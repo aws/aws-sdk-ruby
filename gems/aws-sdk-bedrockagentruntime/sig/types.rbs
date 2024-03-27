@@ -65,6 +65,12 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: [:failure_reason]
     end
 
+    class FilterAttribute
+      attr_accessor key: ::String
+      attr_accessor value: untyped
+      SENSITIVE: []
+    end
+
     class FinalResponse
       attr_accessor text: ::String
       SENSITIVE: [:text]
@@ -145,8 +151,9 @@ module Aws::BedrockAgentRuntime
     class KnowledgeBaseRetrievalResult
       attr_accessor content: Types::RetrievalResultContent
       attr_accessor location: Types::RetrievalResultLocation
+      attr_accessor metadata: ::Hash[::String, untyped]
       attr_accessor score: ::Float
-      SENSITIVE: [:content, :location]
+      SENSITIVE: [:content, :location, :metadata]
     end
 
     class KnowledgeBaseRetrieveAndGenerateConfiguration
@@ -158,9 +165,10 @@ module Aws::BedrockAgentRuntime
     end
 
     class KnowledgeBaseVectorSearchConfiguration
+      attr_accessor filter: Types::RetrievalFilter
       attr_accessor number_of_results: ::Integer
       attr_accessor override_search_type: ("HYBRID" | "SEMANTIC")
-      SENSITIVE: []
+      SENSITIVE: [:filter]
     end
 
     class ModelInvocationInput
@@ -297,6 +305,47 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class RetrievalFilter
+      attr_accessor and_all: ::Array[Types::RetrievalFilter]
+      attr_accessor equals: Types::FilterAttribute
+      attr_accessor greater_than: Types::FilterAttribute
+      attr_accessor greater_than_or_equals: Types::FilterAttribute
+      attr_accessor in: Types::FilterAttribute
+      attr_accessor less_than: Types::FilterAttribute
+      attr_accessor less_than_or_equals: Types::FilterAttribute
+      attr_accessor not_equals: Types::FilterAttribute
+      attr_accessor not_in: Types::FilterAttribute
+      attr_accessor or_all: ::Array[Types::RetrievalFilter]
+      attr_accessor starts_with: Types::FilterAttribute
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AndAll < RetrievalFilter
+      end
+      class Equals < RetrievalFilter
+      end
+      class GreaterThan < RetrievalFilter
+      end
+      class GreaterThanOrEquals < RetrievalFilter
+      end
+      class In < RetrievalFilter
+      end
+      class LessThan < RetrievalFilter
+      end
+      class LessThanOrEquals < RetrievalFilter
+      end
+      class NotEquals < RetrievalFilter
+      end
+      class NotIn < RetrievalFilter
+      end
+      class OrAll < RetrievalFilter
+      end
+      class StartsWith < RetrievalFilter
+      end
+      class Unknown < RetrievalFilter
+      end
+    end
+
     class RetrievalResultContent
       attr_accessor text: ::String
       SENSITIVE: []
@@ -366,7 +415,8 @@ module Aws::BedrockAgentRuntime
     class RetrievedReference
       attr_accessor content: Types::RetrievalResultContent
       attr_accessor location: Types::RetrievalResultLocation
-      SENSITIVE: [:content, :location]
+      attr_accessor metadata: ::Hash[::String, untyped]
+      SENSITIVE: [:content, :location, :metadata]
     end
 
     class ServiceQuotaExceededException

@@ -3817,6 +3817,12 @@ module Aws::Batch
     #   [1]: https://kubernetes.io/docs/concepts/security/pod-security-policy/#privileged
     #   @return [Boolean]
     #
+    # @!attribute [rw] allow_privilege_escalation
+    #   Whether or not a container or a Kubernetes pod is allowed to gain
+    #   more privileges than its parent process. The default value is
+    #   `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] read_only_root_filesystem
     #   When this parameter is `true`, the container is given read-only
     #   access to its root file system. The default value is `false`. This
@@ -3847,6 +3853,7 @@ module Aws::Batch
       :run_as_user,
       :run_as_group,
       :privileged,
+      :allow_privilege_escalation,
       :read_only_root_filesystem,
       :run_as_non_root)
       SENSITIVE = []
@@ -4025,6 +4032,15 @@ module Aws::Batch
     #   [1]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
     #   @return [String]
     #
+    # @!attribute [rw] image_pull_secrets
+    #   References a Kubernetes secret resource. This object must start and
+    #   end with an alphanumeric character, is required to be lowercase, can
+    #   include periods (.) and hyphens (-), and can't contain more than
+    #   253 characters.
+    #
+    #   `ImagePullSecret$name` is required when this object is used.
+    #   @return [Array<Types::ImagePullSecret>]
+    #
     # @!attribute [rw] containers
     #   The properties of the container that's used on the Amazon EKS pod.
     #   @return [Array<Types::EksContainer>]
@@ -4077,6 +4093,7 @@ module Aws::Batch
       :service_account_name,
       :host_network,
       :dns_policy,
+      :image_pull_secrets,
       :containers,
       :init_containers,
       :volumes,
@@ -4142,6 +4159,10 @@ module Aws::Batch
     #   [4]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
     #   @return [String]
     #
+    # @!attribute [rw] image_pull_secrets
+    #   Displays the reference pointer to the Kubernetes secret resource.
+    #   @return [Array<Types::ImagePullSecret>]
+    #
     # @!attribute [rw] containers
     #   The properties of the container that's used on the Amazon EKS pod.
     #   @return [Array<Types::EksContainerDetail>]
@@ -4192,6 +4213,7 @@ module Aws::Batch
       :service_account_name,
       :host_network,
       :dns_policy,
+      :image_pull_secrets,
       :containers,
       :init_containers,
       :volumes,
@@ -4536,6 +4558,23 @@ module Aws::Batch
     #
     class Host < Struct.new(
       :source_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # References a Kubernetes configuration resource that holds a list of
+    # secrets. These secrets help to gain access to pull an image from a
+    # private registry.
+    #
+    # @!attribute [rw] name
+    #   Provides a unique identifier for the `ImagePullSecret`. This object
+    #   is required when `EksPodProperties$imagePullSecrets` is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ImagePullSecret AWS API Documentation
+    #
+    class ImagePullSecret < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end

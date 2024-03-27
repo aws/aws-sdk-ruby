@@ -3184,6 +3184,10 @@ module Aws::ElastiCache
     #   The upper limit for data storage the cache is set to use.
     #   @return [Integer]
     #
+    # @!attribute [rw] minimum
+    #   The lower limit for data storage the cache is set to use.
+    #   @return [Integer]
+    #
     # @!attribute [rw] unit
     #   The unit that the storage is measured in, in GB.
     #   @return [String]
@@ -3192,6 +3196,7 @@ module Aws::ElastiCache
     #
     class DataStorage < Struct.new(
       :maximum,
+      :minimum,
       :unit)
       SENSITIVE = []
       include Aws::Structure
@@ -4951,10 +4956,16 @@ module Aws::ElastiCache
     #   consume per second.
     #   @return [Integer]
     #
+    # @!attribute [rw] minimum
+    #   The configuration for the minimum number of ECPUs the cache should
+    #   be able consume per second.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ECPUPerSecond AWS API Documentation
     #
     class ECPUPerSecond < Struct.new(
-      :maximum)
+      :maximum,
+      :minimum)
       SENSITIVE = []
       include Aws::Structure
     end

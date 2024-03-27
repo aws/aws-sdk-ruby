@@ -241,11 +241,11 @@ module Aws::BedrockAgent
     VectorKnowledgeBaseConfiguration = Shapes::StructureShape.new(name: 'VectorKnowledgeBaseConfiguration')
     Version = Shapes::StringShape.new(name: 'Version')
 
-    APISchema.add_member(:s3, Shapes::ShapeRef.new(shape: S3Identifier, location_name: "s3"))
     APISchema.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
+    APISchema.add_member(:s3, Shapes::ShapeRef.new(shape: S3Identifier, location_name: "s3"))
     APISchema.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    APISchema.add_member_subclass(:s3, Types::APISchema::S3)
     APISchema.add_member_subclass(:payload, Types::APISchema::Payload)
+    APISchema.add_member_subclass(:s3, Types::APISchema::S3)
     APISchema.add_member_subclass(:unknown, Types::APISchema::Unknown)
     APISchema.struct_class = Types::APISchema
 
@@ -267,55 +267,55 @@ module Aws::BedrockAgent
     ActionGroupSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     ActionGroupSummary.struct_class = Types::ActionGroupSummary
 
+    Agent.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, required: true, location_name: "agentArn"))
     Agent.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
     Agent.add_member(:agent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentName"))
-    Agent.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, required: true, location_name: "agentArn"))
+    Agent.add_member(:agent_resource_role_arn, Shapes::ShapeRef.new(shape: AgentRoleArn, required: true, location_name: "agentResourceRoleArn"))
+    Agent.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "agentStatus"))
     Agent.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location_name: "agentVersion"))
     Agent.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    Agent.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
-    Agent.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "agentStatus"))
-    Agent.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
-    Agent.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    Agent.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, required: true, location_name: "idleSessionTTLInSeconds"))
-    Agent.add_member(:agent_resource_role_arn, Shapes::ShapeRef.new(shape: AgentRoleArn, required: true, location_name: "agentResourceRoleArn"))
-    Agent.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
     Agent.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
-    Agent.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
-    Agent.add_member(:prepared_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "preparedAt"))
+    Agent.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
+    Agent.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     Agent.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
-    Agent.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActions, location_name: "recommendedActions"))
+    Agent.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
+    Agent.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, required: true, location_name: "idleSessionTTLInSeconds"))
+    Agent.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
+    Agent.add_member(:prepared_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "preparedAt"))
     Agent.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
+    Agent.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActions, location_name: "recommendedActions"))
+    Agent.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     Agent.struct_class = Types::Agent
 
-    AgentActionGroup.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
-    AgentActionGroup.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "agentVersion"))
+    AgentActionGroup.add_member(:action_group_executor, Shapes::ShapeRef.new(shape: ActionGroupExecutor, location_name: "actionGroupExecutor"))
     AgentActionGroup.add_member(:action_group_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "actionGroupId"))
     AgentActionGroup.add_member(:action_group_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "actionGroupName"))
-    AgentActionGroup.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    AgentActionGroup.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    AgentActionGroup.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
-    AgentActionGroup.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
-    AgentActionGroup.add_member(:parent_action_signature, Shapes::ShapeRef.new(shape: ActionGroupSignature, location_name: "parentActionSignature"))
-    AgentActionGroup.add_member(:action_group_executor, Shapes::ShapeRef.new(shape: ActionGroupExecutor, location_name: "actionGroupExecutor"))
-    AgentActionGroup.add_member(:api_schema, Shapes::ShapeRef.new(shape: APISchema, location_name: "apiSchema"))
     AgentActionGroup.add_member(:action_group_state, Shapes::ShapeRef.new(shape: ActionGroupState, required: true, location_name: "actionGroupState"))
+    AgentActionGroup.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
+    AgentActionGroup.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "agentVersion"))
+    AgentActionGroup.add_member(:api_schema, Shapes::ShapeRef.new(shape: APISchema, location_name: "apiSchema"))
+    AgentActionGroup.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    AgentActionGroup.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    AgentActionGroup.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AgentActionGroup.add_member(:parent_action_signature, Shapes::ShapeRef.new(shape: ActionGroupSignature, location_name: "parentActionSignature"))
+    AgentActionGroup.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentActionGroup.struct_class = Types::AgentActionGroup
 
-    AgentAlias.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
+    AgentAlias.add_member(:agent_alias_arn, Shapes::ShapeRef.new(shape: AgentAliasArn, required: true, location_name: "agentAliasArn"))
+    AgentAlias.add_member(:agent_alias_history_events, Shapes::ShapeRef.new(shape: AgentAliasHistoryEvents, location_name: "agentAliasHistoryEvents"))
     AgentAlias.add_member(:agent_alias_id, Shapes::ShapeRef.new(shape: AgentAliasId, required: true, location_name: "agentAliasId"))
     AgentAlias.add_member(:agent_alias_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentAliasName"))
-    AgentAlias.add_member(:agent_alias_arn, Shapes::ShapeRef.new(shape: AgentAliasArn, required: true, location_name: "agentAliasArn"))
+    AgentAlias.add_member(:agent_alias_status, Shapes::ShapeRef.new(shape: AgentAliasStatus, required: true, location_name: "agentAliasStatus"))
+    AgentAlias.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
     AgentAlias.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    AgentAlias.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     AgentAlias.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     AgentAlias.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, required: true, location_name: "routingConfiguration"))
-    AgentAlias.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     AgentAlias.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
-    AgentAlias.add_member(:agent_alias_history_events, Shapes::ShapeRef.new(shape: AgentAliasHistoryEvents, location_name: "agentAliasHistoryEvents"))
-    AgentAlias.add_member(:agent_alias_status, Shapes::ShapeRef.new(shape: AgentAliasStatus, required: true, location_name: "agentAliasStatus"))
     AgentAlias.struct_class = Types::AgentAlias
 
-    AgentAliasHistoryEvent.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, location_name: "routingConfiguration"))
     AgentAliasHistoryEvent.add_member(:end_date, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "endDate"))
+    AgentAliasHistoryEvent.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, location_name: "routingConfiguration"))
     AgentAliasHistoryEvent.add_member(:start_date, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "startDate"))
     AgentAliasHistoryEvent.struct_class = Types::AgentAliasHistoryEvent
 
@@ -330,26 +330,26 @@ module Aws::BedrockAgent
 
     AgentAliasSummary.add_member(:agent_alias_id, Shapes::ShapeRef.new(shape: AgentAliasId, required: true, location_name: "agentAliasId"))
     AgentAliasSummary.add_member(:agent_alias_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentAliasName"))
-    AgentAliasSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    AgentAliasSummary.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, location_name: "routingConfiguration"))
     AgentAliasSummary.add_member(:agent_alias_status, Shapes::ShapeRef.new(shape: AgentAliasStatus, required: true, location_name: "agentAliasStatus"))
     AgentAliasSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    AgentAliasSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AgentAliasSummary.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, location_name: "routingConfiguration"))
     AgentAliasSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentAliasSummary.struct_class = Types::AgentAliasSummary
 
     AgentKnowledgeBase.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
     AgentKnowledgeBase.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "agentVersion"))
-    AgentKnowledgeBase.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
-    AgentKnowledgeBase.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     AgentKnowledgeBase.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
-    AgentKnowledgeBase.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    AgentKnowledgeBase.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
+    AgentKnowledgeBase.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     AgentKnowledgeBase.add_member(:knowledge_base_state, Shapes::ShapeRef.new(shape: KnowledgeBaseState, required: true, location_name: "knowledgeBaseState"))
+    AgentKnowledgeBase.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentKnowledgeBase.struct_class = Types::AgentKnowledgeBase
 
     AgentKnowledgeBaseSummaries.member = Shapes::ShapeRef.new(shape: AgentKnowledgeBaseSummary)
 
-    AgentKnowledgeBaseSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     AgentKnowledgeBaseSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AgentKnowledgeBaseSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     AgentKnowledgeBaseSummary.add_member(:knowledge_base_state, Shapes::ShapeRef.new(shape: KnowledgeBaseState, required: true, location_name: "knowledgeBaseState"))
     AgentKnowledgeBaseSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentKnowledgeBaseSummary.struct_class = Types::AgentKnowledgeBaseSummary
@@ -360,26 +360,26 @@ module Aws::BedrockAgent
     AgentSummary.add_member(:agent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentName"))
     AgentSummary.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "agentStatus"))
     AgentSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    AgentSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentSummary.add_member(:latest_agent_version, Shapes::ShapeRef.new(shape: Version, location_name: "latestAgentVersion"))
+    AgentSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentSummary.struct_class = Types::AgentSummary
 
+    AgentVersion.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, required: true, location_name: "agentArn"))
     AgentVersion.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
     AgentVersion.add_member(:agent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentName"))
-    AgentVersion.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, required: true, location_name: "agentArn"))
-    AgentVersion.add_member(:version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location_name: "version"))
-    AgentVersion.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
-    AgentVersion.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "agentStatus"))
-    AgentVersion.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
-    AgentVersion.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    AgentVersion.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, required: true, location_name: "idleSessionTTLInSeconds"))
     AgentVersion.add_member(:agent_resource_role_arn, Shapes::ShapeRef.new(shape: AgentRoleArn, required: true, location_name: "agentResourceRoleArn"))
-    AgentVersion.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
+    AgentVersion.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "agentStatus"))
     AgentVersion.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
-    AgentVersion.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    AgentVersion.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
+    AgentVersion.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     AgentVersion.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
-    AgentVersion.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActions, location_name: "recommendedActions"))
+    AgentVersion.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
+    AgentVersion.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, required: true, location_name: "idleSessionTTLInSeconds"))
+    AgentVersion.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
     AgentVersion.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
+    AgentVersion.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActions, location_name: "recommendedActions"))
+    AgentVersion.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    AgentVersion.add_member(:version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location_name: "version"))
     AgentVersion.struct_class = Types::AgentVersion
 
     AgentVersionSummaries.member = Shapes::ShapeRef.new(shape: AgentVersionSummary)
@@ -388,14 +388,14 @@ module Aws::BedrockAgent
     AgentVersionSummary.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "agentStatus"))
     AgentVersionSummary.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "agentVersion"))
     AgentVersionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
-    AgentVersionSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentVersionSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AgentVersionSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentVersionSummary.struct_class = Types::AgentVersionSummary
 
     AssociateAgentKnowledgeBaseRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     AssociateAgentKnowledgeBaseRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
-    AssociateAgentKnowledgeBaseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     AssociateAgentKnowledgeBaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
+    AssociateAgentKnowledgeBaseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     AssociateAgentKnowledgeBaseRequest.add_member(:knowledge_base_state, Shapes::ShapeRef.new(shape: KnowledgeBaseState, location_name: "knowledgeBaseState"))
     AssociateAgentKnowledgeBaseRequest.struct_class = Types::AssociateAgentKnowledgeBaseRequest
 
@@ -409,22 +409,22 @@ module Aws::BedrockAgent
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateAgentActionGroupRequest.add_member(:action_group_executor, Shapes::ShapeRef.new(shape: ActionGroupExecutor, location_name: "actionGroupExecutor"))
+    CreateAgentActionGroupRequest.add_member(:action_group_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "actionGroupName"))
+    CreateAgentActionGroupRequest.add_member(:action_group_state, Shapes::ShapeRef.new(shape: ActionGroupState, location_name: "actionGroupState"))
     CreateAgentActionGroupRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     CreateAgentActionGroupRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
-    CreateAgentActionGroupRequest.add_member(:action_group_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "actionGroupName"))
+    CreateAgentActionGroupRequest.add_member(:api_schema, Shapes::ShapeRef.new(shape: APISchema, location_name: "apiSchema"))
     CreateAgentActionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAgentActionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAgentActionGroupRequest.add_member(:parent_action_group_signature, Shapes::ShapeRef.new(shape: ActionGroupSignature, location_name: "parentActionGroupSignature"))
-    CreateAgentActionGroupRequest.add_member(:action_group_executor, Shapes::ShapeRef.new(shape: ActionGroupExecutor, location_name: "actionGroupExecutor"))
-    CreateAgentActionGroupRequest.add_member(:api_schema, Shapes::ShapeRef.new(shape: APISchema, location_name: "apiSchema"))
-    CreateAgentActionGroupRequest.add_member(:action_group_state, Shapes::ShapeRef.new(shape: ActionGroupState, location_name: "actionGroupState"))
     CreateAgentActionGroupRequest.struct_class = Types::CreateAgentActionGroupRequest
 
     CreateAgentActionGroupResponse.add_member(:agent_action_group, Shapes::ShapeRef.new(shape: AgentActionGroup, required: true, location_name: "agentActionGroup"))
     CreateAgentActionGroupResponse.struct_class = Types::CreateAgentActionGroupResponse
 
-    CreateAgentAliasRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     CreateAgentAliasRequest.add_member(:agent_alias_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentAliasName"))
+    CreateAgentAliasRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     CreateAgentAliasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAgentAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAgentAliasRequest.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, location_name: "routingConfiguration"))
@@ -435,25 +435,25 @@ module Aws::BedrockAgent
     CreateAgentAliasResponse.struct_class = Types::CreateAgentAliasResponse
 
     CreateAgentRequest.add_member(:agent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentName"))
-    CreateAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    CreateAgentRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
-    CreateAgentRequest.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
-    CreateAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateAgentRequest.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
     CreateAgentRequest.add_member(:agent_resource_role_arn, Shapes::ShapeRef.new(shape: AgentRoleArn, required: true, location_name: "agentResourceRoleArn"))
+    CreateAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAgentRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
-    CreateAgentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateAgentRequest.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
+    CreateAgentRequest.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
+    CreateAgentRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
     CreateAgentRequest.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
+    CreateAgentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateAgentRequest.struct_class = Types::CreateAgentRequest
 
     CreateAgentResponse.add_member(:agent, Shapes::ShapeRef.new(shape: Agent, required: true, location_name: "agent"))
     CreateAgentResponse.struct_class = Types::CreateAgentResponse
 
-    CreateDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    CreateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    CreateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateDataSourceRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
+    CreateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    CreateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateDataSourceRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
     CreateDataSourceRequest.add_member(:vector_ingestion_configuration, Shapes::ShapeRef.new(shape: VectorIngestionConfiguration, location_name: "vectorIngestionConfiguration"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
@@ -462,10 +462,10 @@ module Aws::BedrockAgent
     CreateDataSourceResponse.struct_class = Types::CreateDataSourceResponse
 
     CreateKnowledgeBaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    CreateKnowledgeBaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateKnowledgeBaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateKnowledgeBaseRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseRoleArn, required: true, location_name: "roleArn"))
     CreateKnowledgeBaseRequest.add_member(:knowledge_base_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseConfiguration, required: true, location_name: "knowledgeBaseConfiguration"))
+    CreateKnowledgeBaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateKnowledgeBaseRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseRoleArn, required: true, location_name: "roleArn"))
     CreateKnowledgeBaseRequest.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, required: true, location_name: "storageConfiguration"))
     CreateKnowledgeBaseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateKnowledgeBaseRequest.struct_class = Types::CreateKnowledgeBaseRequest
@@ -473,47 +473,47 @@ module Aws::BedrockAgent
     CreateKnowledgeBaseResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBase, required: true, location_name: "knowledgeBase"))
     CreateKnowledgeBaseResponse.struct_class = Types::CreateKnowledgeBaseResponse
 
-    DataSource.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
-    DataSource.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "dataSourceId"))
-    DataSource.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    DataSource.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, required: true, location_name: "status"))
-    DataSource.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    DataSource.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
-    DataSource.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
-    DataSource.add_member(:vector_ingestion_configuration, Shapes::ShapeRef.new(shape: VectorIngestionConfiguration, location_name: "vectorIngestionConfiguration"))
     DataSource.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    DataSource.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
+    DataSource.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "dataSourceId"))
+    DataSource.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DataSource.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
+    DataSource.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    DataSource.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
+    DataSource.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, required: true, location_name: "status"))
     DataSource.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    DataSource.add_member(:vector_ingestion_configuration, Shapes::ShapeRef.new(shape: VectorIngestionConfiguration, location_name: "vectorIngestionConfiguration"))
     DataSource.struct_class = Types::DataSource
 
-    DataSourceConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "type"))
     DataSourceConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DataSourceConfiguration, location_name: "s3Configuration"))
+    DataSourceConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "type"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceSummaries.member = Shapes::ShapeRef.new(shape: DataSourceSummary)
 
-    DataSourceSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     DataSourceSummary.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "dataSourceId"))
+    DataSourceSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DataSourceSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     DataSourceSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     DataSourceSummary.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, required: true, location_name: "status"))
-    DataSourceSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     DataSourceSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     DataSourceSummary.struct_class = Types::DataSourceSummary
 
+    DeleteAgentActionGroupRequest.add_member(:action_group_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "actionGroupId"))
     DeleteAgentActionGroupRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     DeleteAgentActionGroupRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
-    DeleteAgentActionGroupRequest.add_member(:action_group_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "actionGroupId"))
     DeleteAgentActionGroupRequest.add_member(:skip_resource_in_use_check, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "skipResourceInUseCheck"))
     DeleteAgentActionGroupRequest.struct_class = Types::DeleteAgentActionGroupRequest
 
     DeleteAgentActionGroupResponse.struct_class = Types::DeleteAgentActionGroupResponse
 
-    DeleteAgentAliasRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     DeleteAgentAliasRequest.add_member(:agent_alias_id, Shapes::ShapeRef.new(shape: AgentAliasId, required: true, location: "uri", location_name: "agentAliasId"))
+    DeleteAgentAliasRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     DeleteAgentAliasRequest.struct_class = Types::DeleteAgentAliasRequest
 
-    DeleteAgentAliasResponse.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
     DeleteAgentAliasResponse.add_member(:agent_alias_id, Shapes::ShapeRef.new(shape: AgentAliasId, required: true, location_name: "agentAliasId"))
     DeleteAgentAliasResponse.add_member(:agent_alias_status, Shapes::ShapeRef.new(shape: AgentAliasStatus, required: true, location_name: "agentAliasStatus"))
+    DeleteAgentAliasResponse.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
     DeleteAgentAliasResponse.struct_class = Types::DeleteAgentAliasResponse
 
     DeleteAgentRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
@@ -530,16 +530,16 @@ module Aws::BedrockAgent
     DeleteAgentVersionRequest.struct_class = Types::DeleteAgentVersionRequest
 
     DeleteAgentVersionResponse.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "agentId"))
-    DeleteAgentVersionResponse.add_member(:agent_version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location_name: "agentVersion"))
     DeleteAgentVersionResponse.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "agentStatus"))
+    DeleteAgentVersionResponse.add_member(:agent_version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location_name: "agentVersion"))
     DeleteAgentVersionResponse.struct_class = Types::DeleteAgentVersionResponse
 
-    DeleteDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     DeleteDataSourceRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
+    DeleteDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     DeleteDataSourceRequest.struct_class = Types::DeleteDataSourceRequest
 
-    DeleteDataSourceResponse.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     DeleteDataSourceResponse.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "dataSourceId"))
+    DeleteDataSourceResponse.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     DeleteDataSourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, required: true, location_name: "status"))
     DeleteDataSourceResponse.struct_class = Types::DeleteDataSourceResponse
 
@@ -563,16 +563,16 @@ module Aws::BedrockAgent
     FixedSizeChunkingConfiguration.add_member(:overlap_percentage, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfigurationOverlapPercentageInteger, required: true, location_name: "overlapPercentage"))
     FixedSizeChunkingConfiguration.struct_class = Types::FixedSizeChunkingConfiguration
 
+    GetAgentActionGroupRequest.add_member(:action_group_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "actionGroupId"))
     GetAgentActionGroupRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     GetAgentActionGroupRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, required: true, location: "uri", location_name: "agentVersion"))
-    GetAgentActionGroupRequest.add_member(:action_group_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "actionGroupId"))
     GetAgentActionGroupRequest.struct_class = Types::GetAgentActionGroupRequest
 
     GetAgentActionGroupResponse.add_member(:agent_action_group, Shapes::ShapeRef.new(shape: AgentActionGroup, required: true, location_name: "agentActionGroup"))
     GetAgentActionGroupResponse.struct_class = Types::GetAgentActionGroupResponse
 
-    GetAgentAliasRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     GetAgentAliasRequest.add_member(:agent_alias_id, Shapes::ShapeRef.new(shape: AgentAliasId, required: true, location: "uri", location_name: "agentAliasId"))
+    GetAgentAliasRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     GetAgentAliasRequest.struct_class = Types::GetAgentAliasRequest
 
     GetAgentAliasResponse.add_member(:agent_alias, Shapes::ShapeRef.new(shape: AgentAlias, required: true, location_name: "agentAlias"))
@@ -599,16 +599,16 @@ module Aws::BedrockAgent
     GetAgentVersionResponse.add_member(:agent_version, Shapes::ShapeRef.new(shape: AgentVersion, required: true, location_name: "agentVersion"))
     GetAgentVersionResponse.struct_class = Types::GetAgentVersionResponse
 
-    GetDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     GetDataSourceRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
+    GetDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     GetDataSourceRequest.struct_class = Types::GetDataSourceRequest
 
     GetDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
     GetDataSourceResponse.struct_class = Types::GetDataSourceResponse
 
-    GetIngestionJobRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     GetIngestionJobRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     GetIngestionJobRequest.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ingestionJobId"))
+    GetIngestionJobRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     GetIngestionJobRequest.struct_class = Types::GetIngestionJobRequest
 
     GetIngestionJobResponse.add_member(:ingestion_job, Shapes::ShapeRef.new(shape: IngestionJob, required: true, location_name: "ingestionJob"))
@@ -620,21 +620,21 @@ module Aws::BedrockAgent
     GetKnowledgeBaseResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBase, required: true, location_name: "knowledgeBase"))
     GetKnowledgeBaseResponse.struct_class = Types::GetKnowledgeBaseResponse
 
-    InferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
-    InferenceConfiguration.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
-    InferenceConfiguration.add_member(:top_k, Shapes::ShapeRef.new(shape: TopK, location_name: "topK"))
     InferenceConfiguration.add_member(:maximum_length, Shapes::ShapeRef.new(shape: MaximumLength, location_name: "maximumLength"))
     InferenceConfiguration.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: StopSequences, location_name: "stopSequences"))
+    InferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
+    InferenceConfiguration.add_member(:top_k, Shapes::ShapeRef.new(shape: TopK, location_name: "topK"))
+    InferenceConfiguration.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
     InferenceConfiguration.struct_class = Types::InferenceConfiguration
 
-    IngestionJob.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     IngestionJob.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "dataSourceId"))
-    IngestionJob.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ingestionJobId"))
     IngestionJob.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    IngestionJob.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, required: true, location_name: "status"))
-    IngestionJob.add_member(:statistics, Shapes::ShapeRef.new(shape: IngestionJobStatistics, location_name: "statistics"))
     IngestionJob.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    IngestionJob.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ingestionJobId"))
+    IngestionJob.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     IngestionJob.add_member(:started_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "startedAt"))
+    IngestionJob.add_member(:statistics, Shapes::ShapeRef.new(shape: IngestionJobStatistics, location_name: "statistics"))
+    IngestionJob.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, required: true, location_name: "status"))
     IngestionJob.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     IngestionJob.struct_class = Types::IngestionJob
 
@@ -651,39 +651,41 @@ module Aws::BedrockAgent
     IngestionJobSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
     IngestionJobSortBy.struct_class = Types::IngestionJobSortBy
 
-    IngestionJobStatistics.add_member(:number_of_documents_scanned, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfDocumentsScanned"))
-    IngestionJobStatistics.add_member(:number_of_new_documents_indexed, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfNewDocumentsIndexed"))
-    IngestionJobStatistics.add_member(:number_of_modified_documents_indexed, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfModifiedDocumentsIndexed"))
     IngestionJobStatistics.add_member(:number_of_documents_deleted, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfDocumentsDeleted"))
     IngestionJobStatistics.add_member(:number_of_documents_failed, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfDocumentsFailed"))
+    IngestionJobStatistics.add_member(:number_of_documents_scanned, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfDocumentsScanned"))
+    IngestionJobStatistics.add_member(:number_of_metadata_documents_modified, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfMetadataDocumentsModified"))
+    IngestionJobStatistics.add_member(:number_of_metadata_documents_scanned, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfMetadataDocumentsScanned"))
+    IngestionJobStatistics.add_member(:number_of_modified_documents_indexed, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfModifiedDocumentsIndexed"))
+    IngestionJobStatistics.add_member(:number_of_new_documents_indexed, Shapes::ShapeRef.new(shape: PrimitiveLong, location_name: "numberOfNewDocumentsIndexed"))
     IngestionJobStatistics.struct_class = Types::IngestionJobStatistics
 
     IngestionJobSummaries.member = Shapes::ShapeRef.new(shape: IngestionJobSummary)
 
-    IngestionJobSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     IngestionJobSummary.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "dataSourceId"))
-    IngestionJobSummary.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ingestionJobId"))
     IngestionJobSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    IngestionJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, required: true, location_name: "status"))
+    IngestionJobSummary.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ingestionJobId"))
+    IngestionJobSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     IngestionJobSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "startedAt"))
-    IngestionJobSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     IngestionJobSummary.add_member(:statistics, Shapes::ShapeRef.new(shape: IngestionJobStatistics, location_name: "statistics"))
+    IngestionJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, required: true, location_name: "status"))
+    IngestionJobSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     IngestionJobSummary.struct_class = Types::IngestionJobSummary
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    KnowledgeBase.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    KnowledgeBase.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    KnowledgeBase.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    KnowledgeBase.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseArn, required: true, location_name: "knowledgeBaseArn"))
+    KnowledgeBase.add_member(:knowledge_base_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseConfiguration, required: true, location_name: "knowledgeBaseConfiguration"))
     KnowledgeBase.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     KnowledgeBase.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    KnowledgeBase.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseArn, required: true, location_name: "knowledgeBaseArn"))
-    KnowledgeBase.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     KnowledgeBase.add_member(:role_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseRoleArn, required: true, location_name: "roleArn"))
-    KnowledgeBase.add_member(:knowledge_base_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseConfiguration, required: true, location_name: "knowledgeBaseConfiguration"))
-    KnowledgeBase.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, required: true, location_name: "storageConfiguration"))
     KnowledgeBase.add_member(:status, Shapes::ShapeRef.new(shape: KnowledgeBaseStatus, required: true, location_name: "status"))
-    KnowledgeBase.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    KnowledgeBase.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, required: true, location_name: "storageConfiguration"))
     KnowledgeBase.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
-    KnowledgeBase.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     KnowledgeBase.struct_class = Types::KnowledgeBase
 
     KnowledgeBaseConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: KnowledgeBaseType, required: true, location_name: "type"))
@@ -692,9 +694,9 @@ module Aws::BedrockAgent
 
     KnowledgeBaseSummaries.member = Shapes::ShapeRef.new(shape: KnowledgeBaseSummary)
 
+    KnowledgeBaseSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     KnowledgeBaseSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     KnowledgeBaseSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    KnowledgeBaseSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     KnowledgeBaseSummary.add_member(:status, Shapes::ShapeRef.new(shape: KnowledgeBaseStatus, required: true, location_name: "status"))
     KnowledgeBaseSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     KnowledgeBaseSummary.struct_class = Types::KnowledgeBaseSummary
@@ -754,12 +756,12 @@ module Aws::BedrockAgent
     ListDataSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDataSourcesResponse.struct_class = Types::ListDataSourcesResponse
 
-    ListIngestionJobsRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     ListIngestionJobsRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     ListIngestionJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: IngestionJobFilters, location_name: "filters"))
-    ListIngestionJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: IngestionJobSortBy, location_name: "sortBy"))
+    ListIngestionJobsRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     ListIngestionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListIngestionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListIngestionJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: IngestionJobSortBy, location_name: "sortBy"))
     ListIngestionJobsRequest.struct_class = Types::ListIngestionJobsRequest
 
     ListIngestionJobsResponse.add_member(:ingestion_job_summaries, Shapes::ShapeRef.new(shape: IngestionJobSummaries, required: true, location_name: "ingestionJobSummaries"))
@@ -781,23 +783,23 @@ module Aws::BedrockAgent
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     OpenSearchServerlessConfiguration.add_member(:collection_arn, Shapes::ShapeRef.new(shape: OpenSearchServerlessCollectionArn, required: true, location_name: "collectionArn"))
-    OpenSearchServerlessConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: OpenSearchServerlessIndexName, required: true, location_name: "vectorIndexName"))
     OpenSearchServerlessConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: OpenSearchServerlessFieldMapping, required: true, location_name: "fieldMapping"))
+    OpenSearchServerlessConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: OpenSearchServerlessIndexName, required: true, location_name: "vectorIndexName"))
     OpenSearchServerlessConfiguration.struct_class = Types::OpenSearchServerlessConfiguration
 
-    OpenSearchServerlessFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
-    OpenSearchServerlessFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
     OpenSearchServerlessFieldMapping.add_member(:metadata_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "metadataField"))
+    OpenSearchServerlessFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
+    OpenSearchServerlessFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
     OpenSearchServerlessFieldMapping.struct_class = Types::OpenSearchServerlessFieldMapping
 
     PineconeConfiguration.add_member(:connection_string, Shapes::ShapeRef.new(shape: PineconeConnectionString, required: true, location_name: "connectionString"))
     PineconeConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
-    PineconeConfiguration.add_member(:namespace, Shapes::ShapeRef.new(shape: PineconeNamespace, location_name: "namespace"))
     PineconeConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: PineconeFieldMapping, required: true, location_name: "fieldMapping"))
+    PineconeConfiguration.add_member(:namespace, Shapes::ShapeRef.new(shape: PineconeNamespace, location_name: "namespace"))
     PineconeConfiguration.struct_class = Types::PineconeConfiguration
 
-    PineconeFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
     PineconeFieldMapping.add_member(:metadata_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "metadataField"))
+    PineconeFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
     PineconeFieldMapping.struct_class = Types::PineconeFieldMapping
 
     PrepareAgentRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
@@ -809,44 +811,44 @@ module Aws::BedrockAgent
     PrepareAgentResponse.add_member(:prepared_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "preparedAt"))
     PrepareAgentResponse.struct_class = Types::PrepareAgentResponse
 
-    PromptConfiguration.add_member(:prompt_type, Shapes::ShapeRef.new(shape: PromptType, location_name: "promptType"))
-    PromptConfiguration.add_member(:prompt_creation_mode, Shapes::ShapeRef.new(shape: CreationMode, location_name: "promptCreationMode"))
-    PromptConfiguration.add_member(:prompt_state, Shapes::ShapeRef.new(shape: PromptState, location_name: "promptState"))
     PromptConfiguration.add_member(:base_prompt_template, Shapes::ShapeRef.new(shape: BasePromptTemplate, location_name: "basePromptTemplate"))
     PromptConfiguration.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfiguration"))
     PromptConfiguration.add_member(:parser_mode, Shapes::ShapeRef.new(shape: CreationMode, location_name: "parserMode"))
+    PromptConfiguration.add_member(:prompt_creation_mode, Shapes::ShapeRef.new(shape: CreationMode, location_name: "promptCreationMode"))
+    PromptConfiguration.add_member(:prompt_state, Shapes::ShapeRef.new(shape: PromptState, location_name: "promptState"))
+    PromptConfiguration.add_member(:prompt_type, Shapes::ShapeRef.new(shape: PromptType, location_name: "promptType"))
     PromptConfiguration.struct_class = Types::PromptConfiguration
 
     PromptConfigurations.member = Shapes::ShapeRef.new(shape: PromptConfiguration)
 
-    PromptOverrideConfiguration.add_member(:prompt_configurations, Shapes::ShapeRef.new(shape: PromptConfigurations, required: true, location_name: "promptConfigurations"))
     PromptOverrideConfiguration.add_member(:override_lambda, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "overrideLambda"))
+    PromptOverrideConfiguration.add_member(:prompt_configurations, Shapes::ShapeRef.new(shape: PromptConfigurations, required: true, location_name: "promptConfigurations"))
     PromptOverrideConfiguration.struct_class = Types::PromptOverrideConfiguration
 
-    RdsConfiguration.add_member(:resource_arn, Shapes::ShapeRef.new(shape: RdsArn, required: true, location_name: "resourceArn"))
     RdsConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
     RdsConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: RdsDatabaseName, required: true, location_name: "databaseName"))
-    RdsConfiguration.add_member(:table_name, Shapes::ShapeRef.new(shape: RdsTableName, required: true, location_name: "tableName"))
     RdsConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: RdsFieldMapping, required: true, location_name: "fieldMapping"))
+    RdsConfiguration.add_member(:resource_arn, Shapes::ShapeRef.new(shape: RdsArn, required: true, location_name: "resourceArn"))
+    RdsConfiguration.add_member(:table_name, Shapes::ShapeRef.new(shape: RdsTableName, required: true, location_name: "tableName"))
     RdsConfiguration.struct_class = Types::RdsConfiguration
 
-    RdsFieldMapping.add_member(:primary_key_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "primaryKeyField"))
-    RdsFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "vectorField"))
-    RdsFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "textField"))
     RdsFieldMapping.add_member(:metadata_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "metadataField"))
+    RdsFieldMapping.add_member(:primary_key_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "primaryKeyField"))
+    RdsFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "textField"))
+    RdsFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "vectorField"))
     RdsFieldMapping.struct_class = Types::RdsFieldMapping
 
     RecommendedActions.member = Shapes::ShapeRef.new(shape: RecommendedAction)
 
-    RedisEnterpriseCloudConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudEndpoint, required: true, location_name: "endpoint"))
-    RedisEnterpriseCloudConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudIndexName, required: true, location_name: "vectorIndexName"))
     RedisEnterpriseCloudConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
+    RedisEnterpriseCloudConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudEndpoint, required: true, location_name: "endpoint"))
     RedisEnterpriseCloudConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudFieldMapping, required: true, location_name: "fieldMapping"))
+    RedisEnterpriseCloudConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudIndexName, required: true, location_name: "vectorIndexName"))
     RedisEnterpriseCloudConfiguration.struct_class = Types::RedisEnterpriseCloudConfiguration
 
-    RedisEnterpriseCloudFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
-    RedisEnterpriseCloudFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
     RedisEnterpriseCloudFieldMapping.add_member(:metadata_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "metadataField"))
+    RedisEnterpriseCloudFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
+    RedisEnterpriseCloudFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
     RedisEnterpriseCloudFieldMapping.struct_class = Types::RedisEnterpriseCloudFieldMapping
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
@@ -868,10 +870,10 @@ module Aws::BedrockAgent
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
-    StartIngestionJobRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
-    StartIngestionJobRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     StartIngestionJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartIngestionJobRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     StartIngestionJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartIngestionJobRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     StartIngestionJobRequest.struct_class = Types::StartIngestionJobRequest
 
     StartIngestionJobResponse.add_member(:ingestion_job, Shapes::ShapeRef.new(shape: IngestionJob, required: true, location_name: "ingestionJob"))
@@ -879,11 +881,11 @@ module Aws::BedrockAgent
 
     StopSequences.member = Shapes::ShapeRef.new(shape: String)
 
-    StorageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: KnowledgeBaseStorageType, required: true, location_name: "type"))
     StorageConfiguration.add_member(:opensearch_serverless_configuration, Shapes::ShapeRef.new(shape: OpenSearchServerlessConfiguration, location_name: "opensearchServerlessConfiguration"))
     StorageConfiguration.add_member(:pinecone_configuration, Shapes::ShapeRef.new(shape: PineconeConfiguration, location_name: "pineconeConfiguration"))
-    StorageConfiguration.add_member(:redis_enterprise_cloud_configuration, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudConfiguration, location_name: "redisEnterpriseCloudConfiguration"))
     StorageConfiguration.add_member(:rds_configuration, Shapes::ShapeRef.new(shape: RdsConfiguration, location_name: "rdsConfiguration"))
+    StorageConfiguration.add_member(:redis_enterprise_cloud_configuration, Shapes::ShapeRef.new(shape: RedisEnterpriseCloudConfiguration, location_name: "redisEnterpriseCloudConfiguration"))
+    StorageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: KnowledgeBaseStorageType, required: true, location_name: "type"))
     StorageConfiguration.struct_class = Types::StorageConfiguration
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -906,23 +908,23 @@ module Aws::BedrockAgent
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateAgentActionGroupRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
-    UpdateAgentActionGroupRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
+    UpdateAgentActionGroupRequest.add_member(:action_group_executor, Shapes::ShapeRef.new(shape: ActionGroupExecutor, location_name: "actionGroupExecutor"))
     UpdateAgentActionGroupRequest.add_member(:action_group_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "actionGroupId"))
     UpdateAgentActionGroupRequest.add_member(:action_group_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "actionGroupName"))
+    UpdateAgentActionGroupRequest.add_member(:action_group_state, Shapes::ShapeRef.new(shape: ActionGroupState, location_name: "actionGroupState"))
+    UpdateAgentActionGroupRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
+    UpdateAgentActionGroupRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
+    UpdateAgentActionGroupRequest.add_member(:api_schema, Shapes::ShapeRef.new(shape: APISchema, location_name: "apiSchema"))
     UpdateAgentActionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateAgentActionGroupRequest.add_member(:parent_action_group_signature, Shapes::ShapeRef.new(shape: ActionGroupSignature, location_name: "parentActionGroupSignature"))
-    UpdateAgentActionGroupRequest.add_member(:action_group_executor, Shapes::ShapeRef.new(shape: ActionGroupExecutor, location_name: "actionGroupExecutor"))
-    UpdateAgentActionGroupRequest.add_member(:action_group_state, Shapes::ShapeRef.new(shape: ActionGroupState, location_name: "actionGroupState"))
-    UpdateAgentActionGroupRequest.add_member(:api_schema, Shapes::ShapeRef.new(shape: APISchema, location_name: "apiSchema"))
     UpdateAgentActionGroupRequest.struct_class = Types::UpdateAgentActionGroupRequest
 
     UpdateAgentActionGroupResponse.add_member(:agent_action_group, Shapes::ShapeRef.new(shape: AgentActionGroup, required: true, location_name: "agentActionGroup"))
     UpdateAgentActionGroupResponse.struct_class = Types::UpdateAgentActionGroupResponse
 
-    UpdateAgentAliasRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     UpdateAgentAliasRequest.add_member(:agent_alias_id, Shapes::ShapeRef.new(shape: AgentAliasId, required: true, location: "uri", location_name: "agentAliasId"))
     UpdateAgentAliasRequest.add_member(:agent_alias_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentAliasName"))
+    UpdateAgentAliasRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     UpdateAgentAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateAgentAliasRequest.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, location_name: "routingConfiguration"))
     UpdateAgentAliasRequest.struct_class = Types::UpdateAgentAliasRequest
@@ -932,8 +934,8 @@ module Aws::BedrockAgent
 
     UpdateAgentKnowledgeBaseRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     UpdateAgentKnowledgeBaseRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
-    UpdateAgentKnowledgeBaseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     UpdateAgentKnowledgeBaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAgentKnowledgeBaseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     UpdateAgentKnowledgeBaseRequest.add_member(:knowledge_base_state, Shapes::ShapeRef.new(shape: KnowledgeBaseState, location_name: "knowledgeBaseState"))
     UpdateAgentKnowledgeBaseRequest.struct_class = Types::UpdateAgentKnowledgeBaseRequest
 
@@ -942,23 +944,23 @@ module Aws::BedrockAgent
 
     UpdateAgentRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     UpdateAgentRequest.add_member(:agent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentName"))
-    UpdateAgentRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
-    UpdateAgentRequest.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
-    UpdateAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateAgentRequest.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
     UpdateAgentRequest.add_member(:agent_resource_role_arn, Shapes::ShapeRef.new(shape: AgentRoleArn, required: true, location_name: "agentResourceRoleArn"))
     UpdateAgentRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
+    UpdateAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAgentRequest.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location_name: "foundationModel"))
+    UpdateAgentRequest.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
+    UpdateAgentRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
     UpdateAgentRequest.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
     UpdateAgentRequest.struct_class = Types::UpdateAgentRequest
 
     UpdateAgentResponse.add_member(:agent, Shapes::ShapeRef.new(shape: Agent, required: true, location_name: "agent"))
     UpdateAgentResponse.struct_class = Types::UpdateAgentResponse
 
-    UpdateDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
-    UpdateDataSourceRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
-    UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateDataSourceRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
+    UpdateDataSourceRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
+    UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     UpdateDataSourceRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
     UpdateDataSourceRequest.add_member(:vector_ingestion_configuration, Shapes::ShapeRef.new(shape: VectorIngestionConfiguration, location_name: "vectorIngestionConfiguration"))
     UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest
@@ -966,23 +968,23 @@ module Aws::BedrockAgent
     UpdateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
     UpdateDataSourceResponse.struct_class = Types::UpdateDataSourceResponse
 
+    UpdateKnowledgeBaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateKnowledgeBaseRequest.add_member(:knowledge_base_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseConfiguration, required: true, location_name: "knowledgeBaseConfiguration"))
     UpdateKnowledgeBaseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     UpdateKnowledgeBaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    UpdateKnowledgeBaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateKnowledgeBaseRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseRoleArn, required: true, location_name: "roleArn"))
-    UpdateKnowledgeBaseRequest.add_member(:knowledge_base_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseConfiguration, required: true, location_name: "knowledgeBaseConfiguration"))
     UpdateKnowledgeBaseRequest.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, required: true, location_name: "storageConfiguration"))
     UpdateKnowledgeBaseRequest.struct_class = Types::UpdateKnowledgeBaseRequest
 
     UpdateKnowledgeBaseResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBase, required: true, location_name: "knowledgeBase"))
     UpdateKnowledgeBaseResponse.struct_class = Types::UpdateKnowledgeBaseResponse
 
-    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "name"))
     ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "message"))
+    ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "name"))
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)

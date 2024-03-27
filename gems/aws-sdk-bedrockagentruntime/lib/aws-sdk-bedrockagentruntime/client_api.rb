@@ -34,6 +34,9 @@ module Aws::BedrockAgentRuntime
     Double = Shapes::FloatShape.new(name: 'Double')
     FailureReasonString = Shapes::StringShape.new(name: 'FailureReasonString')
     FailureTrace = Shapes::StructureShape.new(name: 'FailureTrace')
+    FilterAttribute = Shapes::StructureShape.new(name: 'FilterAttribute')
+    FilterKey = Shapes::StringShape.new(name: 'FilterKey')
+    FilterValue = Shapes::DocumentShape.new(name: 'FilterValue', document: true)
     FinalResponse = Shapes::StructureShape.new(name: 'FinalResponse')
     FinalResponseString = Shapes::StringShape.new(name: 'FinalResponseString')
     GeneratedResponsePart = Shapes::StructureShape.new(name: 'GeneratedResponsePart')
@@ -87,9 +90,14 @@ module Aws::BedrockAgentRuntime
     RequestBody = Shapes::StructureShape.new(name: 'RequestBody')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseStream = Shapes::StructureShape.new(name: 'ResponseStream')
+    RetrievalFilter = Shapes::UnionShape.new(name: 'RetrievalFilter')
+    RetrievalFilterList = Shapes::ListShape.new(name: 'RetrievalFilterList')
     RetrievalResultContent = Shapes::StructureShape.new(name: 'RetrievalResultContent')
     RetrievalResultLocation = Shapes::StructureShape.new(name: 'RetrievalResultLocation')
     RetrievalResultLocationType = Shapes::StringShape.new(name: 'RetrievalResultLocationType')
+    RetrievalResultMetadata = Shapes::MapShape.new(name: 'RetrievalResultMetadata')
+    RetrievalResultMetadataKey = Shapes::StringShape.new(name: 'RetrievalResultMetadataKey')
+    RetrievalResultMetadataValue = Shapes::DocumentShape.new(name: 'RetrievalResultMetadataValue', document: true)
     RetrievalResultS3Location = Shapes::StructureShape.new(name: 'RetrievalResultS3Location')
     RetrieveAndGenerateConfiguration = Shapes::StructureShape.new(name: 'RetrieveAndGenerateConfiguration')
     RetrieveAndGenerateInput = Shapes::StructureShape.new(name: 'RetrieveAndGenerateInput')
@@ -168,6 +176,10 @@ module Aws::BedrockAgentRuntime
     FailureTrace.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     FailureTrace.struct_class = Types::FailureTrace
 
+    FilterAttribute.add_member(:key, Shapes::ShapeRef.new(shape: FilterKey, required: true, location_name: "key"))
+    FilterAttribute.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, required: true, location_name: "value"))
+    FilterAttribute.struct_class = Types::FilterAttribute
+
     FinalResponse.add_member(:text, Shapes::ShapeRef.new(shape: FinalResponseString, location_name: "text"))
     FinalResponse.struct_class = Types::FinalResponse
 
@@ -224,6 +236,7 @@ module Aws::BedrockAgentRuntime
 
     KnowledgeBaseRetrievalResult.add_member(:content, Shapes::ShapeRef.new(shape: RetrievalResultContent, required: true, location_name: "content"))
     KnowledgeBaseRetrievalResult.add_member(:location, Shapes::ShapeRef.new(shape: RetrievalResultLocation, location_name: "location"))
+    KnowledgeBaseRetrievalResult.add_member(:metadata, Shapes::ShapeRef.new(shape: RetrievalResultMetadata, location_name: "metadata"))
     KnowledgeBaseRetrievalResult.add_member(:score, Shapes::ShapeRef.new(shape: Double, location_name: "score"))
     KnowledgeBaseRetrievalResult.struct_class = Types::KnowledgeBaseRetrievalResult
 
@@ -235,6 +248,7 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseRetrievalConfiguration, location_name: "retrievalConfiguration"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.struct_class = Types::KnowledgeBaseRetrieveAndGenerateConfiguration
 
+    KnowledgeBaseVectorSearchConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: RetrievalFilter, location_name: "filter"))
     KnowledgeBaseVectorSearchConfiguration.add_member(:number_of_results, Shapes::ShapeRef.new(shape: KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger, location_name: "numberOfResults", metadata: {"box"=>true}))
     KnowledgeBaseVectorSearchConfiguration.add_member(:override_search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "overrideSearchType"))
     KnowledgeBaseVectorSearchConfiguration.struct_class = Types::KnowledgeBaseVectorSearchConfiguration
@@ -343,12 +357,43 @@ module Aws::BedrockAgentRuntime
     ResponseStream.add_member(:validation_exception, Shapes::ShapeRef.new(shape: ValidationException, location_name: "validationException"))
     ResponseStream.struct_class = Types::ResponseStream
 
+    RetrievalFilter.add_member(:and_all, Shapes::ShapeRef.new(shape: RetrievalFilterList, location_name: "andAll"))
+    RetrievalFilter.add_member(:equals, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "equals"))
+    RetrievalFilter.add_member(:greater_than, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "greaterThan"))
+    RetrievalFilter.add_member(:greater_than_or_equals, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "greaterThanOrEquals"))
+    RetrievalFilter.add_member(:in, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "in"))
+    RetrievalFilter.add_member(:less_than, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "lessThan"))
+    RetrievalFilter.add_member(:less_than_or_equals, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "lessThanOrEquals"))
+    RetrievalFilter.add_member(:not_equals, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "notEquals"))
+    RetrievalFilter.add_member(:not_in, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "notIn"))
+    RetrievalFilter.add_member(:or_all, Shapes::ShapeRef.new(shape: RetrievalFilterList, location_name: "orAll"))
+    RetrievalFilter.add_member(:starts_with, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "startsWith"))
+    RetrievalFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RetrievalFilter.add_member_subclass(:and_all, Types::RetrievalFilter::AndAll)
+    RetrievalFilter.add_member_subclass(:equals, Types::RetrievalFilter::Equals)
+    RetrievalFilter.add_member_subclass(:greater_than, Types::RetrievalFilter::GreaterThan)
+    RetrievalFilter.add_member_subclass(:greater_than_or_equals, Types::RetrievalFilter::GreaterThanOrEquals)
+    RetrievalFilter.add_member_subclass(:in, Types::RetrievalFilter::In)
+    RetrievalFilter.add_member_subclass(:less_than, Types::RetrievalFilter::LessThan)
+    RetrievalFilter.add_member_subclass(:less_than_or_equals, Types::RetrievalFilter::LessThanOrEquals)
+    RetrievalFilter.add_member_subclass(:not_equals, Types::RetrievalFilter::NotEquals)
+    RetrievalFilter.add_member_subclass(:not_in, Types::RetrievalFilter::NotIn)
+    RetrievalFilter.add_member_subclass(:or_all, Types::RetrievalFilter::OrAll)
+    RetrievalFilter.add_member_subclass(:starts_with, Types::RetrievalFilter::StartsWith)
+    RetrievalFilter.add_member_subclass(:unknown, Types::RetrievalFilter::Unknown)
+    RetrievalFilter.struct_class = Types::RetrievalFilter
+
+    RetrievalFilterList.member = Shapes::ShapeRef.new(shape: RetrievalFilter)
+
     RetrievalResultContent.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "text"))
     RetrievalResultContent.struct_class = Types::RetrievalResultContent
 
     RetrievalResultLocation.add_member(:s3_location, Shapes::ShapeRef.new(shape: RetrievalResultS3Location, location_name: "s3Location"))
     RetrievalResultLocation.add_member(:type, Shapes::ShapeRef.new(shape: RetrievalResultLocationType, required: true, location_name: "type"))
     RetrievalResultLocation.struct_class = Types::RetrievalResultLocation
+
+    RetrievalResultMetadata.key = Shapes::ShapeRef.new(shape: RetrievalResultMetadataKey)
+    RetrievalResultMetadata.value = Shapes::ShapeRef.new(shape: RetrievalResultMetadataValue)
 
     RetrievalResultS3Location.add_member(:uri, Shapes::ShapeRef.new(shape: String, location_name: "uri"))
     RetrievalResultS3Location.struct_class = Types::RetrievalResultS3Location
@@ -389,6 +434,7 @@ module Aws::BedrockAgentRuntime
 
     RetrievedReference.add_member(:content, Shapes::ShapeRef.new(shape: RetrievalResultContent, location_name: "content"))
     RetrievedReference.add_member(:location, Shapes::ShapeRef.new(shape: RetrievalResultLocation, location_name: "location"))
+    RetrievedReference.add_member(:metadata, Shapes::ShapeRef.new(shape: RetrievalResultMetadata, location_name: "metadata"))
     RetrievedReference.struct_class = Types::RetrievedReference
 
     RetrievedReferences.member = Shapes::ShapeRef.new(shape: RetrievedReference)

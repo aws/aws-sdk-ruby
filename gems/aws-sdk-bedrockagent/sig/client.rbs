@@ -80,8 +80,8 @@ module Aws
       def associate_agent_knowledge_base: (
                                             agent_id: ::String,
                                             agent_version: ::String,
-                                            knowledge_base_id: ::String,
                                             description: ::String,
+                                            knowledge_base_id: ::String,
                                             ?knowledge_base_state: ("ENABLED" | "DISABLED")
                                           ) -> _AssociateAgentKnowledgeBaseResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAgentKnowledgeBaseResponseSuccess
@@ -93,33 +93,33 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_agent-instance_method
       def create_agent: (
                           agent_name: ::String,
-                          ?client_token: ::String,
-                          ?instruction: ::String,
-                          ?foundation_model: ::String,
-                          ?description: ::String,
-                          ?idle_session_ttl_in_seconds: ::Integer,
                           agent_resource_role_arn: ::String,
+                          ?client_token: ::String,
                           ?customer_encryption_key_arn: ::String,
-                          ?tags: Hash[::String, ::String],
+                          ?description: ::String,
+                          ?foundation_model: ::String,
+                          ?idle_session_ttl_in_seconds: ::Integer,
+                          ?instruction: ::String,
                           ?prompt_override_configuration: {
+                            override_lambda: ::String?,
                             prompt_configurations: Array[
                               {
-                                prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION")?,
-                                prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")?,
-                                prompt_state: ("ENABLED" | "DISABLED")?,
                                 base_prompt_template: ::String?,
                                 inference_configuration: {
-                                  temperature: ::Float?,
-                                  top_p: ::Float?,
-                                  top_k: ::Integer?,
                                   maximum_length: ::Integer?,
-                                  stop_sequences: Array[::String]?
+                                  stop_sequences: Array[::String]?,
+                                  temperature: ::Float?,
+                                  top_k: ::Integer?,
+                                  top_p: ::Float?
                                 }?,
-                                parser_mode: ("DEFAULT" | "OVERRIDDEN")?
+                                parser_mode: ("DEFAULT" | "OVERRIDDEN")?,
+                                prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")?,
+                                prompt_state: ("ENABLED" | "DISABLED")?,
+                                prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION")?
                               },
-                            ],
-                            override_lambda: ::String?
-                          }
+                            ]
+                          },
+                          ?tags: Hash[::String, ::String]
                         ) -> _CreateAgentResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentResponseSuccess
 
@@ -129,23 +129,23 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_agent_action_group-instance_method
       def create_agent_action_group: (
-                                       agent_id: ::String,
-                                       agent_version: ::String,
-                                       action_group_name: ::String,
-                                       ?client_token: ::String,
-                                       ?description: ::String,
-                                       ?parent_action_group_signature: ("AMAZON.UserInput"),
                                        ?action_group_executor: {
                                          lambda: ::String?
                                        },
+                                       action_group_name: ::String,
+                                       ?action_group_state: ("ENABLED" | "DISABLED"),
+                                       agent_id: ::String,
+                                       agent_version: ::String,
                                        ?api_schema: {
+                                         payload: ::String?,
                                          s3: {
                                            s3_bucket_name: ::String?,
                                            s3_object_key: ::String?
-                                         }?,
-                                         payload: ::String?
+                                         }?
                                        },
-                                       ?action_group_state: ("ENABLED" | "DISABLED")
+                                       ?client_token: ::String,
+                                       ?description: ::String,
+                                       ?parent_action_group_signature: ("AMAZON.UserInput")
                                      ) -> _CreateAgentActionGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentActionGroupResponseSuccess
 
@@ -155,8 +155,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_agent_alias-instance_method
       def create_agent_alias: (
-                                agent_id: ::String,
                                 agent_alias_name: ::String,
+                                agent_id: ::String,
                                 ?client_token: ::String,
                                 ?description: ::String,
                                 ?routing_configuration: Array[
@@ -174,17 +174,17 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_data_source-instance_method
       def create_data_source: (
-                                knowledge_base_id: ::String,
                                 ?client_token: ::String,
-                                name: ::String,
-                                ?description: ::String,
                                 data_source_configuration: {
-                                  type: ("S3"),
                                   s3_configuration: {
                                     bucket_arn: ::String,
                                     inclusion_prefixes: Array[::String]?
-                                  }?
+                                  }?,
+                                  type: ("S3")
                                 },
+                                ?description: ::String,
+                                knowledge_base_id: ::String,
+                                name: ::String,
                                 ?server_side_encryption_configuration: {
                                   kms_key_arn: ::String?
                                 },
@@ -207,57 +207,57 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_knowledge_base-instance_method
       def create_knowledge_base: (
                                    ?client_token: ::String,
-                                   name: ::String,
                                    ?description: ::String,
-                                   role_arn: ::String,
                                    knowledge_base_configuration: {
                                      type: ("VECTOR"),
                                      vector_knowledge_base_configuration: {
                                        embedding_model_arn: ::String
                                      }?
                                    },
+                                   name: ::String,
+                                   role_arn: ::String,
                                    storage_configuration: {
-                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS"),
                                      opensearch_serverless_configuration: {
                                        collection_arn: ::String,
-                                       vector_index_name: ::String,
                                        field_mapping: {
-                                         vector_field: ::String,
+                                         metadata_field: ::String,
                                          text_field: ::String,
-                                         metadata_field: ::String
-                                       }
+                                         vector_field: ::String
+                                       },
+                                       vector_index_name: ::String
                                      }?,
                                      pinecone_configuration: {
                                        connection_string: ::String,
                                        credentials_secret_arn: ::String,
-                                       namespace: ::String?,
                                        field_mapping: {
-                                         text_field: ::String,
-                                         metadata_field: ::String
-                                       }
-                                     }?,
-                                     redis_enterprise_cloud_configuration: {
-                                       endpoint: ::String,
-                                       vector_index_name: ::String,
-                                       credentials_secret_arn: ::String,
-                                       field_mapping: {
-                                         vector_field: ::String,
-                                         text_field: ::String,
-                                         metadata_field: ::String
-                                       }
+                                         metadata_field: ::String,
+                                         text_field: ::String
+                                       },
+                                       namespace: ::String?
                                      }?,
                                      rds_configuration: {
-                                       resource_arn: ::String,
                                        credentials_secret_arn: ::String,
                                        database_name: ::String,
-                                       table_name: ::String,
                                        field_mapping: {
+                                         metadata_field: ::String,
                                          primary_key_field: ::String,
-                                         vector_field: ::String,
                                          text_field: ::String,
-                                         metadata_field: ::String
-                                       }
-                                     }?
+                                         vector_field: ::String
+                                       },
+                                       resource_arn: ::String,
+                                       table_name: ::String
+                                     }?,
+                                     redis_enterprise_cloud_configuration: {
+                                       credentials_secret_arn: ::String,
+                                       endpoint: ::String,
+                                       field_mapping: {
+                                         metadata_field: ::String,
+                                         text_field: ::String,
+                                         vector_field: ::String
+                                       },
+                                       vector_index_name: ::String
+                                     }?,
+                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS")
                                    },
                                    ?tags: Hash[::String, ::String]
                                  ) -> _CreateKnowledgeBaseResponseSuccess
@@ -280,31 +280,31 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_agent_action_group-instance_method
       def delete_agent_action_group: (
+                                       action_group_id: ::String,
                                        agent_id: ::String,
                                        agent_version: ::String,
-                                       action_group_id: ::String,
                                        ?skip_resource_in_use_check: bool
                                      ) -> _DeleteAgentActionGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentActionGroupResponseSuccess
 
       interface _DeleteAgentAliasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentAliasResponse]
-        def agent_id: () -> ::String
         def agent_alias_id: () -> ::String
         def agent_alias_status: () -> ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+        def agent_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_agent_alias-instance_method
       def delete_agent_alias: (
-                                agent_id: ::String,
-                                agent_alias_id: ::String
+                                agent_alias_id: ::String,
+                                agent_id: ::String
                               ) -> _DeleteAgentAliasResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentAliasResponseSuccess
 
       interface _DeleteAgentVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentVersionResponse]
         def agent_id: () -> ::String
-        def agent_version: () -> ::String
         def agent_status: () -> ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+        def agent_version: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_agent_version-instance_method
       def delete_agent_version: (
@@ -316,14 +316,14 @@ module Aws
 
       interface _DeleteDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceResponse]
-        def knowledge_base_id: () -> ::String
         def data_source_id: () -> ::String
+        def knowledge_base_id: () -> ::String
         def status: () -> ("AVAILABLE" | "DELETING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_data_source-instance_method
       def delete_data_source: (
-                                knowledge_base_id: ::String,
-                                data_source_id: ::String
+                                data_source_id: ::String,
+                                knowledge_base_id: ::String
                               ) -> _DeleteDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
 
@@ -365,9 +365,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_agent_action_group-instance_method
       def get_agent_action_group: (
+                                    action_group_id: ::String,
                                     agent_id: ::String,
-                                    agent_version: ::String,
-                                    action_group_id: ::String
+                                    agent_version: ::String
                                   ) -> _GetAgentActionGroupResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentActionGroupResponseSuccess
 
@@ -377,8 +377,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_agent_alias-instance_method
       def get_agent_alias: (
-                             agent_id: ::String,
-                             agent_alias_id: ::String
+                             agent_alias_id: ::String,
+                             agent_id: ::String
                            ) -> _GetAgentAliasResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentAliasResponseSuccess
 
@@ -411,8 +411,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_data_source-instance_method
       def get_data_source: (
-                             knowledge_base_id: ::String,
-                             data_source_id: ::String
+                             data_source_id: ::String,
+                             knowledge_base_id: ::String
                            ) -> _GetDataSourceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceResponseSuccess
 
@@ -422,9 +422,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_ingestion_job-instance_method
       def get_ingestion_job: (
-                               knowledge_base_id: ::String,
                                data_source_id: ::String,
-                               ingestion_job_id: ::String
+                               ingestion_job_id: ::String,
+                               knowledge_base_id: ::String
                              ) -> _GetIngestionJobResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngestionJobResponseSuccess
 
@@ -524,7 +524,6 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_ingestion_jobs-instance_method
       def list_ingestion_jobs: (
-                                 knowledge_base_id: ::String,
                                  data_source_id: ::String,
                                  ?filters: Array[
                                    {
@@ -533,12 +532,13 @@ module Aws
                                      values: Array[::String]
                                    },
                                  ],
+                                 knowledge_base_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
                                  ?sort_by: {
                                    attribute: ("STATUS" | "STARTED_AT"),
                                    order: ("ASCENDING" | "DESCENDING")
-                                 },
-                                 ?max_results: ::Integer,
-                                 ?next_token: ::String
+                                 }
                                ) -> _ListIngestionJobsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngestionJobsResponseSuccess
 
@@ -583,10 +583,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#start_ingestion_job-instance_method
       def start_ingestion_job: (
-                                 knowledge_base_id: ::String,
-                                 data_source_id: ::String,
                                  ?client_token: ::String,
-                                 ?description: ::String
+                                 data_source_id: ::String,
+                                 ?description: ::String,
+                                 knowledge_base_id: ::String
                                ) -> _StartIngestionJobResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIngestionJobResponseSuccess
 
@@ -618,30 +618,30 @@ module Aws
       def update_agent: (
                           agent_id: ::String,
                           agent_name: ::String,
-                          ?instruction: ::String,
-                          ?foundation_model: ::String,
-                          ?description: ::String,
-                          ?idle_session_ttl_in_seconds: ::Integer,
                           agent_resource_role_arn: ::String,
                           ?customer_encryption_key_arn: ::String,
+                          ?description: ::String,
+                          foundation_model: ::String,
+                          ?idle_session_ttl_in_seconds: ::Integer,
+                          ?instruction: ::String,
                           ?prompt_override_configuration: {
+                            override_lambda: ::String?,
                             prompt_configurations: Array[
                               {
-                                prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION")?,
-                                prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")?,
-                                prompt_state: ("ENABLED" | "DISABLED")?,
                                 base_prompt_template: ::String?,
                                 inference_configuration: {
-                                  temperature: ::Float?,
-                                  top_p: ::Float?,
-                                  top_k: ::Integer?,
                                   maximum_length: ::Integer?,
-                                  stop_sequences: Array[::String]?
+                                  stop_sequences: Array[::String]?,
+                                  temperature: ::Float?,
+                                  top_k: ::Integer?,
+                                  top_p: ::Float?
                                 }?,
-                                parser_mode: ("DEFAULT" | "OVERRIDDEN")?
+                                parser_mode: ("DEFAULT" | "OVERRIDDEN")?,
+                                prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")?,
+                                prompt_state: ("ENABLED" | "DISABLED")?,
+                                prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION")?
                               },
-                            ],
-                            override_lambda: ::String?
+                            ]
                           }
                         ) -> _UpdateAgentResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentResponseSuccess
@@ -652,23 +652,23 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_agent_action_group-instance_method
       def update_agent_action_group: (
-                                       agent_id: ::String,
-                                       agent_version: ::String,
-                                       action_group_id: ::String,
-                                       action_group_name: ::String,
-                                       ?description: ::String,
-                                       ?parent_action_group_signature: ("AMAZON.UserInput"),
                                        ?action_group_executor: {
                                          lambda: ::String?
                                        },
+                                       action_group_id: ::String,
+                                       action_group_name: ::String,
                                        ?action_group_state: ("ENABLED" | "DISABLED"),
+                                       agent_id: ::String,
+                                       agent_version: ::String,
                                        ?api_schema: {
+                                         payload: ::String?,
                                          s3: {
                                            s3_bucket_name: ::String?,
                                            s3_object_key: ::String?
-                                         }?,
-                                         payload: ::String?
-                                       }
+                                         }?
+                                       },
+                                       ?description: ::String,
+                                       ?parent_action_group_signature: ("AMAZON.UserInput")
                                      ) -> _UpdateAgentActionGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentActionGroupResponseSuccess
 
@@ -678,9 +678,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_agent_alias-instance_method
       def update_agent_alias: (
-                                agent_id: ::String,
                                 agent_alias_id: ::String,
                                 agent_alias_name: ::String,
+                                agent_id: ::String,
                                 ?description: ::String,
                                 ?routing_configuration: Array[
                                   {
@@ -698,8 +698,8 @@ module Aws
       def update_agent_knowledge_base: (
                                          agent_id: ::String,
                                          agent_version: ::String,
-                                         knowledge_base_id: ::String,
                                          ?description: ::String,
+                                         knowledge_base_id: ::String,
                                          ?knowledge_base_state: ("ENABLED" | "DISABLED")
                                        ) -> _UpdateAgentKnowledgeBaseResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentKnowledgeBaseResponseSuccess
@@ -710,17 +710,17 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_data_source-instance_method
       def update_data_source: (
-                                knowledge_base_id: ::String,
-                                data_source_id: ::String,
-                                name: ::String,
-                                ?description: ::String,
                                 data_source_configuration: {
-                                  type: ("S3"),
                                   s3_configuration: {
                                     bucket_arn: ::String,
                                     inclusion_prefixes: Array[::String]?
-                                  }?
+                                  }?,
+                                  type: ("S3")
                                 },
+                                data_source_id: ::String,
+                                ?description: ::String,
+                                knowledge_base_id: ::String,
+                                name: ::String,
                                 ?server_side_encryption_configuration: {
                                   kms_key_arn: ::String?
                                 },
@@ -742,58 +742,58 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_knowledge_base-instance_method
       def update_knowledge_base: (
-                                   knowledge_base_id: ::String,
-                                   name: ::String,
                                    ?description: ::String,
-                                   role_arn: ::String,
                                    knowledge_base_configuration: {
                                      type: ("VECTOR"),
                                      vector_knowledge_base_configuration: {
                                        embedding_model_arn: ::String
                                      }?
                                    },
+                                   knowledge_base_id: ::String,
+                                   name: ::String,
+                                   role_arn: ::String,
                                    storage_configuration: {
-                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS"),
                                      opensearch_serverless_configuration: {
                                        collection_arn: ::String,
-                                       vector_index_name: ::String,
                                        field_mapping: {
-                                         vector_field: ::String,
+                                         metadata_field: ::String,
                                          text_field: ::String,
-                                         metadata_field: ::String
-                                       }
+                                         vector_field: ::String
+                                       },
+                                       vector_index_name: ::String
                                      }?,
                                      pinecone_configuration: {
                                        connection_string: ::String,
                                        credentials_secret_arn: ::String,
-                                       namespace: ::String?,
                                        field_mapping: {
-                                         text_field: ::String,
-                                         metadata_field: ::String
-                                       }
-                                     }?,
-                                     redis_enterprise_cloud_configuration: {
-                                       endpoint: ::String,
-                                       vector_index_name: ::String,
-                                       credentials_secret_arn: ::String,
-                                       field_mapping: {
-                                         vector_field: ::String,
-                                         text_field: ::String,
-                                         metadata_field: ::String
-                                       }
+                                         metadata_field: ::String,
+                                         text_field: ::String
+                                       },
+                                       namespace: ::String?
                                      }?,
                                      rds_configuration: {
-                                       resource_arn: ::String,
                                        credentials_secret_arn: ::String,
                                        database_name: ::String,
-                                       table_name: ::String,
                                        field_mapping: {
+                                         metadata_field: ::String,
                                          primary_key_field: ::String,
-                                         vector_field: ::String,
                                          text_field: ::String,
-                                         metadata_field: ::String
-                                       }
-                                     }?
+                                         vector_field: ::String
+                                       },
+                                       resource_arn: ::String,
+                                       table_name: ::String
+                                     }?,
+                                     redis_enterprise_cloud_configuration: {
+                                       credentials_secret_arn: ::String,
+                                       endpoint: ::String,
+                                       field_mapping: {
+                                         metadata_field: ::String,
+                                         text_field: ::String,
+                                         vector_field: ::String
+                                       },
+                                       vector_index_name: ::String
+                                     }?,
+                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS")
                                    }
                                  ) -> _UpdateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseResponseSuccess

@@ -1890,6 +1890,25 @@ module Aws::SecretsManager
     #   access to the secret, for example those that use a wildcard for the
     #   principal. By default, public policies aren't blocked.
     #
+    #   Resource policy validation and the BlockPublicPolicy parameter help
+    #   protect your resources by preventing public access from being granted
+    #   through the resource policies that are directly attached to your
+    #   secrets. In addition to using these features, carefully inspect the
+    #   following policies to confirm that they do not grant public access:
+    #
+    #    * Identity-based policies attached to associated Amazon Web Services
+    #     principals (for example, IAM roles)
+    #
+    #   * Resource-based policies attached to associated Amazon Web Services
+    #     resources (for example, Key Management Service (KMS) keys)
+    #
+    #    To review permissions to your secrets, see [Determine who has
+    #   permissions to your secrets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/determine-acccess_examine-iam-policies.html
+    #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutResourcePolicyResponse#arn #arn} => String
@@ -3243,7 +3262,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

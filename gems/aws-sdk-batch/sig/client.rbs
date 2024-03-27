@@ -704,6 +704,11 @@ module Aws
                                          service_account_name: ::String?,
                                          host_network: bool?,
                                          dns_policy: ::String?,
+                                         image_pull_secrets: Array[
+                                           {
+                                             name: ::String
+                                           },
+                                         ]?,
                                          containers: Array[
                                            {
                                              name: ::String?,
@@ -732,6 +737,7 @@ module Aws
                                                run_as_user: ::Integer?,
                                                run_as_group: ::Integer?,
                                                privileged: bool?,
+                                               allow_privilege_escalation: bool?,
                                                read_only_root_filesystem: bool?,
                                                run_as_non_root: bool?
                                              }?
@@ -765,6 +771,7 @@ module Aws
                                                run_as_user: ::Integer?,
                                                run_as_group: ::Integer?,
                                                privileged: bool?,
+                                               allow_privilege_escalation: bool?,
                                                read_only_root_filesystem: bool?,
                                                run_as_non_root: bool?
                                              }?

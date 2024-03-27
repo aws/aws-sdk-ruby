@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2024-03-27)
+------------------
+
+* Feature - This release introduces filtering support on Retrieve and RetrieveAndGenerate APIs.
+
 1.4.0 (2024-03-26)
 ------------------
 

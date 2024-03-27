@@ -686,6 +686,7 @@ module Aws::BedrockAgentRuntime
     #   event.attribution.citations[0].retrieved_references[0].content.text #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.s3_location.uri #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
+    #   event.attribution.citations[0].retrieved_references[0].metadata #=> Hash
     #   event.bytes #=> String
     #
     #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
@@ -747,6 +748,7 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
     #   event.trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
     #   event.trace.orchestration_trace.observation.reprompt_response.text #=> String
     #   event.trace.orchestration_trace.observation.trace_id #=> String
@@ -851,6 +853,63 @@ module Aws::BedrockAgentRuntime
     #     next_token: "NextToken",
     #     retrieval_configuration: {
     #       vector_search_configuration: { # required
+    #         filter: {
+    #           and_all: [
+    #             {
+    #               # recursive RetrievalFilter
+    #             },
+    #           ],
+    #           equals: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           greater_than: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           greater_than_or_equals: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           in: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           less_than: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           less_than_or_equals: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           not_equals: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           not_in: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           or_all: [
+    #             {
+    #               # recursive RetrievalFilter
+    #             },
+    #           ],
+    #           starts_with: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #         },
     #         number_of_results: 1,
     #         override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
     #       },
@@ -867,6 +926,7 @@ module Aws::BedrockAgentRuntime
     #   resp.retrieval_results[0].content.text #=> String
     #   resp.retrieval_results[0].location.s3_location.uri #=> String
     #   resp.retrieval_results[0].location.type #=> String, one of "S3"
+    #   resp.retrieval_results[0].metadata #=> Hash
     #   resp.retrieval_results[0].score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/Retrieve AWS API Documentation
@@ -879,8 +939,8 @@ module Aws::BedrockAgentRuntime
     end
 
     # Queries a knowledge base and generates responses based on the
-    # retrieved results. The response cites up to five sources but only
-    # selects the ones that are relevant to the query.
+    # retrieved results. The response only cites sources that are relevant
+    # to the query.
     #
     # @option params [required, Types::RetrieveAndGenerateInput] :input
     #   Contains the query to be made to the knowledge base.
@@ -923,6 +983,63 @@ module Aws::BedrockAgentRuntime
     #         model_arn: "BedrockModelArn", # required
     #         retrieval_configuration: {
     #           vector_search_configuration: { # required
+    #             filter: {
+    #               and_all: [
+    #                 {
+    #                   # recursive RetrievalFilter
+    #                 },
+    #               ],
+    #               equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               greater_than: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               greater_than_or_equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               in: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               less_than: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               less_than_or_equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               not_equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               not_in: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               or_all: [
+    #                 {
+    #                   # recursive RetrievalFilter
+    #                 },
+    #               ],
+    #               starts_with: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #             },
     #             number_of_results: 1,
     #             override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
     #           },
@@ -946,6 +1063,7 @@ module Aws::BedrockAgentRuntime
     #   resp.citations[0].retrieved_references[0].content.text #=> String
     #   resp.citations[0].retrieved_references[0].location.s3_location.uri #=> String
     #   resp.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
+    #   resp.citations[0].retrieved_references[0].metadata #=> Hash
     #   resp.output.text #=> String
     #   resp.session_id #=> String
     #
@@ -971,7 +1089,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

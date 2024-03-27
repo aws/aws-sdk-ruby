@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2024-03-27)
+------------------
+
+* Feature - This feature allows AWS Batch to support configuration of imagePullSecrets and allowPrivilegeEscalation for jobs running on EKS
+
 1.83.0 (2024-03-08)
 ------------------
 

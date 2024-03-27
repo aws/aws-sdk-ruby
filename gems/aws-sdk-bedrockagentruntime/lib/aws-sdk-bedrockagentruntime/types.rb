@@ -199,6 +199,38 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Specifies the name that the metadata attribute must match and the
+    # value to which to compare the value of the metadata attribute. For
+    # more information, see [Query configurations][1].
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate request][2]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+    #
+    # @!attribute [rw] key
+    #   The name that the metadata attribute must match.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to whcih to compare the value of the metadata attribute.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FilterAttribute AWS API Documentation
+    #
+    class FilterAttribute < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the response to the user.
     #
     # @!attribute [rw] text
@@ -558,6 +590,15 @@ module Aws::BedrockAgentRuntime
     #   Contains information about the location of the data source.
     #   @return [Types::RetrievalResultLocation]
     #
+    # @!attribute [rw] metadata
+    #   Contains metadata attributes and their values for the file in the
+    #   data source. For more information, see [Metadata and filtering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
     # @!attribute [rw] score
     #   The level of relevance of the result to the query.
     #   @return [Float]
@@ -567,8 +608,9 @@ module Aws::BedrockAgentRuntime
     class KnowledgeBaseRetrievalResult < Struct.new(
       :content,
       :location,
+      :metadata,
       :score)
-      SENSITIVE = [:content, :location]
+      SENSITIVE = [:content, :location, :metadata]
       include Aws::Structure
     end
 
@@ -632,6 +674,16 @@ module Aws::BedrockAgentRuntime
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
     # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
     #
+    # @!attribute [rw] filter
+    #   Specifies the filters to use on the metadata in the knowledge base
+    #   data sources before returning results. For more information, see
+    #   [Query configurations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+    #   @return [Types::RetrievalFilter]
+    #
     # @!attribute [rw] number_of_results
     #   The number of source chunks to retrieve.
     #   @return [Integer]
@@ -654,9 +706,10 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/KnowledgeBaseVectorSearchConfiguration AWS API Documentation
     #
     class KnowledgeBaseVectorSearchConfiguration < Struct.new(
+      :filter,
       :number_of_results,
       :override_search_type)
-      SENSITIVE = []
+      SENSITIVE = [:filter]
       include Aws::Structure
     end
 
@@ -1056,7 +1109,7 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [RetrieveAndGenerate request][2]
+    # * [RetrieveAndGenerate request][2] – in the `filter` field
     #
     # ^
     #
@@ -1159,6 +1212,122 @@ module Aws::BedrockAgentRuntime
       :event_type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Specifies the filters to use on the metadata attributes in the
+    # knowledge base data sources before returning results. For more
+    # information, see [Query configurations][1].
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve request][2] – in the `filter` field
+    #
+    # * [RetrieveAndGenerate request][3] – in the `filter` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+    #
+    # @note RetrievalFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] and_all
+    #   Knowledge base data sources whose metadata attributes fulfill all
+    #   the filter conditions inside this list are returned.
+    #   @return [Array<Types::RetrievalFilter>]
+    #
+    # @!attribute [rw] equals
+    #   Knowledge base data sources that contain a metadata attribute whose
+    #   name matches the `key` and whose value matches the `value` in this
+    #   object are returned.
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] greater_than
+    #   Knowledge base data sources that contain a metadata attribute whose
+    #   name matches the `key` and whose value is greater than the `value`
+    #   in this object are returned.
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] greater_than_or_equals
+    #   Knowledge base data sources that contain a metadata attribute whose
+    #   name matches the `key` and whose value is greater than or equal to
+    #   the `value` in this object are returned.
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] in
+    #   Knowledge base data sources that contain a metadata attribute whose
+    #   name matches the `key` and whose value is in the list specified in
+    #   the `value` in this object are returned.
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] less_than
+    #   Knowledge base data sources that contain a metadata attribute whose
+    #   name matches the `key` and whose value is less than the `value` in
+    #   this object are returned.
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] less_than_or_equals
+    #   Knowledge base data sources that contain a metadata attribute whose
+    #   name matches the `key` and whose value is less than or equal to the
+    #   `value` in this object are returned.
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] not_equals
+    #   Knowledge base data sources that contain a metadata attribute whose
+    #   name matches the `key` and whose value doesn't match the `value` in
+    #   this object are returned.
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] not_in
+    #   Knowledge base data sources that contain a metadata attribute whose
+    #   name matches the `key` and whose value isn't in the list specified
+    #   in the `value` in this object are returned.
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] or_all
+    #   Knowledge base data sources whose metadata attributes fulfill at
+    #   least one of the filter conditions inside this list are returned.
+    #   @return [Array<Types::RetrievalFilter>]
+    #
+    # @!attribute [rw] starts_with
+    #   Knowledge base data sources that contain a metadata attribute whose
+    #   name matches the `key` and whose value starts with the `value` in
+    #   this object are returned. This filter is currently only supported
+    #   for Amazon OpenSearch Serverless vector stores.
+    #   @return [Types::FilterAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrievalFilter AWS API Documentation
+    #
+    class RetrievalFilter < Struct.new(
+      :and_all,
+      :equals,
+      :greater_than,
+      :greater_than_or_equals,
+      :in,
+      :less_than,
+      :less_than_or_equals,
+      :not_equals,
+      :not_in,
+      :or_all,
+      :starts_with,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AndAll < RetrievalFilter; end
+      class Equals < RetrievalFilter; end
+      class GreaterThan < RetrievalFilter; end
+      class GreaterThanOrEquals < RetrievalFilter; end
+      class In < RetrievalFilter; end
+      class LessThan < RetrievalFilter; end
+      class LessThanOrEquals < RetrievalFilter; end
+      class NotEquals < RetrievalFilter; end
+      class NotIn < RetrievalFilter; end
+      class OrAll < RetrievalFilter; end
+      class StartsWith < RetrievalFilter; end
+      class Unknown < RetrievalFilter; end
     end
 
     # Contains the cited text from the data source.
@@ -1483,12 +1652,22 @@ module Aws::BedrockAgentRuntime
     #   Contains information about the location of the data source.
     #   @return [Types::RetrievalResultLocation]
     #
+    # @!attribute [rw] metadata
+    #   Contains metadata attributes and their values for the file in the
+    #   data source. For more information, see [Metadata and filtering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrievedReference AWS API Documentation
     #
     class RetrievedReference < Struct.new(
       :content,
-      :location)
-      SENSITIVE = [:content, :location]
+      :location,
+      :metadata)
+      SENSITIVE = [:content, :location, :metadata]
       include Aws::Structure
     end
 

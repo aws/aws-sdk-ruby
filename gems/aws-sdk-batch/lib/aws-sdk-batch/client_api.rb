@@ -122,6 +122,8 @@ module Aws::Batch
     Float = Shapes::FloatShape.new(name: 'Float')
     Host = Shapes::StructureShape.new(name: 'Host')
     ImageIdOverride = Shapes::StringShape.new(name: 'ImageIdOverride')
+    ImagePullSecret = Shapes::StructureShape.new(name: 'ImagePullSecret')
+    ImagePullSecrets = Shapes::ListShape.new(name: 'ImagePullSecrets')
     ImageType = Shapes::StringShape.new(name: 'ImageType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     JQState = Shapes::StringShape.new(name: 'JQState')
@@ -637,6 +639,7 @@ module Aws::Batch
     EksContainerSecurityContext.add_member(:run_as_user, Shapes::ShapeRef.new(shape: Long, location_name: "runAsUser"))
     EksContainerSecurityContext.add_member(:run_as_group, Shapes::ShapeRef.new(shape: Long, location_name: "runAsGroup"))
     EksContainerSecurityContext.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "privileged"))
+    EksContainerSecurityContext.add_member(:allow_privilege_escalation, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowPrivilegeEscalation"))
     EksContainerSecurityContext.add_member(:read_only_root_filesystem, Shapes::ShapeRef.new(shape: Boolean, location_name: "readOnlyRootFilesystem"))
     EksContainerSecurityContext.add_member(:run_as_non_root, Shapes::ShapeRef.new(shape: Boolean, location_name: "runAsNonRoot"))
     EksContainerSecurityContext.struct_class = Types::EksContainerSecurityContext
@@ -669,6 +672,7 @@ module Aws::Batch
     EksPodProperties.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
     EksPodProperties.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
     EksPodProperties.add_member(:dns_policy, Shapes::ShapeRef.new(shape: String, location_name: "dnsPolicy"))
+    EksPodProperties.add_member(:image_pull_secrets, Shapes::ShapeRef.new(shape: ImagePullSecrets, location_name: "imagePullSecrets"))
     EksPodProperties.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainers, location_name: "containers"))
     EksPodProperties.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksContainers, location_name: "initContainers"))
     EksPodProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
@@ -679,6 +683,7 @@ module Aws::Batch
     EksPodPropertiesDetail.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
     EksPodPropertiesDetail.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
     EksPodPropertiesDetail.add_member(:dns_policy, Shapes::ShapeRef.new(shape: String, location_name: "dnsPolicy"))
+    EksPodPropertiesDetail.add_member(:image_pull_secrets, Shapes::ShapeRef.new(shape: ImagePullSecrets, location_name: "imagePullSecrets"))
     EksPodPropertiesDetail.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainerDetails, location_name: "containers"))
     EksPodPropertiesDetail.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksContainerDetails, location_name: "initContainers"))
     EksPodPropertiesDetail.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
@@ -740,6 +745,11 @@ module Aws::Batch
 
     Host.add_member(:source_path, Shapes::ShapeRef.new(shape: String, location_name: "sourcePath"))
     Host.struct_class = Types::Host
+
+    ImagePullSecret.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ImagePullSecret.struct_class = Types::ImagePullSecret
+
+    ImagePullSecrets.member = Shapes::ShapeRef.new(shape: ImagePullSecret)
 
     JobDefinition.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
     JobDefinition.add_member(:job_definition_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionArn"))
