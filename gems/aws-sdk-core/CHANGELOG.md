@@ -1,5 +1,24 @@
 Unreleased Changes
 ------------------
+* Issue - Added support for `short` as ruby shape.
+* Issue - Allow `nil` values in lists and maps.
+* Issue - Populate headers for XML and JSON error responses.
+* Issue - Support fractional seconds when parsing `DateTime` timestamps.
+* Issue - Fix serializing string with JsonValue trait.
+* Issue - Fix an issue where Rest-XML services do not have a `Content-Type` header.
+* Issue - Correctly serialize flattened lists for Query protocol.
+* Issue - Correctly serialize payloads in Rest-XML requests.
+* Issue - Apply appropriate `Content-Type` header for payloads in Rest services.
+* Issue - Correctly serialize URI label bindings in Rest requests.
+* Issue - Correctly serialize and parse header bindings in Rest services.
+* Issue - Ensure that null and empty headers are not sent in Rest requests.
+* Issue - Ensure keys in query maps do not override modeled keys in Rest requests.
+* Issue - Ensure empty blob payloads are omitted in Rest requests.
+* issue - Support parsing `NaN`, `Infinity` and `-Infinity` float values.
+* Issue - Apply appropriate `xmlName` for flattened lists and maps in Rest-XML services.
+* Issue - Fix serializing and deserializing `xmlNamespace` on nested structures for Rest-XML services.
+* Issue - Fix deserializing an empty self-closed blob to produce an empty string.
+* Issue - Support parsing of different formats of error data in Rest-XML services.
 
 3.191.3 (2024-02-20)
 ------------------
