@@ -251,7 +251,7 @@ module AwsSdkCodeGenerator
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
             o.pager = pager(operation_name)
             o.async = @service.protocol_settings['h2'] == 'eventstream' &&
-                      AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @service.api)
+              AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @service.api)
           end
         end
       end
@@ -293,7 +293,7 @@ module AwsSdkCodeGenerator
         if document_struct?(shape)
           ["Shapes::DocumentShape", shape]
 	      elsif shape['union']
-         ["Shapes::UnionShape", shape]
+          ["Shapes::UnionShape", shape]
         elsif SHAPE_CLASSES.key?(type)
           ["Shapes::#{SHAPE_CLASSES[type]}", shape]
         else
@@ -306,7 +306,13 @@ module AwsSdkCodeGenerator
         args << "name: '#{shape_name}'"
         shape.each_pair do |key, value|
           if SHAPE_KEYS[key]
-            args << "#{key}: #{value.inspect}"
+            if key == 'error'
+              # support custom error code
+              custom_error = value.select { |k| k == 'code' }
+              args << "#{key}: #{custom_error.inspect}" unless custom_error.empty?
+            else
+              args << "#{key}: #{value.inspect}"
+            end
           elsif SHAPE_KEYS[key].nil?
             raise "unhandled shape key #{key.inspect}"
           end
@@ -517,11 +523,11 @@ module AwsSdkCodeGenerator
             options = ''
           else
             opts = HashFormatter.new(wrap:false).format(options)
-            options = if opts[0] == "\n"
-                        ",#{opts}"
+            if opts[0] == "\n"
+              options = ",#{opts}"
             else
-              ", #{opts}"
-                      end
+              options = ", #{opts}"
+            end
           end
         end
         "Shapes::ShapeRef.new(shape: #{shape_name}#{options})"
