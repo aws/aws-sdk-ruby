@@ -31,8 +31,10 @@ module Aws
       )
 
       # @option options [Client] :client
+      # @option options [Integer] :thread_count (THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
+        @thread_count = options[:thread_count]
       end
 
       # @return [Client]
@@ -44,14 +46,11 @@ module Aws
       # @option options [Proc] :progress_callback
       #   A Proc that will be called when each chunk of the upload is sent.
       #   It will be invoked with [bytes_read], [total_sizes]
-      # @option options [Integer] :thread_count (THREAD_COUNT)
-      #   The thread count to use for multipart uploads.
       # @return [Seahorse::Client::Response] - the CompleteMultipartUploadResponse
       def upload(source, options = {})
         if File.size(source) < MIN_PART_SIZE
           raise ArgumentError, FILE_TOO_SMALL
         else
-          @thread_count = options[:thread_count] || THREAD_COUNT
           upload_id = initiate_upload(options)
           parts = upload_parts(upload_id, source, options)
           complete_upload(upload_id, parts, options)
@@ -148,7 +147,7 @@ module Aws
         if (callback = options[:progress_callback])
           progress = MultipartProgress.new(pending, callback)
         end
-        @thread_count.times do
+        (@thread_count || options[:thread_count] || THREAD_COUNT).times do
           thread = Thread.new do
             begin
               while part = pending.shift
