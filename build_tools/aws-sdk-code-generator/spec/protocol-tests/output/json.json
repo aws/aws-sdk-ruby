@@ -1328,8 +1328,7 @@
                 "type": "structure",
                 "members": {
                     "Value": {
-                        "shape": "String",
-                        "locationName": "RenamedMember"
+                        "shape": "String"
                     }
                 }
             },
