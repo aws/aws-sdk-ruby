@@ -185,6 +185,21 @@ module Aws
             object.upload_file(one_hundred_seventeen_meg_file, content_type: 'text/plain', progress_callback: callback)
           end
 
+          it 'defaults to THREAD_COUNT without the thread_count option' do
+            expect(Thread).to receive(:new).exactly(S3::MultipartFileUploader::THREAD_COUNT).times.and_return(double(value: nil))
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:complete_multipart_upload)
+            object.upload_file(one_hundred_seventeen_meg_file)
+          end
+
+          it 'respects the thread_count option' do
+            custom_thread_count = 20
+            expect(Thread).to receive(:new).exactly(custom_thread_count).times.and_return(double(value: nil))
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:complete_multipart_upload)
+            object.upload_file(one_hundred_seventeen_meg_file, thread_count: custom_thread_count)
+          end
+
           it 'raises an error if the multipart threshold is too small' do
             error_msg = 'unable to multipart upload files smaller than 5MB'
             expect do
