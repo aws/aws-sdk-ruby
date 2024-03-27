@@ -7,6 +7,7 @@ module Aws
         body = context.http_request.body
         if !body.respond_to?(:size) ||
            (body.respond_to?(:size) && body.size > 0)
+          # appropriate content-type is set when serializing payload body
           case (protocol = context.config.api.metadata['protocol'])
           when 'rest-json'
             context.http_request.headers['Content-Type'] ||=

@@ -14,7 +14,7 @@ Unreleased Changes
 * Issue - Ensure that null and empty headers are not sent in Rest requests.
 * Issue - Ensure keys in query maps do not override modeled keys in Rest requests.
 * Issue - Ensure empty blob payloads are omitted in Rest requests.
-* issue - Support parsing `NaN`, `Infinity` and `-Infinity` float values.
+* Issue - Support parsing `NaN`, `Infinity` and `-Infinity` float values.
 * Issue - Apply appropriate `xmlName` for flattened lists and maps in Rest-XML services.
 * Issue - Fix serializing and deserializing `xmlNamespace` on nested structures for Rest-XML services.
 * Issue - Fix deserializing an empty self-closed blob to produce an empty string.

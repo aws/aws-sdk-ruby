@@ -306,13 +306,7 @@ module AwsSdkCodeGenerator
         args << "name: '#{shape_name}'"
         shape.each_pair do |key, value|
           if SHAPE_KEYS[key]
-            if key == 'error'
-              # support custom error code
-              custom_error = value.select { |k| k == 'code' }
-              args << "#{key}: #{custom_error.inspect}" unless custom_error.empty?
-            else
-              args << "#{key}: #{value.inspect}"
-            end
+            args << "#{key}: #{value.inspect}"
           elsif SHAPE_KEYS[key].nil?
             raise "unhandled shape key #{key.inspect}"
           end
