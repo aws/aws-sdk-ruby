@@ -112,6 +112,8 @@ module Aws::CostExplorer
             Aws::CostExplorer::Endpoints::GetTags.build(context)
           when :get_usage_forecast
             Aws::CostExplorer::Endpoints::GetUsageForecast.build(context)
+          when :list_cost_allocation_tag_backfill_history
+            Aws::CostExplorer::Endpoints::ListCostAllocationTagBackfillHistory.build(context)
           when :list_cost_allocation_tags
             Aws::CostExplorer::Endpoints::ListCostAllocationTags.build(context)
           when :list_cost_category_definitions
@@ -122,6 +124,8 @@ module Aws::CostExplorer
             Aws::CostExplorer::Endpoints::ListTagsForResource.build(context)
           when :provide_anomaly_feedback
             Aws::CostExplorer::Endpoints::ProvideAnomalyFeedback.build(context)
+          when :start_cost_allocation_tag_backfill
+            Aws::CostExplorer::Endpoints::StartCostAllocationTagBackfill.build(context)
           when :start_savings_plans_purchase_recommendation_generation
             Aws::CostExplorer::Endpoints::StartSavingsPlansPurchaseRecommendationGeneration.build(context)
           when :tag_resource

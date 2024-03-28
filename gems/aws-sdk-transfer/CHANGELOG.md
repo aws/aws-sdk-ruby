@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2024-03-08)
+------------------
+
+* Feature - Added DES_EDE3_CBC to the list of supported encryption algorithms for messages sent with an AS2 connector.
+
 1.88.0 (2024-01-26)
 ------------------
 

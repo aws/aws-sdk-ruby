@@ -487,20 +487,35 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Creates a single Amazon GuardDuty detector. A detector is a resource
-    # that represents the GuardDuty service. To start using GuardDuty, you
-    # must create a detector in each Region where you enable the service.
-    # You can have only one detector per account per Region. All data
-    # sources are enabled in a new detector by default.
+    # Creates a single GuardDuty detector. A detector is a resource that
+    # represents the GuardDuty service. To start using GuardDuty, you must
+    # create a detector in each Region where you enable the service. You can
+    # have only one detector per account per Region. All data sources are
+    # enabled in a new detector by default.
+    #
+    # * When you don't specify any `features`, with an exception to
+    #   `RUNTIME_MONITORING`, all the optional features are enabled by
+    #   default.
+    #
+    # * When you specify some of the `features`, any feature that is not
+    #   specified in the API call gets enabled by default, with an exception
+    #   to `RUNTIME_MONITORING`.
+    #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
     #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
     # GuardDuty is presently supported. For more information, see [Regions
-    # and endpoints][1].
+    # and endpoints][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, Boolean] :enable
     #   A Boolean value that specifies whether the detector is to be enabled.
@@ -2839,12 +2854,12 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Retrieves how many active member accounts in your Amazon Web Services
-    # organization have each feature enabled within GuardDuty. Only a
-    # delegated GuardDuty administrator of an organization can run this API.
+    # Retrieves how many active member accounts have each feature enabled
+    # within GuardDuty. Only a delegated GuardDuty administrator of an
+    # organization can run this API.
     #
-    # When you create a new Amazon Web Services organization, it might take
-    # up to 24 hours to generate the statistics for the entire organization.
+    # When you create a new organization, it might take up to 24 hours to
+    # generate the statistics for the entire organization.
     #
     # @return [Types::GetOrganizationStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3014,7 +3029,7 @@ module Aws::GuardDuty
     #       account_ids: ["AccountId"],
     #       data_sources: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
     #       resources: ["String"],
-    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING
+    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING, RDS_DBI_PROTECTION_PROVISIONED, RDS_DBI_PROTECTION_SERVERLESS
     #     },
     #     unit: "String",
     #     max_results: 1,
@@ -3028,7 +3043,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.sum_by_account[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_account[0].total.unit #=> String
     #   resp.usage_statistics.top_accounts_by_feature #=> Array
-    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING"
+    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS"
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts #=> Array
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].account_id #=> String
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].total.amount #=> String
@@ -3046,7 +3061,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.top_resources[0].total.amount #=> String
     #   resp.usage_statistics.top_resources[0].total.unit #=> String
     #   resp.usage_statistics.sum_by_feature #=> Array
-    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING"
+    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS"
     #   resp.usage_statistics.sum_by_feature[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_feature[0].total.unit #=> String
     #   resp.next_token #=> String
@@ -3852,11 +3867,16 @@ module Aws::GuardDuty
     end
 
     # Initiates the malware scan. Invoking this API will automatically
-    # create the [Service-linked role ][1] in the corresponding account.
+    # create the [Service-linked role][1] in the corresponding account.
+    #
+    # When the malware scan starts, you can use the associated scan ID to
+    # track the status of the scan. For more information, see
+    # [DescribeMalwareScans][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeMalwareScans.html
     #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource for which you invoked the
@@ -4049,16 +4069,23 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Updates the GuardDuty detector specified by the detectorId.
+    # Updates the GuardDuty detector specified by the detector ID.
+    #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
     #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
     # GuardDuty is presently supported. For more information, see [Regions
-    # and endpoints][1].
+    # and endpoints][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector to update.
@@ -4344,14 +4371,21 @@ module Aws::GuardDuty
 
     # Contains information on member accounts to be updated.
     #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
+    #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
     # GuardDuty is presently supported. For more information, see [Regions
-    # and endpoints][1].
+    # and endpoints][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The detector ID of the administrator account.
@@ -4423,14 +4457,21 @@ module Aws::GuardDuty
     # values. You must provide a value for either
     # `autoEnableOrganizationMembers` or `autoEnable`, but not both.
     #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
+    #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
     # GuardDuty is presently supported. For more information, see [Regions
-    # and endpoints][1].
+    # and endpoints][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector that configures the delegated administrator.
@@ -4472,6 +4513,13 @@ module Aws::GuardDuty
     #   * `NONE`: Indicates that GuardDuty will not be automatically enabled
     #     for any account in the organization. The administrator must manage
     #     GuardDuty for each account in the organization individually.
+    #
+    #     When you update the auto-enable setting from `ALL` or `NEW` to
+    #     `NONE`, this action doesn't disable the corresponding option for
+    #     your existing accounts. This configuration will apply to the new
+    #     accounts that join the organization. After you update the
+    #     auto-enable settings, no new account will have the corresponding
+    #     option as enabled.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4612,7 +4660,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

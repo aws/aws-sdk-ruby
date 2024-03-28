@@ -1372,6 +1372,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: TrailNotProvidedException)
         o.errors << Shapes::ShapeRef.new(shape: TagsLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: KmsException)
@@ -1503,6 +1504,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrailNameException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudTrailARNInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
       end)
 
@@ -1730,6 +1732,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

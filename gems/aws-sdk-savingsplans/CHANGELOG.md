@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2024-03-20)
+------------------
+
+* Feature - Introducing the Savings Plans Return feature enabling customers to return their Savings Plans within 7 days of purchase.
+
 1.38.0 (2024-01-26)
 ------------------
 

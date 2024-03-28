@@ -1098,6 +1098,7 @@ module Aws::KinesisAnalyticsV2
     SnapshotDetails.add_member(:snapshot_status, Shapes::ShapeRef.new(shape: SnapshotStatus, required: true, location_name: "SnapshotStatus"))
     SnapshotDetails.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "ApplicationVersionId"))
     SnapshotDetails.add_member(:snapshot_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SnapshotCreationTimestamp"))
+    SnapshotDetails.add_member(:runtime_environment, Shapes::ShapeRef.new(shape: RuntimeEnvironment, location_name: "RuntimeEnvironment"))
     SnapshotDetails.struct_class = Types::SnapshotDetails
 
     SnapshotSummaries.member = Shapes::ShapeRef.new(shape: SnapshotDetails)
@@ -1188,6 +1189,7 @@ module Aws::KinesisAnalyticsV2
     UpdateApplicationRequest.add_member(:run_configuration_update, Shapes::ShapeRef.new(shape: RunConfigurationUpdate, location_name: "RunConfigurationUpdate"))
     UpdateApplicationRequest.add_member(:cloud_watch_logging_option_updates, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptionUpdates, location_name: "CloudWatchLoggingOptionUpdates"))
     UpdateApplicationRequest.add_member(:conditional_token, Shapes::ShapeRef.new(shape: ConditionalToken, location_name: "ConditionalToken"))
+    UpdateApplicationRequest.add_member(:runtime_environment_update, Shapes::ShapeRef.new(shape: RuntimeEnvironment, location_name: "RuntimeEnvironmentUpdate"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.add_member(:application_detail, Shapes::ShapeRef.new(shape: ApplicationDetail, required: true, location_name: "ApplicationDetail"))

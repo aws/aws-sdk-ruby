@@ -226,6 +226,7 @@ module Aws::Batch
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
       SENSITIVE: []
     end
 
@@ -492,6 +493,7 @@ module Aws::Batch
       attr_accessor run_as_user: ::Integer
       attr_accessor run_as_group: ::Integer
       attr_accessor privileged: bool
+      attr_accessor allow_privilege_escalation: bool
       attr_accessor read_only_root_filesystem: bool
       attr_accessor run_as_non_root: bool
       SENSITIVE: []
@@ -524,6 +526,7 @@ module Aws::Batch
       attr_accessor service_account_name: ::String
       attr_accessor host_network: bool
       attr_accessor dns_policy: ::String
+      attr_accessor image_pull_secrets: ::Array[Types::ImagePullSecret]
       attr_accessor containers: ::Array[Types::EksContainer]
       attr_accessor init_containers: ::Array[Types::EksContainer]
       attr_accessor volumes: ::Array[Types::EksVolume]
@@ -536,6 +539,7 @@ module Aws::Batch
       attr_accessor service_account_name: ::String
       attr_accessor host_network: bool
       attr_accessor dns_policy: ::String
+      attr_accessor image_pull_secrets: ::Array[Types::ImagePullSecret]
       attr_accessor containers: ::Array[Types::EksContainerDetail]
       attr_accessor init_containers: ::Array[Types::EksContainerDetail]
       attr_accessor volumes: ::Array[Types::EksVolume]
@@ -612,6 +616,11 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class ImagePullSecret
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class JobDefinition
       attr_accessor job_definition_name: ::String
       attr_accessor job_definition_arn: ::String
@@ -682,6 +691,15 @@ module Aws::Batch
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
+      SENSITIVE: []
+    end
+
+    class JobStateTimeLimitAction
+      attr_accessor reason: ::String
+      attr_accessor state: ("RUNNABLE")
+      attr_accessor max_time_seconds: ::Integer
+      attr_accessor action: ("CANCEL")
       SENSITIVE: []
     end
 
@@ -1072,6 +1090,7 @@ module Aws::Batch
       attr_accessor scheduling_policy_arn: ::String
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
+      attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
       SENSITIVE: []
     end
 

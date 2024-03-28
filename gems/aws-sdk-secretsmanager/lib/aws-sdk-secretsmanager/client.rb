@@ -442,7 +442,8 @@ module Aws::SecretsManager
     #
     #   If there are more results available, in the response, Secrets Manager
     #   includes `NextToken`. To get the next results, call
-    #   `BatchGetSecretValue` again with the value from `NextToken`.
+    #   `BatchGetSecretValue` again with the value from `NextToken`. To use
+    #   this parameter, you must also use the `Filters` parameter.
     #
     # @option params [String] :next_token
     #   A token that indicates where the output should continue from, if a
@@ -1270,19 +1271,16 @@ module Aws::SecretsManager
     # characters in passwords: `` !"#$%&'()*+,-./:;<=>?@[\\]^_`\{|\}~ ``
     #
     # Secrets Manager generates a CloudTrail log entry when you call this
-    # action. Do not include sensitive information in request parameters
-    # because it might be logged. For more information, see [Logging Secrets
-    # Manager events with CloudTrail][1].
+    # action.
     #
     # <b>Required permissions: </b> `secretsmanager:GetRandomPassword`. For
-    # more information, see [ IAM policy actions for Secrets Manager][2] and
-    # [Authentication and access control in Secrets Manager][3].
+    # more information, see [ IAM policy actions for Secrets Manager][1] and
+    # [Authentication and access control in Secrets Manager][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
-    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
-    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [Integer] :password_length
     #   The length of the password. If you don't include this parameter, the
@@ -1891,6 +1889,25 @@ module Aws::SecretsManager
     #   Specifies whether to block resource-based policies that allow broad
     #   access to the secret, for example those that use a wildcard for the
     #   principal. By default, public policies aren't blocked.
+    #
+    #   Resource policy validation and the BlockPublicPolicy parameter help
+    #   protect your resources by preventing public access from being granted
+    #   through the resource policies that are directly attached to your
+    #   secrets. In addition to using these features, carefully inspect the
+    #   following policies to confirm that they do not grant public access:
+    #
+    #    * Identity-based policies attached to associated Amazon Web Services
+    #     principals (for example, IAM roles)
+    #
+    #   * Resource-based policies attached to associated Amazon Web Services
+    #     resources (for example, Key Management Service (KMS) keys)
+    #
+    #    To review permissions to your secrets, see [Determine who has
+    #   permissions to your secrets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/determine-acccess_examine-iam-policies.html
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3245,7 +3262,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -840,10 +840,34 @@ module Aws::IVSRealTime
     #   ParticipantTokenConfiguration is placed in the featured slot.
     #   @return [String]
     #
+    # @!attribute [rw] grid_gap
+    #   Specifies the spacing between participant tiles in pixels. Default:
+    #   `2`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] omit_stopped_video
+    #   Determines whether to omit participants with stopped video in the
+    #   composition. Default: `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] video_aspect_ratio
+    #   Sets the non-featured participant display mode. Default: `VIDEO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_fill_mode
+    #   Defines how video fits within the participant tile. When not set,
+    #   `videoFillMode` defaults to `COVER` fill mode for participants in
+    #   the grid and to `CONTAIN` fill mode for featured participants.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GridConfiguration AWS API Documentation
     #
     class GridConfiguration < Struct.new(
-      :featured_participant_attribute)
+      :featured_participant_attribute,
+      :grid_gap,
+      :omit_stopped_video,
+      :video_aspect_ratio,
+      :video_fill_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -867,10 +891,15 @@ module Aws::IVSRealTime
     #   Configuration related to grid layout. Default: Grid layout.
     #   @return [Types::GridConfiguration]
     #
+    # @!attribute [rw] pip
+    #   Configuration related to PiP layout.
+    #   @return [Types::PipConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/LayoutConfiguration AWS API Documentation
     #
     class LayoutConfiguration < Struct.new(
-      :grid)
+      :grid,
+      :pip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1445,6 +1474,84 @@ module Aws::IVSRealTime
     #
     class PendingVerification < Struct.new(
       :exception_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information specific to Picture-in-Picture (PiP) layout,
+    # for [server-side composition][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html
+    #
+    # @!attribute [rw] featured_participant_attribute
+    #   This attribute name identifies the featured slot. A participant with
+    #   this attribute set to `"true"` (as a string value) in
+    #   ParticipantTokenConfiguration is placed in the featured slot.
+    #   @return [String]
+    #
+    # @!attribute [rw] grid_gap
+    #   Specifies the spacing between participant tiles in pixels. Default:
+    #   `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] omit_stopped_video
+    #   Determines whether to omit participants with stopped video in the
+    #   composition. Default: `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pip_behavior
+    #   Defines PiP behavior when all participants have left. Default:
+    #   `STATIC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pip_height
+    #   Specifies the height of the PiP window in pixels. When this is not
+    #   set explicitly, `pipHeight`’s value will be based on the size of the
+    #   composition and the aspect ratio of the participant’s video.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pip_offset
+    #   Sets the PiP window’s offset position in pixels from the closest
+    #   edges determined by `PipPosition`. Default: `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pip_participant_attribute
+    #   Identifies the PiP slot. A participant with this attribute set to
+    #   `"true"` (as a string value) in ParticipantTokenConfiguration is
+    #   placed in the PiP slot.
+    #   @return [String]
+    #
+    # @!attribute [rw] pip_position
+    #   Determines the corner position of the PiP window. Default:
+    #   `BOTTOM_RIGHT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pip_width
+    #   Specifies the width of the PiP window in pixels. When this is not
+    #   set explicitly, `pipWidth`’s value will be based on the size of the
+    #   composition and the aspect ratio of the participant’s video.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] video_fill_mode
+    #   Defines how video fits within the participant tile. Default:
+    #   `COVER`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/PipConfiguration AWS API Documentation
+    #
+    class PipConfiguration < Struct.new(
+      :featured_participant_attribute,
+      :grid_gap,
+      :omit_stopped_video,
+      :pip_behavior,
+      :pip_height,
+      :pip_offset,
+      :pip_participant_attribute,
+      :pip_position,
+      :pip_width,
+      :video_fill_mode)
       SENSITIVE = []
       include Aws::Structure
     end

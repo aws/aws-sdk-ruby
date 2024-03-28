@@ -52,6 +52,7 @@ module Aws::MediaPackageV2
       attr_accessor egress_domain: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
+      attr_accessor etag: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -74,6 +75,7 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
       attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -126,6 +128,7 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -216,6 +219,7 @@ module Aws::MediaPackageV2
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -247,6 +251,7 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
       attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -308,6 +313,7 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -481,6 +487,7 @@ module Aws::MediaPackageV2
 
     class UpdateChannelGroupRequest
       attr_accessor channel_group_name: ::String
+      attr_accessor etag: ::String
       attr_accessor description: ::String
       SENSITIVE: []
     end
@@ -492,6 +499,7 @@ module Aws::MediaPackageV2
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -499,6 +507,7 @@ module Aws::MediaPackageV2
     class UpdateChannelRequest
       attr_accessor channel_group_name: ::String
       attr_accessor channel_name: ::String
+      attr_accessor etag: ::String
       attr_accessor description: ::String
       SENSITIVE: []
     end
@@ -511,6 +520,7 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
       attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -525,6 +535,7 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::CreateHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::CreateLowLatencyHlsManifestConfiguration]
+      attr_accessor etag: ::String
       SENSITIVE: []
     end
 
@@ -541,6 +552,7 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end

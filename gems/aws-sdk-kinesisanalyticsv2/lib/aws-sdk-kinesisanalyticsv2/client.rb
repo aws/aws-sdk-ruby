@@ -405,8 +405,8 @@ module Aws::KinesisAnalyticsV2
     #   The Kinesis Data Analytics application name.
     #
     # @option params [Integer] :current_application_version_id
-    #   The version ID of the Kinesis Data Analytics application. You must
-    #   provide the `CurrentApplicationVersionId` or the
+    #   The version ID of the SQL-based Kinesis Data Analytics application.
+    #   You must provide the `CurrentApplicationVersionId` or the
     #   `ConditionalToken`.You can retrieve the application version ID using
     #   DescribeApplication. For better concurrency support, use the
     #   `ConditionalToken` parameter instead of `CurrentApplicationVersionId`.
@@ -823,15 +823,15 @@ module Aws::KinesisAnalyticsV2
     # Adds a Virtual Private Cloud (VPC) configuration to the application.
     # Applications can use VPCs to store and access resources securely.
     #
-    # Note the following about VPC configurations for Kinesis Data Analytics
-    # applications:
+    # Note the following about VPC configurations for Managed Service for
+    # Apache Flink applications:
     #
     # * VPC configurations are not supported for SQL applications.
     #
-    # * When a VPC is added to a Kinesis Data Analytics application, the
-    #   application can no longer be accessed from the Internet directly. To
-    #   enable Internet access to the application, add an Internet gateway
-    #   to your VPC.
+    # * When a VPC is added to a Managed Service for Apache Flink
+    #   application, the application can no longer be accessed from the
+    #   Internet directly. To enable Internet access to the application, add
+    #   an Internet gateway to your VPC.
     #
     # @option params [required, String] :application_name
     #   The name of an existing application.
@@ -894,9 +894,9 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Creates a Kinesis Data Analytics application. For information about
-    # creating a Kinesis Data Analytics application, see [Creating an
-    # Application][1].
+    # Creates a Managed Service for Apache Flink application. For
+    # information about creating a Managed Service for Apache Flink
+    # application, see [Creating an Application][1].
     #
     #
     #
@@ -935,9 +935,9 @@ module Aws::KinesisAnalyticsV2
     #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #
     # @option params [String] :application_mode
-    #   Use the `STREAMING` mode to create a Kinesis Data Analytics For Flink
-    #   application. To create a Kinesis Data Analytics Studio notebook, use
-    #   the `INTERACTIVE` mode.
+    #   Use the `STREAMING` mode to create a Managed Service for Apache Flink
+    #   application. To create a Managed Service for Apache Flink Studio
+    #   notebook, use the `INTERACTIVE` mode.
     #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -948,7 +948,7 @@ module Aws::KinesisAnalyticsV2
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
     #     application_description: "ApplicationDescription",
-    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0, FLINK-1_15, ZEPPELIN-FLINK-3_0
+    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0, FLINK-1_15, ZEPPELIN-FLINK-3_0, FLINK-1_18
     #     service_execution_role: "RoleARN", # required
     #     application_configuration: {
     #       sql_application_configuration: {
@@ -1143,7 +1143,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1345,8 +1345,8 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Deletes the specified application. Kinesis Data Analytics halts
-    # application execution and deletes the application.
+    # Deletes the specified application. Managed Service for Apache Flink
+    # halts application execution and deletes the application.
     #
     # @option params [required, String] :application_name
     #   The name of the application to delete.
@@ -1372,8 +1372,8 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Deletes an Amazon CloudWatch log stream from an Kinesis Data Analytics
-    # application.
+    # Deletes an Amazon CloudWatch log stream from an SQL-based Kinesis Data
+    # Analytics application.
     #
     # @option params [required, String] :application_name
     #   The application name.
@@ -1604,7 +1604,8 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Removes a VPC configuration from a Kinesis Data Analytics application.
+    # Removes a VPC configuration from a Managed Service for Apache Flink
+    # application.
     #
     # @option params [required, String] :application_name
     #   The name of an existing application.
@@ -1655,7 +1656,7 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Returns information about a specific Kinesis Data Analytics
+    # Returns information about a specific Managed Service for Apache Flink
     # application.
     #
     # If you want to retrieve a list of all applications in your account,
@@ -1665,7 +1666,7 @@ module Aws::KinesisAnalyticsV2
     #   The name of the application.
     #
     # @option params [Boolean] :include_additional_details
-    #   Displays verbose information about a Kinesis Data Analytics
+    #   Displays verbose information about a Managed Service for Apache Flink
     #   application, including the application's job plan.
     #
     # @return [Types::DescribeApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1684,7 +1685,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1831,6 +1832,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.snapshot_details.snapshot_status #=> String, one of "CREATING", "READY", "DELETING", "FAILED"
     #   resp.snapshot_details.application_version_id #=> Integer
     #   resp.snapshot_details.snapshot_creation_timestamp #=> Time
+    #   resp.snapshot_details.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationSnapshot AWS API Documentation
     #
@@ -1845,8 +1847,7 @@ module Aws::KinesisAnalyticsV2
     # application. To see a list of all the versions of an application,
     # invoke the ListApplicationVersions operation.
     #
-    # <note markdown="1"> This operation is supported only for Amazon Kinesis Data Analytics for
-    # Apache Flink.
+    # <note markdown="1"> This operation is supported only for Managed Service for Apache Flink.
     #
     #  </note>
     #
@@ -1874,7 +1875,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_arn #=> String
     #   resp.application_version_detail.application_description #=> String
     #   resp.application_version_detail.application_name #=> String
-    #   resp.application_version_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0"
+    #   resp.application_version_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18"
     #   resp.application_version_detail.service_execution_role #=> String
     #   resp.application_version_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_version_detail.application_version_id #=> Integer
@@ -2014,7 +2015,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @option params [Types::InputStartingPositionConfiguration] :input_starting_position_configuration
     #   The point at which you want Kinesis Data Analytics to start reading
-    #   records from the specified streaming source discovery purposes.
+    #   records from the specified streaming source for discovery purposes.
     #
     # @option params [Types::S3Configuration] :s3_configuration
     #   Specify this parameter to discover a schema from data in an Amazon S3
@@ -2112,6 +2113,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.snapshot_summaries[0].snapshot_status #=> String, one of "CREATING", "READY", "DELETING", "FAILED"
     #   resp.snapshot_summaries[0].application_version_id #=> Integer
     #   resp.snapshot_summaries[0].snapshot_creation_timestamp #=> Time
+    #   resp.snapshot_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationSnapshots AWS API Documentation
@@ -2130,8 +2132,7 @@ module Aws::KinesisAnalyticsV2
     # To get the complete description of a specific application version,
     # invoke the DescribeApplicationVersion operation.
     #
-    # <note markdown="1"> This operation is supported only for Amazon Kinesis Data Analytics for
-    # Apache Flink.
+    # <note markdown="1"> This operation is supported only for Managed Service for Apache Flink.
     #
     #  </note>
     #
@@ -2181,9 +2182,9 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Returns a list of Kinesis Data Analytics applications in your account.
-    # For each application, the response includes the application name,
-    # Amazon Resource Name (ARN), and status.
+    # Returns a list of Managed Service for Apache Flink applications in
+    # your account. For each application, the response includes the
+    # application name, Amazon Resource Name (ARN), and status.
     #
     # If you want detailed information about a specific application, use
     # DescribeApplication.
@@ -2220,7 +2221,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_summaries[0].application_arn #=> String
     #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_summaries[0].application_version_id #=> Integer
-    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0"
+    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18"
     #   resp.application_summaries[0].application_mode #=> String, one of "STREAMING", "INTERACTIVE"
     #   resp.next_token #=> String
     #
@@ -2275,11 +2276,11 @@ module Aws::KinesisAnalyticsV2
     # `AUTOSCALING` status.
     #
     # When you rollback an application, it loads state data from the last
-    # successful snapshot. If the application has no snapshots, Kinesis Data
-    # Analytics rejects the rollback request.
+    # successful snapshot. If the application has no snapshots, Managed
+    # Service for Apache Flink rejects the rollback request.
     #
-    # This action is not supported for Kinesis Data Analytics for SQL
-    # applications.
+    # This action is not supported for Managed Service for Apache Flink for
+    # SQL applications.
     #
     # @option params [required, String] :application_name
     #   The name of the application.
@@ -2304,7 +2305,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -2425,16 +2426,16 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Starts the specified Kinesis Data Analytics application. After
-    # creating an application, you must exclusively call this operation to
-    # start your application.
+    # Starts the specified Managed Service for Apache Flink application.
+    # After creating an application, you must exclusively call this
+    # operation to start your application.
     #
     # @option params [required, String] :application_name
     #   The name of the application.
     #
     # @option params [Types::RunConfiguration] :run_configuration
-    #   Identifies the run configuration (start parameters) of a Kinesis Data
-    #   Analytics application.
+    #   Identifies the run configuration (start parameters) of a Managed
+    #   Service for Apache Flink application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2477,16 +2478,16 @@ module Aws::KinesisAnalyticsV2
     # You can use the DescribeApplication operation to find the application
     # status.
     #
-    # Kinesis Data Analytics takes a snapshot when the application is
-    # stopped, unless `Force` is set to `true`.
+    # Managed Service for Apache Flink takes a snapshot when the application
+    # is stopped, unless `Force` is set to `true`.
     #
     # @option params [required, String] :application_name
     #   The name of the running application to stop.
     #
     # @option params [Boolean] :force
     #   Set to `true` to force the application to stop. If you set `Force` to
-    #   `true`, Kinesis Data Analytics stops the application without taking a
-    #   snapshot.
+    #   `true`, Managed Service for Apache Flink stops the application without
+    #   taking a snapshot.
     #
     #   <note markdown="1"> Force-stopping your application may lead to data loss or duplication.
     #   To prevent data loss or duplicate processing of data during
@@ -2495,7 +2496,7 @@ module Aws::KinesisAnalyticsV2
     #
     #    </note>
     #
-    #   You can only force stop a Flink-based Kinesis Data Analytics
+    #   You can only force stop a Managed Service for Apache Flink
     #   application. You can't force stop a SQL-based Kinesis Data Analytics
     #   application.
     #
@@ -2520,7 +2521,7 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Adds one or more key-value tags to a Kinesis Data Analytics
+    # Adds one or more key-value tags to a Managed Service for Apache Flink
     # application. Note that the maximum number of application tags includes
     # system tags. The maximum number of user-defined application tags is
     # 50. For more information, see [Using Tagging][1].
@@ -2558,16 +2559,16 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Removes one or more tags from a Kinesis Data Analytics application.
-    # For more information, see [Using Tagging][1].
+    # Removes one or more tags from a Managed Service for Apache Flink
+    # application. For more information, see [Using Tagging][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the Kinesis Data Analytics application from which to remove
-    #   the tags.
+    #   The ARN of the Managed Service for Apache Flink application from which
+    #   to remove the tags.
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of keys of tags to remove from the specified application.
@@ -2590,18 +2591,12 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Updates an existing Kinesis Data Analytics application. Using this
-    # operation, you can update application code, input configuration, and
-    # output configuration.
+    # Updates an existing Managed Service for Apache Flink application.
+    # Using this operation, you can update application code, input
+    # configuration, and output configuration.
     #
-    # Kinesis Data Analytics updates the `ApplicationVersionId` each time
-    # you update your application.
-    #
-    # <note markdown="1"> You cannot update the `RuntimeEnvironment` of an existing application.
-    # If you need to update an application's `RuntimeEnvironment`, you must
-    # delete the application and create it again.
-    #
-    #  </note>
+    # Managed Service for Apache Flink updates the `ApplicationVersionId`
+    # each time you update your application.
     #
     # @option params [required, String] :application_name
     #   The name of the application to update.
@@ -2635,6 +2630,16 @@ module Aws::KinesisAnalyticsV2
     #   `ConditionalToken` using DescribeApplication. For better concurrency
     #   support, use the `ConditionalToken` parameter instead of
     #   `CurrentApplicationVersionId`.
+    #
+    # @option params [String] :runtime_environment_update
+    #   Updates the Managed Service for Apache Flink runtime environment used
+    #   to run your code. To avoid issues you must:
+    #
+    #   * Ensure your new jar and dependencies are compatible with the new
+    #     runtime selected.
+    #
+    #   * Ensure your new code's state is compatible with the snapshot from
+    #     which your application will start
     #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2840,6 +2845,7 @@ module Aws::KinesisAnalyticsV2
     #       },
     #     ],
     #     conditional_token: "ConditionalToken",
+    #     runtime_environment_update: "SQL-1_0", # accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0, FLINK-1_15, ZEPPELIN-FLINK-3_0, FLINK-1_18
     #   })
     #
     # @example Response structure
@@ -2847,7 +2853,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
@@ -2968,8 +2974,8 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Updates the maintenance configuration of the Kinesis Data Analytics
-    # application.
+    # Updates the maintenance configuration of the Managed Service for
+    # Apache Flink application.
     #
     # You can invoke this operation on an application that is in one of the
     # two following states: `READY` or `RUNNING`. If you invoke it when the
@@ -2986,11 +2992,10 @@ module Aws::KinesisAnalyticsV2
     # To see the current maintenance configuration of your application,
     # invoke the DescribeApplication operation.
     #
-    # For information about application maintenance, see [Kinesis Data
-    # Analytics for Apache Flink Maintenance][1].
+    # For information about application maintenance, see [Managed Service
+    # for Apache Flink for Apache Flink Maintenance][1].
     #
-    # <note markdown="1"> This operation is supported only for Amazon Kinesis Data Analytics for
-    # Apache Flink.
+    # <note markdown="1"> This operation is supported only for Managed Service for Apache Flink.
     #
     #  </note>
     #
@@ -3047,7 +3052,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

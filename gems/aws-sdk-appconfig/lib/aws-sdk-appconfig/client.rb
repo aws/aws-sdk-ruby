@@ -892,8 +892,8 @@ module Aws::AppConfig
     # * For a custom Amazon SQS notification extension, enter the ARN of an
     #   Amazon SQS message queue in the `Uri` field.
     #
-    # For more information about extensions, see [Working with AppConfig
-    # extensions][1] in the *AppConfig User Guide*.
+    # For more information about extensions, see [Extending workflows][1] in
+    # the *AppConfig User Guide*.
     #
     #
     #
@@ -955,6 +955,7 @@ module Aws::AppConfig
     #       "ExtensionOrParameterName" => {
     #         description: "Description",
     #         required: false,
+    #         dynamic: false,
     #       },
     #     },
     #     tags: {
@@ -979,6 +980,7 @@ module Aws::AppConfig
     #   resp.parameters #=> Hash
     #   resp.parameters["ExtensionOrParameterName"].description #=> String
     #   resp.parameters["ExtensionOrParameterName"].required #=> Boolean
+    #   resp.parameters["ExtensionOrParameterName"].dynamic #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateExtension AWS API Documentation
     #
@@ -999,8 +1001,8 @@ module Aws::AppConfig
     # AppConfig resource is called an *extension association*. An extension
     # association is a specified relationship between an extension and an
     # AppConfig resource, such as an application or a configuration profile.
-    # For more information about extensions and associations, see [Working
-    # with AppConfig extensions][1] in the *AppConfig User Guide*.
+    # For more information about extensions and associations, see [Extending
+    # workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -1988,6 +1990,7 @@ module Aws::AppConfig
     #   resp.parameters #=> Hash
     #   resp.parameters["ExtensionOrParameterName"].description #=> String
     #   resp.parameters["ExtensionOrParameterName"].required #=> Boolean
+    #   resp.parameters["ExtensionOrParameterName"].dynamic #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExtension AWS API Documentation
     #
@@ -1999,8 +2002,8 @@ module Aws::AppConfig
     end
 
     # Returns information about an AppConfig extension association. For more
-    # information about extensions and associations, see [Working with
-    # AppConfig extensions][1] in the *AppConfig User Guide*.
+    # information about extensions and associations, see [Extending
+    # workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -2496,8 +2499,8 @@ module Aws::AppConfig
     end
 
     # Lists all AppConfig extension associations in the account. For more
-    # information about extensions and associations, see [Working with
-    # AppConfig extensions][1] in the *AppConfig User Guide*.
+    # information about extensions and associations, see [Extending
+    # workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -2556,8 +2559,8 @@ module Aws::AppConfig
     end
 
     # Lists all custom and Amazon Web Services authored AppConfig extensions
-    # in the account. For more information about extensions, see [Working
-    # with AppConfig extensions][1] in the *AppConfig User Guide*.
+    # in the account. For more information about extensions, see [Extending
+    # workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -2773,6 +2776,10 @@ module Aws::AppConfig
     #   this ID to encrypt the configuration data using a customer managed
     #   key.
     #
+    # @option params [Hash<String,String>] :dynamic_extension_parameters
+    #   A map of dynamic extension parameter names to values to pass to
+    #   associated extensions with `PRE_START_DEPLOYMENT` actions.
+    #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Deployment#application_id #application_id} => String
@@ -2855,6 +2862,9 @@ module Aws::AppConfig
     #       "TagKey" => "TagValue",
     #     },
     #     kms_key_identifier: "KmsKeyIdentifier",
+    #     dynamic_extension_parameters: {
+    #       "DynamicParameterKey" => "StringWithLengthBetween1And2048",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3466,8 +3476,7 @@ module Aws::AppConfig
     end
 
     # Updates an AppConfig extension. For more information about extensions,
-    # see [Working with AppConfig extensions][1] in the *AppConfig User
-    # Guide*.
+    # see [Extending workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -3517,6 +3526,7 @@ module Aws::AppConfig
     #       "ExtensionOrParameterName" => {
     #         description: "Description",
     #         required: false,
+    #         dynamic: false,
     #       },
     #     },
     #     version_number: 1,
@@ -3538,6 +3548,7 @@ module Aws::AppConfig
     #   resp.parameters #=> Hash
     #   resp.parameters["ExtensionOrParameterName"].description #=> String
     #   resp.parameters["ExtensionOrParameterName"].required #=> Boolean
+    #   resp.parameters["ExtensionOrParameterName"].dynamic #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExtension AWS API Documentation
     #
@@ -3549,8 +3560,8 @@ module Aws::AppConfig
     end
 
     # Updates an association. For more information about extensions and
-    # associations, see [Working with AppConfig extensions][1] in the
-    # *AppConfig User Guide*.
+    # associations, see [Extending workflows][1] in the *AppConfig User
+    # Guide*.
     #
     #
     #
@@ -3654,7 +3665,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

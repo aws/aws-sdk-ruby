@@ -18,7 +18,7 @@ module Aws::Transfer
       attr_accessor partner_profile_id: ::String
       attr_accessor message_subject: ::String
       attr_accessor compression: ("ZLIB" | "DISABLED")
-      attr_accessor encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "NONE")
+      attr_accessor encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "DES_EDE3_CBC" | "NONE")
       attr_accessor signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")
       attr_accessor mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")
       attr_accessor mdn_response: ("SYNC" | "NONE")

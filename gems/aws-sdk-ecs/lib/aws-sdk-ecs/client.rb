@@ -757,14 +757,10 @@ module Aws::ECS
     # specified cluster. To update an existing service, see the
     # UpdateService action.
     #
-    # <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    # customers to Amazon Elastic Inference (EI), and will help current
-    # customers migrate their workloads to options that offer better price
-    # and performance. After April 15, 2023, new customers will not be able
-    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
-    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
-    # at least once during the past 30-day period are considered current
-    # customers and will be able to continue using the service.
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
     #
     #  </note>
     #
@@ -866,7 +862,16 @@ module Aws::ECS
     # When the service scheduler launches new tasks, it determines task
     # placement. For information about task placement and task placement
     # strategies, see [Amazon ECS task placement][5] in the *Amazon Elastic
-    # Container Service Developer Guide*.
+    # Container Service Developer Guide*
+    #
+    # Starting April 15, 2023, Amazon Web Services will not onboard new
+    # customers to Amazon Elastic Inference (EI), and will help current
+    # customers migrate their workloads to options that offer better price
+    # and performance. After April 15, 2023, new customers will not be able
+    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    # at least once during the past 30-day period are considered current
+    # customers and will be able to continue using the service.
     #
     #
     #
@@ -996,7 +1001,7 @@ module Aws::ECS
     #
     #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
     #   provider strategy must be used. For more information, see [Fargate
-    #   capacity providers][2] in the *Amazon ECS User Guide for Fargate*.
+    #   capacity providers][2] in the *Amazon ECS Developer Guide*.
     #
     #    </note>
     #
@@ -1201,11 +1206,16 @@ module Aws::ECS
     #   can only be propagated to the task during task creation. To add tags
     #   to a task after task creation, use the [TagResource][1] API action.
     #
+    #   You must set this to a value other than `NONE` when you use Cost
+    #   Explorer. For more information, see [Amazon ECS usage reports][2] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
+    #
     #   The default is `NONE`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/usage-reports.html
     #
     # @option params [Boolean] :enable_execute_command
     #   Determines whether the execute command functionality is turned on for
@@ -1689,6 +1699,13 @@ module Aws::ECS
     # when a service uses the `EXTERNAL` deployment controller type. For
     # more information, see [Amazon ECS deployment types][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
+    #
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
     #
     # For information about the maximum number of task sets and otther
     # quotas, see [Amazon ECS service quotas][2] in the *Amazon Elastic
@@ -7174,6 +7191,13 @@ module Aws::ECS
 
     # Starts a new task using the specified task definition.
     #
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
     # You can allow Amazon ECS to place tasks for you, or you can customize
     # how Amazon ECS places tasks using placement constraints and placement
     # strategies. For more information, see [Scheduling Tasks][1] in the
@@ -7182,7 +7206,7 @@ module Aws::ECS
     # Alternatively, you can use StartTask to use your own scheduler or
     # place tasks manually on specific container instances.
     #
-    # <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    # Starting April 15, 2023, Amazon Web Services will not onboard new
     # customers to Amazon Elastic Inference (EI), and will help current
     # customers migrate their workloads to options that offer better price
     # and performance. After April 15, 2023, new customers will not be able
@@ -7190,8 +7214,6 @@ module Aws::ECS
     # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
     # at least once during the past 30-day period are considered current
     # customers and will be able to continue using the service.
-    #
-    #  </note>
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
     # the volume when creating or updating a service. For more infomation,
@@ -7748,7 +7770,14 @@ module Aws::ECS
     # Starts a new task from the specified task definition on the specified
     # container instance or instances.
     #
-    # <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
+    # Starting April 15, 2023, Amazon Web Services will not onboard new
     # customers to Amazon Elastic Inference (EI), and will help current
     # customers migrate their workloads to options that offer better price
     # and performance. After April 15, 2023, new customers will not be able
@@ -7756,8 +7785,6 @@ module Aws::ECS
     # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
     # at least once during the past 30-day period are considered current
     # customers and will be able to continue using the service.
-    #
-    #  </note>
     #
     # Alternatively, you can use RunTask to place tasks for you. For more
     # information, see [Scheduling Tasks][1] in the *Amazon Elastic
@@ -9146,6 +9173,13 @@ module Aws::ECS
 
     # Modifies the parameters of a service.
     #
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
     # For services using the rolling update (`ECS`) you can update the
     # desired count, deployment configuration, network configuration, load
     # balancers, service registries, enable ECS managed tags option,
@@ -10225,7 +10259,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

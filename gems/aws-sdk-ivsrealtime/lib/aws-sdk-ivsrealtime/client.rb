@@ -781,6 +781,20 @@ module Aws::IVSRealTime
     #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
     #   resp.composition.end_time #=> Time
     #   resp.composition.layout.grid.featured_participant_attribute #=> String
+    #   resp.composition.layout.grid.grid_gap #=> Integer
+    #   resp.composition.layout.grid.omit_stopped_video #=> Boolean
+    #   resp.composition.layout.grid.video_aspect_ratio #=> String, one of "AUTO", "VIDEO", "SQUARE", "PORTRAIT"
+    #   resp.composition.layout.grid.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
+    #   resp.composition.layout.pip.featured_participant_attribute #=> String
+    #   resp.composition.layout.pip.grid_gap #=> Integer
+    #   resp.composition.layout.pip.omit_stopped_video #=> Boolean
+    #   resp.composition.layout.pip.pip_behavior #=> String, one of "STATIC", "DYNAMIC"
+    #   resp.composition.layout.pip.pip_height #=> Integer
+    #   resp.composition.layout.pip.pip_offset #=> Integer
+    #   resp.composition.layout.pip.pip_participant_attribute #=> String
+    #   resp.composition.layout.pip.pip_position #=> String, one of "TOP_LEFT", "TOP_RIGHT", "BOTTOM_LEFT", "BOTTOM_RIGHT"
+    #   resp.composition.layout.pip.pip_width #=> Integer
+    #   resp.composition.layout.pip.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
     #   resp.composition.stage_arn #=> String
     #   resp.composition.start_time #=> Time
     #   resp.composition.state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
@@ -1438,6 +1452,22 @@ module Aws::IVSRealTime
     #     layout: {
     #       grid: {
     #         featured_participant_attribute: "AttributeKey",
+    #         grid_gap: 1,
+    #         omit_stopped_video: false,
+    #         video_aspect_ratio: "AUTO", # accepts AUTO, VIDEO, SQUARE, PORTRAIT
+    #         video_fill_mode: "FILL", # accepts FILL, COVER, CONTAIN
+    #       },
+    #       pip: {
+    #         featured_participant_attribute: "AttributeKey",
+    #         grid_gap: 1,
+    #         omit_stopped_video: false,
+    #         pip_behavior: "STATIC", # accepts STATIC, DYNAMIC
+    #         pip_height: 1,
+    #         pip_offset: 1,
+    #         pip_participant_attribute: "AttributeKey",
+    #         pip_position: "TOP_LEFT", # accepts TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
+    #         pip_width: 1,
+    #         video_fill_mode: "FILL", # accepts FILL, COVER, CONTAIN
     #       },
     #     },
     #     stage_arn: "StageArn", # required
@@ -1464,6 +1494,20 @@ module Aws::IVSRealTime
     #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
     #   resp.composition.end_time #=> Time
     #   resp.composition.layout.grid.featured_participant_attribute #=> String
+    #   resp.composition.layout.grid.grid_gap #=> Integer
+    #   resp.composition.layout.grid.omit_stopped_video #=> Boolean
+    #   resp.composition.layout.grid.video_aspect_ratio #=> String, one of "AUTO", "VIDEO", "SQUARE", "PORTRAIT"
+    #   resp.composition.layout.grid.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
+    #   resp.composition.layout.pip.featured_participant_attribute #=> String
+    #   resp.composition.layout.pip.grid_gap #=> Integer
+    #   resp.composition.layout.pip.omit_stopped_video #=> Boolean
+    #   resp.composition.layout.pip.pip_behavior #=> String, one of "STATIC", "DYNAMIC"
+    #   resp.composition.layout.pip.pip_height #=> Integer
+    #   resp.composition.layout.pip.pip_offset #=> Integer
+    #   resp.composition.layout.pip.pip_participant_attribute #=> String
+    #   resp.composition.layout.pip.pip_position #=> String, one of "TOP_LEFT", "TOP_RIGHT", "BOTTOM_LEFT", "BOTTOM_RIGHT"
+    #   resp.composition.layout.pip.pip_width #=> Integer
+    #   resp.composition.layout.pip.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
     #   resp.composition.stage_arn #=> String
     #   resp.composition.start_time #=> Time
     #   resp.composition.state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
@@ -1621,7 +1665,7 @@ module Aws::IVSRealTime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

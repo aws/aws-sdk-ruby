@@ -2413,7 +2413,9 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_configuration
     #   Gets users and groups from IAM Identity Center identity source. To
-    #   configure this, see [UserGroupResolutionConfiguration][1].
+    #   configure this, see [UserGroupResolutionConfiguration][1]. This is
+    #   useful for user context filtering, where search results are filtered
+    #   based on the user or their group access to documents.
     #
     #
     #
@@ -2670,6 +2672,26 @@ module Aws::Kendra
     # @!attribute [rw] s3_configuration
     #   Provides the configuration information to connect to an Amazon S3
     #   bucket as your data source.
+    #
+    #   <note markdown="1"> Amazon Kendra now supports an upgraded Amazon S3 connector.
+    #
+    #    You must now use the [TemplateConfiguration][1] object instead of
+    #   the `S3DataSourceConfiguration` object to configure your connector.
+    #
+    #    Connectors configured using the older console and API architecture
+    #   will continue to function as configured. However, you won't be able
+    #   to edit or update them. If you want to edit or update your connector
+    #   configuration, you must create a new connector.
+    #
+    #    We recommended migrating your connector workflow to the upgraded
+    #   version. Support for connectors configured using the older
+    #   architecture is scheduled to end by June 2024.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
     #   @return [Types::S3DataSourceConfiguration]
     #
     # @!attribute [rw] share_point_configuration
@@ -2720,11 +2742,51 @@ module Aws::Kendra
     # @!attribute [rw] fsx_configuration
     #   Provides the configuration information to connect to Amazon FSx as
     #   your data source.
+    #
+    #   <note markdown="1"> Amazon Kendra now supports an upgraded Amazon FSx Windows connector.
+    #
+    #    You must now use the [TemplateConfiguration][1] object instead of
+    #   the `FsxConfiguration` object to configure your connector.
+    #
+    #    Connectors configured using the older console and API architecture
+    #   will continue to function as configured. However, you won't be able
+    #   to edit or update them. If you want to edit or update your connector
+    #   configuration, you must create a new connector.
+    #
+    #    We recommended migrating your connector workflow to the upgraded
+    #   version. Support for connectors configured using the older
+    #   architecture is scheduled to end by June 2024.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
     #   @return [Types::FsxConfiguration]
     #
     # @!attribute [rw] slack_configuration
     #   Provides the configuration information to connect to Slack as your
     #   data source.
+    #
+    #   <note markdown="1"> Amazon Kendra now supports an upgraded Slack connector.
+    #
+    #    You must now use the [TemplateConfiguration][1] object instead of
+    #   the `SlackConfiguration` object to configure your connector.
+    #
+    #    Connectors configured using the older console and API architecture
+    #   will continue to function as configured. However, you won't be able
+    #   to edit or update them. If you want to edit or update your connector
+    #   configuration, you must create a new connector.
+    #
+    #    We recommended migrating your connector workflow to the upgraded
+    #   version. Support for connectors configured using the older
+    #   architecture is scheduled to end by June 2024.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
     #   @return [Types::SlackConfiguration]
     #
     # @!attribute [rw] box_configuration
@@ -2745,15 +2807,37 @@ module Aws::Kendra
     # @!attribute [rw] git_hub_configuration
     #   Provides the configuration information to connect to GitHub as your
     #   data source.
+    #
+    #   <note markdown="1"> Amazon Kendra now supports an upgraded GitHub connector.
+    #
+    #    You must now use the [TemplateConfiguration][1] object instead of
+    #   the `GitHubConfiguration` object to configure your connector.
+    #
+    #    Connectors configured using the older console and API architecture
+    #   will continue to function as configured. However, you won’t be able
+    #   to edit or update them. If you want to edit or update your connector
+    #   configuration, you must create a new connector.
+    #
+    #    We recommended migrating your connector workflow to the upgraded
+    #   version. Support for connectors configured using the older
+    #   architecture is scheduled to end by June 2024.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
     #   @return [Types::GitHubConfiguration]
     #
     # @!attribute [rw] alfresco_configuration
     #   Provides the configuration information to connect to Alfresco as
     #   your data source.
     #
-    #   Support for `AlfrescoConfiguration` ended May 2023. We recommend
+    #   <note markdown="1"> Support for `AlfrescoConfiguration` ended May 2023. We recommend
     #   migrating to or using the Alfresco data source template schema /
     #   [TemplateConfiguration][1] API.
+    #
+    #    </note>
     #
     #
     #
@@ -3780,11 +3864,11 @@ module Aws::Kendra
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that gives Amazon
-    #   Kendra permission to write to your Amazon Cloudwatch logs.
+    #   Kendra permission to write to your Amazon CloudWatch logs.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The identifier of the KMScustomer master key (CMK) that is used to
+    #   The identifier of the KMS customer master key (CMK) that is used to
     #   encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
@@ -3803,7 +3887,7 @@ module Aws::Kendra
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The Unix when the index was last updated.
+    #   The Unix timestamp when the index was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] document_metadata_configurations
@@ -3845,9 +3929,10 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Whether you have enabled the configuration for fetching access
-    #   levels of groups and users from an IAM Identity Center identity
-    #   source.
+    #   Whether you have enabled IAM Identity Center identity source for
+    #   your users and groups. This is useful for user context filtering,
+    #   where search results are filtered based on the user or their group
+    #   access to documents.
     #   @return [Types::UserGroupResolutionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexResponse AWS API Documentation
@@ -5513,6 +5598,26 @@ module Aws::Kendra
     # Provides the configuration information to connect to Amazon FSx as
     # your data source.
     #
+    # <note markdown="1"> Amazon Kendra now supports an upgraded Amazon FSx Windows connector.
+    #
+    #  You must now use the [TemplateConfiguration][1] object instead of the
+    # `FsxConfiguration` object to configure your connector.
+    #
+    #  Connectors configured using the older console and API architecture
+    # will continue to function as configured. However, you won't be able
+    # to edit or update them. If you want to edit or update your connector
+    # configuration, you must create a new connector.
+    #
+    #  We recommended migrating your connector workflow to the upgraded
+    # version. Support for connectors configured using the older
+    # architecture is scheduled to end by June 2024.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
+    #
     # @!attribute [rw] file_system_id
     #   The identifier of the Amazon FSx file system.
     #
@@ -5763,6 +5868,26 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to GitHub as your
     # data source.
+    #
+    # <note markdown="1"> Amazon Kendra now supports an upgraded GitHub connector.
+    #
+    #  You must now use the [TemplateConfiguration][1] object instead of the
+    # `GitHubConfiguration` object to configure your connector.
+    #
+    #  Connectors configured using the older console and API architecture
+    # will continue to function as configured. However, you won’t be able to
+    # edit or update them. If you want to edit or update your connector
+    # configuration, you must create a new connector.
+    #
+    #  We recommended migrating your connector workflow to the upgraded
+    # version. Support for connectors configured using the older
+    # architecture is scheduled to end by June 2024.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
     #
     # @!attribute [rw] saa_s_configuration
     #   Configuration information to connect to GitHub Enterprise Cloud
@@ -7378,7 +7503,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] organization_name
     #   The name of the organization of the GitHub Enterprise Server
-    #   (in-premise) account you want to connect to. You can find your
+    #   (on-premises) account you want to connect to. You can find your
     #   organization name by logging into GitHub desktop and selecting
     #   **Your organizations** under your profile picture dropdown.
     #   @return [String]
@@ -7714,7 +7839,14 @@ module Aws::Kendra
     #   The input query text for the search. Amazon Kendra truncates queries
     #   at 30 token words, which excludes punctuation and stop words.
     #   Truncation still applies if you use Boolean or more advanced,
-    #   complex queries.
+    #   complex queries. For example, `Timeoff AND October AND Category:HR`
+    #   is counted as 3 tokens: `timeoff`, `october`, `hr`. For more
+    #   information, see [Searching with advanced query syntax][1] in the
+    #   Amazon Kendra Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax
     #   @return [String]
     #
     # @!attribute [rw] attribute_filter
@@ -7912,7 +8044,10 @@ module Aws::Kendra
     # document that satisfies the query.
     #
     # @!attribute [rw] id
-    #   The identifier for the query result.
+    #   The unique identifier for the query result item id (`Id`) and the
+    #   query result item document id (`DocumentId`) combined. The value of
+    #   this field changes with every request, even when you have the same
+    #   documents.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -8195,8 +8330,7 @@ module Aws::Kendra
     #   Indicates that this field determines how "fresh" a document is.
     #   For example, if document 1 was created on November 5, and document 2
     #   was created on October 31, document 1 is "fresher" than document
-    #   2. You can only set the `Freshness` field on one `DATE` type field.
-    #   Only applies to `DATE` fields.
+    #   2. Only applies to `DATE` fields.
     #   @return [Boolean]
     #
     # @!attribute [rw] importance
@@ -8228,13 +8362,13 @@ module Aws::Kendra
     #   better. For example, in a task tracking application, a priority 1
     #   task is more important than a priority 5 task.
     #
-    #   Only applies to `LONG` and `DOUBLE` fields.
+    #   Only applies to `LONG` fields.
     #   @return [String]
     #
     # @!attribute [rw] value_importance_map
     #   A list of values that should be given a different boost when they
     #   appear in the result list. For example, if you are boosting a field
-    #   called "department," query terms that match the department field
+    #   called "department", query terms that match the department field
     #   are boosted in the result. However, you can add entries from the
     #   department field to boost documents with those values higher.
     #
@@ -8344,7 +8478,14 @@ module Aws::Kendra
     #   The input query text to retrieve relevant passages for the search.
     #   Amazon Kendra truncates queries at 30 token words, which excludes
     #   punctuation and stop words. Truncation still applies if you use
-    #   Boolean or more advanced, complex queries.
+    #   Boolean or more advanced, complex queries. For example, `Timeoff AND
+    #   October AND Category:HR` is counted as 3 tokens: `timeoff`,
+    #   `october`, `hr`. For more information, see [Searching with advanced
+    #   query syntax][1] in the Amazon Kendra Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax
     #   @return [String]
     #
     # @!attribute [rw] attribute_filter
@@ -8485,6 +8626,26 @@ module Aws::Kendra
     # Provides the configuration information to connect to an Amazon S3
     # bucket.
     #
+    # <note markdown="1"> Amazon Kendra now supports an upgraded Amazon S3 connector.
+    #
+    #  You must now use the [TemplateConfiguration][1] object instead of the
+    # `S3DataSourceConfiguration` object to configure your connector.
+    #
+    #  Connectors configured using the older console and API architecture
+    # will continue to function as configured. However, you won't be able
+    # to edit or update them. If you want to edit or update your connector
+    # configuration, you must create a new connector.
+    #
+    #  We recommended migrating your connector workflow to the upgraded
+    # version. Support for connectors configured using the older
+    # architecture is scheduled to end by June 2024.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
+    #
     # @!attribute [rw] bucket_name
     #   The name of the bucket that contains the documents.
     #   @return [String]
@@ -8495,21 +8656,37 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] inclusion_patterns
-    #   A list of glob patterns for documents that should be indexed. If a
-    #   document that matches an inclusion pattern also matches an exclusion
-    #   pattern, the document is not indexed.
+    #   A list of glob patterns (patterns that can expand a wildcard pattern
+    #   into a list of path names that match the given pattern) for certain
+    #   file names and file types to include in your index. If a document
+    #   matches both an inclusion and exclusion prefix or pattern, the
+    #   exclusion prefix takes precendence and the document is not indexed.
+    #   Examples of glob patterns include:
     #
-    #   Some [examples][1] are:
+    #   * */myapp/config/**—All files inside config directory.
     #
-    #   * **.txt* will include all text files in a directory (files with
-    #     the extension .txt).
+    #   * ***/*.png*—All .png files in all directories.
     #
-    #   * ***/*.txt* will include all text files in a directory and its
-    #     subdirectories.
+    #   * ***/*.\\\{png, ico, md\\}*—All .png, .ico or .md files in all
+    #     directories.
     #
-    #   * **tax** will include all files in a directory that contain
-    #     'tax' in the file name, such as 'tax', 'taxes',
-    #     'income\_tax'.
+    #   * */myapp/src/**/*.ts*—All .ts files inside src directory (and
+    #     all its subdirectories).
+    #
+    #   * ***/!(*.module).ts*—All .ts files but not .module.ts
+    #
+    #   * **.png , *.jpg*—All PNG and JPEG image files in a directory
+    #     (files with the extensions .png and .jpg).
+    #
+    #   * **internal**—All files in a directory that contain 'internal'
+    #     in the file name, such as 'internal', 'internal\_only',
+    #     'company\_internal'.
+    #
+    #   * ***/*internal**—All internal-related files in a directory and
+    #     its subdirectories.
+    #
+    #   For more examples, see [Use of Exclude and Include Filters][1] in
+    #   the Amazon Web Services CLI Command Reference.
     #
     #
     #
@@ -8517,21 +8694,37 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   A list of glob patterns for documents that should not be indexed. If
-    #   a document that matches an inclusion prefix or inclusion pattern
-    #   also matches an exclusion pattern, the document is not indexed.
+    #   A list of glob patterns (patterns that can expand a wildcard pattern
+    #   into a list of path names that match the given pattern) for certain
+    #   file names and file types to exclude from your index. If a document
+    #   matches both an inclusion and exclusion prefix or pattern, the
+    #   exclusion prefix takes precendence and the document is not indexed.
+    #   Examples of glob patterns include:
     #
-    #   Some [examples][1] are:
+    #   * */myapp/config/**—All files inside config directory.
     #
-    #   * **.png , *.jpg* will exclude all PNG and JPEG image files in a
-    #     directory (files with the extensions .png and .jpg).
+    #   * ***/*.png*—All .png files in all directories.
     #
-    #   * **internal** will exclude all files in a directory that contain
-    #     'internal' in the file name, such as 'internal',
-    #     'internal\_only', 'company\_internal'.
+    #   * ***/*.\\\{png, ico, md\\}*—All .png, .ico or .md files in all
+    #     directories.
     #
-    #   * ***/*internal** will exclude all internal-related files in a
-    #     directory and its subdirectories.
+    #   * */myapp/src/**/*.ts*—All .ts files inside src directory (and
+    #     all its subdirectories).
+    #
+    #   * ***/!(*.module).ts*—All .ts files but not .module.ts
+    #
+    #   * **.png , *.jpg*—All PNG and JPEG image files in a directory
+    #     (files with the extensions .png and .jpg).
+    #
+    #   * **internal**—All files in a directory that contain 'internal'
+    #     in the file name, such as 'internal', 'internal\_only',
+    #     'company\_internal'.
+    #
+    #   * ***/*internal**—All internal-related files in a directory and
+    #     its subdirectories.
+    #
+    #   For more examples, see [Use of Exclude and Include Filters][1] in
+    #   the Amazon Web Services CLI Command Reference.
     #
     #
     #
@@ -9434,6 +9627,26 @@ module Aws::Kendra
 
     # Provides the configuration information to connect to Slack as your
     # data source.
+    #
+    # <note markdown="1"> Amazon Kendra now supports an upgraded Slack connector.
+    #
+    #  You must now use the [TemplateConfiguration][1] object instead of the
+    # `SlackConfiguration` object to configure your connector.
+    #
+    #  Connectors configured using the older console and API architecture
+    # will continue to function as configured. However, you won’t be able to
+    # edit or update them. If you want to edit or update your connector
+    # configuration, you must create a new connector.
+    #
+    #  We recommended migrating your connector workflow to the upgraded
+    # version. Support for connectors configured using the older
+    # architecture is scheduled to end by June 2024.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
     #
     # @!attribute [rw] team_id
     #   The identifier of the team in the Slack workspace. For example,
@@ -10481,7 +10694,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the index you want to update.
+    #   A new name for the index.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -10519,9 +10732,10 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an IAM
-    #   Identity Center identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Gets users and groups from IAM Identity Center identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1]. This is
+    #   useful for user context filtering, where search results are filtered
+    #   based on the user or their group access to documents.
     #
     #
     #

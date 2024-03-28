@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.446.0 (2024-03-26)
+------------------
+
+* Feature - Documentation updates for Elastic Compute Cloud (EC2).
+
+1.445.0 (2024-03-25)
+------------------
+
+* Feature - Added support for ModifyInstanceMetadataDefaults and GetInstanceMetadataDefaults to set Instance Metadata Service account defaults
+
+1.444.0 (2024-03-19)
+------------------
+
+* Feature - This release adds the new DescribeMacHosts API operation for getting information about EC2 Mac Dedicated Hosts. Users can now see the latest macOS versions that their underlying Apple Mac can support without needing to be updated.
+
+1.443.0 (2024-03-15)
+------------------
+
+* Feature - Add media accelerator and neuron device information on the describe instance types API.
+
+1.442.0 (2024-03-12)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
+1.441.0 (2024-03-07)
+------------------
+
+* Feature - This release adds an optional parameter to RegisterImage and CopyImage APIs to support tagging AMIs at the time of creation.
+
 1.440.0 (2024-03-01)
 ------------------
 

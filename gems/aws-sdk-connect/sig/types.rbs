@@ -175,7 +175,7 @@ module Aws::Connect
 
     class AssociateInstanceStorageConfigRequest
       attr_accessor instance_id: ::String
-      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS")
       attr_accessor storage_config: Types::InstanceStorageConfig
       SENSITIVE: []
     end
@@ -262,6 +262,12 @@ module Aws::Connect
     class Attribute
       attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING")
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeAndCondition
+      attr_accessor tag_conditions: ::Array[Types::TagCondition]
+      attr_accessor hierarchy_group_condition: Types::HierarchyGroupCondition
       SENSITIVE: []
     end
 
@@ -530,6 +536,14 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ControlPlaneUserAttributeFilter
+      attr_accessor or_conditions: ::Array[Types::AttributeAndCondition]
+      attr_accessor and_condition: Types::AttributeAndCondition
+      attr_accessor tag_condition: Types::TagCondition
+      attr_accessor hierarchy_group_condition: Types::HierarchyGroupCondition
+      SENSITIVE: []
+    end
+
     class CreateAgentStatusRequest
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
@@ -777,6 +791,8 @@ module Aws::Connect
       attr_accessor allowed_access_control_tags: ::Hash[::String, ::String]
       attr_accessor tag_restricted_resources: ::Array[::String]
       attr_accessor applications: ::Array[Types::Application]
+      attr_accessor hierarchy_restricted_resources: ::Array[::String]
+      attr_accessor allowed_access_control_hierarchy_group_id: ::String
       SENSITIVE: []
     end
 
@@ -1240,7 +1256,7 @@ module Aws::Connect
     class DescribeInstanceStorageConfigRequest
       attr_accessor instance_id: ::String
       attr_accessor association_id: ::String
-      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS")
       SENSITIVE: []
     end
 
@@ -1446,7 +1462,7 @@ module Aws::Connect
     class DisassociateInstanceStorageConfigRequest
       attr_accessor instance_id: ::String
       attr_accessor association_id: ::String
-      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS")
       SENSITIVE: []
     end
 
@@ -2509,7 +2525,7 @@ module Aws::Connect
 
     class ListInstanceStorageConfigsRequest
       attr_accessor instance_id: ::String
-      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -3932,6 +3948,8 @@ module Aws::Connect
       attr_accessor tag_restricted_resources: ::Array[::String]
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
+      attr_accessor hierarchy_restricted_resources: ::Array[::String]
+      attr_accessor allowed_access_control_hierarchy_group_id: ::String
       SENSITIVE: []
     end
 
@@ -4576,7 +4594,7 @@ module Aws::Connect
     class UpdateInstanceStorageConfigRequest
       attr_accessor instance_id: ::String
       attr_accessor association_id: ::String
-      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+      attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS")
       attr_accessor storage_config: Types::InstanceStorageConfig
       SENSITIVE: []
     end
@@ -4750,6 +4768,8 @@ module Aws::Connect
       attr_accessor allowed_access_control_tags: ::Hash[::String, ::String]
       attr_accessor tag_restricted_resources: ::Array[::String]
       attr_accessor applications: ::Array[Types::Application]
+      attr_accessor hierarchy_restricted_resources: ::Array[::String]
+      attr_accessor allowed_access_control_hierarchy_group_id: ::String
       SENSITIVE: []
     end
 
@@ -4986,6 +5006,7 @@ module Aws::Connect
 
     class UserSearchFilter
       attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      attr_accessor user_attribute_filter: Types::ControlPlaneUserAttributeFilter
       SENSITIVE: []
     end
 

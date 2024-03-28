@@ -3018,7 +3018,7 @@ module Aws::EC2
     #
     # Encrypted EBS volumes must be attached to instances that support
     # Amazon EBS encryption. For more information, see [Amazon EBS
-    # encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # encryption][1] in the *Amazon EBS User Guide*.
     #
     # After you attach an EBS volume, you must make it available. For more
     # information, see [Make an EBS volume available for use][2].
@@ -3037,13 +3037,13 @@ module Aws::EC2
     #   instance and attach it to a Linux instance.
     #
     # For more information, see [Attach an Amazon EBS volume to an
-    # instance][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    # instance][3] in the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html
+    # [3]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-attaching-volume.html
     #
     # @option params [required, String] :device
     #   The device name (for example, `/dev/sdh` or `xvdh`).
@@ -3244,38 +3244,35 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Adds the specified outbound (egress) rules to a security group for use
-    # with a VPC.
+    # Adds the specified outbound (egress) rules to a security group.
     #
     # An outbound rule permits instances to send traffic to the specified
-    # IPv4 or IPv6 CIDR address ranges, or to the instances that are
-    # associated with the specified source security groups. When specifying
-    # an outbound rule for your security group in a VPC, the `IpPermissions`
-    # must include a destination for the traffic.
+    # IPv4 or IPv6 address ranges, the IP address ranges specified by a
+    # prefix list, or the instances that are associated with a source
+    # security group. For more information, see [Security group rules][1].
     #
-    # You specify a protocol for each rule (for example, TCP). For the TCP
-    # and UDP protocols, you must also specify the destination port or port
-    # range. For the ICMP protocol, you must also specify the ICMP type and
-    # code. You can use -1 for the type or code to mean all types or all
-    # codes.
+    # You must specify exactly one of the following destinations: an IPv4 or
+    # IPv6 address range, a prefix list, or a security group. You must
+    # specify a protocol for each rule (for example, TCP). If the protocol
+    # is TCP or UDP, you must also specify a port or port range. If the
+    # protocol is ICMP or ICMPv6, you must also specify the ICMP type and
+    # code.
     #
-    # Rule changes are propagated to affected instances as quickly as
-    # possible. However, a small delay might occur.
+    # Rule changes are propagated to instances associated with the security
+    # group as quickly as possible. However, a small delay might occur.
     #
-    # For information about VPC security group quotas, see [Amazon VPC
-    # quotas][1].
+    # For examples of rules that you can add to security groups for specific
+    # access scenarios, see [Security group rules for different use
+    # cases][2] in the *Amazon EC2 User Guide*.
     #
-    # <note markdown="1"> If you want to reference a security group across VPCs attached to a
-    # transit gateway using the [security group referencing feature][2],
-    # note that you can only reference security groups for ingress rules.
-    # You cannot reference a security group for egress rules.
-    #
-    #  </note>
+    # For information about security group quotas, see [Amazon VPC
+    # quotas][3] in the *Amazon VPC User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3287,32 +3284,28 @@ module Aws::EC2
     #   The ID of the security group.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   The sets of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range in the same set of permissions.
+    #   The permissions for the security group rules.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags applied to the security group rule.
     #
     # @option params [String] :cidr_ip
-    #   Not supported. Use a set of IP permissions to specify the CIDR.
+    #   Not supported. Use IP permissions instead.
     #
     # @option params [Integer] :from_port
-    #   Not supported. Use a set of IP permissions to specify the port.
+    #   Not supported. Use IP permissions instead.
     #
     # @option params [String] :ip_protocol
-    #   Not supported. Use a set of IP permissions to specify the protocol
-    #   name or number.
+    #   Not supported. Use IP permissions instead.
     #
     # @option params [Integer] :to_port
-    #   Not supported. Use a set of IP permissions to specify the port.
+    #   Not supported. Use IP permissions instead.
     #
     # @option params [String] :source_security_group_name
-    #   Not supported. Use a set of IP permissions to specify a destination
-    #   security group.
+    #   Not supported. Use IP permissions instead.
     #
     # @option params [String] :source_security_group_owner_id
-    #   Not supported. Use a set of IP permissions to specify a destination
-    #   security group.
+    #   Not supported. Use IP permissions instead.
     #
     # @return [Types::AuthorizeSecurityGroupEgressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3464,99 +3457,99 @@ module Aws::EC2
     # Adds the specified inbound (ingress) rules to a security group.
     #
     # An inbound rule permits instances to receive traffic from the
-    # specified IPv4 or IPv6 CIDR address range, or from the instances that
-    # are associated with the specified destination security groups. When
-    # specifying an inbound rule for your security group in a VPC, the
-    # `IpPermissions` must include a source for the traffic.
+    # specified IPv4 or IPv6 address range, the IP address ranges that are
+    # specified by a prefix list, or the instances that are associated with
+    # a destination security group. For more information, see [Security
+    # group rules][1].
     #
-    # You specify a protocol for each rule (for example, TCP). For TCP and
-    # UDP, you must also specify the destination port or port range. For
-    # ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You
-    # can use -1 to mean all types or all codes.
+    # You must specify exactly one of the following sources: an IPv4 or IPv6
+    # address range, a prefix list, or a security group. You must specify a
+    # protocol for each rule (for example, TCP). If the protocol is TCP or
+    # UDP, you must also specify a port or port range. If the protocol is
+    # ICMP or ICMPv6, you must also specify the ICMP/ICMPv6 type and code.
     #
-    # Rule changes are propagated to instances within the security group as
-    # quickly as possible. However, a small delay might occur.
+    # Rule changes are propagated to instances associated with the security
+    # group as quickly as possible. However, a small delay might occur.
     #
-    # For more information about VPC security group quotas, see [Amazon VPC
-    # quotas][1].
+    # For examples of rules that you can add to security groups for specific
+    # access scenarios, see [Security group rules for different use
+    # cases][2] in the *Amazon EC2 User Guide*.
+    #
+    # For more information about security group quotas, see [Amazon VPC
+    # quotas][3] in the *Amazon VPC User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @option params [String] :cidr_ip
-    #   The IPv4 address range, in CIDR format. You can't specify this
-    #   parameter when specifying a source security group. To specify an IPv6
-    #   address range, use a set of IP permissions.
+    #   The IPv4 address range, in CIDR format.
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify an IPv6 address range, use IP permissions instead.
+    #
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #
     # @option params [Integer] :from_port
     #   If the protocol is TCP or UDP, this is the start of the port range. If
-    #   the protocol is ICMP, this is the type number. A value of -1 indicates
-    #   all ICMP types. If you specify all ICMP types, you must specify all
-    #   ICMP codes.
+    #   the protocol is ICMP, this is the ICMP type or -1 (all ICMP types).
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #
     # @option params [String] :group_id
-    #   The ID of the security group. You must specify either the security
-    #   group ID or the security group name in the request. For security
-    #   groups in a nondefault VPC, you must specify the security group ID.
+    #   The ID of the security group.
     #
     # @option params [String] :group_name
-    #   \[Default VPC\] The name of the security group. You must specify
-    #   either the security group ID or the security group name in the
-    #   request. For security groups in a nondefault VPC, you must specify the
-    #   security group ID.
+    #   \[Default VPC\] The name of the security group. For security groups
+    #   for a default VPC you can specify either the ID or the name of the
+    #   security group. For security groups for a nondefault VPC, you must
+    #   specify the ID of the security group.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   The sets of IP permissions.
+    #   The permissions for the security group rules.
     #
     # @option params [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #   Numbers][1]). To specify all protocols, use `-1`.
     #
-    #   Use `-1` to specify all protocols. If you specify `-1` or a protocol
-    #   other than `tcp`, `udp`, or `icmp`, traffic on all ports is allowed,
-    #   regardless of any ports you specify.
+    #   To specify `icmpv6`, use IP permissions instead.
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   If you specify a protocol other than one of the supported values,
+    #   traffic is allowed on all ports, regardless of any ports that you
+    #   specify.
+    #
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #
     #
     #
     #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
     #
     # @option params [String] :source_security_group_name
-    #   \[Default VPC\] The name of the source security group. You can't
-    #   specify this parameter in combination with the following parameters:
-    #   the CIDR IP address range, the start of the port range, the IP
-    #   protocol, and the end of the port range. Creates rules that grant full
-    #   ICMP, UDP, and TCP access. To create a rule with a specific IP
-    #   protocol and port range, use a set of IP permissions instead. The
-    #   source security group must be in the same VPC.
+    #   \[Default VPC\] The name of the source security group.
+    #
+    #   The rule grants full ICMP, UDP, and TCP access. To create a rule with
+    #   a specific protocol and port range, specify a set of IP permissions
+    #   instead.
     #
     # @option params [String] :source_security_group_owner_id
-    #   \[Nondefault VPC\] The Amazon Web Services account ID for the source
-    #   security group, if the source security group is in a different
-    #   account. You can't specify this parameter in combination with the
-    #   following parameters: the CIDR IP address range, the IP protocol, the
-    #   start of the port range, and the end of the port range. Creates rules
-    #   that grant full ICMP, UDP, and TCP access. To create a rule with a
-    #   specific IP protocol and port range, use a set of IP permissions
-    #   instead.
+    #   The Amazon Web Services account ID for the source security group, if
+    #   the source security group is in a different account.
+    #
+    #   The rule grants full ICMP, UDP, and TCP access. To create a rule with
+    #   a specific protocol and port range, use IP permissions instead.
     #
     # @option params [Integer] :to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP, this is the code. A value of -1 indicates all
-    #   ICMP codes. If you specify all ICMP types, you must specify all ICMP
-    #   codes.
+    #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes). If
+    #   the start port is -1 (all ICMP types), then the end port must be -1
+    #   (all ICMP codes).
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3565,7 +3558,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   \[VPC Only\] The tags applied to the security group rule.
+    #   The tags applied to the security group rule.
     #
     # @return [Types::AuthorizeSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3759,11 +3752,7 @@ module Aws::EC2
     # @option params [required, String] :instance_id
     #   The ID of the instance to bundle.
     #
-    #   Type: String
-    #
     #   Default: None
-    #
-    #   Required: Yes
     #
     # @option params [required, Types::Storage] :storage
     #   The bucket in which to store the AMI. You can specify a bucket that
@@ -4479,7 +4468,7 @@ module Aws::EC2
     # encryption key for the Region, or a different key that you specify in
     # the request using **KmsKeyId**. Outposts do not support unencrypted
     # snapshots. For more information, [ Amazon EBS local snapshots on
-    # Outposts][2] in the *Amazon EC2 User Guide*.
+    # Outposts][2] in the *Amazon EBS User Guide*.
     #
     # For more information about the prerequisites and limits when copying
     # an AMI, see [Copy an AMI][3] in the *Amazon EC2 User Guide*.
@@ -4487,7 +4476,7 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
     #
     # @option params [String] :client_token
@@ -4508,12 +4497,12 @@ module Aws::EC2
     #   you cannot create an unencrypted copy of an encrypted snapshot. The
     #   default KMS key for Amazon EBS is used unless you specify a
     #   non-default Key Management Service (KMS) KMS key using `KmsKeyId`. For
-    #   more information, see [Amazon EBS encryption][1] in the *Amazon EC2
+    #   more information, see [Amazon EBS encryption][1] in the *Amazon EBS
     #   User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [String] :kms_key_id
     #   The identifier of the symmetric Key Management Service (KMS) KMS key
@@ -4558,12 +4547,12 @@ module Aws::EC2
     #   the destination Outpost. You cannot copy an AMI from an Outpost to a
     #   Region, from one Outpost to another, or within the same Outpost.
     #
-    #   For more information, see [ Copy AMIs from an Amazon Web Services
-    #   Region to an Outpost][1] in the *Amazon EC2 User Guide*.
+    #   For more information, see [Copy AMIs from an Amazon Web Services
+    #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-amis
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4583,6 +4572,24 @@ module Aws::EC2
     #     other Amazon Web Services accounts
     #
     #   Default: Your user-defined AMI tags are not copied.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new AMI and new snapshots. You can tag the
+    #   AMI, the snapshots, or both.
+    #
+    #   * To tag the new AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the new snapshots, the value for `ResourceType` must be
+    #     `snapshot`. The same tag is applied to all the new snapshots.
+    #
+    #   If you specify other values for `ResourceType`, the request fails.
+    #
+    #   To tag an AMI or snapshot after it has been created, see
+    #   [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #
     # @return [Types::CopyImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4618,6 +4625,17 @@ module Aws::EC2
     #     destination_outpost_arn: "String",
     #     dry_run: false,
     #     copy_image_tags: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4655,19 +4673,18 @@ module Aws::EC2
     # default encryption key for the Region, or a different key that you
     # specify in the request using **KmsKeyId**. Outposts do not support
     # unencrypted snapshots. For more information, [ Amazon EBS local
-    # snapshots on Outposts][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # snapshots on Outposts][1] in the *Amazon EBS User Guide*.
     #
     # Snapshots created by copying another snapshot have an arbitrary volume
     # ID that should not be used for any purpose.
     #
     # For more information, see [Copy an Amazon EBS snapshot][2] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html
     #
     # @option params [String] :description
     #   A description for the EBS snapshot.
@@ -4681,12 +4698,11 @@ module Aws::EC2
     #   Outpost.
     #
     #   For more information, see [ Copy snapshots from an Amazon Web Services
-    #   Region to an Outpost][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots
     #
     # @option params [String] :destination_region
     #   The destination Region to use in the `PresignedUrl` parameter of a
@@ -4705,11 +4721,11 @@ module Aws::EC2
     #   omit this parameter. Encrypted snapshots are encrypted, even if you
     #   omit this parameter and encryption by default is not enabled. You
     #   cannot set this parameter to false. For more information, see [Amazon
-    #   EBS encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   EBS encryption][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [String] :kms_key_id
     #   The identifier of the Key Management Service (KMS) KMS key to use for
@@ -5985,55 +6001,59 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a set of DHCP options for your VPC. After creating the set,
-    # you must associate it with the VPC, causing all existing and new
-    # instances that you launch in the VPC to use this set of DHCP options.
-    # The following are the individual DHCP options you can specify. For
-    # more information about the options, see [RFC 2132][1].
+    # Creates a custom set of DHCP options. After you create a DHCP option
+    # set, you associate it with a VPC. After you associate a DHCP option
+    # set with a VPC, all existing and newly launched instances in the VPC
+    # use this set of DHCP options.
     #
-    # * `domain-name-servers` - The IP addresses of up to four domain name
-    #   servers, or AmazonProvidedDNS. The default DHCP option set specifies
-    #   AmazonProvidedDNS. If specifying more than one domain name server,
-    #   specify the IP addresses in a single parameter, separated by commas.
-    #   To have your instance receive a custom DNS hostname as specified in
-    #   `domain-name`, you must set `domain-name-servers` to a custom DNS
-    #   server.
+    # The following are the individual DHCP options you can specify. For
+    # more information, see [DHCP options sets][1] in the *Amazon VPC User
+    # Guide*.
     #
     # * `domain-name` - If you're using AmazonProvidedDNS in `us-east-1`,
-    #   specify `ec2.internal`. If you're using AmazonProvidedDNS in
-    #   another Region, specify `region.compute.internal` (for example,
-    #   `ap-northeast-1.compute.internal`). Otherwise, specify a domain name
-    #   (for example, `ExampleCompany.com`). This value is used to complete
-    #   unqualified DNS hostnames. **Important**: Some Linux operating
-    #   systems accept multiple domain names separated by spaces. However,
-    #   Windows and other Linux operating systems treat the value as a
-    #   single domain, which results in unexpected behavior. If your DHCP
-    #   options set is associated with a VPC that has instances with
-    #   multiple operating systems, specify only one domain name.
+    #   specify `ec2.internal`. If you're using AmazonProvidedDNS in any
+    #   other Region, specify `region.compute.internal`. Otherwise, specify
+    #   a custom domain name. This value is used to complete unqualified DNS
+    #   hostnames.
     #
-    # * `ntp-servers` - The IP addresses of up to four Network Time Protocol
-    #   (NTP) servers.
+    #   Some Linux operating systems accept multiple domain names separated
+    #   by spaces. However, Windows and other Linux operating systems treat
+    #   the value as a single domain, which results in unexpected behavior.
+    #   If your DHCP option set is associated with a VPC that has instances
+    #   running operating systems that treat the value as a single domain,
+    #   specify only one domain name.
+    #
+    # * `domain-name-servers` - The IP addresses of up to four DNS servers,
+    #   or AmazonProvidedDNS. To specify multiple domain name servers in a
+    #   single parameter, separate the IP addresses using commas. To have
+    #   your instances receive custom DNS hostnames as specified in
+    #   `domain-name`, you must specify a custom DNS server.
+    #
+    # * `ntp-servers` - The IP addresses of up to eight Network Time
+    #   Protocol (NTP) servers (four IPv4 addresses and four IPv6
+    #   addresses).
     #
     # * `netbios-name-servers` - The IP addresses of up to four NetBIOS name
     #   servers.
     #
     # * `netbios-node-type` - The NetBIOS node type (1, 2, 4, or 8). We
-    #   recommend that you specify 2 (broadcast and multicast are not
-    #   currently supported). For more information about these node types,
-    #   see [RFC 2132][1].
+    #   recommend that you specify 2. Broadcast and multicast are not
+    #   supported. For more information about NetBIOS node types, see [RFC
+    #   2132][2].
     #
-    # Your VPC automatically starts out with a set of DHCP options that
-    # includes only a DNS server that we provide (AmazonProvidedDNS). If you
-    # create a set of options, and if your VPC has an internet gateway, make
-    # sure to set the `domain-name-servers` option either to
-    # `AmazonProvidedDNS` or to a domain name server of your choice. For
-    # more information, see [DHCP options sets][2] in the *Amazon VPC User
-    # Guide*.
+    # * `ipv6-preferred-lease-time` - A value (in seconds, minutes, hours,
+    #   or years) for how frequently a running instance with an IPv6
+    #   assigned to it goes through DHCPv6 lease renewal. Acceptable values
+    #   are between 140 and 2147483647 seconds (approximately 68 years). If
+    #   no value is entered, the default lease time is 140 seconds. If you
+    #   use long-term addressing for EC2 instances, you can increase the
+    #   lease time and avoid frequent lease renewal requests. Lease renewal
+    #   typically occurs when half of the lease time has elapsed.
     #
     #
     #
-    # [1]: http://www.ietf.org/rfc/rfc2132.txt
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
+    # [2]: http://www.ietf.org/rfc/rfc2132.txt
     #
     # @option params [required, Array<Types::NewDhcpConfiguration>] :dhcp_configurations
     #   A DHCP configuration option.
@@ -6632,10 +6652,12 @@ module Aws::EC2
     #
     # @option params [String] :deliver_logs_permission_arn
     #   The ARN of the IAM role that allows Amazon EC2 to publish flow logs to
-    #   a CloudWatch Logs log group in your account.
+    #   the log destination.
     #
     #   This parameter is required if the destination type is
-    #   `cloud-watch-logs` and unsupported otherwise.
+    #   `cloud-watch-logs`, or if the destination type is
+    #   `kinesis-data-firehose` and the delivery stream and the resources to
+    #   monitor are in different accounts.
     #
     # @option params [String] :deliver_cross_account_role
     #   The ARN of the IAM role that allows Amazon EC2 to publish flow logs
@@ -11492,13 +11514,13 @@ module Aws::EC2
     # Cloud User Guide*.
     #
     # For more information, see [Amazon Elastic Block Store][2] and [Amazon
-    # EBS encryption][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    # EBS encryption][3] in the *Amazon EBS User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html
+    # [3]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [String] :description
     #   A description for the snapshot.
@@ -11519,11 +11541,11 @@ module Aws::EC2
     #     The snapshot must be created on the same Outpost as the volume.
     #
     #   For more information, see [Create local snapshots from volumes on an
-    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#create-snapshot
     #
     # @option params [required, String] :volume_id
     #   The ID of the Amazon EBS volume.
@@ -11674,12 +11696,11 @@ module Aws::EC2
     #     The snapshots must be created on the same Outpost as the instance.
     #
     #   For more information, see [ Create multi-volume local snapshots from
-    #   instances on an Outpost][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   instances on an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#create-multivol-snapshot
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to apply to every snapshot specified by the instance.
@@ -14013,21 +14034,21 @@ module Aws::EC2
     # You can create encrypted volumes. Encrypted volumes must be attached
     # to instances that support Amazon EBS encryption. Volumes that are
     # created from encrypted snapshots are also automatically encrypted. For
-    # more information, see [Amazon EBS encryption][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # more information, see [Amazon EBS encryption][1] in the *Amazon EBS
+    # User Guide*.
     #
     # You can tag your volumes during creation. For more information, see
     # [Tag your Amazon EC2 resources][2] in the *Amazon Elastic Compute
     # Cloud User Guide*.
     #
     # For more information, see [Create an Amazon EBS volume][3] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html
+    # [3]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-creating-volume.html
     #
     # @option params [required, String] :availability_zone
     #   The ID of the Availability Zone in which to create the volume. For
@@ -14038,8 +14059,7 @@ module Aws::EC2
     #   setting the encryption state to `true` depends on the volume origin
     #   (new or from a snapshot), starting encryption state, ownership, and
     #   whether encryption by default is enabled. For more information, see
-    #   [Encryption by default][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   [Encryption by default][1] in the *Amazon EBS User Guide*.
     #
     #   Encrypted Amazon EBS volumes must be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
@@ -14047,8 +14067,8 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances
     #
     # @option params [Integer] :iops
     #   The number of I/O operations per second (IOPS). For `gp3`, `io1`, and
@@ -14141,13 +14161,13 @@ module Aws::EC2
     #   be used as boot volumes.
     #
     #   For more information, see [Amazon EBS volume types][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EBS User Guide*.
     #
     #   Default: `gp2`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -14163,13 +14183,12 @@ module Aws::EC2
     #   Multi-Attach, you can attach the volume to up to 16 [Instances built
     #   on the Nitro System][1] in the same Availability Zone. This parameter
     #   is supported with `io1` and `io2` volumes only. For more information,
-    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon EBS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     #
     # @option params [Integer] :throughput
     #   The throughput to provision for a volume, with a maximum of 1,000
@@ -17395,11 +17414,11 @@ module Aws::EC2
     # delete the snapshot.
     #
     # For more information, see [Delete an Amazon EBS snapshot][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-snapshot.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-deleting-snapshot.html
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the EBS snapshot.
@@ -18580,11 +18599,11 @@ module Aws::EC2
     # The volume can remain in the `deleting` state for several minutes.
     #
     # For more information, see [Delete an Amazon EBS volume][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-deleting-volume.html
     #
     # @option params [required, String] :volume_id
     #   The ID of the volume.
@@ -19351,6 +19370,12 @@ module Aws::EC2
     # * `vpc-max-security-groups-per-interface`: The maximum number of
     #   security groups that you can assign to a network interface.
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits
@@ -19809,6 +19834,12 @@ module Aws::EC2
     # Wavelength Zones, see [Regions and zones][1] in the *Amazon Elastic
     # Compute Cloud User Guide*.
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
@@ -19820,7 +19851,7 @@ module Aws::EC2
     #     Local Zones, use the name of the group associated with the Local
     #     Zone (for example, `us-west-2-lax-1`) For Wavelength Zones, use the
     #     name of the group associated with the Wavelength Zone (for example,
-    #     `us-east-1-wl1-bos-wlz-1`).
+    #     `us-east-1-wl1`).
     #
     #   * `message` - The Zone message.
     #
@@ -20024,6 +20055,12 @@ module Aws::EC2
     # bundle task is no longer in the list, you can still register an AMI
     # from it. Just use `RegisterImage` with the Amazon S3 bucket name and
     # image manifest name you provided to the bundle task.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
     #
     #  </note>
     #
@@ -23268,6 +23305,12 @@ module Aws::EC2
     # Describes the specified attribute of the specified AMI. You can
     # specify only one attribute at a time.
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
+    #
     # @option params [required, String] :attribute
     #   The AMI attribute.
     #
@@ -23384,6 +23427,12 @@ module Aws::EC2
     # reference a deregistered AMI are terminated, specifying the ID of the
     # image will eventually return an error indicating that the AMI ID
     # cannot be found.
+    #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
     #
     # @option params [Array<String>] :executable_users
     #   Scopes the images by users with explicit launch permissions. Specify
@@ -25129,6 +25178,19 @@ module Aws::EC2
     #   resp.instance_types[0].nitro_tpm_support #=> String, one of "unsupported", "supported"
     #   resp.instance_types[0].nitro_tpm_info.supported_versions #=> Array
     #   resp.instance_types[0].nitro_tpm_info.supported_versions[0] #=> String
+    #   resp.instance_types[0].media_accelerator_info.accelerators #=> Array
+    #   resp.instance_types[0].media_accelerator_info.accelerators[0].count #=> Integer
+    #   resp.instance_types[0].media_accelerator_info.accelerators[0].name #=> String
+    #   resp.instance_types[0].media_accelerator_info.accelerators[0].manufacturer #=> String
+    #   resp.instance_types[0].media_accelerator_info.accelerators[0].memory_info.size_in_mi_b #=> Integer
+    #   resp.instance_types[0].media_accelerator_info.total_media_memory_in_mi_b #=> Integer
+    #   resp.instance_types[0].neuron_info.neuron_devices #=> Array
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].count #=> Integer
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].name #=> String
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].core_info.count #=> Integer
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].core_info.version #=> Integer
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].memory_info.size_in_mi_b #=> Integer
+    #   resp.instance_types[0].neuron_info.total_neuron_device_memory_in_mi_b #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypes AWS API Documentation
@@ -27714,6 +27776,69 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the specified EC2 Mac Dedicated Host or all of your EC2 Mac
+    # Dedicated Hosts.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters.
+    #
+    #   * `availability-zone` - The Availability Zone of the EC2 Mac Dedicated
+    #     Host.
+    #
+    #   * `instance-type` - The instance type size that the EC2 Mac Dedicated
+    #     Host is configured to support.
+    #
+    # @option params [Array<String>] :host_ids
+    #   The IDs of the EC2 Mac Dedicated Hosts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive an
+    #   error.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @return [Types::DescribeMacHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMacHostsResult#mac_hosts #mac_hosts} => Array&lt;Types::MacHost&gt;
+    #   * {Types::DescribeMacHostsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_mac_hosts({
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     host_ids: ["DedicatedHostId"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mac_hosts #=> Array
+    #   resp.mac_hosts[0].host_id #=> String
+    #   resp.mac_hosts[0].mac_os_latest_supported_versions #=> Array
+    #   resp.mac_hosts[0].mac_os_latest_supported_versions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMacHosts AWS API Documentation
+    #
+    # @overload describe_mac_hosts(params = {})
+    # @param [Hash] params ({})
+    def describe_mac_hosts(params = {}, options = {})
+      req = build_request(:describe_mac_hosts, params)
+      req.send_request(options)
+    end
+
     # Describes your managed prefix lists and any Amazon Web
     # Services-managed prefix lists.
     #
@@ -30277,6 +30402,12 @@ module Aws::EC2
     # see [Managing Amazon Web Services Regions][2] in the *Amazon Web
     # Services General Reference*.
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/general/latest/gr/ec2-service.html
@@ -31469,9 +31600,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the VPCs on the other side of a VPC peering connection or
-    # the VPCs attached to a transit gateway that are referencing the
-    # security groups you've specified in this request.
+    # Describes the VPCs on the other side of a VPC peering connection that
+    # are referencing the security groups you've specified in this request.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -31875,11 +32005,11 @@ module Aws::EC2
     # specify only one attribute at a time.
     #
     # For more information about EBS snapshots, see [Amazon EBS
-    # snapshots][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # snapshots][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html
     #
     # @option params [required, String] :attribute
     #   The snapshot attribute you would like to view.
@@ -32079,12 +32209,12 @@ module Aws::EC2
     # DescribeFastSnapshotRestores.
     #
     # For more information about EBS snapshots, see [Amazon EBS
-    # snapshots][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # snapshots][2] in the *Amazon EBS User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -33389,16 +33519,9 @@ module Aws::EC2
 
     # Describes the stale security group rules for security groups in a
     # specified VPC. Rules are stale when they reference a deleted security
-    # group in the same VPC, peered VPC, or in separate VPCs attached to a
-    # transit gateway (with [security group referencing support][1]
-    # enabled). Rules can also be stale if they reference a security group
-    # in a peer VPC for which the VPC peering connection has been deleted or
-    # if they reference a security group in a VPC that has been detached
-    # from a transit gateway.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
+    # group in the same VPC or peered VPC. Rules can also be stale if they
+    # reference a security group in a peer VPC for which the VPC peering
+    # connection has been deleted.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -33828,6 +33951,12 @@ module Aws::EC2
     #
     # For more information about tags, see [Tag your Amazon EC2
     # resources][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
     #
     #
     #
@@ -35560,11 +35689,11 @@ module Aws::EC2
     # specify only one attribute at a time.
     #
     # For more information about EBS volumes, see [Amazon EBS volumes][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html
     #
     # @option params [required, String] :attribute
     #   The attribute of the volume. This parameter is required.
@@ -35647,7 +35776,7 @@ module Aws::EC2
     # `insufficient-data`, then the checks might still be taking place on
     # your volume at the time. We recommend that you retry the request. For
     # more information about volume status, see [Monitor the status of your
-    # volumes][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # volumes][1] in the *Amazon EBS User Guide*.
     #
     # *Events*: Reflect the cause of a volume status and might require you
     # to take action. For example, if your volume returns an `impaired`
@@ -35668,9 +35797,15 @@ module Aws::EC2
     # volumes in the `error` state (for example, when a volume is incapable
     # of accepting I/O.)
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html
+    #
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-status.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -35860,12 +35995,18 @@ module Aws::EC2
     # information, see [Pagination][1].
     #
     # For more information about EBS volumes, see [Amazon EBS volumes][2] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # the *Amazon EBS User Guide*.
+    #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -36110,12 +36251,12 @@ module Aws::EC2
     # modification to an EBS volume. For information about CloudWatch
     # Events, see the [Amazon CloudWatch Events User Guide][1]. For more
     # information, see [Monitor the progress of volume modifications][2] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # the *Amazon EBS User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -37836,11 +37977,11 @@ module Aws::EC2
     # volume attached to ECS tasks` error message.
     #
     # For more information, see [Detach an Amazon EBS volume][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-detaching-volume.html
     #
     # @option params [String] :device
     #   The device name.
@@ -38073,11 +38214,11 @@ module Aws::EC2
     # of your existing volumes.
     #
     # For more information, see [Amazon EBS encryption][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -38473,13 +38614,13 @@ module Aws::EC2
     # publicly accessible again.
     #
     # For more information, see [ Block public access for snapshots][1] in
-    # the *Amazon Elastic Compute Cloud User Guide* .
+    # the *Amazon EBS User Guide* .
     #
     #
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-snapshots.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -39558,8 +39699,8 @@ module Aws::EC2
     # After you enable encryption by default, the EBS volumes that you
     # create are always encrypted, either using the default KMS key or the
     # KMS key that you specified when you created each volume. For more
-    # information, see [Amazon EBS encryption][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # information, see [Amazon EBS encryption][1] in the *Amazon EBS User
+    # Guide*.
     #
     # You can specify the default KMS key for encryption by default using
     # ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId.
@@ -39573,8 +39714,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -39708,11 +39849,11 @@ module Aws::EC2
     # restores, use DisableFastSnapshotRestores.
     #
     # For more information, see [Amazon EBS fast snapshot restore][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-fast-snapshot-restore.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-fast-snapshot-restore.html
     #
     # @option params [required, Array<String>] :availability_zones
     #   One or more Availability Zones. For example, `us-east-2a`.
@@ -40057,11 +40198,11 @@ module Aws::EC2
     # become publicly accessible again.
     #
     # For more information, see [ Block public access for snapshots][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-snapshots.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html
     #
     # @option params [required, String] :state
     #   The mode in which to enable block public access for snapshots for the
@@ -41105,11 +41246,11 @@ module Aws::EC2
     # ResetEbsDefaultKmsKeyId.
     #
     # For more information, see [Amazon EBS encryption][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -41144,11 +41285,11 @@ module Aws::EC2
     # account in the current Region.
     #
     # For more information, see [Amazon EBS encryption][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -41400,6 +41541,48 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_image_block_public_access_state(params = {}, options = {})
       req = build_request(:get_image_block_public_access_state, params)
+      req.send_request(options)
+    end
+
+    # Gets the default instance metadata service (IMDS) settings that are
+    # set at the account level in the specified Amazon Web Services  Region.
+    #
+    # For more information, see [Order of precedence for instance metadata
+    # options][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetInstanceMetadataDefaultsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInstanceMetadataDefaultsResult#account_level #account_level} => Types::InstanceMetadataDefaultsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_instance_metadata_defaults({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_level.http_tokens #=> String, one of "optional", "required"
+    #   resp.account_level.http_put_response_hop_limit #=> Integer
+    #   resp.account_level.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.account_level.instance_metadata_tags #=> String, one of "disabled", "enabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceMetadataDefaults AWS API Documentation
+    #
+    # @overload get_instance_metadata_defaults(params = {})
+    # @param [Hash] params ({})
+    def get_instance_metadata_defaults(params = {}, options = {})
+      req = build_request(:get_instance_metadata_defaults, params)
       req.send_request(options)
     end
 
@@ -43309,11 +43492,11 @@ module Aws::EC2
     # for the account and Region.
     #
     # For more information, see [ Block public access for snapshots][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-snapshots.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -45865,11 +46048,11 @@ module Aws::EC2
     # to launch.
     #
     # For more information, see [Amazon EBS encryption][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [required, String] :kms_key_id
     #   The identifier of the Key Management Service (KMS) KMS key to use for
@@ -47155,6 +47338,83 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the default instance metadata service (IMDS) settings at the
+    # account level in the specified Amazon Web Services  Region.
+    #
+    # <note markdown="1"> To remove a parameter's account-level default setting, specify
+    # `no-preference`. At instance launch, the value will come from the AMI,
+    # or from the launch parameter if specified. For more information, see
+    # [Order of precedence for instance metadata options][1] in the *Amazon
+    # EC2 User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
+    #
+    # @option params [String] :http_tokens
+    #   Indicates whether IMDSv2 is required.
+    #
+    #   * `optional` – IMDSv2 is optional, which means that you can use either
+    #     IMDSv2 or IMDSv1.
+    #
+    #   * `required` – IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
+    #
+    # @option params [Integer] :http_put_response_hop_limit
+    #   The maximum number of hops that the metadata token can travel.
+    #
+    #   Minimum: `1`
+    #
+    #   Maximum: `64`
+    #
+    # @option params [String] :http_endpoint
+    #   Enables or disables the IMDS endpoint on an instance. When disabled,
+    #   the instance metadata can't be accessed.
+    #
+    # @option params [String] :instance_metadata_tags
+    #   Enables or disables access to an instance's tags from the instance
+    #   metadata. For more information, see [Work with instance tags using the
+    #   instance metadata][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyInstanceMetadataDefaultsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceMetadataDefaultsResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_metadata_defaults({
+    #     http_tokens: "optional", # accepts optional, required, no-preference
+    #     http_put_response_hop_limit: 1,
+    #     http_endpoint: "disabled", # accepts disabled, enabled, no-preference
+    #     instance_metadata_tags: "disabled", # accepts disabled, enabled, no-preference
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataDefaults AWS API Documentation
+    #
+    # @overload modify_instance_metadata_defaults(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_metadata_defaults(params = {}, options = {})
+      req = build_request(:modify_instance_metadata_defaults, params)
+      req.send_request(options)
+    end
+
     # Modify the instance metadata parameters on a running or stopped
     # instance. When you modify the parameters on a stopped instance, they
     # are applied when the instance is started. When you modify the
@@ -47187,8 +47447,23 @@ module Aws::EC2
     #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
-    #   (AMI) for your instance is `v2.0`, the default is `required`.
+    #   Default:
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI) for
+    #     your instance is `v2.0` and the account level default is set to
+    #     `no-preference`, the default is `required`.
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI) for
+    #     your instance is `v2.0`, but the account level default is set to `V1
+    #     or V2`, the default is `optional`.
+    #
+    #   The default value can also be affected by other combinations of
+    #   parameters. For more information, see [Order of precedence for
+    #   instance metadata options][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
     #
     # @option params [Integer] :http_put_response_hop_limit
     #   The desired HTTP PUT response hop limit for instance metadata
@@ -47220,8 +47495,6 @@ module Aws::EC2
     #   metadata. Set to `disabled` to turn off access to instance tags from
     #   the instance metadata. For more information, see [Work with instance
     #   tags using the instance metadata][1].
-    #
-    #   Default: `disabled`
     #
     #
     #
@@ -48379,11 +48652,11 @@ module Aws::EC2
     # default KMS key cannot be shared with other accounts.
     #
     # For more information about modifying snapshot permissions, see [Share
-    # a snapshot][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # a snapshot][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modifying-snapshot-permissions.html
     #
     # @option params [String] :attribute
     #   The snapshot attribute to modify. Only volume creation permissions can
@@ -48486,12 +48759,12 @@ module Aws::EC2
     # converted to a full snapshot that includes all of the blocks of data
     # that were written to the volume at the time the snapshot was created,
     # and moved from the standard tier to the archive tier. For more
-    # information, see [Archive Amazon EBS snapshots][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # information, see [Archive Amazon EBS snapshots][1] in the *Amazon EBS
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-archive.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive.html
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot.
@@ -48761,10 +49034,10 @@ module Aws::EC2
     #   instances created in the specified subnet should be assigned a public
     #   IPv4 address.
     #
-    #   Starting on February 1, 2024, Amazon Web Services will charge for all
-    #   public IPv4 addresses, including public IPv4 addresses associated with
-    #   running instances and Elastic IP addresses. For more information, see
-    #   the *Public IPv4 Address* tab on the [Amazon VPC pricing page][1].
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic IP
+    #   addresses. For more information, see the *Public IPv4 Address* tab on
+    #   the [Amazon VPC pricing page][1].
     #
     #
     #
@@ -49920,20 +50193,19 @@ module Aws::EC2
     # attached to a current-generation EC2 instance type, you might be able
     # to apply these changes without stopping the instance or detaching the
     # volume from it. For more information about modifying EBS volumes, see
-    # [Amazon EBS Elastic Volumes][1] (Linux instances) or [Amazon EBS
-    # Elastic Volumes][2] (Windows instances).
+    # [Amazon EBS Elastic Volumes][1] in the *Amazon EBS User Guide*.
     #
     # When you complete a resize operation on your volume, you need to
     # extend the volume's file-system size to take advantage of the new
-    # storage capacity. For more information, see [Extend a Linux file
-    # system][3] or [Extend a Windows file system][4].
+    # storage capacity. For more information, see [Extend the file
+    # system][2].
     #
     # You can use CloudWatch Events to check the status of a modification to
     # an EBS volume. For information about CloudWatch Events, see the
-    # [Amazon CloudWatch Events User Guide][5]. You can also track the
+    # [Amazon CloudWatch Events User Guide][3]. You can also track the
     # status of a modification using DescribeVolumesModifications. For
     # information about tracking status changes using either method, see
-    # [Monitor the progress of volume modifications][6].
+    # [Monitor the progress of volume modifications][4].
     #
     # With previous-generation instance types, resizing an EBS volume might
     # require detaching and reattaching the volume or stopping and
@@ -49946,12 +50218,10 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modify-volume.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-modify-volume.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html#recognize-expanded-volume-linux
-    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ebs-expand-volume.html#recognize-expanded-volume-windows
-    # [5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
-    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modify-volume.html
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
+    # [4]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -49982,14 +50252,13 @@ module Aws::EC2
     #
     # @option params [String] :volume_type
     #   The target EBS volume type of the volume. For more information, see
-    #   [Amazon EBS volume types][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   [Amazon EBS volume types][1] in the *Amazon EBS User Guide*.
     #
     #   Default: The existing type is retained.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #
     # @option params [Integer] :iops
     #   The target IOPS rate of the volume. This parameter is valid only for
@@ -50029,13 +50298,12 @@ module Aws::EC2
     #   Multi-Attach, you can attach the volume to up to 16 [ Nitro-based
     #   instances][1] in the same Availability Zone. This parameter is
     #   supported with `io1` and `io2` volumes only. For more information, see
-    #   [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   [ Amazon EBS Multi-Attach][2] in the *Amazon EBS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     #
     # @return [Types::ModifyVolumeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -51459,9 +51727,10 @@ module Aws::EC2
     # @option params [required, String] :cidr
     #   The public IPv4 or IPv6 address range, in CIDR notation. The most
     #   specific IPv4 prefix that you can specify is /24. The most specific
-    #   IPv6 prefix you can specify is /56. The address range cannot overlap
-    #   with another address range that you've brought to this or another
-    #   Region.
+    #   IPv6 address range that you can bring is /48 for CIDRs that are
+    #   publicly advertisable and /56 for CIDRs that are not publicly
+    #   advertisable. The address range cannot overlap with another address
+    #   range that you've brought to this or another Region.
     #
     # @option params [Types::CidrAuthorizationContext] :cidr_authorization_context
     #   A signed document that proves that you are authorized to bring the
@@ -52155,8 +52424,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Registers an AMI. When you're creating an AMI, this is the final step
-    # you must complete before you can launch an instance from the AMI. For
+    # Registers an AMI. When you're creating an instance-store backed AMI,
+    # registering the AMI is the final step in the creation process. For
     # more information about creating AMIs, see [Create your own AMI][1] in
     # the *Amazon Elastic Compute Cloud User Guide*.
     #
@@ -52246,11 +52515,11 @@ module Aws::EC2
     #   on the same Outpost or in the Region of that Outpost. AMIs on an
     #   Outpost that include local snapshots can be used to launch instances
     #   on the same Outpost only. For more information, [Amazon EBS local
-    #   snapshots on Outposts][1] in the *Amazon EC2 User Guide*.
+    #   snapshots on Outposts][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
     #
     # @option params [String] :description
     #   A description for your AMI.
@@ -52369,6 +52638,18 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the AMI.
+    #
+    #   To tag the AMI, the value for `ResourceType` must be `image`. If you
+    #   specify another value for `ResourceType`, the request fails.
+    #
+    #   To tag an AMI after it has been registered, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #
     # @return [Types::RegisterImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterImageResult#image_id #image_id} => String
@@ -52410,6 +52691,17 @@ module Aws::EC2
     #     tpm_support: "v2.0", # accepts v2.0
     #     uefi_data: "StringType",
     #     imds_support: "v2.0", # accepts v2.0
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -54564,12 +54856,11 @@ module Aws::EC2
     # After resetting the default KMS key to the Amazon Web Services managed
     # KMS key, you can continue to encrypt by a customer managed KMS key by
     # specifying it when you create the volume. For more information, see
-    # [Amazon EBS encryption][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # [Amazon EBS encryption][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -54789,11 +55080,11 @@ module Aws::EC2
     # Resets permission settings for the specified snapshot.
     #
     # For more information about modifying snapshot permissions, see [Share
-    # a snapshot][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # a snapshot][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modifying-snapshot-permissions.html
     #
     # @option params [required, String] :attribute
     #   The attribute to reset. Currently, only the attribute for permission
@@ -54983,12 +55274,12 @@ module Aws::EC2
     end
 
     # Restores a snapshot from the Recycle Bin. For more information, see
-    # [Restore snapshots from the Recycle Bin][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # [Restore snapshots from the Recycle Bin][1] in the *Amazon EBS User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-snaps.html#recycle-bin-restore-snaps
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin-working-with-snaps.html#recycle-bin-restore-snaps
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot to restore.
@@ -55049,12 +55340,12 @@ module Aws::EC2
     #
     # For more information see [ Restore an archived snapshot][1] and [
     # modify the restore period or restore type for a temporarily restored
-    # snapshot][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # snapshot][2] in the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-snapshot-archiving.html#restore-archived-snapshot
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-snapshot-archiving.html#modify-temp-restore-period
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/working-with-snapshot-archiving.html#restore-archived-snapshot
+    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/working-with-snapshot-archiving.html#modify-temp-restore-period
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot to restore.
@@ -55341,8 +55632,7 @@ module Aws::EC2
     #
     # @option params [Integer] :from_port
     #   If the protocol is TCP or UDP, this is the start of the port range. If
-    #   the protocol is ICMP, this is the type number. A value of -1 indicates
-    #   all ICMP types.
+    #   the protocol is ICMP, this is the ICMP type or -1 (all ICMP types).
     #
     # @option params [String] :group_id
     #   The ID of the security group.
@@ -55378,8 +55668,7 @@ module Aws::EC2
     #
     # @option params [Integer] :to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP, this is the code. A value of -1 indicates all
-    #   ICMP codes.
+    #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -58826,7 +59115,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.440.0'
+      context[:gem_version] = '1.446.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

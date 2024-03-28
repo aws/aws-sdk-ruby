@@ -101,12 +101,13 @@ module Aws
           key: options[:key],
           upload_id: upload_id
         )
-        msg = "multipart upload failed: #{errors.map(&:message).join("; ")}"
+        msg = "multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors)
       rescue MultipartUploadError => error
         raise error
       rescue => error
-        msg = "failed to abort multipart upload: #{error.message}"
+        msg = "failed to abort multipart upload: #{error.message}. "\
+          "Multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors + [error])
       end
 

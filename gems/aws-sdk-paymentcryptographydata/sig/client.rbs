@@ -92,6 +92,14 @@ module Aws
                               key_serial_number: ::String,
                               mode: ("ECB" | "CBC")?
                             }?,
+                            emv: {
+                              initialization_vector: ::String?,
+                              major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                              mode: ("ECB" | "CBC")?,
+                              pan_sequence_number: ::String,
+                              primary_account_number: ::String,
+                              session_derivation_data: ::String
+                            }?,
                             symmetric: {
                               initialization_vector: ::String?,
                               mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
@@ -120,6 +128,14 @@ module Aws
                               initialization_vector: ::String?,
                               key_serial_number: ::String,
                               mode: ("ECB" | "CBC")?
+                            }?,
+                            emv: {
+                              initialization_vector: ::String?,
+                              major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                              mode: ("ECB" | "CBC")?,
+                              pan_sequence_number: ::String,
+                              primary_account_number: ::String,
+                              session_derivation_data: ::String
                             }?,
                             symmetric: {
                               initialization_vector: ::String?,

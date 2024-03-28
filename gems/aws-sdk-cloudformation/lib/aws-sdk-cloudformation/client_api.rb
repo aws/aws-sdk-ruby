@@ -240,6 +240,8 @@ module Aws::CloudFormation
     ListStackInstancesOutput = Shapes::StructureShape.new(name: 'ListStackInstancesOutput')
     ListStackResourcesInput = Shapes::StructureShape.new(name: 'ListStackResourcesInput')
     ListStackResourcesOutput = Shapes::StructureShape.new(name: 'ListStackResourcesOutput')
+    ListStackSetAutoDeploymentTargetsInput = Shapes::StructureShape.new(name: 'ListStackSetAutoDeploymentTargetsInput')
+    ListStackSetAutoDeploymentTargetsOutput = Shapes::StructureShape.new(name: 'ListStackSetAutoDeploymentTargetsOutput')
     ListStackSetOperationResultsInput = Shapes::StructureShape.new(name: 'ListStackSetOperationResultsInput')
     ListStackSetOperationResultsOutput = Shapes::StructureShape.new(name: 'ListStackSetOperationResultsOutput')
     ListStackSetOperationsInput = Shapes::StructureShape.new(name: 'ListStackSetOperationsInput')
@@ -459,6 +461,8 @@ module Aws::CloudFormation
     StackResources = Shapes::ListShape.new(name: 'StackResources')
     StackSet = Shapes::StructureShape.new(name: 'StackSet')
     StackSetARN = Shapes::StringShape.new(name: 'StackSetARN')
+    StackSetAutoDeploymentTargetSummaries = Shapes::ListShape.new(name: 'StackSetAutoDeploymentTargetSummaries')
+    StackSetAutoDeploymentTargetSummary = Shapes::StructureShape.new(name: 'StackSetAutoDeploymentTargetSummary')
     StackSetDriftDetectionDetails = Shapes::StructureShape.new(name: 'StackSetDriftDetectionDetails')
     StackSetDriftDetectionStatus = Shapes::StringShape.new(name: 'StackSetDriftDetectionStatus')
     StackSetDriftStatus = Shapes::StringShape.new(name: 'StackSetDriftStatus')
@@ -1280,6 +1284,16 @@ module Aws::CloudFormation
     ListStackResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStackResourcesOutput.struct_class = Types::ListStackResourcesOutput
 
+    ListStackSetAutoDeploymentTargetsInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
+    ListStackSetAutoDeploymentTargetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackSetAutoDeploymentTargetsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListStackSetAutoDeploymentTargetsInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
+    ListStackSetAutoDeploymentTargetsInput.struct_class = Types::ListStackSetAutoDeploymentTargetsInput
+
+    ListStackSetAutoDeploymentTargetsOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: StackSetAutoDeploymentTargetSummaries, location_name: "Summaries"))
+    ListStackSetAutoDeploymentTargetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackSetAutoDeploymentTargetsOutput.struct_class = Types::ListStackSetAutoDeploymentTargetsOutput
+
     ListStackSetOperationResultsInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     ListStackSetOperationResultsInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "OperationId"))
     ListStackSetOperationResultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1826,6 +1840,12 @@ module Aws::CloudFormation
     StackSet.add_member(:managed_execution, Shapes::ShapeRef.new(shape: ManagedExecution, location_name: "ManagedExecution"))
     StackSet.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))
     StackSet.struct_class = Types::StackSet
+
+    StackSetAutoDeploymentTargetSummaries.member = Shapes::ShapeRef.new(shape: StackSetAutoDeploymentTargetSummary)
+
+    StackSetAutoDeploymentTargetSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
+    StackSetAutoDeploymentTargetSummary.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))
+    StackSetAutoDeploymentTargetSummary.struct_class = Types::StackSetAutoDeploymentTargetSummary
 
     StackSetDriftDetectionDetails.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackSetDriftStatus, location_name: "DriftStatus"))
     StackSetDriftDetectionDetails.add_member(:drift_detection_status, Shapes::ShapeRef.new(shape: StackSetDriftDetectionStatus, location_name: "DriftDetectionStatus"))
@@ -2777,6 +2797,15 @@ module Aws::CloudFormation
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_stack_set_auto_deployment_targets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStackSetAutoDeploymentTargets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStackSetAutoDeploymentTargetsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStackSetAutoDeploymentTargetsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
       end)
 
       api.add_operation(:list_stack_set_operation_results, Seahorse::Model::Operation.new.tap do |o|

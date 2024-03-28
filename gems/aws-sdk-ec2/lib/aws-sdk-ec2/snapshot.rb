@@ -125,11 +125,11 @@ module Aws::EC2
 
     # The ARN of the Outpost on which the snapshot is stored. For more
     # information, see [Amazon EBS local snapshots on Outposts][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html
     # @return [String]
     def outpost_arn
       data[:outpost_arn]
@@ -357,12 +357,11 @@ module Aws::EC2
     #   Outpost.
     #
     #   For more information, see [ Copy snapshots from an Amazon Web Services
-    #   Region to an Outpost][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots
     # @option options [String] :destination_region
     #   The destination Region to use in the `PresignedUrl` parameter of a
     #   snapshot copy operation. This parameter is only valid for specifying
@@ -379,11 +378,11 @@ module Aws::EC2
     #   omit this parameter. Encrypted snapshots are encrypted, even if you
     #   omit this parameter and encryption by default is not enabled. You
     #   cannot set this parameter to false. For more information, see [Amazon
-    #   EBS encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   EBS encryption][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     # @option options [String] :kms_key_id
     #   The identifier of the Key Management Service (KMS) KMS key to use for
     #   Amazon EBS encryption. If this parameter is not specified, your KMS

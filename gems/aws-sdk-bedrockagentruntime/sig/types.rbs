@@ -16,11 +16,11 @@ module Aws::BedrockAgentRuntime
 
     class ActionGroupInvocationInput
       attr_accessor action_group_name: ::String
-      attr_accessor verb: ::String
       attr_accessor api_path: ::String
       attr_accessor parameters: ::Array[Types::Parameter]
       attr_accessor request_body: Types::RequestBody
-      SENSITIVE: [:action_group_name, :verb, :api_path]
+      attr_accessor verb: ::String
+      SENSITIVE: [:action_group_name, :api_path, :verb]
     end
 
     class ActionGroupInvocationOutput
@@ -60,9 +60,15 @@ module Aws::BedrockAgentRuntime
     end
 
     class FailureTrace
-      attr_accessor trace_id: ::String
       attr_accessor failure_reason: ::String
+      attr_accessor trace_id: ::String
       SENSITIVE: [:failure_reason]
+    end
+
+    class FilterAttribute
+      attr_accessor key: ::String
+      attr_accessor value: untyped
+      SENSITIVE: []
     end
 
     class FinalResponse
@@ -75,12 +81,17 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: [:text_response_part]
     end
 
+    class GenerationConfiguration
+      attr_accessor prompt_template: Types::PromptTemplate
+      SENSITIVE: []
+    end
+
     class InferenceConfiguration
-      attr_accessor temperature: ::Float
-      attr_accessor top_p: ::Float
-      attr_accessor top_k: ::Integer
       attr_accessor maximum_length: ::Integer
       attr_accessor stop_sequences: ::Array[::String]
+      attr_accessor temperature: ::Float
+      attr_accessor top_k: ::Integer
+      attr_accessor top_p: ::Float
       SENSITIVE: []
     end
 
@@ -91,21 +102,21 @@ module Aws::BedrockAgentRuntime
     end
 
     class InvocationInput
-      attr_accessor trace_id: ::String
-      attr_accessor invocation_type: ("ACTION_GROUP" | "KNOWLEDGE_BASE" | "FINISH")
       attr_accessor action_group_invocation_input: Types::ActionGroupInvocationInput
+      attr_accessor invocation_type: ("ACTION_GROUP" | "KNOWLEDGE_BASE" | "FINISH")
       attr_accessor knowledge_base_lookup_input: Types::KnowledgeBaseLookupInput
+      attr_accessor trace_id: ::String
       SENSITIVE: []
     end
 
     class InvokeAgentRequest
-      attr_accessor session_state: Types::SessionState
-      attr_accessor agent_id: ::String
       attr_accessor agent_alias_id: ::String
-      attr_accessor session_id: ::String
-      attr_accessor end_session: bool
+      attr_accessor agent_id: ::String
       attr_accessor enable_trace: bool
+      attr_accessor end_session: bool
       attr_accessor input_text: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_state: Types::SessionState
       SENSITIVE: [:input_text]
     end
 
@@ -117,9 +128,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class KnowledgeBaseLookupInput
-      attr_accessor text: ::String
       attr_accessor knowledge_base_id: ::String
-      SENSITIVE: [:text, :knowledge_base_id]
+      attr_accessor text: ::String
+      SENSITIVE: [:knowledge_base_id, :text]
     end
 
     class KnowledgeBaseLookupOutput
@@ -140,11 +151,13 @@ module Aws::BedrockAgentRuntime
     class KnowledgeBaseRetrievalResult
       attr_accessor content: Types::RetrievalResultContent
       attr_accessor location: Types::RetrievalResultLocation
+      attr_accessor metadata: ::Hash[::String, untyped]
       attr_accessor score: ::Float
-      SENSITIVE: [:content, :location]
+      SENSITIVE: [:content, :location, :metadata]
     end
 
     class KnowledgeBaseRetrieveAndGenerateConfiguration
+      attr_accessor generation_configuration: Types::GenerationConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor model_arn: ::String
       attr_accessor retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration
@@ -152,47 +165,48 @@ module Aws::BedrockAgentRuntime
     end
 
     class KnowledgeBaseVectorSearchConfiguration
+      attr_accessor filter: Types::RetrievalFilter
       attr_accessor number_of_results: ::Integer
       attr_accessor override_search_type: ("HYBRID" | "SEMANTIC")
-      SENSITIVE: []
+      SENSITIVE: [:filter]
     end
 
     class ModelInvocationInput
-      attr_accessor trace_id: ::String
-      attr_accessor text: ::String
-      attr_accessor type: ("PRE_PROCESSING" | "ORCHESTRATION" | "KNOWLEDGE_BASE_RESPONSE_GENERATION" | "POST_PROCESSING")
       attr_accessor inference_configuration: Types::InferenceConfiguration
       attr_accessor override_lambda: ::String
-      attr_accessor prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")
       attr_accessor parser_mode: ("DEFAULT" | "OVERRIDDEN")
+      attr_accessor prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")
+      attr_accessor text: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor type: ("PRE_PROCESSING" | "ORCHESTRATION" | "KNOWLEDGE_BASE_RESPONSE_GENERATION" | "POST_PROCESSING")
       SENSITIVE: [:text]
     end
 
     class Observation
+      attr_accessor action_group_invocation_output: Types::ActionGroupInvocationOutput
+      attr_accessor final_response: Types::FinalResponse
+      attr_accessor knowledge_base_lookup_output: Types::KnowledgeBaseLookupOutput
+      attr_accessor reprompt_response: Types::RepromptResponse
       attr_accessor trace_id: ::String
       attr_accessor type: ("ACTION_GROUP" | "KNOWLEDGE_BASE" | "FINISH" | "ASK_USER" | "REPROMPT")
-      attr_accessor action_group_invocation_output: Types::ActionGroupInvocationOutput
-      attr_accessor knowledge_base_lookup_output: Types::KnowledgeBaseLookupOutput
-      attr_accessor final_response: Types::FinalResponse
-      attr_accessor reprompt_response: Types::RepromptResponse
       SENSITIVE: [:reprompt_response]
     end
 
     class OrchestrationTrace
-      attr_accessor rationale: Types::Rationale
       attr_accessor invocation_input: Types::InvocationInput
-      attr_accessor observation: Types::Observation
       attr_accessor model_invocation_input: Types::ModelInvocationInput
+      attr_accessor observation: Types::Observation
+      attr_accessor rationale: Types::Rationale
       attr_accessor unknown: untyped
-      SENSITIVE: [:rationale, :invocation_input, :observation, :model_invocation_input]
+      SENSITIVE: [:invocation_input, :model_invocation_input, :observation, :rationale]
 
-      class Rationale < OrchestrationTrace
-      end
       class InvocationInput < OrchestrationTrace
+      end
+      class ModelInvocationInput < OrchestrationTrace
       end
       class Observation < OrchestrationTrace
       end
-      class ModelInvocationInput < OrchestrationTrace
+      class Rationale < OrchestrationTrace
       end
       class Unknown < OrchestrationTrace
       end
@@ -206,15 +220,15 @@ module Aws::BedrockAgentRuntime
     end
 
     class PayloadPart
-      attr_accessor bytes: ::String
       attr_accessor attribution: Types::Attribution
+      attr_accessor bytes: ::String
       attr_accessor event_type: untyped
       SENSITIVE: [:bytes]
     end
 
     class PostProcessingModelInvocationOutput
-      attr_accessor trace_id: ::String
       attr_accessor parsed_response: Types::PostProcessingParsedResponse
+      attr_accessor trace_id: ::String
       SENSITIVE: [:parsed_response]
     end
 
@@ -238,14 +252,14 @@ module Aws::BedrockAgentRuntime
     end
 
     class PreProcessingModelInvocationOutput
-      attr_accessor trace_id: ::String
       attr_accessor parsed_response: Types::PreProcessingParsedResponse
+      attr_accessor trace_id: ::String
       SENSITIVE: [:parsed_response]
     end
 
     class PreProcessingParsedResponse
-      attr_accessor rationale: ::String
       attr_accessor is_valid: bool
+      attr_accessor rationale: ::String
       SENSITIVE: [:rationale]
     end
 
@@ -263,15 +277,20 @@ module Aws::BedrockAgentRuntime
       end
     end
 
+    class PromptTemplate
+      attr_accessor text_prompt_template: ::String
+      SENSITIVE: [:text_prompt_template]
+    end
+
     class Rationale
-      attr_accessor trace_id: ::String
       attr_accessor text: ::String
+      attr_accessor trace_id: ::String
       SENSITIVE: [:text]
     end
 
     class RepromptResponse
-      attr_accessor text: ::String
       attr_accessor source: ("ACTION_GROUP" | "KNOWLEDGE_BASE" | "PARSER")
+      attr_accessor text: ::String
       SENSITIVE: [:source]
     end
 
@@ -286,14 +305,55 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class RetrievalFilter
+      attr_accessor and_all: ::Array[Types::RetrievalFilter]
+      attr_accessor equals: Types::FilterAttribute
+      attr_accessor greater_than: Types::FilterAttribute
+      attr_accessor greater_than_or_equals: Types::FilterAttribute
+      attr_accessor in: Types::FilterAttribute
+      attr_accessor less_than: Types::FilterAttribute
+      attr_accessor less_than_or_equals: Types::FilterAttribute
+      attr_accessor not_equals: Types::FilterAttribute
+      attr_accessor not_in: Types::FilterAttribute
+      attr_accessor or_all: ::Array[Types::RetrievalFilter]
+      attr_accessor starts_with: Types::FilterAttribute
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AndAll < RetrievalFilter
+      end
+      class Equals < RetrievalFilter
+      end
+      class GreaterThan < RetrievalFilter
+      end
+      class GreaterThanOrEquals < RetrievalFilter
+      end
+      class In < RetrievalFilter
+      end
+      class LessThan < RetrievalFilter
+      end
+      class LessThanOrEquals < RetrievalFilter
+      end
+      class NotEquals < RetrievalFilter
+      end
+      class NotIn < RetrievalFilter
+      end
+      class OrAll < RetrievalFilter
+      end
+      class StartsWith < RetrievalFilter
+      end
+      class Unknown < RetrievalFilter
+      end
+    end
+
     class RetrievalResultContent
       attr_accessor text: ::String
       SENSITIVE: []
     end
 
     class RetrievalResultLocation
-      attr_accessor type: ("S3")
       attr_accessor s3_location: Types::RetrievalResultS3Location
+      attr_accessor type: ("S3")
       SENSITIVE: []
     end
 
@@ -303,8 +363,8 @@ module Aws::BedrockAgentRuntime
     end
 
     class RetrieveAndGenerateConfiguration
-      attr_accessor type: ("KNOWLEDGE_BASE")
       attr_accessor knowledge_base_configuration: Types::KnowledgeBaseRetrieveAndGenerateConfiguration
+      attr_accessor type: ("KNOWLEDGE_BASE")
       SENSITIVE: []
     end
 
@@ -319,17 +379,17 @@ module Aws::BedrockAgentRuntime
     end
 
     class RetrieveAndGenerateRequest
-      attr_accessor session_id: ::String
       attr_accessor input: Types::RetrieveAndGenerateInput
       attr_accessor retrieve_and_generate_configuration: Types::RetrieveAndGenerateConfiguration
       attr_accessor session_configuration: Types::RetrieveAndGenerateSessionConfiguration
+      attr_accessor session_id: ::String
       SENSITIVE: [:input]
     end
 
     class RetrieveAndGenerateResponse
-      attr_accessor session_id: ::String
-      attr_accessor output: Types::RetrieveAndGenerateOutput
       attr_accessor citations: ::Array[Types::Citation]
+      attr_accessor output: Types::RetrieveAndGenerateOutput
+      attr_accessor session_id: ::String
       SENSITIVE: [:output]
     end
 
@@ -340,22 +400,23 @@ module Aws::BedrockAgentRuntime
 
     class RetrieveRequest
       attr_accessor knowledge_base_id: ::String
-      attr_accessor retrieval_query: Types::KnowledgeBaseQuery
-      attr_accessor retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration
       attr_accessor next_token: ::String
+      attr_accessor retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration
+      attr_accessor retrieval_query: Types::KnowledgeBaseQuery
       SENSITIVE: [:retrieval_query]
     end
 
     class RetrieveResponse
-      attr_accessor retrieval_results: ::Array[Types::KnowledgeBaseRetrievalResult]
       attr_accessor next_token: ::String
+      attr_accessor retrieval_results: ::Array[Types::KnowledgeBaseRetrievalResult]
       SENSITIVE: [:retrieval_results]
     end
 
     class RetrievedReference
       attr_accessor content: Types::RetrievalResultContent
       attr_accessor location: Types::RetrievalResultLocation
-      SENSITIVE: [:content, :location]
+      attr_accessor metadata: ::Hash[::String, untyped]
+      SENSITIVE: [:content, :location, :metadata]
     end
 
     class ServiceQuotaExceededException
@@ -365,20 +426,20 @@ module Aws::BedrockAgentRuntime
     end
 
     class SessionState
-      attr_accessor session_attributes: ::Hash[::String, ::String]
       attr_accessor prompt_session_attributes: ::Hash[::String, ::String]
+      attr_accessor session_attributes: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class Span
-      attr_accessor start: ::Integer
       attr_accessor end: ::Integer
+      attr_accessor start: ::Integer
       SENSITIVE: []
     end
 
     class TextResponsePart
-      attr_accessor text: ::String
       attr_accessor span: Types::Span
+      attr_accessor text: ::String
       SENSITIVE: []
     end
 
@@ -389,28 +450,28 @@ module Aws::BedrockAgentRuntime
     end
 
     class Trace
-      attr_accessor pre_processing_trace: Types::PreProcessingTrace
+      attr_accessor failure_trace: Types::FailureTrace
       attr_accessor orchestration_trace: Types::OrchestrationTrace
       attr_accessor post_processing_trace: Types::PostProcessingTrace
-      attr_accessor failure_trace: Types::FailureTrace
+      attr_accessor pre_processing_trace: Types::PreProcessingTrace
       attr_accessor unknown: untyped
-      SENSITIVE: [:pre_processing_trace, :orchestration_trace, :post_processing_trace, :failure_trace]
+      SENSITIVE: [:failure_trace, :orchestration_trace, :post_processing_trace, :pre_processing_trace]
 
-      class PreProcessingTrace < Trace
+      class FailureTrace < Trace
       end
       class OrchestrationTrace < Trace
       end
       class PostProcessingTrace < Trace
       end
-      class FailureTrace < Trace
+      class PreProcessingTrace < Trace
       end
       class Unknown < Trace
       end
     end
 
     class TracePart
-      attr_accessor agent_id: ::String
       attr_accessor agent_alias_id: ::String
+      attr_accessor agent_id: ::String
       attr_accessor session_id: ::String
       attr_accessor trace: Types::Trace
       attr_accessor event_type: untyped
@@ -424,7 +485,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class ResponseStream < Enumerator[untyped, untyped]
-      def event_types: () -> [:chunk, :trace, :internal_server_exception, :validation_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :access_denied_exception, :conflict_exception, :dependency_failed_exception, :bad_gateway_exception]
+      def event_types: () -> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
     end
   end
 end

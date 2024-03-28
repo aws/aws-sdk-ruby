@@ -24,6 +24,7 @@ module Aws::ManagedGrafana
     end
 
     class AssociateLicenseRequest
+      attr_accessor grafana_token: ::String
       attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
       attr_accessor workspace_id: ::String
       SENSITIVE: []
@@ -415,6 +416,7 @@ module Aws::ManagedGrafana
       attr_accessor endpoint: ::String
       attr_accessor free_trial_consumed: bool
       attr_accessor free_trial_expiration: ::Time
+      attr_accessor grafana_token: ::String
       attr_accessor grafana_version: ::String
       attr_accessor id: ::String
       attr_accessor license_expiration: ::Time
@@ -439,8 +441,10 @@ module Aws::ManagedGrafana
       attr_accessor created: ::Time
       attr_accessor description: ::String
       attr_accessor endpoint: ::String
+      attr_accessor grafana_token: ::String
       attr_accessor grafana_version: ::String
       attr_accessor id: ::String
+      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
       attr_accessor modified: ::Time
       attr_accessor name: ::String
       attr_accessor notification_destinations: ::Array[("SNS")]

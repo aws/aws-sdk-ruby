@@ -36,6 +36,7 @@ module Aws::EC2InstanceConnect
   # * {SerialConsoleAccessDisabledException}
   # * {SerialConsoleSessionLimitExceededException}
   # * {SerialConsoleSessionUnavailableException}
+  # * {SerialConsoleSessionUnsupportedException}
   # * {ServiceException}
   # * {ThrottlingException}
   #
@@ -170,6 +171,21 @@ module Aws::EC2InstanceConnect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EC2InstanceConnect::Types::SerialConsoleSessionUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SerialConsoleSessionUnsupportedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EC2InstanceConnect::Types::SerialConsoleSessionUnsupportedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

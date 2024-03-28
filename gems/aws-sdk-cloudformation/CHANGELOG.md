@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2024-03-19)
+------------------
+
+* Feature - Documentation update, March 2024. Corrects some formatting.
+
+1.102.0 (2024-03-18)
+------------------
+
+* Feature - This release supports for a new API ListStackSetAutoDeploymentTargets, which provider auto-deployment configuration as a describable resource. Customers can now view the specific combinations of regions and OUs that are being auto-deployed.
+
+1.101.0 (2024-03-12)
+------------------
+
+* Feature - CloudFormation documentation update for March, 2024
+
 1.100.0 (2024-03-04)
 ------------------
 

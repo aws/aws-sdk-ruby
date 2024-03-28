@@ -23,6 +23,9 @@ module Aws::MediaTailor
     AdMarkupType = Shapes::StringShape.new(name: 'AdMarkupType')
     Alert = Shapes::StructureShape.new(name: 'Alert')
     AlertCategory = Shapes::StringShape.new(name: 'AlertCategory')
+    AlternateMedia = Shapes::StructureShape.new(name: 'AlternateMedia')
+    AudienceMedia = Shapes::StructureShape.new(name: 'AudienceMedia')
+    Audiences = Shapes::ListShape.new(name: 'Audiences')
     AvailMatchingCriteria = Shapes::StructureShape.new(name: 'AvailMatchingCriteria')
     AvailSuppression = Shapes::StructureShape.new(name: 'AvailSuppression')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -180,6 +183,8 @@ module Aws::MediaTailor
     __integerMin1Max100 = Shapes::IntegerShape.new(name: '__integerMin1Max100')
     __listOfAdBreak = Shapes::ListShape.new(name: '__listOfAdBreak')
     __listOfAlert = Shapes::ListShape.new(name: '__listOfAlert')
+    __listOfAlternateMedia = Shapes::ListShape.new(name: '__listOfAlternateMedia')
+    __listOfAudienceMedia = Shapes::ListShape.new(name: '__listOfAudienceMedia')
     __listOfAvailMatchingCriteria = Shapes::ListShape.new(name: '__listOfAvailMatchingCriteria')
     __listOfChannel = Shapes::ListShape.new(name: '__listOfChannel')
     __listOfLiveSource = Shapes::ListShape.new(name: '__listOfLiveSource')
@@ -227,6 +232,21 @@ module Aws::MediaTailor
     Alert.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ResourceArn"))
     Alert.struct_class = Types::Alert
 
+    AlternateMedia.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
+    AlternateMedia.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
+    AlternateMedia.add_member(:duration_millis, Shapes::ShapeRef.new(shape: __long, location_name: "DurationMillis"))
+    AlternateMedia.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
+    AlternateMedia.add_member(:scheduled_start_time_millis, Shapes::ShapeRef.new(shape: __long, location_name: "ScheduledStartTimeMillis"))
+    AlternateMedia.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
+    AlternateMedia.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
+    AlternateMedia.struct_class = Types::AlternateMedia
+
+    AudienceMedia.add_member(:alternate_media, Shapes::ShapeRef.new(shape: __listOfAlternateMedia, location_name: "AlternateMedia"))
+    AudienceMedia.add_member(:audience, Shapes::ShapeRef.new(shape: __string, location_name: "Audience"))
+    AudienceMedia.struct_class = Types::AudienceMedia
+
+    Audiences.member = Shapes::ShapeRef.new(shape: String)
+
     AvailMatchingCriteria.add_member(:dynamic_variable, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DynamicVariable"))
     AvailMatchingCriteria.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, required: true, location_name: "Operator"))
     AvailMatchingCriteria.struct_class = Types::AvailMatchingCriteria
@@ -248,6 +268,7 @@ module Aws::MediaTailor
     CdnConfiguration.struct_class = Types::CdnConfiguration
 
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
+    Channel.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     Channel.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelName"))
     Channel.add_member(:channel_state, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelState"))
     Channel.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
@@ -260,7 +281,8 @@ module Aws::MediaTailor
     Channel.add_member(:tier, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Tier"))
     Channel.struct_class = Types::Channel
 
-    ClipRange.add_member(:end_offset_millis, Shapes::ShapeRef.new(shape: __long, required: true, location_name: "EndOffsetMillis"))
+    ClipRange.add_member(:end_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "EndOffsetMillis", metadata: {"box"=>true}))
+    ClipRange.add_member(:start_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "StartOffsetMillis"))
     ClipRange.struct_class = Types::ClipRange
 
     ConfigurationAliasesRequest.key = Shapes::ShapeRef.new(shape: __string)
@@ -285,6 +307,7 @@ module Aws::MediaTailor
     ConfigureLogsForPlaybackConfigurationResponse.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationName"))
     ConfigureLogsForPlaybackConfigurationResponse.struct_class = Types::ConfigureLogsForPlaybackConfigurationResponse
 
+    CreateChannelRequest.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     CreateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
     CreateChannelRequest.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     CreateChannelRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: RequestOutputs, required: true, location_name: "Outputs"))
@@ -295,6 +318,7 @@ module Aws::MediaTailor
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    CreateChannelResponse.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     CreateChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     CreateChannelResponse.add_member(:channel_state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "ChannelState"))
     CreateChannelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
@@ -338,6 +362,7 @@ module Aws::MediaTailor
     CreatePrefetchScheduleResponse.struct_class = Types::CreatePrefetchScheduleResponse
 
     CreateProgramRequest.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
+    CreateProgramRequest.add_member(:audience_media, Shapes::ShapeRef.new(shape: __listOfAudienceMedia, location_name: "AudienceMedia"))
     CreateProgramRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
     CreateProgramRequest.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
     CreateProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ProgramName"))
@@ -348,6 +373,7 @@ module Aws::MediaTailor
 
     CreateProgramResponse.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
     CreateProgramResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    CreateProgramResponse.add_member(:audience_media, Shapes::ShapeRef.new(shape: __listOfAudienceMedia, location_name: "AudienceMedia"))
     CreateProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     CreateProgramResponse.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
     CreateProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
@@ -459,6 +485,7 @@ module Aws::MediaTailor
     DescribeChannelRequest.struct_class = Types::DescribeChannelRequest
 
     DescribeChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    DescribeChannelResponse.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     DescribeChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     DescribeChannelResponse.add_member(:channel_state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "ChannelState"))
     DescribeChannelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
@@ -491,6 +518,7 @@ module Aws::MediaTailor
 
     DescribeProgramResponse.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
     DescribeProgramResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    DescribeProgramResponse.add_member(:audience_media, Shapes::ShapeRef.new(shape: __listOfAudienceMedia, location_name: "AudienceMedia"))
     DescribeProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     DescribeProgramResponse.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
     DescribeProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
@@ -536,6 +564,7 @@ module Aws::MediaTailor
     GetChannelPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy"))
     GetChannelPolicyResponse.struct_class = Types::GetChannelPolicyResponse
 
+    GetChannelScheduleRequest.add_member(:audience, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "audience"))
     GetChannelScheduleRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
     GetChannelScheduleRequest.add_member(:duration_minutes, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "durationMinutes"))
     GetChannelScheduleRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -806,6 +835,7 @@ module Aws::MediaTailor
     ScheduleEntry.add_member(:approximate_duration_seconds, Shapes::ShapeRef.new(shape: __long, location_name: "ApproximateDurationSeconds"))
     ScheduleEntry.add_member(:approximate_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ApproximateStartTime"))
     ScheduleEntry.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
+    ScheduleEntry.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     ScheduleEntry.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelName"))
     ScheduleEntry.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "LiveSourceName"))
     ScheduleEntry.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ProgramName"))
@@ -888,6 +918,7 @@ module Aws::MediaTailor
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
+    UpdateChannelRequest.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     UpdateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
     UpdateChannelRequest.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     UpdateChannelRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: RequestOutputs, required: true, location_name: "Outputs"))
@@ -895,6 +926,7 @@ module Aws::MediaTailor
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 
     UpdateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    UpdateChannelResponse.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     UpdateChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     UpdateChannelResponse.add_member(:channel_state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "ChannelState"))
     UpdateChannelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
@@ -922,6 +954,7 @@ module Aws::MediaTailor
     UpdateLiveSourceResponse.struct_class = Types::UpdateLiveSourceResponse
 
     UpdateProgramRequest.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
+    UpdateProgramRequest.add_member(:audience_media, Shapes::ShapeRef.new(shape: __listOfAudienceMedia, location_name: "AudienceMedia"))
     UpdateProgramRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
     UpdateProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ProgramName"))
     UpdateProgramRequest.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: UpdateProgramScheduleConfiguration, required: true, location_name: "ScheduleConfiguration"))
@@ -929,6 +962,7 @@ module Aws::MediaTailor
 
     UpdateProgramResponse.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
     UpdateProgramResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    UpdateProgramResponse.add_member(:audience_media, Shapes::ShapeRef.new(shape: __listOfAudienceMedia, location_name: "AudienceMedia"))
     UpdateProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     UpdateProgramResponse.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
     UpdateProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
@@ -992,6 +1026,10 @@ module Aws::MediaTailor
     __listOfAdBreak.member = Shapes::ShapeRef.new(shape: AdBreak)
 
     __listOfAlert.member = Shapes::ShapeRef.new(shape: Alert)
+
+    __listOfAlternateMedia.member = Shapes::ShapeRef.new(shape: AlternateMedia)
+
+    __listOfAudienceMedia.member = Shapes::ShapeRef.new(shape: AudienceMedia)
 
     __listOfAvailMatchingCriteria.member = Shapes::ShapeRef.new(shape: AvailMatchingCriteria)
 

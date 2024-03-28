@@ -399,11 +399,12 @@ module Aws
       interface _GetKeyPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyPolicyResponse]
         def policy: () -> ::String
+        def policy_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#get_key_policy-instance_method
       def get_key_policy: (
                             key_id: ::String,
-                            policy_name: ::String
+                            ?policy_name: ::String
                           ) -> _GetKeyPolicyResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKeyPolicyResponseSuccess
 
@@ -550,7 +551,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#put_key_policy-instance_method
       def put_key_policy: (
                             key_id: ::String,
-                            policy_name: ::String,
+                            ?policy_name: ::String,
                             policy: ::String,
                             ?bypass_policy_lockout_safety_check: bool
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

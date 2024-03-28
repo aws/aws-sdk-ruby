@@ -394,21 +394,21 @@ module Aws::SavingsPlans
     #   The ID of the offering.
     #
     # @option params [required, String] :commitment
-    #   The hourly commitment, in USD. This is a value between 0.001 and 1
-    #   million. You cannot specify more than five digits after the decimal
-    #   point.
+    #   The hourly commitment, in the same currency of the
+    #   `savingsPlanOfferingId`. This is a value between 0.001 and 1 million.
+    #   You cannot specify more than five digits after the decimal point.
     #
     # @option params [String] :upfront_payment_amount
     #   The up-front payment amount. This is a whole number between 50 and 99
-    #   percent of the total value of the Savings Plan. This parameter is
-    #   supported only if the payment option is `Partial Upfront`.
+    #   percent of the total value of the Savings Plan. This parameter is only
+    #   supported if the payment option is `Partial Upfront`.
     #
     # @option params [Time,DateTime,Date,Integer,String] :purchase_time
-    #   The time at which to purchase the Savings Plan, in UTC format
+    #   The purchase time of the Savings Plan in UTC format
     #   (YYYY-MM-DDTHH:MM:SSZ).
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -469,7 +469,7 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
-    # Describes the specified Savings Plans rates.
+    # Describes the rates for the specified Savings Plan.
     #
     # @option params [required, String] :savings_plan_id
     #   The ID of the Savings Plan.
@@ -547,7 +547,7 @@ module Aws::SavingsPlans
     #   value.
     #
     # @option params [Array<String>] :states
-    #   The states.
+    #   The current states of the Savings Plans.
     #
     # @option params [Array<Types::SavingsPlanFilter>] :filters
     #   The filters.
@@ -564,7 +564,7 @@ module Aws::SavingsPlans
     #     savings_plan_ids: ["SavingsPlanId"],
     #     next_token: "PaginationToken",
     #     max_results: 1,
-    #     states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired, queued, queued-deleted
+    #     states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired, queued, queued-deleted, pending-return, returned
     #     filters: [
     #       {
     #         name: "region", # accepts region, ec2-instance-family, commitment, upfront, term, savings-plan-type, payment-option, start, end
@@ -582,7 +582,7 @@ module Aws::SavingsPlans
     #   resp.savings_plans[0].description #=> String
     #   resp.savings_plans[0].start #=> String
     #   resp.savings_plans[0].end #=> String
-    #   resp.savings_plans[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired", "queued", "queued-deleted"
+    #   resp.savings_plans[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired", "queued", "queued-deleted", "pending-return", "returned"
     #   resp.savings_plans[0].region #=> String
     #   resp.savings_plans[0].ec2_instance_family #=> String
     #   resp.savings_plans[0].savings_plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker"
@@ -596,6 +596,7 @@ module Aws::SavingsPlans
     #   resp.savings_plans[0].term_duration_in_seconds #=> Integer
     #   resp.savings_plans[0].tags #=> Hash
     #   resp.savings_plans[0].tags["TagKey"] #=> String
+    #   resp.savings_plans[0].returnable_until #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/DescribeSavingsPlans AWS API Documentation
@@ -607,7 +608,7 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
-    # Describes the specified Savings Plans offering rates.
+    # Describes the offering rates for the specified Savings Plans.
     #
     # @option params [Array<String>] :savings_plan_offering_ids
     #   The IDs of the offerings.
@@ -619,7 +620,7 @@ module Aws::SavingsPlans
     #   The plan types.
     #
     # @option params [Array<String>] :products
-    #   The AWS products.
+    #   The Amazon Web Services products.
     #
     # @option params [Array<String>] :service_codes
     #   The services.
@@ -628,7 +629,8 @@ module Aws::SavingsPlans
     #   The usage details of the line item in the billing report.
     #
     # @option params [Array<String>] :operations
-    #   The specific AWS operation for the line item in the billing report.
+    #   The specific Amazon Web Services operation for the line item in the
+    #   billing report.
     #
     # @option params [Array<Types::SavingsPlanOfferingRateFilterElement>] :filters
     #   The filters.
@@ -695,7 +697,7 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
-    # Describes the specified Savings Plans offerings.
+    # Describes the offerings for the specified Savings Plans.
     #
     # @option params [Array<String>] :offering_ids
     #   The IDs of the offerings.
@@ -707,10 +709,10 @@ module Aws::SavingsPlans
     #   The product type.
     #
     # @option params [Array<String>] :plan_types
-    #   The plan type.
+    #   The plan types.
     #
     # @option params [Array<Integer>] :durations
-    #   The durations, in seconds.
+    #   The duration, in seconds.
     #
     # @option params [Array<String>] :currencies
     #   The currencies.
@@ -725,7 +727,8 @@ module Aws::SavingsPlans
     #   The usage details of the line item in the billing report.
     #
     # @option params [Array<String>] :operations
-    #   The specific AWS operation for the line item in the billing report.
+    #   The specific Amazon Web Services operation for the line item in the
+    #   billing report.
     #
     # @option params [Array<Types::SavingsPlanOfferingFilterElement>] :filters
     #   The filters.
@@ -823,6 +826,42 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
+    # Returns the specified Savings Plan.
+    #
+    # @option params [required, String] :savings_plan_id
+    #   The ID of the Savings Plan.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ReturnSavingsPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReturnSavingsPlanResponse#savings_plan_id #savings_plan_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.return_savings_plan({
+    #     savings_plan_id: "SavingsPlanId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.savings_plan_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/ReturnSavingsPlan AWS API Documentation
+    #
+    # @overload return_savings_plan(params = {})
+    # @param [Hash] params ({})
+    def return_savings_plan(params = {}, options = {})
+      req = build_request(:return_savings_plan, params)
+      req.send_request(options)
+    end
+
     # Adds the specified tags to the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -891,7 +930,7 @@ module Aws::SavingsPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-savingsplans'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

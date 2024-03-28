@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2024-03-25)
+------------------
+
+* Feature - Supporting GitLab and GitLab Self Managed as source types in AWS CodeBuild.
+
+1.106.0 (2024-03-20)
+------------------
+
+* Feature - This release adds support for new webhook events (RELEASED and PRERELEASED) and filter types (TAG_NAME and RELEASE_NAME).
+
+1.105.0 (2024-03-15)
+------------------
+
+* Feature - AWS CodeBuild now supports overflow behavior on Reserved Capacity.
+
+1.104.0 (2024-03-08)
+------------------
+
+* Feature - This release adds support for a new webhook event: PULL_REQUEST_CLOSED.
+
 1.103.0 (2024-01-26)
 ------------------
 

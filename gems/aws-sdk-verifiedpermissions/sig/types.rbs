@@ -79,6 +79,20 @@ module Aws::VerifiedPermissions
       SENSITIVE: []
     end
 
+    class CognitoUserPoolConfigurationDetail
+      attr_accessor user_pool_arn: ::String
+      attr_accessor client_ids: ::Array[::String]
+      attr_accessor issuer: ::String
+      SENSITIVE: []
+    end
+
+    class CognitoUserPoolConfigurationItem
+      attr_accessor user_pool_arn: ::String
+      attr_accessor client_ids: ::Array[::String]
+      attr_accessor issuer: ::String
+      SENSITIVE: []
+    end
+
     class Configuration
       attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfiguration
       attr_accessor unknown: untyped
@@ -87,6 +101,28 @@ module Aws::VerifiedPermissions
       class CognitoUserPoolConfiguration < Configuration
       end
       class Unknown < Configuration
+      end
+    end
+
+    class ConfigurationDetail
+      attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CognitoUserPoolConfiguration < ConfigurationDetail
+      end
+      class Unknown < ConfigurationDetail
+      end
+    end
+
+    class ConfigurationItem
+      attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationItem
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CognitoUserPoolConfiguration < ConfigurationItem
+      end
+      class Unknown < ConfigurationItem
       end
     end
 
@@ -268,6 +304,7 @@ module Aws::VerifiedPermissions
       attr_accessor last_updated_date: ::Time
       attr_accessor policy_store_id: ::String
       attr_accessor principal_entity_type: ::String
+      attr_accessor configuration: Types::ConfigurationDetail
       SENSITIVE: [:principal_entity_type]
     end
 
@@ -354,6 +391,7 @@ module Aws::VerifiedPermissions
       attr_accessor last_updated_date: ::Time
       attr_accessor policy_store_id: ::String
       attr_accessor principal_entity_type: ::String
+      attr_accessor configuration: Types::ConfigurationItem
       SENSITIVE: [:principal_entity_type]
     end
 

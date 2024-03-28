@@ -212,6 +212,12 @@ module Aws
                                        }?,
                                        s3_express_directory_bucket: {
                                          bucket_policy: ::String?
+                                       }?,
+                                       dynamodb_stream: {
+                                         stream_policy: ::String?
+                                       }?,
+                                       dynamodb_table: {
+                                         table_policy: ::String?
                                        }?
                                      }],
                                    ?client_token: ::String
@@ -337,7 +343,7 @@ module Aws
         def id: () -> ::String
         def next_token: () -> ::String
         def resource: () -> ::String
-        def resource_type: () -> ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+        def resource_type: () -> ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
         def resource_owner_account: () -> ::String
         def status: () -> ("ACTIVE" | "ARCHIVED" | "RESOLVED")
         def updated_at: () -> ::Time
@@ -407,7 +413,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_analyzed_resources-instance_method
       def list_analyzed_resources: (
                                      analyzer_arn: ::String,
-                                     ?resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket"),
+                                     ?resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream"),
                                      ?next_token: ::String,
                                      ?max_results: ::Integer
                                    ) -> _ListAnalyzedResourcesResponseSuccess
@@ -597,7 +603,7 @@ module Aws
                              ?next_token: ::String,
                              policy_document: ::String,
                              policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY" | "SERVICE_CONTROL_POLICY"),
-                             ?validate_policy_resource_type: ("AWS::S3::Bucket" | "AWS::S3::AccessPoint" | "AWS::S3::MultiRegionAccessPoint" | "AWS::S3ObjectLambda::AccessPoint" | "AWS::IAM::AssumeRolePolicyDocument")
+                             ?validate_policy_resource_type: ("AWS::S3::Bucket" | "AWS::S3::AccessPoint" | "AWS::S3::MultiRegionAccessPoint" | "AWS::S3ObjectLambda::AccessPoint" | "AWS::IAM::AssumeRolePolicyDocument" | "AWS::DynamoDB::Table")
                            ) -> _ValidatePolicyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidatePolicyResponseSuccess
     end

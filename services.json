@@ -587,9 +587,6 @@
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
   },
-  "IoTRoboRunner": {
-    "models": "iot-roborunner/2018-05-10"
-  },
   "IoTSecureTunneling": {
     "models": "iotsecuretunneling/2018-10-05"
   },
@@ -1170,6 +1167,9 @@
   },
   "Textract": {
     "models": "textract/2018-06-27"
+  },
+  "TimestreamInfluxDB": {
+    "models": "timestream-influxdb/2023-01-27"
   },
   "TimestreamQuery": {
     "models": "timestream-query/2018-11-01"

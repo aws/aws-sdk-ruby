@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2024-03-22)
+------------------
+
+* Feature - Updates Amazon Firehose documentation for message regarding Enforcing Tags IAM Policy.
+
 1.65.0 (2024-02-20)
 ------------------
 

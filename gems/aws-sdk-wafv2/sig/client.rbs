@@ -2671,7 +2671,7 @@ module Aws
                             },
                             ?token_domains: Array[::String],
                             ?association_config: {
-                              request_body: Hash[("CLOUDFRONT"), {
+                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE"), {
                                   default_size_inspection_limit: ("KB_16" | "KB_32" | "KB_48" | "KB_64")
                                 }]?
                             }
@@ -5034,7 +5034,7 @@ module Aws
                             },
                             ?token_domains: Array[::String],
                             ?association_config: {
-                              request_body: Hash[("CLOUDFRONT"), {
+                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE"), {
                                   default_size_inspection_limit: ("KB_16" | "KB_32" | "KB_48" | "KB_64")
                                 }]?
                             }

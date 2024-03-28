@@ -2613,6 +2613,15 @@
       "input":{"shape":"DescribeLockedSnapshotsRequest"},
       "output":{"shape":"DescribeLockedSnapshotsResult"}
     },
+    "DescribeMacHosts":{
+      "name":"DescribeMacHosts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeMacHostsRequest"},
+      "output":{"shape":"DescribeMacHostsResult"}
+    },
     "DescribeManagedPrefixLists":{
       "name":"DescribeManagedPrefixLists",
       "http":{
@@ -3928,6 +3937,15 @@
       "input":{"shape":"GetImageBlockPublicAccessStateRequest"},
       "output":{"shape":"GetImageBlockPublicAccessStateResult"}
     },
+    "GetInstanceMetadataDefaults":{
+      "name":"GetInstanceMetadataDefaults",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetInstanceMetadataDefaultsRequest"},
+      "output":{"shape":"GetInstanceMetadataDefaultsResult"}
+    },
     "GetInstanceTypesFromInstanceRequirements":{
       "name":"GetInstanceTypesFromInstanceRequirements",
       "http":{
@@ -4472,6 +4490,15 @@
       },
       "input":{"shape":"ModifyInstanceMaintenanceOptionsRequest"},
       "output":{"shape":"ModifyInstanceMaintenanceOptionsResult"}
+    },
+    "ModifyInstanceMetadataDefaults":{
+      "name":"ModifyInstanceMetadataDefaults",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyInstanceMetadataDefaultsRequest"},
+      "output":{"shape":"ModifyInstanceMetadataDefaultsResult"}
     },
     "ModifyInstanceMetadataOptions":{
       "name":"ModifyInstanceMetadataOptions",
@@ -8077,6 +8104,7 @@
       ]
     },
     "BoxedDouble":{"type":"double"},
+    "BoxedInteger":{"type":"integer"},
     "BundleId":{"type":"string"},
     "BundleIdStringList":{
       "type":"list",
@@ -10037,7 +10065,11 @@
           "shape":"Boolean",
           "locationName":"dryRun"
         },
-        "CopyImageTags":{"shape":"Boolean"}
+        "CopyImageTags":{"shape":"Boolean"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        }
       }
     },
     "CopyImageResult":{
@@ -13041,6 +13073,22 @@
         "shape":"DedicatedHostId",
         "locationName":"item"
       }
+    },
+    "DefaultInstanceMetadataEndpointState":{
+      "type":"string",
+      "enum":[
+        "disabled",
+        "enabled",
+        "no-preference"
+      ]
+    },
+    "DefaultInstanceMetadataTagsState":{
+      "type":"string",
+      "enum":[
+        "disabled",
+        "enabled",
+        "no-preference"
+      ]
     },
     "DefaultNetworkCardIndex":{"type":"integer"},
     "DefaultRouteTableAssociationValue":{
@@ -17004,6 +17052,39 @@
         "Snapshots":{
           "shape":"LockedSnapshotsInfoList",
           "locationName":"snapshotSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeMacHostsRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "HostIds":{
+          "shape":"RequestHostIdList",
+          "locationName":"HostId"
+        },
+        "MaxResults":{"shape":"DescribeMacHostsRequestMaxResults"},
+        "NextToken":{"shape":"String"}
+      }
+    },
+    "DescribeMacHostsRequestMaxResults":{
+      "type":"integer",
+      "max":500,
+      "min":5
+    },
+    "DescribeMacHostsResult":{
+      "type":"structure",
+      "members":{
+        "MacHosts":{
+          "shape":"MacHostList",
+          "locationName":"macHostSet"
         },
         "NextToken":{
           "shape":"String",
@@ -23553,6 +23634,21 @@
         }
       }
     },
+    "GetInstanceMetadataDefaultsRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "GetInstanceMetadataDefaultsResult":{
+      "type":"structure",
+      "members":{
+        "AccountLevel":{
+          "shape":"InstanceMetadataDefaultsResponse",
+          "locationName":"accountLevel"
+        }
+      }
+    },
     "GetInstanceTypesFromInstanceRequirementsRequest":{
       "type":"structure",
       "required":[
@@ -26885,6 +26981,27 @@
         "targeted"
       ]
     },
+    "InstanceMetadataDefaultsResponse":{
+      "type":"structure",
+      "members":{
+        "HttpTokens":{
+          "shape":"HttpTokensState",
+          "locationName":"httpTokens"
+        },
+        "HttpPutResponseHopLimit":{
+          "shape":"BoxedInteger",
+          "locationName":"httpPutResponseHopLimit"
+        },
+        "HttpEndpoint":{
+          "shape":"InstanceMetadataEndpointState",
+          "locationName":"httpEndpoint"
+        },
+        "InstanceMetadataTags":{
+          "shape":"InstanceMetadataTagsState",
+          "locationName":"instanceMetadataTags"
+        }
+      }
+    },
     "InstanceMetadataEndpointState":{
       "type":"string",
       "enum":[
@@ -28559,6 +28676,14 @@
         "NitroTpmInfo":{
           "shape":"NitroTpmInfo",
           "locationName":"nitroTpmInfo"
+        },
+        "MediaAcceleratorInfo":{
+          "shape":"MediaAcceleratorInfo",
+          "locationName":"mediaAcceleratorInfo"
+        },
+        "NeuronInfo":{
+          "shape":"NeuronInfo",
+          "locationName":"neuronInfo"
         }
       }
     },
@@ -31990,6 +32115,33 @@
       ]
     },
     "Long":{"type":"long"},
+    "MacHost":{
+      "type":"structure",
+      "members":{
+        "HostId":{
+          "shape":"DedicatedHostId",
+          "locationName":"hostId"
+        },
+        "MacOSLatestSupportedVersions":{
+          "shape":"MacOSVersionStringList",
+          "locationName":"macOSLatestSupportedVersionSet"
+        }
+      }
+    },
+    "MacHostList":{
+      "type":"list",
+      "member":{
+        "shape":"MacHost",
+        "locationName":"item"
+      }
+    },
+    "MacOSVersionStringList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
+    },
     "MaintenanceDetails":{
       "type":"structure",
       "members":{
@@ -32080,6 +32232,60 @@
     "MaximumIops":{"type":"integer"},
     "MaximumNetworkCards":{"type":"integer"},
     "MaximumThroughputInMBps":{"type":"double"},
+    "MediaAcceleratorInfo":{
+      "type":"structure",
+      "members":{
+        "Accelerators":{
+          "shape":"MediaDeviceInfoList",
+          "locationName":"accelerators"
+        },
+        "TotalMediaMemoryInMiB":{
+          "shape":"TotalMediaMemory",
+          "locationName":"totalMediaMemoryInMiB"
+        }
+      }
+    },
+    "MediaDeviceCount":{"type":"integer"},
+    "MediaDeviceInfo":{
+      "type":"structure",
+      "members":{
+        "Count":{
+          "shape":"MediaDeviceCount",
+          "locationName":"count"
+        },
+        "Name":{
+          "shape":"MediaDeviceName",
+          "locationName":"name"
+        },
+        "Manufacturer":{
+          "shape":"MediaDeviceManufacturerName",
+          "locationName":"manufacturer"
+        },
+        "MemoryInfo":{
+          "shape":"MediaDeviceMemoryInfo",
+          "locationName":"memoryInfo"
+        }
+      }
+    },
+    "MediaDeviceInfoList":{
+      "type":"list",
+      "member":{
+        "shape":"MediaDeviceInfo",
+        "locationName":"item"
+      }
+    },
+    "MediaDeviceManufacturerName":{"type":"string"},
+    "MediaDeviceMemoryInfo":{
+      "type":"structure",
+      "members":{
+        "SizeInMiB":{
+          "shape":"MediaDeviceMemorySize",
+          "locationName":"sizeInMiB"
+        }
+      }
+    },
+    "MediaDeviceMemorySize":{"type":"integer"},
+    "MediaDeviceName":{"type":"string"},
     "MembershipType":{
       "type":"string",
       "enum":[
@@ -32138,6 +32344,14 @@
       }
     },
     "MemorySize":{"type":"long"},
+    "MetadataDefaultHttpTokensState":{
+      "type":"string",
+      "enum":[
+        "optional",
+        "required",
+        "no-preference"
+      ]
+    },
     "MetricPoint":{
       "type":"structure",
       "members":{
@@ -32667,6 +32881,25 @@
         "AutoRecovery":{
           "shape":"InstanceAutoRecoveryState",
           "locationName":"autoRecovery"
+        }
+      }
+    },
+    "ModifyInstanceMetadataDefaultsRequest":{
+      "type":"structure",
+      "members":{
+        "HttpTokens":{"shape":"MetadataDefaultHttpTokensState"},
+        "HttpPutResponseHopLimit":{"shape":"BoxedInteger"},
+        "HttpEndpoint":{"shape":"DefaultInstanceMetadataEndpointState"},
+        "InstanceMetadataTags":{"shape":"DefaultInstanceMetadataTagsState"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyInstanceMetadataDefaultsResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
         }
       }
     },
@@ -35097,13 +35330,78 @@
       }
     },
     "NetworkPerformance":{"type":"string"},
+    "NeuronDeviceCoreCount":{"type":"integer"},
+    "NeuronDeviceCoreInfo":{
+      "type":"structure",
+      "members":{
+        "Count":{
+          "shape":"NeuronDeviceCoreCount",
+          "locationName":"count"
+        },
+        "Version":{
+          "shape":"NeuronDeviceCoreVersion",
+          "locationName":"version"
+        }
+      }
+    },
+    "NeuronDeviceCoreVersion":{"type":"integer"},
+    "NeuronDeviceCount":{"type":"integer"},
+    "NeuronDeviceInfo":{
+      "type":"structure",
+      "members":{
+        "Count":{
+          "shape":"NeuronDeviceCount",
+          "locationName":"count"
+        },
+        "Name":{
+          "shape":"NeuronDeviceName",
+          "locationName":"name"
+        },
+        "CoreInfo":{
+          "shape":"NeuronDeviceCoreInfo",
+          "locationName":"coreInfo"
+        },
+        "MemoryInfo":{
+          "shape":"NeuronDeviceMemoryInfo",
+          "locationName":"memoryInfo"
+        }
+      }
+    },
+    "NeuronDeviceInfoList":{
+      "type":"list",
+      "member":{
+        "shape":"NeuronDeviceInfo",
+        "locationName":"item"
+      }
+    },
+    "NeuronDeviceMemoryInfo":{
+      "type":"structure",
+      "members":{
+        "SizeInMiB":{
+          "shape":"NeuronDeviceMemorySize",
+          "locationName":"sizeInMiB"
+        }
+      }
+    },
+    "NeuronDeviceMemorySize":{"type":"integer"},
+    "NeuronDeviceName":{"type":"string"},
+    "NeuronInfo":{
+      "type":"structure",
+      "members":{
+        "NeuronDevices":{
+          "shape":"NeuronDeviceInfoList",
+          "locationName":"neuronDevices"
+        },
+        "TotalNeuronDeviceMemoryInMiB":{
+          "shape":"TotalNeuronMemory",
+          "locationName":"totalNeuronDeviceMemoryInMiB"
+        }
+      }
+    },
     "NewDhcpConfiguration":{
       "type":"structure",
       "members":{
-        "Key":{
-          "shape":"String",
-          "locationName":"key"
-        },
+        "Key":{"shape":"String"},
         "Values":{
           "shape":"ValueStringList",
           "locationName":"Value"
@@ -37029,7 +37327,11 @@
         "BootMode":{"shape":"BootModeValues"},
         "TpmSupport":{"shape":"TpmSupportValues"},
         "UefiData":{"shape":"StringType"},
-        "ImdsSupport":{"shape":"ImdsSupportValues"}
+        "ImdsSupport":{"shape":"ImdsSupportValues"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        }
       }
     },
     "RegisterImageResult":{
@@ -42560,6 +42862,8 @@
         "Max":{"shape":"Double"}
       }
     },
+    "TotalMediaMemory":{"type":"integer"},
+    "TotalNeuronMemory":{"type":"integer"},
     "TpmSupportValues":{
       "type":"string",
       "enum":["v2.0"]

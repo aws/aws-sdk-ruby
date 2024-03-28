@@ -148,7 +148,15 @@ module Aws
                                   compute_environment: ::String
                                 },
                               ],
-                              ?tags: Hash[::String, ::String]
+                              ?tags: Hash[::String, ::String],
+                              ?job_state_time_limit_actions: Array[
+                                {
+                                  reason: ::String,
+                                  state: ("RUNNABLE"),
+                                  max_time_seconds: ::Integer,
+                                  action: ("CANCEL")
+                                },
+                              ]
                             ) -> _CreateJobQueueResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobQueueResponseSuccess
 
@@ -696,6 +704,11 @@ module Aws
                                          service_account_name: ::String?,
                                          host_network: bool?,
                                          dns_policy: ::String?,
+                                         image_pull_secrets: Array[
+                                           {
+                                             name: ::String
+                                           },
+                                         ]?,
                                          containers: Array[
                                            {
                                              name: ::String?,
@@ -724,6 +737,7 @@ module Aws
                                                run_as_user: ::Integer?,
                                                run_as_group: ::Integer?,
                                                privileged: bool?,
+                                               allow_privilege_escalation: bool?,
                                                read_only_root_filesystem: bool?,
                                                run_as_non_root: bool?
                                              }?
@@ -757,6 +771,7 @@ module Aws
                                                run_as_user: ::Integer?,
                                                run_as_group: ::Integer?,
                                                privileged: bool?,
+                                               allow_privilege_escalation: bool?,
                                                read_only_root_filesystem: bool?,
                                                run_as_non_root: bool?
                                              }?
@@ -1178,6 +1193,14 @@ module Aws
                                 {
                                   order: ::Integer,
                                   compute_environment: ::String
+                                },
+                              ],
+                              ?job_state_time_limit_actions: Array[
+                                {
+                                  reason: ::String,
+                                  state: ("RUNNABLE"),
+                                  max_time_seconds: ::Integer,
+                                  action: ("CANCEL")
                                 },
                               ]
                             ) -> _UpdateJobQueueResponseSuccess

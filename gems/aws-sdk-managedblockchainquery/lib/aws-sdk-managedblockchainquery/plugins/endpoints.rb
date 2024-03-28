@@ -68,6 +68,8 @@ module Aws::ManagedBlockchainQuery
             Aws::ManagedBlockchainQuery::Endpoints::GetTransaction.build(context)
           when :list_asset_contracts
             Aws::ManagedBlockchainQuery::Endpoints::ListAssetContracts.build(context)
+          when :list_filtered_transaction_events
+            Aws::ManagedBlockchainQuery::Endpoints::ListFilteredTransactionEvents.build(context)
           when :list_token_balances
             Aws::ManagedBlockchainQuery::Endpoints::ListTokenBalances.build(context)
           when :list_transaction_events

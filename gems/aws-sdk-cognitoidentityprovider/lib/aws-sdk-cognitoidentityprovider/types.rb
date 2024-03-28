@@ -133,8 +133,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -161,8 +161,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] client_metadata
@@ -474,8 +474,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] user_attribute_names
@@ -514,8 +514,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserRequest AWS API Documentation
@@ -559,8 +559,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableUserRequest AWS API Documentation
@@ -590,8 +590,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminEnableUserRequest AWS API Documentation
@@ -620,8 +620,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] device_key
@@ -652,8 +652,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetDeviceRequest AWS API Documentation
@@ -691,8 +691,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserRequest AWS API Documentation
@@ -1148,8 +1148,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1204,8 +1204,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_id
@@ -1260,8 +1260,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1311,8 +1311,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -1341,8 +1341,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] client_metadata
@@ -1661,8 +1661,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_id
@@ -1693,8 +1693,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -1732,8 +1732,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] mfa_options
@@ -1766,8 +1766,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] event_id
@@ -1809,8 +1809,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] device_key
@@ -1851,8 +1851,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] user_attributes
@@ -1944,8 +1944,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOutRequest AWS API Documentation
@@ -2461,8 +2461,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] confirmation_code
@@ -2567,8 +2567,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] confirmation_code
@@ -4650,8 +4650,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] analytics_metadata
@@ -6365,15 +6365,15 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] filter
     #   A filter string of the form "*AttributeName* *Filter-Type*
     #   "*AttributeValue*"". Quotation marks within the filter string
-    #   must be escaped using the backslash (\\) character. For example,
-    #   "`family_name` = \\"Reddy\\"".
+    #   must be escaped using the backslash (``) character. For example,
+    #   `"family_name = "Reddy""`.
     #
     #   * *AttributeName*: The name of the attribute to search for. You can
     #     only search for one attribute at a time.
     #
-    #   * *Filter-Type*: For an exact match, use =, for example,
-    #     "`given_name` = \\"Jon\\"". For a prefix ("starts with")
-    #     match, use ^=, for example, "`given_name` ^= \\"Jon\\"".
+    #   * *Filter-Type*: For an exact match, use `=`, for example,
+    #     "`given_name = "Jon"`". For a prefix ("starts with") match,
+    #     use `^=`, for example, "`given_name ^= "Jon"`".
     #
     #   * *AttributeValue*: The attribute value that must be matched for
     #     each user.
@@ -6713,7 +6713,9 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] max_value
-    #   The maximum value of an attribute that is of the number data type.
+    #   The maximum length of a number attribute value. Must be a number
+    #   less than or equal to `2^1023`, represented as a string with a
+    #   length of 131072 characters or fewer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NumberAttributeConstraintsType AWS API Documentation
@@ -6940,8 +6942,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] analytics_metadata
@@ -8157,7 +8159,9 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] max_length
-    #   The maximum length.
+    #   The maximum length of a string attribute value. Must be a number
+    #   less than or equal to `2^1023`, represented as a string with a
+    #   length of 131072 characters or fewer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StringAttributeConstraintsType AWS API Documentation
@@ -8430,8 +8434,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias
-    #   attribute in your user pool, you can also use their `sub` in this
-    #   request.
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] event_id

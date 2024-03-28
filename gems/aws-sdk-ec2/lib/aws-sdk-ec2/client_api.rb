@@ -225,6 +225,7 @@ module Aws::EC2
     BootModeTypeList = Shapes::ListShape.new(name: 'BootModeTypeList')
     BootModeValues = Shapes::StringShape.new(name: 'BootModeValues')
     BoxedDouble = Shapes::FloatShape.new(name: 'BoxedDouble')
+    BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
     BundleId = Shapes::StringShape.new(name: 'BundleId')
     BundleIdStringList = Shapes::ListShape.new(name: 'BundleIdStringList')
     BundleInstanceRequest = Shapes::StructureShape.new(name: 'BundleInstanceRequest')
@@ -593,6 +594,8 @@ module Aws::EC2
     DedicatedHostFlag = Shapes::BooleanShape.new(name: 'DedicatedHostFlag')
     DedicatedHostId = Shapes::StringShape.new(name: 'DedicatedHostId')
     DedicatedHostIdList = Shapes::ListShape.new(name: 'DedicatedHostIdList')
+    DefaultInstanceMetadataEndpointState = Shapes::StringShape.new(name: 'DefaultInstanceMetadataEndpointState')
+    DefaultInstanceMetadataTagsState = Shapes::StringShape.new(name: 'DefaultInstanceMetadataTagsState')
     DefaultNetworkCardIndex = Shapes::IntegerShape.new(name: 'DefaultNetworkCardIndex')
     DefaultRouteTableAssociationValue = Shapes::StringShape.new(name: 'DefaultRouteTableAssociationValue')
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
@@ -938,6 +941,9 @@ module Aws::EC2
     DescribeLockedSnapshotsMaxResults = Shapes::IntegerShape.new(name: 'DescribeLockedSnapshotsMaxResults')
     DescribeLockedSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeLockedSnapshotsRequest')
     DescribeLockedSnapshotsResult = Shapes::StructureShape.new(name: 'DescribeLockedSnapshotsResult')
+    DescribeMacHostsRequest = Shapes::StructureShape.new(name: 'DescribeMacHostsRequest')
+    DescribeMacHostsRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeMacHostsRequestMaxResults')
+    DescribeMacHostsResult = Shapes::StructureShape.new(name: 'DescribeMacHostsResult')
     DescribeManagedPrefixListsRequest = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsRequest')
     DescribeManagedPrefixListsResult = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsResult')
     DescribeMovingAddressesMaxResults = Shapes::IntegerShape.new(name: 'DescribeMovingAddressesMaxResults')
@@ -1458,6 +1464,8 @@ module Aws::EC2
     GetHostReservationPurchasePreviewResult = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewResult')
     GetImageBlockPublicAccessStateRequest = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateRequest')
     GetImageBlockPublicAccessStateResult = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateResult')
+    GetInstanceMetadataDefaultsRequest = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsRequest')
+    GetInstanceMetadataDefaultsResult = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsResult')
     GetInstanceTypesFromInstanceRequirementsRequest = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsRequest')
     GetInstanceTypesFromInstanceRequirementsResult = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsResult')
     GetInstanceUefiDataRequest = Shapes::StructureShape.new(name: 'GetInstanceUefiDataRequest')
@@ -1702,6 +1710,7 @@ module Aws::EC2
     InstanceMaintenanceOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMaintenanceOptionsRequest')
     InstanceMarketOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMarketOptionsRequest')
     InstanceMatchCriteria = Shapes::StringShape.new(name: 'InstanceMatchCriteria')
+    InstanceMetadataDefaultsResponse = Shapes::StructureShape.new(name: 'InstanceMetadataDefaultsResponse')
     InstanceMetadataEndpointState = Shapes::StringShape.new(name: 'InstanceMetadataEndpointState')
     InstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMetadataOptionsRequest')
     InstanceMetadataOptionsResponse = Shapes::StructureShape.new(name: 'InstanceMetadataOptionsResponse')
@@ -2026,6 +2035,9 @@ module Aws::EC2
     LockedSnapshotsInfoList = Shapes::ListShape.new(name: 'LockedSnapshotsInfoList')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MacHost = Shapes::StructureShape.new(name: 'MacHost')
+    MacHostList = Shapes::ListShape.new(name: 'MacHostList')
+    MacOSVersionStringList = Shapes::ListShape.new(name: 'MacOSVersionStringList')
     MaintenanceDetails = Shapes::StructureShape.new(name: 'MaintenanceDetails')
     ManagedPrefixList = Shapes::StructureShape.new(name: 'ManagedPrefixList')
     ManagedPrefixListSet = Shapes::ListShape.new(name: 'ManagedPrefixListSet')
@@ -2040,6 +2052,14 @@ module Aws::EC2
     MaximumIops = Shapes::IntegerShape.new(name: 'MaximumIops')
     MaximumNetworkCards = Shapes::IntegerShape.new(name: 'MaximumNetworkCards')
     MaximumThroughputInMBps = Shapes::FloatShape.new(name: 'MaximumThroughputInMBps')
+    MediaAcceleratorInfo = Shapes::StructureShape.new(name: 'MediaAcceleratorInfo')
+    MediaDeviceCount = Shapes::IntegerShape.new(name: 'MediaDeviceCount')
+    MediaDeviceInfo = Shapes::StructureShape.new(name: 'MediaDeviceInfo')
+    MediaDeviceInfoList = Shapes::ListShape.new(name: 'MediaDeviceInfoList')
+    MediaDeviceManufacturerName = Shapes::StringShape.new(name: 'MediaDeviceManufacturerName')
+    MediaDeviceMemoryInfo = Shapes::StructureShape.new(name: 'MediaDeviceMemoryInfo')
+    MediaDeviceMemorySize = Shapes::IntegerShape.new(name: 'MediaDeviceMemorySize')
+    MediaDeviceName = Shapes::StringShape.new(name: 'MediaDeviceName')
     MembershipType = Shapes::StringShape.new(name: 'MembershipType')
     MemoryGiBPerVCpu = Shapes::StructureShape.new(name: 'MemoryGiBPerVCpu')
     MemoryGiBPerVCpuRequest = Shapes::StructureShape.new(name: 'MemoryGiBPerVCpuRequest')
@@ -2047,6 +2067,7 @@ module Aws::EC2
     MemoryMiB = Shapes::StructureShape.new(name: 'MemoryMiB')
     MemoryMiBRequest = Shapes::StructureShape.new(name: 'MemoryMiBRequest')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
+    MetadataDefaultHttpTokensState = Shapes::StringShape.new(name: 'MetadataDefaultHttpTokensState')
     MetricPoint = Shapes::StructureShape.new(name: 'MetricPoint')
     MetricPoints = Shapes::ListShape.new(name: 'MetricPoints')
     MetricType = Shapes::StringShape.new(name: 'MetricType')
@@ -2086,6 +2107,8 @@ module Aws::EC2
     ModifyInstanceEventWindowResult = Shapes::StructureShape.new(name: 'ModifyInstanceEventWindowResult')
     ModifyInstanceMaintenanceOptionsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceMaintenanceOptionsRequest')
     ModifyInstanceMaintenanceOptionsResult = Shapes::StructureShape.new(name: 'ModifyInstanceMaintenanceOptionsResult')
+    ModifyInstanceMetadataDefaultsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataDefaultsRequest')
+    ModifyInstanceMetadataDefaultsResult = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataDefaultsResult')
     ModifyInstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataOptionsRequest')
     ModifyInstanceMetadataOptionsResult = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataOptionsResult')
     ModifyInstancePlacementRequest = Shapes::StructureShape.new(name: 'ModifyInstancePlacementRequest')
@@ -2261,6 +2284,16 @@ module Aws::EC2
     NetworkInterfaceType = Shapes::StringShape.new(name: 'NetworkInterfaceType')
     NetworkNodesList = Shapes::ListShape.new(name: 'NetworkNodesList')
     NetworkPerformance = Shapes::StringShape.new(name: 'NetworkPerformance')
+    NeuronDeviceCoreCount = Shapes::IntegerShape.new(name: 'NeuronDeviceCoreCount')
+    NeuronDeviceCoreInfo = Shapes::StructureShape.new(name: 'NeuronDeviceCoreInfo')
+    NeuronDeviceCoreVersion = Shapes::IntegerShape.new(name: 'NeuronDeviceCoreVersion')
+    NeuronDeviceCount = Shapes::IntegerShape.new(name: 'NeuronDeviceCount')
+    NeuronDeviceInfo = Shapes::StructureShape.new(name: 'NeuronDeviceInfo')
+    NeuronDeviceInfoList = Shapes::ListShape.new(name: 'NeuronDeviceInfoList')
+    NeuronDeviceMemoryInfo = Shapes::StructureShape.new(name: 'NeuronDeviceMemoryInfo')
+    NeuronDeviceMemorySize = Shapes::IntegerShape.new(name: 'NeuronDeviceMemorySize')
+    NeuronDeviceName = Shapes::StringShape.new(name: 'NeuronDeviceName')
+    NeuronInfo = Shapes::StructureShape.new(name: 'NeuronInfo')
     NewDhcpConfiguration = Shapes::StructureShape.new(name: 'NewDhcpConfiguration')
     NewDhcpConfigurationList = Shapes::ListShape.new(name: 'NewDhcpConfigurationList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -2822,6 +2855,8 @@ module Aws::EC2
     TieringOperationStatus = Shapes::StringShape.new(name: 'TieringOperationStatus')
     TotalLocalStorageGB = Shapes::StructureShape.new(name: 'TotalLocalStorageGB')
     TotalLocalStorageGBRequest = Shapes::StructureShape.new(name: 'TotalLocalStorageGBRequest')
+    TotalMediaMemory = Shapes::IntegerShape.new(name: 'TotalMediaMemory')
+    TotalNeuronMemory = Shapes::IntegerShape.new(name: 'TotalNeuronMemory')
     TpmSupportValues = Shapes::StringShape.new(name: 'TpmSupportValues')
     TrafficDirection = Shapes::StringShape.new(name: 'TrafficDirection')
     TrafficMirrorFilter = Shapes::StructureShape.new(name: 'TrafficMirrorFilter')
@@ -4423,6 +4458,7 @@ module Aws::EC2
     CopyImageRequest.add_member(:destination_outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "DestinationOutpostArn"))
     CopyImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CopyImageRequest.add_member(:copy_image_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "CopyImageTags"))
+    CopyImageRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CopyImageRequest.struct_class = Types::CopyImageRequest
 
     CopyImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
@@ -6969,6 +7005,16 @@ module Aws::EC2
     DescribeLockedSnapshotsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeLockedSnapshotsResult.struct_class = Types::DescribeLockedSnapshotsResult
 
+    DescribeMacHostsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeMacHostsRequest.add_member(:host_ids, Shapes::ShapeRef.new(shape: RequestHostIdList, location_name: "HostId"))
+    DescribeMacHostsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeMacHostsRequestMaxResults, location_name: "MaxResults"))
+    DescribeMacHostsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeMacHostsRequest.struct_class = Types::DescribeMacHostsRequest
+
+    DescribeMacHostsResult.add_member(:mac_hosts, Shapes::ShapeRef.new(shape: MacHostList, location_name: "macHostSet"))
+    DescribeMacHostsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeMacHostsResult.struct_class = Types::DescribeMacHostsResult
+
     DescribeManagedPrefixListsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeManagedPrefixListsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeManagedPrefixListsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PrefixListMaxResults, location_name: "MaxResults"))
@@ -9023,6 +9069,12 @@ module Aws::EC2
     GetImageBlockPublicAccessStateResult.add_member(:image_block_public_access_state, Shapes::ShapeRef.new(shape: String, location_name: "imageBlockPublicAccessState"))
     GetImageBlockPublicAccessStateResult.struct_class = Types::GetImageBlockPublicAccessStateResult
 
+    GetInstanceMetadataDefaultsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetInstanceMetadataDefaultsRequest.struct_class = Types::GetInstanceMetadataDefaultsRequest
+
+    GetInstanceMetadataDefaultsResult.add_member(:account_level, Shapes::ShapeRef.new(shape: InstanceMetadataDefaultsResponse, location_name: "accountLevel"))
+    GetInstanceMetadataDefaultsResult.struct_class = Types::GetInstanceMetadataDefaultsResult
+
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:architecture_types, Shapes::ShapeRef.new(shape: ArchitectureTypeSet, required: true, location_name: "ArchitectureType"))
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:virtualization_types, Shapes::ShapeRef.new(shape: VirtualizationTypeSet, required: true, location_name: "VirtualizationType"))
@@ -10020,6 +10072,12 @@ module Aws::EC2
     InstanceMarketOptionsRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotMarketOptions, location_name: "SpotOptions"))
     InstanceMarketOptionsRequest.struct_class = Types::InstanceMarketOptionsRequest
 
+    InstanceMetadataDefaultsResponse.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "httpTokens"))
+    InstanceMetadataDefaultsResponse.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "httpPutResponseHopLimit"))
+    InstanceMetadataDefaultsResponse.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "httpEndpoint"))
+    InstanceMetadataDefaultsResponse.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: InstanceMetadataTagsState, location_name: "instanceMetadataTags"))
+    InstanceMetadataDefaultsResponse.struct_class = Types::InstanceMetadataDefaultsResponse
+
     InstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
     InstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
     InstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "HttpEndpoint"))
@@ -10268,6 +10326,8 @@ module Aws::EC2
     InstanceTypeInfo.add_member(:nitro_enclaves_support, Shapes::ShapeRef.new(shape: NitroEnclavesSupport, location_name: "nitroEnclavesSupport"))
     InstanceTypeInfo.add_member(:nitro_tpm_support, Shapes::ShapeRef.new(shape: NitroTpmSupport, location_name: "nitroTpmSupport"))
     InstanceTypeInfo.add_member(:nitro_tpm_info, Shapes::ShapeRef.new(shape: NitroTpmInfo, location_name: "nitroTpmInfo"))
+    InstanceTypeInfo.add_member(:media_accelerator_info, Shapes::ShapeRef.new(shape: MediaAcceleratorInfo, location_name: "mediaAcceleratorInfo"))
+    InstanceTypeInfo.add_member(:neuron_info, Shapes::ShapeRef.new(shape: NeuronInfo, location_name: "neuronInfo"))
     InstanceTypeInfo.struct_class = Types::InstanceTypeInfo
 
     InstanceTypeInfoFromInstanceRequirements.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
@@ -11180,6 +11240,14 @@ module Aws::EC2
 
     LockedSnapshotsInfoList.member = Shapes::ShapeRef.new(shape: LockedSnapshotsInfo, location_name: "item")
 
+    MacHost.add_member(:host_id, Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "hostId"))
+    MacHost.add_member(:mac_os_latest_supported_versions, Shapes::ShapeRef.new(shape: MacOSVersionStringList, location_name: "macOSLatestSupportedVersionSet"))
+    MacHost.struct_class = Types::MacHost
+
+    MacHostList.member = Shapes::ShapeRef.new(shape: MacHost, location_name: "item")
+
+    MacOSVersionStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
     MaintenanceDetails.add_member(:pending_maintenance, Shapes::ShapeRef.new(shape: String, location_name: "pendingMaintenance"))
     MaintenanceDetails.add_member(:maintenance_auto_applied_after, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "maintenanceAutoAppliedAfter"))
     MaintenanceDetails.add_member(:last_maintenance_applied, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lastMaintenanceApplied"))
@@ -11198,6 +11266,21 @@ module Aws::EC2
     ManagedPrefixList.struct_class = Types::ManagedPrefixList
 
     ManagedPrefixListSet.member = Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "item")
+
+    MediaAcceleratorInfo.add_member(:accelerators, Shapes::ShapeRef.new(shape: MediaDeviceInfoList, location_name: "accelerators"))
+    MediaAcceleratorInfo.add_member(:total_media_memory_in_mi_b, Shapes::ShapeRef.new(shape: TotalMediaMemory, location_name: "totalMediaMemoryInMiB"))
+    MediaAcceleratorInfo.struct_class = Types::MediaAcceleratorInfo
+
+    MediaDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: MediaDeviceCount, location_name: "count"))
+    MediaDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: MediaDeviceName, location_name: "name"))
+    MediaDeviceInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: MediaDeviceManufacturerName, location_name: "manufacturer"))
+    MediaDeviceInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: MediaDeviceMemoryInfo, location_name: "memoryInfo"))
+    MediaDeviceInfo.struct_class = Types::MediaDeviceInfo
+
+    MediaDeviceInfoList.member = Shapes::ShapeRef.new(shape: MediaDeviceInfo, location_name: "item")
+
+    MediaDeviceMemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: MediaDeviceMemorySize, location_name: "sizeInMiB"))
+    MediaDeviceMemoryInfo.struct_class = Types::MediaDeviceMemoryInfo
 
     MemoryGiBPerVCpu.add_member(:min, Shapes::ShapeRef.new(shape: Double, location_name: "min"))
     MemoryGiBPerVCpu.add_member(:max, Shapes::ShapeRef.new(shape: Double, location_name: "max"))
@@ -11423,6 +11506,16 @@ module Aws::EC2
     ModifyInstanceMaintenanceOptionsResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     ModifyInstanceMaintenanceOptionsResult.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "autoRecovery"))
     ModifyInstanceMaintenanceOptionsResult.struct_class = Types::ModifyInstanceMaintenanceOptionsResult
+
+    ModifyInstanceMetadataDefaultsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: MetadataDefaultHttpTokensState, location_name: "HttpTokens"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "HttpPutResponseHopLimit"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: DefaultInstanceMetadataEndpointState, location_name: "HttpEndpoint"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: DefaultInstanceMetadataTagsState, location_name: "InstanceMetadataTags"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceMetadataDefaultsRequest.struct_class = Types::ModifyInstanceMetadataDefaultsRequest
+
+    ModifyInstanceMetadataDefaultsResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyInstanceMetadataDefaultsResult.struct_class = Types::ModifyInstanceMetadataDefaultsResult
 
     ModifyInstanceMetadataOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ModifyInstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
@@ -12272,7 +12365,26 @@ module Aws::EC2
 
     NetworkNodesList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
-    NewDhcpConfiguration.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
+    NeuronDeviceCoreInfo.add_member(:count, Shapes::ShapeRef.new(shape: NeuronDeviceCoreCount, location_name: "count"))
+    NeuronDeviceCoreInfo.add_member(:version, Shapes::ShapeRef.new(shape: NeuronDeviceCoreVersion, location_name: "version"))
+    NeuronDeviceCoreInfo.struct_class = Types::NeuronDeviceCoreInfo
+
+    NeuronDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: NeuronDeviceCount, location_name: "count"))
+    NeuronDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: NeuronDeviceName, location_name: "name"))
+    NeuronDeviceInfo.add_member(:core_info, Shapes::ShapeRef.new(shape: NeuronDeviceCoreInfo, location_name: "coreInfo"))
+    NeuronDeviceInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: NeuronDeviceMemoryInfo, location_name: "memoryInfo"))
+    NeuronDeviceInfo.struct_class = Types::NeuronDeviceInfo
+
+    NeuronDeviceInfoList.member = Shapes::ShapeRef.new(shape: NeuronDeviceInfo, location_name: "item")
+
+    NeuronDeviceMemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: NeuronDeviceMemorySize, location_name: "sizeInMiB"))
+    NeuronDeviceMemoryInfo.struct_class = Types::NeuronDeviceMemoryInfo
+
+    NeuronInfo.add_member(:neuron_devices, Shapes::ShapeRef.new(shape: NeuronDeviceInfoList, location_name: "neuronDevices"))
+    NeuronInfo.add_member(:total_neuron_device_memory_in_mi_b, Shapes::ShapeRef.new(shape: TotalNeuronMemory, location_name: "totalNeuronDeviceMemoryInMiB"))
+    NeuronInfo.struct_class = Types::NeuronInfo
+
+    NewDhcpConfiguration.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     NewDhcpConfiguration.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Value"))
     NewDhcpConfiguration.struct_class = Types::NewDhcpConfiguration
 
@@ -12816,6 +12928,7 @@ module Aws::EC2
     RegisterImageRequest.add_member(:tpm_support, Shapes::ShapeRef.new(shape: TpmSupportValues, location_name: "TpmSupport"))
     RegisterImageRequest.add_member(:uefi_data, Shapes::ShapeRef.new(shape: StringType, location_name: "UefiData"))
     RegisterImageRequest.add_member(:imds_support, Shapes::ShapeRef.new(shape: ImdsSupportValues, location_name: "ImdsSupport"))
+    RegisterImageRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     RegisterImageRequest.struct_class = Types::RegisterImageRequest
 
     RegisterImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
@@ -18220,6 +18333,20 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeLockedSnapshotsResult)
       end)
 
+      api.add_operation(:describe_mac_hosts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMacHosts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMacHostsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMacHostsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_managed_prefix_lists, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeManagedPrefixLists"
         o.http_method = "POST"
@@ -19773,6 +19900,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: GetImageBlockPublicAccessStateResult)
       end)
 
+      api.add_operation(:get_instance_metadata_defaults, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInstanceMetadataDefaults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetInstanceMetadataDefaultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInstanceMetadataDefaultsResult)
+      end)
+
       api.add_operation(:get_instance_types_from_instance_requirements, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetInstanceTypesFromInstanceRequirements"
         o.http_method = "POST"
@@ -20385,6 +20520,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyInstanceMaintenanceOptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyInstanceMaintenanceOptionsResult)
+      end)
+
+      api.add_operation(:modify_instance_metadata_defaults, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceMetadataDefaults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceMetadataDefaultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyInstanceMetadataDefaultsResult)
       end)
 
       api.add_operation(:modify_instance_metadata_options, Seahorse::Model::Operation.new.tap do |o|

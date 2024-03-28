@@ -396,8 +396,22 @@ module Aws::ManagedGrafana
     #
     # [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html
     #
+    # @option params [String] :grafana_token
+    #   A token from Grafana Labs that ties your Amazon Web Services account
+    #   with a Grafana Labs account. For more information, see [Register with
+    #   Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    #
     # @option params [required, String] :license_type
     #   The type of license to associate with the workspace.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana Enterprise
+    #   free trials.
+    #
+    #    </note>
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to associate the license with.
@@ -409,6 +423,7 @@ module Aws::ManagedGrafana
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_license({
+    #     grafana_token: "GrafanaToken",
     #     license_type: "ENTERPRISE", # required, accepts ENTERPRISE, ENTERPRISE_FREE_TRIAL
     #     workspace_id: "WorkspaceId", # required
     #   })
@@ -426,6 +441,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -482,10 +498,10 @@ module Aws::ManagedGrafana
     #   `workspaceOrganizationalUnits` parameter.
     #
     # @option params [required, Array<String>] :authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
-    #   (successor to Single Sign-On), or both to authenticate users for using
-    #   the Grafana console within a workspace. For more information, see
-    #   [User authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
     #
     #
     #
@@ -512,9 +528,10 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #
     # @option params [String] :grafana_version
-    #   Specifies the version of Grafana to support in the new workspace.
+    #   Specifies the version of Grafana to support in the new workspace. If
+    #   not specified, defaults to the latest version (for example, 9.4).
     #
-    #   To get a list of supported version, use the `ListVersions` operation.
+    #   To get a list of supported versions, use the `ListVersions` operation.
     #
     # @option params [Types::NetworkAccessConfiguration] :network_access_control
     #   Configuration for network access to your workspace.
@@ -652,6 +669,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -770,6 +788,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -867,6 +886,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -1011,6 +1031,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -1227,8 +1248,10 @@ module Aws::ManagedGrafana
     #   resp.workspaces[0].created #=> Time
     #   resp.workspaces[0].description #=> String
     #   resp.workspaces[0].endpoint #=> String
+    #   resp.workspaces[0].grafana_token #=> String
     #   resp.workspaces[0].grafana_version #=> String
     #   resp.workspaces[0].id #=> String
+    #   resp.workspaces[0].license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspaces[0].modified #=> Time
     #   resp.workspaces[0].name #=> String
     #   resp.workspaces[0].notification_destinations #=> Array
@@ -1531,6 +1554,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -1578,10 +1602,10 @@ module Aws::ManagedGrafana
     #  </note>
     #
     # @option params [required, Array<String>] :authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
-    #   (successor to Single Sign-On), or both to authenticate users for using
-    #   the Grafana console within a workspace. For more information, see
-    #   [User authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
     #
     #
     #
@@ -1674,13 +1698,18 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #
     # @option params [String] :grafana_version
-    #   Specifies the version of Grafana to support in the new workspace.
+    #   Specifies the version of Grafana to support in the workspace. If not
+    #   specified, keeps the current version of the workspace.
     #
     #   Can only be used to upgrade (for example, from 8.4 to 9.4), not
     #   downgrade (for example, from 9.4 to 8.4).
     #
     #   To know what versions are available to upgrade to for a specific
-    #   workspace, see the `ListVersions` operation.
+    #   workspace, see the [ListVersions][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to update.
@@ -1717,7 +1746,7 @@ module Aws::ManagedGrafana
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

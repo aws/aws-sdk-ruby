@@ -280,7 +280,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#list_experiments-instance_method
       def list_experiments: (
                               ?max_results: ::Integer,
-                              ?next_token: ::String
+                              ?next_token: ::String,
+                              ?experiment_template_id: ::String
                             ) -> _ListExperimentsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperimentsResponseSuccess
 
@@ -327,6 +328,9 @@ module Aws
       def start_experiment: (
                               client_token: ::String,
                               experiment_template_id: ::String,
+                              ?experiment_options: {
+                                actions_mode: ("skip-all" | "run-all")?
+                              },
                               ?tags: Hash[::String, ::String]
                             ) -> _StartExperimentResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExperimentResponseSuccess

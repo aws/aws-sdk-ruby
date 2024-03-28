@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-03-13)
+------------------
+
+* Feature - adds support for multiple new composition layout configuration options (grid, pip)
+
 1.15.0 (2024-01-26)
 ------------------
 

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.902.0 (2024-03-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.901.0 (2024-03-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.900.0 (2024-03-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.899.0 (2024-03-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.898.0 (2024-03-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.897.0 (2024-03-14)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::TimestreamInfluxDB`.
+
+1.896.0 (2024-03-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.895.0 (2024-02-29)
 ------------------
 

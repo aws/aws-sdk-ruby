@@ -151,7 +151,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#associate_instance_storage_config-instance_method
       def associate_instance_storage_config: (
                                                instance_id: ::String,
-                                               resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS"),
+                                               resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS"),
                                                storage_config: {
                                                  association_id: ::String?,
                                                  storage_type: ("S3" | "KINESIS_VIDEO_STREAM" | "KINESIS_STREAM" | "KINESIS_FIREHOSE"),
@@ -779,7 +779,9 @@ module Aws
                                          namespace: ::String?,
                                          application_permissions: Array[::String]?
                                        },
-                                     ]
+                                     ],
+                                     ?hierarchy_restricted_resources: Array[::String],
+                                     ?allowed_access_control_hierarchy_group_id: ::String
                                    ) -> _CreateSecurityProfileResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityProfileResponseSuccess
 
@@ -1266,7 +1268,7 @@ module Aws
       def describe_instance_storage_config: (
                                               instance_id: ::String,
                                               association_id: ::String,
-                                              resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+                                              resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS")
                                             ) -> _DescribeInstanceStorageConfigResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceStorageConfigResponseSuccess
 
@@ -1464,7 +1466,7 @@ module Aws
       def disassociate_instance_storage_config: (
                                                   instance_id: ::String,
                                                   association_id: ::String,
-                                                  resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS")
+                                                  resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS")
                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1990,7 +1992,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_instance_storage_configs-instance_method
       def list_instance_storage_configs: (
                                            instance_id: ::String,
-                                           resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS"),
+                                           resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS"),
                                            ?next_token: ::String,
                                            ?max_results: ::Integer
                                          ) -> _ListInstanceStorageConfigsResponseSuccess
@@ -2935,6 +2937,42 @@ module Aws
                                 tag_key: ::String?,
                                 tag_value: ::String?
                               }?
+                            }?,
+                            user_attribute_filter: {
+                              or_conditions: Array[
+                                {
+                                  tag_conditions: Array[
+                                    {
+                                      tag_key: ::String?,
+                                      tag_value: ::String?
+                                    },
+                                  ]?,
+                                  hierarchy_group_condition: {
+                                    value: ::String?,
+                                    hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+                                  }?
+                                },
+                              ]?,
+                              and_condition: {
+                                tag_conditions: Array[
+                                  {
+                                    tag_key: ::String?,
+                                    tag_value: ::String?
+                                  },
+                                ]?,
+                                hierarchy_group_condition: {
+                                  value: ::String?,
+                                  hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+                                }?
+                              }?,
+                              tag_condition: {
+                                tag_key: ::String?,
+                                tag_value: ::String?
+                              }?,
+                              hierarchy_group_condition: {
+                                value: ::String?,
+                                hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+                              }?
                             }?
                           },
                           ?search_criteria: {
@@ -3545,7 +3583,7 @@ module Aws
       def update_instance_storage_config: (
                                             instance_id: ::String,
                                             association_id: ::String,
-                                            resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS"),
+                                            resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS"),
                                             storage_config: {
                                               association_id: ::String?,
                                               storage_type: ("S3" | "KINESIS_VIDEO_STREAM" | "KINESIS_STREAM" | "KINESIS_FIREHOSE"),
@@ -3862,7 +3900,9 @@ module Aws
                                          namespace: ::String?,
                                          application_permissions: Array[::String]?
                                        },
-                                     ]
+                                     ],
+                                     ?hierarchy_restricted_resources: Array[::String],
+                                     ?allowed_access_control_hierarchy_group_id: ::String
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

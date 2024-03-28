@@ -122,6 +122,8 @@ module Aws::Batch
     Float = Shapes::FloatShape.new(name: 'Float')
     Host = Shapes::StructureShape.new(name: 'Host')
     ImageIdOverride = Shapes::StringShape.new(name: 'ImageIdOverride')
+    ImagePullSecret = Shapes::StructureShape.new(name: 'ImagePullSecret')
+    ImagePullSecrets = Shapes::ListShape.new(name: 'ImagePullSecrets')
     ImageType = Shapes::StringShape.new(name: 'ImageType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     JQState = Shapes::StringShape.new(name: 'JQState')
@@ -136,6 +138,10 @@ module Aws::Batch
     JobExecutionTimeoutMinutes = Shapes::IntegerShape.new(name: 'JobExecutionTimeoutMinutes')
     JobQueueDetail = Shapes::StructureShape.new(name: 'JobQueueDetail')
     JobQueueDetailList = Shapes::ListShape.new(name: 'JobQueueDetailList')
+    JobStateTimeLimitAction = Shapes::StructureShape.new(name: 'JobStateTimeLimitAction')
+    JobStateTimeLimitActions = Shapes::ListShape.new(name: 'JobStateTimeLimitActions')
+    JobStateTimeLimitActionsAction = Shapes::StringShape.new(name: 'JobStateTimeLimitActionsAction')
+    JobStateTimeLimitActionsState = Shapes::StringShape.new(name: 'JobStateTimeLimitActionsState')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     JobSummary = Shapes::StructureShape.new(name: 'JobSummary')
     JobSummaryList = Shapes::ListShape.new(name: 'JobSummaryList')
@@ -424,6 +430,7 @@ module Aws::Batch
     CreateJobQueueRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "priority"))
     CreateJobQueueRequest.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, required: true, location_name: "computeEnvironmentOrder"))
     CreateJobQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    CreateJobQueueRequest.add_member(:job_state_time_limit_actions, Shapes::ShapeRef.new(shape: JobStateTimeLimitActions, location_name: "jobStateTimeLimitActions"))
     CreateJobQueueRequest.struct_class = Types::CreateJobQueueRequest
 
     CreateJobQueueResponse.add_member(:job_queue_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobQueueName"))
@@ -632,6 +639,7 @@ module Aws::Batch
     EksContainerSecurityContext.add_member(:run_as_user, Shapes::ShapeRef.new(shape: Long, location_name: "runAsUser"))
     EksContainerSecurityContext.add_member(:run_as_group, Shapes::ShapeRef.new(shape: Long, location_name: "runAsGroup"))
     EksContainerSecurityContext.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "privileged"))
+    EksContainerSecurityContext.add_member(:allow_privilege_escalation, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowPrivilegeEscalation"))
     EksContainerSecurityContext.add_member(:read_only_root_filesystem, Shapes::ShapeRef.new(shape: Boolean, location_name: "readOnlyRootFilesystem"))
     EksContainerSecurityContext.add_member(:run_as_non_root, Shapes::ShapeRef.new(shape: Boolean, location_name: "runAsNonRoot"))
     EksContainerSecurityContext.struct_class = Types::EksContainerSecurityContext
@@ -664,6 +672,7 @@ module Aws::Batch
     EksPodProperties.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
     EksPodProperties.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
     EksPodProperties.add_member(:dns_policy, Shapes::ShapeRef.new(shape: String, location_name: "dnsPolicy"))
+    EksPodProperties.add_member(:image_pull_secrets, Shapes::ShapeRef.new(shape: ImagePullSecrets, location_name: "imagePullSecrets"))
     EksPodProperties.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainers, location_name: "containers"))
     EksPodProperties.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksContainers, location_name: "initContainers"))
     EksPodProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
@@ -674,6 +683,7 @@ module Aws::Batch
     EksPodPropertiesDetail.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
     EksPodPropertiesDetail.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
     EksPodPropertiesDetail.add_member(:dns_policy, Shapes::ShapeRef.new(shape: String, location_name: "dnsPolicy"))
+    EksPodPropertiesDetail.add_member(:image_pull_secrets, Shapes::ShapeRef.new(shape: ImagePullSecrets, location_name: "imagePullSecrets"))
     EksPodPropertiesDetail.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainerDetails, location_name: "containers"))
     EksPodPropertiesDetail.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksContainerDetails, location_name: "initContainers"))
     EksPodPropertiesDetail.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
@@ -735,6 +745,11 @@ module Aws::Batch
 
     Host.add_member(:source_path, Shapes::ShapeRef.new(shape: String, location_name: "sourcePath"))
     Host.struct_class = Types::Host
+
+    ImagePullSecret.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ImagePullSecret.struct_class = Types::ImagePullSecret
+
+    ImagePullSecrets.member = Shapes::ShapeRef.new(shape: ImagePullSecret)
 
     JobDefinition.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
     JobDefinition.add_member(:job_definition_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionArn"))
@@ -805,9 +820,18 @@ module Aws::Batch
     JobQueueDetail.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "priority"))
     JobQueueDetail.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, required: true, location_name: "computeEnvironmentOrder"))
     JobQueueDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    JobQueueDetail.add_member(:job_state_time_limit_actions, Shapes::ShapeRef.new(shape: JobStateTimeLimitActions, location_name: "jobStateTimeLimitActions"))
     JobQueueDetail.struct_class = Types::JobQueueDetail
 
     JobQueueDetailList.member = Shapes::ShapeRef.new(shape: JobQueueDetail)
+
+    JobStateTimeLimitAction.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
+    JobStateTimeLimitAction.add_member(:state, Shapes::ShapeRef.new(shape: JobStateTimeLimitActionsState, required: true, location_name: "state"))
+    JobStateTimeLimitAction.add_member(:max_time_seconds, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxTimeSeconds"))
+    JobStateTimeLimitAction.add_member(:action, Shapes::ShapeRef.new(shape: JobStateTimeLimitActionsAction, required: true, location_name: "action"))
+    JobStateTimeLimitAction.struct_class = Types::JobStateTimeLimitAction
+
+    JobStateTimeLimitActions.member = Shapes::ShapeRef.new(shape: JobStateTimeLimitAction)
 
     JobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
     JobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
@@ -1156,6 +1180,7 @@ module Aws::Batch
     UpdateJobQueueRequest.add_member(:scheduling_policy_arn, Shapes::ShapeRef.new(shape: String, location_name: "schedulingPolicyArn"))
     UpdateJobQueueRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, location_name: "priority"))
     UpdateJobQueueRequest.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, location_name: "computeEnvironmentOrder"))
+    UpdateJobQueueRequest.add_member(:job_state_time_limit_actions, Shapes::ShapeRef.new(shape: JobStateTimeLimitActions, location_name: "jobStateTimeLimitActions"))
     UpdateJobQueueRequest.struct_class = Types::UpdateJobQueueRequest
 
     UpdateJobQueueResponse.add_member(:job_queue_name, Shapes::ShapeRef.new(shape: String, location_name: "jobQueueName"))

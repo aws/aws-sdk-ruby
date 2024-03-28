@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2024-03-08)
+------------------
+
+* Feature - Add ConcurrentModificationException to SetUserPoolMfaConfig
+
 1.87.0 (2024-02-01)
 ------------------
 

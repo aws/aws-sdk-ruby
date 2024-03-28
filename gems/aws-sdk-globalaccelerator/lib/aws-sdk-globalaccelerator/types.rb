@@ -303,6 +303,13 @@ module Aws::GlobalAccelerator
     #   The address range, in CIDR notation. This must be the exact range
     #   that you provisioned. You can't advertise only a portion of the
     #   provisioned range.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AdvertiseByoipCidrRequest AWS API Documentation
@@ -410,9 +417,8 @@ module Aws::GlobalAccelerator
     end
 
     # A cross-account attachment in Global Accelerator. A cross-account
-    # attachment specifies the *principals* who have permission to add to
-    # accelerators in their own account the resources in your account that
-    # you also list in the attachment.
+    # attachment specifies the *principals* who have permission to work with
+    # *resources* in your account, which you also list in the attachment.
     #
     # @!attribute [rw] attachment_arn
     #   The Amazon Resource Name (ARN) of the cross-account attachment.
@@ -523,6 +529,13 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -723,15 +736,16 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] principals
-    #   The principals to list in the cross-account attachment. A principal
-    #   can be an Amazon Web Services account number or the Amazon Resource
-    #   Name (ARN) for an accelerator.
+    #   The principals to include in the cross-account attachment. A
+    #   principal can be an Amazon Web Services account number or the Amazon
+    #   Resource Name (ARN) for an accelerator.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resources
-    #   The Amazon Resource Names (ARNs) for the resources to list in the
+    #   The Amazon Resource Names (ARNs) for the resources to include in the
     #   cross-account attachment. A resource can be any supported Amazon Web
-    #   Services resource type for Global Accelerator.
+    #   Services resource type for Global Accelerator or a CIDR range for a
+    #   bring your own IP address (BYOIP) address pool.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] idempotency_token
@@ -743,7 +757,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Create tags for cross-account attachment.
+    #   Add tags for a cross-account attachment.
     #
     #   For more information, see [Tagging in Global Accelerator][1] in the
     #   *Global Accelerator Developer Guide*.
@@ -1147,9 +1161,18 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # An endpoint (Amazon Web Services resource) that is listed in a
-    # cross-account attachment and can be added to an accelerator by
-    # specified principals, that are also listed in the attachment.
+    # An endpoint (Amazon Web Services resource) or an IP address range, in
+    # CIDR format, that is listed in a cross-account attachment. A
+    # cross-account resource can be added to an accelerator by specified
+    # principals, which are also listed in the attachment.
+    #
+    # For more information, see [ Working with cross-account attachments and
+    # resources in Global Accelerator][1] in the <i> Global Accelerator
+    # Developer Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html
     #
     # @!attribute [rw] endpoint_id
     #   The endpoint ID for the endpoint that is listed in a cross-account
@@ -1157,17 +1180,31 @@ module Aws::GlobalAccelerator
     #   principals.
     #   @return [String]
     #
+    # @!attribute [rw] cidr
+    #   An IP address range, in CIDR format, that is specified as an Amazon
+    #   Web Services resource. The address must be provisioned and
+    #   advertised in Global Accelerator by following the bring your own IP
+    #   address (BYOIP) process for Global Accelerator.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #   @return [String]
+    #
     # @!attribute [rw] attachment_arn
     #   The Amazon Resource Name (ARN) of the cross-account attachment that
-    #   specifies the endpoints (resources) that can be added to
-    #   accelerators and principals that have permission to add the
-    #   endpoints to accelerators.
+    #   specifies the resources (endpoints or CIDR range) that can be added
+    #   to accelerators and principals that have permission to add them.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CrossAccountResource AWS API Documentation
     #
     class CrossAccountResource < Struct.new(
       :endpoint_id,
+      :cidr,
       :attachment_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -1367,7 +1404,7 @@ module Aws::GlobalAccelerator
     #   The Amazon Resource Name (ARN) of the cross-account attachment that
     #   specifies the endpoints (resources) that can be added to
     #   accelerators and principals that have permission to add the
-    #   endpoints to accelerators.
+    #   endpoints.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingEndpointConfiguration AWS API Documentation
@@ -1598,6 +1635,13 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation. The prefix must be the same
     #   prefix that you specified when you provisioned the address range.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeprovisionByoipCidrRequest AWS API Documentation
@@ -1919,8 +1963,7 @@ module Aws::GlobalAccelerator
     #   is the EC2 instance ID. A resource must be valid and active when you
     #   add it as an endpoint.
     #
-    #   An Application Load Balancer can be either internal or
-    #   internet-facing.
+    #   For cross-account endpoints, this must be the ARN of the resource.
     #   @return [String]
     #
     # @!attribute [rw] weight
@@ -1965,7 +2008,7 @@ module Aws::GlobalAccelerator
     #   The Amazon Resource Name (ARN) of the cross-account attachment that
     #   specifies the endpoints (resources) that can be added to
     #   accelerators and principals that have permission to add the
-    #   endpoints to accelerators.
+    #   endpoints.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration AWS API Documentation
@@ -2431,7 +2474,7 @@ module Aws::GlobalAccelerator
 
     # @!attribute [rw] resource_owner_aws_account_ids
     #   The account IDs of principals (resource owners) in a cross-account
-    #   attachment who can add endpoints (resources) listed in the same
+    #   attachment who can work with resources listed in the same
     #   attachment.
     #   @return [Array<String>]
     #
@@ -2453,8 +2496,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The number of cross-account endpoints objects that you want to
-    #   return with this call. The default value is 10.
+    #   The number of cross-account resource objects that you want to return
+    #   with this call. The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -2474,8 +2517,7 @@ module Aws::GlobalAccelerator
     end
 
     # @!attribute [rw] cross_account_resources
-    #   The endpoints attached to an accelerator in a cross-account
-    #   attachment.
+    #   The cross-account resources used with an accelerator.
     #   @return [Array<Types::CrossAccountResource>]
     #
     # @!attribute [rw] next_token
@@ -2992,8 +3034,15 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] cidr
     #   The public IPv4 address range, in CIDR notation. The most specific
     #   IP prefix that you can specify is /24. The address range cannot
-    #   overlap with another address range that you've brought to this or
-    #   another Region.
+    #   overlap with another address range that you've brought to this
+    #   Amazon Web Services Region or another Region.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @!attribute [rw] cidr_authorization_context
@@ -3058,21 +3107,44 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
-    # An Amazon Web Services resource that is supported by Global
-    # Accelerator and can be added as an endpoint for an accelerator.
+    # A resource is one of the following: the ARN for an Amazon Web Services
+    # resource that is supported by Global Accelerator to be added as an
+    # endpoint, or a CIDR range that specifies a bring your own IP (BYOIP)
+    # address pool.
     #
     # @!attribute [rw] endpoint_id
-    #   The endpoint ID for the endpoint (Amazon Web Services resource).
+    #   The endpoint ID for the endpoint that is specified as a Amazon Web
+    #   Services resource.
+    #
+    #   An endpoint ID for the cross-account feature is the ARN of an Amazon
+    #   Web Services resource, such as a Network Load Balancer, that Global
+    #   Accelerator supports as an endpoint for an accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   An IP address range, in CIDR format, that is specified as resource.
+    #   The address must be provisioned and advertised in Global Accelerator
+    #   by following the bring your own IP address (BYOIP) process for
+    #   Global Accelerator
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Amazon Web Services Region where a resource is located.
+    #   The Amazon Web Services Region where a shared endpoint resource is
+    #   located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Resource AWS API Documentation
     #
     class Resource < Struct.new(
       :endpoint_id,
+      :cidr,
       :region)
       SENSITIVE = []
       include Aws::Structure
@@ -3293,8 +3365,8 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] add_principals
     #   The principals to add to the cross-account attachment. A principal
     #   is an account or the Amazon Resource Name (ARN) of an accelerator
-    #   that the attachment gives permission to add the resources from
-    #   another account, listed in the attachment.
+    #   that the attachment gives permission to work with resources from
+    #   another account. The resources are also listed in the attachment.
     #
     #   To add more than one principal, separate the account numbers or
     #   accelerator ARNs, or both, with commas.
@@ -3303,8 +3375,9 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] remove_principals
     #   The principals to remove from the cross-account attachment. A
     #   principal is an account or the Amazon Resource Name (ARN) of an
-    #   accelerator that is given permission to add the resources from
-    #   another account, listed in the cross-account attachment.
+    #   accelerator that the attachment gives permission to work with
+    #   resources from another account. The resources are also listed in the
+    #   attachment.
     #
     #   To remove more than one principal, separate the account numbers or
     #   accelerator ARNs, or both, with commas.
@@ -3312,7 +3385,7 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] add_resources
     #   The resources to add to the cross-account attachment. A resource
-    #   listed in a cross-account attachment can be added to an accelerator
+    #   listed in a cross-account attachment can be used with an accelerator
     #   by the principals that are listed in the attachment.
     #
     #   To add more than one resource, separate the resource ARNs with
@@ -3321,9 +3394,8 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] remove_resources
     #   The resources to remove from the cross-account attachment. A
-    #   resource listed in a cross-account attachment can be added to an
-    #   accelerator fy principals that are listed in the cross-account
-    #   attachment.
+    #   resource listed in a cross-account attachment can be used with an
+    #   accelerator by the principals that are listed in the attachment.
     #
     #   To remove more than one resource, separate the resource ARNs with
     #   commas.
@@ -3660,6 +3732,13 @@ module Aws::GlobalAccelerator
 
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/WithdrawByoipCidrRequest AWS API Documentation
@@ -3671,7 +3750,7 @@ module Aws::GlobalAccelerator
     end
 
     # @!attribute [rw] byoip_cidr
-    #   Information about the address pool.
+    #   Information about the BYOIP address pool.
     #   @return [Types::ByoipCidr]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/WithdrawByoipCidrResponse AWS API Documentation

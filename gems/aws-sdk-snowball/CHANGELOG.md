@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2024-03-07)
+------------------
+
+* Feature - Doc-only update for change to EKS-Anywhere ordering.
+
 1.65.0 (2024-01-29)
 ------------------
 

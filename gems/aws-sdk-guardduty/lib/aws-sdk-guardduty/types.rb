@@ -2172,20 +2172,31 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] auto_enable_organization_members
-    #   Indicates the auto-enablement configuration of GuardDuty for the
-    #   member accounts in the organization.
+    #   Indicates the auto-enablement configuration of GuardDuty or any of
+    #   the corresponding protection plans for the member accounts in the
+    #   organization.
     #
     #   * `NEW`: Indicates that when a new account joins the organization,
-    #     they will have GuardDuty enabled automatically.
+    #     they will have GuardDuty or any of the corresponding protection
+    #     plans enabled automatically.
     #
     #   * `ALL`: Indicates that all accounts in the organization have
-    #     GuardDuty enabled automatically. This includes `NEW` accounts that
-    #     join the organization and accounts that may have been suspended or
-    #     removed from the organization in GuardDuty.
+    #     GuardDuty and any of the corresponding protection plans enabled
+    #     automatically. This includes `NEW` accounts that join the
+    #     organization and accounts that may have been suspended or removed
+    #     from the organization in GuardDuty.
     #
-    #   * `NONE`: Indicates that GuardDuty will not be automatically enabled
-    #     for any account in the organization. The administrator must manage
-    #     GuardDuty for each account in the organization individually.
+    #   * `NONE`: Indicates that GuardDuty or any of the corresponding
+    #     protection plans will not be automatically enabled for any account
+    #     in the organization. The administrator must manage GuardDuty for
+    #     each account in the organization individually.
+    #
+    #     When you update the auto-enable setting from `ALL` or `NEW` to
+    #     `NONE`, this action doesn't disable the corresponding option for
+    #     your existing accounts. This configuration will apply to the new
+    #     accounts that join the organization. After you update the
+    #     auto-enable settings, no new account will have the corresponding
+    #     option as enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationResponse AWS API Documentation
@@ -2366,6 +2377,16 @@ module Aws::GuardDuty
 
     # Contains information about a GuardDuty feature.
     #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    #
     # @!attribute [rw] name
     #   The name of the feature.
     #   @return [String]
@@ -2389,6 +2410,16 @@ module Aws::GuardDuty
     end
 
     # Contains information about a GuardDuty feature.
+    #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
     #
     # @!attribute [rw] name
     #   Indicates the name of the feature that can be enabled for the
@@ -7783,6 +7814,13 @@ module Aws::GuardDuty
     #   * `NONE`: Indicates that GuardDuty will not be automatically enabled
     #     for any account in the organization. The administrator must manage
     #     GuardDuty for each account in the organization individually.
+    #
+    #     When you update the auto-enable setting from `ALL` or `NEW` to
+    #     `NONE`, this action doesn't disable the corresponding option for
+    #     your existing accounts. This configuration will apply to the new
+    #     accounts that join the organization. After you update the
+    #     auto-enable settings, no new account will have the corresponding
+    #     option as enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationRequest AWS API Documentation

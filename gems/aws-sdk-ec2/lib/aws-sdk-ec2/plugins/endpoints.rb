@@ -642,6 +642,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeLocalGateways.build(context)
           when :describe_locked_snapshots
             Aws::EC2::Endpoints::DescribeLockedSnapshots.build(context)
+          when :describe_mac_hosts
+            Aws::EC2::Endpoints::DescribeMacHosts.build(context)
           when :describe_managed_prefix_lists
             Aws::EC2::Endpoints::DescribeManagedPrefixLists.build(context)
           when :describe_moving_addresses
@@ -936,6 +938,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetHostReservationPurchasePreview.build(context)
           when :get_image_block_public_access_state
             Aws::EC2::Endpoints::GetImageBlockPublicAccessState.build(context)
+          when :get_instance_metadata_defaults
+            Aws::EC2::Endpoints::GetInstanceMetadataDefaults.build(context)
           when :get_instance_types_from_instance_requirements
             Aws::EC2::Endpoints::GetInstanceTypesFromInstanceRequirements.build(context)
           when :get_instance_uefi_data
@@ -1058,6 +1062,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::ModifyInstanceEventWindow.build(context)
           when :modify_instance_maintenance_options
             Aws::EC2::Endpoints::ModifyInstanceMaintenanceOptions.build(context)
+          when :modify_instance_metadata_defaults
+            Aws::EC2::Endpoints::ModifyInstanceMetadataDefaults.build(context)
           when :modify_instance_metadata_options
             Aws::EC2::Endpoints::ModifyInstanceMetadataOptions.build(context)
           when :modify_instance_placement

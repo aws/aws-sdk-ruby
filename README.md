@@ -408,7 +408,6 @@ RubyGems.org page under "LINKS" section.
 | AWS IoT FleetWise                                     | Aws::IoTFleetWise                        | aws-sdk-iotfleetwise                        | 2021-06-17  |
 | AWS IoT Greengrass V2                                 | Aws::GreengrassV2                        | aws-sdk-greengrassv2                        | 2020-11-30  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                    | aws-sdk-iotjobsdataplane                    | 2017-09-29  |
-| AWS IoT RoboRunner                                    | Aws::IoTRoboRunner                       | aws-sdk-iotroborunner                       | 2018-05-10  |
 | AWS IoT Secure Tunneling                              | Aws::IoTSecureTunneling                  | aws-sdk-iotsecuretunneling                  | 2018-10-05  |
 | AWS IoT SiteWise                                      | Aws::IoTSiteWise                         | aws-sdk-iotsitewise                         | 2019-12-02  |
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                      | aws-sdk-iotthingsgraph                      | 2018-09-06  |
@@ -703,6 +702,7 @@ RubyGems.org page under "LINKS" section.
 | Schemas                                               | Aws::Schemas                             | aws-sdk-schemas                             | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                       | aws-sdk-servicequotas                       | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                          | aws-sdk-synthetics                          | 2017-10-11  |
+| Timestream InfluxDB                                   | Aws::TimestreamInfluxDB                  | aws-sdk-timestreaminfluxdb                  | 2023-01-27  |
 | TrustedAdvisor Public API                             | Aws::TrustedAdvisor                      | aws-sdk-trustedadvisor                      | 2022-09-15  |
 
 ## License

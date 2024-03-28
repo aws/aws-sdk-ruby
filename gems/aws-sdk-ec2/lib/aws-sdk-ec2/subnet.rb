@@ -78,10 +78,10 @@ module Aws::EC2
     # Indicates whether instances launched in this subnet receive a public
     # IPv4 address.
     #
-    # Starting on February 1, 2024, Amazon Web Services will charge for all
-    # public IPv4 addresses, including public IPv4 addresses associated with
-    # running instances and Elastic IP addresses. For more information, see
-    # the *Public IPv4 Address* tab on the [Amazon VPC pricing page][1].
+    # Amazon Web Services charges for all public IPv4 addresses, including
+    # public IPv4 addresses associated with running instances and Elastic IP
+    # addresses. For more information, see the *Public IPv4 Address* tab on
+    # the [Amazon VPC pricing page][1].
     #
     #
     #

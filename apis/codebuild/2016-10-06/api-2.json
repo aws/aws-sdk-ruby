@@ -681,7 +681,8 @@
       "enum":[
         "OAUTH",
         "BASIC_AUTH",
-        "PERSONAL_ACCESS_TOKEN"
+        "PERSONAL_ACCESS_TOKEN",
+        "CODECONNECTIONS"
       ]
     },
     "BatchDeleteBuildsInput":{
@@ -1119,6 +1120,7 @@
         "environmentType":{"shape":"EnvironmentType"},
         "computeType":{"shape":"ComputeType"},
         "scalingConfiguration":{"shape":"ScalingConfigurationInput"},
+        "overflowBehavior":{"shape":"FleetOverflowBehavior"},
         "tags":{"shape":"TagList"}
       }
     },
@@ -1458,6 +1460,7 @@
         "environmentType":{"shape":"EnvironmentType"},
         "computeType":{"shape":"ComputeType"},
         "scalingConfiguration":{"shape":"ScalingConfigurationOutput"},
+        "overflowBehavior":{"shape":"FleetOverflowBehavior"},
         "tags":{"shape":"TagList"}
       }
     },
@@ -1489,6 +1492,13 @@
       "member":{"shape":"NonEmptyString"},
       "max":100,
       "min":1
+    },
+    "FleetOverflowBehavior":{
+      "type":"string",
+      "enum":[
+        "QUEUE",
+        "ON_DEMAND"
+      ]
     },
     "FleetScalingMetricType":{
       "type":"string",
@@ -2437,7 +2447,9 @@
       "enum":[
         "GITHUB",
         "BITBUCKET",
-        "GITHUB_ENTERPRISE"
+        "GITHUB_ENTERPRISE",
+        "GITLAB",
+        "GITLAB_SELF_MANAGED"
       ]
     },
     "SharedResourceSortByType":{
@@ -2464,14 +2476,18 @@
     },
     "SourceAuthType":{
       "type":"string",
-      "enum":["OAUTH"]
+      "enum":[
+        "OAUTH",
+        "CODECONNECTIONS"
+      ]
     },
     "SourceCredentialsInfo":{
       "type":"structure",
       "members":{
         "arn":{"shape":"NonEmptyString"},
         "serverType":{"shape":"ServerType"},
-        "authType":{"shape":"AuthType"}
+        "authType":{"shape":"AuthType"},
+        "resource":{"shape":"String"}
       }
     },
     "SourceCredentialsInfos":{
@@ -2484,6 +2500,8 @@
         "CODECOMMIT",
         "CODEPIPELINE",
         "GITHUB",
+        "GITLAB",
+        "GITLAB_SELF_MANAGED",
         "S3",
         "BITBUCKET",
         "GITHUB_ENTERPRISE",
@@ -2696,6 +2714,7 @@
         "environmentType":{"shape":"EnvironmentType"},
         "computeType":{"shape":"ComputeType"},
         "scalingConfiguration":{"shape":"ScalingConfigurationInput"},
+        "overflowBehavior":{"shape":"FleetOverflowBehavior"},
         "tags":{"shape":"TagList"}
       }
     },

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2024-03-20)
+------------------
+
+* Feature - AMB Query: update GetTransaction to include transactionId as input
+
+1.9.0 (2024-03-19)
+------------------
+
+* Feature - Introduces a new API for Amazon Managed Blockchain Query: ListFilteredTransactionEvents.
+
 1.8.0 (2024-02-01)
 ------------------
 

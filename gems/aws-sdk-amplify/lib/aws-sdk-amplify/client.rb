@@ -612,6 +612,13 @@ module Aws::Amplify
 
     # Creates a new backend environment for an Amplify app.
     #
+    # This API is available only to Amplify Gen 1 applications where the
+    # backend is created using Amplify Studio or the Amplify command line
+    # interface (CLI). This API isn’t available to applications created
+    # using the Amplify Gen 2 public preview. When you deploy an application
+    # with Amplify Gen 2, you provision the app's backend infrastructure
+    # using Typescript code.
+    #
     # @option params [required, String] :app_id
     #   The unique ID for an Amplify app.
     #
@@ -1050,6 +1057,13 @@ module Aws::Amplify
 
     # Deletes a backend environment for an Amplify app.
     #
+    # This API is available only to Amplify Gen 1 applications where the
+    # backend was created using Amplify Studio or the Amplify command line
+    # interface (CLI). This API isn’t available to applications created
+    # using the Amplify Gen 2 public preview. When you deploy an application
+    # with Amplify Gen 2, you provision the app's backend infrastructure
+    # using Typescript code.
+    #
     # @option params [required, String] :app_id
     #   The unique ID of an Amplify app.
     #
@@ -1420,6 +1434,13 @@ module Aws::Amplify
     end
 
     # Returns a backend environment for an Amplify app.
+    #
+    # This API is available only to Amplify Gen 1 applications where the
+    # backend was created using Amplify Studio or the Amplify command line
+    # interface (CLI). This API isn’t available to applications created
+    # using the Amplify Gen 2 public preview. When you deploy an application
+    # with Amplify Gen 2, you provision the app's backend infrastructure
+    # using Typescript code.
     #
     # @option params [required, String] :app_id
     #   The unique id for an Amplify app.
@@ -1792,6 +1813,13 @@ module Aws::Amplify
     end
 
     # Lists the backend environments for an Amplify app.
+    #
+    # This API is available only to Amplify Gen 1 applications where the
+    # backend was created using Amplify Studio or the Amplify command line
+    # interface (CLI). This API isn’t available to applications created
+    # using the Amplify Gen 2 public preview. When you deploy an application
+    # with Amplify Gen 2, you provision the app's backend infrastructure
+    # using Typescript code.
     #
     # @option params [required, String] :app_id
     #   The unique ID for an Amplify app.
@@ -2819,7 +2847,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

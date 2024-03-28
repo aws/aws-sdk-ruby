@@ -58,6 +58,11 @@ module Aws::CostExplorer
       SENSITIVE: []
     end
 
+    class BackfillLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class BillExpirationException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -69,6 +74,15 @@ module Aws::CostExplorer
       attr_accessor status: ("Active" | "Inactive")
       attr_accessor last_updated_date: ::String
       attr_accessor last_used_date: ::String
+      SENSITIVE: []
+    end
+
+    class CostAllocationTagBackfillRequest
+      attr_accessor backfill_from: ::String
+      attr_accessor requested_at: ::String
+      attr_accessor completed_at: ::String
+      attr_accessor backfill_status: ("SUCCEEDED" | "PROCESSING" | "FAILED")
+      attr_accessor last_updated_at: ::String
       SENSITIVE: []
     end
 
@@ -781,6 +795,18 @@ module Aws::CostExplorer
       SENSITIVE: []
     end
 
+    class ListCostAllocationTagBackfillHistoryRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCostAllocationTagBackfillHistoryResponse
+      attr_accessor backfill_requests: ::Array[Types::CostAllocationTagBackfillRequest]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListCostAllocationTagsRequest
       attr_accessor status: ("Active" | "Inactive")
       attr_accessor tag_keys: ::Array[::String]
@@ -1228,6 +1254,16 @@ module Aws::CostExplorer
     class SortDefinition
       attr_accessor key: ::String
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class StartCostAllocationTagBackfillRequest
+      attr_accessor backfill_from: ::String
+      SENSITIVE: []
+    end
+
+    class StartCostAllocationTagBackfillResponse
+      attr_accessor backfill_request: Types::CostAllocationTagBackfillRequest
       SENSITIVE: []
     end
 

@@ -44,6 +44,8 @@ module Aws::SavingsPlans
     ParentSavingsPlanOffering = Shapes::StructureShape.new(name: 'ParentSavingsPlanOffering')
     Region = Shapes::StringShape.new(name: 'Region')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ReturnSavingsPlanRequest = Shapes::StructureShape.new(name: 'ReturnSavingsPlanRequest')
+    ReturnSavingsPlanResponse = Shapes::StructureShape.new(name: 'ReturnSavingsPlanResponse')
     SavingsPlan = Shapes::StructureShape.new(name: 'SavingsPlan')
     SavingsPlanArn = Shapes::StringShape.new(name: 'SavingsPlanArn')
     SavingsPlanArnList = Shapes::ListShape.new(name: 'SavingsPlanArnList')
@@ -219,6 +221,13 @@ module Aws::SavingsPlans
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ReturnSavingsPlanRequest.add_member(:savings_plan_id, Shapes::ShapeRef.new(shape: SavingsPlanId, required: true, location_name: "savingsPlanId"))
+    ReturnSavingsPlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ReturnSavingsPlanRequest.struct_class = Types::ReturnSavingsPlanRequest
+
+    ReturnSavingsPlanResponse.add_member(:savings_plan_id, Shapes::ShapeRef.new(shape: SavingsPlanId, location_name: "savingsPlanId"))
+    ReturnSavingsPlanResponse.struct_class = Types::ReturnSavingsPlanResponse
+
     SavingsPlan.add_member(:offering_id, Shapes::ShapeRef.new(shape: SavingsPlanOfferingId, location_name: "offeringId"))
     SavingsPlan.add_member(:savings_plan_id, Shapes::ShapeRef.new(shape: SavingsPlanId, location_name: "savingsPlanId"))
     SavingsPlan.add_member(:savings_plan_arn, Shapes::ShapeRef.new(shape: SavingsPlanArn, location_name: "savingsPlanArn"))
@@ -237,6 +246,7 @@ module Aws::SavingsPlans
     SavingsPlan.add_member(:recurring_payment_amount, Shapes::ShapeRef.new(shape: Amount, location_name: "recurringPaymentAmount"))
     SavingsPlan.add_member(:term_duration_in_seconds, Shapes::ShapeRef.new(shape: TermDurationInSeconds, location_name: "termDurationInSeconds"))
     SavingsPlan.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    SavingsPlan.add_member(:returnable_until, Shapes::ShapeRef.new(shape: String, location_name: "returnableUntil"))
     SavingsPlan.struct_class = Types::SavingsPlan
 
     SavingsPlanArnList.member = Shapes::ShapeRef.new(shape: SavingsPlanArn)
@@ -465,6 +475,18 @@ module Aws::SavingsPlans
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:return_savings_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReturnSavingsPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/ReturnSavingsPlan"
+        o.input = Shapes::ShapeRef.new(shape: ReturnSavingsPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReturnSavingsPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

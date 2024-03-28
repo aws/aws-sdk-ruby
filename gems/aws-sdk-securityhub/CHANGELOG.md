@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2024-03-22)
+------------------
+
+* Feature - Added new resource detail object to ASFF, including resource for LastKnownExploitAt
+
 1.101.0 (2024-01-26)
 ------------------
 

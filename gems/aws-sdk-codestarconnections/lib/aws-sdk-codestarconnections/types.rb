@@ -307,6 +307,15 @@ module Aws::CodeStarconnections
     #   The type of sync configuration.
     #   @return [String]
     #
+    # @!attribute [rw] publish_deployment_status
+    #   Whether to enable or disable publishing of deployment status to
+    #   source providers.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_resource_update_on
+    #   When to trigger Git sync to begin the stack update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateSyncConfigurationInput AWS API Documentation
     #
     class CreateSyncConfigurationInput < Struct.new(
@@ -315,7 +324,9 @@ module Aws::CodeStarconnections
       :repository_link_id,
       :resource_name,
       :role_arn,
-      :sync_type)
+      :sync_type,
+      :publish_deployment_status,
+      :trigger_resource_update_on)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1470,6 +1481,15 @@ module Aws::CodeStarconnections
     #   The type of sync for a specific sync configuration.
     #   @return [String]
     #
+    # @!attribute [rw] publish_deployment_status
+    #   Whether to enable or disable publishing of deployment status to
+    #   source providers.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_resource_update_on
+    #   When to trigger Git sync to begin the stack update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/SyncConfiguration AWS API Documentation
     #
     class SyncConfiguration < Struct.new(
@@ -1481,7 +1501,9 @@ module Aws::CodeStarconnections
       :repository_name,
       :resource_name,
       :role_arn,
-      :sync_type)
+      :sync_type,
+      :publish_deployment_status,
+      :trigger_resource_update_on)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1758,6 +1780,15 @@ module Aws::CodeStarconnections
     #   The sync type for the sync configuration to be updated.
     #   @return [String]
     #
+    # @!attribute [rw] publish_deployment_status
+    #   Whether to enable or disable publishing of deployment status to
+    #   source providers.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_resource_update_on
+    #   When to trigger Git sync to begin the stack update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateSyncConfigurationInput AWS API Documentation
     #
     class UpdateSyncConfigurationInput < Struct.new(
@@ -1766,7 +1797,9 @@ module Aws::CodeStarconnections
       :repository_link_id,
       :resource_name,
       :role_arn,
-      :sync_type)
+      :sync_type,
+      :publish_deployment_status,
+      :trigger_resource_update_on)
       SENSITIVE = []
       include Aws::Structure
     end

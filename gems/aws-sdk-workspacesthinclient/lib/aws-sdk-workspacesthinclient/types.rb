@@ -1282,19 +1282,13 @@ module Aws::WorkSpacesThinClient
     #   maintenance window.
     #   @return [String]
     #
-    # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the Key Management Service key to
-    #   use for the update.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/UpdateDeviceRequest AWS API Documentation
     #
     class UpdateDeviceRequest < Struct.new(
       :id,
       :name,
       :desired_software_set_id,
-      :software_set_update_schedule,
-      :kms_key_arn)
+      :software_set_update_schedule)
       SENSITIVE = [:name]
       include Aws::Structure
     end

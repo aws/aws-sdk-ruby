@@ -2048,9 +2048,9 @@ module Aws::ElastiCache
     # or a secondary replication group associated with a Global datastore.
     #
     # A Redis (cluster mode disabled) replication group is a collection of
-    # clusters, where one of the clusters is a read/write primary and the
-    # others are read-only replicas. Writes to the primary are
-    # asynchronously propagated to the replicas.
+    # nodes, where one of the nodes is a read/write primary and the others
+    # are read-only replicas. Writes to the primary are asynchronously
+    # propagated to the replicas.
     #
     # A Redis cluster-mode enabled cluster is comprised of from 1 to 90
     # shards (API/CLI: node groups). Each shard has a primary node and up to
@@ -2394,11 +2394,6 @@ module Aws::ElastiCache
     #   the new replication group is being created.
     #
     # @option params [String] :preferred_maintenance_window
-    #   Specifies the weekly time range during which maintenance on the
-    #   cluster is performed. It is specified as a range in the format
-    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-    #   window is a 60 minute period. Valid values for `ddd` are:
-    #
     #   Specifies the weekly time range during which maintenance on the
     #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
@@ -2912,11 +2907,13 @@ module Aws::ElastiCache
     #     major_engine_version: "String",
     #     cache_usage_limits: {
     #       data_storage: {
-    #         maximum: 1, # required
+    #         maximum: 1,
+    #         minimum: 1,
     #         unit: "GB", # required, accepts GB
     #       },
     #       ecpu_per_second: {
-    #         maximum: 1, # required
+    #         maximum: 1,
+    #         minimum: 1,
     #       },
     #     },
     #     kms_key_id: "String",
@@ -2944,8 +2941,10 @@ module Aws::ElastiCache
     #   resp.serverless_cache.major_engine_version #=> String
     #   resp.serverless_cache.full_engine_version #=> String
     #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
     #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
     #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
     #   resp.serverless_cache.kms_key_id #=> String
     #   resp.serverless_cache.security_group_ids #=> Array
     #   resp.serverless_cache.security_group_ids[0] #=> String
@@ -4174,8 +4173,10 @@ module Aws::ElastiCache
     #   resp.serverless_cache.major_engine_version #=> String
     #   resp.serverless_cache.full_engine_version #=> String
     #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
     #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
     #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
     #   resp.serverless_cache.kms_key_id #=> String
     #   resp.serverless_cache.security_group_ids #=> Array
     #   resp.serverless_cache.security_group_ids[0] #=> String
@@ -7746,8 +7747,10 @@ module Aws::ElastiCache
     #   resp.serverless_caches[0].major_engine_version #=> String
     #   resp.serverless_caches[0].full_engine_version #=> String
     #   resp.serverless_caches[0].cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_caches[0].cache_usage_limits.data_storage.minimum #=> Integer
     #   resp.serverless_caches[0].cache_usage_limits.data_storage.unit #=> String, one of "GB"
     #   resp.serverless_caches[0].cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_caches[0].cache_usage_limits.ecpu_per_second.minimum #=> Integer
     #   resp.serverless_caches[0].kms_key_id #=> String
     #   resp.serverless_caches[0].security_group_ids #=> Array
     #   resp.serverless_caches[0].security_group_ids[0] #=> String
@@ -10188,11 +10191,13 @@ module Aws::ElastiCache
     #     description: "String",
     #     cache_usage_limits: {
     #       data_storage: {
-    #         maximum: 1, # required
+    #         maximum: 1,
+    #         minimum: 1,
     #         unit: "GB", # required, accepts GB
     #       },
     #       ecpu_per_second: {
-    #         maximum: 1, # required
+    #         maximum: 1,
+    #         minimum: 1,
     #       },
     #     },
     #     remove_user_group: false,
@@ -10212,8 +10217,10 @@ module Aws::ElastiCache
     #   resp.serverless_cache.major_engine_version #=> String
     #   resp.serverless_cache.full_engine_version #=> String
     #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
     #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
     #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
     #   resp.serverless_cache.kms_key_id #=> String
     #   resp.serverless_cache.security_group_ids #=> Array
     #   resp.serverless_cache.security_group_ids[0] #=> String
@@ -11300,7 +11307,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2243,6 +2243,13 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] job_state_time_limit_actions
+    #   The set of actions that Batch performs on jobs that remain at the
+    #   head of the job queue in the specified state longer than specified
+    #   times. Batch will perform each action after `maxTimeSeconds` has
+    #   passed.
+    #   @return [Array<Types::JobStateTimeLimitAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueRequest AWS API Documentation
     #
     class CreateJobQueueRequest < Struct.new(
@@ -2251,7 +2258,8 @@ module Aws::Batch
       :scheduling_policy_arn,
       :priority,
       :compute_environment_order,
-      :tags)
+      :tags,
+      :job_state_time_limit_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3809,6 +3817,12 @@ module Aws::Batch
     #   [1]: https://kubernetes.io/docs/concepts/security/pod-security-policy/#privileged
     #   @return [Boolean]
     #
+    # @!attribute [rw] allow_privilege_escalation
+    #   Whether or not a container or a Kubernetes pod is allowed to gain
+    #   more privileges than its parent process. The default value is
+    #   `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] read_only_root_filesystem
     #   When this parameter is `true`, the container is given read-only
     #   access to its root file system. The default value is `false`. This
@@ -3839,6 +3853,7 @@ module Aws::Batch
       :run_as_user,
       :run_as_group,
       :privileged,
+      :allow_privilege_escalation,
       :read_only_root_filesystem,
       :run_as_non_root)
       SENSITIVE = []
@@ -4017,6 +4032,15 @@ module Aws::Batch
     #   [1]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
     #   @return [String]
     #
+    # @!attribute [rw] image_pull_secrets
+    #   References a Kubernetes secret resource. This object must start and
+    #   end with an alphanumeric character, is required to be lowercase, can
+    #   include periods (.) and hyphens (-), and can't contain more than
+    #   253 characters.
+    #
+    #   `ImagePullSecret$name` is required when this object is used.
+    #   @return [Array<Types::ImagePullSecret>]
+    #
     # @!attribute [rw] containers
     #   The properties of the container that's used on the Amazon EKS pod.
     #   @return [Array<Types::EksContainer>]
@@ -4069,6 +4093,7 @@ module Aws::Batch
       :service_account_name,
       :host_network,
       :dns_policy,
+      :image_pull_secrets,
       :containers,
       :init_containers,
       :volumes,
@@ -4134,6 +4159,10 @@ module Aws::Batch
     #   [4]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
     #   @return [String]
     #
+    # @!attribute [rw] image_pull_secrets
+    #   Displays the reference pointer to the Kubernetes secret resource.
+    #   @return [Array<Types::ImagePullSecret>]
+    #
     # @!attribute [rw] containers
     #   The properties of the container that's used on the Amazon EKS pod.
     #   @return [Array<Types::EksContainerDetail>]
@@ -4184,6 +4213,7 @@ module Aws::Batch
       :service_account_name,
       :host_network,
       :dns_policy,
+      :image_pull_secrets,
       :containers,
       :init_containers,
       :volumes,
@@ -4532,6 +4562,23 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # References a Kubernetes configuration resource that holds a list of
+    # secrets. These secrets help to gain access to pull an image from a
+    # private registry.
+    #
+    # @!attribute [rw] name
+    #   Provides a unique identifier for the `ImagePullSecret`. This object
+    #   is required when `EksPodProperties$imagePullSecrets` is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ImagePullSecret AWS API Documentation
+    #
+    class ImagePullSecret < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents an Batch job definition.
     #
     # @!attribute [rw] job_definition_name
@@ -4745,6 +4792,20 @@ module Aws::Batch
     # @!attribute [rw] status_reason
     #   A short, human-readable string to provide more details for the
     #   current status of the job.
+    #
+    #   * `CAPACITY:INSUFFICIENT_INSTANCE_CAPACITY` - All compute
+    #     environments have insufficient capacity to service the job.
+    #
+    #   * `MISCONFIGURATION:COMPUTE_ENVIRONMENT_MAX_RESOURCE` - All compute
+    #     environments have a `maxVcpu` setting that is smaller than the job
+    #     requirements.
+    #
+    #   * `MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT` - All compute
+    #     environments have no connected instances that meet the job
+    #     requirements.
+    #
+    #   * `MISCONFIGURATION:SERVICE_ROLE_PERMISSIONS` - All compute
+    #     environments have problems with the service role permissions.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -4958,6 +5019,13 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] job_state_time_limit_actions
+    #   The set of actions that Batch perform on jobs that remain at the
+    #   head of the job queue in the specified state longer than specified
+    #   times. Batch will perform each action after `maxTimeSeconds` has
+    #   passed.
+    #   @return [Array<Types::JobStateTimeLimitAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobQueueDetail AWS API Documentation
     #
     class JobQueueDetail < Struct.new(
@@ -4969,7 +5037,45 @@ module Aws::Batch
       :status_reason,
       :priority,
       :compute_environment_order,
-      :tags)
+      :tags,
+      :job_state_time_limit_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an action that Batch will take after the job has remained at
+    # the head of the queue in the specified state for longer than the
+    # specified time.
+    #
+    # @!attribute [rw] reason
+    #   The reason to log for the action being taken.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the job needed to trigger the action. The only
+    #   supported value is "`RUNNABLE`".
+    #   @return [String]
+    #
+    # @!attribute [rw] max_time_seconds
+    #   The approximate amount of time, in seconds, that must pass with the
+    #   job in the specified state before the action is taken. The minimum
+    #   value is 600 (10 minutes) and the maximum value is 86,400 (24
+    #   hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   The action to take when a job is at the head of the job queue in the
+    #   specified state for the specified period of time. The only supported
+    #   value is "`CANCEL`", which will cancel the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobStateTimeLimitAction AWS API Documentation
+    #
+    class JobStateTimeLimitAction < Struct.new(
+      :reason,
+      :state,
+      :max_time_seconds,
+      :action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6903,7 +7009,7 @@ module Aws::Batch
     #   rest of the containers in a task. If this parameter is omitted, a
     #   container is assumed to be essential.
     #
-    #   All tasks must have at least one essential container. If you have an
+    #   All jobs must have at least one essential container. If you have an
     #   application that's composed of multiple containers, group
     #   containers that are used for a common purpose into components, and
     #   separate the different components into multiple task definitions.
@@ -7287,7 +7393,7 @@ module Aws::Batch
     #   rest of the containers in a task. If this parameter is omitted, a
     #   container is assumed to be essential.
     #
-    #   All tasks must have at least one essential container. If you have an
+    #   All jobs must have at least one essential container. If you have an
     #   application that's composed of multiple containers, group
     #   containers that are used for a common purpose into components, and
     #   separate the different components into multiple task definitions.
@@ -7871,6 +7977,13 @@ module Aws::Batch
     #    </note>
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
+    # @!attribute [rw] job_state_time_limit_actions
+    #   The set of actions that Batch perform on jobs that remain at the
+    #   head of the job queue in the specified state longer than specified
+    #   times. Batch will perform each action after `maxTimeSeconds` has
+    #   passed.
+    #   @return [Array<Types::JobStateTimeLimitAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueueRequest AWS API Documentation
     #
     class UpdateJobQueueRequest < Struct.new(
@@ -7878,7 +7991,8 @@ module Aws::Batch
       :state,
       :scheduling_policy_arn,
       :priority,
-      :compute_environment_order)
+      :compute_environment_order,
+      :job_state_time_limit_actions)
       SENSITIVE = []
       include Aws::Structure
     end

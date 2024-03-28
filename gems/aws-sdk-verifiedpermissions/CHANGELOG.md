@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2024-03-06)
+------------------
+
+* Feature - Deprecating details in favor of configuration for GetIdentitySource and ListIdentitySources APIs.
+
 1.16.0 (2024-01-26)
 ------------------
 

@@ -678,7 +678,7 @@ module Aws::Transfer
     # sending files to an externally hosted AS2 server. For SFTP, the
     # connector is required when sending files to an SFTP server or
     # receiving files from an SFTP server. For more details about
-    # connectors, see [Create AS2 connectors][1] and [Create SFTP
+    # connectors, see [Configure AS2 connectors][1] and [Create SFTP
     # connectors][2].
     #
     # <note markdown="1"> You must specify exactly one configuration object: either for AS2
@@ -688,7 +688,7 @@ module Aws::Transfer
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/configure-as2-connector.html
     # [2]: https://docs.aws.amazon.com/transfer/latest/userguide/configure-sftp-connector.html
     #
     # @option params [required, String] :url
@@ -757,7 +757,7 @@ module Aws::Transfer
     #       partner_profile_id: "ProfileId",
     #       message_subject: "MessageSubject",
     #       compression: "ZLIB", # accepts ZLIB, DISABLED
-    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
+    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, DES_EDE3_CBC, NONE
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #       mdn_response: "SYNC", # accepts SYNC, NONE
@@ -2054,7 +2054,7 @@ module Aws::Transfer
     #   resp.connector.as_2_config.partner_profile_id #=> String
     #   resp.connector.as_2_config.message_subject #=> String
     #   resp.connector.as_2_config.compression #=> String, one of "ZLIB", "DISABLED"
-    #   resp.connector.as_2_config.encryption_algorithm #=> String, one of "AES128_CBC", "AES192_CBC", "AES256_CBC", "NONE"
+    #   resp.connector.as_2_config.encryption_algorithm #=> String, one of "AES128_CBC", "AES192_CBC", "AES256_CBC", "DES_EDE3_CBC", "NONE"
     #   resp.connector.as_2_config.signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE"
     #   resp.connector.as_2_config.mdn_signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE", "DEFAULT"
     #   resp.connector.as_2_config.mdn_response #=> String, one of "SYNC", "NONE"
@@ -4060,7 +4060,7 @@ module Aws::Transfer
     #       partner_profile_id: "ProfileId",
     #       message_subject: "MessageSubject",
     #       compression: "ZLIB", # accepts ZLIB, DISABLED
-    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
+    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, DES_EDE3_CBC, NONE
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #       mdn_response: "SYNC", # accepts SYNC, NONE
@@ -4500,6 +4500,21 @@ module Aws::Transfer
     # The response returns the `ServerId` and the `UserName` for the updated
     # user.
     #
+    # In the console, you can select *Restricted* when you create or update
+    # a user. This ensures that the user can't access anything outside of
+    # their home directory. The programmatic way to configure this behavior
+    # is to update the user. Set their `HomeDirectoryType` to `LOGICAL`, and
+    # specify `HomeDirectoryMappings` with `Entry` as root (`/`) and
+    # `Target` as their home directory.
+    #
+    # For example, if the user's home directory is `/test/admin-user`, the
+    # following command updates the user so that their configuration in the
+    # console shows the *Restricted* flag as selected.
+    #
+    # ` aws transfer update-user --server-id <server-id> --user-name
+    # admin-user --home-directory-type LOGICAL --home-directory-mappings
+    # "[\{"Entry":"/", "Target":"/test/admin-user"\}]"`
+    #
     # @option params [String] :home_directory
     #   The landing directory (folder) for a user when they log in to the
     #   server using the client.
@@ -4665,7 +4680,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

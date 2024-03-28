@@ -388,11 +388,13 @@ module Aws
                                      ?major_engine_version: ::String,
                                      ?cache_usage_limits: {
                                        data_storage: {
-                                         maximum: ::Integer,
+                                         maximum: ::Integer?,
+                                         minimum: ::Integer?,
                                          unit: ("GB")
                                        }?,
                                        ecpu_per_second: {
-                                         maximum: ::Integer
+                                         maximum: ::Integer?,
+                                         minimum: ::Integer?
                                        }?
                                      },
                                      ?kms_key_id: ::String,
@@ -1225,11 +1227,13 @@ module Aws
                                      ?description: ::String,
                                      ?cache_usage_limits: {
                                        data_storage: {
-                                         maximum: ::Integer,
+                                         maximum: ::Integer?,
+                                         minimum: ::Integer?,
                                          unit: ("GB")
                                        }?,
                                        ecpu_per_second: {
-                                         maximum: ::Integer
+                                         maximum: ::Integer?,
+                                         minimum: ::Integer?
                                        }?
                                      },
                                      ?remove_user_group: bool,

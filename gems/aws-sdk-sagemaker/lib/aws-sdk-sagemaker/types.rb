@@ -4607,9 +4607,13 @@ module Aws::SageMaker
     #   @return [Types::ModelDataSource]
     #
     # @!attribute [rw] environment
-    #   The environment variables to set in the Docker container. Each key
-    #   and value in the `Environment` string to string map can have length
-    #   of up to 1024. We support up to 16 entries in the map.
+    #   The environment variables to set in the Docker container.
+    #
+    #   The maximum length of each key and value in the `Environment` map is
+    #   1024 bytes. The maximum length of all keys and values in the map,
+    #   combined, is 32 KB. If you pass multiple containers to a
+    #   `CreateModel` request, then the maximum length of all of their maps,
+    #   combined, is also 32 KB.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] model_package_name
@@ -5805,9 +5809,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   SageMaker uses Amazon Web Services KMS to encrypt the EFS volume
-    #   attached to the domain with an Amazon Web Services managed key by
-    #   default. For more control, specify a customer managed key.
+    #   SageMaker uses Amazon Web Services KMS to encrypt EFS and EBS
+    #   volumes attached to the domain with an Amazon Web Services managed
+    #   key by default. For more control, specify a customer managed key.
     #   @return [String]
     #
     # @!attribute [rw] app_security_group_management
@@ -6243,13 +6247,14 @@ module Aws::SageMaker
 
     # @!attribute [rw] feature_group_name
     #   The name of the `FeatureGroup`. The name must be unique within an
-    #   Amazon Web Services Region in an Amazon Web Services account. The
-    #   name:
+    #   Amazon Web Services Region in an Amazon Web Services account.
+    #
+    #   The name:
     #
     #   * Must start and end with an alphanumeric character.
     #
-    #   * Can only contain alphanumeric character and hyphens. Spaces are
-    #     not allowed.
+    #   * Can only include alphanumeric characters, underscores, and
+    #     hyphens. Spaces are not allowed.
     #   @return [String]
     #
     # @!attribute [rw] record_identifier_feature_name
@@ -19021,6 +19026,13 @@ module Aws::SageMaker
     #   The name of a feature. The type must be a string. `FeatureName`
     #   cannot be any of the following: `is_deleted`, `write_time`,
     #   `api_invocation_time`.
+    #
+    #   The name:
+    #
+    #   * Must start and end with an alphanumeric character.
+    #
+    #   * Can only include alphanumeric characters, underscores, and
+    #     hyphens. Spaces are not allowed.
     #   @return [String]
     #
     # @!attribute [rw] feature_type
@@ -38010,7 +38022,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The Amazon Simple Storage (Amazon S3) location and and security
+    # The Amazon Simple Storage (Amazon S3) location and security
     # configuration for `OfflineStore`.
     #
     # @!attribute [rw] s3_uri

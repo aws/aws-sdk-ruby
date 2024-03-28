@@ -9,14 +9,14 @@ module Aws::BedrockAgent
   module Types
 
     class APISchema
-      attr_accessor s3: Types::S3Identifier
       attr_accessor payload: ::String
+      attr_accessor s3: Types::S3Identifier
       attr_accessor unknown: untyped
       SENSITIVE: [:payload]
 
-      class S3 < APISchema
-      end
       class Payload < APISchema
+      end
+      class S3 < APISchema
       end
       class Unknown < APISchema
       end
@@ -48,61 +48,61 @@ module Aws::BedrockAgent
     end
 
     class Agent
+      attr_accessor agent_arn: ::String
       attr_accessor agent_id: ::String
       attr_accessor agent_name: ::String
-      attr_accessor agent_arn: ::String
+      attr_accessor agent_resource_role_arn: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       attr_accessor agent_version: ::String
       attr_accessor client_token: ::String
-      attr_accessor instruction: ::String
-      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
-      attr_accessor foundation_model: ::String
-      attr_accessor description: ::String
-      attr_accessor idle_session_ttl_in_seconds: ::Integer
-      attr_accessor agent_resource_role_arn: ::String
-      attr_accessor customer_encryption_key_arn: ::String
       attr_accessor created_at: ::Time
-      attr_accessor updated_at: ::Time
-      attr_accessor prepared_at: ::Time
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor description: ::String
       attr_accessor failure_reasons: ::Array[::String]
-      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor foundation_model: ::String
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor instruction: ::String
+      attr_accessor prepared_at: ::Time
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor updated_at: ::Time
       SENSITIVE: [:instruction, :prompt_override_configuration]
     end
 
     class AgentActionGroup
-      attr_accessor agent_id: ::String
-      attr_accessor agent_version: ::String
+      attr_accessor action_group_executor: Types::ActionGroupExecutor
       attr_accessor action_group_id: ::String
       attr_accessor action_group_name: ::String
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor updated_at: ::Time
-      attr_accessor parent_action_signature: ("AMAZON.UserInput")
-      attr_accessor action_group_executor: Types::ActionGroupExecutor
-      attr_accessor api_schema: Types::APISchema
       attr_accessor action_group_state: ("ENABLED" | "DISABLED")
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor api_schema: Types::APISchema
+      attr_accessor client_token: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor parent_action_signature: ("AMAZON.UserInput")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class AgentAlias
-      attr_accessor agent_id: ::String
+      attr_accessor agent_alias_arn: ::String
+      attr_accessor agent_alias_history_events: ::Array[Types::AgentAliasHistoryEvent]
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
-      attr_accessor agent_alias_arn: ::String
+      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+      attr_accessor agent_id: ::String
       attr_accessor client_token: ::String
+      attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
-      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      attr_accessor agent_alias_history_events: ::Array[Types::AgentAliasHistoryEvent]
-      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
       SENSITIVE: []
     end
 
     class AgentAliasHistoryEvent
-      attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
       attr_accessor end_date: ::Time
+      attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
       attr_accessor start_date: ::Time
       SENSITIVE: []
     end
@@ -115,10 +115,10 @@ module Aws::BedrockAgent
     class AgentAliasSummary
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
-      attr_accessor description: ::String
-      attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
       attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
       attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -126,17 +126,17 @@ module Aws::BedrockAgent
     class AgentKnowledgeBase
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor knowledge_base_id: ::String
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
-      attr_accessor updated_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_id: ::String
       attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class AgentKnowledgeBaseSummary
-      attr_accessor knowledge_base_id: ::String
       attr_accessor description: ::String
+      attr_accessor knowledge_base_id: ::String
       attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -147,28 +147,28 @@ module Aws::BedrockAgent
       attr_accessor agent_name: ::String
       attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       attr_accessor description: ::String
-      attr_accessor updated_at: ::Time
       attr_accessor latest_agent_version: ::String
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class AgentVersion
+      attr_accessor agent_arn: ::String
       attr_accessor agent_id: ::String
       attr_accessor agent_name: ::String
-      attr_accessor agent_arn: ::String
-      attr_accessor version: ::String
-      attr_accessor instruction: ::String
-      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
-      attr_accessor foundation_model: ::String
-      attr_accessor description: ::String
-      attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor agent_resource_role_arn: ::String
-      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       attr_accessor created_at: ::Time
-      attr_accessor updated_at: ::Time
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor description: ::String
       attr_accessor failure_reasons: ::Array[::String]
-      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor foundation_model: ::String
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor instruction: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor updated_at: ::Time
+      attr_accessor version: ::String
       SENSITIVE: [:instruction, :prompt_override_configuration]
     end
 
@@ -177,16 +177,16 @@ module Aws::BedrockAgent
       attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       attr_accessor agent_version: ::String
       attr_accessor created_at: ::Time
-      attr_accessor updated_at: ::Time
       attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class AssociateAgentKnowledgeBaseRequest
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor knowledge_base_id: ::String
       attr_accessor description: ::String
+      attr_accessor knowledge_base_id: ::String
       attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
@@ -208,15 +208,15 @@ module Aws::BedrockAgent
     end
 
     class CreateAgentActionGroupRequest
+      attr_accessor action_group_executor: Types::ActionGroupExecutor
+      attr_accessor action_group_name: ::String
+      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor action_group_name: ::String
+      attr_accessor api_schema: Types::APISchema
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor parent_action_group_signature: ("AMAZON.UserInput")
-      attr_accessor action_group_executor: Types::ActionGroupExecutor
-      attr_accessor api_schema: Types::APISchema
-      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -226,8 +226,8 @@ module Aws::BedrockAgent
     end
 
     class CreateAgentAliasRequest
-      attr_accessor agent_id: ::String
       attr_accessor agent_alias_name: ::String
+      attr_accessor agent_id: ::String
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
@@ -242,15 +242,15 @@ module Aws::BedrockAgent
 
     class CreateAgentRequest
       attr_accessor agent_name: ::String
-      attr_accessor client_token: ::String
-      attr_accessor instruction: ::String
-      attr_accessor foundation_model: ::String
-      attr_accessor description: ::String
-      attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor agent_resource_role_arn: ::String
+      attr_accessor client_token: ::String
       attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor description: ::String
+      attr_accessor foundation_model: ::String
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor instruction: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:instruction, :prompt_override_configuration]
     end
 
@@ -260,11 +260,11 @@ module Aws::BedrockAgent
     end
 
     class CreateDataSourceRequest
-      attr_accessor knowledge_base_id: ::String
       attr_accessor client_token: ::String
-      attr_accessor name: ::String
-      attr_accessor description: ::String
       attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor name: ::String
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
       SENSITIVE: []
@@ -277,10 +277,10 @@ module Aws::BedrockAgent
 
     class CreateKnowledgeBaseRequest
       attr_accessor client_token: ::String
-      attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor role_arn: ::String
       attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
       attr_accessor storage_configuration: Types::StorageConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -292,39 +292,39 @@ module Aws::BedrockAgent
     end
 
     class DataSource
-      attr_accessor knowledge_base_id: ::String
-      attr_accessor data_source_id: ::String
-      attr_accessor name: ::String
-      attr_accessor status: ("AVAILABLE" | "DELETING")
-      attr_accessor description: ::String
-      attr_accessor data_source_configuration: Types::DataSourceConfiguration
-      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
-      attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
       attr_accessor created_at: ::Time
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor data_source_id: ::String
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor name: ::String
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor status: ("AVAILABLE" | "DELETING")
       attr_accessor updated_at: ::Time
+      attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
       SENSITIVE: []
     end
 
     class DataSourceConfiguration
-      attr_accessor type: ("S3")
       attr_accessor s3_configuration: Types::S3DataSourceConfiguration
+      attr_accessor type: ("S3")
       SENSITIVE: []
     end
 
     class DataSourceSummary
-      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
       attr_accessor status: ("AVAILABLE" | "DELETING")
-      attr_accessor description: ::String
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class DeleteAgentActionGroupRequest
+      attr_accessor action_group_id: ::String
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor action_group_id: ::String
       attr_accessor skip_resource_in_use_check: bool
       SENSITIVE: []
     end
@@ -333,15 +333,15 @@ module Aws::BedrockAgent
     end
 
     class DeleteAgentAliasRequest
-      attr_accessor agent_id: ::String
       attr_accessor agent_alias_id: ::String
+      attr_accessor agent_id: ::String
       SENSITIVE: []
     end
 
     class DeleteAgentAliasResponse
-      attr_accessor agent_id: ::String
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+      attr_accessor agent_id: ::String
       SENSITIVE: []
     end
 
@@ -366,20 +366,20 @@ module Aws::BedrockAgent
 
     class DeleteAgentVersionResponse
       attr_accessor agent_id: ::String
-      attr_accessor agent_version: ::String
       attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      attr_accessor agent_version: ::String
       SENSITIVE: []
     end
 
     class DeleteDataSourceRequest
-      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
+      attr_accessor knowledge_base_id: ::String
       SENSITIVE: []
     end
 
     class DeleteDataSourceResponse
-      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
+      attr_accessor knowledge_base_id: ::String
       attr_accessor status: ("AVAILABLE" | "DELETING")
       SENSITIVE: []
     end
@@ -412,9 +412,9 @@ module Aws::BedrockAgent
     end
 
     class GetAgentActionGroupRequest
+      attr_accessor action_group_id: ::String
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor action_group_id: ::String
       SENSITIVE: []
     end
 
@@ -424,8 +424,8 @@ module Aws::BedrockAgent
     end
 
     class GetAgentAliasRequest
-      attr_accessor agent_id: ::String
       attr_accessor agent_alias_id: ::String
+      attr_accessor agent_id: ::String
       SENSITIVE: []
     end
 
@@ -468,8 +468,8 @@ module Aws::BedrockAgent
     end
 
     class GetDataSourceRequest
-      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
+      attr_accessor knowledge_base_id: ::String
       SENSITIVE: []
     end
 
@@ -479,9 +479,9 @@ module Aws::BedrockAgent
     end
 
     class GetIngestionJobRequest
-      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor ingestion_job_id: ::String
+      attr_accessor knowledge_base_id: ::String
       SENSITIVE: []
     end
 
@@ -501,23 +501,23 @@ module Aws::BedrockAgent
     end
 
     class InferenceConfiguration
-      attr_accessor temperature: ::Float
-      attr_accessor top_p: ::Float
-      attr_accessor top_k: ::Integer
       attr_accessor maximum_length: ::Integer
       attr_accessor stop_sequences: ::Array[::String]
+      attr_accessor temperature: ::Float
+      attr_accessor top_k: ::Integer
+      attr_accessor top_p: ::Float
       SENSITIVE: []
     end
 
     class IngestionJob
-      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
-      attr_accessor ingestion_job_id: ::String
       attr_accessor description: ::String
-      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED")
-      attr_accessor statistics: Types::IngestionJobStatistics
       attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor knowledge_base_id: ::String
       attr_accessor started_at: ::Time
+      attr_accessor statistics: Types::IngestionJobStatistics
+      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -536,23 +536,25 @@ module Aws::BedrockAgent
     end
 
     class IngestionJobStatistics
-      attr_accessor number_of_documents_scanned: ::Integer
-      attr_accessor number_of_new_documents_indexed: ::Integer
-      attr_accessor number_of_modified_documents_indexed: ::Integer
       attr_accessor number_of_documents_deleted: ::Integer
       attr_accessor number_of_documents_failed: ::Integer
+      attr_accessor number_of_documents_scanned: ::Integer
+      attr_accessor number_of_metadata_documents_modified: ::Integer
+      attr_accessor number_of_metadata_documents_scanned: ::Integer
+      attr_accessor number_of_modified_documents_indexed: ::Integer
+      attr_accessor number_of_new_documents_indexed: ::Integer
       SENSITIVE: []
     end
 
     class IngestionJobSummary
-      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
-      attr_accessor ingestion_job_id: ::String
       attr_accessor description: ::String
-      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor knowledge_base_id: ::String
       attr_accessor started_at: ::Time
-      attr_accessor updated_at: ::Time
       attr_accessor statistics: Types::IngestionJobStatistics
+      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -562,17 +564,17 @@ module Aws::BedrockAgent
     end
 
     class KnowledgeBase
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor knowledge_base_arn: ::String
-      attr_accessor description: ::String
       attr_accessor role_arn: ::String
-      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
-      attr_accessor storage_configuration: Types::StorageConfiguration
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
-      attr_accessor created_at: ::Time
+      attr_accessor storage_configuration: Types::StorageConfiguration
       attr_accessor updated_at: ::Time
-      attr_accessor failure_reasons: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -583,9 +585,9 @@ module Aws::BedrockAgent
     end
 
     class KnowledgeBaseSummary
+      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor description: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -671,12 +673,12 @@ module Aws::BedrockAgent
     end
 
     class ListIngestionJobsRequest
-      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor filters: ::Array[Types::IngestionJobFilter]
-      attr_accessor sort_by: Types::IngestionJobSortBy
+      attr_accessor knowledge_base_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor sort_by: Types::IngestionJobSortBy
       SENSITIVE: []
     end
 
@@ -710,29 +712,29 @@ module Aws::BedrockAgent
 
     class OpenSearchServerlessConfiguration
       attr_accessor collection_arn: ::String
-      attr_accessor vector_index_name: ::String
       attr_accessor field_mapping: Types::OpenSearchServerlessFieldMapping
+      attr_accessor vector_index_name: ::String
       SENSITIVE: []
     end
 
     class OpenSearchServerlessFieldMapping
-      attr_accessor vector_field: ::String
-      attr_accessor text_field: ::String
       attr_accessor metadata_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor vector_field: ::String
       SENSITIVE: []
     end
 
     class PineconeConfiguration
       attr_accessor connection_string: ::String
       attr_accessor credentials_secret_arn: ::String
-      attr_accessor namespace: ::String
       attr_accessor field_mapping: Types::PineconeFieldMapping
+      attr_accessor namespace: ::String
       SENSITIVE: []
     end
 
     class PineconeFieldMapping
-      attr_accessor text_field: ::String
       attr_accessor metadata_field: ::String
+      attr_accessor text_field: ::String
       SENSITIVE: []
     end
 
@@ -750,50 +752,50 @@ module Aws::BedrockAgent
     end
 
     class PromptConfiguration
-      attr_accessor prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION")
-      attr_accessor prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")
-      attr_accessor prompt_state: ("ENABLED" | "DISABLED")
       attr_accessor base_prompt_template: ::String
       attr_accessor inference_configuration: Types::InferenceConfiguration
       attr_accessor parser_mode: ("DEFAULT" | "OVERRIDDEN")
+      attr_accessor prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")
+      attr_accessor prompt_state: ("ENABLED" | "DISABLED")
+      attr_accessor prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION")
       SENSITIVE: []
     end
 
     class PromptOverrideConfiguration
-      attr_accessor prompt_configurations: ::Array[Types::PromptConfiguration]
       attr_accessor override_lambda: ::String
+      attr_accessor prompt_configurations: ::Array[Types::PromptConfiguration]
       SENSITIVE: []
     end
 
     class RdsConfiguration
-      attr_accessor resource_arn: ::String
       attr_accessor credentials_secret_arn: ::String
       attr_accessor database_name: ::String
-      attr_accessor table_name: ::String
       attr_accessor field_mapping: Types::RdsFieldMapping
+      attr_accessor resource_arn: ::String
+      attr_accessor table_name: ::String
       SENSITIVE: []
     end
 
     class RdsFieldMapping
-      attr_accessor primary_key_field: ::String
-      attr_accessor vector_field: ::String
-      attr_accessor text_field: ::String
       attr_accessor metadata_field: ::String
+      attr_accessor primary_key_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor vector_field: ::String
       SENSITIVE: []
     end
 
     class RedisEnterpriseCloudConfiguration
-      attr_accessor endpoint: ::String
-      attr_accessor vector_index_name: ::String
       attr_accessor credentials_secret_arn: ::String
+      attr_accessor endpoint: ::String
       attr_accessor field_mapping: Types::RedisEnterpriseCloudFieldMapping
+      attr_accessor vector_index_name: ::String
       SENSITIVE: []
     end
 
     class RedisEnterpriseCloudFieldMapping
-      attr_accessor vector_field: ::String
-      attr_accessor text_field: ::String
       attr_accessor metadata_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor vector_field: ::String
       SENSITIVE: []
     end
 
@@ -825,10 +827,10 @@ module Aws::BedrockAgent
     end
 
     class StartIngestionJobRequest
-      attr_accessor knowledge_base_id: ::String
-      attr_accessor data_source_id: ::String
       attr_accessor client_token: ::String
+      attr_accessor data_source_id: ::String
       attr_accessor description: ::String
+      attr_accessor knowledge_base_id: ::String
       SENSITIVE: []
     end
 
@@ -838,11 +840,11 @@ module Aws::BedrockAgent
     end
 
     class StorageConfiguration
-      attr_accessor type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS")
       attr_accessor opensearch_serverless_configuration: Types::OpenSearchServerlessConfiguration
       attr_accessor pinecone_configuration: Types::PineconeConfiguration
-      attr_accessor redis_enterprise_cloud_configuration: Types::RedisEnterpriseCloudConfiguration
       attr_accessor rds_configuration: Types::RdsConfiguration
+      attr_accessor redis_enterprise_cloud_configuration: Types::RedisEnterpriseCloudConfiguration
+      attr_accessor type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS")
       SENSITIVE: []
     end
 
@@ -870,15 +872,15 @@ module Aws::BedrockAgent
     end
 
     class UpdateAgentActionGroupRequest
-      attr_accessor agent_id: ::String
-      attr_accessor agent_version: ::String
+      attr_accessor action_group_executor: Types::ActionGroupExecutor
       attr_accessor action_group_id: ::String
       attr_accessor action_group_name: ::String
+      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor api_schema: Types::APISchema
       attr_accessor description: ::String
       attr_accessor parent_action_group_signature: ("AMAZON.UserInput")
-      attr_accessor action_group_executor: Types::ActionGroupExecutor
-      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
-      attr_accessor api_schema: Types::APISchema
       SENSITIVE: []
     end
 
@@ -888,9 +890,9 @@ module Aws::BedrockAgent
     end
 
     class UpdateAgentAliasRequest
-      attr_accessor agent_id: ::String
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
+      attr_accessor agent_id: ::String
       attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
       SENSITIVE: []
@@ -904,8 +906,8 @@ module Aws::BedrockAgent
     class UpdateAgentKnowledgeBaseRequest
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor knowledge_base_id: ::String
       attr_accessor description: ::String
+      attr_accessor knowledge_base_id: ::String
       attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
@@ -918,12 +920,12 @@ module Aws::BedrockAgent
     class UpdateAgentRequest
       attr_accessor agent_id: ::String
       attr_accessor agent_name: ::String
-      attr_accessor instruction: ::String
-      attr_accessor foundation_model: ::String
-      attr_accessor description: ::String
-      attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor agent_resource_role_arn: ::String
       attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor foundation_model: ::String
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor instruction: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
       SENSITIVE: [:instruction, :prompt_override_configuration]
     end
@@ -934,11 +936,11 @@ module Aws::BedrockAgent
     end
 
     class UpdateDataSourceRequest
-      attr_accessor knowledge_base_id: ::String
-      attr_accessor data_source_id: ::String
-      attr_accessor name: ::String
-      attr_accessor description: ::String
       attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor data_source_id: ::String
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor name: ::String
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
       SENSITIVE: []
@@ -950,11 +952,11 @@ module Aws::BedrockAgent
     end
 
     class UpdateKnowledgeBaseRequest
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor description: ::String
       attr_accessor role_arn: ::String
-      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor storage_configuration: Types::StorageConfiguration
       SENSITIVE: []
     end
@@ -965,14 +967,14 @@ module Aws::BedrockAgent
     end
 
     class ValidationException
-      attr_accessor message: ::String
       attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor name: ::String
       attr_accessor message: ::String
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 

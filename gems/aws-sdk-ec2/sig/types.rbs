@@ -1542,6 +1542,7 @@ module Aws::EC2
       attr_accessor destination_outpost_arn: ::String
       attr_accessor dry_run: bool
       attr_accessor copy_image_tags: bool
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 
@@ -4999,6 +5000,20 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DescribeMacHostsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor host_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMacHostsResult
+      attr_accessor mac_hosts: ::Array[Types::MacHost]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeManagedPrefixListsRequest
       attr_accessor dry_run: bool
       attr_accessor filters: ::Array[Types::Filter]
@@ -7691,6 +7706,16 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class GetInstanceMetadataDefaultsRequest
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetInstanceMetadataDefaultsResult
+      attr_accessor account_level: Types::InstanceMetadataDefaultsResponse
+      SENSITIVE: []
+    end
+
     class GetInstanceTypesFromInstanceRequirementsRequest
       attr_accessor dry_run: bool
       attr_accessor architecture_types: ::Array[("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac")]
@@ -8864,6 +8889,14 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class InstanceMetadataDefaultsResponse
+      attr_accessor http_tokens: ("optional" | "required")
+      attr_accessor http_put_response_hop_limit: ::Integer
+      attr_accessor http_endpoint: ("disabled" | "enabled")
+      attr_accessor instance_metadata_tags: ("disabled" | "enabled")
+      SENSITIVE: []
+    end
+
     class InstanceMetadataOptionsRequest
       attr_accessor http_tokens: ("optional" | "required")
       attr_accessor http_put_response_hop_limit: ::Integer
@@ -9135,6 +9168,8 @@ module Aws::EC2
       attr_accessor nitro_enclaves_support: ("unsupported" | "supported")
       attr_accessor nitro_tpm_support: ("unsupported" | "supported")
       attr_accessor nitro_tpm_info: Types::NitroTpmInfo
+      attr_accessor media_accelerator_info: Types::MediaAcceleratorInfo
+      attr_accessor neuron_info: Types::NeuronInfo
       SENSITIVE: []
     end
 
@@ -10096,6 +10131,12 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class MacHost
+      attr_accessor host_id: ::String
+      attr_accessor mac_os_latest_supported_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class MaintenanceDetails
       attr_accessor pending_maintenance: ::String
       attr_accessor maintenance_auto_applied_after: ::Time
@@ -10114,6 +10155,25 @@ module Aws::EC2
       attr_accessor version: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class MediaAcceleratorInfo
+      attr_accessor accelerators: ::Array[Types::MediaDeviceInfo]
+      attr_accessor total_media_memory_in_mi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class MediaDeviceInfo
+      attr_accessor count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor manufacturer: ::String
+      attr_accessor memory_info: Types::MediaDeviceMemoryInfo
+      SENSITIVE: []
+    end
+
+    class MediaDeviceMemoryInfo
+      attr_accessor size_in_mi_b: ::Integer
       SENSITIVE: []
     end
 
@@ -10417,6 +10477,20 @@ module Aws::EC2
     class ModifyInstanceMaintenanceOptionsResult
       attr_accessor instance_id: ::String
       attr_accessor auto_recovery: ("disabled" | "default")
+      SENSITIVE: []
+    end
+
+    class ModifyInstanceMetadataDefaultsRequest
+      attr_accessor http_tokens: ("optional" | "required" | "no-preference")
+      attr_accessor http_put_response_hop_limit: ::Integer
+      attr_accessor http_endpoint: ("disabled" | "enabled" | "no-preference")
+      attr_accessor instance_metadata_tags: ("disabled" | "enabled" | "no-preference")
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyInstanceMetadataDefaultsResult
+      attr_accessor return: bool
       SENSITIVE: []
     end
 
@@ -11464,6 +11538,31 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class NeuronDeviceCoreInfo
+      attr_accessor count: ::Integer
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class NeuronDeviceInfo
+      attr_accessor count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor core_info: Types::NeuronDeviceCoreInfo
+      attr_accessor memory_info: Types::NeuronDeviceMemoryInfo
+      SENSITIVE: []
+    end
+
+    class NeuronDeviceMemoryInfo
+      attr_accessor size_in_mi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class NeuronInfo
+      attr_accessor neuron_devices: ::Array[Types::NeuronDeviceInfo]
+      attr_accessor total_neuron_device_memory_in_mi_b: ::Integer
+      SENSITIVE: []
+    end
+
     class NewDhcpConfiguration
       attr_accessor key: ::String
       attr_accessor values: ::Array[::String]
@@ -12049,6 +12148,7 @@ module Aws::EC2
       attr_accessor tpm_support: ("v2.0")
       attr_accessor uefi_data: ::String
       attr_accessor imds_support: ("v2.0")
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 

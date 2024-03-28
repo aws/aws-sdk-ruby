@@ -2633,7 +2633,7 @@ module Aws::Imagebuilder
     #   resp.lifecycle_execution.lifecycle_execution_id #=> String
     #   resp.lifecycle_execution.lifecycle_policy_arn #=> String
     #   resp.lifecycle_execution.resources_impacted_summary.has_impacted_resources #=> Boolean
-    #   resp.lifecycle_execution.state.status #=> String, one of "IN_PROGRESS", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.lifecycle_execution.state.status #=> String, one of "IN_PROGRESS", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS", "PENDING"
     #   resp.lifecycle_execution.state.reason #=> String
     #   resp.lifecycle_execution.start_time #=> Time
     #   resp.lifecycle_execution.end_time #=> Time
@@ -4160,7 +4160,7 @@ module Aws::Imagebuilder
     # @example Response structure
     #
     #   resp.lifecycle_execution_id #=> String
-    #   resp.lifecycle_execution_state.status #=> String, one of "IN_PROGRESS", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.lifecycle_execution_state.status #=> String, one of "IN_PROGRESS", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS", "PENDING"
     #   resp.lifecycle_execution_state.reason #=> String
     #   resp.resources #=> Array
     #   resp.resources[0].account_id #=> String
@@ -4176,6 +4176,8 @@ module Aws::Imagebuilder
     #   resp.resources[0].snapshots[0].state.reason #=> String
     #   resp.resources[0].image_uris #=> Array
     #   resp.resources[0].image_uris[0] #=> String
+    #   resp.resources[0].start_time #=> Time
+    #   resp.resources[0].end_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListLifecycleExecutionResources AWS API Documentation
@@ -4221,7 +4223,7 @@ module Aws::Imagebuilder
     #   resp.lifecycle_executions[0].lifecycle_execution_id #=> String
     #   resp.lifecycle_executions[0].lifecycle_policy_arn #=> String
     #   resp.lifecycle_executions[0].resources_impacted_summary.has_impacted_resources #=> Boolean
-    #   resp.lifecycle_executions[0].state.status #=> String, one of "IN_PROGRESS", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.lifecycle_executions[0].state.status #=> String, one of "IN_PROGRESS", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS", "PENDING"
     #   resp.lifecycle_executions[0].state.reason #=> String
     #   resp.lifecycle_executions[0].start_time #=> Time
     #   resp.lifecycle_executions[0].end_time #=> Time
@@ -5537,7 +5539,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

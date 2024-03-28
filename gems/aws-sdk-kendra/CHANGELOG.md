@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2024-03-22)
+------------------
+
+* Feature - Documentation update, March 2024. Corrects some docs for Amazon Kendra.
+
 1.77.0 (2024-01-26)
 ------------------
 

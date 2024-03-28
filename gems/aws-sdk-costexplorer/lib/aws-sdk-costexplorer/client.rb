@@ -4480,6 +4480,50 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves a list of your historical cost allocation tag backfill
+    # requests.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that are returned for this request.
+    #
+    # @return [Types::ListCostAllocationTagBackfillHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCostAllocationTagBackfillHistoryResponse#backfill_requests #backfill_requests} => Array&lt;Types::CostAllocationTagBackfillRequest&gt;
+    #   * {Types::ListCostAllocationTagBackfillHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cost_allocation_tag_backfill_history({
+    #     next_token: "NextPageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backfill_requests #=> Array
+    #   resp.backfill_requests[0].backfill_from #=> String
+    #   resp.backfill_requests[0].requested_at #=> String
+    #   resp.backfill_requests[0].completed_at #=> String
+    #   resp.backfill_requests[0].backfill_status #=> String, one of "SUCCEEDED", "PROCESSING", "FAILED"
+    #   resp.backfill_requests[0].last_updated_at #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostAllocationTagBackfillHistory AWS API Documentation
+    #
+    # @overload list_cost_allocation_tag_backfill_history(params = {})
+    # @param [Hash] params ({})
+    def list_cost_allocation_tag_backfill_history(params = {}, options = {})
+      req = build_request(:list_cost_allocation_tag_backfill_history, params)
+      req.send_request(options)
+    end
+
     # Get a list of cost allocation tags. All inputs in the API are optional
     # and serve as filters. By default, all cost allocation tags are
     # returned.
@@ -4720,6 +4764,44 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def provide_anomaly_feedback(params = {}, options = {})
       req = build_request(:provide_anomaly_feedback, params)
+      req.send_request(options)
+    end
+
+    # Request a cost allocation tag backfill. This will backfill the
+    # activation status (either `active` or `inactive`) for all tag keys
+    # from `para:BackfillFrom` up to the when this request is made.
+    #
+    # You can request a backfill once every 24 hours.
+    #
+    # @option params [required, String] :backfill_from
+    #   The date you want the backfill to start from. The date can only be a
+    #   first day of the month (a billing start date). Dates can't precede
+    #   the previous twelve months, or in the future.
+    #
+    # @return [Types::StartCostAllocationTagBackfillResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCostAllocationTagBackfillResponse#backfill_request #backfill_request} => Types::CostAllocationTagBackfillRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_cost_allocation_tag_backfill({
+    #     backfill_from: "ZonedDateTime", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backfill_request.backfill_from #=> String
+    #   resp.backfill_request.requested_at #=> String
+    #   resp.backfill_request.completed_at #=> String
+    #   resp.backfill_request.backfill_status #=> String, one of "SUCCEEDED", "PROCESSING", "FAILED"
+    #   resp.backfill_request.last_updated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/StartCostAllocationTagBackfill AWS API Documentation
+    #
+    # @overload start_cost_allocation_tag_backfill(params = {})
+    # @param [Hash] params ({})
+    def start_cost_allocation_tag_backfill(params = {}, options = {})
+      req = build_request(:start_cost_allocation_tag_backfill, params)
       req.send_request(options)
     end
 
@@ -5204,7 +5286,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

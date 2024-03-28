@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2024-03-27)
+------------------
+
+* Feature - This release introduces filtering support on Retrieve and RetrieveAndGenerate APIs.
+
+1.4.0 (2024-03-26)
+------------------
+
+* Feature - This release adds support to customize prompts sent through the RetrieveAndGenerate API in Agents for Amazon Bedrock.
+
+1.3.0 (2024-03-08)
+------------------
+
+* Feature - Documentation update for Bedrock Runtime Agent
+
 1.2.0 (2024-02-28)
 ------------------
 

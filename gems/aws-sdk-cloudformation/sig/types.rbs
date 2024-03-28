@@ -930,6 +930,20 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class ListStackSetAutoDeploymentTargetsInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class ListStackSetAutoDeploymentTargetsOutput
+      attr_accessor summaries: ::Array[Types::StackSetAutoDeploymentTargetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListStackSetOperationResultsInput
       attr_accessor stack_set_name: ::String
       attr_accessor operation_id: ::String
@@ -1544,6 +1558,12 @@ module Aws::CloudFormation
       attr_accessor permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED")
       attr_accessor organizational_unit_ids: ::Array[::String]
       attr_accessor managed_execution: Types::ManagedExecution
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StackSetAutoDeploymentTargetSummary
+      attr_accessor organizational_unit_id: ::String
       attr_accessor regions: ::Array[::String]
       SENSITIVE: []
     end

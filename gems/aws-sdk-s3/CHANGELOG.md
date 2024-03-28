@@ -3,6 +3,28 @@ Unreleased Changes
 
 * Issue - Ignore `Content-Type` header in the pre-signer.
 
+=======
+1.146.0 (2024-03-18)
+------------------
+
+* Feature - Fix two issues with response root node names.
+
+1.145.0 (2024-03-15)
+------------------
+
+* Feature - Documentation updates for Amazon S3.
+
+1.144.0 (2024-03-13)
+------------------
+
+* Feature - This release makes the default option for S3 on Outposts request signing to use the SigV4A algorithm when using AWS Common Runtime (CRT).
+
+1.143.1 (2024-03-12)
+------------------
+
+* Issue - Include original part errors in message when aborting multipart upload fails (#2990).
+
+
 1.143.0 (2024-01-26)
 ------------------
 

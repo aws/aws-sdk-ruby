@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-03-08)
+------------------
+
+* Feature - Added exceptions to CreateTrail, DescribeTrails, and ListImportFailures APIs.
+
 1.76.0 (2024-01-26)
 ------------------
 

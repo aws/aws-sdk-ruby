@@ -415,6 +415,7 @@ module Aws::GlobalAccelerator
     CreateListenerResponse.struct_class = Types::CreateListenerResponse
 
     CrossAccountResource.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "EndpointId"))
+    CrossAccountResource.add_member(:cidr, Shapes::ShapeRef.new(shape: GenericString, location_name: "Cidr"))
     CrossAccountResource.add_member(:attachment_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "AttachmentArn"))
     CrossAccountResource.struct_class = Types::CrossAccountResource
 
@@ -822,7 +823,8 @@ module Aws::GlobalAccelerator
     RemoveEndpointsRequest.add_member(:endpoint_group_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointGroupArn"))
     RemoveEndpointsRequest.struct_class = Types::RemoveEndpointsRequest
 
-    Resource.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointId"))
+    Resource.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "EndpointId"))
+    Resource.add_member(:cidr, Shapes::ShapeRef.new(shape: GenericString, location_name: "Cidr"))
     Resource.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, location_name: "Region"))
     Resource.struct_class = Types::Resource
 

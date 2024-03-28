@@ -70,8 +70,23 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @!attribute [rw] grafana_token
+    #   A token from Grafana Labs that ties your Amazon Web Services account
+    #   with a Grafana Labs account. For more information, see [Register
+    #   with Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    #   @return [String]
+    #
     # @!attribute [rw] license_type
     #   The type of license to associate with the workspace.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
+    #   Enterprise free trials.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -81,6 +96,7 @@ module Aws::ManagedGrafana
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/AssociateLicenseRequest AWS API Documentation
     #
     class AssociateLicenseRequest < Struct.new(
+      :grafana_token,
       :license_type,
       :workspace_id)
       SENSITIVE = []
@@ -257,10 +273,10 @@ module Aws::ManagedGrafana
     #   @return [String]
     #
     # @!attribute [rw] authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
-    #   (successor to Single Sign-On), or both to authenticate users for
-    #   using the Grafana console within a workspace. For more information,
-    #   see [User authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
     #
     #
     #
@@ -286,9 +302,10 @@ module Aws::ManagedGrafana
     #   @return [String]
     #
     # @!attribute [rw] grafana_version
-    #   Specifies the version of Grafana to support in the new workspace.
+    #   Specifies the version of Grafana to support in the new workspace. If
+    #   not specified, defaults to the latest version (for example, 9.4).
     #
-    #   To get a list of supported version, use the `ListVersions`
+    #   To get a list of supported versions, use the `ListVersions`
     #   operation.
     #   @return [String]
     #
@@ -1228,10 +1245,10 @@ module Aws::ManagedGrafana
     end
 
     # @!attribute [rw] authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
-    #   (successor to Single Sign-On), or both to authenticate users for
-    #   using the Grafana console within a workspace. For more information,
-    #   see [User authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
     #
     #
     #
@@ -1283,13 +1300,18 @@ module Aws::ManagedGrafana
     #   @return [String]
     #
     # @!attribute [rw] grafana_version
-    #   Specifies the version of Grafana to support in the new workspace.
+    #   Specifies the version of Grafana to support in the workspace. If not
+    #   specified, keeps the current version of the workspace.
     #
     #   Can only be used to upgrade (for example, from 8.4 to 9.4), not
     #   downgrade (for example, from 9.4 to 8.4).
     #
     #   To know what versions are available to upgrade to for a specific
-    #   workspace, see the `ListVersions` operation.
+    #   workspace, see the [ListVersions][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -1611,12 +1633,31 @@ module Aws::ManagedGrafana
     # @!attribute [rw] free_trial_consumed
     #   Specifies whether this workspace has already fully used its free
     #   trial for Grafana Enterprise.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
+    #   Enterprise free trials.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] free_trial_expiration
     #   If this workspace is currently in the free trial period for Grafana
     #   Enterprise, this value specifies when that free trial ends.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
+    #   Enterprise free trials.
+    #
+    #    </note>
     #   @return [Time]
+    #
+    # @!attribute [rw] grafana_token
+    #   The token that ties this workspace to a Grafana Labs account. For
+    #   more information, see [Register with Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    #   @return [String]
     #
     # @!attribute [rw] grafana_version
     #   The version of Grafana supported in this workspace.
@@ -1627,13 +1668,21 @@ module Aws::ManagedGrafana
     #   @return [String]
     #
     # @!attribute [rw] license_expiration
-    #   If this workspace has a full Grafana Enterprise license, this
-    #   specifies when the license ends and will need to be renewed.
+    #   If this workspace has a full Grafana Enterprise license purchased
+    #   through Amazon Web Services Marketplace, this specifies when the
+    #   license ends and will need to be renewed. Purchasing the Enterprise
+    #   plugins option through Amazon Managed Grafana does not have an
+    #   expiration. It is valid until the license is removed.
     #   @return [Time]
     #
     # @!attribute [rw] license_type
     #   Specifies whether this workspace has a full Grafana Enterprise
-    #   license or a free trial license.
+    #   license.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
+    #   Enterprise free trials.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] modified
@@ -1729,6 +1778,7 @@ module Aws::ManagedGrafana
       :endpoint,
       :free_trial_consumed,
       :free_trial_expiration,
+      :grafana_token,
       :grafana_version,
       :id,
       :license_expiration,
@@ -1770,12 +1820,31 @@ module Aws::ManagedGrafana
     #   workspace.
     #   @return [String]
     #
+    # @!attribute [rw] grafana_token
+    #   The token that ties this workspace to a Grafana Labs account. For
+    #   more information, see [Register with Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    #   @return [String]
+    #
     # @!attribute [rw] grafana_version
     #   The Grafana version that the workspace is running.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The unique ID of the workspace.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_type
+    #   Specifies whether this workspace has a full Grafana Enterprise
+    #   license.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
+    #   Enterprise free trials.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] modified
@@ -1807,8 +1876,10 @@ module Aws::ManagedGrafana
       :created,
       :description,
       :endpoint,
+      :grafana_token,
       :grafana_version,
       :id,
+      :license_type,
       :modified,
       :name,
       :notification_destinations,

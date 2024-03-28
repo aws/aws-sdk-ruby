@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2024-03-07)
+------------------
+
+* Feature - Documentation updates for AWS Lambda
+
 1.116.0 (2024-02-20)
 ------------------
 

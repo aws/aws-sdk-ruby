@@ -170,6 +170,8 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::ListStackInstances.build(context)
           when :list_stack_resources
             Aws::CloudFormation::Endpoints::ListStackResources.build(context)
+          when :list_stack_set_auto_deployment_targets
+            Aws::CloudFormation::Endpoints::ListStackSetAutoDeploymentTargets.build(context)
           when :list_stack_set_operation_results
             Aws::CloudFormation::Endpoints::ListStackSetOperationResults.build(context)
           when :list_stack_set_operations

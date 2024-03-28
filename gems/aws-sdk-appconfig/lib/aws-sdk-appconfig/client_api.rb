@@ -65,6 +65,8 @@ module Aws::AppConfig
     DeploymentSummary = Shapes::StructureShape.new(name: 'DeploymentSummary')
     Deployments = Shapes::StructureShape.new(name: 'Deployments')
     Description = Shapes::StringShape.new(name: 'Description')
+    DynamicParameterKey = Shapes::StringShape.new(name: 'DynamicParameterKey')
+    DynamicParameterMap = Shapes::MapShape.new(name: 'DynamicParameterMap')
     Environment = Shapes::StructureShape.new(name: 'Environment')
     EnvironmentList = Shapes::ListShape.new(name: 'EnvironmentList')
     EnvironmentState = Shapes::StringShape.new(name: 'EnvironmentState')
@@ -401,6 +403,9 @@ module Aws::AppConfig
     Deployments.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     Deployments.struct_class = Types::Deployments
 
+    DynamicParameterMap.key = Shapes::ShapeRef.new(shape: DynamicParameterKey)
+    DynamicParameterMap.value = Shapes::ShapeRef.new(shape: StringWithLengthBetween1And2048)
+
     Environment.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, location_name: "ApplicationId"))
     Environment.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
     Environment.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
@@ -588,6 +593,7 @@ module Aws::AppConfig
 
     Parameter.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     Parameter.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "Required"))
+    Parameter.add_member(:dynamic, Shapes::ShapeRef.new(shape: Boolean, location_name: "Dynamic"))
     Parameter.struct_class = Types::Parameter
 
     ParameterMap.key = Shapes::ShapeRef.new(shape: ExtensionOrParameterName)
@@ -620,6 +626,7 @@ module Aws::AppConfig
     StartDeploymentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StartDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     StartDeploymentRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
+    StartDeploymentRequest.add_member(:dynamic_extension_parameters, Shapes::ShapeRef.new(shape: DynamicParameterMap, location_name: "DynamicExtensionParameters"))
     StartDeploymentRequest.struct_class = Types::StartDeploymentRequest
 
     StopDeploymentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))

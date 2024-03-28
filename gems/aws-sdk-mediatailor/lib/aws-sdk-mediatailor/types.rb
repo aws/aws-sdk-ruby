@@ -223,6 +223,73 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # A playlist of media (VOD and/or live) to be played instead of the
+    # default media on a particular program.
+    #
+    # @!attribute [rw] ad_breaks
+    #   Ad break configuration parameters defined in AlternateMedia.
+    #   @return [Array<Types::AdBreak>]
+    #
+    # @!attribute [rw] clip_range
+    #   Clip range configuration for the VOD source associated with the
+    #   program.
+    #   @return [Types::ClipRange]
+    #
+    # @!attribute [rw] duration_millis
+    #   The duration of the alternateMedia in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] live_source_name
+    #   The name of the live source for alternateMedia.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_start_time_millis
+    #   The date and time that the alternateMedia is scheduled to start, in
+    #   epoch milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_location_name
+    #   The name of the source location for alternateMedia.
+    #   @return [String]
+    #
+    # @!attribute [rw] vod_source_name
+    #   The name of the VOD source for alternateMedia.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AlternateMedia AWS API Documentation
+    #
+    class AlternateMedia < Struct.new(
+      :ad_breaks,
+      :clip_range,
+      :duration_millis,
+      :live_source_name,
+      :scheduled_start_time_millis,
+      :source_location_name,
+      :vod_source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An AudienceMedia object contains an Audience and a list of
+    # AlternateMedia.
+    #
+    # @!attribute [rw] alternate_media
+    #   The list of AlternateMedia defined in AudienceMedia.
+    #   @return [Array<Types::AlternateMedia>]
+    #
+    # @!attribute [rw] audience
+    #   The Audience defined in AudienceMedia.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AudienceMedia AWS API Documentation
+    #
+    class AudienceMedia < Struct.new(
+      :alternate_media,
+      :audience)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # MediaTailor only places (consumes) prefetched ads if the ad break
     # meets the criteria defined by the dynamic variables. This gives you
     # granular control over which ad break to place the prefetched ads into.
@@ -398,6 +465,10 @@ module Aws::MediaTailor
     #   The ARN of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -459,6 +530,7 @@ module Aws::MediaTailor
     #
     class Channel < Struct.new(
       :arn,
+      :audiences,
       :channel_name,
       :channel_state,
       :creation_time,
@@ -481,10 +553,17 @@ module Aws::MediaTailor
     #   beginning of the VOD source associated with the program.
     #   @return [Integer]
     #
+    # @!attribute [rw] start_offset_millis
+    #   The start offset of the clip range, in milliseconds. This offset
+    #   truncates the start at the number of milliseconds into the duration
+    #   of the VOD source.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ClipRange AWS API Documentation
     #
     class ClipRange < Struct.new(
-      :end_offset_millis)
+      :end_offset_millis,
+      :start_offset_millis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -573,6 +652,10 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -622,6 +705,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
+      :audiences,
       :channel_name,
       :filler_slate,
       :outputs,
@@ -636,6 +720,10 @@ module Aws::MediaTailor
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) to assign to the channel.
     #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] channel_name
     #   The name to assign to the channel.
@@ -689,6 +777,7 @@ module Aws::MediaTailor
     #
     class CreateChannelResponse < Struct.new(
       :arn,
+      :audiences,
       :channel_name,
       :channel_state,
       :creation_time,
@@ -883,6 +972,10 @@ module Aws::MediaTailor
     #   The ad break configuration settings.
     #   @return [Array<Types::AdBreak>]
     #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel for this Program.
     #   @return [String]
@@ -911,6 +1004,7 @@ module Aws::MediaTailor
     #
     class CreateProgramRequest < Struct.new(
       :ad_breaks,
+      :audience_media,
       :channel_name,
       :live_source_name,
       :program_name,
@@ -928,6 +1022,10 @@ module Aws::MediaTailor
     # @!attribute [rw] arn
     #   The ARN to assign to the program.
     #   @return [String]
+    #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
     #
     # @!attribute [rw] channel_name
     #   The name to assign to the channel for this program.
@@ -970,6 +1068,7 @@ module Aws::MediaTailor
     class CreateProgramResponse < Struct.new(
       :ad_breaks,
       :arn,
+      :audience_media,
       :channel_name,
       :clip_range,
       :creation_time,
@@ -1471,6 +1570,10 @@ module Aws::MediaTailor
     #   The ARN of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -1527,6 +1630,7 @@ module Aws::MediaTailor
     #
     class DescribeChannelResponse < Struct.new(
       :arn,
+      :audiences,
       :channel_name,
       :channel_state,
       :creation_time,
@@ -1633,6 +1737,10 @@ module Aws::MediaTailor
     #   The ARN of the program.
     #   @return [String]
     #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel that the program belongs to.
     #   @return [String]
@@ -1677,6 +1785,7 @@ module Aws::MediaTailor
     class DescribeProgramResponse < Struct.new(
       :ad_breaks,
       :arn,
+      :audience_media,
       :channel_name,
       :clip_range,
       :creation_time,
@@ -1859,6 +1968,10 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @!attribute [rw] audience
+    #   The single audience for GetChannelScheduleRequest.
+    #   @return [String]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel associated with this Channel Schedule.
     #   @return [String]
@@ -1892,6 +2005,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetChannelScheduleRequest AWS API Documentation
     #
     class GetChannelScheduleRequest < Struct.new(
+      :audience,
       :channel_name,
       :duration_minutes,
       :max_results,
@@ -3509,6 +3623,10 @@ module Aws::MediaTailor
     #   The ARN of the program.
     #   @return [String]
     #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in ScheduleEntry.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel that uses this schedule.
     #   @return [String]
@@ -3543,6 +3661,7 @@ module Aws::MediaTailor
       :approximate_duration_seconds,
       :approximate_start_time,
       :arn,
+      :audiences,
       :channel_name,
       :live_source_name,
       :program_name,
@@ -3995,6 +4114,10 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -4018,6 +4141,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
+      :audiences,
       :channel_name,
       :filler_slate,
       :outputs,
@@ -4029,6 +4153,10 @@ module Aws::MediaTailor
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) associated with the channel.
     #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] channel_name
     #   The name of the channel.
@@ -4090,6 +4218,7 @@ module Aws::MediaTailor
     #
     class UpdateChannelResponse < Struct.new(
       :arn,
+      :audiences,
       :channel_name,
       :channel_state,
       :creation_time,
@@ -4181,6 +4310,10 @@ module Aws::MediaTailor
     #   The ad break configuration settings.
     #   @return [Array<Types::AdBreak>]
     #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel for this Program.
     #   @return [String]
@@ -4197,6 +4330,7 @@ module Aws::MediaTailor
     #
     class UpdateProgramRequest < Struct.new(
       :ad_breaks,
+      :audience_media,
       :channel_name,
       :program_name,
       :schedule_configuration)
@@ -4211,6 +4345,10 @@ module Aws::MediaTailor
     # @!attribute [rw] arn
     #   The ARN to assign to the program.
     #   @return [String]
+    #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
     #
     # @!attribute [rw] channel_name
     #   The name to assign to the channel for this program.
@@ -4253,6 +4391,7 @@ module Aws::MediaTailor
     class UpdateProgramResponse < Struct.new(
       :ad_breaks,
       :arn,
+      :audience_media,
       :channel_name,
       :clip_range,
       :creation_time,

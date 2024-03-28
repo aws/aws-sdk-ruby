@@ -274,6 +274,7 @@ module Aws::RDS
     DBSubnetGroups = Shapes::ListShape.new(name: 'DBSubnetGroups')
     DBSubnetQuotaExceededFault = Shapes::StructureShape.new(name: 'DBSubnetQuotaExceededFault')
     DBUpgradeDependencyFailureFault = Shapes::StructureShape.new(name: 'DBUpgradeDependencyFailureFault')
+    DataFilter = Shapes::StringShape.new(name: 'DataFilter')
     DatabaseArn = Shapes::StringShape.new(name: 'DatabaseArn')
     DeleteBlueGreenDeploymentRequest = Shapes::StructureShape.new(name: 'DeleteBlueGreenDeploymentRequest')
     DeleteBlueGreenDeploymentResponse = Shapes::StructureShape.new(name: 'DeleteBlueGreenDeploymentResponse')
@@ -447,6 +448,7 @@ module Aws::RDS
     IntegrationAlreadyExistsFault = Shapes::StructureShape.new(name: 'IntegrationAlreadyExistsFault')
     IntegrationArn = Shapes::StringShape.new(name: 'IntegrationArn')
     IntegrationConflictOperationFault = Shapes::StructureShape.new(name: 'IntegrationConflictOperationFault')
+    IntegrationDescription = Shapes::StringShape.new(name: 'IntegrationDescription')
     IntegrationError = Shapes::StructureShape.new(name: 'IntegrationError')
     IntegrationErrorList = Shapes::ListShape.new(name: 'IntegrationErrorList')
     IntegrationIdentifier = Shapes::StringShape.new(name: 'IntegrationIdentifier')
@@ -541,6 +543,7 @@ module Aws::RDS
     ModifyEventSubscriptionResult = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResult')
     ModifyGlobalClusterMessage = Shapes::StructureShape.new(name: 'ModifyGlobalClusterMessage')
     ModifyGlobalClusterResult = Shapes::StructureShape.new(name: 'ModifyGlobalClusterResult')
+    ModifyIntegrationMessage = Shapes::StructureShape.new(name: 'ModifyIntegrationMessage')
     ModifyOptionGroupMessage = Shapes::StructureShape.new(name: 'ModifyOptionGroupMessage')
     ModifyOptionGroupResult = Shapes::StructureShape.new(name: 'ModifyOptionGroupResult')
     ModifyTenantDatabaseMessage = Shapes::StructureShape.new(name: 'ModifyTenantDatabaseMessage')
@@ -908,6 +911,7 @@ module Aws::RDS
     ClusterPendingModifiedValues.add_member(:rds_custom_cluster_configuration, Shapes::ShapeRef.new(shape: RdsCustomClusterConfiguration, location_name: "RdsCustomClusterConfiguration"))
     ClusterPendingModifiedValues.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Iops"))
     ClusterPendingModifiedValues.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
+    ClusterPendingModifiedValues.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     ClusterPendingModifiedValues.struct_class = Types::ClusterPendingModifiedValues
 
     ConnectionPoolConfiguration.add_member(:max_connections_percent, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxConnectionsPercent"))
@@ -1072,6 +1076,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     CreateDBClusterMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
     CreateDBClusterMessage.add_member(:enable_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLocalWriteForwarding"))
+    CreateDBClusterMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
 
@@ -1309,6 +1314,8 @@ module Aws::RDS
     CreateIntegrationMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KMSKeyId"))
     CreateIntegrationMessage.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "AdditionalEncryptionContext"))
     CreateIntegrationMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateIntegrationMessage.add_member(:data_filter, Shapes::ShapeRef.new(shape: DataFilter, location_name: "DataFilter"))
+    CreateIntegrationMessage.add_member(:description, Shapes::ShapeRef.new(shape: IntegrationDescription, location_name: "Description"))
     CreateIntegrationMessage.struct_class = Types::CreateIntegrationMessage
 
     CreateOptionGroupMessage.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OptionGroupName"))
@@ -1423,6 +1430,7 @@ module Aws::RDS
     DBCluster.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
     DBCluster.add_member(:limitless_database, Shapes::ShapeRef.new(shape: LimitlessDatabase, location_name: "LimitlessDatabase"))
     DBCluster.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    DBCluster.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
@@ -2860,6 +2868,8 @@ module Aws::RDS
     Integration.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Integration.add_member(:create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))
     Integration.add_member(:errors, Shapes::ShapeRef.new(shape: IntegrationErrorList, location_name: "Errors"))
+    Integration.add_member(:data_filter, Shapes::ShapeRef.new(shape: DataFilter, location_name: "DataFilter"))
+    Integration.add_member(:description, Shapes::ShapeRef.new(shape: IntegrationDescription, location_name: "Description"))
     Integration.struct_class = Types::Integration
 
     IntegrationAlreadyExistsFault.struct_class = Types::IntegrationAlreadyExistsFault
@@ -3068,6 +3078,7 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:enable_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLocalWriteForwarding"))
     ModifyDBClusterMessage.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointArn, location_name: "AwsBackupRecoveryPointArn"))
     ModifyDBClusterMessage.add_member(:enable_limitless_database, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLimitlessDatabase"))
+    ModifyDBClusterMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
 
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
@@ -3239,6 +3250,12 @@ module Aws::RDS
 
     ModifyGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
     ModifyGlobalClusterResult.struct_class = Types::ModifyGlobalClusterResult
+
+    ModifyIntegrationMessage.add_member(:integration_identifier, Shapes::ShapeRef.new(shape: IntegrationIdentifier, required: true, location_name: "IntegrationIdentifier"))
+    ModifyIntegrationMessage.add_member(:integration_name, Shapes::ShapeRef.new(shape: IntegrationName, location_name: "IntegrationName"))
+    ModifyIntegrationMessage.add_member(:data_filter, Shapes::ShapeRef.new(shape: DataFilter, location_name: "DataFilter"))
+    ModifyIntegrationMessage.add_member(:description, Shapes::ShapeRef.new(shape: IntegrationDescription, location_name: "Description"))
+    ModifyIntegrationMessage.struct_class = Types::ModifyIntegrationMessage
 
     ModifyOptionGroupMessage.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OptionGroupName"))
     ModifyOptionGroupMessage.add_member(:options_to_include, Shapes::ShapeRef.new(shape: OptionConfigurationList, location_name: "OptionsToInclude"))
@@ -5949,6 +5966,17 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+      end)
+
+      api.add_operation(:modify_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyIntegrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: Integration)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIntegrationStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationConflictOperationFault)
       end)
 
       api.add_operation(:modify_option_group, Seahorse::Model::Operation.new.tap do |o|

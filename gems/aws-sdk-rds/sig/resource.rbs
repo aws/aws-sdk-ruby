@@ -147,6 +147,7 @@ module Aws
                                ?manage_master_user_password: bool,
                                ?master_user_secret_kms_key_id: ::String,
                                ?enable_local_write_forwarding: bool,
+                               ?ca_certificate_identifier: ::String,
                                ?source_region: ::String
                              ) -> DBCluster
                            | (?Hash[Symbol, untyped]) -> DBCluster

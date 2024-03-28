@@ -867,7 +867,8 @@ module Aws::ElastiCache
 
     CustomerNodeEndpointList.member = Shapes::ShapeRef.new(shape: CustomerNodeEndpoint)
 
-    DataStorage.add_member(:maximum, Shapes::ShapeRef.new(shape: IntegerOptional, required: true, location_name: "Maximum"))
+    DataStorage.add_member(:maximum, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Maximum"))
+    DataStorage.add_member(:minimum, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Minimum"))
     DataStorage.add_member(:unit, Shapes::ShapeRef.new(shape: DataStorageUnit, required: true, location_name: "Unit"))
     DataStorage.struct_class = Types::DataStorage
 
@@ -1130,7 +1131,8 @@ module Aws::ElastiCache
 
     EC2SecurityGroupList.member = Shapes::ShapeRef.new(shape: EC2SecurityGroup, location_name: "EC2SecurityGroup")
 
-    ECPUPerSecond.add_member(:maximum, Shapes::ShapeRef.new(shape: IntegerOptional, required: true, location_name: "Maximum"))
+    ECPUPerSecond.add_member(:maximum, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Maximum"))
+    ECPUPerSecond.add_member(:minimum, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Minimum"))
     ECPUPerSecond.struct_class = Types::ECPUPerSecond
 
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))

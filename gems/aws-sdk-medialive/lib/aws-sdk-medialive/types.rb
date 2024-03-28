@@ -5429,6 +5429,47 @@ module Aws::MediaLive
     #   Timecode burn-in settings
     #   @return [Types::TimecodeBurninSettings]
     #
+    # @!attribute [rw] mv_over_picture_boundaries
+    #   If you are setting up the picture as a tile, you must set this to
+    #   "disabled". In all other configurations, you typically enter
+    #   "enabled".
+    #   @return [String]
+    #
+    # @!attribute [rw] mv_temporal_predictor
+    #   If you are setting up the picture as a tile, you must set this to
+    #   "disabled". In other configurations, you typically enter
+    #   "enabled".
+    #   @return [String]
+    #
+    # @!attribute [rw] tile_height
+    #   Set this field to set up the picture as a tile. You must also set
+    #   tileWidth. The tile height must result in 22 or fewer rows in the
+    #   frame. The tile width must result in 20 or fewer columns in the
+    #   frame. And finally, the product of the column count and row count
+    #   must be 64 of less. If the tile width and height are specified,
+    #   MediaLive will override the video codec slices field with a value
+    #   that MediaLive calculates
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_padding
+    #   Set to "padded" to force MediaLive to add padding to the frame, to
+    #   obtain a frame that is a whole multiple of the tile size. If you are
+    #   setting up the picture as a tile, you must enter "padded". In all
+    #   other configurations, you typically enter "none".
+    #   @return [String]
+    #
+    # @!attribute [rw] tile_width
+    #   Set this field to set up the picture as a tile. See tileHeight for
+    #   more information.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] treeblock_size
+    #   Select the tree block size used for encoding. If you enter "auto",
+    #   the encoder will pick the best size. If you are setting up the
+    #   picture as a tile, you must set this to 32x32. In all other
+    #   configurations, you typically enter "auto".
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265Settings AWS API Documentation
     #
     class H265Settings < Struct.new(
@@ -5461,7 +5502,13 @@ module Aws::MediaLive
       :slices,
       :tier,
       :timecode_insertion,
-      :timecode_burnin_settings)
+      :timecode_burnin_settings,
+      :mv_over_picture_boundaries,
+      :mv_temporal_predictor,
+      :tile_height,
+      :tile_padding,
+      :tile_width,
+      :treeblock_size)
       SENSITIVE = []
       include Aws::Structure
     end

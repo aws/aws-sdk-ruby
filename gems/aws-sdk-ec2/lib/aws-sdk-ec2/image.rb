@@ -164,8 +164,7 @@ module Aws::EC2
       data[:hypervisor]
     end
 
-    # The Amazon Web Services account alias (for example, `amazon`, `self`)
-    # or the Amazon Web Services account ID of the AMI owner.
+    # The owner alias (`amazon` \| `aws-marketplace`).
     # @return [String]
     def image_owner_alias
       data[:image_owner_alias]

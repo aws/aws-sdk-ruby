@@ -80,6 +80,11 @@ module Aws::EC2InstanceConnect
       SENSITIVE: []
     end
 
+    class SerialConsoleSessionUnsupportedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ServiceException
       attr_accessor message: ::String
       SENSITIVE: []

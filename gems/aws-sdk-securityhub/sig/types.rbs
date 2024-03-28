@@ -5856,9 +5856,9 @@ module Aws::SecurityHub
     class NumberFilter
       attr_accessor gte: ::Float
       attr_accessor lte: ::Float
-      attr_accessor eq: ::Float
       attr_accessor gt: ::Float
       attr_accessor lt: ::Float
+      attr_accessor eq: ::Float
       SENSITIVE: []
     end
 
@@ -6819,6 +6819,7 @@ module Aws::SecurityHub
       attr_accessor fix_available: ("YES" | "NO" | "PARTIAL")
       attr_accessor epss_score: ::Float
       attr_accessor exploit_available: ("YES" | "NO")
+      attr_accessor last_known_exploit_at: ::String
       attr_accessor code_vulnerabilities: ::Array[Types::VulnerabilityCodeVulnerabilities]
       SENSITIVE: []
     end

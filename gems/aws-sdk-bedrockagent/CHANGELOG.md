@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2024-03-27)
+------------------
+
+* Feature - This changes introduces metadata documents statistics and also updates the documentation for bedrock agent.
+
 1.3.0 (2024-01-26)
 ------------------
 

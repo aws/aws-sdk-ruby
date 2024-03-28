@@ -532,6 +532,7 @@ module Aws::AppConfig
     class Parameter
       attr_accessor description: ::String
       attr_accessor required: bool
+      attr_accessor dynamic: bool
       SENSITIVE: []
     end
 
@@ -568,6 +569,7 @@ module Aws::AppConfig
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor kms_key_identifier: ::String
+      attr_accessor dynamic_extension_parameters: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

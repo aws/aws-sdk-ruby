@@ -196,7 +196,7 @@ module Aws::CloudWatchLogs
     LiveTailSessionResults = Shapes::ListShape.new(name: 'LiveTailSessionResults')
     LiveTailSessionStart = Shapes::StructureShape.new(name: 'LiveTailSessionStart')
     LiveTailSessionUpdate = Shapes::StructureShape.new(name: 'LiveTailSessionUpdate')
-    LogEvent = Shapes::StringShape.new(name: 'LogEvent')
+    LogEvent = Shapes::StructureShape.new(name: 'LogEvent')
     LogEventIndex = Shapes::IntegerShape.new(name: 'LogEventIndex')
     LogGroup = Shapes::StructureShape.new(name: 'LogGroup')
     LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
@@ -903,6 +903,10 @@ module Aws::CloudWatchLogs
     LiveTailSessionUpdate.add_member(:session_metadata, Shapes::ShapeRef.new(shape: LiveTailSessionMetadata, location_name: "sessionMetadata"))
     LiveTailSessionUpdate.add_member(:session_results, Shapes::ShapeRef.new(shape: LiveTailSessionResults, location_name: "sessionResults"))
     LiveTailSessionUpdate.struct_class = Types::LiveTailSessionUpdate
+
+    LogEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
+    LogEvent.add_member(:message, Shapes::ShapeRef.new(shape: EventMessage, location_name: "message"))
+    LogEvent.struct_class = Types::LogEvent
 
     LogGroup.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     LogGroup.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))

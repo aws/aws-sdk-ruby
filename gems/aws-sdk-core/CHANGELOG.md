@@ -20,6 +20,16 @@ Unreleased Changes
 * Issue - Fix deserializing an empty self-closed blob to produce an empty string.
 * Issue - Support parsing of different formats of error data in Rest-XML services.
 
+3.191.5 (2024-03-26)
+------------------
+
+* Issue - Fix `EC2Metadata` and `InstanceProfileCredentials` to respect the port from a configured endpoint from code, ENV, or shared config.
+
+3.191.4 (2024-03-15)
+------------------
+
+* Issue - Ensure output unions work correctly with stub_responses.
+
 3.191.3 (2024-02-20)
 ------------------
 

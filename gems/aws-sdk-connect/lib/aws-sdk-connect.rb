@@ -52,6 +52,6 @@ require_relative 'aws-sdk-connect/customizations'
 # @!group service
 module Aws::Connect
 
-  GEM_VERSION = '1.150.0'
+  GEM_VERSION = '1.153.0'
 
 end

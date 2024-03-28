@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2024-03-21)
+------------------
+
+* Feature - This release adds Package groups to CodeArtifact so you can more conveniently configure package origin controls for multiple packages.
+
 1.38.0 (2024-01-26)
 ------------------
 

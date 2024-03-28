@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2024-03-27)
+------------------
+
+* Feature - Added minimum capacity to  Amazon ElastiCache Serverless. This feature allows customer to ensure minimum capacity even without current load
+
+1.97.0 (2024-03-11)
+------------------
+
+* Feature - Revisions to API text that are now to be carried over to SDK text, changing usages of "SFO" in code examples to "us-west-1", and some other typos.
+
 1.96.0 (2024-01-26)
 ------------------
 

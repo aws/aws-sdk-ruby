@@ -33,6 +33,7 @@ module Aws::Pricing
   # * {InvalidNextTokenException}
   # * {InvalidParameterException}
   # * {NotFoundException}
+  # * {ResourceNotFoundException}
   # * {ThrottlingException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -125,6 +126,21 @@ module Aws::Pricing
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Pricing::Types::NotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Pricing::Types::ResourceNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

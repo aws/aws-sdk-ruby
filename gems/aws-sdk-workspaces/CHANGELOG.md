@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2024-03-07)
+------------------
+
+* Feature - Added note for user decoupling
+
 1.99.0 (2024-02-08)
 ------------------
 

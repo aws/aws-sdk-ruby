@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-03-11)
+------------------
+
+* Feature - This release enables customers to safely update their MediaPackage v2 channel groups, channels and origin endpoints using entity tags.
+
 1.12.0 (2024-01-26)
 ------------------
 
