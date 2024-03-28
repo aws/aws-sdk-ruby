@@ -34,7 +34,7 @@ module Aws
       # @option options [Integer] :thread_count (THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @thread_count = options[:thread_count]
+        @thread_count = options[:thread_count] || THREAD_COUNT
       end
 
       # @return [Client]
@@ -147,7 +147,7 @@ module Aws
         if (callback = options[:progress_callback])
           progress = MultipartProgress.new(pending, callback)
         end
-        (@thread_count || options[:thread_count] || THREAD_COUNT).times do
+        options.fetch(:thread_count, @thread_count).times do
           thread = Thread.new do
             begin
               while part = pending.shift
