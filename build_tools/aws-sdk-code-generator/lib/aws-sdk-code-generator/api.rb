@@ -60,16 +60,14 @@ module AwsSdkCodeGenerator
           end
         when 'boolean' then 'Boolean'
         when 'character' then 'String<character>'
-        when 'double' then 'Float'
-        when 'float' then 'Float'
-        when 'integer' then 'Integer'
+        when 'double', 'float' then 'Float'
+        when 'integer', 'long', 'short' then 'Integer'
         when 'list'
           if nested
             "Array"
           else
             "Array<#{ruby_input_type(shape['member'], api, operation, nested: true)}>"
           end
-        when 'long' then 'Integer'
         when 'map'
           if nested
             "Hash"
@@ -96,11 +94,9 @@ module AwsSdkCodeGenerator
         when 'boolean' then 'Boolean'
         when 'byte' then 'Integer<byte>'
         when 'character' then 'String<character>'
-        when 'double' then 'Float'
-        when 'float' then 'Float'
-        when 'integer' then 'Integer'
+        when 'double', 'float' then 'Float'
+        when 'integer', 'long', 'short' then 'Integer'
         when 'list' then "Array<#{ruby_type(shape['member'], api)}>"
-        when 'long' then 'Integer'
         when 'map' then "Hash<String,#{ruby_type(shape['value'], api)}>"
         when 'string' then streaming?(shape_ref, api) ? 'IO' : 'String'
         when 'structure'

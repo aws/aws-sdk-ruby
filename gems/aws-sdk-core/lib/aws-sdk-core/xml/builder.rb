@@ -17,18 +17,18 @@ module Aws
       end
 
       def to_xml(params)
-        structure(@rules.location_name, @rules, params)
+        structure(@rules.location_name, @rules, params, top_level: true)
         @xml.join
       end
       alias serialize to_xml
 
       private
 
-      def structure(name, ref, values)
+      def structure(name, ref, values, top_level: false)
         if values.empty?
-          node(name, ref)
+          node(name, ref, top_level: top_level)
         else
-          node(name, ref, structure_attrs(ref, values)) do
+          node(name, ref, structure_attrs(ref, values), top_level: top_level) do
             ref.shape.members.each do |member_name, member_ref|
               next if values[member_name].nil?
               next if xml_attribute?(member_ref)
@@ -50,7 +50,7 @@ module Aws
       def list(name, ref, values)
         if ref[:flattened] || ref.shape.flattened
           values.each do |value|
-            member(ref.shape.member.location_name || name, ref.shape.member, value)
+            member(name, ref.shape.member, value)
           end
         else
           node(name, ref) do
@@ -65,7 +65,7 @@ module Aws
       def map(name, ref, hash)
         key_ref = ref.shape.key
         value_ref = ref.shape.value
-        if ref.shape.flattened
+        if ref[:flattened] || ref.shape.flattened
           hash.each do |key, value|
             node(name, ref) do
               member(key_ref.location_name || 'key', key_ref, key)
@@ -75,7 +75,8 @@ module Aws
         else
           node(name, ref) do
             hash.each do |key, value|
-              node('entry', ref)  do
+              # Pass in a new ShapeRef to create an entry node
+              node('entry', ShapeRef.new) do
                 member(key_ref.location_name || 'key', key_ref, key)
                 member(value_ref.location_name || 'value', value_ref, value)
               end
@@ -121,19 +122,27 @@ module Aws
       # Pass a block if you want to nest XML nodes inside.  When doing this,
       # you may *not* pass a value to the `args` list.
       #
-      def node(name, ref, *args, &block)
+      def node(name, ref, *args, top_level: false, &block)
         attrs = args.last.is_a?(Hash) ? args.pop : {}
-        attrs = shape_attrs(ref).merge(attrs)
+        attrs = shape_attrs(ref, top_level: top_level).merge(attrs)
         args << attrs
         @builder.node(name, *args, &block)
       end
 
-      def shape_attrs(ref)
-        if xmlns = ref['xmlNamespace']
-          if prefix = xmlns['prefix']
-            { 'xmlns:' + prefix => xmlns['uri'] }
-          else
-            { 'xmlns' => xmlns['uri'] }
+      def shape_attrs(ref, top_level: false)
+        # for non top level shapes, do NOT fall back to metadata key on shape
+        xmlns = top_level ? ref['xmlNamespace'] : ref.metadata['xmlNamespace']
+
+        if xmlns
+          case xmlns
+          when String
+            { 'xmlns' => xmlns }
+          when Hash
+            if (prefix = xmlns['prefix'])
+              { "xmlns:#{prefix}" => xmlns['uri'] }
+            else
+              { 'xmlns' => xmlns['uri'] }
+            end
           end
         else
           {}

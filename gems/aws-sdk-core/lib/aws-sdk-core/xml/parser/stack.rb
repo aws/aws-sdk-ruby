@@ -24,6 +24,8 @@ module Aws
           if name.to_s == 'encoding' && value.to_s == 'base64'
             @frame = BlobFrame.new(name, @frame.parent, @frame.ref)
           else
+            # don't try to parse shapes from xml namespace
+            return if name.to_s == 'xmlns'
             start_element(name)
             text(value)
             end_element(name)

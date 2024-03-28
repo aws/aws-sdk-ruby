@@ -91,7 +91,8 @@
       "type": "string"
     },
     "Body": {
-      "type": "blob"
+      "type": "blob",
+      "streaming": true
     },
     "Stream": {
       "type": "blob",

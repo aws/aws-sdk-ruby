@@ -46,8 +46,8 @@ module AwsSdkCodeGenerator
 
       when 'list' then list(s, i, visited)
       when 'map' then map(s, i, visited)
-      when 'boolean' then "false"
-      when 'integer', 'long' then '1'
+      when 'boolean' then 'false'
+      when 'integer', 'long', 'short' then '1'
       when 'float', 'double' then '1.0'
       when 'byte' then '97'
       when 'character' then '"a"'

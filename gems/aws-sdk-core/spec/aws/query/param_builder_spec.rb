@@ -157,14 +157,18 @@ module Aws
         ])
       end
 
-      it 'supports flattened lists with locationName traits' do
+      it 'does not support flattened lists with member locationName traits' do
         shapes['IntegerList']['flattened'] = true
+        # locationName trait on targeted member is ignored when serializing
+        # serializing flattened lists in structures
         shapes['IntegerList']['member']['locationName'] = 'Number'
-        expect(query(number_list: [3,2,1])).to eq([
-          ['Number.1', '3'],
-          ['Number.2', '2'],
-          ['Number.3', '1'],
-        ])
+        expect(query(number_list: [3, 2, 1])).to eq(
+          [
+            %w[NumberList.1 3],
+            %w[NumberList.2 2],
+            %w[NumberList.3 1]
+          ]
+       )
       end
 
       it 'supports flattened maps' do

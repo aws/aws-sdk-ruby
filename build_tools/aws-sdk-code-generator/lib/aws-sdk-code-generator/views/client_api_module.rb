@@ -6,7 +6,7 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      SKIP_TRAITS = Set.new(%w(shape deprecated location locationName documentation))
+      SKIP_TRAITS = Set.new(%w[shape deprecated location locationName documentation])
 
       SHAPE_CLASSES = {
         'blob' => 'BlobShape',
@@ -16,13 +16,14 @@ module AwsSdkCodeGenerator
         'double' => 'FloatShape',
         'float' => 'FloatShape',
         'integer' => 'IntegerShape',
-        'list' => 'ListShape',
         'long' => 'IntegerShape',
+        'short' => 'IntegerShape',
+        'list' => 'ListShape',
         'map' => 'MapShape',
         'string' => 'StringShape',
         'structure' => 'StructureShape',
         'timestamp' => 'TimestampShape'
-      }
+      }.freeze
 
       SHAPE_KEYS = {
         # keep
@@ -34,6 +35,8 @@ module AwsSdkCodeGenerator
         'union' => false, # should remain false
         'document' => true,
         'jsonvalue' => true,
+        'error' => true, # parsing customized error
+        'locationName' => true, # to recognize xmlName defined on shape
         # event stream modeling
         'event' => false,
         'eventstream' => false,
@@ -43,7 +46,6 @@ module AwsSdkCodeGenerator
         'synthetic' => false,
         'box' => false,
         'fault' => false,
-        'error' => false,
         'exception_event' => false, # internal, exceptions cannot be events
         'deprecated' => false,
         'deprecatedMessage' => false,
@@ -52,7 +54,6 @@ module AwsSdkCodeGenerator
         'members' => false,
         'member' => false,
         'key' => false,
-        'locationName' => false,
         'value' => false,
         'required' => false,
         'enum' => false,
@@ -65,7 +66,7 @@ module AwsSdkCodeGenerator
         'wrapper' => false,
         'xmlOrder' => false,
         'retryable' => false,
-      }
+      }.freeze
 
       METADATA_KEYS = {
         # keep all
@@ -89,7 +90,7 @@ module AwsSdkCodeGenerator
         'awsQueryCompatible' => true, # AwsQuery migration
         # ignore
         'ripServiceName' => true
-      }
+      }.freeze
 
       # @option options [required, Service] :service
       def initialize(options)
@@ -499,7 +500,14 @@ module AwsSdkCodeGenerator
           metadata.each_pair do |key, value|
             next if key == 'resultWrapper'
             if key == 'locationName'
-              options[:location_name] = value.inspect
+              options[:location_name] =
+                # use the xmlName on shape if defined
+                if (@service.protocol == 'rest-xml') &&
+                   (shape_location_name = @service.api['shapes'][shape_name]['locationName'])
+                  shape_location_name.inspect
+                else
+                  value.inspect
+                end
             else
               options[:metadata] ||= {}
               options[:metadata][key] = value.inspect

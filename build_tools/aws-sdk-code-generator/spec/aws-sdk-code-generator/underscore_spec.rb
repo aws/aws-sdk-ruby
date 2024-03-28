@@ -4,47 +4,48 @@ require_relative '../spec_helper'
 
 module AwsSdkCodeGenerator
   module Underscore
+
     describe 'underscore' do
 
       it 'downcases titleized words' do
-        expect(underscore('Foo')).to eq('foo')
+        expect(Underscore.underscore('Foo')).to eq('foo')
       end
 
       it 'breaks compound titleized words with underscores' do
-        expect(underscore('FooBarYuck')).to eq('foo_bar_yuck')
+        expect(Underscore.underscore('FooBarYuck')).to eq('foo_bar_yuck')
       end
 
       it 'treats acronyms as a single word' do
-        expect(underscore('AWS')).to eq('aws')
+        expect(Underscore.underscore('AWS')).to eq('aws')
       end
 
       it 'preserves leading acronyms' do
-        expect(underscore('AWSAccount')).to eq('aws_account')
+        expect(Underscore.underscore('AWSAccount')).to eq('aws_account')
       end
 
       it 'preserves trailing acronyms' do
-        expect(underscore('SimpleDB')).to eq('simple_db')
+        expect(Underscore.underscore('SimpleDB')).to eq('simple_db')
       end
 
       it 'preserves nested acronyms' do
-        expect(underscore('MySUPERWord')).to eq('my_super_word')
-        expect(underscore('AWSAccountID')).to eq('aws_account_id')
+        expect(Underscore.underscore('MySUPERWord')).to eq('my_super_word')
+        expect(Underscore.underscore('AWSAccountID')).to eq('aws_account_id')
       end
 
       it 'treats trailing numbers as a part of acronyms' do
-        expect(underscore('MD5OfBody')).to eq('md5_of_body')
-        expect(underscore('S3Bucket')).to eq('s3_bucket')
-        expect(underscore('EC2Instance')).to eq('ec2_instance')
+        expect(Underscore.underscore('MD5OfBody')).to eq('md5_of_body')
+        expect(Underscore.underscore('S3Bucket')).to eq('s3_bucket')
+        expect(Underscore.underscore('EC2Instance')).to eq('ec2_instance')
       end
 
       it 'does not include leading numbers as part of a word' do
-        expect(underscore('SentLast24Hours')).to eq('sent_last_24_hours')
-        expect(underscore('24MIN')).to eq('24_min')
+        expect(Underscore.underscore('SentLast24Hours')).to eq('sent_last_24_hours')
+        expect(Underscore.underscore('24MIN')).to eq('24_min')
       end
 
       it 'accepts words that start with a lower case letter' do
-        expect(underscore('s3Key')).to eq('s3_key')
-        expect(underscore('s3Bucket')).to eq('s3_bucket')
+        expect(Underscore.underscore('s3Key')).to eq('s3_key')
+        expect(Underscore.underscore('s3Bucket')).to eq('s3_bucket')
       end
 
       describe 'irregular inflections' do
@@ -85,7 +86,7 @@ module AwsSdkCodeGenerator
           'VolumeiSCSIAttributes' => 'volume_iscsi_attributes'
         }.each do |camel_case, underscored|
           it "inflects #{camel_case} to #{underscored}" do
-            expect(underscore(camel_case)).to eq(underscored)
+            expect(Underscore.underscore(camel_case)).to eq(underscored)
           end
         end
 

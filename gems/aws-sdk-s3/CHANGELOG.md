@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Ignore `Content-Type` header in the pre-signer.
+
+=======
 1.146.0 (2024-03-18)
 ------------------
 
@@ -20,6 +23,7 @@ Unreleased Changes
 ------------------
 
 * Issue - Include original part errors in message when aborting multipart upload fails (#2990).
+
 
 1.143.0 (2024-01-26)
 ------------------
