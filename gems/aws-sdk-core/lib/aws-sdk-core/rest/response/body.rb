@@ -48,7 +48,7 @@ module Aws
             StringShape === @rules[:payload_member].shape
           )
         end
-        
+
         def parse(body, rules, target = nil)
           @parser_class.new(rules).parse(body, target) if body.size > 0
         end

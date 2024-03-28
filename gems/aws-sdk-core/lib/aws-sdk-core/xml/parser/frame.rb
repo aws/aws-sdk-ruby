@@ -292,20 +292,7 @@ module Aws
 
       class TimestampFrame < Frame
         def result
-          @text.empty? ? nil : parse(@text.join)
-        end
-        def parse(value)
-          case value
-          when nil then nil
-          when /^\d+$/ then Time.at(value.to_i)
-          else
-            begin
-              fractional_time = Time.parse(value).utc.to_f
-              Time.at(fractional_time)
-            rescue ArgumentError
-              raise "unhandled timestamp format `#{value}'"
-            end
-          end
+          @text.empty? ? nil : Aws::Util.deserialize_time(@text.join)
         end
       end
 

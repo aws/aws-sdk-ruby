@@ -2,7 +2,6 @@
 
 require 'time'
 require 'base64'
-
 require_relative 'header_list_parser'
 
 module Aws

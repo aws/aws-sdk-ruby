@@ -71,17 +71,18 @@ module Aws
         end
 
         def update_payload_content_type(req)
+          # headers could be already populated if specified on input shape
           case @rules[:payload_member].shape
           when BlobShape
-            req.headers['Content-Type'] = 'application/octet-stream'
+            req.headers['Content-Type'] ||= 'application/octet-stream'
           when StringShape
-            req.headers['Content-Type'] = 'text/plain'
+            req.headers['Content-Type'] ||= 'text/plain'
           when UnionShape
-            req.headers['Content-Type'] = if xml_builder?
-                                            'application/xml'
-                                          elsif json_builder?
-                                            'application/json'
-                                          end
+            req.headers['Content-Type'] ||= if xml_builder?
+                                              'application/xml'
+                                            elsif json_builder?
+                                              'application/json'
+                                            end
           end
         end
 
