@@ -16,7 +16,7 @@ module Aws::OAM
 
     class CreateLinkInput
       attr_accessor label_template: ::String
-      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application")]
+      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application" | "AWS::InternetMonitor::Monitor")]
       attr_accessor sink_identifier: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -242,7 +242,7 @@ module Aws::OAM
 
     class UpdateLinkInput
       attr_accessor identifier: ::String
-      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application")]
+      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application" | "AWS::InternetMonitor::Monitor")]
       SENSITIVE: []
     end
 

@@ -99,7 +99,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -204,7 +204,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -276,7 +276,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -449,7 +449,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -474,7 +474,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -524,7 +524,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer

@@ -466,7 +466,7 @@ module Aws::OAM
     #
     #   resp = client.create_link({
     #     label_template: "LabelTemplate", # required
-    #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application
+    #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application, AWS::InternetMonitor::Monitor
     #     sink_identifier: "ResourceIdentifier", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1130,7 +1130,7 @@ module Aws::OAM
     #
     #   resp = client.update_link({
     #     identifier: "ResourceIdentifier", # required
-    #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application
+    #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application, AWS::InternetMonitor::Monitor
     #   })
     #
     # @example Response structure
@@ -1167,7 +1167,7 @@ module Aws::OAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-oam'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

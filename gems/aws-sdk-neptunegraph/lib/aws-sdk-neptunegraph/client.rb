@@ -531,7 +531,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -764,7 +764,11 @@ module Aws::NeptuneGraph
 
     # Create a private graph endpoint to allow private access from to the
     # graph from within a VPC. You can attach security groups to the private
-    # graph endpoint. VPC endpoint charges apply.
+    # graph endpoint.
+    #
+    # <note markdown="1"> VPC endpoint charges apply.
+    #
+    #  </note>
     #
     # @option params [required, String] :graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
@@ -853,7 +857,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -954,9 +958,7 @@ module Aws::NeptuneGraph
       req.send_request(options)
     end
 
-    # Execute an openCypher query. Currently, the SDK does not support
-    # parameterized queries. If you want to make a parameterized query call,
-    # you can use an HTTP request.
+    # Execute an openCypher query.
     #
     # When invoking this operation in a Neptune Analytics cluster, the IAM
     # user or role making the request must have a policy attached that
@@ -968,13 +970,6 @@ module Aws::NeptuneGraph
     # * neptune-graph:WriteDataViaQuery
     #
     # * neptune-graph:DeleteDataViaQuery
-    #
-    # <note markdown="1"> Non-parametrized queries are not considered for plan caching. You can
-    # force plan caching with `planCache=enabled`. The plan cache will be
-    # reused only for the same exact query. Slight variations in the query
-    # will not be able to reuse the query plan cache.
-    #
-    #  </note>
     #
     # @option params [required, String] :graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
@@ -1071,7 +1066,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1457,7 +1452,7 @@ module Aws::NeptuneGraph
     #   resp.graphs[0].id #=> String
     #   resp.graphs[0].name #=> String
     #   resp.graphs[0].arn #=> String
-    #   resp.graphs[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.graphs[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.graphs[0].provisioned_memory #=> Integer
     #   resp.graphs[0].public_connectivity #=> Boolean
     #   resp.graphs[0].endpoint #=> String
@@ -1693,7 +1688,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1730,7 +1725,9 @@ module Aws::NeptuneGraph
     #
     # @option params [Integer] :provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
-    #   use for the graph. Min = 128
+    #   use for the graph.
+    #
+    #   Min = 128
     #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the graph has deletion protection
@@ -1787,7 +1784,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1889,7 +1886,9 @@ module Aws::NeptuneGraph
     #
     # @option params [Integer] :provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
-    #   use for the graph. Min = 128
+    #   use for the graph.
+    #
+    #   Min = 128
     #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the graph has deletion protection
@@ -1928,7 +1927,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1963,7 +1962,7 @@ module Aws::NeptuneGraph
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

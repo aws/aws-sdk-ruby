@@ -504,7 +504,8 @@ module Aws::CodeCatalyst
     #    </note>
     #
     # @option params [String] :vpc_connection_name
-    #   The name of the connection to use connect to a Amazon VPC.
+    #   The name of the connection that will be used to connect to Amazon VPC,
+    #   if any.
     #
     # @return [Types::CreateDevEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1126,6 +1127,8 @@ module Aws::CodeCatalyst
     #
     #   * {Types::GetSubscriptionResponse#subscription_type #subscription_type} => String
     #   * {Types::GetSubscriptionResponse#aws_account_name #aws_account_name} => String
+    #   * {Types::GetSubscriptionResponse#pending_subscription_type #pending_subscription_type} => String
+    #   * {Types::GetSubscriptionResponse#pending_subscription_start_time #pending_subscription_start_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1137,6 +1140,8 @@ module Aws::CodeCatalyst
     #
     #   resp.subscription_type #=> String
     #   resp.aws_account_name #=> String
+    #   resp.pending_subscription_type #=> String
+    #   resp.pending_subscription_start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetSubscription AWS API Documentation
     #
@@ -2392,7 +2397,7 @@ module Aws::CodeCatalyst
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecatalyst'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

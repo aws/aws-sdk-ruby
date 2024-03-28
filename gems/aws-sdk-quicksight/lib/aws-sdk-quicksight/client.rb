@@ -5960,6 +5960,8 @@ module Aws::QuickSight
     #
     #   * {Types::DescribeIpRestrictionResponse#aws_account_id #aws_account_id} => String
     #   * {Types::DescribeIpRestrictionResponse#ip_restriction_rule_map #ip_restriction_rule_map} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeIpRestrictionResponse#vpc_id_restriction_rule_map #vpc_id_restriction_rule_map} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeIpRestrictionResponse#vpc_endpoint_id_restriction_rule_map #vpc_endpoint_id_restriction_rule_map} => Hash&lt;String,String&gt;
     #   * {Types::DescribeIpRestrictionResponse#enabled #enabled} => Boolean
     #   * {Types::DescribeIpRestrictionResponse#request_id #request_id} => String
     #   * {Types::DescribeIpRestrictionResponse#status #status} => Integer
@@ -5975,6 +5977,10 @@ module Aws::QuickSight
     #   resp.aws_account_id #=> String
     #   resp.ip_restriction_rule_map #=> Hash
     #   resp.ip_restriction_rule_map["CIDR"] #=> String
+    #   resp.vpc_id_restriction_rule_map #=> Hash
+    #   resp.vpc_id_restriction_rule_map["VpcId"] #=> String
+    #   resp.vpc_endpoint_id_restriction_rule_map #=> Hash
+    #   resp.vpc_endpoint_id_restriction_rule_map["VpcEndpointId"] #=> String
     #   resp.enabled #=> Boolean
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -7047,7 +7053,10 @@ module Aws::QuickSight
     #   dashboard ARNs in the account that you want the user to be able to
     #   view.
     #
-    #   Currently, you can pass up to 25 dashboard ARNs in each API call.
+    #   If you want to make changes to the theme of your embedded content,
+    #   pass a list of theme ARNs that the anonymous users need access to.
+    #
+    #   Currently, you can pass up to 25 theme ARNs in each API call.
     #
     # @option params [required, Types::AnonymousUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The configuration of the experience that you are embedding.
@@ -12293,8 +12302,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates the content and status of IP rules. To use this operation, you
-    # must provide the entire map of rules. You can use the
+    # Updates the content and status of IP rules. Traffic from a source is
+    # allowed when the source satisfies either the `IpRestrictionRule`,
+    # `VpcIdRestrictionRule`, or `VpcEndpointIdRestrictionRule`. To use this
+    # operation, you must provide the entire map of rules. You can use the
     # `DescribeIpRestriction` operation to get the current rule map.
     #
     # @option params [required, String] :aws_account_id
@@ -12302,6 +12313,15 @@ module Aws::QuickSight
     #
     # @option params [Hash<String,String>] :ip_restriction_rule_map
     #   A map that describes the updated IP rules with CIDR ranges and
+    #   descriptions.
+    #
+    # @option params [Hash<String,String>] :vpc_id_restriction_rule_map
+    #   A map of VPC IDs and their corresponding rules. When you configure
+    #   this parameter, traffic from all VPC endpoints that are present in the
+    #   specified VPC is allowed.
+    #
+    # @option params [Hash<String,String>] :vpc_endpoint_id_restriction_rule_map
+    #   A map of allowed VPC endpoint IDs and their corresponding rule
     #   descriptions.
     #
     # @option params [Boolean] :enabled
@@ -12319,6 +12339,12 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     ip_restriction_rule_map: {
     #       "CIDR" => "IpRestrictionRuleDescription",
+    #     },
+    #     vpc_id_restriction_rule_map: {
+    #       "VpcId" => "VpcIdRestrictionRuleDescription",
+    #     },
+    #     vpc_endpoint_id_restriction_rule_map: {
+    #       "VpcEndpointId" => "VpcEndpointIdRestrictionRuleDescription",
     #     },
     #     enabled: false,
     #   })
@@ -13539,7 +13565,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

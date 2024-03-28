@@ -43,6 +43,7 @@ module Aws
 
       # @option options [required,String] :bucket
       # @option options [required,String] :key
+      # @option options [Integer] :thread_count (THREAD_COUNT)
       # @return [Seahorse::Client::Response] - the CompleteMultipartUploadResponse
       def upload(options = {}, &block)
         Aws::Plugins::UserAgent.feature('s3-transfer') do
@@ -152,7 +153,7 @@ module Aws
       def upload_in_threads(read_pipe, completed, options, thread_errors)
         mutex = Mutex.new
         part_number = 0
-        @thread_count.times.map do
+        options.fetch(:thread_count, @thread_count).times.map do
           thread = Thread.new do
             begin
               loop do

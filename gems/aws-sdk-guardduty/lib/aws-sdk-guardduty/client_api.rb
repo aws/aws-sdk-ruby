@@ -1863,6 +1863,11 @@ module Aws::GuardDuty
     RuntimeContext.add_member(:address_family, Shapes::ShapeRef.new(shape: String, location_name: "addressFamily"))
     RuntimeContext.add_member(:iana_protocol_number, Shapes::ShapeRef.new(shape: Integer, location_name: "ianaProtocolNumber"))
     RuntimeContext.add_member(:memory_regions, Shapes::ShapeRef.new(shape: MemoryRegionsList, location_name: "memoryRegions"))
+    RuntimeContext.add_member(:tool_name, Shapes::ShapeRef.new(shape: String, location_name: "toolName"))
+    RuntimeContext.add_member(:tool_category, Shapes::ShapeRef.new(shape: String, location_name: "toolCategory"))
+    RuntimeContext.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
+    RuntimeContext.add_member(:command_line_example, Shapes::ShapeRef.new(shape: String, location_name: "commandLineExample"))
+    RuntimeContext.add_member(:threat_file_path, Shapes::ShapeRef.new(shape: String, location_name: "threatFilePath"))
     RuntimeContext.struct_class = Types::RuntimeContext
 
     RuntimeDetails.add_member(:process, Shapes::ShapeRef.new(shape: ProcessDetails, location_name: "process"))
@@ -2044,6 +2049,7 @@ module Aws::GuardDuty
 
     ThreatIntelligenceDetail.add_member(:threat_list_name, Shapes::ShapeRef.new(shape: String, location_name: "threatListName"))
     ThreatIntelligenceDetail.add_member(:threat_names, Shapes::ShapeRef.new(shape: ThreatNames, location_name: "threatNames"))
+    ThreatIntelligenceDetail.add_member(:threat_file_sha_256, Shapes::ShapeRef.new(shape: String, location_name: "threatFileSha256"))
     ThreatIntelligenceDetail.struct_class = Types::ThreatIntelligenceDetail
 
     ThreatIntelligenceDetails.member = Shapes::ShapeRef.new(shape: ThreatIntelligenceDetail)

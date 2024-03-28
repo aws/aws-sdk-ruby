@@ -147,7 +147,7 @@ module Aws
         if (callback = options[:progress_callback])
           progress = MultipartProgress.new(pending, callback)
         end
-        @thread_count.times do
+        options.fetch(:thread_count, @thread_count).times do
           thread = Thread.new do
             begin
               while part = pending.shift

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.447.0 (2024-03-28)
+------------------
+
+* Feature - Amazon EC2 C7gd, M7gd and R7gd metal instances with up to 3.8 TB of local NVMe-based SSD block-level storage have up to 45% improved real-time NVMe storage performance than comparable Graviton2-based instances.
+
 1.446.0 (2024-03-26)
 ------------------
 

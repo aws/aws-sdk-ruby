@@ -8434,7 +8434,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A dataset parameter.
+    # A parameter that is created in a dataset. The parameter can be a
+    # string, integer, decimal, or datetime data type.
     #
     # @!attribute [rw] string_dataset_parameter
     #   A string parameter that is created in the dataset.
@@ -11908,6 +11909,14 @@ module Aws::QuickSight
     #   A map that describes the IP rules with CIDR range and description.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc_id_restriction_rule_map
+    #   A map of allowed VPC IDs and their rule descriptions.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_endpoint_id_restriction_rule_map
+    #   A map of allowed VPC endpoint IDs and their rule descriptions.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] enabled
     #   A value that specifies whether IP rules are turned on.
     #   @return [Boolean]
@@ -11925,6 +11934,8 @@ module Aws::QuickSight
     class DescribeIpRestrictionResponse < Struct.new(
       :aws_account_id,
       :ip_restriction_rule_map,
+      :vpc_id_restriction_rule_map,
+      :vpc_endpoint_id_restriction_rule_map,
       :enabled,
       :request_id,
       :status)
@@ -15244,7 +15255,10 @@ module Aws::QuickSight
     #   dashboard ARNs in the account that you want the user to be able to
     #   view.
     #
-    #   Currently, you can pass up to 25 dashboard ARNs in each API call.
+    #   If you want to make changes to the theme of your embedded content,
+    #   pass a list of theme ARNs that the anonymous users need access to.
+    #
+    #   Currently, you can pass up to 25 theme ARNs in each API call.
     #   @return [Array<String>]
     #
     # @!attribute [rw] experience_configuration
@@ -31259,6 +31273,17 @@ module Aws::QuickSight
     #   descriptions.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc_id_restriction_rule_map
+    #   A map of VPC IDs and their corresponding rules. When you configure
+    #   this parameter, traffic from all VPC endpoints that are present in
+    #   the specified VPC is allowed.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_endpoint_id_restriction_rule_map
+    #   A map of allowed VPC endpoint IDs and their corresponding rule
+    #   descriptions.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] enabled
     #   A value that specifies whether IP rules are turned on.
     #   @return [Boolean]
@@ -31268,6 +31293,8 @@ module Aws::QuickSight
     class UpdateIpRestrictionRequest < Struct.new(
       :aws_account_id,
       :ip_restriction_rule_map,
+      :vpc_id_restriction_rule_map,
+      :vpc_endpoint_id_restriction_rule_map,
       :enabled)
       SENSITIVE = []
       include Aws::Structure

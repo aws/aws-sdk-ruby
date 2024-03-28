@@ -4,6 +4,12 @@ Unreleased Changes
 * Issue - Ignore `Content-Type` header in the pre-signer.
 
 =======
+=======
+1.146.1 (2024-03-28)
+------------------
+
+* Issue - Fix bug where thread_count option was not being respected for multipart uploads.
+
 1.146.0 (2024-03-18)
 ------------------
 

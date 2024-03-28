@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2024-03-28)
+------------------
+
+* Feature - Update ImportTaskCancelled waiter to evaluate task state correctly and minor documentation changes.
+
 1.4.0 (2024-02-12)
 ------------------
 

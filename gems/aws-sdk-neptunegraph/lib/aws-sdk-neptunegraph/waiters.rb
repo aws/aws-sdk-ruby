@@ -289,7 +289,7 @@ module Aws::NeptuneGraph
             acceptors: [
               {
                 "matcher" => "path",
-                "argument" => "status != 'CANCELLING'",
+                "argument" => "status != 'CANCELLING' && status != 'CANCELLED'",
                 "state" => "failure",
                 "expected" => true
               },

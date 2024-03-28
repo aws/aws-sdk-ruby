@@ -1762,6 +1762,12 @@ module Aws::QuickSight
     VisualSubtitleLabelOptions = Shapes::StructureShape.new(name: 'VisualSubtitleLabelOptions')
     VisualTitleLabelOptions = Shapes::StructureShape.new(name: 'VisualTitleLabelOptions')
     VpcConnectionProperties = Shapes::StructureShape.new(name: 'VpcConnectionProperties')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
+    VpcEndpointIdRestrictionRuleDescription = Shapes::StringShape.new(name: 'VpcEndpointIdRestrictionRuleDescription')
+    VpcEndpointIdRestrictionRuleMap = Shapes::MapShape.new(name: 'VpcEndpointIdRestrictionRuleMap')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
+    VpcIdRestrictionRuleDescription = Shapes::StringShape.new(name: 'VpcIdRestrictionRuleDescription')
+    VpcIdRestrictionRuleMap = Shapes::MapShape.new(name: 'VpcIdRestrictionRuleMap')
     Warehouse = Shapes::StringShape.new(name: 'Warehouse')
     WaterfallChartAggregatedFieldWells = Shapes::StructureShape.new(name: 'WaterfallChartAggregatedFieldWells')
     WaterfallChartColorConfiguration = Shapes::StructureShape.new(name: 'WaterfallChartColorConfiguration')
@@ -4221,6 +4227,8 @@ module Aws::QuickSight
 
     DescribeIpRestrictionResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
     DescribeIpRestrictionResponse.add_member(:ip_restriction_rule_map, Shapes::ShapeRef.new(shape: IpRestrictionRuleMap, location_name: "IpRestrictionRuleMap"))
+    DescribeIpRestrictionResponse.add_member(:vpc_id_restriction_rule_map, Shapes::ShapeRef.new(shape: VpcIdRestrictionRuleMap, location_name: "VpcIdRestrictionRuleMap"))
+    DescribeIpRestrictionResponse.add_member(:vpc_endpoint_id_restriction_rule_map, Shapes::ShapeRef.new(shape: VpcEndpointIdRestrictionRuleMap, location_name: "VpcEndpointIdRestrictionRuleMap"))
     DescribeIpRestrictionResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Enabled"))
     DescribeIpRestrictionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeIpRestrictionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -8164,6 +8172,8 @@ module Aws::QuickSight
 
     UpdateIpRestrictionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateIpRestrictionRequest.add_member(:ip_restriction_rule_map, Shapes::ShapeRef.new(shape: IpRestrictionRuleMap, location_name: "IpRestrictionRuleMap"))
+    UpdateIpRestrictionRequest.add_member(:vpc_id_restriction_rule_map, Shapes::ShapeRef.new(shape: VpcIdRestrictionRuleMap, location_name: "VpcIdRestrictionRuleMap"))
+    UpdateIpRestrictionRequest.add_member(:vpc_endpoint_id_restriction_rule_map, Shapes::ShapeRef.new(shape: VpcEndpointIdRestrictionRuleMap, location_name: "VpcEndpointIdRestrictionRuleMap"))
     UpdateIpRestrictionRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Enabled"))
     UpdateIpRestrictionRequest.struct_class = Types::UpdateIpRestrictionRequest
 
@@ -8484,6 +8494,12 @@ module Aws::QuickSight
 
     VpcConnectionProperties.add_member(:vpc_connection_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "VpcConnectionArn"))
     VpcConnectionProperties.struct_class = Types::VpcConnectionProperties
+
+    VpcEndpointIdRestrictionRuleMap.key = Shapes::ShapeRef.new(shape: VpcEndpointId)
+    VpcEndpointIdRestrictionRuleMap.value = Shapes::ShapeRef.new(shape: VpcEndpointIdRestrictionRuleDescription)
+
+    VpcIdRestrictionRuleMap.key = Shapes::ShapeRef.new(shape: VpcId)
+    VpcIdRestrictionRuleMap.value = Shapes::ShapeRef.new(shape: VpcIdRestrictionRuleDescription)
 
     WaterfallChartAggregatedFieldWells.add_member(:categories, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "Categories"))
     WaterfallChartAggregatedFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: MeasureFieldList, location_name: "Values"))

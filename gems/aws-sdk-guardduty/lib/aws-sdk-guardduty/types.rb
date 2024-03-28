@@ -808,19 +808,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
-    # your Amazon EC2 instances (currently in preview release) and is
-    # subject to change. The use of this API is subject to Section 2 of the
-    # [Amazon Web Services Service Terms][1] ("Betas and Previews").
-    #
-    #  </note>
-    #
     # Contains information about the Amazon EC2 instance runtime coverage
     # details.
-    #
-    #
-    #
-    # [1]: http://aws.amazon.com/service-terms/
     #
     # @!attribute [rw] instance_id
     #   The Amazon EC2 instance ID.
@@ -1062,19 +1051,8 @@ module Aws::GuardDuty
     #   @return [Types::CoverageEcsClusterDetails]
     #
     # @!attribute [rw] ec2_instance_details
-    #   <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
-    #   your Amazon EC2 instances (currently in preview release) and is
-    #   subject to change. The use of this API is subject to Section 2 of
-    #   the [Amazon Web Services Service Terms][1] ("Betas and Previews").
-    #
-    #    </note>
-    #
     #   Information about the Amazon EC2 instance assessed for runtime
     #   coverage.
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/service-terms/
     #   @return [Types::CoverageEc2InstanceDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageResourceDetails AWS API Documentation
@@ -2549,7 +2527,12 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] domain_with_suffix
     #   The second and top level domain involved in the activity that
-    #   prompted GuardDuty to generate this finding.
+    #   potentially prompted GuardDuty to generate this finding. For a list
+    #   of top-level and second-level domains, see [public suffix list][1].
+    #
+    #
+    #
+    #   [1]: https://publicsuffix.org/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction AWS API Documentation
@@ -6617,6 +6600,28 @@ module Aws::GuardDuty
     #   heap.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tool_name
+    #   Name of the potentially suspicious tool.
+    #   @return [String]
+    #
+    # @!attribute [rw] tool_category
+    #   Category that the tool belongs to. Some of the examples are Backdoor
+    #   Tool, Pentest Tool, Network Scanner, and Network Sniffer.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   Name of the security service that has been potentially disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] command_line_example
+    #   Example of the command line involved in the suspicious activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] threat_file_path
+    #   The suspicious file path for which the threat intelligence details
+    #   were found.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RuntimeContext AWS API Documentation
     #
     class RuntimeContext < Struct.new(
@@ -6639,7 +6644,12 @@ module Aws::GuardDuty
       :target_process,
       :address_family,
       :iana_protocol_number,
-      :memory_regions)
+      :memory_regions,
+      :tool_name,
+      :tool_category,
+      :service_name,
+      :command_line_example,
+      :threat_file_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7388,11 +7398,16 @@ module Aws::GuardDuty
     #   triggered the finding.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] threat_file_sha_256
+    #   SHA256 of the file that generated the finding.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ThreatIntelligenceDetail AWS API Documentation
     #
     class ThreatIntelligenceDetail < Struct.new(
       :threat_list_name,
-      :threat_names)
+      :threat_names,
+      :threat_file_sha_256)
       SENSITIVE = []
       include Aws::Structure
     end
