@@ -3017,6 +3017,8 @@ module Aws::QuickSight
     class DescribeIpRestrictionResponse
       attr_accessor aws_account_id: ::String
       attr_accessor ip_restriction_rule_map: ::Hash[::String, ::String]
+      attr_accessor vpc_id_restriction_rule_map: ::Hash[::String, ::String]
+      attr_accessor vpc_endpoint_id_restriction_rule_map: ::Hash[::String, ::String]
       attr_accessor enabled: bool
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
@@ -7982,6 +7984,8 @@ module Aws::QuickSight
     class UpdateIpRestrictionRequest
       attr_accessor aws_account_id: ::String
       attr_accessor ip_restriction_rule_map: ::Hash[::String, ::String]
+      attr_accessor vpc_id_restriction_rule_map: ::Hash[::String, ::String]
+      attr_accessor vpc_endpoint_id_restriction_rule_map: ::Hash[::String, ::String]
       attr_accessor enabled: bool
       SENSITIVE: []
     end

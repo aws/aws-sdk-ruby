@@ -210,7 +210,9 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
-    #   use for the graph. Min = 128
+    #   use for the graph.
+    #
+    #   Min = 128
     #   @return [Integer]
     #
     # @!attribute [rw] endpoint
@@ -220,6 +222,11 @@ module Aws::NeptuneGraph
     # @!attribute [rw] public_connectivity
     #   Specifies whether or not the graph can be reachable over the
     #   internet. All access to graphs is IAM authenticated.
+    #
+    #   <note markdown="1"> If enabling public connectivity for the first time, there will be a
+    #   delay while it is enabled.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] vector_search_configuration
@@ -229,6 +236,8 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] replica_count
     #   The number of replicas in other AZs.
+    #
+    #   Default: If not specified, the default value is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_identifier
@@ -2117,7 +2126,9 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
-    #   use for the graph. Min = 128
+    #   use for the graph.
+    #
+    #   Min = 128
     #   @return [Integer]
     #
     # @!attribute [rw] deletion_protection
@@ -2374,7 +2385,9 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
-    #   use for the graph. Min = 128
+    #   use for the graph.
+    #
+    #   Min = 128
     #   @return [Integer]
     #
     # @!attribute [rw] deletion_protection

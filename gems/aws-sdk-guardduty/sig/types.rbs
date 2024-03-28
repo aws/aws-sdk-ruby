@@ -582,13 +582,13 @@ module Aws::GuardDuty
     end
 
     class DetectorAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class DetectorAdditionalConfigurationResult
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1379,13 +1379,13 @@ module Aws::GuardDuty
     end
 
     class MemberAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class MemberAdditionalConfigurationResult
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1452,13 +1452,13 @@ module Aws::GuardDuty
     end
 
     class OrganizationAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
       SENSITIVE: []
     end
 
     class OrganizationAdditionalConfigurationResult
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
       SENSITIVE: []
     end
@@ -1515,7 +1515,7 @@ module Aws::GuardDuty
     end
 
     class OrganizationFeatureStatisticsAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor enabled_accounts_count: ::Integer
       SENSITIVE: []
     end
@@ -1726,6 +1726,11 @@ module Aws::GuardDuty
       attr_accessor address_family: ::String
       attr_accessor iana_protocol_number: ::Integer
       attr_accessor memory_regions: ::Array[::String]
+      attr_accessor tool_name: ::String
+      attr_accessor tool_category: ::String
+      attr_accessor service_name: ::String
+      attr_accessor command_line_example: ::String
+      attr_accessor threat_file_path: ::String
       SENSITIVE: []
     end
 
@@ -1940,6 +1945,7 @@ module Aws::GuardDuty
     class ThreatIntelligenceDetail
       attr_accessor threat_list_name: ::String
       attr_accessor threat_names: ::Array[::String]
+      attr_accessor threat_file_sha_256: ::String
       SENSITIVE: []
     end
 

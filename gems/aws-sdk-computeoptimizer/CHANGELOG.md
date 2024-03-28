@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2024-03-28)
+------------------
+
+* Feature - This release enables AWS Compute Optimizer to analyze and generate recommendations with a new customization preference, Memory Utilization.
+
 1.53.0 (2024-01-26)
 ------------------
 

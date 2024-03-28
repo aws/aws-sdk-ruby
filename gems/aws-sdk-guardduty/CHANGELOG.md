@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2024-03-28)
+------------------
+
+* Feature - Add EC2 support for GuardDuty Runtime Monitoring auto management.
+
 1.88.0 (2024-03-08)
 ------------------
 

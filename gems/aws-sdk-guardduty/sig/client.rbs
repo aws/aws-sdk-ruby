@@ -136,7 +136,7 @@ module Aws
                                  status: ("ENABLED" | "DISABLED")?,
                                  additional_configuration: Array[
                                    {
-                                     name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")?,
+                                     name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
                                      status: ("ENABLED" | "DISABLED")?
                                    },
                                  ]?
@@ -948,7 +948,7 @@ module Aws
                                  status: ("ENABLED" | "DISABLED")?,
                                  additional_configuration: Array[
                                    {
-                                     name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")?,
+                                     name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
                                      status: ("ENABLED" | "DISABLED")?
                                    },
                                  ]?
@@ -1069,7 +1069,7 @@ module Aws
                                          status: ("ENABLED" | "DISABLED")?,
                                          additional_configuration: Array[
                                            {
-                                             name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")?,
+                                             name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
                                              status: ("ENABLED" | "DISABLED")?
                                            },
                                          ]?
@@ -1108,7 +1108,7 @@ module Aws
                                                    auto_enable: ("NEW" | "NONE" | "ALL")?,
                                                    additional_configuration: Array[
                                                      {
-                                                       name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")?,
+                                                       name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
                                                        auto_enable: ("NEW" | "NONE" | "ALL")?
                                                      },
                                                    ]?

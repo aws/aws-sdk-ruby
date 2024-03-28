@@ -1442,9 +1442,9 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.look_back_period #=> String, one of "DAYS_14", "DAYS_32", "DAYS_93"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences #=> Array
-    #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization"
+    #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization", "MemoryUtilization"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.threshold #=> String, one of "P90", "P95", "P99_5"
-    #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_0"
+    #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_10", "PERCENT_0"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.preferred_resources #=> Array
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.preferred_resources[0].name #=> String, one of "Ec2InstanceTypes"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.preferred_resources[0].include_list #=> Array
@@ -1704,9 +1704,9 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.look_back_period #=> String, one of "DAYS_14", "DAYS_32", "DAYS_93"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences #=> Array
-    #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization"
+    #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization", "MemoryUtilization"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.threshold #=> String, one of "P90", "P95", "P99_5"
-    #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_0"
+    #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_10", "PERCENT_0"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.preferred_resources #=> Array
     #   resp.instance_recommendations[0].effective_recommendation_preferences.preferred_resources[0].name #=> String, one of "Ec2InstanceTypes"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.preferred_resources[0].include_list #=> Array
@@ -2034,9 +2034,9 @@ module Aws::ComputeOptimizer
     #   resp.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.look_back_period #=> String, one of "DAYS_14", "DAYS_32", "DAYS_93"
     #   resp.utilization_preferences #=> Array
-    #   resp.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization"
+    #   resp.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization", "MemoryUtilization"
     #   resp.utilization_preferences[0].metric_parameters.threshold #=> String, one of "P90", "P95", "P99_5"
-    #   resp.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_0"
+    #   resp.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_10", "PERCENT_0"
     #   resp.preferred_resources #=> Array
     #   resp.preferred_resources[0].name #=> String, one of "Ec2InstanceTypes"
     #   resp.preferred_resources[0].include_list #=> Array
@@ -2460,9 +2460,9 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_preferences_details[0].external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.recommendation_preferences_details[0].look_back_period #=> String, one of "DAYS_14", "DAYS_32", "DAYS_93"
     #   resp.recommendation_preferences_details[0].utilization_preferences #=> Array
-    #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_name #=> String, one of "CpuUtilization"
+    #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_name #=> String, one of "CpuUtilization", "MemoryUtilization"
     #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_parameters.threshold #=> String, one of "P90", "P95", "P99_5"
-    #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_0"
+    #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_10", "PERCENT_0"
     #   resp.recommendation_preferences_details[0].preferred_resources #=> Array
     #   resp.recommendation_preferences_details[0].preferred_resources[0].name #=> String, one of "Ec2InstanceTypes"
     #   resp.recommendation_preferences_details[0].preferred_resources[0].include_list #=> Array
@@ -2680,16 +2680,26 @@ module Aws::ComputeOptimizer
     #    </note>
     #
     # @option params [Array<Types::UtilizationPreference>] :utilization_preferences
-    #   The preference to control the resource’s CPU utilization thresholds -
-    #   threshold and headroom. When this preference isn't specified, we use
-    #   the following default values:
+    #   The preference to control the resource’s CPU utilization threshold,
+    #   CPU utilization headroom, and memory utilization headroom. When this
+    #   preference isn't specified, we use the following default values.
+    #
+    #   CPU utilization:
     #
     #   * `P99_5` for threshold
     #
-    #   * `PERCENT_17` for headroom
+    #   * `PERCENT_20` for headroom
     #
-    #   <note markdown="1"> You can only set this preference for the Amazon EC2 instance resource
-    #   type.
+    #   Memory utilization:
+    #
+    #   * `PERCENT_20` for headroom
+    #
+    #   ^
+    #
+    #   <note markdown="1"> * You can only set CPU and memory utilization preferences for the
+    #     Amazon EC2 instance resource type.
+    #
+    #   * The threshold setting isn’t available for memory utilization.
     #
     #    </note>
     #
@@ -2740,10 +2750,10 @@ module Aws::ComputeOptimizer
     #     look_back_period: "DAYS_14", # accepts DAYS_14, DAYS_32, DAYS_93
     #     utilization_preferences: [
     #       {
-    #         metric_name: "CpuUtilization", # accepts CpuUtilization
+    #         metric_name: "CpuUtilization", # accepts CpuUtilization, MemoryUtilization
     #         metric_parameters: {
     #           threshold: "P90", # accepts P90, P95, P99_5
-    #           headroom: "PERCENT_30", # accepts PERCENT_30, PERCENT_20, PERCENT_0
+    #           headroom: "PERCENT_30", # accepts PERCENT_30, PERCENT_20, PERCENT_10, PERCENT_0
     #         },
     #       },
     #     ],
@@ -2855,7 +2865,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -582,7 +582,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -990,17 +990,18 @@ module Aws::GuardDuty
     # existing auto-enable settings for your organization, see
     # [DescribeOrganizationConfiguration][1].
     #
-    # If you are adding accounts by invitation, before using
-    # [InviteMembers][2], use `CreateMembers` after GuardDuty has been
-    # enabled in potential member accounts.
-    #
-    # If you disassociate a member from a GuardDuty delegated administrator,
-    # the member account details obtained from this API, including the
+    # If you disassociate a member account that was added by invitation, the
+    # member account details obtained from this API, including the
     # associated email addresses, will be retained. This is done so that the
     # delegated administrator can invoke the [InviteMembers][2] API without
     # the need to invoke the CreateMembers API again. To remove the details
     # associated with a member account, the delegated administrator must
     # invoke the [DeleteMembers][3] API.
+    #
+    # When the member accounts added through Organizations are later
+    # disassociated, you (administrator) can't invite them by calling the
+    # InviteMembers API. You can create an association with these member
+    # accounts again only by calling the CreateMembers API.
     #
     #
     #
@@ -1591,7 +1592,7 @@ module Aws::GuardDuty
     #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS", "RUNTIME_MONITORING"
     #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.features[0].additional_configuration #=> Array
-    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.features[0].additional_configuration[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.next_token #=> String
     #   resp.auto_enable_organization_members #=> String, one of "NEW", "ALL", "NONE"
@@ -1769,6 +1770,19 @@ module Aws::GuardDuty
     # organization set to `ALL`, you'll receive an error if you attempt to
     # disassociate a member account before removing them from your
     # organization.
+    #
+    # If you disassociate a member account that was added by invitation, the
+    # member account details obtained from this API, including the
+    # associated email addresses, will be retained. This is done so that the
+    # delegated administrator can invoke the [InviteMembers][2] API without
+    # the need to invoke the CreateMembers API again. To remove the details
+    # associated with a member account, the delegated administrator must
+    # invoke the [DeleteMembers][3] API.
+    #
+    # When the member accounts added through Organizations are later
+    # disassociated, you (administrator) can't invite them by calling the
+    # InviteMembers API. You can create an association with these member
+    # accounts again only by calling the CreateMembers API.
     #
     #
     #
@@ -1979,7 +1993,7 @@ module Aws::GuardDuty
     #   resp.features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].updated_at #=> Time
     #   resp.features[0].additional_configuration #=> Array
-    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].additional_configuration[0].updated_at #=> Time
     #
@@ -2389,6 +2403,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_list_name #=> String
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_names #=> Array
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_names[0] #=> String
+    #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_file_sha_256 #=> String
     #   resp.findings[0].service.archived #=> Boolean
     #   resp.findings[0].service.count #=> Integer
     #   resp.findings[0].service.detector_id #=> String
@@ -2512,6 +2527,11 @@ module Aws::GuardDuty
     #   resp.findings[0].service.runtime_details.context.iana_protocol_number #=> Integer
     #   resp.findings[0].service.runtime_details.context.memory_regions #=> Array
     #   resp.findings[0].service.runtime_details.context.memory_regions[0] #=> String
+    #   resp.findings[0].service.runtime_details.context.tool_name #=> String
+    #   resp.findings[0].service.runtime_details.context.tool_category #=> String
+    #   resp.findings[0].service.runtime_details.context.service_name #=> String
+    #   resp.findings[0].service.runtime_details.context.command_line_example #=> String
+    #   resp.findings[0].service.runtime_details.context.threat_file_path #=> String
     #   resp.findings[0].service.detection.anomaly.profiles #=> Hash
     #   resp.findings[0].service.detection.anomaly.profiles["String"] #=> Hash
     #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"] #=> Array
@@ -2791,7 +2811,7 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].updated_at #=> Time
     #   resp.member_data_source_configurations[0].features[0].additional_configuration #=> Array
-    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT"
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].updated_at #=> Time
     #   resp.unprocessed_accounts #=> Array
@@ -2876,7 +2896,7 @@ module Aws::GuardDuty
     #   resp.organization_details.organization_statistics.count_by_feature[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS", "RUNTIME_MONITORING"
     #   resp.organization_details.organization_statistics.count_by_feature[0].enabled_accounts_count #=> Integer
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration #=> Array
-    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT"
+    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].enabled_accounts_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetOrganizationStatistics AWS API Documentation
@@ -3099,6 +3119,19 @@ module Aws::GuardDuty
     # associated with a member account, you must also invoke
     # [DeleteMembers][5].
     #
+    # If you disassociate a member account that was added by invitation, the
+    # member account details obtained from this API, including the
+    # associated email addresses, will be retained. This is done so that the
+    # delegated administrator can invoke the [InviteMembers][6] API without
+    # the need to invoke the CreateMembers API again. To remove the details
+    # associated with a member account, the delegated administrator must
+    # invoke the [DeleteMembers][5] API.
+    #
+    # When the member accounts added through Organizations are later
+    # disassociated, you (administrator) can't invite them by calling the
+    # InviteMembers API. You can create an association with these member
+    # accounts again only by calling the CreateMembers API.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html
@@ -3106,6 +3139,7 @@ module Aws::GuardDuty
     # [3]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html
     # [4]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
     # [5]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
+    # [6]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -4141,7 +4175,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -4430,7 +4464,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -4551,7 +4585,7 @@ module Aws::GuardDuty
     #         auto_enable: "NEW", # accepts NEW, NONE, ALL
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
     #             auto_enable: "NEW", # accepts NEW, NONE, ALL
     #           },
     #         ],
@@ -4660,7 +4694,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-03-28)
+------------------
+
+* Feature - This release adds support for sharing AWS::InternetMonitor::Monitor resources.
+
 1.12.0 (2024-01-26)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2024-03-28)
+------------------
+
+* Feature - Amazon QuickSight: Adds support for setting up VPC Endpoint restrictions for accessing QuickSight Website.
+
 1.105.0 (2024-02-29)
 ------------------
 
