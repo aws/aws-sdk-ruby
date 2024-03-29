@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.904.0 (2024-03-29)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::CodeConnections`.
+
 1.903.0 (2024-03-28)
 ------------------
 

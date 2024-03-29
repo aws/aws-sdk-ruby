@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-03-29)
+------------------
+
+* Feature - This release adds support to allow customers to track cross account monitors through ListMonitor, GetMonitor, ListHealthEvents, GetHealthEvent, StartQuery APIs.
+
 1.15.0 (2024-02-22)
 ------------------
 

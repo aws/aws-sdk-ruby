@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2024-03-29)
+------------------
+
+* Feature - Add support for retrieving key historical and live metrics for LoRaWAN devices and gateways
+
 1.43.0 (2024-01-26)
 ------------------
 

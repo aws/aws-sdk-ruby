@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.189.0 (2024-03-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-codeconnections` gem.
+
 3.188.0 (2024-03-14)
 ------------------
 

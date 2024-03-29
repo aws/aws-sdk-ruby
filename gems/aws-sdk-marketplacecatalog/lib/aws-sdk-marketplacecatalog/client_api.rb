@@ -143,6 +143,9 @@ module Aws::MarketplaceCatalog
     OfferProductIdString = Shapes::StringShape.new(name: 'OfferProductIdString')
     OfferReleaseDateFilter = Shapes::StructureShape.new(name: 'OfferReleaseDateFilter')
     OfferReleaseDateFilterDateRange = Shapes::StructureShape.new(name: 'OfferReleaseDateFilterDateRange')
+    OfferResaleAuthorizationIdFilter = Shapes::StructureShape.new(name: 'OfferResaleAuthorizationIdFilter')
+    OfferResaleAuthorizationIdFilterValueList = Shapes::ListShape.new(name: 'OfferResaleAuthorizationIdFilterValueList')
+    OfferResaleAuthorizationIdString = Shapes::StringShape.new(name: 'OfferResaleAuthorizationIdString')
     OfferSort = Shapes::StructureShape.new(name: 'OfferSort')
     OfferSortBy = Shapes::StringShape.new(name: 'OfferSortBy')
     OfferStateFilter = Shapes::StructureShape.new(name: 'OfferStateFilter')
@@ -589,6 +592,7 @@ module Aws::MarketplaceCatalog
     OfferFilters.add_member(:entity_id, Shapes::ShapeRef.new(shape: OfferEntityIdFilter, location_name: "EntityId"))
     OfferFilters.add_member(:name, Shapes::ShapeRef.new(shape: OfferNameFilter, location_name: "Name"))
     OfferFilters.add_member(:product_id, Shapes::ShapeRef.new(shape: OfferProductIdFilter, location_name: "ProductId"))
+    OfferFilters.add_member(:resale_authorization_id, Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdFilter, location_name: "ResaleAuthorizationId"))
     OfferFilters.add_member(:release_date, Shapes::ShapeRef.new(shape: OfferReleaseDateFilter, location_name: "ReleaseDate"))
     OfferFilters.add_member(:availability_end_date, Shapes::ShapeRef.new(shape: OfferAvailabilityEndDateFilter, location_name: "AvailabilityEndDate"))
     OfferFilters.add_member(:buyer_accounts, Shapes::ShapeRef.new(shape: OfferBuyerAccountsFilter, location_name: "BuyerAccounts"))
@@ -622,6 +626,11 @@ module Aws::MarketplaceCatalog
     OfferReleaseDateFilterDateRange.add_member(:before_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
     OfferReleaseDateFilterDateRange.struct_class = Types::OfferReleaseDateFilterDateRange
 
+    OfferResaleAuthorizationIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdFilterValueList, location_name: "ValueList"))
+    OfferResaleAuthorizationIdFilter.struct_class = Types::OfferResaleAuthorizationIdFilter
+
+    OfferResaleAuthorizationIdFilterValueList.member = Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdString)
+
     OfferSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: OfferSortBy, location_name: "SortBy"))
     OfferSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     OfferSort.struct_class = Types::OfferSort
@@ -633,6 +642,7 @@ module Aws::MarketplaceCatalog
 
     OfferSummary.add_member(:name, Shapes::ShapeRef.new(shape: OfferNameString, location_name: "Name"))
     OfferSummary.add_member(:product_id, Shapes::ShapeRef.new(shape: OfferProductIdString, location_name: "ProductId"))
+    OfferSummary.add_member(:resale_authorization_id, Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdString, location_name: "ResaleAuthorizationId"))
     OfferSummary.add_member(:release_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "ReleaseDate"))
     OfferSummary.add_member(:availability_end_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AvailabilityEndDate"))
     OfferSummary.add_member(:buyer_accounts, Shapes::ShapeRef.new(shape: OfferBuyerAccountsList, location_name: "BuyerAccounts"))

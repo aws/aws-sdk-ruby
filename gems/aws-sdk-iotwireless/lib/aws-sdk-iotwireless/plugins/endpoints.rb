@@ -144,6 +144,10 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::GetFuotaTask.build(context)
           when :get_log_levels_by_resource_types
             Aws::IoTWireless::Endpoints::GetLogLevelsByResourceTypes.build(context)
+          when :get_metric_configuration
+            Aws::IoTWireless::Endpoints::GetMetricConfiguration.build(context)
+          when :get_metrics
+            Aws::IoTWireless::Endpoints::GetMetrics.build(context)
           when :get_multicast_group
             Aws::IoTWireless::Endpoints::GetMulticastGroup.build(context)
           when :get_multicast_group_session
@@ -258,6 +262,8 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::UpdateFuotaTask.build(context)
           when :update_log_levels_by_resource_types
             Aws::IoTWireless::Endpoints::UpdateLogLevelsByResourceTypes.build(context)
+          when :update_metric_configuration
+            Aws::IoTWireless::Endpoints::UpdateMetricConfiguration.build(context)
           when :update_multicast_group
             Aws::IoTWireless::Endpoints::UpdateMulticastGroup.build(context)
           when :update_network_analyzer_configuration

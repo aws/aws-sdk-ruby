@@ -239,6 +239,9 @@
   "CodeCommit": {
     "models": "codecommit/2015-04-13"
   },
+  "CodeConnections": {
+    "models": "codeconnections/2023-12-01"
+  },
   "CodeDeploy": {
     "models": "codedeploy/2014-10-06"
   },

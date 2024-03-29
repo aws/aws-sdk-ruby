@@ -266,6 +266,9 @@ module Aws
                                product_id: {
                                  value_list: Array[::String]?
                                }?,
+                               resale_authorization_id: {
+                                 value_list: Array[::String]?
+                               }?,
                                release_date: {
                                  date_range: {
                                    after_value: ::String?,
@@ -386,7 +389,7 @@ module Aws
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              offer_sort: {
-                               sort_by: ("EntityId" | "Name" | "ProductId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate")?,
+                               sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              container_product_sort: {

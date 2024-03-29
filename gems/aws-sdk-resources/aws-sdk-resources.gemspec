@@ -90,6 +90,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-codebuild', '~> 1')
   spec.add_dependency('aws-sdk-codecatalyst', '~> 1')
   spec.add_dependency('aws-sdk-codecommit', '~> 1')
+  spec.add_dependency('aws-sdk-codeconnections', '~> 1')
   spec.add_dependency('aws-sdk-codedeploy', '~> 1')
   spec.add_dependency('aws-sdk-codeguruprofiler', '~> 1')
   spec.add_dependency('aws-sdk-codegurureviewer', '~> 1')

@@ -2284,6 +2284,97 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
+    # @!attribute [rw] import_options
+    #   Options for how to perform an import.
+    #   @return [Types::ImportOptions]
+    #
+    # @!attribute [rw] fail_on_error
+    #   If set to true, the task halts when an import error is encountered.
+    #   If set to false, the task skips the data that caused the error and
+    #   continues if possible.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source
+    #   A URL identifying the location of the data to be imported. This can
+    #   be an Amazon S3 path, or can point to a Neptune database endpoint or
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Specifies the format of Amazon S3 data to be imported. Valid values
+    #   are CSV, which identifies the Gremlin CSV format or OPENCYPHER,
+    #   which identies the openCypher load format.
+    #   @return [String]
+    #
+    # @!attribute [rw] graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that will allow access to the data that is
+    #   to be imported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/StartImportTaskInput AWS API Documentation
+    #
+    class StartImportTaskInput < Struct.new(
+      :import_options,
+      :fail_on_error,
+      :source,
+      :format,
+      :graph_identifier,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_id
+    #   The unique identifier of the Neptune Analytics graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   A URL identifying the location of the data to be imported. This can
+    #   be an Amazon S3 path, or can point to a Neptune database endpoint or
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Specifies the format of Amazon S3 data to be imported. Valid values
+    #   are CSV, which identifies the Gremlin CSV format or OPENCYPHER,
+    #   which identies the openCypher load format.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that will allow access to the data that is
+    #   to be imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_options
+    #   Options for how to perform an import.
+    #   @return [Types::ImportOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/StartImportTaskOutput AWS API Documentation
+    #
+    class StartImportTaskOutput < Struct.new(
+      :graph_id,
+      :task_id,
+      :source,
+      :format,
+      :role_arn,
+      :status,
+      :import_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   ARN of the resource for which tags need to be added.
     #   @return [String]

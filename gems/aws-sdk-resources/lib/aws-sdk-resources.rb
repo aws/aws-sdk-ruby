@@ -80,6 +80,7 @@ module Aws
   autoload :CodeBuild, 'aws-sdk-codebuild'
   autoload :CodeCatalyst, 'aws-sdk-codecatalyst'
   autoload :CodeCommit, 'aws-sdk-codecommit'
+  autoload :CodeConnections, 'aws-sdk-codeconnections'
   autoload :CodeDeploy, 'aws-sdk-codedeploy'
   autoload :CodeGuruProfiler, 'aws-sdk-codeguruprofiler'
   autoload :CodeGuruReviewer, 'aws-sdk-codegurureviewer'

@@ -372,6 +372,21 @@ module Aws::NeptuneGraph
       end
     end
 
+    class StartImportTask
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::NeptuneGraph::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          endpoint: endpoint,
+          api_type: "ControlPlane",
+        )
+      end
+    end
+
     class TagResource
       def self.build(context)
         unless context.config.regional_endpoint

@@ -1984,6 +1984,83 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Get the metric configuration status for this account.
+    #
+    # @return [Types::GetMetricConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetricConfigurationResponse#summary_metric #summary_metric} => Types::SummaryMetricConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.summary_metric.status #=> String, one of "Enabled", "Disabled"
+    #
+    # @overload get_metric_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_metric_configuration(params = {}, options = {})
+      req = build_request(:get_metric_configuration, params)
+      req.send_request(options)
+    end
+
+    # Get metrics.
+    #
+    # @option params [Array<Types::SummaryMetricQuery>] :summary_metric_queries
+    #   The list of queries to retrieve summary metrics.
+    #
+    # @return [Types::GetMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetricsResponse#summary_metric_query_results #summary_metric_query_results} => Array&lt;Types::SummaryMetricQueryResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metrics({
+    #     summary_metric_queries: [
+    #       {
+    #         query_id: "MetricQueryId",
+    #         metric_name: "DeviceRSSI", # accepts DeviceRSSI, DeviceSNR, DeviceUplinkCount, DeviceDownlinkCount, DeviceUplinkLostCount, DeviceUplinkLostRate, DeviceJoinRequestCount, DeviceJoinAcceptCount, DeviceRoamingUplinkCount, DeviceRoamingDownlinkCount, GatewayUpTime, GatewayDownTime, GatewayRSSI, GatewaySNR, GatewayUplinkCount, GatewayDownlinkCount, GatewayJoinRequestCount, GatewayJoinAcceptCount, AwsAccountUplinkCount, AwsAccountDownlinkCount, AwsAccountUplinkLostCount, AwsAccountUplinkLostRate, AwsAccountJoinRequestCount, AwsAccountJoinAcceptCount, AwsAccountRoamingUplinkCount, AwsAccountRoamingDownlinkCount, AwsAccountDeviceCount, AwsAccountGatewayCount, AwsAccountActiveDeviceCount, AwsAccountActiveGatewayCount
+    #         dimensions: [
+    #           {
+    #             name: "DeviceId", # accepts DeviceId, GatewayId
+    #             value: "DimensionValue",
+    #           },
+    #         ],
+    #         aggregation_period: "OneHour", # accepts OneHour, OneDay, OneWeek
+    #         start_timestamp: Time.now,
+    #         end_timestamp: Time.now,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.summary_metric_query_results #=> Array
+    #   resp.summary_metric_query_results[0].query_id #=> String
+    #   resp.summary_metric_query_results[0].query_status #=> String, one of "Succeeded", "Failed"
+    #   resp.summary_metric_query_results[0].error #=> String
+    #   resp.summary_metric_query_results[0].metric_name #=> String, one of "DeviceRSSI", "DeviceSNR", "DeviceUplinkCount", "DeviceDownlinkCount", "DeviceUplinkLostCount", "DeviceUplinkLostRate", "DeviceJoinRequestCount", "DeviceJoinAcceptCount", "DeviceRoamingUplinkCount", "DeviceRoamingDownlinkCount", "GatewayUpTime", "GatewayDownTime", "GatewayRSSI", "GatewaySNR", "GatewayUplinkCount", "GatewayDownlinkCount", "GatewayJoinRequestCount", "GatewayJoinAcceptCount", "AwsAccountUplinkCount", "AwsAccountDownlinkCount", "AwsAccountUplinkLostCount", "AwsAccountUplinkLostRate", "AwsAccountJoinRequestCount", "AwsAccountJoinAcceptCount", "AwsAccountRoamingUplinkCount", "AwsAccountRoamingDownlinkCount", "AwsAccountDeviceCount", "AwsAccountGatewayCount", "AwsAccountActiveDeviceCount", "AwsAccountActiveGatewayCount"
+    #   resp.summary_metric_query_results[0].dimensions #=> Array
+    #   resp.summary_metric_query_results[0].dimensions[0].name #=> String, one of "DeviceId", "GatewayId"
+    #   resp.summary_metric_query_results[0].dimensions[0].value #=> String
+    #   resp.summary_metric_query_results[0].aggregation_period #=> String, one of "OneHour", "OneDay", "OneWeek"
+    #   resp.summary_metric_query_results[0].start_timestamp #=> Time
+    #   resp.summary_metric_query_results[0].end_timestamp #=> Time
+    #   resp.summary_metric_query_results[0].timestamps #=> Array
+    #   resp.summary_metric_query_results[0].timestamps[0] #=> Time
+    #   resp.summary_metric_query_results[0].values #=> Array
+    #   resp.summary_metric_query_results[0].values[0].min #=> Float
+    #   resp.summary_metric_query_results[0].values[0].max #=> Float
+    #   resp.summary_metric_query_results[0].values[0].sum #=> Float
+    #   resp.summary_metric_query_results[0].values[0].avg #=> Float
+    #   resp.summary_metric_query_results[0].values[0].std #=> Float
+    #   resp.summary_metric_query_results[0].values[0].p90 #=> Float
+    #   resp.summary_metric_query_results[0].unit #=> String
+    #
+    # @overload get_metrics(params = {})
+    # @param [Hash] params ({})
+    def get_metrics(params = {}, options = {})
+      req = build_request(:get_metrics, params)
+      req.send_request(options)
+    end
+
     # Gets information about a multicast group.
     #
     # @option params [required, String] :id
@@ -4582,6 +4659,28 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Update the metric configuration.
+    #
+    # @option params [Types::SummaryMetricConfiguration] :summary_metric
+    #   The value to be used to set summary metric configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_metric_configuration({
+    #     summary_metric: {
+    #       status: "Enabled", # accepts Enabled, Disabled
+    #     },
+    #   })
+    #
+    # @overload update_metric_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_metric_configuration(params = {}, options = {})
+      req = build_request(:update_metric_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates properties of a multicast group session.
     #
     # @option params [required, String] :id
@@ -5017,7 +5116,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

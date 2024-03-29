@@ -587,6 +587,9 @@ module Aws::InternetMonitor
     #   `EventID` contains the forward slash (“/”) character, you must
     #   URL-encode the `EventID` field in the request URL.
     #
+    # @option params [String] :linked_account_id
+    #   TBD
+    #
     # @return [Types::GetHealthEventOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetHealthEventOutput#event_arn #event_arn} => String
@@ -606,6 +609,7 @@ module Aws::InternetMonitor
     #   resp = client.get_health_event({
     #     monitor_name: "ResourceName", # required
     #     event_id: "HealthEventName", # required
+    #     linked_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -669,6 +673,9 @@ module Aws::InternetMonitor
     # @option params [required, String] :monitor_name
     #   The name of the monitor.
     #
+    # @option params [String] :linked_account_id
+    #   TBD
+    #
     # @return [Types::GetMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMonitorOutput#monitor_name #monitor_name} => String
@@ -689,6 +696,7 @@ module Aws::InternetMonitor
     #
     #   resp = client.get_monitor({
     #     monitor_name: "ResourceName", # required
+    #     linked_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -865,6 +873,9 @@ module Aws::InternetMonitor
     # @option params [String] :event_status
     #   The status of a health event.
     #
+    # @option params [String] :linked_account_id
+    #   TBD
+    #
     # @return [Types::ListHealthEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListHealthEventsOutput#health_events #health_events} => Array&lt;Types::HealthEvent&gt;
@@ -881,6 +892,7 @@ module Aws::InternetMonitor
     #     next_token: "String",
     #     max_results: 1,
     #     event_status: "ACTIVE", # accepts ACTIVE, RESOLVED
+    #     linked_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -959,6 +971,9 @@ module Aws::InternetMonitor
     #
     #   [1]: https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html
     #
+    # @option params [Boolean] :include_linked_accounts
+    #   TBD
+    #
     # @return [Types::ListMonitorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMonitorsOutput#monitors #monitors} => Array&lt;Types::Monitor&gt;
@@ -972,6 +987,7 @@ module Aws::InternetMonitor
     #     next_token: "String",
     #     max_results: 1,
     #     monitor_status: "String",
+    #     include_linked_accounts: false,
     #   })
     #
     # @example Response structure
@@ -1087,6 +1103,9 @@ module Aws::InternetMonitor
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
     #
+    # @option params [String] :linked_account_id
+    #   TBD
+    #
     # @return [Types::StartQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartQueryOutput#query_id #query_id} => String
@@ -1105,6 +1124,7 @@ module Aws::InternetMonitor
     #         values: ["String"],
     #       },
     #     ],
+    #     linked_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1362,7 +1382,7 @@ module Aws::InternetMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-internetmonitor'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

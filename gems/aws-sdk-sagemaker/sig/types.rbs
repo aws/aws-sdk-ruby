@@ -150,6 +150,7 @@ module Aws::SageMaker
       attr_accessor last_modified_time: ::Time
       attr_accessor kernel_gateway_image_config: Types::KernelGatewayImageConfig
       attr_accessor jupyter_lab_app_image_config: Types::JupyterLabAppImageConfig
+      attr_accessor code_editor_app_image_config: Types::CodeEditorAppImageConfig
       SENSITIVE: []
     end
 
@@ -733,8 +734,15 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CodeEditorAppImageConfig
+      attr_accessor file_system_config: Types::FileSystemConfig
+      attr_accessor container_config: Types::ContainerConfig
+      SENSITIVE: []
+    end
+
     class CodeEditorAppSettings
       attr_accessor default_resource_spec: Types::ResourceSpec
+      attr_accessor custom_images: ::Array[Types::CustomImage]
       attr_accessor lifecycle_config_arns: ::Array[::String]
       SENSITIVE: []
     end
@@ -903,6 +911,7 @@ module Aws::SageMaker
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor kernel_gateway_image_config: Types::KernelGatewayImageConfig
       attr_accessor jupyter_lab_app_image_config: Types::JupyterLabAppImageConfig
+      attr_accessor code_editor_app_image_config: Types::CodeEditorAppImageConfig
       SENSITIVE: []
     end
 
@@ -2377,6 +2386,7 @@ module Aws::SageMaker
       attr_accessor last_modified_time: ::Time
       attr_accessor kernel_gateway_image_config: Types::KernelGatewayImageConfig
       attr_accessor jupyter_lab_app_image_config: Types::JupyterLabAppImageConfig
+      attr_accessor code_editor_app_image_config: Types::CodeEditorAppImageConfig
       SENSITIVE: []
     end
 
@@ -8848,6 +8858,7 @@ module Aws::SageMaker
       attr_accessor app_image_config_name: ::String
       attr_accessor kernel_gateway_image_config: Types::KernelGatewayImageConfig
       attr_accessor jupyter_lab_app_image_config: Types::JupyterLabAppImageConfig
+      attr_accessor code_editor_app_image_config: Types::CodeEditorAppImageConfig
       SENSITIVE: []
     end
 

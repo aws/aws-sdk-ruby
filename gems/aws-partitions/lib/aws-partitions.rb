@@ -318,6 +318,7 @@ module Aws
             'CodeBuild' => 'codebuild',
             'CodeCatalyst' => 'codecatalyst',
             'CodeCommit' => 'codecommit',
+            'CodeConnections' => 'codeconnections',
             'CodeDeploy' => 'codedeploy',
             'CodeGuruProfiler' => 'codeguru-profiler',
             'CodeGuruReviewer' => 'codeguru-reviewer',

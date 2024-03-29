@@ -357,6 +357,7 @@ RubyGems.org page under "LINKS" section.
 | AWS CloudTrail Data Service                           | Aws::CloudTrailData                      | aws-sdk-cloudtraildata                      | 2021-08-11  |
 | AWS CodeBuild                                         | Aws::CodeBuild                           | aws-sdk-codebuild                           | 2016-10-06  |
 | AWS CodeCommit                                        | Aws::CodeCommit                          | aws-sdk-codecommit                          | 2015-04-13  |
+| AWS CodeConnections                                   | Aws::CodeConnections                     | aws-sdk-codeconnections                     | 2023-12-01  |
 | AWS CodeDeploy                                        | Aws::CodeDeploy                          | aws-sdk-codedeploy                          | 2014-10-06  |
 | AWS CodePipeline                                      | Aws::CodePipeline                        | aws-sdk-codepipeline                        | 2015-07-09  |
 | AWS CodeStar                                          | Aws::CodeStar                            | aws-sdk-codestar                            | 2017-04-19  |
