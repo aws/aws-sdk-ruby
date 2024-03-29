@@ -15,6 +15,11 @@
           "matcher": "error",
           "expected": "ValidationError",
           "state": "retry"
+        },
+        {
+          "matcher": "error",
+          "expected": "Throttling",
+          "state": "retry"
         }
       ]
     },
@@ -112,6 +117,11 @@
           "expected": "ValidationError",
           "matcher": "error",
           "state": "failure"
+        },
+        {
+          "expected": "Throttling",
+          "matcher": "error",
+          "state": "retry"
         }
       ]
     },
@@ -173,6 +183,11 @@
           "expected": "UPDATE_COMPLETE",
           "matcher": "pathAny",
           "state": "failure"
+        },
+        {
+          "expected": "Throttling",
+          "matcher": "error",
+          "state": "retry"
         }
       ]
     },
@@ -259,6 +274,11 @@
           "expected": "ValidationError",
           "matcher": "error",
           "state": "failure"
+        },
+        {
+          "expected": "Throttling",
+          "matcher": "error",
+          "state": "retry"
         }
       ]
     },
@@ -296,6 +316,11 @@
           "expected": "ValidationError",
           "matcher": "error",
           "state": "failure"
+        },
+        {
+          "expected": "Throttling",
+          "matcher": "error",
+          "state": "retry"
         }
       ]
     },
@@ -321,6 +346,11 @@
           "expected": "ValidationError",
           "matcher": "error",
           "state": "failure"
+        },
+        {
+          "expected": "Throttling",
+          "matcher": "error",
+          "state": "retry"
         }
       ]
     },
@@ -341,6 +371,11 @@
           "expected": "FAILED",
           "matcher": "path",
           "state": "failure"
+        },
+        {
+          "expected": "Throttling",
+          "matcher": "error",
+          "state": "retry"
         }
       ]
     }

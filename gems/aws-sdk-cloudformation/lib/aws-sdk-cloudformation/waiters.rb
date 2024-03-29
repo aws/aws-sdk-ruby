@@ -113,6 +113,11 @@ module Aws::CloudFormation
                 "expected" => "ValidationError",
                 "matcher" => "error",
                 "state" => "failure"
+              },
+              {
+                "expected" => "Throttling",
+                "matcher" => "error",
+                "state" => "retry"
               }
             ]
           )
@@ -235,6 +240,11 @@ module Aws::CloudFormation
                 "expected" => "ValidationError",
                 "matcher" => "error",
                 "state" => "failure"
+              },
+              {
+                "expected" => "Throttling",
+                "matcher" => "error",
+                "state" => "retry"
               }
             ]
           )
@@ -321,6 +331,11 @@ module Aws::CloudFormation
                 "expected" => "UPDATE_COMPLETE",
                 "matcher" => "pathAny",
                 "state" => "failure"
+              },
+              {
+                "expected" => "Throttling",
+                "matcher" => "error",
+                "state" => "retry"
               }
             ]
           )
@@ -362,6 +377,11 @@ module Aws::CloudFormation
               {
                 "matcher" => "error",
                 "expected" => "ValidationError",
+                "state" => "retry"
+              },
+              {
+                "matcher" => "error",
+                "expected" => "Throttling",
                 "state" => "retry"
               }
             ]
@@ -437,6 +457,11 @@ module Aws::CloudFormation
                 "expected" => "ValidationError",
                 "matcher" => "error",
                 "state" => "failure"
+              },
+              {
+                "expected" => "Throttling",
+                "matcher" => "error",
+                "state" => "retry"
               }
             ]
           )
@@ -499,6 +524,11 @@ module Aws::CloudFormation
                 "expected" => "ValidationError",
                 "matcher" => "error",
                 "state" => "failure"
+              },
+              {
+                "expected" => "Throttling",
+                "matcher" => "error",
+                "state" => "retry"
               }
             ]
           )
@@ -606,6 +636,11 @@ module Aws::CloudFormation
                 "expected" => "FAILED",
                 "matcher" => "path",
                 "state" => "failure"
+              },
+              {
+                "expected" => "Throttling",
+                "matcher" => "error",
+                "state" => "retry"
               }
             ]
           )
