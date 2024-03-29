@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Retry Throttling errors in CloudFormation waiters
+
 1.103.0 (2024-03-19)
 ------------------
 
