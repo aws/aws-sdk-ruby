@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.905.0 (2024-04-01)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Deadline`.
+
 1.904.0 (2024-03-29)
 ------------------
 

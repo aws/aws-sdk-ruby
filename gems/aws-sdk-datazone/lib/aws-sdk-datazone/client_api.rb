@@ -49,6 +49,8 @@ module Aws::DataZone
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BusinessNameGenerationConfiguration = Shapes::StructureShape.new(name: 'BusinessNameGenerationConfiguration')
+    CancelMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'CancelMetadataGenerationRunInput')
+    CancelMetadataGenerationRunOutput = Shapes::StructureShape.new(name: 'CancelMetadataGenerationRunOutput')
     CancelSubscriptionInput = Shapes::StructureShape.new(name: 'CancelSubscriptionInput')
     CancelSubscriptionOutput = Shapes::StructureShape.new(name: 'CancelSubscriptionOutput')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
@@ -173,6 +175,7 @@ module Aws::DataZone
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
     DomainSummaries = Shapes::ListShape.new(name: 'DomainSummaries')
     DomainSummary = Shapes::StructureShape.new(name: 'DomainSummary')
+    EditedValue = Shapes::StringShape.new(name: 'EditedValue')
     EnableSetting = Shapes::StringShape.new(name: 'EnableSetting')
     EnabledRegionList = Shapes::ListShape.new(name: 'EnabledRegionList')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
@@ -255,6 +258,8 @@ module Aws::DataZone
     GetIamPortalLoginUrlOutput = Shapes::StructureShape.new(name: 'GetIamPortalLoginUrlOutput')
     GetListingInput = Shapes::StructureShape.new(name: 'GetListingInput')
     GetListingOutput = Shapes::StructureShape.new(name: 'GetListingOutput')
+    GetMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'GetMetadataGenerationRunInput')
+    GetMetadataGenerationRunOutput = Shapes::StructureShape.new(name: 'GetMetadataGenerationRunOutput')
     GetProjectInput = Shapes::StructureShape.new(name: 'GetProjectInput')
     GetProjectOutput = Shapes::StructureShape.new(name: 'GetProjectOutput')
     GetSubscriptionGrantInput = Shapes::StructureShape.new(name: 'GetSubscriptionGrantInput')
@@ -322,6 +327,8 @@ module Aws::DataZone
     ListEnvironmentProfilesOutput = Shapes::StructureShape.new(name: 'ListEnvironmentProfilesOutput')
     ListEnvironmentsInput = Shapes::StructureShape.new(name: 'ListEnvironmentsInput')
     ListEnvironmentsOutput = Shapes::StructureShape.new(name: 'ListEnvironmentsOutput')
+    ListMetadataGenerationRunsInput = Shapes::StructureShape.new(name: 'ListMetadataGenerationRunsInput')
+    ListMetadataGenerationRunsOutput = Shapes::StructureShape.new(name: 'ListMetadataGenerationRunsOutput')
     ListNotificationsInput = Shapes::StructureShape.new(name: 'ListNotificationsInput')
     ListNotificationsOutput = Shapes::StructureShape.new(name: 'ListNotificationsOutput')
     ListProjectMembershipsInput = Shapes::StructureShape.new(name: 'ListProjectMembershipsInput')
@@ -350,6 +357,13 @@ module Aws::DataZone
     Member = Shapes::UnionShape.new(name: 'Member')
     MemberDetails = Shapes::UnionShape.new(name: 'MemberDetails')
     Message = Shapes::StringShape.new(name: 'Message')
+    MetadataGenerationRunIdentifier = Shapes::StringShape.new(name: 'MetadataGenerationRunIdentifier')
+    MetadataGenerationRunItem = Shapes::StructureShape.new(name: 'MetadataGenerationRunItem')
+    MetadataGenerationRunStatus = Shapes::StringShape.new(name: 'MetadataGenerationRunStatus')
+    MetadataGenerationRunTarget = Shapes::StructureShape.new(name: 'MetadataGenerationRunTarget')
+    MetadataGenerationRunType = Shapes::StringShape.new(name: 'MetadataGenerationRunType')
+    MetadataGenerationRuns = Shapes::ListShape.new(name: 'MetadataGenerationRuns')
+    MetadataGenerationTargetType = Shapes::StringShape.new(name: 'MetadataGenerationTargetType')
     MetadataMap = Shapes::MapShape.new(name: 'MetadataMap')
     Model = Shapes::UnionShape.new(name: 'Model')
     Name = Shapes::StringShape.new(name: 'Name')
@@ -447,6 +461,8 @@ module Aws::DataZone
     SsoUserProfileDetails = Shapes::StructureShape.new(name: 'SsoUserProfileDetails')
     StartDataSourceRunInput = Shapes::StructureShape.new(name: 'StartDataSourceRunInput')
     StartDataSourceRunOutput = Shapes::StructureShape.new(name: 'StartDataSourceRunOutput')
+    StartMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'StartMetadataGenerationRunInput')
+    StartMetadataGenerationRunOutput = Shapes::StructureShape.new(name: 'StartMetadataGenerationRunOutput')
     String = Shapes::StringShape.new(name: 'String')
     SubscribedAsset = Shapes::StructureShape.new(name: 'SubscribedAsset')
     SubscribedAssetListing = Shapes::StructureShape.new(name: 'SubscribedAssetListing')
@@ -547,8 +563,9 @@ module Aws::DataZone
     UserType = Shapes::StringShape.new(name: 'UserType')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
+    AcceptChoice.add_member(:edited_value, Shapes::ShapeRef.new(shape: EditedValue, location_name: "editedValue"))
     AcceptChoice.add_member(:prediction_choice, Shapes::ShapeRef.new(shape: Integer, location_name: "predictionChoice"))
-    AcceptChoice.add_member(:prediction_target, Shapes::ShapeRef.new(shape: String, location_name: "predictionTarget"))
+    AcceptChoice.add_member(:prediction_target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "predictionTarget"))
     AcceptChoice.struct_class = Types::AcceptChoice
 
     AcceptChoices.member = Shapes::ShapeRef.new(shape: AcceptChoice)
@@ -682,6 +699,12 @@ module Aws::DataZone
 
     BusinessNameGenerationConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     BusinessNameGenerationConfiguration.struct_class = Types::BusinessNameGenerationConfiguration
+
+    CancelMetadataGenerationRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    CancelMetadataGenerationRunInput.add_member(:identifier, Shapes::ShapeRef.new(shape: MetadataGenerationRunIdentifier, required: true, location: "uri", location_name: "identifier"))
+    CancelMetadataGenerationRunInput.struct_class = Types::CancelMetadataGenerationRunInput
+
+    CancelMetadataGenerationRunOutput.struct_class = Types::CancelMetadataGenerationRunOutput
 
     CancelSubscriptionInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CancelSubscriptionInput.add_member(:identifier, Shapes::ShapeRef.new(shape: SubscriptionId, required: true, location: "uri", location_name: "identifier"))
@@ -1771,6 +1794,20 @@ module Aws::DataZone
     GetListingOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     GetListingOutput.struct_class = Types::GetListingOutput
 
+    GetMetadataGenerationRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    GetMetadataGenerationRunInput.add_member(:identifier, Shapes::ShapeRef.new(shape: MetadataGenerationRunIdentifier, required: true, location: "uri", location_name: "identifier"))
+    GetMetadataGenerationRunInput.struct_class = Types::GetMetadataGenerationRunInput
+
+    GetMetadataGenerationRunOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    GetMetadataGenerationRunOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    GetMetadataGenerationRunOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    GetMetadataGenerationRunOutput.add_member(:id, Shapes::ShapeRef.new(shape: MetadataGenerationRunIdentifier, required: true, location_name: "id"))
+    GetMetadataGenerationRunOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
+    GetMetadataGenerationRunOutput.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, location_name: "status"))
+    GetMetadataGenerationRunOutput.add_member(:target, Shapes::ShapeRef.new(shape: MetadataGenerationRunTarget, location_name: "target"))
+    GetMetadataGenerationRunOutput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location_name: "type"))
+    GetMetadataGenerationRunOutput.struct_class = Types::GetMetadataGenerationRunOutput
+
     GetProjectInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     GetProjectInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location: "uri", location_name: "identifier"))
     GetProjectInput.struct_class = Types::GetProjectInput
@@ -2056,6 +2093,17 @@ module Aws::DataZone
     ListEnvironmentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListEnvironmentsOutput.struct_class = Types::ListEnvironmentsOutput
 
+    ListMetadataGenerationRunsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    ListMetadataGenerationRunsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMetadataGenerationRunsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListMetadataGenerationRunsInput.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, location: "querystring", location_name: "status"))
+    ListMetadataGenerationRunsInput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location: "querystring", location_name: "type"))
+    ListMetadataGenerationRunsInput.struct_class = Types::ListMetadataGenerationRunsInput
+
+    ListMetadataGenerationRunsOutput.add_member(:items, Shapes::ShapeRef.new(shape: MetadataGenerationRuns, location_name: "items"))
+    ListMetadataGenerationRunsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListMetadataGenerationRunsOutput.struct_class = Types::ListMetadataGenerationRunsOutput
+
     ListNotificationsInput.add_member(:after_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "afterTimestamp"))
     ListNotificationsInput.add_member(:before_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "beforeTimestamp"))
     ListNotificationsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -2188,6 +2236,23 @@ module Aws::DataZone
     MemberDetails.add_member_subclass(:unknown, Types::MemberDetails::Unknown)
     MemberDetails.struct_class = Types::MemberDetails
 
+    MetadataGenerationRunItem.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    MetadataGenerationRunItem.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    MetadataGenerationRunItem.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    MetadataGenerationRunItem.add_member(:id, Shapes::ShapeRef.new(shape: MetadataGenerationRunIdentifier, required: true, location_name: "id"))
+    MetadataGenerationRunItem.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
+    MetadataGenerationRunItem.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, location_name: "status"))
+    MetadataGenerationRunItem.add_member(:target, Shapes::ShapeRef.new(shape: MetadataGenerationRunTarget, location_name: "target"))
+    MetadataGenerationRunItem.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location_name: "type"))
+    MetadataGenerationRunItem.struct_class = Types::MetadataGenerationRunItem
+
+    MetadataGenerationRunTarget.add_member(:identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "identifier"))
+    MetadataGenerationRunTarget.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location_name: "revision"))
+    MetadataGenerationRunTarget.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationTargetType, required: true, location_name: "type"))
+    MetadataGenerationRunTarget.struct_class = Types::MetadataGenerationRunTarget
+
+    MetadataGenerationRuns.member = Shapes::ShapeRef.new(shape: MetadataGenerationRunItem)
+
     MetadataMap.key = Shapes::ShapeRef.new(shape: String)
     MetadataMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -2312,7 +2377,7 @@ module Aws::DataZone
     RegionalParameterMap.value = Shapes::ShapeRef.new(shape: RegionalParameter)
 
     RejectChoice.add_member(:prediction_choices, Shapes::ShapeRef.new(shape: PredictionChoices, location_name: "predictionChoices"))
-    RejectChoice.add_member(:prediction_target, Shapes::ShapeRef.new(shape: String, location_name: "predictionTarget"))
+    RejectChoice.add_member(:prediction_target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "predictionTarget"))
     RejectChoice.struct_class = Types::RejectChoice
 
     RejectChoices.member = Shapes::ShapeRef.new(shape: RejectChoice)
@@ -2548,6 +2613,22 @@ module Aws::DataZone
     StartDataSourceRunOutput.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceRunType, required: true, location_name: "type"))
     StartDataSourceRunOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "updatedAt"))
     StartDataSourceRunOutput.struct_class = Types::StartDataSourceRunOutput
+
+    StartMetadataGenerationRunInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartMetadataGenerationRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    StartMetadataGenerationRunInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
+    StartMetadataGenerationRunInput.add_member(:target, Shapes::ShapeRef.new(shape: MetadataGenerationRunTarget, required: true, location_name: "target"))
+    StartMetadataGenerationRunInput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, required: true, location_name: "type"))
+    StartMetadataGenerationRunInput.struct_class = Types::StartMetadataGenerationRunInput
+
+    StartMetadataGenerationRunOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    StartMetadataGenerationRunOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    StartMetadataGenerationRunOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    StartMetadataGenerationRunOutput.add_member(:id, Shapes::ShapeRef.new(shape: MetadataGenerationRunIdentifier, required: true, location_name: "id"))
+    StartMetadataGenerationRunOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "owningProjectId"))
+    StartMetadataGenerationRunOutput.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, location_name: "status"))
+    StartMetadataGenerationRunOutput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location_name: "type"))
+    StartMetadataGenerationRunOutput.struct_class = Types::StartMetadataGenerationRunOutput
 
     SubscribedAsset.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
     SubscribedAsset.add_member(:asset_revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "assetRevision"))
@@ -3035,6 +3116,21 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/subscription-requests/{identifier}/accept"
         o.input = Shapes::ShapeRef.new(shape: AcceptSubscriptionRequestInput)
         o.output = Shapes::ShapeRef.new(shape: AcceptSubscriptionRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:cancel_metadata_generation_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelMetadataGenerationRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/metadata-generation-runs/{identifier}/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelMetadataGenerationRunInput)
+        o.output = Shapes::ShapeRef.new(shape: CancelMetadataGenerationRunOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -3784,6 +3880,20 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:get_metadata_generation_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetadataGenerationRun"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/metadata-generation-runs/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetMetadataGenerationRunInput)
+        o.output = Shapes::ShapeRef.new(shape: GetMetadataGenerationRunOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:get_project, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetProject"
         o.http_method = "GET"
@@ -4054,6 +4164,26 @@ module Aws::DataZone
         )
       end)
 
+      api.add_operation(:list_metadata_generation_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMetadataGenerationRuns"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/metadata-generation-runs"
+        o.input = Shapes::ShapeRef.new(shape: ListMetadataGenerationRunsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListMetadataGenerationRunsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_notifications, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListNotifications"
         o.http_method = "GET"
@@ -4232,6 +4362,7 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
@@ -4369,6 +4500,22 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/data-sources/{dataSourceIdentifier}/runs"
         o.input = Shapes::ShapeRef.new(shape: StartDataSourceRunInput)
         o.output = Shapes::ShapeRef.new(shape: StartDataSourceRunOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:start_metadata_generation_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMetadataGenerationRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/metadata-generation-runs"
+        o.input = Shapes::ShapeRef.new(shape: StartMetadataGenerationRunInput)
+        o.output = Shapes::ShapeRef.new(shape: StartMetadataGenerationRunOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

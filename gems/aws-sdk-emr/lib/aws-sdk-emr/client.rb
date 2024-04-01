@@ -3787,7 +3787,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_UnhealthyNodeReplacement.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html
     #
     # @option params [required, Array<String>] :job_flow_ids
     #   The list of strings that uniquely identify the clusters for which to
@@ -4147,7 +4147,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

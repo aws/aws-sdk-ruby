@@ -341,6 +341,9 @@
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01"
   },
+  "Deadline": {
+    "models": "deadline/2023-10-12"
+  },
   "Detective": {
     "models": "detective/2018-10-26"
   },

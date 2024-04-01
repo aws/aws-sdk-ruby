@@ -9,9 +9,10 @@ module Aws::DataZone
   module Types
 
     class AcceptChoice
+      attr_accessor edited_value: ::String
       attr_accessor prediction_choice: ::Integer
       attr_accessor prediction_target: ::String
-      SENSITIVE: []
+      SENSITIVE: [:edited_value]
     end
 
     class AcceptPredictionsInput
@@ -162,6 +163,15 @@ module Aws::DataZone
     class BusinessNameGenerationConfiguration
       attr_accessor enabled: bool
       SENSITIVE: []
+    end
+
+    class CancelMetadataGenerationRunInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMetadataGenerationRunOutput < Aws::EmptyStructure
     end
 
     class CancelSubscriptionInput
@@ -1459,6 +1469,24 @@ module Aws::DataZone
       SENSITIVE: [:description]
     end
 
+    class GetMetadataGenerationRunInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetMetadataGenerationRunOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+      attr_accessor target: Types::MetadataGenerationRunTarget
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
+      SENSITIVE: []
+    end
+
     class GetProjectInput
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
@@ -1822,6 +1850,21 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ListMetadataGenerationRunsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
+      SENSITIVE: []
+    end
+
+    class ListMetadataGenerationRunsOutput
+      attr_accessor items: ::Array[Types::MetadataGenerationRunItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListNotificationsInput
       attr_accessor after_timestamp: ::Time
       attr_accessor before_timestamp: ::Time
@@ -2005,6 +2048,25 @@ module Aws::DataZone
       end
       class Unknown < MemberDetails
       end
+    end
+
+    class MetadataGenerationRunItem
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+      attr_accessor target: Types::MetadataGenerationRunTarget
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
+      SENSITIVE: []
+    end
+
+    class MetadataGenerationRunTarget
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
+      attr_accessor type: ("ASSET")
+      SENSITIVE: []
     end
 
     class Model
@@ -2449,6 +2511,26 @@ module Aws::DataZone
       attr_accessor stopped_at: ::Time
       attr_accessor type: ("PRIORITIZED" | "SCHEDULED")
       attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StartMetadataGenerationRunInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor target: Types::MetadataGenerationRunTarget
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
+      SENSITIVE: []
+    end
+
+    class StartMetadataGenerationRunOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+      attr_accessor type: ("BUSINESS_DESCRIPTIONS")
       SENSITIVE: []
     end
 

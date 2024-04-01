@@ -352,6 +352,7 @@ module Aws
             'DataSync' => 'datasync',
             'DataZone' => 'datazone',
             'DatabaseMigrationService' => 'dms',
+            'Deadline' => 'deadline',
             'Detective' => 'api.detective',
             'DevOpsGuru' => 'devops-guru',
             'DeviceFarm' => 'devicefarm',

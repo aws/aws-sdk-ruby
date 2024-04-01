@@ -392,6 +392,9 @@ module Aws::DataZone
     # Amazon DataZone assets.
     #
     # @option params [Array<Types::AcceptChoice>] :accept_choices
+    #   Specifies the prediction (aka, the automatically generated piece of
+    #   metadata) and the target (for example, a column name) that can be
+    #   accepted.
     #
     # @option params [Types::AcceptRule] :accept_rule
     #   Specifies the rule (or the conditions) under which a prediction can be
@@ -408,8 +411,10 @@ module Aws::DataZone
     #   The identifier of the Amazon DataZone domain.
     #
     # @option params [required, String] :identifier
+    #   The identifier of the asset.
     #
     # @option params [String] :revision
+    #   The revision that is to be made to the asset.
     #
     # @return [Types::AcceptPredictionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -422,8 +427,9 @@ module Aws::DataZone
     #   resp = client.accept_predictions({
     #     accept_choices: [
     #       {
+    #         edited_value: "EditedValue",
     #         prediction_choice: 1,
-    #         prediction_target: "String",
+    #         prediction_target: "String", # required
     #       },
     #     ],
     #     accept_rule: {
@@ -527,6 +533,33 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Cancels the metadata generation run.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the metadata generation
+    #   run is to be cancelled.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the metadata generation run.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_metadata_generation_run({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "MetadataGenerationRunIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CancelMetadataGenerationRun AWS API Documentation
+    #
+    # @overload cancel_metadata_generation_run(params = {})
+    # @param [Hash] params ({})
+    def cancel_metadata_generation_run(params = {}, options = {})
+      req = build_request(:cancel_metadata_generation_run, params)
+      req.send_request(options)
+    end
+
     # Cancels the subscription to the specified asset.
     #
     # @option params [required, String] :domain_identifier
@@ -609,6 +642,7 @@ module Aws::DataZone
     #   Amazon DataZone domain where the asset is created.
     #
     # @option params [String] :external_identifier
+    #   The external identifier of the asset.
     #
     # @option params [Array<Types::FormInput>] :forms_input
     #   Metadata forms attached to the asset.
@@ -1683,19 +1717,30 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Publishes a listing (a record of an asset at a given time) or removes
+    # a listing from the catalog.
+    #
     # @option params [required, String] :action
+    #   Specifies whether to publish or unpublish a listing.
     #
     # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain.
     #
     # @option params [required, String] :entity_identifier
+    #   The ID of the asset.
     #
     # @option params [String] :entity_revision
+    #   The revision of an asset.
     #
     # @option params [required, String] :entity_type
+    #   The type of an entity.
     #
     # @return [Types::CreateListingChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1937,6 +1982,7 @@ module Aws::DataZone
     #   The reason for the subscription request.
     #
     # @option params [required, Array<Types::SubscribedListingInput>] :subscribed_listings
+    #   The published asset for which the subscription grant is to be created.
     #
     # @option params [required, Array<Types::SubscribedPrincipalInput>] :subscribed_principals
     #   The Amazon DataZone principals for whom the subscription request is
@@ -2349,7 +2395,8 @@ module Aws::DataZone
     #   deleted.
     #
     # @option params [Boolean] :skip_deletion_check
-    #   Optional flag to delete all child entities within the domain
+    #   Specifies the optional flag to delete all child entities within the
+    #   domain.
     #
     # @return [Types::DeleteDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2538,9 +2585,13 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Deletes a listing (a record of an asset at a given time).
+    #
     # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain.
     #
     # @option params [required, String] :identifier
+    #   The ID of the listing to be deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2569,8 +2620,8 @@ module Aws::DataZone
     #   The identifier of the project that is to be deleted.
     #
     # @option params [Boolean] :skip_deletion_check
-    #   Optional flag to asynchronously delete child entities within the
-    #   project
+    #   Specifies the optional flag to delete all child entities within the
+    #   project.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3601,11 +3652,16 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Gets a listing (a record of an asset at a given time).
+    #
     # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain.
     #
     # @option params [required, String] :identifier
+    #   The ID of the listing.
     #
     # @option params [String] :listing_revision
+    #   The revision of the listing.
     #
     # @return [Types::GetListingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3657,6 +3713,55 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_listing(params = {}, options = {})
       req = build_request(:get_listing, params)
+      req.send_request(options)
+    end
+
+    # Gets a metadata generation run in Amazon DataZone.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain the metadata generation run of
+    #   which you want to get.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the metadata generation run.
+    #
+    # @return [Types::GetMetadataGenerationRunOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetadataGenerationRunOutput#created_at #created_at} => Time
+    #   * {Types::GetMetadataGenerationRunOutput#created_by #created_by} => String
+    #   * {Types::GetMetadataGenerationRunOutput#domain_id #domain_id} => String
+    #   * {Types::GetMetadataGenerationRunOutput#id #id} => String
+    #   * {Types::GetMetadataGenerationRunOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::GetMetadataGenerationRunOutput#status #status} => String
+    #   * {Types::GetMetadataGenerationRunOutput#target #target} => Types::MetadataGenerationRunTarget
+    #   * {Types::GetMetadataGenerationRunOutput#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metadata_generation_run({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "MetadataGenerationRunIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.target.identifier #=> String
+    #   resp.target.revision #=> String
+    #   resp.target.type #=> String, one of "ASSET"
+    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRun AWS API Documentation
+    #
+    # @overload get_metadata_generation_run(params = {})
+    # @param [Hash] params ({})
+    def get_metadata_generation_run(params = {}, options = {})
+      req = build_request(:get_metadata_generation_run, params)
       req.send_request(options)
     end
 
@@ -4610,6 +4715,7 @@ module Aws::DataZone
     #   `ListEnvironments` to list the next set of environments.
     #
     # @option params [String] :name
+    #   The name of the environment.
     #
     # @option params [String] :next_token
     #   When the number of environments is greater than the default value for
@@ -4675,6 +4781,75 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def list_environments(params = {}, options = {})
       req = build_request(:list_environments, params)
+      req.send_request(options)
+    end
+
+    # Lists all metadata generation runs.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain where you want to list metadata
+    #   generation runs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of metadata generation runs to return in a single
+    #   call to ListMetadataGenerationRuns. When the number of metadata
+    #   generation runs to be listed is greater than the value of MaxResults,
+    #   the response contains a NextToken value that you can use in a
+    #   subsequent call to ListMetadataGenerationRuns to list the next set of
+    #   revisions.
+    #
+    # @option params [String] :next_token
+    #   When the number of metadata generation runs is greater than the
+    #   default value for the MaxResults parameter, or if you explicitly
+    #   specify a value for MaxResults that is less than the number of
+    #   metadata generation runs, the response includes a pagination token
+    #   named NextToken. You can specify this NextToken value in a subsequent
+    #   call to ListMetadataGenerationRuns to list the next set of revisions.
+    #
+    # @option params [String] :status
+    #   The status of the metadata generation runs.
+    #
+    # @option params [String] :type
+    #   The type of the metadata generation runs.
+    #
+    # @return [Types::ListMetadataGenerationRunsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMetadataGenerationRunsOutput#items #items} => Array&lt;Types::MetadataGenerationRunItem&gt;
+    #   * {Types::ListMetadataGenerationRunsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_metadata_generation_runs({
+    #     domain_identifier: "DomainId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELED, SUCCEEDED, FAILED
+    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].domain_id #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].owning_project_id #=> String
+    #   resp.items[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].target.identifier #=> String
+    #   resp.items[0].target.revision #=> String
+    #   resp.items[0].target.type #=> String, one of "ASSET"
+    #   resp.items[0].type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListMetadataGenerationRuns AWS API Documentation
+    #
+    # @overload list_metadata_generation_runs(params = {})
+    # @param [Hash] params ({})
+    def list_metadata_generation_runs(params = {}, options = {})
+      req = build_request(:list_metadata_generation_runs, params)
       req.send_request(options)
     end
 
@@ -4844,6 +5019,7 @@ module Aws::DataZone
     #   the next set of projects.
     #
     # @option params [String] :name
+    #   The name of the project.
     #
     # @option params [String] :next_token
     #   When the number of projects is greater than the default value for the
@@ -5398,10 +5574,16 @@ module Aws::DataZone
     #   The identifier of the prediction.
     #
     # @option params [Array<Types::RejectChoice>] :reject_choices
+    #   Specifies the prediction (aka, the automatically generated piece of
+    #   metadata) and the target (for example, a column name) that can be
+    #   rejected.
     #
     # @option params [Types::RejectRule] :reject_rule
+    #   Specifies the rule (or the conditions) under which a prediction can be
+    #   rejected.
     #
     # @option params [String] :revision
+    #   The revision that is to be made to the asset.
     #
     # @return [Types::RejectPredictionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5418,7 +5600,7 @@ module Aws::DataZone
     #     reject_choices: [
     #       {
     #         prediction_choices: [1],
-    #         prediction_target: "String",
+    #         prediction_target: "String", # required
     #       },
     #     ],
     #     reject_rule: {
@@ -5617,6 +5799,7 @@ module Aws::DataZone
     #   The identifier of the owning project specified for the search.
     #
     # @option params [Array<Types::SearchInItem>] :search_in
+    #   The details of the search.
     #
     # @option params [required, String] :search_scope
     #   The scope of the search.
@@ -5812,7 +5995,8 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Searches listings in Amazon DataZone.
+    # Searches listings (records of an asset at a given time) in Amazon
+    # DataZone.
     #
     # @option params [Array<String>] :additional_attributes
     #   Specifies additional attributes for the search.
@@ -5839,6 +6023,7 @@ module Aws::DataZone
     #   next set of results.
     #
     # @option params [Array<Types::SearchInItem>] :search_in
+    #   The details of the search.
     #
     # @option params [String] :search_text
     #   Specifies the text for which to search.
@@ -5929,6 +6114,7 @@ module Aws::DataZone
     #   The filters for the `SearchTypes` action.
     #
     # @option params [required, Boolean] :managed
+    #   Specifies whether the search is managed.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call to
@@ -5946,6 +6132,7 @@ module Aws::DataZone
     #   next set of results.
     #
     # @option params [Array<Types::SearchInItem>] :search_in
+    #   The details of the search.
     #
     # @option params [required, String] :search_scope
     #   Specifies the scope of the search for types.
@@ -6177,6 +6364,72 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def start_data_source_run(params = {}, options = {})
       req = build_request(:start_data_source_run, params)
+      req.send_request(options)
+    end
+
+    # Starts the metadata generation run.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain where you want to start a
+    #   metadata generation run.
+    #
+    # @option params [required, String] :owning_project_identifier
+    #   The ID of the project that owns the asset for which you want to start
+    #   a metadata generation run.
+    #
+    # @option params [required, Types::MetadataGenerationRunTarget] :target
+    #   The asset for which you want to start a metadata generation run.
+    #
+    # @option params [required, String] :type
+    #   The type of the metadata generation run.
+    #
+    # @return [Types::StartMetadataGenerationRunOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMetadataGenerationRunOutput#created_at #created_at} => Time
+    #   * {Types::StartMetadataGenerationRunOutput#created_by #created_by} => String
+    #   * {Types::StartMetadataGenerationRunOutput#domain_id #domain_id} => String
+    #   * {Types::StartMetadataGenerationRunOutput#id #id} => String
+    #   * {Types::StartMetadataGenerationRunOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::StartMetadataGenerationRunOutput#status #status} => String
+    #   * {Types::StartMetadataGenerationRunOutput#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_metadata_generation_run({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     target: { # required
+    #       identifier: "String", # required
+    #       revision: "Revision",
+    #       type: "ASSET", # required, accepts ASSET
+    #     },
+    #     type: "BUSINESS_DESCRIPTIONS", # required, accepts BUSINESS_DESCRIPTIONS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRun AWS API Documentation
+    #
+    # @overload start_metadata_generation_run(params = {})
+    # @param [Hash] params ({})
+    def start_metadata_generation_run(params = {}, options = {})
+      req = build_request(:start_metadata_generation_run, params)
       req.send_request(options)
     end
 

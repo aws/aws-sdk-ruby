@@ -114,6 +114,7 @@ module Aws
   autoload :DataSync, 'aws-sdk-datasync'
   autoload :DataZone, 'aws-sdk-datazone'
   autoload :DatabaseMigrationService, 'aws-sdk-databasemigrationservice'
+  autoload :Deadline, 'aws-sdk-deadline'
   autoload :Detective, 'aws-sdk-detective'
   autoload :DevOpsGuru, 'aws-sdk-devopsguru'
   autoload :DeviceFarm, 'aws-sdk-devicefarm'
