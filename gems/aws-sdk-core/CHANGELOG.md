@@ -1,6 +1,6 @@
 Unreleased Changes
 ------------------
-* Issue - Fix ordering of plugin options for performance optimization (#3002).
+* Issue - Performance optimization: ensure presence and order of instance variables in `PluginOptions` (#3002).
 
 3.191.5 (2024-03-26)
 ------------------

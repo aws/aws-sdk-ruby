@@ -111,6 +111,8 @@ module Seahorse
 
         def initialize(name, options = {})
           @name = name
+          # prevent unstable object shapes by ensuring
+          # order and presence of instance variables
           @default = nil
           @default_block = nil
           @required = nil
