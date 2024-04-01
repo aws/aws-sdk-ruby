@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Issue - Fix ordering of plugin options for performance optimization.
 
 3.191.5 (2024-03-26)
 ------------------
