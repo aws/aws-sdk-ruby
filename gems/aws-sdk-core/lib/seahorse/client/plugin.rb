@@ -111,7 +111,15 @@ module Seahorse
 
         def initialize(name, options = {})
           @name = name
+          # prevent unstable object shapes by ensuring
+          # order and presence of instance variables
+          @default = nil
+          @default_block = nil
+          @required = nil
+          @doc_type = nil
           @doc_default = nil
+          @docstring = nil
+          @rbs_type = nil
           options.each_pair do |opt_name, opt_value|
             self.send("#{opt_name}=", opt_value)
           end
