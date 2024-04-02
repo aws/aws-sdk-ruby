@@ -3,17 +3,19 @@
 require 'rexml/document'
 require 'rspec/expectations'
 
-PROTOCOL_TESTS_IGNORE_LIST_PATH = File.join(File.dirname(__FILE__), 'protocol-tests-ignore-list.json')
-
 # This module contains helpers relating to protocol-tests
 module ProtocolTestsHelper
+  PROTOCOL_TESTS_IGNORE_LIST_PATH = File.join(File.dirname(__FILE__), 'protocol-tests-ignore-list.json')
   class << self
-
+    def ignore_list
+      @ignore_list ||= JSON.parse(File.read(PROTOCOL_TESTS_IGNORE_LIST_PATH))
+    end
     def check_ignore_list(protocol, test_id, test_type)
       return nil if protocol.include?('extras')
 
-      ignore_list = JSON.parse(File.read(PROTOCOL_TESTS_IGNORE_LIST_PATH))[protocol]
-      ignore_list[test_type].find { |i| i.key?(test_id) }
+      # ignore_list = JSON.parse(File.read(PROTOCOL_TESTS_IGNORE_LIST_PATH))[protocol]
+      filtered_ignore_list = ignore_list[protocol]
+      filtered_ignore_list[test_type].find { |i| i.key?(test_id) }
     end
 
     # sets up paths for each protocol and its file paths
