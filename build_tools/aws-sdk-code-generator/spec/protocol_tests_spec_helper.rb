@@ -36,7 +36,7 @@ module ProtocolTestsHelper
     def each_test_case(context, fixture_path)
       return unless fixture_path
 
-      Aws::Json.load_file(fixture_path).each do |suite|
+      JSON.load(fixture_path).each do |suite|
         context.context(suite['description']) do
           suite['cases'].each do |test_case|
             suite['metadata']['endpointPrefix'] ||= 'svc'
