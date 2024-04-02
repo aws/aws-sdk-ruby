@@ -66,7 +66,7 @@ module ProtocolTestsHelper
           gem_version: '1.0.0'
         }
         if suite['metadata']['protocol'] == 'api-gateway'
-          opts[:default_endpoint] = 'https://foobar.us-west-2.amazonaws.com/test'
+          opts[:default_endpoint] = 'https://foo.execute-api.us-west-2.amazonaws.com/test'
         end
         service = AwsSdkCodeGenerator::Service.new(opts)
         code = AwsSdkCodeGenerator::CodeBuilder.new(
