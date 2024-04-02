@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-04-02)
+------------------
+
+* Feature - Doc-only update. Changed "Resources" to "Key Concepts" in docs and updated text.
+
 1.20.0 (2024-01-26)
 ------------------
 

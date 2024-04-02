@@ -10826,6 +10826,17 @@ module Aws::Glue
     #   resp.table.federated_table.identifier #=> String
     #   resp.table.federated_table.database_identifier #=> String
     #   resp.table.federated_table.connection_name #=> String
+    #   resp.table.view_definition.is_protected #=> Boolean
+    #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.sub_objects #=> Array
+    #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.representations #=> Array
+    #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table.is_multi_dialect_view #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -10993,6 +11004,17 @@ module Aws::Glue
     #   resp.table_version.table.federated_table.identifier #=> String
     #   resp.table_version.table.federated_table.database_identifier #=> String
     #   resp.table_version.table.federated_table.connection_name #=> String
+    #   resp.table_version.table.view_definition.is_protected #=> Boolean
+    #   resp.table_version.table.view_definition.definer #=> String
+    #   resp.table_version.table.view_definition.sub_objects #=> Array
+    #   resp.table_version.table.view_definition.sub_objects[0] #=> String
+    #   resp.table_version.table.view_definition.representations #=> Array
+    #   resp.table_version.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_version.table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table_version.table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table_version.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_version.table.is_multi_dialect_view #=> Boolean
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -11112,6 +11134,17 @@ module Aws::Glue
     #   resp.table_versions[0].table.federated_table.identifier #=> String
     #   resp.table_versions[0].table.federated_table.database_identifier #=> String
     #   resp.table_versions[0].table.federated_table.connection_name #=> String
+    #   resp.table_versions[0].table.view_definition.is_protected #=> Boolean
+    #   resp.table_versions[0].table.view_definition.definer #=> String
+    #   resp.table_versions[0].table.view_definition.sub_objects #=> Array
+    #   resp.table_versions[0].table.view_definition.sub_objects[0] #=> String
+    #   resp.table_versions[0].table.view_definition.representations #=> Array
+    #   resp.table_versions[0].table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_versions[0].table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -11242,6 +11275,17 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.identifier #=> String
     #   resp.table_list[0].federated_table.database_identifier #=> String
     #   resp.table_list[0].federated_table.connection_name #=> String
+    #   resp.table_list[0].view_definition.is_protected #=> Boolean
+    #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.sub_objects #=> Array
+    #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.representations #=> Array
+    #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -11804,7 +11848,9 @@ module Aws::Glue
     #   * {Types::GetUnfilteredTableMetadataResponse#is_registered_with_lake_formation #is_registered_with_lake_formation} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#cell_filters #cell_filters} => Array&lt;Types::ColumnRowFilter&gt;
     #   * {Types::GetUnfilteredTableMetadataResponse#query_authorization_id #query_authorization_id} => String
+    #   * {Types::GetUnfilteredTableMetadataResponse#is_multi_dialect_view #is_multi_dialect_view} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetUnfilteredTableMetadataResponse#is_protected #is_protected} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#permissions #permissions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -11905,6 +11951,17 @@ module Aws::Glue
     #   resp.table.federated_table.identifier #=> String
     #   resp.table.federated_table.database_identifier #=> String
     #   resp.table.federated_table.connection_name #=> String
+    #   resp.table.view_definition.is_protected #=> Boolean
+    #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.sub_objects #=> Array
+    #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.representations #=> Array
+    #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table.is_multi_dialect_view #=> Boolean
     #   resp.authorized_columns #=> Array
     #   resp.authorized_columns[0] #=> String
     #   resp.is_registered_with_lake_formation #=> Boolean
@@ -11912,7 +11969,9 @@ module Aws::Glue
     #   resp.cell_filters[0].column_name #=> String
     #   resp.cell_filters[0].row_filter_expression #=> String
     #   resp.query_authorization_id #=> String
+    #   resp.is_multi_dialect_view #=> Boolean
     #   resp.resource_arn #=> String
+    #   resp.is_protected #=> Boolean
     #   resp.permissions #=> Array
     #   resp.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #
@@ -14362,6 +14421,17 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.identifier #=> String
     #   resp.table_list[0].federated_table.database_identifier #=> String
     #   resp.table_list[0].federated_table.connection_name #=> String
+    #   resp.table_list[0].view_definition.is_protected #=> Boolean
+    #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.sub_objects #=> Array
+    #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.representations #=> Array
+    #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -17008,7 +17078,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.168.0'
+      context[:gem_version] = '1.169.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

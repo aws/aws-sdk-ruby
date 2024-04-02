@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2024-04-02)
+------------------
+
+* Feature - This release increases the limit on the roleArns request parameter for the *Profile APIs that support it. This parameter can now take up to 250 role ARNs.
+
 1.13.0 (2024-03-22)
 ------------------
 

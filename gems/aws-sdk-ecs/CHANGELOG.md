@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2024-04-02)
+------------------
+
+* Feature - Documentation only update for Amazon ECS.
+
 1.144.0 (2024-03-26)
 ------------------
 

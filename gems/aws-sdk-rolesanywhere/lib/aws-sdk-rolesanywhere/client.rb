@@ -397,7 +397,8 @@ module Aws::RolesAnywhere
     # @option params [Integer] :duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
-    #   documentation][1] page for more details.
+    #   documentation][1] page for more details. In requests, if this value is
+    #   not provided, the default value will be 3600.
     #
     #
     #
@@ -1648,7 +1649,8 @@ module Aws::RolesAnywhere
     # @option params [Integer] :duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
-    #   documentation][1] page for more details.
+    #   documentation][1] page for more details. In requests, if this value is
+    #   not provided, the default value will be 3600.
     #
     #
     #
@@ -1790,7 +1792,7 @@ module Aws::RolesAnywhere
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1221,8 +1221,12 @@ module Aws::Glue
     VersionMismatchException = Shapes::StructureShape.new(name: 'VersionMismatchException')
     VersionString = Shapes::StringShape.new(name: 'VersionString')
     VersionsString = Shapes::StringShape.new(name: 'VersionsString')
+    ViewDefinition = Shapes::StructureShape.new(name: 'ViewDefinition')
     ViewDialect = Shapes::StringShape.new(name: 'ViewDialect')
     ViewDialectVersionString = Shapes::StringShape.new(name: 'ViewDialectVersionString')
+    ViewRepresentation = Shapes::StructureShape.new(name: 'ViewRepresentation')
+    ViewRepresentationList = Shapes::ListShape.new(name: 'ViewRepresentationList')
+    ViewSubObjectsList = Shapes::ListShape.new(name: 'ViewSubObjectsList')
     ViewTextString = Shapes::StringShape.new(name: 'ViewTextString')
     WorkerType = Shapes::StringShape.new(name: 'WorkerType')
     Workflow = Shapes::StructureShape.new(name: 'Workflow')
@@ -3681,7 +3685,9 @@ module Aws::Glue
     GetUnfilteredTableMetadataResponse.add_member(:is_registered_with_lake_formation, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRegisteredWithLakeFormation"))
     GetUnfilteredTableMetadataResponse.add_member(:cell_filters, Shapes::ShapeRef.new(shape: ColumnRowFilterList, location_name: "CellFilters"))
     GetUnfilteredTableMetadataResponse.add_member(:query_authorization_id, Shapes::ShapeRef.new(shape: HashString, location_name: "QueryAuthorizationId"))
+    GetUnfilteredTableMetadataResponse.add_member(:is_multi_dialect_view, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsMultiDialectView"))
     GetUnfilteredTableMetadataResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "ResourceArn"))
+    GetUnfilteredTableMetadataResponse.add_member(:is_protected, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsProtected"))
     GetUnfilteredTableMetadataResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     GetUnfilteredTableMetadataResponse.struct_class = Types::GetUnfilteredTableMetadataResponse
 
@@ -5392,6 +5398,8 @@ module Aws::Glue
     Table.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     Table.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
     Table.add_member(:federated_table, Shapes::ShapeRef.new(shape: FederatedTable, location_name: "FederatedTable"))
+    Table.add_member(:view_definition, Shapes::ShapeRef.new(shape: ViewDefinition, location_name: "ViewDefinition"))
+    Table.add_member(:is_multi_dialect_view, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsMultiDialectView"))
     Table.struct_class = Types::Table
 
     TableError.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TableName"))
@@ -5858,6 +5866,23 @@ module Aws::Glue
 
     VersionMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     VersionMismatchException.struct_class = Types::VersionMismatchException
+
+    ViewDefinition.add_member(:is_protected, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsProtected"))
+    ViewDefinition.add_member(:definer, Shapes::ShapeRef.new(shape: ArnString, location_name: "Definer"))
+    ViewDefinition.add_member(:sub_objects, Shapes::ShapeRef.new(shape: ViewSubObjectsList, location_name: "SubObjects"))
+    ViewDefinition.add_member(:representations, Shapes::ShapeRef.new(shape: ViewRepresentationList, location_name: "Representations"))
+    ViewDefinition.struct_class = Types::ViewDefinition
+
+    ViewRepresentation.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
+    ViewRepresentation.add_member(:dialect_version, Shapes::ShapeRef.new(shape: ViewDialectVersionString, location_name: "DialectVersion"))
+    ViewRepresentation.add_member(:view_original_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewOriginalText"))
+    ViewRepresentation.add_member(:view_expanded_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewExpandedText"))
+    ViewRepresentation.add_member(:is_stale, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsStale"))
+    ViewRepresentation.struct_class = Types::ViewRepresentation
+
+    ViewRepresentationList.member = Shapes::ShapeRef.new(shape: ViewRepresentation)
+
+    ViewSubObjectsList.member = Shapes::ShapeRef.new(shape: ArnString)
 
     Workflow.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     Workflow.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
