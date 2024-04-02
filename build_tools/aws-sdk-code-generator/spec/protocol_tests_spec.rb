@@ -5,14 +5,13 @@ require_relative 'protocol_tests_spec_helper'
 
 ProtocolTestsHelper.fixtures.each do |protocol, files|
   describe(protocol) do
-    let(:matcher) { ProtocolTestsHelper::Matcher.new }
     describe 'input' do
       ProtocolTestsHelper.each_test_case(self, files['input']) do |group, suite, test_case, test_id, description|
         group.it(description) do
           if (ignore_result = ProtocolTestsHelper.check_ignore_list(protocol, test_id, 'input'))
             skip(ignore_result[test_id])
           end
-          matcher.setup_matchers(test_id, self)
+          ProtocolTestsHelper::Matcher.setup_matchers(test_id, self)
 
           client = ProtocolTestsHelper.client_for(suite, test_case, "Input_#{test_id}")
           ctx = nil
@@ -25,12 +24,12 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
           request_params = ProtocolTestsHelper.format_data(input_shape, test_case['params'] || {})
           client.operation_name(request_params)
 
-          matcher.match_req_host(test_case, ctx.http_request, self)
-          matcher.match_req_method(test_case, ctx.http_request, self)
-          matcher.match_req_uri(test_case, ctx.http_request, self)
-          matcher.match_req_headers(suite, test_case, ctx.http_request, self)
-          matcher.exclude_req_headers(test_case, ctx.http_request, self)
-          matcher.match_req_body(suite, test_case, ctx.http_request, self)
+          ProtocolTestsHelper::Matcher.match_req_host(test_case, ctx.http_request, self)
+          ProtocolTestsHelper::Matcher.match_req_method(test_case, ctx.http_request, self)
+          ProtocolTestsHelper::Matcher.match_req_uri(test_case, ctx.http_request, self)
+          ProtocolTestsHelper::Matcher.match_req_headers(suite, test_case, ctx.http_request, self)
+          ProtocolTestsHelper::Matcher.exclude_req_headers(test_case, ctx.http_request, self)
+          ProtocolTestsHelper::Matcher.match_req_body(suite, test_case, ctx.http_request, self)
         end
       end
     end
@@ -65,7 +64,7 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
           rescue => error
             error
           end
-          matcher.match_resp_data(test_case, resp, self)
+          ProtocolTestsHelper::Matcher.match_resp_data(test_case, resp, self)
         end
       end
     end

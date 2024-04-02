@@ -144,148 +144,148 @@ module ProtocolTestsHelper
   class Matcher
     include RSpec::Matchers
 
-    def setup_matchers(id, it)
-      return unless id.include?('IdempotencyToken')
+    class << self
+      def setup_matchers(id, it)
+        return unless id.include?('IdempotencyToken')
 
-      it.allow(SecureRandom).to it.receive(:uuid).and_return('00000000-0000-4000-8000-000000000000')
-    end
-
-    def match_req_host(test_case, http_req, it)
-      if (expected_host = test_case['serialized']['host'])
-        # create URI object to cover custom host paths
-        expected_host_uri = URI.parse(expected_host)
-        unless expected_host_uri.host
-          expected_host_uri = URI.parse(
-            "#{http_req.endpoint.scheme}://#{expected_host}"
-          )
-        end
-        it.expect(http_req.endpoint.host).to eq(expected_host_uri.host)
-        it.expect(http_req.endpoint.path).to start_with(expected_host_uri.path)
+        it.allow(SecureRandom).to it.receive(:uuid).and_return('00000000-0000-4000-8000-000000000000')
       end
-    end
 
-    def match_req_method(test_case, http_req, it)
-      if (expected_method = test_case['serialized']['method'])
-        it.expect(http_req.http_method).to eq(expected_method)
-      end
-    end
-
-    def match_req_uri(test_case, http_req, it)
-      if (expected_uri = test_case['serialized']['uri'])
-        # normalize expected URI path
-        expected_uri = Pathname.new(expected_uri).cleanpath.to_s
-        it.expect(http_req.endpoint.request_uri).to eq(expected_uri)
-      end
-    end
-
-    def match_req_headers(suite, test_case, http_req, it)
-      protocol = suite['metadata']['protocol']
-      if (expected_headers = test_case['serialized']['headers'])
-        headers = normalize_headers(http_req.headers)
-        if expected_headers['Content-Type'] && %w[query ec2].include?(protocol)
-          expected_headers['Content-Type'] += '; charset=utf-8'
-        end
-        expected_headers = normalize_headers(expected_headers)
-        it.expect(headers).to include(expected_headers)
-      end
-    end
-
-    def exclude_req_headers(test_case, http_req, it)
-      if (excluded_headers = test_case['serialized']['forbidHeaders'])
-        headers = normalize_headers(http_req.headers)
-        excluded_headers = excluded_headers.map(&:downcase) # normalize array
-        it.expect(headers.keys).to_not include(*excluded_headers)
-      end
-    end
-
-    def match_req_body(suite, test_case, http_req, it)
-      protocol = suite['metadata']['protocol']
-      if (expected_body = test_case['serialized']['body'])
-        body = http_req.body_contents
-        case protocol
-        when 'query', 'ec2'
-          body = body.split('&').sort.join('&')
-          expected_body = expected_body.split('&').sort.join('&')
-        when 'json'
-          body = Aws::Json.load(body)
-          expected_body = Aws::Json.load(expected_body)
-        when 'rest-json'
-          if body[0] == '{'
-            body = Aws::Json.load(body)
-            expected_body = case expected_body
-                            when ''
-                              {}
-                            else
-                              Aws::Json.load(expected_body)
-                            end
+      def match_req_host(test_case, http_req, it)
+        if (expected_host = test_case['serialized']['host'])
+          # create URI object to cover custom host paths
+          expected_host_uri = URI.parse(expected_host)
+          unless expected_host_uri.host
+            expected_host_uri = URI.parse(
+              "#{http_req.endpoint.scheme}://#{expected_host}"
+            )
           end
-        when 'rest-xml'
-          body = normalize_xml(body)
-          expected_body = normalize_xml(expected_body)
-        when 'api-gateway'
-          if body[0] == '{'
+          it.expect(http_req.endpoint.host).to it.eq(expected_host_uri.host)
+          it.expect(http_req.endpoint.path).to it.start_with(expected_host_uri.path)
+        end
+      end
+
+      def match_req_method(test_case, http_req, it)
+        if (expected_method = test_case['serialized']['method'])
+          it.expect(http_req.http_method).to it.eq(expected_method)
+        end
+      end
+
+      def match_req_uri(test_case, http_req, it)
+        if (expected_uri = test_case['serialized']['uri'])
+          # normalize expected URI path
+          expected_uri = Pathname.new(expected_uri).cleanpath.to_s
+          it.expect(http_req.endpoint.request_uri).to it.eq(expected_uri)
+        end
+      end
+
+      def match_req_headers(suite, test_case, http_req, it)
+        protocol = suite['metadata']['protocol']
+        if (expected_headers = test_case['serialized']['headers'])
+          headers = normalize_headers(http_req.headers)
+          if expected_headers['Content-Type'] && %w[query ec2].include?(protocol)
+            expected_headers['Content-Type'] += '; charset=utf-8'
+          end
+          expected_headers = normalize_headers(expected_headers)
+          it.expect(headers).to it.include(expected_headers)
+        end
+      end
+
+      def exclude_req_headers(test_case, http_req, it)
+        if (excluded_headers = test_case['serialized']['forbidHeaders'])
+          headers = normalize_headers(http_req.headers)
+          excluded_headers = excluded_headers.map(&:downcase) # normalize array
+          it.expect(headers.keys).to_not it.include(*excluded_headers)
+        end
+      end
+
+      def match_req_body(suite, test_case, http_req, it)
+        protocol = suite['metadata']['protocol']
+        if (expected_body = test_case['serialized']['body'])
+          body = http_req.body_contents
+          case protocol
+          when 'query', 'ec2'
+            body = body.split('&').sort.join('&')
+            expected_body = expected_body.split('&').sort.join('&')
+          when 'json'
             body = Aws::Json.load(body)
             expected_body = Aws::Json.load(expected_body)
-          end
-        else raise "unsupported protocol: `#{protocol}`"
-        end
-        it.expect(body).to(eq(expected_body))
-      end
-    end
-
-    def match_resp_data(test_case, resp, it)
-      data = ProtocolTestsHelper.data_to_hash(resp.data)
-      expected_data = if error_case?(test_case)
-                        error_shape = resp.context.operation.errors.find do |err|
-                          err.shape.name == test_case['errorCode']
-                        end
-                        raise "Unable to find #{test_case['errorCode']} in error shapes" if error_shape.nil?
-
-                        ProtocolTestsHelper.format_data(
-                          error_shape,
-                          test_case['error'] || {}
-                        )
-                      else
-                        ProtocolTestsHelper.format_data(
-                          resp.context.operation.output,
-                          test_case['result'] || {}
-                        )
-                      end
-      if test_case['response']['eventstream']
-        data.each do |member_name, value|
-          if value.respond_to?(:each)
-            # event stream member
-            value.each do |event_struct|
-              # verify each event
-              event = event_struct.to_h
-              expect_event = expected_data[member_name][event.delete(:event_type)]
-              it.expect(ProtocolTestsHelper.data_to_hash(event)).to eq(expect_event)
+          when 'rest-json'
+            if body[0] == '{'
+              body = Aws::Json.load(body)
+              expected_body = case expected_body
+                              when ''
+                                {}
+                              else
+                                Aws::Json.load(expected_body)
+                              end
             end
-          else
-            # non event stream member
-            it.expect(value).to eq(expected_data[member_name])
+          when 'rest-xml'
+            body = normalize_xml(body)
+            expected_body = normalize_xml(expected_body)
+          when 'api-gateway'
+            if body[0] == '{'
+              body = Aws::Json.load(body)
+              expected_body = Aws::Json.load(expected_body)
+            end
+          else raise "unsupported protocol: `#{protocol}`"
           end
+          it.expect(body).to it.eq(expected_body)
         end
-      else
-        it.expect(data).to eq(expected_data)
+      end
+
+      def match_resp_data(test_case, resp, it)
+        data = ProtocolTestsHelper.data_to_hash(resp.data)
+        expected_data = if error_case?(test_case)
+                          error_shape = resp.context.operation.errors.find do |err|
+                            err.shape.name == test_case['errorCode']
+                          end
+                          raise "Unable to find #{test_case['errorCode']} in error shapes" if error_shape.nil?
+
+                          ProtocolTestsHelper.format_data(
+                            error_shape,
+                            test_case['error'] || {}
+                          )
+                        else
+                          ProtocolTestsHelper.format_data(
+                            resp.context.operation.output,
+                            test_case['result'] || {}
+                          )
+                        end
+        if test_case['response']['eventstream']
+          data.each do |member_name, value|
+            if value.respond_to?(:each)
+              # event stream member
+              value.each do |event_struct|
+                # verify each event
+                event = event_struct.to_h
+                expect_event = expected_data[member_name][event.delete(:event_type)]
+                it.expect(ProtocolTestsHelper.data_to_hash(event)).to it.eq(expect_event)
+              end
+            else
+              # non event stream member
+              it.expect(value).to it.eq(expected_data[member_name])
+            end
+          end
+        else
+          it.expect(data).to it.eq(expected_data)
+        end
+      end
+
+      private
+      def normalize_headers(hash)
+        hash.each.with_object({}) do |(k, v), headers|
+          headers[k.downcase] = v.to_s
+        end
+      end
+
+      def normalize_xml(xml)
+        REXML::Document.new(xml).to_s.gsub(/>\s+?</, '><').strip
+      end
+
+      def error_case?(test_case)
+        !test_case['error'].nil?
       end
     end
-
-    private
-
-    def normalize_headers(hash)
-      hash.each.with_object({}) do |(k, v), headers|
-        headers[k.downcase] = v.to_s
-      end
-    end
-
-    def normalize_xml(xml)
-      REXML::Document.new(xml).to_s.gsub(/>\s+?</, '><').strip
-    end
-
-    def error_case?(test_case)
-      !test_case['error'].nil?
-    end
-
   end
 end
