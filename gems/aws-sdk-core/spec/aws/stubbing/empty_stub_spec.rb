@@ -19,17 +19,16 @@ module Aws
           string_map: {},
           byte: 0,
           boolean: false,
-          character: 'CharacterShape',
+          character: "CharacterShape",
           double: 0.0,
           float: 0.0,
           integer: 0,
           long: 0,
-          short: 0,
-          string: 'StringShape',
-          string_with_consecutive_spaces: 'StringShape',
-          string_with_lf: 'StringShape',
+          string: "StringShape",
+          string_with_consecutive_spaces: "StringShape",
+          string_with_lf: "StringShape",
           sensitive_string: 'SensitiveStringShape',
-          timestamp: now
+          timestamp: now,
         })
       end
 

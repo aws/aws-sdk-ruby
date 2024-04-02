@@ -79,14 +79,14 @@ module AwsSdkCodeGenerator
           end
         when 'blob'
           if ref['streaming']
-            '::String | ::StringIO | ::File' # input only
+            "::String | ::StringIO | ::File" # input only
           else
-            '::String'
+            "::String"
           end
         when 'list' then list(s, i, visited)
         when 'map' then map(s, i, visited)
-        when 'boolean' then 'bool'
-        when 'integer', 'long', 'short' then '::Integer'
+        when 'boolean' then "bool"
+        when 'integer', 'long' then '::Integer'
         when 'float', 'double' then '::Float'
         when 'byte' then '::Integer'
         when 'character' then '::String'
