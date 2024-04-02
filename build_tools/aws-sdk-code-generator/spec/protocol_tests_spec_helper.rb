@@ -36,7 +36,7 @@ module ProtocolTestsHelper
     def each_test_case(context, fixture_path)
       return unless fixture_path
 
-      JSON.load(fixture_path).each do |suite|
+      JSON.load_file(fixture_path).each do |suite|
         context.context(suite['description']) do
           suite['cases'].each do |test_case|
             suite['metadata']['endpointPrefix'] ||= 'svc'
@@ -215,12 +215,13 @@ module ProtocolTestsHelper
           when 'rest-json'
             if body[0] == '{'
               body = Aws::Json.load(body)
-              expected_body = case expected_body
-                              when ''
-                                {}
-                              else
-                                Aws::Json.load(expected_body)
-                              end
+              expected_body =
+                case expected_body
+                  when ''
+                    {}
+                  else
+                    Aws::Json.load(expected_body)
+                  end
             end
           when 'rest-xml'
             body = normalize_xml(body)
@@ -238,22 +239,23 @@ module ProtocolTestsHelper
 
       def match_resp_data(test_case, resp, it)
         data = ProtocolTestsHelper.data_to_hash(resp.data)
-        expected_data = if error_case?(test_case)
-                          error_shape = resp.context.operation.errors.find do |err|
-                            err.shape.name == test_case['errorCode']
-                          end
-                          raise "Unable to find #{test_case['errorCode']} in error shapes" if error_shape.nil?
+        expected_data =
+          if error_case?(test_case)
+            error_shape = resp.context.operation.errors.find do |err|
+              err.shape.name == test_case['errorCode']
+            end
+            raise "Unable to find #{test_case['errorCode']} in error shapes" if error_shape.nil?
 
-                          ProtocolTestsHelper.format_data(
-                            error_shape,
-                            test_case['error'] || {}
-                          )
-                        else
-                          ProtocolTestsHelper.format_data(
-                            resp.context.operation.output,
-                            test_case['result'] || {}
-                          )
-                        end
+            ProtocolTestsHelper.format_data(
+              error_shape,
+              test_case['error'] || {}
+            )
+          else
+            ProtocolTestsHelper.format_data(
+              resp.context.operation.output,
+              test_case['result'] || {}
+            )
+          end
         if test_case['response']['eventstream']
           data.each do |member_name, value|
             if value.respond_to?(:each)
