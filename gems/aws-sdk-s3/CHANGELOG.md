@@ -3,8 +3,6 @@ Unreleased Changes
 
 * Issue - Ignore `Content-Type` header in the pre-signer.
 
-=======
-=======
 1.146.1 (2024-03-28)
 ------------------
 
