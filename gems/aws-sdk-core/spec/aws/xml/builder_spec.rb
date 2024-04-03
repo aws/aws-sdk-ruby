@@ -283,13 +283,11 @@ module Aws
           XML
         end
 
-        it 'applies xml namespaces only to top level shapes' do
-          ns = {
-            'xmlNamespace' => {
-              'prefix' => 'xsi',
-              'uri' => 'http://xmlns.com/uri'
-            }
-          }
+        it 'applies xml namespaces to any shape' do
+          ns = { 'xmlNamespace' => {
+            'prefix' => 'xsi',
+            'uri' => 'http://xmlns.com/uri'
+          }}
           shapes['StringShape'].update(ns)
           shapes['StructureShape']['members']['Nested'].update(ns)
           params = {
@@ -297,12 +295,12 @@ module Aws
               string: 'abc'
             }
           }
-          expect(xml(params)).to eq(<<~XML)
-            <xml>
-              <Nested xmlns:xsi="http://xmlns.com/uri">
-                <String>abc</String>
-              </Nested>
-            </xml>
+          expect(xml(params)).to eq(<<-XML)
+<xml>
+  <Nested xmlns:xsi="http://xmlns.com/uri">
+    <String xmlns:xsi="http://xmlns.com/uri">abc</String>
+  </Nested>
+</xml>
           XML
         end
       end
