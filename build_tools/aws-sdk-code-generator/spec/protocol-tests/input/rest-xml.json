@@ -1310,10 +1310,7 @@
                 "serialized": {
                     "method": "PUT",
                     "uri": "/HttpPayloadWithUnion",
-                    "body": "",
-                    "headers": {
-                        "Content-Type": "application/xml"
-                    }
+                    "body": ""
                 }
             }
         ]
@@ -4965,7 +4962,7 @@
                 "serialized": {
                     "method": "POST",
                     "uri": "/XmlNamespaces",
-                    "body": "<XmlNamespacesRequest xmlns=\"http://foo.com\">\n    <nested>\n        <foo xmlns:baz=\"http://baz.com\">Foo</foo>\n        <values xmlns=\"http://qux.com\">\n            <member xmlns=\"http://bux.com\">Bar</member>\n            <member xmlns=\"http://bux.com\">Baz</member>\n        </values>\n    </nested>\n</XmlNamespacesRequest>\n",
+                    "body": "<XmlNamespacesRequest xmlns=\"http://foo.com\">\n    <nested xmlns=\"http://foo.com\">\n        <foo xmlns:baz=\"http://baz.com\">Foo</foo>\n        <values xmlns=\"http://qux.com\">\n            <member xmlns=\"http://bux.com\">Bar</member>\n            <member xmlns=\"http://bux.com\">Baz</member>\n        </values>\n    </nested>\n</XmlNamespacesRequest>\n",
                     "headers": {
                         "Content-Type": "application/xml"
                     }
