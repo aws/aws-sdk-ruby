@@ -86,6 +86,7 @@ module Aws::DataZone
 
     class AssetItemAdditionalAttributes
       attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       attr_accessor read_only_forms_output: ::Array[Types::FormOutput]
       SENSITIVE: []
     end
@@ -97,6 +98,7 @@ module Aws::DataZone
       attr_accessor created_at: ::Time
       attr_accessor forms: ::String
       attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor latest_time_series_data_point_forms: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       attr_accessor owning_project_id: ::String
       SENSITIVE: []
     end
@@ -126,6 +128,7 @@ module Aws::DataZone
 
     class AssetListingItemAdditionalAttributes
       attr_accessor forms: ::String
+      attr_accessor latest_time_series_data_point_forms: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       SENSITIVE: []
     end
 
@@ -244,6 +247,7 @@ module Aws::DataZone
       attr_accessor forms_output: ::Array[Types::FormOutput]
       attr_accessor glossary_terms: ::Array[::String]
       attr_accessor id: ::String
+      attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       attr_accessor listing: Types::AssetListingDetails
       attr_accessor name: ::String
       attr_accessor owning_project_id: ::String
@@ -279,6 +283,7 @@ module Aws::DataZone
       attr_accessor forms_output: ::Array[Types::FormOutput]
       attr_accessor glossary_terms: ::Array[::String]
       attr_accessor id: ::String
+      attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       attr_accessor listing: Types::AssetListingDetails
       attr_accessor name: ::String
       attr_accessor owning_project_id: ::String
@@ -958,6 +963,18 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class DeleteTimeSeriesDataPointsInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("ASSET" | "LISTING")
+      attr_accessor form_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTimeSeriesDataPointsOutput < Aws::EmptyStructure
+    end
+
     class Deployment
       attr_accessor deployment_id: ::String
       attr_accessor deployment_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "PENDING_DEPLOYMENT")
@@ -1158,6 +1175,7 @@ module Aws::DataZone
       attr_accessor forms_output: ::Array[Types::FormOutput]
       attr_accessor glossary_terms: ::Array[::String]
       attr_accessor id: ::String
+      attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       attr_accessor listing: Types::AssetListingDetails
       attr_accessor name: ::String
       attr_accessor owning_project_id: ::String
@@ -1597,6 +1615,24 @@ module Aws::DataZone
       SENSITIVE: [:name]
     end
 
+    class GetTimeSeriesDataPointInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("ASSET" | "LISTING")
+      attr_accessor form_name: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetTimeSeriesDataPointOutput
+      attr_accessor domain_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_type: ("ASSET" | "LISTING")
+      attr_accessor form: Types::TimeSeriesDataPointFormOutput
+      attr_accessor form_name: ::String
+      SENSITIVE: []
+    end
+
     class GetUserProfileInput
       attr_accessor domain_identifier: ::String
       attr_accessor type: ("IAM" | "SSO")
@@ -1644,6 +1680,7 @@ module Aws::DataZone
     end
 
     class GlueRunConfigurationInput
+      attr_accessor auto_import_data_quality_result: bool
       attr_accessor data_access_role: ::String
       attr_accessor relational_filter_configurations: ::Array[Types::RelationalFilterConfiguration]
       SENSITIVE: []
@@ -1651,6 +1688,7 @@ module Aws::DataZone
 
     class GlueRunConfigurationOutput
       attr_accessor account_id: ::String
+      attr_accessor auto_import_data_quality_result: bool
       attr_accessor data_access_role: ::String
       attr_accessor region: ::String
       attr_accessor relational_filter_configurations: ::Array[Types::RelationalFilterConfiguration]
@@ -1999,6 +2037,24 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ListTimeSeriesDataPointsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("ASSET" | "LISTING")
+      attr_accessor form_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ListTimeSeriesDataPointsOutput
+      attr_accessor items: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListingItem
       attr_accessor asset_listing: Types::AssetListing
       attr_accessor unknown: untyped
@@ -2099,6 +2155,23 @@ module Aws::DataZone
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor type: ("PROJECT")
+      SENSITIVE: []
+    end
+
+    class PostTimeSeriesDataPointsInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("ASSET" | "LISTING")
+      attr_accessor forms: ::Array[Types::TimeSeriesDataPointFormInput]
+      SENSITIVE: []
+    end
+
+    class PostTimeSeriesDataPointsOutput
+      attr_accessor domain_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_type: ("ASSET" | "LISTING")
+      attr_accessor forms: ::Array[Types::TimeSeriesDataPointFormOutput]
       SENSITIVE: []
     end
 
@@ -2347,7 +2420,7 @@ module Aws::DataZone
     end
 
     class SearchInput
-      attr_accessor additional_attributes: ::Array[("FORMS")]
+      attr_accessor additional_attributes: ::Array[("FORMS" | "TIME_SERIES_DATA_POINT_FORMS")]
       attr_accessor domain_identifier: ::String
       attr_accessor filters: Types::FilterClause
       attr_accessor max_results: ::Integer
@@ -2381,7 +2454,7 @@ module Aws::DataZone
     end
 
     class SearchListingsInput
-      attr_accessor additional_attributes: ::Array[("FORMS")]
+      attr_accessor additional_attributes: ::Array[("FORMS" | "TIME_SERIES_DATA_POINT_FORMS")]
       attr_accessor domain_identifier: ::String
       attr_accessor filters: Types::FilterClause
       attr_accessor max_results: ::Integer
@@ -2702,6 +2775,35 @@ module Aws::DataZone
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeSeriesDataPointFormInput
+      attr_accessor content: ::String
+      attr_accessor form_name: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: []
+    end
+
+    class TimeSeriesDataPointFormOutput
+      attr_accessor content: ::String
+      attr_accessor form_name: ::String
+      attr_accessor id: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
+      SENSITIVE: []
+    end
+
+    class TimeSeriesDataPointSummaryFormOutput
+      attr_accessor content_summary: ::String
+      attr_accessor form_name: ::String
+      attr_accessor id: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor type_identifier: ::String
+      attr_accessor type_revision: ::String
       SENSITIVE: []
     end
 

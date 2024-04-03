@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2024-04-03)
+------------------
+
+* Feature - The release includes a public SDK for AWS Clean Rooms ML APIs, making them globally available to developers worldwide.
+
 1.2.0 (2024-01-26)
 ------------------
 

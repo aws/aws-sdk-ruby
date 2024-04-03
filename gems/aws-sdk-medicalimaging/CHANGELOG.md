@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2024-04-03)
+------------------
+
+* Feature - SearchImageSets API now supports following enhancements - Additional support for searching on UpdatedAt and SeriesInstanceUID - Support for searching existing filters between dates/times - Support for sorting the search result by Ascending/Descending - Additional parameters returned in the response
+
 1.6.0 (2024-01-26)
 ------------------
 

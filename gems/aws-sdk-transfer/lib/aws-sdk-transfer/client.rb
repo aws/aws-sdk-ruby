@@ -744,6 +744,9 @@ module Aws::Transfer
     # @option params [Types::SftpConnectorConfig] :sftp_config
     #   A structure that contains the parameters for an SFTP connector object.
     #
+    # @option params [String] :security_policy_name
+    #   Specifies the name of the security policy for the connector.
+    #
     # @return [Types::CreateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConnectorResponse#connector_id #connector_id} => String
@@ -775,6 +778,7 @@ module Aws::Transfer
     #       user_secret_id: "SecretId",
     #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
     #     },
+    #     security_policy_name: "ConnectorSecurityPolicyName",
     #   })
     #
     # @example Response structure
@@ -1096,8 +1100,7 @@ module Aws::Transfer
     #     Currently, only HTTP is supported.
     #
     # @option params [String] :security_policy_name
-    #   Specifies the name of the security policy that is attached to the
-    #   server.
+    #   Specifies the name of the security policy for the server.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for servers.
@@ -2069,6 +2072,7 @@ module Aws::Transfer
     #   resp.connector.sftp_config.trusted_host_keys[0] #=> String
     #   resp.connector.service_managed_egress_ip_addresses #=> Array
     #   resp.connector.service_managed_egress_ip_addresses[0] #=> String
+    #   resp.connector.security_policy_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeConnector AWS API Documentation
     #
@@ -2228,18 +2232,20 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Describes the security policy that is attached to your file transfer
-    # protocol-enabled server. The response contains a description of the
-    # security policy's properties. For more information about security
-    # policies, see [Working with security policies][1].
+    # Describes the security policy that is attached to your server or SFTP
+    # connector. The response contains a description of the security
+    # policy's properties. For more information about security policies,
+    # see [Working with security policies for servers][1] or [Working with
+    # security policies for SFTP connectors][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html
+    # [2]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html
     #
     # @option params [required, String] :security_policy_name
-    #   Specifies the name of the security policy that is attached to the
-    #   server.
+    #   Specify the text name of the security policy for which you want the
+    #   details.
     #
     # @return [Types::DescribeSecurityPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2263,6 +2269,11 @@ module Aws::Transfer
     #   resp.security_policy.ssh_macs[0] #=> String
     #   resp.security_policy.tls_ciphers #=> Array
     #   resp.security_policy.tls_ciphers[0] #=> String
+    #   resp.security_policy.ssh_host_key_algorithms #=> Array
+    #   resp.security_policy.ssh_host_key_algorithms[0] #=> String
+    #   resp.security_policy.type #=> String, one of "SERVER", "CONNECTOR"
+    #   resp.security_policy.protocols #=> Array
+    #   resp.security_policy.protocols[0] #=> String, one of "SFTP", "FTPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeSecurityPolicy AWS API Documentation
     #
@@ -3058,8 +3069,15 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Lists the security policies that are attached to your file transfer
-    # protocol-enabled servers.
+    # Lists the security policies that are attached to your servers and SFTP
+    # connectors. For more information about security policies, see [Working
+    # with security policies for servers][1] or [Working with security
+    # policies for SFTP connectors][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html
+    # [2]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html
     #
     # @option params [Integer] :max_results
     #   Specifies the number of security policies to return as a response to
@@ -4046,6 +4064,9 @@ module Aws::Transfer
     # @option params [Types::SftpConnectorConfig] :sftp_config
     #   A structure that contains the parameters for an SFTP connector object.
     #
+    # @option params [String] :security_policy_name
+    #   Specifies the name of the security policy for the connector.
+    #
     # @return [Types::UpdateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateConnectorResponse#connector_id #connector_id} => String
@@ -4072,6 +4093,7 @@ module Aws::Transfer
     #       user_secret_id: "SecretId",
     #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
     #     },
+    #     security_policy_name: "ConnectorSecurityPolicyName",
     #   })
     #
     # @example Response structure
@@ -4373,8 +4395,7 @@ module Aws::Transfer
     #    </note>
     #
     # @option params [String] :security_policy_name
-    #   Specifies the name of the security policy that is attached to the
-    #   server.
+    #   Specifies the name of the security policy for the server.
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a server instance that the
@@ -4680,7 +4701,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

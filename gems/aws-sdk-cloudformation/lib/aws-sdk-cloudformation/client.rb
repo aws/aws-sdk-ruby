@@ -417,7 +417,7 @@ module Aws::CloudFormation
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html
     # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #
     # @option params [String] :type
     #   The extension type.
@@ -531,7 +531,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #
     # @option params [required, Array<Types::TypeConfigurationIdentifier>] :type_configuration_identifiers
     #   The list of identifiers for the desired extension configurations.
@@ -2535,6 +2535,7 @@ module Aws::CloudFormation
     #   resp.changes #=> Array
     #   resp.changes[0].type #=> String, one of "Resource"
     #   resp.changes[0].hook_invocation_count #=> Integer
+    #   resp.changes[0].resource_change.policy_action #=> String, one of "Delete", "Retain", "Snapshot", "ReplaceAndDelete", "ReplaceAndRetain", "ReplaceAndSnapshot"
     #   resp.changes[0].resource_change.action #=> String, one of "Add", "Modify", "Remove", "Import", "Dynamic"
     #   resp.changes[0].resource_change.logical_resource_id #=> String
     #   resp.changes[0].resource_change.physical_resource_id #=> String
@@ -6529,7 +6530,7 @@ module Aws::CloudFormation
     # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html
     # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html
     # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    # [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #
     # @option params [String] :type
     #   The kind of extension.
@@ -6771,7 +6772,7 @@ module Aws::CloudFormation
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     # [3]: https://docs.aws.amazon.com/
     #
     # @option params [String] :type_arn
@@ -8330,7 +8331,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

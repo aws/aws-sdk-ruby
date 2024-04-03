@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2024-04-03)
+------------------
+
+* Feature - This release supports the feature of dataQuality to enrich asset with dataQualityResult in Amazon DataZone.
+
 1.4.0 (2024-01-30)
 ------------------
 

@@ -537,6 +537,10 @@ module Aws::Transfer
     #   object.
     #   @return [Types::SftpConnectorConfig]
     #
+    # @!attribute [rw] security_policy_name
+    #   Specifies the name of the security policy for the connector.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateConnectorRequest AWS API Documentation
     #
     class CreateConnectorRequest < Struct.new(
@@ -545,7 +549,8 @@ module Aws::Transfer
       :access_role,
       :logging_role,
       :tags,
-      :sftp_config)
+      :sftp_config,
+      :security_policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -873,8 +878,7 @@ module Aws::Transfer
     #   @return [Types::ProtocolDetails]
     #
     # @!attribute [rw] security_policy_name
-    #   Specifies the name of the security policy that is attached to the
-    #   server.
+    #   Specifies the name of the security policy for the server.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1736,8 +1740,8 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] security_policy_name
-    #   Specifies the name of the security policy that is attached to the
-    #   server.
+    #   Specify the text name of the security policy for which you want the
+    #   details.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeSecurityPolicyRequest AWS API Documentation
@@ -2219,6 +2223,10 @@ module Aws::Transfer
     #   addresses are assigned automatically when you create the connector.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] security_policy_name
+    #   The text name of the security policy for the specified connector.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedConnector AWS API Documentation
     #
     class DescribedConnector < Struct.new(
@@ -2230,7 +2238,8 @@ module Aws::Transfer
       :logging_role,
       :tags,
       :sftp_config,
-      :service_managed_egress_ip_addresses)
+      :service_managed_egress_ip_addresses,
+      :security_policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2402,44 +2411,72 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Describes the properties of a security policy that was specified. For
+    # Describes the properties of a security policy that you specify. For
     # more information about security policies, see [Working with security
-    # policies][1].
+    # policies for servers][1] or [Working with security policies for SFTP
+    # connectors][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html
+    # [2]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html
     #
     # @!attribute [rw] fips
     #   Specifies whether this policy enables Federal Information Processing
-    #   Standards (FIPS).
+    #   Standards (FIPS). This parameter applies to both server and
+    #   connector security policies.
     #   @return [Boolean]
     #
     # @!attribute [rw] security_policy_name
-    #   Specifies the name of the security policy that is attached to the
-    #   server.
+    #   The text name of the specified security policy.
     #   @return [String]
     #
     # @!attribute [rw] ssh_ciphers
-    #   Specifies the enabled Secure Shell (SSH) cipher encryption
-    #   algorithms in the security policy that is attached to the server.
+    #   Lists the enabled Secure Shell (SSH) cipher encryption algorithms in
+    #   the security policy that is attached to the server or connector.
+    #   This parameter applies to both server and connector security
+    #   policies.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ssh_kexs
-    #   Specifies the enabled SSH key exchange (KEX) encryption algorithms
-    #   in the security policy that is attached to the server.
+    #   Lists the enabled SSH key exchange (KEX) encryption algorithms in
+    #   the security policy that is attached to the server or connector.
+    #   This parameter applies to both server and connector security
+    #   policies.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ssh_macs
-    #   Specifies the enabled SSH message authentication code (MAC)
-    #   encryption algorithms in the security policy that is attached to the
-    #   server.
+    #   Lists the enabled SSH message authentication code (MAC) encryption
+    #   algorithms in the security policy that is attached to the server or
+    #   connector. This parameter applies to both server and connector
+    #   security policies.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tls_ciphers
-    #   Specifies the enabled Transport Layer Security (TLS) cipher
-    #   encryption algorithms in the security policy that is attached to the
-    #   server.
+    #   Lists the enabled Transport Layer Security (TLS) cipher encryption
+    #   algorithms in the security policy that is attached to the server.
+    #
+    #   <note markdown="1"> This parameter only applies to security policies for servers.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ssh_host_key_algorithms
+    #   Lists the host key algorithms for the security policy.
+    #
+    #   <note markdown="1"> This parameter only applies to security policies for connectors.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The resource type to which the security policy applies, either
+    #   server or connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocols
+    #   Lists the file transfer protocols that the security policy applies
+    #   to.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedSecurityPolicy AWS API Documentation
@@ -2450,7 +2487,10 @@ module Aws::Transfer
       :ssh_ciphers,
       :ssh_kexs,
       :ssh_macs,
-      :tls_ciphers)
+      :tls_ciphers,
+      :ssh_host_key_algorithms,
+      :type,
+      :protocols)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2615,8 +2655,7 @@ module Aws::Transfer
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_policy_name
-    #   Specifies the name of the security policy that is attached to the
-    #   server.
+    #   Specifies the name of the security policy for the server.
     #   @return [String]
     #
     # @!attribute [rw] server_id
@@ -5746,6 +5785,10 @@ module Aws::Transfer
     #   object.
     #   @return [Types::SftpConnectorConfig]
     #
+    # @!attribute [rw] security_policy_name
+    #   Specifies the name of the security policy for the connector.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateConnectorRequest AWS API Documentation
     #
     class UpdateConnectorRequest < Struct.new(
@@ -5754,7 +5797,8 @@ module Aws::Transfer
       :as_2_config,
       :access_role,
       :logging_role,
-      :sftp_config)
+      :sftp_config,
+      :security_policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6060,8 +6104,7 @@ module Aws::Transfer
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_policy_name
-    #   Specifies the name of the security policy that is attached to the
-    #   server.
+    #   Specifies the name of the security policy for the server.
     #   @return [String]
     #
     # @!attribute [rw] server_id

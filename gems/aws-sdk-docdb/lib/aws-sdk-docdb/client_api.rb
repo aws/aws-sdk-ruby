@@ -242,6 +242,8 @@ module Aws::DocDB
     SubscriptionAlreadyExistFault = Shapes::StructureShape.new(name: 'SubscriptionAlreadyExistFault')
     SubscriptionCategoryNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionCategoryNotFoundFault')
     SubscriptionNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionNotFoundFault')
+    SwitchoverGlobalClusterMessage = Shapes::StructureShape.new(name: 'SwitchoverGlobalClusterMessage')
+    SwitchoverGlobalClusterResult = Shapes::StructureShape.new(name: 'SwitchoverGlobalClusterResult')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
@@ -1216,6 +1218,13 @@ module Aws::DocDB
 
     SubscriptionNotFoundFault.struct_class = Types::SubscriptionNotFoundFault
 
+    SwitchoverGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, required: true, location_name: "GlobalClusterIdentifier"))
+    SwitchoverGlobalClusterMessage.add_member(:target_db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetDbClusterIdentifier"))
+    SwitchoverGlobalClusterMessage.struct_class = Types::SwitchoverGlobalClusterMessage
+
+    SwitchoverGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
+    SwitchoverGlobalClusterResult.struct_class = Types::SwitchoverGlobalClusterResult
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -1962,6 +1971,18 @@ module Aws::DocDB
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+      end)
+
+      api.add_operation(:switchover_global_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SwitchoverGlobalCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SwitchoverGlobalClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: SwitchoverGlobalClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
       end)
     end
 

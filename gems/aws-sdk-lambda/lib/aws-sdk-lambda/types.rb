@@ -1036,7 +1036,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
     #   @return [Types::ImageConfig]
     #
     # @!attribute [rw] code_signing_config_arn
@@ -6427,7 +6427,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
     #   @return [Types::ImageConfig]
     #
     # @!attribute [rw] ephemeral_storage

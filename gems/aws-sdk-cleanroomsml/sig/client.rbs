@@ -208,7 +208,6 @@ module Aws
         def create_time: () -> ::Time
         def description: () -> ::String
         def kms_key_arn: () -> ::String
-        def metrics: () -> ::Array[Types::AudienceModelMetric]
         def name: () -> ::String
         def status: () -> ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
         def status_details: () -> Types::StatusDetails

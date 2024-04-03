@@ -425,15 +425,15 @@ module Aws::MedicalImaging
     #   @return [String]
     #
     # @!attribute [rw] dicom_study_instance_uid
-    #   The DICOM provided identifier for studyInstanceUid.&gt;
+    #   The DICOM provided identifier for the Study Instance UID.
     #   @return [String]
     #
     # @!attribute [rw] dicom_study_id
-    #   The DICOM provided studyId.
+    #   The DICOM provided identifier for the Study ID.
     #   @return [String]
     #
     # @!attribute [rw] dicom_study_description
-    #   The description of the study.
+    #   The DICOM provided Study Description.
     #   @return [String]
     #
     # @!attribute [rw] dicom_number_of_study_related_series
@@ -447,6 +447,22 @@ module Aws::MedicalImaging
     # @!attribute [rw] dicom_accession_number
     #   The accession number for the DICOM study.
     #   @return [String]
+    #
+    # @!attribute [rw] dicom_series_instance_uid
+    #   The DICOM provided identifier for the Series Instance UID.
+    #   @return [String]
+    #
+    # @!attribute [rw] dicom_series_modality
+    #   The DICOM provided identifier for the series Modality.
+    #   @return [String]
+    #
+    # @!attribute [rw] dicom_series_body_part
+    #   The DICOM provided identifier for the series Body Part Examined.
+    #   @return [String]
+    #
+    # @!attribute [rw] dicom_series_number
+    #   The DICOM provided identifier for the Series Number.
+    #   @return [Integer]
     #
     # @!attribute [rw] dicom_study_date
     #   The study date.
@@ -469,9 +485,13 @@ module Aws::MedicalImaging
       :dicom_number_of_study_related_series,
       :dicom_number_of_study_related_instances,
       :dicom_accession_number,
+      :dicom_series_instance_uid,
+      :dicom_series_modality,
+      :dicom_series_body_part,
+      :dicom_series_number,
       :dicom_study_date,
       :dicom_study_time)
-      SENSITIVE = [:dicom_patient_id, :dicom_patient_name, :dicom_patient_birth_date, :dicom_patient_sex, :dicom_study_instance_uid, :dicom_study_id, :dicom_study_description, :dicom_accession_number, :dicom_study_date, :dicom_study_time]
+      SENSITIVE = [:dicom_patient_id, :dicom_patient_name, :dicom_patient_birth_date, :dicom_patient_sex, :dicom_study_instance_uid, :dicom_study_id, :dicom_study_description, :dicom_accession_number, :dicom_series_instance_uid, :dicom_series_modality, :dicom_series_body_part, :dicom_series_number, :dicom_study_date, :dicom_study_time]
       include Aws::Structure
     end
 
@@ -1195,8 +1215,16 @@ module Aws::MedicalImaging
     #   The DICOM study instance UID for search.
     #   @return [String]
     #
+    # @!attribute [rw] dicom_series_instance_uid
+    #   The Series Instance UID input for search.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The created at time of the image set provided for search.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp input for search.
     #   @return [Time]
     #
     # @!attribute [rw] dicom_study_date_and_time
@@ -1211,10 +1239,12 @@ module Aws::MedicalImaging
       :dicom_accession_number,
       :dicom_study_id,
       :dicom_study_instance_uid,
+      :dicom_series_instance_uid,
       :created_at,
+      :updated_at,
       :dicom_study_date_and_time,
       :unknown)
-      SENSITIVE = [:dicom_patient_id, :dicom_accession_number, :dicom_study_id, :dicom_study_instance_uid]
+      SENSITIVE = [:dicom_patient_id, :dicom_accession_number, :dicom_study_id, :dicom_study_instance_uid, :dicom_series_instance_uid]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -1222,7 +1252,9 @@ module Aws::MedicalImaging
       class DicomAccessionNumber < SearchByAttributeValue; end
       class DicomStudyId < SearchByAttributeValue; end
       class DicomStudyInstanceUid < SearchByAttributeValue; end
+      class DicomSeriesInstanceUid < SearchByAttributeValue; end
       class CreatedAt < SearchByAttributeValue; end
+      class UpdatedAt < SearchByAttributeValue; end
       class DicomStudyDateAndTime < SearchByAttributeValue; end
       class Unknown < SearchByAttributeValue; end
     end
@@ -1233,10 +1265,15 @@ module Aws::MedicalImaging
     #   The filters for the search criteria.
     #   @return [Array<Types::SearchFilter>]
     #
+    # @!attribute [rw] sort
+    #   The sort input for search criteria.
+    #   @return [Types::Sort]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/SearchCriteria AWS API Documentation
     #
     class SearchCriteria < Struct.new(
-      :filters)
+      :filters,
+      :sort)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1294,6 +1331,10 @@ module Aws::MedicalImaging
     #   The model containing the image set results.
     #   @return [Array<Types::ImageSetsMetadataSummary>]
     #
+    # @!attribute [rw] sort
+    #   The sort order for image set search results.
+    #   @return [Types::Sort]
+    #
     # @!attribute [rw] next_token
     #   The token for pagination results.
     #   @return [String]
@@ -1302,6 +1343,7 @@ module Aws::MedicalImaging
     #
     class SearchImageSetsResponse < Struct.new(
       :image_sets_metadata_summaries,
+      :sort,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1316,6 +1358,25 @@ module Aws::MedicalImaging
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Sort search results.
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for search criteria.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_field
+    #   The sort field for search criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/Sort AWS API Documentation
+    #
+    class Sort < Struct.new(
+      :sort_order,
+      :sort_field)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -164,6 +164,8 @@ module Aws::DocDB
             Aws::DocDB::Endpoints::StartDBCluster.build(context)
           when :stop_db_cluster
             Aws::DocDB::Endpoints::StopDBCluster.build(context)
+          when :switchover_global_cluster
+            Aws::DocDB::Endpoints::SwitchoverGlobalCluster.build(context)
           end
         end
       end

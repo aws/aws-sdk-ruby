@@ -329,6 +329,11 @@ module Aws::DataZone
     #   asset.
     #   @return [Array<Types::FormOutput>]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms_output
+    #   The latest time series data points forms included in the additional
+    #   attributes of an asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] read_only_forms_output
     #   The read-only forms included in the additional attributes of an
     #   inventory asset.
@@ -338,6 +343,7 @@ module Aws::DataZone
     #
     class AssetItemAdditionalAttributes < Struct.new(
       :forms_output,
+      :latest_time_series_data_point_forms_output,
       :read_only_forms_output)
       SENSITIVE = []
       include Aws::Structure
@@ -372,6 +378,11 @@ module Aws::DataZone
     #   DataZone catalog.
     #   @return [Array<Types::DetailedGlossaryTerm>]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms
+    #   The latest time series data points forms included in the additional
+    #   attributes of an asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] owning_project_id
     #   The identifier of the project where an asset published in an Amazon
     #   DataZone catalog exists.
@@ -386,6 +397,7 @@ module Aws::DataZone
       :created_at,
       :forms,
       :glossary_terms,
+      :latest_time_series_data_point_forms,
       :owning_project_id)
       SENSITIVE = []
       include Aws::Structure
@@ -495,10 +507,16 @@ module Aws::DataZone
     #   asset.
     #   @return [String]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms
+    #   The latest time series data points forms included in the additional
+    #   attributes of an asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetListingItemAdditionalAttributes AWS API Documentation
     #
     class AssetListingItemAdditionalAttributes < Struct.new(
-      :forms)
+      :forms,
+      :latest_time_series_data_point_forms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -931,6 +949,11 @@ module Aws::DataZone
     #   The unique identifier of the created asset.
     #   @return [String]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms_output
+    #   The latest data point that was imported into the time series form
+    #   for the asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] listing
     #   The details of an asset published in an Amazon DataZone catalog.
     #   @return [Types::AssetListingDetails]
@@ -977,6 +1000,7 @@ module Aws::DataZone
       :forms_output,
       :glossary_terms,
       :id,
+      :latest_time_series_data_point_forms_output,
       :listing,
       :name,
       :owning_project_id,
@@ -1092,6 +1116,11 @@ module Aws::DataZone
     #   The unique identifier of the asset revision.
     #   @return [String]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms_output
+    #   The latest data point that was imported into the time series form
+    #   for the asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] listing
     #   The details of an asset published in an Amazon DataZone catalog.
     #   @return [Types::AssetListingDetails]
@@ -1139,6 +1168,7 @@ module Aws::DataZone
       :forms_output,
       :glossary_terms,
       :id,
+      :latest_time_series_data_point_forms_output,
       :listing,
       :name,
       :owning_project_id,
@@ -3724,6 +3754,48 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the asset for which
+    #   you want to delete a time series form.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the asset for which you want to delete a time series form.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to delete a time series
+    #   form.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series form that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteTimeSeriesDataPointsInput AWS API Documentation
+    #
+    class DeleteTimeSeriesDataPointsInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :form_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteTimeSeriesDataPointsOutput AWS API Documentation
+    #
+    class DeleteTimeSeriesDataPointsOutput < Aws::EmptyStructure; end
+
     # The details of the last deployment of the environment.
     #
     # @!attribute [rw] deployment_id
@@ -4467,6 +4539,11 @@ module Aws::DataZone
     #   The ID of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms_output
+    #   The latest data point that was imported into the time series form
+    #   for the asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] listing
     #   The listing of the asset.
     #   @return [Types::AssetListingDetails]
@@ -4508,6 +4585,7 @@ module Aws::DataZone
       :forms_output,
       :glossary_terms,
       :id,
+      :latest_time_series_data_point_forms_output,
       :listing,
       :name,
       :owning_project_id,
@@ -6197,6 +6275,75 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the asset for which
+    #   you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the asset for which you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series form that houses the data point that you
+    #   want to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the data point that you want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetTimeSeriesDataPointInput AWS API Documentation
+    #
+    class GetTimeSeriesDataPointInput < Struct.new(
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :form_name,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain that houses the asset data
+    #   point that you want to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The ID of the asset for which you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] form
+    #   The time series form that houses the data point that you want to
+    #   get.
+    #   @return [Types::TimeSeriesDataPointFormOutput]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series form that houses the data point that you
+    #   want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetTimeSeriesDataPointOutput AWS API Documentation
+    #
+    class GetTimeSeriesDataPointOutput < Struct.new(
+      :domain_id,
+      :entity_id,
+      :entity_type,
+      :form,
+      :form_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
     #   the ID of the Amazon DataZone domain the data portal of which you
     #   want to get.
     #   @return [String]
@@ -6385,6 +6532,11 @@ module Aws::DataZone
 
     # The configuration details of the Amazon Web Services Glue data source.
     #
+    # @!attribute [rw] auto_import_data_quality_result
+    #   Specifies whether to automatically import data quality metrics as
+    #   part of the data source run.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] data_access_role
     #   The data access role included in the configuration details of the
     #   Amazon Web Services Glue data source.
@@ -6398,6 +6550,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlueRunConfigurationInput AWS API Documentation
     #
     class GlueRunConfigurationInput < Struct.new(
+      :auto_import_data_quality_result,
       :data_access_role,
       :relational_filter_configurations)
       SENSITIVE = []
@@ -6410,6 +6563,11 @@ module Aws::DataZone
     #   The Amazon Web Services account ID included in the configuration
     #   details of the Amazon Web Services Glue data source.
     #   @return [String]
+    #
+    # @!attribute [rw] auto_import_data_quality_result
+    #   Specifies whether to automatically import data quality metrics as
+    #   part of the data source run.
+    #   @return [Boolean]
     #
     # @!attribute [rw] data_access_role
     #   The data access role included in the configuration details of the
@@ -6430,6 +6588,7 @@ module Aws::DataZone
     #
     class GlueRunConfigurationOutput < Struct.new(
       :account_id,
+      :auto_import_data_quality_result,
       :data_access_role,
       :region,
       :relational_filter_configurations)
@@ -7829,6 +7988,87 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the assets for
+    #   which you want to list time series data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp at which the data points that you wanted to list
+    #   ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the asset for which you want to list data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to list data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of data points to return in a single call to
+    #   ListTimeSeriesDataPoints. When the number of data points to be
+    #   listed is greater than the value of MaxResults, the response
+    #   contains a NextToken value that you can use in a subsequent call to
+    #   ListTimeSeriesDataPoints to list the next set of data points.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of data points is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of data points, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListTimeSeriesDataPoints to
+    #   list the next set of data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp at which the data points that you want to list
+    #   started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListTimeSeriesDataPointsInput AWS API Documentation
+    #
+    class ListTimeSeriesDataPointsInput < Struct.new(
+      :domain_identifier,
+      :ended_at,
+      :entity_identifier,
+      :entity_type,
+      :form_name,
+      :max_results,
+      :next_token,
+      :started_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of the ListTimeSeriesDataPoints action.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of data points is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of data points, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListTimeSeriesDataPoints to
+    #   list the next set of data points.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListTimeSeriesDataPointsOutput AWS API Documentation
+    #
+    class ListTimeSeriesDataPointsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a listing (aka asset published in a Amazon DataZone
     # catalog).
     #
@@ -8131,6 +8371,73 @@ module Aws::DataZone
       :id,
       :name,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which you want to post time
+    #   series data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the asset for which you want to post time series data
+    #   points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to post data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms
+    #   The forms that contain the data points that you want to post.
+    #   @return [Array<Types::TimeSeriesDataPointFormInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PostTimeSeriesDataPointsInput AWS API Documentation
+    #
+    class PostTimeSeriesDataPointsInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :forms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain in which you want to post time
+    #   series data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The ID of the asset for which you want to post time series data
+    #   points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to post data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms
+    #   The forms that contain the data points that you have posted.
+    #   @return [Array<Types::TimeSeriesDataPointFormOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PostTimeSeriesDataPointsOutput AWS API Documentation
+    #
+    class PostTimeSeriesDataPointsOutput < Struct.new(
+      :domain_id,
+      :entity_id,
+      :entity_type,
+      :forms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10296,6 +10603,118 @@ module Aws::DataZone
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time series data points form.
+    #
+    # @!attribute [rw] content
+    #   The content of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the time series data points form.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type_identifier
+    #   The ID of the type of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_revision
+    #   The revision type of the time series data points form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/TimeSeriesDataPointFormInput AWS API Documentation
+    #
+    class TimeSeriesDataPointFormInput < Struct.new(
+      :content,
+      :form_name,
+      :timestamp,
+      :type_identifier,
+      :type_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time series data points form.
+    #
+    # @!attribute [rw] content
+    #   The content of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the time series data points form.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type_identifier
+    #   The ID of the type of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_revision
+    #   The revision type of the time series data points form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/TimeSeriesDataPointFormOutput AWS API Documentation
+    #
+    class TimeSeriesDataPointFormOutput < Struct.new(
+      :content,
+      :form_name,
+      :id,
+      :timestamp,
+      :type_identifier,
+      :type_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the time series data points form.
+    #
+    # @!attribute [rw] content_summary
+    #   The content of the summary of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series data points summary form.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the time series data points summary form.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the time series data points summary form.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type_identifier
+    #   The type ID of the time series data points summary form.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_revision
+    #   The type revision of the time series data points summary form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/TimeSeriesDataPointSummaryFormOutput AWS API Documentation
+    #
+    class TimeSeriesDataPointSummaryFormOutput < Struct.new(
+      :content_summary,
+      :form_name,
+      :id,
+      :timestamp,
+      :type_identifier,
+      :type_revision)
       SENSITIVE = []
       include Aws::Structure
     end

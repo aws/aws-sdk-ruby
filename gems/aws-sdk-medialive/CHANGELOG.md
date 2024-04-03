@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2024-04-03)
+------------------
+
+* Feature - Cmaf Ingest outputs are now supported in Media Live
+
 1.117.0 (2024-03-25)
 ------------------
 

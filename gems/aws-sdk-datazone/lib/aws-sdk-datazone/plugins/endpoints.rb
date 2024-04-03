@@ -134,6 +134,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::DeleteSubscriptionRequest.build(context)
           when :delete_subscription_target
             Aws::DataZone::Endpoints::DeleteSubscriptionTarget.build(context)
+          when :delete_time_series_data_points
+            Aws::DataZone::Endpoints::DeleteTimeSeriesDataPoints.build(context)
           when :get_asset
             Aws::DataZone::Endpoints::GetAsset.build(context)
           when :get_asset_type
@@ -176,6 +178,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetSubscriptionRequestDetails.build(context)
           when :get_subscription_target
             Aws::DataZone::Endpoints::GetSubscriptionTarget.build(context)
+          when :get_time_series_data_point
+            Aws::DataZone::Endpoints::GetTimeSeriesDataPoint.build(context)
           when :get_user_profile
             Aws::DataZone::Endpoints::GetUserProfile.build(context)
           when :list_asset_revisions
@@ -214,6 +218,10 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListSubscriptions.build(context)
           when :list_tags_for_resource
             Aws::DataZone::Endpoints::ListTagsForResource.build(context)
+          when :list_time_series_data_points
+            Aws::DataZone::Endpoints::ListTimeSeriesDataPoints.build(context)
+          when :post_time_series_data_points
+            Aws::DataZone::Endpoints::PostTimeSeriesDataPoints.build(context)
           when :put_environment_blueprint_configuration
             Aws::DataZone::Endpoints::PutEnvironmentBlueprintConfiguration.build(context)
           when :reject_predictions

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2024-04-03)
+------------------
+
+* Feature - Add ability to specify Security Policies for SFTP Connectors
+
 1.89.0 (2024-03-08)
 ------------------
 

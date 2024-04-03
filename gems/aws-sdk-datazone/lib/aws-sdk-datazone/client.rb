@@ -678,6 +678,7 @@ module Aws::DataZone
     #   * {Types::CreateAssetOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::CreateAssetOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::CreateAssetOutput#id #id} => String
+    #   * {Types::CreateAssetOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
     #   * {Types::CreateAssetOutput#listing #listing} => Types::AssetListingDetails
     #   * {Types::CreateAssetOutput#name #name} => String
     #   * {Types::CreateAssetOutput#owning_project_id #owning_project_id} => String
@@ -731,6 +732,13 @@ module Aws::DataZone
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
+    #   resp.latest_time_series_data_point_forms_output #=> Array
+    #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].form_name #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].id #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].timestamp #=> Time
+    #   resp.latest_time_series_data_point_forms_output[0].type_identifier #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].type_revision #=> String
     #   resp.listing.listing_id #=> String
     #   resp.listing.listing_status #=> String, one of "CREATING", "ACTIVE", "INACTIVE"
     #   resp.name #=> String
@@ -802,6 +810,7 @@ module Aws::DataZone
     #   * {Types::CreateAssetRevisionOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::CreateAssetRevisionOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::CreateAssetRevisionOutput#id #id} => String
+    #   * {Types::CreateAssetRevisionOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
     #   * {Types::CreateAssetRevisionOutput#listing #listing} => Types::AssetListingDetails
     #   * {Types::CreateAssetRevisionOutput#name #name} => String
     #   * {Types::CreateAssetRevisionOutput#owning_project_id #owning_project_id} => String
@@ -853,6 +862,13 @@ module Aws::DataZone
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
+    #   resp.latest_time_series_data_point_forms_output #=> Array
+    #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].form_name #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].id #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].timestamp #=> Time
+    #   resp.latest_time_series_data_point_forms_output[0].type_identifier #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].type_revision #=> String
     #   resp.listing.listing_id #=> String
     #   resp.listing.listing_status #=> String, one of "CREATING", "ACTIVE", "INACTIVE"
     #   resp.name #=> String
@@ -1041,6 +1057,7 @@ module Aws::DataZone
     #     client_token: "String",
     #     configuration: {
     #       glue_run_configuration: {
+    #         auto_import_data_quality_result: false,
     #         data_access_role: "GlueRunConfigurationInputDataAccessRoleString",
     #         relational_filter_configurations: [ # required
     #           {
@@ -1107,6 +1124,7 @@ module Aws::DataZone
     #   resp.asset_forms_output[0].type_name #=> String
     #   resp.asset_forms_output[0].type_revision #=> String
     #   resp.configuration.glue_run_configuration.account_id #=> String
+    #   resp.configuration.glue_run_configuration.auto_import_data_quality_result #=> Boolean
     #   resp.configuration.glue_run_configuration.data_access_role #=> String
     #   resp.configuration.glue_run_configuration.region #=> String
     #   resp.configuration.glue_run_configuration.relational_filter_configurations #=> Array
@@ -1754,7 +1772,7 @@ module Aws::DataZone
     #     action: "PUBLISH", # required, accepts PUBLISH, UNPUBLISH
     #     client_token: "ClientToken",
     #     domain_identifier: "DomainId", # required
-    #     entity_identifier: "EntityId", # required
+    #     entity_identifier: "EntityIdentifier", # required
     #     entity_revision: "Revision",
     #     entity_type: "ASSET", # required, accepts ASSET
     #   })
@@ -2331,6 +2349,7 @@ module Aws::DataZone
     #   resp.asset_forms_output[0].type_name #=> String
     #   resp.asset_forms_output[0].type_revision #=> String
     #   resp.configuration.glue_run_configuration.account_id #=> String
+    #   resp.configuration.glue_run_configuration.auto_import_data_quality_result #=> Boolean
     #   resp.configuration.glue_run_configuration.data_access_role #=> String
     #   resp.configuration.glue_run_configuration.region #=> String
     #   resp.configuration.glue_run_configuration.relational_filter_configurations #=> Array
@@ -2797,6 +2816,49 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Deletes the specified time series form for the specified asset.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the asset for which
+    #   you want to delete a time series form.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the asset for which you want to delete a time series form.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset for which you want to delete a time series form.
+    #
+    # @option params [required, String] :form_name
+    #   The name of the time series form that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_time_series_data_points({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #     form_name: "TimeSeriesFormName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteTimeSeriesDataPoints AWS API Documentation
+    #
+    # @overload delete_time_series_data_points(params = {})
+    # @param [Hash] params ({})
+    def delete_time_series_data_points(params = {}, options = {})
+      req = build_request(:delete_time_series_data_points, params)
+      req.send_request(options)
+    end
+
     # Gets an Amazon DataZone asset.
     #
     # @option params [required, String] :domain_identifier
@@ -2820,6 +2882,7 @@ module Aws::DataZone
     #   * {Types::GetAssetOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::GetAssetOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::GetAssetOutput#id #id} => String
+    #   * {Types::GetAssetOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
     #   * {Types::GetAssetOutput#listing #listing} => Types::AssetListingDetails
     #   * {Types::GetAssetOutput#name #name} => String
     #   * {Types::GetAssetOutput#owning_project_id #owning_project_id} => String
@@ -2853,6 +2916,13 @@ module Aws::DataZone
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
+    #   resp.latest_time_series_data_point_forms_output #=> Array
+    #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].form_name #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].id #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].timestamp #=> Time
+    #   resp.latest_time_series_data_point_forms_output[0].type_identifier #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].type_revision #=> String
     #   resp.listing.listing_id #=> String
     #   resp.listing.listing_status #=> String, one of "CREATING", "ACTIVE", "INACTIVE"
     #   resp.name #=> String
@@ -2983,6 +3053,7 @@ module Aws::DataZone
     #   resp.asset_forms_output[0].type_name #=> String
     #   resp.asset_forms_output[0].type_revision #=> String
     #   resp.configuration.glue_run_configuration.account_id #=> String
+    #   resp.configuration.glue_run_configuration.auto_import_data_quality_result #=> Boolean
     #   resp.configuration.glue_run_configuration.data_access_role #=> String
     #   resp.configuration.glue_run_configuration.region #=> String
     #   resp.configuration.glue_run_configuration.relational_filter_configurations #=> Array
@@ -3700,6 +3771,13 @@ module Aws::DataZone
     #   resp.item.asset_listing.glossary_terms #=> Array
     #   resp.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms #=> Array
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].content_summary #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].form_name #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].id #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].timestamp #=> Time
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].type_identifier #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].type_revision #=> String
     #   resp.item.asset_listing.owning_project_id #=> String
     #   resp.listing_revision #=> String
     #   resp.name #=> String
@@ -4081,6 +4159,65 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_subscription_target(params = {}, options = {})
       req = build_request(:get_subscription_target, params)
+      req.send_request(options)
+    end
+
+    # Gets the existing data point for the asset.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the asset for which
+    #   you want to get the data point.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the asset for which you want to get the data point.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset for which you want to get the data point.
+    #
+    # @option params [required, String] :form_name
+    #   The name of the time series form that houses the data point that you
+    #   want to get.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the data point that you want to get.
+    #
+    # @return [Types::GetTimeSeriesDataPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTimeSeriesDataPointOutput#domain_id #domain_id} => String
+    #   * {Types::GetTimeSeriesDataPointOutput#entity_id #entity_id} => String
+    #   * {Types::GetTimeSeriesDataPointOutput#entity_type #entity_type} => String
+    #   * {Types::GetTimeSeriesDataPointOutput#form #form} => Types::TimeSeriesDataPointFormOutput
+    #   * {Types::GetTimeSeriesDataPointOutput#form_name #form_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_time_series_data_point({
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #     form_name: "TimeSeriesFormName", # required
+    #     identifier: "TimeSeriesDataPointIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_id #=> String
+    #   resp.entity_id #=> String
+    #   resp.entity_type #=> String, one of "ASSET", "LISTING"
+    #   resp.form.content #=> String
+    #   resp.form.form_name #=> String
+    #   resp.form.id #=> String
+    #   resp.form.timestamp #=> Time
+    #   resp.form.type_identifier #=> String
+    #   resp.form.type_revision #=> String
+    #   resp.form_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetTimeSeriesDataPoint AWS API Documentation
+    #
+    # @overload get_time_series_data_point(params = {})
+    # @param [Hash] params ({})
+    def get_time_series_data_point(params = {}, options = {})
+      req = build_request(:get_time_series_data_point, params)
       req.send_request(options)
     end
 
@@ -5487,6 +5624,153 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Lists time series data points.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the assets for which
+    #   you want to list time series data points.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :ended_at
+    #   The timestamp at which the data points that you wanted to list ended.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the asset for which you want to list data points.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset for which you want to list data points.
+    #
+    # @option params [required, String] :form_name
+    #   The name of the time series data points form.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data points to return in a single call to
+    #   ListTimeSeriesDataPoints. When the number of data points to be listed
+    #   is greater than the value of MaxResults, the response contains a
+    #   NextToken value that you can use in a subsequent call to
+    #   ListTimeSeriesDataPoints to list the next set of data points.
+    #
+    # @option params [String] :next_token
+    #   When the number of data points is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of data points, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListTimeSeriesDataPoints to
+    #   list the next set of data points.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :started_at
+    #   The timestamp at which the data points that you want to list started.
+    #
+    # @return [Types::ListTimeSeriesDataPointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTimeSeriesDataPointsOutput#items #items} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
+    #   * {Types::ListTimeSeriesDataPointsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_time_series_data_points({
+    #     domain_identifier: "DomainId", # required
+    #     ended_at: Time.now,
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #     form_name: "TimeSeriesFormName", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     started_at: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].content_summary #=> String
+    #   resp.items[0].form_name #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].timestamp #=> Time
+    #   resp.items[0].type_identifier #=> String
+    #   resp.items[0].type_revision #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListTimeSeriesDataPoints AWS API Documentation
+    #
+    # @overload list_time_series_data_points(params = {})
+    # @param [Hash] params ({})
+    def list_time_series_data_points(params = {}, options = {})
+      req = build_request(:list_time_series_data_points, params)
+      req.send_request(options)
+    end
+
+    # Posts time series data points to Amazon DataZone for the specified
+    # asset.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which you want to post time
+    #   series data points.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the asset for which you want to post time series data
+    #   points.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset for which you want to post data points.
+    #
+    # @option params [required, Array<Types::TimeSeriesDataPointFormInput>] :forms
+    #   The forms that contain the data points that you want to post.
+    #
+    # @return [Types::PostTimeSeriesDataPointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PostTimeSeriesDataPointsOutput#domain_id #domain_id} => String
+    #   * {Types::PostTimeSeriesDataPointsOutput#entity_id #entity_id} => String
+    #   * {Types::PostTimeSeriesDataPointsOutput#entity_type #entity_type} => String
+    #   * {Types::PostTimeSeriesDataPointsOutput#forms #forms} => Array&lt;Types::TimeSeriesDataPointFormOutput&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.post_time_series_data_points({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #     forms: [ # required
+    #       {
+    #         content: "TimeSeriesDataPointFormInputContentString",
+    #         form_name: "TimeSeriesFormName", # required
+    #         timestamp: Time.now, # required
+    #         type_identifier: "FormTypeIdentifier", # required
+    #         type_revision: "Revision",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_id #=> String
+    #   resp.entity_id #=> String
+    #   resp.entity_type #=> String, one of "ASSET", "LISTING"
+    #   resp.forms #=> Array
+    #   resp.forms[0].content #=> String
+    #   resp.forms[0].form_name #=> String
+    #   resp.forms[0].id #=> String
+    #   resp.forms[0].timestamp #=> Time
+    #   resp.forms[0].type_identifier #=> String
+    #   resp.forms[0].type_revision #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PostTimeSeriesDataPoints AWS API Documentation
+    #
+    # @overload post_time_series_data_points(params = {})
+    # @param [Hash] params ({})
+    def post_time_series_data_points(params = {}, options = {})
+      req = build_request(:post_time_series_data_points, params)
+      req.send_request(options)
+    end
+
     # Writes the configuration for the specified environment blueprint in
     # Amazon DataZone.
     #
@@ -5821,7 +6105,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.search({
-    #     additional_attributes: ["FORMS"], # accepts FORMS
+    #     additional_attributes: ["FORMS"], # accepts FORMS, TIME_SERIES_DATA_POINT_FORMS
     #     domain_identifier: "DomainId", # required
     #     filters: {
     #       and: [
@@ -5863,6 +6147,13 @@ module Aws::DataZone
     #   resp.items[0].asset_item.additional_attributes.forms_output[0].form_name #=> String
     #   resp.items[0].asset_item.additional_attributes.forms_output[0].type_name #=> String
     #   resp.items[0].asset_item.additional_attributes.forms_output[0].type_revision #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output #=> Array
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].content_summary #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].form_name #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].id #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].timestamp #=> Time
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].type_identifier #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].type_revision #=> String
     #   resp.items[0].asset_item.additional_attributes.read_only_forms_output #=> Array
     #   resp.items[0].asset_item.additional_attributes.read_only_forms_output[0].content #=> String
     #   resp.items[0].asset_item.additional_attributes.read_only_forms_output[0].form_name #=> String
@@ -6042,7 +6333,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_listings({
-    #     additional_attributes: ["FORMS"], # accepts FORMS
+    #     additional_attributes: ["FORMS"], # accepts FORMS, TIME_SERIES_DATA_POINT_FORMS
     #     domain_identifier: "DomainId", # required
     #     filters: {
     #       and: [
@@ -6078,6 +6369,13 @@ module Aws::DataZone
     #
     #   resp.items #=> Array
     #   resp.items[0].asset_listing.additional_attributes.forms #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms #=> Array
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].content_summary #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].form_name #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].id #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].timestamp #=> Time
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].type_identifier #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].type_revision #=> String
     #   resp.items[0].asset_listing.created_at #=> Time
     #   resp.items[0].asset_listing.description #=> String
     #   resp.items[0].asset_listing.entity_id #=> String
@@ -6561,6 +6859,7 @@ module Aws::DataZone
     #     ],
     #     configuration: {
     #       glue_run_configuration: {
+    #         auto_import_data_quality_result: false,
     #         data_access_role: "GlueRunConfigurationInputDataAccessRoleString",
     #         relational_filter_configurations: [ # required
     #           {
@@ -6625,6 +6924,7 @@ module Aws::DataZone
     #   resp.asset_forms_output[0].type_name #=> String
     #   resp.asset_forms_output[0].type_revision #=> String
     #   resp.configuration.glue_run_configuration.account_id #=> String
+    #   resp.configuration.glue_run_configuration.auto_import_data_quality_result #=> Boolean
     #   resp.configuration.glue_run_configuration.data_access_role #=> String
     #   resp.configuration.glue_run_configuration.region #=> String
     #   resp.configuration.glue_run_configuration.relational_filter_configurations #=> Array
@@ -7529,7 +7829,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
