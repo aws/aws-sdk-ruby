@@ -57,7 +57,7 @@ module ProtocolTestsHelper
       name = "Service_#{id}"
       unless Aws.const_defined?(name)
         operation = test_case['given']
-        operation['http'] ||= { 'method' => 'POST', 'requestUri' => '/' }
+        # operation['http'] ||= { 'method' => 'POST', 'requestUri' => '/' }
         opts = {
           name: name,
           module_name: "Aws::#{name}",
