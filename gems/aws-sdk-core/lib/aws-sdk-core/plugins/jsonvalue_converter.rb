@@ -43,17 +43,15 @@ module Aws
           end
         end
 
-        def serialize_jsonvalue(value, context)
-          return value if value.is_a?(String)
-
-          unless value.respond_to?(:to_json)
+        def serialize_jsonvalue(v, context)
+          unless v.respond_to?(:to_json)
             raise ArgumentError, "The value of #{context} is not JSON serializable."
           end
-
-          value.to_json
+          v.to_json
         end
 
       end
+
       handler(Handler, step: :initialize)
     end
 
