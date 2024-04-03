@@ -1310,10 +1310,7 @@
                 "serialized": {
                     "method": "PUT",
                     "uri": "/HttpPayloadWithUnion",
-                    "body": "",
-                    "headers": {
-                        "Content-Type": "application/xml"
-                    }
+                    "body": ""
                 }
             }
         ]
