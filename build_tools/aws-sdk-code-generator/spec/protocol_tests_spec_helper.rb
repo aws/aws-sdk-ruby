@@ -113,8 +113,12 @@ module ProtocolTestsHelper
           params[underscore(key).to_sym] = format_data(member_ref, value)
         end
       when Seahorse::Model::Shapes::ListShape
+        return nil if src.nil?
+
         src.map { |value| format_data(ref.shape.member, value) }
       when Seahorse::Model::Shapes::MapShape
+        return nil if src.nil?
+
         src.each.with_object({}) do |(key, value), params|
           # handle case-sensitive headers extracted from protocol-tests
           key = key.downcase if ref.location == 'headers'
