@@ -80,8 +80,7 @@ module ProtocolTestsHelper
         regional_endpoint: true,
         endpoint: suite['clientEndpoint'] || 'http://example.com',
         region: 'us-east-1',
-        credentials: Aws::Credentials.new('akid', 'secret'),
-        retry_limit: 0
+        credentials: Aws::Credentials.new('akid', 'secret')
       )
     end
 

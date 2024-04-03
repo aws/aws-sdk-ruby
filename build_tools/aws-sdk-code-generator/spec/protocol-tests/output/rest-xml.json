@@ -3921,7 +3921,7 @@
                     "headers": {
                         "Content-Type": "application/xml"
                     },
-                    "body": "<XmlNamespacesResponse xmlns=\"http://foo.com\">\n    <nested xmlns=\"http://foo.com\">\n        <foo xmlns:baz=\"http://baz.com\">Foo</foo>\n        <values xmlns=\"http://qux.com\">\n            <member xmlns=\"http://bux.com\">Bar</member>\n            <member xmlns=\"http://bux.com\">Baz</member>\n        </values>\n    </nested>\n</XmlNamespacesResponse>\n"
+                    "body": "<XmlNamespacesResponse xmlns=\"http://foo.com\">\n    <nested>\n        <foo xmlns:baz=\"http://baz.com\">Foo</foo>\n        <values xmlns=\"http://qux.com\">\n            <member xmlns=\"http://bux.com\">Bar</member>\n            <member xmlns=\"http://bux.com\">Baz</member>\n        </values>\n    </nested>\n</XmlNamespacesResponse>\n"
                 }
             }
         ]
