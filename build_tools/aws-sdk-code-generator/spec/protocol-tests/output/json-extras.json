@@ -80,10 +80,14 @@
       {
         "id": "JsonScalarEventHeaders",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Scalar eventheader members",
         "result": {
@@ -150,10 +154,14 @@
       {
         "id": "JsonStringEventPayloadMember",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "String eventpayload member",
         "result": {
@@ -214,10 +222,14 @@
       {
         "id": "JsonBlobEventPayloadMember",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Blob eventpayload members",
         "result": {
@@ -289,10 +301,14 @@
       {
         "id": "JsonStructEventPayloadMember",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Structure eventpayload members",
         "result": {
@@ -362,10 +378,14 @@
       {
         "id": "JsonEventsWithExplicitEventHeaderAndImplicitEventPayloads",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Event with explicit eventheader and implicit eventpayloads",
         "result": {

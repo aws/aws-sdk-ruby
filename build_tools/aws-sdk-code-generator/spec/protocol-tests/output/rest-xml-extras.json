@@ -22,10 +22,14 @@
       {
         "id": "RestXmlStreamingPayload",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Streaming payload",
         "result": {
@@ -120,10 +124,14 @@
       {
         "id": "RestXmlScalarEventHeaderMembers",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "result": {
           "Payload": {
@@ -190,10 +198,14 @@
       {
         "id": "RestXmlStringEventPayloadMember",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "String eventpayload member",
         "result": {
@@ -254,10 +266,14 @@
       {
         "id": "RestXmlBlobEventPayloadMember",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Blob eventpayload members",
         "result": {
@@ -329,10 +345,14 @@
       {
         "id": "RestXmlStructEventPayloadMembers",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Structure eventpayload members",
         "result": {
@@ -400,10 +420,14 @@
       {
         "id": "RestXmlEventBothEventHeaderAndEventPayload",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Event with both eventheader and eventpayload",
         "result": {

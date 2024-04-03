@@ -22,10 +22,14 @@
       {
         "id": "RestJsonStreamingPayload",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Streaming payload",
         "result": {

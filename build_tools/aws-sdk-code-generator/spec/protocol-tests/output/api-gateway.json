@@ -48,10 +48,14 @@
       {
         "id": "ApiGatewayUnmarshallsScalarPayloadMembers",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Scalar members in payload are unmarshalled correctly",
         "result": {
@@ -95,10 +99,14 @@
       {
         "id": "ApiGatewayUnmarshallsBooleanMember",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Boolean member with value in payload is unmarshalled correctly",
         "result": {
@@ -152,10 +160,14 @@
       {
         "id": "ApiGatewayUnmarshallsNestedStructPayload",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Nested structure in payload is unmarshalled correctly",
         "result": {
@@ -210,10 +222,14 @@
       {
         "id": "ApiGatewayUnmarshallListofStringsPayload",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "List of strings in payload is unmarshalled correctly",
         "result": {
@@ -278,10 +294,14 @@
       {
         "id": "ApiGatewayUnmarshallListofStructsPayload",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "List of structs in payload is unmarshalled correctly",
         "result": {
@@ -342,10 +362,14 @@
       {
         "id": "ApiGatewayUnmarshallRecursiveStructWithNoRecursionMember",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Recursive structure with no recursion used is unmarshalled correctly",
         "result": {
@@ -419,10 +443,14 @@
       {
         "id": "ApiGatewayUnmarshallRecrusiveStructwithRecursionMember",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Recursive structure with multiple levels of recursion is unmarshalled correctly",
         "result": {
@@ -455,7 +483,11 @@
       {
         "id": "ApiGatewayNoOutput",
         "given": {
-          "name": "OperationName"
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          }
         },
         "description": "Operation with no output defined ignores any content in body",
         "result": {
@@ -499,10 +531,14 @@
       {
         "id": "ApiGatewayUnmodeledDataIsIgnored",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Unmodeled data is ignored",
         "result": {
@@ -540,10 +576,14 @@
       {
         "id": "ApiGatewayNoHeaders",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "No headers present, does not set modeled header member",
         "result": {
@@ -585,10 +625,14 @@
       {
         "id": "ApiGatewayMultipleHeaders",
         "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
           "output": {
             "shape": "OutputShape"
-          },
-          "name": "OperationName"
+          }
         },
         "description": "Multiple modeled headers in response, sets appropriate header members",
         "result": {
