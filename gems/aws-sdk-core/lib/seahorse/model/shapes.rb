@@ -64,9 +64,6 @@ module Seahorse
         # @return [Boolean]
         attr_accessor :document
 
-        # @return [Hash]
-        attr_accessor :metadata
-
         # @return [String, nil]
         def location
           @location || (shape && shape[:location])
