@@ -78,11 +78,12 @@ module Aws
           when StringShape
             req.headers['Content-Type'] ||= 'text/plain'
           when UnionShape
-            req.headers['Content-Type'] ||= if xml_builder?
-                                              'application/xml'
-                                            elsif json_builder?
-                                              'application/json'
-                                            end
+            req.headers['Content-Type'] ||=
+              if xml_builder?
+                'application/xml'
+              elsif json_builder?
+                'application/json'
+              end
           end
         end
 
