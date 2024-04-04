@@ -228,6 +228,7 @@ module ProtocolTestsHelper
               body = Aws::Json.load(body)
               expected_body =
                 case expected_body
+                  # to handle empty body, sourced from protocol-tests
                   when ''
                     {}
                   else
