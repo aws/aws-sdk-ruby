@@ -1221,6 +1221,17 @@ module Aws::DocDB
     class SubscriptionNotFoundFault < Aws::EmptyStructure
     end
 
+    class SwitchoverGlobalClusterMessage
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor target_db_cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class SwitchoverGlobalClusterResult
+      attr_accessor global_cluster: Types::GlobalCluster
+      SENSITIVE: []
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String

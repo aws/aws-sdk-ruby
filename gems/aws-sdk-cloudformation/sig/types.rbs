@@ -1195,6 +1195,7 @@ module Aws::CloudFormation
     end
 
     class ResourceChange
+      attr_accessor policy_action: ("Delete" | "Retain" | "Snapshot" | "ReplaceAndDelete" | "ReplaceAndRetain" | "ReplaceAndSnapshot")
       attr_accessor action: ("Add" | "Modify" | "Remove" | "Import" | "Dynamic")
       attr_accessor logical_resource_id: ::String
       attr_accessor physical_resource_id: ::String

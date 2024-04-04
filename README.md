@@ -357,6 +357,7 @@ RubyGems.org page under "LINKS" section.
 | AWS CloudTrail Data Service                           | Aws::CloudTrailData                      | aws-sdk-cloudtraildata                      | 2021-08-11  |
 | AWS CodeBuild                                         | Aws::CodeBuild                           | aws-sdk-codebuild                           | 2016-10-06  |
 | AWS CodeCommit                                        | Aws::CodeCommit                          | aws-sdk-codecommit                          | 2015-04-13  |
+| AWS CodeConnections                                   | Aws::CodeConnections                     | aws-sdk-codeconnections                     | 2023-12-01  |
 | AWS CodeDeploy                                        | Aws::CodeDeploy                          | aws-sdk-codedeploy                          | 2014-10-06  |
 | AWS CodePipeline                                      | Aws::CodePipeline                        | aws-sdk-codepipeline                        | 2015-07-09  |
 | AWS CodeStar                                          | Aws::CodeStar                            | aws-sdk-codestar                            | 2017-04-19  |
@@ -486,6 +487,7 @@ RubyGems.org page under "LINKS" section.
 | AWS X-Ray                                             | Aws::XRay                                | aws-sdk-xray                                | 2016-04-12  |
 | AWS re:Post Private                                   | Aws::Repostspace                         | aws-sdk-repostspace                         | 2022-05-13  |
 | AWSBillingConductor                                   | Aws::BillingConductor                    | aws-sdk-billingconductor                    | 2021-07-30  |
+| AWSDeadlineCloud                                      | Aws::Deadline                            | aws-sdk-deadline                            | 2023-10-12  |
 | AWSKendraFrontendService                              | Aws::Kendra                              | aws-sdk-kendra                              | 2019-02-03  |
 | AWSMainframeModernization                             | Aws::MainframeModernization              | aws-sdk-mainframemodernization              | 2021-04-28  |
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering                 | aws-sdk-marketplacemetering                 | 2016-01-14  |

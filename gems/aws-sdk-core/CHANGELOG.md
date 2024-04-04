@@ -19,6 +19,10 @@ Unreleased Changes
 * Issue - Fix deserializing an empty self-closed blob to produce an empty string.
 * Issue - Support parsing of different formats of error data in Rest-XML services.
 
+3.191.6 (2024-04-02)
+------------------
+* Issue - Performance optimization: ensure presence and order of instance variables in `PluginOptions` (#3002).
+
 3.191.5 (2024-03-26)
 ------------------
 

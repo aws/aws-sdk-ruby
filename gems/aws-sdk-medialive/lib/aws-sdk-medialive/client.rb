@@ -1059,6 +1059,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.audio_descriptions[0].remix_settings.channels_in #=> Integer
     #   resp.channel.encoder_settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.channel.encoder_settings.audio_descriptions[0].stream_name #=> String
+    #   resp.channel.encoder_settings.audio_descriptions[0].audio_dash_roles #=> Array
+    #   resp.channel.encoder_settings.audio_descriptions[0].audio_dash_roles[0] #=> String, one of "ALTERNATE", "COMMENTARY", "DESCRIPTION", "DUB", "EMERGENCY", "ENHANCED-AUDIO-INTELLIGIBILITY", "KARAOKE", "MAIN", "SUPPLEMENTARY"
+    #   resp.channel.encoder_settings.audio_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.password_param #=> String
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
@@ -1134,6 +1137,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.channel.encoder_settings.caption_descriptions[0].caption_dash_roles #=> Array
+    #   resp.channel.encoder_settings.caption_descriptions[0].caption_dash_roles[0] #=> String, one of "ALTERNATE", "CAPTION", "COMMENTARY", "DESCRIPTION", "DUB", "EASYREADER", "EMERGENCY", "FORCED-SUBTITLE", "KARAOKE", "MAIN", "METADATA", "SUBTITLE", "SUPPLEMENTARY"
+    #   resp.channel.encoder_settings.caption_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.channel.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.initial_audio_gain #=> Integer
@@ -1263,6 +1269,12 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.send_delay_ms #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -1422,6 +1434,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.column_depth #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.include_fec #=> String, one of "COLUMN", "COLUMN_AND_ROW"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.row_length #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.cmaf_ingest_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.channel.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -2169,6 +2182,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_in #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].stream_name #=> String
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles #=> Array
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles[0] #=> String, one of "ALTERNATE", "COMMENTARY", "DESCRIPTION", "DUB", "EMERGENCY", "ENHANCED-AUDIO-INTELLIGIBILITY", "KARAOKE", "MAIN", "SUPPLEMENTARY"
+    #   resp.encoder_settings.audio_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.password_param #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
@@ -2244,6 +2260,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles #=> Array
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles[0] #=> String, one of "ALTERNATE", "CAPTION", "COMMENTARY", "DESCRIPTION", "DUB", "EASYREADER", "EMERGENCY", "FORCED-SUBTITLE", "KARAOKE", "MAIN", "METADATA", "SUBTITLE", "SUPPLEMENTARY"
+    #   resp.encoder_settings.caption_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
@@ -2373,6 +2392,12 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.send_delay_ms #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -2532,6 +2557,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.column_depth #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.include_fec #=> String, one of "COLUMN", "COLUMN_AND_ROW"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.row_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.cmaf_ingest_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -3171,6 +3197,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_in #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].stream_name #=> String
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles #=> Array
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles[0] #=> String, one of "ALTERNATE", "COMMENTARY", "DESCRIPTION", "DUB", "EMERGENCY", "ENHANCED-AUDIO-INTELLIGIBILITY", "KARAOKE", "MAIN", "SUPPLEMENTARY"
+    #   resp.encoder_settings.audio_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.password_param #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
@@ -3246,6 +3275,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles #=> Array
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles[0] #=> String, one of "ALTERNATE", "CAPTION", "COMMENTARY", "DESCRIPTION", "DUB", "EASYREADER", "EMERGENCY", "FORCED-SUBTITLE", "KARAOKE", "MAIN", "METADATA", "SUBTITLE", "SUPPLEMENTARY"
+    #   resp.encoder_settings.caption_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
@@ -3375,6 +3407,12 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.send_delay_ms #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -3534,6 +3572,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.column_depth #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.include_fec #=> String, one of "COLUMN", "COLUMN_AND_ROW"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.row_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.cmaf_ingest_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -5310,6 +5349,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_in #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].stream_name #=> String
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles #=> Array
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles[0] #=> String, one of "ALTERNATE", "COMMENTARY", "DESCRIPTION", "DUB", "EMERGENCY", "ENHANCED-AUDIO-INTELLIGIBILITY", "KARAOKE", "MAIN", "SUPPLEMENTARY"
+    #   resp.encoder_settings.audio_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.password_param #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
@@ -5385,6 +5427,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles #=> Array
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles[0] #=> String, one of "ALTERNATE", "CAPTION", "COMMENTARY", "DESCRIPTION", "DUB", "EASYREADER", "EMERGENCY", "FORCED-SUBTITLE", "KARAOKE", "MAIN", "METADATA", "SUBTITLE", "SUPPLEMENTARY"
+    #   resp.encoder_settings.caption_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
@@ -5514,6 +5559,12 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.send_delay_ms #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -5673,6 +5724,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.column_depth #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.include_fec #=> String, one of "COLUMN", "COLUMN_AND_ROW"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.row_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.cmaf_ingest_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -6124,6 +6176,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_in #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].stream_name #=> String
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles #=> Array
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles[0] #=> String, one of "ALTERNATE", "COMMENTARY", "DESCRIPTION", "DUB", "EMERGENCY", "ENHANCED-AUDIO-INTELLIGIBILITY", "KARAOKE", "MAIN", "SUPPLEMENTARY"
+    #   resp.encoder_settings.audio_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.password_param #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
@@ -6199,6 +6254,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles #=> Array
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles[0] #=> String, one of "ALTERNATE", "CAPTION", "COMMENTARY", "DESCRIPTION", "DUB", "EASYREADER", "EMERGENCY", "FORCED-SUBTITLE", "KARAOKE", "MAIN", "METADATA", "SUBTITLE", "SUPPLEMENTARY"
+    #   resp.encoder_settings.caption_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
@@ -6328,6 +6386,12 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.send_delay_ms #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -6487,6 +6551,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.column_depth #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.include_fec #=> String, one of "COLUMN", "COLUMN_AND_ROW"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.row_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.cmaf_ingest_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -6966,6 +7031,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.audio_descriptions[0].remix_settings.channels_in #=> Integer
     #   resp.channel.encoder_settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.channel.encoder_settings.audio_descriptions[0].stream_name #=> String
+    #   resp.channel.encoder_settings.audio_descriptions[0].audio_dash_roles #=> Array
+    #   resp.channel.encoder_settings.audio_descriptions[0].audio_dash_roles[0] #=> String, one of "ALTERNATE", "COMMENTARY", "DESCRIPTION", "DUB", "EMERGENCY", "ENHANCED-AUDIO-INTELLIGIBILITY", "KARAOKE", "MAIN", "SUPPLEMENTARY"
+    #   resp.channel.encoder_settings.audio_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.password_param #=> String
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
@@ -7041,6 +7109,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.channel.encoder_settings.caption_descriptions[0].caption_dash_roles #=> Array
+    #   resp.channel.encoder_settings.caption_descriptions[0].caption_dash_roles[0] #=> String, one of "ALTERNATE", "CAPTION", "COMMENTARY", "DESCRIPTION", "DUB", "EASYREADER", "EMERGENCY", "FORCED-SUBTITLE", "KARAOKE", "MAIN", "METADATA", "SUBTITLE", "SUPPLEMENTARY"
+    #   resp.channel.encoder_settings.caption_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.channel.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.initial_audio_gain #=> Integer
@@ -7170,6 +7241,12 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.send_delay_ms #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -7329,6 +7406,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.column_depth #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.include_fec #=> String, one of "COLUMN", "COLUMN_AND_ROW"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.row_length #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.cmaf_ingest_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.channel.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -7688,6 +7766,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.audio_descriptions[0].remix_settings.channels_in #=> Integer
     #   resp.channel.encoder_settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.channel.encoder_settings.audio_descriptions[0].stream_name #=> String
+    #   resp.channel.encoder_settings.audio_descriptions[0].audio_dash_roles #=> Array
+    #   resp.channel.encoder_settings.audio_descriptions[0].audio_dash_roles[0] #=> String, one of "ALTERNATE", "COMMENTARY", "DESCRIPTION", "DUB", "EMERGENCY", "ENHANCED-AUDIO-INTELLIGIBILITY", "KARAOKE", "MAIN", "SUPPLEMENTARY"
+    #   resp.channel.encoder_settings.audio_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.password_param #=> String
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.channel.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
@@ -7763,6 +7844,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.channel.encoder_settings.caption_descriptions[0].caption_dash_roles #=> Array
+    #   resp.channel.encoder_settings.caption_descriptions[0].caption_dash_roles[0] #=> String, one of "ALTERNATE", "CAPTION", "COMMENTARY", "DESCRIPTION", "DUB", "EASYREADER", "EMERGENCY", "FORCED-SUBTITLE", "KARAOKE", "MAIN", "METADATA", "SUBTITLE", "SUPPLEMENTARY"
+    #   resp.channel.encoder_settings.caption_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.channel.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.initial_audio_gain #=> Integer
@@ -7892,6 +7976,12 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.send_delay_ms #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -8051,6 +8141,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.column_depth #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.include_fec #=> String, one of "COLUMN", "COLUMN_AND_ROW"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.row_length #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.cmaf_ingest_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.channel.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -8878,6 +8969,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_in #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.encoder_settings.audio_descriptions[0].stream_name #=> String
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles #=> Array
+    #   resp.encoder_settings.audio_descriptions[0].audio_dash_roles[0] #=> String, one of "ALTERNATE", "COMMENTARY", "DESCRIPTION", "DUB", "EMERGENCY", "ENHANCED-AUDIO-INTELLIGIBILITY", "KARAOKE", "MAIN", "SUPPLEMENTARY"
+    #   resp.encoder_settings.audio_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.password_param #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.uri #=> String
     #   resp.encoder_settings.avail_blanking.avail_blanking_image.username #=> String
@@ -8953,6 +9047,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles #=> Array
+    #   resp.encoder_settings.caption_descriptions[0].caption_dash_roles[0] #=> String, one of "ALTERNATE", "CAPTION", "COMMENTARY", "DESCRIPTION", "DUB", "EASYREADER", "EMERGENCY", "FORCED-SUBTITLE", "KARAOKE", "MAIN", "METADATA", "SUBTITLE", "SUPPLEMENTARY"
+    #   resp.encoder_settings.caption_descriptions[0].dvb_dash_accessibility #=> String, one of "DVBDASH_1_VISUALLY_IMPAIRED", "DVBDASH_2_HARD_OF_HEARING", "DVBDASH_3_SUPPLEMENTAL_COMMENTARY", "DVBDASH_4_DIRECTORS_COMMENTARY", "DVBDASH_5_EDUCATIONAL_NOTES", "DVBDASH_6_MAIN_PROGRAM", "DVBDASH_7_CLEAN_FEED"
     #   resp.encoder_settings.feature_activations.input_prepare_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.feature_activations.output_static_image_overlay_schedule_actions #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.initial_audio_gain #=> Integer
@@ -9082,6 +9179,12 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.encoder_settings.output_groups[0].output_group_settings.udp_group_settings.timed_metadata_id_3_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_type #=> String, one of "NONE", "SCTE_35_WITHOUT_SEGMENTATION"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.segment_length_units #=> String, one of "MILLISECONDS", "SECONDS"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.send_delay_ms #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -9241,6 +9344,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.column_depth #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.include_fec #=> String, one of "COLUMN", "COLUMN_AND_ROW"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.fec_output_settings.row_length #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.cmaf_ingest_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -9478,7 +9582,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

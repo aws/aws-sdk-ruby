@@ -26,7 +26,8 @@ module Aws::RolesAnywhere
     # @!attribute [rw] duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
-    #   documentation][1] page for more details.
+    #   documentation][1] page for more details. In requests, if this value
+    #   is not provided, the default value will be 3600.
     #
     #
     #
@@ -521,7 +522,8 @@ module Aws::RolesAnywhere
     # @!attribute [rw] duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
-    #   documentation][1] page for more details.
+    #   documentation][1] page for more details. In requests, if this value
+    #   is not provided, the default value will be 3600.
     #
     #
     #
@@ -1046,7 +1048,8 @@ module Aws::RolesAnywhere
     # @!attribute [rw] duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
-    #   documentation][1] page for more details.
+    #   documentation][1] page for more details. In requests, if this value
+    #   is not provided, the default value will be 3600.
     #
     #
     #

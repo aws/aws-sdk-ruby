@@ -339,6 +339,8 @@ module Aws
         def satellite_arn: () -> ::String
         def start_time: () -> ::Time
         def tags: () -> ::Hash[::String, ::String]
+        def visibility_end_time: () -> ::Time
+        def visibility_start_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#describe_contact-instance_method
       def describe_contact: (

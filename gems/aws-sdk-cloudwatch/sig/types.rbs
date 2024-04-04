@@ -798,6 +798,7 @@ module Aws::CloudWatch
     end
 
     class SingleMetricAnomalyDetector
+      attr_accessor account_id: ::String
       attr_accessor namespace: ::String
       attr_accessor metric_name: ::String
       attr_accessor dimensions: ::Array[Types::Dimension]

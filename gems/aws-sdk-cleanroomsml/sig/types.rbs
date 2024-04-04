@@ -50,13 +50,6 @@ module Aws::CleanRoomsML
       SENSITIVE: []
     end
 
-    class AudienceModelMetric
-      attr_accessor for_top_k_item_predictions: ::Integer
-      attr_accessor type: ("NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN" | "MEAN_RECIPROCAL_RANK" | "PRECISION" | "RECALL")
-      attr_accessor value: ::Float
-      SENSITIVE: []
-    end
-
     class AudienceModelSummary
       attr_accessor audience_model_arn: ::String
       attr_accessor create_time: ::Time
@@ -69,6 +62,7 @@ module Aws::CleanRoomsML
     end
 
     class AudienceQualityMetrics
+      attr_accessor recall_metric: ::Float
       attr_accessor relevance_metrics: ::Array[Types::RelevanceMetric]
       SENSITIVE: []
     end
@@ -237,7 +231,6 @@ module Aws::CleanRoomsML
       attr_accessor create_time: ::Time
       attr_accessor description: ::String
       attr_accessor kms_key_arn: ::String
-      attr_accessor metrics: ::Array[Types::AudienceModelMetric]
       attr_accessor name: ::String
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor status_details: Types::StatusDetails

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2024-03-29)
+------------------
+
+* Feature - Add the new API Start-Import-Task for Amazon Neptune Analytics.
+
 1.5.0 (2024-03-28)
 ------------------
 

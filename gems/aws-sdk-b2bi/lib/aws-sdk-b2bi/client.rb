@@ -521,7 +521,7 @@ module Aws::B2bi
     #       edi: {
     #         type: { # required
     #           x12_details: {
-    #             transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_214, X12_215, X12_310, X12_315, X12_322, X12_404, X12_410, X12_820, X12_824, X12_830, X12_846, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_940, X12_990, X12_997
+    #             transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999
     #             version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010
     #           },
     #         },
@@ -557,7 +557,7 @@ module Aws::B2bi
     #   resp.capability_arn #=> String
     #   resp.name #=> String
     #   resp.type #=> String, one of "edi"
-    #   resp.configuration.edi.type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_214", "X12_215", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_820", "X12_824", "X12_830", "X12_846", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_940", "X12_990", "X12_997"
+    #   resp.configuration.edi.type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999"
     #   resp.configuration.edi.type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010"
     #   resp.configuration.edi.input_location.bucket_name #=> String
     #   resp.configuration.edi.input_location.key #=> String
@@ -905,7 +905,7 @@ module Aws::B2bi
     #     mapping_template: "MappingTemplate", # required
     #     edi_type: { # required
     #       x12_details: {
-    #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_214, X12_215, X12_310, X12_315, X12_322, X12_404, X12_410, X12_820, X12_824, X12_830, X12_846, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_940, X12_990, X12_997
+    #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999
     #         version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010
     #       },
     #     },
@@ -927,7 +927,7 @@ module Aws::B2bi
     #   resp.file_format #=> String, one of "XML", "JSON"
     #   resp.mapping_template #=> String
     #   resp.status #=> String, one of "active", "inactive"
-    #   resp.edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_214", "X12_215", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_820", "X12_824", "X12_830", "X12_846", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_940", "X12_990", "X12_997"
+    #   resp.edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999"
     #   resp.edi_type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010"
     #   resp.sample_document #=> String
     #   resp.created_at #=> Time
@@ -1136,7 +1136,7 @@ module Aws::B2bi
     #   resp.capability_arn #=> String
     #   resp.name #=> String
     #   resp.type #=> String, one of "edi"
-    #   resp.configuration.edi.type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_214", "X12_215", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_820", "X12_824", "X12_830", "X12_846", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_940", "X12_990", "X12_997"
+    #   resp.configuration.edi.type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999"
     #   resp.configuration.edi.type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010"
     #   resp.configuration.edi.input_location.bucket_name #=> String
     #   resp.configuration.edi.input_location.key #=> String
@@ -1359,7 +1359,7 @@ module Aws::B2bi
     #   resp.file_format #=> String, one of "XML", "JSON"
     #   resp.mapping_template #=> String
     #   resp.status #=> String, one of "active", "inactive"
-    #   resp.edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_214", "X12_215", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_820", "X12_824", "X12_830", "X12_846", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_940", "X12_990", "X12_997"
+    #   resp.edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999"
     #   resp.edi_type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010"
     #   resp.sample_document #=> String
     #   resp.created_at #=> Time
@@ -1773,7 +1773,7 @@ module Aws::B2bi
     #   resp.transformers[0].file_format #=> String, one of "XML", "JSON"
     #   resp.transformers[0].mapping_template #=> String
     #   resp.transformers[0].status #=> String, one of "active", "inactive"
-    #   resp.transformers[0].edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_214", "X12_215", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_820", "X12_824", "X12_830", "X12_846", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_940", "X12_990", "X12_997"
+    #   resp.transformers[0].edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999"
     #   resp.transformers[0].edi_type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010"
     #   resp.transformers[0].sample_document #=> String
     #   resp.transformers[0].created_at #=> Time
@@ -2030,7 +2030,7 @@ module Aws::B2bi
     #     file_format: "XML", # required, accepts XML, JSON
     #     edi_type: { # required
     #       x12_details: {
-    #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_214, X12_215, X12_310, X12_315, X12_322, X12_404, X12_410, X12_820, X12_824, X12_830, X12_846, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_940, X12_990, X12_997
+    #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999
     #         version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010
     #       },
     #     },
@@ -2197,7 +2197,7 @@ module Aws::B2bi
     #       edi: {
     #         type: { # required
     #           x12_details: {
-    #             transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_214, X12_215, X12_310, X12_315, X12_322, X12_404, X12_410, X12_820, X12_824, X12_830, X12_846, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_940, X12_990, X12_997
+    #             transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999
     #             version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010
     #           },
     #         },
@@ -2226,7 +2226,7 @@ module Aws::B2bi
     #   resp.capability_arn #=> String
     #   resp.name #=> String
     #   resp.type #=> String, one of "edi"
-    #   resp.configuration.edi.type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_214", "X12_215", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_820", "X12_824", "X12_830", "X12_846", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_940", "X12_990", "X12_997"
+    #   resp.configuration.edi.type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999"
     #   resp.configuration.edi.type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010"
     #   resp.configuration.edi.input_location.bucket_name #=> String
     #   resp.configuration.edi.input_location.key #=> String
@@ -2514,7 +2514,7 @@ module Aws::B2bi
     #     status: "active", # accepts active, inactive
     #     edi_type: {
     #       x12_details: {
-    #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_214, X12_215, X12_310, X12_315, X12_322, X12_404, X12_410, X12_820, X12_824, X12_830, X12_846, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_940, X12_990, X12_997
+    #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999
     #         version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010
     #       },
     #     },
@@ -2529,7 +2529,7 @@ module Aws::B2bi
     #   resp.file_format #=> String, one of "XML", "JSON"
     #   resp.mapping_template #=> String
     #   resp.status #=> String, one of "active", "inactive"
-    #   resp.edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_214", "X12_215", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_820", "X12_824", "X12_830", "X12_846", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_940", "X12_990", "X12_997"
+    #   resp.edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999"
     #   resp.edi_type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010"
     #   resp.sample_document #=> String
     #   resp.created_at #=> Time
@@ -2557,7 +2557,7 @@ module Aws::B2bi
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-b2bi'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

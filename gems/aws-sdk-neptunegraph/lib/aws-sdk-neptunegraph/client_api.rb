@@ -125,6 +125,8 @@ module Aws::NeptuneGraph
     SnapshotIdentifier = Shapes::StringShape.new(name: 'SnapshotIdentifier')
     SnapshotName = Shapes::StringShape.new(name: 'SnapshotName')
     SnapshotStatus = Shapes::StringShape.new(name: 'SnapshotStatus')
+    StartImportTaskInput = Shapes::StructureShape.new(name: 'StartImportTaskInput')
+    StartImportTaskOutput = Shapes::StructureShape.new(name: 'StartImportTaskOutput')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
@@ -616,6 +618,23 @@ module Aws::NeptuneGraph
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    StartImportTaskInput.add_member(:import_options, Shapes::ShapeRef.new(shape: ImportOptions, location_name: "importOptions"))
+    StartImportTaskInput.add_member(:fail_on_error, Shapes::ShapeRef.new(shape: Boolean, location_name: "failOnError"))
+    StartImportTaskInput.add_member(:source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "source"))
+    StartImportTaskInput.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "format"))
+    StartImportTaskInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "uri", location_name: "graphIdentifier"))
+    StartImportTaskInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    StartImportTaskInput.struct_class = Types::StartImportTaskInput
+
+    StartImportTaskOutput.add_member(:graph_id, Shapes::ShapeRef.new(shape: GraphId, location_name: "graphId"))
+    StartImportTaskOutput.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, required: true, location_name: "taskId"))
+    StartImportTaskOutput.add_member(:source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "source"))
+    StartImportTaskOutput.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "format"))
+    StartImportTaskOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    StartImportTaskOutput.add_member(:status, Shapes::ShapeRef.new(shape: ImportTaskStatus, required: true, location_name: "status"))
+    StartImportTaskOutput.add_member(:import_options, Shapes::ShapeRef.new(shape: ImportOptions, location_name: "importOptions"))
+    StartImportTaskOutput.struct_class = Types::StartImportTaskOutput
+
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -1029,6 +1048,19 @@ module Aws::NeptuneGraph
         o.input = Shapes::ShapeRef.new(shape: RestoreGraphFromSnapshotInput)
         o.output = Shapes::ShapeRef.new(shape: RestoreGraphFromSnapshotOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:start_import_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartImportTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/graphs/{graphIdentifier}/importtasks"
+        o.input = Shapes::ShapeRef.new(shape: StartImportTaskInput)
+        o.output = Shapes::ShapeRef.new(shape: StartImportTaskOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

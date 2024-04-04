@@ -273,6 +273,7 @@ module Aws::SageMaker
     ClusterSummaries = Shapes::ListShape.new(name: 'ClusterSummaries')
     ClusterSummary = Shapes::StructureShape.new(name: 'ClusterSummary')
     ClusterThreadsPerCore = Shapes::IntegerShape.new(name: 'ClusterThreadsPerCore')
+    CodeEditorAppImageConfig = Shapes::StructureShape.new(name: 'CodeEditorAppImageConfig')
     CodeEditorAppSettings = Shapes::StructureShape.new(name: 'CodeEditorAppSettings')
     CodeRepositories = Shapes::ListShape.new(name: 'CodeRepositories')
     CodeRepository = Shapes::StructureShape.new(name: 'CodeRepository')
@@ -2378,6 +2379,7 @@ module Aws::SageMaker
     AppImageConfigDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     AppImageConfigDetails.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
     AppImageConfigDetails.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
+    AppImageConfigDetails.add_member(:code_editor_app_image_config, Shapes::ShapeRef.new(shape: CodeEditorAppImageConfig, location_name: "CodeEditorAppImageConfig"))
     AppImageConfigDetails.struct_class = Types::AppImageConfigDetails
 
     AppImageConfigList.member = Shapes::ShapeRef.new(shape: AppImageConfigDetails)
@@ -2870,7 +2872,12 @@ module Aws::SageMaker
     ClusterSummary.add_member(:cluster_status, Shapes::ShapeRef.new(shape: ClusterStatus, required: true, location_name: "ClusterStatus"))
     ClusterSummary.struct_class = Types::ClusterSummary
 
+    CodeEditorAppImageConfig.add_member(:file_system_config, Shapes::ShapeRef.new(shape: FileSystemConfig, location_name: "FileSystemConfig"))
+    CodeEditorAppImageConfig.add_member(:container_config, Shapes::ShapeRef.new(shape: ContainerConfig, location_name: "ContainerConfig"))
+    CodeEditorAppImageConfig.struct_class = Types::CodeEditorAppImageConfig
+
     CodeEditorAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    CodeEditorAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
     CodeEditorAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
     CodeEditorAppSettings.struct_class = Types::CodeEditorAppSettings
 
@@ -3021,6 +3028,7 @@ module Aws::SageMaker
     CreateAppImageConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAppImageConfigRequest.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
     CreateAppImageConfigRequest.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
+    CreateAppImageConfigRequest.add_member(:code_editor_app_image_config, Shapes::ShapeRef.new(shape: CodeEditorAppImageConfig, location_name: "CodeEditorAppImageConfig"))
     CreateAppImageConfigRequest.struct_class = Types::CreateAppImageConfigRequest
 
     CreateAppImageConfigResponse.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
@@ -4119,6 +4127,7 @@ module Aws::SageMaker
     DescribeAppImageConfigResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeAppImageConfigResponse.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
     DescribeAppImageConfigResponse.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
+    DescribeAppImageConfigResponse.add_member(:code_editor_app_image_config, Shapes::ShapeRef.new(shape: CodeEditorAppImageConfig, location_name: "CodeEditorAppImageConfig"))
     DescribeAppImageConfigResponse.struct_class = Types::DescribeAppImageConfigResponse
 
     DescribeAppRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
@@ -9466,6 +9475,7 @@ module Aws::SageMaker
     UpdateAppImageConfigRequest.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
     UpdateAppImageConfigRequest.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
     UpdateAppImageConfigRequest.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
+    UpdateAppImageConfigRequest.add_member(:code_editor_app_image_config, Shapes::ShapeRef.new(shape: CodeEditorAppImageConfig, location_name: "CodeEditorAppImageConfig"))
     UpdateAppImageConfigRequest.struct_class = Types::UpdateAppImageConfigRequest
 
     UpdateAppImageConfigResponse.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))

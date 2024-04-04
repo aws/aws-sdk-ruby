@@ -125,6 +125,10 @@ module Aws::MediaLive
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
     ClaimDeviceRequest = Shapes::StructureShape.new(name: 'ClaimDeviceRequest')
     ClaimDeviceResponse = Shapes::StructureShape.new(name: 'ClaimDeviceResponse')
+    CmafIngestGroupSettings = Shapes::StructureShape.new(name: 'CmafIngestGroupSettings')
+    CmafIngestOutputSettings = Shapes::StructureShape.new(name: 'CmafIngestOutputSettings')
+    CmafIngestSegmentLengthUnits = Shapes::StringShape.new(name: 'CmafIngestSegmentLengthUnits')
+    CmafNielsenId3Behavior = Shapes::StringShape.new(name: 'CmafNielsenId3Behavior')
     ColorCorrection = Shapes::StructureShape.new(name: 'ColorCorrection')
     ColorCorrectionSettings = Shapes::StructureShape.new(name: 'ColorCorrectionSettings')
     ColorSpace = Shapes::StringShape.new(name: 'ColorSpace')
@@ -155,6 +159,8 @@ module Aws::MediaLive
     CreatePartnerInputResponse = Shapes::StructureShape.new(name: 'CreatePartnerInputResponse')
     CreatePartnerInputResultModel = Shapes::StructureShape.new(name: 'CreatePartnerInputResultModel')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
+    DashRoleAudio = Shapes::StringShape.new(name: 'DashRoleAudio')
+    DashRoleCaption = Shapes::StringShape.new(name: 'DashRoleCaption')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
     DeleteInputRequest = Shapes::StructureShape.new(name: 'DeleteInputRequest')
@@ -200,6 +206,7 @@ module Aws::MediaLive
     DeviceUpdateStatus = Shapes::StringShape.new(name: 'DeviceUpdateStatus')
     DolbyEProgramSelection = Shapes::StringShape.new(name: 'DolbyEProgramSelection')
     DolbyVision81Settings = Shapes::StructureShape.new(name: 'DolbyVision81Settings')
+    DvbDashAccessibility = Shapes::StringShape.new(name: 'DvbDashAccessibility')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
     DvbSdtOutputSdt = Shapes::StringShape.new(name: 'DvbSdtOutputSdt')
     DvbSdtSettings = Shapes::StructureShape.new(name: 'DvbSdtSettings')
@@ -636,6 +643,7 @@ module Aws::MediaLive
     Scte35SpliceInsertWebDeliveryAllowedBehavior = Shapes::StringShape.new(name: 'Scte35SpliceInsertWebDeliveryAllowedBehavior')
     Scte35TimeSignalApos = Shapes::StructureShape.new(name: 'Scte35TimeSignalApos')
     Scte35TimeSignalScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35TimeSignalScheduleActionSettings')
+    Scte35Type = Shapes::StringShape.new(name: 'Scte35Type')
     Scte35WebDeliveryAllowedFlag = Shapes::StringShape.new(name: 'Scte35WebDeliveryAllowedFlag')
     SmoothGroupAudioOnlyTimecodeControl = Shapes::StringShape.new(name: 'SmoothGroupAudioOnlyTimecodeControl')
     SmoothGroupCertificateMode = Shapes::StringShape.new(name: 'SmoothGroupCertificateMode')
@@ -832,6 +840,8 @@ module Aws::MediaLive
     __listOfChannelPipelineIdToRestart = Shapes::ListShape.new(name: '__listOfChannelPipelineIdToRestart')
     __listOfChannelSummary = Shapes::ListShape.new(name: '__listOfChannelSummary')
     __listOfColorCorrection = Shapes::ListShape.new(name: '__listOfColorCorrection')
+    __listOfDashRoleAudio = Shapes::ListShape.new(name: '__listOfDashRoleAudio')
+    __listOfDashRoleCaption = Shapes::ListShape.new(name: '__listOfDashRoleCaption')
     __listOfFailoverCondition = Shapes::ListShape.new(name: '__listOfFailoverCondition')
     __listOfHlsAdMarkers = Shapes::ListShape.new(name: '__listOfHlsAdMarkers')
     __listOfInput = Shapes::ListShape.new(name: '__listOfInput')
@@ -983,6 +993,8 @@ module Aws::MediaLive
     AudioDescription.add_member(:name, Shapes::ShapeRef.new(shape: __stringMax255, required: true, location_name: "name"))
     AudioDescription.add_member(:remix_settings, Shapes::ShapeRef.new(shape: RemixSettings, location_name: "remixSettings"))
     AudioDescription.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
+    AudioDescription.add_member(:audio_dash_roles, Shapes::ShapeRef.new(shape: __listOfDashRoleAudio, location_name: "audioDashRoles"))
+    AudioDescription.add_member(:dvb_dash_accessibility, Shapes::ShapeRef.new(shape: DvbDashAccessibility, location_name: "dvbDashAccessibility"))
     AudioDescription.struct_class = Types::AudioDescription
 
     AudioDolbyEDecode.add_member(:program_selection, Shapes::ShapeRef.new(shape: DolbyEProgramSelection, required: true, location_name: "programSelection"))
@@ -1183,6 +1195,8 @@ module Aws::MediaLive
     CaptionDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: __string, location_name: "languageCode"))
     CaptionDescription.add_member(:language_description, Shapes::ShapeRef.new(shape: __string, location_name: "languageDescription"))
     CaptionDescription.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    CaptionDescription.add_member(:caption_dash_roles, Shapes::ShapeRef.new(shape: __listOfDashRoleCaption, location_name: "captionDashRoles"))
+    CaptionDescription.add_member(:dvb_dash_accessibility, Shapes::ShapeRef.new(shape: DvbDashAccessibility, location_name: "dvbDashAccessibility"))
     CaptionDescription.struct_class = Types::CaptionDescription
 
     CaptionDestinationSettings.add_member(:arib_destination_settings, Shapes::ShapeRef.new(shape: AribDestinationSettings, location_name: "aribDestinationSettings"))
@@ -1277,6 +1291,17 @@ module Aws::MediaLive
     ClaimDeviceRequest.struct_class = Types::ClaimDeviceRequest
 
     ClaimDeviceResponse.struct_class = Types::ClaimDeviceResponse
+
+    CmafIngestGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    CmafIngestGroupSettings.add_member(:nielsen_id_3_behavior, Shapes::ShapeRef.new(shape: CmafNielsenId3Behavior, location_name: "nielsenId3Behavior"))
+    CmafIngestGroupSettings.add_member(:scte_35_type, Shapes::ShapeRef.new(shape: Scte35Type, location_name: "scte35Type"))
+    CmafIngestGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "segmentLength"))
+    CmafIngestGroupSettings.add_member(:segment_length_units, Shapes::ShapeRef.new(shape: CmafIngestSegmentLengthUnits, location_name: "segmentLengthUnits"))
+    CmafIngestGroupSettings.add_member(:send_delay_ms, Shapes::ShapeRef.new(shape: __integerMin0Max2000, location_name: "sendDelayMs"))
+    CmafIngestGroupSettings.struct_class = Types::CmafIngestGroupSettings
+
+    CmafIngestOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
+    CmafIngestOutputSettings.struct_class = Types::CmafIngestOutputSettings
 
     ColorCorrection.add_member(:input_color_space, Shapes::ShapeRef.new(shape: ColorSpace, required: true, location_name: "inputColorSpace"))
     ColorCorrection.add_member(:output_color_space, Shapes::ShapeRef.new(shape: ColorSpace, required: true, location_name: "outputColorSpace"))
@@ -2814,6 +2839,7 @@ module Aws::MediaLive
     OutputGroupSettings.add_member(:multiplex_group_settings, Shapes::ShapeRef.new(shape: MultiplexGroupSettings, location_name: "multiplexGroupSettings"))
     OutputGroupSettings.add_member(:rtmp_group_settings, Shapes::ShapeRef.new(shape: RtmpGroupSettings, location_name: "rtmpGroupSettings"))
     OutputGroupSettings.add_member(:udp_group_settings, Shapes::ShapeRef.new(shape: UdpGroupSettings, location_name: "udpGroupSettings"))
+    OutputGroupSettings.add_member(:cmaf_ingest_group_settings, Shapes::ShapeRef.new(shape: CmafIngestGroupSettings, location_name: "cmafIngestGroupSettings"))
     OutputGroupSettings.struct_class = Types::OutputGroupSettings
 
     OutputLocationRef.add_member(:destination_ref_id, Shapes::ShapeRef.new(shape: __string, location_name: "destinationRefId"))
@@ -2831,6 +2857,7 @@ module Aws::MediaLive
     OutputSettings.add_member(:multiplex_output_settings, Shapes::ShapeRef.new(shape: MultiplexOutputSettings, location_name: "multiplexOutputSettings"))
     OutputSettings.add_member(:rtmp_output_settings, Shapes::ShapeRef.new(shape: RtmpOutputSettings, location_name: "rtmpOutputSettings"))
     OutputSettings.add_member(:udp_output_settings, Shapes::ShapeRef.new(shape: UdpOutputSettings, location_name: "udpOutputSettings"))
+    OutputSettings.add_member(:cmaf_ingest_output_settings, Shapes::ShapeRef.new(shape: CmafIngestOutputSettings, location_name: "cmafIngestOutputSettings"))
     OutputSettings.struct_class = Types::OutputSettings
 
     PassThroughSettings.struct_class = Types::PassThroughSettings
@@ -3554,6 +3581,10 @@ module Aws::MediaLive
     __listOfChannelSummary.member = Shapes::ShapeRef.new(shape: ChannelSummary)
 
     __listOfColorCorrection.member = Shapes::ShapeRef.new(shape: ColorCorrection)
+
+    __listOfDashRoleAudio.member = Shapes::ShapeRef.new(shape: DashRoleAudio)
+
+    __listOfDashRoleCaption.member = Shapes::ShapeRef.new(shape: DashRoleCaption)
 
     __listOfFailoverCondition.member = Shapes::ShapeRef.new(shape: FailoverCondition)
 

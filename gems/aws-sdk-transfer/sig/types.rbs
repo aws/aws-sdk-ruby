@@ -81,6 +81,7 @@ module Aws::Transfer
       attr_accessor logging_role: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor sftp_config: Types::SftpConnectorConfig
+      attr_accessor security_policy_name: ::String
       SENSITIVE: []
     end
 
@@ -411,6 +412,7 @@ module Aws::Transfer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor sftp_config: Types::SftpConnectorConfig
       attr_accessor service_managed_egress_ip_addresses: ::Array[::String]
+      attr_accessor security_policy_name: ::String
       SENSITIVE: []
     end
 
@@ -454,6 +456,9 @@ module Aws::Transfer
       attr_accessor ssh_kexs: ::Array[::String]
       attr_accessor ssh_macs: ::Array[::String]
       attr_accessor tls_ciphers: ::Array[::String]
+      attr_accessor ssh_host_key_algorithms: ::Array[::String]
+      attr_accessor type: ("SERVER" | "CONNECTOR")
+      attr_accessor protocols: ::Array[("SFTP" | "FTPS")]
       SENSITIVE: []
     end
 
@@ -1110,6 +1115,7 @@ module Aws::Transfer
       attr_accessor access_role: ::String
       attr_accessor logging_role: ::String
       attr_accessor sftp_config: Types::SftpConnectorConfig
+      attr_accessor security_policy_name: ::String
       SENSITIVE: []
     end
 

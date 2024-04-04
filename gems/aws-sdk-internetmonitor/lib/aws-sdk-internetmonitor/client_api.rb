@@ -14,9 +14,11 @@ module Aws::InternetMonitor
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AvailabilityMeasurement = Shapes::StructureShape.new(name: 'AvailabilityMeasurement')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateMonitorInput = Shapes::StructureShape.new(name: 'CreateMonitorInput')
     CreateMonitorOutput = Shapes::StructureShape.new(name: 'CreateMonitorOutput')
@@ -151,6 +153,7 @@ module Aws::InternetMonitor
 
     GetHealthEventInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
     GetHealthEventInput.add_member(:event_id, Shapes::ShapeRef.new(shape: HealthEventName, required: true, location: "uri", location_name: "EventId"))
+    GetHealthEventInput.add_member(:linked_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "LinkedAccountId"))
     GetHealthEventInput.struct_class = Types::GetHealthEventInput
 
     GetHealthEventOutput.add_member(:event_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventArn"))
@@ -167,6 +170,7 @@ module Aws::InternetMonitor
     GetHealthEventOutput.struct_class = Types::GetHealthEventOutput
 
     GetMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
+    GetMonitorInput.add_member(:linked_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "LinkedAccountId"))
     GetMonitorInput.struct_class = Types::GetMonitorInput
 
     GetMonitorOutput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MonitorName"))
@@ -266,6 +270,7 @@ module Aws::InternetMonitor
     ListHealthEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
     ListHealthEventsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListHealthEventsInput.add_member(:event_status, Shapes::ShapeRef.new(shape: HealthEventStatus, location: "querystring", location_name: "EventStatus"))
+    ListHealthEventsInput.add_member(:linked_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "LinkedAccountId"))
     ListHealthEventsInput.struct_class = Types::ListHealthEventsInput
 
     ListHealthEventsOutput.add_member(:health_events, Shapes::ShapeRef.new(shape: HealthEventList, required: true, location_name: "HealthEvents"))
@@ -275,6 +280,7 @@ module Aws::InternetMonitor
     ListMonitorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
     ListMonitorsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListMonitorsInput.add_member(:monitor_status, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "MonitorStatus"))
+    ListMonitorsInput.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "IncludeLinkedAccounts"))
     ListMonitorsInput.struct_class = Types::ListMonitorsInput
 
     ListMonitorsOutput.add_member(:monitors, Shapes::ShapeRef.new(shape: MonitorList, required: true, location_name: "Monitors"))
@@ -350,6 +356,7 @@ module Aws::InternetMonitor
     StartQueryInput.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "EndTime"))
     StartQueryInput.add_member(:query_type, Shapes::ShapeRef.new(shape: QueryType, required: true, location_name: "QueryType"))
     StartQueryInput.add_member(:filter_parameters, Shapes::ShapeRef.new(shape: FilterParameters, location_name: "FilterParameters"))
+    StartQueryInput.add_member(:linked_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "LinkedAccountId"))
     StartQueryInput.struct_class = Types::StartQueryInput
 
     StartQueryOutput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueryId"))

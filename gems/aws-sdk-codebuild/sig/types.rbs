@@ -490,7 +490,7 @@ module Aws::CodeBuild
     end
 
     class FleetStatus
-      attr_accessor status_code: ("CREATING" | "UPDATING" | "ROTATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_ROLLBACK_FAILED" | "ACTIVE")
+      attr_accessor status_code: ("CREATING" | "UPDATING" | "ROTATING" | "PENDING_DELETION" | "DELETING" | "CREATE_FAILED" | "UPDATE_ROLLBACK_FAILED" | "ACTIVE")
       attr_accessor context: ("CREATE_FAILED" | "UPDATE_FAILED")
       attr_accessor message: ::String
       SENSITIVE: []

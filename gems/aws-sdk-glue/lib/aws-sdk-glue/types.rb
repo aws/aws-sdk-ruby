@@ -12161,9 +12161,22 @@ module Aws::Glue
     #   Lake Formation.
     #   @return [String]
     #
+    # @!attribute [rw] is_multi_dialect_view
+    #   Specifies whether the view supports the SQL dialects of one or more
+    #   different query engines and can therefore be read by those engines.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] resource_arn
     #   The resource ARN of the parent resource extracted from the request.
     #   @return [String]
+    #
+    # @!attribute [rw] is_protected
+    #   A flag that instructs the engine not to push user-provided
+    #   operations into the logical plan of the view during query planning.
+    #   However, if set this flag does not guarantee that the engine will
+    #   comply. Refer to the engine's documentation to understand the
+    #   guarantees provided, if any.
+    #   @return [Boolean]
     #
     # @!attribute [rw] permissions
     #   The Lake Formation data permissions of the caller on the table. Used
@@ -12178,7 +12191,9 @@ module Aws::Glue
       :is_registered_with_lake_formation,
       :cell_filters,
       :query_authorization_id,
+      :is_multi_dialect_view,
       :resource_arn,
+      :is_protected,
       :permissions)
       SENSITIVE = []
       include Aws::Structure
@@ -20850,6 +20865,16 @@ module Aws::Glue
     #   Glue Data Catalog.
     #   @return [Types::FederatedTable]
     #
+    # @!attribute [rw] view_definition
+    #   A structure that contains all the information that defines the view,
+    #   including the dialect or dialects for the view, and the query.
+    #   @return [Types::ViewDefinition]
+    #
+    # @!attribute [rw] is_multi_dialect_view
+    #   Specifies whether the view supports the SQL dialects of one or more
+    #   different query engines and can therefore be read by those engines.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -20873,7 +20898,9 @@ module Aws::Glue
       :target_table,
       :catalog_id,
       :version_id,
-      :federated_table)
+      :federated_table,
+      :view_definition,
+      :is_multi_dialect_view)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23078,6 +23105,87 @@ module Aws::Glue
     #
     class VersionMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing details for representations.
+    #
+    # @!attribute [rw] is_protected
+    #   You can set this flag as true to instruct the engine not to push
+    #   user-provided operations into the logical plan of the view during
+    #   query planning. However, setting this flag does not guarantee that
+    #   the engine will comply. Refer to the engine's documentation to
+    #   understand the guarantees provided, if any.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] definer
+    #   The definer of a view in SQL.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_objects
+    #   A list of table Amazon Resource Names (ARNs).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] representations
+    #   A list of representations.
+    #   @return [Array<Types::ViewRepresentation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinition AWS API Documentation
+    #
+    class ViewDefinition < Struct.new(
+      :is_protected,
+      :definer,
+      :sub_objects,
+      :representations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the dialect of the view, and the query that
+    # defines the view.
+    #
+    # @!attribute [rw] dialect
+    #   The dialect of the query engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialect_version
+    #   The version of the dialect of the query engine. For example, 3.0.0.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_original_text
+    #   The `SELECT` query provided by the customer during `CREATE VIEW
+    #   DDL`. This SQL is not used during a query on a view
+    #   (`ViewExpandedText` is used instead). `ViewOriginalText` is used for
+    #   cases like `SHOW CREATE VIEW` where users want to see the original
+    #   DDL command that created the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_expanded_text
+    #   The expanded SQL for the view. This SQL is used by engines while
+    #   processing a query on a view. Engines may perform operations during
+    #   view creation to transform `ViewOriginalText` to `ViewExpandedText`.
+    #   For example:
+    #
+    #   * Fully qualify identifiers: `SELECT * from table1 → SELECT * from
+    #     db1.table1`
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] is_stale
+    #   Dialects marked as stale are no longer valid and must be updated
+    #   before they can be queried in their respective query engines.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewRepresentation AWS API Documentation
+    #
+    class ViewRepresentation < Struct.new(
+      :dialect,
+      :dialect_version,
+      :view_original_text,
+      :view_expanded_text,
+      :is_stale)
       SENSITIVE = []
       include Aws::Structure
     end

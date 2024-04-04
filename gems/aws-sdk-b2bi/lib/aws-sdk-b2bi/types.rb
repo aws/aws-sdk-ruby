@@ -2040,7 +2040,7 @@ module Aws::B2bi
     #
     # @!attribute [rw] version
     #   Returns the version to use for the specified X12 transaction set.
-    #   Supported versions are `4010`, `4030`, and `5010`.
+    #   </p>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12Details AWS API Documentation

@@ -1336,6 +1336,11 @@ module Aws::SageMaker
     #   environment variables and entry point.
     #   @return [Types::JupyterLabAppImageConfig]
     #
+    # @!attribute [rw] code_editor_app_image_config
+    #   The configuration for the file system and the runtime, such as the
+    #   environment variables and entry point.
+    #   @return [Types::CodeEditorAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AppImageConfigDetails AWS API Documentation
     #
     class AppImageConfigDetails < Struct.new(
@@ -1344,7 +1349,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :kernel_gateway_image_config,
-      :jupyter_lab_app_image_config)
+      :jupyter_lab_app_image_config,
+      :code_editor_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4185,6 +4191,28 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration for the file system and kernels in a SageMaker image
+    # running as a Code Editor app. The `FileSystemConfig` object is not
+    # supported.
+    #
+    # @!attribute [rw] file_system_config
+    #   The Amazon Elastic File System storage configuration for a SageMaker
+    #   image.
+    #   @return [Types::FileSystemConfig]
+    #
+    # @!attribute [rw] container_config
+    #   The configuration used to run the application image container.
+    #   @return [Types::ContainerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeEditorAppImageConfig AWS API Documentation
+    #
+    class CodeEditorAppImageConfig < Struct.new(
+      :file_system_config,
+      :container_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Code Editor application settings.
     #
     # For more information about Code Editor, see [Get started with Code
@@ -4199,6 +4227,11 @@ module Aws::SageMaker
     #   version, and the instance type that the version runs on.
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] custom_images
+    #   A list of custom SageMaker images that are configured to run as a
+    #   Code Editor app.
+    #   @return [Array<Types::CustomImage>]
+    #
     # @!attribute [rw] lifecycle_config_arns
     #   The Amazon Resource Name (ARN) of the Code Editor application
     #   lifecycle configuration.
@@ -4208,6 +4241,7 @@ module Aws::SageMaker
     #
     class CodeEditorAppSettings < Struct.new(
       :default_resource_spec,
+      :custom_images,
       :lifecycle_config_arns)
       SENSITIVE = []
       include Aws::Structure
@@ -4988,13 +5022,21 @@ module Aws::SageMaker
     #   visible in JupyterLab.
     #   @return [Types::JupyterLabAppImageConfig]
     #
+    # @!attribute [rw] code_editor_app_image_config
+    #   The `CodeEditorAppImageConfig`. You can only specify one image
+    #   kernel in the AppImageConfig API. This kernel is shown to users
+    #   before the image starts. After the image runs, all kernels are
+    #   visible in Code Editor.
+    #   @return [Types::CodeEditorAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppImageConfigRequest AWS API Documentation
     #
     class CreateAppImageConfigRequest < Struct.new(
       :app_image_config_name,
       :tags,
       :kernel_gateway_image_config,
-      :jupyter_lab_app_image_config)
+      :jupyter_lab_app_image_config,
+      :code_editor_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11486,6 +11528,10 @@ module Aws::SageMaker
     #   The configuration of the JupyterLab app.
     #   @return [Types::JupyterLabAppImageConfig]
     #
+    # @!attribute [rw] code_editor_app_image_config
+    #   The configuration of the Code Editor app.
+    #   @return [Types::CodeEditorAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppImageConfigResponse AWS API Documentation
     #
     class DescribeAppImageConfigResponse < Struct.new(
@@ -11494,7 +11540,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :kernel_gateway_image_config,
-      :jupyter_lab_app_image_config)
+      :jupyter_lab_app_image_config,
+      :code_editor_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42782,12 +42829,17 @@ module Aws::SageMaker
     #   The JupyterLab app running on the image.
     #   @return [Types::JupyterLabAppImageConfig]
     #
+    # @!attribute [rw] code_editor_app_image_config
+    #   The Code Editor app running on the image.
+    #   @return [Types::CodeEditorAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateAppImageConfigRequest AWS API Documentation
     #
     class UpdateAppImageConfigRequest < Struct.new(
       :app_image_config_name,
       :kernel_gateway_image_config,
-      :jupyter_lab_app_image_config)
+      :jupyter_lab_app_image_config,
+      :code_editor_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end

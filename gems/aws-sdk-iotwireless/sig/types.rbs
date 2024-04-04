@@ -487,6 +487,12 @@ module Aws::IoTWireless
       SENSITIVE: []
     end
 
+    class Dimension
+      attr_accessor name: ("DeviceId" | "GatewayId")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class DisassociateAwsAccountFromPartnerAccountRequest
       attr_accessor partner_account_id: ::String
       attr_accessor partner_type: ("Sidewalk")
@@ -663,6 +669,24 @@ module Aws::IoTWireless
       attr_accessor default_log_level: ("INFO" | "ERROR" | "DISABLED")
       attr_accessor wireless_gateway_log_options: ::Array[Types::WirelessGatewayLogOption]
       attr_accessor wireless_device_log_options: ::Array[Types::WirelessDeviceLogOption]
+      SENSITIVE: []
+    end
+
+    class GetMetricConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetMetricConfigurationResponse
+      attr_accessor summary_metric: Types::SummaryMetricConfiguration
+      SENSITIVE: []
+    end
+
+    class GetMetricsRequest
+      attr_accessor summary_metric_queries: ::Array[Types::SummaryMetricQuery]
+      SENSITIVE: []
+    end
+
+    class GetMetricsResponse
+      attr_accessor summary_metric_query_results: ::Array[Types::SummaryMetricQueryResult]
       SENSITIVE: []
     end
 
@@ -1495,6 +1519,16 @@ module Aws::IoTWireless
       SENSITIVE: []
     end
 
+    class MetricQueryValue
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      attr_accessor sum: ::Float
+      attr_accessor avg: ::Float
+      attr_accessor std: ::Float
+      attr_accessor p90: ::Float
+      SENSITIVE: []
+    end
+
     class MulticastGroup
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -1848,6 +1882,36 @@ module Aws::IoTWireless
       SENSITIVE: []
     end
 
+    class SummaryMetricConfiguration
+      attr_accessor status: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class SummaryMetricQuery
+      attr_accessor query_id: ::String
+      attr_accessor metric_name: ("DeviceRSSI" | "DeviceSNR" | "DeviceUplinkCount" | "DeviceDownlinkCount" | "DeviceUplinkLostCount" | "DeviceUplinkLostRate" | "DeviceJoinRequestCount" | "DeviceJoinAcceptCount" | "DeviceRoamingUplinkCount" | "DeviceRoamingDownlinkCount" | "GatewayUpTime" | "GatewayDownTime" | "GatewayRSSI" | "GatewaySNR" | "GatewayUplinkCount" | "GatewayDownlinkCount" | "GatewayJoinRequestCount" | "GatewayJoinAcceptCount" | "AwsAccountUplinkCount" | "AwsAccountDownlinkCount" | "AwsAccountUplinkLostCount" | "AwsAccountUplinkLostRate" | "AwsAccountJoinRequestCount" | "AwsAccountJoinAcceptCount" | "AwsAccountRoamingUplinkCount" | "AwsAccountRoamingDownlinkCount" | "AwsAccountDeviceCount" | "AwsAccountGatewayCount" | "AwsAccountActiveDeviceCount" | "AwsAccountActiveGatewayCount")
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor aggregation_period: ("OneHour" | "OneDay" | "OneWeek")
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class SummaryMetricQueryResult
+      attr_accessor query_id: ::String
+      attr_accessor query_status: ("Succeeded" | "Failed")
+      attr_accessor error: ::String
+      attr_accessor metric_name: ("DeviceRSSI" | "DeviceSNR" | "DeviceUplinkCount" | "DeviceDownlinkCount" | "DeviceUplinkLostCount" | "DeviceUplinkLostRate" | "DeviceJoinRequestCount" | "DeviceJoinAcceptCount" | "DeviceRoamingUplinkCount" | "DeviceRoamingDownlinkCount" | "GatewayUpTime" | "GatewayDownTime" | "GatewayRSSI" | "GatewaySNR" | "GatewayUplinkCount" | "GatewayDownlinkCount" | "GatewayJoinRequestCount" | "GatewayJoinAcceptCount" | "AwsAccountUplinkCount" | "AwsAccountDownlinkCount" | "AwsAccountUplinkLostCount" | "AwsAccountUplinkLostRate" | "AwsAccountJoinRequestCount" | "AwsAccountJoinAcceptCount" | "AwsAccountRoamingUplinkCount" | "AwsAccountRoamingDownlinkCount" | "AwsAccountDeviceCount" | "AwsAccountGatewayCount" | "AwsAccountActiveDeviceCount" | "AwsAccountActiveGatewayCount")
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor aggregation_period: ("OneHour" | "OneDay" | "OneWeek")
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor timestamps: ::Array[::Time]
+      attr_accessor values: ::Array[Types::MetricQueryValue]
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -1992,6 +2056,14 @@ module Aws::IoTWireless
     end
 
     class UpdateLogLevelsByResourceTypesResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMetricConfigurationRequest
+      attr_accessor summary_metric: Types::SummaryMetricConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateMetricConfigurationResponse < Aws::EmptyStructure
     end
 
     class UpdateMulticastGroupRequest

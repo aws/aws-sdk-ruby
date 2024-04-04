@@ -566,6 +566,27 @@ module Aws::NeptuneGraph
       SENSITIVE: []
     end
 
+    class StartImportTaskInput
+      attr_accessor import_options: Types::ImportOptions
+      attr_accessor fail_on_error: bool
+      attr_accessor source: ::String
+      attr_accessor format: ("CSV" | "OPEN_CYPHER")
+      attr_accessor graph_identifier: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartImportTaskOutput
+      attr_accessor graph_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor source: ::String
+      attr_accessor format: ("CSV" | "OPEN_CYPHER")
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor import_options: Types::ImportOptions
+      SENSITIVE: []
+    end
+
     class TagResourceInput
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]

@@ -440,6 +440,18 @@ module Aws::MediaLive
     #   displayed by the player (eg. English, or Director Commentary).
     #   @return [String]
     #
+    # @!attribute [rw] audio_dash_roles
+    #   Identifies the DASH roles to assign to this audio output. Applies
+    #   only when the audio output is configured for DVB DASH accessibility
+    #   signaling.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dvb_dash_accessibility
+    #   Identifies DVB DASH accessibility signaling in this audio output.
+    #   Used in Microsoft Smooth Streaming outputs to signal accessibility
+    #   information to packagers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioDescription AWS API Documentation
     #
     class AudioDescription < Struct.new(
@@ -453,7 +465,9 @@ module Aws::MediaLive
       :language_code_control,
       :name,
       :remix_settings,
-      :stream_name)
+      :stream_name,
+      :audio_dash_roles,
+      :dvb_dash_accessibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1488,6 +1502,18 @@ module Aws::MediaLive
     #   description with an output. Names must be unique within an event.
     #   @return [String]
     #
+    # @!attribute [rw] caption_dash_roles
+    #   Identifies the DASH roles to assign to this captions output. Applies
+    #   only when the captions output is configured for DVB DASH
+    #   accessibility signaling.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dvb_dash_accessibility
+    #   Identifies DVB DASH accessibility signaling in this captions output.
+    #   Used in Microsoft Smooth Streaming outputs to signal accessibility
+    #   information to packagers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionDescription AWS API Documentation
     #
     class CaptionDescription < Struct.new(
@@ -1496,7 +1522,9 @@ module Aws::MediaLive
       :destination_settings,
       :language_code,
       :language_description,
-      :name)
+      :name,
+      :caption_dash_roles,
+      :dvb_dash_accessibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9915,6 +9943,10 @@ module Aws::MediaLive
     #   Udp Group Settings
     #   @return [Types::UdpGroupSettings]
     #
+    # @!attribute [rw] cmaf_ingest_group_settings
+    #   Cmaf Ingest Group Settings
+    #   @return [Types::CmafIngestGroupSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputGroupSettings AWS API Documentation
     #
     class OutputGroupSettings < Struct.new(
@@ -9925,7 +9957,8 @@ module Aws::MediaLive
       :ms_smooth_group_settings,
       :multiplex_group_settings,
       :rtmp_group_settings,
-      :udp_group_settings)
+      :udp_group_settings,
+      :cmaf_ingest_group_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9996,6 +10029,10 @@ module Aws::MediaLive
     #   Udp Output Settings
     #   @return [Types::UdpOutputSettings]
     #
+    # @!attribute [rw] cmaf_ingest_output_settings
+    #   Cmaf Ingest Output Settings
+    #   @return [Types::CmafIngestOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputSettings AWS API Documentation
     #
     class OutputSettings < Struct.new(
@@ -10006,7 +10043,8 @@ module Aws::MediaLive
       :ms_smooth_output_settings,
       :multiplex_output_settings,
       :rtmp_output_settings,
-      :udp_output_settings)
+      :udp_output_settings,
+      :cmaf_ingest_output_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13406,6 +13444,65 @@ module Aws::MediaLive
       :state,
       :tags,
       :vpc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cmaf Ingest Group Settings
+    #
+    # @!attribute [rw] destination
+    #   A HTTP destination for the tracks
+    #   @return [Types::OutputLocationRef]
+    #
+    # @!attribute [rw] nielsen_id_3_behavior
+    #   If set to passthrough, Nielsen inaudible tones for media tracking
+    #   will be detected in the input audio and an equivalent ID3 tag will
+    #   be inserted in the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] scte_35_type
+    #   Type of scte35 track to add. none or scte35WithoutSegmentation
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_length
+    #   The nominal duration of segments. The units are specified in
+    #   SegmentLengthUnits. The segments will end on the next keyframe after
+    #   the specified duration, so the actual segment length might be
+    #   longer, and it might be a fraction of the units.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment_length_units
+    #   Time unit for segment length parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] send_delay_ms
+    #   Number of milliseconds to delay the output from the second pipeline.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CmafIngestGroupSettings AWS API Documentation
+    #
+    class CmafIngestGroupSettings < Struct.new(
+      :destination,
+      :nielsen_id_3_behavior,
+      :scte_35_type,
+      :segment_length,
+      :segment_length_units,
+      :send_delay_ms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cmaf Ingest Output Settings
+    #
+    # @!attribute [rw] name_modifier
+    #   String concatenated to the end of the destination filename. Required
+    #   for multiple outputs of the same type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CmafIngestOutputSettings AWS API Documentation
+    #
+    class CmafIngestOutputSettings < Struct.new(
+      :name_modifier)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.169.0 (2024-04-02)
+------------------
+
+* Feature - Adding View related fields to responses of read-only Table APIs.
+
 1.168.0 (2024-02-05)
 ------------------
 

@@ -38,6 +38,7 @@ module Aws::Transfer
     CompressionEnum = Shapes::StringShape.new(name: 'CompressionEnum')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectorId = Shapes::StringShape.new(name: 'ConnectorId')
+    ConnectorSecurityPolicyName = Shapes::StringShape.new(name: 'ConnectorSecurityPolicyName')
     CopyStepDetails = Shapes::StructureShape.new(name: 'CopyStepDetails')
     CreateAccessRequest = Shapes::StructureShape.new(name: 'CreateAccessRequest')
     CreateAccessResponse = Shapes::StructureShape.new(name: 'CreateAccessResponse')
@@ -246,6 +247,9 @@ module Aws::Transfer
     SecurityPolicyNames = Shapes::ListShape.new(name: 'SecurityPolicyNames')
     SecurityPolicyOption = Shapes::StringShape.new(name: 'SecurityPolicyOption')
     SecurityPolicyOptions = Shapes::ListShape.new(name: 'SecurityPolicyOptions')
+    SecurityPolicyProtocol = Shapes::StringShape.new(name: 'SecurityPolicyProtocol')
+    SecurityPolicyProtocols = Shapes::ListShape.new(name: 'SecurityPolicyProtocols')
+    SecurityPolicyResourceType = Shapes::StringShape.new(name: 'SecurityPolicyResourceType')
     SendWorkflowStepStateRequest = Shapes::StructureShape.new(name: 'SendWorkflowStepStateRequest')
     SendWorkflowStepStateResponse = Shapes::StructureShape.new(name: 'SendWorkflowStepStateResponse')
     ServerId = Shapes::StringShape.new(name: 'ServerId')
@@ -388,6 +392,7 @@ module Aws::Transfer
     CreateConnectorRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     CreateConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
+    CreateConnectorRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
     CreateConnectorRequest.struct_class = Types::CreateConnectorRequest
 
     CreateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
@@ -622,6 +627,7 @@ module Aws::Transfer
     DescribedConnector.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribedConnector.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
     DescribedConnector.add_member(:service_managed_egress_ip_addresses, Shapes::ShapeRef.new(shape: ServiceManagedEgressIpAddresses, location_name: "ServiceManagedEgressIpAddresses"))
+    DescribedConnector.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
     DescribedConnector.struct_class = Types::DescribedConnector
 
     DescribedExecution.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "ExecutionId"))
@@ -657,6 +663,9 @@ module Aws::Transfer
     DescribedSecurityPolicy.add_member(:ssh_kexs, Shapes::ShapeRef.new(shape: SecurityPolicyOptions, location_name: "SshKexs"))
     DescribedSecurityPolicy.add_member(:ssh_macs, Shapes::ShapeRef.new(shape: SecurityPolicyOptions, location_name: "SshMacs"))
     DescribedSecurityPolicy.add_member(:tls_ciphers, Shapes::ShapeRef.new(shape: SecurityPolicyOptions, location_name: "TlsCiphers"))
+    DescribedSecurityPolicy.add_member(:ssh_host_key_algorithms, Shapes::ShapeRef.new(shape: SecurityPolicyOptions, location_name: "SshHostKeyAlgorithms"))
+    DescribedSecurityPolicy.add_member(:type, Shapes::ShapeRef.new(shape: SecurityPolicyResourceType, location_name: "Type"))
+    DescribedSecurityPolicy.add_member(:protocols, Shapes::ShapeRef.new(shape: SecurityPolicyProtocols, location_name: "Protocols"))
     DescribedSecurityPolicy.struct_class = Types::DescribedSecurityPolicy
 
     DescribedServer.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -1054,6 +1063,8 @@ module Aws::Transfer
 
     SecurityPolicyOptions.member = Shapes::ShapeRef.new(shape: SecurityPolicyOption)
 
+    SecurityPolicyProtocols.member = Shapes::ShapeRef.new(shape: SecurityPolicyProtocol)
+
     SendWorkflowStepStateRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "WorkflowId"))
     SendWorkflowStepStateRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, required: true, location_name: "ExecutionId"))
     SendWorkflowStepStateRequest.add_member(:token, Shapes::ShapeRef.new(shape: CallbackToken, required: true, location_name: "Token"))
@@ -1190,6 +1201,7 @@ module Aws::Transfer
     UpdateConnectorRequest.add_member(:access_role, Shapes::ShapeRef.new(shape: Role, location_name: "AccessRole"))
     UpdateConnectorRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     UpdateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
+    UpdateConnectorRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
     UpdateConnectorRequest.struct_class = Types::UpdateConnectorRequest
 
     UpdateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))

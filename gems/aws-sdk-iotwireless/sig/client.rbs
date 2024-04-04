@@ -747,6 +747,39 @@ module Aws
                                             ) -> _GetLogLevelsByResourceTypesResponseSuccess
                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogLevelsByResourceTypesResponseSuccess
 
+      interface _GetMetricConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMetricConfigurationResponse]
+        def summary_metric: () -> Types::SummaryMetricConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_metric_configuration-instance_method
+      def get_metric_configuration: (
+                                    ) -> _GetMetricConfigurationResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetricConfigurationResponseSuccess
+
+      interface _GetMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMetricsResponse]
+        def summary_metric_query_results: () -> ::Array[Types::SummaryMetricQueryResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_metrics-instance_method
+      def get_metrics: (
+                         ?summary_metric_queries: Array[
+                           {
+                             query_id: ::String?,
+                             metric_name: ("DeviceRSSI" | "DeviceSNR" | "DeviceUplinkCount" | "DeviceDownlinkCount" | "DeviceUplinkLostCount" | "DeviceUplinkLostRate" | "DeviceJoinRequestCount" | "DeviceJoinAcceptCount" | "DeviceRoamingUplinkCount" | "DeviceRoamingDownlinkCount" | "GatewayUpTime" | "GatewayDownTime" | "GatewayRSSI" | "GatewaySNR" | "GatewayUplinkCount" | "GatewayDownlinkCount" | "GatewayJoinRequestCount" | "GatewayJoinAcceptCount" | "AwsAccountUplinkCount" | "AwsAccountDownlinkCount" | "AwsAccountUplinkLostCount" | "AwsAccountUplinkLostRate" | "AwsAccountJoinRequestCount" | "AwsAccountJoinAcceptCount" | "AwsAccountRoamingUplinkCount" | "AwsAccountRoamingDownlinkCount" | "AwsAccountDeviceCount" | "AwsAccountGatewayCount" | "AwsAccountActiveDeviceCount" | "AwsAccountActiveGatewayCount")?,
+                             dimensions: Array[
+                               {
+                                 name: ("DeviceId" | "GatewayId")?,
+                                 value: ::String?
+                               },
+                             ]?,
+                             aggregation_period: ("OneHour" | "OneDay" | "OneWeek")?,
+                             start_timestamp: ::Time?,
+                             end_timestamp: ::Time?
+                           },
+                         ]
+                       ) -> _GetMetricsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetricsResponseSuccess
+
       interface _GetMulticastGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMulticastGroupResponse]
         def arn: () -> ::String
@@ -1720,6 +1753,17 @@ module Aws
                                                  ]
                                                ) -> _UpdateLogLevelsByResourceTypesResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLogLevelsByResourceTypesResponseSuccess
+
+      interface _UpdateMetricConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMetricConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_metric_configuration-instance_method
+      def update_metric_configuration: (
+                                         ?summary_metric: {
+                                           status: ("Enabled" | "Disabled")?
+                                         }
+                                       ) -> _UpdateMetricConfigurationResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMetricConfigurationResponseSuccess
 
       interface _UpdateMulticastGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMulticastGroupResponse]

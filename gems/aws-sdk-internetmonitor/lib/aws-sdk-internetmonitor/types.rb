@@ -337,11 +337,16 @@ module Aws::InternetMonitor
     #   URL-encode the `EventID` field in the request URL.
     #   @return [String]
     #
+    # @!attribute [rw] linked_account_id
+    #   TBD
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetHealthEventInput AWS API Documentation
     #
     class GetHealthEventInput < Struct.new(
       :monitor_name,
-      :event_id)
+      :event_id,
+      :linked_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -421,10 +426,15 @@ module Aws::InternetMonitor
     #   The name of the monitor.
     #   @return [String]
     #
+    # @!attribute [rw] linked_account_id
+    #   TBD
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitorInput AWS API Documentation
     #
     class GetMonitorInput < Struct.new(
-      :monitor_name)
+      :monitor_name,
+      :linked_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1006,6 +1016,10 @@ module Aws::InternetMonitor
     #   The status of a health event.
     #   @return [String]
     #
+    # @!attribute [rw] linked_account_id
+    #   TBD
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ListHealthEventsInput AWS API Documentation
     #
     class ListHealthEventsInput < Struct.new(
@@ -1014,7 +1028,8 @@ module Aws::InternetMonitor
       :end_time,
       :next_token,
       :max_results,
-      :event_status)
+      :event_status,
+      :linked_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1058,12 +1073,17 @@ module Aws::InternetMonitor
     #   [1]: https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] include_linked_accounts
+    #   TBD
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ListMonitorsInput AWS API Documentation
     #
     class ListMonitorsInput < Struct.new(
       :next_token,
       :max_results,
-      :monitor_status)
+      :monitor_status,
+      :include_linked_accounts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1507,6 +1527,10 @@ module Aws::InternetMonitor
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
     #   @return [Array<Types::FilterParameter>]
     #
+    # @!attribute [rw] linked_account_id
+    #   TBD
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/StartQueryInput AWS API Documentation
     #
     class StartQueryInput < Struct.new(
@@ -1514,7 +1538,8 @@ module Aws::InternetMonitor
       :start_time,
       :end_time,
       :query_type,
-      :filter_parameters)
+      :filter_parameters,
+      :linked_account_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -258,6 +258,7 @@ module Aws
       interface _SearchImageSetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchImageSetsResponse]
         def image_sets_metadata_summaries: () -> ::Array[Types::ImageSetsMetadataSummary]
+        def sort: () -> Types::Sort
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#search_image_sets-instance_method
@@ -272,7 +273,9 @@ module Aws
                                          dicom_accession_number: ::String?,
                                          dicom_study_id: ::String?,
                                          dicom_study_instance_uid: ::String?,
+                                         dicom_series_instance_uid: ::String?,
                                          created_at: ::Time?,
+                                         updated_at: ::Time?,
                                          dicom_study_date_and_time: {
                                            dicom_study_date: ::String,
                                            dicom_study_time: ::String?
@@ -281,7 +284,11 @@ module Aws
                                      ],
                                      operator: ("EQUAL" | "BETWEEN")
                                    },
-                                 ]?
+                                 ]?,
+                                 sort: {
+                                   sort_order: ("ASC" | "DESC"),
+                                   sort_field: ("updatedAt" | "createdAt" | "DICOMStudyDateAndTime")
+                                 }?
                                },
                                ?max_results: ::Integer,
                                ?next_token: ::String

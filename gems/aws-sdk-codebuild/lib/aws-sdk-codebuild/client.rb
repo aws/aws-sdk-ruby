@@ -773,7 +773,7 @@ module Aws::CodeBuild
     #   resp.fleets[0].id #=> String
     #   resp.fleets[0].created #=> Time
     #   resp.fleets[0].last_modified #=> Time
-    #   resp.fleets[0].status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
+    #   resp.fleets[0].status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "PENDING_DELETION", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
     #   resp.fleets[0].status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.fleets[0].status.message #=> String
     #   resp.fleets[0].base_capacity #=> Integer
@@ -1211,7 +1211,7 @@ module Aws::CodeBuild
     #   resp.fleet.id #=> String
     #   resp.fleet.created #=> Time
     #   resp.fleet.last_modified #=> Time
-    #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
+    #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "PENDING_DELETION", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
     #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.fleet.status.message #=> String
     #   resp.fleet.base_capacity #=> Integer
@@ -4936,7 +4936,7 @@ module Aws::CodeBuild
     #   resp.fleet.id #=> String
     #   resp.fleet.created #=> Time
     #   resp.fleet.last_modified #=> Time
-    #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
+    #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "PENDING_DELETION", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
     #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.fleet.status.message #=> String
     #   resp.fleet.base_capacity #=> Integer
@@ -5642,7 +5642,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

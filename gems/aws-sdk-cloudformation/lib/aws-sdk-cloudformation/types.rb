@@ -3692,7 +3692,7 @@ module Aws::CloudFormation
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #   @return [String]
     #
     # @!attribute [rw] publisher_id
@@ -6570,6 +6570,25 @@ module Aws::CloudFormation
     # The `ResourceChange` structure describes the resource and the action
     # that CloudFormation will perform on it if you execute this change set.
     #
+    # @!attribute [rw] policy_action
+    #   The action that will be taken on the physical resource when the
+    #   change set is executed.
+    #
+    #   * `Delete` The resource will be deleted.
+    #
+    #   * `Retain` The resource will be retained.
+    #
+    #   * `Snapshot` The resource will have a snapshot taken.
+    #
+    #   * `ReplaceAndDelete` The resource will be replaced and then deleted.
+    #
+    #   * `ReplaceAndRetain` The resource will be replaced and then
+    #     retained.
+    #
+    #   * `ReplaceAndSnapshot` The resource will be replaced and then have a
+    #     snapshot taken.
+    #   @return [String]
+    #
     # @!attribute [rw] action
     #   The action that CloudFormation takes on the resource, such as `Add`
     #   (adds a new resource), `Modify` (changes a resource), `Remove`
@@ -6632,6 +6651,7 @@ module Aws::CloudFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange AWS API Documentation
     #
     class ResourceChange < Struct.new(
+      :policy_action,
       :action,
       :logical_resource_id,
       :physical_resource_id,
@@ -10056,7 +10076,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the configuration data, in this

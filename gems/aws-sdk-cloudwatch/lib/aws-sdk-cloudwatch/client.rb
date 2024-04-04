@@ -519,6 +519,7 @@ module Aws::CloudWatch
     #     ],
     #     stat: "AnomalyDetectorMetricStat",
     #     single_metric_anomaly_detector: {
+    #       account_id: "AccountId",
     #       namespace: "Namespace",
     #       metric_name: "MetricName",
     #       dimensions: [
@@ -1133,6 +1134,7 @@ module Aws::CloudWatch
     #   resp.anomaly_detectors[0].configuration.excluded_time_ranges[0].end_time #=> Time
     #   resp.anomaly_detectors[0].configuration.metric_timezone #=> String
     #   resp.anomaly_detectors[0].state_value #=> String, one of "PENDING_TRAINING", "TRAINED_INSUFFICIENT_DATA", "TRAINED"
+    #   resp.anomaly_detectors[0].single_metric_anomaly_detector.account_id #=> String
     #   resp.anomaly_detectors[0].single_metric_anomaly_detector.namespace #=> String
     #   resp.anomaly_detectors[0].single_metric_anomaly_detector.metric_name #=> String
     #   resp.anomaly_detectors[0].single_metric_anomaly_detector.dimensions #=> Array
@@ -1655,6 +1657,9 @@ module Aws::CloudWatch
     #   the `MaxDatapoints` limit is reached. `TimestampAscending` returns the
     #   oldest data first and paginates when the `MaxDatapoints` limit is
     #   reached.
+    #
+    #   If you omit this parameter, the default of `TimestampDescending` is
+    #   used.
     #
     # @option params [Integer] :max_datapoints
     #   The maximum number of data points the request should return before
@@ -2407,6 +2412,11 @@ module Aws::CloudWatch
     # use the model to display a band of expected normal values when the
     # metric is graphed.
     #
+    # If you have enabled unified cross-account observability, and this
+    # account is a monitoring account, the metric can be in the same account
+    # or a source account. You can specify the account ID in the object you
+    # specify in the `SingleMetricAnomalyDetector` parameter.
+    #
     # For more information, see [CloudWatch Anomaly Detection][1].
     #
     #
@@ -2447,7 +2457,7 @@ module Aws::CloudWatch
     #
     #   * `Stat`
     #
-    #   * the `MetricMatchAnomalyDetector` parameters of
+    #   * the `MetricMathAnomalyDetector` parameters of
     #     `PutAnomalyDetectorInput`
     #
     #   Instead, specify the single metric anomaly detector attributes as part
@@ -2497,6 +2507,7 @@ module Aws::CloudWatch
     #       metric_timezone: "AnomalyDetectorMetricTimezone",
     #     },
     #     single_metric_anomaly_detector: {
+    #       account_id: "AccountId",
     #       namespace: "Namespace",
     #       metric_name: "MetricName",
     #       dimensions: [
@@ -2563,8 +2574,15 @@ module Aws::CloudWatch
     # composite alarm that goes into ALARM state only when more than one of
     # the underlying metric alarms are in ALARM state.
     #
-    # Currently, the only alarm actions that can be taken by composite
-    # alarms are notifying SNS topics.
+    # Composite alarms can take the following actions:
+    #
+    # * Notify Amazon SNS topics.
+    #
+    # * Invoke Lambda functions.
+    #
+    # * Create OpsItems in Systems Manager Ops Center.
+    #
+    # * Create incidents in Systems Manager Incident Manager.
     #
     # <note markdown="1"> It is possible to create a loop or cycle of composite alarms, where
     # composite alarm A depends on composite alarm B, and composite alarm B
@@ -2611,7 +2629,27 @@ module Aws::CloudWatch
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   Valid Values: \]
+    #
+    #   **Amazon SNS actions:**
+    #
+    #   `arn:aws:sns:region:account-id:sns-topic-name `
+    #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
+    #   **Systems Manager actions:**
+    #
     #   `arn:aws:ssm:region:account-id:opsitem:severity `
     #
     # @option params [String] :alarm_description
@@ -2684,22 +2722,67 @@ module Aws::CloudWatch
     #   `INSUFFICIENT_DATA` state from any other state. Each action is
     #   specified as an Amazon Resource Name (ARN).
     #
-    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name `
+    #   Valid Values: \]
+    #
+    #   **Amazon SNS actions:**
+    #
+    #   `arn:aws:sns:region:account-id:sns-topic-name `
+    #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
     #
     # @option params [Array<String>] :ok_actions
     #   The actions to execute when this alarm transitions to an `OK` state
     #   from any other state. Each action is specified as an Amazon Resource
     #   Name (ARN).
     #
-    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name `
+    #   Valid Values: \]
+    #
+    #   **Amazon SNS actions:**
+    #
+    #   `arn:aws:sns:region:account-id:sns-topic-name `
+    #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of key-value pairs to associate with the composite alarm. You
-    #   can associate as many as 50 tags with an alarm.
+    #   A list of key-value pairs to associate with the alarm. You can
+    #   associate as many as 50 tags with an alarm. To be able to associate
+    #   tags with the alarm when you create the alarm, you must have the
+    #   `cloudwatch:TagResource` permission.
     #
     #   Tags can help you organize and categorize your resources. You can also
-    #   use them to scope user permissions, by granting a user permission to
+    #   use them to scope user permissions by granting a user permission to
     #   access or change only resources with certain tag values.
+    #
+    #   If you are using this operation to update an existing alarm, any tags
+    #   you specify in this parameter are ignored. To change the tags of an
+    #   existing alarm, use [TagResource][1] or [UntagResource][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
     #
     # @option params [String] :actions_suppressor
     #   Actions will be suppressed if the suppressor alarm is in the `ALARM`
@@ -3050,10 +3133,22 @@ module Aws::CloudWatch
     #
     #   ^
     #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
     #   **SNS notification action:**
     #
-    #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #     `
+    #   * `arn:aws:sns:region:account-id:sns-topic-name `
     #
     #   ^
     #
@@ -3094,10 +3189,22 @@ module Aws::CloudWatch
     #
     #   ^
     #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
     #   **SNS notification action:**
     #
-    #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #     `
+    #   * `arn:aws:sns:region:account-id:sns-topic-name `
     #
     #   ^
     #
@@ -3138,10 +3245,22 @@ module Aws::CloudWatch
     #
     #   ^
     #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
     #   **SNS notification action:**
     #
-    #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #     `
+    #   * `arn:aws:sns:region:account-id:sns-topic-name `
     #
     #   ^
     #
@@ -3466,10 +3585,9 @@ module Aws::CloudWatch
     # You can publish either individual data points in the `Value` field, or
     # arrays of values and the number of times each value occurred during
     # the period by using the `Values` and `Counts` fields in the
-    # `MetricDatum` structure. Using the `Values` and `Counts` method
-    # enables you to publish up to 150 values per metric with one
-    # `PutMetricData` request, and supports retrieving percentile statistics
-    # on this data.
+    # `MetricData` structure. Using the `Values` and `Counts` method enables
+    # you to publish up to 150 values per metric with one `PutMetricData`
+    # request, and supports retrieving percentile statistics on this data.
     #
     # Each `PutMetricData` request is limited to 1 MB in size for HTTP POST
     # requests. You can send a payload compressed by gzip. Each request is
@@ -3986,7 +4104,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

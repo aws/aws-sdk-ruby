@@ -723,11 +723,12 @@ module Aws::GroundStation
     #
     # @option params [Integer] :contact_post_pass_duration_seconds
     #   Amount of time after a contact ends that you’d like to receive a
-    #   CloudWatch event indicating the pass has finished.
+    #   Ground Station Contact State Change event indicating the pass has
+    #   finished.
     #
     # @option params [Integer] :contact_pre_pass_duration_seconds
-    #   Amount of time prior to contact start you’d like to receive a
-    #   CloudWatch event indicating an upcoming pass.
+    #   Amount of time prior to contact start you’d like to receive a Ground
+    #   Station Contact State Change event indicating an upcoming pass.
     #
     # @option params [required, Array<Array>] :dataflow_edges
     #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
@@ -933,6 +934,8 @@ module Aws::GroundStation
     #   * {Types::DescribeContactResponse#satellite_arn #satellite_arn} => String
     #   * {Types::DescribeContactResponse#start_time #start_time} => Time
     #   * {Types::DescribeContactResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeContactResponse#visibility_end_time #visibility_end_time} => Time
+    #   * {Types::DescribeContactResponse#visibility_start_time #visibility_start_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1017,6 +1020,8 @@ module Aws::GroundStation
     #   resp.start_time #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.visibility_end_time #=> Time
+    #   resp.visibility_start_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1496,6 +1501,8 @@ module Aws::GroundStation
     #   resp.contact_list[0].start_time #=> Time
     #   resp.contact_list[0].tags #=> Hash
     #   resp.contact_list[0].tags["String"] #=> String
+    #   resp.contact_list[0].visibility_end_time #=> Time
+    #   resp.contact_list[0].visibility_start_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListContacts AWS API Documentation
@@ -2152,11 +2159,13 @@ module Aws::GroundStation
     #
     # @option params [Integer] :contact_post_pass_duration_seconds
     #   Amount of time after a contact ends that you’d like to receive a
-    #   CloudWatch event indicating the pass has finished.
+    #   Ground Station Contact State Change event indicating the pass has
+    #   finished.
     #
     # @option params [Integer] :contact_pre_pass_duration_seconds
     #   Amount of time after a contact ends that you’d like to receive a
-    #   CloudWatch event indicating the pass has finished.
+    #   Ground Station Contact State Change event indicating the pass has
+    #   finished.
     #
     # @option params [Array<Array>] :dataflow_edges
     #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
@@ -2232,7 +2241,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.907.0 (2024-04-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.906.0 (2024-04-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.905.0 (2024-04-01)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Deadline`.
+
+1.904.0 (2024-03-29)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::CodeConnections`.
+
 1.903.0 (2024-03-28)
 ------------------
 

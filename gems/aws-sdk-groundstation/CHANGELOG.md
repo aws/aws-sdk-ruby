@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2024-04-03)
+------------------
+
+* Feature - This release adds visibilityStartTime and visibilityEndTime to DescribeContact and ListContacts responses.
+
 1.44.0 (2024-01-26)
 ------------------
 

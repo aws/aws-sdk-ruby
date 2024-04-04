@@ -160,6 +160,8 @@ module Aws::GroundStation
       attr_accessor satellite_arn: ::String
       attr_accessor start_time: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor visibility_end_time: ::Time
+      attr_accessor visibility_start_time: ::Time
       SENSITIVE: []
     end
 
@@ -297,6 +299,8 @@ module Aws::GroundStation
       attr_accessor satellite_arn: ::String
       attr_accessor start_time: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor visibility_end_time: ::Time
+      attr_accessor visibility_start_time: ::Time
       SENSITIVE: []
     end
 

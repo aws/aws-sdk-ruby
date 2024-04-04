@@ -66,6 +66,7 @@ module Aws::InternetMonitor
     class GetHealthEventInput
       attr_accessor monitor_name: ::String
       attr_accessor event_id: ::String
+      attr_accessor linked_account_id: ::String
       SENSITIVE: []
     end
 
@@ -86,6 +87,7 @@ module Aws::InternetMonitor
 
     class GetMonitorInput
       attr_accessor monitor_name: ::String
+      attr_accessor linked_account_id: ::String
       SENSITIVE: []
     end
 
@@ -207,6 +209,7 @@ module Aws::InternetMonitor
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor event_status: ("ACTIVE" | "RESOLVED")
+      attr_accessor linked_account_id: ::String
       SENSITIVE: []
     end
 
@@ -220,6 +223,7 @@ module Aws::InternetMonitor
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor monitor_status: ::String
+      attr_accessor include_linked_accounts: bool
       SENSITIVE: []
     end
 
@@ -311,6 +315,7 @@ module Aws::InternetMonitor
       attr_accessor end_time: ::Time
       attr_accessor query_type: ("MEASUREMENTS" | "TOP_LOCATIONS" | "TOP_LOCATION_DETAILS")
       attr_accessor filter_parameters: ::Array[Types::FilterParameter]
+      attr_accessor linked_account_id: ::String
       SENSITIVE: []
     end
 

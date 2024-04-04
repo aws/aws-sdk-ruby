@@ -5594,6 +5594,58 @@ module Aws::DocDB
     #
     class SubscriptionNotFoundFault < Aws::EmptyStructure; end
 
+    # @!attribute [rw] global_cluster_identifier
+    #   The identifier of the Amazon DocumentDB global database cluster to
+    #   switch over. The identifier is the unique key assigned by the user
+    #   when the cluster is created. In other words, it's the name of the
+    #   global cluster. This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing global cluster (Amazon
+    #     DocumentDB global database).
+    #
+    #   * Minimum length of 1. Maximum length of 255.
+    #
+    #   Pattern: `[A-Za-z][0-9A-Za-z-:._]*`
+    #   @return [String]
+    #
+    # @!attribute [rw] target_db_cluster_identifier
+    #   The identifier of the secondary Amazon DocumentDB cluster to promote
+    #   to the new primary for the global database cluster. Use the Amazon
+    #   Resource Name (ARN) for the identifier so that Amazon DocumentDB can
+    #   locate the cluster in its Amazon Web Services region.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing secondary cluster.
+    #
+    #   * Minimum length of 1. Maximum length of 255.
+    #
+    #   Pattern: `[A-Za-z][0-9A-Za-z-:._]*`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/SwitchoverGlobalClusterMessage AWS API Documentation
+    #
+    class SwitchoverGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :target_db_cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Amazon DocumentDB global cluster.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/SwitchoverGlobalClusterResult AWS API Documentation
+    #
+    class SwitchoverGlobalClusterResult < Struct.new(
+      :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata assigned to an Amazon DocumentDB resource consisting of a
     # key-value pair.
     #

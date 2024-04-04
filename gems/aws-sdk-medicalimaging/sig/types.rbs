@@ -128,9 +128,13 @@ module Aws::MedicalImaging
       attr_accessor dicom_number_of_study_related_series: ::Integer
       attr_accessor dicom_number_of_study_related_instances: ::Integer
       attr_accessor dicom_accession_number: ::String
+      attr_accessor dicom_series_instance_uid: ::String
+      attr_accessor dicom_series_modality: ::String
+      attr_accessor dicom_series_body_part: ::String
+      attr_accessor dicom_series_number: ::Integer
       attr_accessor dicom_study_date: ::String
       attr_accessor dicom_study_time: ::String
-      SENSITIVE: [:dicom_patient_id, :dicom_patient_name, :dicom_patient_birth_date, :dicom_patient_sex, :dicom_study_instance_uid, :dicom_study_id, :dicom_study_description, :dicom_accession_number, :dicom_study_date, :dicom_study_time]
+      SENSITIVE: [:dicom_patient_id, :dicom_patient_name, :dicom_patient_birth_date, :dicom_patient_sex, :dicom_study_instance_uid, :dicom_study_id, :dicom_study_description, :dicom_accession_number, :dicom_series_instance_uid, :dicom_series_modality, :dicom_series_body_part, :dicom_series_number, :dicom_study_date, :dicom_study_time]
     end
 
     class DICOMUpdates
@@ -357,10 +361,12 @@ module Aws::MedicalImaging
       attr_accessor dicom_accession_number: ::String
       attr_accessor dicom_study_id: ::String
       attr_accessor dicom_study_instance_uid: ::String
+      attr_accessor dicom_series_instance_uid: ::String
       attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       attr_accessor dicom_study_date_and_time: Types::DICOMStudyDateAndTime
       attr_accessor unknown: untyped
-      SENSITIVE: [:dicom_patient_id, :dicom_accession_number, :dicom_study_id, :dicom_study_instance_uid]
+      SENSITIVE: [:dicom_patient_id, :dicom_accession_number, :dicom_study_id, :dicom_study_instance_uid, :dicom_series_instance_uid]
 
       class DicomPatientId < SearchByAttributeValue
       end
@@ -370,7 +376,11 @@ module Aws::MedicalImaging
       end
       class DicomStudyInstanceUid < SearchByAttributeValue
       end
+      class DicomSeriesInstanceUid < SearchByAttributeValue
+      end
       class CreatedAt < SearchByAttributeValue
+      end
+      class UpdatedAt < SearchByAttributeValue
       end
       class DicomStudyDateAndTime < SearchByAttributeValue
       end
@@ -380,6 +390,7 @@ module Aws::MedicalImaging
 
     class SearchCriteria
       attr_accessor filters: ::Array[Types::SearchFilter]
+      attr_accessor sort: Types::Sort
       SENSITIVE: []
     end
 
@@ -399,12 +410,19 @@ module Aws::MedicalImaging
 
     class SearchImageSetsResponse
       attr_accessor image_sets_metadata_summaries: ::Array[Types::ImageSetsMetadataSummary]
+      attr_accessor sort: Types::Sort
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Sort
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_field: ("updatedAt" | "createdAt" | "DICOMStudyDateAndTime")
       SENSITIVE: []
     end
 

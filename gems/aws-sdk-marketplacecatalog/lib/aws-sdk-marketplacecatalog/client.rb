@@ -836,6 +836,9 @@ module Aws::MarketplaceCatalog
     #         product_id: {
     #           value_list: ["OfferProductIdString"],
     #         },
+    #         resale_authorization_id: {
+    #           value_list: ["OfferResaleAuthorizationIdString"],
+    #         },
     #         release_date: {
     #           date_range: {
     #             after_value: "DateTimeISO8601",
@@ -956,7 +959,7 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       offer_sort: {
-    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate
+    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ResaleAuthorizationId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       container_product_sort: {
@@ -989,6 +992,7 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].saa_s_product_summary.visibility #=> String, one of "Limited", "Public", "Restricted", "Draft"
     #   resp.entity_summary_list[0].offer_summary.name #=> String
     #   resp.entity_summary_list[0].offer_summary.product_id #=> String
+    #   resp.entity_summary_list[0].offer_summary.resale_authorization_id #=> String
     #   resp.entity_summary_list[0].offer_summary.release_date #=> String
     #   resp.entity_summary_list[0].offer_summary.availability_end_date #=> String
     #   resp.entity_summary_list[0].offer_summary.buyer_accounts #=> Array

@@ -572,6 +572,15 @@ module Aws::MedicalImaging
     # Get the import job properties to learn more about the job or job
     # progress.
     #
+    # <note markdown="1"> The `jobStatus` refers to the execution of the import job. Therefore,
+    # an import job can return a `jobStatus` as `COMPLETED` even if
+    # validation issues are discovered during the import process. If a
+    # `jobStatus` returns as `COMPLETED`, we still recommend you review the
+    # output manifests written to S3, as they provide details on the success
+    # or failure of individual P10 object imports.
+    #
+    #  </note>
+    #
     # @option params [required, String] :datastore_id
     #   The data store identifier.
     #
@@ -992,6 +1001,7 @@ module Aws::MedicalImaging
     # @return [Types::SearchImageSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchImageSetsResponse#image_sets_metadata_summaries #image_sets_metadata_summaries} => Array&lt;Types::ImageSetsMetadataSummary&gt;
+    #   * {Types::SearchImageSetsResponse#sort #data.sort} => Types::Sort (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::SearchImageSetsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -1009,7 +1019,9 @@ module Aws::MedicalImaging
     #               dicom_accession_number: "DICOMAccessionNumber",
     #               dicom_study_id: "DICOMStudyId",
     #               dicom_study_instance_uid: "DICOMStudyInstanceUID",
+    #               dicom_series_instance_uid: "DICOMSeriesInstanceUID",
     #               created_at: Time.now,
+    #               updated_at: Time.now,
     #               dicom_study_date_and_time: {
     #                 dicom_study_date: "DICOMStudyDate", # required
     #                 dicom_study_time: "DICOMStudyTime",
@@ -1019,6 +1031,10 @@ module Aws::MedicalImaging
     #           operator: "EQUAL", # required, accepts EQUAL, BETWEEN
     #         },
     #       ],
+    #       sort: {
+    #         sort_order: "ASC", # required, accepts ASC, DESC
+    #         sort_field: "updatedAt", # required, accepts updatedAt, createdAt, DICOMStudyDateAndTime
+    #       },
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1041,8 +1057,14 @@ module Aws::MedicalImaging
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_number_of_study_related_series #=> Integer
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_number_of_study_related_instances #=> Integer
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_accession_number #=> String
+    #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_series_instance_uid #=> String
+    #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_series_modality #=> String
+    #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_series_body_part #=> String
+    #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_series_number #=> Integer
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_study_date #=> String
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_study_time #=> String
+    #   resp.data.sort.sort_order #=> String, one of "ASC", "DESC"
+    #   resp.data.sort.sort_field #=> String, one of "updatedAt", "createdAt", "DICOMStudyDateAndTime"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/SearchImageSets AWS API Documentation
@@ -1246,7 +1268,7 @@ module Aws::MedicalImaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

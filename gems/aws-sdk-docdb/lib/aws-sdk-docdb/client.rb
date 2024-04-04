@@ -5357,6 +5357,76 @@ module Aws::DocDB
       req.send_request(options)
     end
 
+    # Switches over the specified secondary Amazon DocumentDB cluster to be
+    # the new primary Amazon DocumentDB cluster in the global database
+    # cluster.
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   The identifier of the Amazon DocumentDB global database cluster to
+    #   switch over. The identifier is the unique key assigned by the user
+    #   when the cluster is created. In other words, it's the name of the
+    #   global cluster. This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing global cluster (Amazon
+    #     DocumentDB global database).
+    #
+    #   * Minimum length of 1. Maximum length of 255.
+    #
+    #   Pattern: `[A-Za-z][0-9A-Za-z-:._]*`
+    #
+    # @option params [required, String] :target_db_cluster_identifier
+    #   The identifier of the secondary Amazon DocumentDB cluster to promote
+    #   to the new primary for the global database cluster. Use the Amazon
+    #   Resource Name (ARN) for the identifier so that Amazon DocumentDB can
+    #   locate the cluster in its Amazon Web Services region.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing secondary cluster.
+    #
+    #   * Minimum length of 1. Maximum length of 255.
+    #
+    #   Pattern: `[A-Za-z][0-9A-Za-z-:._]*`
+    #
+    # @return [Types::SwitchoverGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SwitchoverGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.switchover_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     target_db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/SwitchoverGlobalCluster AWS API Documentation
+    #
+    # @overload switchover_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def switchover_global_cluster(params = {}, options = {})
+      req = build_request(:switchover_global_cluster, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5370,7 +5440,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

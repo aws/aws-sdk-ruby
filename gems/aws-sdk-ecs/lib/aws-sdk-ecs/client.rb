@@ -7430,28 +7430,22 @@ module Aws::ECS
     #   task definition to run. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
-    #   When you create a policy for run-task, you can set the resource to be
-    #   the latest task definition revision, or a specific revision.
-    #
     #   The full ARN value must match the value that you specified as the
     #   `Resource` of the principal's permissions policy.
     #
-    #   When you specify the policy resource as the latest task definition
-    #   version (by setting the `Resource` in the policy to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`),
-    #   then set this value to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`.
+    #   When you specify a task definition, you must either specify a specific
+    #   revision, or all revisions in the ARN.
     #
-    #   When you specify the policy resource as a specific task definition
-    #   version (by setting the `Resource` in the policy to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`
-    #   or
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*`),
-    #   then set this value to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`.
+    #   To specify a specific revision, include the revision number in the
+    #   ARN. For example, to specify revision 2, use
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:2`.
+    #
+    #   To specify all revisions, use the wildcard (*) in the ARN. For
+    #   example, to specify all revisions, use
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*`.
     #
     #   For more information, see [Policy Resources for Amazon ECS][1] in the
-    #   Amazon Elastic Container Service developer Guide.
+    #   Amazon Elastic Container Service Developer Guide.
     #
     #
     #
@@ -10259,7 +10253,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

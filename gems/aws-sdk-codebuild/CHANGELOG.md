@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2024-03-29)
+------------------
+
+* Feature - Add new fleet status code for Reserved Capacity.
+
 1.107.0 (2024-03-25)
 ------------------
 

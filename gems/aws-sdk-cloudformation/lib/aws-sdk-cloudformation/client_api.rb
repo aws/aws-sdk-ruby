@@ -309,6 +309,7 @@ module Aws::CloudFormation
     PhysicalResourceId = Shapes::StringShape.new(name: 'PhysicalResourceId')
     PhysicalResourceIdContext = Shapes::ListShape.new(name: 'PhysicalResourceIdContext')
     PhysicalResourceIdContextKeyValuePair = Shapes::StructureShape.new(name: 'PhysicalResourceIdContextKeyValuePair')
+    PolicyAction = Shapes::StringShape.new(name: 'PolicyAction')
     PrivateTypeArn = Shapes::StringShape.new(name: 'PrivateTypeArn')
     Properties = Shapes::StringShape.new(name: 'Properties')
     PropertyDescription = Shapes::StringShape.new(name: 'PropertyDescription')
@@ -1500,6 +1501,7 @@ module Aws::CloudFormation
 
     RequiredActivatedTypes.member = Shapes::ShapeRef.new(shape: RequiredActivatedType)
 
+    ResourceChange.add_member(:policy_action, Shapes::ShapeRef.new(shape: PolicyAction, location_name: "PolicyAction"))
     ResourceChange.add_member(:action, Shapes::ShapeRef.new(shape: ChangeAction, location_name: "Action"))
     ResourceChange.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "LogicalResourceId"))
     ResourceChange.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, location_name: "PhysicalResourceId"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2024-04-01)
+------------------
+
+* Feature - This release fixes a broken link in the documentation.
+
 1.84.0 (2024-02-16)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.190.0 (2024-04-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-deadline` gem.
+
+3.189.0 (2024-03-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-codeconnections` gem.
+
 3.188.0 (2024-03-14)
 ------------------
 
