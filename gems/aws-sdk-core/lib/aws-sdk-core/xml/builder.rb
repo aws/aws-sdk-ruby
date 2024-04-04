@@ -10,6 +10,8 @@ module Aws
 
       def initialize(rules, options = {})
         @rules = rules
+        @location_name =
+          options[:location_name].nil? ? @rules.location_name : options[:location_name]
         @xml = options[:target] || []
         indent = options[:indent] || ''
         pad = options[:pad] || ''
@@ -17,7 +19,7 @@ module Aws
       end
 
       def to_xml(params)
-        structure(@rules.location_name, @rules, params)
+        structure(@location_name, @rules, params)
         @xml.join
       end
       alias serialize to_xml

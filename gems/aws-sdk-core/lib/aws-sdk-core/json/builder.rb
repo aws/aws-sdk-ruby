@@ -8,7 +8,7 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      def initialize(rules)
+      def initialize(rules, _options = {})
         @rules = rules
       end
 

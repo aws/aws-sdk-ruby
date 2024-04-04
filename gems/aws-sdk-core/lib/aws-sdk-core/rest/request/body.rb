@@ -49,24 +49,26 @@ module Aws
             params[@rules[:payload]]
           elsif @rules[:payload]
             params = params[@rules[:payload]]
-            if xml_builder? &&
-               @rules.shape.member?(@rules[:payload_member].location_name)
-              # serializing payload member for rest-xml is as follows:
-              # 1. Use the member locationName if the member value doesn't match the member's name (default)
-              # 2. Use the value of the locationName on the member's target if present
-              # 3. Use the shape name of the member's target
-              update_payload_location_name
+            if params
+              if xml_builder? &&
+                 @rules.shape.member?(@rules[:payload_member].location_name)
+                # serializing payload member name for rest-xml is as follows:
+                # 1. Use the member locationName if the member value doesn't match the member's name (default)
+                # 2. Use the value of the locationName on the member's target if present
+                # 3. Use the shape name of the member's target
+                serialize(@rules[:payload_member], params, location_name: payload_location_name)
+              else
+                serialize(@rules[:payload_member], params)
+              end
             end
-            serialize(@rules[:payload_member], params) if params
           else
             params = body_params(params)
             serialize(@rules, params) unless params.empty?
           end
         end
 
-        def update_payload_location_name
-          @rules[:payload_member].location_name =
-            @rules[:payload_member].shape['locationName'] ||
+        def payload_location_name
+          @rules[:payload_member].shape['locationName'] ||
             @rules[:payload_member].shape.name
         end
 
@@ -102,8 +104,8 @@ module Aws
           @serializer_class == Json::Builder
         end
 
-        def serialize(rules, params)
-          @serializer_class.new(rules).serialize(params)
+        def serialize(rules, params, location_name: nil)
+          @serializer_class.new(rules, location_name: location_name).serialize(params)
         end
 
         def body_params(params)
