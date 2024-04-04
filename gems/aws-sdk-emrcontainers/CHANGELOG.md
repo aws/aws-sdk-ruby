@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2024-04-04)
+------------------
+
+* Feature - This release adds support for integration with EKS AccessEntry APIs to enable automatic Cluster Access for EMR on EKS.
+
 1.31.0 (2024-03-25)
 ------------------
 

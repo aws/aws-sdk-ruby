@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2024-04-04)
+------------------
+
+* Feature - Adding support for X12 5010 HIPAA EDI version and associated transaction sets.
+
 1.5.0 (2024-03-29)
 ------------------
 

@@ -56,6 +56,10 @@ module Aws::CleanRooms
     BatchGetCollaborationAnalysisTemplateErrorList = Shapes::ListShape.new(name: 'BatchGetCollaborationAnalysisTemplateErrorList')
     BatchGetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateInput')
     BatchGetCollaborationAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateOutput')
+    BatchGetSchemaAnalysisRuleError = Shapes::StructureShape.new(name: 'BatchGetSchemaAnalysisRuleError')
+    BatchGetSchemaAnalysisRuleErrorList = Shapes::ListShape.new(name: 'BatchGetSchemaAnalysisRuleErrorList')
+    BatchGetSchemaAnalysisRuleInput = Shapes::StructureShape.new(name: 'BatchGetSchemaAnalysisRuleInput')
+    BatchGetSchemaAnalysisRuleOutput = Shapes::StructureShape.new(name: 'BatchGetSchemaAnalysisRuleOutput')
     BatchGetSchemaError = Shapes::StructureShape.new(name: 'BatchGetSchemaError')
     BatchGetSchemaErrorList = Shapes::ListShape.new(name: 'BatchGetSchemaErrorList')
     BatchGetSchemaInput = Shapes::StructureShape.new(name: 'BatchGetSchemaInput')
@@ -313,7 +317,18 @@ module Aws::CleanRooms
     ScalarFunctions = Shapes::StringShape.new(name: 'ScalarFunctions')
     ScalarFunctionsList = Shapes::ListShape.new(name: 'ScalarFunctionsList')
     Schema = Shapes::StructureShape.new(name: 'Schema')
+    SchemaAnalysisRuleList = Shapes::ListShape.new(name: 'SchemaAnalysisRuleList')
+    SchemaAnalysisRuleRequest = Shapes::StructureShape.new(name: 'SchemaAnalysisRuleRequest')
+    SchemaAnalysisRuleRequestList = Shapes::ListShape.new(name: 'SchemaAnalysisRuleRequestList')
+    SchemaConfiguration = Shapes::StringShape.new(name: 'SchemaConfiguration')
+    SchemaConfigurationList = Shapes::ListShape.new(name: 'SchemaConfigurationList')
     SchemaList = Shapes::ListShape.new(name: 'SchemaList')
+    SchemaStatus = Shapes::StringShape.new(name: 'SchemaStatus')
+    SchemaStatusDetail = Shapes::StructureShape.new(name: 'SchemaStatusDetail')
+    SchemaStatusDetailList = Shapes::ListShape.new(name: 'SchemaStatusDetailList')
+    SchemaStatusReason = Shapes::StructureShape.new(name: 'SchemaStatusReason')
+    SchemaStatusReasonCode = Shapes::StringShape.new(name: 'SchemaStatusReasonCode')
+    SchemaStatusReasonList = Shapes::ListShape.new(name: 'SchemaStatusReasonList')
     SchemaSummary = Shapes::StructureShape.new(name: 'SchemaSummary')
     SchemaSummaryList = Shapes::ListShape.new(name: 'SchemaSummaryList')
     SchemaType = Shapes::StringShape.new(name: 'SchemaType')
@@ -497,6 +512,22 @@ module Aws::CleanRooms
     BatchGetCollaborationAnalysisTemplateOutput.add_member(:collaboration_analysis_templates, Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplateList, required: true, location_name: "collaborationAnalysisTemplates"))
     BatchGetCollaborationAnalysisTemplateOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetCollaborationAnalysisTemplateErrorList, required: true, location_name: "errors"))
     BatchGetCollaborationAnalysisTemplateOutput.struct_class = Types::BatchGetCollaborationAnalysisTemplateOutput
+
+    BatchGetSchemaAnalysisRuleError.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
+    BatchGetSchemaAnalysisRuleError.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisRuleType, required: true, location_name: "type"))
+    BatchGetSchemaAnalysisRuleError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    BatchGetSchemaAnalysisRuleError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BatchGetSchemaAnalysisRuleError.struct_class = Types::BatchGetSchemaAnalysisRuleError
+
+    BatchGetSchemaAnalysisRuleErrorList.member = Shapes::ShapeRef.new(shape: BatchGetSchemaAnalysisRuleError)
+
+    BatchGetSchemaAnalysisRuleInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    BatchGetSchemaAnalysisRuleInput.add_member(:schema_analysis_rule_requests, Shapes::ShapeRef.new(shape: SchemaAnalysisRuleRequestList, required: true, location_name: "schemaAnalysisRuleRequests"))
+    BatchGetSchemaAnalysisRuleInput.struct_class = Types::BatchGetSchemaAnalysisRuleInput
+
+    BatchGetSchemaAnalysisRuleOutput.add_member(:analysis_rules, Shapes::ShapeRef.new(shape: SchemaAnalysisRuleList, required: true, location_name: "analysisRules"))
+    BatchGetSchemaAnalysisRuleOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetSchemaAnalysisRuleErrorList, required: true, location_name: "errors"))
+    BatchGetSchemaAnalysisRuleOutput.struct_class = Types::BatchGetSchemaAnalysisRuleOutput
 
     BatchGetSchemaError.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
     BatchGetSchemaError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
@@ -1451,9 +1482,34 @@ module Aws::CleanRooms
     Schema.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
     Schema.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     Schema.add_member(:type, Shapes::ShapeRef.new(shape: SchemaType, required: true, location_name: "type"))
+    Schema.add_member(:schema_status_details, Shapes::ShapeRef.new(shape: SchemaStatusDetailList, required: true, location_name: "schemaStatusDetails"))
     Schema.struct_class = Types::Schema
 
+    SchemaAnalysisRuleList.member = Shapes::ShapeRef.new(shape: AnalysisRule)
+
+    SchemaAnalysisRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
+    SchemaAnalysisRuleRequest.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisRuleType, required: true, location_name: "type"))
+    SchemaAnalysisRuleRequest.struct_class = Types::SchemaAnalysisRuleRequest
+
+    SchemaAnalysisRuleRequestList.member = Shapes::ShapeRef.new(shape: SchemaAnalysisRuleRequest)
+
+    SchemaConfigurationList.member = Shapes::ShapeRef.new(shape: SchemaConfiguration)
+
     SchemaList.member = Shapes::ShapeRef.new(shape: Schema)
+
+    SchemaStatusDetail.add_member(:status, Shapes::ShapeRef.new(shape: SchemaStatus, required: true, location_name: "status"))
+    SchemaStatusDetail.add_member(:reasons, Shapes::ShapeRef.new(shape: SchemaStatusReasonList, location_name: "reasons"))
+    SchemaStatusDetail.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: AnalysisRuleType, location_name: "analysisRuleType"))
+    SchemaStatusDetail.add_member(:configurations, Shapes::ShapeRef.new(shape: SchemaConfigurationList, location_name: "configurations"))
+    SchemaStatusDetail.struct_class = Types::SchemaStatusDetail
+
+    SchemaStatusDetailList.member = Shapes::ShapeRef.new(shape: SchemaStatusDetail)
+
+    SchemaStatusReason.add_member(:code, Shapes::ShapeRef.new(shape: SchemaStatusReasonCode, required: true, location_name: "code"))
+    SchemaStatusReason.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    SchemaStatusReason.struct_class = Types::SchemaStatusReason
+
+    SchemaStatusReasonList.member = Shapes::ShapeRef.new(shape: SchemaStatusReason)
 
     SchemaSummary.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
     SchemaSummary.add_member(:type, Shapes::ShapeRef.new(shape: SchemaType, required: true, location_name: "type"))
@@ -1633,6 +1689,19 @@ module Aws::CleanRooms
         o.http_request_uri = "/collaborations/{collaborationIdentifier}/batch-schema"
         o.input = Shapes::ShapeRef.new(shape: BatchGetSchemaInput)
         o.output = Shapes::ShapeRef.new(shape: BatchGetSchemaOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:batch_get_schema_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetSchemaAnalysisRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/batch-schema-analysis-rule"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetSchemaAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetSchemaAnalysisRuleOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

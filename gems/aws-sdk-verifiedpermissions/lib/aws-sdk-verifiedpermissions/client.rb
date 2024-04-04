@@ -627,6 +627,9 @@ module Aws::VerifiedPermissions
     #       cognito_user_pool_configuration: {
     #         user_pool_arn: "UserPoolArn", # required
     #         client_ids: ["ClientId"],
+    #         group_configuration: {
+    #           group_entity_type: "GroupEntityType", # required
+    #         },
     #       },
     #     },
     #     principal_entity_type: "PrincipalEntityType",
@@ -1117,6 +1120,7 @@ module Aws::VerifiedPermissions
     #   resp.configuration.cognito_user_pool_configuration.client_ids #=> Array
     #   resp.configuration.cognito_user_pool_configuration.client_ids[0] #=> String
     #   resp.configuration.cognito_user_pool_configuration.issuer #=> String
+    #   resp.configuration.cognito_user_pool_configuration.group_configuration.group_entity_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetIdentitySource AWS API Documentation
     #
@@ -1495,6 +1499,7 @@ module Aws::VerifiedPermissions
     #   * {Types::IsAuthorizedWithTokenOutput#decision #decision} => String
     #   * {Types::IsAuthorizedWithTokenOutput#determining_policies #determining_policies} => Array&lt;Types::DeterminingPolicyItem&gt;
     #   * {Types::IsAuthorizedWithTokenOutput#errors #errors} => Array&lt;Types::EvaluationErrorItem&gt;
+    #   * {Types::IsAuthorizedWithTokenOutput#principal #principal} => Types::EntityIdentifier
     #
     # @example Request syntax with placeholder values
     #
@@ -1543,6 +1548,8 @@ module Aws::VerifiedPermissions
     #   resp.determining_policies[0].policy_id #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].error_description #=> String
+    #   resp.principal.entity_type #=> String
+    #   resp.principal.entity_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/IsAuthorizedWithToken AWS API Documentation
     #
@@ -1623,6 +1630,7 @@ module Aws::VerifiedPermissions
     #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.client_ids #=> Array
     #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.client_ids[0] #=> String
     #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.issuer #=> String
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.group_configuration.group_entity_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListIdentitySources AWS API Documentation
     #
@@ -1952,6 +1960,9 @@ module Aws::VerifiedPermissions
     #       cognito_user_pool_configuration: {
     #         user_pool_arn: "UserPoolArn", # required
     #         client_ids: ["ClientId"],
+    #         group_configuration: {
+    #           group_entity_type: "GroupEntityType", # required
+    #         },
     #       },
     #     },
     #     principal_entity_type: "PrincipalEntityType",
@@ -2245,7 +2256,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

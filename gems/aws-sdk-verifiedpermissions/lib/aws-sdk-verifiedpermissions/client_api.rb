@@ -28,6 +28,9 @@ module Aws::VerifiedPermissions
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientIds = Shapes::ListShape.new(name: 'ClientIds')
+    CognitoGroupConfiguration = Shapes::StructureShape.new(name: 'CognitoGroupConfiguration')
+    CognitoGroupConfigurationDetail = Shapes::StructureShape.new(name: 'CognitoGroupConfigurationDetail')
+    CognitoGroupConfigurationItem = Shapes::StructureShape.new(name: 'CognitoGroupConfigurationItem')
     CognitoUserPoolConfiguration = Shapes::StructureShape.new(name: 'CognitoUserPoolConfiguration')
     CognitoUserPoolConfigurationDetail = Shapes::StructureShape.new(name: 'CognitoUserPoolConfigurationDetail')
     CognitoUserPoolConfigurationItem = Shapes::StructureShape.new(name: 'CognitoUserPoolConfigurationItem')
@@ -77,6 +80,7 @@ module Aws::VerifiedPermissions
     GetPolicyTemplateOutput = Shapes::StructureShape.new(name: 'GetPolicyTemplateOutput')
     GetSchemaInput = Shapes::StructureShape.new(name: 'GetSchemaInput')
     GetSchemaOutput = Shapes::StructureShape.new(name: 'GetSchemaOutput')
+    GroupEntityType = Shapes::StringShape.new(name: 'GroupEntityType')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdentitySourceDetails = Shapes::StructureShape.new(name: 'IdentitySourceDetails')
     IdentitySourceFilter = Shapes::StructureShape.new(name: 'IdentitySourceFilter')
@@ -149,6 +153,7 @@ module Aws::VerifiedPermissions
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimestampFormat = Shapes::TimestampShape.new(name: 'TimestampFormat', timestampFormat: "iso8601")
     Token = Shapes::StringShape.new(name: 'Token')
+    UpdateCognitoGroupConfiguration = Shapes::StructureShape.new(name: 'UpdateCognitoGroupConfiguration')
     UpdateCognitoUserPoolConfiguration = Shapes::StructureShape.new(name: 'UpdateCognitoUserPoolConfiguration')
     UpdateConfiguration = Shapes::UnionShape.new(name: 'UpdateConfiguration')
     UpdateIdentitySourceInput = Shapes::StructureShape.new(name: 'UpdateIdentitySourceInput')
@@ -217,18 +222,30 @@ module Aws::VerifiedPermissions
 
     ClientIds.member = Shapes::ShapeRef.new(shape: ClientId)
 
+    CognitoGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    CognitoGroupConfiguration.struct_class = Types::CognitoGroupConfiguration
+
+    CognitoGroupConfigurationDetail.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, location_name: "groupEntityType"))
+    CognitoGroupConfigurationDetail.struct_class = Types::CognitoGroupConfigurationDetail
+
+    CognitoGroupConfigurationItem.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, location_name: "groupEntityType"))
+    CognitoGroupConfigurationItem.struct_class = Types::CognitoGroupConfigurationItem
+
     CognitoUserPoolConfiguration.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
     CognitoUserPoolConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    CognitoUserPoolConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: CognitoGroupConfiguration, location_name: "groupConfiguration"))
     CognitoUserPoolConfiguration.struct_class = Types::CognitoUserPoolConfiguration
 
     CognitoUserPoolConfigurationDetail.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
     CognitoUserPoolConfigurationDetail.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, required: true, location_name: "clientIds"))
     CognitoUserPoolConfigurationDetail.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    CognitoUserPoolConfigurationDetail.add_member(:group_configuration, Shapes::ShapeRef.new(shape: CognitoGroupConfigurationDetail, location_name: "groupConfiguration"))
     CognitoUserPoolConfigurationDetail.struct_class = Types::CognitoUserPoolConfigurationDetail
 
     CognitoUserPoolConfigurationItem.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
     CognitoUserPoolConfigurationItem.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, required: true, location_name: "clientIds"))
     CognitoUserPoolConfigurationItem.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    CognitoUserPoolConfigurationItem.add_member(:group_configuration, Shapes::ShapeRef.new(shape: CognitoGroupConfigurationItem, location_name: "groupConfiguration"))
     CognitoUserPoolConfigurationItem.struct_class = Types::CognitoUserPoolConfigurationItem
 
     Configuration.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfiguration, location_name: "cognitoUserPoolConfiguration"))
@@ -488,6 +505,7 @@ module Aws::VerifiedPermissions
     IsAuthorizedWithTokenOutput.add_member(:decision, Shapes::ShapeRef.new(shape: Decision, required: true, location_name: "decision"))
     IsAuthorizedWithTokenOutput.add_member(:determining_policies, Shapes::ShapeRef.new(shape: DeterminingPolicyList, required: true, location_name: "determiningPolicies"))
     IsAuthorizedWithTokenOutput.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
+    IsAuthorizedWithTokenOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     IsAuthorizedWithTokenOutput.struct_class = Types::IsAuthorizedWithTokenOutput
 
     ListIdentitySourcesInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -661,8 +679,12 @@ module Aws::VerifiedPermissions
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UpdateCognitoGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    UpdateCognitoGroupConfiguration.struct_class = Types::UpdateCognitoGroupConfiguration
+
     UpdateCognitoUserPoolConfiguration.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
     UpdateCognitoUserPoolConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    UpdateCognitoUserPoolConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: UpdateCognitoGroupConfiguration, location_name: "groupConfiguration"))
     UpdateCognitoUserPoolConfiguration.struct_class = Types::UpdateCognitoUserPoolConfiguration
 
     UpdateConfiguration.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: UpdateCognitoUserPoolConfiguration, location_name: "cognitoUserPoolConfiguration"))

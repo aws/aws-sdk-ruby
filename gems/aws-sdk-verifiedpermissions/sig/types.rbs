@@ -73,9 +73,25 @@ module Aws::VerifiedPermissions
       SENSITIVE: []
     end
 
+    class CognitoGroupConfiguration
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_entity_type]
+    end
+
+    class CognitoGroupConfigurationDetail
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_entity_type]
+    end
+
+    class CognitoGroupConfigurationItem
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_entity_type]
+    end
+
     class CognitoUserPoolConfiguration
       attr_accessor user_pool_arn: ::String
       attr_accessor client_ids: ::Array[::String]
+      attr_accessor group_configuration: Types::CognitoGroupConfiguration
       SENSITIVE: []
     end
 
@@ -83,6 +99,7 @@ module Aws::VerifiedPermissions
       attr_accessor user_pool_arn: ::String
       attr_accessor client_ids: ::Array[::String]
       attr_accessor issuer: ::String
+      attr_accessor group_configuration: Types::CognitoGroupConfigurationDetail
       SENSITIVE: []
     end
 
@@ -90,6 +107,7 @@ module Aws::VerifiedPermissions
       attr_accessor user_pool_arn: ::String
       attr_accessor client_ids: ::Array[::String]
       attr_accessor issuer: ::String
+      attr_accessor group_configuration: Types::CognitoGroupConfigurationItem
       SENSITIVE: []
     end
 
@@ -440,6 +458,7 @@ module Aws::VerifiedPermissions
       attr_accessor decision: ("ALLOW" | "DENY")
       attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
       attr_accessor errors: ::Array[Types::EvaluationErrorItem]
+      attr_accessor principal: Types::EntityIdentifier
       SENSITIVE: []
     end
 
@@ -668,9 +687,15 @@ module Aws::VerifiedPermissions
       SENSITIVE: []
     end
 
+    class UpdateCognitoGroupConfiguration
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_entity_type]
+    end
+
     class UpdateCognitoUserPoolConfiguration
       attr_accessor user_pool_arn: ::String
       attr_accessor client_ids: ::Array[::String]
+      attr_accessor group_configuration: Types::UpdateCognitoGroupConfiguration
       SENSITIVE: []
     end
 

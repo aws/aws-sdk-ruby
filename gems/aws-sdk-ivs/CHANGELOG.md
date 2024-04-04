@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-04-04)
+------------------
+
+* Feature - API update to include an SRT ingest endpoint and passphrase for all channels.
+
 1.45.0 (2024-02-01)
 ------------------
 

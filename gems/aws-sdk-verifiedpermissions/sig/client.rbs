@@ -133,7 +133,10 @@ module Aws
                                     configuration: {
                                       cognito_user_pool_configuration: {
                                         user_pool_arn: ::String,
-                                        client_ids: Array[::String]?
+                                        client_ids: Array[::String]?,
+                                        group_configuration: {
+                                          group_entity_type: ::String
+                                        }?
                                       }?
                                     },
                                     ?principal_entity_type: ::String
@@ -375,6 +378,7 @@ module Aws
         def decision: () -> ("ALLOW" | "DENY")
         def determining_policies: () -> ::Array[Types::DeterminingPolicyItem]
         def errors: () -> ::Array[Types::EvaluationErrorItem]
+        def principal: () -> Types::EntityIdentifier
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#is_authorized_with_token-instance_method
       def is_authorized_with_token: (
@@ -516,7 +520,10 @@ module Aws
                                     update_configuration: {
                                       cognito_user_pool_configuration: {
                                         user_pool_arn: ::String,
-                                        client_ids: Array[::String]?
+                                        client_ids: Array[::String]?,
+                                        group_configuration: {
+                                          group_entity_type: ::String
+                                        }?
                                       }?
                                     },
                                     ?principal_entity_type: ::String

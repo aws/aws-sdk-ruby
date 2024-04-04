@@ -1410,6 +1410,12 @@ module Aws::EMRContainers
     # @option params [String] :next_token
     #   The token for the next set of virtual clusters to return.
     #
+    # @option params [Boolean] :eks_access_entry_integrated
+    #   Optional Boolean that specifies whether the operation should return
+    #   the virtual clusters that have the access entry integration enabled or
+    #   disabled. If not specified, the operation returns all applicable
+    #   virtual clusters.
+    #
     # @return [Types::ListVirtualClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListVirtualClustersResponse#virtual_clusters #virtual_clusters} => Array&lt;Types::VirtualCluster&gt;
@@ -1427,6 +1433,7 @@ module Aws::EMRContainers
     #     states: ["RUNNING"], # accepts RUNNING, TERMINATING, TERMINATED, ARRESTED
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     eks_access_entry_integrated: false,
     #   })
     #
     # @example Response structure
@@ -1651,7 +1658,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

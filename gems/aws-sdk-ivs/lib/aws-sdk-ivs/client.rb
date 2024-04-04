@@ -417,6 +417,8 @@ module Aws::IVS
     #   resp.channels[0].playback_url #=> String
     #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channels[0].recording_configuration_arn #=> String
+    #   resp.channels[0].srt.endpoint #=> String
+    #   resp.channels[0].srt.passphrase #=> String
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
     #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -518,7 +520,8 @@ module Aws::IVS
     #   Default: `false`.
     #
     # @option params [Boolean] :insecure_ingest
-    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
     #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
@@ -599,6 +602,8 @@ module Aws::IVS
     #   resp.channel.playback_url #=> String
     #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
+    #   resp.channel.srt.endpoint #=> String
+    #   resp.channel.srt.passphrase #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -1014,6 +1019,8 @@ module Aws::IVS
     #   resp.channel.playback_url #=> String
     #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
+    #   resp.channel.srt.endpoint #=> String
+    #   resp.channel.srt.passphrase #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -1245,6 +1252,8 @@ module Aws::IVS
     #   resp.stream_session.channel.playback_url #=> String
     #   resp.stream_session.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.stream_session.channel.recording_configuration_arn #=> String
+    #   resp.stream_session.channel.srt.endpoint #=> String
+    #   resp.stream_session.channel.srt.passphrase #=> String
     #   resp.stream_session.channel.tags #=> Hash
     #   resp.stream_session.channel.tags["TagKey"] #=> String
     #   resp.stream_session.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -1918,7 +1927,8 @@ module Aws::IVS
     #   Whether the channel is private (enabled for playback authorization).
     #
     # @option params [Boolean] :insecure_ingest
-    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
     #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
@@ -1984,6 +1994,8 @@ module Aws::IVS
     #   resp.channel.playback_url #=> String
     #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
+    #   resp.channel.srt.endpoint #=> String
+    #   resp.channel.srt.passphrase #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -2077,7 +2089,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

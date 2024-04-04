@@ -452,7 +452,7 @@ module Aws::CleanRooms
     #   Currently accepts collaboration ID.
     #
     # @option params [required, Array<String>] :names
-    #   The names for the schema objects to retrieve.&gt;
+    #   The names for the schema objects to retrieve.
     #
     # @return [Types::BatchGetSchemaOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -486,6 +486,14 @@ module Aws::CleanRooms
     #   resp.schemas[0].create_time #=> Time
     #   resp.schemas[0].update_time #=> Time
     #   resp.schemas[0].type #=> String, one of "TABLE"
+    #   resp.schemas[0].schema_status_details #=> Array
+    #   resp.schemas[0].schema_status_details[0].status #=> String, one of "READY", "NOT_READY"
+    #   resp.schemas[0].schema_status_details[0].reasons #=> Array
+    #   resp.schemas[0].schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
+    #   resp.schemas[0].schema_status_details[0].reasons[0].message #=> String
+    #   resp.schemas[0].schema_status_details[0].analysis_rule_type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.schemas[0].schema_status_details[0].configurations #=> Array
+    #   resp.schemas[0].schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
     #   resp.errors #=> Array
     #   resp.errors[0].name #=> String
     #   resp.errors[0].code #=> String
@@ -497,6 +505,84 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def batch_get_schema(params = {}, options = {})
       req = build_request(:batch_get_schema, params)
+      req.send_request(options)
+    end
+
+    # Retrieves multiple analysis rule schemas.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The unique identifier of the collaboration that contains the schema
+    #   analysis rule.
+    #
+    # @option params [required, Array<Types::SchemaAnalysisRuleRequest>] :schema_analysis_rule_requests
+    #   The information that's necessary to retrieve a schema analysis rule.
+    #
+    # @return [Types::BatchGetSchemaAnalysisRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetSchemaAnalysisRuleOutput#analysis_rules #analysis_rules} => Array&lt;Types::AnalysisRule&gt;
+    #   * {Types::BatchGetSchemaAnalysisRuleOutput#errors #errors} => Array&lt;Types::BatchGetSchemaAnalysisRuleError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_schema_analysis_rule({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     schema_analysis_rule_requests: [ # required
+    #       {
+    #         name: "TableAlias", # required
+    #         type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_rules #=> Array
+    #   resp.analysis_rules[0].collaboration_id #=> String
+    #   resp.analysis_rules[0].type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.analysis_rules[0].name #=> String
+    #   resp.analysis_rules[0].create_time #=> Time
+    #   resp.analysis_rules[0].update_time #=> Time
+    #   resp.analysis_rules[0].policy.v1.list.join_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.list.join_columns[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.list.allowed_join_operators #=> Array
+    #   resp.analysis_rules[0].policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
+    #   resp.analysis_rules[0].policy.v1.list.list_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.list.list_columns[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.aggregation.aggregate_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.aggregation.aggregate_columns[0].column_names #=> Array
+    #   resp.analysis_rules[0].policy.v1.aggregation.aggregate_columns[0].column_names[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.aggregation.aggregate_columns[0].function #=> String, one of "SUM", "SUM_DISTINCT", "COUNT", "COUNT_DISTINCT", "AVG"
+    #   resp.analysis_rules[0].policy.v1.aggregation.join_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.aggregation.join_columns[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.aggregation.join_required #=> String, one of "QUERY_RUNNER"
+    #   resp.analysis_rules[0].policy.v1.aggregation.allowed_join_operators #=> Array
+    #   resp.analysis_rules[0].policy.v1.aggregation.allowed_join_operators[0] #=> String, one of "OR", "AND"
+    #   resp.analysis_rules[0].policy.v1.aggregation.dimension_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.aggregation.dimension_columns[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.aggregation.scalar_functions #=> Array
+    #   resp.analysis_rules[0].policy.v1.aggregation.scalar_functions[0] #=> String, one of "ABS", "CAST", "CEILING", "COALESCE", "CONVERT", "CURRENT_DATE", "DATEADD", "EXTRACT", "FLOOR", "GETDATE", "LN", "LOG", "LOWER", "ROUND", "RTRIM", "SQRT", "SUBSTRING", "TO_CHAR", "TO_DATE", "TO_NUMBER", "TO_TIMESTAMP", "TRIM", "TRUNC", "UPPER"
+    #   resp.analysis_rules[0].policy.v1.aggregation.output_constraints #=> Array
+    #   resp.analysis_rules[0].policy.v1.aggregation.output_constraints[0].column_name #=> String
+    #   resp.analysis_rules[0].policy.v1.aggregation.output_constraints[0].minimum #=> Integer
+    #   resp.analysis_rules[0].policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rules[0].policy.v1.custom.allowed_analyses #=> Array
+    #   resp.analysis_rules[0].policy.v1.custom.allowed_analyses[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.custom.allowed_analysis_providers #=> Array
+    #   resp.analysis_rules[0].policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.custom.differential_privacy.columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].name #=> String
+    #   resp.errors[0].type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetSchemaAnalysisRule AWS API Documentation
+    #
+    # @overload batch_get_schema_analysis_rule(params = {})
+    # @param [Hash] params ({})
+    def batch_get_schema_analysis_rule(params = {}, options = {})
+      req = build_request(:batch_get_schema_analysis_rule, params)
       req.send_request(options)
     end
 
@@ -883,7 +969,7 @@ module Aws::CleanRooms
     #           join_required: "QUERY_RUNNER", # accepts QUERY_RUNNER
     #           allowed_join_operators: ["OR"], # accepts OR, AND
     #           dimension_columns: ["AnalysisRuleColumnName"], # required
-    #           scalar_functions: ["TRUNC"], # required, accepts TRUNC, ABS, CEILING, FLOOR, LN, LOG, ROUND, SQRT, CAST, LOWER, RTRIM, UPPER, COALESCE
+    #           scalar_functions: ["ABS"], # required, accepts ABS, CAST, CEILING, COALESCE, CONVERT, CURRENT_DATE, DATEADD, EXTRACT, FLOOR, GETDATE, LN, LOG, LOWER, ROUND, RTRIM, SQRT, SUBSTRING, TO_CHAR, TO_DATE, TO_NUMBER, TO_TIMESTAMP, TRIM, TRUNC, UPPER
     #           output_constraints: [ # required
     #             {
     #               column_name: "AnalysisRuleColumnName", # required
@@ -929,7 +1015,7 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.scalar_functions #=> Array
-    #   resp.analysis_rule.policy.v1.aggregation.scalar_functions[0] #=> String, one of "TRUNC", "ABS", "CEILING", "FLOOR", "LN", "LOG", "ROUND", "SQRT", "CAST", "LOWER", "RTRIM", "UPPER", "COALESCE"
+    #   resp.analysis_rule.policy.v1.aggregation.scalar_functions[0] #=> String, one of "ABS", "CAST", "CEILING", "COALESCE", "CONVERT", "CURRENT_DATE", "DATEADD", "EXTRACT", "FLOOR", "GETDATE", "LN", "LOG", "LOWER", "ROUND", "RTRIM", "SQRT", "SUBSTRING", "TO_CHAR", "TO_DATE", "TO_NUMBER", "TO_TIMESTAMP", "TRIM", "TRUNC", "UPPER"
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
@@ -1783,7 +1869,7 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.scalar_functions #=> Array
-    #   resp.analysis_rule.policy.v1.aggregation.scalar_functions[0] #=> String, one of "TRUNC", "ABS", "CEILING", "FLOOR", "LN", "LOG", "ROUND", "SQRT", "CAST", "LOWER", "RTRIM", "UPPER", "COALESCE"
+    #   resp.analysis_rule.policy.v1.aggregation.scalar_functions[0] #=> String, one of "ABS", "CAST", "CEILING", "COALESCE", "CONVERT", "CURRENT_DATE", "DATEADD", "EXTRACT", "FLOOR", "GETDATE", "LN", "LOG", "LOWER", "ROUND", "RTRIM", "SQRT", "SUBSTRING", "TO_CHAR", "TO_DATE", "TO_NUMBER", "TO_TIMESTAMP", "TRIM", "TRUNC", "UPPER"
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
@@ -2035,6 +2121,14 @@ module Aws::CleanRooms
     #   resp.schema.create_time #=> Time
     #   resp.schema.update_time #=> Time
     #   resp.schema.type #=> String, one of "TABLE"
+    #   resp.schema.schema_status_details #=> Array
+    #   resp.schema.schema_status_details[0].status #=> String, one of "READY", "NOT_READY"
+    #   resp.schema.schema_status_details[0].reasons #=> Array
+    #   resp.schema.schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
+    #   resp.schema.schema_status_details[0].reasons[0].message #=> String
+    #   resp.schema.schema_status_details[0].analysis_rule_type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.schema.schema_status_details[0].configurations #=> Array
+    #   resp.schema.schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetSchema AWS API Documentation
     #
@@ -2096,7 +2190,7 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.scalar_functions #=> Array
-    #   resp.analysis_rule.policy.v1.aggregation.scalar_functions[0] #=> String, one of "TRUNC", "ABS", "CEILING", "FLOOR", "LN", "LOG", "ROUND", "SQRT", "CAST", "LOWER", "RTRIM", "UPPER", "COALESCE"
+    #   resp.analysis_rule.policy.v1.aggregation.scalar_functions[0] #=> String, one of "ABS", "CAST", "CEILING", "COALESCE", "CONVERT", "CURRENT_DATE", "DATEADD", "EXTRACT", "FLOOR", "GETDATE", "LN", "LOG", "LOWER", "ROUND", "RTRIM", "SQRT", "SUBSTRING", "TO_CHAR", "TO_DATE", "TO_NUMBER", "TO_TIMESTAMP", "TRIM", "TRUNC", "UPPER"
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
@@ -3379,7 +3473,7 @@ module Aws::CleanRooms
     #           join_required: "QUERY_RUNNER", # accepts QUERY_RUNNER
     #           allowed_join_operators: ["OR"], # accepts OR, AND
     #           dimension_columns: ["AnalysisRuleColumnName"], # required
-    #           scalar_functions: ["TRUNC"], # required, accepts TRUNC, ABS, CEILING, FLOOR, LN, LOG, ROUND, SQRT, CAST, LOWER, RTRIM, UPPER, COALESCE
+    #           scalar_functions: ["ABS"], # required, accepts ABS, CAST, CEILING, COALESCE, CONVERT, CURRENT_DATE, DATEADD, EXTRACT, FLOOR, GETDATE, LN, LOG, LOWER, ROUND, RTRIM, SQRT, SUBSTRING, TO_CHAR, TO_DATE, TO_NUMBER, TO_TIMESTAMP, TRIM, TRUNC, UPPER
     #           output_constraints: [ # required
     #             {
     #               column_name: "AnalysisRuleColumnName", # required
@@ -3425,7 +3519,7 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.scalar_functions #=> Array
-    #   resp.analysis_rule.policy.v1.aggregation.scalar_functions[0] #=> String, one of "TRUNC", "ABS", "CEILING", "FLOOR", "LN", "LOG", "ROUND", "SQRT", "CAST", "LOWER", "RTRIM", "UPPER", "COALESCE"
+    #   resp.analysis_rule.policy.v1.aggregation.scalar_functions[0] #=> String, one of "ABS", "CAST", "CEILING", "COALESCE", "CONVERT", "CURRENT_DATE", "DATEADD", "EXTRACT", "FLOOR", "GETDATE", "LN", "LOG", "LOWER", "ROUND", "RTRIM", "SQRT", "SUBSTRING", "TO_CHAR", "TO_DATE", "TO_NUMBER", "TO_TIMESTAMP", "TRIM", "TRUNC", "UPPER"
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
@@ -3699,7 +3793,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

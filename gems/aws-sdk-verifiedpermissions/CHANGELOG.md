@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-04-04)
+------------------
+
+* Feature - Adds GroupConfiguration field to Identity Source API's
+
 1.17.0 (2024-03-06)
 ------------------
 

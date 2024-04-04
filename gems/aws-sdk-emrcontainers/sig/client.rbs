@@ -368,7 +368,8 @@ module Aws
                                    ?created_before: ::Time,
                                    ?states: Array[("RUNNING" | "TERMINATING" | "TERMINATED" | "ARRESTED")],
                                    ?max_results: ::Integer,
-                                   ?next_token: ::String
+                                   ?next_token: ::String,
+                                   ?eks_access_entry_integrated: bool
                                  ) -> _ListVirtualClustersResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualClustersResponseSuccess
 

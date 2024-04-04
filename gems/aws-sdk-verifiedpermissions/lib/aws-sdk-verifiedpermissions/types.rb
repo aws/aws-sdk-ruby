@@ -201,13 +201,13 @@ module Aws::VerifiedPermissions
     #   @return [Types::EntityIdentifier]
     #
     # @!attribute [rw] action
-    #   Specifies the requested action to be authorized. For example, is the
-    #   principal authorized to perform this action on the resource?
+    #   Specifies the requested action to be authorized. For example,
+    #   `PhotoFlash::ReadPhoto`.
     #   @return [Types::ActionIdentifier]
     #
     # @!attribute [rw] resource
-    #   Specifies the resource for which the authorization decision is to be
-    #   made.
+    #   Specifies the resource that you want an authorization decision for.
+    #   For example, `PhotoFlash::Photo`.
     #   @return [Types::EntityIdentifier]
     #
     # @!attribute [rw] context
@@ -262,9 +262,9 @@ module Aws::VerifiedPermissions
     #   @return [Array<Types::DeterminingPolicyItem>]
     #
     # @!attribute [rw] errors
-    #   Errors that occurred while making an authorization decision, for
-    #   example, a policy references an Entity or entity Attribute that does
-    #   not exist in the slice.
+    #   Errors that occurred while making an authorization decision. For
+    #   example, a policy might reference an entity or attribute that
+    #   doesn't exist in the request.
     #   @return [Array<Types::EvaluationErrorItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedOutputItem AWS API Documentation
@@ -278,6 +278,78 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
+    # The type of entity that a policy store maps to groups from an Amazon
+    # Cognito user pool identity source.
+    #
+    # This data type is part of a [CognitoUserPoolConfiguration][1]
+    # structure and is a request parameter in [CreateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfiguration.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+    #
+    # @!attribute [rw] group_entity_type
+    #   The name of the schema entity type that's mapped to the user pool
+    #   group. Defaults to `AWS::CognitoGroup`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoGroupConfiguration AWS API Documentation
+    #
+    class CognitoGroupConfiguration < Struct.new(
+      :group_entity_type)
+      SENSITIVE = [:group_entity_type]
+      include Aws::Structure
+    end
+
+    # The type of entity that a policy store maps to groups from an Amazon
+    # Cognito user pool identity source.
+    #
+    # This data type is part of an [CognitoUserPoolConfigurationDetail][1]
+    # structure and is a response parameter to [GetIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationItem.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+    #
+    # @!attribute [rw] group_entity_type
+    #   The name of the schema entity type that's mapped to the user pool
+    #   group. Defaults to `AWS::CognitoGroup`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoGroupConfigurationDetail AWS API Documentation
+    #
+    class CognitoGroupConfigurationDetail < Struct.new(
+      :group_entity_type)
+      SENSITIVE = [:group_entity_type]
+      include Aws::Structure
+    end
+
+    # The type of entity that a policy store maps to groups from an Amazon
+    # Cognito user pool identity source.
+    #
+    # This data type is part of an [CognitoUserPoolConfigurationItem][1]
+    # structure and is a response parameter to [ListIdentitySources][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationDetail.html
+    # [2]: http://forums.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+    #
+    # @!attribute [rw] group_entity_type
+    #   The name of the schema entity type that's mapped to the user pool
+    #   group. Defaults to `AWS::CognitoGroup`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoGroupConfigurationItem AWS API Documentation
+    #
+    class CognitoGroupConfigurationItem < Struct.new(
+      :group_entity_type)
+      SENSITIVE = [:group_entity_type]
+      include Aws::Structure
+    end
+
     # The configuration for an identity source that represents a connection
     # to an Amazon Cognito user pool used as an identity provider for
     # Verified Permissions.
@@ -287,7 +359,8 @@ module Aws::VerifiedPermissions
     # [CreateIdentitySource][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
+    # \{"groupEntityType": "MyCorp::Group"\}\}`
     #
     #
     #
@@ -313,11 +386,17 @@ module Aws::VerifiedPermissions
     #   Example: `"ClientIds": ["&ExampleCogClientId;"]`
     #   @return [Array<String>]
     #
+    # @!attribute [rw] group_configuration
+    #   The type of entity that a policy store maps to groups from an Amazon
+    #   Cognito user pool identity source.
+    #   @return [Types::CognitoGroupConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfiguration AWS API Documentation
     #
     class CognitoUserPoolConfiguration < Struct.new(
       :user_pool_arn,
-      :client_ids)
+      :client_ids,
+      :group_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -331,7 +410,8 @@ module Aws::VerifiedPermissions
     # [GetIdentitySource][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
+    # \{"groupEntityType": "MyCorp::Group"\}\}`
     #
     #
     #
@@ -365,12 +445,18 @@ module Aws::VerifiedPermissions
     #   "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5"`
     #   @return [String]
     #
+    # @!attribute [rw] group_configuration
+    #   The type of entity that a policy store maps to groups from an Amazon
+    #   Cognito user pool identity source.
+    #   @return [Types::CognitoGroupConfigurationDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfigurationDetail AWS API Documentation
     #
     class CognitoUserPoolConfigurationDetail < Struct.new(
       :user_pool_arn,
       :client_ids,
-      :issuer)
+      :issuer,
+      :group_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -384,7 +470,8 @@ module Aws::VerifiedPermissions
     # [ListIdentitySources][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
+    # \{"groupEntityType": "MyCorp::Group"\}\}`
     #
     #
     #
@@ -418,12 +505,18 @@ module Aws::VerifiedPermissions
     #   "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5"`
     #   @return [String]
     #
+    # @!attribute [rw] group_configuration
+    #   The type of entity that a policy store maps to groups from an Amazon
+    #   Cognito user pool identity source.
+    #   @return [Types::CognitoGroupConfigurationItem]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfigurationItem AWS API Documentation
     #
     class CognitoUserPoolConfigurationItem < Struct.new(
       :user_pool_arn,
       :client_ids,
-      :issuer)
+      :issuer,
+      :group_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -434,7 +527,7 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> At this time, the only valid member of this structure is a Amazon
     # Cognito user pool configuration.
     #
-    #  You must specify a `userPoolArn`, and optionally, a `ClientId`.
+    #  Specifies a `userPoolArn`, a `groupConfiguration`, and a `ClientId`.
     #
     #  </note>
     #
@@ -455,7 +548,8 @@ module Aws::VerifiedPermissions
     #
     #   Example:
     #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
-    #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}\}`
+    #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
+    #   \{"groupEntityType": "MyCorp::Group"\}\}\}`
     #
     #
     #
@@ -490,11 +584,13 @@ module Aws::VerifiedPermissions
     #   Contains configuration details of a Amazon Cognito user pool that
     #   Verified Permissions can use as a source of authenticated identities
     #   as entities. It specifies the [Amazon Resource Name (ARN)][1] of a
-    #   Amazon Cognito user pool and one or more application client IDs.
+    #   Amazon Cognito user pool, the policy store entity that you want to
+    #   assign to user groups, and one or more application client IDs.
     #
     #   Example:
     #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
-    #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}\}`
+    #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
+    #   \{"groupEntityType": "MyCorp::Group"\}\}\}`
     #
     #
     #
@@ -529,11 +625,13 @@ module Aws::VerifiedPermissions
     #   Contains configuration details of a Amazon Cognito user pool that
     #   Verified Permissions can use as a source of authenticated identities
     #   as entities. It specifies the [Amazon Resource Name (ARN)][1] of a
-    #   Amazon Cognito user pool and one or more application client IDs.
+    #   Amazon Cognito user pool, the policy store entity that you want to
+    #   assign to user groups, and one or more application client IDs.
     #
     #   Example:
     #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
-    #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}\}`
+    #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
+    #   \{"groupEntityType": "MyCorp::Group"\}\}\}`
     #
     #
     #
@@ -1900,12 +1998,17 @@ module Aws::VerifiedPermissions
     #   not exist in the slice.
     #   @return [Array<Types::EvaluationErrorItem>]
     #
+    # @!attribute [rw] principal
+    #   The identifier of the principal in the ID or access token.
+    #   @return [Types::EntityIdentifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/IsAuthorizedWithTokenOutput AWS API Documentation
     #
     class IsAuthorizedWithTokenOutput < Struct.new(
       :decision,
       :determining_policies,
-      :errors)
+      :errors,
+      :principal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2823,6 +2926,22 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
+    # The user group entities from an Amazon Cognito user pool identity
+    # source.
+    #
+    # @!attribute [rw] group_entity_type
+    #   The name of the schema entity type that's mapped to the user pool
+    #   group. Defaults to `AWS::CognitoGroup`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdateCognitoGroupConfiguration AWS API Documentation
+    #
+    class UpdateCognitoGroupConfiguration < Struct.new(
+      :group_entity_type)
+      SENSITIVE = [:group_entity_type]
+      include Aws::Structure
+    end
+
     # Contains configuration details of a Amazon Cognito user pool for use
     # with an identity source.
     #
@@ -2840,11 +2959,17 @@ module Aws::VerifiedPermissions
     #   Amazon Cognito user pool.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] group_configuration
+    #   The configuration of the user groups from an Amazon Cognito user
+    #   pool identity source.
+    #   @return [Types::UpdateCognitoGroupConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdateCognitoUserPoolConfiguration AWS API Documentation
     #
     class UpdateCognitoUserPoolConfiguration < Struct.new(
       :user_pool_arn,
-      :client_ids)
+      :client_ids,
+      :group_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

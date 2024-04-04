@@ -62,6 +62,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::BatchGetCollaborationAnalysisTemplate.build(context)
           when :batch_get_schema
             Aws::CleanRooms::Endpoints::BatchGetSchema.build(context)
+          when :batch_get_schema_analysis_rule
+            Aws::CleanRooms::Endpoints::BatchGetSchemaAnalysisRule.build(context)
           when :create_analysis_template
             Aws::CleanRooms::Endpoints::CreateAnalysisTemplate.build(context)
           when :create_collaboration

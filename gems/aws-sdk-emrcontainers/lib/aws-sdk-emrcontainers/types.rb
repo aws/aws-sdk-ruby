@@ -617,6 +617,19 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # The request exceeded the Amazon EKS API operation limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/EKSRequestThrottledException AWS API Documentation
+    #
+    class EKSRequestThrottledException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The information about the Amazon EKS cluster.
     #
     # @!attribute [rw] namespace
@@ -1257,6 +1270,13 @@ module Aws::EMRContainers
     #   The token for the next set of virtual clusters to return.
     #   @return [String]
     #
+    # @!attribute [rw] eks_access_entry_integrated
+    #   Optional Boolean that specifies whether the operation should return
+    #   the virtual clusters that have the access entry integration enabled
+    #   or disabled. If not specified, the operation returns all applicable
+    #   virtual clusters.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListVirtualClustersRequest AWS API Documentation
     #
     class ListVirtualClustersRequest < Struct.new(
@@ -1266,7 +1286,8 @@ module Aws::EMRContainers
       :created_before,
       :states,
       :max_results,
-      :next_token)
+      :next_token,
+      :eks_access_entry_integrated)
       SENSITIVE = []
       include Aws::Structure
     end

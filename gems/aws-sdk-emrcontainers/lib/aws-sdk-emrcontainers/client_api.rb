@@ -15,6 +15,7 @@ module Aws::EMRContainers
 
     ACMCertArn = Shapes::StringShape.new(name: 'ACMCertArn')
     Base64Encoded = Shapes::StringShape.new(name: 'Base64Encoded')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelJobRunRequest = Shapes::StructureShape.new(name: 'CancelJobRunRequest')
     CancelJobRunResponse = Shapes::StructureShape.new(name: 'CancelJobRunResponse')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
@@ -51,6 +52,7 @@ module Aws::EMRContainers
     DescribeManagedEndpointResponse = Shapes::StructureShape.new(name: 'DescribeManagedEndpointResponse')
     DescribeVirtualClusterRequest = Shapes::StructureShape.new(name: 'DescribeVirtualClusterRequest')
     DescribeVirtualClusterResponse = Shapes::StructureShape.new(name: 'DescribeVirtualClusterResponse')
+    EKSRequestThrottledException = Shapes::StructureShape.new(name: 'EKSRequestThrottledException')
     EksInfo = Shapes::StructureShape.new(name: 'EksInfo')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointArn = Shapes::StringShape.new(name: 'EndpointArn')
@@ -282,6 +284,9 @@ module Aws::EMRContainers
     DescribeVirtualClusterResponse.add_member(:virtual_cluster, Shapes::ShapeRef.new(shape: VirtualCluster, location_name: "virtualCluster"))
     DescribeVirtualClusterResponse.struct_class = Types::DescribeVirtualClusterResponse
 
+    EKSRequestThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
+    EKSRequestThrottledException.struct_class = Types::EKSRequestThrottledException
+
     EksInfo.add_member(:namespace, Shapes::ShapeRef.new(shape: KubernetesNamespace, location_name: "namespace"))
     EksInfo.struct_class = Types::EksInfo
 
@@ -428,6 +433,7 @@ module Aws::EMRContainers
     ListVirtualClustersRequest.add_member(:states, Shapes::ShapeRef.new(shape: VirtualClusterStates, location: "querystring", location_name: "states"))
     ListVirtualClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: JavaInteger, location: "querystring", location_name: "maxResults"))
     ListVirtualClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListVirtualClustersRequest.add_member(:eks_access_entry_integrated, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "eksAccessEntryIntegrated"))
     ListVirtualClustersRequest.struct_class = Types::ListVirtualClustersRequest
 
     ListVirtualClustersResponse.add_member(:virtual_clusters, Shapes::ShapeRef.new(shape: VirtualClusters, location_name: "virtualClusters"))
@@ -606,6 +612,7 @@ module Aws::EMRContainers
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: EKSRequestThrottledException)
       end)
 
       api.add_operation(:delete_job_template, Seahorse::Model::Operation.new.tap do |o|

@@ -207,6 +207,11 @@ module Aws::EMRContainers
       SENSITIVE: []
     end
 
+    class EKSRequestThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class EksInfo
       attr_accessor namespace: ::String
       SENSITIVE: []
@@ -374,6 +379,7 @@ module Aws::EMRContainers
       attr_accessor states: ::Array[("RUNNING" | "TERMINATING" | "TERMINATED" | "ARRESTED")]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor eks_access_entry_integrated: bool
       SENSITIVE: []
     end
 
