@@ -109,8 +109,7 @@ module Aws
         }
         ruby_types.each do |_k, v|
           resp = client.foo(header_field: v)
-          expected_value = v.is_a?(String) ? v : v.to_json
-          expect(resp.context.params[:header_field]).to eq(expected_value)
+          expect(resp.context.params[:header_field]).to eq(v.to_json)
         end
       end
 
