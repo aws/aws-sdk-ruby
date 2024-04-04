@@ -19,7 +19,9 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
           end
 
           input_shape = client.config.api.operation(:operation_name).input
-          request_params = ProtocolTestsHelper.format_data(input_shape, test_case['params'] || {})
+          request_params = ProtocolTestsHelper.format_data(
+            input_shape, test_case['params'] || {}, input_shape: true
+          )
           client.operation_name(request_params)
 
           ProtocolTestsHelper::Matcher.match_req_host(test_case, ctx.http_request, self)
@@ -35,7 +37,6 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
     describe 'output' do
       ProtocolTestsHelper.each_test_case(self, files['output']) do |group, suite, test_case, test_id, description|
         group.it(description) do
-
           ProtocolTestsHelper.skip_test_if_ignored(protocol, test_id, 'output', self)
 
           client = ProtocolTestsHelper.client_for(suite, test_case, "Output_#{test_id}")

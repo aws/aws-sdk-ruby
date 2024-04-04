@@ -109,26 +109,26 @@ module ProtocolTestsHelper
       end
     end
 
-    def format_data(ref, src)
+    def format_data(ref, src, input_shape: false)
       case ref.shape
       when Seahorse::Model::Shapes::StructureShape
         return nil if src.nil?
 
         src.each.with_object({}) do |(key, value), params|
           member_ref = ref.shape.member(underscore(key).to_sym)
-          params[underscore(key).to_sym] = format_data(member_ref, value)
+          params[underscore(key).to_sym] = format_data(member_ref, value, input_shape: input_shape)
         end
       when Seahorse::Model::Shapes::ListShape
         return nil if src.nil?
 
-        src.map { |value| format_data(ref.shape.member, value) }
+        src.map { |value| format_data(ref.shape.member, value, input_shape: input_shape) }
       when Seahorse::Model::Shapes::MapShape
         return nil if src.nil?
 
         src.each.with_object({}) do |(key, value), params|
           # handle case-sensitive headers extracted from protocol-tests
           key = key.downcase if ref.location == 'headers'
-          params[key] = format_data(ref.shape.value, value)
+          params[key] = format_data(ref.shape.value, value, input_shape: input_shape)
         end
       when Seahorse::Model::Shapes::TimestampShape
         case src
@@ -141,6 +141,13 @@ module ProtocolTestsHelper
         case src
         when String
           Aws::Util.deserialize_number(src)
+        else
+          src
+        end
+      when Seahorse::Model::Shapes::StringShape
+        # handle specs with jsonValue trait in input shape
+        if ref['jsonvalue'] && input_shape
+          JSON.parse(src)
         else
           src
         end
