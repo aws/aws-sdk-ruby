@@ -16,7 +16,6 @@ Unreleased Changes
 * Issue - Ensure empty blob payloads are omitted in Rest requests.
 * Issue - Support parsing `NaN`, `Infinity` and `-Infinity` float values.
 * Issue - Apply appropriate `xmlName` for flattened lists and maps in Rest-XML services.
-* Issue - Fix serializing and deserializing `xmlNamespace` on nested structures for Rest-XML services.
 * Issue - Fix deserializing an empty self-closed blob to produce an empty string.
 * Issue - Support parsing of different formats of error data in Rest-XML services.
 
