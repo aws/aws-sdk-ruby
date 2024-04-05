@@ -56,8 +56,6 @@ module ProtocolTestsHelper
     def client_for(suite, test_case, id)
       name = "Service_#{id}"
       unless Aws.const_defined?(name)
-        operation = test_case['given']
-        # operation['http'] ||= { 'method' => 'POST', 'requestUri' => '/' }
         opts = {
           name: name,
           module_name: "Aws::#{name}",
