@@ -69,7 +69,6 @@ module Aws
       def map(ref, values, target = nil)
         target = {} if target.nil?
         values.each do |key, value|
-          # drops key-value pair if nil value
           next if value.nil?
 
           target[key] = parse_ref(ref.shape.value, value)
