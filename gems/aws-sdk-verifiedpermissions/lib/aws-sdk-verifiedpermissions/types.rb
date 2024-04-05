@@ -278,8 +278,154 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # The type of entity that a policy store maps to groups from an Amazon
-    # Cognito user pool identity source.
+    # @!attribute [rw] policy_store_id
+    #   Specifies the ID of the policy store. Policies in this policy store
+    #   will be used to make an authorization decision for the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_token
+    #   Specifies an identity (ID) token for the principal that you want to
+    #   authorize in each request. This token is provided to you by the
+    #   identity provider (IdP) associated with the specified identity
+    #   source. You must specify either an `accessToken`, an
+    #   `identityToken`, or both.
+    #
+    #   Must be an ID token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `id`.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_token
+    #   Specifies an access token for the principal that you want to
+    #   authorize in each request. This token is provided to you by the
+    #   identity provider (IdP) associated with the specified identity
+    #   source. You must specify either an `accessToken`, an
+    #   `identityToken`, or both.
+    #
+    #   Must be an access token. Verified Permissions returns an error if
+    #   the `token_use` claim in the submitted token isn't `access`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities
+    #   Specifies the list of resources and their associated attributes that
+    #   Verified Permissions can examine when evaluating the policies.
+    #
+    #   You can't include principals in this parameter, only resource and
+    #   action entities. This parameter can't include any entities of a
+    #   type that matches the user or group entity types that you defined in
+    #   your identity source.
+    #
+    #    * The `BatchIsAuthorizedWithToken` operation takes principal
+    #     attributes from <b> <i>only</i> </b> the `identityToken` or
+    #     `accessToken` passed to the operation.
+    #
+    #   * For action entities, you can include only their `Identifier` and
+    #     `EntityType`.
+    #   @return [Types::EntitiesDefinition]
+    #
+    # @!attribute [rw] requests
+    #   An array of up to 30 requests that you want Verified Permissions to
+    #   evaluate.
+    #   @return [Array<Types::BatchIsAuthorizedWithTokenInputItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedWithTokenInput AWS API Documentation
+    #
+    class BatchIsAuthorizedWithTokenInput < Struct.new(
+      :policy_store_id,
+      :identity_token,
+      :access_token,
+      :entities,
+      :requests)
+      SENSITIVE = [:identity_token, :access_token]
+      include Aws::Structure
+    end
+
+    # An authorization request that you include in a
+    # `BatchIsAuthorizedWithToken` API request.
+    #
+    # @!attribute [rw] action
+    #   Specifies the requested action to be authorized. For example,
+    #   `PhotoFlash::ReadPhoto`.
+    #   @return [Types::ActionIdentifier]
+    #
+    # @!attribute [rw] resource
+    #   Specifies the resource that you want an authorization decision for.
+    #   For example, `PhotoFlash::Photo`.
+    #   @return [Types::EntityIdentifier]
+    #
+    # @!attribute [rw] context
+    #   Specifies additional context that can be used to make more granular
+    #   authorization decisions.
+    #   @return [Types::ContextDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedWithTokenInputItem AWS API Documentation
+    #
+    class BatchIsAuthorizedWithTokenInputItem < Struct.new(
+      :action,
+      :resource,
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] principal
+    #   The identifier of the principal in the ID or access token.
+    #   @return [Types::EntityIdentifier]
+    #
+    # @!attribute [rw] results
+    #   A series of `Allow` or `Deny` decisions for each request, and the
+    #   policies that produced them.
+    #   @return [Array<Types::BatchIsAuthorizedWithTokenOutputItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedWithTokenOutput AWS API Documentation
+    #
+    class BatchIsAuthorizedWithTokenOutput < Struct.new(
+      :principal,
+      :results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The decision, based on policy evaluation, from an individual
+    # authorization request in a `BatchIsAuthorizedWithToken` API request.
+    #
+    # @!attribute [rw] request
+    #   The authorization request that initiated the decision.
+    #   @return [Types::BatchIsAuthorizedWithTokenInputItem]
+    #
+    # @!attribute [rw] decision
+    #   An authorization decision that indicates if the authorization
+    #   request should be allowed or denied.
+    #   @return [String]
+    #
+    # @!attribute [rw] determining_policies
+    #   The list of determining policies used to make the authorization
+    #   decision. For example, if there are two matching policies, where one
+    #   is a forbid and the other is a permit, then the forbid policy will
+    #   be the determining policy. In the case of multiple matching permit
+    #   policies then there would be multiple determining policies. In the
+    #   case that no policies match, and hence the response is DENY, there
+    #   would be no determining policies.
+    #   @return [Array<Types::DeterminingPolicyItem>]
+    #
+    # @!attribute [rw] errors
+    #   Errors that occurred while making an authorization decision. For
+    #   example, a policy might reference an entity or attribute that
+    #   doesn't exist in the request.
+    #   @return [Array<Types::EvaluationErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedWithTokenOutputItem AWS API Documentation
+    #
+    class BatchIsAuthorizedWithTokenOutputItem < Struct.new(
+      :request,
+      :decision,
+      :determining_policies,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of user groups and entities from an Amazon Cognito user pool
+    # identity source.
     #
     # This data type is part of a [CognitoUserPoolConfiguration][1]
     # structure and is a request parameter in [CreateIdentitySource][2].
@@ -302,8 +448,8 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # The type of entity that a policy store maps to groups from an Amazon
-    # Cognito user pool identity source.
+    # A list of user groups and entities from an Amazon Cognito user pool
+    # identity source.
     #
     # This data type is part of an [CognitoUserPoolConfigurationDetail][1]
     # structure and is a response parameter to [GetIdentitySource][2].
@@ -326,8 +472,8 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # The type of entity that a policy store maps to groups from an Amazon
-    # Cognito user pool identity source.
+    # A list of user groups and entities from an Amazon Cognito user pool
+    # identity source.
     #
     # This data type is part of an [CognitoUserPoolConfigurationItem][1]
     # structure and is a response parameter to [ListIdentitySources][2].
@@ -359,8 +505,7 @@ module Aws::VerifiedPermissions
     # [CreateIdentitySource][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
-    # \{"groupEntityType": "MyCorp::Group"\}\}`
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
     #
     #
     #
@@ -387,8 +532,8 @@ module Aws::VerifiedPermissions
     #   @return [Array<String>]
     #
     # @!attribute [rw] group_configuration
-    #   The type of entity that a policy store maps to groups from an Amazon
-    #   Cognito user pool identity source.
+    #   The configuration of the user groups from an Amazon Cognito user
+    #   pool identity source.
     #   @return [Types::CognitoGroupConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfiguration AWS API Documentation
@@ -410,8 +555,7 @@ module Aws::VerifiedPermissions
     # [GetIdentitySource][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
-    # \{"groupEntityType": "MyCorp::Group"\}\}`
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
     #
     #
     #
@@ -446,8 +590,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] group_configuration
-    #   The type of entity that a policy store maps to groups from an Amazon
-    #   Cognito user pool identity source.
+    #   The configuration of the user groups from an Amazon Cognito user
+    #   pool identity source.
     #   @return [Types::CognitoGroupConfigurationDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfigurationDetail AWS API Documentation
@@ -470,8 +614,7 @@ module Aws::VerifiedPermissions
     # [ListIdentitySources][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
-    # \{"groupEntityType": "MyCorp::Group"\}\}`
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
     #
     #
     #
@@ -506,8 +649,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] group_configuration
-    #   The type of entity that a policy store maps to groups from an Amazon
-    #   Cognito user pool identity source.
+    #   The configuration of the user groups from an Amazon Cognito user
+    #   pool identity source.
     #   @return [Types::CognitoGroupConfigurationItem]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfigurationItem AWS API Documentation
@@ -527,7 +670,7 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> At this time, the only valid member of this structure is a Amazon
     # Cognito user pool configuration.
     #
-    #  Specifies a `userPoolArn`, a `groupConfiguration`, and a `ClientId`.
+    #  You must specify a `userPoolArn`, and optionally, a `ClientId`.
     #
     #  </note>
     #
@@ -584,8 +727,7 @@ module Aws::VerifiedPermissions
     #   Contains configuration details of a Amazon Cognito user pool that
     #   Verified Permissions can use as a source of authenticated identities
     #   as entities. It specifies the [Amazon Resource Name (ARN)][1] of a
-    #   Amazon Cognito user pool, the policy store entity that you want to
-    #   assign to user groups, and one or more application client IDs.
+    #   Amazon Cognito user pool and one or more application client IDs.
     #
     #   Example:
     #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
@@ -625,8 +767,7 @@ module Aws::VerifiedPermissions
     #   Contains configuration details of a Amazon Cognito user pool that
     #   Verified Permissions can use as a source of authenticated identities
     #   as entities. It specifies the [Amazon Resource Name (ARN)][1] of a
-    #   Amazon Cognito user pool, the policy store entity that you want to
-    #   assign to user groups, and one or more application client IDs.
+    #   Amazon Cognito user pool and one or more application client IDs.
     #
     #   Example:
     #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
@@ -1950,8 +2091,10 @@ module Aws::VerifiedPermissions
     #   Specifies the list of resources and their associated attributes that
     #   Verified Permissions can examine when evaluating the policies.
     #
-    #   <note markdown="1"> You can include only resource and action entities in this parameter;
-    #   you can't include principals.
+    #   You can't include principals in this parameter, only resource and
+    #   action entities. This parameter can't include any entities of a
+    #   type that matches the user or group entity types that you defined in
+    #   your identity source.
     #
     #    * The `IsAuthorizedWithToken` operation takes principal attributes
     #     from <b> <i>only</i> </b> the `identityToken` or `accessToken`
@@ -1959,8 +2102,6 @@ module Aws::VerifiedPermissions
     #
     #   * For action entities, you can include only their `Identifier` and
     #     `EntityType`.
-    #
-    #    </note>
     #   @return [Types::EntitiesDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/IsAuthorizedWithTokenInput AWS API Documentation
@@ -2926,8 +3067,8 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # The user group entities from an Amazon Cognito user pool identity
-    # source.
+    # A list of user groups and entities from an Amazon Cognito user pool
+    # identity source.
     #
     # @!attribute [rw] group_entity_type
     #   The name of the schema entity type that's mapped to the user pool

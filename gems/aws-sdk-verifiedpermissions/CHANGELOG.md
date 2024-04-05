@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-04-05)
+------------------
+
+* Feature - Adding BatchIsAuthorizedWithToken API which supports multiple authorization requests against a PolicyStore given a bearer token.
+
 1.18.0 (2024-04-04)
 ------------------
 

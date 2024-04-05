@@ -1158,6 +1158,7 @@ module Aws::QuickSight
       attr_accessor last_name: ::String
       attr_accessor email_address: ::String
       attr_accessor contact_number: ::String
+      attr_accessor iam_identity_center_instance_arn: ::String
       SENSITIVE: []
     end
 

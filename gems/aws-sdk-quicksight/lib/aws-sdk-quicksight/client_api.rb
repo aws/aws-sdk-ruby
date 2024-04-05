@@ -2776,6 +2776,7 @@ module Aws::QuickSight
     CreateAccountSubscriptionRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: String, location_name: "LastName"))
     CreateAccountSubscriptionRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: String, location_name: "EmailAddress"))
     CreateAccountSubscriptionRequest.add_member(:contact_number, Shapes::ShapeRef.new(shape: String, location_name: "ContactNumber"))
+    CreateAccountSubscriptionRequest.add_member(:iam_identity_center_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "IAMIdentityCenterInstanceArn"))
     CreateAccountSubscriptionRequest.struct_class = Types::CreateAccountSubscriptionRequest
 
     CreateAccountSubscriptionResponse.add_member(:signup_response, Shapes::ShapeRef.new(shape: SignupResponse, location_name: "SignupResponse"))

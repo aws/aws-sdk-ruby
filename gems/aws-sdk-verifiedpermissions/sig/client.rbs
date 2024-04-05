@@ -119,6 +119,51 @@ module Aws
                                ) -> _BatchIsAuthorizedResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchIsAuthorizedResponseSuccess
 
+      interface _BatchIsAuthorizedWithTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchIsAuthorizedWithTokenOutput]
+        def principal: () -> Types::EntityIdentifier
+        def results: () -> ::Array[Types::BatchIsAuthorizedWithTokenOutputItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#batch_is_authorized_with_token-instance_method
+      def batch_is_authorized_with_token: (
+                                            policy_store_id: ::String,
+                                            ?identity_token: ::String,
+                                            ?access_token: ::String,
+                                            ?entities: {
+                                              entity_list: Array[
+                                                {
+                                                  identifier: {
+                                                    entity_type: ::String,
+                                                    entity_id: ::String
+                                                  },
+                                                  attributes: Hash[::String, untyped]?,
+                                                  parents: Array[
+                                                    {
+                                                      entity_type: ::String,
+                                                      entity_id: ::String
+                                                    },
+                                                  ]?
+                                                },
+                                              ]?
+                                            },
+                                            requests: Array[
+                                              {
+                                                action: {
+                                                  action_type: ::String,
+                                                  action_id: ::String
+                                                }?,
+                                                resource: {
+                                                  entity_type: ::String,
+                                                  entity_id: ::String
+                                                }?,
+                                                context: {
+                                                  context_map: Hash[::String, untyped]?
+                                                }?
+                                              },
+                                            ]
+                                          ) -> _BatchIsAuthorizedWithTokenResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchIsAuthorizedWithTokenResponseSuccess
+
       interface _CreateIdentitySourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdentitySourceOutput]
         def created_date: () -> ::Time

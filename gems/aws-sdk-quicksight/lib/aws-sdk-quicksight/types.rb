@@ -272,8 +272,10 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The configuration for applying a filter to all sheets. You can apply
-    # this filter to all visuals on every sheet.
+    # An empty object that represents that the `AllSheets` option is the
+    # chosen value for the `FilterScopeConfiguration` parameter. This
+    # structure applies the filter to all visuals on all sheets of an
+    # Analysis, Dashboard, or Template.
     #
     # This is a union type structure. For this structure to be valid, only
     # one of the attributes can be defined.
@@ -4551,6 +4553,10 @@ module Aws::QuickSight
     #   QuickSight account.
     #   @return [String]
     #
+    # @!attribute [rw] iam_identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountSubscriptionRequest AWS API Documentation
     #
     class CreateAccountSubscriptionRequest < Struct.new(
@@ -4568,7 +4574,8 @@ module Aws::QuickSight
       :first_name,
       :last_name,
       :email_address,
-      :contact_number)
+      :contact_number,
+      :iam_identity_center_instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14080,7 +14087,11 @@ module Aws::QuickSight
     #   @return [Types::SelectedSheetsFilterScopeConfiguration]
     #
     # @!attribute [rw] all_sheets
-    #   The configuration for applying a filter to all sheets.
+    #   The configuration that applies a filter to all sheets. When you
+    #   choose `AllSheets` as the value for a `FilterScopeConfiguration`,
+    #   this filter is applied to all visuals of all sheets in an Analysis,
+    #   Dashboard, or Template. The `AllSheetsFilterScopeConfiguration` is
+    #   chosen.
     #   @return [Types::AllSheetsFilterScopeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterScopeConfiguration AWS API Documentation

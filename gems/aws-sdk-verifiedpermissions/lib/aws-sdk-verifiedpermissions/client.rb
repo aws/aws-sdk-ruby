@@ -518,6 +518,152 @@ module Aws::VerifiedPermissions
       req.send_request(options)
     end
 
+    # Makes a series of decisions about multiple authorization requests for
+    # one token. The principal in this request comes from an external
+    # identity source in the form of an identity or access token, formatted
+    # as a [JSON web token (JWT)][1]. The information in the parameters can
+    # also define additional context that Verified Permissions can include
+    # in the evaluations.
+    #
+    # The request is evaluated against all policies in the specified policy
+    # store that match the entities that you provide in the entities
+    # declaration and in the token. The result of the decisions is a series
+    # of `Allow` or `Deny` responses, along with the IDs of the policies
+    # that produced each decision.
+    #
+    # The `entities` of a `BatchIsAuthorizedWithToken` API request can
+    # contain up to 100 resources and up to 99 user groups. The `requests`
+    # of a `BatchIsAuthorizedWithToken` API request can contain up to 30
+    # requests.
+    #
+    # <note markdown="1"> The `BatchIsAuthorizedWithToken` operation doesn't have its own IAM
+    # permission. To authorize this operation for Amazon Web Services
+    # principals, include the permission
+    # `verifiedpermissions:IsAuthorizedWithToken` in their IAM policies.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://wikipedia.org/wiki/JSON_Web_Token
+    #
+    # @option params [required, String] :policy_store_id
+    #   Specifies the ID of the policy store. Policies in this policy store
+    #   will be used to make an authorization decision for the input.
+    #
+    # @option params [String] :identity_token
+    #   Specifies an identity (ID) token for the principal that you want to
+    #   authorize in each request. This token is provided to you by the
+    #   identity provider (IdP) associated with the specified identity source.
+    #   You must specify either an `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an ID token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `id`.
+    #
+    # @option params [String] :access_token
+    #   Specifies an access token for the principal that you want to authorize
+    #   in each request. This token is provided to you by the identity
+    #   provider (IdP) associated with the specified identity source. You must
+    #   specify either an `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an access token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `access`.
+    #
+    # @option params [Types::EntitiesDefinition] :entities
+    #   Specifies the list of resources and their associated attributes that
+    #   Verified Permissions can examine when evaluating the policies.
+    #
+    #   You can't include principals in this parameter, only resource and
+    #   action entities. This parameter can't include any entities of a type
+    #   that matches the user or group entity types that you defined in your
+    #   identity source.
+    #
+    #    * The `BatchIsAuthorizedWithToken` operation takes principal
+    #     attributes from <b> <i>only</i> </b> the `identityToken` or
+    #     `accessToken` passed to the operation.
+    #
+    #   * For action entities, you can include only their `Identifier` and
+    #     `EntityType`.
+    #
+    # @option params [required, Array<Types::BatchIsAuthorizedWithTokenInputItem>] :requests
+    #   An array of up to 30 requests that you want Verified Permissions to
+    #   evaluate.
+    #
+    # @return [Types::BatchIsAuthorizedWithTokenOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchIsAuthorizedWithTokenOutput#principal #principal} => Types::EntityIdentifier
+    #   * {Types::BatchIsAuthorizedWithTokenOutput#results #results} => Array&lt;Types::BatchIsAuthorizedWithTokenOutputItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_is_authorized_with_token({
+    #     policy_store_id: "PolicyStoreId", # required
+    #     identity_token: "Token",
+    #     access_token: "Token",
+    #     entities: {
+    #       entity_list: [
+    #         {
+    #           identifier: { # required
+    #             entity_type: "EntityType", # required
+    #             entity_id: "EntityId", # required
+    #           },
+    #           attributes: {
+    #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           parents: [
+    #             {
+    #               entity_type: "EntityType", # required
+    #               entity_id: "EntityId", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     requests: [ # required
+    #       {
+    #         action: {
+    #           action_type: "ActionType", # required
+    #           action_id: "ActionId", # required
+    #         },
+    #         resource: {
+    #           entity_type: "EntityType", # required
+    #           entity_id: "EntityId", # required
+    #         },
+    #         context: {
+    #           context_map: {
+    #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.principal.entity_type #=> String
+    #   resp.principal.entity_id #=> String
+    #   resp.results #=> Array
+    #   resp.results[0].request.action.action_type #=> String
+    #   resp.results[0].request.action.action_id #=> String
+    #   resp.results[0].request.resource.entity_type #=> String
+    #   resp.results[0].request.resource.entity_id #=> String
+    #   resp.results[0].request.context.context_map #=> Hash
+    #   resp.results[0].request.context.context_map["String"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.results[0].decision #=> String, one of "ALLOW", "DENY"
+    #   resp.results[0].determining_policies #=> Array
+    #   resp.results[0].determining_policies[0].policy_id #=> String
+    #   resp.results[0].errors #=> Array
+    #   resp.results[0].errors[0].error_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedWithToken AWS API Documentation
+    #
+    # @overload batch_is_authorized_with_token(params = {})
+    # @param [Hash] params ({})
+    def batch_is_authorized_with_token(params = {}, options = {})
+      req = build_request(:batch_is_authorized_with_token, params)
+      req.send_request(options)
+    end
+
     # Creates a reference to an Amazon Cognito user pool as an external
     # identity provider (IdP).
     #
@@ -1421,14 +1567,6 @@ module Aws::VerifiedPermissions
     # `Allow` or `Deny`, along with a list of the policies that resulted in
     # the decision.
     #
-    # If you specify the `identityToken` parameter, then this operation
-    # derives the principal from that token. You must not also include that
-    # principal in the `entities` parameter or the operation fails and
-    # reports a conflict between the two entity sources.
-    #
-    #  If you provide only an `accessToken`, then you can include the entity
-    # as part of the `entities` parameter to provide additional attributes.
-    #
     # At this time, Verified Permissions accepts tokens from only Amazon
     # Cognito.
     #
@@ -1482,8 +1620,10 @@ module Aws::VerifiedPermissions
     #   Specifies the list of resources and their associated attributes that
     #   Verified Permissions can examine when evaluating the policies.
     #
-    #   <note markdown="1"> You can include only resource and action entities in this parameter;
-    #   you can't include principals.
+    #   You can't include principals in this parameter, only resource and
+    #   action entities. This parameter can't include any entities of a type
+    #   that matches the user or group entity types that you defined in your
+    #   identity source.
     #
     #    * The `IsAuthorizedWithToken` operation takes principal attributes
     #     from <b> <i>only</i> </b> the `identityToken` or `accessToken`
@@ -1491,8 +1631,6 @@ module Aws::VerifiedPermissions
     #
     #   * For action entities, you can include only their `Identifier` and
     #     `EntityType`.
-    #
-    #    </note>
     #
     # @return [Types::IsAuthorizedWithTokenOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2256,7 +2394,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

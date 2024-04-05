@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2024-04-05)
+------------------
+
+* Feature - Adding IAMIdentityCenterInstanceArn parameter to CreateAccountSubscription
+
 1.106.0 (2024-03-28)
 ------------------
 

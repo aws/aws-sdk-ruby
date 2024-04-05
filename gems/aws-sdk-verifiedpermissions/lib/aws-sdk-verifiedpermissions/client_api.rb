@@ -24,6 +24,12 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedOutput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutput')
     BatchIsAuthorizedOutputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutputItem')
     BatchIsAuthorizedOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedOutputList')
+    BatchIsAuthorizedWithTokenInput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenInput')
+    BatchIsAuthorizedWithTokenInputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenInputItem')
+    BatchIsAuthorizedWithTokenInputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedWithTokenInputList')
+    BatchIsAuthorizedWithTokenOutput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenOutput')
+    BatchIsAuthorizedWithTokenOutputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenOutputItem')
+    BatchIsAuthorizedWithTokenOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedWithTokenOutputList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -219,6 +225,32 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedOutputItem.struct_class = Types::BatchIsAuthorizedOutputItem
 
     BatchIsAuthorizedOutputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutputItem)
+
+    BatchIsAuthorizedWithTokenInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    BatchIsAuthorizedWithTokenInput.add_member(:identity_token, Shapes::ShapeRef.new(shape: Token, location_name: "identityToken"))
+    BatchIsAuthorizedWithTokenInput.add_member(:access_token, Shapes::ShapeRef.new(shape: Token, location_name: "accessToken"))
+    BatchIsAuthorizedWithTokenInput.add_member(:entities, Shapes::ShapeRef.new(shape: EntitiesDefinition, location_name: "entities"))
+    BatchIsAuthorizedWithTokenInput.add_member(:requests, Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInputList, required: true, location_name: "requests"))
+    BatchIsAuthorizedWithTokenInput.struct_class = Types::BatchIsAuthorizedWithTokenInput
+
+    BatchIsAuthorizedWithTokenInputItem.add_member(:action, Shapes::ShapeRef.new(shape: ActionIdentifier, location_name: "action"))
+    BatchIsAuthorizedWithTokenInputItem.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    BatchIsAuthorizedWithTokenInputItem.add_member(:context, Shapes::ShapeRef.new(shape: ContextDefinition, location_name: "context"))
+    BatchIsAuthorizedWithTokenInputItem.struct_class = Types::BatchIsAuthorizedWithTokenInputItem
+
+    BatchIsAuthorizedWithTokenInputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInputItem)
+
+    BatchIsAuthorizedWithTokenOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
+    BatchIsAuthorizedWithTokenOutput.add_member(:results, Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutputList, required: true, location_name: "results"))
+    BatchIsAuthorizedWithTokenOutput.struct_class = Types::BatchIsAuthorizedWithTokenOutput
+
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:request, Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInputItem, required: true, location_name: "request"))
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:decision, Shapes::ShapeRef.new(shape: Decision, required: true, location_name: "decision"))
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:determining_policies, Shapes::ShapeRef.new(shape: DeterminingPolicyList, required: true, location_name: "determiningPolicies"))
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
+    BatchIsAuthorizedWithTokenOutputItem.struct_class = Types::BatchIsAuthorizedWithTokenOutputItem
+
+    BatchIsAuthorizedWithTokenOutputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutputItem)
 
     ClientIds.member = Shapes::ShapeRef.new(shape: ClientId)
 
@@ -790,6 +822,19 @@ module Aws::VerifiedPermissions
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchIsAuthorizedInput)
         o.output = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_is_authorized_with_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchIsAuthorizedWithToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

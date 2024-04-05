@@ -694,6 +694,9 @@ module Aws::QuickSight
     #   `ENTERPPRISE_AND_Q` is the selected edition of the new Amazon
     #   QuickSight account.
     #
+    # @option params [String] :iam_identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+    #
     # @return [Types::CreateAccountSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccountSubscriptionResponse#signup_response #signup_response} => Types::SignupResponse
@@ -718,6 +721,7 @@ module Aws::QuickSight
     #     last_name: "String",
     #     email_address: "String",
     #     contact_number: "String",
+    #     iam_identity_center_instance_arn: "String",
     #   })
     #
     # @example Response structure
@@ -13565,7 +13569,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

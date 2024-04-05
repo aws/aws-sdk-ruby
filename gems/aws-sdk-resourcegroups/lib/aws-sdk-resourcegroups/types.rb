@@ -53,10 +53,10 @@ module Aws::ResourceGroups
     #   The name of the group, which is the identifier of the group in other
     #   operations. You can't change the name of a resource group after you
     #   create it. A resource group name can consist of letters, numbers,
-    #   hyphens, periods, and underscores. The name cannot start with `AWS`
-    #   or `aws`; these are reserved. A resource group name must be unique
-    #   within each Amazon Web Services Region in your Amazon Web Services
-    #   account.
+    #   hyphens, periods, and underscores. The name cannot start with `AWS`,
+    #   `aws`, or any other possible capitalization; these are reserved. A
+    #   resource group name must be unique within each Amazon Web Services
+    #   Region in your Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -754,10 +754,12 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] query_errors
-    #   A list of `QueryError` objects. Each error is an object that
-    #   contains `ErrorCode` and `Message` structures. Possible values for
-    #   `ErrorCode` are `CLOUDFORMATION_STACK_INACTIVE` and
-    #   `CLOUDFORMATION_STACK_NOT_EXISTING`.
+    #   A list of `QueryError` objects. Each error contains an `ErrorCode`
+    #   and `Message`. Possible values for ErrorCode are
+    #   `CLOUDFORMATION_STACK_INACTIVE`,
+    #   `CLOUDFORMATION_STACK_NOT_EXISTING`,
+    #   `CLOUDFORMATION_STACK_UNASSUMABLE_ROLE` and
+    #   `RESOURCE_TYPE_NOT_SUPPORTED`.
     #   @return [Array<Types::QueryError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesOutput AWS API Documentation
@@ -775,18 +777,27 @@ module Aws::ResourceGroups
     #   Filters, formatted as GroupFilter objects, that you want to apply to
     #   a `ListGroups` operation.
     #
-    #   * `resource-type` - Filter the results to include only those of the
-    #     specified resource types. Specify up to five resource types in the
-    #     format `AWS::ServiceCode::ResourceType `. For example,
-    #     `AWS::EC2::Instance`, or `AWS::S3::Bucket`.
+    #   * `resource-type` - Filter the results to include only those
+    #     resource groups that have the specified resource type in their
+    #     `ResourceTypeFilter`. For example, `AWS::EC2::Instance` would
+    #     return any resource group with a `ResourceTypeFilter` that
+    #     includes `AWS::EC2::Instance`.
     #
     #   * `configuration-type` - Filter the results to include only those
     #     groups that have the specified configuration types attached. The
     #     current supported values are:
     #
+    #     * `AWS::AppRegistry::Application`
+    #
+    #     * `AWS::AppRegistry::ApplicationResourceGroups`
+    #
+    #     * `AWS::CloudFormation::Stack`
+    #
     #     * `AWS::EC2::CapacityReservationPool`
     #
     #     * `AWS::EC2::HostManagement`
+    #
+    #     * `AWS::NetworkFirewall::RuleGroup`
     #   @return [Array<Types::GroupFilter>]
     #
     # @!attribute [rw] max_results
@@ -932,23 +943,14 @@ module Aws::ResourceGroups
     class PutGroupConfigurationOutput < Aws::EmptyStructure; end
 
     # A two-part error structure that can occur in `ListGroupResources` or
-    # `SearchResources` operations on CloudFront stack-based queries. The
-    # error occurs if the CloudFront stack on which the query is based
-    # either does not exist, or has a status that renders the stack
-    # inactive. A `QueryError` occurrence does not necessarily mean that
-    # Resource Groups could not complete the operation, but the resulting
-    # group might have no member resources.
+    # `SearchResources`.
     #
     # @!attribute [rw] error_code
     #   Specifies the error code that was raised.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   A message that explains the `ErrorCode` value. Messages might state
-    #   that the specified CloudFront stack does not exist (or no longer
-    #   exists). For `CLOUDFORMATION_STACK_INACTIVE`, the message typically
-    #   states that the CloudFront stack has a status that is not (or no
-    #   longer) active, such as `CREATE_FAILED`.
+    #   A message that explains the `ErrorCode`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/QueryError AWS API Documentation
@@ -1196,14 +1198,16 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] query_errors
-    #   A list of `QueryError` objects. Each error is an object that
-    #   contains `ErrorCode` and `Message` structures.
+    #   A list of `QueryError` objects. Each error contains an `ErrorCode`
+    #   and `Message`.
     #
     #   Possible values for `ErrorCode`:
     #
     #   * `CLOUDFORMATION_STACK_INACTIVE`
     #
     #   * `CLOUDFORMATION_STACK_NOT_EXISTING`
+    #
+    #   * `CLOUDFORMATION_STACK_UNASSUMABLE_ROLE `
     #   @return [Array<Types::QueryError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResourcesOutput AWS API Documentation

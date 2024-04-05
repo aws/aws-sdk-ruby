@@ -233,7 +233,7 @@ module Aws::ResourceGroups
     end
 
     class QueryError
-      attr_accessor error_code: ("CLOUDFORMATION_STACK_INACTIVE" | "CLOUDFORMATION_STACK_NOT_EXISTING" | "CLOUDFORMATION_STACK_UNASSUMABLE_ROLE")
+      attr_accessor error_code: ("CLOUDFORMATION_STACK_INACTIVE" | "CLOUDFORMATION_STACK_NOT_EXISTING" | "CLOUDFORMATION_STACK_UNASSUMABLE_ROLE" | "RESOURCE_TYPE_NOT_SUPPORTED")
       attr_accessor message: ::String
       SENSITIVE: []
     end
