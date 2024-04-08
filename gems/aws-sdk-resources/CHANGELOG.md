@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.191.0 (2024-04-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-controlcatalog` gem.
+
 3.190.0 (2024-04-01)
 ------------------
 

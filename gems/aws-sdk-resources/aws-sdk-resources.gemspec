@@ -112,6 +112,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-connectcontactlens', '~> 1')
   spec.add_dependency('aws-sdk-connectparticipant', '~> 1')
   spec.add_dependency('aws-sdk-connectwisdomservice', '~> 1')
+  spec.add_dependency('aws-sdk-controlcatalog', '~> 1')
   spec.add_dependency('aws-sdk-controltower', '~> 1')
   spec.add_dependency('aws-sdk-costexplorer', '~> 1')
   spec.add_dependency('aws-sdk-costoptimizationhub', '~> 1')

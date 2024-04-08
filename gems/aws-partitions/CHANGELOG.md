@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.910.0 (2024-04-08)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::ControlCatalog`.
+
 1.909.0 (2024-04-05)
 ------------------
 

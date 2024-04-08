@@ -38,7 +38,7 @@ module Aws::NetworkMonitor
 
     # @!attribute [rw] monitor_name
     #   The name identifying the monitor. It can contain only letters,
-    #   underscores (\_), or dashes (-), and can be up to 255 characters.
+    #   underscores (\_), or dashes (-), and can be up to 200 characters.
     #   @return [String]
     #
     # @!attribute [rw] probes
@@ -89,7 +89,7 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] aggregation_period
     #   The number of seconds that metrics are aggregated by and sent to
-    #   Amazon CloudWatch. This will be either `30` or `60`.
+    #   Amazon CloudWatch. This must be either `30` or `60`.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -115,7 +115,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination IP address. This will be either `IPV4` or `IPV6`.
+    #   The destination IP address. This must be either `IPV4` or `IPV6`.
     #   @return [String]
     #
     # @!attribute [rw] destination_port
@@ -126,12 +126,12 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] protocol
     #   The protocol used for the network traffic between the `source` and
-    #   `destination`. This will be either `TCP` or `ICMP`.
+    #   `destination`. This must be either `TCP` or `ICMP`.
     #   @return [String]
     #
     # @!attribute [rw] packet_size
     #   The size of the packets sent between the source and destination.
-    #   This will be a number between `56` and `8500`.
+    #   This must be a number between `56` and `8500`.
     #   @return [Integer]
     #
     # @!attribute [rw] probe_tags
@@ -197,7 +197,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination IP address for the monitor. This will be either an
+    #   The destination IP address for the monitor. This must be either an
     #   IPv4 or IPv6 address.
     #   @return [String]
     #
@@ -209,12 +209,12 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] protocol
     #   The protocol used for the network traffic between the `source` and
-    #   `destination`. This will be either `TCP` or `ICMP`.
+    #   `destination`. This must be either `TCP` or `ICMP`.
     #   @return [String]
     #
     # @!attribute [rw] packet_size
     #   The size of the packets sent between the source and destination.
-    #   This will be a number between `56` and `8500`.
+    #   This must be a number between `56` and `8500`.
     #   @return [Integer]
     #
     # @!attribute [rw] address_family
@@ -393,7 +393,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination IP address for the monitor. This will be either an
+    #   The destination IP address for the monitor. This must be either an
     #   IPv4 or IPv6 address.
     #   @return [String]
     #
@@ -405,12 +405,12 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] protocol
     #   The protocol used for the network traffic between the `source` and
-    #   `destination`. This will be either `TCP` or `ICMP`.
+    #   `destination`. This must be either `TCP` or `ICMP`.
     #   @return [String]
     #
     # @!attribute [rw] packet_size
     #   The size of the packets sent between the source and destination.
-    #   This will be a number between `56` and `8500`.
+    #   This must be a number between `56` and `8500`.
     #   @return [Integer]
     #
     # @!attribute [rw] address_family
@@ -659,7 +659,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination IP address. This will be either `IPV4` or `IPV6`.
+    #   The destination IP address. This must be either `IPV4` or `IPV6`.
     #   @return [String]
     #
     # @!attribute [rw] destination_port
@@ -670,12 +670,12 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] protocol
     #   The protocol used for the network traffic between the `source` and
-    #   `destination`. This will be either `TCP` or `ICMP`.
+    #   `destination`. This must be either `TCP` or `ICMP`.
     #   @return [String]
     #
     # @!attribute [rw] packet_size
     #   The size of the packets sent between the source and destination.
-    #   This will be a number between `56` and `8500`.
+    #   This must be a number between `56` and `8500`.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -892,7 +892,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination_port
-    #   The updated destination port. This will be a number between `1` and
+    #   The updated destination port. This must be a number between `1` and
     #   `65536`.
     #   @return [Integer]
     #
@@ -905,7 +905,7 @@ module Aws::NetworkMonitor
     #   @return [Integer]
     #
     # @!attribute [rw] address_family
-    #   The updated IP address family. This will be either `IPV4` or `IPV6`.
+    #   The updated IP address family. This must be either `IPV4` or `IPV6`.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id

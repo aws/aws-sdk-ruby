@@ -396,7 +396,7 @@ module Aws::NetworkMonitor
     #
     # @option params [required, String] :monitor_name
     #   The name identifying the monitor. It can contain only letters,
-    #   underscores (\_), or dashes (-), and can be up to 255 characters.
+    #   underscores (\_), or dashes (-), and can be up to 200 characters.
     #
     # @option params [Array<Types::CreateMonitorProbeInput>] :probes
     #   Displays a list of all of the probes created for a monitor.

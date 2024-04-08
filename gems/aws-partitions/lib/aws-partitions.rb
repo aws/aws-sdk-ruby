@@ -340,6 +340,7 @@ module Aws
             'ConnectContactLens' => 'contact-lens',
             'ConnectParticipant' => 'participant.connect',
             'ConnectWisdomService' => 'wisdom',
+            'ControlCatalog' => 'controlcatalog',
             'ControlTower' => 'controltower',
             'CostExplorer' => 'ce',
             'CostOptimizationHub' => 'cost-optimization-hub',

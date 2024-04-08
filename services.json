@@ -305,6 +305,9 @@
   "ConnectWisdomService": {
     "models": "wisdom/2020-10-19"
   },
+  "ControlCatalog": {
+    "models": "controlcatalog/2018-05-10"
+  },
   "ControlTower": {
     "models": "controltower/2018-05-10"
   },

@@ -366,6 +366,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Comprehend Medical                                | Aws::ComprehendMedical                   | aws-sdk-comprehendmedical                   | 2018-10-30  |
 | AWS Compute Optimizer                                 | Aws::ComputeOptimizer                    | aws-sdk-computeoptimizer                    | 2019-11-01  |
 | AWS Config                                            | Aws::ConfigService                       | aws-sdk-configservice                       | 2014-11-12  |
+| AWS Control Catalog                                   | Aws::ControlCatalog                      | aws-sdk-controlcatalog                      | 2018-05-10  |
 | AWS Control Tower                                     | Aws::ControlTower                        | aws-sdk-controltower                        | 2018-05-10  |
 | AWS Cost Explorer Service                             | Aws::CostExplorer                        | aws-sdk-costexplorer                        | 2017-10-25  |
 | AWS Cost and Usage Report Service                     | Aws::CostandUsageReportService           | aws-sdk-costandusagereportservice           | 2017-01-06  |
