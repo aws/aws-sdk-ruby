@@ -11,13 +11,6 @@ module ProtocolTestsHelper
       @ignore_list ||= JSON.parse(File.read(PROTOCOL_TESTS_IGNORE_LIST_PATH))
     end
 
-    def check_ignore_list(protocol, test_id, test_type)
-      return nil if protocol.include?('extras')
-
-      filtered_ignore_list = ignore_list[protocol]
-      filtered_ignore_list[test_type].find { |i| i.key?(test_id) }
-    end
-
     def skip_test_if_ignored(protocol, test_id, test_type, it)
       if ignore_result = check_ignore_list(protocol, test_id, test_type)
         it.skip(ignore_result[test_id])
@@ -156,6 +149,16 @@ module ProtocolTestsHelper
     def underscore(str)
       AwsSdkCodeGenerator::Underscore.underscore(str)
     end
+
+    private
+
+    def check_ignore_list(protocol, test_id, test_type)
+      return nil if protocol.include?('extras')
+
+      filtered_ignore_list = ignore_list[protocol]
+      filtered_ignore_list[test_type].find { |i| i.key?(test_id) }
+    end
+
   end
 
   # input/output matchers
@@ -294,6 +297,7 @@ module ProtocolTestsHelper
       end
 
       private
+
       def normalize_headers(hash)
         hash.each.with_object({}) do |(k, v), headers|
           headers[k.downcase] = v.to_s

@@ -47,11 +47,12 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
             )
 
             # Base64 encoded binary body is provided for eventstream
-            body = if test_case['response']['eventstream']
-                     Base64.decode64(test_case['response']['body'])
-                   else
-                     test_case['response']['body']
-                   end
+            body =
+              if test_case['response']['eventstream']
+                Base64.decode64(test_case['response']['body'])
+              else
+                test_case['response']['body']
+              end
             context.http_response.signal_data(body)
             context.http_response.signal_done
             Seahorse::Client::Response.new(context: context)
