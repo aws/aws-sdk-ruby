@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Ignore `Content-Type` header in the pre-signer.
+* Issue - Omit `ContentType` plugin when generating presigned url.
 
 1.146.1 (2024-03-28)
 ------------------

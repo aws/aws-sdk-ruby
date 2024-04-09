@@ -2,24 +2,49 @@
 
 module Aws
   module Rest
+    # NOTE: headers could be already populated if specified on input shape
     class ContentTypeHandler < Seahorse::Client::Handler
       def call(context)
         body = context.http_request.body
-        if !body.respond_to?(:size) ||
-           (body.respond_to?(:size) && body.size > 0)
-          # headers could be already populated if specified on input shape
-          # OR during serialization of the payload body
-          case (protocol = context.config.api.metadata['protocol'])
-          when 'rest-json'
+
+        if (payload = context.operation.input[:payload_member])
+          case payload.shape
+          when Seahorse::Model::Shapes::BlobShape
             context.http_request.headers['Content-Type'] ||=
-              'application/json'
-          when 'rest-xml'
+              'application/octet-stream'
+          when Seahorse::Model::Shapes::StringShape
             context.http_request.headers['Content-Type'] ||=
-              'application/xml'
-          else raise "Unsupported protocol #{protocol}"
+              'text/plain'
+          else
+            apply_default_content_type(context)
           end
+        elsif !body.respond_to?(:size) || non_empty_body?(body)
+          apply_default_content_type(context)
         end
+
         @handler.call(context)
+      end
+
+      private
+
+      def non_empty_body?(body)
+        body.respond_to?(:size) && body.size.positive?
+      end
+
+      # content-type defaults as noted here:
+      # rest-json: https://smithy.io/2.0/aws/protocols/aws-restxml-protocol.html#content-type
+      # rest-xml: https://smithy.io/2.0/aws/protocols/aws-restxml-protocol.html#content-type
+      def apply_default_content_type(context)
+        protocol = context.config.api.metadata['protocol']
+        case protocol
+        when 'rest-json'
+          context.http_request.headers['Content-Type'] ||=
+            'application/json'
+        when 'rest-xml'
+          context.http_request.headers['Content-Type'] ||=
+            'application/xml'
+        else raise "Unsupported protocol #{protocol}"
+        end
       end
     end
   end

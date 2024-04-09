@@ -15,7 +15,6 @@ module Aws
         'amz-sdk-request',
         'cache-control',
         'content-length', # due to a ELB bug
-        'content-type',
         'expect',
         'from',
         'if-match',
@@ -200,6 +199,7 @@ module Aws
         req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
         req.handlers.remove(Aws::Plugins::Sign::Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
+        req.handlers.remove(Aws::Rest::ContentTypeHandler)
 
         req.handle(step: :send) do |context|
           # if an endpoint was not provided, force secure or insecure

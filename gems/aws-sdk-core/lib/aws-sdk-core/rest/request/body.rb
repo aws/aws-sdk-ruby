@@ -18,7 +18,6 @@ module Aws
         # @param [Hash] params
         def apply(http_req, params)
           body = build_body(params)
-          update_payload_content_type(http_req) if @rules[:payload_member]
 
           # for rest-json, ensure we send at least an empty object
           # don't send an empty object for streaming? case.
@@ -70,23 +69,6 @@ module Aws
         def payload_location_name
           @rules[:payload_member].shape['locationName'] ||
             @rules[:payload_member].shape.name
-        end
-
-        def update_payload_content_type(req)
-          # headers could be already populated if specified on input shape
-          case @rules[:payload_member].shape
-          when BlobShape
-            req.headers['Content-Type'] ||= 'application/octet-stream'
-          when StringShape
-            req.headers['Content-Type'] ||= 'text/plain'
-          when UnionShape
-            req.headers['Content-Type'] ||=
-              if xml_builder?
-                'application/xml'
-              elsif json_builder?
-                'application/json'
-              end
-          end
         end
 
         def streaming?
