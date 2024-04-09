@@ -4,9 +4,9 @@ Unreleased Changes
 * Issue - Allow `nil` values in lists and maps.
 * Issue - Populate headers for XML and JSON error responses.
 * Issue - Support fractional seconds when parsing `DateTime` timestamps.
-* Issue - Fix an issue where Rest-XML services do not have a `Content-Type` header.
 * Issue - Correctly serialize flattened lists for Query protocol.
 * Issue - Correctly serialize payloads in Rest-XML requests.
+* Issue - Fix an issue where Rest-XML requests do not have a default `Content-Type` header.
 * Issue - Apply appropriate `Content-Type` header for payloads in Rest services.
 * Issue - Correctly serialize URI label bindings in Rest requests.
 * Issue - Correctly serialize and parse header bindings in Rest services.
