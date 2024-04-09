@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-04-09)
+------------------
+
+* Feature - The OrchestrationSendingRoleArn has been added to the email channel and is used to send emails from campaigns or journeys.
+
 1.86.0 (2024-01-26)
 ------------------
 

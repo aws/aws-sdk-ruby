@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2024-04-09)
+------------------
+
+* Feature - Add new webhook filter types for GitHub webhooks
+
 1.108.0 (2024-03-29)
 ------------------
 

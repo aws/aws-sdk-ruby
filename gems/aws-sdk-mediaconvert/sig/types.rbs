@@ -232,6 +232,10 @@ module Aws::MediaConvert
       attr_accessor background_opacity: ::Integer
       attr_accessor fallback_font: ("BEST_MATCH" | "MONOSPACED_SANSSERIF" | "MONOSPACED_SERIF" | "PROPORTIONAL_SANSSERIF" | "PROPORTIONAL_SERIF")
       attr_accessor font_color: ("WHITE" | "BLACK" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "HEX" | "AUTO")
+      attr_accessor font_file_bold: ::String
+      attr_accessor font_file_bold_italic: ::String
+      attr_accessor font_file_italic: ::String
+      attr_accessor font_file_regular: ::String
       attr_accessor font_opacity: ::Integer
       attr_accessor font_resolution: ::Integer
       attr_accessor font_script: ("AUTOMATIC" | "HANS" | "HANT")
@@ -663,6 +667,10 @@ module Aws::MediaConvert
       attr_accessor dds_y_coordinate: ::Integer
       attr_accessor fallback_font: ("BEST_MATCH" | "MONOSPACED_SANSSERIF" | "MONOSPACED_SERIF" | "PROPORTIONAL_SANSSERIF" | "PROPORTIONAL_SERIF")
       attr_accessor font_color: ("WHITE" | "BLACK" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "HEX" | "AUTO")
+      attr_accessor font_file_bold: ::String
+      attr_accessor font_file_bold_italic: ::String
+      attr_accessor font_file_italic: ::String
+      attr_accessor font_file_regular: ::String
       attr_accessor font_opacity: ::Integer
       attr_accessor font_resolution: ::Integer
       attr_accessor font_script: ("AUTOMATIC" | "HANS" | "HANT")
@@ -1428,6 +1436,7 @@ module Aws::MediaConvert
       attr_accessor pcr_pid: ::Integer
       attr_accessor pmt_interval: ::Integer
       attr_accessor pmt_pid: ::Integer
+      attr_accessor prevent_buffer_underflow: ("DISABLED" | "ENABLED")
       attr_accessor private_metadata_pid: ::Integer
       attr_accessor program_number: ::Integer
       attr_accessor pts_offset: ::Integer

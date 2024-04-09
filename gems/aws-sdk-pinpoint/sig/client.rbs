@@ -3306,7 +3306,8 @@ module Aws
                                     enabled: bool?,
                                     from_address: ::String,
                                     identity: ::String,
-                                    role_arn: ::String?
+                                    role_arn: ::String?,
+                                    orchestration_sending_role_arn: ::String?
                                   }
                                 ) -> _UpdateEmailChannelResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEmailChannelResponseSuccess

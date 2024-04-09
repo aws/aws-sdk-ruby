@@ -645,6 +645,7 @@ module Aws
                                              ?source_db_cluster_identifier: ::String,
                                              ?dedicated_log_volume: bool,
                                              ?upgrade_storage_config: bool,
+                                             ?ca_certificate_identifier: ::String,
                                              ?source_region: ::String
                                            ) -> _CreateDBInstanceReadReplicaResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBInstanceReadReplicaResponseSuccess
@@ -3087,7 +3088,8 @@ module Aws
                                                   ?storage_throughput: ::Integer,
                                                   ?db_cluster_snapshot_identifier: ::String,
                                                   ?allocated_storage: ::Integer,
-                                                  ?dedicated_log_volume: bool
+                                                  ?dedicated_log_volume: bool,
+                                                  ?ca_certificate_identifier: ::String
                                                 ) -> _RestoreDBInstanceFromDBSnapshotResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceFromDBSnapshotResponseSuccess
 
@@ -3155,7 +3157,8 @@ module Aws
                                          ?storage_throughput: ::Integer,
                                          ?manage_master_user_password: bool,
                                          ?master_user_secret_kms_key_id: ::String,
-                                         ?dedicated_log_volume: bool
+                                         ?dedicated_log_volume: bool,
+                                         ?ca_certificate_identifier: ::String
                                        ) -> _RestoreDBInstanceFromS3ResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceFromS3ResponseSuccess
 
@@ -3218,7 +3221,8 @@ module Aws
                                                   ?network_type: ::String,
                                                   ?storage_throughput: ::Integer,
                                                   ?allocated_storage: ::Integer,
-                                                  ?dedicated_log_volume: bool
+                                                  ?dedicated_log_volume: bool,
+                                                  ?ca_certificate_identifier: ::String
                                                 ) -> _RestoreDBInstanceToPointInTimeResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceToPointInTimeResponseSuccess
 

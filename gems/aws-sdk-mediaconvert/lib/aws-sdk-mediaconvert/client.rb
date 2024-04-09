@@ -779,6 +779,10 @@ module Aws::MediaConvert
     #               background_opacity: 1,
     #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
+    #               font_file_bold: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_bold_italic: "__string",
+    #               font_file_italic: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_regular: "__stringPatternS3TtfHttpsTtf",
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
@@ -806,6 +810,10 @@ module Aws::MediaConvert
     #               dds_y_coordinate: 1,
     #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
+    #               font_file_bold: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_bold_italic: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_italic: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_regular: "__stringPatternS3TtfHttpsTtf",
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
@@ -915,6 +923,7 @@ module Aws::MediaConvert
     #           pcr_pid: 1,
     #           pmt_interval: 1,
     #           pmt_pid: 1,
+    #           prevent_buffer_underflow: "DISABLED", # accepts DISABLED, ENABLED
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           pts_offset: 1,
@@ -1539,6 +1548,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_bold #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_bold_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_regular #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
@@ -1564,6 +1577,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_bold #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_bold_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_regular #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
@@ -1646,6 +1663,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.pcr_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pmt_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pmt_pid #=> Integer
+    #   resp.preset.settings.container_settings.m2ts_settings.prevent_buffer_underflow #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pts_offset #=> Integer
@@ -2486,6 +2504,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_bold #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_bold_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_regular #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
@@ -2511,6 +2533,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_bold #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_bold_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_regular #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
@@ -2593,6 +2619,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.pcr_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pmt_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pmt_pid #=> Integer
+    #   resp.preset.settings.container_settings.m2ts_settings.prevent_buffer_underflow #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pts_offset #=> Integer
@@ -3312,6 +3339,10 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_bold #=> String
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_bold_italic #=> String
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_italic #=> String
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_regular #=> String
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
@@ -3337,6 +3368,10 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_bold #=> String
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_bold_italic #=> String
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_italic #=> String
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_regular #=> String
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
@@ -3419,6 +3454,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.pcr_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.pmt_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.pmt_pid #=> Integer
+    #   resp.presets[0].settings.container_settings.m2ts_settings.prevent_buffer_underflow #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.pts_offset #=> Integer
@@ -4252,6 +4288,10 @@ module Aws::MediaConvert
     #               background_opacity: 1,
     #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
+    #               font_file_bold: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_bold_italic: "__string",
+    #               font_file_italic: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_regular: "__stringPatternS3TtfHttpsTtf",
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
@@ -4279,6 +4319,10 @@ module Aws::MediaConvert
     #               dds_y_coordinate: 1,
     #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
+    #               font_file_bold: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_bold_italic: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_italic: "__stringPatternS3TtfHttpsTtf",
+    #               font_file_regular: "__stringPatternS3TtfHttpsTtf",
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
@@ -4388,6 +4432,7 @@ module Aws::MediaConvert
     #           pcr_pid: 1,
     #           pmt_interval: 1,
     #           pmt_pid: 1,
+    #           prevent_buffer_underflow: "DISABLED", # accepts DISABLED, ENABLED
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           pts_offset: 1,
@@ -5009,6 +5054,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_bold #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_bold_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_file_regular #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
@@ -5034,6 +5083,10 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_bold #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_bold_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_italic #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_file_regular #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
@@ -5116,6 +5169,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.pcr_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pmt_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pmt_pid #=> Integer
+    #   resp.preset.settings.container_settings.m2ts_settings.prevent_buffer_underflow #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pts_offset #=> Integer
@@ -5596,7 +5650,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

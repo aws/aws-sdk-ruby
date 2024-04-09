@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.224.0 (2024-04-09)
+------------------
+
+* Feature - This release adds support for specifying the CA certificate to use for the new db instance when restoring from db snapshot, restoring from s3, restoring to point in time, and creating a db instance read replica.
+
 1.223.0 (2024-03-18)
 ------------------
 

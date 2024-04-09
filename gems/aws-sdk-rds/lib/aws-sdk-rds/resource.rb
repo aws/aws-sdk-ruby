@@ -501,7 +501,8 @@ module Aws::RDS
     #   `serverless`.
     #
     #   The `serverless` engine mode only applies for Aurora Serverless v1 DB
-    #   clusters.
+    #   clusters. Aurora Serverless v2 DB clusters use the `provisioned`
+    #   engine mode.
     #
     #   For information about limitations and requirements for Serverless DB
     #   clusters, see the following sections in the *Amazon Aurora User

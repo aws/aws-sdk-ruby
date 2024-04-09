@@ -3315,6 +3315,7 @@ module Aws::Pinpoint
     #   resp.email_channel_response.messages_per_second #=> Integer
     #   resp.email_channel_response.platform #=> String
     #   resp.email_channel_response.role_arn #=> String
+    #   resp.email_channel_response.orchestration_sending_role_arn #=> String
     #   resp.email_channel_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailChannel AWS API Documentation
@@ -6144,6 +6145,7 @@ module Aws::Pinpoint
     #   resp.email_channel_response.messages_per_second #=> Integer
     #   resp.email_channel_response.platform #=> String
     #   resp.email_channel_response.role_arn #=> String
+    #   resp.email_channel_response.orchestration_sending_role_arn #=> String
     #   resp.email_channel_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailChannel AWS API Documentation
@@ -10800,6 +10802,7 @@ module Aws::Pinpoint
     #       from_address: "__string", # required
     #       identity: "__string", # required
     #       role_arn: "__string",
+    #       orchestration_sending_role_arn: "__string",
     #     },
     #   })
     #
@@ -10819,6 +10822,7 @@ module Aws::Pinpoint
     #   resp.email_channel_response.messages_per_second #=> Integer
     #   resp.email_channel_response.platform #=> String
     #   resp.email_channel_response.role_arn #=> String
+    #   resp.email_channel_response.orchestration_sending_role_arn #=> String
     #   resp.email_channel_response.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailChannel AWS API Documentation
@@ -12854,7 +12858,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
