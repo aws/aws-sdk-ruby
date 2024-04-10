@@ -5,16 +5,18 @@ Unreleased Changes
 * Issue - Populate headers for XML and JSON error responses.
 * Issue - Support fractional seconds when parsing `DateTime` timestamps.
 * Issue - Correctly serialize flattened lists for Query protocol.
-* Issue - Correctly serialize payloads in Rest-XML requests.
-* Issue - Fix an issue where Rest-XML requests do not have a default `Content-Type` header.
+* Issue - Correctly serialize payload name in Rest-XML requests.
+* Issue - Fix an issue where Rest-XML requests do not have a default `Content-Type` header applied.
 * Issue - Apply appropriate `Content-Type` header for payloads in Rest services.
 * Issue - Correctly serialize URI label bindings in Rest requests.
 * Issue - Correctly serialize and parse header bindings in Rest services.
 * Issue - Ensure that null and empty headers are not sent in Rest requests.
 * Issue - Ensure keys in query maps do not override modeled keys in Rest requests.
 * Issue - Ensure empty blob payloads are omitted in Rest requests.
-* Issue - Support parsing `NaN`, `Infinity` and `-Infinity` float values.
+* Issue - Support parsing of `NaN`, `Infinity` and `-Infinity` float values.
 * Issue - Apply appropriate `xmlName` for flattened lists and maps in Rest-XML services.
+* Issue - Handle serializing of different formats of `xmlNamespace` on shapes.
+* Issue - Fix deserializing of an empty blob to produce an empty string.
 * Issue - Fix deserializing an empty self-closed blob to produce an empty string.
 * Issue - Support parsing of different formats of error data in Rest-XML services.
 
