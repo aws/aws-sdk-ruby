@@ -52,6 +52,12 @@ module Aws::CleanRooms
     AnalysisTemplateSummary = Shapes::StructureShape.new(name: 'AnalysisTemplateSummary')
     AnalysisTemplateSummaryList = Shapes::ListShape.new(name: 'AnalysisTemplateSummaryList')
     AnalysisTemplateText = Shapes::StringShape.new(name: 'AnalysisTemplateText')
+    AnalysisTemplateValidationStatus = Shapes::StringShape.new(name: 'AnalysisTemplateValidationStatus')
+    AnalysisTemplateValidationStatusDetail = Shapes::StructureShape.new(name: 'AnalysisTemplateValidationStatusDetail')
+    AnalysisTemplateValidationStatusDetailList = Shapes::ListShape.new(name: 'AnalysisTemplateValidationStatusDetailList')
+    AnalysisTemplateValidationStatusReason = Shapes::StructureShape.new(name: 'AnalysisTemplateValidationStatusReason')
+    AnalysisTemplateValidationStatusReasonList = Shapes::ListShape.new(name: 'AnalysisTemplateValidationStatusReasonList')
+    AnalysisTemplateValidationType = Shapes::StringShape.new(name: 'AnalysisTemplateValidationType')
     BatchGetCollaborationAnalysisTemplateError = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateError')
     BatchGetCollaborationAnalysisTemplateErrorList = Shapes::ListShape.new(name: 'BatchGetCollaborationAnalysisTemplateErrorList')
     BatchGetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateInput')
@@ -480,6 +486,7 @@ module Aws::CleanRooms
     AnalysisTemplate.add_member(:format, Shapes::ShapeRef.new(shape: AnalysisFormat, required: true, location_name: "format"))
     AnalysisTemplate.add_member(:source, Shapes::ShapeRef.new(shape: AnalysisSource, required: true, location_name: "source"))
     AnalysisTemplate.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
+    AnalysisTemplate.add_member(:validations, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: "validations"))
     AnalysisTemplate.struct_class = Types::AnalysisTemplate
 
     AnalysisTemplateArnList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArn)
@@ -497,6 +504,18 @@ module Aws::CleanRooms
     AnalysisTemplateSummary.struct_class = Types::AnalysisTemplateSummary
 
     AnalysisTemplateSummaryList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateSummary)
+
+    AnalysisTemplateValidationStatusDetail.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationType, required: true, location_name: "type"))
+    AnalysisTemplateValidationStatusDetail.add_member(:status, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatus, required: true, location_name: "status"))
+    AnalysisTemplateValidationStatusDetail.add_member(:reasons, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusReasonList, location_name: "reasons"))
+    AnalysisTemplateValidationStatusDetail.struct_class = Types::AnalysisTemplateValidationStatusDetail
+
+    AnalysisTemplateValidationStatusDetailList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetail)
+
+    AnalysisTemplateValidationStatusReason.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    AnalysisTemplateValidationStatusReason.struct_class = Types::AnalysisTemplateValidationStatusReason
+
+    AnalysisTemplateValidationStatusReasonList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusReason)
 
     BatchGetCollaborationAnalysisTemplateError.add_member(:arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, required: true, location_name: "arn"))
     BatchGetCollaborationAnalysisTemplateError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
@@ -572,6 +591,7 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplate.add_member(:format, Shapes::ShapeRef.new(shape: AnalysisFormat, required: true, location_name: "format"))
     CollaborationAnalysisTemplate.add_member(:source, Shapes::ShapeRef.new(shape: AnalysisSource, required: true, location_name: "source"))
     CollaborationAnalysisTemplate.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
+    CollaborationAnalysisTemplate.add_member(:validations, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: "validations"))
     CollaborationAnalysisTemplate.struct_class = Types::CollaborationAnalysisTemplate
 
     CollaborationAnalysisTemplateList.member = Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplate)

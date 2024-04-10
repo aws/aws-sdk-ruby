@@ -128,6 +128,7 @@ module Aws::CleanRooms
       attr_accessor format: ("SQL")
       attr_accessor source: Types::AnalysisSource
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
+      attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       SENSITIVE: [:source]
     end
 
@@ -142,6 +143,18 @@ module Aws::CleanRooms
       attr_accessor collaboration_arn: ::String
       attr_accessor collaboration_id: ::String
       attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AnalysisTemplateValidationStatusDetail
+      attr_accessor type: ("DIFFERENTIAL_PRIVACY")
+      attr_accessor status: ("VALID" | "INVALID" | "UNABLE_TO_VALIDATE")
+      attr_accessor reasons: ::Array[Types::AnalysisTemplateValidationStatusReason]
+      SENSITIVE: []
+    end
+
+    class AnalysisTemplateValidationStatusReason
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -234,6 +247,7 @@ module Aws::CleanRooms
       attr_accessor format: ("SQL")
       attr_accessor source: Types::AnalysisSource
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
+      attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       SENSITIVE: [:source]
     end
 

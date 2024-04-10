@@ -697,7 +697,7 @@ module Aws
                          function: ::String,
                          actions: Array[
                            {
-                             action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "END_ASSOCIATED_TASKS"),
+                             action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION"),
                              task_action: {
                                name: ::String,
                                description: ::String?,
@@ -752,6 +752,9 @@ module Aws
                                ]
                              }?,
                              end_associated_tasks_action: {
+                             }?,
+                             submit_auto_evaluation_action: {
+                               evaluation_form_id: ::String
                              }?
                            },
                          ],
@@ -3825,7 +3828,7 @@ module Aws
                          function: ::String,
                          actions: Array[
                            {
-                             action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "END_ASSOCIATED_TASKS"),
+                             action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION"),
                              task_action: {
                                name: ::String,
                                description: ::String?,
@@ -3880,6 +3883,9 @@ module Aws
                                ]
                              }?,
                              end_associated_tasks_action: {
+                             }?,
+                             submit_auto_evaluation_action: {
+                               evaluation_form_id: ::String
                              }?
                            },
                          ],

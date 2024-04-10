@@ -380,6 +380,7 @@ module Aws::Connect
     EvaluationForm = Shapes::StructureShape.new(name: 'EvaluationForm')
     EvaluationFormContent = Shapes::StructureShape.new(name: 'EvaluationFormContent')
     EvaluationFormDescription = Shapes::StringShape.new(name: 'EvaluationFormDescription')
+    EvaluationFormId = Shapes::StringShape.new(name: 'EvaluationFormId')
     EvaluationFormItem = Shapes::UnionShape.new(name: 'EvaluationFormItem')
     EvaluationFormItemWeight = Shapes::FloatShape.new(name: 'EvaluationFormItemWeight')
     EvaluationFormItemsList = Shapes::ListShape.new(name: 'EvaluationFormItemsList')
@@ -1012,6 +1013,7 @@ module Aws::Connect
     StringCondition = Shapes::StructureShape.new(name: 'StringCondition')
     StringReference = Shapes::StructureShape.new(name: 'StringReference')
     Subject = Shapes::StringShape.new(name: 'Subject')
+    SubmitAutoEvaluationActionDefinition = Shapes::StructureShape.new(name: 'SubmitAutoEvaluationActionDefinition')
     SubmitContactEvaluationRequest = Shapes::StructureShape.new(name: 'SubmitContactEvaluationRequest')
     SubmitContactEvaluationResponse = Shapes::StructureShape.new(name: 'SubmitContactEvaluationResponse')
     Subtype = Shapes::StringShape.new(name: 'Subtype')
@@ -4116,6 +4118,7 @@ module Aws::Connect
     RuleAction.add_member(:create_case_action, Shapes::ShapeRef.new(shape: CreateCaseActionDefinition, location_name: "CreateCaseAction"))
     RuleAction.add_member(:update_case_action, Shapes::ShapeRef.new(shape: UpdateCaseActionDefinition, location_name: "UpdateCaseAction"))
     RuleAction.add_member(:end_associated_tasks_action, Shapes::ShapeRef.new(shape: EndAssociatedTasksActionDefinition, location_name: "EndAssociatedTasksAction"))
+    RuleAction.add_member(:submit_auto_evaluation_action, Shapes::ShapeRef.new(shape: SubmitAutoEvaluationActionDefinition, location_name: "SubmitAutoEvaluationAction"))
     RuleAction.struct_class = Types::RuleAction
 
     RuleActions.member = Shapes::ShapeRef.new(shape: RuleAction)
@@ -4540,6 +4543,9 @@ module Aws::Connect
     StringReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
     StringReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
     StringReference.struct_class = Types::StringReference
+
+    SubmitAutoEvaluationActionDefinition.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: EvaluationFormId, required: true, location_name: "EvaluationFormId"))
+    SubmitAutoEvaluationActionDefinition.struct_class = Types::SubmitAutoEvaluationActionDefinition
 
     SubmitContactEvaluationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     SubmitContactEvaluationRequest.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationId"))

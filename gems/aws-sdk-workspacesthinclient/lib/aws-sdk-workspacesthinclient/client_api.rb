@@ -38,7 +38,6 @@ module Aws::WorkSpacesThinClient
     DeviceSoftwareSetComplianceStatus = Shapes::StringShape.new(name: 'DeviceSoftwareSetComplianceStatus')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
     DeviceSummary = Shapes::StructureShape.new(name: 'DeviceSummary')
-    EmbeddedTag = Shapes::StructureShape.new(name: 'EmbeddedTag')
     Environment = Shapes::StructureShape.new(name: 'Environment')
     EnvironmentId = Shapes::StringShape.new(name: 'EnvironmentId')
     EnvironmentList = Shapes::ListShape.new(name: 'EnvironmentList')
@@ -56,7 +55,6 @@ module Aws::WorkSpacesThinClient
     Hour = Shapes::IntegerShape.new(name: 'Hour')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
-    InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     ListDevicesRequest = Shapes::StructureShape.new(name: 'ListDevicesRequest')
     ListDevicesResponse = Shapes::StructureShape.new(name: 'ListDevicesResponse')
@@ -174,7 +172,7 @@ module Aws::WorkSpacesThinClient
     Device.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Device.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     Device.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
-    Device.add_member(:tags, Shapes::ShapeRef.new(shape: EmbeddedTag, location_name: "tags"))
+    Device.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     Device.struct_class = Types::Device
 
     DeviceList.member = Shapes::ShapeRef.new(shape: DeviceSummary)
@@ -194,12 +192,7 @@ module Aws::WorkSpacesThinClient
     DeviceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     DeviceSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     DeviceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
-    DeviceSummary.add_member(:tags, Shapes::ShapeRef.new(shape: EmbeddedTag, location_name: "tags"))
     DeviceSummary.struct_class = Types::DeviceSummary
-
-    EmbeddedTag.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
-    EmbeddedTag.add_member(:internal_id, Shapes::ShapeRef.new(shape: String, location_name: "internalId"))
-    EmbeddedTag.struct_class = Types::EmbeddedTag
 
     Environment.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "id"))
     Environment.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "name"))
@@ -219,7 +212,7 @@ module Aws::WorkSpacesThinClient
     Environment.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     Environment.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
-    Environment.add_member(:tags, Shapes::ShapeRef.new(shape: EmbeddedTag, location_name: "tags"))
+    Environment.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     Environment.struct_class = Types::Environment
 
     EnvironmentList.member = Shapes::ShapeRef.new(shape: EnvironmentSummary)
@@ -238,7 +231,6 @@ module Aws::WorkSpacesThinClient
     EnvironmentSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     EnvironmentSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     EnvironmentSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
-    EnvironmentSummary.add_member(:tags, Shapes::ShapeRef.new(shape: EmbeddedTag, location_name: "tags"))
     EnvironmentSummary.struct_class = Types::EnvironmentSummary
 
     GetDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: DeviceId, required: true, location: "uri", location_name: "id"))
@@ -262,10 +254,6 @@ module Aws::WorkSpacesThinClient
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
-
-    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
-    InternalServiceException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
-    InternalServiceException.struct_class = Types::InternalServiceException
 
     ListDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -331,6 +319,7 @@ module Aws::WorkSpacesThinClient
     SoftwareSet.add_member(:validation_status, Shapes::ShapeRef.new(shape: SoftwareSetValidationStatus, location_name: "validationStatus"))
     SoftwareSet.add_member(:software, Shapes::ShapeRef.new(shape: SoftwareList, location_name: "software"))
     SoftwareSet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    SoftwareSet.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     SoftwareSet.struct_class = Types::SoftwareSet
 
     SoftwareSetList.member = Shapes::ShapeRef.new(shape: SoftwareSetSummary)
@@ -613,8 +602,10 @@ module Aws::WorkSpacesThinClient
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -627,8 +618,11 @@ module Aws::WorkSpacesThinClient
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -641,8 +635,11 @@ module Aws::WorkSpacesThinClient
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_device, Seahorse::Model::Operation.new.tap do |o|

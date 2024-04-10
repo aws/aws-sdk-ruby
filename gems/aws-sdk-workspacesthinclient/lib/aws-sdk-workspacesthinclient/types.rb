@@ -356,7 +356,7 @@ module Aws::WorkSpacesThinClient
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource.
-    #   @return [Types::EmbeddedTag]
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/Device AWS API Documentation
     #
@@ -450,10 +450,6 @@ module Aws::WorkSpacesThinClient
     #   The Amazon Resource Name (ARN) of the device.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   The tag keys and optional values for the resource.
-    #   @return [Types::EmbeddedTag]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/DeviceSummary AWS API Documentation
     #
     class DeviceSummary < Struct.new(
@@ -471,28 +467,8 @@ module Aws::WorkSpacesThinClient
       :last_posture_at,
       :created_at,
       :updated_at,
-      :arn,
-      :tags)
-      SENSITIVE = [:name, :tags]
-      include Aws::Structure
-    end
-
-    # The resource and internal ID of a resource to tag.
-    #
-    # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of a resource to tag.
-    #   @return [String]
-    #
-    # @!attribute [rw] internal_id
-    #   The internal ID of a resource to tag.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/EmbeddedTag AWS API Documentation
-    #
-    class EmbeddedTag < Struct.new(
-      :resource_arn,
-      :internal_id)
-      SENSITIVE = []
+      :arn)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -577,7 +553,7 @@ module Aws::WorkSpacesThinClient
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource.
-    #   @return [Types::EmbeddedTag]
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/Environment AWS API Documentation
     #
@@ -666,10 +642,6 @@ module Aws::WorkSpacesThinClient
     #   The Amazon Resource Name (ARN) of the environment.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   The tag keys and optional values for the resource.
-    #   @return [Types::EmbeddedTag]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/EnvironmentSummary AWS API Documentation
     #
     class EnvironmentSummary < Struct.new(
@@ -686,9 +658,8 @@ module Aws::WorkSpacesThinClient
       :pending_software_set_id,
       :created_at,
       :updated_at,
-      :arn,
-      :tags)
-      SENSITIVE = [:name, :desktop_endpoint, :tags]
+      :arn)
+      SENSITIVE = [:name, :desktop_endpoint]
       include Aws::Structure
     end
 
@@ -777,25 +748,6 @@ module Aws::WorkSpacesThinClient
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
-      :message,
-      :retry_after_seconds)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Request processing failed due to some unknown error, exception, or
-    # failure.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @!attribute [rw] retry_after_seconds
-    #   The number of seconds to wait before retrying the next request.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/InternalServiceException AWS API Documentation
-    #
-    class InternalServiceException < Struct.new(
       :message,
       :retry_after_seconds)
       SENSITIVE = []
@@ -1131,6 +1083,10 @@ module Aws::WorkSpacesThinClient
     #   The Amazon Resource Name (ARN) of the software set.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values for the resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/SoftwareSet AWS API Documentation
     #
     class SoftwareSet < Struct.new(
@@ -1140,8 +1096,9 @@ module Aws::WorkSpacesThinClient
       :supported_until,
       :validation_status,
       :software,
-      :arn)
-      SENSITIVE = []
+      :arn,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 

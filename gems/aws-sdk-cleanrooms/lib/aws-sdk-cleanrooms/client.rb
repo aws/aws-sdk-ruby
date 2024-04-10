@@ -431,6 +431,11 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_templates[0].analysis_parameters[0].name #=> String
     #   resp.collaboration_analysis_templates[0].analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
     #   resp.collaboration_analysis_templates[0].analysis_parameters[0].default_value #=> String
+    #   resp.collaboration_analysis_templates[0].validations #=> Array
+    #   resp.collaboration_analysis_templates[0].validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_analysis_templates[0].validations[0].status #=> String, one of "VALID", "INVALID", "UNABLE_TO_VALIDATE"
+    #   resp.collaboration_analysis_templates[0].validations[0].reasons #=> Array
+    #   resp.collaboration_analysis_templates[0].validations[0].reasons[0].message #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
@@ -659,6 +664,11 @@ module Aws::CleanRooms
     #   resp.analysis_template.analysis_parameters[0].name #=> String
     #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
     #   resp.analysis_template.analysis_parameters[0].default_value #=> String
+    #   resp.analysis_template.validations #=> Array
+    #   resp.analysis_template.validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.analysis_template.validations[0].status #=> String, one of "VALID", "INVALID", "UNABLE_TO_VALIDATE"
+    #   resp.analysis_template.validations[0].reasons #=> Array
+    #   resp.analysis_template.validations[0].reasons[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateAnalysisTemplate AWS API Documentation
     #
@@ -1551,6 +1561,11 @@ module Aws::CleanRooms
     #   resp.analysis_template.analysis_parameters[0].name #=> String
     #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
     #   resp.analysis_template.analysis_parameters[0].default_value #=> String
+    #   resp.analysis_template.validations #=> Array
+    #   resp.analysis_template.validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.analysis_template.validations[0].status #=> String, one of "VALID", "INVALID", "UNABLE_TO_VALIDATE"
+    #   resp.analysis_template.validations[0].reasons #=> Array
+    #   resp.analysis_template.validations[0].reasons[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetAnalysisTemplate AWS API Documentation
     #
@@ -1644,6 +1659,11 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_template.analysis_parameters[0].name #=> String
     #   resp.collaboration_analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
     #   resp.collaboration_analysis_template.analysis_parameters[0].default_value #=> String
+    #   resp.collaboration_analysis_template.validations #=> Array
+    #   resp.collaboration_analysis_template.validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_analysis_template.validations[0].status #=> String, one of "VALID", "INVALID", "UNABLE_TO_VALIDATE"
+    #   resp.collaboration_analysis_template.validations[0].reasons #=> Array
+    #   resp.collaboration_analysis_template.validations[0].reasons[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationAnalysisTemplate AWS API Documentation
     #
@@ -3266,6 +3286,11 @@ module Aws::CleanRooms
     #   resp.analysis_template.analysis_parameters[0].name #=> String
     #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
     #   resp.analysis_template.analysis_parameters[0].default_value #=> String
+    #   resp.analysis_template.validations #=> Array
+    #   resp.analysis_template.validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.analysis_template.validations[0].status #=> String, one of "VALID", "INVALID", "UNABLE_TO_VALIDATE"
+    #   resp.analysis_template.validations[0].reasons #=> Array
+    #   resp.analysis_template.validations[0].reasons[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateAnalysisTemplate AWS API Documentation
     #
@@ -3793,7 +3818,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

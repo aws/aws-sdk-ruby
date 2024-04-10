@@ -3339,9 +3339,6 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] applications
-    #   This API is in preview release for Amazon Connect and is subject to
-    #   change.
-    #
     #   A list of third-party applications that the security profile will
     #   give access to.
     #   @return [Array<Types::Application>]
@@ -12115,9 +12112,6 @@ module Aws::Connect
     end
 
     # @!attribute [rw] applications
-    #   This API is in preview release for Amazon Connect and is subject to
-    #   change.
-    #
     #   A list of the third-party application's metadata.
     #   @return [Array<Types::Application>]
     #
@@ -15521,6 +15515,10 @@ module Aws::Connect
     #   Supported only for `TriggerEventSource` values: `OnCaseUpdate`.
     #   @return [Types::EndAssociatedTasksActionDefinition]
     #
+    # @!attribute [rw] submit_auto_evaluation_action
+    #   Information about the submit automated evaluation action.
+    #   @return [Types::SubmitAutoEvaluationActionDefinition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleAction AWS API Documentation
     #
     class RuleAction < Struct.new(
@@ -15531,7 +15529,8 @@ module Aws::Connect
       :send_notification_action,
       :create_case_action,
       :update_case_action,
-      :end_associated_tasks_action)
+      :end_associated_tasks_action,
+      :submit_auto_evaluation_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17885,6 +17884,20 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the submit automated evaluation action.
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The identifier of the auto-evaluation enabled form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SubmitAutoEvaluationActionDefinition AWS API Documentation
+    #
+    class SubmitAutoEvaluationActionDefinition < Struct.new(
+      :evaluation_form_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -20039,9 +20052,6 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] applications
-    #   This API is in preview release for Amazon Connect and is subject to
-    #   change.
-    #
     #   A list of the third-party application's metadata.
     #   @return [Array<Types::Application>]
     #

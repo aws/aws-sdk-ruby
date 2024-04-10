@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2024-04-10)
+------------------
+
+* Feature - This release adds a new QiC public API updateSession and updates an existing QiC public API createSession
+
 1.5.0 (2024-01-26)
 ------------------
 

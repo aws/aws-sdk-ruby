@@ -184,6 +184,32 @@ module Aws
                             ?client_token: ::String,
                             ?description: ::String,
                             name: ::String,
+                            ?tag_filter: {
+                              and_conditions: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String?
+                                },
+                              ]?,
+                              or_conditions: Array[
+                                {
+                                  and_conditions: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ]?,
+                                  tag_condition: {
+                                    key: ::String,
+                                    value: ::String?
+                                  }?
+                                },
+                              ]?,
+                              tag_condition: {
+                                key: ::String,
+                                value: ::String?
+                              }?
+                            },
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateSessionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSessionResponseSuccess
@@ -692,6 +718,44 @@ module Aws
                                    ?shortcut_key: ::String
                                  ) -> _UpdateQuickResponseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQuickResponseResponseSuccess
+
+      interface _UpdateSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSessionResponse]
+        def session: () -> Types::SessionData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#update_session-instance_method
+      def update_session: (
+                            assistant_id: ::String,
+                            ?description: ::String,
+                            session_id: ::String,
+                            ?tag_filter: {
+                              and_conditions: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String?
+                                },
+                              ]?,
+                              or_conditions: Array[
+                                {
+                                  and_conditions: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ]?,
+                                  tag_condition: {
+                                    key: ::String,
+                                    value: ::String?
+                                  }?
+                                },
+                              ]?,
+                              tag_condition: {
+                                key: ::String,
+                                value: ::String?
+                              }?
+                            }
+                          ) -> _UpdateSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSessionResponseSuccess
     end
   end
 end

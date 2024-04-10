@@ -416,13 +416,14 @@ module Aws::QConnect
     #   The customer managed key must have a policy that allows
     #   `kms:CreateGrant`, ` kms:DescribeKey`, `kms:Decrypt`, and
     #   `kms:GenerateDataKey*` permissions to the IAM identity using the key
-    #   to invoke Amazon Q. To use Amazon Q with chat, the key policy must
-    #   also allow `kms:Decrypt`, `kms:GenerateDataKey*`, and
-    #   `kms:DescribeKey` permissions to the `connect.amazonaws.com` service
-    #   principal.
+    #   to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat,
+    #   the key policy must also allow `kms:Decrypt`, `kms:GenerateDataKey*`,
+    #   and `kms:DescribeKey` permissions to the `connect.amazonaws.com`
+    #   service principal.
     #
     #   For more information about setting up a customer managed key for
-    #   Amazon Q, see [Enable Amazon Q in Connect for your instance][1].
+    #   Amazon Q in Connect, see [Enable Amazon Q in Connect for your
+    #   instance][1].
     #
     #
     #
@@ -481,8 +482,8 @@ module Aws::QConnect
     # knowledge base. An assistant can have only a single association.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @option params [required, Types::AssistantAssociationInputData] :association
     #   The identifier of the associated resource.
@@ -545,7 +546,7 @@ module Aws::QConnect
       req.send_request(options)
     end
 
-    # Creates Amazon Q content. Before to calling this API, use
+    # Creates Amazon Q in Connect content. Before to calling this API, use
     # [StartContentUpload][1] to upload an asset.
     #
     #
@@ -567,15 +568,14 @@ module Aws::QConnect
     #
     # @option params [required, String] :knowledge_base_id
     #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   QUICK\_RESPONSES type knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [Hash<String,String>] :metadata
     #   A key/value map to store attributes without affecting tagging or
     #   recommendations. For example, when synchronizing data between an
-    #   external system and Amazon Q, you can store an external version
-    #   identifier as metadata to utilize for determining drift.
+    #   external system and Amazon Q in Connect, you can store an external
+    #   version identifier as metadata to utilize for determining drift.
     #
     # @option params [required, String] :name
     #   The name of the content. Each piece of content in a knowledge base
@@ -715,10 +715,12 @@ module Aws::QConnect
     #
     #   This KMS key must have a policy that allows `kms:CreateGrant`,
     #   `kms:DescribeKey`, `kms:Decrypt`, and `kms:GenerateDataKey*`
-    #   permissions to the IAM identity using the key to invoke Amazon Q.
+    #   permissions to the IAM identity using the key to invoke Amazon Q in
+    #   Connect.
     #
     #   For more information about setting up a customer managed key for
-    #   Amazon Q, see [Enable Amazon Q in Connect for your instance][1].
+    #   Amazon Q in Connect, see [Enable Amazon Q in Connect for your
+    #   instance][1].
     #
     #
     #
@@ -785,7 +787,7 @@ module Aws::QConnect
       req.send_request(options)
     end
 
-    # Creates an Amazon Q quick response.
+    # Creates an Amazon Q in Connect quick response.
     #
     # @option params [Array<String>] :channels
     #   The Amazon Connect channels this quick response applies to.
@@ -826,10 +828,8 @@ module Aws::QConnect
     #   Whether the quick response is active.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [String] :language
     #   The language code value for the language in which the quick response
@@ -911,12 +911,13 @@ module Aws::QConnect
     end
 
     # Creates a session. A session is a contextual container used for
-    # generating recommendations. Amazon Connect creates a new Amazon Q
-    # session for each contact on which Amazon Q is enabled.
+    # generating recommendations. Amazon Connect creates a new Amazon Q in
+    # Connect session for each contact on which Amazon Q in Connect is
+    # enabled.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -937,6 +938,9 @@ module Aws::QConnect
     # @option params [required, String] :name
     #   The name of the session.
     #
+    # @option params [Types::TagFilter] :tag_filter
+    #   An object that can be used to specify Tag conditions.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #
@@ -951,6 +955,32 @@ module Aws::QConnect
     #     client_token: "ClientToken",
     #     description: "Description",
     #     name: "Name", # required
+    #     tag_filter: {
+    #       and_conditions: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
+    #       or_conditions: [
+    #         {
+    #           and_conditions: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
+    #           tag_condition: {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         },
+    #       ],
+    #       tag_condition: {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -963,6 +993,17 @@ module Aws::QConnect
     #   resp.session.name #=> String
     #   resp.session.session_arn #=> String
     #   resp.session.session_id #=> String
+    #   resp.session.tag_filter.and_conditions #=> Array
+    #   resp.session.tag_filter.and_conditions[0].key #=> String
+    #   resp.session.tag_filter.and_conditions[0].value #=> String
+    #   resp.session.tag_filter.or_conditions #=> Array
+    #   resp.session.tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.session.tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.session.tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.session.tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.session.tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.session.tag_filter.tag_condition.key #=> String
+    #   resp.session.tag_filter.tag_condition.value #=> String
     #   resp.session.tags #=> Hash
     #   resp.session.tags["TagKey"] #=> String
     #
@@ -978,8 +1019,8 @@ module Aws::QConnect
     # Deletes an assistant.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1005,8 +1046,8 @@ module Aws::QConnect
     #   the ARN. URLs cannot contain the ARN.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1033,10 +1074,8 @@ module Aws::QConnect
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1062,9 +1101,7 @@ module Aws::QConnect
     #   The identifier of the import job to be deleted.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it.
+    #   The identifier of the knowledge base.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1127,9 +1164,7 @@ module Aws::QConnect
     #
     # @option params [required, String] :knowledge_base_id
     #   The knowledge base from which the quick response is deleted. The
-    #   identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it.
+    #   identifier of the knowledge base.
     #
     # @option params [required, String] :quick_response_id
     #   The identifier of the quick response to delete.
@@ -1155,8 +1190,8 @@ module Aws::QConnect
     # Retrieves information about an assistant.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @return [Types::GetAssistantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1198,8 +1233,8 @@ module Aws::QConnect
     #   the ARN. URLs cannot contain the ARN.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @return [Types::GetAssistantAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1241,9 +1276,8 @@ module Aws::QConnect
     #
     # @option params [required, String] :knowledge_base_id
     #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   QUICK\_RESPONSES type knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Types::GetContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1291,10 +1325,8 @@ module Aws::QConnect
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Types::GetContentSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1381,10 +1413,8 @@ module Aws::QConnect
     # Retrieves information about the knowledge base.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Types::GetKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1477,6 +1507,12 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # This API will be discontinued starting June 1, 2024. To receive
+    # generative responses after March 1, 2024, you will need to create a
+    # new Assistant in the Amazon Connect console and integrate the Amazon Q
+    # in Connect JavaScript library (amazon-q-connectjs) into your
+    # applications.
+    #
     # Retrieves recommendations for the specified session. To avoid
     # retrieving the same recommendations in subsequent calls, use
     # [NotifyRecommendationsReceived][1]. This API supports long-polling
@@ -1491,8 +1527,8 @@ module Aws::QConnect
     # [2]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_QueryAssistant.html
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1594,8 +1630,8 @@ module Aws::QConnect
     # Retrieves information for a specified session.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @option params [required, String] :session_id
     #   The identifier of the session. Can be either the ID or the ARN. URLs
@@ -1619,6 +1655,17 @@ module Aws::QConnect
     #   resp.session.name #=> String
     #   resp.session.session_arn #=> String
     #   resp.session.session_id #=> String
+    #   resp.session.tag_filter.and_conditions #=> Array
+    #   resp.session.tag_filter.and_conditions[0].key #=> String
+    #   resp.session.tag_filter.and_conditions[0].value #=> String
+    #   resp.session.tag_filter.or_conditions #=> Array
+    #   resp.session.tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.session.tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.session.tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.session.tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.session.tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.session.tag_filter.tag_condition.key #=> String
+    #   resp.session.tag_filter.tag_condition.value #=> String
     #   resp.session.tags #=> Hash
     #   resp.session.tags["TagKey"] #=> String
     #
@@ -1634,8 +1681,8 @@ module Aws::QConnect
     # Lists information about assistant associations.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1736,9 +1783,8 @@ module Aws::QConnect
     #
     # @option params [required, String] :knowledge_base_id
     #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   QUICK\_RESPONSES type knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1793,10 +1839,8 @@ module Aws::QConnect
     # Lists information about import jobs.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1901,10 +1945,8 @@ module Aws::QConnect
     # Lists information about quick response.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1998,8 +2040,8 @@ module Aws::QConnect
     # [1]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @option params [required, Array<String>] :recommendation_ids
     #   The identifiers of the recommendations.
@@ -2042,7 +2084,7 @@ module Aws::QConnect
     # target. This API only supports generative targets.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant.
+    #   The identifier of the Amazon Q in Connect assistant.
     #
     # @option params [required, Types::ContentFeedbackData] :content_feedback
     #   Information about the feedback provided.
@@ -2091,6 +2133,12 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # This API will be discontinued starting June 1, 2024. To receive
+    # generative responses after March 1, 2024, you will need to create a
+    # new Assistant in the Amazon Connect console and integrate the Amazon Q
+    # in Connect JavaScript library (amazon-q-connectjs) into your
+    # applications.
+    #
     # Performs a manual search against the specified assistant. To retrieve
     # recommendations for an assistant, use [GetRecommendations][1].
     #
@@ -2099,8 +2147,8 @@ module Aws::QConnect
     # [1]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -2117,8 +2165,8 @@ module Aws::QConnect
     #   The text to search for.
     #
     # @option params [String] :session_id
-    #   The identifier of the Amazon Q session. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect session. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @return [Types::QueryAssistantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2211,10 +2259,8 @@ module Aws::QConnect
     # Removes a URI template from a knowledge base.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2238,9 +2284,8 @@ module Aws::QConnect
     #
     # @option params [required, String] :knowledge_base_id
     #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   QUICK\_RESPONSES type knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -2304,8 +2349,8 @@ module Aws::QConnect
       req.send_request(options)
     end
 
-    # Searches existing Amazon Q quick responses in an Amazon Q knowledge
-    # base.
+    # Searches existing Amazon Q in Connect quick responses in an Amazon Q
+    # in Connect knowledge base.
     #
     # @option params [Hash<String,String>] :attributes
     #   The [user-defined Amazon Connect contact attributes][1] to be resolved
@@ -2416,8 +2461,8 @@ module Aws::QConnect
     # Searches for sessions.
     #
     # @option params [required, String] :assistant_id
-    #   The identifier of the Amazon Q assistant. Can be either the ID or the
-    #   ARN. URLs cannot contain the ARN.
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -2488,10 +2533,8 @@ module Aws::QConnect
     #   The type of content to upload.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [Integer] :presigned_url_time_to_live
     #   The expected expiration time of the generated presigned URL, specified
@@ -2529,15 +2572,15 @@ module Aws::QConnect
       req.send_request(options)
     end
 
-    # Start an asynchronous job to import Amazon Q resources from an
-    # uploaded source file. Before calling this API, use
+    # Start an asynchronous job to import Amazon Q in Connect resources from
+    # an uploaded source file. Before calling this API, use
     # [StartContentUpload][1] to upload an asset that contains the resource
     # data.
     #
-    # * For importing Amazon Q quick responses, you need to upload a csv
-    #   file including the quick responses. For information about how to
-    #   format the csv file for importing quick responses, see [Import quick
-    #   responses][2].
+    # * For importing Amazon Q in Connect quick responses, you need to
+    #   upload a csv file including the quick responses. For information
+    #   about how to format the csv file for importing quick responses, see
+    #   [Import quick responses][2].
     #
     # ^
     #
@@ -2565,18 +2608,16 @@ module Aws::QConnect
     #   ^
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
-    #   * For importing Amazon Q quick responses, this should be a
+    #   * For importing Amazon Q in Connect quick responses, this should be a
     #     `QUICK_RESPONSES` type knowledge base.
     #
     #   ^
     #
     # @option params [Hash<String,String>] :metadata
-    #   The metadata fields of the imported Amazon Q resources.
+    #   The metadata fields of the imported Amazon Q in Connect resources.
     #
     # @option params [required, String] :upload_id
     #   A pointer to the uploaded asset. This value is returned by
@@ -2699,14 +2740,13 @@ module Aws::QConnect
     #
     # @option params [required, String] :knowledge_base_id
     #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN
+    #   QUICK\_RESPONSES type knowledge base. Can be either the ID or the ARN
     #
     # @option params [Hash<String,String>] :metadata
     #   A key/value map to store attributes without affecting tagging or
     #   recommendations. For example, when synchronizing data between an
-    #   external system and Amazon Q, you can store an external version
-    #   identifier as metadata to utilize for determining drift.
+    #   external system and Amazon Q in Connect, you can store an external
+    #   version identifier as metadata to utilize for determining drift.
     #
     # @option params [String] :override_link_out_uri
     #   The URI for the article. If the knowledge base has a templateUri,
@@ -2784,16 +2824,15 @@ module Aws::QConnect
 
     # Updates the template URI of a knowledge base. This is only supported
     # for knowledge bases of type EXTERNAL. Include a single variable in
-    # `$\{variable\}` format; this interpolated by Amazon Q using ingested
-    # content. For example, if you ingest a Salesforce article, it has an
-    # `Id` value, and you can set the template URI to
+    # `$\{variable\}` format; this interpolated by Amazon Q in Connect using
+    # ingested content. For example, if you ingest a Salesforce article, it
+    # has an `Id` value, and you can set the template URI to
     # `https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*$\{Id\}*/view`.
     #
     # @option params [required, String] :knowledge_base_id
     #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   QUICK\_RESPONSES type knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [required, String] :template_uri
     #   The template URI to update.
@@ -2835,7 +2874,7 @@ module Aws::QConnect
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Q quick response.
+    # Updates an existing Amazon Q in Connect quick response.
     #
     # @option params [Array<String>] :channels
     #   The Amazon Connect contact channels this quick response applies to.
@@ -2863,10 +2902,8 @@ module Aws::QConnect
     #   Whether the quick response is active.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. This should not be a
-    #   QUICK\_RESPONSES type knowledge base if you're storing Amazon Q
-    #   Content resource to it. Can be either the ID or the ARN. URLs cannot
-    #   contain the ARN.
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
     #
     # @option params [String] :language
     #   The language code value for the language in which the quick response
@@ -2956,6 +2993,93 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Updates a session. A session is a contextual container used for
+    # generating recommendations. Amazon Connect updates the existing Amazon
+    # Q in Connect session for each contact on which Amazon Q in Connect is
+    # enabled.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [String] :description
+    #   The description.
+    #
+    # @option params [required, String] :session_id
+    #   The identifier of the session. Can be either the ID or the ARN. URLs
+    #   cannot contain the ARN.
+    #
+    # @option params [Types::TagFilter] :tag_filter
+    #   An object that can be used to specify Tag conditions.
+    #
+    # @return [Types::UpdateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSessionResponse#session #session} => Types::SessionData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_session({
+    #     assistant_id: "UuidOrArn", # required
+    #     description: "Description",
+    #     session_id: "UuidOrArn", # required
+    #     tag_filter: {
+    #       and_conditions: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
+    #       or_conditions: [
+    #         {
+    #           and_conditions: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
+    #           tag_condition: {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         },
+    #       ],
+    #       tag_condition: {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session.description #=> String
+    #   resp.session.integration_configuration.topic_integration_arn #=> String
+    #   resp.session.name #=> String
+    #   resp.session.session_arn #=> String
+    #   resp.session.session_id #=> String
+    #   resp.session.tag_filter.and_conditions #=> Array
+    #   resp.session.tag_filter.and_conditions[0].key #=> String
+    #   resp.session.tag_filter.and_conditions[0].value #=> String
+    #   resp.session.tag_filter.or_conditions #=> Array
+    #   resp.session.tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.session.tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.session.tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.session.tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.session.tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.session.tag_filter.tag_condition.key #=> String
+    #   resp.session.tag_filter.tag_condition.value #=> String
+    #   resp.session.tags #=> Hash
+    #   resp.session.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateSession AWS API Documentation
+    #
+    # @overload update_session(params = {})
+    # @param [Hash] params ({})
+    def update_session(params = {}, options = {})
+      req = build_request(:update_session, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2969,7 +3093,7 @@ module Aws::QConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -394,6 +394,24 @@ module Aws::NetworkMonitor
     # and your destination IP addresses. Each probe then aggregates and
     # sends metrics to Amazon CloudWatch.
     #
+    # You can also create a monitor with probes using this command. For each
+    # probe, you define the following:
+    #
+    # * `source`—The subnet IDs where the probes will be created.
+    #
+    # * `destination`— The target destination IP address for the probe.
+    #
+    # * `destinationPort`—Required only if the protocol is `TCP`.
+    #
+    # * `protocol`—The communication protocol between the source and
+    #   destination. This will be either `TCP` or `ICMP`.
+    #
+    # * `packetSize`—The size of the packets. This must be a number between
+    #   `56` and `8500`.
+    #
+    # * (Optional) `tags` —Key-value pairs created and assigned to the
+    #   probe.
+    #
     # @option params [required, String] :monitor_name
     #   The name identifying the monitor. It can contain only letters,
     #   underscores (\_), or dashes (-), and can be up to 200 characters.
@@ -403,7 +421,8 @@ module Aws::NetworkMonitor
     #
     # @option params [Integer] :aggregation_period
     #   The time, in seconds, that metrics are aggregated and sent to Amazon
-    #   CloudWatch. Valid values are either `30` or `60`.
+    #   CloudWatch. Valid values are either `30` or `60`. `60` is the default
+    #   if no period is chosen.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure the idempotency of the
@@ -466,11 +485,12 @@ module Aws::NetworkMonitor
 
     # Create a probe within a monitor. Once you create a probe, and it
     # begins monitoring your network traffic, you'll incur billing charges
-    # for that probe.
+    # for that probe. This action requires the `monitorName` parameter. Run
+    # `ListMonitors` to get a list of monitor names. Note the name of the
+    # `monitorName` you want to create the probe for.
     #
     # @option params [required, String] :monitor_name
-    #   The name of the monitor to associated with the probe. To get a list of
-    #   available monitors, use `ListMonitors`.
+    #   The name of the monitor to associated with the probe.
     #
     # @option params [required, Types::ProbeInput] :probe
     #   Describes the details of an individual probe for a monitor.
@@ -549,9 +569,11 @@ module Aws::NetworkMonitor
 
     # Deletes a specified monitor.
     #
+    # This action requires the `monitorName` parameter. Run `ListMonitors`
+    # to get a list of monitor names.
+    #
     # @option params [required, String] :monitor_name
-    #   The name of the monitor to delete. Use the `ListMonitors` action to
-    #   get a list of your current monitors.
+    #   The name of the monitor to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -570,16 +592,19 @@ module Aws::NetworkMonitor
       req.send_request(options)
     end
 
-    # Deletes the specified monitor. Once a probe is deleted you'll no
-    # longer incur any billing fees for that probe.
+    # Deletes the specified probe. Once a probe is deleted you'll no longer
+    # incur any billing fees for that probe.
+    #
+    # This action requires both the `monitorName` and `probeId` parameters.
+    # Run `ListMonitors` to get a list of monitor names. Run `GetMonitor` to
+    # get a list of probes and probe IDs. You can only delete a single probe
+    # at a time using this action.
     #
     # @option params [required, String] :monitor_name
-    #   The name of the monitor to delete. For a list of the available
-    #   monitors, use the `ListMonitors` action.
+    #   The name of the monitor to delete.
     #
     # @option params [required, String] :probe_id
-    #   The ID of the probe to delete. Run `GetMonitor` to get a lst of all
-    #   probes and probe IDs associated with the monitor.
+    #   The ID of the probe to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -600,6 +625,9 @@ module Aws::NetworkMonitor
     end
 
     # Returns details about a specific monitor.
+    #
+    # This action requires the `monitorName` parameter. Run `ListMonitors`
+    # to get a list of monitor names.
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor that details are returned for.
@@ -656,8 +684,10 @@ module Aws::NetworkMonitor
       req.send_request(options)
     end
 
-    # Returns the details about a probe. You'll need both the `monitorName`
-    # and `probeId`.
+    # Returns the details about a probe. This action requires both the
+    # `monitorName` and `probeId` parameters. Run `ListMonitors` to get a
+    # list of monitor names. Run `GetMonitor` to get a list of probes and
+    # probe IDs.
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor associated with the probe. Run `ListMonitors`
@@ -851,11 +881,12 @@ module Aws::NetworkMonitor
     end
 
     # Updates the `aggregationPeriod` for a monitor. Monitors support an
-    # `aggregationPeriod` of either `30` or `60` seconds.
+    # `aggregationPeriod` of either `30` or `60` seconds. This action
+    # requires the `monitorName` and `probeId` parameter. Run `ListMonitors`
+    # to get a list of monitor names.
     #
     # @option params [required, String] :monitor_name
-    #   The name of the monitor to update. Run `ListMonitors` to get a list of
-    #   monitor names.
+    #   The name of the monitor to update.
     #
     # @option params [required, Integer] :aggregation_period
     #   The aggregation time, in seconds, to change to. This must be either
@@ -898,11 +929,29 @@ module Aws::NetworkMonitor
     # and `probeId` parameters. Run `ListMonitors` to get a list of monitor
     # names. Run `GetMonitor` to get a list of probes and probe IDs.
     #
+    # You can update the following para create a monitor with probes using
+    # this command. For each probe, you define the following:
+    #
+    # * `state`—The state of the probe.
+    #
+    # * `destination`— The target destination IP address for the probe.
+    #
+    # * `destinationPort`—Required only if the protocol is `TCP`.
+    #
+    # * `protocol`—The communication protocol between the source and
+    #   destination. This will be either `TCP` or `ICMP`.
+    #
+    # * `packetSize`—The size of the packets. This must be a number between
+    #   `56` and `8500`.
+    #
+    # * (Optional) `tags` —Key-value pairs created and assigned to the
+    #   probe.
+    #
     # @option params [required, String] :monitor_name
     #   The name of the monitor that the probe was updated for.
     #
     # @option params [required, String] :probe_id
-    #   Run `GetMonitor` to get a list of probes and probe IDs.
+    #   The ID of the probe to update.
     #
     # @option params [String] :state
     #   The state of the probe update.
@@ -991,7 +1040,7 @@ module Aws::NetworkMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmonitor'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

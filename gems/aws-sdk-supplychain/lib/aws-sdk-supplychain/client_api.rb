@@ -21,12 +21,18 @@ module Aws::SupplyChain
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateBillOfMaterialsImportJobRequest = Shapes::StructureShape.new(name: 'CreateBillOfMaterialsImportJobRequest')
     CreateBillOfMaterialsImportJobResponse = Shapes::StructureShape.new(name: 'CreateBillOfMaterialsImportJobResponse')
+    DataIntegrationEventData = Shapes::StringShape.new(name: 'DataIntegrationEventData')
+    DataIntegrationEventGroupId = Shapes::StringShape.new(name: 'DataIntegrationEventGroupId')
+    DataIntegrationEventType = Shapes::StringShape.new(name: 'DataIntegrationEventType')
     GetBillOfMaterialsImportJobRequest = Shapes::StructureShape.new(name: 'GetBillOfMaterialsImportJobRequest')
     GetBillOfMaterialsImportJobResponse = Shapes::StructureShape.new(name: 'GetBillOfMaterialsImportJobResponse')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    SendDataIntegrationEventRequest = Shapes::StructureShape.new(name: 'SendDataIntegrationEventRequest')
+    SendDataIntegrationEventResponse = Shapes::StructureShape.new(name: 'SendDataIntegrationEventResponse')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
+    SyntheticTimestamp_epoch_seconds = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_epoch_seconds', timestampFormat: "unixTimestamp")
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UUID = Shapes::StringShape.new(name: 'UUID')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -64,6 +70,17 @@ module Aws::SupplyChain
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    SendDataIntegrationEventRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "instanceId"))
+    SendDataIntegrationEventRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: DataIntegrationEventType, required: true, location_name: "eventType"))
+    SendDataIntegrationEventRequest.add_member(:data, Shapes::ShapeRef.new(shape: DataIntegrationEventData, required: true, location_name: "data"))
+    SendDataIntegrationEventRequest.add_member(:event_group_id, Shapes::ShapeRef.new(shape: DataIntegrationEventGroupId, required: true, location_name: "eventGroupId"))
+    SendDataIntegrationEventRequest.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, location_name: "eventTimestamp"))
+    SendDataIntegrationEventRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    SendDataIntegrationEventRequest.struct_class = Types::SendDataIntegrationEventRequest
+
+    SendDataIntegrationEventResponse.add_member(:event_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "eventId"))
+    SendDataIntegrationEventResponse.struct_class = Types::SendDataIntegrationEventResponse
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -113,6 +130,21 @@ module Aws::SupplyChain
         o.http_request_uri = "/api/configuration/instances/{instanceId}/bill-of-materials-import-jobs/{jobId}"
         o.input = Shapes::ShapeRef.new(shape: GetBillOfMaterialsImportJobRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBillOfMaterialsImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:send_data_integration_event, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendDataIntegrationEvent"
+        o.http_method = "POST"
+        o.http_request_uri = "/api-data/data-integration/instance/{instanceId}/data-integration-events"
+        o.input = Shapes::ShapeRef.new(shape: SendDataIntegrationEventRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendDataIntegrationEventResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

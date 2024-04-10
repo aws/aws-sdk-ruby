@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2024-04-10)
+------------------
+
+* Feature - Added support for ContentType to content moderation detections.
+
 1.93.0 (2024-01-26)
 ------------------
 

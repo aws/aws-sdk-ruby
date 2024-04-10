@@ -414,6 +414,11 @@ module Aws::CleanRooms
     #   The parameters of the analysis template.
     #   @return [Array<Types::AnalysisParameter>]
     #
+    # @!attribute [rw] validations
+    #   Information about the validations performed on the analysis
+    #   template.
+    #   @return [Array<Types::AnalysisTemplateValidationStatusDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplate AWS API Documentation
     #
     class AnalysisTemplate < Struct.new(
@@ -430,7 +435,8 @@ module Aws::CleanRooms
       :schema,
       :format,
       :source,
-      :analysis_parameters)
+      :analysis_parameters,
+      :validations)
       SENSITIVE = [:source]
       include Aws::Structure
     end
@@ -493,6 +499,58 @@ module Aws::CleanRooms
       :collaboration_arn,
       :collaboration_id,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status details of the analysis template validation. Clean Rooms
+    # Differential Privacy uses a general-purpose query structure to support
+    # complex SQL queries and validates whether an analysis template fits
+    # that general-purpose query structure. Validation is performed when
+    # analysis templates are created and fetched. Because analysis templates
+    # are immutable by design, we recommend that you create analysis
+    # templates after you associate the configured tables with their
+    # analysis rule to your collaboration.
+    #
+    # For more information, see
+    # [https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy
+    #
+    # @!attribute [rw] type
+    #   The type of validation that was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   The reasons for the validation results.
+    #   @return [Array<Types::AnalysisTemplateValidationStatusReason>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateValidationStatusDetail AWS API Documentation
+    #
+    class AnalysisTemplateValidationStatusDetail < Struct.new(
+      :type,
+      :status,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reasons for the validation results.
+    #
+    # @!attribute [rw] message
+    #   The validation message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateValidationStatusReason AWS API Documentation
+    #
+    class AnalysisTemplateValidationStatusReason < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -824,6 +882,10 @@ module Aws::CleanRooms
     #   template.
     #   @return [Array<Types::AnalysisParameter>]
     #
+    # @!attribute [rw] validations
+    #   The validations that were performed.
+    #   @return [Array<Types::AnalysisTemplateValidationStatusDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplate AWS API Documentation
     #
     class CollaborationAnalysisTemplate < Struct.new(
@@ -839,7 +901,8 @@ module Aws::CleanRooms
       :schema,
       :format,
       :source,
-      :analysis_parameters)
+      :analysis_parameters,
+      :validations)
       SENSITIVE = [:source]
       include Aws::Structure
     end

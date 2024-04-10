@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2024-04-10)
+------------------
+
+* Feature - This release adds new Submit Auto Evaluation Action for Amazon Connect Rules.
+
 1.153.0 (2024-03-20)
 ------------------
 

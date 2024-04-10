@@ -14,6 +14,7 @@ module Aws::QConnect
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AndConditions = Shapes::ListShape.new(name: 'AndConditions')
     AppIntegrationsConfiguration = Shapes::StructureShape.new(name: 'AppIntegrationsConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssistantAssociationData = Shapes::StructureShape.new(name: 'AssistantAssociationData')
@@ -155,6 +156,8 @@ module Aws::QConnect
     NotifyRecommendationsReceivedRequest = Shapes::StructureShape.new(name: 'NotifyRecommendationsReceivedRequest')
     NotifyRecommendationsReceivedResponse = Shapes::StructureShape.new(name: 'NotifyRecommendationsReceivedResponse')
     ObjectFieldsList = Shapes::ListShape.new(name: 'ObjectFieldsList')
+    OrCondition = Shapes::UnionShape.new(name: 'OrCondition')
+    OrConditions = Shapes::ListShape.new(name: 'OrConditions')
     Order = Shapes::StringShape.new(name: 'Order')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Priority = Shapes::StringShape.new(name: 'Priority')
@@ -240,6 +243,8 @@ module Aws::QConnect
     StartImportJobResponse = Shapes::StructureShape.new(name: 'StartImportJobResponse')
     String = Shapes::StringShape.new(name: 'String')
     SyntheticTimestamp_epoch_seconds = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_epoch_seconds', timestampFormat: "unixTimestamp")
+    TagCondition = Shapes::StructureShape.new(name: 'TagCondition')
+    TagFilter = Shapes::UnionShape.new(name: 'TagFilter')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -258,6 +263,8 @@ module Aws::QConnect
     UpdateKnowledgeBaseTemplateUriResponse = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseTemplateUriResponse')
     UpdateQuickResponseRequest = Shapes::StructureShape.new(name: 'UpdateQuickResponseRequest')
     UpdateQuickResponseResponse = Shapes::StructureShape.new(name: 'UpdateQuickResponseResponse')
+    UpdateSessionRequest = Shapes::StructureShape.new(name: 'UpdateSessionRequest')
+    UpdateSessionResponse = Shapes::StructureShape.new(name: 'UpdateSessionResponse')
     UploadId = Shapes::StringShape.new(name: 'UploadId')
     Uri = Shapes::StringShape.new(name: 'Uri')
     Url = Shapes::StringShape.new(name: 'Url')
@@ -268,6 +275,8 @@ module Aws::QConnect
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AndConditions.member = Shapes::ShapeRef.new(shape: TagCondition)
 
     AppIntegrationsConfiguration.add_member(:app_integration_arn, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "appIntegrationArn"))
     AppIntegrationsConfiguration.add_member(:object_fields, Shapes::ShapeRef.new(shape: ObjectFieldsList, location_name: "objectFields"))
@@ -474,6 +483,7 @@ module Aws::QConnect
     CreateSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateSessionRequest.add_member(:tag_filter, Shapes::ShapeRef.new(shape: TagFilter, location_name: "tagFilter"))
     CreateSessionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateSessionRequest.struct_class = Types::CreateSessionRequest
 
@@ -784,6 +794,16 @@ module Aws::QConnect
 
     ObjectFieldsList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    OrCondition.add_member(:and_conditions, Shapes::ShapeRef.new(shape: AndConditions, location_name: "andConditions"))
+    OrCondition.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "tagCondition"))
+    OrCondition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OrCondition.add_member_subclass(:and_conditions, Types::OrCondition::AndConditions)
+    OrCondition.add_member_subclass(:tag_condition, Types::OrCondition::TagCondition)
+    OrCondition.add_member_subclass(:unknown, Types::OrCondition::Unknown)
+    OrCondition.struct_class = Types::OrCondition
+
+    OrConditions.member = Shapes::ShapeRef.new(shape: OrCondition)
+
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
 
@@ -1036,6 +1056,7 @@ module Aws::QConnect
     SessionData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     SessionData.add_member(:session_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "sessionArn"))
     SessionData.add_member(:session_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "sessionId"))
+    SessionData.add_member(:tag_filter, Shapes::ShapeRef.new(shape: TagFilter, location_name: "tagFilter"))
     SessionData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     SessionData.struct_class = Types::SessionData
 
@@ -1083,6 +1104,20 @@ module Aws::QConnect
 
     StartImportJobResponse.add_member(:import_job, Shapes::ShapeRef.new(shape: ImportJobData, location_name: "importJob"))
     StartImportJobResponse.struct_class = Types::StartImportJobResponse
+
+    TagCondition.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+    TagCondition.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+    TagCondition.struct_class = Types::TagCondition
+
+    TagFilter.add_member(:and_conditions, Shapes::ShapeRef.new(shape: AndConditions, location_name: "andConditions"))
+    TagFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: OrConditions, location_name: "orConditions"))
+    TagFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "tagCondition"))
+    TagFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TagFilter.add_member_subclass(:and_conditions, Types::TagFilter::AndConditions)
+    TagFilter.add_member_subclass(:or_conditions, Types::TagFilter::OrConditions)
+    TagFilter.add_member_subclass(:tag_condition, Types::TagFilter::TagCondition)
+    TagFilter.add_member_subclass(:unknown, Types::TagFilter::Unknown)
+    TagFilter.struct_class = Types::TagFilter
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -1147,6 +1182,15 @@ module Aws::QConnect
 
     UpdateQuickResponseResponse.add_member(:quick_response, Shapes::ShapeRef.new(shape: QuickResponseData, location_name: "quickResponse"))
     UpdateQuickResponseResponse.struct_class = Types::UpdateQuickResponseResponse
+
+    UpdateSessionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    UpdateSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "sessionId"))
+    UpdateSessionRequest.add_member(:tag_filter, Shapes::ShapeRef.new(shape: TagFilter, location_name: "tagFilter"))
+    UpdateSessionRequest.struct_class = Types::UpdateSessionRequest
+
+    UpdateSessionResponse.add_member(:session, Shapes::ShapeRef.new(shape: SessionData, location_name: "session"))
+    UpdateSessionResponse.struct_class = Types::UpdateSessionResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -1240,6 +1284,7 @@ module Aws::QConnect
         o.output = Shapes::ShapeRef.new(shape: CreateSessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -1699,6 +1744,17 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/assistants/{assistantId}/sessions/{sessionId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end

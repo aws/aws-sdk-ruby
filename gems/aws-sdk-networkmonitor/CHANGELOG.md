@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2024-04-10)
+------------------
+
+* Feature - Examples were added to CloudWatch Network Monitor commands.
+
 1.1.0 (2024-01-26)
 ------------------
 

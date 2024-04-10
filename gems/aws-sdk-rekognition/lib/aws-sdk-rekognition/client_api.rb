@@ -694,6 +694,7 @@ module Aws::Rekognition
     ContentModerationDetection.add_member(:start_timestamp_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "StartTimestampMillis"))
     ContentModerationDetection.add_member(:end_timestamp_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "EndTimestampMillis"))
     ContentModerationDetection.add_member(:duration_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "DurationMillis"))
+    ContentModerationDetection.add_member(:content_types, Shapes::ShapeRef.new(shape: ContentTypes, location_name: "ContentTypes"))
     ContentModerationDetection.struct_class = Types::ContentModerationDetection
 
     ContentModerationDetections.member = Shapes::ShapeRef.new(shape: ContentModerationDetection)

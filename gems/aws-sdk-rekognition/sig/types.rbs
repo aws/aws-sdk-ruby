@@ -166,6 +166,7 @@ module Aws::Rekognition
       attr_accessor start_timestamp_millis: ::Integer
       attr_accessor end_timestamp_millis: ::Integer
       attr_accessor duration_millis: ::Integer
+      attr_accessor content_types: ::Array[Types::ContentType]
       SENSITIVE: []
     end
 

@@ -47,7 +47,8 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] aggregation_period
     #   The time, in seconds, that metrics are aggregated and sent to Amazon
-    #   CloudWatch. Valid values are either `30` or `60`.
+    #   CloudWatch. Valid values are either `30` or `60`. `60` is the
+    #   default if no period is chosen.
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
@@ -89,7 +90,7 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] aggregation_period
     #   The number of seconds that metrics are aggregated by and sent to
-    #   Amazon CloudWatch. This must be either `30` or `60`.
+    #   Amazon CloudWatch. This will be either `30` or `60`.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -152,8 +153,7 @@ module Aws::NetworkMonitor
     end
 
     # @!attribute [rw] monitor_name
-    #   The name of the monitor to associated with the probe. To get a list
-    #   of available monitors, use `ListMonitors`.
+    #   The name of the monitor to associated with the probe.
     #   @return [String]
     #
     # @!attribute [rw] probe
@@ -262,8 +262,7 @@ module Aws::NetworkMonitor
     end
 
     # @!attribute [rw] monitor_name
-    #   The name of the monitor to delete. Use the `ListMonitors` action to
-    #   get a list of your current monitors.
+    #   The name of the monitor to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmonitor-2023-08-01/DeleteMonitorInput AWS API Documentation
@@ -279,13 +278,11 @@ module Aws::NetworkMonitor
     class DeleteMonitorOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] monitor_name
-    #   The name of the monitor to delete. For a list of the available
-    #   monitors, use the `ListMonitors` action.
+    #   The name of the monitor to delete.
     #   @return [String]
     #
     # @!attribute [rw] probe_id
-    #   The ID of the probe to delete. Run `GetMonitor` to get a lst of all
-    #   probes and probe IDs associated with the monitor.
+    #   The ID of the probe to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmonitor-2023-08-01/DeleteProbeInput AWS API Documentation
@@ -318,12 +315,11 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] monitor_name
-    #   The name of the monitor. To get a list of the current monitors and
-    #   their names, use the `ListMonitors` action.
+    #   The name of the monitor.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   Returns a list of the state of each monitor.
+    #   Lists the status of the `state` of each monitor.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_period
@@ -574,7 +570,7 @@ module Aws::NetworkMonitor
       include Aws::Structure
     end
 
-    # Describes information about a monitor probe.
+    # Describes information about a network monitor probe.
     #
     # @!attribute [rw] probe_id
     #   The ID of the probe.
@@ -777,8 +773,7 @@ module Aws::NetworkMonitor
     class UntagResourceOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] monitor_name
-    #   The name of the monitor to update. Run `ListMonitors` to get a list
-    #   of monitor names.
+    #   The name of the monitor to update.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_period
@@ -832,7 +827,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] probe_id
-    #   Run `GetMonitor` to get a list of probes and probe IDs.
+    #   The ID of the probe to update.
     #   @return [String]
     #
     # @!attribute [rw] state

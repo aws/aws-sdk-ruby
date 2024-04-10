@@ -2621,7 +2621,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS, SUBMIT_AUTO_EVALUATION
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -2680,6 +2680,9 @@ module Aws::Connect
     #           ],
     #         },
     #         end_associated_tasks_action: {
+    #         },
+    #         submit_auto_evaluation_action: {
+    #           evaluation_form_id: "EvaluationFormId", # required
     #         },
     #       },
     #     ],
@@ -2740,9 +2743,6 @@ module Aws::Connect
     #   \| `SecurityProfile` \| `Queue` \| `RoutingProfile`
     #
     # @option params [Array<Types::Application>] :applications
-    #   This API is in preview release for Amazon Connect and is subject to
-    #   change.
-    #
     #   A list of third-party applications that the security profile will give
     #   access to.
     #
@@ -5210,7 +5210,7 @@ module Aws::Connect
     #   resp.rule.trigger_event_source.integration_association_id #=> String
     #   resp.rule.function #=> String
     #   resp.rule.actions #=> Array
-    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS"
+    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION"
     #   resp.rule.actions[0].task_action.name #=> String
     #   resp.rule.actions[0].task_action.description #=> String
     #   resp.rule.actions[0].task_action.contact_flow_id #=> String
@@ -5237,6 +5237,7 @@ module Aws::Connect
     #   resp.rule.actions[0].update_case_action.fields[0].value.boolean_value #=> Boolean
     #   resp.rule.actions[0].update_case_action.fields[0].value.double_value #=> Float
     #   resp.rule.actions[0].update_case_action.fields[0].value.string_value #=> String
+    #   resp.rule.actions[0].submit_auto_evaluation_action.evaluation_form_id #=> String
     #   resp.rule.publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule.created_time #=> Time
     #   resp.rule.last_updated_time #=> Time
@@ -10316,7 +10317,7 @@ module Aws::Connect
     #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate"
     #   resp.rule_summary_list[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule_summary_list[0].action_summaries #=> Array
-    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS"
+    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION"
     #   resp.rule_summary_list[0].created_time #=> Time
     #   resp.rule_summary_list[0].last_updated_time #=> Time
     #   resp.next_token #=> String
@@ -15863,7 +15864,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS, SUBMIT_AUTO_EVALUATION
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -15923,6 +15924,9 @@ module Aws::Connect
     #         },
     #         end_associated_tasks_action: {
     #         },
+    #         submit_auto_evaluation_action: {
+    #           evaluation_form_id: "EvaluationFormId", # required
+    #         },
     #       },
     #     ],
     #     publish_status: "DRAFT", # required, accepts DRAFT, PUBLISHED
@@ -15970,9 +15974,6 @@ module Aws::Connect
     #   to in Amazon Connect.
     #
     # @option params [Array<Types::Application>] :applications
-    #   This API is in preview release for Amazon Connect and is subject to
-    #   change.
-    #
     #   A list of the third-party application's metadata.
     #
     # @option params [Array<String>] :hierarchy_restricted_resources
@@ -16681,7 +16682,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

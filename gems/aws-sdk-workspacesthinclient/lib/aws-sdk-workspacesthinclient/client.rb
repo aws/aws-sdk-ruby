@@ -496,8 +496,6 @@ module Aws::WorkSpacesThinClient
     #   resp.environment.created_at #=> Time
     #   resp.environment.updated_at #=> Time
     #   resp.environment.arn #=> String
-    #   resp.environment.tags.resource_arn #=> String
-    #   resp.environment.tags.internal_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/CreateEnvironment AWS API Documentation
     #
@@ -684,8 +682,8 @@ module Aws::WorkSpacesThinClient
     #   resp.device.updated_at #=> Time
     #   resp.device.arn #=> String
     #   resp.device.kms_key_arn #=> String
-    #   resp.device.tags.resource_arn #=> String
-    #   resp.device.tags.internal_id #=> String
+    #   resp.device.tags #=> Hash
+    #   resp.device.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/GetDevice AWS API Documentation
     #
@@ -738,8 +736,8 @@ module Aws::WorkSpacesThinClient
     #   resp.environment.updated_at #=> Time
     #   resp.environment.arn #=> String
     #   resp.environment.kms_key_arn #=> String
-    #   resp.environment.tags.resource_arn #=> String
-    #   resp.environment.tags.internal_id #=> String
+    #   resp.environment.tags #=> Hash
+    #   resp.environment.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/GetEnvironment AWS API Documentation
     #
@@ -776,6 +774,8 @@ module Aws::WorkSpacesThinClient
     #   resp.software_set.software[0].name #=> String
     #   resp.software_set.software[0].version #=> String
     #   resp.software_set.arn #=> String
+    #   resp.software_set.tags #=> Hash
+    #   resp.software_set.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/GetSoftwareSet AWS API Documentation
     #
@@ -835,8 +835,6 @@ module Aws::WorkSpacesThinClient
     #   resp.devices[0].created_at #=> Time
     #   resp.devices[0].updated_at #=> Time
     #   resp.devices[0].arn #=> String
-    #   resp.devices[0].tags.resource_arn #=> String
-    #   resp.devices[0].tags.internal_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/ListDevices AWS API Documentation
@@ -903,8 +901,6 @@ module Aws::WorkSpacesThinClient
     #   resp.environments[0].created_at #=> Time
     #   resp.environments[0].updated_at #=> Time
     #   resp.environments[0].arn #=> String
-    #   resp.environments[0].tags.resource_arn #=> String
-    #   resp.environments[0].tags.internal_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/ListEnvironments AWS API Documentation
@@ -1098,8 +1094,6 @@ module Aws::WorkSpacesThinClient
     #   resp.device.created_at #=> Time
     #   resp.device.updated_at #=> Time
     #   resp.device.arn #=> String
-    #   resp.device.tags.resource_arn #=> String
-    #   resp.device.tags.internal_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/UpdateDevice AWS API Documentation
     #
@@ -1187,8 +1181,6 @@ module Aws::WorkSpacesThinClient
     #   resp.environment.created_at #=> Time
     #   resp.environment.updated_at #=> Time
     #   resp.environment.arn #=> String
-    #   resp.environment.tags.resource_arn #=> String
-    #   resp.environment.tags.internal_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/UpdateEnvironment AWS API Documentation
     #
@@ -1238,7 +1230,7 @@ module Aws::WorkSpacesThinClient
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesthinclient'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

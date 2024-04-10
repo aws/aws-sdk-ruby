@@ -3999,6 +3999,9 @@ module Aws::Rekognition
     #   resp.moderation_labels[0].start_timestamp_millis #=> Integer
     #   resp.moderation_labels[0].end_timestamp_millis #=> Integer
     #   resp.moderation_labels[0].duration_millis #=> Integer
+    #   resp.moderation_labels[0].content_types #=> Array
+    #   resp.moderation_labels[0].content_types[0].confidence #=> Float
+    #   resp.moderation_labels[0].content_types[0].name #=> String
     #   resp.next_token #=> String
     #   resp.moderation_model_version #=> String
     #   resp.job_id #=> String
@@ -8377,7 +8380,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

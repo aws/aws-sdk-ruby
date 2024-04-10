@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-04-10)
+------------------
+
+* Feature - AWS Clean Rooms Differential Privacy is now fully available. Differential privacy protects against user-identification attempts.
+
 1.17.0 (2024-04-04)
 ------------------
 
