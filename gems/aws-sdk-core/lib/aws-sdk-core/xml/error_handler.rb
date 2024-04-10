@@ -42,9 +42,8 @@ module Aws
         data = EmptyStructure.new
         if error_rules = context.operation.errors
           error_rules.each do |rule|
-            # for modeled shape with error trait
-            # match `code` in the error trait before
-            # match modeled shape name
+            # query protocol may have custom error code
+            # reference: https://smithy.io/2.0/aws/protocols/aws-query-protocol.html#error-code-resolution
             error_shape_code = rule.shape['error']['code'] if rule.shape['error']
             match = (code == error_shape_code || code == rule.shape.name)
             next unless match && rule.shape.members.any?
