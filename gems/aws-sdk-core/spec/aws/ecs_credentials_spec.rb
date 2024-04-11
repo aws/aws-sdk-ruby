@@ -302,7 +302,7 @@ module Aws
 
     context 'generalized HTTP endpoint: request' do
       file = File.expand_path('ecs_credentials_request.json', __dir__)
-      test_cases = Aws::Json.load_file(file)
+      test_cases = JSON.load_file(file)
 
       def setup_env(env)
         return unless env
@@ -363,7 +363,7 @@ module Aws
       end
 
       file = File.expand_path('ecs_credentials_response.json', __dir__)
-      test_cases = Aws::Json.load_file(file)
+      test_cases = JSON.load_file(file)
 
       def setup_response(response)
         stub_request(:get, "http://169.254.170.2#{path}").to_return(

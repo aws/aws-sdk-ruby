@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../query'
-
 module Aws
   module Plugins
     module Protocols
