@@ -1,10 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Feature - Support RpcV2 protocol.
-
-* Feature - Add CBOR encoder and decoder.
-
 3.191.6 (2024-04-02)
 ------------------
 * Issue - Performance optimization: ensure presence and order of instance variables in `PluginOptions` (#3002).
