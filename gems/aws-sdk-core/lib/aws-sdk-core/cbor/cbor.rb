@@ -508,7 +508,8 @@ module Aws
 
       def read_count(add_info)
         case add_info
-        when 0...24; add_info
+        when 0...23; add_info
+        when 23; :undefined
         when 24; take(1).ord
         when 25; take(2).unpack("n").first
         when 26; take(4).unpack("N").first
@@ -543,7 +544,8 @@ module Aws
         add_info = ib & FIVE_BIT_MASK
         major_type = ib >> 5
         val = case add_info
-              when 0...24; add_info
+              when 0...23; add_info
+              when 23; :undefined
               when 24; take(1).ord
               when 25; take(2).unpack("value").first
               when 26; (s = take(4)).unpack("N").first
@@ -576,7 +578,7 @@ module Aws
           elsif String === di && (val & ~1) == TAG_BIGNUM_BASE
             (TAG_BIGNUM_BASE - val) ^ di.bytes.inject(0) {|sum, b| sum <<= 8; sum += b }
           else
-            Tagged.new(val, di)
+            Tagged.new(val, di).to_s
           end
         when 2; take(val).force_encoding(Encoding::BINARY)
         when 3; take(val).force_encoding(Encoding::UTF_8)
