@@ -6,7 +6,7 @@ module Aws
   module Cbor
 
     describe Encoder do
-      let(:time) { Time.parse('2020-01-01 12:21:42') }
+      let(:time) { Time.parse('2020-01-01 12:21:42').utc }
 
       def cbor64_encode(value)
         Base64.encode64(Encoder.new.add(value).bytes).strip.force_encoding("UTF-8")
