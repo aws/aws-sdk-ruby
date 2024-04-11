@@ -293,24 +293,19 @@ module Aws
         when 25; take(2).unpack("n").first
         when 26; take(4).unpack("N").first
         when 27; take(8).unpack("Q>").first
-        else raise "unknown additional information #{add_info}"
+        else raise UnexpectedAdditionalInformation.new(add_info)
         end
-      end
-
-      def atleast!(n)
-        left = @buffer.bytesize - @pos
-        raise OutOfBytesError.new(n - left) if n > left
       end
 
       def take(n)
         opos = @pos
         @pos += n
-        raise OutOfBytesError.new(@pos - @buffer.bytesize) if @pos > @buffer.bytesize
+        raise OutOfBytesError.new(n, @buffer.bytesize - @pos) if @pos > @buffer.bytesize
         @buffer[opos, n]
       end
 
       def peek(n)
-        return nil if (@pos + n) > @buffer.bytesize
+        OutOfBytesError.new(n, @buffer.bytesize - @pos) if (@pos + n) > @buffer.bytesize
         @buffer[@pos, n]
       end
     end

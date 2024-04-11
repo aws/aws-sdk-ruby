@@ -64,7 +64,7 @@ module Aws
           as_bytes = [input].pack('H*')
 
           # TODO: break this down into several errors somehow?
-          expect { Aws::Cbor.decode(as_bytes) }.to raise_error(OutOfBytesError)
+          expect { Aws::Cbor.decode(as_bytes) }.to raise_error(ArgumentError)
         end
       end
     end

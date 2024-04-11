@@ -14,10 +14,21 @@ module Aws
   # @api private
   module Cbor
 
-    class OutOfBytesError < ArgumentError; end
+    class OutOfBytesError < ArgumentError
+      def initialize(n, left)
+        super("Out of bytes.  Trying to read #{n} bytes but buffer contains only #{left}")
+      end
+    end
     class UnknownType < ArgumentError; end
     class ExtraBytesError < ArgumentError; end
     class UnexpectedBreakCode < ArgumentError; end
+
+    class UnexpectedAdditionalInformation < ArgumentError
+      def initialize(add_info)
+        super("Unepxected Additional Information: #{add_info}")
+      end
+    end
+
     class << self
       def encode(data)
         ENGINE.encode(data)
