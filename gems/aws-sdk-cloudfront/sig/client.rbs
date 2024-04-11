@@ -900,7 +900,7 @@ module Aws
                                             description: ::String?,
                                             signing_protocol: ("sigv4"),
                                             signing_behavior: ("never" | "always" | "no-override"),
-                                            origin_access_control_origin_type: ("s3" | "mediastore")
+                                            origin_access_control_origin_type: ("s3" | "mediastore" | "mediapackagev2" | "lambda")
                                           }
                                         ) -> _CreateOriginAccessControlResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOriginAccessControlResponseSuccess
@@ -2428,7 +2428,7 @@ module Aws
                                             description: ::String?,
                                             signing_protocol: ("sigv4"),
                                             signing_behavior: ("never" | "always" | "no-override"),
-                                            origin_access_control_origin_type: ("s3" | "mediastore")
+                                            origin_access_control_origin_type: ("s3" | "mediastore" | "mediapackagev2" | "lambda")
                                           },
                                           id: ::String,
                                           ?if_match: ::String

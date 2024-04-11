@@ -186,7 +186,7 @@ module Aws
       def create_open_id_connect_provider: (
                                              url: ::String,
                                              ?client_id_list: Array[::String],
-                                             thumbprint_list: Array[::String],
+                                             ?thumbprint_list: Array[::String],
                                              ?tags: Array[
                                                {
                                                  key: ::String,

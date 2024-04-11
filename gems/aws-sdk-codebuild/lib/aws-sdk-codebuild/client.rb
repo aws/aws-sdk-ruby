@@ -2313,7 +2313,7 @@ module Aws::CodeBuild
     #
     # @option params [required, String] :token
     #   For GitHub or GitHub Enterprise, this is the personal access token.
-    #   For Bitbucket, this is the app password.
+    #   For Bitbucket, this is either the access token or the app password.
     #
     # @option params [required, String] :server_type
     #   The source provider used for this project.
@@ -5642,7 +5642,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

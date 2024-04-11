@@ -2029,6 +2029,18 @@ module Aws::Batch
     #   resp.jobs[0].attempts[0].started_at #=> Integer
     #   resp.jobs[0].attempts[0].stopped_at #=> Integer
     #   resp.jobs[0].attempts[0].status_reason #=> String
+    #   resp.jobs[0].attempts[0].task_properties #=> Array
+    #   resp.jobs[0].attempts[0].task_properties[0].container_instance_arn #=> String
+    #   resp.jobs[0].attempts[0].task_properties[0].task_arn #=> String
+    #   resp.jobs[0].attempts[0].task_properties[0].containers #=> Array
+    #   resp.jobs[0].attempts[0].task_properties[0].containers[0].exit_code #=> Integer
+    #   resp.jobs[0].attempts[0].task_properties[0].containers[0].name #=> String
+    #   resp.jobs[0].attempts[0].task_properties[0].containers[0].reason #=> String
+    #   resp.jobs[0].attempts[0].task_properties[0].containers[0].log_stream_name #=> String
+    #   resp.jobs[0].attempts[0].task_properties[0].containers[0].network_interfaces #=> Array
+    #   resp.jobs[0].attempts[0].task_properties[0].containers[0].network_interfaces[0].attachment_id #=> String
+    #   resp.jobs[0].attempts[0].task_properties[0].containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.jobs[0].attempts[0].task_properties[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.jobs[0].status_reason #=> String
     #   resp.jobs[0].created_at #=> Integer
     #   resp.jobs[0].retry_strategy.attempts #=> Integer
@@ -2340,9 +2352,11 @@ module Aws::Batch
     #   resp.jobs[0].eks_properties.pod_properties.share_process_namespace #=> Boolean
     #   resp.jobs[0].eks_attempts #=> Array
     #   resp.jobs[0].eks_attempts[0].containers #=> Array
+    #   resp.jobs[0].eks_attempts[0].containers[0].name #=> String
     #   resp.jobs[0].eks_attempts[0].containers[0].exit_code #=> Integer
     #   resp.jobs[0].eks_attempts[0].containers[0].reason #=> String
     #   resp.jobs[0].eks_attempts[0].init_containers #=> Array
+    #   resp.jobs[0].eks_attempts[0].init_containers[0].name #=> String
     #   resp.jobs[0].eks_attempts[0].init_containers[0].exit_code #=> Integer
     #   resp.jobs[0].eks_attempts[0].init_containers[0].reason #=> String
     #   resp.jobs[0].eks_attempts[0].pod_name #=> String
@@ -4480,7 +4494,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

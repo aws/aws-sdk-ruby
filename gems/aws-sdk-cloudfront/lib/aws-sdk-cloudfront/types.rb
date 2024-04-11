@@ -269,8 +269,9 @@ module Aws::CloudFront
     # *Amazon CloudFront Developer Guide*.
     #
     # If you don't want to specify any cache behaviors, include only an
-    # empty `CacheBehaviors` element. Don't include an empty
-    # `CacheBehavior` element because this is invalid.
+    # empty `CacheBehaviors` element. For more information, see
+    # [CacheBehaviors][2]. Don't include an empty `CacheBehavior` element
+    # because this is invalid.
     #
     # To delete all cache behaviors in an existing distribution, update the
     # distribution configuration and include only an empty `CacheBehaviors`
@@ -281,12 +282,13 @@ module Aws::CloudFront
     # you want to include in the updated distribution.
     #
     # For more information about cache behaviors, see [Cache Behavior
-    # Settings][2] in the *Amazon CloudFront Developer Guide*.
+    # Settings][3] in the *Amazon CloudFront Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior
+    # [2]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CacheBehaviors.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior
     #
     # @!attribute [rw] path_pattern
     #   The pattern (for example, `images/*.jpg`) that specifies which
@@ -1021,7 +1023,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The Key Value Store entity cannot be deleted while it is in use.
+    # The key value store entity cannot be deleted while it is in use.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1512,7 +1514,9 @@ module Aws::CloudFront
     #
     # @!attribute [rw] weight
     #   The percentage of traffic to send to a staging distribution,
-    #   expressed as a decimal number between 0 and .15.
+    #   expressed as a decimal number between 0 and 0.15. For example, a
+    #   value of 0.10 means 10% of traffic is sent to the staging
+    #   distribution.
     #   @return [Float]
     #
     # @!attribute [rw] session_stickiness_config
@@ -2105,12 +2109,12 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] name
-    #   The name of the Key Value Store. The maximum length of the name is
-    #   32 characters.
+    #   The name of the key value store. The minimum length is 1 character
+    #   and the maximum length is 64 characters.
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   The comment of the Key Value Store.
+    #   The comment of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] import_source
@@ -2129,15 +2133,15 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] key_value_store
-    #   The resulting Key Value Store.
+    #   The resulting key value store.
     #   @return [Types::KeyValueStore]
     #
     # @!attribute [rw] etag
-    #   The ETag in the resulting Key Value Store.
+    #   The `ETag` in the resulting key value store.
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The location of the resulting Key Value Store.
+    #   The location of the resulting key value store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyValueStoreResult AWS API Documentation
@@ -2307,10 +2311,10 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] sampling_rate
-    #   The sampling rate for this real-time log configuration. The sampling
-    #   rate determines the percentage of viewer requests that are
-    #   represented in the real-time log data. You must provide an integer
-    #   between 1 and 100, inclusive.
+    #   The sampling rate for this real-time log configuration. You can
+    #   specify a whole number between 1 and 100 (inclusive) to determine
+    #   the percentage of viewer requests that are represented in the
+    #   real-time log data.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateRealtimeLogConfigRequest AWS API Documentation
@@ -2824,8 +2828,8 @@ module Aws::CloudFront
     #
     # @!attribute [rw] function_associations
     #   A list of CloudFront functions that are associated with this cache
-    #   behavior. CloudFront functions must be published to the `LIVE` stage
-    #   to associate them with a cache behavior.
+    #   behavior. Your functions must be published to the `LIVE` stage to
+    #   associate them with a cache behavior.
     #   @return [Types::FunctionAssociations]
     #
     # @!attribute [rw] field_level_encryption_id
@@ -3194,11 +3198,11 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] name
-    #   The name of the Key Value Store.
+    #   The name of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] if_match
-    #   The Key Value Store to delete, if a match occurs.
+    #   The key value store to delete, if a match occurs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteKeyValueStoreRequest AWS API Documentation
@@ -3384,7 +3388,7 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] name
-    #   The name of the Key Value Store.
+    #   The name of the key value store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeKeyValueStoreRequest AWS API Documentation
@@ -3396,11 +3400,11 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] key_value_store
-    #   The resulting Key Value Store.
+    #   The resulting key value store.
     #   @return [Types::KeyValueStore]
     #
     # @!attribute [rw] etag
-    #   The ETag of the resulting Key Value Store.
+    #   The `ETag` of the resulting key value store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeKeyValueStoreResult AWS API Documentation
@@ -3656,9 +3660,9 @@ module Aws::CloudFront
     #   A unique identifier that specifies the WAF web ACL, if any, to
     #   associate with this distribution. To specify a web ACL created using
     #   the latest version of WAF, use the ACL ARN, for example
-    #   `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a`.
+    #   `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #   To specify a web ACL created using WAF Classic, use the ACL ID, for
-    #   example `473e64fd-f30b-4765-81a0-62ad96dd167a`.
+    #   example `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #
     #   WAF is a web application firewall that lets you monitor the HTTP and
     #   HTTPS requests that are forwarded to CloudFront, and lets you
@@ -3676,8 +3680,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] http_version
-    #   (Optional) Specify the maximum HTTP version(s) that you want viewers
-    #   to use to communicate with CloudFront. The default value for new web
+    #   (Optional) Specify the HTTP version(s) that you want viewers to use
+    #   to communicate with CloudFront. The default value for new web
     #   distributions is `http2`. Viewers that don't support HTTP/2
     #   automatically use an earlier HTTP version.
     #
@@ -4019,7 +4023,9 @@ module Aws::CloudFront
     #   @return [Array<Types::AliasICPRecordal>]
     #
     # @!attribute [rw] staging
-    #   Whether the primary distribution has a staging distribution enabled.
+    #   A Boolean that indicates whether this is a staging distribution.
+    #   When this value is `true`, this is a staging distribution. When this
+    #   value is `false`, this is not a staging distribution.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionSummary AWS API Documentation
@@ -4128,8 +4134,8 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The Key Value Store entity already exists. You must provide a unique
-    # Key Value Store entity.
+    # The key value store entity already exists. You must provide a unique
+    # key value store entity.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4142,7 +4148,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The Key Value Store entity limit has been exceeded.
+    # The key value store entity limit has been exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4155,7 +4161,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The Key Value Store entity was not found.
+    # The key value store entity was not found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4168,7 +4174,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The Key Value Store entity size limit was exceeded.
+    # The key value store entity size limit was exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4719,7 +4725,7 @@ module Aws::CloudFront
     end
 
     # A list of CloudFront functions that are associated with a cache
-    # behavior in a CloudFront distribution. CloudFront functions must be
+    # behavior in a CloudFront distribution. Your functions must be
     # published to the `LIVE` stage to associate them with a cache behavior.
     #
     # @!attribute [rw] quantity
@@ -4728,8 +4734,8 @@ module Aws::CloudFront
     #
     # @!attribute [rw] items
     #   The CloudFront functions that are associated with a cache behavior
-    #   in a CloudFront distribution. CloudFront functions must be published
-    #   to the `LIVE` stage to associate them with a cache behavior.
+    #   in a CloudFront distribution. Your functions must be published to
+    #   the `LIVE` stage to associate them with a cache behavior.
     #   @return [Array<Types::FunctionAssociation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionAssociations AWS API Documentation
@@ -4752,7 +4758,7 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] key_value_store_associations
-    #   The configuration for the Key Value Store associations.
+    #   The configuration for the key value store associations.
     #   @return [Types::KeyValueStoreAssociations]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionConfig AWS API Documentation
@@ -5935,15 +5941,15 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The import source for the Key Value Store.
+    # The import source for the key value store.
     #
     # @!attribute [rw] source_type
-    #   The source type of the import source for the Key Value Store.
+    #   The source type of the import source for the key value store.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) of the import source for the Key
-    #   Value Store.
+    #   The Amazon Resource Name (ARN) of the import source for the key
+    #   value store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ImportSource AWS API Documentation
@@ -6635,33 +6641,33 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The Key Value Store. Use this to separate data from function code,
+    # The key value store. Use this to separate data from function code,
     # allowing you to update data without having to publish a new version of
-    # a function. The Key Value Store holds keys and their corresponding
+    # a function. The key value store holds keys and their corresponding
     # values.
     #
     # @!attribute [rw] name
-    #   The name of the Key Value Store.
+    #   The name of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique Id for the Key Value Store.
+    #   The unique Id for the key value store.
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   A comment for the Key Value Store.
+    #   A comment for the key value store.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store.
+    #   The Amazon Resource Name (ARN) of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the Key Value Store.
+    #   The status of the key value store.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The last-modified time of the Key Value Store.
+    #   The last-modified time of the key value store.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyValueStore AWS API Documentation
@@ -6677,10 +6683,10 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The Key Value Store association.
+    # The key value store association.
     #
     # @!attribute [rw] key_value_store_arn
-    #   The Amazon Resource Name (ARN) of the Key Value Store association.
+    #   The Amazon Resource Name (ARN) of the key value store association.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyValueStoreAssociation AWS API Documentation
@@ -6691,14 +6697,14 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The Key Value Store associations.
+    # The key value store associations.
     #
     # @!attribute [rw] quantity
-    #   The quantity of Key Value Store associations.
+    #   The quantity of key value store associations.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   The items of the Key Value Store association.
+    #   The items of the key value store association.
     #   @return [Array<Types::KeyValueStoreAssociation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyValueStoreAssociations AWS API Documentation
@@ -6710,22 +6716,22 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The Key Value Store list.
+    # The key value store list.
     #
     # @!attribute [rw] next_marker
-    #   The next marker associated with the Key Value Store list.
+    #   The next marker associated with the key value store list.
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   The maximum number of items in the Key Value Store list.
+    #   The maximum number of items in the key value store list.
     #   @return [Integer]
     #
     # @!attribute [rw] quantity
-    #   The quantity of the Key Value Store list.
+    #   The quantity of the key value store list.
     #   @return [Integer]
     #
     # @!attribute [rw] items
-    #   The items of the Key Value Store list.
+    #   The items of the key value store list.
     #   @return [Array<Types::KeyValueStore>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyValueStoreList AWS API Documentation
@@ -7247,6 +7253,12 @@ module Aws::CloudFront
     #   distributions. If you specify "null" for the ID, the request
     #   returns a list of the distributions that aren't associated with a
     #   web ACL.
+    #
+    #   For WAFV2, this is the ARN of the web ACL, such as
+    #   `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    #
+    #   For WAF Classic, this is the ID of the web ACL, such as
+    #   `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByWebACLIdRequest AWS API Documentation
@@ -7502,15 +7514,15 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] marker
-    #   The marker associated with the Key Value Stores list.
+    #   The marker associated with the key value stores list.
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   The maximum number of items in the Key Value Stores list.
+    #   The maximum number of items in the key value stores list.
     #   @return [Integer]
     #
     # @!attribute [rw] status
-    #   The status of the request for the Key Value Stores list.
+    #   The status of the request for the key value stores list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyValueStoresRequest AWS API Documentation
@@ -7524,7 +7536,7 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] key_value_store_list
-    #   The resulting Key Value Stores list.
+    #   The resulting key value stores list.
     #   @return [Types::KeyValueStoreList]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyValueStoresResult AWS API Documentation
@@ -8302,7 +8314,8 @@ module Aws::CloudFront
     # A CloudFront origin access control configuration.
     #
     # @!attribute [rw] name
-    #   A name to identify the origin access control.
+    #   A name to identify the origin access control. You can specify up to
+    #   64 characters.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -10371,12 +10384,14 @@ module Aws::CloudFront
     #   value.
     #
     #   For more information about the `Strict-Transport-Security` HTTP
-    #   response header, see [Strict-Transport-Security][1] in the MDN Web
+    #   response header, see [Security headers][1] in the *Amazon CloudFront
+    #   Developer Guide* and [Strict-Transport-Security][2] in the MDN Web
     #   Docs.
     #
     #
     #
-    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#understanding-response-headers-policies-security
+    #   [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
     #   @return [Types::ResponseHeadersPolicyStrictTransportSecurity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResponseHeadersPolicySecurityHeadersConfig AWS API Documentation
@@ -10635,14 +10650,21 @@ module Aws::CloudFront
     # a website endpoint, use the `CustomOriginConfig` element instead.
     #
     # @!attribute [rw] origin_access_identity
+    #   <note markdown="1"> If you're using origin access control (OAC) instead of origin
+    #   access identity, specify an empty `OriginAccessIdentity` element.
+    #   For more information, see [Restricting access to an Amazon Web
+    #   Services][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
     #   The CloudFront origin access identity to associate with the origin.
     #   Use an origin access identity to configure the origin so that
     #   viewers can *only* access objects in an Amazon S3 bucket through
     #   CloudFront. The format of the value is:
     #
-    #   origin-access-identity/cloudfront/*ID-of-origin-access-identity*
+    #   `origin-access-identity/cloudfront/ID-of-origin-access-identity`
     #
-    #   where ` ID-of-origin-access-identity ` is the value that CloudFront
+    #   The ` ID-of-origin-access-identity ` is the value that CloudFront
     #   returned in the `ID` element when you created the origin access
     #   identity.
     #
@@ -10658,12 +10680,13 @@ module Aws::CloudFront
     #   configuration and specify the new origin access identity.
     #
     #   For more information about the origin access identity, see [Serving
-    #   Private Content through CloudFront][1] in the *Amazon CloudFront
+    #   Private Content through CloudFront][2] in the *Amazon CloudFront
     #   Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/S3OriginConfig AWS API Documentation
@@ -10693,7 +10716,7 @@ module Aws::CloudFront
     #   being part of the same session. Allowed values are 300–3600 seconds
     #   (5–60 minutes).
     #
-    #   The value must be less than or equal to `IdleTTL`.
+    #   The value must be greater than or equal to `IdleTTL`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/SessionStickinessConfig AWS API Documentation
@@ -12731,15 +12754,15 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] name
-    #   The name of the Key Value Store to update.
+    #   The name of the key value store to update.
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   The comment of the Key Value Store to update.
+    #   The comment of the key value store to update.
     #   @return [String]
     #
     # @!attribute [rw] if_match
-    #   The Key Value Store to update, if a match occurs.
+    #   The key value store to update, if a match occurs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyValueStoreRequest AWS API Documentation
@@ -12753,11 +12776,11 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] key_value_store
-    #   The resulting Key Value Store to update.
+    #   The resulting key value store to update.
     #   @return [Types::KeyValueStore]
     #
     # @!attribute [rw] etag
-    #   The ETag of the resulting Key Value Store.
+    #   The `ETag` of the resulting key value store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyValueStoreResult AWS API Documentation

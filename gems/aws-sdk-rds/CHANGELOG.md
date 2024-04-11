@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.225.0 (2024-04-11)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Standard Edition 2 support in RDS Custom for Oracle.
+
 1.224.0 (2024-04-09)
 ------------------
 

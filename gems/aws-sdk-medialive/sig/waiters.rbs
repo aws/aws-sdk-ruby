@@ -118,6 +118,46 @@ module Aws
                   ) -> Client::_DescribeMultiplexResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeMultiplexResponseSuccess
       end
+
+      class SignalMapCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    identifier: ::String
+                  ) -> Client::_GetSignalMapResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSignalMapResponseSuccess
+      end
+
+      class SignalMapMonitorDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    identifier: ::String
+                  ) -> Client::_GetSignalMapResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSignalMapResponseSuccess
+      end
+
+      class SignalMapMonitorDeployed
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    identifier: ::String
+                  ) -> Client::_GetSignalMapResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSignalMapResponseSuccess
+      end
+
+      class SignalMapUpdated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    identifier: ::String
+                  ) -> Client::_GetSignalMapResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSignalMapResponseSuccess
+      end
     end
   end
 end

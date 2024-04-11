@@ -81,9 +81,15 @@ module Aws::CloudWatch
     #   @return [Types::AnomalyDetectorConfiguration]
     #
     # @!attribute [rw] state_value
-    #   The current status of the anomaly detector's training. The possible
-    #   values are `TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA`
+    #   The current status of the anomaly detector's training.
     #   @return [String]
+    #
+    # @!attribute [rw] metric_characteristics
+    #   This object includes parameters that you can use to provide
+    #   information about your metric to CloudWatch to help it build more
+    #   accurate anomaly detection models. Currently, it includes the
+    #   `PeriodicSpikes` parameter.
+    #   @return [Types::MetricCharacteristics]
     #
     # @!attribute [rw] single_metric_anomaly_detector
     #   The CloudWatch metric and statistic for this anomaly detector.
@@ -102,6 +108,7 @@ module Aws::CloudWatch
       :stat,
       :configuration,
       :state_value,
+      :metric_characteristics,
       :single_metric_anomaly_detector,
       :metric_math_anomaly_detector)
       SENSITIVE = []
@@ -2582,6 +2589,26 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # This object includes parameters that you can use to provide
+    # information to CloudWatch to help it build more accurate anomaly
+    # detection models.
+    #
+    # @!attribute [rw] periodic_spikes
+    #   Set this parameter to `true` if values for this metric consistently
+    #   include spikes that should not be considered to be anomalies. With
+    #   this set to `true`, CloudWatch will expect to see spikes that
+    #   occurred consistently during the model training period, and won't
+    #   flag future similar spikes as anomalies.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricCharacteristics AWS API Documentation
+    #
+    class MetricCharacteristics < Struct.new(
+      :periodic_spikes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This structure is used in both `GetMetricData` and `PutMetricAlarm`.
     # The supported use of this structure is different for those two
     # operations.
@@ -3183,6 +3210,13 @@ module Aws::CloudWatch
     #   metric.
     #   @return [Types::AnomalyDetectorConfiguration]
     #
+    # @!attribute [rw] metric_characteristics
+    #   Use this object to include parameters to provide information about
+    #   your metric to CloudWatch to help it build more accurate anomaly
+    #   detection models. Currently, it includes the `PeriodicSpikes`
+    #   parameter.
+    #   @return [Types::MetricCharacteristics]
+    #
     # @!attribute [rw] single_metric_anomaly_detector
     #   A single metric anomaly detector to be created.
     #
@@ -3233,6 +3267,7 @@ module Aws::CloudWatch
       :dimensions,
       :stat,
       :configuration,
+      :metric_characteristics,
       :single_metric_anomaly_detector,
       :metric_math_anomaly_detector)
       SENSITIVE = []

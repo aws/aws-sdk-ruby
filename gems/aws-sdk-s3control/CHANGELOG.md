@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2024-04-11)
+------------------
+
+* Feature - Documentation updates for Amazon S3-control.
+
 1.78.0 (2024-02-14)
 ------------------
 

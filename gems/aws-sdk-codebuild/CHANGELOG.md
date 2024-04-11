@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2024-04-11)
+------------------
+
+* Feature - Support access tokens for Bitbucket sources
+
 1.109.0 (2024-04-09)
 ------------------
 

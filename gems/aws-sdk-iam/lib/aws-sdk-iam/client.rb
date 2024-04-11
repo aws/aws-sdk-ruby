@@ -1372,20 +1372,23 @@ module Aws::IAM
     #   `CreateOpenIDConnectProviderRequest` operation accepts client IDs up
     #   to 255 characters long.
     #
-    # @option params [required, Array<String>] :thumbprint_list
+    # @option params [Array<String>] :thumbprint_list
     #   A list of server certificate thumbprints for the OpenID Connect (OIDC)
     #   identity provider's server certificates. Typically this list includes
     #   only one entry. However, IAM lets you have up to five thumbprints for
     #   an OIDC provider. This lets you maintain multiple thumbprints if the
     #   identity provider is rotating certificates.
     #
+    #   This parameter is optional. If it is not included, IAM will retrieve
+    #   and use the top intermediate certificate authority (CA) thumbprint of
+    #   the OpenID Connect identity provider server certificate.
+    #
     #   The server certificate thumbprint is the hex-encoded SHA-1 hash value
     #   of the X.509 certificate used by the domain where the OpenID Connect
     #   provider makes its keys available. It is always a 40-character string.
     #
-    #   You must provide at least one thumbprint when creating an IAM OIDC
-    #   provider. For example, assume that the OIDC provider is
-    #   `server.example.com` and the provider stores its keys at
+    #   For example, assume that the OIDC provider is `server.example.com` and
+    #   the provider stores its keys at
     #   https://keys.server.example.com/openid-connect. In that case, the
     #   thumbprint string would be the hex-encoded SHA-1 hash value of the
     #   certificate used by `https://keys.server.example.com.`
@@ -1445,7 +1448,7 @@ module Aws::IAM
     #   resp = client.create_open_id_connect_provider({
     #     url: "OpenIDConnectProviderUrlType", # required
     #     client_id_list: ["clientIDType"],
-    #     thumbprint_list: ["thumbprintType"], # required
+    #     thumbprint_list: ["thumbprintType"],
     #     tags: [
     #       {
     #         key: "tagKeyType", # required
@@ -9878,7 +9881,7 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Removes the specified IAM role from the specified EC2 instance
+    # Removes the specified IAM role from the specified Amazon EC2 instance
     # profile.
     #
     # Make sure that you do not have any Amazon EC2 instances running with
@@ -10465,13 +10468,13 @@ module Aws::IAM
     #   following list shows each of the supported scenario values and the
     #   resources that you must define to run the simulation.
     #
-    #   Each of the EC2 scenarios requires that you specify instance, image,
-    #   and security group resources. If your scenario includes an EBS volume,
-    #   then you must specify that volume as a resource. If the EC2 scenario
-    #   includes VPC, then you must supply the network interface resource. If
-    #   it includes an IP subnet, then you must specify the subnet resource.
-    #   For more information on the EC2 scenario options, see [Supported
-    #   platforms][1] in the *Amazon EC2 User Guide*.
+    #   Each of the Amazon EC2 scenarios requires that you specify instance,
+    #   image, and security group resources. If your scenario includes an EBS
+    #   volume, then you must specify that volume as a resource. If the Amazon
+    #   EC2 scenario includes VPC, then you must supply the network interface
+    #   resource. If it includes an IP subnet, then you must specify the
+    #   subnet resource. For more information on the Amazon EC2 scenario
+    #   options, see [Supported platforms][1] in the *Amazon EC2 User Guide*.
     #
     #   * **EC2-VPC-InstanceStore**
     #
@@ -10830,13 +10833,13 @@ module Aws::IAM
     #   following list shows each of the supported scenario values and the
     #   resources that you must define to run the simulation.
     #
-    #   Each of the EC2 scenarios requires that you specify instance, image,
-    #   and security group resources. If your scenario includes an EBS volume,
-    #   then you must specify that volume as a resource. If the EC2 scenario
-    #   includes VPC, then you must supply the network interface resource. If
-    #   it includes an IP subnet, then you must specify the subnet resource.
-    #   For more information on the EC2 scenario options, see [Supported
-    #   platforms][1] in the *Amazon EC2 User Guide*.
+    #   Each of the Amazon EC2 scenarios requires that you specify instance,
+    #   image, and security group resources. If your scenario includes an EBS
+    #   volume, then you must specify that volume as a resource. If the Amazon
+    #   EC2 scenario includes VPC, then you must supply the network interface
+    #   resource. If it includes an IP subnet, then you must specify the
+    #   subnet resource. For more information on the Amazon EC2 scenario
+    #   options, see [Supported platforms][1] in the *Amazon EC2 User Guide*.
     #
     #   * **EC2-VPC-InstanceStore**
     #
@@ -12564,6 +12567,11 @@ module Aws::IAM
     #   when you use those operations to create a console URL. For more
     #   information, see [Using IAM roles][1] in the *IAM User Guide*.
     #
+    #   <note markdown="1"> IAM role credentials provided by Amazon EC2 instances assigned to the
+    #   role are not subject to the specified maximum session duration.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
@@ -13467,7 +13475,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -185,6 +185,7 @@ module Aws::CloudWatch
     Metric = Shapes::StructureShape.new(name: 'Metric')
     MetricAlarm = Shapes::StructureShape.new(name: 'MetricAlarm')
     MetricAlarms = Shapes::ListShape.new(name: 'MetricAlarms')
+    MetricCharacteristics = Shapes::StructureShape.new(name: 'MetricCharacteristics')
     MetricData = Shapes::ListShape.new(name: 'MetricData')
     MetricDataQueries = Shapes::ListShape.new(name: 'MetricDataQueries')
     MetricDataQuery = Shapes::StructureShape.new(name: 'MetricDataQuery')
@@ -223,6 +224,7 @@ module Aws::CloudWatch
     OwningAccounts = Shapes::ListShape.new(name: 'OwningAccounts')
     PartialFailure = Shapes::StructureShape.new(name: 'PartialFailure')
     Period = Shapes::IntegerShape.new(name: 'Period')
+    PeriodicSpikes = Shapes::BooleanShape.new(name: 'PeriodicSpikes')
     PutAnomalyDetectorInput = Shapes::StructureShape.new(name: 'PutAnomalyDetectorInput')
     PutAnomalyDetectorOutput = Shapes::StructureShape.new(name: 'PutAnomalyDetectorOutput')
     PutCompositeAlarmInput = Shapes::StructureShape.new(name: 'PutCompositeAlarmInput')
@@ -300,6 +302,7 @@ module Aws::CloudWatch
     AnomalyDetector.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, deprecated: true, location_name: "Stat", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector.Stat property."}))
     AnomalyDetector.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
     AnomalyDetector.add_member(:state_value, Shapes::ShapeRef.new(shape: AnomalyDetectorStateValue, location_name: "StateValue"))
+    AnomalyDetector.add_member(:metric_characteristics, Shapes::ShapeRef.new(shape: MetricCharacteristics, location_name: "MetricCharacteristics"))
     AnomalyDetector.add_member(:single_metric_anomaly_detector, Shapes::ShapeRef.new(shape: SingleMetricAnomalyDetector, location_name: "SingleMetricAnomalyDetector"))
     AnomalyDetector.add_member(:metric_math_anomaly_detector, Shapes::ShapeRef.new(shape: MetricMathAnomalyDetector, location_name: "MetricMathAnomalyDetector"))
     AnomalyDetector.struct_class = Types::AnomalyDetector
@@ -754,6 +757,9 @@ module Aws::CloudWatch
 
     MetricAlarms.member = Shapes::ShapeRef.new(shape: MetricAlarm)
 
+    MetricCharacteristics.add_member(:periodic_spikes, Shapes::ShapeRef.new(shape: PeriodicSpikes, location_name: "PeriodicSpikes"))
+    MetricCharacteristics.struct_class = Types::MetricCharacteristics
+
     MetricData.member = Shapes::ShapeRef.new(shape: MetricDatum)
 
     MetricDataQueries.member = Shapes::ShapeRef.new(shape: MetricDataQuery)
@@ -852,6 +858,7 @@ module Aws::CloudWatch
     PutAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
     PutAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, deprecated: true, location_name: "Stat", metadata: {"deprecatedMessage"=>"Use SingleMetricAnomalyDetector."}))
     PutAnomalyDetectorInput.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
+    PutAnomalyDetectorInput.add_member(:metric_characteristics, Shapes::ShapeRef.new(shape: MetricCharacteristics, location_name: "MetricCharacteristics"))
     PutAnomalyDetectorInput.add_member(:single_metric_anomaly_detector, Shapes::ShapeRef.new(shape: SingleMetricAnomalyDetector, location_name: "SingleMetricAnomalyDetector"))
     PutAnomalyDetectorInput.add_member(:metric_math_anomaly_detector, Shapes::ShapeRef.new(shape: MetricMathAnomalyDetector, location_name: "MetricMathAnomalyDetector"))
     PutAnomalyDetectorInput.struct_class = Types::PutAnomalyDetectorInput

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2024-04-11)
+------------------
+
+* Feature - For CreateOpenIDConnectProvider API, the ThumbprintList parameter is no longer required.
+
 1.94.0 (2024-01-26)
 ------------------
 

@@ -22,6 +22,8 @@ module Aws::Batch
     AttemptContainerDetail = Shapes::StructureShape.new(name: 'AttemptContainerDetail')
     AttemptDetail = Shapes::StructureShape.new(name: 'AttemptDetail')
     AttemptDetails = Shapes::ListShape.new(name: 'AttemptDetails')
+    AttemptEcsTaskDetails = Shapes::StructureShape.new(name: 'AttemptEcsTaskDetails')
+    AttemptTaskContainerDetails = Shapes::StructureShape.new(name: 'AttemptTaskContainerDetails')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CEState = Shapes::StringShape.new(name: 'CEState')
     CEStatus = Shapes::StringShape.new(name: 'CEStatus')
@@ -151,6 +153,8 @@ module Aws::Batch
     KubernetesVersion = Shapes::StringShape.new(name: 'KubernetesVersion')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
     LinuxParameters = Shapes::StructureShape.new(name: 'LinuxParameters')
+    ListAttemptEcsTaskDetails = Shapes::ListShape.new(name: 'ListAttemptEcsTaskDetails')
+    ListAttemptTaskContainerDetails = Shapes::ListShape.new(name: 'ListAttemptTaskContainerDetails')
     ListEcsTaskDetails = Shapes::ListShape.new(name: 'ListEcsTaskDetails')
     ListEcsTaskProperties = Shapes::ListShape.new(name: 'ListEcsTaskProperties')
     ListJobsFilterList = Shapes::ListShape.new(name: 'ListJobsFilterList')
@@ -266,9 +270,22 @@ module Aws::Batch
     AttemptDetail.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
     AttemptDetail.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
     AttemptDetail.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    AttemptDetail.add_member(:task_properties, Shapes::ShapeRef.new(shape: ListAttemptEcsTaskDetails, location_name: "taskProperties"))
     AttemptDetail.struct_class = Types::AttemptDetail
 
     AttemptDetails.member = Shapes::ShapeRef.new(shape: AttemptDetail)
+
+    AttemptEcsTaskDetails.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
+    AttemptEcsTaskDetails.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
+    AttemptEcsTaskDetails.add_member(:containers, Shapes::ShapeRef.new(shape: ListAttemptTaskContainerDetails, location_name: "containers"))
+    AttemptEcsTaskDetails.struct_class = Types::AttemptEcsTaskDetails
+
+    AttemptTaskContainerDetails.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
+    AttemptTaskContainerDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    AttemptTaskContainerDetails.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    AttemptTaskContainerDetails.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "logStreamName"))
+    AttemptTaskContainerDetails.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaceList, location_name: "networkInterfaces"))
+    AttemptTaskContainerDetails.struct_class = Types::AttemptTaskContainerDetails
 
     CancelJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     CancelJobRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
@@ -569,6 +586,7 @@ module Aws::Batch
     EcsTaskProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
     EcsTaskProperties.struct_class = Types::EcsTaskProperties
 
+    EksAttemptContainerDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EksAttemptContainerDetail.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
     EksAttemptContainerDetail.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     EksAttemptContainerDetail.struct_class = Types::EksAttemptContainerDetail
@@ -872,6 +890,10 @@ module Aws::Batch
     LinuxParameters.add_member(:max_swap, Shapes::ShapeRef.new(shape: Integer, location_name: "maxSwap"))
     LinuxParameters.add_member(:swappiness, Shapes::ShapeRef.new(shape: Integer, location_name: "swappiness"))
     LinuxParameters.struct_class = Types::LinuxParameters
+
+    ListAttemptEcsTaskDetails.member = Shapes::ShapeRef.new(shape: AttemptEcsTaskDetails)
+
+    ListAttemptTaskContainerDetails.member = Shapes::ShapeRef.new(shape: AttemptTaskContainerDetails)
 
     ListEcsTaskDetails.member = Shapes::ShapeRef.new(shape: EcsTaskDetails)
 

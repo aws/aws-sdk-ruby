@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2024-04-11)
+------------------
+
+* Feature - This release adds the task properties field to attempt details and the name field on EKS container detail.
+
 1.84.0 (2024-03-27)
 ------------------
 

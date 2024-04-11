@@ -2661,7 +2661,7 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] token
     #   For GitHub or GitHub Enterprise, this is the personal access token.
-    #   For Bitbucket, this is the app password.
+    #   For Bitbucket, this is either the access token or the app password.
     #   @return [String]
     #
     # @!attribute [rw] server_type
