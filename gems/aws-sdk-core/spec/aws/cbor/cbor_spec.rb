@@ -38,18 +38,26 @@ module Aws
           input = test_case['input']
           as_bytes = [input].pack('H*')
 
-          if (expect = test_case['expect'])
-            actual = Aws::Cbor.decode(as_bytes)
-            expect(actual).to eq(expected_value(expect))
-          elsif test_case['error']
-            # TODO
-          end
+          expect = test_case['expect']
+          actual = Aws::Cbor.decode(as_bytes)
+          expect(actual).to eq(expected_value(expect))
         end
       end
     end
 
     context 'decode error tests' do
+      file = File.expand_path('decode-error-tests.json', __dir__)
+      test_cases = JSON.load_file(file)
 
+      test_cases.each do |test_case|
+        it "passes #{test_case['description']}" do
+          input = test_case['input']
+          as_bytes = [input].pack('H*')
+
+          # TODO: break this down into several errors somehow?
+          expect { Aws::Cbor.decode(as_bytes) }.to raise_error(OutOfBytesError)
+        end
+      end
     end
 
   end
