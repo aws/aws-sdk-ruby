@@ -22,12 +22,12 @@ module Aws
           end
         when 'tag'
           value = expected_value(expect['tag']['value'])
-          "#{expect['tag']['id']}(#{value})"
+          Tagged.new(expect['tag']['id'], value)
         when 'bool' then expect['bool']
         when 'null' then nil
-        when 'undefined' then nil
-        when 'float32' then expect['float32']
-        when 'float64' then expect['float64']
+        when 'undefined' then :undefined
+        when 'float32' then [expect['float32']].pack('L').unpack('f').first
+        when 'float64' then [expect['float64']].pack('Q').unpack('d').first
         else
           raise "unexpected expect value: #{expect}"
         end
@@ -39,8 +39,17 @@ module Aws
           as_bytes = [input].pack('H*')
 
           expect = test_case['expect']
-          actual = Aws::Cbor.decode(as_bytes)
-          expect(actual).to eq(expected_value(expect))
+          actual = Aws::Cbor::CborEngine.decode(as_bytes)
+          expected = expected_value(expect)
+          if expected.is_a?(Float) && expected.nan?
+            expect(actual.nan?).to be true
+          elsif expected.is_a?(Array) && expected.first.is_a?(Float) && expected.first.nan?
+            expect(actual.first.nan?).to be true
+          elsif expected.is_a?(Hash) && expected.values.first.is_a?(Float) && expected.values.first.nan?
+            expect(actual.values.first.nan?).to be true
+          else
+            expect(actual).to eq(expected)
+          end
         end
       end
     end
