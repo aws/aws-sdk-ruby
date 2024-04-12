@@ -2,11 +2,10 @@
 
 module Aws
   module Cbor
+    # Pure ruby implementation of CBOR encoder.
     class Encoder
-
       def initialize
         @buffer = String.new
-        # Using StringIO is about 2x slower
       end
 
       # @return the encoded bytes in CBOR format for all added data
@@ -17,11 +16,11 @@ module Aws
       # generic method for adding generic Ruby data based on its type
       def add(value)
         case value
-        when Integer; add_auto_integer(value)
-        when Numeric; add_auto_float(value)
-        when Symbol; add_string(value.to_s)
-        when true,false; add_boolean(value)
-        when nil; add_nil
+        when Integer then add_auto_integer(value)
+        when Numeric then add_auto_float(value)
+        when Symbol then add_string(value.to_s)
+        when true, false then add_boolean(value)
+        when nil then add_nil
         when Tagged
           add_tag(value.tag)
           add(value.value)
@@ -33,10 +32,13 @@ module Aws
           end
         when Array
           start_array(value.size)
-          value.each {|di| add(di)}
+          value.each { |di| add(di) }
         when Hash
           start_map(value.size)
-          value.each {|k, v| add(k); add(v)}
+          value.each do |k, v|
+            add(k)
+            add(v)
+          end
         when Time
           add_time(value)
         else
@@ -64,48 +66,48 @@ module Aws
 
       TAG_BIGNUM_BASE = 2
 
-      MAX_INTEGER = 18446744073709551616 # 2^64
+      MAX_INTEGER = 18_446_744_073_709_551_616 # 2^64
 
-      HALF_NAN_BYTES = ("\xf9" + Half::NAN_BYTES).freeze
+      HALF_NAN_BYTES = "\xF9#{Half::NAN_BYTES}"
       FLOAT_NAN_BYTES = "\xFA\x7F\xC0\x00\x00"
 
       def head(major_type, value)
         @buffer <<
           case value
           when 0...24
-            [major_type + value].pack("C") # 8-bit unsigned
+            [major_type + value].pack('C') # 8-bit unsigned
           when 0...256
-            [major_type + 24, value].pack("CC")
-          when 0...65536
-            [major_type + 25, value].pack("Cn")
-          when 0...4294967296
-            [major_type + 26, value].pack("CN")
+            [major_type + 24, value].pack('CC')
+          when 0...65_536
+            [major_type + 25, value].pack('Cn')
+          when 0...4_294_967_296
+            [major_type + 26, value].pack('CN')
           when 0...MAX_INTEGER
-            [major_type + 27, value].pack("CQ>")
+            [major_type + 27, value].pack('CQ>')
           else
             raise ArgumentError, "Value is too large to encode: #{d}"
           end
       end
 
       # streaming style, lower level interface
-      def add_integer(d)
-        major_type = if d < 0
-                       d = -1 - d
+      def add_integer(value)
+        major_type = if value.negative?
+                       value = -1 - value
                        MAJOR_TYPE_NEGATIVE_INT
                      else
                        MAJOR_TYPE_UNSIGNED_INT
                      end
-        head(major_type, d)
+        head(major_type, value)
       end
 
-      def add_bignum(d)
-        major_type = if d < 0
-                       d = -1 - d
+      def add_bignum(value)
+        major_type = if value.negative?
+                       value = -1 - value
                        MAJOR_TYPE_NEGATIVE_INT
                      else
                        MAJOR_TYPE_UNSIGNED_INT
                      end
-        s = bignum_to_bytes(d)
+        s = bignum_to_bytes(value)
         head(MAJOR_TYPE_TAG, TAG_BIGNUM_BASE + (major_type >> 5))
         head(MAJOR_TYPE_BYTE_STR, s.bytesize)
         @buffer << s
@@ -115,54 +117,54 @@ module Aws
       # that contains exactly two integer numbers:
       # an exponent e and a mantissa m
       # See: https://www.rfc-editor.org/rfc/rfc8949.html#name-decimal-fractions-and-bigfl
-      def add_big_decimal(bd)
+      def add_big_decimal(value)
         raise NotImplementedError
       end
 
-      def add_auto_integer(d)
-        major_type = if d < 0
-                       d = -1 - d
+      def add_auto_integer(value)
+        major_type = if value.negative?
+                       value = -1 - value
                        MAJOR_TYPE_NEGATIVE_INT
                      else
                        MAJOR_TYPE_UNSIGNED_INT
                      end
 
-        if d >= MAX_INTEGER
-          s = bignum_to_bytes(d)
+        if value >= MAX_INTEGER
+          s = bignum_to_bytes(value)
           head(MAJOR_TYPE_TAG, TAG_BIGNUM_BASE + (major_type >> 5))
           head(MAJOR_TYPE_BYTE_STR, s.bytesize)
           @buffer << s
         else
-          head(major_type, d)
+          head(major_type, value)
         end
       end
 
-      def add_float(fv)
-        if fv.nan?
+      def add_float(value)
+        if value.nan?
           @buffer << FLOAT_NAN_BYTES
         else
-          ss = [fv].pack("g")         # single-precision
+          ss = [value].pack('g') # single-precision
           @buffer << FLOAT_BYTES << ss
         end
       end
 
-      def add_double(fv)
-        if fv.nan?
-          @buffer << FLOAT_NAN_BYTES
-        else
-          @buffer << [DOUBLE_BYTES, fv].pack("CG") # double-precision
-        end
+      def add_double(value)
+        @buffer << if value.nan?
+                     FLOAT_NAN_BYTES
+                   else
+                     [DOUBLE_BYTES, value].pack('CG') # double-precision
+                   end
       end
 
-      def add_auto_float(fv)
-        if fv.nan?
+      def add_auto_float(value)
+        if value.nan?
           @buffer << FLOAT_NAN_BYTES # Prefer using single precision over half
         else
-          ss = [fv].pack("g")         # single-precision
-          if ss.unpack("g").first == fv
+          ss = [value].pack('g') # single-precision
+          if ss.unpack1('g') == value
             @buffer << FLOAT_BYTES << ss
           else
-            @buffer << [DOUBLE_BYTES, fv].pack("CG") # double-precision
+            @buffer << [DOUBLE_BYTES, value].pack('CG') # double-precision
           end
         end
       end
@@ -220,11 +222,11 @@ module Aws
         add_integer(epoch_ms)
       end
 
-      def bignum_to_bytes(d)
+      def bignum_to_bytes(value)
         s = String.new
-        while (d != 0)
-          s << (d & 0xFF)
-          d >>= 8
+        while value != 0
+          s << (value & 0xFF)
+          value >>= 8
         end
         s.reverse!
       end

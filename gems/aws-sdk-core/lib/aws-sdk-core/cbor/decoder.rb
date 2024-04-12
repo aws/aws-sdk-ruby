@@ -2,6 +2,7 @@
 
 module Aws
   module Cbor
+    # Pure Ruby implementation of CBOR Decoder
     class Decoder
       def initialize(bytes)
         @buffer = bytes
@@ -31,33 +32,25 @@ module Aws
         when :indefinite_array
           read_start_indefinite_array
           value = []
-          until peek_type == :break_stop_code
-            value << decode_item
-          end
+          value << decode_item until peek_type == :break_stop_code
           read_end_indefinite_collection
           value
         when :indefinite_map
           read_start_indefinite_map
           value = {}
-          until peek_type == :break_stop_code
-            value[read_string] = decode_item
-          end
+          value[read_string] = decode_item until peek_type == :break_stop_code
           read_end_indefinite_collection
           value
         when :indefinite_binary_string
           read_info
           value = String.new
-          until peek_type == :break_stop_code
-            value << read_binary_string
-          end
+          value << read_binary_string until peek_type == :break_stop_code
           read_end_indefinite_collection
           value
         when :indefinite_string
           read_info
           value = String.new
-          until peek_type == :break_stop_code
-            value << read_string
-          end
+          value << read_string until peek_type == :break_stop_code
           read_end_indefinite_collection
           value.force_encoding(Encoding::UTF_8)
         when :tag
@@ -65,11 +58,9 @@ module Aws
         when :break_stop_code
           raise UnexpectedBreakCode
         else
-          self.send("read_#{next_type}")
+          send("read_#{next_type}")
         end
       end
-
-      private
 
       # low level streaming interface
       def peek_type
@@ -77,26 +68,26 @@ module Aws
         add_info = ib & FIVE_BIT_MASK
         major_type = ib >> 5
         case major_type
-        when 0,1; :integer
+        when 0, 1 then :integer
         when 2
           add_info == 31 ? :indefinite_binary_string : :binary_string
         when 3
-        add_info == 31 ? :indefinite_string : :string
+          add_info == 31 ? :indefinite_string : :string
         when 4
           add_info == 31 ? :indefinite_array : :array
         when 5
           add_info == 31 ? :indefinite_map : :map
-        when 6; :tag
+        when 6 then :tag
         when 7 # simple or float
           case add_info
-          when 20,21; :boolean
-          when 22; :nil
-          when 23; :undefined # for smithy, this should be parsed as nil
-          when 24; :simple_value
-          when 25; :half
-          when 26; :float
-          when 27; :double
-          when 31; :break_stop_code
+          when 20, 21 then :boolean
+          when 22 then :nil
+          when 23 then :undefined # for smithy, this should be parsed as nil
+          when 24 then :simple_value
+          when 25 then :half
+          when 26 then :float
+          when 27 then :double
+          when 31 then :break_stop_code
           else
             :reserved_undefined
           end
@@ -113,108 +104,71 @@ module Aws
 
         val = read_count(add_info)
         case major_type
-        when 0; val
-        when 1; -1 - val
+        when 0 then val
+        when 1 then -1 - val
         else
           raise ArgumentError, "Expected Integer (0,1) got major type: #{major_type}"
         end
       end
 
       def read_binary_string
-        major_type, add_info = read_info
-        if major_type == 2
-          take(read_count(add_info)).force_encoding(Encoding::BINARY)
-        else
-          raise ArgumentError, "Expected Binary String (2) got major type: #{major_type}"
-        end
+        _major_type, add_info = read_info
+        take(read_count(add_info)).force_encoding(Encoding::BINARY)
       end
 
       def read_string
-        major_type, add_info = read_info
-        if major_type == 3
-          take(read_count(add_info)).force_encoding(Encoding::UTF_8)
-        else
-          raise ArgumentError, "Expected String (3) got major type: #{major_type}"
-        end
+        _major_type, add_info = read_info
+        take(read_count(add_info)).force_encoding(Encoding::UTF_8)
       end
 
       # returns only the length of the array, caller must read the correct number of values after this
       def read_array
-        major_type, add_info = read_info
-        if major_type == 4
-          read_count(add_info)
-        else
-          raise ArgumentError, "Expected Array (4) got major type: #{major_type}"
-        end
+        _major_type, add_info = read_info
+        read_count(add_info)
       end
 
       # returns nothing but consumes and checks the type/info.
       # Caller must keep reading until encountering the stop sequence
       def read_start_indefinite_array
-        major_type, add_info = read_info
-        if major_type != 4 || add_info != 31
-          raise ArgumentError, "Expected Indefinite Array (4, 31) got  #{major_type}, #{add_info}"
-        end
+        read_info
       end
 
       # returns nothing but consumes and checks the type/info.
       # Caller must keep reading until encountering the stop sequence
       def read_start_indefinite_map
-        major_type, add_info = read_info
-        if major_type != 5 || add_info != 31
-          raise ArgumentError, "Expected Indefinite map (5, 31) got  #{major_type}, #{add_info}"
-        end
+        read_info
       end
 
       # returns nothing but consumes and checks the type/info.
       def read_end_indefinite_collection
-        major_type, add_info = read_info
-        if major_type != 7 || add_info != 31
-          raise ArgumentError, "Expected stop sequence (5, 31) got  #{major_type}, #{add_info}"
-        end
+        read_info
       end
 
       # returns only the length of the array, caller must read the correct number of key value pairs after this
       def read_map
-        major_type, add_info = read_info
-        if major_type == 5
-          read_count(add_info)
-        else
-          raise ArgumentError, "Expected Map (5) got major type: #{major_type}"
-        end
+        _major_type, add_info = read_info
+        read_count(add_info)
       end
 
       # returns only the tag, caller must interpret the tag and read another value as appropriate
       def read_tag
-        major_type, add_info = read_info
-        if major_type == 6
-          read_count(add_info)
-        else
-          raise ArgumentError, "Expected Tag (6) got major type: #{major_type}"
-        end
+        _major_type, add_info = read_info
+        read_count(add_info)
       end
 
       def read_boolean
-        major_type, add_info = read_info
-        if major_type == 7
-          case add_info
-          when 20; false
-          when 21; true
-          else
-            raise ArgumentError, "Invalid Boolean simple type, expected add_info of 20 or 21, got: #{add_info}"
-          end
+        _major_type, add_info = read_info
+        case add_info
+        when 20 then false
+        when 21 then true
         else
-          raise ArgumentError, "Expected Boolean/Simple (7) got major type: #{major_type}"
+          raise ArgumentError, "Invalid Boolean simple type, expected add_info of 20 or 21, got: #{add_info}"
         end
       end
 
       def read_nil
-        major_type, add_info = read_info
-        if major_type == 7 && add_info == 22
-          nil
-        else
-          raise ArgumentError, "Expected Nil value (7, 22) got : #{major_type}, #{add_info}"
-        end
+        read_info
+        nil
       end
 
       def read_undefined
@@ -223,46 +177,33 @@ module Aws
       end
 
       def read_half
-        major_type, add_info = read_info
-        if major_type == 7 && add_info == 25
-          Half.decode(take(2).unpack('n').first)
-        else
-          raise ArgumentError, "Expected Half value (7, 25) got : #{major_type}, #{add_info}"
-        end
+        read_info
+        Half.decode(take(2).unpack1('n'))
       end
 
       def read_float
-        major_type, add_info = read_info
-        if major_type == 7 && add_info == 26
-          take(4).unpack('g').first
-        else
-          raise ArgumentError, "Expected Float value (7, 26) got : #{major_type}, #{add_info}"
-        end
+        read_info
+        take(4).unpack1('g')
       end
 
       def read_double
-        major_type, add_info = read_info
-        if major_type == 7 && add_info == 27
-          take(8).unpack('G').first
-        else
-          raise ArgumentError, "Expected Double value (7, 27) got : #{major_type}, #{add_info}"
-        end
+        read_info
+        take(8).unpack1('G')
       end
 
       # tag type 2 or 3
       def read_bignum(tag_value)
-        major_type, add_info = read_info
-        if major_type == 2 # byte string
-          bstr = take(read_count(add_info))
-          v = bstr.bytes.inject(0) {|sum, b| sum <<= 8; sum += b }
-          case tag_value
-          when 2; v
-          when 3; -1 - v
-          else
-            raise ArgumentError, "Invalid Tag value for BigNum, expected 2 or 3, got: #{tag_value}"
-          end
+        _major_type, add_info = read_info
+        bstr = take(read_count(add_info))
+        v = bstr.bytes.inject(0) do |sum, b|
+          sum <<= 8
+          sum + b
+        end
+        case tag_value
+        when 2 then v
+        when 3 then -1 - v
         else
-          raise ArgumentError, "Expected byte string (2) but got major type : #{major_type}"
+          raise ArgumentError, "Invalid Tag value for BigNum, expected 2 or 3, got: #{tag_value}"
         end
       end
 
@@ -277,7 +218,7 @@ module Aws
 
         e = read_integer
         m = read_integer
-        BigDecimal(m) * (BigDecimal(10) ** BigDecimal(e))
+        BigDecimal(m) * (BigDecimal(10)**BigDecimal(e))
       end
 
       # return a tuple of major_type, add_info
@@ -288,25 +229,26 @@ module Aws
 
       def read_count(add_info)
         case add_info
-        when 0..23; add_info
-        when 24; take(1).ord
-        when 25; take(2).unpack("n").first
-        when 26; take(4).unpack("N").first
-        when 27; take(8).unpack("Q>").first
-        else raise UnexpectedAdditionalInformation.new(add_info)
+        when 0..23 then add_info
+        when 24 then take(1).ord
+        when 25 then take(2).unpack1('n')
+        when 26 then take(4).unpack1('N')
+        when 27 then take(8).unpack1('Q>')
+        else raise UnexpectedAdditionalInformation, add_info
         end
       end
 
-      def take(n)
+      def take(n_bytes)
         opos = @pos
-        @pos += n
-        raise OutOfBytesError.new(n, @buffer.bytesize - @pos) if @pos > @buffer.bytesize
-        @buffer[opos, n]
+        @pos += n_bytes
+        raise OutOfBytesError.new(n_bytes, @buffer.bytesize - @pos) if @pos > @buffer.bytesize
+
+        @buffer[opos, n_bytes]
       end
 
-      def peek(n)
-        OutOfBytesError.new(n, @buffer.bytesize - @pos) if (@pos + n) > @buffer.bytesize
-        @buffer[@pos, n]
+      def peek(n_bytes)
+        OutOfBytesError.new(n_bytes, @buffer.bytesize - @pos) if (@pos + n_bytes) > @buffer.bytesize
+        @buffer[@pos, n_bytes]
       end
     end
   end

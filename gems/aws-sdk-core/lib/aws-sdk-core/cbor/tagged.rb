@@ -6,6 +6,7 @@ module Aws
       def to_s
         "#{tag}(#{value})"
       end
+
       def inspect
         "#{tag}(#{value.inspect})"
       end
