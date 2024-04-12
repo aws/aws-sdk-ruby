@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add default max_results value to Resource methods for legacy APIs that support un-paginated calls by default.
+
 1.448.0 (2024-04-04)
 ------------------
 
