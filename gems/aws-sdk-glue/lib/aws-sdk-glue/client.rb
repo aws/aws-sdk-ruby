@@ -11801,8 +11801,8 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves table metadata from the Data Catalog that contains
-    # unfiltered metadata.
+    # Allows a third-party analytical engine to retrieve unfiltered table
+    # metadata from the Data Catalog.
     #
     # For IAM authorization, the public IAM action associated with this API
     # is `glue:GetTable`.
@@ -11825,7 +11825,46 @@ module Aws::Glue
     #   A structure containing Lake Formation audit context information.
     #
     # @option params [required, Array<String>] :supported_permission_types
-    #   (Required) A list of supported permission types.
+    #   Indicates the level of filtering a third-party analytical engine is
+    #   capable of enforcing when calling the `GetUnfilteredTableMetadata` API
+    #   operation. Accepted values are:
+    #
+    #   * `COLUMN_PERMISSION` - Column permissions ensure that users can
+    #     access only specific columns in the table. If there are particular
+    #     columns contain sensitive data, data lake administrators can define
+    #     column filters that exclude access to specific columns.
+    #
+    #   * `CELL_FILTER_PERMISSION` - Cell-level filtering combines column
+    #     filtering (include or exclude columns) and row filter expressions to
+    #     restrict access to individual elements in the table.
+    #
+    #   * `NESTED_PERMISSION` - Nested permissions combines cell-level
+    #     filtering and nested column filtering to restrict access to columns
+    #     and/or nested columns in specific rows based on row filter
+    #     expressions.
+    #
+    #   * `NESTED_CELL_PERMISSION` - Nested cell permissions combines nested
+    #     permission with nested cell-level filtering. This allows different
+    #     subsets of nested columns to be restricted based on an array of row
+    #     filter expressions.
+    #
+    #   Note: Each of these permission types follows a hierarchical order
+    #   where each subsequent permission type includes all permission of the
+    #   previous type.
+    #
+    #   Important: If you provide a supported permission type that doesn't
+    #   match the user's level of permissions on the table, then Lake
+    #   Formation raises an exception. For example, if the third-party engine
+    #   calling the `GetUnfilteredTableMetadata` operation can enforce only
+    #   column-level filtering, and the user has nested cell filtering applied
+    #   on the table, Lake Formation throws an exception, and will not return
+    #   unfiltered table metadata and data access credentials.
+    #
+    # @option params [String] :parent_resource_arn
+    #   The resource ARN of the view.
+    #
+    # @option params [String] :root_resource_arn
+    #   The resource ARN of the root view in a chain of nested views.
     #
     # @option params [Types::SupportedDialect] :supported_dialect
     #   A structure specifying the dialect and dialect version used by the
@@ -11866,6 +11905,8 @@ module Aws::Glue
     #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
+    #     parent_resource_arn: "ArnString",
+    #     root_resource_arn: "ArnString",
     #     supported_dialect: {
     #       dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
     #       dialect_version: "ViewDialectVersionString",
@@ -17078,7 +17119,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.169.0'
+      context[:gem_version] = '1.170.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

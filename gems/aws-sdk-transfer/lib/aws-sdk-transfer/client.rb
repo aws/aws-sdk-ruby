@@ -2009,7 +2009,7 @@ module Aws::Transfer
     #
     #   resp.certificate.arn #=> String
     #   resp.certificate.certificate_id #=> String
-    #   resp.certificate.usage #=> String, one of "SIGNING", "ENCRYPTION"
+    #   resp.certificate.usage #=> String, one of "SIGNING", "ENCRYPTION", "TLS"
     #   resp.certificate.status #=> String, one of "ACTIVE", "PENDING_ROTATION", "INACTIVE"
     #   resp.certificate.certificate #=> String
     #   resp.certificate.certificate_chain #=> String
@@ -2523,7 +2523,14 @@ module Aws::Transfer
     # create local (AS2) profiles and partner profiles.
     #
     # @option params [required, String] :usage
-    #   Specifies whether this certificate is used for signing or encryption.
+    #   Specifies how this certificate is used. It can be used in the
+    #   following ways:
+    #
+    #   * `SIGNING`: For signing AS2 messages
+    #
+    #   * `ENCRYPTION`: For encrypting AS2 messages
+    #
+    #   * `TLS`: For securing AS2 communications sent over HTTPS
     #
     # @option params [required, String] :certificate
     #   * For the CLI, provide a file path for a certificate in URI format.
@@ -2564,7 +2571,7 @@ module Aws::Transfer
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_certificate({
-    #     usage: "SIGNING", # required, accepts SIGNING, ENCRYPTION
+    #     usage: "SIGNING", # required, accepts SIGNING, ENCRYPTION, TLS
     #     certificate: "CertificateBodyType", # required
     #     certificate_chain: "CertificateChainType",
     #     private_key: "PrivateKeyType",
@@ -2832,7 +2839,7 @@ module Aws::Transfer
     #   resp.certificates #=> Array
     #   resp.certificates[0].arn #=> String
     #   resp.certificates[0].certificate_id #=> String
-    #   resp.certificates[0].usage #=> String, one of "SIGNING", "ENCRYPTION"
+    #   resp.certificates[0].usage #=> String, one of "SIGNING", "ENCRYPTION", "TLS"
     #   resp.certificates[0].status #=> String, one of "ACTIVE", "PENDING_ROTATION", "INACTIVE"
     #   resp.certificates[0].active_date #=> Time
     #   resp.certificates[0].inactive_date #=> Time
@@ -4701,7 +4708,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

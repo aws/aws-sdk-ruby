@@ -2097,6 +2097,15 @@ module Aws::MediaTailor
     #   The configuration for HLS content.
     #   @return [Types::HlsConfiguration]
     #
+    # @!attribute [rw] insertion_mode
+    #   The setting that controls whether players can use stitched or guided
+    #   ad insertion. The default, `STITCHED_ONLY`, forces all player
+    #   sessions to use stitched (server-side) ad insertion. Choosing
+    #   `PLAYER_SELECT` allows players to select either stitched or guided
+    #   ad insertion at session-initialization time. The default for players
+    #   that do not specify an insertion mode is stitched.
+    #   @return [String]
+    #
     # @!attribute [rw] live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
@@ -2188,6 +2197,7 @@ module Aws::MediaTailor
       :configuration_aliases,
       :dash_configuration,
       :hls_configuration,
+      :insertion_mode,
       :live_pre_roll_configuration,
       :log_configuration,
       :manifest_processing_rules,
@@ -2942,6 +2952,15 @@ module Aws::MediaTailor
     #   The configuration for HLS content.
     #   @return [Types::HlsConfiguration]
     #
+    # @!attribute [rw] insertion_mode
+    #   The setting that controls whether players can use stitched or guided
+    #   ad insertion. The default, `STITCHED_ONLY`, forces all player
+    #   sessions to use stitched (server-side) ad insertion. Choosing
+    #   `PLAYER_SELECT` allows players to select either stitched or guided
+    #   ad insertion at session-initialization time. The default for players
+    #   that do not specify an insertion mode is stitched.
+    #   @return [String]
+    #
     # @!attribute [rw] live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
@@ -3033,6 +3052,7 @@ module Aws::MediaTailor
       :configuration_aliases,
       :dash_configuration,
       :hls_configuration,
+      :insertion_mode,
       :live_pre_roll_configuration,
       :log_configuration,
       :manifest_processing_rules,
@@ -3248,6 +3268,15 @@ module Aws::MediaTailor
     #   The configuration for DASH content.
     #   @return [Types::DashConfigurationForPut]
     #
+    # @!attribute [rw] insertion_mode
+    #   The setting that controls whether players can use stitched or guided
+    #   ad insertion. The default, `STITCHED_ONLY`, forces all player
+    #   sessions to use stitched (server-side) ad insertion. Choosing
+    #   `PLAYER_SELECT` allows players to select either stitched or guided
+    #   ad insertion at session-initialization time. The default for players
+    #   that do not specify an insertion mode is stitched.
+    #   @return [String]
+    #
     # @!attribute [rw] live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
@@ -3320,6 +3349,7 @@ module Aws::MediaTailor
       :cdn_configuration,
       :configuration_aliases,
       :dash_configuration,
+      :insertion_mode,
       :live_pre_roll_configuration,
       :manifest_processing_rules,
       :name,
@@ -3383,6 +3413,15 @@ module Aws::MediaTailor
     # @!attribute [rw] hls_configuration
     #   The configuration for HLS content.
     #   @return [Types::HlsConfiguration]
+    #
+    # @!attribute [rw] insertion_mode
+    #   The setting that controls whether players can use stitched or guided
+    #   ad insertion. The default, `STITCHED_ONLY`, forces all player
+    #   sessions to use stitched (server-side) ad insertion. Choosing
+    #   `PLAYER_SELECT` allows players to select either stitched or guided
+    #   ad insertion at session-initialization time. The default for players
+    #   that do not specify an insertion mode is stitched.
+    #   @return [String]
     #
     # @!attribute [rw] live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
@@ -3476,6 +3515,7 @@ module Aws::MediaTailor
       :configuration_aliases,
       :dash_configuration,
       :hls_configuration,
+      :insertion_mode,
       :live_pre_roll_configuration,
       :log_configuration,
       :manifest_processing_rules,

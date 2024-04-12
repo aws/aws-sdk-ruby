@@ -387,7 +387,7 @@ module Aws::Transfer
     class DescribedCertificate
       attr_accessor arn: ::String
       attr_accessor certificate_id: ::String
-      attr_accessor usage: ("SIGNING" | "ENCRYPTION")
+      attr_accessor usage: ("SIGNING" | "ENCRYPTION" | "TLS")
       attr_accessor status: ("ACTIVE" | "PENDING_ROTATION" | "INACTIVE")
       attr_accessor certificate: ::String
       attr_accessor certificate_chain: ::String
@@ -569,7 +569,7 @@ module Aws::Transfer
     end
 
     class ImportCertificateRequest
-      attr_accessor usage: ("SIGNING" | "ENCRYPTION")
+      attr_accessor usage: ("SIGNING" | "ENCRYPTION" | "TLS")
       attr_accessor certificate: ::String
       attr_accessor certificate_chain: ::String
       attr_accessor private_key: ::String
@@ -812,7 +812,7 @@ module Aws::Transfer
     class ListedCertificate
       attr_accessor arn: ::String
       attr_accessor certificate_id: ::String
-      attr_accessor usage: ("SIGNING" | "ENCRYPTION")
+      attr_accessor usage: ("SIGNING" | "ENCRYPTION" | "TLS")
       attr_accessor status: ("ACTIVE" | "PENDING_ROTATION" | "INACTIVE")
       attr_accessor active_date: ::Time
       attr_accessor inactive_date: ::Time

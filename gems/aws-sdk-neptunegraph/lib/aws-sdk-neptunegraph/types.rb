@@ -152,6 +152,9 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] replica_count
     #   The number of replicas in other AZs. Min =0, Max = 2, Default = 1.
+    #
+    #   Additional charges equivalent to the m-NCUs selected for the graph
+    #   apply for each replica.
     #   @return [Integer]
     #
     # @!attribute [rw] deletion_protection
@@ -385,6 +388,9 @@ module Aws::NeptuneGraph
     # @!attribute [rw] replica_count
     #   The number of replicas in other AZs to provision on the new graph
     #   after import. Default = 0, Min = 0, Max = 2.
+    #
+    #   Additional charges equivalent to the m-NCUs selected for the graph
+    #   apply for each replica.
     #   @return [Integer]
     #
     # @!attribute [rw] deletion_protection
@@ -2145,6 +2151,9 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] replica_count
     #   The number of replicas in other AZs. Min =0, Max = 2, Default =1
+    #
+    #   Additional charges equivalent to the m-NCUs selected for the graph
+    #   apply for each replica.
     #   @return [Integer]
     #
     # @!attribute [rw] public_connectivity

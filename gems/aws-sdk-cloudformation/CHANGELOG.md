@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2024-04-12)
+------------------
+
+* Feature - Adding support for the new parameter "IncludePropertyValues" in the CloudFormation DescribeChangeSet API. When this parameter is included, the DescribeChangeSet response will include more detailed information such as before and after values for the resource properties that will change.
+
 1.104.0 (2024-04-03)
 ------------------
 

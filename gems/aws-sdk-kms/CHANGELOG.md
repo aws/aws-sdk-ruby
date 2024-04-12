@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2024-04-12)
+------------------
+
+* Feature - This feature supports the ability to specify a custom rotation period for automatic key rotations, the ability to perform on-demand key rotations, and visibility into your key material rotations.
+
 1.78.0 (2024-03-18)
 ------------------
 

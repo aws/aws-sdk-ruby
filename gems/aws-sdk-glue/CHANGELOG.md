@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2024-04-12)
+------------------
+
+* Feature - Modifying request for GetUnfilteredTableMetadata for view-related fields.
+
 1.169.0 (2024-04-02)
 ------------------
 

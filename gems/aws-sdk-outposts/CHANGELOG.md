@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2024-04-12)
+------------------
+
+* Feature - This release adds EXPEDITORS as a valid shipment carrier.
+
 1.53.0 (2024-01-26)
 ------------------
 

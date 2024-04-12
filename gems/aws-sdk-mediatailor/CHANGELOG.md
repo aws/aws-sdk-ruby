@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2024-04-12)
+------------------
+
+* Feature - Added InsertionMode to PlaybackConfigurations. This setting controls whether players can use stitched or guided ad insertion. The default for players that do not specify an insertion mode is stitched.
+
 1.77.0 (2024-03-18)
 ------------------
 

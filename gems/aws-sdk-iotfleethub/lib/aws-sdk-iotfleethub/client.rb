@@ -388,12 +388,19 @@ module Aws::IoTFleetHub
 
     # @!group API Operations
 
-    # Creates a Fleet Hub for AWS IoT Device Management web application.
+    # Creates a Fleet Hub for IoT Device Management web application.
     #
-    # <note markdown="1"> Fleet Hub for AWS IoT Device Management is in public preview and is
-    # subject to change.
+    # When creating a Fleet Hub application, you must create an organization
+    # instance of IAM Identity Center if you don't already have one. The
+    # Fleet Hub application you create must also be in the same Amazon Web
+    # Services Region of the organization instance of IAM Identity Center.
+    # For more information see [Enabling IAM Identity Center][1] and
+    # [Organization instances of IAM Identity Center][2].
     #
-    #  </note>
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/get-set-up-for-idc.html
+    # [2]: https://docs.aws.amazon.com/singlesignon/latest/userguide/organization-instances-identity-center.html
     #
     # @option params [required, String] :application_name
     #   The name of the web application.
@@ -411,7 +418,7 @@ module Aws::IoTFleetHub
     #
     # @option params [required, String] :role_arn
     #   The ARN of the role that the web application assumes when it interacts
-    #   with AWS IoT Core.
+    #   with Amazon Web Services IoT Core.
     #
     #   <note markdown="1"> The name of the role must be in the form `AWSIotFleetHub_random_string
     #   `.
@@ -451,12 +458,7 @@ module Aws::IoTFleetHub
       req.send_request(options)
     end
 
-    # Deletes a Fleet Hub for AWS IoT Device Management web application.
-    #
-    # <note markdown="1"> Fleet Hub for AWS IoT Device Management is in public preview and is
-    # subject to change.
-    #
-    #  </note>
+    # Deletes a Fleet Hub for IoT Device Management web application.
     #
     # @option params [required, String] :application_id
     #   The unique Id of the web application.
@@ -485,13 +487,8 @@ module Aws::IoTFleetHub
       req.send_request(options)
     end
 
-    # Gets information about a Fleet Hub for AWS IoT Device Management web
+    # Gets information about a Fleet Hub for IoT Device Management web
     # application.
-    #
-    # <note markdown="1"> Fleet Hub for AWS IoT Device Management is in public preview and is
-    # subject to change.
-    #
-    #  </note>
     #
     # @option params [required, String] :application_id
     #   The unique Id of the web application.
@@ -540,13 +537,8 @@ module Aws::IoTFleetHub
       req.send_request(options)
     end
 
-    # Gets a list of Fleet Hub for AWS IoT Device Management web
-    # applications for the current account.
-    #
-    # <note markdown="1"> Fleet Hub for AWS IoT Device Management is in public preview and is
-    # subject to change.
-    #
-    #  </note>
+    # Gets a list of Fleet Hub for IoT Device Management web applications
+    # for the current account.
     #
     # @option params [String] :next_token
     #   A token used to get the next set of results.
@@ -585,11 +577,6 @@ module Aws::IoTFleetHub
 
     # Lists the tags for the specified resource.
     #
-    # <note markdown="1"> Fleet Hub for AWS IoT Device Management is in public preview and is
-    # subject to change.
-    #
-    #  </note>
-    #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource.
     #
@@ -618,11 +605,6 @@ module Aws::IoTFleetHub
     # Adds to or modifies the tags of the specified resource. Tags are
     # metadata which can be used to manage a resource.
     #
-    # <note markdown="1"> Fleet Hub for AWS IoT Device Management is in public preview and is
-    # subject to change.
-    #
-    #  </note>
-    #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource.
     #
@@ -649,11 +631,6 @@ module Aws::IoTFleetHub
 
     # Removes the specified tags (metadata) from the resource.
     #
-    # <note markdown="1"> Fleet Hub for AWS IoT Device Management is in public preview and is
-    # subject to change.
-    #
-    #  </note>
-    #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource.
     #
@@ -676,13 +653,8 @@ module Aws::IoTFleetHub
       req.send_request(options)
     end
 
-    # Updates information about a Fleet Hub for a AWS IoT Device Management
-    # web application.
-    #
-    # <note markdown="1"> Fleet Hub for AWS IoT Device Management is in public preview and is
-    # subject to change.
-    #
-    #  </note>
+    # Updates information about a Fleet Hub for IoT Device Management web
+    # application.
     #
     # @option params [required, String] :application_id
     #   The unique Id of the web application.
@@ -732,7 +704,7 @@ module Aws::IoTFleetHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotfleethub'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

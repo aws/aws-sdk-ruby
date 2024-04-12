@@ -40,6 +40,9 @@ module Aws::HealthLake
     DescribeFHIRImportJobRequest = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobRequest')
     DescribeFHIRImportJobResponse = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobResponse')
     EncryptionKeyID = Shapes::StringShape.new(name: 'EncryptionKeyID')
+    ErrorCategory = Shapes::StringShape.new(name: 'ErrorCategory')
+    ErrorCause = Shapes::StructureShape.new(name: 'ErrorCause')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExportJobProperties = Shapes::StructureShape.new(name: 'ExportJobProperties')
     ExportJobPropertiesList = Shapes::ListShape.new(name: 'ExportJobPropertiesList')
     FHIRVersion = Shapes::StringShape.new(name: 'FHIRVersion')
@@ -130,6 +133,7 @@ module Aws::HealthLake
     DatastoreProperties.add_member(:sse_configuration, Shapes::ShapeRef.new(shape: SseConfiguration, location_name: "SseConfiguration"))
     DatastoreProperties.add_member(:preload_data_config, Shapes::ShapeRef.new(shape: PreloadDataConfig, location_name: "PreloadDataConfig"))
     DatastoreProperties.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "IdentityProviderConfiguration"))
+    DatastoreProperties.add_member(:error_cause, Shapes::ShapeRef.new(shape: ErrorCause, location_name: "ErrorCause"))
     DatastoreProperties.struct_class = Types::DatastoreProperties
 
     DatastorePropertiesList.member = Shapes::ShapeRef.new(shape: DatastoreProperties)
@@ -162,6 +166,10 @@ module Aws::HealthLake
 
     DescribeFHIRImportJobResponse.add_member(:import_job_properties, Shapes::ShapeRef.new(shape: ImportJobProperties, required: true, location_name: "ImportJobProperties"))
     DescribeFHIRImportJobResponse.struct_class = Types::DescribeFHIRImportJobResponse
+
+    ErrorCause.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    ErrorCause.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "ErrorCategory"))
+    ErrorCause.struct_class = Types::ErrorCause
 
     ExportJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     ExportJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))

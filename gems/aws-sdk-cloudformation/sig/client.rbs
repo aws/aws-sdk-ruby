@@ -478,7 +478,8 @@ module Aws
       def describe_change_set: (
                                  change_set_name: ::String,
                                  ?stack_name: ::String,
-                                 ?next_token: ::String
+                                 ?next_token: ::String,
+                                 ?include_property_values: bool
                                ) -> _DescribeChangeSetResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChangeSetResponseSuccess
 
@@ -1509,7 +1510,8 @@ module Aws
       def wait_until: (:change_set_create_complete waiter_name, 
                     change_set_name: ::String,
                     ?stack_name: ::String,
-                    ?next_token: ::String
+                    ?next_token: ::String,
+                    ?include_property_values: bool
                   ) -> Client::_DescribeChangeSetResponseSuccess
                     | (:change_set_create_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeChangeSetResponseSuccess
                     | (:stack_create_complete waiter_name, 

@@ -2071,8 +2071,14 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] usage
-    #   Specifies whether this certificate is used for signing or
-    #   encryption.
+    #   Specifies how this certificate is used. It can be used in the
+    #   following ways:
+    #
+    #   * `SIGNING`: For signing AS2 messages
+    #
+    #   * `ENCRYPTION`: For encrypting AS2 messages
+    #
+    #   * `TLS`: For securing AS2 communications sent over HTTPS
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3294,8 +3300,14 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] usage
-    #   Specifies whether this certificate is used for signing or
-    #   encryption.
+    #   Specifies how this certificate is used. It can be used in the
+    #   following ways:
+    #
+    #   * `SIGNING`: For signing AS2 messages
+    #
+    #   * `ENCRYPTION`: For encrypting AS2 messages
+    #
+    #   * `TLS`: For securing AS2 communications sent over HTTPS
     #   @return [String]
     #
     # @!attribute [rw] certificate
@@ -4225,8 +4237,14 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] usage
-    #   Specifies whether this certificate is used for signing or
-    #   encryption.
+    #   Specifies how this certificate is used. It can be used in the
+    #   following ways:
+    #
+    #   * `SIGNING`: For signing AS2 messages
+    #
+    #   * `ENCRYPTION`: For encrypting AS2 messages
+    #
+    #   * `TLS`: For securing AS2 communications sent over HTTPS
     #   @return [String]
     #
     # @!attribute [rw] status

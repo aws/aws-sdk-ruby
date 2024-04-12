@@ -3036,6 +3036,8 @@ module Aws::Glue
       attr_accessor name: ::String
       attr_accessor audit_context: Types::AuditContext
       attr_accessor supported_permission_types: ::Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")]
+      attr_accessor parent_resource_arn: ::String
+      attr_accessor root_resource_arn: ::String
       attr_accessor supported_dialect: Types::SupportedDialect
       attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
       attr_accessor query_session_context: Types::QuerySessionContext

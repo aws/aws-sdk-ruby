@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2024-04-12)
+------------------
+
+* Feature - Updates documentation for AWS Config
+
 1.105.0 (2024-01-26)
 ------------------
 

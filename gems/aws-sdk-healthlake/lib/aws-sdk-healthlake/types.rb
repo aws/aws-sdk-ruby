@@ -198,6 +198,10 @@ module Aws::HealthLake
     #   store.
     #   @return [Types::IdentityProviderConfiguration]
     #
+    # @!attribute [rw] error_cause
+    #   The error cause for the current data store operation.
+    #   @return [Types::ErrorCause]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DatastoreProperties AWS API Documentation
     #
     class DatastoreProperties < Struct.new(
@@ -210,7 +214,8 @@ module Aws::HealthLake
       :datastore_endpoint,
       :sse_configuration,
       :preload_data_config,
-      :identity_provider_configuration)
+      :identity_provider_configuration,
+      :error_cause)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -341,6 +346,26 @@ module Aws::HealthLake
     #
     class DescribeFHIRImportJobResponse < Struct.new(
       :import_job_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error info of the create/delete data store operation.
+    #
+    # @!attribute [rw] error_message
+    #   The text of the error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_category
+    #   The error category of the create/delete data store operation.
+    #   Possible statuses are RETRYABLE\_ERROR or NON\_RETRYABLE\_ERROR.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ErrorCause AWS API Documentation
+    #
+    class ErrorCause < Struct.new(
+      :error_message,
+      :error_category)
       SENSITIVE = []
       include Aws::Structure
     end
