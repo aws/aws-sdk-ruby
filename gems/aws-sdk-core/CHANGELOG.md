@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
 
+* Feature - Update serializing/deserializing for all protocols to align with Smithy protocol-tests.
 * Issue - Allow `nil` values in lists and maps.
 * Issue - Populate headers for XML and JSON error responses.
 * Issue - Support fractional seconds when parsing `DateTime` timestamps.
