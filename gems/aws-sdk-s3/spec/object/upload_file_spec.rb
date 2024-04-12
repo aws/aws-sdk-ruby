@@ -232,6 +232,10 @@ module Aws
           end
 
           it 'reports when it is unable to abort a failed multipart upload' do
+            allow(Thread).to receive(:new) do |_, &block|
+              double(value: block.call)
+            end
+
             client.stub_responses(
               :upload_part,
               [
