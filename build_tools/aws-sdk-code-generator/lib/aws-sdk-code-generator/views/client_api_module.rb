@@ -34,7 +34,7 @@ module AwsSdkCodeGenerator
         'union' => false, # should remain false
         'document' => true,
         'jsonvalue' => true,
-        'error' => true, # parsing customized error
+        'error' => true, # parsing customized error code in query protocol
         'locationName' => true, # to recognize xmlName defined on shape
         # event stream modeling
         'event' => false,
@@ -99,6 +99,7 @@ module AwsSdkCodeGenerator
       # @return [String|nil]
       def generated_src_warning
         return if @service.protocol == 'api-gateway'
+
         GENERATED_SRC_WARNING
       end
 
@@ -257,6 +258,7 @@ module AwsSdkCodeGenerator
 
       def apig_authorizer
         return nil unless @service.api.key? 'authorizers'
+
         @service.api['authorizers'].map do |name, authorizer|
           Authorizer.new.tap do |a|
             a.name = name
@@ -305,6 +307,9 @@ module AwsSdkCodeGenerator
         args << "name: '#{shape_name}'"
         shape.each_pair do |key, value|
           if SHAPE_KEYS[key]
+            # only query protocols have custom error code
+            next if @service.protocol != 'query' && key == 'error'
+
             args << "#{key}: #{value.inspect}"
           elsif SHAPE_KEYS[key].nil?
             raise "unhandled shape key #{key.inspect}"
@@ -498,6 +503,7 @@ module AwsSdkCodeGenerator
           options = {}
           metadata.each_pair do |key, value|
             next if key == 'resultWrapper'
+
             if key == 'locationName'
               options[:location_name] =
                 # use the xmlName on shape if defined
