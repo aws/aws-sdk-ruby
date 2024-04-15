@@ -40,6 +40,7 @@ module AwsSdkCodeGenerator
     def default_plugins
       {
         'Seahorse::Client::Plugins::ContentLength' => "#{seahorse_plugins}/content_length.rb",
+        'Seahorse::Client::Plugins::ContentType' => "#{seahorse_plugins}/content_type.rb",
         'Aws::Plugins::CredentialsConfiguration' => "#{core_plugins}/credentials_configuration.rb",
         'Aws::Plugins::Logging' => "#{core_plugins}/logging.rb",
         'Aws::Plugins::ParamConverter' => "#{core_plugins}/param_converter.rb",
