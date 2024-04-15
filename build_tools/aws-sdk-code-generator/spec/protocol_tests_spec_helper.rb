@@ -258,8 +258,8 @@ module ProtocolTestsHelper
               expected_body = Aws::Json.load(expected_body)
             end
           when 'smithy-rpc-v2-cbor'
-            body = Base64.decode64(body)
-            expected_body = Aws::Cbor.decode(body)
+            body = Aws::Cbor.decode(body)
+            expected_body = Aws::Cbor.decode(Base64.decode64(expected_body))
           else raise "unsupported protocol: `#{protocol}`"
           end
           it.expect(body).to it.eq(expected_body)

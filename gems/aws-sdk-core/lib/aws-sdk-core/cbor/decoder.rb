@@ -4,6 +4,7 @@ module Aws
   module Cbor
     # Pure Ruby implementation of CBOR Decoder
     class Decoder
+
       def initialize(bytes)
         @buffer = bytes
         @pos = 0
@@ -21,6 +22,7 @@ module Aws
       private
 
       FIVE_BIT_MASK = 0x1F
+      TAG_TYPE_EPOCH = 1
 
       # high level, generic decode. Based on the next type. Consumes and returns
       # the next item as a ruby object.
@@ -55,7 +57,12 @@ module Aws
           read_end_indefinite_collection
           value.force_encoding(Encoding::UTF_8)
         when :tag
-          Tagged.new(read_tag, decode_item)
+          case (tag = read_tag)
+          when TAG_TYPE_EPOCH then Time.at(decode_item / 1000.0)
+          # TODO: Consider handling of  BigDecimal, ect
+          else
+            Tagged.new(tag, decode_item)
+          end
         when :break_stop_code
           raise UnexpectedBreakCodeError
         else
