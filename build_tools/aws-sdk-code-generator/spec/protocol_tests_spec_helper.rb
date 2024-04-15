@@ -11,8 +11,14 @@ module ProtocolTestsHelper
       @ignore_list ||= JSON.parse(File.read(PROTOCOL_TESTS_IGNORE_LIST_PATH))
     end
 
+    #   "protocol" : {
+    #     "input" : [],
+    #     "output" : [
+    #       {"SomeTestId": "Description "}
+    #     ]
+    #   },
     def skip_test_if_ignored(protocol, test_id, test_type, it)
-      if ignore_result = check_ignore_list(protocol, test_id, test_type)
+      if (ignore_result = check_ignore_list(protocol, test_id, test_type))
         it.skip(ignore_result[test_id])
       end
     end
@@ -155,8 +161,8 @@ module ProtocolTestsHelper
     def check_ignore_list(protocol, test_id, test_type)
       return nil if protocol.include?('extras')
 
-      filtered_ignore_list = ignore_list[protocol]
-      filtered_ignore_list[test_type].find { |i| i.key?(test_id) }
+      filtered_ignore_list = ignore_list.fetch(protocol, {})
+      filtered_ignore_list.fetch(test_type, []).find { |i| i.key?(test_id) }
     end
 
   end
@@ -251,6 +257,9 @@ module ProtocolTestsHelper
               body = Aws::Json.load(body)
               expected_body = Aws::Json.load(expected_body)
             end
+          when 'smithy-rpc-v2-cbor'
+            body = Base64.decode64(body)
+            expected_body = Aws::Cbor.decode(body)
           else raise "unsupported protocol: `#{protocol}`"
           end
           it.expect(body).to it.eq(expected_body)

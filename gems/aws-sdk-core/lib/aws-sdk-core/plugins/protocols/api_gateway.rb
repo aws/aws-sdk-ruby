@@ -22,8 +22,8 @@ module Aws
         handler(Rest::Handler)
         handler(ContentTypeHandler, priority: 30)
         handler(Json::ErrorHandler, step: :sign)
-      end
 
+      end
     end
   end
 end

@@ -42,7 +42,7 @@ module Aws
         when Time
           add_time(value)
         else
-          raise UnknownType, "Unable to encode #{value}"
+          raise UnknownTypeError.new(value)
         end
         self
       end
@@ -85,7 +85,7 @@ module Aws
           when 0...MAX_INTEGER
             [major_type + 27, value].pack('CQ>')
           else
-            raise ArgumentError, "Value is too large to encode: #{d}"
+            raise CborError, "Value is too large to encode: #{d}"
           end
       end
 

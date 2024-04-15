@@ -13,19 +13,31 @@ require_relative 'json/oj_engine'
 module Aws
   # @api private
   module Cbor
+    class CborError < StandardError; end
 
-    class OutOfBytesError < ArgumentError
+    class OutOfBytesError < CborError
       def initialize(n, left)
-        super("Out of bytes.  Trying to read #{n} bytes but buffer contains only #{left}")
+        super("Out of bytes. Trying to read #{n} bytes but buffer contains only #{left}")
       end
     end
-    class UnknownType < ArgumentError; end
-    class ExtraBytesError < ArgumentError; end
-    class UnexpectedBreakCode < ArgumentError; end
 
-    class UnexpectedAdditionalInformation < ArgumentError
+    class UnknownTypeError < CborError
+      def initialize(type)
+        super("Unable to encode #{value}")
+      end
+    end
+
+    class ExtraBytesError < CborError
+      def initialize(pos, size)
+        super("Extra bytes follow after decoding item. Read #{pos} / #{size} bytes")
+      end
+    end
+
+    class UnexpectedBreakCodeError < CborError; end
+
+    class UnexpectedAdditionalInformationError < CborError
       def initialize(add_info)
-        super("Unepxected Additional Information: #{add_info}")
+        super("Unexpected additional information: #{add_info}")
       end
     end
 

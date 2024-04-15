@@ -10,18 +10,19 @@ module Aws
       end
 
       def decode
+        return nil if @buffer.nil? || @buffer.empty?
+
         val = decode_item
         return val unless @pos != @buffer.size
 
-        message = "Extra bytes follow after decoding item. Read #{@pos} / #{@buffer.size} bytes"
-        raise ExtraBytesError, message
+        raise ExtraBytesError.new(@pos, @buffer.size)
       end
 
       private
 
       FIVE_BIT_MASK = 0x1F
 
-      # high level, generic decode. Based on the next type.  Consumes and returns
+      # high level, generic decode. Based on the next type. Consumes and returns
       # the next item as a ruby object.
       def decode_item
         case (next_type = peek_type)
@@ -56,7 +57,7 @@ module Aws
         when :tag
           Tagged.new(read_tag, decode_item)
         when :break_stop_code
-          raise UnexpectedBreakCode
+          raise UnexpectedBreakCodeError
         else
           send("read_#{next_type}")
         end
@@ -107,7 +108,8 @@ module Aws
         when 0 then val
         when 1 then -1 - val
         else
-          raise ArgumentError, "Expected Integer (0,1) got major type: #{major_type}"
+          raise CborError,
+                "Expected Integer (0,1) got major type: #{major_type}"
         end
       end
 
@@ -156,13 +158,19 @@ module Aws
         read_count(add_info)
       end
 
+      def read_reserved_undefined
+        read_info
+      end
+
       def read_boolean
         _major_type, add_info = read_info
         case add_info
         when 20 then false
         when 21 then true
         else
-          raise ArgumentError, "Invalid Boolean simple type, expected add_info of 20 or 21, got: #{add_info}"
+          raise CborError,
+                'Invalid Boolean simple type, expected add_info of 20 or 21, ' \
+                 "got: #{add_info}"
         end
       end
 
@@ -203,7 +211,9 @@ module Aws
         when 2 then v
         when 3 then -1 - v
         else
-          raise ArgumentError, "Invalid Tag value for BigNum, expected 2 or 3, got: #{tag_value}"
+          raise CborError,
+                'Invalid Tag value for BigNum, ' \
+                "expected 2 or 3, got: #{tag_value}"
         end
       end
 
@@ -213,7 +223,7 @@ module Aws
       # See: https://www.rfc-editor.org/rfc/rfc8949.html#name-decimal-fractions-and-bigfl
       def read_big_decimal
         unless (s = read_array) == 2
-          raise ArgumentError, "Expected array of length 2 but length is: #{s}"
+          raise CborError, "Expected array of length 2 but length is: #{s}"
         end
 
         e = read_integer
@@ -234,21 +244,25 @@ module Aws
         when 25 then take(2).unpack1('n')
         when 26 then take(4).unpack1('N')
         when 27 then take(8).unpack1('Q>')
-        else raise UnexpectedAdditionalInformation, add_info
+        when 28 then take(16).unpack1('Q>')
+        when 29 then take(32).unpack1('Q>')
+        else raise UnexpectedAdditionalInformationError.new(add_info)
         end
       end
 
       def take(n_bytes)
         opos = @pos
         @pos += n_bytes
-        raise OutOfBytesError.new(n_bytes, @buffer.bytesize - @pos) if @pos > @buffer.bytesize
 
-        @buffer[opos, n_bytes]
+        return @buffer[opos, n_bytes] if @pos <= @buffer.bytesize
+
+        raise OutOfBytesError.new(n_bytes, @buffer.bytesize - @pos)
       end
 
       def peek(n_bytes)
-        OutOfBytesError.new(n_bytes, @buffer.bytesize - @pos) if (@pos + n_bytes) > @buffer.bytesize
-        @buffer[@pos, n_bytes]
+        return @buffer[@pos, n_bytes] if (@pos + n_bytes) <= @buffer.bytesize
+
+        raise OutOfBytesError.new(n_bytes, @buffer.bytesize - @pos)
       end
     end
   end

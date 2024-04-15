@@ -34,23 +34,28 @@ module Aws
           end
         end
 
+        def assert(actual, expected)
+          if expected.is_a?(Float) && expected.nan?
+            expect(actual.nan?).to be true
+          elsif expected.is_a?(Array)
+            expected.each_with_index do |item, i|
+              assert(actual[i], item)
+            end
+          elsif expected.is_a?(Hash)
+            expected.each do |key, value|
+              assert(actual[key], value)
+            end
+          else
+            expect(actual).to eq(expected)
+          end
+        end
+
         test_cases.each do |test_case|
           it "passes #{test_case['description']}" do
-            input = test_case['input']
-            as_bytes = [input].pack('H*')
-
-            expect = test_case['expect']
-            actual = Aws::Cbor::CborEngine.decode(as_bytes)
-            expected = expected_value(expect)
-            if expected.is_a?(Float) && expected.nan?
-              expect(actual.nan?).to be true
-            elsif expected.is_a?(Array) && expected.first.is_a?(Float) && expected.first.nan?
-              expect(actual.first.nan?).to be true
-            elsif expected.is_a?(Hash) && expected.values.first.is_a?(Float) && expected.values.first.nan?
-              expect(actual.values.first.nan?).to be true
-            else
-              expect(actual).to eq(expected)
-            end
+            input = [test_case['input']].pack('H*')
+            actual = Aws::Cbor::CborEngine.decode(input)
+            expected = expected_value(test_case['expect'])
+            assert(actual, expected)
           end
         end
       end
@@ -61,11 +66,10 @@ module Aws
 
         test_cases.each do |test_case|
           it "passes #{test_case['description']}" do
-            input = test_case['input']
-            as_bytes = [input].pack('H*')
+            input = [test_case['input']].pack('H*')
 
-            # TODO: break this down into several errors somehow?
-            expect { Aws::Cbor::CborEngine.decode(as_bytes) }.to raise_error(ArgumentError)
+            expect { Aws::Cbor::CborEngine.decode(input) }
+              .to raise_error(CborError)
           end
         end
       end
