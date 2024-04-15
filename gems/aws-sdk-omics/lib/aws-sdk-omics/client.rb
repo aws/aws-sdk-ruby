@@ -568,7 +568,7 @@ module Aws::Omics
     #       {
     #         part_number: 1, # required
     #         part_source: "SOURCE1", # required, accepts SOURCE1, SOURCE2
-    #         checksum: "String", # required
+    #         checksum: "CompleteReadSetUploadPartListItemChecksumString", # required
     #       },
     #     ],
     #   })
@@ -993,6 +993,9 @@ module Aws::Omics
     #   An S3 location that is used to store files that have failed a direct
     #   upload.
     #
+    # @option params [String] :e_tag_algorithm_family
+    #   The ETag algorithm family to use for ingested read sets.
+    #
     # @return [Types::CreateSequenceStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSequenceStoreResponse#id #id} => String
@@ -1002,6 +1005,7 @@ module Aws::Omics
     #   * {Types::CreateSequenceStoreResponse#sse_config #sse_config} => Types::SseConfig
     #   * {Types::CreateSequenceStoreResponse#creation_time #creation_time} => Time
     #   * {Types::CreateSequenceStoreResponse#fallback_location #fallback_location} => String
+    #   * {Types::CreateSequenceStoreResponse#e_tag_algorithm_family #e_tag_algorithm_family} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1017,6 +1021,7 @@ module Aws::Omics
     #     },
     #     client_token: "ClientToken",
     #     fallback_location: "S3Destination",
+    #     e_tag_algorithm_family: "MD5up", # accepts MD5up, SHA256up, SHA512up
     #   })
     #
     # @example Response structure
@@ -1029,6 +1034,7 @@ module Aws::Omics
     #   resp.sse_config.key_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.fallback_location #=> String
+    #   resp.e_tag_algorithm_family #=> String, one of "MD5up", "SHA256up", "SHA512up"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateSequenceStore AWS API Documentation
     #
@@ -1968,15 +1974,18 @@ module Aws::Omics
     #   resp.files.source1.total_parts #=> Integer
     #   resp.files.source1.part_size #=> Integer
     #   resp.files.source1.content_length #=> Integer
+    #   resp.files.source1.s3_access.s3_uri #=> String
     #   resp.files.source2.total_parts #=> Integer
     #   resp.files.source2.part_size #=> Integer
     #   resp.files.source2.content_length #=> Integer
+    #   resp.files.source2.s3_access.s3_uri #=> String
     #   resp.files.index.total_parts #=> Integer
     #   resp.files.index.part_size #=> Integer
     #   resp.files.index.content_length #=> Integer
+    #   resp.files.index.s3_access.s3_uri #=> String
     #   resp.status_message #=> String
     #   resp.creation_type #=> String, one of "IMPORT", "UPLOAD"
-    #   resp.etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up", "FASTQ_SHA256up", "BAM_SHA256up", "CRAM_SHA256up", "FASTQ_SHA512up", "BAM_SHA512up", "CRAM_SHA512up"
     #   resp.etag.source1 #=> String
     #   resp.etag.source2 #=> String
     #
@@ -2133,9 +2142,11 @@ module Aws::Omics
     #   resp.files.source.total_parts #=> Integer
     #   resp.files.source.part_size #=> Integer
     #   resp.files.source.content_length #=> Integer
+    #   resp.files.source.s3_access.s3_uri #=> String
     #   resp.files.index.total_parts #=> Integer
     #   resp.files.index.part_size #=> Integer
     #   resp.files.index.content_length #=> Integer
+    #   resp.files.index.s3_access.s3_uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReferenceMetadata AWS API Documentation
     #
@@ -2402,6 +2413,8 @@ module Aws::Omics
     #   * {Types::GetSequenceStoreResponse#sse_config #sse_config} => Types::SseConfig
     #   * {Types::GetSequenceStoreResponse#creation_time #creation_time} => Time
     #   * {Types::GetSequenceStoreResponse#fallback_location #fallback_location} => String
+    #   * {Types::GetSequenceStoreResponse#s3_access #s3_access} => Types::SequenceStoreS3Access
+    #   * {Types::GetSequenceStoreResponse#e_tag_algorithm_family #e_tag_algorithm_family} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2419,6 +2432,9 @@ module Aws::Omics
     #   resp.sse_config.key_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.fallback_location #=> String
+    #   resp.s3_access.s3_uri #=> String
+    #   resp.s3_access.s3_access_point_arn #=> String
+    #   resp.e_tag_algorithm_family #=> String, one of "MD5up", "SHA256up", "SHA512up"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetSequenceStore AWS API Documentation
     #
@@ -2837,7 +2853,7 @@ module Aws::Omics
 
     # Lists multipart read set uploads and for in progress uploads. Once the
     # upload is completed, a read set is created and the upload will no
-    # longer be returned in the respone.
+    # longer be returned in the response.
     #
     # @option params [required, String] :sequence_store_id
     #   The Sequence Store ID used for the multipart uploads.
@@ -3183,7 +3199,7 @@ module Aws::Omics
     #   resp.read_sets[0].creation_time #=> Time
     #   resp.read_sets[0].status_message #=> String
     #   resp.read_sets[0].creation_type #=> String, one of "IMPORT", "UPLOAD"
-    #   resp.read_sets[0].etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.read_sets[0].etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up", "FASTQ_SHA256up", "BAM_SHA256up", "CRAM_SHA256up", "FASTQ_SHA512up", "BAM_SHA512up", "CRAM_SHA512up"
     #   resp.read_sets[0].etag.source1 #=> String
     #   resp.read_sets[0].etag.source2 #=> String
     #
@@ -3568,6 +3584,7 @@ module Aws::Omics
     #   resp.sequence_stores[0].sse_config.key_arn #=> String
     #   resp.sequence_stores[0].creation_time #=> Time
     #   resp.sequence_stores[0].fallback_location #=> String
+    #   resp.sequence_stores[0].e_tag_algorithm_family #=> String, one of "MD5up", "SHA256up", "SHA512up"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListSequenceStores AWS API Documentation
     #
@@ -4179,7 +4196,7 @@ module Aws::Omics
     #   additional encoding or escaping.
     #
     # @option params [Integer] :storage_capacity
-    #   A storage capacity for the run in gigabytes.
+    #   A storage capacity for the run in gibibytes.
     #
     # @option params [String] :output_uri
     #   An output URI for the run.
@@ -4632,7 +4649,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

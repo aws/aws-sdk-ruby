@@ -11277,6 +11277,10 @@ module Aws::Redshift
     #   store the cluster's admin credentials secret.
     #   @return [String]
     #
+    # @!attribute [rw] snapshot_arn
+    #   The Amazon Resource Name (ARN) of the snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -11315,7 +11319,8 @@ module Aws::Redshift
       :manual_snapshot_remaining_days,
       :snapshot_retention_start_time,
       :master_password_secret_arn,
-      :master_password_secret_kms_key_id)
+      :master_password_secret_kms_key_id,
+      :snapshot_arn)
       SENSITIVE = []
       include Aws::Structure
     end

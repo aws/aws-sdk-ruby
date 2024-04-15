@@ -122,6 +122,8 @@ module Aws::KMS
             Aws::KMS::Endpoints::ListGrants.build(context)
           when :list_key_policies
             Aws::KMS::Endpoints::ListKeyPolicies.build(context)
+          when :list_key_rotations
+            Aws::KMS::Endpoints::ListKeyRotations.build(context)
           when :list_keys
             Aws::KMS::Endpoints::ListKeys.build(context)
           when :list_resource_tags
@@ -138,6 +140,8 @@ module Aws::KMS
             Aws::KMS::Endpoints::RetireGrant.build(context)
           when :revoke_grant
             Aws::KMS::Endpoints::RevokeGrant.build(context)
+          when :rotate_key_on_demand
+            Aws::KMS::Endpoints::RotateKeyOnDemand.build(context)
           when :schedule_key_deletion
             Aws::KMS::Endpoints::ScheduleKeyDeletion.build(context)
           when :sign

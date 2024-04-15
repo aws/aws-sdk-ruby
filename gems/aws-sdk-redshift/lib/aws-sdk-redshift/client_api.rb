@@ -2668,6 +2668,7 @@ module Aws::Redshift
     Snapshot.add_member(:snapshot_retention_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotRetentionStartTime"))
     Snapshot.add_member(:master_password_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretArn"))
     Snapshot.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
+    Snapshot.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotArn"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotCopyAlreadyDisabledFault.struct_class = Types::SnapshotCopyAlreadyDisabledFault

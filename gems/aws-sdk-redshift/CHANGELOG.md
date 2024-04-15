@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2024-04-12)
+------------------
+
+* Feature - Adds support for Amazon Redshift DescribeClusterSnapshots API to include Snapshot ARN response field.
+
 1.110.0 (2024-03-06)
 ------------------
 

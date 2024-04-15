@@ -381,8 +381,11 @@ module Aws::CloudFormation
     # perform if you execute the change set.
     #
     # @!attribute [rw] type
-    #   The type of entity that CloudFormation changes. Currently, the only
-    #   entity type is `Resource`.
+    #   The type of entity that CloudFormation changes.
+    #
+    #   * `Resource` This change is for a resource.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] hook_invocation_count
@@ -2379,12 +2382,18 @@ module Aws::CloudFormation
     #   identifies the next page of information that you want to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] include_property_values
+    #   If `true`, the returned changes include detailed changes in the
+    #   property values.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetInput AWS API Documentation
     #
     class DescribeChangeSetInput < Struct.new(
       :change_set_name,
       :stack_name,
-      :next_token)
+      :next_token,
+      :include_property_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6648,6 +6657,16 @@ module Aws::CloudFormation
     #   stack template.
     #   @return [Types::ModuleInfo]
     #
+    # @!attribute [rw] before_context
+    #   An encoded JSON string containing the context of the resource before
+    #   the change is executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_context
+    #   An encoded JSON string containing the context of the resource after
+    #   the change is executed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange AWS API Documentation
     #
     class ResourceChange < Struct.new(
@@ -6660,7 +6679,9 @@ module Aws::CloudFormation
       :scope,
       :details,
       :change_set_id,
-      :module_info)
+      :module_info,
+      :before_context,
+      :after_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7008,12 +7029,41 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
+    # @!attribute [rw] path
+    #   The property path of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_value
+    #   The value of the property before the change is executed. Large
+    #   values can be truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_value
+    #   The value of the property after the change is executed. Large values
+    #   can be truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_change_type
+    #   The type of change to be made to the property if the change is
+    #   executed.
+    #
+    #   * `Add` The item will be added.
+    #
+    #   * `Remove` The item will be removed.
+    #
+    #   * `Modify` The item will be modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceTargetDefinition AWS API Documentation
     #
     class ResourceTargetDefinition < Struct.new(
       :attribute,
       :name,
-      :requires_recreation)
+      :requires_recreation,
+      :path,
+      :before_value,
+      :after_value,
+      :attribute_change_type)
       SENSITIVE = []
       include Aws::Structure
     end

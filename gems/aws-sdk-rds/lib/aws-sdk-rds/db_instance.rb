@@ -1273,6 +1273,10 @@ module Aws::RDS
     #
     #   * `custom-oracle-ee-cdb` (for RDS Custom for Oracle DB instances)
     #
+    #   * `custom-oracle-se2` (for RDS Custom for Oracle DB instances)
+    #
+    #   * `custom-oracle-se2-cdb` (for RDS Custom for Oracle DB instances)
+    #
     #   * `custom-sqlserver-ee` (for RDS Custom for SQL Server DB instances)
     #
     #   * `custom-sqlserver-se` (for RDS Custom for SQL Server DB instances)
@@ -3020,6 +3024,15 @@ module Aws::RDS
     #
     #   For the valid values for allocated storage for each engine, see
     #   `CreateDBInstance`.
+    #
+    #   Constraints:
+    #
+    #   * When you increase the allocated storage for a DB instance that uses
+    #     Provisioned IOPS (`gp3`, `io1`, or `io2` storage type), you must
+    #     also specify the `Iops` parameter. You can use the current value for
+    #     `Iops`.
+    #
+    #   ^
     # @option options [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example
     #   `db.m4.large`. Not all DB instance classes are available in all Amazon
@@ -3400,7 +3413,9 @@ module Aws::RDS
     #     existing value are rounded up so that they are 10% greater than the
     #     current value.
     #
-    #   ^
+    #   * When you increase the Provisioned IOPS, you must also specify the
+    #     `AllocatedStorage` parameter. You can use the current value for
+    #     `AllocatedStorage`.
     #
     #   Default: Uses existing setting
     # @option options [String] :option_group_name

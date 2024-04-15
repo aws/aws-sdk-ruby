@@ -600,6 +600,7 @@ module Aws
         def configuration_aliases: () -> ::Hash[::String, ::Hash[::String, ::String]]
         def dash_configuration: () -> Types::DashConfiguration
         def hls_configuration: () -> Types::HlsConfiguration
+        def insertion_mode: () -> ("STITCHED_ONLY" | "PLAYER_SELECT")
         def live_pre_roll_configuration: () -> Types::LivePreRollConfiguration
         def log_configuration: () -> Types::LogConfiguration
         def manifest_processing_rules: () -> Types::ManifestProcessingRules
@@ -753,6 +754,7 @@ module Aws
         def configuration_aliases: () -> ::Hash[::String, ::Hash[::String, ::String]]
         def dash_configuration: () -> Types::DashConfiguration
         def hls_configuration: () -> Types::HlsConfiguration
+        def insertion_mode: () -> ("STITCHED_ONLY" | "PLAYER_SELECT")
         def live_pre_roll_configuration: () -> Types::LivePreRollConfiguration
         def log_configuration: () -> Types::LogConfiguration
         def manifest_processing_rules: () -> Types::ManifestProcessingRules
@@ -787,6 +789,7 @@ module Aws
                                           mpd_location: ::String?,
                                           origin_manifest_type: ("SINGLE_PERIOD" | "MULTI_PERIOD")?
                                         },
+                                        ?insertion_mode: ("STITCHED_ONLY" | "PLAYER_SELECT"),
                                         ?live_pre_roll_configuration: {
                                           ad_decision_server_url: ::String?,
                                           max_duration_seconds: ::Integer?

@@ -840,6 +840,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess AWS API Documentation
     #
@@ -1125,6 +1126,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot AWS API Documentation
     #
@@ -2034,6 +2036,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot AWS API Documentation
     #
@@ -3445,6 +3448,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot AWS API Documentation
     #
@@ -4477,6 +4481,7 @@ module Aws::Redshift
     #   resp.snapshots[0].snapshot_retention_start_time #=> Time
     #   resp.snapshots[0].master_password_secret_arn #=> String
     #   resp.snapshots[0].master_password_secret_kms_key_id #=> String
+    #   resp.snapshots[0].snapshot_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -9655,6 +9660,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshot AWS API Documentation
     #
@@ -12155,6 +12161,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess AWS API Documentation
     #
@@ -12392,7 +12399,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

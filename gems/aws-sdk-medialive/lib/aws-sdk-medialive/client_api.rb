@@ -75,6 +75,7 @@ module Aws::MediaLive
     AvailSettings = Shapes::StructureShape.new(name: 'AvailSettings')
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BadRequestExceptionResponseContent = Shapes::StructureShape.new(name: 'BadRequestExceptionResponseContent')
     BatchDelete = Shapes::StructureShape.new(name: 'BatchDelete')
     BatchDeleteRequest = Shapes::StructureShape.new(name: 'BatchDeleteRequest')
     BatchDeleteResponse = Shapes::StructureShape.new(name: 'BatchDeleteResponse')
@@ -125,6 +126,12 @@ module Aws::MediaLive
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
     ClaimDeviceRequest = Shapes::StructureShape.new(name: 'ClaimDeviceRequest')
     ClaimDeviceResponse = Shapes::StructureShape.new(name: 'ClaimDeviceResponse')
+    CloudWatchAlarmTemplateComparisonOperator = Shapes::StringShape.new(name: 'CloudWatchAlarmTemplateComparisonOperator')
+    CloudWatchAlarmTemplateGroupSummary = Shapes::StructureShape.new(name: 'CloudWatchAlarmTemplateGroupSummary')
+    CloudWatchAlarmTemplateStatistic = Shapes::StringShape.new(name: 'CloudWatchAlarmTemplateStatistic')
+    CloudWatchAlarmTemplateSummary = Shapes::StructureShape.new(name: 'CloudWatchAlarmTemplateSummary')
+    CloudWatchAlarmTemplateTargetResourceType = Shapes::StringShape.new(name: 'CloudWatchAlarmTemplateTargetResourceType')
+    CloudWatchAlarmTemplateTreatMissingData = Shapes::StringShape.new(name: 'CloudWatchAlarmTemplateTreatMissingData')
     CmafIngestGroupSettings = Shapes::StructureShape.new(name: 'CmafIngestGroupSettings')
     CmafIngestOutputSettings = Shapes::StructureShape.new(name: 'CmafIngestOutputSettings')
     CmafIngestSegmentLengthUnits = Shapes::StringShape.new(name: 'CmafIngestSegmentLengthUnits')
@@ -134,11 +141,28 @@ module Aws::MediaLive
     ColorSpace = Shapes::StringShape.new(name: 'ColorSpace')
     ColorSpacePassthroughSettings = Shapes::StructureShape.new(name: 'ColorSpacePassthroughSettings')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConflictExceptionResponseContent = Shapes::StructureShape.new(name: 'ConflictExceptionResponseContent')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateChannel = Shapes::StructureShape.new(name: 'CreateChannel')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
     CreateChannelResultModel = Shapes::StructureShape.new(name: 'CreateChannelResultModel')
+    CreateCloudWatchAlarmTemplateGroupRequest = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateGroupRequest')
+    CreateCloudWatchAlarmTemplateGroupRequestContent = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateGroupRequestContent')
+    CreateCloudWatchAlarmTemplateGroupResponse = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateGroupResponse')
+    CreateCloudWatchAlarmTemplateGroupResponseContent = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateGroupResponseContent')
+    CreateCloudWatchAlarmTemplateRequest = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateRequest')
+    CreateCloudWatchAlarmTemplateRequestContent = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateRequestContent')
+    CreateCloudWatchAlarmTemplateResponse = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateResponse')
+    CreateCloudWatchAlarmTemplateResponseContent = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateResponseContent')
+    CreateEventBridgeRuleTemplateGroupRequest = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateGroupRequest')
+    CreateEventBridgeRuleTemplateGroupRequestContent = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateGroupRequestContent')
+    CreateEventBridgeRuleTemplateGroupResponse = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateGroupResponse')
+    CreateEventBridgeRuleTemplateGroupResponseContent = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateGroupResponseContent')
+    CreateEventBridgeRuleTemplateRequest = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateRequest')
+    CreateEventBridgeRuleTemplateRequestContent = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateRequestContent')
+    CreateEventBridgeRuleTemplateResponse = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateResponse')
+    CreateEventBridgeRuleTemplateResponseContent = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateResponseContent')
     CreateInput = Shapes::StructureShape.new(name: 'CreateInput')
     CreateInputRequest = Shapes::StructureShape.new(name: 'CreateInputRequest')
     CreateInputResponse = Shapes::StructureShape.new(name: 'CreateInputResponse')
@@ -158,11 +182,19 @@ module Aws::MediaLive
     CreatePartnerInputRequest = Shapes::StructureShape.new(name: 'CreatePartnerInputRequest')
     CreatePartnerInputResponse = Shapes::StructureShape.new(name: 'CreatePartnerInputResponse')
     CreatePartnerInputResultModel = Shapes::StructureShape.new(name: 'CreatePartnerInputResultModel')
+    CreateSignalMapRequest = Shapes::StructureShape.new(name: 'CreateSignalMapRequest')
+    CreateSignalMapRequestContent = Shapes::StructureShape.new(name: 'CreateSignalMapRequestContent')
+    CreateSignalMapResponse = Shapes::StructureShape.new(name: 'CreateSignalMapResponse')
+    CreateSignalMapResponseContent = Shapes::StructureShape.new(name: 'CreateSignalMapResponseContent')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     DashRoleAudio = Shapes::StringShape.new(name: 'DashRoleAudio')
     DashRoleCaption = Shapes::StringShape.new(name: 'DashRoleCaption')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
+    DeleteCloudWatchAlarmTemplateGroupRequest = Shapes::StructureShape.new(name: 'DeleteCloudWatchAlarmTemplateGroupRequest')
+    DeleteCloudWatchAlarmTemplateRequest = Shapes::StructureShape.new(name: 'DeleteCloudWatchAlarmTemplateRequest')
+    DeleteEventBridgeRuleTemplateGroupRequest = Shapes::StructureShape.new(name: 'DeleteEventBridgeRuleTemplateGroupRequest')
+    DeleteEventBridgeRuleTemplateRequest = Shapes::StructureShape.new(name: 'DeleteEventBridgeRuleTemplateRequest')
     DeleteInputRequest = Shapes::StructureShape.new(name: 'DeleteInputRequest')
     DeleteInputResponse = Shapes::StructureShape.new(name: 'DeleteInputResponse')
     DeleteInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'DeleteInputSecurityGroupRequest')
@@ -175,6 +207,7 @@ module Aws::MediaLive
     DeleteReservationResponse = Shapes::StructureShape.new(name: 'DeleteReservationResponse')
     DeleteScheduleRequest = Shapes::StructureShape.new(name: 'DeleteScheduleRequest')
     DeleteScheduleResponse = Shapes::StructureShape.new(name: 'DeleteScheduleResponse')
+    DeleteSignalMapRequest = Shapes::StructureShape.new(name: 'DeleteSignalMapRequest')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
     DescribeAccountConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAccountConfigurationRequest')
     DescribeAccountConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeAccountConfigurationResponse')
@@ -251,6 +284,11 @@ module Aws::MediaLive
     EncoderSettings = Shapes::StructureShape.new(name: 'EncoderSettings')
     EpochLockingSettings = Shapes::StructureShape.new(name: 'EpochLockingSettings')
     Esam = Shapes::StructureShape.new(name: 'Esam')
+    EventBridgeRuleTemplateEventType = Shapes::StringShape.new(name: 'EventBridgeRuleTemplateEventType')
+    EventBridgeRuleTemplateGroupSummary = Shapes::StructureShape.new(name: 'EventBridgeRuleTemplateGroupSummary')
+    EventBridgeRuleTemplateSummary = Shapes::StructureShape.new(name: 'EventBridgeRuleTemplateSummary')
+    EventBridgeRuleTemplateTarget = Shapes::StructureShape.new(name: 'EventBridgeRuleTemplateTarget')
+    FailedMediaResourceMap = Shapes::MapShape.new(name: 'FailedMediaResourceMap')
     FailoverCondition = Shapes::StructureShape.new(name: 'FailoverCondition')
     FailoverConditionSettings = Shapes::StructureShape.new(name: 'FailoverConditionSettings')
     FeatureActivations = Shapes::StructureShape.new(name: 'FeatureActivations')
@@ -266,6 +304,7 @@ module Aws::MediaLive
     FollowModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FollowModeScheduleActionStartSettings')
     FollowPoint = Shapes::StringShape.new(name: 'FollowPoint')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    ForbiddenExceptionResponseContent = Shapes::StructureShape.new(name: 'ForbiddenExceptionResponseContent')
     FrameCaptureCdnSettings = Shapes::StructureShape.new(name: 'FrameCaptureCdnSettings')
     FrameCaptureGroupSettings = Shapes::StructureShape.new(name: 'FrameCaptureGroupSettings')
     FrameCaptureHlsSettings = Shapes::StructureShape.new(name: 'FrameCaptureHlsSettings')
@@ -275,6 +314,21 @@ module Aws::MediaLive
     FrameCaptureS3Settings = Shapes::StructureShape.new(name: 'FrameCaptureS3Settings')
     FrameCaptureSettings = Shapes::StructureShape.new(name: 'FrameCaptureSettings')
     GatewayTimeoutException = Shapes::StructureShape.new(name: 'GatewayTimeoutException')
+    GetCloudWatchAlarmTemplateGroupRequest = Shapes::StructureShape.new(name: 'GetCloudWatchAlarmTemplateGroupRequest')
+    GetCloudWatchAlarmTemplateGroupResponse = Shapes::StructureShape.new(name: 'GetCloudWatchAlarmTemplateGroupResponse')
+    GetCloudWatchAlarmTemplateGroupResponseContent = Shapes::StructureShape.new(name: 'GetCloudWatchAlarmTemplateGroupResponseContent')
+    GetCloudWatchAlarmTemplateRequest = Shapes::StructureShape.new(name: 'GetCloudWatchAlarmTemplateRequest')
+    GetCloudWatchAlarmTemplateResponse = Shapes::StructureShape.new(name: 'GetCloudWatchAlarmTemplateResponse')
+    GetCloudWatchAlarmTemplateResponseContent = Shapes::StructureShape.new(name: 'GetCloudWatchAlarmTemplateResponseContent')
+    GetEventBridgeRuleTemplateGroupRequest = Shapes::StructureShape.new(name: 'GetEventBridgeRuleTemplateGroupRequest')
+    GetEventBridgeRuleTemplateGroupResponse = Shapes::StructureShape.new(name: 'GetEventBridgeRuleTemplateGroupResponse')
+    GetEventBridgeRuleTemplateGroupResponseContent = Shapes::StructureShape.new(name: 'GetEventBridgeRuleTemplateGroupResponseContent')
+    GetEventBridgeRuleTemplateRequest = Shapes::StructureShape.new(name: 'GetEventBridgeRuleTemplateRequest')
+    GetEventBridgeRuleTemplateResponse = Shapes::StructureShape.new(name: 'GetEventBridgeRuleTemplateResponse')
+    GetEventBridgeRuleTemplateResponseContent = Shapes::StructureShape.new(name: 'GetEventBridgeRuleTemplateResponseContent')
+    GetSignalMapRequest = Shapes::StructureShape.new(name: 'GetSignalMapRequest')
+    GetSignalMapResponse = Shapes::StructureShape.new(name: 'GetSignalMapResponse')
+    GetSignalMapResponseContent = Shapes::StructureShape.new(name: 'GetSignalMapResponseContent')
     GlobalConfiguration = Shapes::StructureShape.new(name: 'GlobalConfiguration')
     GlobalConfigurationInputEndAction = Shapes::StringShape.new(name: 'GlobalConfigurationInputEndAction')
     GlobalConfigurationLowFramerateInputs = Shapes::StringShape.new(name: 'GlobalConfigurationLowFramerateInputs')
@@ -436,6 +490,7 @@ module Aws::MediaLive
     InputWhitelistRule = Shapes::StructureShape.new(name: 'InputWhitelistRule')
     InputWhitelistRuleCidr = Shapes::StructureShape.new(name: 'InputWhitelistRuleCidr')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
+    InternalServerErrorExceptionResponseContent = Shapes::StructureShape.new(name: 'InternalServerErrorExceptionResponseContent')
     InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidRequest = Shapes::StructureShape.new(name: 'InvalidRequest')
     KeyProviderSettings = Shapes::StructureShape.new(name: 'KeyProviderSettings')
@@ -444,6 +499,18 @@ module Aws::MediaLive
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListChannelsResultModel = Shapes::StructureShape.new(name: 'ListChannelsResultModel')
+    ListCloudWatchAlarmTemplateGroupsRequest = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplateGroupsRequest')
+    ListCloudWatchAlarmTemplateGroupsResponse = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplateGroupsResponse')
+    ListCloudWatchAlarmTemplateGroupsResponseContent = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplateGroupsResponseContent')
+    ListCloudWatchAlarmTemplatesRequest = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplatesRequest')
+    ListCloudWatchAlarmTemplatesResponse = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplatesResponse')
+    ListCloudWatchAlarmTemplatesResponseContent = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplatesResponseContent')
+    ListEventBridgeRuleTemplateGroupsRequest = Shapes::StructureShape.new(name: 'ListEventBridgeRuleTemplateGroupsRequest')
+    ListEventBridgeRuleTemplateGroupsResponse = Shapes::StructureShape.new(name: 'ListEventBridgeRuleTemplateGroupsResponse')
+    ListEventBridgeRuleTemplateGroupsResponseContent = Shapes::StructureShape.new(name: 'ListEventBridgeRuleTemplateGroupsResponseContent')
+    ListEventBridgeRuleTemplatesRequest = Shapes::StructureShape.new(name: 'ListEventBridgeRuleTemplatesRequest')
+    ListEventBridgeRuleTemplatesResponse = Shapes::StructureShape.new(name: 'ListEventBridgeRuleTemplatesResponse')
+    ListEventBridgeRuleTemplatesResponseContent = Shapes::StructureShape.new(name: 'ListEventBridgeRuleTemplatesResponseContent')
     ListInputDeviceTransfersRequest = Shapes::StructureShape.new(name: 'ListInputDeviceTransfersRequest')
     ListInputDeviceTransfersResponse = Shapes::StructureShape.new(name: 'ListInputDeviceTransfersResponse')
     ListInputDeviceTransfersResultModel = Shapes::StructureShape.new(name: 'ListInputDeviceTransfersResultModel')
@@ -468,6 +535,9 @@ module Aws::MediaLive
     ListReservationsRequest = Shapes::StructureShape.new(name: 'ListReservationsRequest')
     ListReservationsResponse = Shapes::StructureShape.new(name: 'ListReservationsResponse')
     ListReservationsResultModel = Shapes::StructureShape.new(name: 'ListReservationsResultModel')
+    ListSignalMapsRequest = Shapes::StructureShape.new(name: 'ListSignalMapsRequest')
+    ListSignalMapsResponse = Shapes::StructureShape.new(name: 'ListSignalMapsResponse')
+    ListSignalMapsResponseContent = Shapes::StructureShape.new(name: 'ListSignalMapsResponseContent')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
@@ -507,6 +577,10 @@ module Aws::MediaLive
     MediaPackageGroupSettings = Shapes::StructureShape.new(name: 'MediaPackageGroupSettings')
     MediaPackageOutputDestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputDestinationSettings')
     MediaPackageOutputSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputSettings')
+    MediaResource = Shapes::StructureShape.new(name: 'MediaResource')
+    MediaResourceMap = Shapes::MapShape.new(name: 'MediaResourceMap')
+    MediaResourceNeighbor = Shapes::StructureShape.new(name: 'MediaResourceNeighbor')
+    MonitorDeployment = Shapes::StructureShape.new(name: 'MonitorDeployment')
     MotionGraphicsActivateScheduleActionSettings = Shapes::StructureShape.new(name: 'MotionGraphicsActivateScheduleActionSettings')
     MotionGraphicsConfiguration = Shapes::StructureShape.new(name: 'MotionGraphicsConfiguration')
     MotionGraphicsDeactivateScheduleActionSettings = Shapes::StructureShape.new(name: 'MotionGraphicsDeactivateScheduleActionSettings')
@@ -557,6 +631,7 @@ module Aws::MediaLive
     NielsenWatermarksDistributionTypes = Shapes::StringShape.new(name: 'NielsenWatermarksDistributionTypes')
     NielsenWatermarksSettings = Shapes::StructureShape.new(name: 'NielsenWatermarksSettings')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NotFoundExceptionResponseContent = Shapes::StructureShape.new(name: 'NotFoundExceptionResponseContent')
     Offering = Shapes::StructureShape.new(name: 'Offering')
     OfferingDurationUnits = Shapes::StringShape.new(name: 'OfferingDurationUnits')
     OfferingType = Shapes::StringShape.new(name: 'OfferingType')
@@ -645,6 +720,9 @@ module Aws::MediaLive
     Scte35TimeSignalScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35TimeSignalScheduleActionSettings')
     Scte35Type = Shapes::StringShape.new(name: 'Scte35Type')
     Scte35WebDeliveryAllowedFlag = Shapes::StringShape.new(name: 'Scte35WebDeliveryAllowedFlag')
+    SignalMapMonitorDeploymentStatus = Shapes::StringShape.new(name: 'SignalMapMonitorDeploymentStatus')
+    SignalMapStatus = Shapes::StringShape.new(name: 'SignalMapStatus')
+    SignalMapSummary = Shapes::StructureShape.new(name: 'SignalMapSummary')
     SmoothGroupAudioOnlyTimecodeControl = Shapes::StringShape.new(name: 'SmoothGroupAudioOnlyTimecodeControl')
     SmoothGroupCertificateMode = Shapes::StringShape.new(name: 'SmoothGroupCertificateMode')
     SmoothGroupEventIdMode = Shapes::StringShape.new(name: 'SmoothGroupEventIdMode')
@@ -658,13 +736,24 @@ module Aws::MediaLive
     StandardHlsSettings = Shapes::StructureShape.new(name: 'StandardHlsSettings')
     StartChannelRequest = Shapes::StructureShape.new(name: 'StartChannelRequest')
     StartChannelResponse = Shapes::StructureShape.new(name: 'StartChannelResponse')
+    StartDeleteMonitorDeploymentRequest = Shapes::StructureShape.new(name: 'StartDeleteMonitorDeploymentRequest')
+    StartDeleteMonitorDeploymentResponse = Shapes::StructureShape.new(name: 'StartDeleteMonitorDeploymentResponse')
+    StartDeleteMonitorDeploymentResponseContent = Shapes::StructureShape.new(name: 'StartDeleteMonitorDeploymentResponseContent')
     StartInputDeviceMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'StartInputDeviceMaintenanceWindowRequest')
     StartInputDeviceMaintenanceWindowResponse = Shapes::StructureShape.new(name: 'StartInputDeviceMaintenanceWindowResponse')
     StartInputDeviceRequest = Shapes::StructureShape.new(name: 'StartInputDeviceRequest')
     StartInputDeviceResponse = Shapes::StructureShape.new(name: 'StartInputDeviceResponse')
+    StartMonitorDeploymentRequest = Shapes::StructureShape.new(name: 'StartMonitorDeploymentRequest')
+    StartMonitorDeploymentRequestContent = Shapes::StructureShape.new(name: 'StartMonitorDeploymentRequestContent')
+    StartMonitorDeploymentResponse = Shapes::StructureShape.new(name: 'StartMonitorDeploymentResponse')
+    StartMonitorDeploymentResponseContent = Shapes::StructureShape.new(name: 'StartMonitorDeploymentResponseContent')
     StartMultiplexRequest = Shapes::StructureShape.new(name: 'StartMultiplexRequest')
     StartMultiplexResponse = Shapes::StructureShape.new(name: 'StartMultiplexResponse')
     StartTimecode = Shapes::StructureShape.new(name: 'StartTimecode')
+    StartUpdateSignalMapRequest = Shapes::StructureShape.new(name: 'StartUpdateSignalMapRequest')
+    StartUpdateSignalMapRequestContent = Shapes::StructureShape.new(name: 'StartUpdateSignalMapRequestContent')
+    StartUpdateSignalMapResponse = Shapes::StructureShape.new(name: 'StartUpdateSignalMapResponse')
+    StartUpdateSignalMapResponseContent = Shapes::StructureShape.new(name: 'StartUpdateSignalMapResponseContent')
     StaticImageActivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageActivateScheduleActionSettings')
     StaticImageDeactivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageDeactivateScheduleActionSettings')
     StaticImageOutputActivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageOutputActivateScheduleActionSettings')
@@ -677,6 +766,8 @@ module Aws::MediaLive
     StopMultiplexRequest = Shapes::StructureShape.new(name: 'StopMultiplexRequest')
     StopMultiplexResponse = Shapes::StructureShape.new(name: 'StopMultiplexResponse')
     StopTimecode = Shapes::StructureShape.new(name: 'StopTimecode')
+    SuccessfulMonitorDeployment = Shapes::StructureShape.new(name: 'SuccessfulMonitorDeployment')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
     Tags = Shapes::MapShape.new(name: 'Tags')
     TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
     TeletextDestinationSettings = Shapes::StructureShape.new(name: 'TeletextDestinationSettings')
@@ -697,6 +788,7 @@ module Aws::MediaLive
     TimecodeConfig = Shapes::StructureShape.new(name: 'TimecodeConfig')
     TimecodeConfigSource = Shapes::StringShape.new(name: 'TimecodeConfigSource')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TooManyRequestsExceptionResponseContent = Shapes::StructureShape.new(name: 'TooManyRequestsExceptionResponseContent')
     TransferInputDevice = Shapes::StructureShape.new(name: 'TransferInputDevice')
     TransferInputDeviceRequest = Shapes::StructureShape.new(name: 'TransferInputDeviceRequest')
     TransferInputDeviceResponse = Shapes::StructureShape.new(name: 'TransferInputDeviceResponse')
@@ -719,6 +811,22 @@ module Aws::MediaLive
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateChannelResultModel = Shapes::StructureShape.new(name: 'UpdateChannelResultModel')
+    UpdateCloudWatchAlarmTemplateGroupRequest = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateGroupRequest')
+    UpdateCloudWatchAlarmTemplateGroupRequestContent = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateGroupRequestContent')
+    UpdateCloudWatchAlarmTemplateGroupResponse = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateGroupResponse')
+    UpdateCloudWatchAlarmTemplateGroupResponseContent = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateGroupResponseContent')
+    UpdateCloudWatchAlarmTemplateRequest = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateRequest')
+    UpdateCloudWatchAlarmTemplateRequestContent = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateRequestContent')
+    UpdateCloudWatchAlarmTemplateResponse = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateResponse')
+    UpdateCloudWatchAlarmTemplateResponseContent = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateResponseContent')
+    UpdateEventBridgeRuleTemplateGroupRequest = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateGroupRequest')
+    UpdateEventBridgeRuleTemplateGroupRequestContent = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateGroupRequestContent')
+    UpdateEventBridgeRuleTemplateGroupResponse = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateGroupResponse')
+    UpdateEventBridgeRuleTemplateGroupResponseContent = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateGroupResponseContent')
+    UpdateEventBridgeRuleTemplateRequest = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateRequest')
+    UpdateEventBridgeRuleTemplateRequestContent = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateRequestContent')
+    UpdateEventBridgeRuleTemplateResponse = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateResponse')
+    UpdateEventBridgeRuleTemplateResponseContent = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateResponseContent')
     UpdateInput = Shapes::StructureShape.new(name: 'UpdateInput')
     UpdateInputDevice = Shapes::StructureShape.new(name: 'UpdateInputDevice')
     UpdateInputDeviceRequest = Shapes::StructureShape.new(name: 'UpdateInputDeviceRequest')
@@ -773,6 +881,7 @@ module Aws::MediaLive
     __doubleMinNegative1Max5 = Shapes::FloatShape.new(name: '__doubleMinNegative1Max5')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __integer = Shapes::IntegerShape.new(name: '__integer')
+    __integerMax5 = Shapes::IntegerShape.new(name: '__integerMax5')
     __integerMin0 = Shapes::IntegerShape.new(name: '__integerMin0')
     __integerMin0Max10 = Shapes::IntegerShape.new(name: '__integerMin0Max10')
     __integerMin0Max100 = Shapes::IntegerShape.new(name: '__integerMin0Max100')
@@ -801,6 +910,7 @@ module Aws::MediaLive
     __integerMin100000Max40000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max40000000')
     __integerMin100000Max80000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max80000000')
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
+    __integerMin10Max86400 = Shapes::IntegerShape.new(name: '__integerMin10Max86400')
     __integerMin1Max10 = Shapes::IntegerShape.new(name: '__integerMin1Max10')
     __integerMin1Max1000000 = Shapes::IntegerShape.new(name: '__integerMin1Max1000000')
     __integerMin1Max16 = Shapes::IntegerShape.new(name: '__integerMin1Max16')
@@ -839,9 +949,14 @@ module Aws::MediaLive
     __listOfChannelEgressEndpoint = Shapes::ListShape.new(name: '__listOfChannelEgressEndpoint')
     __listOfChannelPipelineIdToRestart = Shapes::ListShape.new(name: '__listOfChannelPipelineIdToRestart')
     __listOfChannelSummary = Shapes::ListShape.new(name: '__listOfChannelSummary')
+    __listOfCloudWatchAlarmTemplateGroupSummary = Shapes::ListShape.new(name: '__listOfCloudWatchAlarmTemplateGroupSummary')
+    __listOfCloudWatchAlarmTemplateSummary = Shapes::ListShape.new(name: '__listOfCloudWatchAlarmTemplateSummary')
     __listOfColorCorrection = Shapes::ListShape.new(name: '__listOfColorCorrection')
     __listOfDashRoleAudio = Shapes::ListShape.new(name: '__listOfDashRoleAudio')
     __listOfDashRoleCaption = Shapes::ListShape.new(name: '__listOfDashRoleCaption')
+    __listOfEventBridgeRuleTemplateGroupSummary = Shapes::ListShape.new(name: '__listOfEventBridgeRuleTemplateGroupSummary')
+    __listOfEventBridgeRuleTemplateSummary = Shapes::ListShape.new(name: '__listOfEventBridgeRuleTemplateSummary')
+    __listOfEventBridgeRuleTemplateTarget = Shapes::ListShape.new(name: '__listOfEventBridgeRuleTemplateTarget')
     __listOfFailoverCondition = Shapes::ListShape.new(name: '__listOfFailoverCondition')
     __listOfHlsAdMarkers = Shapes::ListShape.new(name: '__listOfHlsAdMarkers')
     __listOfInput = Shapes::ListShape.new(name: '__listOfInput')
@@ -862,6 +977,7 @@ module Aws::MediaLive
     __listOfMediaConnectFlow = Shapes::ListShape.new(name: '__listOfMediaConnectFlow')
     __listOfMediaConnectFlowRequest = Shapes::ListShape.new(name: '__listOfMediaConnectFlowRequest')
     __listOfMediaPackageOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfMediaPackageOutputDestinationSettings')
+    __listOfMediaResourceNeighbor = Shapes::ListShape.new(name: '__listOfMediaResourceNeighbor')
     __listOfMultiplexOutputDestination = Shapes::ListShape.new(name: '__listOfMultiplexOutputDestination')
     __listOfMultiplexProgramPipelineDetail = Shapes::ListShape.new(name: '__listOfMultiplexProgramPipelineDetail')
     __listOfMultiplexProgramSummary = Shapes::ListShape.new(name: '__listOfMultiplexProgramSummary')
@@ -877,6 +993,7 @@ module Aws::MediaLive
     __listOfRtmpAdMarkers = Shapes::ListShape.new(name: '__listOfRtmpAdMarkers')
     __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
     __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
+    __listOfSignalMapSummary = Shapes::ListShape.new(name: '__listOfSignalMapSummary')
     __listOfThumbnail = Shapes::ListShape.new(name: '__listOfThumbnail')
     __listOfThumbnailDetail = Shapes::ListShape.new(name: '__listOfThumbnailDetail')
     __listOfTransferringInputDeviceSummary = Shapes::ListShape.new(name: '__listOfTransferringInputDeviceSummary')
@@ -884,6 +1001,8 @@ module Aws::MediaLive
     __listOfVideoDescription = Shapes::ListShape.new(name: '__listOfVideoDescription')
     __listOf__integer = Shapes::ListShape.new(name: '__listOf__integer')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
+    __listOf__stringMin7Max11PatternAws097 = Shapes::ListShape.new(name: '__listOf__stringMin7Max11PatternAws097')
+    __listOf__stringPatternS = Shapes::ListShape.new(name: '__listOf__stringPatternS')
     __long = Shapes::IntegerShape.new(name: '__long')
     __longMin0Max1099511627775 = Shapes::IntegerShape.new(name: '__longMin0Max1099511627775')
     __longMin0Max4294967295 = Shapes::IntegerShape.new(name: '__longMin0Max4294967295')
@@ -895,8 +1014,13 @@ module Aws::MediaLive
     __stringMax255 = Shapes::StringShape.new(name: '__stringMax255')
     __stringMax256 = Shapes::StringShape.new(name: '__stringMax256')
     __stringMax32 = Shapes::StringShape.new(name: '__stringMax32')
+    __stringMax64 = Shapes::StringShape.new(name: '__stringMax64')
+    __stringMin0Max1024 = Shapes::StringShape.new(name: '__stringMin0Max1024')
     __stringMin1 = Shapes::StringShape.new(name: '__stringMin1')
+    __stringMin1Max2048 = Shapes::StringShape.new(name: '__stringMin1Max2048')
+    __stringMin1Max2048PatternArn = Shapes::StringShape.new(name: '__stringMin1Max2048PatternArn')
     __stringMin1Max255 = Shapes::StringShape.new(name: '__stringMin1Max255')
+    __stringMin1Max255PatternS = Shapes::StringShape.new(name: '__stringMin1Max255PatternS')
     __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
     __stringMin1Max35 = Shapes::StringShape.new(name: '__stringMin1Max35')
     __stringMin1Max7 = Shapes::StringShape.new(name: '__stringMin1Max7')
@@ -905,7 +1029,14 @@ module Aws::MediaLive
     __stringMin34Max34 = Shapes::StringShape.new(name: '__stringMin34Max34')
     __stringMin3Max3 = Shapes::StringShape.new(name: '__stringMin3Max3')
     __stringMin6Max6 = Shapes::StringShape.new(name: '__stringMin6Max6')
+    __stringMin7Max11PatternAws097 = Shapes::StringShape.new(name: '__stringMin7Max11PatternAws097')
     __stringPattern010920300 = Shapes::StringShape.new(name: '__stringPattern010920300')
+    __stringPatternArnMedialiveCloudwatchAlarmTemplate = Shapes::StringShape.new(name: '__stringPatternArnMedialiveCloudwatchAlarmTemplate')
+    __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup = Shapes::StringShape.new(name: '__stringPatternArnMedialiveCloudwatchAlarmTemplateGroup')
+    __stringPatternArnMedialiveEventbridgeRuleTemplate = Shapes::StringShape.new(name: '__stringPatternArnMedialiveEventbridgeRuleTemplate')
+    __stringPatternArnMedialiveEventbridgeRuleTemplateGroup = Shapes::StringShape.new(name: '__stringPatternArnMedialiveEventbridgeRuleTemplateGroup')
+    __stringPatternArnMedialiveSignalMap = Shapes::StringShape.new(name: '__stringPatternArnMedialiveSignalMap')
+    __stringPatternS = Shapes::StringShape.new(name: '__stringPatternS')
     __timestamp = Shapes::TimestampShape.new(name: '__timestamp')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
@@ -1069,6 +1200,9 @@ module Aws::MediaLive
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    BadRequestExceptionResponseContent.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    BadRequestExceptionResponseContent.struct_class = Types::BadRequestExceptionResponseContent
 
     BatchDelete.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
     BatchDelete.add_member(:input_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputIds"))
@@ -1292,6 +1426,35 @@ module Aws::MediaLive
 
     ClaimDeviceResponse.struct_class = Types::ClaimDeviceResponse
 
+    CloudWatchAlarmTemplateGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup, required: true, location_name: "arn"))
+    CloudWatchAlarmTemplateGroupSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    CloudWatchAlarmTemplateGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CloudWatchAlarmTemplateGroupSummary.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    CloudWatchAlarmTemplateGroupSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CloudWatchAlarmTemplateGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CloudWatchAlarmTemplateGroupSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CloudWatchAlarmTemplateGroupSummary.add_member(:template_count, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "templateCount"))
+    CloudWatchAlarmTemplateGroupSummary.struct_class = Types::CloudWatchAlarmTemplateGroupSummary
+
+    CloudWatchAlarmTemplateSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplate, required: true, location_name: "arn"))
+    CloudWatchAlarmTemplateSummary.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, required: true, location_name: "comparisonOperator"))
+    CloudWatchAlarmTemplateSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    CloudWatchAlarmTemplateSummary.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    CloudWatchAlarmTemplateSummary.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CloudWatchAlarmTemplateSummary.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "evaluationPeriods"))
+    CloudWatchAlarmTemplateSummary.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "groupId"))
+    CloudWatchAlarmTemplateSummary.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    CloudWatchAlarmTemplateSummary.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, required: true, location_name: "metricName"))
+    CloudWatchAlarmTemplateSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CloudWatchAlarmTemplateSummary.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CloudWatchAlarmTemplateSummary.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, required: true, location_name: "period"))
+    CloudWatchAlarmTemplateSummary.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, required: true, location_name: "statistic"))
+    CloudWatchAlarmTemplateSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CloudWatchAlarmTemplateSummary.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
+    CloudWatchAlarmTemplateSummary.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
+    CloudWatchAlarmTemplateSummary.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
+    CloudWatchAlarmTemplateSummary.struct_class = Types::CloudWatchAlarmTemplateSummary
+
     CmafIngestGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     CmafIngestGroupSettings.add_member(:nielsen_id_3_behavior, Shapes::ShapeRef.new(shape: CmafNielsenId3Behavior, location_name: "nielsenId3Behavior"))
     CmafIngestGroupSettings.add_member(:scte_35_type, Shapes::ShapeRef.new(shape: Scte35Type, location_name: "scte35Type"))
@@ -1315,6 +1478,9 @@ module Aws::MediaLive
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    ConflictExceptionResponseContent.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ConflictExceptionResponseContent.struct_class = Types::ConflictExceptionResponseContent
 
     CreateChannel.add_member(:cdi_input_specification, Shapes::ShapeRef.new(shape: CdiInputSpecification, location_name: "cdiInputSpecification"))
     CreateChannel.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
@@ -1353,6 +1519,170 @@ module Aws::MediaLive
 
     CreateChannelResultModel.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     CreateChannelResultModel.struct_class = Types::CreateChannelResultModel
+
+    CreateCloudWatchAlarmTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateCloudWatchAlarmTemplateGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateCloudWatchAlarmTemplateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateGroupRequest.struct_class = Types::CreateCloudWatchAlarmTemplateGroupRequest
+
+    CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateGroupRequestContent.struct_class = Types::CreateCloudWatchAlarmTemplateGroupRequestContent
+
+    CreateCloudWatchAlarmTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup, location_name: "arn"))
+    CreateCloudWatchAlarmTemplateGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    CreateCloudWatchAlarmTemplateGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateCloudWatchAlarmTemplateGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    CreateCloudWatchAlarmTemplateGroupResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateCloudWatchAlarmTemplateGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    CreateCloudWatchAlarmTemplateGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateGroupResponse.struct_class = Types::CreateCloudWatchAlarmTemplateGroupResponse
+
+    CreateCloudWatchAlarmTemplateGroupResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup, required: true, location_name: "arn"))
+    CreateCloudWatchAlarmTemplateGroupResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    CreateCloudWatchAlarmTemplateGroupResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateCloudWatchAlarmTemplateGroupResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    CreateCloudWatchAlarmTemplateGroupResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateCloudWatchAlarmTemplateGroupResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateCloudWatchAlarmTemplateGroupResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateGroupResponseContent.struct_class = Types::CreateCloudWatchAlarmTemplateGroupResponseContent
+
+    CreateCloudWatchAlarmTemplateRequest.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, required: true, location_name: "comparisonOperator"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "evaluationPeriods"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, required: true, location_name: "groupIdentifier"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, required: true, location_name: "metricName"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, required: true, location_name: "period"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, required: true, location_name: "statistic"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
+    CreateCloudWatchAlarmTemplateRequest.struct_class = Types::CreateCloudWatchAlarmTemplateRequest
+
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, required: true, location_name: "comparisonOperator"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "evaluationPeriods"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, required: true, location_name: "groupIdentifier"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, required: true, location_name: "metricName"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, required: true, location_name: "period"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, required: true, location_name: "statistic"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
+    CreateCloudWatchAlarmTemplateRequestContent.struct_class = Types::CreateCloudWatchAlarmTemplateRequestContent
+
+    CreateCloudWatchAlarmTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplate, location_name: "arn"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, location_name: "comparisonOperator"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "evaluationPeriods"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "groupId"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, location_name: "metricName"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, location_name: "period"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, location_name: "statistic"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, location_name: "targetResourceType"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, location_name: "threshold"))
+    CreateCloudWatchAlarmTemplateResponse.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, location_name: "treatMissingData"))
+    CreateCloudWatchAlarmTemplateResponse.struct_class = Types::CreateCloudWatchAlarmTemplateResponse
+
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplate, required: true, location_name: "arn"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, required: true, location_name: "comparisonOperator"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "evaluationPeriods"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "groupId"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, required: true, location_name: "metricName"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, required: true, location_name: "period"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, required: true, location_name: "statistic"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
+    CreateCloudWatchAlarmTemplateResponseContent.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
+    CreateCloudWatchAlarmTemplateResponseContent.struct_class = Types::CreateCloudWatchAlarmTemplateResponseContent
+
+    CreateEventBridgeRuleTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateEventBridgeRuleTemplateGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateEventBridgeRuleTemplateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateGroupRequest.struct_class = Types::CreateEventBridgeRuleTemplateGroupRequest
+
+    CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateGroupRequestContent.struct_class = Types::CreateEventBridgeRuleTemplateGroupRequestContent
+
+    CreateEventBridgeRuleTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup, location_name: "arn"))
+    CreateEventBridgeRuleTemplateGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    CreateEventBridgeRuleTemplateGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateEventBridgeRuleTemplateGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    CreateEventBridgeRuleTemplateGroupResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateEventBridgeRuleTemplateGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    CreateEventBridgeRuleTemplateGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateGroupResponse.struct_class = Types::CreateEventBridgeRuleTemplateGroupResponse
+
+    CreateEventBridgeRuleTemplateGroupResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup, required: true, location_name: "arn"))
+    CreateEventBridgeRuleTemplateGroupResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    CreateEventBridgeRuleTemplateGroupResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateEventBridgeRuleTemplateGroupResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    CreateEventBridgeRuleTemplateGroupResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateEventBridgeRuleTemplateGroupResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateEventBridgeRuleTemplateGroupResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateGroupResponseContent.struct_class = Types::CreateEventBridgeRuleTemplateGroupResponseContent
+
+    CreateEventBridgeRuleTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateEventBridgeRuleTemplateRequest.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    CreateEventBridgeRuleTemplateRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, required: true, location_name: "eventType"))
+    CreateEventBridgeRuleTemplateRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, required: true, location_name: "groupIdentifier"))
+    CreateEventBridgeRuleTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateEventBridgeRuleTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateRequest.struct_class = Types::CreateEventBridgeRuleTemplateRequest
+
+    CreateEventBridgeRuleTemplateRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateEventBridgeRuleTemplateRequestContent.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    CreateEventBridgeRuleTemplateRequestContent.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, required: true, location_name: "eventType"))
+    CreateEventBridgeRuleTemplateRequestContent.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, required: true, location_name: "groupIdentifier"))
+    CreateEventBridgeRuleTemplateRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateEventBridgeRuleTemplateRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateRequestContent.struct_class = Types::CreateEventBridgeRuleTemplateRequestContent
+
+    CreateEventBridgeRuleTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplate, location_name: "arn"))
+    CreateEventBridgeRuleTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    CreateEventBridgeRuleTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateEventBridgeRuleTemplateResponse.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    CreateEventBridgeRuleTemplateResponse.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, location_name: "eventType"))
+    CreateEventBridgeRuleTemplateResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "groupId"))
+    CreateEventBridgeRuleTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    CreateEventBridgeRuleTemplateResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateEventBridgeRuleTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    CreateEventBridgeRuleTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateResponse.struct_class = Types::CreateEventBridgeRuleTemplateResponse
+
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplate, required: true, location_name: "arn"))
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, required: true, location_name: "eventType"))
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "groupId"))
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateEventBridgeRuleTemplateResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateResponseContent.struct_class = Types::CreateEventBridgeRuleTemplateResponseContent
 
     CreateInput.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
     CreateInput.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceSettings, location_name: "inputDevices"))
@@ -1448,6 +1778,62 @@ module Aws::MediaLive
     CreatePartnerInputResultModel.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
     CreatePartnerInputResultModel.struct_class = Types::CreatePartnerInputResultModel
 
+    CreateSignalMapRequest.add_member(:cloud_watch_alarm_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "cloudWatchAlarmTemplateGroupIdentifiers"))
+    CreateSignalMapRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateSignalMapRequest.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, required: true, location_name: "discoveryEntryPointArn"))
+    CreateSignalMapRequest.add_member(:event_bridge_rule_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "eventBridgeRuleTemplateGroupIdentifiers"))
+    CreateSignalMapRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateSignalMapRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSignalMapRequest.struct_class = Types::CreateSignalMapRequest
+
+    CreateSignalMapRequestContent.add_member(:cloud_watch_alarm_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "cloudWatchAlarmTemplateGroupIdentifiers"))
+    CreateSignalMapRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateSignalMapRequestContent.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, required: true, location_name: "discoveryEntryPointArn"))
+    CreateSignalMapRequestContent.add_member(:event_bridge_rule_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "eventBridgeRuleTemplateGroupIdentifiers"))
+    CreateSignalMapRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateSignalMapRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSignalMapRequestContent.struct_class = Types::CreateSignalMapRequestContent
+
+    CreateSignalMapResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, location_name: "arn"))
+    CreateSignalMapResponse.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    CreateSignalMapResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    CreateSignalMapResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateSignalMapResponse.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "discoveryEntryPointArn"))
+    CreateSignalMapResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    CreateSignalMapResponse.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    CreateSignalMapResponse.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    CreateSignalMapResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    CreateSignalMapResponse.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    CreateSignalMapResponse.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    CreateSignalMapResponse.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    CreateSignalMapResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateSignalMapResponse.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, location_name: "monitorChangesPendingDeployment"))
+    CreateSignalMapResponse.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    CreateSignalMapResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    CreateSignalMapResponse.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, location_name: "status"))
+    CreateSignalMapResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSignalMapResponse.struct_class = Types::CreateSignalMapResponse
+
+    CreateSignalMapResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, required: true, location_name: "arn"))
+    CreateSignalMapResponseContent.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    CreateSignalMapResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    CreateSignalMapResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    CreateSignalMapResponseContent.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, required: true, location_name: "discoveryEntryPointArn"))
+    CreateSignalMapResponseContent.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    CreateSignalMapResponseContent.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    CreateSignalMapResponseContent.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    CreateSignalMapResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    CreateSignalMapResponseContent.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    CreateSignalMapResponseContent.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    CreateSignalMapResponseContent.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    CreateSignalMapResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    CreateSignalMapResponseContent.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "monitorChangesPendingDeployment"))
+    CreateSignalMapResponseContent.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    CreateSignalMapResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    CreateSignalMapResponseContent.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, required: true, location_name: "status"))
+    CreateSignalMapResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSignalMapResponseContent.struct_class = Types::CreateSignalMapResponseContent
+
     CreateTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateTagsRequest.struct_class = Types::CreateTagsRequest
@@ -1474,6 +1860,18 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DeleteChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     DeleteChannelResponse.struct_class = Types::DeleteChannelResponse
+
+    DeleteCloudWatchAlarmTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    DeleteCloudWatchAlarmTemplateGroupRequest.struct_class = Types::DeleteCloudWatchAlarmTemplateGroupRequest
+
+    DeleteCloudWatchAlarmTemplateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    DeleteCloudWatchAlarmTemplateRequest.struct_class = Types::DeleteCloudWatchAlarmTemplateRequest
+
+    DeleteEventBridgeRuleTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    DeleteEventBridgeRuleTemplateGroupRequest.struct_class = Types::DeleteEventBridgeRuleTemplateGroupRequest
+
+    DeleteEventBridgeRuleTemplateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    DeleteEventBridgeRuleTemplateRequest.struct_class = Types::DeleteEventBridgeRuleTemplateRequest
 
     DeleteInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
     DeleteInputRequest.struct_class = Types::DeleteInputRequest
@@ -1539,6 +1937,9 @@ module Aws::MediaLive
     DeleteScheduleRequest.struct_class = Types::DeleteScheduleRequest
 
     DeleteScheduleResponse.struct_class = Types::DeleteScheduleResponse
+
+    DeleteSignalMapRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    DeleteSignalMapRequest.struct_class = Types::DeleteSignalMapRequest
 
     DeleteTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     DeleteTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
@@ -1843,6 +2244,34 @@ module Aws::MediaLive
     Esam.add_member(:zone_identity, Shapes::ShapeRef.new(shape: __stringMax256, location_name: "zoneIdentity"))
     Esam.struct_class = Types::Esam
 
+    EventBridgeRuleTemplateGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup, required: true, location_name: "arn"))
+    EventBridgeRuleTemplateGroupSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    EventBridgeRuleTemplateGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    EventBridgeRuleTemplateGroupSummary.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    EventBridgeRuleTemplateGroupSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    EventBridgeRuleTemplateGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    EventBridgeRuleTemplateGroupSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    EventBridgeRuleTemplateGroupSummary.add_member(:template_count, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "templateCount"))
+    EventBridgeRuleTemplateGroupSummary.struct_class = Types::EventBridgeRuleTemplateGroupSummary
+
+    EventBridgeRuleTemplateSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplate, required: true, location_name: "arn"))
+    EventBridgeRuleTemplateSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    EventBridgeRuleTemplateSummary.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    EventBridgeRuleTemplateSummary.add_member(:event_target_count, Shapes::ShapeRef.new(shape: __integerMax5, required: true, location_name: "eventTargetCount"))
+    EventBridgeRuleTemplateSummary.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, required: true, location_name: "eventType"))
+    EventBridgeRuleTemplateSummary.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "groupId"))
+    EventBridgeRuleTemplateSummary.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    EventBridgeRuleTemplateSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    EventBridgeRuleTemplateSummary.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    EventBridgeRuleTemplateSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    EventBridgeRuleTemplateSummary.struct_class = Types::EventBridgeRuleTemplateSummary
+
+    EventBridgeRuleTemplateTarget.add_member(:arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048PatternArn, required: true, location_name: "arn"))
+    EventBridgeRuleTemplateTarget.struct_class = Types::EventBridgeRuleTemplateTarget
+
+    FailedMediaResourceMap.key = Shapes::ShapeRef.new(shape: __string)
+    FailedMediaResourceMap.value = Shapes::ShapeRef.new(shape: MediaResource)
+
     FailoverCondition.add_member(:failover_condition_settings, Shapes::ShapeRef.new(shape: FailoverConditionSettings, location_name: "failoverConditionSettings"))
     FailoverCondition.struct_class = Types::FailoverCondition
 
@@ -1875,6 +2304,9 @@ module Aws::MediaLive
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
+    ForbiddenExceptionResponseContent.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    ForbiddenExceptionResponseContent.struct_class = Types::ForbiddenExceptionResponseContent
+
     FrameCaptureCdnSettings.add_member(:frame_capture_s3_settings, Shapes::ShapeRef.new(shape: FrameCaptureS3Settings, location_name: "frameCaptureS3Settings"))
     FrameCaptureCdnSettings.struct_class = Types::FrameCaptureCdnSettings
 
@@ -1897,6 +2329,159 @@ module Aws::MediaLive
 
     GatewayTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     GatewayTimeoutException.struct_class = Types::GatewayTimeoutException
+
+    GetCloudWatchAlarmTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    GetCloudWatchAlarmTemplateGroupRequest.struct_class = Types::GetCloudWatchAlarmTemplateGroupRequest
+
+    GetCloudWatchAlarmTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup, location_name: "arn"))
+    GetCloudWatchAlarmTemplateGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    GetCloudWatchAlarmTemplateGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetCloudWatchAlarmTemplateGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    GetCloudWatchAlarmTemplateGroupResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetCloudWatchAlarmTemplateGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    GetCloudWatchAlarmTemplateGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetCloudWatchAlarmTemplateGroupResponse.struct_class = Types::GetCloudWatchAlarmTemplateGroupResponse
+
+    GetCloudWatchAlarmTemplateGroupResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup, required: true, location_name: "arn"))
+    GetCloudWatchAlarmTemplateGroupResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    GetCloudWatchAlarmTemplateGroupResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetCloudWatchAlarmTemplateGroupResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    GetCloudWatchAlarmTemplateGroupResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetCloudWatchAlarmTemplateGroupResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    GetCloudWatchAlarmTemplateGroupResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetCloudWatchAlarmTemplateGroupResponseContent.struct_class = Types::GetCloudWatchAlarmTemplateGroupResponseContent
+
+    GetCloudWatchAlarmTemplateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    GetCloudWatchAlarmTemplateRequest.struct_class = Types::GetCloudWatchAlarmTemplateRequest
+
+    GetCloudWatchAlarmTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplate, location_name: "arn"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, location_name: "comparisonOperator"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "evaluationPeriods"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "groupId"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, location_name: "metricName"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, location_name: "period"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, location_name: "statistic"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, location_name: "targetResourceType"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, location_name: "threshold"))
+    GetCloudWatchAlarmTemplateResponse.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, location_name: "treatMissingData"))
+    GetCloudWatchAlarmTemplateResponse.struct_class = Types::GetCloudWatchAlarmTemplateResponse
+
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplate, required: true, location_name: "arn"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, required: true, location_name: "comparisonOperator"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "evaluationPeriods"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "groupId"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, required: true, location_name: "metricName"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, required: true, location_name: "period"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, required: true, location_name: "statistic"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
+    GetCloudWatchAlarmTemplateResponseContent.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
+    GetCloudWatchAlarmTemplateResponseContent.struct_class = Types::GetCloudWatchAlarmTemplateResponseContent
+
+    GetEventBridgeRuleTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    GetEventBridgeRuleTemplateGroupRequest.struct_class = Types::GetEventBridgeRuleTemplateGroupRequest
+
+    GetEventBridgeRuleTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup, location_name: "arn"))
+    GetEventBridgeRuleTemplateGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    GetEventBridgeRuleTemplateGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetEventBridgeRuleTemplateGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    GetEventBridgeRuleTemplateGroupResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetEventBridgeRuleTemplateGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    GetEventBridgeRuleTemplateGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetEventBridgeRuleTemplateGroupResponse.struct_class = Types::GetEventBridgeRuleTemplateGroupResponse
+
+    GetEventBridgeRuleTemplateGroupResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup, required: true, location_name: "arn"))
+    GetEventBridgeRuleTemplateGroupResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    GetEventBridgeRuleTemplateGroupResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetEventBridgeRuleTemplateGroupResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    GetEventBridgeRuleTemplateGroupResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetEventBridgeRuleTemplateGroupResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    GetEventBridgeRuleTemplateGroupResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetEventBridgeRuleTemplateGroupResponseContent.struct_class = Types::GetEventBridgeRuleTemplateGroupResponseContent
+
+    GetEventBridgeRuleTemplateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    GetEventBridgeRuleTemplateRequest.struct_class = Types::GetEventBridgeRuleTemplateRequest
+
+    GetEventBridgeRuleTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplate, location_name: "arn"))
+    GetEventBridgeRuleTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    GetEventBridgeRuleTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetEventBridgeRuleTemplateResponse.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    GetEventBridgeRuleTemplateResponse.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, location_name: "eventType"))
+    GetEventBridgeRuleTemplateResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "groupId"))
+    GetEventBridgeRuleTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    GetEventBridgeRuleTemplateResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetEventBridgeRuleTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    GetEventBridgeRuleTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetEventBridgeRuleTemplateResponse.struct_class = Types::GetEventBridgeRuleTemplateResponse
+
+    GetEventBridgeRuleTemplateResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplate, required: true, location_name: "arn"))
+    GetEventBridgeRuleTemplateResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    GetEventBridgeRuleTemplateResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetEventBridgeRuleTemplateResponseContent.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    GetEventBridgeRuleTemplateResponseContent.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, required: true, location_name: "eventType"))
+    GetEventBridgeRuleTemplateResponseContent.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "groupId"))
+    GetEventBridgeRuleTemplateResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    GetEventBridgeRuleTemplateResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetEventBridgeRuleTemplateResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    GetEventBridgeRuleTemplateResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetEventBridgeRuleTemplateResponseContent.struct_class = Types::GetEventBridgeRuleTemplateResponseContent
+
+    GetSignalMapRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    GetSignalMapRequest.struct_class = Types::GetSignalMapRequest
+
+    GetSignalMapResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, location_name: "arn"))
+    GetSignalMapResponse.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    GetSignalMapResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    GetSignalMapResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetSignalMapResponse.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "discoveryEntryPointArn"))
+    GetSignalMapResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    GetSignalMapResponse.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    GetSignalMapResponse.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    GetSignalMapResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    GetSignalMapResponse.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    GetSignalMapResponse.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    GetSignalMapResponse.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    GetSignalMapResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetSignalMapResponse.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, location_name: "monitorChangesPendingDeployment"))
+    GetSignalMapResponse.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    GetSignalMapResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    GetSignalMapResponse.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, location_name: "status"))
+    GetSignalMapResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetSignalMapResponse.struct_class = Types::GetSignalMapResponse
+
+    GetSignalMapResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, required: true, location_name: "arn"))
+    GetSignalMapResponseContent.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    GetSignalMapResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    GetSignalMapResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    GetSignalMapResponseContent.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, required: true, location_name: "discoveryEntryPointArn"))
+    GetSignalMapResponseContent.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    GetSignalMapResponseContent.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    GetSignalMapResponseContent.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    GetSignalMapResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    GetSignalMapResponseContent.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    GetSignalMapResponseContent.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    GetSignalMapResponseContent.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    GetSignalMapResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    GetSignalMapResponseContent.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "monitorChangesPendingDeployment"))
+    GetSignalMapResponseContent.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    GetSignalMapResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    GetSignalMapResponseContent.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, required: true, location_name: "status"))
+    GetSignalMapResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetSignalMapResponseContent.struct_class = Types::GetSignalMapResponseContent
 
     GlobalConfiguration.add_member(:initial_audio_gain, Shapes::ShapeRef.new(shape: __integerMinNegative60Max60, location_name: "initialAudioGain"))
     GlobalConfiguration.add_member(:input_end_action, Shapes::ShapeRef.new(shape: GlobalConfigurationInputEndAction, location_name: "inputEndAction"))
@@ -2355,6 +2940,9 @@ module Aws::MediaLive
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
+    InternalServerErrorExceptionResponseContent.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InternalServerErrorExceptionResponseContent.struct_class = Types::InternalServerErrorExceptionResponseContent
+
     InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServiceError.struct_class = Types::InternalServiceError
 
@@ -2378,6 +2966,62 @@ module Aws::MediaLive
     ListChannelsResultModel.add_member(:channels, Shapes::ShapeRef.new(shape: __listOfChannelSummary, location_name: "channels"))
     ListChannelsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListChannelsResultModel.struct_class = Types::ListChannelsResultModel
+
+    ListCloudWatchAlarmTemplateGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCloudWatchAlarmTemplateGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListCloudWatchAlarmTemplateGroupsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "scope"))
+    ListCloudWatchAlarmTemplateGroupsRequest.add_member(:signal_map_identifier, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "signalMapIdentifier"))
+    ListCloudWatchAlarmTemplateGroupsRequest.struct_class = Types::ListCloudWatchAlarmTemplateGroupsRequest
+
+    ListCloudWatchAlarmTemplateGroupsResponse.add_member(:cloud_watch_alarm_template_groups, Shapes::ShapeRef.new(shape: __listOfCloudWatchAlarmTemplateGroupSummary, location_name: "cloudWatchAlarmTemplateGroups"))
+    ListCloudWatchAlarmTemplateGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListCloudWatchAlarmTemplateGroupsResponse.struct_class = Types::ListCloudWatchAlarmTemplateGroupsResponse
+
+    ListCloudWatchAlarmTemplateGroupsResponseContent.add_member(:cloud_watch_alarm_template_groups, Shapes::ShapeRef.new(shape: __listOfCloudWatchAlarmTemplateGroupSummary, required: true, location_name: "cloudWatchAlarmTemplateGroups"))
+    ListCloudWatchAlarmTemplateGroupsResponseContent.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListCloudWatchAlarmTemplateGroupsResponseContent.struct_class = Types::ListCloudWatchAlarmTemplateGroupsResponseContent
+
+    ListCloudWatchAlarmTemplatesRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "groupIdentifier"))
+    ListCloudWatchAlarmTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCloudWatchAlarmTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListCloudWatchAlarmTemplatesRequest.add_member(:scope, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "scope"))
+    ListCloudWatchAlarmTemplatesRequest.add_member(:signal_map_identifier, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "signalMapIdentifier"))
+    ListCloudWatchAlarmTemplatesRequest.struct_class = Types::ListCloudWatchAlarmTemplatesRequest
+
+    ListCloudWatchAlarmTemplatesResponse.add_member(:cloud_watch_alarm_templates, Shapes::ShapeRef.new(shape: __listOfCloudWatchAlarmTemplateSummary, location_name: "cloudWatchAlarmTemplates"))
+    ListCloudWatchAlarmTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListCloudWatchAlarmTemplatesResponse.struct_class = Types::ListCloudWatchAlarmTemplatesResponse
+
+    ListCloudWatchAlarmTemplatesResponseContent.add_member(:cloud_watch_alarm_templates, Shapes::ShapeRef.new(shape: __listOfCloudWatchAlarmTemplateSummary, required: true, location_name: "cloudWatchAlarmTemplates"))
+    ListCloudWatchAlarmTemplatesResponseContent.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListCloudWatchAlarmTemplatesResponseContent.struct_class = Types::ListCloudWatchAlarmTemplatesResponseContent
+
+    ListEventBridgeRuleTemplateGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListEventBridgeRuleTemplateGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListEventBridgeRuleTemplateGroupsRequest.add_member(:signal_map_identifier, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "signalMapIdentifier"))
+    ListEventBridgeRuleTemplateGroupsRequest.struct_class = Types::ListEventBridgeRuleTemplateGroupsRequest
+
+    ListEventBridgeRuleTemplateGroupsResponse.add_member(:event_bridge_rule_template_groups, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateGroupSummary, location_name: "eventBridgeRuleTemplateGroups"))
+    ListEventBridgeRuleTemplateGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListEventBridgeRuleTemplateGroupsResponse.struct_class = Types::ListEventBridgeRuleTemplateGroupsResponse
+
+    ListEventBridgeRuleTemplateGroupsResponseContent.add_member(:event_bridge_rule_template_groups, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateGroupSummary, required: true, location_name: "eventBridgeRuleTemplateGroups"))
+    ListEventBridgeRuleTemplateGroupsResponseContent.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListEventBridgeRuleTemplateGroupsResponseContent.struct_class = Types::ListEventBridgeRuleTemplateGroupsResponseContent
+
+    ListEventBridgeRuleTemplatesRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "groupIdentifier"))
+    ListEventBridgeRuleTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListEventBridgeRuleTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListEventBridgeRuleTemplatesRequest.add_member(:signal_map_identifier, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "signalMapIdentifier"))
+    ListEventBridgeRuleTemplatesRequest.struct_class = Types::ListEventBridgeRuleTemplatesRequest
+
+    ListEventBridgeRuleTemplatesResponse.add_member(:event_bridge_rule_templates, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateSummary, location_name: "eventBridgeRuleTemplates"))
+    ListEventBridgeRuleTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListEventBridgeRuleTemplatesResponse.struct_class = Types::ListEventBridgeRuleTemplatesResponse
+
+    ListEventBridgeRuleTemplatesResponseContent.add_member(:event_bridge_rule_templates, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateSummary, required: true, location_name: "eventBridgeRuleTemplates"))
+    ListEventBridgeRuleTemplatesResponseContent.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListEventBridgeRuleTemplatesResponseContent.struct_class = Types::ListEventBridgeRuleTemplatesResponseContent
 
     ListInputDeviceTransfersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListInputDeviceTransfersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -2495,6 +3139,20 @@ module Aws::MediaLive
     ListReservationsResultModel.add_member(:reservations, Shapes::ShapeRef.new(shape: __listOfReservation, location_name: "reservations"))
     ListReservationsResultModel.struct_class = Types::ListReservationsResultModel
 
+    ListSignalMapsRequest.add_member(:cloud_watch_alarm_template_group_identifier, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "cloudWatchAlarmTemplateGroupIdentifier"))
+    ListSignalMapsRequest.add_member(:event_bridge_rule_template_group_identifier, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "eventBridgeRuleTemplateGroupIdentifier"))
+    ListSignalMapsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListSignalMapsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListSignalMapsRequest.struct_class = Types::ListSignalMapsRequest
+
+    ListSignalMapsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListSignalMapsResponse.add_member(:signal_maps, Shapes::ShapeRef.new(shape: __listOfSignalMapSummary, location_name: "signalMaps"))
+    ListSignalMapsResponse.struct_class = Types::ListSignalMapsResponse
+
+    ListSignalMapsResponseContent.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
+    ListSignalMapsResponseContent.add_member(:signal_maps, Shapes::ShapeRef.new(shape: __listOfSignalMapSummary, required: true, location_name: "signalMaps"))
+    ListSignalMapsResponseContent.struct_class = Types::ListSignalMapsResponseContent
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -2600,6 +3258,23 @@ module Aws::MediaLive
     MediaPackageOutputDestinationSettings.struct_class = Types::MediaPackageOutputDestinationSettings
 
     MediaPackageOutputSettings.struct_class = Types::MediaPackageOutputSettings
+
+    MediaResource.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMediaResourceNeighbor, location_name: "destinations"))
+    MediaResource.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "name"))
+    MediaResource.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfMediaResourceNeighbor, location_name: "sources"))
+    MediaResource.struct_class = Types::MediaResource
+
+    MediaResourceMap.key = Shapes::ShapeRef.new(shape: __string)
+    MediaResourceMap.value = Shapes::ShapeRef.new(shape: MediaResource)
+
+    MediaResourceNeighbor.add_member(:arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048PatternArn, required: true, location_name: "arn"))
+    MediaResourceNeighbor.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "name"))
+    MediaResourceNeighbor.struct_class = Types::MediaResourceNeighbor
+
+    MonitorDeployment.add_member(:details_uri, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "detailsUri"))
+    MonitorDeployment.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    MonitorDeployment.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapMonitorDeploymentStatus, required: true, location_name: "status"))
+    MonitorDeployment.struct_class = Types::MonitorDeployment
 
     MotionGraphicsActivateScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __longMin0Max86400000, location_name: "duration"))
     MotionGraphicsActivateScheduleActionSettings.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
@@ -2793,6 +3468,9 @@ module Aws::MediaLive
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
+
+    NotFoundExceptionResponseContent.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NotFoundExceptionResponseContent.struct_class = Types::NotFoundExceptionResponseContent
 
     Offering.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Offering.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
@@ -3103,6 +3781,17 @@ module Aws::MediaLive
     Scte35TimeSignalScheduleActionSettings.add_member(:scte_35_descriptors, Shapes::ShapeRef.new(shape: __listOfScte35Descriptor, required: true, location_name: "scte35Descriptors"))
     Scte35TimeSignalScheduleActionSettings.struct_class = Types::Scte35TimeSignalScheduleActionSettings
 
+    SignalMapSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, required: true, location_name: "arn"))
+    SignalMapSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    SignalMapSummary.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    SignalMapSummary.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    SignalMapSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    SignalMapSummary.add_member(:monitor_deployment_status, Shapes::ShapeRef.new(shape: SignalMapMonitorDeploymentStatus, required: true, location_name: "monitorDeploymentStatus"))
+    SignalMapSummary.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    SignalMapSummary.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, required: true, location_name: "status"))
+    SignalMapSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    SignalMapSummary.struct_class = Types::SignalMapSummary
+
     SmpteTtDestinationSettings.struct_class = Types::SmpteTtDestinationSettings
 
     StandardHlsSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
@@ -3132,6 +3821,49 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
 
+    StartDeleteMonitorDeploymentRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    StartDeleteMonitorDeploymentRequest.struct_class = Types::StartDeleteMonitorDeploymentRequest
+
+    StartDeleteMonitorDeploymentResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, location_name: "arn"))
+    StartDeleteMonitorDeploymentResponse.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    StartDeleteMonitorDeploymentResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    StartDeleteMonitorDeploymentResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    StartDeleteMonitorDeploymentResponse.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "discoveryEntryPointArn"))
+    StartDeleteMonitorDeploymentResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    StartDeleteMonitorDeploymentResponse.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    StartDeleteMonitorDeploymentResponse.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    StartDeleteMonitorDeploymentResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    StartDeleteMonitorDeploymentResponse.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    StartDeleteMonitorDeploymentResponse.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    StartDeleteMonitorDeploymentResponse.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    StartDeleteMonitorDeploymentResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    StartDeleteMonitorDeploymentResponse.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, location_name: "monitorChangesPendingDeployment"))
+    StartDeleteMonitorDeploymentResponse.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    StartDeleteMonitorDeploymentResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    StartDeleteMonitorDeploymentResponse.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, location_name: "status"))
+    StartDeleteMonitorDeploymentResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartDeleteMonitorDeploymentResponse.struct_class = Types::StartDeleteMonitorDeploymentResponse
+
+    StartDeleteMonitorDeploymentResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, required: true, location_name: "arn"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, required: true, location_name: "discoveryEntryPointArn"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "monitorChangesPendingDeployment"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, required: true, location_name: "status"))
+    StartDeleteMonitorDeploymentResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartDeleteMonitorDeploymentResponseContent.struct_class = Types::StartDeleteMonitorDeploymentResponseContent
+
     StartInputDeviceMaintenanceWindowRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
     StartInputDeviceMaintenanceWindowRequest.struct_class = Types::StartInputDeviceMaintenanceWindowRequest
 
@@ -3141,6 +3873,53 @@ module Aws::MediaLive
     StartInputDeviceRequest.struct_class = Types::StartInputDeviceRequest
 
     StartInputDeviceResponse.struct_class = Types::StartInputDeviceResponse
+
+    StartMonitorDeploymentRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "dryRun"))
+    StartMonitorDeploymentRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    StartMonitorDeploymentRequest.struct_class = Types::StartMonitorDeploymentRequest
+
+    StartMonitorDeploymentRequestContent.add_member(:dry_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "dryRun"))
+    StartMonitorDeploymentRequestContent.struct_class = Types::StartMonitorDeploymentRequestContent
+
+    StartMonitorDeploymentResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, location_name: "arn"))
+    StartMonitorDeploymentResponse.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    StartMonitorDeploymentResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    StartMonitorDeploymentResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    StartMonitorDeploymentResponse.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "discoveryEntryPointArn"))
+    StartMonitorDeploymentResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    StartMonitorDeploymentResponse.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    StartMonitorDeploymentResponse.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    StartMonitorDeploymentResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    StartMonitorDeploymentResponse.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    StartMonitorDeploymentResponse.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    StartMonitorDeploymentResponse.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    StartMonitorDeploymentResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    StartMonitorDeploymentResponse.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, location_name: "monitorChangesPendingDeployment"))
+    StartMonitorDeploymentResponse.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    StartMonitorDeploymentResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    StartMonitorDeploymentResponse.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, location_name: "status"))
+    StartMonitorDeploymentResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartMonitorDeploymentResponse.struct_class = Types::StartMonitorDeploymentResponse
+
+    StartMonitorDeploymentResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, required: true, location_name: "arn"))
+    StartMonitorDeploymentResponseContent.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    StartMonitorDeploymentResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    StartMonitorDeploymentResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    StartMonitorDeploymentResponseContent.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, required: true, location_name: "discoveryEntryPointArn"))
+    StartMonitorDeploymentResponseContent.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    StartMonitorDeploymentResponseContent.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    StartMonitorDeploymentResponseContent.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    StartMonitorDeploymentResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    StartMonitorDeploymentResponseContent.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    StartMonitorDeploymentResponseContent.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    StartMonitorDeploymentResponseContent.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    StartMonitorDeploymentResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    StartMonitorDeploymentResponseContent.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "monitorChangesPendingDeployment"))
+    StartMonitorDeploymentResponseContent.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    StartMonitorDeploymentResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    StartMonitorDeploymentResponseContent.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, required: true, location_name: "status"))
+    StartMonitorDeploymentResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartMonitorDeploymentResponseContent.struct_class = Types::StartMonitorDeploymentResponseContent
 
     StartMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
     StartMultiplexRequest.struct_class = Types::StartMultiplexRequest
@@ -3159,6 +3938,63 @@ module Aws::MediaLive
 
     StartTimecode.add_member(:timecode, Shapes::ShapeRef.new(shape: __string, location_name: "timecode"))
     StartTimecode.struct_class = Types::StartTimecode
+
+    StartUpdateSignalMapRequest.add_member(:cloud_watch_alarm_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "cloudWatchAlarmTemplateGroupIdentifiers"))
+    StartUpdateSignalMapRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    StartUpdateSignalMapRequest.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "discoveryEntryPointArn"))
+    StartUpdateSignalMapRequest.add_member(:event_bridge_rule_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "eventBridgeRuleTemplateGroupIdentifiers"))
+    StartUpdateSignalMapRequest.add_member(:force_rediscovery, Shapes::ShapeRef.new(shape: __boolean, location_name: "forceRediscovery"))
+    StartUpdateSignalMapRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    StartUpdateSignalMapRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    StartUpdateSignalMapRequest.struct_class = Types::StartUpdateSignalMapRequest
+
+    StartUpdateSignalMapRequestContent.add_member(:cloud_watch_alarm_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "cloudWatchAlarmTemplateGroupIdentifiers"))
+    StartUpdateSignalMapRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    StartUpdateSignalMapRequestContent.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "discoveryEntryPointArn"))
+    StartUpdateSignalMapRequestContent.add_member(:event_bridge_rule_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "eventBridgeRuleTemplateGroupIdentifiers"))
+    StartUpdateSignalMapRequestContent.add_member(:force_rediscovery, Shapes::ShapeRef.new(shape: __boolean, location_name: "forceRediscovery"))
+    StartUpdateSignalMapRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    StartUpdateSignalMapRequestContent.struct_class = Types::StartUpdateSignalMapRequestContent
+
+    StartUpdateSignalMapResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, location_name: "arn"))
+    StartUpdateSignalMapResponse.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    StartUpdateSignalMapResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    StartUpdateSignalMapResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    StartUpdateSignalMapResponse.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "discoveryEntryPointArn"))
+    StartUpdateSignalMapResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    StartUpdateSignalMapResponse.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    StartUpdateSignalMapResponse.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    StartUpdateSignalMapResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    StartUpdateSignalMapResponse.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    StartUpdateSignalMapResponse.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    StartUpdateSignalMapResponse.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    StartUpdateSignalMapResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    StartUpdateSignalMapResponse.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, location_name: "monitorChangesPendingDeployment"))
+    StartUpdateSignalMapResponse.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    StartUpdateSignalMapResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    StartUpdateSignalMapResponse.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, location_name: "status"))
+    StartUpdateSignalMapResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartUpdateSignalMapResponse.struct_class = Types::StartUpdateSignalMapResponse
+
+    StartUpdateSignalMapResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, required: true, location_name: "arn"))
+    StartUpdateSignalMapResponseContent.add_member(:cloud_watch_alarm_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "cloudWatchAlarmTemplateGroupIds"))
+    StartUpdateSignalMapResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    StartUpdateSignalMapResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    StartUpdateSignalMapResponseContent.add_member(:discovery_entry_point_arn, Shapes::ShapeRef.new(shape: __stringMin1Max2048, required: true, location_name: "discoveryEntryPointArn"))
+    StartUpdateSignalMapResponseContent.add_member(:error_message, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "errorMessage"))
+    StartUpdateSignalMapResponseContent.add_member(:event_bridge_rule_template_group_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin7Max11PatternAws097, location_name: "eventBridgeRuleTemplateGroupIds"))
+    StartUpdateSignalMapResponseContent.add_member(:failed_media_resource_map, Shapes::ShapeRef.new(shape: FailedMediaResourceMap, location_name: "failedMediaResourceMap"))
+    StartUpdateSignalMapResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    StartUpdateSignalMapResponseContent.add_member(:last_discovered_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastDiscoveredAt"))
+    StartUpdateSignalMapResponseContent.add_member(:last_successful_monitor_deployment, Shapes::ShapeRef.new(shape: SuccessfulMonitorDeployment, location_name: "lastSuccessfulMonitorDeployment"))
+    StartUpdateSignalMapResponseContent.add_member(:media_resource_map, Shapes::ShapeRef.new(shape: MediaResourceMap, location_name: "mediaResourceMap"))
+    StartUpdateSignalMapResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    StartUpdateSignalMapResponseContent.add_member(:monitor_changes_pending_deployment, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "monitorChangesPendingDeployment"))
+    StartUpdateSignalMapResponseContent.add_member(:monitor_deployment, Shapes::ShapeRef.new(shape: MonitorDeployment, location_name: "monitorDeployment"))
+    StartUpdateSignalMapResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    StartUpdateSignalMapResponseContent.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapStatus, required: true, location_name: "status"))
+    StartUpdateSignalMapResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartUpdateSignalMapResponseContent.struct_class = Types::StartUpdateSignalMapResponseContent
 
     StaticImageActivateScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "duration"))
     StaticImageActivateScheduleActionSettings.add_member(:fade_in, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "fadeIn"))
@@ -3245,6 +4081,13 @@ module Aws::MediaLive
     StopTimecode.add_member(:timecode, Shapes::ShapeRef.new(shape: __string, location_name: "timecode"))
     StopTimecode.struct_class = Types::StopTimecode
 
+    SuccessfulMonitorDeployment.add_member(:details_uri, Shapes::ShapeRef.new(shape: __stringMin1Max2048, required: true, location_name: "detailsUri"))
+    SuccessfulMonitorDeployment.add_member(:status, Shapes::ShapeRef.new(shape: SignalMapMonitorDeploymentStatus, required: true, location_name: "status"))
+    SuccessfulMonitorDeployment.struct_class = Types::SuccessfulMonitorDeployment
+
+    TagMap.key = Shapes::ShapeRef.new(shape: __string)
+    TagMap.value = Shapes::ShapeRef.new(shape: __string)
+
     Tags.key = Shapes::ShapeRef.new(shape: __string)
     Tags.value = Shapes::ShapeRef.new(shape: __string)
 
@@ -3290,6 +4133,9 @@ module Aws::MediaLive
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    TooManyRequestsExceptionResponseContent.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    TooManyRequestsExceptionResponseContent.struct_class = Types::TooManyRequestsExceptionResponseContent
 
     TransferInputDevice.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
     TransferInputDevice.add_member(:target_region, Shapes::ShapeRef.new(shape: __string, location_name: "targetRegion"))
@@ -3383,6 +4229,162 @@ module Aws::MediaLive
 
     UpdateChannelResultModel.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     UpdateChannelResultModel.struct_class = Types::UpdateChannelResultModel
+
+    UpdateCloudWatchAlarmTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateCloudWatchAlarmTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    UpdateCloudWatchAlarmTemplateGroupRequest.struct_class = Types::UpdateCloudWatchAlarmTemplateGroupRequest
+
+    UpdateCloudWatchAlarmTemplateGroupRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateCloudWatchAlarmTemplateGroupRequestContent.struct_class = Types::UpdateCloudWatchAlarmTemplateGroupRequestContent
+
+    UpdateCloudWatchAlarmTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup, location_name: "arn"))
+    UpdateCloudWatchAlarmTemplateGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    UpdateCloudWatchAlarmTemplateGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateCloudWatchAlarmTemplateGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    UpdateCloudWatchAlarmTemplateGroupResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    UpdateCloudWatchAlarmTemplateGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    UpdateCloudWatchAlarmTemplateGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateCloudWatchAlarmTemplateGroupResponse.struct_class = Types::UpdateCloudWatchAlarmTemplateGroupResponse
+
+    UpdateCloudWatchAlarmTemplateGroupResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup, required: true, location_name: "arn"))
+    UpdateCloudWatchAlarmTemplateGroupResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    UpdateCloudWatchAlarmTemplateGroupResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateCloudWatchAlarmTemplateGroupResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    UpdateCloudWatchAlarmTemplateGroupResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    UpdateCloudWatchAlarmTemplateGroupResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    UpdateCloudWatchAlarmTemplateGroupResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateCloudWatchAlarmTemplateGroupResponseContent.struct_class = Types::UpdateCloudWatchAlarmTemplateGroupResponseContent
+
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, location_name: "comparisonOperator"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "evaluationPeriods"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, location_name: "groupIdentifier"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, location_name: "metricName"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, location_name: "period"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, location_name: "statistic"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, location_name: "targetResourceType"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, location_name: "threshold"))
+    UpdateCloudWatchAlarmTemplateRequest.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, location_name: "treatMissingData"))
+    UpdateCloudWatchAlarmTemplateRequest.struct_class = Types::UpdateCloudWatchAlarmTemplateRequest
+
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, location_name: "comparisonOperator"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "evaluationPeriods"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, location_name: "groupIdentifier"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, location_name: "metricName"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, location_name: "period"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, location_name: "statistic"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, location_name: "targetResourceType"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, location_name: "threshold"))
+    UpdateCloudWatchAlarmTemplateRequestContent.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, location_name: "treatMissingData"))
+    UpdateCloudWatchAlarmTemplateRequestContent.struct_class = Types::UpdateCloudWatchAlarmTemplateRequestContent
+
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplate, location_name: "arn"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, location_name: "comparisonOperator"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "evaluationPeriods"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "groupId"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, location_name: "metricName"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, location_name: "period"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, location_name: "statistic"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, location_name: "targetResourceType"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, location_name: "threshold"))
+    UpdateCloudWatchAlarmTemplateResponse.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, location_name: "treatMissingData"))
+    UpdateCloudWatchAlarmTemplateResponse.struct_class = Types::UpdateCloudWatchAlarmTemplateResponse
+
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplate, required: true, location_name: "arn"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, required: true, location_name: "comparisonOperator"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "datapointsToAlarm"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "evaluationPeriods"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "groupId"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:metric_name, Shapes::ShapeRef.new(shape: __stringMax64, required: true, location_name: "metricName"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:period, Shapes::ShapeRef.new(shape: __integerMin10Max86400, required: true, location_name: "period"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:statistic, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateStatistic, required: true, location_name: "statistic"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
+    UpdateCloudWatchAlarmTemplateResponseContent.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
+    UpdateCloudWatchAlarmTemplateResponseContent.struct_class = Types::UpdateCloudWatchAlarmTemplateResponseContent
+
+    UpdateEventBridgeRuleTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateEventBridgeRuleTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    UpdateEventBridgeRuleTemplateGroupRequest.struct_class = Types::UpdateEventBridgeRuleTemplateGroupRequest
+
+    UpdateEventBridgeRuleTemplateGroupRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateEventBridgeRuleTemplateGroupRequestContent.struct_class = Types::UpdateEventBridgeRuleTemplateGroupRequestContent
+
+    UpdateEventBridgeRuleTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup, location_name: "arn"))
+    UpdateEventBridgeRuleTemplateGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    UpdateEventBridgeRuleTemplateGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateEventBridgeRuleTemplateGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    UpdateEventBridgeRuleTemplateGroupResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    UpdateEventBridgeRuleTemplateGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    UpdateEventBridgeRuleTemplateGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateEventBridgeRuleTemplateGroupResponse.struct_class = Types::UpdateEventBridgeRuleTemplateGroupResponse
+
+    UpdateEventBridgeRuleTemplateGroupResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup, required: true, location_name: "arn"))
+    UpdateEventBridgeRuleTemplateGroupResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    UpdateEventBridgeRuleTemplateGroupResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateEventBridgeRuleTemplateGroupResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    UpdateEventBridgeRuleTemplateGroupResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    UpdateEventBridgeRuleTemplateGroupResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    UpdateEventBridgeRuleTemplateGroupResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateEventBridgeRuleTemplateGroupResponseContent.struct_class = Types::UpdateEventBridgeRuleTemplateGroupResponseContent
+
+    UpdateEventBridgeRuleTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateEventBridgeRuleTemplateRequest.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    UpdateEventBridgeRuleTemplateRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, location_name: "eventType"))
+    UpdateEventBridgeRuleTemplateRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, location_name: "groupIdentifier"))
+    UpdateEventBridgeRuleTemplateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    UpdateEventBridgeRuleTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    UpdateEventBridgeRuleTemplateRequest.struct_class = Types::UpdateEventBridgeRuleTemplateRequest
+
+    UpdateEventBridgeRuleTemplateRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateEventBridgeRuleTemplateRequestContent.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    UpdateEventBridgeRuleTemplateRequestContent.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, location_name: "eventType"))
+    UpdateEventBridgeRuleTemplateRequestContent.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, location_name: "groupIdentifier"))
+    UpdateEventBridgeRuleTemplateRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    UpdateEventBridgeRuleTemplateRequestContent.struct_class = Types::UpdateEventBridgeRuleTemplateRequestContent
+
+    UpdateEventBridgeRuleTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplate, location_name: "arn"))
+    UpdateEventBridgeRuleTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
+    UpdateEventBridgeRuleTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateEventBridgeRuleTemplateResponse.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    UpdateEventBridgeRuleTemplateResponse.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, location_name: "eventType"))
+    UpdateEventBridgeRuleTemplateResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "groupId"))
+    UpdateEventBridgeRuleTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, location_name: "id"))
+    UpdateEventBridgeRuleTemplateResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    UpdateEventBridgeRuleTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, location_name: "name"))
+    UpdateEventBridgeRuleTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateEventBridgeRuleTemplateResponse.struct_class = Types::UpdateEventBridgeRuleTemplateResponse
+
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplate, required: true, location_name: "arn"))
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "createdAt"))
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:event_targets, Shapes::ShapeRef.new(shape: __listOfEventBridgeRuleTemplateTarget, location_name: "eventTargets"))
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:event_type, Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateEventType, required: true, location_name: "eventType"))
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "groupId"))
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097, required: true, location_name: "id"))
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:modified_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "modifiedAt"))
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
+    UpdateEventBridgeRuleTemplateResponseContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateEventBridgeRuleTemplateResponseContent.struct_class = Types::UpdateEventBridgeRuleTemplateResponseContent
 
     UpdateInput.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
     UpdateInput.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceRequest, location_name: "inputDevices"))
@@ -3580,11 +4582,21 @@ module Aws::MediaLive
 
     __listOfChannelSummary.member = Shapes::ShapeRef.new(shape: ChannelSummary)
 
+    __listOfCloudWatchAlarmTemplateGroupSummary.member = Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateGroupSummary)
+
+    __listOfCloudWatchAlarmTemplateSummary.member = Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateSummary)
+
     __listOfColorCorrection.member = Shapes::ShapeRef.new(shape: ColorCorrection)
 
     __listOfDashRoleAudio.member = Shapes::ShapeRef.new(shape: DashRoleAudio)
 
     __listOfDashRoleCaption.member = Shapes::ShapeRef.new(shape: DashRoleCaption)
+
+    __listOfEventBridgeRuleTemplateGroupSummary.member = Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateGroupSummary)
+
+    __listOfEventBridgeRuleTemplateSummary.member = Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateSummary)
+
+    __listOfEventBridgeRuleTemplateTarget.member = Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateTarget)
 
     __listOfFailoverCondition.member = Shapes::ShapeRef.new(shape: FailoverCondition)
 
@@ -3626,6 +4638,8 @@ module Aws::MediaLive
 
     __listOfMediaPackageOutputDestinationSettings.member = Shapes::ShapeRef.new(shape: MediaPackageOutputDestinationSettings)
 
+    __listOfMediaResourceNeighbor.member = Shapes::ShapeRef.new(shape: MediaResourceNeighbor)
+
     __listOfMultiplexOutputDestination.member = Shapes::ShapeRef.new(shape: MultiplexOutputDestination)
 
     __listOfMultiplexProgramPipelineDetail.member = Shapes::ShapeRef.new(shape: MultiplexProgramPipelineDetail)
@@ -3656,6 +4670,8 @@ module Aws::MediaLive
 
     __listOfScte35Descriptor.member = Shapes::ShapeRef.new(shape: Scte35Descriptor)
 
+    __listOfSignalMapSummary.member = Shapes::ShapeRef.new(shape: SignalMapSummary)
+
     __listOfThumbnail.member = Shapes::ShapeRef.new(shape: Thumbnail)
 
     __listOfThumbnailDetail.member = Shapes::ShapeRef.new(shape: ThumbnailDetail)
@@ -3669,6 +4685,10 @@ module Aws::MediaLive
     __listOf__integer.member = Shapes::ShapeRef.new(shape: __integer)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    __listOf__stringMin7Max11PatternAws097.member = Shapes::ShapeRef.new(shape: __stringMin7Max11PatternAws097)
+
+    __listOf__stringPatternS.member = Shapes::ShapeRef.new(shape: __stringPatternS)
 
 
     # @api private
@@ -4738,6 +5758,404 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_cloud_watch_alarm_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCloudWatchAlarmTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/cloudwatch-alarm-templates"
+        o.input = Shapes::ShapeRef.new(shape: CreateCloudWatchAlarmTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCloudWatchAlarmTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_cloud_watch_alarm_template_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCloudWatchAlarmTemplateGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/cloudwatch-alarm-template-groups"
+        o.input = Shapes::ShapeRef.new(shape: CreateCloudWatchAlarmTemplateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCloudWatchAlarmTemplateGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_event_bridge_rule_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEventBridgeRuleTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/eventbridge-rule-templates"
+        o.input = Shapes::ShapeRef.new(shape: CreateEventBridgeRuleTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEventBridgeRuleTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_event_bridge_rule_template_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEventBridgeRuleTemplateGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/eventbridge-rule-template-groups"
+        o.input = Shapes::ShapeRef.new(shape: CreateEventBridgeRuleTemplateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEventBridgeRuleTemplateGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_signal_map, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSignalMap"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/signal-maps"
+        o.input = Shapes::ShapeRef.new(shape: CreateSignalMapRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSignalMapResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_cloud_watch_alarm_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCloudWatchAlarmTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/cloudwatch-alarm-templates/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCloudWatchAlarmTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_cloud_watch_alarm_template_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCloudWatchAlarmTemplateGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/cloudwatch-alarm-template-groups/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCloudWatchAlarmTemplateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_event_bridge_rule_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventBridgeRuleTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/eventbridge-rule-templates/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventBridgeRuleTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_event_bridge_rule_template_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventBridgeRuleTemplateGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/eventbridge-rule-template-groups/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventBridgeRuleTemplateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_signal_map, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSignalMap"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/signal-maps/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSignalMapRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_cloud_watch_alarm_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCloudWatchAlarmTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/cloudwatch-alarm-templates/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetCloudWatchAlarmTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCloudWatchAlarmTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:get_cloud_watch_alarm_template_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCloudWatchAlarmTemplateGroup"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/cloudwatch-alarm-template-groups/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetCloudWatchAlarmTemplateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCloudWatchAlarmTemplateGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:get_event_bridge_rule_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEventBridgeRuleTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/eventbridge-rule-templates/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetEventBridgeRuleTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventBridgeRuleTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:get_event_bridge_rule_template_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEventBridgeRuleTemplateGroup"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/eventbridge-rule-template-groups/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetEventBridgeRuleTemplateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventBridgeRuleTemplateGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:get_signal_map, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSignalMap"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/signal-maps/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetSignalMapRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSignalMapResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:list_cloud_watch_alarm_template_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCloudWatchAlarmTemplateGroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/cloudwatch-alarm-template-groups"
+        o.input = Shapes::ShapeRef.new(shape: ListCloudWatchAlarmTemplateGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCloudWatchAlarmTemplateGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_cloud_watch_alarm_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCloudWatchAlarmTemplates"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/cloudwatch-alarm-templates"
+        o.input = Shapes::ShapeRef.new(shape: ListCloudWatchAlarmTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCloudWatchAlarmTemplatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_event_bridge_rule_template_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEventBridgeRuleTemplateGroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/eventbridge-rule-template-groups"
+        o.input = Shapes::ShapeRef.new(shape: ListEventBridgeRuleTemplateGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEventBridgeRuleTemplateGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_event_bridge_rule_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEventBridgeRuleTemplates"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/eventbridge-rule-templates"
+        o.input = Shapes::ShapeRef.new(shape: ListEventBridgeRuleTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEventBridgeRuleTemplatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_signal_maps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSignalMaps"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/signal-maps"
+        o.input = Shapes::ShapeRef.new(shape: ListSignalMapsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSignalMapsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:start_delete_monitor_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDeleteMonitorDeployment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/signal-maps/{identifier}/monitor-deployment"
+        o.input = Shapes::ShapeRef.new(shape: StartDeleteMonitorDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDeleteMonitorDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_monitor_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMonitorDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/signal-maps/{identifier}/monitor-deployment"
+        o.input = Shapes::ShapeRef.new(shape: StartMonitorDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMonitorDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_update_signal_map, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartUpdateSignalMap"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/prod/signal-maps/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: StartUpdateSignalMapRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartUpdateSignalMapResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_cloud_watch_alarm_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCloudWatchAlarmTemplate"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/prod/cloudwatch-alarm-templates/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCloudWatchAlarmTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCloudWatchAlarmTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_cloud_watch_alarm_template_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCloudWatchAlarmTemplateGroup"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/prod/cloudwatch-alarm-template-groups/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCloudWatchAlarmTemplateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCloudWatchAlarmTemplateGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_event_bridge_rule_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEventBridgeRuleTemplate"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/prod/eventbridge-rule-templates/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEventBridgeRuleTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEventBridgeRuleTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_event_bridge_rule_template_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEventBridgeRuleTemplateGroup"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/prod/eventbridge-rule-template-groups/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEventBridgeRuleTemplateGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEventBridgeRuleTemplateGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)

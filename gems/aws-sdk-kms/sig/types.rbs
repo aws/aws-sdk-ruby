@@ -57,6 +57,11 @@ module Aws::KMS
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ConnectCustomKeyStoreRequest
       attr_accessor custom_key_store_id: ::String
       SENSITIVE: []
@@ -264,6 +269,7 @@ module Aws::KMS
 
     class EnableKeyRotationRequest
       attr_accessor key_id: ::String
+      attr_accessor rotation_period_in_days: ::Integer
       SENSITIVE: []
     end
 
@@ -409,6 +415,10 @@ module Aws::KMS
 
     class GetKeyRotationStatusResponse
       attr_accessor key_rotation_enabled: bool
+      attr_accessor key_id: ::String
+      attr_accessor rotation_period_in_days: ::Integer
+      attr_accessor next_rotation_date: ::Time
+      attr_accessor on_demand_rotation_start_date: ::Time
       SENSITIVE: []
     end
 
@@ -638,6 +648,20 @@ module Aws::KMS
       SENSITIVE: []
     end
 
+    class ListKeyRotationsRequest
+      attr_accessor key_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListKeyRotationsResponse
+      attr_accessor rotations: ::Array[Types::RotationsListEntry]
+      attr_accessor next_marker: ::String
+      attr_accessor truncated: bool
+      SENSITIVE: []
+    end
+
     class ListKeysRequest
       attr_accessor limit: ::Integer
       attr_accessor marker: ::String
@@ -760,6 +784,23 @@ module Aws::KMS
       attr_accessor key_id: ::String
       attr_accessor grant_id: ::String
       attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class RotateKeyOnDemandRequest
+      attr_accessor key_id: ::String
+      SENSITIVE: []
+    end
+
+    class RotateKeyOnDemandResponse
+      attr_accessor key_id: ::String
+      SENSITIVE: []
+    end
+
+    class RotationsListEntry
+      attr_accessor key_id: ::String
+      attr_accessor rotation_date: ::Time
+      attr_accessor rotation_type: ("AUTOMATIC" | "ON_DEMAND")
       SENSITIVE: []
     end
 

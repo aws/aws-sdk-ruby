@@ -2473,6 +2473,10 @@ module Aws::CloudFormation
     #   A string (provided by the DescribeChangeSet response output) that
     #   identifies the next page of information that you want to retrieve.
     #
+    # @option params [Boolean] :include_property_values
+    #   If `true`, the returned changes include detailed changes in the
+    #   property values.
+    #
     # @return [Types::DescribeChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeChangeSetOutput#change_set_name #change_set_name} => String
@@ -2503,6 +2507,7 @@ module Aws::CloudFormation
     #     change_set_name: "ChangeSetNameOrId", # required
     #     stack_name: "StackNameOrId",
     #     next_token: "NextToken",
+    #     include_property_values: false,
     #   })
     #
     # @example Response structure
@@ -2547,12 +2552,18 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.details[0].target.attribute #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "UpdateReplacePolicy", "Tags"
     #   resp.changes[0].resource_change.details[0].target.name #=> String
     #   resp.changes[0].resource_change.details[0].target.requires_recreation #=> String, one of "Never", "Conditionally", "Always"
+    #   resp.changes[0].resource_change.details[0].target.path #=> String
+    #   resp.changes[0].resource_change.details[0].target.before_value #=> String
+    #   resp.changes[0].resource_change.details[0].target.after_value #=> String
+    #   resp.changes[0].resource_change.details[0].target.attribute_change_type #=> String, one of "Add", "Remove", "Modify"
     #   resp.changes[0].resource_change.details[0].evaluation #=> String, one of "Static", "Dynamic"
     #   resp.changes[0].resource_change.details[0].change_source #=> String, one of "ResourceReference", "ParameterReference", "ResourceAttribute", "DirectModification", "Automatic"
     #   resp.changes[0].resource_change.details[0].causing_entity #=> String
     #   resp.changes[0].resource_change.change_set_id #=> String
     #   resp.changes[0].resource_change.module_info.type_hierarchy #=> String
     #   resp.changes[0].resource_change.module_info.logical_id_hierarchy #=> String
+    #   resp.changes[0].resource_change.before_context #=> String
+    #   resp.changes[0].resource_change.after_context #=> String
     #   resp.next_token #=> String
     #   resp.include_nested_stacks #=> Boolean
     #   resp.parent_change_set_id #=> String
@@ -8331,7 +8342,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

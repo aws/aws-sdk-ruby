@@ -2611,6 +2611,7 @@ module Aws::Redshift
       attr_accessor snapshot_retention_start_time: ::Time
       attr_accessor master_password_secret_arn: ::String
       attr_accessor master_password_secret_kms_key_id: ::String
+      attr_accessor snapshot_arn: ::String
       SENSITIVE: []
     end
 

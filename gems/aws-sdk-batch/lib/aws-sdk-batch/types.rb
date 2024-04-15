@@ -143,13 +143,84 @@ module Aws::Batch
     #   current status of the job attempt.
     #   @return [String]
     #
+    # @!attribute [rw] task_properties
+    #   The properties for a task definition that describes the container
+    #   and volume definitions of an Amazon ECS task.
+    #   @return [Array<Types::AttemptEcsTaskDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptDetail AWS API Documentation
     #
     class AttemptDetail < Struct.new(
       :container,
       :started_at,
       :stopped_at,
-      :status_reason)
+      :status_reason,
+      :task_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the details of a task.
+    #
+    # @!attribute [rw] container_instance_arn
+    #   The Amazon Resource Name (ARN) of the container instance that hosts
+    #   the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_arn
+    #   The ARN of the Amazon ECS task.
+    #   @return [String]
+    #
+    # @!attribute [rw] containers
+    #   A list of containers that are included in the `taskProperties` list.
+    #   @return [Array<Types::AttemptTaskContainerDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptEcsTaskDetails AWS API Documentation
+    #
+    class AttemptEcsTaskDetails < Struct.new(
+      :container_instance_arn,
+      :task_arn,
+      :containers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the details of a container that's part of a
+    # job attempt.
+    #
+    # @!attribute [rw] exit_code
+    #   The exit code for the container’s attempt. A non-zero exit code is
+    #   considered failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of a container.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A short (255 max characters) string that's easy to understand and
+    #   provides additional details for a running or stopped container.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_stream_name
+    #   The name of the Amazon CloudWatch Logs log stream that's associated
+    #   with the container. The log group for Batch jobs is
+    #   `/aws/batch/job`. Each container attempt receives a log stream name
+    #   when they reach the `RUNNING` status.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interfaces
+    #   The network interfaces that are associated with the job attempt.
+    #   @return [Array<Types::NetworkInterface>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptTaskContainerDetails AWS API Documentation
+    #
+    class AttemptTaskContainerDetails < Struct.new(
+      :exit_code,
+      :name,
+      :reason,
+      :log_stream_name,
+      :network_interfaces)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3211,6 +3282,10 @@ module Aws::Batch
     # An object that represents the details for an attempt for a job attempt
     # that an Amazon EKS container runs.
     #
+    # @!attribute [rw] name
+    #   The name of a container.
+    #   @return [String]
+    #
     # @!attribute [rw] exit_code
     #   The exit code returned for the job attempt. A non-zero exit code is
     #   considered failed.
@@ -3224,6 +3299,7 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksAttemptContainerDetail AWS API Documentation
     #
     class EksAttemptContainerDetail < Struct.new(
+      :name,
       :exit_code,
       :reason)
       SENSITIVE = []
@@ -4033,10 +4109,9 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] image_pull_secrets
-    #   References a Kubernetes secret resource. This object must start and
-    #   end with an alphanumeric character, is required to be lowercase, can
-    #   include periods (.) and hyphens (-), and can't contain more than
-    #   253 characters.
+    #   References a Kubernetes secret resource. It holds a list of secrets.
+    #   These secrets help to gain access to pull an images from a private
+    #   registry.
     #
     #   `ImagePullSecret$name` is required when this object is used.
     #   @return [Array<Types::ImagePullSecret>]
@@ -4161,6 +4236,8 @@ module Aws::Batch
     #
     # @!attribute [rw] image_pull_secrets
     #   Displays the reference pointer to the Kubernetes secret resource.
+    #   These secrets help to gain access to pull an images from a private
+    #   registry.
     #   @return [Array<Types::ImagePullSecret>]
     #
     # @!attribute [rw] containers
@@ -4562,9 +4639,10 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # References a Kubernetes configuration resource that holds a list of
-    # secrets. These secrets help to gain access to pull an image from a
-    # private registry.
+    # References a Kubernetes secret resource. This name of the secret must
+    # start and end with an alphanumeric character, is required to be
+    # lowercase, can include periods (.) and hyphens (-), and can't contain
+    # more than 253 characters.
     #
     # @!attribute [rw] name
     #   Provides a unique identifier for the `ImagePullSecret`. This object
@@ -5053,7 +5131,7 @@ module Aws::Batch
     #
     # @!attribute [rw] state
     #   The state of the job needed to trigger the action. The only
-    #   supported value is "`RUNNABLE`".
+    #   supported value is `RUNNABLE`.
     #   @return [String]
     #
     # @!attribute [rw] max_time_seconds
@@ -5066,7 +5144,7 @@ module Aws::Batch
     # @!attribute [rw] action
     #   The action to take when a job is at the head of the job queue in the
     #   specified state for the specified period of time. The only supported
-    #   value is "`CANCEL`", which will cancel the job.
+    #   value is `CANCEL`, which will cancel the job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobStateTimeLimitAction AWS API Documentation

@@ -107,6 +107,8 @@ module Aws
       # validate members
       member_ref = ref.shape.member
       values.each.with_index do |value, index|
+        next unless value
+
         shape(member_ref, value, errors, context + "[#{index}]")
       end
     end
@@ -122,6 +124,8 @@ module Aws
 
       values.each do |key, value|
         shape(key_ref, key, errors, "#{context} #{key.inspect} key")
+        next unless value
+
         shape(value_ref, value, errors, context + "[#{key.inspect}]")
       end
     end

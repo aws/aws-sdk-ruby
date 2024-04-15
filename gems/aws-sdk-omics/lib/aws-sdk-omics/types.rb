@@ -766,7 +766,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] upload_id
-    #   he ID for the initiated multipart upload.
+    #   The ID for the initiated multipart upload.
     #   @return [String]
     #
     # @!attribute [rw] source_file_type
@@ -987,6 +987,10 @@ module Aws::Omics
     #   upload.
     #   @return [String]
     #
+    # @!attribute [rw] e_tag_algorithm_family
+    #   The ETag algorithm family to use for ingested read sets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateSequenceStoreRequest AWS API Documentation
     #
     class CreateSequenceStoreRequest < Struct.new(
@@ -995,7 +999,8 @@ module Aws::Omics
       :sse_config,
       :tags,
       :client_token,
-      :fallback_location)
+      :fallback_location,
+      :e_tag_algorithm_family)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1029,6 +1034,10 @@ module Aws::Omics
     #   upload.
     #   @return [String]
     #
+    # @!attribute [rw] e_tag_algorithm_family
+    #   The algorithm family of the ETag.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateSequenceStoreResponse AWS API Documentation
     #
     class CreateSequenceStoreResponse < Struct.new(
@@ -1038,7 +1047,8 @@ module Aws::Omics
       :description,
       :sse_config,
       :creation_time,
-      :fallback_location)
+      :fallback_location,
+      :e_tag_algorithm_family)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1593,12 +1603,17 @@ module Aws::Omics
     #   The file's content length.
     #   @return [Integer]
     #
+    # @!attribute [rw] s3_access
+    #   The S3 URI metadata of a sequence store.
+    #   @return [Types::ReadSetS3Access]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/FileInformation AWS API Documentation
     #
     class FileInformation < Struct.new(
       :total_parts,
       :part_size,
-      :content_length)
+      :content_length,
+      :s3_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2849,6 +2864,15 @@ module Aws::Omics
     #   upload.
     #   @return [String]
     #
+    # @!attribute [rw] s3_access
+    #   The S3 metadata of a sequence store, including the ARN and S3 URI of
+    #   the S3 bucket.
+    #   @return [Types::SequenceStoreS3Access]
+    #
+    # @!attribute [rw] e_tag_algorithm_family
+    #   The algorithm family of the ETag.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetSequenceStoreResponse AWS API Documentation
     #
     class GetSequenceStoreResponse < Struct.new(
@@ -2858,7 +2882,9 @@ module Aws::Omics
       :description,
       :sse_config,
       :creation_time,
-      :fallback_location)
+      :fallback_location,
+      :s3_access,
+      :e_tag_algorithm_family)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4744,6 +4770,20 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # The S3 URI for each read set file.
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 URI for each read set file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ReadSetS3Access AWS API Documentation
+    #
+    class ReadSetS3Access < Struct.new(
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Filter settings that select for read set upload parts of interest.
     #
     # @!attribute [rw] created_after
@@ -5206,6 +5246,10 @@ module Aws::Omics
     #   upload.
     #   @return [String]
     #
+    # @!attribute [rw] e_tag_algorithm_family
+    #   The algorithm family of the ETag.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/SequenceStoreDetail AWS API Documentation
     #
     class SequenceStoreDetail < Struct.new(
@@ -5215,7 +5259,8 @@ module Aws::Omics
       :description,
       :sse_config,
       :creation_time,
-      :fallback_location)
+      :fallback_location,
+      :e_tag_algorithm_family)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5240,6 +5285,26 @@ module Aws::Omics
       :name,
       :created_after,
       :created_before)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 access metadata of the sequence store.
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 URI of the sequence store.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_point_arn
+    #   This is ARN of the access point associated with the S3 bucket
+    #   storing read sets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/SequenceStoreS3Access AWS API Documentation
+    #
+    class SequenceStoreS3Access < Struct.new(
+      :s3_uri,
+      :s3_access_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5771,7 +5836,7 @@ module Aws::Omics
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] storage_capacity
-    #   A storage capacity for the run in gigabytes.
+    #   A storage capacity for the run in gibibytes.
     #   @return [Integer]
     #
     # @!attribute [rw] output_uri

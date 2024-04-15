@@ -262,6 +262,7 @@ module Aws::IAM
     OpenIDConnectProviderListEntry = Shapes::StructureShape.new(name: 'OpenIDConnectProviderListEntry')
     OpenIDConnectProviderListType = Shapes::ListShape.new(name: 'OpenIDConnectProviderListType')
     OpenIDConnectProviderUrlType = Shapes::StringShape.new(name: 'OpenIDConnectProviderUrlType')
+    OpenIdIdpCommunicationErrorException = Shapes::StructureShape.new(name: 'OpenIdIdpCommunicationErrorException')
     OrganizationsDecisionDetail = Shapes::StructureShape.new(name: 'OrganizationsDecisionDetail')
     PasswordPolicy = Shapes::StructureShape.new(name: 'PasswordPolicy')
     PasswordPolicyViolationException = Shapes::StructureShape.new(name: 'PasswordPolicyViolationException')
@@ -444,6 +445,7 @@ module Aws::IAM
     mfaDeviceListType = Shapes::ListShape.new(name: 'mfaDeviceListType')
     minimumPasswordLengthType = Shapes::IntegerShape.new(name: 'minimumPasswordLengthType')
     noSuchEntityMessage = Shapes::StringShape.new(name: 'noSuchEntityMessage')
+    openIdIdpCommunicationErrorExceptionMessage = Shapes::StringShape.new(name: 'openIdIdpCommunicationErrorExceptionMessage')
     organizationsEntityPathType = Shapes::StringShape.new(name: 'organizationsEntityPathType')
     organizationsPolicyIdType = Shapes::StringShape.new(name: 'organizationsPolicyIdType')
     passwordPolicyViolationMessage = Shapes::StringShape.new(name: 'passwordPolicyViolationMessage')
@@ -628,7 +630,7 @@ module Aws::IAM
 
     CreateOpenIDConnectProviderRequest.add_member(:url, Shapes::ShapeRef.new(shape: OpenIDConnectProviderUrlType, required: true, location_name: "Url"))
     CreateOpenIDConnectProviderRequest.add_member(:client_id_list, Shapes::ShapeRef.new(shape: clientIDListType, location_name: "ClientIDList"))
-    CreateOpenIDConnectProviderRequest.add_member(:thumbprint_list, Shapes::ShapeRef.new(shape: thumbprintListType, required: true, location_name: "ThumbprintList"))
+    CreateOpenIDConnectProviderRequest.add_member(:thumbprint_list, Shapes::ShapeRef.new(shape: thumbprintListType, location_name: "ThumbprintList"))
     CreateOpenIDConnectProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     CreateOpenIDConnectProviderRequest.struct_class = Types::CreateOpenIDConnectProviderRequest
 
@@ -1523,6 +1525,9 @@ module Aws::IAM
 
     OpenIDConnectProviderListType.member = Shapes::ShapeRef.new(shape: OpenIDConnectProviderListEntry)
 
+    OpenIdIdpCommunicationErrorException.add_member(:message, Shapes::ShapeRef.new(shape: openIdIdpCommunicationErrorExceptionMessage, location_name: "message"))
+    OpenIdIdpCommunicationErrorException.struct_class = Types::OpenIdIdpCommunicationErrorException
+
     OrganizationsDecisionDetail.add_member(:allowed_by_organizations, Shapes::ShapeRef.new(shape: booleanType, location_name: "AllowedByOrganizations"))
     OrganizationsDecisionDetail.struct_class = Types::OrganizationsDecisionDetail
 
@@ -2290,6 +2295,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: OpenIdIdpCommunicationErrorException)
       end)
 
       api.add_operation(:create_policy, Seahorse::Model::Operation.new.tap do |o|

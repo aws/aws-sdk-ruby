@@ -3726,6 +3726,8 @@ module Aws
                                              all_columns_requested: bool?
                                            },
                                            supported_permission_types: Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")],
+                                           ?parent_resource_arn: ::String,
+                                           ?root_resource_arn: ::String,
                                            ?supported_dialect: {
                                              dialect: ("REDSHIFT" | "ATHENA" | "SPARK")?,
                                              dialect_version: ::String?

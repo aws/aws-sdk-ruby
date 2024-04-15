@@ -27,10 +27,13 @@ module Aws::CloudFormation
     ActivateOrganizationsAccessOutput = Shapes::StructureShape.new(name: 'ActivateOrganizationsAccessOutput')
     ActivateTypeInput = Shapes::StructureShape.new(name: 'ActivateTypeInput')
     ActivateTypeOutput = Shapes::StructureShape.new(name: 'ActivateTypeOutput')
+    AfterContext = Shapes::StringShape.new(name: 'AfterContext')
+    AfterValue = Shapes::StringShape.new(name: 'AfterValue')
     AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AttributeChangeType = Shapes::StringShape.new(name: 'AttributeChangeType')
     AutoDeployment = Shapes::StructureShape.new(name: 'AutoDeployment')
     AutoDeploymentNullable = Shapes::BooleanShape.new(name: 'AutoDeploymentNullable')
     AutoUpdate = Shapes::BooleanShape.new(name: 'AutoUpdate')
@@ -38,6 +41,8 @@ module Aws::CloudFormation
     BatchDescribeTypeConfigurationsErrors = Shapes::ListShape.new(name: 'BatchDescribeTypeConfigurationsErrors')
     BatchDescribeTypeConfigurationsInput = Shapes::StructureShape.new(name: 'BatchDescribeTypeConfigurationsInput')
     BatchDescribeTypeConfigurationsOutput = Shapes::StructureShape.new(name: 'BatchDescribeTypeConfigurationsOutput')
+    BeforeContext = Shapes::StringShape.new(name: 'BeforeContext')
+    BeforeValue = Shapes::StringShape.new(name: 'BeforeValue')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
     BoxedMaxResults = Shapes::IntegerShape.new(name: 'BoxedMaxResults')
     CFNRegistryException = Shapes::StructureShape.new(name: 'CFNRegistryException')
@@ -204,6 +209,7 @@ module Aws::CloudFormation
     InProgressStackInstancesCount = Shapes::IntegerShape.new(name: 'InProgressStackInstancesCount')
     InSyncStackInstancesCount = Shapes::IntegerShape.new(name: 'InSyncStackInstancesCount')
     IncludeNestedStacks = Shapes::BooleanShape.new(name: 'IncludeNestedStacks')
+    IncludePropertyValues = Shapes::BooleanShape.new(name: 'IncludePropertyValues')
     InsufficientCapabilitiesException = Shapes::StructureShape.new(name: 'InsufficientCapabilitiesException')
     InvalidChangeSetStatusException = Shapes::StructureShape.new(name: 'InvalidChangeSetStatusException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -365,6 +371,7 @@ module Aws::CloudFormation
     ResourceIdentifiers = Shapes::ListShape.new(name: 'ResourceIdentifiers')
     ResourceModel = Shapes::StringShape.new(name: 'ResourceModel')
     ResourceProperties = Shapes::StringShape.new(name: 'ResourceProperties')
+    ResourcePropertyPath = Shapes::StringShape.new(name: 'ResourcePropertyPath')
     ResourceScanId = Shapes::StringShape.new(name: 'ResourceScanId')
     ResourceScanInProgressException = Shapes::StructureShape.new(name: 'ResourceScanInProgressException')
     ResourceScanLimitExceededException = Shapes::StructureShape.new(name: 'ResourceScanLimitExceededException')
@@ -874,6 +881,7 @@ module Aws::CloudFormation
     DescribeChangeSetInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetNameOrId, required: true, location_name: "ChangeSetName"))
     DescribeChangeSetInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
     DescribeChangeSetInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeChangeSetInput.add_member(:include_property_values, Shapes::ShapeRef.new(shape: IncludePropertyValues, location_name: "IncludePropertyValues"))
     DescribeChangeSetInput.struct_class = Types::DescribeChangeSetInput
 
     DescribeChangeSetOutput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetName, location_name: "ChangeSetName"))
@@ -1511,6 +1519,8 @@ module Aws::CloudFormation
     ResourceChange.add_member(:details, Shapes::ShapeRef.new(shape: ResourceChangeDetails, location_name: "Details"))
     ResourceChange.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ChangeSetId"))
     ResourceChange.add_member(:module_info, Shapes::ShapeRef.new(shape: ModuleInfo, location_name: "ModuleInfo"))
+    ResourceChange.add_member(:before_context, Shapes::ShapeRef.new(shape: BeforeContext, location_name: "BeforeContext"))
+    ResourceChange.add_member(:after_context, Shapes::ShapeRef.new(shape: AfterContext, location_name: "AfterContext"))
     ResourceChange.struct_class = Types::ResourceChange
 
     ResourceChangeDetail.add_member(:target, Shapes::ShapeRef.new(shape: ResourceTargetDefinition, location_name: "Target"))
@@ -1569,6 +1579,10 @@ module Aws::CloudFormation
     ResourceTargetDefinition.add_member(:attribute, Shapes::ShapeRef.new(shape: ResourceAttribute, location_name: "Attribute"))
     ResourceTargetDefinition.add_member(:name, Shapes::ShapeRef.new(shape: PropertyName, location_name: "Name"))
     ResourceTargetDefinition.add_member(:requires_recreation, Shapes::ShapeRef.new(shape: RequiresRecreation, location_name: "RequiresRecreation"))
+    ResourceTargetDefinition.add_member(:path, Shapes::ShapeRef.new(shape: ResourcePropertyPath, location_name: "Path"))
+    ResourceTargetDefinition.add_member(:before_value, Shapes::ShapeRef.new(shape: BeforeValue, location_name: "BeforeValue"))
+    ResourceTargetDefinition.add_member(:after_value, Shapes::ShapeRef.new(shape: AfterValue, location_name: "AfterValue"))
+    ResourceTargetDefinition.add_member(:attribute_change_type, Shapes::ShapeRef.new(shape: AttributeChangeType, location_name: "AttributeChangeType"))
     ResourceTargetDefinition.struct_class = Types::ResourceTargetDefinition
 
     ResourceToImport.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))

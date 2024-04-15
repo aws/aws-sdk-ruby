@@ -32,14 +32,14 @@ module Aws::HealthLake
     class CreateFHIRDatastoreResponse
       attr_accessor datastore_id: ::String
       attr_accessor datastore_arn: ::String
-      attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED")
       attr_accessor datastore_endpoint: ::String
       SENSITIVE: []
     end
 
     class DatastoreFilter
       attr_accessor datastore_name: ::String
-      attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED")
       attr_accessor created_before: ::Time
       attr_accessor created_after: ::Time
       SENSITIVE: []
@@ -49,13 +49,14 @@ module Aws::HealthLake
       attr_accessor datastore_id: ::String
       attr_accessor datastore_arn: ::String
       attr_accessor datastore_name: ::String
-      attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor datastore_type_version: ("R4")
       attr_accessor datastore_endpoint: ::String
       attr_accessor sse_configuration: Types::SseConfiguration
       attr_accessor preload_data_config: Types::PreloadDataConfig
       attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      attr_accessor error_cause: Types::ErrorCause
       SENSITIVE: []
     end
 
@@ -67,7 +68,7 @@ module Aws::HealthLake
     class DeleteFHIRDatastoreResponse
       attr_accessor datastore_id: ::String
       attr_accessor datastore_arn: ::String
-      attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED")
       attr_accessor datastore_endpoint: ::String
       SENSITIVE: []
     end
@@ -101,6 +102,12 @@ module Aws::HealthLake
 
     class DescribeFHIRImportJobResponse
       attr_accessor import_job_properties: Types::ImportJobProperties
+      SENSITIVE: []
+    end
+
+    class ErrorCause
+      attr_accessor error_message: ::String
+      attr_accessor error_category: ("RETRYABLE_ERROR" | "NON_RETRYABLE_ERROR")
       SENSITIVE: []
     end
 

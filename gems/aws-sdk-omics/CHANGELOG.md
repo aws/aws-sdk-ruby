@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-04-11)
+------------------
+
+* Feature - This release adds support for retrieval of S3 direct access metadata on sequence stores and read sets, and adds support for SHA256up and SHA512up HealthOmics ETags.
+
 1.23.0 (2024-01-26)
 ------------------
 

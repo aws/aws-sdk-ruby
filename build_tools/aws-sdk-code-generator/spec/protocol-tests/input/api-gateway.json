@@ -1,6 +1,6 @@
 [
   {
-    "description": "No parameters set marshalls as empty body",
+    "description": "Test cases for EmptyOperation operation",
     "metadata": {
        "protocol": "api-gateway",
        "apiVersion": "2016-12-14T20:41:37Z"
@@ -8,6 +8,7 @@
     "shapes": {},
     "cases": [
       {
+        "id": "ApiGatewayMarshalEmptyBody",
         "given": {
           "http": {
             "method": "GET",
@@ -15,6 +16,7 @@
           },
           "name": "OperationName"
         },
+        "description": "No parameters set marshals as empty body",
         "serialized": {
           "body": "",
           "uri": "/test/noauth/scalars",
@@ -24,7 +26,7 @@
     ]
   },
   {
-    "description": "Scalar members in payload member",
+    "description": "Test cases for Scalar Payload Members",
     "metadata": {
        "protocol": "api-gateway",
        "apiVersion": "2016-12-14T20:41:37Z"
@@ -68,6 +70,7 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayMarshalsScalarPayloadMembers",
         "given": {
           "http": {
             "method": "GET",
@@ -78,6 +81,7 @@
           },
           "name": "OperationName"
         },
+        "description": "Scalar members in payload member",
         "params": {
           "StringMember": "foo",
           "IntegerMember": 42,
@@ -94,7 +98,7 @@
     ]
   },
   {
-    "description": "Nested structure in payload member",
+    "description": "Test cases for Struct Payload Member",
     "metadata": {
        "protocol": "api-gateway",
        "apiVersion": "2016-12-14T20:41:37Z"
@@ -131,6 +135,7 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayNestedStructPayloadMember",
         "given": {
           "http": {
             "method": "GET",
@@ -141,6 +146,7 @@
           },
           "name": "OperationName"
         },
+        "description": "Nested structure in payload member",
         "params": {
           "PayloadMember": {
             "NestedStructure": {
@@ -157,7 +163,7 @@
     ]
   },
   {
-    "description": "Recursive structure with no recursion used",
+    "description": "Test cases for Recursive structure with no recursion member",
     "metadata": {
        "protocol": "api-gateway",
        "apiVersion": "2016-12-14T20:41:37Z"
@@ -185,6 +191,7 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayRecursiveStructWithNoRecursionMember",
         "given": {
           "http": {
             "method": "PUT",
@@ -195,6 +202,7 @@
           },
           "name": "OperationName"
         },
+        "description": "Recursive structure with no recursion used",
         "params": {
           "RecursiveStructure": {
             "NoRecursiveMember": "foo"
@@ -209,7 +217,7 @@
     ]
   },
   {
-    "description": "Recursive structure with multiple levels of recursion",
+    "description": "Test cases for Recursive structure with recursion member",
     "metadata": {
        "protocol": "api-gateway",
        "apiVersion": "2016-12-14T20:41:37Z"
@@ -253,6 +261,7 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayRecrusiveStructwithRecursionMember",
         "given": {
           "http": {
             "method": "PUT",
@@ -263,6 +272,7 @@
           },
           "name": "OperationName"
         },
+        "description": "Recursive structure with multiple levels of recursion\"",
         "params": {
           "RecursiveStructure": {
             "RecursiveMember": {
@@ -281,7 +291,7 @@
     ]
   },
   {
-    "description": "Modeled string header with location name, Query Strings",
+    "description": "Test cases for String Header with location name",
     "metadata": {
        "protocol": "api-gateway",
        "apiVersion": "2016-12-14T20:41:37Z"
@@ -313,6 +323,7 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayStringHeaderQueryString",
         "given": {
           "http": {
             "method": "POST",
@@ -323,6 +334,7 @@
           },
           "name": "OperationName"
         },
+        "description": "Modeled string header with location name, Query Strings",
         "params": {
           "QueryStrMemberA": "querya",
           "QueryStrMemberB": "queryb",
@@ -339,7 +351,7 @@
     ]
   },
   {
-    "description": "Operation with single path parameter replaces placeholder",
+    "description": "Test cases for Operation with single path parameter",
     "metadata": {
        "protocol": "api-gateway",
        "apiVersion": "2016-12-14T20:41:37Z"
@@ -360,6 +372,7 @@
     },
     "cases": [
       {
+        "id": "ApiGatewaySinglePathParameter",
         "given": {
           "http": {
             "method": "GET",
@@ -370,6 +383,7 @@
           },
           "name": "OperationName"
         },
+        "description": "Operation with single path parameter replaces placeholder",
         "params": {
           "PathMember": "foo"
         },
@@ -382,7 +396,7 @@
     ]
   },
   {
-    "description": "Operation with multiple path parameters replaces correct placeholders",
+    "description": "Test cases for Operation with multiple path parameters",
     "metadata": {
        "protocol": "api-gateway",
        "apiVersion": "2016-12-14T20:41:37Z"
@@ -409,6 +423,7 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayMultiplePathParameters",
         "given": {
           "http": {
             "method": "GET",
@@ -419,6 +434,7 @@
           },
           "name": "OperationName"
         },
+        "description": "Operation with multiple path parameters replaces correct placeholders",
         "params": {
           "PathMember": "foo",
           "MultiLocation": "bar"

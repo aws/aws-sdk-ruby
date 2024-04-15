@@ -25,6 +25,7 @@ module Aws::CloudWatch
       attr_accessor stat: ::String
       attr_accessor configuration: Types::AnomalyDetectorConfiguration
       attr_accessor state_value: ("PENDING_TRAINING" | "TRAINED_INSUFFICIENT_DATA" | "TRAINED")
+      attr_accessor metric_characteristics: Types::MetricCharacteristics
       attr_accessor single_metric_anomaly_detector: Types::SingleMetricAnomalyDetector
       attr_accessor metric_math_anomaly_detector: Types::MetricMathAnomalyDetector
       SENSITIVE: []
@@ -572,6 +573,11 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class MetricCharacteristics
+      attr_accessor periodic_spikes: bool
+      SENSITIVE: []
+    end
+
     class MetricDataQuery
       attr_accessor id: ::String
       attr_accessor metric_stat: Types::MetricStat
@@ -667,6 +673,7 @@ module Aws::CloudWatch
       attr_accessor dimensions: ::Array[Types::Dimension]
       attr_accessor stat: ::String
       attr_accessor configuration: Types::AnomalyDetectorConfiguration
+      attr_accessor metric_characteristics: Types::MetricCharacteristics
       attr_accessor single_metric_anomaly_detector: Types::SingleMetricAnomalyDetector
       attr_accessor metric_math_anomaly_detector: Types::MetricMathAnomalyDetector
       SENSITIVE: []

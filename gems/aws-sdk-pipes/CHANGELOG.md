@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-04-11)
+------------------
+
+* Feature - LogConfiguration ARN validation fixes
+
 1.15.0 (2024-01-26)
 ------------------
 

@@ -10,13 +10,8 @@
 module Aws::IoTFleetHub
   module Types
 
-    # A summary of information about a AWS IoT Device Management web
-    # application.
-    #
-    # <note markdown="1"> Fleet Hub for AWS IoT Device Management is in public preview and is
-    # subject to change.
-    #
-    #  </note>
+    # A summary of information about a Fleet Hub for IoT Device Management
+    # web application.
     #
     # @!attribute [rw] application_id
     #   The unique Id of the web application.
@@ -89,7 +84,7 @@ module Aws::IoTFleetHub
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that the web application assumes when it
-    #   interacts with AWS IoT Core.
+    #   interacts with Amazon Web Services IoT Core.
     #
     #   <note markdown="1"> The name of the role must be in the form
     #   `AWSIotFleetHub_random_string `.
@@ -193,7 +188,7 @@ module Aws::IoTFleetHub
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that the web application assumes when it
-    #   interacts with AWS IoT Core.
+    #   interacts with Amazon Web Services IoT Core.
     #   @return [String]
     #
     # @!attribute [rw] sso_client_id
@@ -202,7 +197,9 @@ module Aws::IoTFleetHub
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   A message indicating why the `DescribeApplication` API failed.
+    #   A message that explains any failures included in the
+    #   `applicationState` response field. This message explains failures in
+    #   the `CreateApplication` and `DeleteApplication` actions.
     #   @return [String]
     #
     # @!attribute [rw] tags

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2024-04-12)
+------------------
+
+* Feature - Update to API documentation to resolve customer reported issues.
+
 1.6.0 (2024-03-29)
 ------------------
 

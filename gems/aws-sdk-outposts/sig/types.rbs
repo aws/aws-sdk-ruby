@@ -414,7 +414,7 @@ module Aws::Outposts
 
     class ShipmentInformation
       attr_accessor shipment_tracking_number: ::String
-      attr_accessor shipment_carrier: ("DHL" | "DBS" | "FEDEX" | "UPS")
+      attr_accessor shipment_carrier: ("DHL" | "DBS" | "FEDEX" | "UPS" | "EXPEDITORS")
       SENSITIVE: []
     end
 

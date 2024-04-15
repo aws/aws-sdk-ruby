@@ -3675,6 +3675,8 @@ module Aws::Glue
     GetUnfilteredTableMetadataRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetUnfilteredTableMetadataRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
     GetUnfilteredTableMetadataRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, required: true, location_name: "SupportedPermissionTypes"))
+    GetUnfilteredTableMetadataRequest.add_member(:parent_resource_arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "ParentResourceArn"))
+    GetUnfilteredTableMetadataRequest.add_member(:root_resource_arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "RootResourceArn"))
     GetUnfilteredTableMetadataRequest.add_member(:supported_dialect, Shapes::ShapeRef.new(shape: SupportedDialect, location_name: "SupportedDialect"))
     GetUnfilteredTableMetadataRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     GetUnfilteredTableMetadataRequest.add_member(:query_session_context, Shapes::ShapeRef.new(shape: QuerySessionContext, location_name: "QuerySessionContext"))

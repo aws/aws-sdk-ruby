@@ -520,6 +520,20 @@ module Aws::ConfigService
     #
     # @!attribute [rw] configuration_item_delivery_time
     #   The time when configuration changes for the resource were delivered.
+    #
+    #   <note markdown="1"> This field is optional and is not guaranteed to be present in a
+    #   configuration item (CI). If you are using daily recording, this
+    #   field will be populated. However, if you are using continuous
+    #   recording, this field will be omitted since the delivery time is
+    #   instantaneous as the CI is available right away. For more
+    #   information on daily recording and continuous recording, see
+    #   [Recording Frequency][1] in the *Config Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BaseConfigurationItem AWS API Documentation
@@ -1380,6 +1394,20 @@ module Aws::ConfigService
     #
     # @!attribute [rw] configuration_item_delivery_time
     #   The time when configuration changes for the resource were delivered.
+    #
+    #   <note markdown="1"> This field is optional and is not guaranteed to be present in a
+    #   configuration item (CI). If you are using daily recording, this
+    #   field will be populated. However, if you are using continuous
+    #   recording, this field will be omitted since the delivery time is
+    #   instantaneous as the CI is available right away. For more
+    #   information on daily recording and continuous recording, see
+    #   [Recording Frequency][1] in the *Config Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationItem AWS API Documentation
@@ -2604,7 +2632,7 @@ module Aws::ConfigService
     #   The number of rule evaluation results that you want returned.
     #
     #   This parameter is required if the rule limit for your account is
-    #   more than the default of 150 rules.
+    #   more than the default of 1000 rules.
     #
     #   For information about requesting a rule limit increase, see [Config
     #   Limits][1] in the *Amazon Web Services General Reference Guide*.
@@ -5313,7 +5341,7 @@ module Aws::ConfigService
     class MaxActiveResourcesExceededException < Aws::EmptyStructure; end
 
     # Failed to add the Config rule because the account already contains the
-    # maximum number of 150 rules. Consider deleting any deactivated rules
+    # maximum number of 1000 rules. Consider deleting any deactivated rules
     # before you add new rules.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/MaxNumberOfConfigRulesExceededException AWS API Documentation
@@ -7964,7 +7992,10 @@ module Aws::ConfigService
     #
     # @!attribute [rw] evaluation_mode
     #   Filters all resource evaluations results based on an evaluation
-    #   mode. the valid value for this API is `Proactive`.
+    #   mode.
+    #
+    #   Currently, `DECTECTIVE` is not supported as a valid value. Ignore
+    #   other documentation stating otherwise.
     #   @return [String]
     #
     # @!attribute [rw] time_window

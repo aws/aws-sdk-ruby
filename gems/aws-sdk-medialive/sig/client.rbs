@@ -3447,6 +3447,532 @@ module Aws
                                      ) -> _RestartChannelPipelinesResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestartChannelPipelinesResponseSuccess
 
+      interface _CreateCloudWatchAlarmTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudWatchAlarmTemplateResponse]
+        def arn: () -> ::String
+        def comparison_operator: () -> ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+        def created_at: () -> ::Time
+        def datapoints_to_alarm: () -> ::Integer
+        def description: () -> ::String
+        def evaluation_periods: () -> ::Integer
+        def group_id: () -> ::String
+        def id: () -> ::String
+        def metric_name: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def period: () -> ::Integer
+        def statistic: () -> ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+        def tags: () -> ::Hash[::String, ::String]
+        def target_resource_type: () -> ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+        def threshold: () -> ::Float
+        def treat_missing_data: () -> ("notBreaching" | "breaching" | "ignore" | "missing")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_cloud_watch_alarm_template-instance_method
+      def create_cloud_watch_alarm_template: (
+                                               comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold"),
+                                               ?datapoints_to_alarm: ::Integer,
+                                               ?description: ::String,
+                                               evaluation_periods: ::Integer,
+                                               group_identifier: ::String,
+                                               metric_name: ::String,
+                                               name: ::String,
+                                               period: ::Integer,
+                                               statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum"),
+                                               ?tags: Hash[::String, ::String],
+                                               target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET"),
+                                               threshold: ::Float,
+                                               treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+                                             ) -> _CreateCloudWatchAlarmTemplateResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudWatchAlarmTemplateResponseSuccess
+
+      interface _CreateCloudWatchAlarmTemplateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudWatchAlarmTemplateGroupResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_cloud_watch_alarm_template_group-instance_method
+      def create_cloud_watch_alarm_template_group: (
+                                                     ?description: ::String,
+                                                     name: ::String,
+                                                     ?tags: Hash[::String, ::String]
+                                                   ) -> _CreateCloudWatchAlarmTemplateGroupResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudWatchAlarmTemplateGroupResponseSuccess
+
+      interface _CreateEventBridgeRuleTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventBridgeRuleTemplateResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def event_targets: () -> ::Array[Types::EventBridgeRuleTemplateTarget]
+        def event_type: () -> ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+        def group_id: () -> ::String
+        def id: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_event_bridge_rule_template-instance_method
+      def create_event_bridge_rule_template: (
+                                               ?description: ::String,
+                                               ?event_targets: Array[
+                                                 {
+                                                   arn: ::String
+                                                 },
+                                               ],
+                                               event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE"),
+                                               group_identifier: ::String,
+                                               name: ::String,
+                                               ?tags: Hash[::String, ::String]
+                                             ) -> _CreateEventBridgeRuleTemplateResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventBridgeRuleTemplateResponseSuccess
+
+      interface _CreateEventBridgeRuleTemplateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventBridgeRuleTemplateGroupResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_event_bridge_rule_template_group-instance_method
+      def create_event_bridge_rule_template_group: (
+                                                     ?description: ::String,
+                                                     name: ::String,
+                                                     ?tags: Hash[::String, ::String]
+                                                   ) -> _CreateEventBridgeRuleTemplateGroupResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventBridgeRuleTemplateGroupResponseSuccess
+
+      interface _CreateSignalMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSignalMapResponse]
+        def arn: () -> ::String
+        def cloud_watch_alarm_template_group_ids: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def discovery_entry_point_arn: () -> ::String
+        def error_message: () -> ::String
+        def event_bridge_rule_template_group_ids: () -> ::Array[::String]
+        def failed_media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def id: () -> ::String
+        def last_discovered_at: () -> ::Time
+        def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment
+        def media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def modified_at: () -> ::Time
+        def monitor_changes_pending_deployment: () -> bool
+        def monitor_deployment: () -> Types::MonitorDeployment
+        def name: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_signal_map-instance_method
+      def create_signal_map: (
+                               ?cloud_watch_alarm_template_group_identifiers: Array[::String],
+                               ?description: ::String,
+                               discovery_entry_point_arn: ::String,
+                               ?event_bridge_rule_template_group_identifiers: Array[::String],
+                               name: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateSignalMapResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSignalMapResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_cloud_watch_alarm_template-instance_method
+      def delete_cloud_watch_alarm_template: (
+                                               identifier: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_cloud_watch_alarm_template_group-instance_method
+      def delete_cloud_watch_alarm_template_group: (
+                                                     identifier: ::String
+                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_event_bridge_rule_template-instance_method
+      def delete_event_bridge_rule_template: (
+                                               identifier: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_event_bridge_rule_template_group-instance_method
+      def delete_event_bridge_rule_template_group: (
+                                                     identifier: ::String
+                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_signal_map-instance_method
+      def delete_signal_map: (
+                               identifier: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetCloudWatchAlarmTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudWatchAlarmTemplateResponse]
+        def arn: () -> ::String
+        def comparison_operator: () -> ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+        def created_at: () -> ::Time
+        def datapoints_to_alarm: () -> ::Integer
+        def description: () -> ::String
+        def evaluation_periods: () -> ::Integer
+        def group_id: () -> ::String
+        def id: () -> ::String
+        def metric_name: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def period: () -> ::Integer
+        def statistic: () -> ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+        def tags: () -> ::Hash[::String, ::String]
+        def target_resource_type: () -> ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+        def threshold: () -> ::Float
+        def treat_missing_data: () -> ("notBreaching" | "breaching" | "ignore" | "missing")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#get_cloud_watch_alarm_template-instance_method
+      def get_cloud_watch_alarm_template: (
+                                            identifier: ::String
+                                          ) -> _GetCloudWatchAlarmTemplateResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudWatchAlarmTemplateResponseSuccess
+
+      interface _GetCloudWatchAlarmTemplateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudWatchAlarmTemplateGroupResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#get_cloud_watch_alarm_template_group-instance_method
+      def get_cloud_watch_alarm_template_group: (
+                                                  identifier: ::String
+                                                ) -> _GetCloudWatchAlarmTemplateGroupResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudWatchAlarmTemplateGroupResponseSuccess
+
+      interface _GetEventBridgeRuleTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventBridgeRuleTemplateResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def event_targets: () -> ::Array[Types::EventBridgeRuleTemplateTarget]
+        def event_type: () -> ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+        def group_id: () -> ::String
+        def id: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#get_event_bridge_rule_template-instance_method
+      def get_event_bridge_rule_template: (
+                                            identifier: ::String
+                                          ) -> _GetEventBridgeRuleTemplateResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventBridgeRuleTemplateResponseSuccess
+
+      interface _GetEventBridgeRuleTemplateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventBridgeRuleTemplateGroupResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#get_event_bridge_rule_template_group-instance_method
+      def get_event_bridge_rule_template_group: (
+                                                  identifier: ::String
+                                                ) -> _GetEventBridgeRuleTemplateGroupResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventBridgeRuleTemplateGroupResponseSuccess
+
+      interface _GetSignalMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSignalMapResponse]
+        def arn: () -> ::String
+        def cloud_watch_alarm_template_group_ids: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def discovery_entry_point_arn: () -> ::String
+        def error_message: () -> ::String
+        def event_bridge_rule_template_group_ids: () -> ::Array[::String]
+        def failed_media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def id: () -> ::String
+        def last_discovered_at: () -> ::Time
+        def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment
+        def media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def modified_at: () -> ::Time
+        def monitor_changes_pending_deployment: () -> bool
+        def monitor_deployment: () -> Types::MonitorDeployment
+        def name: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#get_signal_map-instance_method
+      def get_signal_map: (
+                            identifier: ::String
+                          ) -> _GetSignalMapResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSignalMapResponseSuccess
+
+      interface _ListCloudWatchAlarmTemplateGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCloudWatchAlarmTemplateGroupsResponse]
+        def cloud_watch_alarm_template_groups: () -> ::Array[Types::CloudWatchAlarmTemplateGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_cloud_watch_alarm_template_groups-instance_method
+      def list_cloud_watch_alarm_template_groups: (
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String,
+                                                    ?scope: ::String,
+                                                    ?signal_map_identifier: ::String
+                                                  ) -> _ListCloudWatchAlarmTemplateGroupsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCloudWatchAlarmTemplateGroupsResponseSuccess
+
+      interface _ListCloudWatchAlarmTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCloudWatchAlarmTemplatesResponse]
+        def cloud_watch_alarm_templates: () -> ::Array[Types::CloudWatchAlarmTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_cloud_watch_alarm_templates-instance_method
+      def list_cloud_watch_alarm_templates: (
+                                              ?group_identifier: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              ?scope: ::String,
+                                              ?signal_map_identifier: ::String
+                                            ) -> _ListCloudWatchAlarmTemplatesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCloudWatchAlarmTemplatesResponseSuccess
+
+      interface _ListEventBridgeRuleTemplateGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventBridgeRuleTemplateGroupsResponse]
+        def event_bridge_rule_template_groups: () -> ::Array[Types::EventBridgeRuleTemplateGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_event_bridge_rule_template_groups-instance_method
+      def list_event_bridge_rule_template_groups: (
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String,
+                                                    ?signal_map_identifier: ::String
+                                                  ) -> _ListEventBridgeRuleTemplateGroupsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventBridgeRuleTemplateGroupsResponseSuccess
+
+      interface _ListEventBridgeRuleTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventBridgeRuleTemplatesResponse]
+        def event_bridge_rule_templates: () -> ::Array[Types::EventBridgeRuleTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_event_bridge_rule_templates-instance_method
+      def list_event_bridge_rule_templates: (
+                                              ?group_identifier: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              ?signal_map_identifier: ::String
+                                            ) -> _ListEventBridgeRuleTemplatesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventBridgeRuleTemplatesResponseSuccess
+
+      interface _ListSignalMapsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSignalMapsResponse]
+        def next_token: () -> ::String
+        def signal_maps: () -> ::Array[Types::SignalMapSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_signal_maps-instance_method
+      def list_signal_maps: (
+                              ?cloud_watch_alarm_template_group_identifier: ::String,
+                              ?event_bridge_rule_template_group_identifier: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListSignalMapsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSignalMapsResponseSuccess
+
+      interface _StartDeleteMonitorDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDeleteMonitorDeploymentResponse]
+        def arn: () -> ::String
+        def cloud_watch_alarm_template_group_ids: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def discovery_entry_point_arn: () -> ::String
+        def error_message: () -> ::String
+        def event_bridge_rule_template_group_ids: () -> ::Array[::String]
+        def failed_media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def id: () -> ::String
+        def last_discovered_at: () -> ::Time
+        def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment
+        def media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def modified_at: () -> ::Time
+        def monitor_changes_pending_deployment: () -> bool
+        def monitor_deployment: () -> Types::MonitorDeployment
+        def name: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#start_delete_monitor_deployment-instance_method
+      def start_delete_monitor_deployment: (
+                                             identifier: ::String
+                                           ) -> _StartDeleteMonitorDeploymentResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeleteMonitorDeploymentResponseSuccess
+
+      interface _StartMonitorDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMonitorDeploymentResponse]
+        def arn: () -> ::String
+        def cloud_watch_alarm_template_group_ids: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def discovery_entry_point_arn: () -> ::String
+        def error_message: () -> ::String
+        def event_bridge_rule_template_group_ids: () -> ::Array[::String]
+        def failed_media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def id: () -> ::String
+        def last_discovered_at: () -> ::Time
+        def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment
+        def media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def modified_at: () -> ::Time
+        def monitor_changes_pending_deployment: () -> bool
+        def monitor_deployment: () -> Types::MonitorDeployment
+        def name: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#start_monitor_deployment-instance_method
+      def start_monitor_deployment: (
+                                      ?dry_run: bool,
+                                      identifier: ::String
+                                    ) -> _StartMonitorDeploymentResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMonitorDeploymentResponseSuccess
+
+      interface _StartUpdateSignalMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartUpdateSignalMapResponse]
+        def arn: () -> ::String
+        def cloud_watch_alarm_template_group_ids: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def discovery_entry_point_arn: () -> ::String
+        def error_message: () -> ::String
+        def event_bridge_rule_template_group_ids: () -> ::Array[::String]
+        def failed_media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def id: () -> ::String
+        def last_discovered_at: () -> ::Time
+        def last_successful_monitor_deployment: () -> Types::SuccessfulMonitorDeployment
+        def media_resource_map: () -> ::Hash[::String, Types::MediaResource]
+        def modified_at: () -> ::Time
+        def monitor_changes_pending_deployment: () -> bool
+        def monitor_deployment: () -> Types::MonitorDeployment
+        def name: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#start_update_signal_map-instance_method
+      def start_update_signal_map: (
+                                     ?cloud_watch_alarm_template_group_identifiers: Array[::String],
+                                     ?description: ::String,
+                                     ?discovery_entry_point_arn: ::String,
+                                     ?event_bridge_rule_template_group_identifiers: Array[::String],
+                                     ?force_rediscovery: bool,
+                                     identifier: ::String,
+                                     ?name: ::String
+                                   ) -> _StartUpdateSignalMapResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartUpdateSignalMapResponseSuccess
+
+      interface _UpdateCloudWatchAlarmTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloudWatchAlarmTemplateResponse]
+        def arn: () -> ::String
+        def comparison_operator: () -> ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+        def created_at: () -> ::Time
+        def datapoints_to_alarm: () -> ::Integer
+        def description: () -> ::String
+        def evaluation_periods: () -> ::Integer
+        def group_id: () -> ::String
+        def id: () -> ::String
+        def metric_name: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def period: () -> ::Integer
+        def statistic: () -> ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+        def tags: () -> ::Hash[::String, ::String]
+        def target_resource_type: () -> ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+        def threshold: () -> ::Float
+        def treat_missing_data: () -> ("notBreaching" | "breaching" | "ignore" | "missing")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#update_cloud_watch_alarm_template-instance_method
+      def update_cloud_watch_alarm_template: (
+                                               ?comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold"),
+                                               ?datapoints_to_alarm: ::Integer,
+                                               ?description: ::String,
+                                               ?evaluation_periods: ::Integer,
+                                               ?group_identifier: ::String,
+                                               identifier: ::String,
+                                               ?metric_name: ::String,
+                                               ?name: ::String,
+                                               ?period: ::Integer,
+                                               ?statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum"),
+                                               ?target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET"),
+                                               ?threshold: ::Float,
+                                               ?treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+                                             ) -> _UpdateCloudWatchAlarmTemplateResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudWatchAlarmTemplateResponseSuccess
+
+      interface _UpdateCloudWatchAlarmTemplateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloudWatchAlarmTemplateGroupResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#update_cloud_watch_alarm_template_group-instance_method
+      def update_cloud_watch_alarm_template_group: (
+                                                     ?description: ::String,
+                                                     identifier: ::String
+                                                   ) -> _UpdateCloudWatchAlarmTemplateGroupResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudWatchAlarmTemplateGroupResponseSuccess
+
+      interface _UpdateEventBridgeRuleTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventBridgeRuleTemplateResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def event_targets: () -> ::Array[Types::EventBridgeRuleTemplateTarget]
+        def event_type: () -> ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+        def group_id: () -> ::String
+        def id: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#update_event_bridge_rule_template-instance_method
+      def update_event_bridge_rule_template: (
+                                               ?description: ::String,
+                                               ?event_targets: Array[
+                                                 {
+                                                   arn: ::String
+                                                 },
+                                               ],
+                                               ?event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE"),
+                                               ?group_identifier: ::String,
+                                               identifier: ::String,
+                                               ?name: ::String
+                                             ) -> _UpdateEventBridgeRuleTemplateResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventBridgeRuleTemplateResponseSuccess
+
+      interface _UpdateEventBridgeRuleTemplateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventBridgeRuleTemplateGroupResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id: () -> ::String
+        def modified_at: () -> ::Time
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#update_event_bridge_rule_template_group-instance_method
+      def update_event_bridge_rule_template_group: (
+                                                     ?description: ::String,
+                                                     identifier: ::String
+                                                   ) -> _UpdateEventBridgeRuleTemplateGroupResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventBridgeRuleTemplateGroupResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#wait_until-instance_method
       def wait_until: (:channel_created waiter_name, 
                     channel_id: ::String
@@ -3492,6 +4018,22 @@ module Aws
                     multiplex_id: ::String
                   ) -> Client::_DescribeMultiplexResponseSuccess
                     | (:multiplex_stopped waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMultiplexResponseSuccess
+                    | (:signal_map_created waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetSignalMapResponseSuccess
+                    | (:signal_map_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSignalMapResponseSuccess
+                    | (:signal_map_monitor_deleted waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetSignalMapResponseSuccess
+                    | (:signal_map_monitor_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSignalMapResponseSuccess
+                    | (:signal_map_monitor_deployed waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetSignalMapResponseSuccess
+                    | (:signal_map_monitor_deployed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSignalMapResponseSuccess
+                    | (:signal_map_updated waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetSignalMapResponseSuccess
+                    | (:signal_map_updated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSignalMapResponseSuccess
     end
   end
 end

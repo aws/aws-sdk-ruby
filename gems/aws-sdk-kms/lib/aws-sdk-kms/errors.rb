@@ -33,6 +33,7 @@ module Aws::KMS
   # * {CloudHsmClusterNotActiveException}
   # * {CloudHsmClusterNotFoundException}
   # * {CloudHsmClusterNotRelatedException}
+  # * {ConflictException}
   # * {CustomKeyStoreHasCMKsException}
   # * {CustomKeyStoreInvalidStateException}
   # * {CustomKeyStoreNameInUseException}
@@ -161,6 +162,21 @@ module Aws::KMS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::KMS::Types::CloudHsmClusterNotRelatedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::KMS::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

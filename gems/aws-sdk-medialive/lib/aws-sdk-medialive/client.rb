@@ -9569,6 +9569,1551 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Creates a cloudwatch alarm template to dynamically generate cloudwatch
+    # metric alarms on targeted resource types.
+    #
+    # @option params [required, String] :comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #
+    # @option params [Integer] :datapoints_to_alarm
+    #
+    # @option params [String] :description
+    #
+    # @option params [required, Integer] :evaluation_periods
+    #
+    # @option params [required, String] :group_identifier
+    #
+    # @option params [required, String] :metric_name
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [required, Integer] :period
+    #
+    # @option params [required, String] :statistic
+    #   The statistic to apply to the alarm's metric data.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Represents the tags associated with a resource.
+    #
+    # @option params [required, String] :target_resource_type
+    #   The resource type this template should dynamically generate cloudwatch
+    #   metric alarms for.
+    #
+    # @option params [required, Float] :threshold
+    #
+    # @option params [required, String] :treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #
+    # @return [Types::CreateCloudWatchAlarmTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#arn #arn} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#comparison_operator #comparison_operator} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#created_at #created_at} => Time
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#datapoints_to_alarm #datapoints_to_alarm} => Integer
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#description #description} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#evaluation_periods #evaluation_periods} => Integer
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#group_id #group_id} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#id #id} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#metric_name #metric_name} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#modified_at #modified_at} => Time
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#name #name} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#period #period} => Integer
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#statistic #statistic} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#target_resource_type #target_resource_type} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#threshold #threshold} => Float
+    #   * {Types::CreateCloudWatchAlarmTemplateResponse#treat_missing_data #treat_missing_data} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cloud_watch_alarm_template({
+    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #     datapoints_to_alarm: 1,
+    #     description: "__stringMin0Max1024",
+    #     evaluation_periods: 1, # required
+    #     group_identifier: "__stringPatternS", # required
+    #     metric_name: "__stringMax64", # required
+    #     name: "__stringMin1Max255PatternS", # required
+    #     period: 1, # required
+    #     statistic: "SampleCount", # required, accepts SampleCount, Average, Sum, Minimum, Maximum
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION", # required, accepts CLOUDFRONT_DISTRIBUTION, MEDIALIVE_MULTIPLEX, MEDIALIVE_CHANNEL, MEDIALIVE_INPUT_DEVICE, MEDIAPACKAGE_CHANNEL, MEDIAPACKAGE_ORIGIN_ENDPOINT, MEDIACONNECT_FLOW, S3_BUCKET
+    #     threshold: 1.0, # required
+    #     treat_missing_data: "notBreaching", # required, accepts notBreaching, breaching, ignore, missing
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+    #   resp.created_at #=> Time
+    #   resp.datapoints_to_alarm #=> Integer
+    #   resp.description #=> String
+    #   resp.evaluation_periods #=> Integer
+    #   resp.group_id #=> String
+    #   resp.id #=> String
+    #   resp.metric_name #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.period #=> Integer
+    #   resp.statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET"
+    #   resp.threshold #=> Float
+    #   resp.treat_missing_data #=> String, one of "notBreaching", "breaching", "ignore", "missing"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplate AWS API Documentation
+    #
+    # @overload create_cloud_watch_alarm_template(params = {})
+    # @param [Hash] params ({})
+    def create_cloud_watch_alarm_template(params = {}, options = {})
+      req = build_request(:create_cloud_watch_alarm_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a cloudwatch alarm template group to group your cloudwatch
+    # alarm templates and to attach to signal maps for dynamically creating
+    # alarms.
+    #
+    # @option params [String] :description
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Represents the tags associated with a resource.
+    #
+    # @return [Types::CreateCloudWatchAlarmTemplateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCloudWatchAlarmTemplateGroupResponse#arn #arn} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateGroupResponse#created_at #created_at} => Time
+    #   * {Types::CreateCloudWatchAlarmTemplateGroupResponse#description #description} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateGroupResponse#id #id} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateGroupResponse#modified_at #modified_at} => Time
+    #   * {Types::CreateCloudWatchAlarmTemplateGroupResponse#name #name} => String
+    #   * {Types::CreateCloudWatchAlarmTemplateGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cloud_watch_alarm_template_group({
+    #     description: "__stringMin0Max1024",
+    #     name: "__stringMin1Max255PatternS", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateGroup AWS API Documentation
+    #
+    # @overload create_cloud_watch_alarm_template_group(params = {})
+    # @param [Hash] params ({})
+    def create_cloud_watch_alarm_template_group(params = {}, options = {})
+      req = build_request(:create_cloud_watch_alarm_template_group, params)
+      req.send_request(options)
+    end
+
+    # Creates an eventbridge rule template to monitor events and send
+    # notifications to your targeted resources.
+    #
+    # @option params [String] :description
+    #
+    # @option params [Array<Types::EventBridgeRuleTemplateTarget>] :event_targets
+    #
+    # @option params [required, String] :event_type
+    #   The type of event to match with the rule.
+    #
+    # @option params [required, String] :group_identifier
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Represents the tags associated with a resource.
+    #
+    # @return [Types::CreateEventBridgeRuleTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#arn #arn} => String
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#created_at #created_at} => Time
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#description #description} => String
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#event_targets #event_targets} => Array&lt;Types::EventBridgeRuleTemplateTarget&gt;
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#event_type #event_type} => String
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#group_id #group_id} => String
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#id #id} => String
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#modified_at #modified_at} => Time
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#name #name} => String
+    #   * {Types::CreateEventBridgeRuleTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_event_bridge_rule_template({
+    #     description: "__stringMin0Max1024",
+    #     event_targets: [
+    #       {
+    #         arn: "__stringMin1Max2048PatternArn", # required
+    #       },
+    #     ],
+    #     event_type: "MEDIALIVE_MULTIPLEX_ALERT", # required, accepts MEDIALIVE_MULTIPLEX_ALERT, MEDIALIVE_MULTIPLEX_STATE_CHANGE, MEDIALIVE_CHANNEL_ALERT, MEDIALIVE_CHANNEL_INPUT_CHANGE, MEDIALIVE_CHANNEL_STATE_CHANGE, MEDIAPACKAGE_INPUT_NOTIFICATION, MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION, MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION, SIGNAL_MAP_ACTIVE_ALARM, MEDIACONNECT_ALERT, MEDIACONNECT_SOURCE_HEALTH, MEDIACONNECT_OUTPUT_HEALTH, MEDIACONNECT_FLOW_STATUS_CHANGE
+    #     group_identifier: "__stringPatternS", # required
+    #     name: "__stringMin1Max255PatternS", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.event_targets #=> Array
+    #   resp.event_targets[0].arn #=> String
+    #   resp.event_type #=> String, one of "MEDIALIVE_MULTIPLEX_ALERT", "MEDIALIVE_MULTIPLEX_STATE_CHANGE", "MEDIALIVE_CHANNEL_ALERT", "MEDIALIVE_CHANNEL_INPUT_CHANGE", "MEDIALIVE_CHANNEL_STATE_CHANGE", "MEDIAPACKAGE_INPUT_NOTIFICATION", "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION", "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION", "SIGNAL_MAP_ACTIVE_ALARM", "MEDIACONNECT_ALERT", "MEDIACONNECT_SOURCE_HEALTH", "MEDIACONNECT_OUTPUT_HEALTH", "MEDIACONNECT_FLOW_STATUS_CHANGE"
+    #   resp.group_id #=> String
+    #   resp.id #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplate AWS API Documentation
+    #
+    # @overload create_event_bridge_rule_template(params = {})
+    # @param [Hash] params ({})
+    def create_event_bridge_rule_template(params = {}, options = {})
+      req = build_request(:create_event_bridge_rule_template, params)
+      req.send_request(options)
+    end
+
+    # Creates an eventbridge rule template group to group your eventbridge
+    # rule templates and to attach to signal maps for dynamically creating
+    # notification rules.
+    #
+    # @option params [String] :description
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Represents the tags associated with a resource.
+    #
+    # @return [Types::CreateEventBridgeRuleTemplateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEventBridgeRuleTemplateGroupResponse#arn #arn} => String
+    #   * {Types::CreateEventBridgeRuleTemplateGroupResponse#created_at #created_at} => Time
+    #   * {Types::CreateEventBridgeRuleTemplateGroupResponse#description #description} => String
+    #   * {Types::CreateEventBridgeRuleTemplateGroupResponse#id #id} => String
+    #   * {Types::CreateEventBridgeRuleTemplateGroupResponse#modified_at #modified_at} => Time
+    #   * {Types::CreateEventBridgeRuleTemplateGroupResponse#name #name} => String
+    #   * {Types::CreateEventBridgeRuleTemplateGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_event_bridge_rule_template_group({
+    #     description: "__stringMin0Max1024",
+    #     name: "__stringMin1Max255PatternS", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateGroup AWS API Documentation
+    #
+    # @overload create_event_bridge_rule_template_group(params = {})
+    # @param [Hash] params ({})
+    def create_event_bridge_rule_template_group(params = {}, options = {})
+      req = build_request(:create_event_bridge_rule_template_group, params)
+      req.send_request(options)
+    end
+
+    # Initiates the creation of a new signal map. Will discover a new
+    # mediaResourceMap based on the provided discoveryEntryPointArn.
+    #
+    # @option params [Array<String>] :cloud_watch_alarm_template_group_identifiers
+    #
+    # @option params [String] :description
+    #
+    # @option params [required, String] :discovery_entry_point_arn
+    #
+    # @option params [Array<String>] :event_bridge_rule_template_group_identifiers
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Represents the tags associated with a resource.
+    #
+    # @return [Types::CreateSignalMapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSignalMapResponse#arn #arn} => String
+    #   * {Types::CreateSignalMapResponse#cloud_watch_alarm_template_group_ids #cloud_watch_alarm_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::CreateSignalMapResponse#created_at #created_at} => Time
+    #   * {Types::CreateSignalMapResponse#description #description} => String
+    #   * {Types::CreateSignalMapResponse#discovery_entry_point_arn #discovery_entry_point_arn} => String
+    #   * {Types::CreateSignalMapResponse#error_message #error_message} => String
+    #   * {Types::CreateSignalMapResponse#event_bridge_rule_template_group_ids #event_bridge_rule_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::CreateSignalMapResponse#failed_media_resource_map #failed_media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::CreateSignalMapResponse#id #id} => String
+    #   * {Types::CreateSignalMapResponse#last_discovered_at #last_discovered_at} => Time
+    #   * {Types::CreateSignalMapResponse#last_successful_monitor_deployment #last_successful_monitor_deployment} => Types::SuccessfulMonitorDeployment
+    #   * {Types::CreateSignalMapResponse#media_resource_map #media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::CreateSignalMapResponse#modified_at #modified_at} => Time
+    #   * {Types::CreateSignalMapResponse#monitor_changes_pending_deployment #monitor_changes_pending_deployment} => Boolean
+    #   * {Types::CreateSignalMapResponse#monitor_deployment #monitor_deployment} => Types::MonitorDeployment
+    #   * {Types::CreateSignalMapResponse#name #name} => String
+    #   * {Types::CreateSignalMapResponse#status #status} => String
+    #   * {Types::CreateSignalMapResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_signal_map({
+    #     cloud_watch_alarm_template_group_identifiers: ["__stringPatternS"],
+    #     description: "__stringMin0Max1024",
+    #     discovery_entry_point_arn: "__stringMin1Max2048", # required
+    #     event_bridge_rule_template_group_identifiers: ["__stringPatternS"],
+    #     name: "__stringMin1Max255PatternS", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.cloud_watch_alarm_template_group_ids #=> Array
+    #   resp.cloud_watch_alarm_template_group_ids[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.discovery_entry_point_arn #=> String
+    #   resp.error_message #=> String
+    #   resp.event_bridge_rule_template_group_ids #=> Array
+    #   resp.event_bridge_rule_template_group_ids[0] #=> String
+    #   resp.failed_media_resource_map #=> Hash
+    #   resp.failed_media_resource_map["__string"].destinations #=> Array
+    #   resp.failed_media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.failed_media_resource_map["__string"].name #=> String
+    #   resp.failed_media_resource_map["__string"].sources #=> Array
+    #   resp.failed_media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].sources[0].name #=> String
+    #   resp.id #=> String
+    #   resp.last_discovered_at #=> Time
+    #   resp.last_successful_monitor_deployment.details_uri #=> String
+    #   resp.last_successful_monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.media_resource_map #=> Hash
+    #   resp.media_resource_map["__string"].destinations #=> Array
+    #   resp.media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.media_resource_map["__string"].name #=> String
+    #   resp.media_resource_map["__string"].sources #=> Array
+    #   resp.media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.media_resource_map["__string"].sources[0].name #=> String
+    #   resp.modified_at #=> Time
+    #   resp.monitor_changes_pending_deployment #=> Boolean
+    #   resp.monitor_deployment.details_uri #=> String
+    #   resp.monitor_deployment.error_message #=> String
+    #   resp.monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_REVERTED", "UPDATE_FAILED", "READY", "NOT_READY"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateSignalMap AWS API Documentation
+    #
+    # @overload create_signal_map(params = {})
+    # @param [Hash] params ({})
+    def create_signal_map(params = {}, options = {})
+      req = build_request(:create_signal_map, params)
+      req.send_request(options)
+    end
+
+    # Deletes a cloudwatch alarm template.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cloud_watch_alarm_template({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteCloudWatchAlarmTemplate AWS API Documentation
+    #
+    # @overload delete_cloud_watch_alarm_template(params = {})
+    # @param [Hash] params ({})
+    def delete_cloud_watch_alarm_template(params = {}, options = {})
+      req = build_request(:delete_cloud_watch_alarm_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes a cloudwatch alarm template group. You must detach this group
+    # from all signal maps and ensure its existing templates are moved to
+    # another group or deleted.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cloud_watch_alarm_template_group({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteCloudWatchAlarmTemplateGroup AWS API Documentation
+    #
+    # @overload delete_cloud_watch_alarm_template_group(params = {})
+    # @param [Hash] params ({})
+    def delete_cloud_watch_alarm_template_group(params = {}, options = {})
+      req = build_request(:delete_cloud_watch_alarm_template_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes an eventbridge rule template.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_event_bridge_rule_template({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteEventBridgeRuleTemplate AWS API Documentation
+    #
+    # @overload delete_event_bridge_rule_template(params = {})
+    # @param [Hash] params ({})
+    def delete_event_bridge_rule_template(params = {}, options = {})
+      req = build_request(:delete_event_bridge_rule_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes an eventbridge rule template group. You must detach this group
+    # from all signal maps and ensure its existing templates are moved to
+    # another group or deleted.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_event_bridge_rule_template_group({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteEventBridgeRuleTemplateGroup AWS API Documentation
+    #
+    # @overload delete_event_bridge_rule_template_group(params = {})
+    # @param [Hash] params ({})
+    def delete_event_bridge_rule_template_group(params = {}, options = {})
+      req = build_request(:delete_event_bridge_rule_template_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified signal map.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_signal_map({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteSignalMap AWS API Documentation
+    #
+    # @overload delete_signal_map(params = {})
+    # @param [Hash] params ({})
+    def delete_signal_map(params = {}, options = {})
+      req = build_request(:delete_signal_map, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified cloudwatch alarm template.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Types::GetCloudWatchAlarmTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#arn #arn} => String
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#comparison_operator #comparison_operator} => String
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#created_at #created_at} => Time
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#datapoints_to_alarm #datapoints_to_alarm} => Integer
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#description #description} => String
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#evaluation_periods #evaluation_periods} => Integer
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#group_id #group_id} => String
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#id #id} => String
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#metric_name #metric_name} => String
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#modified_at #modified_at} => Time
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#name #name} => String
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#period #period} => Integer
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#statistic #statistic} => String
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#target_resource_type #target_resource_type} => String
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#threshold #threshold} => Float
+    #   * {Types::GetCloudWatchAlarmTemplateResponse#treat_missing_data #treat_missing_data} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cloud_watch_alarm_template({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+    #   resp.created_at #=> Time
+    #   resp.datapoints_to_alarm #=> Integer
+    #   resp.description #=> String
+    #   resp.evaluation_periods #=> Integer
+    #   resp.group_id #=> String
+    #   resp.id #=> String
+    #   resp.metric_name #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.period #=> Integer
+    #   resp.statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET"
+    #   resp.threshold #=> Float
+    #   resp.treat_missing_data #=> String, one of "notBreaching", "breaching", "ignore", "missing"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetCloudWatchAlarmTemplate AWS API Documentation
+    #
+    # @overload get_cloud_watch_alarm_template(params = {})
+    # @param [Hash] params ({})
+    def get_cloud_watch_alarm_template(params = {}, options = {})
+      req = build_request(:get_cloud_watch_alarm_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified cloudwatch alarm template group.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Types::GetCloudWatchAlarmTemplateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCloudWatchAlarmTemplateGroupResponse#arn #arn} => String
+    #   * {Types::GetCloudWatchAlarmTemplateGroupResponse#created_at #created_at} => Time
+    #   * {Types::GetCloudWatchAlarmTemplateGroupResponse#description #description} => String
+    #   * {Types::GetCloudWatchAlarmTemplateGroupResponse#id #id} => String
+    #   * {Types::GetCloudWatchAlarmTemplateGroupResponse#modified_at #modified_at} => Time
+    #   * {Types::GetCloudWatchAlarmTemplateGroupResponse#name #name} => String
+    #   * {Types::GetCloudWatchAlarmTemplateGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cloud_watch_alarm_template_group({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetCloudWatchAlarmTemplateGroup AWS API Documentation
+    #
+    # @overload get_cloud_watch_alarm_template_group(params = {})
+    # @param [Hash] params ({})
+    def get_cloud_watch_alarm_template_group(params = {}, options = {})
+      req = build_request(:get_cloud_watch_alarm_template_group, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified eventbridge rule template.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Types::GetEventBridgeRuleTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventBridgeRuleTemplateResponse#arn #arn} => String
+    #   * {Types::GetEventBridgeRuleTemplateResponse#created_at #created_at} => Time
+    #   * {Types::GetEventBridgeRuleTemplateResponse#description #description} => String
+    #   * {Types::GetEventBridgeRuleTemplateResponse#event_targets #event_targets} => Array&lt;Types::EventBridgeRuleTemplateTarget&gt;
+    #   * {Types::GetEventBridgeRuleTemplateResponse#event_type #event_type} => String
+    #   * {Types::GetEventBridgeRuleTemplateResponse#group_id #group_id} => String
+    #   * {Types::GetEventBridgeRuleTemplateResponse#id #id} => String
+    #   * {Types::GetEventBridgeRuleTemplateResponse#modified_at #modified_at} => Time
+    #   * {Types::GetEventBridgeRuleTemplateResponse#name #name} => String
+    #   * {Types::GetEventBridgeRuleTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event_bridge_rule_template({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.event_targets #=> Array
+    #   resp.event_targets[0].arn #=> String
+    #   resp.event_type #=> String, one of "MEDIALIVE_MULTIPLEX_ALERT", "MEDIALIVE_MULTIPLEX_STATE_CHANGE", "MEDIALIVE_CHANNEL_ALERT", "MEDIALIVE_CHANNEL_INPUT_CHANGE", "MEDIALIVE_CHANNEL_STATE_CHANGE", "MEDIAPACKAGE_INPUT_NOTIFICATION", "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION", "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION", "SIGNAL_MAP_ACTIVE_ALARM", "MEDIACONNECT_ALERT", "MEDIACONNECT_SOURCE_HEALTH", "MEDIACONNECT_OUTPUT_HEALTH", "MEDIACONNECT_FLOW_STATUS_CHANGE"
+    #   resp.group_id #=> String
+    #   resp.id #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetEventBridgeRuleTemplate AWS API Documentation
+    #
+    # @overload get_event_bridge_rule_template(params = {})
+    # @param [Hash] params ({})
+    def get_event_bridge_rule_template(params = {}, options = {})
+      req = build_request(:get_event_bridge_rule_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified eventbridge rule template group.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Types::GetEventBridgeRuleTemplateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventBridgeRuleTemplateGroupResponse#arn #arn} => String
+    #   * {Types::GetEventBridgeRuleTemplateGroupResponse#created_at #created_at} => Time
+    #   * {Types::GetEventBridgeRuleTemplateGroupResponse#description #description} => String
+    #   * {Types::GetEventBridgeRuleTemplateGroupResponse#id #id} => String
+    #   * {Types::GetEventBridgeRuleTemplateGroupResponse#modified_at #modified_at} => Time
+    #   * {Types::GetEventBridgeRuleTemplateGroupResponse#name #name} => String
+    #   * {Types::GetEventBridgeRuleTemplateGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event_bridge_rule_template_group({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetEventBridgeRuleTemplateGroup AWS API Documentation
+    #
+    # @overload get_event_bridge_rule_template_group(params = {})
+    # @param [Hash] params ({})
+    def get_event_bridge_rule_template_group(params = {}, options = {})
+      req = build_request(:get_event_bridge_rule_template_group, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified signal map.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Types::GetSignalMapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSignalMapResponse#arn #arn} => String
+    #   * {Types::GetSignalMapResponse#cloud_watch_alarm_template_group_ids #cloud_watch_alarm_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::GetSignalMapResponse#created_at #created_at} => Time
+    #   * {Types::GetSignalMapResponse#description #description} => String
+    #   * {Types::GetSignalMapResponse#discovery_entry_point_arn #discovery_entry_point_arn} => String
+    #   * {Types::GetSignalMapResponse#error_message #error_message} => String
+    #   * {Types::GetSignalMapResponse#event_bridge_rule_template_group_ids #event_bridge_rule_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::GetSignalMapResponse#failed_media_resource_map #failed_media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::GetSignalMapResponse#id #id} => String
+    #   * {Types::GetSignalMapResponse#last_discovered_at #last_discovered_at} => Time
+    #   * {Types::GetSignalMapResponse#last_successful_monitor_deployment #last_successful_monitor_deployment} => Types::SuccessfulMonitorDeployment
+    #   * {Types::GetSignalMapResponse#media_resource_map #media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::GetSignalMapResponse#modified_at #modified_at} => Time
+    #   * {Types::GetSignalMapResponse#monitor_changes_pending_deployment #monitor_changes_pending_deployment} => Boolean
+    #   * {Types::GetSignalMapResponse#monitor_deployment #monitor_deployment} => Types::MonitorDeployment
+    #   * {Types::GetSignalMapResponse#name #name} => String
+    #   * {Types::GetSignalMapResponse#status #status} => String
+    #   * {Types::GetSignalMapResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_signal_map({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.cloud_watch_alarm_template_group_ids #=> Array
+    #   resp.cloud_watch_alarm_template_group_ids[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.discovery_entry_point_arn #=> String
+    #   resp.error_message #=> String
+    #   resp.event_bridge_rule_template_group_ids #=> Array
+    #   resp.event_bridge_rule_template_group_ids[0] #=> String
+    #   resp.failed_media_resource_map #=> Hash
+    #   resp.failed_media_resource_map["__string"].destinations #=> Array
+    #   resp.failed_media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.failed_media_resource_map["__string"].name #=> String
+    #   resp.failed_media_resource_map["__string"].sources #=> Array
+    #   resp.failed_media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].sources[0].name #=> String
+    #   resp.id #=> String
+    #   resp.last_discovered_at #=> Time
+    #   resp.last_successful_monitor_deployment.details_uri #=> String
+    #   resp.last_successful_monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.media_resource_map #=> Hash
+    #   resp.media_resource_map["__string"].destinations #=> Array
+    #   resp.media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.media_resource_map["__string"].name #=> String
+    #   resp.media_resource_map["__string"].sources #=> Array
+    #   resp.media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.media_resource_map["__string"].sources[0].name #=> String
+    #   resp.modified_at #=> Time
+    #   resp.monitor_changes_pending_deployment #=> Boolean
+    #   resp.monitor_deployment.details_uri #=> String
+    #   resp.monitor_deployment.error_message #=> String
+    #   resp.monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_REVERTED", "UPDATE_FAILED", "READY", "NOT_READY"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * signal_map_created
+    #   * signal_map_monitor_deleted
+    #   * signal_map_monitor_deployed
+    #   * signal_map_updated
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetSignalMap AWS API Documentation
+    #
+    # @overload get_signal_map(params = {})
+    # @param [Hash] params ({})
+    def get_signal_map(params = {}, options = {})
+      req = build_request(:get_signal_map, params)
+      req.send_request(options)
+    end
+
+    # Lists cloudwatch alarm template groups.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :scope
+    #
+    # @option params [String] :signal_map_identifier
+    #
+    # @return [Types::ListCloudWatchAlarmTemplateGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCloudWatchAlarmTemplateGroupsResponse#cloud_watch_alarm_template_groups #cloud_watch_alarm_template_groups} => Array&lt;Types::CloudWatchAlarmTemplateGroupSummary&gt;
+    #   * {Types::ListCloudWatchAlarmTemplateGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cloud_watch_alarm_template_groups({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     scope: "__string",
+    #     signal_map_identifier: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_watch_alarm_template_groups #=> Array
+    #   resp.cloud_watch_alarm_template_groups[0].arn #=> String
+    #   resp.cloud_watch_alarm_template_groups[0].created_at #=> Time
+    #   resp.cloud_watch_alarm_template_groups[0].description #=> String
+    #   resp.cloud_watch_alarm_template_groups[0].id #=> String
+    #   resp.cloud_watch_alarm_template_groups[0].modified_at #=> Time
+    #   resp.cloud_watch_alarm_template_groups[0].name #=> String
+    #   resp.cloud_watch_alarm_template_groups[0].tags #=> Hash
+    #   resp.cloud_watch_alarm_template_groups[0].tags["__string"] #=> String
+    #   resp.cloud_watch_alarm_template_groups[0].template_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListCloudWatchAlarmTemplateGroups AWS API Documentation
+    #
+    # @overload list_cloud_watch_alarm_template_groups(params = {})
+    # @param [Hash] params ({})
+    def list_cloud_watch_alarm_template_groups(params = {}, options = {})
+      req = build_request(:list_cloud_watch_alarm_template_groups, params)
+      req.send_request(options)
+    end
+
+    # Lists cloudwatch alarm templates.
+    #
+    # @option params [String] :group_identifier
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :scope
+    #
+    # @option params [String] :signal_map_identifier
+    #
+    # @return [Types::ListCloudWatchAlarmTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCloudWatchAlarmTemplatesResponse#cloud_watch_alarm_templates #cloud_watch_alarm_templates} => Array&lt;Types::CloudWatchAlarmTemplateSummary&gt;
+    #   * {Types::ListCloudWatchAlarmTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cloud_watch_alarm_templates({
+    #     group_identifier: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     scope: "__string",
+    #     signal_map_identifier: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cloud_watch_alarm_templates #=> Array
+    #   resp.cloud_watch_alarm_templates[0].arn #=> String
+    #   resp.cloud_watch_alarm_templates[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+    #   resp.cloud_watch_alarm_templates[0].created_at #=> Time
+    #   resp.cloud_watch_alarm_templates[0].datapoints_to_alarm #=> Integer
+    #   resp.cloud_watch_alarm_templates[0].description #=> String
+    #   resp.cloud_watch_alarm_templates[0].evaluation_periods #=> Integer
+    #   resp.cloud_watch_alarm_templates[0].group_id #=> String
+    #   resp.cloud_watch_alarm_templates[0].id #=> String
+    #   resp.cloud_watch_alarm_templates[0].metric_name #=> String
+    #   resp.cloud_watch_alarm_templates[0].modified_at #=> Time
+    #   resp.cloud_watch_alarm_templates[0].name #=> String
+    #   resp.cloud_watch_alarm_templates[0].period #=> Integer
+    #   resp.cloud_watch_alarm_templates[0].statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
+    #   resp.cloud_watch_alarm_templates[0].tags #=> Hash
+    #   resp.cloud_watch_alarm_templates[0].tags["__string"] #=> String
+    #   resp.cloud_watch_alarm_templates[0].target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET"
+    #   resp.cloud_watch_alarm_templates[0].threshold #=> Float
+    #   resp.cloud_watch_alarm_templates[0].treat_missing_data #=> String, one of "notBreaching", "breaching", "ignore", "missing"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListCloudWatchAlarmTemplates AWS API Documentation
+    #
+    # @overload list_cloud_watch_alarm_templates(params = {})
+    # @param [Hash] params ({})
+    def list_cloud_watch_alarm_templates(params = {}, options = {})
+      req = build_request(:list_cloud_watch_alarm_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists eventbridge rule template groups.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :signal_map_identifier
+    #
+    # @return [Types::ListEventBridgeRuleTemplateGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventBridgeRuleTemplateGroupsResponse#event_bridge_rule_template_groups #event_bridge_rule_template_groups} => Array&lt;Types::EventBridgeRuleTemplateGroupSummary&gt;
+    #   * {Types::ListEventBridgeRuleTemplateGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_event_bridge_rule_template_groups({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     signal_map_identifier: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_bridge_rule_template_groups #=> Array
+    #   resp.event_bridge_rule_template_groups[0].arn #=> String
+    #   resp.event_bridge_rule_template_groups[0].created_at #=> Time
+    #   resp.event_bridge_rule_template_groups[0].description #=> String
+    #   resp.event_bridge_rule_template_groups[0].id #=> String
+    #   resp.event_bridge_rule_template_groups[0].modified_at #=> Time
+    #   resp.event_bridge_rule_template_groups[0].name #=> String
+    #   resp.event_bridge_rule_template_groups[0].tags #=> Hash
+    #   resp.event_bridge_rule_template_groups[0].tags["__string"] #=> String
+    #   resp.event_bridge_rule_template_groups[0].template_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListEventBridgeRuleTemplateGroups AWS API Documentation
+    #
+    # @overload list_event_bridge_rule_template_groups(params = {})
+    # @param [Hash] params ({})
+    def list_event_bridge_rule_template_groups(params = {}, options = {})
+      req = build_request(:list_event_bridge_rule_template_groups, params)
+      req.send_request(options)
+    end
+
+    # Lists eventbridge rule templates.
+    #
+    # @option params [String] :group_identifier
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :signal_map_identifier
+    #
+    # @return [Types::ListEventBridgeRuleTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventBridgeRuleTemplatesResponse#event_bridge_rule_templates #event_bridge_rule_templates} => Array&lt;Types::EventBridgeRuleTemplateSummary&gt;
+    #   * {Types::ListEventBridgeRuleTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_event_bridge_rule_templates({
+    #     group_identifier: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     signal_map_identifier: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_bridge_rule_templates #=> Array
+    #   resp.event_bridge_rule_templates[0].arn #=> String
+    #   resp.event_bridge_rule_templates[0].created_at #=> Time
+    #   resp.event_bridge_rule_templates[0].description #=> String
+    #   resp.event_bridge_rule_templates[0].event_target_count #=> Integer
+    #   resp.event_bridge_rule_templates[0].event_type #=> String, one of "MEDIALIVE_MULTIPLEX_ALERT", "MEDIALIVE_MULTIPLEX_STATE_CHANGE", "MEDIALIVE_CHANNEL_ALERT", "MEDIALIVE_CHANNEL_INPUT_CHANGE", "MEDIALIVE_CHANNEL_STATE_CHANGE", "MEDIAPACKAGE_INPUT_NOTIFICATION", "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION", "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION", "SIGNAL_MAP_ACTIVE_ALARM", "MEDIACONNECT_ALERT", "MEDIACONNECT_SOURCE_HEALTH", "MEDIACONNECT_OUTPUT_HEALTH", "MEDIACONNECT_FLOW_STATUS_CHANGE"
+    #   resp.event_bridge_rule_templates[0].group_id #=> String
+    #   resp.event_bridge_rule_templates[0].id #=> String
+    #   resp.event_bridge_rule_templates[0].modified_at #=> Time
+    #   resp.event_bridge_rule_templates[0].name #=> String
+    #   resp.event_bridge_rule_templates[0].tags #=> Hash
+    #   resp.event_bridge_rule_templates[0].tags["__string"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListEventBridgeRuleTemplates AWS API Documentation
+    #
+    # @overload list_event_bridge_rule_templates(params = {})
+    # @param [Hash] params ({})
+    def list_event_bridge_rule_templates(params = {}, options = {})
+      req = build_request(:list_event_bridge_rule_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists signal maps.
+    #
+    # @option params [String] :cloud_watch_alarm_template_group_identifier
+    #
+    # @option params [String] :event_bridge_rule_template_group_identifier
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListSignalMapsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSignalMapsResponse#next_token #next_token} => String
+    #   * {Types::ListSignalMapsResponse#signal_maps #signal_maps} => Array&lt;Types::SignalMapSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_signal_maps({
+    #     cloud_watch_alarm_template_group_identifier: "__string",
+    #     event_bridge_rule_template_group_identifier: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.signal_maps #=> Array
+    #   resp.signal_maps[0].arn #=> String
+    #   resp.signal_maps[0].created_at #=> Time
+    #   resp.signal_maps[0].description #=> String
+    #   resp.signal_maps[0].id #=> String
+    #   resp.signal_maps[0].modified_at #=> Time
+    #   resp.signal_maps[0].monitor_deployment_status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.signal_maps[0].name #=> String
+    #   resp.signal_maps[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_REVERTED", "UPDATE_FAILED", "READY", "NOT_READY"
+    #   resp.signal_maps[0].tags #=> Hash
+    #   resp.signal_maps[0].tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListSignalMaps AWS API Documentation
+    #
+    # @overload list_signal_maps(params = {})
+    # @param [Hash] params ({})
+    def list_signal_maps(params = {}, options = {})
+      req = build_request(:list_signal_maps, params)
+      req.send_request(options)
+    end
+
+    # Initiates a deployment to delete the monitor of the specified signal
+    # map.
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Types::StartDeleteMonitorDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDeleteMonitorDeploymentResponse#arn #arn} => String
+    #   * {Types::StartDeleteMonitorDeploymentResponse#cloud_watch_alarm_template_group_ids #cloud_watch_alarm_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::StartDeleteMonitorDeploymentResponse#created_at #created_at} => Time
+    #   * {Types::StartDeleteMonitorDeploymentResponse#description #description} => String
+    #   * {Types::StartDeleteMonitorDeploymentResponse#discovery_entry_point_arn #discovery_entry_point_arn} => String
+    #   * {Types::StartDeleteMonitorDeploymentResponse#error_message #error_message} => String
+    #   * {Types::StartDeleteMonitorDeploymentResponse#event_bridge_rule_template_group_ids #event_bridge_rule_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::StartDeleteMonitorDeploymentResponse#failed_media_resource_map #failed_media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::StartDeleteMonitorDeploymentResponse#id #id} => String
+    #   * {Types::StartDeleteMonitorDeploymentResponse#last_discovered_at #last_discovered_at} => Time
+    #   * {Types::StartDeleteMonitorDeploymentResponse#last_successful_monitor_deployment #last_successful_monitor_deployment} => Types::SuccessfulMonitorDeployment
+    #   * {Types::StartDeleteMonitorDeploymentResponse#media_resource_map #media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::StartDeleteMonitorDeploymentResponse#modified_at #modified_at} => Time
+    #   * {Types::StartDeleteMonitorDeploymentResponse#monitor_changes_pending_deployment #monitor_changes_pending_deployment} => Boolean
+    #   * {Types::StartDeleteMonitorDeploymentResponse#monitor_deployment #monitor_deployment} => Types::MonitorDeployment
+    #   * {Types::StartDeleteMonitorDeploymentResponse#name #name} => String
+    #   * {Types::StartDeleteMonitorDeploymentResponse#status #status} => String
+    #   * {Types::StartDeleteMonitorDeploymentResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_delete_monitor_deployment({
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.cloud_watch_alarm_template_group_ids #=> Array
+    #   resp.cloud_watch_alarm_template_group_ids[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.discovery_entry_point_arn #=> String
+    #   resp.error_message #=> String
+    #   resp.event_bridge_rule_template_group_ids #=> Array
+    #   resp.event_bridge_rule_template_group_ids[0] #=> String
+    #   resp.failed_media_resource_map #=> Hash
+    #   resp.failed_media_resource_map["__string"].destinations #=> Array
+    #   resp.failed_media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.failed_media_resource_map["__string"].name #=> String
+    #   resp.failed_media_resource_map["__string"].sources #=> Array
+    #   resp.failed_media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].sources[0].name #=> String
+    #   resp.id #=> String
+    #   resp.last_discovered_at #=> Time
+    #   resp.last_successful_monitor_deployment.details_uri #=> String
+    #   resp.last_successful_monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.media_resource_map #=> Hash
+    #   resp.media_resource_map["__string"].destinations #=> Array
+    #   resp.media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.media_resource_map["__string"].name #=> String
+    #   resp.media_resource_map["__string"].sources #=> Array
+    #   resp.media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.media_resource_map["__string"].sources[0].name #=> String
+    #   resp.modified_at #=> Time
+    #   resp.monitor_changes_pending_deployment #=> Boolean
+    #   resp.monitor_deployment.details_uri #=> String
+    #   resp.monitor_deployment.error_message #=> String
+    #   resp.monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_REVERTED", "UPDATE_FAILED", "READY", "NOT_READY"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartDeleteMonitorDeployment AWS API Documentation
+    #
+    # @overload start_delete_monitor_deployment(params = {})
+    # @param [Hash] params ({})
+    def start_delete_monitor_deployment(params = {}, options = {})
+      req = build_request(:start_delete_monitor_deployment, params)
+      req.send_request(options)
+    end
+
+    # Initiates a deployment to deploy the latest monitor of the specified
+    # signal map.
+    #
+    # @option params [Boolean] :dry_run
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Types::StartMonitorDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMonitorDeploymentResponse#arn #arn} => String
+    #   * {Types::StartMonitorDeploymentResponse#cloud_watch_alarm_template_group_ids #cloud_watch_alarm_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::StartMonitorDeploymentResponse#created_at #created_at} => Time
+    #   * {Types::StartMonitorDeploymentResponse#description #description} => String
+    #   * {Types::StartMonitorDeploymentResponse#discovery_entry_point_arn #discovery_entry_point_arn} => String
+    #   * {Types::StartMonitorDeploymentResponse#error_message #error_message} => String
+    #   * {Types::StartMonitorDeploymentResponse#event_bridge_rule_template_group_ids #event_bridge_rule_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::StartMonitorDeploymentResponse#failed_media_resource_map #failed_media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::StartMonitorDeploymentResponse#id #id} => String
+    #   * {Types::StartMonitorDeploymentResponse#last_discovered_at #last_discovered_at} => Time
+    #   * {Types::StartMonitorDeploymentResponse#last_successful_monitor_deployment #last_successful_monitor_deployment} => Types::SuccessfulMonitorDeployment
+    #   * {Types::StartMonitorDeploymentResponse#media_resource_map #media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::StartMonitorDeploymentResponse#modified_at #modified_at} => Time
+    #   * {Types::StartMonitorDeploymentResponse#monitor_changes_pending_deployment #monitor_changes_pending_deployment} => Boolean
+    #   * {Types::StartMonitorDeploymentResponse#monitor_deployment #monitor_deployment} => Types::MonitorDeployment
+    #   * {Types::StartMonitorDeploymentResponse#name #name} => String
+    #   * {Types::StartMonitorDeploymentResponse#status #status} => String
+    #   * {Types::StartMonitorDeploymentResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_monitor_deployment({
+    #     dry_run: false,
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.cloud_watch_alarm_template_group_ids #=> Array
+    #   resp.cloud_watch_alarm_template_group_ids[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.discovery_entry_point_arn #=> String
+    #   resp.error_message #=> String
+    #   resp.event_bridge_rule_template_group_ids #=> Array
+    #   resp.event_bridge_rule_template_group_ids[0] #=> String
+    #   resp.failed_media_resource_map #=> Hash
+    #   resp.failed_media_resource_map["__string"].destinations #=> Array
+    #   resp.failed_media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.failed_media_resource_map["__string"].name #=> String
+    #   resp.failed_media_resource_map["__string"].sources #=> Array
+    #   resp.failed_media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].sources[0].name #=> String
+    #   resp.id #=> String
+    #   resp.last_discovered_at #=> Time
+    #   resp.last_successful_monitor_deployment.details_uri #=> String
+    #   resp.last_successful_monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.media_resource_map #=> Hash
+    #   resp.media_resource_map["__string"].destinations #=> Array
+    #   resp.media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.media_resource_map["__string"].name #=> String
+    #   resp.media_resource_map["__string"].sources #=> Array
+    #   resp.media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.media_resource_map["__string"].sources[0].name #=> String
+    #   resp.modified_at #=> Time
+    #   resp.monitor_changes_pending_deployment #=> Boolean
+    #   resp.monitor_deployment.details_uri #=> String
+    #   resp.monitor_deployment.error_message #=> String
+    #   resp.monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_REVERTED", "UPDATE_FAILED", "READY", "NOT_READY"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMonitorDeployment AWS API Documentation
+    #
+    # @overload start_monitor_deployment(params = {})
+    # @param [Hash] params ({})
+    def start_monitor_deployment(params = {}, options = {})
+      req = build_request(:start_monitor_deployment, params)
+      req.send_request(options)
+    end
+
+    # Initiates an update for the specified signal map. Will discover a new
+    # signal map if a changed discoveryEntryPointArn is provided.
+    #
+    # @option params [Array<String>] :cloud_watch_alarm_template_group_identifiers
+    #
+    # @option params [String] :description
+    #
+    # @option params [String] :discovery_entry_point_arn
+    #
+    # @option params [Array<String>] :event_bridge_rule_template_group_identifiers
+    #
+    # @option params [Boolean] :force_rediscovery
+    #
+    # @option params [required, String] :identifier
+    #
+    # @option params [String] :name
+    #
+    # @return [Types::StartUpdateSignalMapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartUpdateSignalMapResponse#arn #arn} => String
+    #   * {Types::StartUpdateSignalMapResponse#cloud_watch_alarm_template_group_ids #cloud_watch_alarm_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::StartUpdateSignalMapResponse#created_at #created_at} => Time
+    #   * {Types::StartUpdateSignalMapResponse#description #description} => String
+    #   * {Types::StartUpdateSignalMapResponse#discovery_entry_point_arn #discovery_entry_point_arn} => String
+    #   * {Types::StartUpdateSignalMapResponse#error_message #error_message} => String
+    #   * {Types::StartUpdateSignalMapResponse#event_bridge_rule_template_group_ids #event_bridge_rule_template_group_ids} => Array&lt;String&gt;
+    #   * {Types::StartUpdateSignalMapResponse#failed_media_resource_map #failed_media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::StartUpdateSignalMapResponse#id #id} => String
+    #   * {Types::StartUpdateSignalMapResponse#last_discovered_at #last_discovered_at} => Time
+    #   * {Types::StartUpdateSignalMapResponse#last_successful_monitor_deployment #last_successful_monitor_deployment} => Types::SuccessfulMonitorDeployment
+    #   * {Types::StartUpdateSignalMapResponse#media_resource_map #media_resource_map} => Hash&lt;String,Types::MediaResource&gt;
+    #   * {Types::StartUpdateSignalMapResponse#modified_at #modified_at} => Time
+    #   * {Types::StartUpdateSignalMapResponse#monitor_changes_pending_deployment #monitor_changes_pending_deployment} => Boolean
+    #   * {Types::StartUpdateSignalMapResponse#monitor_deployment #monitor_deployment} => Types::MonitorDeployment
+    #   * {Types::StartUpdateSignalMapResponse#name #name} => String
+    #   * {Types::StartUpdateSignalMapResponse#status #status} => String
+    #   * {Types::StartUpdateSignalMapResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_update_signal_map({
+    #     cloud_watch_alarm_template_group_identifiers: ["__stringPatternS"],
+    #     description: "__stringMin0Max1024",
+    #     discovery_entry_point_arn: "__stringMin1Max2048",
+    #     event_bridge_rule_template_group_identifiers: ["__stringPatternS"],
+    #     force_rediscovery: false,
+    #     identifier: "__string", # required
+    #     name: "__stringMin1Max255PatternS",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.cloud_watch_alarm_template_group_ids #=> Array
+    #   resp.cloud_watch_alarm_template_group_ids[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.discovery_entry_point_arn #=> String
+    #   resp.error_message #=> String
+    #   resp.event_bridge_rule_template_group_ids #=> Array
+    #   resp.event_bridge_rule_template_group_ids[0] #=> String
+    #   resp.failed_media_resource_map #=> Hash
+    #   resp.failed_media_resource_map["__string"].destinations #=> Array
+    #   resp.failed_media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.failed_media_resource_map["__string"].name #=> String
+    #   resp.failed_media_resource_map["__string"].sources #=> Array
+    #   resp.failed_media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.failed_media_resource_map["__string"].sources[0].name #=> String
+    #   resp.id #=> String
+    #   resp.last_discovered_at #=> Time
+    #   resp.last_successful_monitor_deployment.details_uri #=> String
+    #   resp.last_successful_monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.media_resource_map #=> Hash
+    #   resp.media_resource_map["__string"].destinations #=> Array
+    #   resp.media_resource_map["__string"].destinations[0].arn #=> String
+    #   resp.media_resource_map["__string"].destinations[0].name #=> String
+    #   resp.media_resource_map["__string"].name #=> String
+    #   resp.media_resource_map["__string"].sources #=> Array
+    #   resp.media_resource_map["__string"].sources[0].arn #=> String
+    #   resp.media_resource_map["__string"].sources[0].name #=> String
+    #   resp.modified_at #=> Time
+    #   resp.monitor_changes_pending_deployment #=> Boolean
+    #   resp.monitor_deployment.details_uri #=> String
+    #   resp.monitor_deployment.error_message #=> String
+    #   resp.monitor_deployment.status #=> String, one of "NOT_DEPLOYED", "DRY_RUN_DEPLOYMENT_COMPLETE", "DRY_RUN_DEPLOYMENT_FAILED", "DRY_RUN_DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_COMPLETE", "DEPLOYMENT_FAILED", "DEPLOYMENT_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_REVERTED", "UPDATE_FAILED", "READY", "NOT_READY"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartUpdateSignalMap AWS API Documentation
+    #
+    # @overload start_update_signal_map(params = {})
+    # @param [Hash] params ({})
+    def start_update_signal_map(params = {}, options = {})
+      req = build_request(:start_update_signal_map, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified cloudwatch alarm template.
+    #
+    # @option params [String] :comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #
+    # @option params [Integer] :datapoints_to_alarm
+    #
+    # @option params [String] :description
+    #
+    # @option params [Integer] :evaluation_periods
+    #
+    # @option params [String] :group_identifier
+    #
+    # @option params [required, String] :identifier
+    #
+    # @option params [String] :metric_name
+    #
+    # @option params [String] :name
+    #
+    # @option params [Integer] :period
+    #
+    # @option params [String] :statistic
+    #   The statistic to apply to the alarm's metric data.
+    #
+    # @option params [String] :target_resource_type
+    #   The resource type this template should dynamically generate cloudwatch
+    #   metric alarms for.
+    #
+    # @option params [Float] :threshold
+    #
+    # @option params [String] :treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #
+    # @return [Types::UpdateCloudWatchAlarmTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#arn #arn} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#comparison_operator #comparison_operator} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#created_at #created_at} => Time
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#datapoints_to_alarm #datapoints_to_alarm} => Integer
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#description #description} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#evaluation_periods #evaluation_periods} => Integer
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#group_id #group_id} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#id #id} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#metric_name #metric_name} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#modified_at #modified_at} => Time
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#name #name} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#period #period} => Integer
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#statistic #statistic} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#target_resource_type #target_resource_type} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#threshold #threshold} => Float
+    #   * {Types::UpdateCloudWatchAlarmTemplateResponse#treat_missing_data #treat_missing_data} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cloud_watch_alarm_template({
+    #     comparison_operator: "GreaterThanOrEqualToThreshold", # accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #     datapoints_to_alarm: 1,
+    #     description: "__stringMin0Max1024",
+    #     evaluation_periods: 1,
+    #     group_identifier: "__stringPatternS",
+    #     identifier: "__string", # required
+    #     metric_name: "__stringMax64",
+    #     name: "__stringMin1Max255PatternS",
+    #     period: 1,
+    #     statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
+    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, MEDIALIVE_MULTIPLEX, MEDIALIVE_CHANNEL, MEDIALIVE_INPUT_DEVICE, MEDIAPACKAGE_CHANNEL, MEDIAPACKAGE_ORIGIN_ENDPOINT, MEDIACONNECT_FLOW, S3_BUCKET
+    #     threshold: 1.0,
+    #     treat_missing_data: "notBreaching", # accepts notBreaching, breaching, ignore, missing
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+    #   resp.created_at #=> Time
+    #   resp.datapoints_to_alarm #=> Integer
+    #   resp.description #=> String
+    #   resp.evaluation_periods #=> Integer
+    #   resp.group_id #=> String
+    #   resp.id #=> String
+    #   resp.metric_name #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.period #=> Integer
+    #   resp.statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET"
+    #   resp.threshold #=> Float
+    #   resp.treat_missing_data #=> String, one of "notBreaching", "breaching", "ignore", "missing"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplate AWS API Documentation
+    #
+    # @overload update_cloud_watch_alarm_template(params = {})
+    # @param [Hash] params ({})
+    def update_cloud_watch_alarm_template(params = {}, options = {})
+      req = build_request(:update_cloud_watch_alarm_template, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified cloudwatch alarm template group.
+    #
+    # @option params [String] :description
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Types::UpdateCloudWatchAlarmTemplateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCloudWatchAlarmTemplateGroupResponse#arn #arn} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateGroupResponse#created_at #created_at} => Time
+    #   * {Types::UpdateCloudWatchAlarmTemplateGroupResponse#description #description} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateGroupResponse#id #id} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateGroupResponse#modified_at #modified_at} => Time
+    #   * {Types::UpdateCloudWatchAlarmTemplateGroupResponse#name #name} => String
+    #   * {Types::UpdateCloudWatchAlarmTemplateGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cloud_watch_alarm_template_group({
+    #     description: "__stringMin0Max1024",
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplateGroup AWS API Documentation
+    #
+    # @overload update_cloud_watch_alarm_template_group(params = {})
+    # @param [Hash] params ({})
+    def update_cloud_watch_alarm_template_group(params = {}, options = {})
+      req = build_request(:update_cloud_watch_alarm_template_group, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified eventbridge rule template.
+    #
+    # @option params [String] :description
+    #
+    # @option params [Array<Types::EventBridgeRuleTemplateTarget>] :event_targets
+    #
+    # @option params [String] :event_type
+    #   The type of event to match with the rule.
+    #
+    # @option params [String] :group_identifier
+    #
+    # @option params [required, String] :identifier
+    #
+    # @option params [String] :name
+    #
+    # @return [Types::UpdateEventBridgeRuleTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#arn #arn} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#created_at #created_at} => Time
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#description #description} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#event_targets #event_targets} => Array&lt;Types::EventBridgeRuleTemplateTarget&gt;
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#event_type #event_type} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#group_id #group_id} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#id #id} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#modified_at #modified_at} => Time
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#name #name} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_event_bridge_rule_template({
+    #     description: "__stringMin0Max1024",
+    #     event_targets: [
+    #       {
+    #         arn: "__stringMin1Max2048PatternArn", # required
+    #       },
+    #     ],
+    #     event_type: "MEDIALIVE_MULTIPLEX_ALERT", # accepts MEDIALIVE_MULTIPLEX_ALERT, MEDIALIVE_MULTIPLEX_STATE_CHANGE, MEDIALIVE_CHANNEL_ALERT, MEDIALIVE_CHANNEL_INPUT_CHANGE, MEDIALIVE_CHANNEL_STATE_CHANGE, MEDIAPACKAGE_INPUT_NOTIFICATION, MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION, MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION, SIGNAL_MAP_ACTIVE_ALARM, MEDIACONNECT_ALERT, MEDIACONNECT_SOURCE_HEALTH, MEDIACONNECT_OUTPUT_HEALTH, MEDIACONNECT_FLOW_STATUS_CHANGE
+    #     group_identifier: "__stringPatternS",
+    #     identifier: "__string", # required
+    #     name: "__stringMin1Max255PatternS",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.event_targets #=> Array
+    #   resp.event_targets[0].arn #=> String
+    #   resp.event_type #=> String, one of "MEDIALIVE_MULTIPLEX_ALERT", "MEDIALIVE_MULTIPLEX_STATE_CHANGE", "MEDIALIVE_CHANNEL_ALERT", "MEDIALIVE_CHANNEL_INPUT_CHANGE", "MEDIALIVE_CHANNEL_STATE_CHANGE", "MEDIAPACKAGE_INPUT_NOTIFICATION", "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION", "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION", "SIGNAL_MAP_ACTIVE_ALARM", "MEDIACONNECT_ALERT", "MEDIACONNECT_SOURCE_HEALTH", "MEDIACONNECT_OUTPUT_HEALTH", "MEDIACONNECT_FLOW_STATUS_CHANGE"
+    #   resp.group_id #=> String
+    #   resp.id #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplate AWS API Documentation
+    #
+    # @overload update_event_bridge_rule_template(params = {})
+    # @param [Hash] params ({})
+    def update_event_bridge_rule_template(params = {}, options = {})
+      req = build_request(:update_event_bridge_rule_template, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified eventbridge rule template group.
+    #
+    # @option params [String] :description
+    #
+    # @option params [required, String] :identifier
+    #
+    # @return [Types::UpdateEventBridgeRuleTemplateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEventBridgeRuleTemplateGroupResponse#arn #arn} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateGroupResponse#created_at #created_at} => Time
+    #   * {Types::UpdateEventBridgeRuleTemplateGroupResponse#description #description} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateGroupResponse#id #id} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateGroupResponse#modified_at #modified_at} => Time
+    #   * {Types::UpdateEventBridgeRuleTemplateGroupResponse#name #name} => String
+    #   * {Types::UpdateEventBridgeRuleTemplateGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_event_bridge_rule_template_group({
+    #     description: "__stringMin0Max1024",
+    #     identifier: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.modified_at #=> Time
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplateGroup AWS API Documentation
+    #
+    # @overload update_event_bridge_rule_template_group(params = {})
+    # @param [Hash] params ({})
+    def update_event_bridge_rule_template_group(params = {}, options = {})
+      req = build_request(:update_event_bridge_rule_template_group, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -9582,7 +11127,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -9648,19 +11193,23 @@ module Aws::MediaLive
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                      | :delay   | :max_attempts |
-    # | ----------------- | --------------------------- | -------- | ------------- |
-    # | channel_created   | {Client#describe_channel}   | 3        | 5             |
-    # | channel_deleted   | {Client#describe_channel}   | 5        | 84            |
-    # | channel_running   | {Client#describe_channel}   | 5        | 120           |
-    # | channel_stopped   | {Client#describe_channel}   | 5        | 60            |
-    # | input_attached    | {Client#describe_input}     | 5        | 20            |
-    # | input_deleted     | {Client#describe_input}     | 5        | 20            |
-    # | input_detached    | {Client#describe_input}     | 5        | 84            |
-    # | multiplex_created | {Client#describe_multiplex} | 3        | 5             |
-    # | multiplex_deleted | {Client#describe_multiplex} | 5        | 20            |
-    # | multiplex_running | {Client#describe_multiplex} | 5        | 120           |
-    # | multiplex_stopped | {Client#describe_multiplex} | 5        | 28            |
+    # | waiter_name                 | params                      | :delay   | :max_attempts |
+    # | --------------------------- | --------------------------- | -------- | ------------- |
+    # | channel_created             | {Client#describe_channel}   | 3        | 5             |
+    # | channel_deleted             | {Client#describe_channel}   | 5        | 84            |
+    # | channel_running             | {Client#describe_channel}   | 5        | 120           |
+    # | channel_stopped             | {Client#describe_channel}   | 5        | 60            |
+    # | input_attached              | {Client#describe_input}     | 5        | 20            |
+    # | input_deleted               | {Client#describe_input}     | 5        | 20            |
+    # | input_detached              | {Client#describe_input}     | 5        | 84            |
+    # | multiplex_created           | {Client#describe_multiplex} | 3        | 5             |
+    # | multiplex_deleted           | {Client#describe_multiplex} | 5        | 20            |
+    # | multiplex_running           | {Client#describe_multiplex} | 5        | 120           |
+    # | multiplex_stopped           | {Client#describe_multiplex} | 5        | 28            |
+    # | signal_map_created          | {Client#get_signal_map}     | 5        | 60            |
+    # | signal_map_monitor_deleted  | {Client#get_signal_map}     | 5        | 120           |
+    # | signal_map_monitor_deployed | {Client#get_signal_map}     | 5        | 120           |
+    # | signal_map_updated          | {Client#get_signal_map}     | 5        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -9721,7 +11270,11 @@ module Aws::MediaLive
         multiplex_created: Waiters::MultiplexCreated,
         multiplex_deleted: Waiters::MultiplexDeleted,
         multiplex_running: Waiters::MultiplexRunning,
-        multiplex_stopped: Waiters::MultiplexStopped
+        multiplex_stopped: Waiters::MultiplexStopped,
+        signal_map_created: Waiters::SignalMapCreated,
+        signal_map_monitor_deleted: Waiters::SignalMapMonitorDeleted,
+        signal_map_monitor_deployed: Waiters::SignalMapMonitorDeployed,
+        signal_map_updated: Waiters::SignalMapUpdated
       }
     end
 

@@ -12103,8 +12103,50 @@ module Aws::Glue
     #   @return [Types::AuditContext]
     #
     # @!attribute [rw] supported_permission_types
-    #   (Required) A list of supported permission types.
+    #   Indicates the level of filtering a third-party analytical engine is
+    #   capable of enforcing when calling the `GetUnfilteredTableMetadata`
+    #   API operation. Accepted values are:
+    #
+    #   * `COLUMN_PERMISSION` - Column permissions ensure that users can
+    #     access only specific columns in the table. If there are particular
+    #     columns contain sensitive data, data lake administrators can
+    #     define column filters that exclude access to specific columns.
+    #
+    #   * `CELL_FILTER_PERMISSION` - Cell-level filtering combines column
+    #     filtering (include or exclude columns) and row filter expressions
+    #     to restrict access to individual elements in the table.
+    #
+    #   * `NESTED_PERMISSION` - Nested permissions combines cell-level
+    #     filtering and nested column filtering to restrict access to
+    #     columns and/or nested columns in specific rows based on row filter
+    #     expressions.
+    #
+    #   * `NESTED_CELL_PERMISSION` - Nested cell permissions combines nested
+    #     permission with nested cell-level filtering. This allows different
+    #     subsets of nested columns to be restricted based on an array of
+    #     row filter expressions.
+    #
+    #   Note: Each of these permission types follows a hierarchical order
+    #   where each subsequent permission type includes all permission of the
+    #   previous type.
+    #
+    #   Important: If you provide a supported permission type that doesn't
+    #   match the user's level of permissions on the table, then Lake
+    #   Formation raises an exception. For example, if the third-party
+    #   engine calling the `GetUnfilteredTableMetadata` operation can
+    #   enforce only column-level filtering, and the user has nested cell
+    #   filtering applied on the table, Lake Formation throws an exception,
+    #   and will not return unfiltered table metadata and data access
+    #   credentials.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] parent_resource_arn
+    #   The resource ARN of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_resource_arn
+    #   The resource ARN of the root view in a chain of nested views.
+    #   @return [String]
     #
     # @!attribute [rw] supported_dialect
     #   A structure specifying the dialect and dialect version used by the
@@ -12132,6 +12174,8 @@ module Aws::Glue
       :name,
       :audit_context,
       :supported_permission_types,
+      :parent_resource_arn,
+      :root_resource_arn,
       :supported_dialect,
       :permissions,
       :query_session_context)
@@ -14366,14 +14410,19 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] max_fetch_time_in_ms
-    #   The maximum time spent in the job executor to fetch a record from
-    #   the Kinesis data stream per shard, specified in milliseconds (ms).
-    #   The default value is `1000`.
+    #   The maximum time spent for the job executor to read records for the
+    #   current batch from the Kinesis data stream, specified in
+    #   milliseconds (ms). Multiple `GetRecords` API calls may be made
+    #   within this time. The default value is `1000`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_fetch_records_per_shard
     #   The maximum number of records to fetch per shard in the Kinesis data
-    #   stream. The default value is `100000`.
+    #   stream per microbatch. Note: The client can exceed this limit if the
+    #   streaming job has already read extra records from Kinesis (in the
+    #   same get-records call). If `MaxFetchRecordsPerShard` needs to be
+    #   strict then it needs to be a multiple of `MaxRecordPerRead`. The
+    #   default value is `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_record_per_read

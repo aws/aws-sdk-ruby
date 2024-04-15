@@ -936,6 +936,12 @@ module Aws::S3Control
     # @!attribute [rw] bucket_account_id
     #   The Amazon Web Services account ID associated with the S3 bucket
     #   associated with this access point.
+    #
+    #   For same account access point when your bucket and access point
+    #   belong to the same account owner, the `BucketAccountId` is not
+    #   required. For cross-account access point when your bucket and access
+    #   point are not in the same account, the `BucketAccountId` is
+    #   required.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointRequest AWS API Documentation
@@ -3147,8 +3153,8 @@ module Aws::S3Control
     #   Specifies the Multi-Region Access Point. The name of the
     #   Multi-Region Access Point is different from the alias. For more
     #   information about the distinction between the name and the alias of
-    #   an Multi-Region Access Point, see [Managing Multi-Region Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   an Multi-Region Access Point, see [Rules for naming Amazon S3
+    #   Multi-Region Access Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3185,8 +3191,8 @@ module Aws::S3Control
     #   Specifies the Multi-Region Access Point. The name of the
     #   Multi-Region Access Point is different from the alias. For more
     #   information about the distinction between the name and the alias of
-    #   an Multi-Region Access Point, see [Managing Multi-Region Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   an Multi-Region Access Point, see [Rules for naming Amazon S3
+    #   Multi-Region Access Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3231,8 +3237,8 @@ module Aws::S3Control
     #   information you want to receive. The name of the Multi-Region Access
     #   Point is different from the alias. For more information about the
     #   distinction between the name and the alias of an Multi-Region Access
-    #   Point, see [Managing Multi-Region Access Points][1] in the *Amazon
-    #   S3 User Guide*.
+    #   Point, see [Rules for naming Amazon S3 Multi-Region Access
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -4139,9 +4145,9 @@ module Aws::S3Control
     #   sends when invoking an Lambda function. Version `1.0` is the
     #   default. Version `2.0` is required when you use Batch Operations to
     #   invoke Lambda functions that act on directory buckets, or if you
-    #   need to specify `UserArguments`. For more information, see [Using
-    #   Lambda with Amazon S3 Batch Operations and Amazon S3 Express One
-    #   Zone][1] in the *Amazon Web Services Storage Blog*.
+    #   need to specify `UserArguments`. For more information, see [Automate
+    #   object processing in Amazon S3 directory buckets with S3 Batch
+    #   Operations and Lambda][1] in the *Amazon Web Services Storage Blog*.
     #
     #   Ensure that your Lambda function code expects
     #   `InvocationSchemaVersion` **2.0** and uses bucket name rather than
@@ -4157,20 +4163,20 @@ module Aws::S3Control
     #
     #
     #
-    #   [1]: https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/
+    #   [1]: https://aws.amazon.com/blogs/storage/automate-object-processing-in-amazon-s3-directory-buckets-with-s3-batch-operations-and-aws-lambda/
     #   @return [String]
     #
     # @!attribute [rw] user_arguments
     #   Key-value pairs that are passed in the payload that Batch Operations
     #   sends when invoking an Lambda function. You must specify
     #   `InvocationSchemaVersion` **2.0** for `LambdaInvoke` operations that
-    #   include `UserArguments`. For more information, see [Using Lambda
-    #   with Amazon S3 Batch Operations and Amazon S3 Express One Zone][1]
-    #   in the *Amazon Web Services Storage Blog*.
+    #   include `UserArguments`. For more information, see [Automate object
+    #   processing in Amazon S3 directory buckets with S3 Batch Operations
+    #   and Lambda][1] in the *Amazon Web Services Storage Blog*.
     #
     #
     #
-    #   [1]: https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/
+    #   [1]: https://aws.amazon.com/blogs/storage/automate-object-processing-in-amazon-s3-directory-buckets-with-s3-batch-operations-and-aws-lambda/
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LambdaInvokeOperation AWS API Documentation
@@ -4312,11 +4318,15 @@ module Aws::S3Control
     #   @return [Array<Types::S3Tag>]
     #
     # @!attribute [rw] object_size_greater_than
-    #   Minimum object size to which the rule applies.
+    #   The non-inclusive minimum object size for the lifecycle rule.
+    #   Setting this property to 7 means the rule applies to objects with a
+    #   size that is greater than 7.
     #   @return [Integer]
     #
     # @!attribute [rw] object_size_less_than
-    #   Maximum object size to which the rule applies.
+    #   The non-inclusive maximum object size for the lifecycle rule.
+    #   Setting this property to 77 means the rule applies to objects with a
+    #   size that is less than 77.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LifecycleRuleAndOperator AWS API Documentation
@@ -5302,8 +5312,8 @@ module Aws::S3Control
     # @!attribute [rw] alias
     #   The alias for the Multi-Region Access Point. For more information
     #   about the distinction between the name and the alias of an
-    #   Multi-Region Access Point, see [Managing Multi-Region Access
-    #   Points][1].
+    #   Multi-Region Access Point, see [Rules for naming Amazon S3
+    #   Multi-Region Access Points][1].
     #
     #
     #
@@ -6750,9 +6760,9 @@ module Aws::S3Control
     #
     #   * **Directory buckets** - For example, to copy objects to a
     #     directory bucket named `destinationBucket` in the Availability
-    #     Zone; identified by the AZ ID `usw2-az2`, set the `TargetResource`
+    #     Zone; identified by the AZ ID `usw2-az1`, set the `TargetResource`
     #     property to
-    #     `arn:aws:s3express:region:account_id:/bucket/destination_bucket_base_name--usw2-az2--x-s3`.
+    #     `arn:aws:s3express:region:account_id:/bucket/destination_bucket_base_name--usw2-az1--x-s3`.
     #   @return [String]
     #
     # @!attribute [rw] canned_access_control_list

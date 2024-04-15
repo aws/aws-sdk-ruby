@@ -1365,7 +1365,7 @@ module Aws::ConfigService
     #   The number of rule evaluation results that you want returned.
     #
     #   This parameter is required if the rule limit for your account is more
-    #   than the default of 150 rules.
+    #   than the default of 1000 rules.
     #
     #   For information about requesting a rule limit increase, see [Config
     #   Limits][1] in the *Amazon Web Services General Reference Guide*.
@@ -5873,7 +5873,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

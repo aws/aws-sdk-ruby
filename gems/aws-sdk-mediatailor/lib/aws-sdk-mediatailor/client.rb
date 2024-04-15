@@ -1866,6 +1866,7 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#configuration_aliases #configuration_aliases} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::GetPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
+    #   * {Types::GetPlaybackConfigurationResponse#insertion_mode #insertion_mode} => String
     #   * {Types::GetPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#log_configuration #log_configuration} => Types::LogConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#manifest_processing_rules #manifest_processing_rules} => Types::ManifestProcessingRules
@@ -1902,6 +1903,7 @@ module Aws::MediaTailor
     #   resp.dash_configuration.mpd_location #=> String
     #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
+    #   resp.insertion_mode #=> String, one of "STITCHED_ONLY", "PLAYER_SELECT"
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
     #   resp.log_configuration.percent_enabled #=> Integer
@@ -2214,6 +2216,7 @@ module Aws::MediaTailor
     #   resp.items[0].dash_configuration.mpd_location #=> String
     #   resp.items[0].dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.items[0].hls_configuration.manifest_endpoint_prefix #=> String
+    #   resp.items[0].insertion_mode #=> String, one of "STITCHED_ONLY", "PLAYER_SELECT"
     #   resp.items[0].live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.items[0].live_pre_roll_configuration.max_duration_seconds #=> Integer
     #   resp.items[0].log_configuration.percent_enabled #=> Integer
@@ -2536,6 +2539,14 @@ module Aws::MediaTailor
     # @option params [Types::DashConfigurationForPut] :dash_configuration
     #   The configuration for DASH content.
     #
+    # @option params [String] :insertion_mode
+    #   The setting that controls whether players can use stitched or guided
+    #   ad insertion. The default, `STITCHED_ONLY`, forces all player sessions
+    #   to use stitched (server-side) ad insertion. Choosing `PLAYER_SELECT`
+    #   allows players to select either stitched or guided ad insertion at
+    #   session-initialization time. The default for players that do not
+    #   specify an insertion mode is stitched.
+    #
     # @option params [Types::LivePreRollConfiguration] :live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
     #
@@ -2599,6 +2610,7 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#configuration_aliases #configuration_aliases} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::PutPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
+    #   * {Types::PutPlaybackConfigurationResponse#insertion_mode #insertion_mode} => String
     #   * {Types::PutPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#log_configuration #log_configuration} => Types::LogConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#manifest_processing_rules #manifest_processing_rules} => Types::ManifestProcessingRules
@@ -2638,6 +2650,7 @@ module Aws::MediaTailor
     #       mpd_location: "__string",
     #       origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
     #     },
+    #     insertion_mode: "STITCHED_ONLY", # accepts STITCHED_ONLY, PLAYER_SELECT
     #     live_pre_roll_configuration: {
     #       ad_decision_server_url: "__string",
     #       max_duration_seconds: 1,
@@ -2674,6 +2687,7 @@ module Aws::MediaTailor
     #   resp.dash_configuration.mpd_location #=> String
     #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
+    #   resp.insertion_mode #=> String, one of "STITCHED_ONLY", "PLAYER_SELECT"
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
     #   resp.log_configuration.percent_enabled #=> Integer
@@ -3363,7 +3377,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

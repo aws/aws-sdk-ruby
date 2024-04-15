@@ -378,6 +378,7 @@ module Aws::CloudFormation
       attr_accessor change_set_name: ::String
       attr_accessor stack_name: ::String
       attr_accessor next_token: ::String
+      attr_accessor include_property_values: bool
       SENSITIVE: []
     end
 
@@ -1205,6 +1206,8 @@ module Aws::CloudFormation
       attr_accessor details: ::Array[Types::ResourceChangeDetail]
       attr_accessor change_set_id: ::String
       attr_accessor module_info: Types::ModuleInfo
+      attr_accessor before_context: ::String
+      attr_accessor after_context: ::String
       SENSITIVE: []
     end
 
@@ -1263,6 +1266,10 @@ module Aws::CloudFormation
       attr_accessor attribute: ("Properties" | "Metadata" | "CreationPolicy" | "UpdatePolicy" | "DeletionPolicy" | "UpdateReplacePolicy" | "Tags")
       attr_accessor name: ::String
       attr_accessor requires_recreation: ("Never" | "Conditionally" | "Always")
+      attr_accessor path: ::String
+      attr_accessor before_value: ::String
+      attr_accessor after_value: ::String
+      attr_accessor attribute_change_type: ("Add" | "Remove" | "Modify")
       SENSITIVE: []
     end
 

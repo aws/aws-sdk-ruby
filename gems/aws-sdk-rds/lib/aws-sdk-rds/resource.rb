@@ -1361,6 +1361,10 @@ module Aws::RDS
     #
     #   * `custom-oracle-ee-cdb` (for RDS Custom for Oracle DB instances)
     #
+    #   * `custom-oracle-se2` (for RDS Custom for Oracle DB instances)
+    #
+    #   * `custom-oracle-se2-cdb` (for RDS Custom for Oracle DB instances)
+    #
     #   * `custom-sqlserver-ee` (for RDS Custom for SQL Server DB instances)
     #
     #   * `custom-sqlserver-se` (for RDS Custom for SQL Server DB instances)
@@ -2896,6 +2900,12 @@ module Aws::RDS
     #   * `aurora-postgresql`
     #
     #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
     #
     #   * `db2-ae`
     #

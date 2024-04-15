@@ -482,6 +482,9 @@ module Aws::NeptuneGraph
     # @option params [Integer] :replica_count
     #   The number of replicas in other AZs. Min =0, Max = 2, Default = 1.
     #
+    #   Additional charges equivalent to the m-NCUs selected for the graph
+    #   apply for each replica.
+    #
     # @option params [Boolean] :deletion_protection
     #   Indicates whether or not to enable deletion protection on the graph.
     #   The graph can’t be deleted when deletion protection is enabled.
@@ -650,6 +653,9 @@ module Aws::NeptuneGraph
     # @option params [Integer] :replica_count
     #   The number of replicas in other AZs to provision on the new graph
     #   after import. Default = 0, Min = 0, Max = 2.
+    #
+    #   Additional charges equivalent to the m-NCUs selected for the graph
+    #   apply for each replica.
     #
     # @option params [Boolean] :deletion_protection
     #   Indicates whether or not to enable deletion protection on the graph.
@@ -1742,6 +1748,9 @@ module Aws::NeptuneGraph
     # @option params [Integer] :replica_count
     #   The number of replicas in other AZs. Min =0, Max = 2, Default =1
     #
+    #   Additional charges equivalent to the m-NCUs selected for the graph
+    #   apply for each replica.
+    #
     # @option params [Boolean] :public_connectivity
     #   Specifies whether or not the graph can be reachable over the internet.
     #   All access to graphs is IAM authenticated. (`true` to enable, or
@@ -2041,7 +2050,7 @@ module Aws::NeptuneGraph
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

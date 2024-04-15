@@ -41,6 +41,23 @@ module Aws::Batch
       attr_accessor started_at: ::Integer
       attr_accessor stopped_at: ::Integer
       attr_accessor status_reason: ::String
+      attr_accessor task_properties: ::Array[Types::AttemptEcsTaskDetails]
+      SENSITIVE: []
+    end
+
+    class AttemptEcsTaskDetails
+      attr_accessor container_instance_arn: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor containers: ::Array[Types::AttemptTaskContainerDetails]
+      SENSITIVE: []
+    end
+
+    class AttemptTaskContainerDetails
+      attr_accessor exit_code: ::Integer
+      attr_accessor name: ::String
+      attr_accessor reason: ::String
+      attr_accessor log_stream_name: ::String
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
       SENSITIVE: []
     end
 
@@ -417,6 +434,7 @@ module Aws::Batch
     end
 
     class EksAttemptContainerDetail
+      attr_accessor name: ::String
       attr_accessor exit_code: ::Integer
       attr_accessor reason: ::String
       SENSITIVE: []

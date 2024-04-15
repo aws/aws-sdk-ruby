@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-04-12)
+------------------
+
+* Feature - Documentation updates for AWS IoT Fleet Hub to clarify that Fleet Hub supports organization instance of IAM Identity Center.
+
 1.23.0 (2024-01-26)
 ------------------
 

@@ -53,6 +53,6 @@ require_relative 'aws-sdk-transfer/customizations'
 # @!group service
 module Aws::Transfer
 
-  GEM_VERSION = '1.90.0'
+  GEM_VERSION = '1.91.0'
 
 end

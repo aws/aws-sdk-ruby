@@ -468,7 +468,7 @@ module Aws::HealthLake
     #
     #   resp.datastore_id #=> String
     #   resp.datastore_arn #=> String
-    #   resp.datastore_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED"
+    #   resp.datastore_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.datastore_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateFHIRDatastore AWS API Documentation
@@ -502,7 +502,7 @@ module Aws::HealthLake
     #
     #   resp.datastore_id #=> String
     #   resp.datastore_arn #=> String
-    #   resp.datastore_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED"
+    #   resp.datastore_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.datastore_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DeleteFHIRDatastore AWS API Documentation
@@ -537,7 +537,7 @@ module Aws::HealthLake
     #   resp.datastore_properties.datastore_id #=> String
     #   resp.datastore_properties.datastore_arn #=> String
     #   resp.datastore_properties.datastore_name #=> String
-    #   resp.datastore_properties.datastore_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED"
+    #   resp.datastore_properties.datastore_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.datastore_properties.created_at #=> Time
     #   resp.datastore_properties.datastore_type_version #=> String, one of "R4"
     #   resp.datastore_properties.datastore_endpoint #=> String
@@ -548,6 +548,8 @@ module Aws::HealthLake
     #   resp.datastore_properties.identity_provider_configuration.fine_grained_authorization_enabled #=> Boolean
     #   resp.datastore_properties.identity_provider_configuration.metadata #=> String
     #   resp.datastore_properties.identity_provider_configuration.idp_lambda_arn #=> String
+    #   resp.datastore_properties.error_cause.error_message #=> String
+    #   resp.datastore_properties.error_cause.error_category #=> String, one of "RETRYABLE_ERROR", "NON_RETRYABLE_ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRDatastore AWS API Documentation
     #
@@ -677,7 +679,7 @@ module Aws::HealthLake
     #   resp = client.list_fhir_datastores({
     #     filter: {
     #       datastore_name: "DatastoreName",
-    #       datastore_status: "CREATING", # accepts CREATING, ACTIVE, DELETING, DELETED
+    #       datastore_status: "CREATING", # accepts CREATING, ACTIVE, DELETING, DELETED, CREATE_FAILED
     #       created_before: Time.now,
     #       created_after: Time.now,
     #     },
@@ -691,7 +693,7 @@ module Aws::HealthLake
     #   resp.datastore_properties_list[0].datastore_id #=> String
     #   resp.datastore_properties_list[0].datastore_arn #=> String
     #   resp.datastore_properties_list[0].datastore_name #=> String
-    #   resp.datastore_properties_list[0].datastore_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED"
+    #   resp.datastore_properties_list[0].datastore_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.datastore_properties_list[0].created_at #=> Time
     #   resp.datastore_properties_list[0].datastore_type_version #=> String, one of "R4"
     #   resp.datastore_properties_list[0].datastore_endpoint #=> String
@@ -702,6 +704,8 @@ module Aws::HealthLake
     #   resp.datastore_properties_list[0].identity_provider_configuration.fine_grained_authorization_enabled #=> Boolean
     #   resp.datastore_properties_list[0].identity_provider_configuration.metadata #=> String
     #   resp.datastore_properties_list[0].identity_provider_configuration.idp_lambda_arn #=> String
+    #   resp.datastore_properties_list[0].error_cause.error_message #=> String
+    #   resp.datastore_properties_list[0].error_cause.error_category #=> String, one of "RETRYABLE_ERROR", "NON_RETRYABLE_ERROR"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListFHIRDatastores AWS API Documentation
@@ -1097,7 +1101,7 @@ module Aws::HealthLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

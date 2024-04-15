@@ -265,7 +265,8 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#enable_key_rotation-instance_method
       def enable_key_rotation: (
-                                 key_id: ::String
+                                 key_id: ::String,
+                                 ?rotation_period_in_days: ::Integer
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -411,6 +412,10 @@ module Aws
       interface _GetKeyRotationStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyRotationStatusResponse]
         def key_rotation_enabled: () -> bool
+        def key_id: () -> ::String
+        def rotation_period_in_days: () -> ::Integer
+        def next_rotation_date: () -> ::Time
+        def on_demand_rotation_start_date: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#get_key_rotation_status-instance_method
       def get_key_rotation_status: (
@@ -506,6 +511,20 @@ module Aws
                                ?marker: ::String
                              ) -> _ListKeyPoliciesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeyPoliciesResponseSuccess
+
+      interface _ListKeyRotationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKeyRotationsResponse]
+        def rotations: () -> ::Array[Types::RotationsListEntry]
+        def next_marker: () -> ::String
+        def truncated: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#list_key_rotations-instance_method
+      def list_key_rotations: (
+                                key_id: ::String,
+                                ?limit: ::Integer,
+                                ?marker: ::String
+                              ) -> _ListKeyRotationsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeyRotationsResponseSuccess
 
       interface _ListKeysResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListKeysResponse]
@@ -617,6 +636,16 @@ module Aws
                           ?dry_run: bool
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RotateKeyOnDemandResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RotateKeyOnDemandResponse]
+        def key_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#rotate_key_on_demand-instance_method
+      def rotate_key_on_demand: (
+                                  key_id: ::String
+                                ) -> _RotateKeyOnDemandResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RotateKeyOnDemandResponseSuccess
 
       interface _ScheduleKeyDeletionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ScheduleKeyDeletionResponse]

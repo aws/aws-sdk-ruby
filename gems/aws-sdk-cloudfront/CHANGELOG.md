@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2024-04-11)
+------------------
+
+* Feature - CloudFront origin access control extends support to AWS Lambda function URLs and AWS Elemental MediaPackage v2 origins.
+
 1.87.0 (2024-01-26)
 ------------------
 
