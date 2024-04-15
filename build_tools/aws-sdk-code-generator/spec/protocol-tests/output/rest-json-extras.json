@@ -1,0 +1,46 @@
+[
+  {
+    "description": "Test cases for Streaming Payload",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "payload": "Stream",
+        "members": {
+          "Stream": {
+            "shape": "Stream"
+          }
+        }
+      },
+      "Stream": {
+        "type": "blob"
+      }
+    },
+    "cases": [
+      {
+        "id": "RestJsonStreamingPayload",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "Streaming payload",
+        "result": {
+          "Stream": "abc"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "abc"
+        }
+      }
+    ]
+  }
+]

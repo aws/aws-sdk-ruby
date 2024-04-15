@@ -104,7 +104,7 @@ and 10485780 bytes inclusive.
         def update_content_encoding(encoding, context)
           headers = context.http_request.headers
           if headers['Content-Encoding']
-            headers['Content-Encoding'] += ',' + encoding
+            headers['Content-Encoding'] += ", #{encoding}"
           else
             headers['Content-Encoding'] = encoding
           end

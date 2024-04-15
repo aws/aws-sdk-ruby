@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Omit `ContentType` plugin when generating presigned url.
+
 1.146.1 (2024-03-28)
 ------------------
 
@@ -25,6 +27,7 @@ Unreleased Changes
 ------------------
 
 * Issue - Include original part errors in message when aborting multipart upload fails (#2990).
+
 
 1.143.0 (2024-01-26)
 ------------------

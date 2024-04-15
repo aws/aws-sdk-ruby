@@ -71,12 +71,19 @@ module Aws
             # some type(code) might contains invalid characters
             # such as ':' (efs) etc
             match = rule.shape.name == code.gsub(/[^^a-zA-Z0-9]/, '')
-            if match && rule.shape.members.any?
-              data = Parser.new(rule).parse(context.http_response.body_contents)
-            end
+            next unless match && rule.shape.members.any?
+
+            data = Parser.new(rule).parse(context.http_response.body_contents)
+            # errors support HTTP bindings
+            apply_error_headers(rule, context, data)
           end
         end
         data
+      end
+
+      def apply_error_headers(rule, context, data)
+        headers = Aws::Rest::Response::Headers.new(rule)
+        headers.apply(context.http_response, data)
       end
 
     end

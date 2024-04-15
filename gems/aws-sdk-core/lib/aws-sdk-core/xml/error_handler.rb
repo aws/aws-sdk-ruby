@@ -26,8 +26,7 @@ module Aws
         end
         context[:request_id] = request_id(body)
         errors_module = context.client.class.errors_module
-        error_class = errors_module.error_class(code).new(context, message, data)
-        error_class
+        errors_module.error_class(code).new(context, message, data)
       end
 
       def extract_error(body, context)
@@ -43,19 +42,36 @@ module Aws
         data = EmptyStructure.new
         if error_rules = context.operation.errors
           error_rules.each do |rule|
-            # for modeled shape with error trait
-            # match `code` in the error trait before
-            # match modeled shape name
+            # query protocol may have custom error code
+            # reference: https://smithy.io/2.0/aws/protocols/aws-query-protocol.html#error-code-resolution
             error_shape_code = rule.shape['error']['code'] if rule.shape['error']
             match = (code == error_shape_code || code == rule.shape.name)
-            if match && rule.shape.members.any?
-              data = Parser.new(rule).parse(context.http_response.body_contents)
-            end
+            next unless match && rule.shape.members.any?
+
+            data = parse_error_data(rule, context.http_response.body_contents)
+            # supporting HTTP bindings
+            apply_error_headers(rule, context, data)
           end
         end
         data
       rescue Xml::Parser::ParsingError
         EmptyStructure.new
+      end
+
+      def parse_error_data(rule, body)
+        # errors may nested under <Errors><Error>structure_data</Error></Errors>
+        # Or may be flat and under <Error>structure_data</Error>
+        body = body.tr("\n", '')
+        if matches = body.match(/<Error>(.+?)<\/Error>/)
+          Parser.new(rule).parse("<#{rule.shape.name}>#{matches[1]}</#{rule.shape.name}>")
+        else
+          EmptyStructure.new
+        end
+      end
+
+      def apply_error_headers(rule, context, data)
+        headers = Aws::Rest::Response::Headers.new(rule)
+        headers.apply(context.http_response, data)
       end
 
       def error_code(body, context)

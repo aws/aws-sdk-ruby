@@ -138,11 +138,7 @@ module Aws
         end
 
         def xml_name(ref)
-          if flattened_list?(ref)
-            ref.shape.member.location_name || ref.location_name
-          else
-            ref.location_name
-          end
+          ref.location_name
         end
 
         def flattened_list?(ref)
@@ -266,7 +262,7 @@ module Aws
 
       class BlobFrame < Frame
         def result
-          @text.empty? ? nil : Base64.decode64(@text.join)
+          @text.empty? ? '' : Base64.decode64(@text.join)
         end
       end
 
@@ -278,7 +274,7 @@ module Aws
 
       class FloatFrame < Frame
         def result
-          @text.empty? ? nil : @text.join.to_f
+          @text.empty? ? nil : Aws::Util.deserialize_number(@text.join)
         end
       end
 
@@ -296,19 +292,7 @@ module Aws
 
       class TimestampFrame < Frame
         def result
-          @text.empty? ? nil : parse(@text.join)
-        end
-        def parse(value)
-          case value
-          when nil then nil
-          when /^\d+$/ then Time.at(value.to_i)
-          else
-            begin
-              Time.parse(value).utc
-            rescue ArgumentError
-              raise "unhandled timestamp format `#{value}'"
-            end
-          end
+          @text.empty? ? nil : Aws::Util.deserialize_time(@text.join)
         end
       end
 
