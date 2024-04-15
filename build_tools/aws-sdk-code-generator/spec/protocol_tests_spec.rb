@@ -46,9 +46,10 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
               test_case['response']['headers'] ||= {}
             )
 
-            # Base64 encoded binary body is provided for eventstream
+            # Base64 encoded binary body is provided for eventstream and cbor
             body =
-              if test_case['response']['eventstream'] || protocol == 'smithy-rpc-v2-cbor'
+              if test_case['response']['eventstream'] ||
+                 protocol == 'smithy-rpc-v2-cbor'
                 Base64.decode64(test_case['response']['body'])
               else
                 test_case['response']['body']

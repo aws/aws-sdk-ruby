@@ -74,6 +74,7 @@ require_relative 'aws-sdk-core/stubbing/protocols/api_gateway'
 
 # protocols
 
+require_relative 'aws-sdk-core/error_handler'
 require_relative 'aws-sdk-core/rest'
 require_relative 'aws-sdk-core/xml'
 require_relative 'aws-sdk-core/json'

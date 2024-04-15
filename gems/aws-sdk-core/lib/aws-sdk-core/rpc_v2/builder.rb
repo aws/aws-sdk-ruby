@@ -40,20 +40,18 @@ module Aws
         end
       end
 
+      def blob(value)
+        String === value ? value : value.read
+      end
+
       def format(ref, value)
         case ref.shape
         when StructureShape then structure(ref, value)
         when ListShape      then list(ref, value)
         when MapShape       then map(ref, value)
-        when TimestampShape then value.to_i
-        when BlobShape      then encode(value)
-        when FloatShape     then Util.serialize_number(value)
+        when BlobShape      then blob(value)
         else value
         end
-      end
-
-      def encode(blob)
-        Base64.strict_encode64(String === blob ? blob : blob.read)
       end
     end
   end

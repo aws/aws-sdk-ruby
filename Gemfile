@@ -9,14 +9,15 @@ gem 'aws-crt' if ENV['CRT']
 gem 'http-2'
 gem 'jmespath'
 
-# json and xml parsers
+# protocol parsers
 gem 'json'
 gem 'nokogiri', '>= 1.6.8.1'
 gem 'oga'
 gem 'rexml'
 
-# These json and xml parsers do not have java gems
+# These protocol parsers do not have java gems
 unless defined?(JRUBY_VERSION)
+  gem 'cbor'
   gem 'libxml-ruby'
   gem 'oj'
   gem 'ox'

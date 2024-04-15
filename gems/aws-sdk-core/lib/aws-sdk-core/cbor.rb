@@ -1,14 +1,7 @@
-require_relative 'cbor/cbor_engine'
-
 # frozen_string_literal: true
 
-require 'json'
-require_relative 'json/builder'
-require_relative 'json/error_handler'
-require_relative 'json/handler'
-require_relative 'json/parser'
-require_relative 'json/json_engine'
-require_relative 'json/oj_engine'
+require_relative 'cbor/cbor_engine'
+require_relative 'cbor/default_cbor_engine'
 
 module Aws
   # @api private
@@ -53,7 +46,10 @@ module Aws
       private
 
       def select_engine
-        CborEngine
+      #   require 'cbor'
+      #   CborEngine
+      # rescue LoadError
+        DefaultCborEngine
       end
     end
 

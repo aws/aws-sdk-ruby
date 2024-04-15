@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rexml/document'
-require 'rspec/expectations'
 
 # This module contains helpers relating to protocol-tests
 module ProtocolTestsHelper
@@ -229,17 +228,17 @@ module ProtocolTestsHelper
       def match_req_body(suite, test_case, http_req, it)
         protocol = suite['metadata']['protocol']
         if (expected_body = test_case['serialized']['body'])
-          body = http_req.body_contents
+          request_body = http_req.body_contents
           case protocol
           when 'query', 'ec2'
-            body = body.split('&').sort.join('&')
+            request_body = request_body.split('&').sort.join('&')
             expected_body = expected_body.split('&').sort.join('&')
           when 'json'
-            body = Aws::Json.load(body)
+            request_body = Aws::Json.load(request_body)
             expected_body = Aws::Json.load(expected_body)
           when 'rest-json'
-            if body[0] == '{'
-              body = Aws::Json.load(body)
+            if request_body[0] == '{'
+              request_body = Aws::Json.load(request_body)
               expected_body =
                 case expected_body
                   # to handle empty body, sourced from protocol-tests
@@ -250,19 +249,19 @@ module ProtocolTestsHelper
                   end
             end
           when 'rest-xml'
-            body = normalize_xml(body)
+            request_body = normalize_xml(request_body)
             expected_body = normalize_xml(expected_body)
           when 'api-gateway'
-            if body[0] == '{'
-              body = Aws::Json.load(body)
+            if request_body[0] == '{'
+              request_body = Aws::Json.load(request_body)
               expected_body = Aws::Json.load(expected_body)
             end
           when 'smithy-rpc-v2-cbor'
-            body = Aws::Cbor.decode(body)
+            request_body = Aws::Cbor.decode(request_body)
             expected_body = Aws::Cbor.decode(Base64.decode64(expected_body))
           else raise "unsupported protocol: `#{protocol}`"
           end
-          it.expect(body).to it.eq(expected_body)
+          it.expect(request_body).to it.eq(expected_body)
         end
       end
 
@@ -323,3 +322,11 @@ module ProtocolTestsHelper
     end
   end
 end
+
+# @api private
+# RSpec::Matchers.define :match_cbor_float do |expected|
+#   match do |actual|
+#     expect(actual).to be_within(0.0001).of(expected)
+#   end
+#   diffable
+# end

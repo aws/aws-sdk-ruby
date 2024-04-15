@@ -2,7 +2,7 @@ require_relative '../../spec_helper'
 
 module Aws
   module Cbor
-    describe CborEngine do
+    describe DefaultCborEngine do
       context 'decode success tests' do
         file = File.expand_path('decode-success-tests.json', __dir__)
         test_cases = JSON.load_file(file)
