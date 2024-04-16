@@ -44,6 +44,8 @@ module Aws
 
       def parse_body(context)
         cbor_data = context.http_response.body_contents.force_encoding(Encoding::BINARY)
+        return {} if cbor_data.empty?
+
         Parser.new(
           context.operation.output,
           query_compatible: query_compatible?(context)

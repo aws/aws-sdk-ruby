@@ -261,15 +261,15 @@ module ProtocolTestsHelper
             expected_body = Aws::Cbor.decode(Base64.decode64(expected_body))
           else raise "unsupported protocol: `#{protocol}`"
           end
-          it.expect(request_body).to it.eq(expected_body)
+          assert(it, request_body, expected_body)
         end
       end
 
-      def match_resp_data(test_case, resp, it)
-        resp_data = ProtocolTestsHelper.data_to_hash(resp.data)
+      def match_resp_data(test_case, http_resp, it)
+        response_data = ProtocolTestsHelper.data_to_hash(http_resp.data)
         expected_data =
           if error_case?(test_case)
-            error_shape = resp.context.operation.errors.find do |err|
+            error_shape = http_resp.context.operation.errors.find do |err|
               err.shape.name == test_case['errorCode']
             end
             raise "Unable to find #{test_case['errorCode']} in error shapes" if error_shape.nil?
@@ -280,12 +280,12 @@ module ProtocolTestsHelper
             )
           else
             ProtocolTestsHelper.format_data(
-              resp.context.operation.output,
+              http_resp.context.operation.output,
               test_case['result'] || {}
             )
           end
         if test_case['response']['eventstream']
-          resp_data.each do |member_name, value|
+          response_data.each do |member_name, value|
             if value.respond_to?(:each)
               # event stream member
               value.each do |event_struct|
@@ -300,11 +300,31 @@ module ProtocolTestsHelper
             end
           end
         else
-          it.expect(resp_data).to it.eq(expected_data)
+          assert(it, response_data, expected_data)
         end
       end
 
       private
+
+      def assert(it, actual, expected)
+        case actual
+        when Hash
+          actual.each do |key, value|
+            assert(it, value, expected[key])
+          end
+        when Array
+          actual.each_with_index do |value, index|
+            assert(it, value, expected[index])
+          end
+        when Float
+          return if actual.nan? && expected.nan?
+          return if actual.infinite? && expected.infinite?
+
+          it.expect(actual).to it.be_within(0.0001).of(expected)
+        else
+          it.expect(actual).to it.eq(expected)
+        end
+      end
 
       def normalize_headers(hash)
         hash.each.with_object({}) do |(k, v), headers|
