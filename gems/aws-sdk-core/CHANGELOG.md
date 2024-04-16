@@ -5,6 +5,8 @@ Unreleased Changes
 
 * Feature - Add CBOR encoder and decoder.
 
+* Issue - Enhance, refactor, and rebase protocols to be consistent. Ensure protocol tests are run for each engine.
+
 3.192.0 (2024-04-16)
 ------------------
 
