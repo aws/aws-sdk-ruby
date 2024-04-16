@@ -14,8 +14,6 @@ module Aws
       else
         code, message, data = extract_error(body, context)
       end
-      headers = context.http_response.headers
-      context[:request_id] = request_id(headers, body)
       errors_module = context.client.class.errors_module
       errors_module.error_class(code).new(context, message, data)
     end
@@ -31,10 +29,6 @@ module Aws
         412 => 'PreconditionFailed',
         413 => 'RequestEntityTooLarge',
       }[status_code] || "Http#{status_code}Error"
-    end
-
-    def request_id(headers, _body)
-      headers['x-amz-request-id'] || headers['x-amzn-requestid']
     end
 
   end

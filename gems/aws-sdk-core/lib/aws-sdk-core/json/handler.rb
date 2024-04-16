@@ -12,8 +12,7 @@ module Aws
         build_request(context)
         response = @handler.call(context)
         response.on(200..299) { |resp| parse_response(resp) }
-        response.on(200..599) { |resp| apply_request_id(context) }
-        response
+        response.on(200..599) { |_resp| apply_request_id(context) }
       end
 
       private

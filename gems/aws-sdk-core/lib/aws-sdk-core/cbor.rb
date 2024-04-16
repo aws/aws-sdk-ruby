@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'cbor/cbor_engine'
-require_relative 'cbor/default_cbor_engine'
+require_relative 'cbor/engines/cbor_engine'
+require_relative 'cbor/engines/default_cbor_engine'
 
 module Aws
   # @api private

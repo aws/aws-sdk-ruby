@@ -266,7 +266,7 @@ module ProtocolTestsHelper
       end
 
       def match_resp_data(test_case, resp, it)
-        data = ProtocolTestsHelper.data_to_hash(resp.data)
+        resp_data = ProtocolTestsHelper.data_to_hash(resp.data)
         expected_data =
           if error_case?(test_case)
             error_shape = resp.context.operation.errors.find do |err|
@@ -285,7 +285,7 @@ module ProtocolTestsHelper
             )
           end
         if test_case['response']['eventstream']
-          data.each do |member_name, value|
+          resp_data.each do |member_name, value|
             if value.respond_to?(:each)
               # event stream member
               value.each do |event_struct|
@@ -300,7 +300,7 @@ module ProtocolTestsHelper
             end
           end
         else
-          it.expect(data).to it.eq(expected_data)
+          it.expect(resp_data).to it.eq(expected_data)
         end
       end
 
@@ -322,11 +322,3 @@ module ProtocolTestsHelper
     end
   end
 end
-
-# @api private
-# RSpec::Matchers.define :match_cbor_float do |expected|
-#   match do |actual|
-#     expect(actual).to be_within(0.0001).of(expected)
-#   end
-#   diffable
-# end

@@ -8,7 +8,8 @@ module Aws
       def call(context)
         build_request(context)
         response = @handler.call(context)
-        response.on(200..299) { |resp| resp.data = parse_body(resp.context) }
+        response.on(200..299) { |resp| resp.data = parse_body(context) }
+        response.on(200..599) { |_resp| apply_request_id(context) }
         response
       end
 
@@ -19,8 +20,8 @@ module Aws
         build_url(context)
         context.http_request.headers['smithy-protocol'] = 'rpc-v2-cbor'
         context.http_request.headers['Accept'] = 'application/cbor' # remove?
-        context.http_request.headers['Content-Type'] ||= 'application/cbor' # specific to input
         context.http_request.body = build_body(context)
+        apply_content_type_header(context)
       end
 
       def build_url(context)
@@ -33,17 +34,20 @@ module Aws
         Builder.new(context.operation.input).serialize(context.params)
       end
 
+      def apply_content_type_header(context)
+        # If the input shape is empty, do not set the content type. This is
+        # different than if the input shape is a structure with no members.
+        return if context.operation.input.shape.struct_class == EmptyStructure
+
+        context.http_request.headers['Content-Type'] = 'application/cbor'
+      end
+
       def parse_body(context)
         cbor_data = context.http_response.body_contents.force_encoding(Encoding::BINARY)
         Parser.new(
           context.operation.output,
           query_compatible: query_compatible?(context)
         ).parse(cbor_data)
-      end
-
-      def target(context)
-        prefix = context.config.api.metadata['targetPrefix']
-        "#{prefix}.#{context.operation.name}"
       end
 
       def apply_request_id(context)

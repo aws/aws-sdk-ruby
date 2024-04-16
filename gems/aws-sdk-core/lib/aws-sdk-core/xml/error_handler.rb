@@ -16,6 +16,7 @@ module Aws
       private
 
       def extract_error(body, context)
+        context[:request_id] = request_id(body)
         code = error_code(body, context)
         [
           code,
@@ -84,7 +85,7 @@ module Aws
         end
       end
 
-      def request_id(_headers, body)
+      def request_id(body)
         if (matches = body.match(/<RequestId>(.+?)<\/RequestId>/m))
           matches[1]
         end
