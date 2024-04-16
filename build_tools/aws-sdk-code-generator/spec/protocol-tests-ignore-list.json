@@ -1,4 +1,15 @@
 {
+  "rest-json" : {
+    "input" : {},
+    "output" : {
+      "oj": {
+        "RestJsonDeserializesDenseSetMapAndSkipsNull": "Breaking behavior change if we drop null values in maps"
+      },
+      "json": {
+        "RestJsonDeserializesDenseSetMapAndSkipsNull": "Breaking behavior change if we drop null values in maps"
+      }
+    }
+  },
   "rest-xml" : {
     "input" : {},
     "output" : {

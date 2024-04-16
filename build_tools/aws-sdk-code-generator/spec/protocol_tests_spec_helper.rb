@@ -339,6 +339,8 @@ module ProtocolTestsHelper
         case actual
         when Hash
           actual.each do |key, value|
+            it.expect(actual).not_to it.include(key) unless expected.key?(key)
+
             assert(it, value, expected[key])
           end
         when Array
