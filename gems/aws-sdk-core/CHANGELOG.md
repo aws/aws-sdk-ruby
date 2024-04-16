@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.192.0 (2024-04-16)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Feature - Update serializing/deserializing for all protocols to align with Smithy protocol-tests.
 * Issue - Allow `nil` values in lists and maps.
 * Issue - Populate headers for XML and JSON error responses.

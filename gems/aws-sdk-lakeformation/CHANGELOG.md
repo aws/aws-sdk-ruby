@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2024-04-16)
+------------------
+
+* Feature - This release adds Lake Formation managed RAM support for the 4 APIs - "DescribeLakeFormationIdentityCenterConfiguration", "CreateLakeFormationIdentityCenterConfiguration", "DescribeLakeFormationIdentityCenterConfiguration", and "DeleteLakeFormationIdentityCenterConfiguration"
+
 1.47.0 (2024-01-26)
 ------------------
 

@@ -175,6 +175,7 @@ module Aws::IoTWireless
     DisassociateWirelessGatewayFromCertificateResponse = Shapes::StructureShape.new(name: 'DisassociateWirelessGatewayFromCertificateResponse')
     DisassociateWirelessGatewayFromThingRequest = Shapes::StructureShape.new(name: 'DisassociateWirelessGatewayFromThingRequest')
     DisassociateWirelessGatewayFromThingResponse = Shapes::StructureShape.new(name: 'DisassociateWirelessGatewayFromThingResponse')
+    DlAllowed = Shapes::BooleanShape.new(name: 'DlAllowed')
     DlBucketSize = Shapes::IntegerShape.new(name: 'DlBucketSize')
     DlClass = Shapes::StringShape.new(name: 'DlClass')
     DlDr = Shapes::IntegerShape.new(name: 'DlDr')
@@ -297,6 +298,7 @@ module Aws::IoTWireless
     HrAllowed = Shapes::BooleanShape.new(name: 'HrAllowed')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     ISODateTimeString = Shapes::StringShape.new(name: 'ISODateTimeString')
+    Id = Shapes::StringShape.new(name: 'Id')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IdentifierType = Shapes::StringShape.new(name: 'IdentifierType')
     ImportTaskArn = Shapes::StringShape.new(name: 'ImportTaskArn')
@@ -371,6 +373,8 @@ module Aws::IoTWireless
     LoRaWANMulticastGet = Shapes::StructureShape.new(name: 'LoRaWANMulticastGet')
     LoRaWANMulticastMetadata = Shapes::StructureShape.new(name: 'LoRaWANMulticastMetadata')
     LoRaWANMulticastSession = Shapes::StructureShape.new(name: 'LoRaWANMulticastSession')
+    LoRaWANPublicGatewayMetadata = Shapes::StructureShape.new(name: 'LoRaWANPublicGatewayMetadata')
+    LoRaWANPublicGatewayMetadataList = Shapes::ListShape.new(name: 'LoRaWANPublicGatewayMetadataList')
     LoRaWANSendDataToDevice = Shapes::StructureShape.new(name: 'LoRaWANSendDataToDevice')
     LoRaWANServiceProfile = Shapes::StructureShape.new(name: 'LoRaWANServiceProfile')
     LoRaWANStartFuotaTask = Shapes::StructureShape.new(name: 'LoRaWANStartFuotaTask')
@@ -478,6 +482,7 @@ module Aws::IoTWireless
     PrAllowed = Shapes::BooleanShape.new(name: 'PrAllowed')
     PresetFreq = Shapes::IntegerShape.new(name: 'PresetFreq')
     PrivateKeysList = Shapes::ListShape.new(name: 'PrivateKeysList')
+    ProviderNetId = Shapes::StringShape.new(name: 'ProviderNetId')
     ProximityEventConfiguration = Shapes::StructureShape.new(name: 'ProximityEventConfiguration')
     ProximityResourceTypeEventConfiguration = Shapes::StructureShape.new(name: 'ProximityResourceTypeEventConfiguration')
     PutPositionConfigurationRequest = Shapes::StructureShape.new(name: 'PutPositionConfigurationRequest')
@@ -1654,6 +1659,7 @@ module Aws::IoTWireless
     LoRaWANDeviceMetadata.add_member(:frequency, Shapes::ShapeRef.new(shape: Integer, location_name: "Frequency"))
     LoRaWANDeviceMetadata.add_member(:timestamp, Shapes::ShapeRef.new(shape: ISODateTimeString, location_name: "Timestamp"))
     LoRaWANDeviceMetadata.add_member(:gateways, Shapes::ShapeRef.new(shape: LoRaWANGatewayMetadataList, location_name: "Gateways"))
+    LoRaWANDeviceMetadata.add_member(:public_gateways, Shapes::ShapeRef.new(shape: LoRaWANPublicGatewayMetadataList, location_name: "PublicGateways"))
     LoRaWANDeviceMetadata.struct_class = Types::LoRaWANDeviceMetadata
 
     LoRaWANDeviceProfile.add_member(:supports_class_b, Shapes::ShapeRef.new(shape: SupportsClassB, location_name: "SupportsClassB"))
@@ -1757,6 +1763,16 @@ module Aws::IoTWireless
     LoRaWANMulticastSession.add_member(:session_timeout, Shapes::ShapeRef.new(shape: SessionTimeout, location_name: "SessionTimeout"))
     LoRaWANMulticastSession.add_member(:ping_slot_period, Shapes::ShapeRef.new(shape: PingSlotPeriod, location_name: "PingSlotPeriod"))
     LoRaWANMulticastSession.struct_class = Types::LoRaWANMulticastSession
+
+    LoRaWANPublicGatewayMetadata.add_member(:provider_net_id, Shapes::ShapeRef.new(shape: ProviderNetId, location_name: "ProviderNetId"))
+    LoRaWANPublicGatewayMetadata.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    LoRaWANPublicGatewayMetadata.add_member(:rssi, Shapes::ShapeRef.new(shape: Double, location_name: "Rssi"))
+    LoRaWANPublicGatewayMetadata.add_member(:snr, Shapes::ShapeRef.new(shape: Double, location_name: "Snr"))
+    LoRaWANPublicGatewayMetadata.add_member(:rf_region, Shapes::ShapeRef.new(shape: RfRegion, location_name: "RfRegion"))
+    LoRaWANPublicGatewayMetadata.add_member(:dl_allowed, Shapes::ShapeRef.new(shape: DlAllowed, location_name: "DlAllowed"))
+    LoRaWANPublicGatewayMetadata.struct_class = Types::LoRaWANPublicGatewayMetadata
+
+    LoRaWANPublicGatewayMetadataList.member = Shapes::ShapeRef.new(shape: LoRaWANPublicGatewayMetadata)
 
     LoRaWANSendDataToDevice.add_member(:f_port, Shapes::ShapeRef.new(shape: FPort, location_name: "FPort"))
     LoRaWANSendDataToDevice.add_member(:participating_gateways, Shapes::ShapeRef.new(shape: ParticipatingGateways, location_name: "ParticipatingGateways"))

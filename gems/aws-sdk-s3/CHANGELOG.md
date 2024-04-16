@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Issue - Omit `ContentType` plugin when generating presigned url.
 
 1.146.1 (2024-03-28)

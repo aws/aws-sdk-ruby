@@ -58,6 +58,8 @@ module Aws::Outposts
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :cancel_capacity_task
+            Aws::Outposts::Endpoints::CancelCapacityTask.build(context)
           when :cancel_order
             Aws::Outposts::Endpoints::CancelOrder.build(context)
           when :create_order
@@ -70,6 +72,8 @@ module Aws::Outposts
             Aws::Outposts::Endpoints::DeleteOutpost.build(context)
           when :delete_site
             Aws::Outposts::Endpoints::DeleteSite.build(context)
+          when :get_capacity_task
+            Aws::Outposts::Endpoints::GetCapacityTask.build(context)
           when :get_catalog_item
             Aws::Outposts::Endpoints::GetCatalogItem.build(context)
           when :get_connection
@@ -80,12 +84,16 @@ module Aws::Outposts
             Aws::Outposts::Endpoints::GetOutpost.build(context)
           when :get_outpost_instance_types
             Aws::Outposts::Endpoints::GetOutpostInstanceTypes.build(context)
+          when :get_outpost_supported_instance_types
+            Aws::Outposts::Endpoints::GetOutpostSupportedInstanceTypes.build(context)
           when :get_site
             Aws::Outposts::Endpoints::GetSite.build(context)
           when :get_site_address
             Aws::Outposts::Endpoints::GetSiteAddress.build(context)
           when :list_assets
             Aws::Outposts::Endpoints::ListAssets.build(context)
+          when :list_capacity_tasks
+            Aws::Outposts::Endpoints::ListCapacityTasks.build(context)
           when :list_catalog_items
             Aws::Outposts::Endpoints::ListCatalogItems.build(context)
           when :list_orders
@@ -96,6 +104,8 @@ module Aws::Outposts
             Aws::Outposts::Endpoints::ListSites.build(context)
           when :list_tags_for_resource
             Aws::Outposts::Endpoints::ListTagsForResource.build(context)
+          when :start_capacity_task
+            Aws::Outposts::Endpoints::StartCapacityTask.build(context)
           when :start_connection
             Aws::Outposts::Endpoints::StartConnection.build(context)
           when :tag_resource

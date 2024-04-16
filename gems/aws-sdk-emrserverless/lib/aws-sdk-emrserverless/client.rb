@@ -513,6 +513,7 @@ module Aws::EMRServerless
     #           cpu: "CpuSize", # required
     #           memory: "MemorySize", # required
     #           disk: "DiskSize",
+    #           disk_type: "DiskType",
     #         },
     #       },
     #     },
@@ -645,6 +646,7 @@ module Aws::EMRServerless
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.cpu #=> String
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.memory #=> String
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.disk #=> String
+    #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.disk_type #=> String
     #   resp.application.maximum_capacity.cpu #=> String
     #   resp.application.maximum_capacity.memory #=> String
     #   resp.application.maximum_capacity.disk #=> String
@@ -1266,6 +1268,7 @@ module Aws::EMRServerless
     #           cpu: "CpuSize", # required
     #           memory: "MemorySize", # required
     #           disk: "DiskSize",
+    #           disk_type: "DiskType",
     #         },
     #       },
     #     },
@@ -1343,6 +1346,7 @@ module Aws::EMRServerless
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.cpu #=> String
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.memory #=> String
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.disk #=> String
+    #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.disk_type #=> String
     #   resp.application.maximum_capacity.cpu #=> String
     #   resp.application.maximum_capacity.memory #=> String
     #   resp.application.maximum_capacity.disk #=> String
@@ -1402,7 +1406,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

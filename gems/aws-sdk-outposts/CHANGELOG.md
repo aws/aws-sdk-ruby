@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2024-04-16)
+------------------
+
+* Feature - This release adds new APIs to allow customers to configure their Outpost capacity at order-time.
+
 1.54.0 (2024-04-12)
 ------------------
 

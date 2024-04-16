@@ -128,6 +128,7 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -199,6 +200,31 @@ module Aws
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?
+                                        }?
+                                      },
+                                    ],
+                                    ?dash_manifests: Array[
+                                      {
+                                        manifest_name: ::String,
+                                        manifest_window_seconds: ::Integer?,
+                                        filter_configuration: {
+                                          manifest_filter: ::String?,
+                                          start: ::Time?,
+                                          end: ::Time?,
+                                          time_delay_seconds: ::Integer?
+                                        }?,
+                                        min_update_period_seconds: ::Integer?,
+                                        min_buffer_time_seconds: ::Integer?,
+                                        suggested_presentation_delay_seconds: ::Integer?,
+                                        segment_template_format: ("NUMBER_WITH_TIMELINE")?,
+                                        period_triggers: Array[("AVAILS" | "DRM_KEY_ROTATION" | "SOURCE_CHANGES" | "SOURCE_DISRUPTIONS" | "NONE")]?,
+                                        scte_dash: {
+                                          ad_marker_dash: ("BINARY" | "XML")?
+                                        }?,
+                                        drm_signaling: ("INDIVIDUAL" | "REFERENCED")?,
+                                        utc_timing: {
+                                          timing_mode: ("HTTP_HEAD" | "HTTP_ISO" | "HTTP_XSDATE" | "UTC_DIRECT")?,
+                                          timing_source: ::String?
                                         }?
                                       },
                                     ],
@@ -322,6 +348,7 @@ module Aws
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
+        def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_origin_endpoint-instance_method
       def get_origin_endpoint: (
@@ -488,6 +515,7 @@ module Aws
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
+        def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#update_origin_endpoint-instance_method
       def update_origin_endpoint: (
@@ -556,6 +584,31 @@ module Aws
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?
+                                        }?
+                                      },
+                                    ],
+                                    ?dash_manifests: Array[
+                                      {
+                                        manifest_name: ::String,
+                                        manifest_window_seconds: ::Integer?,
+                                        filter_configuration: {
+                                          manifest_filter: ::String?,
+                                          start: ::Time?,
+                                          end: ::Time?,
+                                          time_delay_seconds: ::Integer?
+                                        }?,
+                                        min_update_period_seconds: ::Integer?,
+                                        min_buffer_time_seconds: ::Integer?,
+                                        suggested_presentation_delay_seconds: ::Integer?,
+                                        segment_template_format: ("NUMBER_WITH_TIMELINE")?,
+                                        period_triggers: Array[("AVAILS" | "DRM_KEY_ROTATION" | "SOURCE_CHANGES" | "SOURCE_DISRUPTIONS" | "NONE")]?,
+                                        scte_dash: {
+                                          ad_marker_dash: ("BINARY" | "XML")?
+                                        }?,
+                                        drm_signaling: ("INDIVIDUAL" | "REFERENCED")?,
+                                        utc_timing: {
+                                          timing_mode: ("HTTP_HEAD" | "HTTP_ISO" | "HTTP_XSDATE" | "UTC_DIRECT")?,
+                                          timing_source: ::String?
                                         }?
                                       },
                                     ],

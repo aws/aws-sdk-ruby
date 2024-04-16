@@ -959,6 +959,18 @@ module Aws::LakeFormation
     #   third-party applications that are allowed to access data managed by
     #   Lake Formation.
     #
+    # @option params [Array<Types::DataLakePrincipal>] :share_recipients
+    #   A list of Amazon Web Services account IDs and/or Amazon Web Services
+    #   organization/organizational unit ARNs that are allowed to access data
+    #   managed by Lake Formation.
+    #
+    #   If the `ShareRecipients` list includes valid values, a resource share
+    #   is created with the principals you want to have access to the
+    #   resources.
+    #
+    #   If the `ShareRecipients` value is null or the list is empty, no
+    #   resource share is created.
+    #
     # @return [Types::CreateLakeFormationIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLakeFormationIdentityCenterConfigurationResponse#application_arn #application_arn} => String
@@ -972,6 +984,11 @@ module Aws::LakeFormation
     #       status: "ENABLED", # required, accepts ENABLED, DISABLED
     #       authorized_targets: ["ScopeTarget"], # required
     #     },
+    #     share_recipients: [
+    #       {
+    #         data_lake_principal_identifier: "DataLakePrincipalString",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1334,6 +1351,8 @@ module Aws::LakeFormation
     #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#instance_arn #instance_arn} => String
     #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#application_arn #application_arn} => String
     #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#external_filtering #external_filtering} => Types::ExternalFilteringConfiguration
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#share_recipients #share_recipients} => Array&lt;Types::DataLakePrincipal&gt;
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#resource_share #resource_share} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1349,6 +1368,9 @@ module Aws::LakeFormation
     #   resp.external_filtering.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.external_filtering.authorized_targets #=> Array
     #   resp.external_filtering.authorized_targets[0] #=> String
+    #   resp.share_recipients #=> Array
+    #   resp.share_recipients[0].data_lake_principal_identifier #=> String
+    #   resp.resource_share #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeLakeFormationIdentityCenterConfiguration AWS API Documentation
     #
@@ -3528,6 +3550,22 @@ module Aws::LakeFormation
     #   definitions, table definitions, view definitions, and other control
     #   information to manage your Lake Formation environment.
     #
+    # @option params [Array<Types::DataLakePrincipal>] :share_recipients
+    #   A list of Amazon Web Services account IDs or Amazon Web Services
+    #   organization/organizational unit ARNs that are allowed to access to
+    #   access data managed by Lake Formation.
+    #
+    #   If the `ShareRecipients` list includes valid values, then the resource
+    #   share is updated with the principals you want to have access to the
+    #   resources.
+    #
+    #   If the `ShareRecipients` value is null, both the list of share
+    #   recipients and the resource share remain unchanged.
+    #
+    #   If the `ShareRecipients` value is an empty list, then the existing
+    #   share recipients list will be cleared, and the resource share will be
+    #   deleted.
+    #
     # @option params [String] :application_status
     #   Allows to enable or disable the IAM Identity Center connection.
     #
@@ -3542,6 +3580,11 @@ module Aws::LakeFormation
     #
     #   resp = client.update_lake_formation_identity_center_configuration({
     #     catalog_id: "CatalogIdString",
+    #     share_recipients: [
+    #       {
+    #         data_lake_principal_identifier: "DataLakePrincipalString",
+    #       },
+    #     ],
     #     application_status: "ENABLED", # accepts ENABLED, DISABLED
     #     external_filtering: {
     #       status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -3708,7 +3751,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

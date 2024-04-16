@@ -435,7 +435,7 @@ module Aws::BedrockAgent
     CreateAgentAliasResponse.struct_class = Types::CreateAgentAliasResponse
 
     CreateAgentRequest.add_member(:agent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentName"))
-    CreateAgentRequest.add_member(:agent_resource_role_arn, Shapes::ShapeRef.new(shape: AgentRoleArn, required: true, location_name: "agentResourceRoleArn"))
+    CreateAgentRequest.add_member(:agent_resource_role_arn, Shapes::ShapeRef.new(shape: AgentRoleArn, location_name: "agentResourceRoleArn"))
     CreateAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAgentRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
     CreateAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))

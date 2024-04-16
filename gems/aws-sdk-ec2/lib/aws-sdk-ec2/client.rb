@@ -59115,7 +59115,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.448.1'
+      context[:gem_version] = '1.449.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -969,6 +969,7 @@ module Aws::MainframeModernization
     #   * {Types::GetBatchJobExecutionResponse#execution_id #execution_id} => String
     #   * {Types::GetBatchJobExecutionResponse#job_id #job_id} => String
     #   * {Types::GetBatchJobExecutionResponse#job_name #job_name} => String
+    #   * {Types::GetBatchJobExecutionResponse#job_step_restart_marker #job_step_restart_marker} => Types::JobStepRestartMarker
     #   * {Types::GetBatchJobExecutionResponse#job_type #job_type} => String
     #   * {Types::GetBatchJobExecutionResponse#job_user #job_user} => String
     #   * {Types::GetBatchJobExecutionResponse#return_code #return_code} => String
@@ -988,6 +989,11 @@ module Aws::MainframeModernization
     #   resp.application_id #=> String
     #   resp.batch_job_identifier.file_batch_job_identifier.file_name #=> String
     #   resp.batch_job_identifier.file_batch_job_identifier.folder_path #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.execution_id #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.from_proc_step #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.from_step #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.to_proc_step #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.to_step #=> String
     #   resp.batch_job_identifier.s3_batch_job_identifier.bucket #=> String
     #   resp.batch_job_identifier.s3_batch_job_identifier.identifier.file_name #=> String
     #   resp.batch_job_identifier.s3_batch_job_identifier.identifier.script_name #=> String
@@ -997,11 +1003,15 @@ module Aws::MainframeModernization
     #   resp.execution_id #=> String
     #   resp.job_id #=> String
     #   resp.job_name #=> String
+    #   resp.job_step_restart_marker.from_proc_step #=> String
+    #   resp.job_step_restart_marker.from_step #=> String
+    #   resp.job_step_restart_marker.to_proc_step #=> String
+    #   resp.job_step_restart_marker.to_step #=> String
     #   resp.job_type #=> String, one of "VSE", "JES2", "JES3"
     #   resp.job_user #=> String
     #   resp.return_code #=> String
     #   resp.start_time #=> Time
-    #   resp.status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Succeeded With Warning"
+    #   resp.status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Purged", "Succeeded With Warning"
     #   resp.status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/GetBatchJobExecution AWS API Documentation
@@ -1469,7 +1479,7 @@ module Aws::MainframeModernization
     #     next_token: "NextToken",
     #     started_after: Time.now,
     #     started_before: Time.now,
-    #     status: "Submitting", # accepts Submitting, Holding, Dispatching, Running, Cancelling, Cancelled, Succeeded, Failed, Succeeded With Warning
+    #     status: "Submitting", # accepts Submitting, Holding, Dispatching, Running, Cancelling, Cancelled, Succeeded, Failed, Purged, Succeeded With Warning
     #   })
     #
     # @example Response structure
@@ -1478,6 +1488,11 @@ module Aws::MainframeModernization
     #   resp.batch_job_executions[0].application_id #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.file_batch_job_identifier.file_name #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.file_batch_job_identifier.folder_path #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.execution_id #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.from_proc_step #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.from_step #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.to_proc_step #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.to_step #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.bucket #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.identifier.file_name #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.identifier.script_name #=> String
@@ -1490,7 +1505,7 @@ module Aws::MainframeModernization
     #   resp.batch_job_executions[0].job_type #=> String, one of "VSE", "JES2", "JES3"
     #   resp.batch_job_executions[0].return_code #=> String
     #   resp.batch_job_executions[0].start_time #=> Time
-    #   resp.batch_job_executions[0].status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Succeeded With Warning"
+    #   resp.batch_job_executions[0].status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Purged", "Succeeded With Warning"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListBatchJobExecutions AWS API Documentation
@@ -1499,6 +1514,45 @@ module Aws::MainframeModernization
     # @param [Hash] params ({})
     def list_batch_job_executions(params = {}, options = {})
       req = build_request(:list_batch_job_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists all the job steps for JCL files to restart a batch job. This is
+    # only applicable for Micro Focus engine with versions 8.0.6 and above.
+    #
+    # @option params [required, String] :application_id
+    #   The unique identifier of the application.
+    #
+    # @option params [required, String] :execution_id
+    #   The unique identifier of each batch job execution.
+    #
+    # @return [Types::ListBatchJobRestartPointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBatchJobRestartPointsResponse#batch_job_steps #batch_job_steps} => Array&lt;Types::JobStep&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_batch_job_restart_points({
+    #     application_id: "Identifier", # required
+    #     execution_id: "Identifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_job_steps #=> Array
+    #   resp.batch_job_steps[0].proc_step_name #=> String
+    #   resp.batch_job_steps[0].proc_step_number #=> Integer
+    #   resp.batch_job_steps[0].step_cond_code #=> String
+    #   resp.batch_job_steps[0].step_name #=> String
+    #   resp.batch_job_steps[0].step_number #=> Integer
+    #   resp.batch_job_steps[0].step_restartable #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListBatchJobRestartPoints AWS API Documentation
+    #
+    # @overload list_batch_job_restart_points(params = {})
+    # @param [Hash] params ({})
+    def list_batch_job_restart_points(params = {}, options = {})
+      req = build_request(:list_batch_job_restart_points, params)
       req.send_request(options)
     end
 
@@ -1853,6 +1907,15 @@ module Aws::MainframeModernization
     #         file_name: "String", # required
     #         folder_path: "String",
     #       },
+    #       restart_batch_job_identifier: {
+    #         execution_id: "Identifier", # required
+    #         job_step_restart_marker: { # required
+    #           from_proc_step: "String",
+    #           from_step: "String", # required
+    #           to_proc_step: "String",
+    #           to_step: "String",
+    #         },
+    #       },
     #       s3_batch_job_identifier: {
     #         bucket: "String", # required
     #         identifier: { # required
@@ -2098,7 +2161,7 @@ module Aws::MainframeModernization
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mainframemodernization'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

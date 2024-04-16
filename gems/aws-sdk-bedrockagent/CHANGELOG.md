@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2024-04-16)
+------------------
+
+* Feature - For Create Agent API, the agentResourceRoleArn parameter is no longer required.
+
 1.4.0 (2024-03-27)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2024-04-16)
+------------------
+
+* Feature - Add PublicGateways in the GetWirelessStatistics call response, indicating the LoRaWAN public network accessed by the device.
+
 1.44.0 (2024-03-29)
 ------------------
 

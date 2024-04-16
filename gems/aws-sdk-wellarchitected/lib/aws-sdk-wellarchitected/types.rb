@@ -24,6 +24,75 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # Account-level: Input for the Jira configuration.
+    #
+    # @!attribute [rw] issue_management_status
+    #   Account-level: Jira issue management status.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_management_type
+    #   Account-level: Jira issue management type.
+    #   @return [String]
+    #
+    # @!attribute [rw] jira_project_key
+    #   Account-level: Jira project key to sync workloads to.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_status
+    #   Account-level: Configuration status of the Jira integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AccountJiraConfigurationInput AWS API Documentation
+    #
+    class AccountJiraConfigurationInput < Struct.new(
+      :issue_management_status,
+      :issue_management_type,
+      :jira_project_key,
+      :integration_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Account-level: Output configuration of the Jira integration.
+    #
+    # @!attribute [rw] integration_status
+    #   Account-level: Configuration status of the Jira integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_management_status
+    #   Account-level: Jira issue management status.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_management_type
+    #   Account-level: Jira issue management type.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdomain
+    #   Account-level: Jira subdomain URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] jira_project_key
+    #   Account-level: Jira project key to sync workloads to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Account-level: Status message on configuration of the Jira
+    #   integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AccountJiraConfigurationOutput AWS API Documentation
+    #
+    class AccountJiraConfigurationOutput < Struct.new(
+      :integration_status,
+      :issue_management_status,
+      :issue_management_type,
+      :subdomain,
+      :jira_project_key,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The choice level additional resources for a custom lens.
     #
     # This field does not apply to Amazon Web Services official lenses.
@@ -126,6 +195,10 @@ module Aws::WellArchitected
     #   The reason why the question is not applicable to your workload.
     #   @return [String]
     #
+    # @!attribute [rw] jira_configuration
+    #   Configuration of the Jira integration.
+    #   @return [Types::JiraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Answer AWS API Documentation
     #
     class Answer < Struct.new(
@@ -142,7 +215,8 @@ module Aws::WellArchitected
       :is_applicable,
       :risk,
       :notes,
-      :reason)
+      :reason,
+      :jira_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -194,6 +268,10 @@ module Aws::WellArchitected
     #   The type of the question.
     #   @return [String]
     #
+    # @!attribute [rw] jira_configuration
+    #   Configuration of the Jira integration.
+    #   @return [Types::JiraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AnswerSummary AWS API Documentation
     #
     class AnswerSummary < Struct.new(
@@ -206,7 +284,8 @@ module Aws::WellArchitected
       :is_applicable,
       :risk,
       :reason,
-      :question_type)
+      :question_type,
+      :jira_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1272,6 +1351,10 @@ module Aws::WellArchitected
     #   The list of review template ARNs to associate with the workload.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] jira_configuration
+    #   Jira configuration settings when creating a workload.
+    #   @return [Types::WorkloadJiraConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateWorkloadInput AWS API Documentation
     #
     class CreateWorkloadInput < Struct.new(
@@ -1293,7 +1376,8 @@ module Aws::WellArchitected
       :discovery_config,
       :applications,
       :profile_arns,
-      :review_template_arns)
+      :review_template_arns,
+      :jira_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1916,6 +2000,28 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] organization_sharing_status
+    #   Amazon Web Services Organizations sharing status.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_integration_status
+    #   Discovery integration status.
+    #   @return [String]
+    #
+    # @!attribute [rw] jira_configuration
+    #   Jira configuration status.
+    #   @return [Types::AccountJiraConfigurationOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetGlobalSettingsOutput AWS API Documentation
+    #
+    class GetGlobalSettingsOutput < Struct.new(
+      :organization_sharing_status,
+      :discovery_integration_status,
+      :jira_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
@@ -2522,6 +2628,10 @@ module Aws::WellArchitected
     #   The improvement plan details.
     #   @return [Array<Types::ChoiceImprovementPlan>]
     #
+    # @!attribute [rw] jira_configuration
+    #   Configuration of the Jira integration.
+    #   @return [Types::JiraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ImprovementSummary AWS API Documentation
     #
     class ImprovementSummary < Struct.new(
@@ -2530,7 +2640,8 @@ module Aws::WellArchitected
       :question_title,
       :risk,
       :improvement_plan_url,
-      :improvement_plans)
+      :improvement_plans,
+      :jira_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2545,6 +2656,39 @@ module Aws::WellArchitected
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration of the Jira integration.
+    #
+    # @!attribute [rw] jira_issue_url
+    #   The URL of the associated Jira issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_synced_time
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/JiraConfiguration AWS API Documentation
+    #
+    class JiraConfiguration < Struct.new(
+      :jira_issue_url,
+      :last_synced_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Selected questions in the workload.
+    #
+    # @!attribute [rw] selected_pillars
+    #   Selected pillars in the workload.
+    #   @return [Array<Types::SelectedPillar>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/JiraSelectedQuestionConfiguration AWS API Documentation
+    #
+    class JiraSelectedQuestionConfiguration < Struct.new(
+      :selected_pillars)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2655,6 +2799,10 @@ module Aws::WellArchitected
     #   List of pillar review summaries of lens review in a workload.
     #   @return [Array<Types::PillarReviewSummary>]
     #
+    # @!attribute [rw] jira_configuration
+    #   Jira configuration status of the Lens review.
+    #   @return [Types::JiraSelectedQuestionConfiguration]
+    #
     # @!attribute [rw] updated_at
     #   The date and time recorded.
     #   @return [Time]
@@ -2693,6 +2841,7 @@ module Aws::WellArchitected
       :lens_name,
       :lens_status,
       :pillar_review_summaries,
+      :jira_configuration,
       :updated_at,
       :notes,
       :risk_counts,
@@ -5119,6 +5268,27 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # The selected pillar.
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_question_ids
+    #   Selected question IDs in the selected pillar.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/SelectedPillar AWS API Documentation
+    #
+    class SelectedPillar < Struct.new(
+      :pillar_id,
+      :selected_question_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The user has reached their resource quota.
     #
     # @!attribute [rw] message
@@ -5504,11 +5674,53 @@ module Aws::WellArchitected
     #   The status of discovery support settings.
     #   @return [String]
     #
+    # @!attribute [rw] jira_configuration
+    #   The status of Jira integration settings.
+    #   @return [Types::AccountJiraConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateGlobalSettingsInput AWS API Documentation
     #
     class UpdateGlobalSettingsInput < Struct.new(
       :organization_sharing_status,
-      :discovery_integration_status)
+      :discovery_integration_status,
+      :jira_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] integrating_service
+    #   Which integrated service to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateIntegrationInput AWS API Documentation
+    #
+    class UpdateIntegrationInput < Struct.new(
+      :workload_id,
+      :client_request_token,
+      :integrating_service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5549,13 +5761,18 @@ module Aws::WellArchitected
     #   with the workload when the template is applied.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] jira_configuration
+    #   Configuration of the Jira integration.
+    #   @return [Types::JiraSelectedQuestionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateLensReviewInput AWS API Documentation
     #
     class UpdateLensReviewInput < Struct.new(
       :workload_id,
       :lens_alias,
       :lens_notes,
-      :pillar_notes)
+      :pillar_notes,
+      :jira_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6002,6 +6219,10 @@ module Aws::WellArchitected
     #   List of AppRegistry application ARNs to associate to the workload.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] jira_configuration
+    #   Configuration of the Jira integration.
+    #   @return [Types::WorkloadJiraConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkloadInput AWS API Documentation
     #
     class UpdateWorkloadInput < Struct.new(
@@ -6021,7 +6242,8 @@ module Aws::WellArchitected
       :notes,
       :improvement_status,
       :discovery_config,
-      :applications)
+      :applications,
+      :jira_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6476,6 +6698,10 @@ module Aws::WellArchitected
     #   rating.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] jira_configuration
+    #   Jira configuration for a specific workload.
+    #   @return [Types::WorkloadJiraConfigurationOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Workload AWS API Documentation
     #
     class Workload < Struct.new(
@@ -6505,7 +6731,8 @@ module Aws::WellArchitected
       :discovery_config,
       :applications,
       :profiles,
-      :prioritized_risk_counts)
+      :prioritized_risk_counts,
+      :jira_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6529,6 +6756,60 @@ module Aws::WellArchitected
     class WorkloadDiscoveryConfig < Struct.new(
       :trusted_advisor_integration_status,
       :workload_resource_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Workload-level: Input for the Jira configuration.
+    #
+    # @!attribute [rw] issue_management_status
+    #   Workload-level: Jira issue management status.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_management_type
+    #   Workload-level: Jira issue management type.
+    #   @return [String]
+    #
+    # @!attribute [rw] jira_project_key
+    #   Workload-level: Jira project key to sync workloads to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/WorkloadJiraConfigurationInput AWS API Documentation
+    #
+    class WorkloadJiraConfigurationInput < Struct.new(
+      :issue_management_status,
+      :issue_management_type,
+      :jira_project_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Workload-level: Output configuration of the Jira integration.
+    #
+    # @!attribute [rw] issue_management_status
+    #   Workload-level: Jira issue management status.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_management_type
+    #   Workload-level: Jira issue management type.
+    #   @return [String]
+    #
+    # @!attribute [rw] jira_project_key
+    #   Workload-level: Jira project key to sync workloads to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Workload-level: Status message on configuration of the Jira
+    #   integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/WorkloadJiraConfigurationOutput AWS API Documentation
+    #
+    class WorkloadJiraConfigurationOutput < Struct.new(
+      :issue_management_status,
+      :issue_management_type,
+      :jira_project_key,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end

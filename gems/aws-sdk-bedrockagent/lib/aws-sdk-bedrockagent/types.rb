@@ -80,8 +80,8 @@ module Aws::BedrockAgent
     # @note ActionGroupExecutor is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ActionGroupExecutor corresponding to the set member.
     #
     # @!attribute [rw] lambda
-    #   The ARN of the Lambda function containing the business logic that is
-    #   carried out upon invoking the action.
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ActionGroupExecutor AWS API Documentation
@@ -139,7 +139,7 @@ module Aws::BedrockAgent
     # Contains details about an agent.
     #
     # @!attribute [rw] agent_arn
-    #   The ARN of the agent.
+    #   The Amazon Resource Name (ARN) of the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_id
@@ -151,9 +151,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] agent_resource_role_arn
-    #   The ARN of the IAM role with permissions to call API operations on
-    #   the agent. The ARN must begin with
-    #   `AmazonBedrockExecutionRoleForAgents_`.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_status
@@ -195,7 +194,8 @@ module Aws::BedrockAgent
     #   @return [Time]
     #
     # @!attribute [rw] customer_encryption_key_arn
-    #   The ARN of the KMS key that encrypts the agent.
+    #   The Amazon Resource Name (ARN) of the KMS key that encrypts the
+    #   agent.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -275,8 +275,8 @@ module Aws::BedrockAgent
     # Contains details about an action group.
     #
     # @!attribute [rw] action_group_executor
-    #   The ARN of the Lambda function containing the business logic that is
-    #   carried out upon invoking the action.
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
     #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_id
@@ -378,7 +378,7 @@ module Aws::BedrockAgent
     # Contains details about an alias of an agent.
     #
     # @!attribute [rw] agent_alias_arn
-    #   The ARN of the alias of the agent.
+    #   The Amazon Resource Name (ARN) of the alias of the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_alias_history_events
@@ -678,7 +678,8 @@ module Aws::BedrockAgent
     # Contains details about a version of an agent.
     #
     # @!attribute [rw] agent_arn
-    #   The ARN of the agent that the version belongs to.
+    #   The Amazon Resource Name (ARN) of the agent that the version belongs
+    #   to.
     #   @return [String]
     #
     # @!attribute [rw] agent_id
@@ -690,9 +691,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] agent_resource_role_arn
-    #   The ARN of the IAM role with permissions to invoke API operations on
-    #   the agent. The ARN must begin with
-    #   `AmazonBedrockExecutionRoleForAgents_`.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_status
@@ -704,7 +704,8 @@ module Aws::BedrockAgent
     #   @return [Time]
     #
     # @!attribute [rw] customer_encryption_key_arn
-    #   The ARN of the KMS key that encrypts the agent.
+    #   The Amazon Resource Name (ARN) of the KMS key that encrypts the
+    #   agent.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -919,8 +920,8 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] action_group_executor
-    #   The ARN of the Lambda function containing the business logic that is
-    #   carried out upon invoking the action.
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
     #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_name
@@ -1083,8 +1084,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] agent_resource_role_arn
-    #   The ARN of the IAM role with permissions to create the agent. The
-    #   ARN must begin with `AmazonBedrockExecutionRoleForAgents_`.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1102,7 +1103,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] customer_encryption_key_arn
-    #   The ARN of the KMS key with which to encrypt the agent.
+    #   The Amazon Resource Name (ARN) of the KMS key with which to encrypt
+    #   the agent.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1265,8 +1267,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role with permissions to create the knowledge
-    #   base.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] storage_configuration
@@ -2245,7 +2247,7 @@ module Aws::BedrockAgent
     #   @return [Array<String>]
     #
     # @!attribute [rw] knowledge_base_arn
-    #   The ARN of the knowledge base.
+    #   The Amazon Resource Name (ARN) of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_configuration
@@ -2262,9 +2264,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role with permissions to invoke API operations on
-    #   the knowledge base. The ARN must begin with
-    #   `AmazonBedrockExecutionRoleForKnowledgeBase_`.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2778,7 +2779,8 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource for which to list tags.
+    #   The Amazon Resource Name (ARN) of the resource for which to list
+    #   tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListTagsForResourceRequest AWS API Documentation
@@ -2810,7 +2812,8 @@ module Aws::BedrockAgent
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
     #
     # @!attribute [rw] collection_arn
-    #   The ARN of the OpenSearch Service vector store.
+    #   The Amazon Resource Name (ARN) of the OpenSearch Service vector
+    #   store.
     #   @return [String]
     #
     # @!attribute [rw] field_mapping
@@ -2874,8 +2877,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] credentials_secret_arn
-    #   The ARN of the secret that you created in Secrets Manager that is
-    #   linked to your Pinecone API key.
+    #   The Amazon Resource Name (ARN) of the secret that you created in
+    #   Secrets Manager that is linked to your Pinecone API key.
     #   @return [String]
     #
     # @!attribute [rw] field_mapping
@@ -3086,8 +3089,8 @@ module Aws::BedrockAgent
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
     #
     # @!attribute [rw] credentials_secret_arn
-    #   The ARN of the secret that you created in Secrets Manager that is
-    #   linked to your Amazon RDS database.
+    #   The Amazon Resource Name (ARN) of the secret that you created in
+    #   Secrets Manager that is linked to your Amazon RDS database.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -3100,7 +3103,7 @@ module Aws::BedrockAgent
     #   @return [Types::RdsFieldMapping]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the vector store.
+    #   The Amazon Resource Name (ARN) of the vector store.
     #   @return [String]
     #
     # @!attribute [rw] table_name
@@ -3163,8 +3166,9 @@ module Aws::BedrockAgent
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
     #
     # @!attribute [rw] credentials_secret_arn
-    #   The ARN of the secret that you created in Secrets Manager that is
-    #   linked to your Redis Enterprise Cloud database.
+    #   The Amazon Resource Name (ARN) of the secret that you created in
+    #   Secrets Manager that is linked to your Redis Enterprise Cloud
+    #   database.
     #   @return [String]
     #
     # @!attribute [rw] endpoint
@@ -3220,8 +3224,8 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # The specified resource ARN was not found. Check the ARN and try your
-    # request again.
+    # The specified resource Amazon Resource Name (ARN) was not found. Check
+    # the Amazon Resource Name (ARN) and try your request again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3237,7 +3241,8 @@ module Aws::BedrockAgent
     # Contains information about the S3 configuration of the data source.
     #
     # @!attribute [rw] bucket_arn
-    #   The ARN of the bucket that contains the data source.
+    #   The Amazon Resource Name (ARN) of the bucket that contains the data
+    #   source.
     #   @return [String]
     #
     # @!attribute [rw] inclusion_prefixes
@@ -3281,7 +3286,8 @@ module Aws::BedrockAgent
     # Contains the configuration for server-side encryption.
     #
     # @!attribute [rw] kms_key_arn
-    #   The ARN of the KMS key used to encrypt the resource.
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ServerSideEncryptionConfiguration AWS API Documentation
@@ -3400,7 +3406,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource to tag.
+    #   The Amazon Resource Name (ARN) of the resource to tag.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3435,7 +3441,8 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource from which to remove tags.
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -3456,8 +3463,8 @@ module Aws::BedrockAgent
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] action_group_executor
-    #   The ARN of the Lambda function containing the business logic that is
-    #   carried out upon invoking the action.
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
     #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_id
@@ -3654,12 +3661,13 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] agent_resource_role_arn
-    #   The ARN of the IAM role with permissions to update the agent. The
-    #   ARN must begin with `AmazonBedrockExecutionRoleForAgents_`.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #   @return [String]
     #
     # @!attribute [rw] customer_encryption_key_arn
-    #   The ARN of the KMS key with which to encrypt the agent.
+    #   The Amazon Resource Name (ARN) of the KMS key with which to encrypt
+    #   the agent.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3798,7 +3806,7 @@ module Aws::BedrockAgent
     #
     # @!attribute [rw] role_arn
     #   Specifies a different Amazon Resource Name (ARN) of the IAM role
-    #   with permissions to modify the knowledge base.
+    #   with permissions to invoke API operations on the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] storage_configuration
@@ -3892,8 +3900,8 @@ module Aws::BedrockAgent
     # the knowledge base.
     #
     # @!attribute [rw] embedding_model_arn
-    #   The ARN of the model used to create vector embeddings for the
-    #   knowledge base.
+    #   The Amazon Resource Name (ARN) of the model used to create vector
+    #   embeddings for the knowledge base.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VectorKnowledgeBaseConfiguration AWS API Documentation

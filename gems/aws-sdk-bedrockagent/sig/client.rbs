@@ -93,7 +93,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_agent-instance_method
       def create_agent: (
                           agent_name: ::String,
-                          agent_resource_role_arn: ::String,
+                          ?agent_resource_role_arn: ::String,
                           ?client_token: ::String,
                           ?customer_encryption_key_arn: ::String,
                           ?description: ::String,
