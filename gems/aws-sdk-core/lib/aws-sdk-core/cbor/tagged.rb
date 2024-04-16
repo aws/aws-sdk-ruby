@@ -10,6 +10,7 @@ module Aws
       def inspect
         "#{tag}(#{value.inspect})"
       end
+
       def data
         value
       end

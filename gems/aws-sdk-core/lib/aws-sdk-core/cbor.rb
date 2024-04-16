@@ -39,6 +39,7 @@ module Aws
       end
 
       def decode(bytes)
+        bytes.force_encoding(Encoding::BINARY)
         ENGINE.decode(bytes)
       end
 

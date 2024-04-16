@@ -14,23 +14,22 @@ module Aws
       private
 
       def extract_error(body, context)
-        body = body.force_encoding(Encoding::BINARY)
-        json = Cbor.decode(body)
-        code = error_code(json, context)
-        message = json['message']
+        data = Cbor.decode(body)
+        code = error_code(data, context)
+        message = data['message']
         data = parse_error_data(context, body, code)
         [code, message, data]
       rescue Cbor::CborError
         [http_status_error_code(context), '', EmptyStructure.new]
       end
 
-      def error_code(json, context)
+      def error_code(data, context)
         code =
           if aws_query_error?(context)
             error = context.http_response.headers['x-amzn-query-error'].split(';')[0]
             remove_prefix(error, context)
           else
-            json['__type']
+            data['__type']
           end
         if code
           code.split('#').last
