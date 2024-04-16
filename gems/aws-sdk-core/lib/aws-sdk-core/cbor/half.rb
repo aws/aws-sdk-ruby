@@ -9,7 +9,6 @@ module Aws
     # exponent - 5 bits
     # precision - 10 bits
     module Half
-      NAN_BYTES = "\x7e\x00"
       def self.decode(b16)
         exp = b16 >> 10 & 0x1f
         mant = b16 & 0x3ff

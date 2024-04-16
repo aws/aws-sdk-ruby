@@ -46,9 +46,9 @@ module Aws
       private
 
       def select_engine
-      #   require 'cbor'
-      #   CborEngine
-      # rescue LoadError
+        require 'cbor'
+        CborEngine
+      rescue LoadError
         DefaultCborEngine
       end
     end

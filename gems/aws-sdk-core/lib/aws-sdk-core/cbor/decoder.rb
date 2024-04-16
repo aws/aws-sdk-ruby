@@ -58,7 +58,11 @@ module Aws
           value.force_encoding(Encoding::UTF_8)
         when :tag
           case (tag = read_tag)
-          when TAG_TYPE_EPOCH then Time.at(decode_item / 1000.0)
+          when TAG_TYPE_EPOCH
+            type = peek_type
+            item = decode_item
+            item = item / 1000.0 if type == :integer
+            Time.at(item)
           # TODO: Consider handling of  BigDecimal, ect
           else
             Tagged.new(tag, decode_item)

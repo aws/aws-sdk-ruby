@@ -53,7 +53,7 @@ module Aws
         test_cases.each do |test_case|
           it "passes #{test_case['description']}" do
             input = [test_case['input']].pack('H*')
-            actual = Aws::Cbor::CborEngine.decode(input)
+            actual = Aws::Cbor::DefaultCborEngine.decode(input)
             expected = expected_value(test_case['expect'])
             assert(actual, expected)
           end
@@ -68,7 +68,7 @@ module Aws
           it "passes #{test_case['description']}" do
             input = [test_case['input']].pack('H*')
 
-            expect { Aws::Cbor::CborEngine.decode(input) }
+            expect { Aws::Cbor::DefaultCborEngine.decode(input) }
               .to raise_error(CborError)
           end
         end

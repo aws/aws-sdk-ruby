@@ -63,13 +63,9 @@ module Aws
 
       # https://www.rfc-editor.org/rfc/rfc8949.html#tags
       TAG_TYPE_EPOCH = 1
-
       TAG_BIGNUM_BASE = 2
 
       MAX_INTEGER = 18_446_744_073_709_551_616 # 2^64
-
-      HALF_NAN_BYTES = "\xF9#{Half::NAN_BYTES}"
-      FLOAT_NAN_BYTES = "\xFA\x7F\xC0\x00\x00"
 
       def head(major_type, value)
         @buffer <<
@@ -140,25 +136,16 @@ module Aws
       end
 
       def add_float(value)
-        if value.nan?
-          @buffer << FLOAT_NAN_BYTES
-        else
-          ss = [value].pack('g') # single-precision
-          @buffer << FLOAT_BYTES << ss
-        end
+        @buffer << [FLOAT_BYTES, value].pack('Cg') # single-precision
       end
 
       def add_double(value)
-        @buffer << if value.nan?
-                     FLOAT_NAN_BYTES
-                   else
-                     [DOUBLE_BYTES, value].pack('CG') # double-precision
-                   end
+        @buffer << [DOUBLE_BYTES, value].pack('CG') # double-precision
       end
 
       def add_auto_float(value)
         if value.nan?
-          @buffer << FLOAT_NAN_BYTES # Prefer using single precision over half
+          @buffer << FLOAT_BYTES << [value].pack('g')
         else
           ss = [value].pack('g') # single-precision
           if ss.unpack1('g') == value
