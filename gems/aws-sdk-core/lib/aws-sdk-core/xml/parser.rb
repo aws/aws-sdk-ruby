@@ -80,7 +80,7 @@ module Aws
         private
 
         def load_engine(name)
-          require "aws-sdk-core/xml/parser/engines/#{name}"
+          require "aws-sdk-core/xml/parser/#{name}_engine"
           const_name = name[0].upcase + name[1..-1] + 'Engine'
           const_get(const_name)
         end
