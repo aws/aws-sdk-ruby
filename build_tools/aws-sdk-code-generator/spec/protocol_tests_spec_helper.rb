@@ -11,14 +11,14 @@ module ProtocolTestsHelper
     end
 
     #   "protocol" : {
-    #     "input" : [],
-    #     "output" : [
-    #       {"SomeTestId": "Description "}
-    #     ]
+    #     "input" : {},
+    #     "output" : {
+    #       "some_engine": { "SomeTestId": "Description" }
+    #     }
     #   },
-    def skip_test_if_ignored(protocol, test_id, test_type, it)
-      if (ignore_result = check_ignore_list(protocol, test_id, test_type))
-        it.skip(ignore_result[test_id])
+    def skip_test_if_ignored(protocol, test_type, engine, test_id, it)
+      if (_test_id, description = check_ignore_list(protocol, test_type, engine, test_id))
+        it.skip(description)
       end
     end
 
@@ -85,6 +85,32 @@ module ProtocolTestsHelper
         credentials: Aws::Credentials.new('akid', 'secret'),
         retry_limit: 0
       )
+    end
+
+    def engines_for(protocol)
+      case protocol
+      when /json/, /api-gateway/
+        [:oj, :json]
+      when /xml/, /ec2/, /query/
+        [:ox, :nokogiri, :rexml, :libxml, :oga]
+      when /smithy-rpc-v2-cbor/
+        [:cbor]
+      else
+        raise "unsupported protocol: #{protocol}"
+      end
+    end
+
+    def engine_interface_for(protocol)
+      case protocol
+      when /json/, /api-gateway/
+        Aws::Json
+      when /xml/, /ec2/, /query/
+        Aws::Xml::Parser
+      when /smithy-rpc-v2-cbor/
+        Aws::Cbor
+      else
+        raise "unsupported protocol: #{protocol}"
+      end
     end
 
     # formats response data
@@ -157,11 +183,14 @@ module ProtocolTestsHelper
 
     private
 
-    def check_ignore_list(protocol, test_id, test_type)
+    def check_ignore_list(protocol, test_type, engine, test_id)
       return nil if protocol.include?('extras')
 
-      filtered_ignore_list = ignore_list.fetch(protocol, {})
-      filtered_ignore_list.fetch(test_type, []).find { |i| i.key?(test_id) }
+      ignore_list
+        .fetch(protocol, {})
+        .fetch(test_type, {})
+        .fetch(engine.to_s, {})
+        .find { |k, _v| k == test_id }
     end
 
   end

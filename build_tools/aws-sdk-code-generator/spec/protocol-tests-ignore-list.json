@@ -1,14 +1,13 @@
 {
-  "rest-json" : {
-    "input" : [],
-    "output" : [
-      {"RestJsonDeserializesDenseSetMapAndSkipsNull": "Seeking clarification from Smithy"}
-    ]
-  },
   "rest-xml" : {
-    "input" : [],
-    "output" : [
-      {"SimpleScalarPropertiesComplexEscapes": "OxEngine does not handle all escape cases but other engines supports it"}
-    ]
+    "input" : {},
+    "output" : {
+      "ox": {
+        "SimpleScalarPropertiesComplexEscapes": "OxEngine does not handle all escape cases but other engines supports it"
+      },
+      "nokogiri": {
+        "SimpleScalarPropertiesWithXMLPreamble": "Nokogiri doesn't support XML preamble?"
+      }
+    }
   }
 }

@@ -45,7 +45,7 @@ module Aws
 
       context 'when using bundled json' do
         before do
-          engine = Aws::Json::JSONEngine
+          engine = Aws::Json::JsonEngine
           stub_const('Aws::Json::ENGINE', engine)
         end
 

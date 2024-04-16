@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
+require 'oj'
+
 module Aws
   module Json
     module OjEngine
       # @api private
-      LOAD_OPTIONS = { mode: :compat, symbol_keys: false, empty_string: false }.freeze
+      LOAD_OPTIONS = {
+        mode: :compat,
+        symbol_keys: false,
+        empty_string: false
+      }.freeze
 
       # @api private
       DUMP_OPTIONS = { mode: :compat }.freeze

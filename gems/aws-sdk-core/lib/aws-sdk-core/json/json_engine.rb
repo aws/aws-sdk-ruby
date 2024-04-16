@@ -4,7 +4,7 @@ require 'json'
 
 module Aws
   module Json
-    module JSONEngine
+    module JsonEngine
       class << self
         def load(json)
           JSON.parse(json)
