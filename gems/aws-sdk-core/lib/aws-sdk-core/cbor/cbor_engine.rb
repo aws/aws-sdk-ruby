@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../tagged'
-require_relative '../encoder'
-require_relative '../decoder'
+require_relative 'tagged'
+require_relative 'encoder'
+require_relative 'decoder'
 
 module Aws
   module Cbor
