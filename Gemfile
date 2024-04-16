@@ -17,7 +17,6 @@ gem 'rexml'
 
 # These protocol parsers do not have java gems
 unless defined?(JRUBY_VERSION)
-  gem 'cbor'
   gem 'libxml-ruby'
   gem 'oj'
   gem 'ox'

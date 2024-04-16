@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'cbor/engines/cbor_engine'
-require_relative 'cbor/engines/default_cbor_engine'
 
 module Aws
   # @api private
@@ -46,10 +45,7 @@ module Aws
       private
 
       def select_engine
-        require 'cbor'
         CborEngine
-      rescue LoadError
-        DefaultCborEngine
       end
     end
 

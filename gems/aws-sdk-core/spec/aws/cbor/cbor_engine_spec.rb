@@ -2,7 +2,7 @@ require_relative '../../spec_helper'
 
 module Aws
   module Cbor
-    describe DefaultCborEngine do
+    describe CborEngine do
       context 'decode success tests' do
         file = File.expand_path('decode-success-tests.json', __dir__)
         test_cases = JSON.load_file(file)
@@ -53,7 +53,7 @@ module Aws
         test_cases.each do |test_case|
           it "passes #{test_case['description']}" do
             input = [test_case['input']].pack('H*')
-            actual = Aws::Cbor::DefaultCborEngine.decode(input)
+            actual = Aws::Cbor::CborEngine.decode(input)
             expected = expected_value(test_case['expect'])
             assert(actual, expected)
           end
@@ -68,7 +68,7 @@ module Aws
           it "passes #{test_case['description']}" do
             input = [test_case['input']].pack('H*')
 
-            expect { Aws::Cbor::DefaultCborEngine.decode(input) }
+            expect { Aws::Cbor::CborEngine.decode(input) }
               .to raise_error(CborError)
           end
         end
