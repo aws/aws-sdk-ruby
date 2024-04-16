@@ -1555,12 +1555,19 @@ module Aws::EMRServerless
     #   The disk requirements for every worker instance of the worker type.
     #   @return [String]
     #
+    # @!attribute [rw] disk_type
+    #   The disk type for every worker instance of the work type. Shuffle
+    #   optimized disks have higher performance characteristics and are
+    #   better for shuffle heavy workloads. Default is `STANDARD`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/WorkerResourceConfig AWS API Documentation
     #
     class WorkerResourceConfig < Struct.new(
       :cpu,
       :memory,
-      :disk)
+      :disk,
+      :disk_type)
       SENSITIVE = []
       include Aws::Structure
     end

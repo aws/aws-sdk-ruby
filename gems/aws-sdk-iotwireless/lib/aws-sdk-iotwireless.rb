@@ -52,6 +52,6 @@ require_relative 'aws-sdk-iotwireless/customizations'
 # @!group service
 module Aws::IoTWireless
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end

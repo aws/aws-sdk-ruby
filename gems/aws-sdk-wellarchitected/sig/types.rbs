@@ -13,6 +13,24 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class AccountJiraConfigurationInput
+      attr_accessor issue_management_status: ("ENABLED" | "DISABLED")
+      attr_accessor issue_management_type: ("AUTO" | "MANUAL")
+      attr_accessor jira_project_key: ::String
+      attr_accessor integration_status: ("NOT_CONFIGURED")
+      SENSITIVE: []
+    end
+
+    class AccountJiraConfigurationOutput
+      attr_accessor integration_status: ("CONFIGURED" | "NOT_CONFIGURED")
+      attr_accessor issue_management_status: ("ENABLED" | "DISABLED")
+      attr_accessor issue_management_type: ("AUTO" | "MANUAL")
+      attr_accessor subdomain: ::String
+      attr_accessor jira_project_key: ::String
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
     class AdditionalResources
       attr_accessor type: ("HELPFUL_RESOURCE" | "IMPROVEMENT_PLAN")
       attr_accessor content: ::Array[Types::ChoiceContent]
@@ -34,6 +52,7 @@ module Aws::WellArchitected
       attr_accessor risk: ("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE")
       attr_accessor notes: ::String
       attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      attr_accessor jira_configuration: Types::JiraConfiguration
       SENSITIVE: []
     end
 
@@ -48,6 +67,7 @@ module Aws::WellArchitected
       attr_accessor risk: ("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE")
       attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
       attr_accessor question_type: ("PRIORITIZED" | "NON_PRIORITIZED")
+      attr_accessor jira_configuration: Types::JiraConfiguration
       SENSITIVE: []
     end
 
@@ -280,6 +300,7 @@ module Aws::WellArchitected
       attr_accessor applications: ::Array[::String]
       attr_accessor profile_arns: ::Array[::String]
       attr_accessor review_template_arns: ::Array[::String]
+      attr_accessor jira_configuration: Types::WorkloadJiraConfigurationInput
       SENSITIVE: []
     end
 
@@ -408,6 +429,13 @@ module Aws::WellArchitected
       attr_accessor metrics: ::Array[Types::ConsolidatedReportMetric]
       attr_accessor next_token: ::String
       attr_accessor base_64_string: ::String
+      SENSITIVE: []
+    end
+
+    class GetGlobalSettingsOutput
+      attr_accessor organization_sharing_status: ("ENABLED" | "DISABLED")
+      attr_accessor discovery_integration_status: ("ENABLED" | "DISABLED")
+      attr_accessor jira_configuration: Types::AccountJiraConfigurationOutput
       SENSITIVE: []
     end
 
@@ -565,11 +593,23 @@ module Aws::WellArchitected
       attr_accessor risk: ("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE")
       attr_accessor improvement_plan_url: ::String
       attr_accessor improvement_plans: ::Array[Types::ChoiceImprovementPlan]
+      attr_accessor jira_configuration: Types::JiraConfiguration
       SENSITIVE: []
     end
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JiraConfiguration
+      attr_accessor jira_issue_url: ::String
+      attr_accessor last_synced_time: ::Time
+      SENSITIVE: []
+    end
+
+    class JiraSelectedQuestionConfiguration
+      attr_accessor selected_pillars: ::Array[Types::SelectedPillar]
       SENSITIVE: []
     end
 
@@ -598,6 +638,7 @@ module Aws::WellArchitected
       attr_accessor lens_name: ::String
       attr_accessor lens_status: ("CURRENT" | "NOT_CURRENT" | "DEPRECATED" | "DELETED" | "UNSHARED")
       attr_accessor pillar_review_summaries: ::Array[Types::PillarReviewSummary]
+      attr_accessor jira_configuration: Types::JiraSelectedQuestionConfiguration
       attr_accessor updated_at: ::Time
       attr_accessor notes: ::String
       attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
@@ -1194,6 +1235,12 @@ module Aws::WellArchitected
       SENSITIVE: []
     end
 
+    class SelectedPillar
+      attr_accessor pillar_id: ::String
+      attr_accessor selected_question_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -1287,6 +1334,14 @@ module Aws::WellArchitected
     class UpdateGlobalSettingsInput
       attr_accessor organization_sharing_status: ("ENABLED" | "DISABLED")
       attr_accessor discovery_integration_status: ("ENABLED" | "DISABLED")
+      attr_accessor jira_configuration: Types::AccountJiraConfigurationInput
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationInput
+      attr_accessor workload_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor integrating_service: ("JIRA")
       SENSITIVE: []
     end
 
@@ -1295,6 +1350,7 @@ module Aws::WellArchitected
       attr_accessor lens_alias: ::String
       attr_accessor lens_notes: ::String
       attr_accessor pillar_notes: ::Hash[::String, ::String]
+      attr_accessor jira_configuration: Types::JiraSelectedQuestionConfiguration
       SENSITIVE: []
     end
 
@@ -1393,6 +1449,7 @@ module Aws::WellArchitected
       attr_accessor improvement_status: ("NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "RISK_ACKNOWLEDGED")
       attr_accessor discovery_config: Types::WorkloadDiscoveryConfig
       attr_accessor applications: ::Array[::String]
+      attr_accessor jira_configuration: Types::WorkloadJiraConfigurationInput
       SENSITIVE: []
     end
 
@@ -1483,12 +1540,28 @@ module Aws::WellArchitected
       attr_accessor applications: ::Array[::String]
       attr_accessor profiles: ::Array[Types::WorkloadProfile]
       attr_accessor prioritized_risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      attr_accessor jira_configuration: Types::WorkloadJiraConfigurationOutput
       SENSITIVE: []
     end
 
     class WorkloadDiscoveryConfig
       attr_accessor trusted_advisor_integration_status: ("ENABLED" | "DISABLED")
       attr_accessor workload_resource_definition: ::Array[("WORKLOAD_METADATA" | "APP_REGISTRY")]
+      SENSITIVE: []
+    end
+
+    class WorkloadJiraConfigurationInput
+      attr_accessor issue_management_status: ("ENABLED" | "DISABLED" | "INHERIT")
+      attr_accessor issue_management_type: ("AUTO" | "MANUAL")
+      attr_accessor jira_project_key: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadJiraConfigurationOutput
+      attr_accessor issue_management_status: ("ENABLED" | "DISABLED" | "INHERIT")
+      attr_accessor issue_management_type: ("AUTO" | "MANUAL")
+      attr_accessor jira_project_key: ::String
+      attr_accessor status_message: ::String
       SENSITIVE: []
     end
 

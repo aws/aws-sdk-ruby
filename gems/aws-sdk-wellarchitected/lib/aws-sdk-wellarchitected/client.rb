@@ -1129,6 +1129,9 @@ module Aws::WellArchitected
     # @option params [Array<String>] :review_template_arns
     #   The list of review template ARNs to associate with the workload.
     #
+    # @option params [Types::WorkloadJiraConfigurationInput] :jira_configuration
+    #   Jira configuration settings when creating a workload.
+    #
     # @return [Types::CreateWorkloadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkloadOutput#workload_id #workload_id} => String
@@ -1161,6 +1164,11 @@ module Aws::WellArchitected
     #     applications: ["ApplicationArn"],
     #     profile_arns: ["ProfileArn"],
     #     review_template_arns: ["TemplateArn"],
+    #     jira_configuration: {
+    #       issue_management_status: "ENABLED", # accepts ENABLED, DISABLED, INHERIT
+    #       issue_management_type: "AUTO", # accepts AUTO, MANUAL
+    #       jira_project_key: "JiraProjectKey",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1882,6 +1890,8 @@ module Aws::WellArchitected
     #   resp.answer.risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.answer.notes #=> String
     #   resp.answer.reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
+    #   resp.answer.jira_configuration.jira_issue_url #=> String
+    #   resp.answer.jira_configuration.last_synced_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAnswer AWS API Documentation
     #
@@ -1963,6 +1973,34 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def get_consolidated_report(params = {}, options = {})
       req = build_request(:get_consolidated_report, params)
+      req.send_request(options)
+    end
+
+    # Global settings for all workloads.
+    #
+    # @return [Types::GetGlobalSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGlobalSettingsOutput#organization_sharing_status #organization_sharing_status} => String
+    #   * {Types::GetGlobalSettingsOutput#discovery_integration_status #discovery_integration_status} => String
+    #   * {Types::GetGlobalSettingsOutput#jira_configuration #jira_configuration} => Types::AccountJiraConfigurationOutput
+    #
+    # @example Response structure
+    #
+    #   resp.organization_sharing_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.discovery_integration_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jira_configuration.integration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
+    #   resp.jira_configuration.issue_management_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jira_configuration.issue_management_type #=> String, one of "AUTO", "MANUAL"
+    #   resp.jira_configuration.subdomain #=> String
+    #   resp.jira_configuration.jira_project_key #=> String
+    #   resp.jira_configuration.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetGlobalSettings AWS API Documentation
+    #
+    # @overload get_global_settings(params = {})
+    # @param [Hash] params ({})
+    def get_global_settings(params = {}, options = {})
+      req = build_request(:get_global_settings, params)
       req.send_request(options)
     end
 
@@ -2072,6 +2110,10 @@ module Aws::WellArchitected
     #   resp.lens_review.pillar_review_summaries[0].risk_counts["Risk"] #=> Integer
     #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts #=> Hash
     #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.lens_review.jira_configuration.selected_pillars #=> Array
+    #   resp.lens_review.jira_configuration.selected_pillars[0].pillar_id #=> String
+    #   resp.lens_review.jira_configuration.selected_pillars[0].selected_question_ids #=> Array
+    #   resp.lens_review.jira_configuration.selected_pillars[0].selected_question_ids[0] #=> String
     #   resp.lens_review.updated_at #=> Time
     #   resp.lens_review.notes #=> String
     #   resp.lens_review.risk_counts #=> Hash
@@ -2281,6 +2323,10 @@ module Aws::WellArchitected
     #   resp.milestone.workload.profiles[0].profile_version #=> String
     #   resp.milestone.workload.prioritized_risk_counts #=> Hash
     #   resp.milestone.workload.prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.milestone.workload.jira_configuration.issue_management_status #=> String, one of "ENABLED", "DISABLED", "INHERIT"
+    #   resp.milestone.workload.jira_configuration.issue_management_type #=> String, one of "AUTO", "MANUAL"
+    #   resp.milestone.workload.jira_configuration.jira_project_key #=> String
+    #   resp.milestone.workload.jira_configuration.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetMilestone AWS API Documentation
     #
@@ -2615,6 +2661,10 @@ module Aws::WellArchitected
     #   resp.workload.profiles[0].profile_version #=> String
     #   resp.workload.prioritized_risk_counts #=> Hash
     #   resp.workload.prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.workload.jira_configuration.issue_management_status #=> String, one of "ENABLED", "DISABLED", "INHERIT"
+    #   resp.workload.jira_configuration.issue_management_type #=> String, one of "AUTO", "MANUAL"
+    #   resp.workload.jira_configuration.jira_project_key #=> String
+    #   resp.workload.jira_configuration.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetWorkload AWS API Documentation
     #
@@ -2817,6 +2867,8 @@ module Aws::WellArchitected
     #   resp.answer_summaries[0].risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.answer_summaries[0].reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
     #   resp.answer_summaries[0].question_type #=> String, one of "PRIORITIZED", "NON_PRIORITIZED"
+    #   resp.answer_summaries[0].jira_configuration.jira_issue_url #=> String
+    #   resp.answer_summaries[0].jira_configuration.last_synced_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAnswers AWS API Documentation
@@ -2973,7 +3025,7 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
-    # List lens review improvements.
+    # List the improvements of a particular lens review.
     #
     # @option params [required, String] :workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -3051,6 +3103,8 @@ module Aws::WellArchitected
     #   resp.improvement_summaries[0].improvement_plans[0].choice_id #=> String
     #   resp.improvement_summaries[0].improvement_plans[0].display_text #=> String
     #   resp.improvement_summaries[0].improvement_plans[0].improvement_plan_url #=> String
+    #   resp.improvement_summaries[0].jira_configuration.jira_issue_url #=> String
+    #   resp.improvement_summaries[0].jira_configuration.last_synced_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensReviewImprovements AWS API Documentation
@@ -4110,6 +4164,8 @@ module Aws::WellArchitected
     #   resp.answer.risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.answer.notes #=> String
     #   resp.answer.reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
+    #   resp.answer.jira_configuration.jira_issue_url #=> String
+    #   resp.answer.jira_configuration.last_synced_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAnswer AWS API Documentation
     #
@@ -4120,7 +4176,7 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
-    # Updates whether the Amazon Web Services account is opted into
+    # Update whether the Amazon Web Services account is opted into
     # organization sharing and discovery integration features.
     #
     # @option params [String] :organization_sharing_status
@@ -4129,6 +4185,9 @@ module Aws::WellArchitected
     # @option params [String] :discovery_integration_status
     #   The status of discovery support settings.
     #
+    # @option params [Types::AccountJiraConfigurationInput] :jira_configuration
+    #   The status of Jira integration settings.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4136,6 +4195,12 @@ module Aws::WellArchitected
     #   resp = client.update_global_settings({
     #     organization_sharing_status: "ENABLED", # accepts ENABLED, DISABLED
     #     discovery_integration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     jira_configuration: {
+    #       issue_management_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       issue_management_type: "AUTO", # accepts AUTO, MANUAL
+    #       jira_project_key: "JiraProjectKey",
+    #       integration_status: "NOT_CONFIGURED", # accepts NOT_CONFIGURED
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateGlobalSettings AWS API Documentation
@@ -4144,6 +4209,51 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def update_global_settings(params = {}, options = {})
       req = build_request(:update_global_settings, params)
+      req.send_request(options)
+    end
+
+    # Update integration features.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :integrating_service
+    #   Which integrated service to update.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_integration({
+    #     workload_id: "WorkloadId", # required
+    #     client_request_token: "ClientRequestToken", # required
+    #     integrating_service: "JIRA", # required, accepts JIRA
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateIntegration AWS API Documentation
+    #
+    # @overload update_integration(params = {})
+    # @param [Hash] params ({})
+    def update_integration(params = {}, options = {})
+      req = build_request(:update_integration, params)
       req.send_request(options)
     end
 
@@ -4179,6 +4289,9 @@ module Aws::WellArchitected
     #   For a review template, these are the notes that will be associated
     #   with the workload when the template is applied.
     #
+    # @option params [Types::JiraSelectedQuestionConfiguration] :jira_configuration
+    #   Configuration of the Jira integration.
+    #
     # @return [Types::UpdateLensReviewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLensReviewOutput#workload_id #workload_id} => String
@@ -4192,6 +4305,14 @@ module Aws::WellArchitected
     #     lens_notes: "Notes",
     #     pillar_notes: {
     #       "PillarId" => "Notes",
+    #     },
+    #     jira_configuration: {
+    #       selected_pillars: [
+    #         {
+    #           pillar_id: "PillarId",
+    #           selected_question_ids: ["SelectedQuestionId"],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -4211,6 +4332,10 @@ module Aws::WellArchitected
     #   resp.lens_review.pillar_review_summaries[0].risk_counts["Risk"] #=> Integer
     #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts #=> Hash
     #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.lens_review.jira_configuration.selected_pillars #=> Array
+    #   resp.lens_review.jira_configuration.selected_pillars[0].pillar_id #=> String
+    #   resp.lens_review.jira_configuration.selected_pillars[0].selected_question_ids #=> Array
+    #   resp.lens_review.jira_configuration.selected_pillars[0].selected_question_ids[0] #=> String
     #   resp.lens_review.updated_at #=> Time
     #   resp.lens_review.notes #=> String
     #   resp.lens_review.risk_counts #=> Hash
@@ -4719,6 +4844,9 @@ module Aws::WellArchitected
     # @option params [Array<String>] :applications
     #   List of AppRegistry application ARNs to associate to the workload.
     #
+    # @option params [Types::WorkloadJiraConfigurationInput] :jira_configuration
+    #   Configuration of the Jira integration.
+    #
     # @return [Types::UpdateWorkloadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkloadOutput#workload #workload} => Types::Workload
@@ -4746,6 +4874,11 @@ module Aws::WellArchitected
     #       workload_resource_definition: ["WORKLOAD_METADATA"], # accepts WORKLOAD_METADATA, APP_REGISTRY
     #     },
     #     applications: ["ApplicationArn"],
+    #     jira_configuration: {
+    #       issue_management_status: "ENABLED", # accepts ENABLED, DISABLED, INHERIT
+    #       issue_management_type: "AUTO", # accepts AUTO, MANUAL
+    #       jira_project_key: "JiraProjectKey",
+    #     },
     #   })
     #
     # @example Response structure
@@ -4790,6 +4923,10 @@ module Aws::WellArchitected
     #   resp.workload.profiles[0].profile_version #=> String
     #   resp.workload.prioritized_risk_counts #=> Hash
     #   resp.workload.prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.workload.jira_configuration.issue_management_status #=> String, one of "ENABLED", "DISABLED", "INHERIT"
+    #   resp.workload.jira_configuration.issue_management_type #=> String, one of "AUTO", "MANUAL"
+    #   resp.workload.jira_configuration.jira_project_key #=> String
+    #   resp.workload.jira_configuration.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkload AWS API Documentation
     #
@@ -5020,7 +5157,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -101,7 +101,8 @@ module Aws
                                     worker_configuration: {
                                       cpu: ::String,
                                       memory: ::String,
-                                      disk: ::String?
+                                      disk: ::String?,
+                                      disk_type: ::String?
                                     }?
                                   }],
                                 ?maximum_capacity: {
@@ -343,7 +344,8 @@ module Aws
                                     worker_configuration: {
                                       cpu: ::String,
                                       memory: ::String,
-                                      disk: ::String?
+                                      disk: ::String?,
+                                      disk_type: ::String?
                                     }?
                                   }],
                                 ?maximum_capacity: {

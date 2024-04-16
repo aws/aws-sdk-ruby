@@ -32,7 +32,7 @@ require_relative 'aws-sdk-entityresolution/customizations'
 # structure.
 #
 #     entity_resolution = Aws::EntityResolution::Client.new
-#     resp = entity_resolution.create_id_mapping_workflow(params)
+#     resp = entity_resolution.add_policy_statement(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-entityresolution/customizations'
 # @!group service
 module Aws::EntityResolution
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end

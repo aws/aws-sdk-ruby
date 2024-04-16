@@ -430,6 +430,7 @@ module Aws::EMRServerless
       attr_accessor cpu: ::String
       attr_accessor memory: ::String
       attr_accessor disk: ::String
+      attr_accessor disk_type: ::String
       SENSITIVE: []
     end
 

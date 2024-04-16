@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-04-16)
+------------------
+
+* Feature - Adding new ListBatchJobRestartPoints API and support for restart batch job.
+
 1.15.0 (2024-01-26)
 ------------------
 

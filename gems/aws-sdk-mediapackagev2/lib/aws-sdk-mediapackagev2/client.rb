@@ -606,6 +606,9 @@ module Aws::MediaPackageV2
     # @option params [Array<Types::CreateLowLatencyHlsManifestConfiguration>] :low_latency_hls_manifests
     #   A low-latency HLS manifest configuration.
     #
+    # @option params [Array<Types::CreateDashManifestConfiguration>] :dash_manifests
+    #   A DASH manifest configuration.
+    #
     # @option params [Hash<String,String>] :tags
     #   A comma-separated list of tag key:value pairs that you define. For
     #   example:
@@ -628,6 +631,7 @@ module Aws::MediaPackageV2
     #   * {Types::CreateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::CreateOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::CreateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::CreateOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
     #   * {Types::CreateOriginEndpointResponse#etag #etag} => String
     #   * {Types::CreateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -703,6 +707,31 @@ module Aws::MediaPackageV2
     #         },
     #       },
     #     ],
+    #     dash_manifests: [
+    #       {
+    #         manifest_name: "ManifestName", # required
+    #         manifest_window_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
+    #         min_update_period_seconds: 1,
+    #         min_buffer_time_seconds: 1,
+    #         suggested_presentation_delay_seconds: 1,
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE
+    #         period_triggers: ["AVAILS"], # accepts AVAILS, DRM_KEY_ROTATION, SOURCE_CHANGES, SOURCE_DISRUPTIONS, NONE
+    #         scte_dash: {
+    #           ad_marker_dash: "BINARY", # accepts BINARY, XML
+    #         },
+    #         drm_signaling: "INDIVIDUAL", # accepts INDIVIDUAL, REFERENCED
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", # accepts HTTP_HEAD, HTTP_ISO, HTTP_XSDATE, UTC_DIRECT
+    #           timing_source: "DashUtcTimingTimingSourceString",
+    #         },
+    #       },
+    #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -759,6 +788,24 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests #=> Array
+    #   resp.dash_manifests[0].manifest_name #=> String
+    #   resp.dash_manifests[0].url #=> String
+    #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.start #=> Time
+    #   resp.dash_manifests[0].filter_configuration.end #=> Time
+    #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
+    #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
+    #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE"
+    #   resp.dash_manifests[0].period_triggers #=> Array
+    #   resp.dash_manifests[0].period_triggers[0] #=> String, one of "AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"
+    #   resp.dash_manifests[0].scte_dash.ad_marker_dash #=> String, one of "BINARY", "XML"
+    #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
+    #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
+    #   resp.dash_manifests[0].utc_timing.timing_source #=> String
     #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -1116,6 +1163,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
     #   * {Types::GetOriginEndpointResponse#etag #etag} => String
     #   * {Types::GetOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1179,6 +1227,24 @@ module Aws::MediaPackageV2
     #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.dash_manifests #=> Array
+    #   resp.dash_manifests[0].manifest_name #=> String
+    #   resp.dash_manifests[0].url #=> String
+    #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.start #=> Time
+    #   resp.dash_manifests[0].filter_configuration.end #=> Time
+    #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
+    #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
+    #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE"
+    #   resp.dash_manifests[0].period_triggers #=> Array
+    #   resp.dash_manifests[0].period_triggers[0] #=> String, one of "AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"
+    #   resp.dash_manifests[0].scte_dash.ad_marker_dash #=> String, one of "BINARY", "XML"
+    #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
+    #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
+    #   resp.dash_manifests[0].utc_timing.timing_source #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetOriginEndpoint AWS API Documentation
     #
@@ -1388,6 +1454,9 @@ module Aws::MediaPackageV2
     #   resp.items[0].low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.items[0].low_latency_hls_manifests[0].child_manifest_name #=> String
     #   resp.items[0].low_latency_hls_manifests[0].url #=> String
+    #   resp.items[0].dash_manifests #=> Array
+    #   resp.items[0].dash_manifests[0].manifest_name #=> String
+    #   resp.items[0].dash_manifests[0].url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListOriginEndpoints AWS API Documentation
@@ -1752,6 +1821,9 @@ module Aws::MediaPackageV2
     # @option params [Array<Types::CreateLowLatencyHlsManifestConfiguration>] :low_latency_hls_manifests
     #   A low-latency HLS manifest configuration.
     #
+    # @option params [Array<Types::CreateDashManifestConfiguration>] :dash_manifests
+    #   A DASH manifest configuration.
+    #
     # @option params [String] :etag
     #   The expected current Entity Tag (ETag) for the resource. If the
     #   specified ETag does not match the resource's current entity tag, the
@@ -1773,6 +1845,7 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
     #   * {Types::UpdateOriginEndpointResponse#etag #etag} => String
     #   * {Types::UpdateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1845,6 +1918,31 @@ module Aws::MediaPackageV2
     #         },
     #       },
     #     ],
+    #     dash_manifests: [
+    #       {
+    #         manifest_name: "ManifestName", # required
+    #         manifest_window_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
+    #         min_update_period_seconds: 1,
+    #         min_buffer_time_seconds: 1,
+    #         suggested_presentation_delay_seconds: 1,
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE
+    #         period_triggers: ["AVAILS"], # accepts AVAILS, DRM_KEY_ROTATION, SOURCE_CHANGES, SOURCE_DISRUPTIONS, NONE
+    #         scte_dash: {
+    #           ad_marker_dash: "BINARY", # accepts BINARY, XML
+    #         },
+    #         drm_signaling: "INDIVIDUAL", # accepts INDIVIDUAL, REFERENCED
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", # accepts HTTP_HEAD, HTTP_ISO, HTTP_XSDATE, UTC_DIRECT
+    #           timing_source: "DashUtcTimingTimingSourceString",
+    #         },
+    #       },
+    #     ],
     #     etag: "EntityTag",
     #   })
     #
@@ -1902,6 +2000,24 @@ module Aws::MediaPackageV2
     #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.dash_manifests #=> Array
+    #   resp.dash_manifests[0].manifest_name #=> String
+    #   resp.dash_manifests[0].url #=> String
+    #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.start #=> Time
+    #   resp.dash_manifests[0].filter_configuration.end #=> Time
+    #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
+    #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
+    #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE"
+    #   resp.dash_manifests[0].period_triggers #=> Array
+    #   resp.dash_manifests[0].period_triggers[0] #=> String, one of "AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"
+    #   resp.dash_manifests[0].scte_dash.ad_marker_dash #=> String, one of "BINARY", "XML"
+    #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
+    #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
+    #   resp.dash_manifests[0].utc_timing.timing_source #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateOriginEndpoint AWS API Documentation
     #
@@ -1925,7 +2041,7 @@ module Aws::MediaPackageV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-04-16)
+------------------
+
+* Feature - This release adds support for shuffle optimized disks that allow larger disk sizes and higher IOPS to efficiently run shuffle heavy workloads.
+
 1.19.0 (2024-01-26)
 ------------------
 

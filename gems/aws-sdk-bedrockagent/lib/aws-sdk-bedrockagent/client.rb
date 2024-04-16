@@ -455,11 +455,11 @@ module Aws::BedrockAgent
     #
     # * Specify the following fields for security purposes.
     #
-    #   * `agentResourceRoleArn` – The ARN of the role with permissions to
-    #     create an agent.
+    #   * `agentResourceRoleArn` – The Amazon Resource Name (ARN) of the
+    #     role with permissions to invoke API operations on an agent.
     #
-    #   * (Optional) `customerEncryptionKeyArn` – The ARN of a KMS key to
-    #     encrypt the creation of the agent.
+    #   * (Optional) `customerEncryptionKeyArn` – The Amazon Resource Name
+    #     (ARN) of a KMS key to encrypt the creation of the agent.
     #
     #   * (Optional) `idleSessionTTLinSeconds` – Specify the number of
     #     seconds for which the agent should maintain session information.
@@ -481,9 +481,9 @@ module Aws::BedrockAgent
     # @option params [required, String] :agent_name
     #   A name for the agent that you create.
     #
-    # @option params [required, String] :agent_resource_role_arn
-    #   The ARN of the IAM role with permissions to create the agent. The ARN
-    #   must begin with `AmazonBedrockExecutionRoleForAgents_`.
+    # @option params [String] :agent_resource_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -499,7 +499,8 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :customer_encryption_key_arn
-    #   The ARN of the KMS key with which to encrypt the agent.
+    #   The Amazon Resource Name (ARN) of the KMS key with which to encrypt
+    #   the agent.
     #
     # @option params [String] :description
     #   A description of the agent.
@@ -539,7 +540,7 @@ module Aws::BedrockAgent
     #
     #   resp = client.create_agent({
     #     agent_name: "Name", # required
-    #     agent_resource_role_arn: "AgentRoleArn", # required
+    #     agent_resource_role_arn: "AgentRoleArn",
     #     client_token: "ClientToken",
     #     customer_encryption_key_arn: "KmsKeyArn",
     #     description: "Description",
@@ -633,8 +634,8 @@ module Aws::BedrockAgent
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #
     # @option params [Types::ActionGroupExecutor] :action_group_executor
-    #   The ARN of the Lambda function containing the business logic that is
-    #   carried out upon invoking the action.
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
     #
     # @option params [required, String] :action_group_name
     #   The name to give the action group.
@@ -936,8 +937,8 @@ module Aws::BedrockAgent
     #
     # * Provide the `name` and an optional `description`.
     #
-    # * Provide the ARN with permissions to create a knowledge base in the
-    #   `roleArn` field.
+    # * Provide the Amazon Resource Name (ARN) with permissions to create a
+    #   knowledge base in the `roleArn` field.
     #
     # * Provide the embedding model to use in the `embeddingModelArn` field
     #   in the `knowledgeBaseConfiguration` object.
@@ -993,7 +994,8 @@ module Aws::BedrockAgent
     #   A name for the knowledge base.
     #
     # @option params [required, String] :role_arn
-    #   The ARN of the IAM role with permissions to create the knowledge base.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the knowledge base.
     #
     # @option params [required, Types::StorageConfiguration] :storage_configuration
     #   Contains details about the configuration of the vector database used
@@ -2254,7 +2256,7 @@ module Aws::BedrockAgent
     # List all the tags for the resource you specify.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource for which to list tags.
+    #   The Amazon Resource Name (ARN) of the resource for which to list tags.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2391,7 +2393,7 @@ module Aws::BedrockAgent
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource to tag.
+    #   The Amazon Resource Name (ARN) of the resource to tag.
     #
     # @option params [required, Hash<String,String>] :tags
     #   An object containing key-value pairs that define the tags to attach to
@@ -2420,7 +2422,8 @@ module Aws::BedrockAgent
     # Remove tags from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource from which to remove tags.
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags.
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of keys of the tags to remove from the resource.
@@ -2452,11 +2455,12 @@ module Aws::BedrockAgent
     #   Specifies a new name for the agent.
     #
     # @option params [required, String] :agent_resource_role_arn
-    #   The ARN of the IAM role with permissions to update the agent. The ARN
-    #   must begin with `AmazonBedrockExecutionRoleForAgents_`.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #
     # @option params [String] :customer_encryption_key_arn
-    #   The ARN of the KMS key with which to encrypt the agent.
+    #   The Amazon Resource Name (ARN) of the KMS key with which to encrypt
+    #   the agent.
     #
     # @option params [String] :description
     #   Specifies a new description of the agent.
@@ -2568,8 +2572,8 @@ module Aws::BedrockAgent
     # Updates the configuration for an action group for an agent.
     #
     # @option params [Types::ActionGroupExecutor] :action_group_executor
-    #   The ARN of the Lambda function containing the business logic that is
-    #   carried out upon invoking the action.
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
     #
     # @option params [required, String] :action_group_id
     #   The unique identifier of the action group.
@@ -2919,7 +2923,7 @@ module Aws::BedrockAgent
     #
     # @option params [required, String] :role_arn
     #   Specifies a different Amazon Resource Name (ARN) of the IAM role with
-    #   permissions to modify the knowledge base.
+    #   permissions to invoke API operations on the knowledge base.
     #
     # @option params [required, Types::StorageConfiguration] :storage_configuration
     #   Specifies the configuration for the vector store used for the
@@ -3050,7 +3054,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

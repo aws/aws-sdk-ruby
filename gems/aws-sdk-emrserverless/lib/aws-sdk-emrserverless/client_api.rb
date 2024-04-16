@@ -41,6 +41,7 @@ module Aws::EMRServerless
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DiskSize = Shapes::StringShape.new(name: 'DiskSize')
+    DiskType = Shapes::StringShape.new(name: 'DiskType')
     Double = Shapes::FloatShape.new(name: 'Double')
     Duration = Shapes::IntegerShape.new(name: 'Duration')
     EncryptionKeyArn = Shapes::StringShape.new(name: 'EncryptionKeyArn')
@@ -479,6 +480,7 @@ module Aws::EMRServerless
     WorkerResourceConfig.add_member(:cpu, Shapes::ShapeRef.new(shape: CpuSize, required: true, location_name: "cpu"))
     WorkerResourceConfig.add_member(:memory, Shapes::ShapeRef.new(shape: MemorySize, required: true, location_name: "memory"))
     WorkerResourceConfig.add_member(:disk, Shapes::ShapeRef.new(shape: DiskSize, location_name: "disk"))
+    WorkerResourceConfig.add_member(:disk_type, Shapes::ShapeRef.new(shape: DiskType, location_name: "diskType"))
     WorkerResourceConfig.struct_class = Types::WorkerResourceConfig
 
     WorkerTypeSpecification.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfiguration, location_name: "imageConfiguration"))

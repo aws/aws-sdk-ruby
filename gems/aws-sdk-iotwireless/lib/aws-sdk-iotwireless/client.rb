@@ -394,13 +394,22 @@ module Aws::IoTWireless
     #   The Sidewalk account credentials.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to attach to the specified resource. Tags are metadata that
@@ -633,13 +642,22 @@ module Aws::IoTWireless
     #   can use to manage a resource.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CreateDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -688,13 +706,22 @@ module Aws::IoTWireless
     #   you can use to manage a resource.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Types::SidewalkCreateDeviceProfile] :sidewalk
     #   The Sidewalk-related information for creating the Sidewalk device
@@ -762,13 +789,22 @@ module Aws::IoTWireless
     #   The description of the new resource.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Types::LoRaWANFuotaTask] :lo_ra_wan
     #   The LoRaWAN information used with a FUOTA task.
@@ -853,13 +889,22 @@ module Aws::IoTWireless
     #   The description of the multicast group.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [required, Types::LoRaWANMulticast] :lo_ra_wan
     #   The LoRaWAN information that is to be used with the multicast group.
@@ -930,13 +975,22 @@ module Aws::IoTWireless
     #   you can use to manage a resource.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Array<String>] :multicast_groups
     #   Multicast Group resources to add to the network analyzer
@@ -995,13 +1049,22 @@ module Aws::IoTWireless
     #   you can use to manage a resource.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CreateServiceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1055,13 +1118,22 @@ module Aws::IoTWireless
     #   The name of the destination to assign to the new wireless device.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Types::LoRaWANDevice] :lo_ra_wan
     #   The device configuration information to use to create the wireless
@@ -1169,6 +1241,19 @@ module Aws::IoTWireless
 
     # Provisions a wireless gateway.
     #
+    # <note markdown="1"> When provisioning a wireless gateway, you might run into duplication
+    # errors for the following reasons.
+    #
+    #  * If you specify a `GatewayEui` value that already exists.
+    #
+    # * If you used a `ClientRequestToken` with the same parameters within
+    #   the last 10 minutes.
+    #
+    #  To avoid this error, make sure that you use unique identifiers and
+    # parameters for each request within the specified time period.
+    #
+    #  </note>
+    #
     # @option params [String] :name
     #   The name of the new resource.
     #
@@ -1184,13 +1269,22 @@ module Aws::IoTWireless
     #   you can use to manage a resource.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CreateWirelessGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1283,13 +1377,22 @@ module Aws::IoTWireless
     #   Information about the gateways to update.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to attach to the specified resource. Tags are metadata that
@@ -1536,6 +1639,19 @@ module Aws::IoTWireless
     end
 
     # Deletes a wireless gateway.
+    #
+    # <note markdown="1"> When deleting a wireless gateway, you might run into duplication
+    # errors for the following reasons.
+    #
+    #  * If you specify a `GatewayEui` value that already exists.
+    #
+    # * If you used a `ClientRequestToken` with the same parameters within
+    #   the last 10 minutes.
+    #
+    #  To avoid this error, make sure that you use unique identifiers and
+    # parameters for each request within the specified time period.
+    #
+    #  </note>
     #
     # @option params [required, String] :id
     #   The ID of the resource to delete.
@@ -1984,7 +2100,7 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Get the metric configuration status for this account.
+    # Get the metric configuration status for this AWS account.
     #
     # @return [Types::GetMetricConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2001,10 +2117,10 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Get metrics.
+    # Get the summary metrics for this AWS account.
     #
     # @option params [Array<Types::SummaryMetricQuery>] :summary_metric_queries
-    #   The list of queries to retrieve summary metrics.
+    #   The list of queries to retrieve the summary metrics.
     #
     # @return [Types::GetMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2871,6 +2987,13 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.gateways[0].gateway_eui #=> String
     #   resp.lo_ra_wan.gateways[0].snr #=> Float
     #   resp.lo_ra_wan.gateways[0].rssi #=> Float
+    #   resp.lo_ra_wan.public_gateways #=> Array
+    #   resp.lo_ra_wan.public_gateways[0].provider_net_id #=> String
+    #   resp.lo_ra_wan.public_gateways[0].id #=> String
+    #   resp.lo_ra_wan.public_gateways[0].rssi #=> Float
+    #   resp.lo_ra_wan.public_gateways[0].snr #=> Float
+    #   resp.lo_ra_wan.public_gateways[0].rf_region #=> String
+    #   resp.lo_ra_wan.public_gateways[0].dl_allowed #=> Boolean
     #   resp.sidewalk.rssi #=> Integer
     #   resp.sidewalk.battery_level #=> String, one of "normal", "low", "critical"
     #   resp.sidewalk.event #=> String, one of "discovered", "lost", "ack", "nack", "passthrough"
@@ -4246,13 +4369,22 @@ module Aws::IoTWireless
     #   onboarded to AWS IoT Wireless.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [String] :device_name
     #   The name of the wireless device for which an import task is being
@@ -4309,13 +4441,22 @@ module Aws::IoTWireless
     #   to AWS IoT Wireless.
     #
     # @option params [String] :client_request_token
-    #   Each resource must have a unique client request token. If you try to
-    #   create a new resource with the same token as a resource that already
-    #   exists, an exception occurs. If you omit this value, AWS SDKs will
-    #   automatically generate a unique client request.
+    #   Each resource must have a unique client request token. The client
+    #   token is used to implement idempotency. It ensures that the request
+    #   completes no more than one time. If you retry a request with the same
+    #   token and the same parameters, the request will complete successfully.
+    #   However, if you try to create a new resource using the same token but
+    #   different parameters, an HTTP 409 conflict occurs. If you omit this
+    #   value, AWS SDKs will automatically generate a unique client request.
+    #   For more information about idempotency, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tag to attach to the specified resource. Tags are metadata that
@@ -4659,7 +4800,7 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Update the metric configuration.
+    # Update the summary metric configuration.
     #
     # @option params [Types::SummaryMetricConfiguration] :summary_metric
     #   The value to be used to set summary metric configuration.
@@ -5116,7 +5257,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

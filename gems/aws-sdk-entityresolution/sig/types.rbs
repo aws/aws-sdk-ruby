@@ -13,6 +13,23 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class AddPolicyStatementInput
+      attr_accessor action: ::Array[::String]
+      attr_accessor arn: ::String
+      attr_accessor condition: ::String
+      attr_accessor effect: ("Allow" | "Deny")
+      attr_accessor principal: ::Array[::String]
+      attr_accessor statement_id: ::String
+      SENSITIVE: []
+    end
+
+    class AddPolicyStatementOutput
+      attr_accessor arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -37,6 +54,31 @@ module Aws::EntityResolution
       attr_accessor role_arn: ::String
       attr_accessor workflow_arn: ::String
       attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIdNamespaceInput
+      attr_accessor description: ::String
+      attr_accessor id_mapping_workflow_properties: ::Array[Types::IdNamespaceIdMappingWorkflowProperties]
+      attr_accessor id_namespace_name: ::String
+      attr_accessor input_source_config: ::Array[Types::IdNamespaceInputSource]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("SOURCE" | "TARGET")
+      SENSITIVE: []
+    end
+
+    class CreateIdNamespaceOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id_mapping_workflow_properties: ::Array[Types::IdNamespaceIdMappingWorkflowProperties]
+      attr_accessor id_namespace_arn: ::String
+      attr_accessor id_namespace_name: ::String
+      attr_accessor input_source_config: ::Array[Types::IdNamespaceInputSource]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("SOURCE" | "TARGET")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -90,6 +132,16 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class DeleteIdNamespaceInput
+      attr_accessor id_namespace_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdNamespaceOutput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class DeleteMatchingWorkflowInput
       attr_accessor workflow_name: ::String
       SENSITIVE: []
@@ -97,6 +149,19 @@ module Aws::EntityResolution
 
     class DeleteMatchingWorkflowOutput
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyStatementInput
+      attr_accessor arn: ::String
+      attr_accessor statement_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyStatementOutput
+      attr_accessor arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor token: ::String
       SENSITIVE: []
     end
 
@@ -133,6 +198,7 @@ module Aws::EntityResolution
       attr_accessor error_details: Types::ErrorDetails
       attr_accessor job_id: ::String
       attr_accessor metrics: Types::IdMappingJobMetrics
+      attr_accessor output_source_config: ::Array[Types::IdMappingJobOutputSource]
       attr_accessor start_time: ::Time
       attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "QUEUED")
       SENSITIVE: []
@@ -157,7 +223,27 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class GetIdNamespaceInput
+      attr_accessor id_namespace_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdNamespaceOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id_mapping_workflow_properties: ::Array[Types::IdNamespaceIdMappingWorkflowProperties]
+      attr_accessor id_namespace_arn: ::String
+      attr_accessor id_namespace_name: ::String
+      attr_accessor input_source_config: ::Array[Types::IdNamespaceInputSource]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("SOURCE" | "TARGET")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class GetMatchIdInput
+      attr_accessor apply_normalization: bool
       attr_accessor record: ::Hash[::String, ::String]
       attr_accessor workflow_name: ::String
       SENSITIVE: [:record]
@@ -165,6 +251,7 @@ module Aws::EntityResolution
 
     class GetMatchIdOutput
       attr_accessor match_id: ::String
+      attr_accessor match_rule: ::String
       SENSITIVE: []
     end
 
@@ -179,6 +266,7 @@ module Aws::EntityResolution
       attr_accessor error_details: Types::ErrorDetails
       attr_accessor job_id: ::String
       attr_accessor metrics: Types::JobMetrics
+      attr_accessor output_source_config: ::Array[Types::JobOutputSource]
       attr_accessor start_time: ::Time
       attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "QUEUED")
       SENSITIVE: []
@@ -204,6 +292,18 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class GetPolicyInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyOutput
+      attr_accessor arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
     class GetProviderServiceInput
       attr_accessor provider_name: ::String
       attr_accessor provider_service_name: ::String
@@ -212,10 +312,13 @@ module Aws::EntityResolution
 
     class GetProviderServiceOutput
       attr_accessor anonymized_output: bool
+      attr_accessor provider_component_schema: Types::ProviderComponentSchema
       attr_accessor provider_configuration_definition: untyped
       attr_accessor provider_endpoint_configuration: Types::ProviderEndpointConfiguration
       attr_accessor provider_entity_output_definition: untyped
+      attr_accessor provider_id_name_space_configuration: Types::ProviderIdNameSpaceConfiguration
       attr_accessor provider_intermediate_data_access_configuration: Types::ProviderIntermediateDataAccessConfiguration
+      attr_accessor provider_job_configuration: untyped
       attr_accessor provider_name: ::String
       attr_accessor provider_service_arn: ::String
       attr_accessor provider_service_display_name: ::String
@@ -248,6 +351,13 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class IdMappingJobOutputSource
+      attr_accessor kms_arn: ::String
+      attr_accessor output_s3_path: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
     class IdMappingTechniques
       attr_accessor id_mapping_type: ("PROVIDER")
       attr_accessor provider_properties: Types::ProviderProperties
@@ -257,6 +367,7 @@ module Aws::EntityResolution
     class IdMappingWorkflowInputSource
       attr_accessor input_source_arn: ::String
       attr_accessor schema_name: ::String
+      attr_accessor type: ("SOURCE" | "TARGET")
       SENSITIVE: []
     end
 
@@ -271,6 +382,28 @@ module Aws::EntityResolution
       attr_accessor updated_at: ::Time
       attr_accessor workflow_arn: ::String
       attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class IdNamespaceIdMappingWorkflowProperties
+      attr_accessor id_mapping_type: ("PROVIDER")
+      attr_accessor provider_properties: Types::NamespaceProviderProperties
+      SENSITIVE: []
+    end
+
+    class IdNamespaceInputSource
+      attr_accessor input_source_arn: ::String
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class IdNamespaceSummary
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id_namespace_arn: ::String
+      attr_accessor id_namespace_name: ::String
+      attr_accessor type: ("SOURCE" | "TARGET")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -304,6 +437,13 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class JobOutputSource
+      attr_accessor kms_arn: ::String
+      attr_accessor output_s3_path: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
     class JobSummary
       attr_accessor end_time: ::Time
       attr_accessor job_id: ::String
@@ -334,6 +474,18 @@ module Aws::EntityResolution
     class ListIdMappingWorkflowsOutput
       attr_accessor next_token: ::String
       attr_accessor workflow_summaries: ::Array[Types::IdMappingWorkflowSummary]
+      SENSITIVE: []
+    end
+
+    class ListIdNamespacesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdNamespacesOutput
+      attr_accessor id_namespace_summaries: ::Array[Types::IdNamespaceSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -406,6 +558,12 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class NamespaceProviderProperties
+      attr_accessor provider_configuration: untyped
+      attr_accessor provider_service_arn: ::String
+      SENSITIVE: []
+    end
+
     class OutputAttribute
       attr_accessor hashed: bool
       attr_accessor name: ::String
@@ -420,6 +578,12 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class ProviderComponentSchema
+      attr_accessor provider_schema_attributes: ::Array[Types::ProviderSchemaAttribute]
+      attr_accessor schemas: ::Array[::Array[::String]]
+      SENSITIVE: []
+    end
+
     class ProviderEndpointConfiguration
       attr_accessor marketplace_configuration: Types::ProviderMarketplaceConfiguration
       attr_accessor unknown: untyped
@@ -429,6 +593,13 @@ module Aws::EntityResolution
       end
       class Unknown < ProviderEndpointConfiguration
       end
+    end
+
+    class ProviderIdNameSpaceConfiguration
+      attr_accessor description: ::String
+      attr_accessor provider_source_configuration_definition: untyped
+      attr_accessor provider_target_configuration_definition: untyped
+      SENSITIVE: []
     end
 
     class ProviderIntermediateDataAccessConfiguration
@@ -452,12 +623,34 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class ProviderSchemaAttribute
+      attr_accessor field_name: ::String
+      attr_accessor hashing: bool
+      attr_accessor sub_type: ::String
+      attr_accessor type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID")
+      SENSITIVE: []
+    end
+
     class ProviderServiceSummary
       attr_accessor provider_name: ::String
       attr_accessor provider_service_arn: ::String
       attr_accessor provider_service_display_name: ::String
       attr_accessor provider_service_name: ::String
       attr_accessor provider_service_type: ("ASSIGNMENT" | "ID_MAPPING")
+      SENSITIVE: []
+    end
+
+    class PutPolicyInput
+      attr_accessor arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class PutPolicyOutput
+      attr_accessor arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor token: ::String
       SENSITIVE: []
     end
 
@@ -504,12 +697,14 @@ module Aws::EntityResolution
     end
 
     class StartIdMappingJobInput
+      attr_accessor output_source_config: ::Array[Types::IdMappingJobOutputSource]
       attr_accessor workflow_name: ::String
       SENSITIVE: []
     end
 
     class StartIdMappingJobOutput
       attr_accessor job_id: ::String
+      attr_accessor output_source_config: ::Array[Types::IdMappingJobOutputSource]
       SENSITIVE: []
     end
 
@@ -564,6 +759,28 @@ module Aws::EntityResolution
       attr_accessor role_arn: ::String
       attr_accessor workflow_arn: ::String
       attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIdNamespaceInput
+      attr_accessor description: ::String
+      attr_accessor id_mapping_workflow_properties: ::Array[Types::IdNamespaceIdMappingWorkflowProperties]
+      attr_accessor id_namespace_name: ::String
+      attr_accessor input_source_config: ::Array[Types::IdNamespaceInputSource]
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIdNamespaceOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id_mapping_workflow_properties: ::Array[Types::IdNamespaceIdMappingWorkflowProperties]
+      attr_accessor id_namespace_arn: ::String
+      attr_accessor id_namespace_name: ::String
+      attr_accessor input_source_config: ::Array[Types::IdNamespaceInputSource]
+      attr_accessor role_arn: ::String
+      attr_accessor type: ("SOURCE" | "TARGET")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 

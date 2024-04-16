@@ -1303,6 +1303,7 @@ module Aws::IoTWireless
       attr_accessor frequency: ::Integer
       attr_accessor timestamp: ::String
       attr_accessor gateways: ::Array[Types::LoRaWANGatewayMetadata]
+      attr_accessor public_gateways: ::Array[Types::LoRaWANPublicGatewayMetadata]
       SENSITIVE: []
     end
 
@@ -1433,6 +1434,16 @@ module Aws::IoTWireless
       attr_accessor session_start_time: ::Time
       attr_accessor session_timeout: ::Integer
       attr_accessor ping_slot_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class LoRaWANPublicGatewayMetadata
+      attr_accessor provider_net_id: ::String
+      attr_accessor id: ::String
+      attr_accessor rssi: ::Float
+      attr_accessor snr: ::Float
+      attr_accessor rf_region: ::String
+      attr_accessor dl_allowed: bool
       SENSITIVE: []
     end
 

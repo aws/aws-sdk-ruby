@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2024-04-16)
+------------------
+
+* Feature - Cross Account Resource Support .
+
 1.6.0 (2024-01-26)
 ------------------
 
