@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Omit keys with `nil` value in json maps when deserializing.
+* Issue - Drop key/value pair if value is `nil` when deserializing json maps.
 
 3.192.0 (2024-04-16)
 ------------------
