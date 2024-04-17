@@ -75,6 +75,11 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class AppliedCreatorModeConfiguration
+      attr_accessor creator_mode_control: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class AttachmentInput
       attr_accessor data: ::String
       attr_accessor name: ::String
@@ -153,11 +158,24 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class ChatModeConfiguration
+      attr_accessor plugin_configuration: Types::PluginConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PluginConfiguration < ChatModeConfiguration
+      end
+      class Unknown < ChatModeConfiguration
+      end
+    end
+
     class ChatSyncInput
       attr_accessor action_execution: Types::ActionExecution
       attr_accessor application_id: ::String
       attr_accessor attachments: ::Array[Types::AttachmentInput]
       attr_accessor attribute_filter: Types::AttributeFilter
+      attr_accessor chat_mode: ("RETRIEVAL_MODE" | "CREATOR_MODE" | "PLUGIN_MODE")
+      attr_accessor chat_mode_configuration: Types::ChatModeConfiguration
       attr_accessor client_token: ::String
       attr_accessor conversation_id: ::String
       attr_accessor parent_message_id: ::String
@@ -208,6 +226,7 @@ module Aws::QBusiness
       attr_accessor description: ::String
       attr_accessor display_name: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor identity_center_instance_arn: ::String
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -304,6 +323,7 @@ module Aws::QBusiness
     class CreateWebExperienceRequest
       attr_accessor application_id: ::String
       attr_accessor client_token: ::String
+      attr_accessor role_arn: ::String
       attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
       attr_accessor subtitle: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -315,6 +335,11 @@ module Aws::QBusiness
     class CreateWebExperienceResponse
       attr_accessor web_experience_arn: ::String
       attr_accessor web_experience_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatorModeConfiguration
+      attr_accessor creator_mode_control: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -603,6 +628,7 @@ module Aws::QBusiness
       attr_accessor display_name: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor error: Types::ErrorDetail
+      attr_accessor identity_center_application_arn: ::String
       attr_accessor role_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
       attr_accessor updated_at: ::Time
@@ -618,6 +644,7 @@ module Aws::QBusiness
 
     class GetChatControlsConfigurationResponse
       attr_accessor blocked_phrases: Types::BlockedPhrasesConfiguration
+      attr_accessor creator_mode_configuration: Types::AppliedCreatorModeConfiguration
       attr_accessor next_token: ::String
       attr_accessor response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
       attr_accessor topic_configurations: ::Array[Types::TopicConfiguration]
@@ -750,6 +777,7 @@ module Aws::QBusiness
       attr_accessor created_at: ::Time
       attr_accessor default_endpoint: ::String
       attr_accessor error: Types::ErrorDetail
+      attr_accessor role_arn: ::String
       attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "PENDING_AUTH_CONFIG")
       attr_accessor subtitle: ::String
@@ -1069,6 +1097,11 @@ module Aws::QBusiness
       end
     end
 
+    class PluginConfiguration
+      attr_accessor plugin_id: ::String
+      SENSITIVE: []
+    end
+
     class Principal
       attr_accessor group: Types::PrincipalGroup
       attr_accessor user: Types::PrincipalUser
@@ -1301,6 +1334,7 @@ module Aws::QBusiness
       attr_accessor application_id: ::String
       attr_accessor blocked_phrases_configuration_update: Types::BlockedPhrasesConfigurationUpdate
       attr_accessor client_token: ::String
+      attr_accessor creator_mode_configuration: Types::CreatorModeConfiguration
       attr_accessor response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
       attr_accessor topic_configurations_to_create_or_update: ::Array[Types::TopicConfiguration]
       attr_accessor topic_configurations_to_delete: ::Array[Types::TopicConfiguration]
