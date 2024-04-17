@@ -19,7 +19,6 @@
   "rest-json" : {
     "input" : [],
     "output" : [
-      {"RestJsonDeserializesDenseSetMapAndSkipsNull": "Seeking clarification from Smithy"}
     ]
   },
   "rest-xml" : {
