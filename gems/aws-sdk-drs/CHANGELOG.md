@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-04-18)
+------------------
+
+* Feature - Outpost ARN added to Source Server and Recovery Instance
+
 1.29.0 (2024-02-26)
 ------------------
 

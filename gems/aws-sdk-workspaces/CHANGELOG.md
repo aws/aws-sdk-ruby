@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-04-18)
+------------------
+
+* Feature - Adds new APIs for managing and sharing WorkSpaces BYOL configuration across accounts.
+
 1.100.0 (2024-03-07)
 ------------------
 

@@ -398,6 +398,45 @@ module Aws::WorkSpaces
 
     # @!group API Operations
 
+    # Accepts the account link invitation.
+    #
+    # There's currently no unlinking capability after you accept the
+    # account linking invitation.
+    #
+    # @option params [required, String] :link_id
+    #   The identifier of the account link.
+    #
+    # @option params [String] :client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #
+    # @return [Types::AcceptAccountLinkInvitationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptAccountLinkInvitationResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_account_link_invitation({
+    #     link_id: "LinkId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AcceptAccountLinkInvitation AWS API Documentation
+    #
+    # @overload accept_account_link_invitation(params = {})
+    # @param [Hash] params ({})
+    def accept_account_link_invitation(params = {}, options = {})
+      req = build_request(:accept_account_link_invitation, params)
+      req.send_request(options)
+    end
+
     # Associates the specified connection alias with the specified directory
     # to enable cross-Region redirection. For more information, see [
     # Cross-Region Redirection for Amazon WorkSpaces][1].
@@ -610,6 +649,42 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def copy_workspace_image(params = {}, options = {})
       req = build_request(:copy_workspace_image, params)
+      req.send_request(options)
+    end
+
+    # Creates the account link invitation.
+    #
+    # @option params [required, String] :target_account_id
+    #   The identifier of the target account.
+    #
+    # @option params [String] :client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #
+    # @return [Types::CreateAccountLinkInvitationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccountLinkInvitationResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_account_link_invitation({
+    #     target_account_id: "AwsAccount", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateAccountLinkInvitation AWS API Documentation
+    #
+    # @overload create_account_link_invitation(params = {})
+    # @param [Hash] params ({})
+    def create_account_link_invitation(params = {}, options = {})
+      req = build_request(:create_account_link_invitation, params)
       req.send_request(options)
     end
 
@@ -1210,6 +1285,42 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Deletes the account link invitation.
+    #
+    # @option params [required, String] :link_id
+    #   The identifier of the account link.
+    #
+    # @option params [String] :client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #
+    # @return [Types::DeleteAccountLinkInvitationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccountLinkInvitationResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_account_link_invitation({
+    #     link_id: "LinkId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteAccountLinkInvitation AWS API Documentation
+    #
+    # @overload delete_account_link_invitation(params = {})
+    # @param [Hash] params ({})
+    def delete_account_link_invitation(params = {}, options = {})
+      req = build_request(:delete_account_link_invitation, params)
+      req.send_request(options)
+    end
+
     # Deletes customized client branding. Client branding allows you to
     # customize your WorkSpace's client login portal. You can tailor your
     # login portal company logo, the support email address, support link,
@@ -1515,11 +1626,13 @@ module Aws::WorkSpaces
     #
     #   * {Types::DescribeAccountResult#dedicated_tenancy_support #dedicated_tenancy_support} => String
     #   * {Types::DescribeAccountResult#dedicated_tenancy_management_cidr_range #dedicated_tenancy_management_cidr_range} => String
+    #   * {Types::DescribeAccountResult#dedicated_tenancy_account_type #dedicated_tenancy_account_type} => String
     #
     # @example Response structure
     #
     #   resp.dedicated_tenancy_support #=> String, one of "ENABLED", "DISABLED"
     #   resp.dedicated_tenancy_management_cidr_range #=> String
+    #   resp.dedicated_tenancy_account_type #=> String, one of "SOURCE_ACCOUNT", "TARGET_ACCOUNT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccount AWS API Documentation
     #
@@ -2683,6 +2796,41 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Retrieves account link information.
+    #
+    # @option params [String] :link_id
+    #   The identifier of the account to link.
+    #
+    # @option params [String] :linked_account_id
+    #   The identifier of the account link
+    #
+    # @return [Types::GetAccountLinkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountLinkResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_account_link({
+    #     link_id: "LinkId",
+    #     linked_account_id: "AwsAccount",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/GetAccountLink AWS API Documentation
+    #
+    # @overload get_account_link(params = {})
+    # @param [Hash] params ({})
+    def get_account_link(params = {}, options = {})
+      req = build_request(:get_account_link, params)
+      req.send_request(options)
+    end
+
     # Imports client branding. Client branding allows you to customize your
     # WorkSpace's client login portal. You can tailor your login portal
     # company logo, the support email address, support link, link to reset
@@ -2942,6 +3090,51 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def import_workspace_image(params = {}, options = {})
       req = build_request(:import_workspace_image, params)
+      req.send_request(options)
+    end
+
+    # Lists all account links.
+    #
+    # @option params [Array<String>] :link_status_filter
+    #   Filters the account based on their link status.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of accounts to return.
+    #
+    # @return [Types::ListAccountLinksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccountLinksResult#account_links #account_links} => Array&lt;Types::AccountLink&gt;
+    #   * {Types::ListAccountLinksResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_account_links({
+    #     link_status_filter: ["LINKED"], # accepts LINKED, LINKING_FAILED, LINK_NOT_FOUND, PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT, REJECTED
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_links #=> Array
+    #   resp.account_links[0].account_link_id #=> String
+    #   resp.account_links[0].account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_links[0].source_account_id #=> String
+    #   resp.account_links[0].target_account_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAccountLinks AWS API Documentation
+    #
+    # @overload list_account_links(params = {})
+    # @param [Hash] params ({})
+    def list_account_links(params = {}, options = {})
+      req = build_request(:list_account_links, params)
       req.send_request(options)
     end
 
@@ -3555,6 +3748,41 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Rejects the account link invitation.
+    #
+    # @option params [required, String] :link_id
+    #   The identifier of the account link
+    #
+    # @option params [String] :client_token
+    #   The client token of the account link invitation to reject.
+    #
+    # @return [Types::RejectAccountLinkInvitationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectAccountLinkInvitationResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_account_link_invitation({
+    #     link_id: "LinkId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RejectAccountLinkInvitation AWS API Documentation
+    #
+    # @overload reject_account_link_invitation(params = {})
+    # @param [Hash] params ({})
+    def reject_account_link_invitation(params = {}, options = {})
+      req = build_request(:reject_account_link_invitation, params)
+      req.send_request(options)
+    end
+
     # Restores the specified WorkSpace to its last known healthy state.
     #
     # You cannot restore a WorkSpace unless its state is ` AVAILABLE`,
@@ -4000,7 +4228,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

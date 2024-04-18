@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.235.0 (2024-04-18)
+------------------
+
+* Feature - Removed deprecated enum values and updated API documentation.
+
 1.234.0 (2024-03-25)
 ------------------
 

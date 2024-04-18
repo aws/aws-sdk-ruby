@@ -13,6 +13,12 @@ module Aws::RolesAnywhere
       SENSITIVE: []
     end
 
+    class AttributeMapping
+      attr_accessor certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN")
+      attr_accessor mapping_rules: ::Array[Types::MappingRule]
+      SENSITIVE: []
+    end
+
     class CreateProfileRequest
       attr_accessor duration_seconds: ::Integer
       attr_accessor enabled: bool
@@ -58,6 +64,18 @@ module Aws::RolesAnywhere
 
     class CrlDetailResponse
       attr_accessor crl: Types::CrlDetail
+      SENSITIVE: []
+    end
+
+    class DeleteAttributeMappingRequest
+      attr_accessor certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN")
+      attr_accessor profile_id: ::String
+      attr_accessor specifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteAttributeMappingResponse
+      attr_accessor profile: Types::ProfileDetail
       SENSITIVE: []
     end
 
@@ -117,6 +135,11 @@ module Aws::RolesAnywhere
       SENSITIVE: []
     end
 
+    class MappingRule
+      attr_accessor specifier: ::String
+      SENSITIVE: []
+    end
+
     class NotificationSetting
       attr_accessor channel: ("ALL")
       attr_accessor enabled: bool
@@ -141,6 +164,7 @@ module Aws::RolesAnywhere
     end
 
     class ProfileDetail
+      attr_accessor attribute_mappings: ::Array[Types::AttributeMapping]
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
       attr_accessor duration_seconds: ::Integer
@@ -157,6 +181,18 @@ module Aws::RolesAnywhere
     end
 
     class ProfileDetailResponse
+      attr_accessor profile: Types::ProfileDetail
+      SENSITIVE: []
+    end
+
+    class PutAttributeMappingRequest
+      attr_accessor certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN")
+      attr_accessor mapping_rules: ::Array[Types::MappingRule]
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutAttributeMappingResponse
       attr_accessor profile: Types::ProfileDetail
       SENSITIVE: []
     end

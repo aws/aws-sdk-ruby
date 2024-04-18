@@ -551,7 +551,7 @@ module Aws::EMRServerless
     #       {
     #         classification: "String1024", # required
     #         properties: {
-    #           "String1024" => "String1024",
+    #           "ConfigurationPropertyKey" => "ConfigurationPropertyValue",
     #         },
     #         configurations: {
     #           # recursive ConfigurationList
@@ -575,6 +575,9 @@ module Aws::EMRServerless
     #         log_types: {
     #           "WorkerTypeString" => ["LogTypeString"],
     #         },
+    #       },
+    #       prometheus_monitoring_configuration: {
+    #         remote_write_url: "PrometheusUrlString",
     #       },
     #     },
     #   })
@@ -670,7 +673,7 @@ module Aws::EMRServerless
     #   resp.application.runtime_configuration #=> Array
     #   resp.application.runtime_configuration[0].classification #=> String
     #   resp.application.runtime_configuration[0].properties #=> Hash
-    #   resp.application.runtime_configuration[0].properties["String1024"] #=> String
+    #   resp.application.runtime_configuration[0].properties["ConfigurationPropertyKey"] #=> String
     #   resp.application.runtime_configuration[0].configurations #=> Types::ConfigurationList
     #   resp.application.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
     #   resp.application.monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
@@ -683,6 +686,7 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types #=> Hash
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
+    #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -772,7 +776,7 @@ module Aws::EMRServerless
     #   resp.job_run.configuration_overrides.application_configuration #=> Array
     #   resp.job_run.configuration_overrides.application_configuration[0].classification #=> String
     #   resp.job_run.configuration_overrides.application_configuration[0].properties #=> Hash
-    #   resp.job_run.configuration_overrides.application_configuration[0].properties["String1024"] #=> String
+    #   resp.job_run.configuration_overrides.application_configuration[0].properties["ConfigurationPropertyKey"] #=> String
     #   resp.job_run.configuration_overrides.application_configuration[0].configurations #=> Types::ConfigurationList
     #   resp.job_run.configuration_overrides.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
     #   resp.job_run.configuration_overrides.monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
@@ -785,6 +789,7 @@ module Aws::EMRServerless
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types #=> Hash
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
+    #   resp.job_run.configuration_overrides.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
     #   resp.job_run.job_driver.spark_submit.entry_point #=> String
     #   resp.job_run.job_driver.spark_submit.entry_point_arguments #=> Array
     #   resp.job_run.job_driver.spark_submit.entry_point_arguments[0] #=> String
@@ -1048,7 +1053,7 @@ module Aws::EMRServerless
     #         {
     #           classification: "String1024", # required
     #           properties: {
-    #             "String1024" => "String1024",
+    #             "ConfigurationPropertyKey" => "ConfigurationPropertyValue",
     #           },
     #           configurations: {
     #             # recursive ConfigurationList
@@ -1072,6 +1077,9 @@ module Aws::EMRServerless
     #           log_types: {
     #             "WorkerTypeString" => ["LogTypeString"],
     #           },
+    #         },
+    #         prometheus_monitoring_configuration: {
+    #           remote_write_url: "PrometheusUrlString",
     #         },
     #       },
     #     },
@@ -1304,7 +1312,7 @@ module Aws::EMRServerless
     #       {
     #         classification: "String1024", # required
     #         properties: {
-    #           "String1024" => "String1024",
+    #           "ConfigurationPropertyKey" => "ConfigurationPropertyValue",
     #         },
     #         configurations: {
     #           # recursive ConfigurationList
@@ -1328,6 +1336,9 @@ module Aws::EMRServerless
     #         log_types: {
     #           "WorkerTypeString" => ["LogTypeString"],
     #         },
+    #       },
+    #       prometheus_monitoring_configuration: {
+    #         remote_write_url: "PrometheusUrlString",
     #       },
     #     },
     #   })
@@ -1370,7 +1381,7 @@ module Aws::EMRServerless
     #   resp.application.runtime_configuration #=> Array
     #   resp.application.runtime_configuration[0].classification #=> String
     #   resp.application.runtime_configuration[0].properties #=> Hash
-    #   resp.application.runtime_configuration[0].properties["String1024"] #=> String
+    #   resp.application.runtime_configuration[0].properties["ConfigurationPropertyKey"] #=> String
     #   resp.application.runtime_configuration[0].configurations #=> Types::ConfigurationList
     #   resp.application.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
     #   resp.application.monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
@@ -1383,6 +1394,7 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types #=> Hash
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
+    #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1406,7 +1418,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

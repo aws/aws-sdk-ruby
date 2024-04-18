@@ -32,7 +32,7 @@ require_relative 'aws-sdk-workspaces/customizations'
 # structure.
 #
 #     work_spaces = Aws::WorkSpaces::Client.new
-#     resp = work_spaces.associate_connection_alias(params)
+#     resp = work_spaces.accept_account_link_invitation(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-workspaces/customizations'
 # @!group service
 module Aws::WorkSpaces
 
-  GEM_VERSION = '1.100.0'
+  GEM_VERSION = '1.101.0'
 
 end

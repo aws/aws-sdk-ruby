@@ -23,6 +23,27 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
+    # A mapping applied to the authenticating end-entity certificate.
+    #
+    # @!attribute [rw] certificate_field
+    #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
+    #   certificates.
+    #   @return [String]
+    #
+    # @!attribute [rw] mapping_rules
+    #   A list of mapping entries for every supported specifier or
+    #   sub-field.
+    #   @return [Array<Types::MappingRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/AttributeMapping AWS API Documentation
+    #
+    class AttributeMapping < Struct.new(
+      :certificate_field,
+      :mapping_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
@@ -223,6 +244,42 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
+    # @!attribute [rw] certificate_field
+    #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
+    #   certificates.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] specifiers
+    #   A list of specifiers of a certificate field; for example, CN, OU,
+    #   UID from a Subject.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteAttributeMappingRequest AWS API Documentation
+    #
+    class DeleteAttributeMappingRequest < Struct.new(
+      :certificate_field,
+      :profile_id,
+      :specifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile
+    #   The state of the profile after a read or write operation.
+    #   @return [Types::ProfileDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteAttributeMappingResponse AWS API Documentation
+    #
+    class DeleteAttributeMappingResponse < Struct.new(
+      :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] crl_data
     #   The x509 v3 specified certificate revocation list (CRL).
     #   @return [String]
@@ -401,6 +458,21 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
+    # A single mapping entry for each supported specifier or sub-field.
+    #
+    # @!attribute [rw] specifier
+    #   Specifier within a certificate field, such as CN, OU, or UID from
+    #   the Subject field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/MappingRule AWS API Documentation
+    #
+    class MappingRule < Struct.new(
+      :specifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Customizable notification settings that will be applied to
     # notification events. IAM Roles Anywhere consumes these settings while
     # notifying across multiple channels - CloudWatch metrics, EventBridge,
@@ -511,6 +583,10 @@ module Aws::RolesAnywhere
 
     # The state of the profile after a read or write operation.
     #
+    # @!attribute [rw] attribute_mappings
+    #   A mapping applied to the authenticating end-entity certificate.
+    #   @return [Array<Types::AttributeMapping>]
+    #
     # @!attribute [rw] created_at
     #   The ISO-8601 timestamp when the profile was created.
     #   @return [Time]
@@ -573,6 +649,7 @@ module Aws::RolesAnywhere
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ProfileDetail AWS API Documentation
     #
     class ProfileDetail < Struct.new(
+      :attribute_mappings,
       :created_at,
       :created_by,
       :duration_seconds,
@@ -596,6 +673,42 @@ module Aws::RolesAnywhere
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ProfileDetailResponse AWS API Documentation
     #
     class ProfileDetailResponse < Struct.new(
+      :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_field
+    #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
+    #   certificates.
+    #   @return [String]
+    #
+    # @!attribute [rw] mapping_rules
+    #   A list of mapping entries for every supported specifier or
+    #   sub-field.
+    #   @return [Array<Types::MappingRule>]
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutAttributeMappingRequest AWS API Documentation
+    #
+    class PutAttributeMappingRequest < Struct.new(
+      :certificate_field,
+      :mapping_rules,
+      :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile
+    #   The state of the profile after a read or write operation.
+    #   @return [Types::ProfileDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutAttributeMappingResponse AWS API Documentation
+    #
+    class PutAttributeMappingResponse < Struct.new(
       :profile)
       SENSITIVE = []
       include Aws::Structure

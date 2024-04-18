@@ -1106,12 +1106,18 @@ module Aws::EMRServerless
     #   configure your jobs to send log information to CloudWatch.
     #   @return [Types::CloudWatchLoggingConfiguration]
     #
+    # @!attribute [rw] prometheus_monitoring_configuration
+    #   The monitoring configuration object you can configure to send
+    #   metrics to Amazon Managed Service for Prometheus for a job run.
+    #   @return [Types::PrometheusMonitoringConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/MonitoringConfiguration AWS API Documentation
     #
     class MonitoringConfiguration < Struct.new(
       :s3_monitoring_configuration,
       :managed_persistence_monitoring_configuration,
-      :cloud_watch_logging_configuration)
+      :cloud_watch_logging_configuration,
+      :prometheus_monitoring_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1131,6 +1137,22 @@ module Aws::EMRServerless
     class NetworkConfiguration < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The monitoring configuration object you can configure to send metrics
+    # to Amazon Managed Service for Prometheus for a job run.
+    #
+    # @!attribute [rw] remote_write_url
+    #   The remote write URL in the Amazon Managed Service for Prometheus
+    #   workspace to send metrics to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/PrometheusMonitoringConfiguration AWS API Documentation
+    #
+    class PrometheusMonitoringConfiguration < Struct.new(
+      :remote_write_url)
       SENSITIVE = []
       include Aws::Structure
     end

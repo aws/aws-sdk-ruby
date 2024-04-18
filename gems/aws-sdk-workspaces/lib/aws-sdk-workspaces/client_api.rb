@@ -14,8 +14,13 @@ module Aws::WorkSpaces
     include Seahorse::Model
 
     ARN = Shapes::StringShape.new(name: 'ARN')
+    AcceptAccountLinkInvitationRequest = Shapes::StructureShape.new(name: 'AcceptAccountLinkInvitationRequest')
+    AcceptAccountLinkInvitationResult = Shapes::StructureShape.new(name: 'AcceptAccountLinkInvitationResult')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessPropertyValue = Shapes::StringShape.new(name: 'AccessPropertyValue')
+    AccountLink = Shapes::StructureShape.new(name: 'AccountLink')
+    AccountLinkList = Shapes::ListShape.new(name: 'AccountLinkList')
+    AccountLinkStatusEnum = Shapes::StringShape.new(name: 'AccountLinkStatusEnum')
     AccountModification = Shapes::StructureShape.new(name: 'AccountModification')
     AccountModificationList = Shapes::ListShape.new(name: 'AccountModificationList')
     AddInName = Shapes::StringShape.new(name: 'AddInName')
@@ -63,12 +68,14 @@ module Aws::WorkSpaces
     ClientProperties = Shapes::StructureShape.new(name: 'ClientProperties')
     ClientPropertiesList = Shapes::ListShape.new(name: 'ClientPropertiesList')
     ClientPropertiesResult = Shapes::StructureShape.new(name: 'ClientPropertiesResult')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ClientUrl = Shapes::StringShape.new(name: 'ClientUrl')
     Compute = Shapes::StringShape.new(name: 'Compute')
     ComputeList = Shapes::ListShape.new(name: 'ComputeList')
     ComputeNotCompatibleException = Shapes::StructureShape.new(name: 'ComputeNotCompatibleException')
     ComputeType = Shapes::StructureShape.new(name: 'ComputeType')
     ComputerName = Shapes::StringShape.new(name: 'ComputerName')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectClientAddIn = Shapes::StructureShape.new(name: 'ConnectClientAddIn')
     ConnectClientAddInList = Shapes::ListShape.new(name: 'ConnectClientAddInList')
     ConnectionAlias = Shapes::StructureShape.new(name: 'ConnectionAlias')
@@ -85,6 +92,8 @@ module Aws::WorkSpaces
     ConnectionString = Shapes::StringShape.new(name: 'ConnectionString')
     CopyWorkspaceImageRequest = Shapes::StructureShape.new(name: 'CopyWorkspaceImageRequest')
     CopyWorkspaceImageResult = Shapes::StructureShape.new(name: 'CopyWorkspaceImageResult')
+    CreateAccountLinkInvitationRequest = Shapes::StructureShape.new(name: 'CreateAccountLinkInvitationRequest')
+    CreateAccountLinkInvitationResult = Shapes::StructureShape.new(name: 'CreateAccountLinkInvitationResult')
     CreateConnectClientAddInRequest = Shapes::StructureShape.new(name: 'CreateConnectClientAddInRequest')
     CreateConnectClientAddInResult = Shapes::StructureShape.new(name: 'CreateConnectClientAddInResult')
     CreateConnectionAliasRequest = Shapes::StructureShape.new(name: 'CreateConnectionAliasRequest')
@@ -105,6 +114,7 @@ module Aws::WorkSpaces
     CreateWorkspacesResult = Shapes::StructureShape.new(name: 'CreateWorkspacesResult')
     DataReplication = Shapes::StringShape.new(name: 'DataReplication')
     DataReplicationSettings = Shapes::StructureShape.new(name: 'DataReplicationSettings')
+    DedicatedTenancyAccountType = Shapes::StringShape.new(name: 'DedicatedTenancyAccountType')
     DedicatedTenancyCidrRangeList = Shapes::ListShape.new(name: 'DedicatedTenancyCidrRangeList')
     DedicatedTenancyManagementCidrRange = Shapes::StringShape.new(name: 'DedicatedTenancyManagementCidrRange')
     DedicatedTenancyModificationStateEnum = Shapes::StringShape.new(name: 'DedicatedTenancyModificationStateEnum')
@@ -119,6 +129,8 @@ module Aws::WorkSpaces
     DeletableCertificateBasedAuthProperty = Shapes::StringShape.new(name: 'DeletableCertificateBasedAuthProperty')
     DeletableSamlPropertiesList = Shapes::ListShape.new(name: 'DeletableSamlPropertiesList')
     DeletableSamlProperty = Shapes::StringShape.new(name: 'DeletableSamlProperty')
+    DeleteAccountLinkInvitationRequest = Shapes::StructureShape.new(name: 'DeleteAccountLinkInvitationRequest')
+    DeleteAccountLinkInvitationResult = Shapes::StructureShape.new(name: 'DeleteAccountLinkInvitationResult')
     DeleteClientBrandingRequest = Shapes::StructureShape.new(name: 'DeleteClientBrandingRequest')
     DeleteClientBrandingResult = Shapes::StructureShape.new(name: 'DeleteClientBrandingResult')
     DeleteConnectClientAddInRequest = Shapes::StructureShape.new(name: 'DeleteConnectClientAddInRequest')
@@ -207,6 +219,8 @@ module Aws::WorkSpaces
     FailedStopWorkspaceRequests = Shapes::ListShape.new(name: 'FailedStopWorkspaceRequests')
     FailedTerminateWorkspaceRequests = Shapes::ListShape.new(name: 'FailedTerminateWorkspaceRequests')
     FailedWorkspaceChangeRequest = Shapes::StructureShape.new(name: 'FailedWorkspaceChangeRequest')
+    GetAccountLinkRequest = Shapes::StructureShape.new(name: 'GetAccountLinkRequest')
+    GetAccountLinkResult = Shapes::StructureShape.new(name: 'GetAccountLinkResult')
     ImageAssociatedResourceType = Shapes::StringShape.new(name: 'ImageAssociatedResourceType')
     ImageAssociatedResourceTypeList = Shapes::ListShape.new(name: 'ImageAssociatedResourceTypeList')
     ImagePermission = Shapes::StructureShape.new(name: 'ImagePermission')
@@ -219,6 +233,7 @@ module Aws::WorkSpaces
     ImportWorkspaceImageRequest = Shapes::StructureShape.new(name: 'ImportWorkspaceImageRequest')
     ImportWorkspaceImageResult = Shapes::StructureShape.new(name: 'ImportWorkspaceImageResult')
     IncompatibleApplicationsException = Shapes::StructureShape.new(name: 'IncompatibleApplicationsException')
+    InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidParameterValuesException = Shapes::StructureShape.new(name: 'InvalidParameterValuesException')
     InvalidResourceStateException = Shapes::StructureShape.new(name: 'InvalidResourceStateException')
     Ios2XLogo = Shapes::BlobShape.new(name: 'Ios2XLogo')
@@ -237,6 +252,10 @@ module Aws::WorkSpaces
     IpRuleItem = Shapes::StructureShape.new(name: 'IpRuleItem')
     IpRuleList = Shapes::ListShape.new(name: 'IpRuleList')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
+    LinkId = Shapes::StringShape.new(name: 'LinkId')
+    LinkStatusFilterList = Shapes::ListShape.new(name: 'LinkStatusFilterList')
+    ListAccountLinksRequest = Shapes::StructureShape.new(name: 'ListAccountLinksRequest')
+    ListAccountLinksResult = Shapes::StructureShape.new(name: 'ListAccountLinksResult')
     ListAvailableManagementCidrRangesRequest = Shapes::StructureShape.new(name: 'ListAvailableManagementCidrRangesRequest')
     ListAvailableManagementCidrRangesResult = Shapes::StructureShape.new(name: 'ListAvailableManagementCidrRangesResult')
     LogUploadEnum = Shapes::StringShape.new(name: 'LogUploadEnum')
@@ -293,6 +312,8 @@ module Aws::WorkSpaces
     RegisterWorkspaceDirectoryRequest = Shapes::StructureShape.new(name: 'RegisterWorkspaceDirectoryRequest')
     RegisterWorkspaceDirectoryResult = Shapes::StructureShape.new(name: 'RegisterWorkspaceDirectoryResult')
     RegistrationCode = Shapes::StringShape.new(name: 'RegistrationCode')
+    RejectAccountLinkInvitationRequest = Shapes::StructureShape.new(name: 'RejectAccountLinkInvitationRequest')
+    RejectAccountLinkInvitationResult = Shapes::StructureShape.new(name: 'RejectAccountLinkInvitationResult')
     RelatedWorkspaceProperties = Shapes::StructureShape.new(name: 'RelatedWorkspaceProperties')
     RelatedWorkspaces = Shapes::ListShape.new(name: 'RelatedWorkspaces')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
@@ -363,6 +384,7 @@ module Aws::WorkSpaces
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserStorage = Shapes::StructureShape.new(name: 'UserStorage')
     UserVolumeSizeGib = Shapes::IntegerShape.new(name: 'UserVolumeSizeGib')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VolumeEncryptionKey = Shapes::StringShape.new(name: 'VolumeEncryptionKey')
     WorkSpaceApplication = Shapes::StructureShape.new(name: 'WorkSpaceApplication')
     WorkSpaceApplicationDeployment = Shapes::StructureShape.new(name: 'WorkSpaceApplicationDeployment')
@@ -412,8 +434,23 @@ module Aws::WorkSpaces
     WorkspacesIpGroup = Shapes::StructureShape.new(name: 'WorkspacesIpGroup')
     WorkspacesIpGroupsList = Shapes::ListShape.new(name: 'WorkspacesIpGroupsList')
 
+    AcceptAccountLinkInvitationRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "LinkId"))
+    AcceptAccountLinkInvitationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    AcceptAccountLinkInvitationRequest.struct_class = Types::AcceptAccountLinkInvitationRequest
+
+    AcceptAccountLinkInvitationResult.add_member(:account_link, Shapes::ShapeRef.new(shape: AccountLink, location_name: "AccountLink"))
+    AcceptAccountLinkInvitationResult.struct_class = Types::AcceptAccountLinkInvitationResult
+
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountLink.add_member(:account_link_id, Shapes::ShapeRef.new(shape: LinkId, location_name: "AccountLinkId"))
+    AccountLink.add_member(:account_link_status, Shapes::ShapeRef.new(shape: AccountLinkStatusEnum, location_name: "AccountLinkStatus"))
+    AccountLink.add_member(:source_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "SourceAccountId"))
+    AccountLink.add_member(:target_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "TargetAccountId"))
+    AccountLink.struct_class = Types::AccountLink
+
+    AccountLinkList.member = Shapes::ShapeRef.new(shape: AccountLink)
 
     AccountModification.add_member(:modification_state, Shapes::ShapeRef.new(shape: DedicatedTenancyModificationStateEnum, location_name: "ModificationState"))
     AccountModification.add_member(:dedicated_tenancy_support, Shapes::ShapeRef.new(shape: DedicatedTenancySupportResultEnum, location_name: "DedicatedTenancySupport"))
@@ -512,6 +549,9 @@ module Aws::WorkSpaces
     ComputeType.add_member(:name, Shapes::ShapeRef.new(shape: Compute, location_name: "Name"))
     ComputeType.struct_class = Types::ComputeType
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     ConnectClientAddIn.add_member(:add_in_id, Shapes::ShapeRef.new(shape: AmazonUuid, location_name: "AddInId"))
     ConnectClientAddIn.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ResourceId"))
     ConnectClientAddIn.add_member(:name, Shapes::ShapeRef.new(shape: AddInName, location_name: "Name"))
@@ -554,6 +594,13 @@ module Aws::WorkSpaces
 
     CopyWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
     CopyWorkspaceImageResult.struct_class = Types::CopyWorkspaceImageResult
+
+    CreateAccountLinkInvitationRequest.add_member(:target_account_id, Shapes::ShapeRef.new(shape: AwsAccount, required: true, location_name: "TargetAccountId"))
+    CreateAccountLinkInvitationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    CreateAccountLinkInvitationRequest.struct_class = Types::CreateAccountLinkInvitationRequest
+
+    CreateAccountLinkInvitationResult.add_member(:account_link, Shapes::ShapeRef.new(shape: AccountLink, location_name: "AccountLink"))
+    CreateAccountLinkInvitationResult.struct_class = Types::CreateAccountLinkInvitationResult
 
     CreateConnectClientAddInRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
     CreateConnectClientAddInRequest.add_member(:name, Shapes::ShapeRef.new(shape: AddInName, required: true, location_name: "Name"))
@@ -669,6 +716,13 @@ module Aws::WorkSpaces
 
     DeletableSamlPropertiesList.member = Shapes::ShapeRef.new(shape: DeletableSamlProperty)
 
+    DeleteAccountLinkInvitationRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "LinkId"))
+    DeleteAccountLinkInvitationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    DeleteAccountLinkInvitationRequest.struct_class = Types::DeleteAccountLinkInvitationRequest
+
+    DeleteAccountLinkInvitationResult.add_member(:account_link, Shapes::ShapeRef.new(shape: AccountLink, location_name: "AccountLink"))
+    DeleteAccountLinkInvitationResult.struct_class = Types::DeleteAccountLinkInvitationResult
+
     DeleteClientBrandingRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
     DeleteClientBrandingRequest.add_member(:platforms, Shapes::ShapeRef.new(shape: ClientDeviceTypeList, required: true, location_name: "Platforms"))
     DeleteClientBrandingRequest.struct_class = Types::DeleteClientBrandingRequest
@@ -730,6 +784,7 @@ module Aws::WorkSpaces
 
     DescribeAccountResult.add_member(:dedicated_tenancy_support, Shapes::ShapeRef.new(shape: DedicatedTenancySupportResultEnum, location_name: "DedicatedTenancySupport"))
     DescribeAccountResult.add_member(:dedicated_tenancy_management_cidr_range, Shapes::ShapeRef.new(shape: DedicatedTenancyManagementCidrRange, location_name: "DedicatedTenancyManagementCidrRange"))
+    DescribeAccountResult.add_member(:dedicated_tenancy_account_type, Shapes::ShapeRef.new(shape: DedicatedTenancyAccountType, location_name: "DedicatedTenancyAccountType"))
     DescribeAccountResult.struct_class = Types::DescribeAccountResult
 
     DescribeApplicationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
@@ -962,6 +1017,13 @@ module Aws::WorkSpaces
     FailedWorkspaceChangeRequest.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
     FailedWorkspaceChangeRequest.struct_class = Types::FailedWorkspaceChangeRequest
 
+    GetAccountLinkRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, location_name: "LinkId"))
+    GetAccountLinkRequest.add_member(:linked_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "LinkedAccountId"))
+    GetAccountLinkRequest.struct_class = Types::GetAccountLinkRequest
+
+    GetAccountLinkResult.add_member(:account_link, Shapes::ShapeRef.new(shape: AccountLink, location_name: "AccountLink"))
+    GetAccountLinkResult.struct_class = Types::GetAccountLinkResult
+
     ImageAssociatedResourceTypeList.member = Shapes::ShapeRef.new(shape: ImageAssociatedResourceType)
 
     ImagePermission.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "SharedAccountId"))
@@ -1010,6 +1072,9 @@ module Aws::WorkSpaces
 
     IncompatibleApplicationsException.struct_class = Types::IncompatibleApplicationsException
 
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InternalServerException.struct_class = Types::InternalServerException
+
     InvalidParameterValuesException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InvalidParameterValuesException.struct_class = Types::InvalidParameterValuesException
 
@@ -1043,6 +1108,17 @@ module Aws::WorkSpaces
     IpRuleItem.struct_class = Types::IpRuleItem
 
     IpRuleList.member = Shapes::ShapeRef.new(shape: IpRuleItem)
+
+    LinkStatusFilterList.member = Shapes::ShapeRef.new(shape: AccountLinkStatusEnum)
+
+    ListAccountLinksRequest.add_member(:link_status_filter, Shapes::ShapeRef.new(shape: LinkStatusFilterList, location_name: "LinkStatusFilter"))
+    ListAccountLinksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAccountLinksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
+    ListAccountLinksRequest.struct_class = Types::ListAccountLinksRequest
+
+    ListAccountLinksResult.add_member(:account_links, Shapes::ShapeRef.new(shape: AccountLinkList, location_name: "AccountLinks"))
+    ListAccountLinksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAccountLinksResult.struct_class = Types::ListAccountLinksResult
 
     ListAvailableManagementCidrRangesRequest.add_member(:management_cidr_range_constraint, Shapes::ShapeRef.new(shape: ManagementCidrRangeConstraint, required: true, location_name: "ManagementCidrRangeConstraint"))
     ListAvailableManagementCidrRangesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ManagementCidrRangeMaxResults, location_name: "MaxResults"))
@@ -1182,6 +1258,13 @@ module Aws::WorkSpaces
     RegisterWorkspaceDirectoryRequest.struct_class = Types::RegisterWorkspaceDirectoryRequest
 
     RegisterWorkspaceDirectoryResult.struct_class = Types::RegisterWorkspaceDirectoryResult
+
+    RejectAccountLinkInvitationRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "LinkId"))
+    RejectAccountLinkInvitationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    RejectAccountLinkInvitationRequest.struct_class = Types::RejectAccountLinkInvitationRequest
+
+    RejectAccountLinkInvitationResult.add_member(:account_link, Shapes::ShapeRef.new(shape: AccountLink, location_name: "AccountLink"))
+    RejectAccountLinkInvitationResult.struct_class = Types::RejectAccountLinkInvitationResult
 
     RelatedWorkspaceProperties.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))
     RelatedWorkspaceProperties.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
@@ -1352,6 +1435,9 @@ module Aws::WorkSpaces
 
     UserStorage.add_member(:capacity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Capacity"))
     UserStorage.struct_class = Types::UserStorage
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ValidationException.struct_class = Types::ValidationException
 
     WorkSpaceApplication.add_member(:application_id, Shapes::ShapeRef.new(shape: WorkSpaceApplicationId, location_name: "ApplicationId"))
     WorkSpaceApplication.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Created"))
@@ -1538,6 +1624,19 @@ module Aws::WorkSpaces
         "uid" => "workspaces-2015-04-08",
       }
 
+      api.add_operation(:accept_account_link_invitation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptAccountLinkInvitation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcceptAccountLinkInvitationRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptAccountLinkInvitationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:associate_connection_alias, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateConnectionAlias"
         o.http_method = "POST"
@@ -1610,6 +1709,18 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+      end)
+
+      api.add_operation(:create_account_link_invitation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccountLinkInvitation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccountLinkInvitationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccountLinkInvitationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:create_connect_client_add_in, Seahorse::Model::Operation.new.tap do |o|
@@ -1728,6 +1839,19 @@ module Aws::WorkSpaces
         o.output = Shapes::ShapeRef.new(shape: CreateWorkspacesResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+      end)
+
+      api.add_operation(:delete_account_link_invitation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccountLinkInvitation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccountLinkInvitationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccountLinkInvitationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_client_branding, Seahorse::Model::Operation.new.tap do |o|
@@ -2125,6 +2249,18 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_account_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountLink"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAccountLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccountLinkResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:import_client_branding, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportClientBranding"
         o.http_method = "POST"
@@ -2149,6 +2285,23 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+      end)
+
+      api.add_operation(:list_account_links, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccountLinks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAccountLinksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccountLinksResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_available_management_cidr_ranges, Seahorse::Model::Operation.new.tap do |o|
@@ -2315,6 +2468,19 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedNetworkConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
+      api.add_operation(:reject_account_link_invitation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectAccountLinkInvitation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RejectAccountLinkInvitationRequest)
+        o.output = Shapes::ShapeRef.new(shape: RejectAccountLinkInvitationResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:restore_workspace, Seahorse::Model::Operation.new.tap do |o|

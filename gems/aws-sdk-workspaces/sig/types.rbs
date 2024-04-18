@@ -8,8 +8,27 @@
 module Aws::WorkSpaces
   module Types
 
+    class AcceptAccountLinkInvitationRequest
+      attr_accessor link_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptAccountLinkInvitationResult
+      attr_accessor account_link: Types::AccountLink
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountLink
+      attr_accessor account_link_id: ::String
+      attr_accessor account_link_status: ("LINKED" | "LINKING_FAILED" | "LINK_NOT_FOUND" | "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT" | "REJECTED")
+      attr_accessor source_account_id: ::String
+      attr_accessor target_account_id: ::String
       SENSITIVE: []
     end
 
@@ -120,6 +139,11 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ConnectClientAddIn
       attr_accessor add_in_id: ::String
       attr_accessor resource_id: ::String
@@ -162,6 +186,17 @@ module Aws::WorkSpaces
 
     class CopyWorkspaceImageResult
       attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccountLinkInvitationRequest
+      attr_accessor target_account_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccountLinkInvitationResult
+      attr_accessor account_link: Types::AccountLink
       SENSITIVE: []
     end
 
@@ -316,6 +351,17 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class DeleteAccountLinkInvitationRequest
+      attr_accessor link_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountLinkInvitationResult
+      attr_accessor account_link: Types::AccountLink
+      SENSITIVE: []
+    end
+
     class DeleteClientBrandingRequest
       attr_accessor resource_id: ::String
       attr_accessor platforms: ::Array[("DeviceTypeWindows" | "DeviceTypeOsx" | "DeviceTypeAndroid" | "DeviceTypeIos" | "DeviceTypeLinux" | "DeviceTypeWeb")]
@@ -411,6 +457,7 @@ module Aws::WorkSpaces
     class DescribeAccountResult
       attr_accessor dedicated_tenancy_support: ("ENABLED" | "DISABLED")
       attr_accessor dedicated_tenancy_management_cidr_range: ::String
+      attr_accessor dedicated_tenancy_account_type: ("SOURCE_ACCOUNT" | "TARGET_ACCOUNT")
       SENSITIVE: []
     end
 
@@ -716,6 +763,17 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class GetAccountLinkRequest
+      attr_accessor link_id: ::String
+      attr_accessor linked_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountLinkResult
+      attr_accessor account_link: Types::AccountLink
+      SENSITIVE: []
+    end
+
     class ImagePermission
       attr_accessor shared_account_id: ::String
       SENSITIVE: []
@@ -771,6 +829,11 @@ module Aws::WorkSpaces
     class IncompatibleApplicationsException < Aws::EmptyStructure
     end
 
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class InvalidParameterValuesException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -806,6 +869,19 @@ module Aws::WorkSpaces
     class IpRuleItem
       attr_accessor ip_rule: ::String
       attr_accessor rule_desc: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountLinksRequest
+      attr_accessor link_status_filter: ::Array[("LINKED" | "LINKING_FAILED" | "LINK_NOT_FOUND" | "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT" | "REJECTED")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccountLinksResult
+      attr_accessor account_links: ::Array[Types::AccountLink]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -992,6 +1068,17 @@ module Aws::WorkSpaces
     end
 
     class RegisterWorkspaceDirectoryResult < Aws::EmptyStructure
+    end
+
+    class RejectAccountLinkInvitationRequest
+      attr_accessor link_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RejectAccountLinkInvitationResult
+      attr_accessor account_link: Types::AccountLink
+      SENSITIVE: []
     end
 
     class RelatedWorkspaceProperties
@@ -1216,6 +1303,11 @@ module Aws::WorkSpaces
 
     class UserStorage
       attr_accessor capacity: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

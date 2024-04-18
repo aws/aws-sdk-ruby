@@ -735,6 +735,8 @@ module Aws::GuardDuty
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.awsApiCallAction.remoteIpDetails.organization.asn
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
@@ -759,6 +761,8 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.networkConnectionAction.remoteIpDetails.organization.asn
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
@@ -769,6 +773,8 @@ module Aws::GuardDuty
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.kubernetesApiCallAction.namespace
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
@@ -778,6 +784,8 @@ module Aws::GuardDuty
     #   * service.action.kubernetesApiCallAction.statusCode
     #
     #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV6
     #
     #   * service.action.networkConnectionAction.protocol
     #
@@ -2305,6 +2313,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.organization.isp #=> String
@@ -2324,12 +2333,14 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.network_connection_action.local_port_details.port_name #=> String
     #   resp.findings[0].service.action.network_connection_action.protocol #=> String
     #   resp.findings[0].service.action.network_connection_action.local_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.network_connection_action.local_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_name #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.network_connection_action.remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.organization.isp #=> String
@@ -2341,12 +2352,14 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_port_details.port #=> Integer
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_port_details.port_name #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_name #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.isp #=> String
@@ -2362,6 +2375,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.isp #=> String
@@ -2378,6 +2392,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.isp #=> String
@@ -4694,7 +4709,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

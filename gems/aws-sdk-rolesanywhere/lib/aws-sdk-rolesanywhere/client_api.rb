@@ -15,8 +15,11 @@ module Aws::RolesAnywhere
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AttributeMapping = Shapes::StructureShape.new(name: 'AttributeMapping')
+    AttributeMappings = Shapes::ListShape.new(name: 'AttributeMappings')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CertificateField = Shapes::StringShape.new(name: 'CertificateField')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
     CreateProfileRequestDurationSecondsInteger = Shapes::IntegerShape.new(name: 'CreateProfileRequestDurationSecondsInteger')
     CreateTrustAnchorRequest = Shapes::StructureShape.new(name: 'CreateTrustAnchorRequest')
@@ -25,6 +28,8 @@ module Aws::RolesAnywhere
     CrlDetail = Shapes::StructureShape.new(name: 'CrlDetail')
     CrlDetailResponse = Shapes::StructureShape.new(name: 'CrlDetailResponse')
     CrlDetails = Shapes::ListShape.new(name: 'CrlDetails')
+    DeleteAttributeMappingRequest = Shapes::StructureShape.new(name: 'DeleteAttributeMappingRequest')
+    DeleteAttributeMappingResponse = Shapes::StructureShape.new(name: 'DeleteAttributeMappingResponse')
     ImportCrlRequest = Shapes::StructureShape.new(name: 'ImportCrlRequest')
     ImportCrlRequestCrlDataBlob = Shapes::BlobShape.new(name: 'ImportCrlRequestCrlDataBlob')
     InstanceProperties = Shapes::ListShape.new(name: 'InstanceProperties')
@@ -43,6 +48,9 @@ module Aws::RolesAnywhere
     ListTrustAnchorsResponse = Shapes::StructureShape.new(name: 'ListTrustAnchorsResponse')
     ManagedPolicyList = Shapes::ListShape.new(name: 'ManagedPolicyList')
     ManagedPolicyListMemberString = Shapes::StringShape.new(name: 'ManagedPolicyListMemberString')
+    MappingRule = Shapes::StructureShape.new(name: 'MappingRule')
+    MappingRuleSpecifierString = Shapes::StringShape.new(name: 'MappingRuleSpecifierString')
+    MappingRules = Shapes::ListShape.new(name: 'MappingRules')
     NotificationChannel = Shapes::StringShape.new(name: 'NotificationChannel')
     NotificationEvent = Shapes::StringShape.new(name: 'NotificationEvent')
     NotificationSetting = Shapes::StructureShape.new(name: 'NotificationSetting')
@@ -58,6 +66,8 @@ module Aws::RolesAnywhere
     ProfileDetail = Shapes::StructureShape.new(name: 'ProfileDetail')
     ProfileDetailResponse = Shapes::StructureShape.new(name: 'ProfileDetailResponse')
     ProfileDetails = Shapes::ListShape.new(name: 'ProfileDetails')
+    PutAttributeMappingRequest = Shapes::StructureShape.new(name: 'PutAttributeMappingRequest')
+    PutAttributeMappingResponse = Shapes::StructureShape.new(name: 'PutAttributeMappingResponse')
     PutNotificationSettingsRequest = Shapes::StructureShape.new(name: 'PutNotificationSettingsRequest')
     PutNotificationSettingsResponse = Shapes::StructureShape.new(name: 'PutNotificationSettingsResponse')
     ResetNotificationSettingsRequest = Shapes::StructureShape.new(name: 'ResetNotificationSettingsRequest')
@@ -73,6 +83,7 @@ module Aws::RolesAnywhere
     Source = Shapes::StructureShape.new(name: 'Source')
     SourceData = Shapes::UnionShape.new(name: 'SourceData')
     SourceDataX509CertificateDataString = Shapes::StringShape.new(name: 'SourceDataX509CertificateDataString')
+    SpecifierList = Shapes::ListShape.new(name: 'SpecifierList')
     String = Shapes::StringShape.new(name: 'String')
     SubjectDetail = Shapes::StructureShape.new(name: 'SubjectDetail')
     SubjectDetailResponse = Shapes::StructureShape.new(name: 'SubjectDetailResponse')
@@ -105,6 +116,12 @@ module Aws::RolesAnywhere
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AttributeMapping.add_member(:certificate_field, Shapes::ShapeRef.new(shape: CertificateField, location_name: "certificateField"))
+    AttributeMapping.add_member(:mapping_rules, Shapes::ShapeRef.new(shape: MappingRules, location_name: "mappingRules"))
+    AttributeMapping.struct_class = Types::AttributeMapping
+
+    AttributeMappings.member = Shapes::ShapeRef.new(shape: AttributeMapping)
 
     CreateProfileRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CreateProfileRequestDurationSecondsInteger, location_name: "durationSeconds"))
     CreateProfileRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
@@ -147,6 +164,14 @@ module Aws::RolesAnywhere
     CrlDetailResponse.struct_class = Types::CrlDetailResponse
 
     CrlDetails.member = Shapes::ShapeRef.new(shape: CrlDetail)
+
+    DeleteAttributeMappingRequest.add_member(:certificate_field, Shapes::ShapeRef.new(shape: CertificateField, required: true, location: "querystring", location_name: "certificateField"))
+    DeleteAttributeMappingRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
+    DeleteAttributeMappingRequest.add_member(:specifiers, Shapes::ShapeRef.new(shape: SpecifierList, location: "querystring", location_name: "specifiers"))
+    DeleteAttributeMappingRequest.struct_class = Types::DeleteAttributeMappingRequest
+
+    DeleteAttributeMappingResponse.add_member(:profile, Shapes::ShapeRef.new(shape: ProfileDetail, required: true, location_name: "profile"))
+    DeleteAttributeMappingResponse.struct_class = Types::DeleteAttributeMappingResponse
 
     ImportCrlRequest.add_member(:crl_data, Shapes::ShapeRef.new(shape: ImportCrlRequestCrlDataBlob, required: true, location_name: "crlData"))
     ImportCrlRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
@@ -193,6 +218,11 @@ module Aws::RolesAnywhere
 
     ManagedPolicyList.member = Shapes::ShapeRef.new(shape: ManagedPolicyListMemberString)
 
+    MappingRule.add_member(:specifier, Shapes::ShapeRef.new(shape: MappingRuleSpecifierString, required: true, location_name: "specifier"))
+    MappingRule.struct_class = Types::MappingRule
+
+    MappingRules.member = Shapes::ShapeRef.new(shape: MappingRule)
+
     NotificationSetting.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
     NotificationSetting.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     NotificationSetting.add_member(:event, Shapes::ShapeRef.new(shape: NotificationEvent, required: true, location_name: "event"))
@@ -216,6 +246,7 @@ module Aws::RolesAnywhere
 
     NotificationSettings.member = Shapes::ShapeRef.new(shape: NotificationSetting)
 
+    ProfileDetail.add_member(:attribute_mappings, Shapes::ShapeRef.new(shape: AttributeMappings, location_name: "attributeMappings"))
     ProfileDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     ProfileDetail.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
     ProfileDetail.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "durationSeconds"))
@@ -234,6 +265,14 @@ module Aws::RolesAnywhere
     ProfileDetailResponse.struct_class = Types::ProfileDetailResponse
 
     ProfileDetails.member = Shapes::ShapeRef.new(shape: ProfileDetail)
+
+    PutAttributeMappingRequest.add_member(:certificate_field, Shapes::ShapeRef.new(shape: CertificateField, required: true, location_name: "certificateField"))
+    PutAttributeMappingRequest.add_member(:mapping_rules, Shapes::ShapeRef.new(shape: MappingRules, required: true, location_name: "mappingRules"))
+    PutAttributeMappingRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
+    PutAttributeMappingRequest.struct_class = Types::PutAttributeMappingRequest
+
+    PutAttributeMappingResponse.add_member(:profile, Shapes::ShapeRef.new(shape: ProfileDetail, required: true, location_name: "profile"))
+    PutAttributeMappingResponse.struct_class = Types::PutAttributeMappingResponse
 
     PutNotificationSettingsRequest.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettings, required: true, location_name: "notificationSettings"))
     PutNotificationSettingsRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "trustAnchorId"))
@@ -277,6 +316,8 @@ module Aws::RolesAnywhere
     SourceData.add_member_subclass(:x509_certificate_data, Types::SourceData::X509CertificateData)
     SourceData.add_member_subclass(:unknown, Types::SourceData::Unknown)
     SourceData.struct_class = Types::SourceData
+
+    SpecifierList.member = Shapes::ShapeRef.new(shape: String)
 
     SubjectDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     SubjectDetail.add_member(:credentials, Shapes::ShapeRef.new(shape: CredentialSummaries, location_name: "credentials"))
@@ -397,6 +438,17 @@ module Aws::RolesAnywhere
         o.input = Shapes::ShapeRef.new(shape: CreateTrustAnchorRequest)
         o.output = Shapes::ShapeRef.new(shape: TrustAnchorDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_attribute_mapping, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAttributeMapping"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/profiles/{profileId}/mappings"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAttributeMappingRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAttributeMappingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -609,6 +661,17 @@ module Aws::RolesAnywhere
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_attribute_mapping, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAttributeMapping"
+        o.http_method = "PUT"
+        o.http_request_uri = "/profiles/{profileId}/mappings"
+        o.input = Shapes::ShapeRef.new(shape: PutAttributeMappingRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAttributeMappingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:put_notification_settings, Seahorse::Model::Operation.new.tap do |o|

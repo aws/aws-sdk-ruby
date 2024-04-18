@@ -73,6 +73,17 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AcceptAccountLinkInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptAccountLinkInvitationResult]
+        def account_link: () -> Types::AccountLink
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#accept_account_link_invitation-instance_method
+      def accept_account_link_invitation: (
+                                            link_id: ::String,
+                                            ?client_token: ::String
+                                          ) -> _AcceptAccountLinkInvitationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptAccountLinkInvitationResponseSuccess
+
       interface _AssociateConnectionAliasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateConnectionAliasResult]
         def connection_identifier: () -> ::String
@@ -138,6 +149,17 @@ module Aws
                                   ]
                                 ) -> _CopyWorkspaceImageResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyWorkspaceImageResponseSuccess
+
+      interface _CreateAccountLinkInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccountLinkInvitationResult]
+        def account_link: () -> Types::AccountLink
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_account_link_invitation-instance_method
+      def create_account_link_invitation: (
+                                            target_account_id: ::String,
+                                            ?client_token: ::String
+                                          ) -> _CreateAccountLinkInvitationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccountLinkInvitationResponseSuccess
 
       interface _CreateConnectClientAddInResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectClientAddInResult]
@@ -336,6 +358,17 @@ module Aws
                              ) -> _CreateWorkspacesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspacesResponseSuccess
 
+      interface _DeleteAccountLinkInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountLinkInvitationResult]
+        def account_link: () -> Types::AccountLink
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#delete_account_link_invitation-instance_method
+      def delete_account_link_invitation: (
+                                            link_id: ::String,
+                                            ?client_token: ::String
+                                          ) -> _DeleteAccountLinkInvitationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountLinkInvitationResponseSuccess
+
       interface _DeleteClientBrandingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClientBrandingResult]
       end
@@ -426,6 +459,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountResult]
         def dedicated_tenancy_support: () -> ("ENABLED" | "DISABLED")
         def dedicated_tenancy_management_cidr_range: () -> ::String
+        def dedicated_tenancy_account_type: () -> ("SOURCE_ACCOUNT" | "TARGET_ACCOUNT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_account-instance_method
       def describe_account: (
@@ -720,6 +754,17 @@ module Aws
                                               ) -> _DisassociateWorkspaceApplicationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWorkspaceApplicationResponseSuccess
 
+      interface _GetAccountLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountLinkResult]
+        def account_link: () -> Types::AccountLink
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#get_account_link-instance_method
+      def get_account_link: (
+                              ?link_id: ::String,
+                              ?linked_account_id: ::String
+                            ) -> _GetAccountLinkResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountLinkResponseSuccess
+
       interface _ImportClientBrandingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ImportClientBrandingResult]
         def device_type_windows: () -> Types::DefaultClientBrandingAttributes
@@ -798,6 +843,19 @@ module Aws
                                     ?applications: Array[("Microsoft_Office_2016" | "Microsoft_Office_2019")]
                                   ) -> _ImportWorkspaceImageResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportWorkspaceImageResponseSuccess
+
+      interface _ListAccountLinksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountLinksResult]
+        def account_links: () -> ::Array[Types::AccountLink]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#list_account_links-instance_method
+      def list_account_links: (
+                                ?link_status_filter: Array[("LINKED" | "LINKING_FAILED" | "LINK_NOT_FOUND" | "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT" | "REJECTED")],
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListAccountLinksResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountLinksResponseSuccess
 
       interface _ListAvailableManagementCidrRangesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAvailableManagementCidrRangesResult]
@@ -1003,6 +1061,17 @@ module Aws
                                           ]
                                         ) -> _RegisterWorkspaceDirectoryResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterWorkspaceDirectoryResponseSuccess
+
+      interface _RejectAccountLinkInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectAccountLinkInvitationResult]
+        def account_link: () -> Types::AccountLink
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#reject_account_link_invitation-instance_method
+      def reject_account_link_invitation: (
+                                            link_id: ::String,
+                                            ?client_token: ::String
+                                          ) -> _RejectAccountLinkInvitationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectAccountLinkInvitationResponseSuccess
 
       interface _RestoreWorkspaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RestoreWorkspaceResult]

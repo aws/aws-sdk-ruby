@@ -453,6 +453,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -560,6 +564,62 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
+    # Delete an entry from the attribute mapping rules enforced by a given
+    # profile.
+    #
+    # @option params [required, String] :certificate_field
+    #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
+    #   certificates.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile.
+    #
+    # @option params [Array<String>] :specifiers
+    #   A list of specifiers of a certificate field; for example, CN, OU, UID
+    #   from a Subject.
+    #
+    # @return [Types::DeleteAttributeMappingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAttributeMappingResponse#profile #profile} => Types::ProfileDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_attribute_mapping({
+    #     certificate_field: "x509Subject", # required, accepts x509Subject, x509Issuer, x509SAN
+    #     profile_id: "Uuid", # required
+    #     specifiers: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.created_by #=> String
+    #   resp.profile.duration_seconds #=> Integer
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteAttributeMapping AWS API Documentation
+    #
+    # @overload delete_attribute_mapping(params = {})
+    # @param [Hash] params ({})
+    def delete_attribute_mapping(params = {}, options = {})
+      req = build_request(:delete_attribute_mapping, params)
+      req.send_request(options)
+    end
+
     # Deletes a certificate revocation list (CRL).
     #
     # <b>Required permissions: </b> `rolesanywhere:DeleteCrl`.
@@ -616,6 +676,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -741,6 +805,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -868,6 +936,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -993,6 +1065,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -1256,6 +1332,10 @@ module Aws::RolesAnywhere
     #
     #   resp.next_token #=> String
     #   resp.profiles #=> Array
+    #   resp.profiles[0].attribute_mappings #=> Array
+    #   resp.profiles[0].attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profiles[0].attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profiles[0].attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profiles[0].created_at #=> Time
     #   resp.profiles[0].created_by #=> String
     #   resp.profiles[0].duration_seconds #=> Integer
@@ -1413,6 +1493,66 @@ module Aws::RolesAnywhere
     # @param [Hash] params ({})
     def list_trust_anchors(params = {}, options = {})
       req = build_request(:list_trust_anchors, params)
+      req.send_request(options)
+    end
+
+    # Put an entry in the attribute mapping rules that will be enforced by a
+    # given profile. A mapping specifies a certificate field and one or more
+    # specifiers that have contextual meanings.
+    #
+    # @option params [required, String] :certificate_field
+    #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
+    #   certificates.
+    #
+    # @option params [required, Array<Types::MappingRule>] :mapping_rules
+    #   A list of mapping entries for every supported specifier or sub-field.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile.
+    #
+    # @return [Types::PutAttributeMappingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAttributeMappingResponse#profile #profile} => Types::ProfileDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_attribute_mapping({
+    #     certificate_field: "x509Subject", # required, accepts x509Subject, x509Issuer, x509SAN
+    #     mapping_rules: [ # required
+    #       {
+    #         specifier: "MappingRuleSpecifierString", # required
+    #       },
+    #     ],
+    #     profile_id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.created_by #=> String
+    #   resp.profile.duration_seconds #=> Integer
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutAttributeMapping AWS API Documentation
+    #
+    # @overload put_attribute_mapping(params = {})
+    # @param [Hash] params ({})
+    def put_attribute_mapping(params = {}, options = {})
+      req = build_request(:put_attribute_mapping, params)
       req.send_request(options)
     end
 
@@ -1691,6 +1831,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -1792,7 +1936,7 @@ module Aws::RolesAnywhere
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -233,7 +233,7 @@ module Aws::QuickSight
 
     class AssetBundleExportJobDataSourceOverrideProperties
       attr_accessor arn: ::String
-      attr_accessor properties: ::Array[("Name" | "DisableSsl" | "SecretArn" | "Username" | "Password" | "Domain" | "WorkGroup" | "Host" | "Port" | "Database" | "DataSetName" | "Catalog" | "InstanceId" | "ClusterId" | "ManifestFileLocation" | "Warehouse" | "RoleArn")]
+      attr_accessor properties: ::Array[("Name" | "DisableSsl" | "SecretArn" | "Username" | "Password" | "Domain" | "WorkGroup" | "Host" | "Port" | "Database" | "DataSetName" | "Catalog" | "InstanceId" | "ClusterId" | "ManifestFileLocation" | "Warehouse" | "RoleArn" | "ProductType")]
       SENSITIVE: []
     end
 
@@ -474,6 +474,12 @@ module Aws::QuickSight
     class AssetBundleImportJobVPCConnectionOverrideTags
       attr_accessor vpc_connection_ids: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AssetBundleImportJobWarning
+      attr_accessor arn: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -839,6 +845,7 @@ module Aws::QuickSight
       attr_accessor filter_id: ::String
       attr_accessor column: Types::ColumnIdentifier
       attr_accessor configuration: Types::CategoryFilterConfiguration
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
       SENSITIVE: []
     end
 
@@ -2198,6 +2205,43 @@ module Aws::QuickSight
       SENSITIVE: [:custom_value]
     end
 
+    class DefaultDateTimePickerControlOptions
+      attr_accessor type: ("SINGLE_VALUED" | "DATE_RANGE")
+      attr_accessor display_options: Types::DateTimePickerControlDisplayOptions
+      SENSITIVE: []
+    end
+
+    class DefaultFilterControlConfiguration
+      attr_accessor title: ::String
+      attr_accessor control_options: Types::DefaultFilterControlOptions
+      SENSITIVE: []
+    end
+
+    class DefaultFilterControlOptions
+      attr_accessor default_date_time_picker_options: Types::DefaultDateTimePickerControlOptions
+      attr_accessor default_list_options: Types::DefaultFilterListControlOptions
+      attr_accessor default_dropdown_options: Types::DefaultFilterDropDownControlOptions
+      attr_accessor default_text_field_options: Types::DefaultTextFieldControlOptions
+      attr_accessor default_text_area_options: Types::DefaultTextAreaControlOptions
+      attr_accessor default_slider_options: Types::DefaultSliderControlOptions
+      attr_accessor default_relative_date_time_options: Types::DefaultRelativeDateTimeControlOptions
+      SENSITIVE: []
+    end
+
+    class DefaultFilterDropDownControlOptions
+      attr_accessor display_options: Types::DropDownControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor selectable_values: Types::FilterSelectableValues
+      SENSITIVE: []
+    end
+
+    class DefaultFilterListControlOptions
+      attr_accessor display_options: Types::ListControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor selectable_values: Types::FilterSelectableValues
+      SENSITIVE: []
+    end
+
     class DefaultFormatting
       attr_accessor display_format: ("AUTO" | "PERCENT" | "CURRENCY" | "NUMBER" | "DATE" | "STRING")
       attr_accessor display_format_options: Types::DisplayFormatOptions
@@ -2232,8 +2276,33 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DefaultRelativeDateTimeControlOptions
+      attr_accessor display_options: Types::RelativeDateTimeControlDisplayOptions
+      SENSITIVE: []
+    end
+
     class DefaultSectionBasedLayoutConfiguration
       attr_accessor canvas_size_options: Types::SectionBasedLayoutCanvasSizeOptions
+      SENSITIVE: []
+    end
+
+    class DefaultSliderControlOptions
+      attr_accessor display_options: Types::SliderControlDisplayOptions
+      attr_accessor type: ("SINGLE_POINT" | "RANGE")
+      attr_accessor maximum_value: ::Float
+      attr_accessor minimum_value: ::Float
+      attr_accessor step_size: ::Float
+      SENSITIVE: []
+    end
+
+    class DefaultTextAreaControlOptions
+      attr_accessor delimiter: ::String
+      attr_accessor display_options: Types::TextAreaControlDisplayOptions
+      SENSITIVE: []
+    end
+
+    class DefaultTextFieldControlOptions
+      attr_accessor display_options: Types::TextFieldControlDisplayOptions
       SENSITIVE: []
     end
 
@@ -2737,6 +2806,7 @@ module Aws::QuickSight
       attr_accessor override_permissions: Types::AssetBundleImportJobOverridePermissions
       attr_accessor override_tags: Types::AssetBundleImportJobOverrideTags
       attr_accessor override_validation_strategy: Types::AssetBundleImportJobOverrideValidationStrategy
+      attr_accessor warnings: ::Array[Types::AssetBundleImportJobWarning]
       SENSITIVE: []
     end
 
@@ -3506,6 +3576,14 @@ module Aws::QuickSight
       attr_accessor text_area: Types::FilterTextAreaControl
       attr_accessor slider: Types::FilterSliderControl
       attr_accessor relative_date_time: Types::FilterRelativeDateTimeControl
+      attr_accessor cross_sheet: Types::FilterCrossSheetControl
+      SENSITIVE: []
+    end
+
+    class FilterCrossSheetControl
+      attr_accessor filter_control_id: ::String
+      attr_accessor source_filter_id: ::String
+      attr_accessor cascading_control_configuration: Types::CascadingControlConfiguration
       SENSITIVE: []
     end
 
@@ -5285,6 +5363,7 @@ module Aws::QuickSight
       attr_accessor aggregation_function: Types::AggregationFunction
       attr_accessor parameter_name: ::String
       attr_accessor null_option: ("ALL_VALUES" | "NULLS_ONLY" | "NON_NULLS_ONLY")
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
       SENSITIVE: []
     end
 
@@ -5305,6 +5384,7 @@ module Aws::QuickSight
       attr_accessor select_all_options: ("FILTER_ALL_VALUES")
       attr_accessor aggregation_function: Types::AggregationFunction
       attr_accessor null_option: ("ALL_VALUES" | "NULLS_ONLY" | "NON_NULLS_ONLY")
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
       SENSITIVE: []
     end
 
@@ -6058,6 +6138,7 @@ module Aws::QuickSight
       attr_accessor parameter_name: ::String
       attr_accessor null_option: ("ALL_VALUES" | "NULLS_ONLY" | "NON_NULLS_ONLY")
       attr_accessor exclude_period_configuration: Types::ExcludePeriodConfiguration
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
       SENSITIVE: []
     end
 
@@ -7275,6 +7356,7 @@ module Aws::QuickSight
       attr_accessor parameter_name: ::String
       attr_accessor time_granularity: ("YEAR" | "QUARTER" | "MONTH" | "WEEK" | "DAY" | "HOUR" | "MINUTE" | "SECOND" | "MILLISECOND")
       attr_accessor rolling_date: Types::RollingDateConfiguration
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
       SENSITIVE: []
     end
 
@@ -7296,6 +7378,7 @@ module Aws::QuickSight
       attr_accessor null_option: ("ALL_VALUES" | "NULLS_ONLY" | "NON_NULLS_ONLY")
       attr_accessor exclude_period_configuration: Types::ExcludePeriodConfiguration
       attr_accessor time_granularity: ("YEAR" | "QUARTER" | "MONTH" | "WEEK" | "DAY" | "HOUR" | "MINUTE" | "SECOND" | "MILLISECOND")
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
       SENSITIVE: []
     end
 
@@ -7326,6 +7409,7 @@ module Aws::QuickSight
       attr_accessor aggregation_sort_configurations: ::Array[Types::AggregationSortConfiguration]
       attr_accessor time_granularity: ("YEAR" | "QUARTER" | "MONTH" | "WEEK" | "DAY" | "HOUR" | "MINUTE" | "SECOND" | "MILLISECOND")
       attr_accessor parameter_name: ::String
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
       SENSITIVE: []
     end
 
