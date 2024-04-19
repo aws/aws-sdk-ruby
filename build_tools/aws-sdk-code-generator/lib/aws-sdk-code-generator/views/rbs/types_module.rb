@@ -31,7 +31,7 @@ module AwsSdkCodeGenerator
               # exceptions will not have the event trait.
               shape['members'].each do |name, ref|
                 if !!@service.api['shapes'][ref['shape']]['exception']
-                  @service.api['shapes'][ref['shape']]['exception_event'] = true
+                  @service.api['shapes'][ref['shape']]['exceptionEvent'] = true
                 end
               end
             end
@@ -90,7 +90,7 @@ module AwsSdkCodeGenerator
               returns: AwsSdkCodeGenerator::RBS.to_type(member_ref, @api)
             )
           end
-          if shape['event'] || shape['exception_event']
+          if shape['event'] || shape['exceptionEvent']
             members << StructMember.new(
               member_name: 'event_type',
               returns: 'untyped'

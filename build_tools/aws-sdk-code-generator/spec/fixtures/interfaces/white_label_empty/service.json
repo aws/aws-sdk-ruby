@@ -1,7 +1,7 @@
 {
   "metadata" : {
     "apiVersion" : "2016-12-14T20:41:37Z",
-    "endpointPrefix" : "foobar",
+    "endpointPrefix" : "svc",
     "signingName" : "execute-api",
     "serviceFullName" : "SdkTestApi",
     "protocol" : "api-gateway",

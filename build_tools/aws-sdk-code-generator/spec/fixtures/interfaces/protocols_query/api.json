@@ -2,7 +2,8 @@
   "metadata": {
     "endpointPrefix": "svc",
     "serviceId": "sample_svc",
-    "protocol": "rest-json"
+    "protocols": ["query"],
+    "protocol": ["fake"]
   },
   "operations": {
     "Operation": {
