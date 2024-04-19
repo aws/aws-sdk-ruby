@@ -1325,7 +1325,8 @@ module Aws::GuardDuty
 
     class LocalIpDetails
       attr_accessor ip_address_v4: ::String
-      SENSITIVE: [:ip_address_v4]
+      attr_accessor ip_address_v6: ::String
+      SENSITIVE: [:ip_address_v4, :ip_address_v6]
     end
 
     class LocalPortDetails
@@ -1674,8 +1675,9 @@ module Aws::GuardDuty
       attr_accessor country: Types::Country
       attr_accessor geo_location: Types::GeoLocation
       attr_accessor ip_address_v4: ::String
+      attr_accessor ip_address_v6: ::String
       attr_accessor organization: Types::Organization
-      SENSITIVE: [:ip_address_v4]
+      SENSITIVE: [:ip_address_v4, :ip_address_v6]
     end
 
     class RemotePortDetails

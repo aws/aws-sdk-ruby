@@ -62,6 +62,8 @@ module Aws::RolesAnywhere
             Aws::RolesAnywhere::Endpoints::CreateProfile.build(context)
           when :create_trust_anchor
             Aws::RolesAnywhere::Endpoints::CreateTrustAnchor.build(context)
+          when :delete_attribute_mapping
+            Aws::RolesAnywhere::Endpoints::DeleteAttributeMapping.build(context)
           when :delete_crl
             Aws::RolesAnywhere::Endpoints::DeleteCrl.build(context)
           when :delete_profile
@@ -100,6 +102,8 @@ module Aws::RolesAnywhere
             Aws::RolesAnywhere::Endpoints::ListTagsForResource.build(context)
           when :list_trust_anchors
             Aws::RolesAnywhere::Endpoints::ListTrustAnchors.build(context)
+          when :put_attribute_mapping
+            Aws::RolesAnywhere::Endpoints::PutAttributeMapping.build(context)
           when :put_notification_settings
             Aws::RolesAnywhere::Endpoints::PutNotificationSettings.build(context)
           when :reset_notification_settings

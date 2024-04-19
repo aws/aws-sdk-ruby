@@ -300,12 +300,18 @@ module Aws::EMRServerless
       attr_accessor s3_monitoring_configuration: Types::S3MonitoringConfiguration
       attr_accessor managed_persistence_monitoring_configuration: Types::ManagedPersistenceMonitoringConfiguration
       attr_accessor cloud_watch_logging_configuration: Types::CloudWatchLoggingConfiguration
+      attr_accessor prometheus_monitoring_configuration: Types::PrometheusMonitoringConfiguration
       SENSITIVE: []
     end
 
     class NetworkConfiguration
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PrometheusMonitoringConfiguration
+      attr_accessor remote_write_url: ::String
       SENSITIVE: []
     end
 

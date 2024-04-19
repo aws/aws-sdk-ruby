@@ -4061,15 +4061,25 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The LifeCycle configuration for a SageMaker HyperPod cluster.
+    # The lifecycle configuration for a SageMaker HyperPod cluster.
     #
     # @!attribute [rw] source_s3_uri
-    #   An Amazon S3 bucket path where your LifeCycle scripts are stored.
+    #   An Amazon S3 bucket path where your lifecycle scripts are stored.
+    #
+    #   Make sure that the S3 bucket path starts with `s3://sagemaker-`. The
+    #   [IAM role for SageMaker HyperPod][1] has the managed [
+    #   `AmazonSageMakerClusterInstanceRolePolicy` ][2] attached, which
+    #   allows access to S3 buckets with the specific prefix `sagemaker-`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-iam-role-for-hyperpod
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-cluster.html
     #   @return [String]
     #
     # @!attribute [rw] on_create
-    #   The directory of the LifeCycle script under `SourceS3Uri`. This
-    #   LifeCycle script runs during cluster creation.
+    #   The file name of the entrypoint script of lifecycle scripts under
+    #   `SourceS3Uri`. This entrypoint script runs during cluster creation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterLifeCycleConfig AWS API Documentation
@@ -6293,7 +6303,7 @@ module Aws::SageMaker
     #
     #   The name:
     #
-    #   * Must start and end with an alphanumeric character.
+    #   * Must start with an alphanumeric character.
     #
     #   * Can only include alphanumeric characters, underscores, and
     #     hyphens. Spaces are not allowed.
@@ -6311,7 +6321,7 @@ module Aws::SageMaker
     #
     #   This name:
     #
-    #   * Must start and end with an alphanumeric character.
+    #   * Must start with an alphanumeric character.
     #
     #   * Can only contains alphanumeric characters, hyphens, underscores.
     #     Spaces are not allowed.
@@ -19076,7 +19086,7 @@ module Aws::SageMaker
     #
     #   The name:
     #
-    #   * Must start and end with an alphanumeric character.
+    #   * Must start with an alphanumeric character.
     #
     #   * Can only include alphanumeric characters, underscores, and
     #     hyphens. Spaces are not allowed.

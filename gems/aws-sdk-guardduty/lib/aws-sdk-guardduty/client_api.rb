@@ -1526,6 +1526,7 @@ module Aws::GuardDuty
     ListThreatIntelSetsResponse.struct_class = Types::ListThreatIntelSetsResponse
 
     LocalIpDetails.add_member(:ip_address_v4, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ipAddressV4"))
+    LocalIpDetails.add_member(:ip_address_v6, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ipAddressV6"))
     LocalIpDetails.struct_class = Types::LocalIpDetails
 
     LocalPortDetails.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
@@ -1817,6 +1818,7 @@ module Aws::GuardDuty
     RemoteIpDetails.add_member(:country, Shapes::ShapeRef.new(shape: Country, location_name: "country"))
     RemoteIpDetails.add_member(:geo_location, Shapes::ShapeRef.new(shape: GeoLocation, location_name: "geoLocation"))
     RemoteIpDetails.add_member(:ip_address_v4, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ipAddressV4"))
+    RemoteIpDetails.add_member(:ip_address_v6, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ipAddressV6"))
     RemoteIpDetails.add_member(:organization, Shapes::ShapeRef.new(shape: Organization, location_name: "organization"))
     RemoteIpDetails.struct_class = Types::RemoteIpDetails
 

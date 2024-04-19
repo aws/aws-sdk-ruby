@@ -4177,6 +4177,13 @@ module Aws::EC2
     # and the instances continue to run until they are interrupted or you
     # terminate them manually.
     #
+    # **Restrictions**
+    #
+    # * You can delete up to 100 fleets in a single request. If you exceed
+    #   the specified number, no fleets are deleted.
+    #
+    # ^
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -4185,6 +4192,8 @@ module Aws::EC2
     #
     # @option params [required, Array<String>] :spot_fleet_request_ids
     #   The IDs of the Spot Fleet requests.
+    #
+    #   Constraint: You can specify up to 100 IDs in a single request.
     #
     # @option params [required, Boolean] :terminate_instances
     #   Indicates whether to terminate the associated instances when the Spot
@@ -15728,18 +15737,23 @@ module Aws::EC2
     # until they are interrupted or you terminate them manually.
     #
     # For `instant` fleets, EC2 Fleet must terminate the instances when the
-    # fleet is deleted. A deleted `instant` fleet with running instances is
-    # not supported.
+    # fleet is deleted. Up to 1000 instances can be terminated in a single
+    # request to delete `instant` fleets. A deleted `instant` fleet with
+    # running instances is not supported.
     #
     # **Restrictions**
     #
-    # * You can delete up to 25 `instant` fleets in a single request. If you
-    #   exceed this number, no `instant` fleets are deleted and an error is
-    #   returned. There is no restriction on the number of fleets of type
-    #   `maintain` or `request` that can be deleted in a single request.
+    # * You can delete up to 25 fleets of type `instant` in a single
+    #   request.
     #
-    # * Up to 1000 instances can be terminated in a single request to delete
-    #   `instant` fleets.
+    # * You can delete up to 100 fleets of type `maintain` or `request` in a
+    #   single request.
+    #
+    # * You can delete up to 125 fleets in a single request, provided you do
+    #   not exceed the quota for each fleet type, as specified above.
+    #
+    # * If you exceed the specified number of fleets to delete, no fleets
+    #   are deleted.
     #
     # For more information, see [Delete an EC2 Fleet][1] in the *Amazon EC2
     # User Guide*.
@@ -15756,6 +15770,9 @@ module Aws::EC2
     #
     # @option params [required, Array<String>] :fleet_ids
     #   The IDs of the EC2 Fleets.
+    #
+    #   Constraints: In a single request, you can specify up to 25 `instant`
+    #   fleet IDs and up to 100 `maintain` or `request` fleet IDs.
     #
     # @option params [required, Boolean] :terminate_instances
     #   Indicates whether to terminate the associated instances when the EC2
@@ -24797,10 +24814,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Returns a list of all instance types offered. The results can be
-    # filtered by location (Region or Availability Zone). If no location is
-    # specified, the instance types offered in the current Region are
-    # returned.
+    # Lists the instance types that are offered for the specified location.
+    # If no location is specified, the default is to list the instance types
+    # that are offered in the current Region.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -24811,14 +24827,32 @@ module Aws::EC2
     # @option params [String] :location_type
     #   The location type.
     #
+    #   * `availability-zone` - The Availability Zone. When you specify a
+    #     location filter, it must be an Availability Zone for the current
+    #     Region.
+    #
+    #   * `availability-zone-id` - The AZ ID. When you specify a location
+    #     filter, it must be an AZ ID for the current Region.
+    #
+    #   * `outpost` - The Outpost ARN. When you specify a location filter, it
+    #     must be an Outpost ARN for the current Region.
+    #
+    #   * `region` - The current Region. If you specify a location filter, it
+    #     must match the current Region.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
-    #   * `location` - This depends on the location type. For example, if the
-    #     location type is `region` (default), the location is the Region code
-    #     (for example, `us-east-2`.)
+    #   * `instance-type` - The instance type. For a list of possible values,
+    #     see [Instance][1].
     #
-    #   * `instance-type` - The instance type. For example, `c5.2xlarge`.
+    #   * `location` - The location. For a list of possible identifiers, see
+    #     [Regions and Zones][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Instance.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -24872,9 +24906,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the details of the instance types that are offered in a
-    # location. The results can be filtered by the attributes of the
-    # instance types.
+    # Describes the specified instance types. By default, all instance types
+    # for the current Region are described. Alternatively, you can filter
+    # the results.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -24883,12 +24917,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :instance_types
-    #   The instance types. For more information, see [Instance types][1] in
-    #   the *Amazon EC2 User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   The instance types.
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
@@ -41156,6 +41185,13 @@ module Aws::EC2
     #
     # The returned content is Base64-encoded.
     #
+    # For more information, see [Instance console output][1] in the *Amazon
+    # EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshoot-unreachable-instance.html#instance-console-console-output
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -47342,10 +47378,10 @@ module Aws::EC2
     # account level in the specified Amazon Web Services  Region.
     #
     # <note markdown="1"> To remove a parameter's account-level default setting, specify
-    # `no-preference`. At instance launch, the value will come from the AMI,
-    # or from the launch parameter if specified. For more information, see
-    # [Order of precedence for instance metadata options][1] in the *Amazon
-    # EC2 User Guide*.
+    # `no-preference`. If an account-level setting is cleared with
+    # `no-preference`, then the instance launch considers the other instance
+    # metadata settings. For more information, see [Order of precedence for
+    # instance metadata options][1] in the *Amazon EC2 User Guide*.
     #
     #  </note>
     #
@@ -47363,11 +47399,11 @@ module Aws::EC2
     #     disabled, and you must use IMDSv2.
     #
     # @option params [Integer] :http_put_response_hop_limit
-    #   The maximum number of hops that the metadata token can travel.
+    #   The maximum number of hops that the metadata token can travel. To
+    #   indicate no preference, specify `-1`.
     #
-    #   Minimum: `1`
-    #
-    #   Maximum: `64`
+    #   Possible values: Integers from `1` to `64`, and `-1` to indicate no
+    #   preference
     #
     # @option params [String] :http_endpoint
     #   Enables or disables the IMDS endpoint on an instance. When disabled,
@@ -55944,7 +55980,8 @@ module Aws::EC2
     #   [CreateSecurityGroup][1].
     #
     #   If you specify a network interface, you must specify any security
-    #   groups as part of the network interface.
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #
     #
     #
@@ -55954,7 +55991,8 @@ module Aws::EC2
     #   \[Default VPC\] The names of the security groups.
     #
     #   If you specify a network interface, you must specify any security
-    #   groups as part of the network interface.
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #
     #   Default: Amazon EC2 uses the default security group.
     #
@@ -55962,7 +56000,7 @@ module Aws::EC2
     #   The ID of the subnet to launch the instance into.
     #
     #   If you specify a network interface, you must specify any subnets as
-    #   part of the network interface.
+    #   part of the network interface instead of using this parameter.
     #
     # @option params [String] :user_data
     #   The user data script to make available to the instance. For more
@@ -56038,9 +56076,7 @@ module Aws::EC2
     #   Default: `stop`
     #
     # @option params [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   The network interfaces to associate with the instance. If you specify
-    #   a network interface, you must specify any security groups and subnets
-    #   as part of the network interface.
+    #   The network interfaces to associate with the instance.
     #
     # @option params [String] :private_ip_address
     #   The primary IPv4 address. You must specify a value from the IPv4
@@ -56056,33 +56092,23 @@ module Aws::EC2
     #   the same request.
     #
     # @option params [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   Deprecated.
+    #   An elastic GPU to associate with the instance.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    #   workloads that require graphics acceleration, we recommend that you
-    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #    </note>
     #
     # @option params [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
-    #   Elastic inference accelerators are a resource you can attach to your
-    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
-    #   workloads.
     #
-    #   You cannot specify accelerators from different generations in the same
-    #   request.
-    #
-    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    #   customers to Amazon Elastic Inference (EI), and will help current
-    #   customers migrate their workloads to options that offer better price
-    #   and performance. After April 15, 2023, new customers will not be able
-    #   to launch instances with Amazon EI accelerators in Amazon SageMaker,
-    #   Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
-    #   at least once during the past 30-day period are considered current
-    #   customers and will be able to continue using the service.
+    #   <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to new customers.
+    #   For more information, see [Amazon Elastic Inference FAQs][1].
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/machine-learning/elastic-inference/faqs/
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources that are created during instance
@@ -56994,7 +57020,8 @@ module Aws::EC2
     #   * `type` - The type of route (`propagated` \| `static`).
     #
     # @option params [Integer] :max_results
-    #   The maximum number of routes to return.
+    #   The maximum number of routes to return. If a value is not provided,
+    #   the default is 1000.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -59115,7 +59142,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.449.0'
+      context[:gem_version] = '1.450.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

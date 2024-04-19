@@ -498,8 +498,9 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.source_server.data_replication_info.staging_availability_zone #=> String
+    #   resp.source_server.data_replication_info.staging_outpost_arn #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
     #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
@@ -515,6 +516,7 @@ module Aws::Drs
     #   resp.source_server.source_cloud_properties.origin_account_id #=> String
     #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_server.source_network_id #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
@@ -1229,6 +1231,7 @@ module Aws::Drs
     #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.staging_availability_zone #=> String
+    #   resp.items[0].data_replication_info.staging_outpost_arn #=> String
     #   resp.items[0].ec2_instance_id #=> String
     #   resp.items[0].ec2_instance_state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "SHUTTING-DOWN", "TERMINATED", "NOT_FOUND"
     #   resp.items[0].failback.agent_last_seen_by_service_date_time #=> String
@@ -1266,6 +1269,7 @@ module Aws::Drs
     #   resp.items[0].recovery_instance_properties.network_interfaces[0].mac_address #=> String
     #   resp.items[0].recovery_instance_properties.os.full_string #=> String
     #   resp.items[0].recovery_instance_properties.ram_bytes #=> Integer
+    #   resp.items[0].source_outpost_arn #=> String
     #   resp.items[0].source_server_id #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
@@ -1513,8 +1517,9 @@ module Aws::Drs
     #   resp.items[0].data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.items[0].data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+    #   resp.items[0].data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.items[0].data_replication_info.staging_availability_zone #=> String
+    #   resp.items[0].data_replication_info.staging_outpost_arn #=> String
     #   resp.items[0].last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.items[0].life_cycle.added_to_service_date_time #=> String
     #   resp.items[0].life_cycle.elapsed_replication_duration #=> String
@@ -1530,6 +1535,7 @@ module Aws::Drs
     #   resp.items[0].source_cloud_properties.origin_account_id #=> String
     #   resp.items[0].source_cloud_properties.origin_availability_zone #=> String
     #   resp.items[0].source_cloud_properties.origin_region #=> String
+    #   resp.items[0].source_cloud_properties.source_outpost_arn #=> String
     #   resp.items[0].source_network_id #=> String
     #   resp.items[0].source_properties.cpus #=> Array
     #   resp.items[0].source_properties.cpus[0].cores #=> Integer
@@ -1664,8 +1670,9 @@ module Aws::Drs
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+    #   resp.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.data_replication_info.staging_availability_zone #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -1681,6 +1688,7 @@ module Aws::Drs
     #   resp.source_cloud_properties.origin_account_id #=> String
     #   resp.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_cloud_properties.origin_region #=> String
+    #   resp.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_network_id #=> String
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -2241,8 +2249,9 @@ module Aws::Drs
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+    #   resp.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.data_replication_info.staging_availability_zone #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -2258,6 +2267,7 @@ module Aws::Drs
     #   resp.source_cloud_properties.origin_account_id #=> String
     #   resp.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_cloud_properties.origin_region #=> String
+    #   resp.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_network_id #=> String
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -2514,8 +2524,9 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.source_server.data_replication_info.staging_availability_zone #=> String
+    #   resp.source_server.data_replication_info.staging_outpost_arn #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
     #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
@@ -2531,6 +2542,7 @@ module Aws::Drs
     #   resp.source_server.source_cloud_properties.origin_account_id #=> String
     #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_server.source_network_id #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
@@ -2751,8 +2763,9 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.source_server.data_replication_info.staging_availability_zone #=> String
+    #   resp.source_server.data_replication_info.staging_outpost_arn #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
     #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
@@ -2768,6 +2781,7 @@ module Aws::Drs
     #   resp.source_server.source_cloud_properties.origin_account_id #=> String
     #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_server.source_network_id #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
@@ -3491,7 +3505,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

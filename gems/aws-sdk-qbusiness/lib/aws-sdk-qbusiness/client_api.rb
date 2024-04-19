@@ -37,6 +37,7 @@ module Aws::QBusiness
     ApplicationStatus = Shapes::StringShape.new(name: 'ApplicationStatus')
     Applications = Shapes::ListShape.new(name: 'Applications')
     AppliedAttachmentsConfiguration = Shapes::StructureShape.new(name: 'AppliedAttachmentsConfiguration')
+    AppliedCreatorModeConfiguration = Shapes::StructureShape.new(name: 'AppliedCreatorModeConfiguration')
     AttachmentInput = Shapes::StructureShape.new(name: 'AttachmentInput')
     AttachmentName = Shapes::StringShape.new(name: 'AttachmentName')
     AttachmentOutput = Shapes::StructureShape.new(name: 'AttachmentOutput')
@@ -61,6 +62,8 @@ module Aws::QBusiness
     BlockedPhrasesConfigurationUpdate = Shapes::StructureShape.new(name: 'BlockedPhrasesConfigurationUpdate')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoostingDurationInSeconds = Shapes::IntegerShape.new(name: 'BoostingDurationInSeconds')
+    ChatMode = Shapes::StringShape.new(name: 'ChatMode')
+    ChatModeConfiguration = Shapes::UnionShape.new(name: 'ChatModeConfiguration')
     ChatSyncInput = Shapes::StructureShape.new(name: 'ChatSyncInput')
     ChatSyncOutput = Shapes::StructureShape.new(name: 'ChatSyncOutput')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -87,6 +90,8 @@ module Aws::QBusiness
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     CreateWebExperienceRequest = Shapes::StructureShape.new(name: 'CreateWebExperienceRequest')
     CreateWebExperienceResponse = Shapes::StructureShape.new(name: 'CreateWebExperienceResponse')
+    CreatorModeConfiguration = Shapes::StructureShape.new(name: 'CreatorModeConfiguration')
+    CreatorModeControl = Shapes::StringShape.new(name: 'CreatorModeControl')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceArn = Shapes::StringShape.new(name: 'DataSourceArn')
     DataSourceConfiguration = Shapes::DocumentShape.new(name: 'DataSourceConfiguration', document: true)
@@ -185,6 +190,7 @@ module Aws::QBusiness
     GroupSummary = Shapes::StructureShape.new(name: 'GroupSummary')
     GroupSummaryList = Shapes::ListShape.new(name: 'GroupSummaryList')
     HookConfiguration = Shapes::StructureShape.new(name: 'HookConfiguration')
+    IdcApplicationArn = Shapes::StringShape.new(name: 'IdcApplicationArn')
     Index = Shapes::StructureShape.new(name: 'Index')
     IndexArn = Shapes::StringShape.new(name: 'IndexArn')
     IndexCapacityConfiguration = Shapes::StructureShape.new(name: 'IndexCapacityConfiguration')
@@ -198,6 +204,7 @@ module Aws::QBusiness
     Indices = Shapes::ListShape.new(name: 'Indices')
     InlineDocumentEnrichmentConfiguration = Shapes::StructureShape.new(name: 'InlineDocumentEnrichmentConfiguration')
     InlineDocumentEnrichmentConfigurations = Shapes::ListShape.new(name: 'InlineDocumentEnrichmentConfigurations')
+    InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KendraIndexConfiguration = Shapes::StructureShape.new(name: 'KendraIndexConfiguration')
@@ -266,6 +273,7 @@ module Aws::QBusiness
     Plugin = Shapes::StructureShape.new(name: 'Plugin')
     PluginArn = Shapes::StringShape.new(name: 'PluginArn')
     PluginAuthConfiguration = Shapes::UnionShape.new(name: 'PluginAuthConfiguration')
+    PluginConfiguration = Shapes::StructureShape.new(name: 'PluginConfiguration')
     PluginId = Shapes::StringShape.new(name: 'PluginId')
     PluginName = Shapes::StringShape.new(name: 'PluginName')
     PluginState = Shapes::StringShape.new(name: 'PluginState')
@@ -438,6 +446,9 @@ module Aws::QBusiness
     AppliedAttachmentsConfiguration.add_member(:attachments_control_mode, Shapes::ShapeRef.new(shape: AttachmentsControlMode, location_name: "attachmentsControlMode"))
     AppliedAttachmentsConfiguration.struct_class = Types::AppliedAttachmentsConfiguration
 
+    AppliedCreatorModeConfiguration.add_member(:creator_mode_control, Shapes::ShapeRef.new(shape: CreatorModeControl, required: true, location_name: "creatorModeControl"))
+    AppliedCreatorModeConfiguration.struct_class = Types::AppliedCreatorModeConfiguration
+
     AttachmentInput.add_member(:data, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "data"))
     AttachmentInput.add_member(:name, Shapes::ShapeRef.new(shape: AttachmentName, required: true, location_name: "name"))
     AttachmentInput.struct_class = Types::AttachmentInput
@@ -502,15 +513,23 @@ module Aws::QBusiness
     BlockedPhrasesConfigurationUpdate.add_member(:system_message_override, Shapes::ShapeRef.new(shape: SystemMessageOverride, location_name: "systemMessageOverride"))
     BlockedPhrasesConfigurationUpdate.struct_class = Types::BlockedPhrasesConfigurationUpdate
 
+    ChatModeConfiguration.add_member(:plugin_configuration, Shapes::ShapeRef.new(shape: PluginConfiguration, location_name: "pluginConfiguration"))
+    ChatModeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ChatModeConfiguration.add_member_subclass(:plugin_configuration, Types::ChatModeConfiguration::PluginConfiguration)
+    ChatModeConfiguration.add_member_subclass(:unknown, Types::ChatModeConfiguration::Unknown)
+    ChatModeConfiguration.struct_class = Types::ChatModeConfiguration
+
     ChatSyncInput.add_member(:action_execution, Shapes::ShapeRef.new(shape: ActionExecution, location_name: "actionExecution"))
     ChatSyncInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     ChatSyncInput.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentsInput, location_name: "attachments"))
     ChatSyncInput.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: AttributeFilter, location_name: "attributeFilter"))
+    ChatSyncInput.add_member(:chat_mode, Shapes::ShapeRef.new(shape: ChatMode, location_name: "chatMode"))
+    ChatSyncInput.add_member(:chat_mode_configuration, Shapes::ShapeRef.new(shape: ChatModeConfiguration, location_name: "chatModeConfiguration"))
     ChatSyncInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     ChatSyncInput.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, location_name: "conversationId"))
     ChatSyncInput.add_member(:parent_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "parentMessageId"))
     ChatSyncInput.add_member(:user_groups, Shapes::ShapeRef.new(shape: UserGroups, location: "querystring", location_name: "userGroups"))
-    ChatSyncInput.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "querystring", location_name: "userId"))
+    ChatSyncInput.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location: "querystring", location_name: "userId"))
     ChatSyncInput.add_member(:user_message, Shapes::ShapeRef.new(shape: UserMessage, location_name: "userMessage"))
     ChatSyncInput.struct_class = Types::ChatSyncInput
 
@@ -546,6 +565,7 @@ module Aws::QBusiness
     CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateApplicationRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "displayName"))
     CreateApplicationRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    CreateApplicationRequest.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "identityCenterInstanceArn"))
     CreateApplicationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
@@ -621,6 +641,7 @@ module Aws::QBusiness
 
     CreateWebExperienceRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     CreateWebExperienceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateWebExperienceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateWebExperienceRequest.add_member(:sample_prompts_control_mode, Shapes::ShapeRef.new(shape: WebExperienceSamplePromptsControlMode, location_name: "samplePromptsControlMode"))
     CreateWebExperienceRequest.add_member(:subtitle, Shapes::ShapeRef.new(shape: WebExperienceSubtitle, location_name: "subtitle"))
     CreateWebExperienceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -631,6 +652,9 @@ module Aws::QBusiness
     CreateWebExperienceResponse.add_member(:web_experience_arn, Shapes::ShapeRef.new(shape: WebExperienceArn, location_name: "webExperienceArn"))
     CreateWebExperienceResponse.add_member(:web_experience_id, Shapes::ShapeRef.new(shape: WebExperienceId, location_name: "webExperienceId"))
     CreateWebExperienceResponse.struct_class = Types::CreateWebExperienceResponse
+
+    CreatorModeConfiguration.add_member(:creator_mode_control, Shapes::ShapeRef.new(shape: CreatorModeControl, required: true, location_name: "creatorModeControl"))
+    CreatorModeConfiguration.struct_class = Types::CreatorModeConfiguration
 
     DataSource.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     DataSource.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "dataSourceId"))
@@ -682,7 +706,7 @@ module Aws::QBusiness
 
     DeleteConversationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     DeleteConversationRequest.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, required: true, location: "uri", location_name: "conversationId"))
-    DeleteConversationRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "querystring", location_name: "userId"))
+    DeleteConversationRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location: "querystring", location_name: "userId"))
     DeleteConversationRequest.struct_class = Types::DeleteConversationRequest
 
     DeleteConversationResponse.struct_class = Types::DeleteConversationResponse
@@ -855,6 +879,7 @@ module Aws::QBusiness
     GetApplicationResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "displayName"))
     GetApplicationResponse.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     GetApplicationResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
+    GetApplicationResponse.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdcApplicationArn, location_name: "identityCenterApplicationArn"))
     GetApplicationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     GetApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "status"))
     GetApplicationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
@@ -866,6 +891,7 @@ module Aws::QBusiness
     GetChatControlsConfigurationRequest.struct_class = Types::GetChatControlsConfigurationRequest
 
     GetChatControlsConfigurationResponse.add_member(:blocked_phrases, Shapes::ShapeRef.new(shape: BlockedPhrasesConfiguration, location_name: "blockedPhrases"))
+    GetChatControlsConfigurationResponse.add_member(:creator_mode_configuration, Shapes::ShapeRef.new(shape: AppliedCreatorModeConfiguration, location_name: "creatorModeConfiguration"))
     GetChatControlsConfigurationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetChatControlsConfigurationResponse.add_member(:response_scope, Shapes::ShapeRef.new(shape: ResponseScope, location_name: "responseScope"))
     GetChatControlsConfigurationResponse.add_member(:topic_configurations, Shapes::ShapeRef.new(shape: TopicConfigurations, location_name: "topicConfigurations"))
@@ -970,6 +996,7 @@ module Aws::QBusiness
     GetWebExperienceResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetWebExperienceResponse.add_member(:default_endpoint, Shapes::ShapeRef.new(shape: Url, location_name: "defaultEndpoint"))
     GetWebExperienceResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
+    GetWebExperienceResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     GetWebExperienceResponse.add_member(:sample_prompts_control_mode, Shapes::ShapeRef.new(shape: WebExperienceSamplePromptsControlMode, location_name: "samplePromptsControlMode"))
     GetWebExperienceResponse.add_member(:status, Shapes::ShapeRef.new(shape: WebExperienceStatus, location_name: "status"))
     GetWebExperienceResponse.add_member(:subtitle, Shapes::ShapeRef.new(shape: WebExperienceSubtitle, location_name: "subtitle"))
@@ -1044,7 +1071,7 @@ module Aws::QBusiness
     ListConversationsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     ListConversationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsIntegerForListConversations, location: "querystring", location_name: "maxResults"))
     ListConversationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListConversationsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "querystring", location_name: "userId"))
+    ListConversationsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location: "querystring", location_name: "userId"))
     ListConversationsRequest.struct_class = Types::ListConversationsRequest
 
     ListConversationsResponse.add_member(:conversations, Shapes::ShapeRef.new(shape: Conversations, location_name: "conversations"))
@@ -1111,7 +1138,7 @@ module Aws::QBusiness
     ListMessagesRequest.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, required: true, location: "uri", location_name: "conversationId"))
     ListMessagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsIntegerForListMessages, location: "querystring", location_name: "maxResults"))
     ListMessagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListMessagesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "querystring", location_name: "userId"))
+    ListMessagesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location: "querystring", location_name: "userId"))
     ListMessagesRequest.struct_class = Types::ListMessagesRequest
 
     ListMessagesResponse.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, location_name: "messages"))
@@ -1210,6 +1237,9 @@ module Aws::QBusiness
     PluginAuthConfiguration.add_member_subclass(:unknown, Types::PluginAuthConfiguration::Unknown)
     PluginAuthConfiguration.struct_class = Types::PluginAuthConfiguration
 
+    PluginConfiguration.add_member(:plugin_id, Shapes::ShapeRef.new(shape: PluginId, required: true, location_name: "pluginId"))
+    PluginConfiguration.struct_class = Types::PluginConfiguration
+
     Plugins.member = Shapes::ShapeRef.new(shape: Plugin)
 
     Principal.add_member(:group, Shapes::ShapeRef.new(shape: PrincipalGroup, location_name: "group"))
@@ -1237,7 +1267,7 @@ module Aws::QBusiness
     PutFeedbackRequest.add_member(:message_copied_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "messageCopiedAt"))
     PutFeedbackRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: SystemMessageId, required: true, location: "uri", location_name: "messageId"))
     PutFeedbackRequest.add_member(:message_usefulness, Shapes::ShapeRef.new(shape: MessageUsefulnessFeedback, location_name: "messageUsefulness"))
-    PutFeedbackRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "querystring", location_name: "userId"))
+    PutFeedbackRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location: "querystring", location_name: "userId"))
     PutFeedbackRequest.struct_class = Types::PutFeedbackRequest
 
     PutGroupRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
@@ -1395,6 +1425,7 @@ module Aws::QBusiness
     UpdateChatControlsConfigurationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     UpdateChatControlsConfigurationRequest.add_member(:blocked_phrases_configuration_update, Shapes::ShapeRef.new(shape: BlockedPhrasesConfigurationUpdate, location_name: "blockedPhrasesConfigurationUpdate"))
     UpdateChatControlsConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateChatControlsConfigurationRequest.add_member(:creator_mode_configuration, Shapes::ShapeRef.new(shape: CreatorModeConfiguration, location_name: "creatorModeConfiguration"))
     UpdateChatControlsConfigurationRequest.add_member(:response_scope, Shapes::ShapeRef.new(shape: ResponseScope, location_name: "responseScope"))
     UpdateChatControlsConfigurationRequest.add_member(:topic_configurations_to_create_or_update, Shapes::ShapeRef.new(shape: TopicConfigurations, location_name: "topicConfigurationsToCreateOrUpdate"))
     UpdateChatControlsConfigurationRequest.add_member(:topic_configurations_to_delete, Shapes::ShapeRef.new(shape: TopicConfigurations, location_name: "topicConfigurationsToDelete"))

@@ -1306,6 +1306,8 @@ module Aws::GuardDuty
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.awsApiCallAction.remoteIpDetails.organization.asn
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
@@ -1330,6 +1332,8 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.networkConnectionAction.remoteIpDetails.organization.asn
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
@@ -1340,6 +1344,8 @@ module Aws::GuardDuty
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.kubernetesApiCallAction.namespace
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
@@ -1349,6 +1355,8 @@ module Aws::GuardDuty
     #   * service.action.kubernetesApiCallAction.statusCode
     #
     #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV6
     #
     #   * service.action.networkConnectionAction.protocol
     #
@@ -5039,11 +5047,16 @@ module Aws::GuardDuty
     #   The IPv4 local address of the connection.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_v6
+    #   The IPv6 local address of the connection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalIpDetails AWS API Documentation
     #
     class LocalIpDetails < Struct.new(
-      :ip_address_v4)
-      SENSITIVE = [:ip_address_v4]
+      :ip_address_v4,
+      :ip_address_v6)
+      SENSITIVE = [:ip_address_v4, :ip_address_v6]
       include Aws::Structure
     end
 
@@ -6383,6 +6396,10 @@ module Aws::GuardDuty
     #   The IPv4 remote address of the connection.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_v6
+    #   The IPv6 remote address of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] organization
     #   The ISP organization information of the remote IP address.
     #   @return [Types::Organization]
@@ -6394,8 +6411,9 @@ module Aws::GuardDuty
       :country,
       :geo_location,
       :ip_address_v4,
+      :ip_address_v6,
       :organization)
-      SENSITIVE = [:ip_address_v4]
+      SENSITIVE = [:ip_address_v4, :ip_address_v6]
       include Aws::Structure
     end
 

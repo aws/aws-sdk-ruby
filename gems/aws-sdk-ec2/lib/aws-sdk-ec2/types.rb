@@ -4188,6 +4188,8 @@ module Aws::EC2
     #
     # @!attribute [rw] spot_fleet_request_ids
     #   The IDs of the Spot Fleet requests.
+    #
+    #   Constraint: You can specify up to 100 IDs in a single request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] terminate_instances
@@ -7685,7 +7687,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -7695,7 +7697,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetError AWS API Documentation
@@ -13706,6 +13708,9 @@ module Aws::EC2
     #
     # @!attribute [rw] fleet_ids
     #   The IDs of the EC2 Fleets.
+    #
+    #   Constraints: In a single request, you can specify up to 25 `instant`
+    #   fleet IDs and up to 100 `maintain` or `request` fleet IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] terminate_instances
@@ -20040,16 +20045,34 @@ module Aws::EC2
     #
     # @!attribute [rw] location_type
     #   The location type.
+    #
+    #   * `availability-zone` - The Availability Zone. When you specify a
+    #     location filter, it must be an Availability Zone for the current
+    #     Region.
+    #
+    #   * `availability-zone-id` - The AZ ID. When you specify a location
+    #     filter, it must be an AZ ID for the current Region.
+    #
+    #   * `outpost` - The Outpost ARN. When you specify a location filter,
+    #     it must be an Outpost ARN for the current Region.
+    #
+    #   * `region` - The current Region. If you specify a location filter,
+    #     it must match the current Region.
     #   @return [String]
     #
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
-    #   * `location` - This depends on the location type. For example, if
-    #     the location type is `region` (default), the location is the
-    #     Region code (for example, `us-east-2`.)
+    #   * `instance-type` - The instance type. For a list of possible
+    #     values, see [Instance][1].
     #
-    #   * `instance-type` - The instance type. For example, `c5.2xlarge`.
+    #   * `location` - The location. For a list of possible identifiers, see
+    #     [Regions and Zones][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Instance.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -20081,7 +20104,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] instance_type_offerings
-    #   The instance types offered.
+    #   The instance types offered in the location.
     #   @return [Array<Types::InstanceTypeOffering>]
     #
     # @!attribute [rw] next_token
@@ -20106,12 +20129,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_types
-    #   The instance types. For more information, see [Instance types][1] in
-    #   the *Amazon EC2 User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   The instance types.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -20306,12 +20324,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] instance_types
-    #   The instance type. For more information, see [Instance types][1] in
-    #   the *Amazon EC2 User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   The instance type.
     #   @return [Array<Types::InstanceTypeInfo>]
     #
     # @!attribute [rw] next_token
@@ -47897,11 +47910,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
-    #   The maximum number of hops that the metadata token can travel.
+    #   The maximum number of hops that the metadata token can travel. To
+    #   indicate no preference, specify `-1`.
     #
-    #   Minimum: `1`
-    #
-    #   Maximum: `64`
+    #   Possible values: Integers from `1` to `64`, and `-1` to indicate no
+    #   preference
     #   @return [Integer]
     #
     # @!attribute [rw] http_endpoint
@@ -56177,9 +56190,7 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateBlockDeviceMappingRequest>]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces. If you specify a network interface,
-    #   you must specify any security groups and subnets as part of the
-    #   network interface.
+    #   The network interfaces for the instance.
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
@@ -56338,17 +56349,20 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateElasticInferenceAccelerator>]
     #
     # @!attribute [rw] security_group_ids
-    #   One or more security group IDs. You can create a security group
-    #   using [CreateSecurityGroup][1].
+    #   The IDs of the security groups.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
-    #   One or more security group names. For a nondefault VPC, you must use
+    #   The names of the security groups. For a nondefault VPC, you must use
     #   security group IDs instead.
+    #
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_market_options
@@ -58835,7 +58849,8 @@ module Aws::EC2
     #   using [CreateSecurityGroup][1].
     #
     #   If you specify a network interface, you must specify any security
-    #   groups as part of the network interface.
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #
     #
     #
@@ -58846,7 +58861,8 @@ module Aws::EC2
     #   \[Default VPC\] The names of the security groups.
     #
     #   If you specify a network interface, you must specify any security
-    #   groups as part of the network interface.
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #
     #   Default: Amazon EC2 uses the default security group.
     #   @return [Array<String>]
@@ -58855,7 +58871,7 @@ module Aws::EC2
     #   The ID of the subnet to launch the instance into.
     #
     #   If you specify a network interface, you must specify any subnets as
-    #   part of the network interface.
+    #   part of the network interface instead of using this parameter.
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -58941,9 +58957,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
-    #   The network interfaces to associate with the instance. If you
-    #   specify a network interface, you must specify any security groups
-    #   and subnets as part of the network interface.
+    #   The network interfaces to associate with the instance.
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] private_ip_address
@@ -58961,35 +58975,25 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_specification
-    #   Deprecated.
+    #   An elastic GPU to associate with the instance.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    #   workloads that require graphics acceleration, we recommend that you
-    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
-    #   Elastic inference accelerators are a resource you can attach to your
-    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
-    #   workloads.
     #
-    #   You cannot specify accelerators from different generations in the
-    #   same request.
-    #
-    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    #   customers to Amazon Elastic Inference (EI), and will help current
-    #   customers migrate their workloads to options that offer better price
-    #   and performance. After April 15, 2023, new customers will not be
-    #   able to launch instances with Amazon EI accelerators in Amazon
-    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
-    #   used Amazon EI at least once during the past 30-day period are
-    #   considered current customers and will be able to continue using the
-    #   service.
+    #   <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to new
+    #   customers. For more information, see [Amazon Elastic Inference
+    #   FAQs][1].
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/machine-learning/elastic-inference/faqs/
     #   @return [Array<Types::ElasticInferenceAccelerator>]
     #
     # @!attribute [rw] tag_specifications
@@ -60115,7 +60119,8 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of routes to return.
+    #   The maximum number of routes to return. If a value is not provided,
+    #   the default is 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -61342,6 +61347,10 @@ module Aws::EC2
     #
     # @!attribute [rw] security_groups
     #   The security groups.
+    #
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] addressing_type
@@ -61392,13 +61401,10 @@ module Aws::EC2
     #   @return [Types::SpotFleetMonitoring]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces. If you specify a network interface,
-    #   you must specify subnet IDs and security group IDs using the network
-    #   interface.
+    #   The network interfaces.
     #
-    #   <note markdown="1"> `SpotFleetLaunchSpecification` currently does not support Elastic
-    #   Fabric Adapter (EFA). To specify an EFA, you must use
-    #   [LaunchTemplateConfig][1].
+    #   <note markdown="1"> `SpotFleetLaunchSpecification` does not support Elastic Fabric
+    #   Adapter (EFA). You must use [LaunchTemplateConfig][1] instead.
     #
     #    </note>
     #
@@ -61433,6 +61439,9 @@ module Aws::EC2
     #   The IDs of the subnets in which to launch the instances. To specify
     #   multiple subnets, separate them using commas; for example,
     #   "subnet-1234abcdeexample1, subnet-0987cdef6example2".
+    #
+    #   If you specify a network interface, you must specify any subnets as
+    #   part of the network interface instead of using this parameter.
     #   @return [String]
     #
     # @!attribute [rw] user_data

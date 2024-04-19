@@ -7,6 +7,11 @@ Unreleased Changes
 
 * Issue - Enhance, refactor, and rebase protocols to be consistent. Ensure protocol tests are run for each engine.
 
+3.192.1 (2024-04-18)
+------------------
+
+* Issue - Drop key/value pair if value is `nil` when deserializing json maps.
+
 3.192.0 (2024-04-16)
 ------------------
 

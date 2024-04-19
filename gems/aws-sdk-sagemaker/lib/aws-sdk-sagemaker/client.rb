@@ -3506,7 +3506,7 @@ module Aws::SageMaker
     #
     #   The name:
     #
-    #   * Must start and end with an alphanumeric character.
+    #   * Must start with an alphanumeric character.
     #
     #   * Can only include alphanumeric characters, underscores, and hyphens.
     #     Spaces are not allowed.
@@ -3523,7 +3523,7 @@ module Aws::SageMaker
     #
     #   This name:
     #
-    #   * Must start and end with an alphanumeric character.
+    #   * Must start with an alphanumeric character.
     #
     #   * Can only contains alphanumeric characters, hyphens, underscores.
     #     Spaces are not allowed.
@@ -3746,7 +3746,7 @@ module Aws::SageMaker
     #   resp = client.create_flow_definition({
     #     flow_definition_name: "FlowDefinitionName", # required
     #     human_loop_request_source: {
-    #       aws_managed_human_loop_request_source: "AWS/Rekognition/DetectModerationLabels/Image/V3", # required, accepts AWS/Rekognition/DetectModerationLabels/Image/V3, AWS/Textract/AnalyzeDocument/Forms/V1, AWS/Textract/AnalyzeExpense, AWS/Handshake/VerifyIdentity, AWS/Bedrock/ModelEvaluation
+    #       aws_managed_human_loop_request_source: "AWS/Rekognition/DetectModerationLabels/Image/V3", # required, accepts AWS/Rekognition/DetectModerationLabels/Image/V3, AWS/Textract/AnalyzeDocument/Forms/V1
     #     },
     #     human_loop_activation_config: {
     #       human_loop_activation_conditions_config: { # required
@@ -12629,7 +12629,7 @@ module Aws::SageMaker
     #   resp.flow_definition_name #=> String
     #   resp.flow_definition_status #=> String, one of "Initializing", "Active", "Failed", "Deleting"
     #   resp.creation_time #=> Time
-    #   resp.human_loop_request_source.aws_managed_human_loop_request_source #=> String, one of "AWS/Rekognition/DetectModerationLabels/Image/V3", "AWS/Textract/AnalyzeDocument/Forms/V1", "AWS/Textract/AnalyzeExpense", "AWS/Handshake/VerifyIdentity", "AWS/Bedrock/ModelEvaluation"
+    #   resp.human_loop_request_source.aws_managed_human_loop_request_source #=> String, one of "AWS/Rekognition/DetectModerationLabels/Image/V3", "AWS/Textract/AnalyzeDocument/Forms/V1"
     #   resp.human_loop_activation_config.human_loop_activation_conditions_config.human_loop_activation_conditions #=> String
     #   resp.human_loop_config.workteam_arn #=> String
     #   resp.human_loop_config.human_task_ui_arn #=> String
@@ -26196,7 +26196,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.234.0'
+      context[:gem_version] = '1.235.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

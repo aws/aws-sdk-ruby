@@ -305,11 +305,17 @@ module Aws
                            untyped,
                          ]?
                        },
+                       ?chat_mode: ("RETRIEVAL_MODE" | "CREATOR_MODE" | "PLUGIN_MODE"),
+                       ?chat_mode_configuration: {
+                         plugin_configuration: {
+                           plugin_id: ::String
+                         }?
+                       },
                        ?client_token: ::String,
                        ?conversation_id: ::String,
                        ?parent_message_id: ::String,
                        ?user_groups: Array[::String],
-                       user_id: ::String,
+                       ?user_id: ::String,
                        ?user_message: ::String
                      ) -> _ChatSyncResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ChatSyncResponseSuccess
@@ -330,6 +336,7 @@ module Aws
                                 ?encryption_configuration: {
                                   kms_key_id: ::String?
                                 },
+                                ?identity_center_instance_arn: ::String,
                                 role_arn: ::String,
                                 ?tags: Array[
                                   {
@@ -553,6 +560,7 @@ module Aws
       def create_web_experience: (
                                    application_id: ::String,
                                    ?client_token: ::String,
+                                   ?role_arn: ::String,
                                    ?sample_prompts_control_mode: ("ENABLED" | "DISABLED"),
                                    ?subtitle: ::String,
                                    ?tags: Array[
@@ -591,7 +599,7 @@ module Aws
       def delete_conversation: (
                                  application_id: ::String,
                                  conversation_id: ::String,
-                                 user_id: ::String
+                                 ?user_id: ::String
                                ) -> _DeleteConversationResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConversationResponseSuccess
 
@@ -677,6 +685,7 @@ module Aws
         def description: () -> ::String
         def display_name: () -> ::String
         def encryption_configuration: () -> Types::EncryptionConfiguration
+        def identity_center_application_arn: () -> ::String
         def role_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
         def updated_at: () -> ::Time
@@ -690,6 +699,7 @@ module Aws
       interface _GetChatControlsConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetChatControlsConfigurationResponse]
         def blocked_phrases: () -> Types::BlockedPhrasesConfiguration
+        def creator_mode_configuration: () -> Types::AppliedCreatorModeConfiguration
         def next_token: () -> ::String
         def response_scope: () -> ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
         def topic_configurations: () -> ::Array[Types::TopicConfiguration]
@@ -820,6 +830,7 @@ module Aws
         def authentication_configuration: () -> Types::WebExperienceAuthConfiguration
         def created_at: () -> ::Time
         def default_endpoint: () -> ::String
+        def role_arn: () -> ::String
         def sample_prompts_control_mode: () -> ("ENABLED" | "DISABLED")
         def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "PENDING_AUTH_CONFIG")
         def subtitle: () -> ::String
@@ -858,7 +869,7 @@ module Aws
                                 application_id: ::String,
                                 ?max_results: ::Integer,
                                 ?next_token: ::String,
-                                user_id: ::String
+                                ?user_id: ::String
                               ) -> _ListConversationsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConversationsResponseSuccess
 
@@ -949,7 +960,7 @@ module Aws
                            conversation_id: ::String,
                            ?max_results: ::Integer,
                            ?next_token: ::String,
-                           user_id: ::String
+                           ?user_id: ::String
                          ) -> _ListMessagesResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMessagesResponseSuccess
 
@@ -1014,7 +1025,7 @@ module Aws
                             submitted_at: ::Time,
                             usefulness: ("USEFUL" | "NOT_USEFUL")
                           },
-                          user_id: ::String
+                          ?user_id: ::String
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1120,6 +1131,9 @@ module Aws
                                                   system_message_override: ::String?
                                                 },
                                                 ?client_token: ::String,
+                                                ?creator_mode_configuration: {
+                                                  creator_mode_control: ("ENABLED" | "DISABLED")
+                                                },
                                                 ?response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED"),
                                                 ?topic_configurations_to_create_or_update: Array[
                                                   {
