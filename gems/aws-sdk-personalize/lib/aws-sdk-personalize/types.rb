@@ -138,6 +138,32 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # The automatic training configuration to use when `performAutoTraining`
+    # is true.
+    #
+    # @!attribute [rw] scheduling_expression
+    #   Specifies how often to automatically train new solution versions.
+    #   Specify a rate expression in rate(*value* *unit*) format. For value,
+    #   specify a number between 1 and 30. For unit, specify `day` or
+    #   `days`. For example, to automatically create a new solution version
+    #   every 5 days, specify `rate(5 days)`. The default is every 7 days.
+    #
+    #   For more information about auto training, see [Creating and
+    #   configuring a solution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/AutoTrainingConfig AWS API Documentation
+    #
+    class AutoTrainingConfig < Struct.new(
+      :scheduling_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information on a batch inference job.
     #
     # @!attribute [rw] job_name
@@ -545,8 +571,8 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] solution_version_arn
-    #   The Amazon Resource Name (ARN) of a specific version of the
-    #   solution.
+    #   The Amazon Resource Name (ARN) of the solution version the campaign
+    #   uses.
     #   @return [String]
     #
     # @!attribute [rw] min_provisioned_tps
@@ -643,11 +669,28 @@ module Aws::Personalize
     #   [2]: https://aws.amazon.com/personalize/pricing/
     #   @return [Boolean]
     #
+    # @!attribute [rw] sync_with_latest_solution_version
+    #   Whether the campaign automatically updates to use the latest
+    #   solution version (trained model) of a solution. If you specify
+    #   `True`, you must specify the ARN of your *solution* for the
+    #   `SolutionVersionArn` parameter. It must be in `SolutionArn/$LATEST`
+    #   format. The default is `False` and you must manually update the
+    #   campaign to deploy the latest solution version.
+    #
+    #   For more information about automatic campaign updates, see [Enabling
+    #   automatic campaign updates][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CampaignConfig AWS API Documentation
     #
     class CampaignConfig < Struct.new(
       :item_exploration_config,
-      :enable_metadata_with_recommendations)
+      :enable_metadata_with_recommendations,
+      :sync_with_latest_solution_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -988,7 +1031,23 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] solution_version_arn
-    #   The Amazon Resource Name (ARN) of the solution version to deploy.
+    #   The Amazon Resource Name (ARN) of the trained model to deploy with
+    #   the campaign. To specify the latest solution version of your
+    #   solution, specify the ARN of your *solution* in
+    #   `SolutionArn/$LATEST` format. You must use this format if you set
+    #   `syncWithLatestSolutionVersion` to `True` in the
+    #   [CampaignConfig][1].
+    #
+    #   To deploy a model that isn't the latest solution version of your
+    #   solution, specify the ARN of the solution version.
+    #
+    #   For more information about automatic campaign updates, see [Enabling
+    #   automatic campaign updates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update
     #   @return [String]
     #
     # @!attribute [rw] min_provisioned_tps
@@ -1554,6 +1613,30 @@ module Aws::Personalize
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] perform_auto_training
+    #   Whether the solution uses automatic training to create new solution
+    #   versions (trained models). The default is `True` and the solution
+    #   automatically creates new solution versions every 7 days. You can
+    #   change the training frequency by specifying a `schedulingExpression`
+    #   in the `AutoTrainingConfig` as part of solution configuration. For
+    #   more information about automatic training, see [Configuring
+    #   automatic training][1].
+    #
+    #   Automatic solution version creation starts one hour after the
+    #   solution is ACTIVE. If you manually create a solution version within
+    #   the hour, the solution skips the first automatic training.
+    #
+    #   After training starts, you can get the solution version's Amazon
+    #   Resource Name (ARN) with the [ListSolutionVersions][2] API
+    #   operation. To get its status, use the [DescribeSolutionVersion][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
+    #   [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] recipe_arn
     #   The Amazon Resource Name (ARN) of the recipe to use for model
     #   training. This is required when `performAutoML` is false. For
@@ -1604,6 +1687,7 @@ module Aws::Personalize
       :name,
       :perform_hpo,
       :perform_auto_ml,
+      :perform_auto_training,
       :recipe_arn,
       :dataset_group_arn,
       :event_type,
@@ -4212,7 +4296,7 @@ module Aws::Personalize
     end
 
     # @!attribute [rw] resource_arn
-    #   The resource's Amazon Resource Name.
+    #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListTagsForResourceRequest AWS API Documentation
@@ -4850,8 +4934,26 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # An object that provides information about a solution. A solution is a
-    # trained model that can be deployed as a campaign.
+    # After you create a solution, you can’t change its configuration. By
+    # default, all new solutions use automatic training. With automatic
+    # training, you incur training costs while your solution is active. You
+    # can't stop automatic training for a solution. To avoid unnecessary
+    # costs, make sure to delete the solution when you are finished. For
+    # information about training costs, see [Amazon Personalize pricing][1].
+    #
+    # An object that provides information about a solution. A solution
+    # includes the custom recipe, customized parameters, and trained models
+    # (Solution Versions) that Amazon Personalize uses to generate
+    # recommendations.
+    #
+    # After you create a solution, you can’t change its configuration. If
+    # you need to make changes, you can [clone the solution][2] with the
+    # Amazon Personalize console or create a new one.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/personalize/pricing/
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/cloning-solution.html
     #
     # @!attribute [rw] name
     #   The name of the solution.
@@ -4879,6 +4981,19 @@ module Aws::Personalize
     #
     #
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] perform_auto_training
+    #   Specifies whether the solution automatically creates solution
+    #   versions. The default is `True` and the solution automatically
+    #   creates new solution versions every 7 days.
+    #
+    #   For more information about auto training, see [Creating and
+    #   configuring a solution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html
     #   @return [Boolean]
     #
     # @!attribute [rw] recipe_arn
@@ -4937,6 +5052,7 @@ module Aws::Personalize
       :solution_arn,
       :perform_hpo,
       :perform_auto_ml,
+      :perform_auto_training,
       :recipe_arn,
       :dataset_group_arn,
       :event_type,
@@ -4993,6 +5109,10 @@ module Aws::Personalize
     #   custom solution version (trained model).
     #   @return [Types::TrainingDataConfig]
     #
+    # @!attribute [rw] auto_training_config
+    #   Specifies the automatic training configuration to use.
+    #   @return [Types::AutoTrainingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionConfig AWS API Documentation
     #
     class SolutionConfig < Struct.new(
@@ -5002,7 +5122,8 @@ module Aws::Personalize
       :feature_transformation_parameters,
       :auto_ml_config,
       :optimization_objective,
-      :training_data_config)
+      :training_data_config,
+      :auto_training_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5114,22 +5235,10 @@ module Aws::Personalize
     #
     # @!attribute [rw] training_mode
     #   The scope of training to be performed when creating the solution
-    #   version. The `FULL` option trains the solution version based on the
-    #   entirety of the input solution's training data, while the `UPDATE`
-    #   option processes only the data that has changed in comparison to the
-    #   input solution. Choose `UPDATE` when you want to incrementally
-    #   update your solution version instead of creating an entirely new
-    #   one.
-    #
-    #   The `UPDATE` option can only be used when you already have an active
-    #   solution version created from the input solution using the `FULL`
-    #   option and the input solution was trained with the
-    #   [User-Personalization][1] recipe or the [HRNN-Coldstart][2] recipe.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
-    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
+    #   version. A `FULL` training considers all of the data in your dataset
+    #   group. An `UPDATE` processes only the data that has changed since
+    #   the latest training. Only solution versions created with the
+    #   User-Personalization recipe can use `UPDATE`.
     #   @return [String]
     #
     # @!attribute [rw] tuned_hpo_params
@@ -5168,6 +5277,10 @@ module Aws::Personalize
     #   The date and time (in Unix time) that the solution was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] training_type
+    #   Whether the solution version was created automatically or manually.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionVersion AWS API Documentation
     #
     class SolutionVersion < Struct.new(
@@ -5186,7 +5299,8 @@ module Aws::Personalize
       :status,
       :failure_reason,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :training_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5213,6 +5327,18 @@ module Aws::Personalize
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] training_mode
+    #   The scope of training to be performed when creating the solution
+    #   version. A `FULL` training considers all of the data in your dataset
+    #   group. An `UPDATE` processes only the data that has changed since
+    #   the latest training. Only solution versions created with the
+    #   User-Personalization recipe can use `UPDATE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_type
+    #   Whether the solution version was created automatically or manually.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date_time
     #   The date and time (in Unix time) that this version of a solution was
     #   created.
@@ -5232,6 +5358,8 @@ module Aws::Personalize
     class SolutionVersionSummary < Struct.new(
       :solution_version_arn,
       :status,
+      :training_mode,
+      :training_type,
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
@@ -5303,7 +5431,7 @@ module Aws::Personalize
     # The optional metadata that you apply to resources to help you
     # categorize and organize them. Each tag consists of a key and an
     # optional value, both of which you define. For more information see
-    # [Tagging Amazon Personalize recources][1].
+    # [Tagging Amazon Personalize resources][1].
     #
     #
     #
@@ -5334,7 +5462,7 @@ module Aws::Personalize
     #
     # @!attribute [rw] tags
     #   Tags to apply to the resource. For more information see [Tagging
-    #   Amazon Personalize recources][1].
+    #   Amazon Personalize resources][1].
     #
     #
     #
@@ -5405,10 +5533,11 @@ module Aws::Personalize
     #   Specifies the columns to exclude from training. Each key is a
     #   dataset type, and each value is a list of columns. Exclude columns
     #   to control what data Amazon Personalize uses to generate
-    #   recommendations. For example, you might have a column that you want
-    #   to use only to filter recommendations. You can exclude this column
-    #   from training and Amazon Personalize considers it only when
-    #   filtering.
+    #   recommendations.
+    #
+    #   For example, you might have a column that you want to use only to
+    #   filter recommendations. You can exclude this column from training
+    #   and Amazon Personalize considers it only when filtering.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/TrainingDataConfig AWS API Documentation
@@ -5439,7 +5568,7 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   Keys to remove from the resource's tags.
+    #   The keys of the tags to be removed.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UntagResourceRequest AWS API Documentation
@@ -5460,7 +5589,22 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] solution_version_arn
-    #   The ARN of a new solution version to deploy.
+    #   The Amazon Resource Name (ARN) of a new model to deploy. To specify
+    #   the latest solution version of your solution, specify the ARN of
+    #   your *solution* in `SolutionArn/$LATEST` format. You must use this
+    #   format if you set `syncWithLatestSolutionVersion` to `True` in the
+    #   [CampaignConfig][1].
+    #
+    #   To deploy a model that isn't the latest solution version of your
+    #   solution, specify the ARN of the solution version.
+    #
+    #   For more information about automatic campaign updates, see [Enabling
+    #   automatic campaign updates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update
     #   @return [String]
     #
     # @!attribute [rw] min_provisioned_tps

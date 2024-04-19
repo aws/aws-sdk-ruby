@@ -3713,6 +3713,7 @@ module Aws
         def resource_arn: () -> ::String
         def is_protected: () -> bool
         def permissions: () -> ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
+        def row_filter: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_unfiltered_table_metadata-instance_method
       def get_unfiltered_table_metadata: (

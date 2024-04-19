@@ -11891,6 +11891,7 @@ module Aws::Glue
     #   * {Types::GetUnfilteredTableMetadataResponse#resource_arn #resource_arn} => String
     #   * {Types::GetUnfilteredTableMetadataResponse#is_protected #is_protected} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#permissions #permissions} => Array&lt;String&gt;
+    #   * {Types::GetUnfilteredTableMetadataResponse#row_filter #row_filter} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -12015,6 +12016,7 @@ module Aws::Glue
     #   resp.is_protected #=> Boolean
     #   resp.permissions #=> Array
     #   resp.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.row_filter #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadata AWS API Documentation
     #
@@ -17119,7 +17121,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.170.0'
+      context[:gem_version] = '1.171.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

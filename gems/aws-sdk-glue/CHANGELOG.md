@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2024-04-19)
+------------------
+
+* Feature - Adding RowFilter in the response for GetUnfilteredTableMetadata API
+
 1.170.0 (2024-04-12)
 ------------------
 
