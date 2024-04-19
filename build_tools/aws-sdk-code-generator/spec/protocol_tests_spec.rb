@@ -8,7 +8,7 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
     ProtocolTestsHelper.engines_for(protocol).each do |engine|
 
       context "Engine: #{engine}" do
-        before(:all) { ProtocolTestsHelper.set_engine(protocol, engine) }
+        before(:all) { ProtocolTestsHelper.set_engine(self, protocol, engine) }
 
         describe 'input tests' do
           ProtocolTestsHelper.each_test_case(self, files['input']) do |group, suite, test_case, test_id, description|

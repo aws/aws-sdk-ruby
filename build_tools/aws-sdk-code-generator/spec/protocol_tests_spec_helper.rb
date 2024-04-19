@@ -101,7 +101,7 @@ module ProtocolTestsHelper
       end
     end
 
-    def set_engine(protocol, engine)
+    def set_engine(context, protocol, engine)
       adapter_class =
         case protocol
         when /json/, /api-gateway/
@@ -113,10 +113,9 @@ module ProtocolTestsHelper
         else
           raise "unsupported protocol: #{protocol}"
         end
-      puts "setting engine: #{engine}"
       adapter_class.engine = engine
     rescue LoadError
-      skip "Skipping tests for missing engine: #{engine}"
+      context.skip "Skipping tests for missing engine: #{engine}"
     end
 
     # formats response data
