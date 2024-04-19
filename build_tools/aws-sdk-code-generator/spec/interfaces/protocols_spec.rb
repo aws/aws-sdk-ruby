@@ -49,7 +49,7 @@ describe 'Protocols Resolution:' do
   context 'without smithy rpc protocol support' do
     before do
       protocols = AwsSdkCodeGenerator::Service::SUPPORTED_PROTOCOLS
-      protocols.reject! { |p| p == 'smithy-rpc-v2-cbor' }
+      protocols = protocols.reject { |p| p == 'smithy-rpc-v2-cbor' }
       stub_const('AwsSdkCodeGenerator::Service::SUPPORTED_PROTOCOLS', protocols)
     end
 
