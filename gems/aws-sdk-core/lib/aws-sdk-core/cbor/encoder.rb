@@ -42,7 +42,7 @@ module Aws
         when Time
           add_time(value)
         else
-          raise UnknownTypeError.new(value)
+          raise UnknownTypeError, value
         end
         self
       end
@@ -87,22 +87,24 @@ module Aws
 
       # streaming style, lower level interface
       def add_integer(value)
-        major_type = if value.negative?
-                       value = -1 - value
-                       MAJOR_TYPE_NEGATIVE_INT
-                     else
-                       MAJOR_TYPE_UNSIGNED_INT
-                     end
+        major_type =
+          if value.negative?
+            value = -1 - value
+            MAJOR_TYPE_NEGATIVE_INT
+          else
+            MAJOR_TYPE_UNSIGNED_INT
+          end
         head(major_type, value)
       end
 
       def add_bignum(value)
-        major_type = if value.negative?
-                       value = -1 - value
-                       MAJOR_TYPE_NEGATIVE_INT
-                     else
-                       MAJOR_TYPE_UNSIGNED_INT
-                     end
+        major_type =
+          if value.negative?
+            value = -1 - value
+            MAJOR_TYPE_NEGATIVE_INT
+          else
+            MAJOR_TYPE_UNSIGNED_INT
+          end
         s = bignum_to_bytes(value)
         head(MAJOR_TYPE_TAG, TAG_BIGNUM_BASE + (major_type >> 5))
         head(MAJOR_TYPE_BYTE_STR, s.bytesize)
@@ -118,12 +120,13 @@ module Aws
       end
 
       def add_auto_integer(value)
-        major_type = if value.negative?
-                       value = -1 - value
-                       MAJOR_TYPE_NEGATIVE_INT
-                     else
-                       MAJOR_TYPE_UNSIGNED_INT
-                     end
+        major_type =
+          if value.negative?
+            value = -1 - value
+            MAJOR_TYPE_NEGATIVE_INT
+          else
+            MAJOR_TYPE_UNSIGNED_INT
+          end
 
         if value >= MAX_INTEGER
           s = bignum_to_bytes(value)

@@ -8,14 +8,7 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
     ProtocolTestsHelper.engines_for(protocol).each do |engine|
 
       context "Engine: #{engine}" do
-        before(:all) do
-          engine_interface = ProtocolTestsHelper.engine_interface_for(protocol)
-          begin
-            engine_interface.engine = engine
-          rescue LoadError
-            skip "Skipping tests for missing engine: #{engine}"
-          end
-        end
+        before(:all) { ProtocolTestsHelper.set_engine(protocol, engine) }
 
         describe 'input tests' do
           ProtocolTestsHelper.each_test_case(self, files['input']) do |group, suite, test_case, test_id, description|

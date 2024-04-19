@@ -13,7 +13,7 @@ module Aws
 
     class UnknownTypeError < CborError
       def initialize(type)
-        super("Unable to encode #{value}")
+        super("Unable to encode #{type}")
       end
     end
 

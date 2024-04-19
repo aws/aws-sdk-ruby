@@ -4,7 +4,6 @@ module Aws
   module Cbor
     # Pure Ruby implementation of CBOR Decoder
     class Decoder
-
       def initialize(bytes)
         @buffer = bytes
         @pos = 0
@@ -61,7 +60,7 @@ module Aws
           when TAG_TYPE_EPOCH
             type = peek_type
             item = decode_item
-            item = item / 1000.0 if type == :integer
+            item /= 1000.0 if type == :integer
             Time.at(item)
           # TODO: Consider handling of  BigDecimal, ect
           else
@@ -263,7 +262,7 @@ module Aws
         when 27 then take(8).unpack1('Q>')
         when 28 then take(16).unpack1('Q>')
         when 29 then take(32).unpack1('Q>')
-        else raise UnexpectedAdditionalInformationError.new(add_info)
+        else raise UnexpectedAdditionalInformationError, add_info
         end
       end
 

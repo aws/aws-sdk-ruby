@@ -10,6 +10,7 @@ module ProtocolTestsHelper
       @ignore_list ||= JSON.parse(File.read(PROTOCOL_TESTS_IGNORE_LIST_PATH))
     end
 
+    # The format for the ignore list:
     #   "protocol" : {
     #     "input" : {},
     #     "output" : {
@@ -17,8 +18,8 @@ module ProtocolTestsHelper
     #     }
     #   },
     def skip_test_if_ignored(protocol, test_type, engine, test_id, it)
-      if (_test_id, description = check_ignore_list(protocol, test_type, engine, test_id))
-        it.skip(description)
+      if (test_id, description = check_ignore_list(protocol, test_type, engine, test_id))
+        it.skip("ID: #{test_id} - #{description}")
       end
     end
 
@@ -100,17 +101,22 @@ module ProtocolTestsHelper
       end
     end
 
-    def engine_interface_for(protocol)
-      case protocol
-      when /json/, /api-gateway/
-        Aws::Json
-      when /xml/, /ec2/, /query/
-        Aws::Xml::Parser
-      when /smithy-rpc-v2-cbor/
-        Aws::Cbor
-      else
-        raise "unsupported protocol: #{protocol}"
-      end
+    def set_engine(protocol, engine)
+      adapter_class =
+        case protocol
+        when /json/, /api-gateway/
+          Aws::Json
+        when /xml/, /ec2/, /query/
+          Aws::Xml::Parser
+        when /smithy-rpc-v2-cbor/
+          Aws::Cbor
+        else
+          raise "unsupported protocol: #{protocol}"
+        end
+      puts "setting engine: #{engine}"
+      adapter_class.engine = engine
+    rescue LoadError
+      skip "Skipping tests for missing engine: #{engine}"
     end
 
     # formats response data
