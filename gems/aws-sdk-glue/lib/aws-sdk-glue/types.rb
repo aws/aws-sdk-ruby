@@ -12227,6 +12227,13 @@ module Aws::Glue
     #   to authorize the call when no view context is found.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] row_filter
+    #   The filter that applies to the table. For example when applying the
+    #   filter in SQL, it would go in the `WHERE` clause and can be
+    #   evaluated by using an `AND` operator with any other predicates
+    #   applied by the user querying the table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadataResponse AWS API Documentation
     #
     class GetUnfilteredTableMetadataResponse < Struct.new(
@@ -12238,7 +12245,8 @@ module Aws::Glue
       :is_multi_dialect_view,
       :resource_arn,
       :is_protected,
-      :permissions)
+      :permissions,
+      :row_filter)
       SENSITIVE = []
       include Aws::Structure
     end

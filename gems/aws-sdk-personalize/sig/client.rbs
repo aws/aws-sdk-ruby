@@ -157,7 +157,8 @@ module Aws
                              ?min_provisioned_tps: ::Integer,
                              ?campaign_config: {
                                item_exploration_config: Hash[::String, ::String]?,
-                               enable_metadata_with_recommendations: bool?
+                               enable_metadata_with_recommendations: bool?,
+                               sync_with_latest_solution_version: bool?
                              },
                              ?tags: Array[
                                {
@@ -363,6 +364,7 @@ module Aws
                              name: ::String,
                              ?perform_hpo: bool,
                              ?perform_auto_ml: bool,
+                             ?perform_auto_training: bool,
                              ?recipe_arn: ::String,
                              dataset_group_arn: ::String,
                              ?event_type: ::String,
@@ -413,6 +415,9 @@ module Aws
                                }?,
                                training_data_config: {
                                  excluded_dataset_columns: Hash[::String, Array[::String]]?
+                               }?,
+                               auto_training_config: {
+                                 scheduling_expression: ::String?
                                }?
                              },
                              ?tags: Array[
@@ -432,7 +437,7 @@ module Aws
       def create_solution_version: (
                                      ?name: ::String,
                                      solution_arn: ::String,
-                                     ?training_mode: ("FULL" | "UPDATE"),
+                                     ?training_mode: ("FULL" | "UPDATE" | "AUTOTRAIN"),
                                      ?tags: Array[
                                        {
                                          tag_key: ::String,
@@ -956,7 +961,8 @@ module Aws
                              ?min_provisioned_tps: ::Integer,
                              ?campaign_config: {
                                item_exploration_config: Hash[::String, ::String]?,
-                               enable_metadata_with_recommendations: bool?
+                               enable_metadata_with_recommendations: bool?,
+                               sync_with_latest_solution_version: bool?
                              }
                            ) -> _UpdateCampaignResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCampaignResponseSuccess

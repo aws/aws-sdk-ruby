@@ -3054,6 +3054,7 @@ module Aws::Glue
       attr_accessor resource_arn: ::String
       attr_accessor is_protected: bool
       attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
+      attr_accessor row_filter: ::String
       SENSITIVE: []
     end
 

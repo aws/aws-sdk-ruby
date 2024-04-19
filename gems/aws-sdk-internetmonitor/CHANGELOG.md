@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2024-04-19)
+------------------
+
+* Feature - This update introduces the GetInternetEvent and ListInternetEvents APIs, which provide access to internet events displayed on the Amazon CloudWatch Internet Weather Map.
+
 1.16.0 (2024-03-29)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2024-04-19)
+------------------
+
+* Feature - This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign
+
 1.59.0 (2024-01-26)
 ------------------
 

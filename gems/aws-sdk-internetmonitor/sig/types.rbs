@@ -25,6 +25,18 @@ module Aws::InternetMonitor
       SENSITIVE: []
     end
 
+    class ClientLocation
+      attr_accessor as_name: ::String
+      attr_accessor as_number: ::Integer
+      attr_accessor country: ::String
+      attr_accessor subdivision: ::String
+      attr_accessor metro: ::String
+      attr_accessor city: ::String
+      attr_accessor latitude: ::Float
+      attr_accessor longitude: ::Float
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -82,6 +94,22 @@ module Aws::InternetMonitor
       attr_accessor percent_of_total_traffic_impacted: ::Float
       attr_accessor impact_type: ("AVAILABILITY" | "PERFORMANCE" | "LOCAL_AVAILABILITY" | "LOCAL_PERFORMANCE")
       attr_accessor health_score_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class GetInternetEventInput
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInternetEventOutput
+      attr_accessor event_id: ::String
+      attr_accessor event_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor client_location: Types::ClientLocation
+      attr_accessor event_type: ("AVAILABILITY" | "PERFORMANCE")
+      attr_accessor event_status: ("ACTIVE" | "RESOLVED")
       SENSITIVE: []
     end
 
@@ -186,6 +214,17 @@ module Aws::InternetMonitor
       SENSITIVE: []
     end
 
+    class InternetEventSummary
+      attr_accessor event_id: ::String
+      attr_accessor event_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor client_location: Types::ClientLocation
+      attr_accessor event_type: ("AVAILABILITY" | "PERFORMANCE")
+      attr_accessor event_status: ("ACTIVE" | "RESOLVED")
+      SENSITIVE: []
+    end
+
     class InternetHealth
       attr_accessor availability: Types::AvailabilityMeasurement
       attr_accessor performance: Types::PerformanceMeasurement
@@ -215,6 +254,22 @@ module Aws::InternetMonitor
 
     class ListHealthEventsOutput
       attr_accessor health_events: ::Array[Types::HealthEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInternetEventsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor event_status: ::String
+      attr_accessor event_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListInternetEventsOutput
+      attr_accessor internet_events: ::Array[Types::InternetEventSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
