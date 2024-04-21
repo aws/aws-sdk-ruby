@@ -99,15 +99,9 @@ module AwsSdkCodeGenerator
             ).to_s
           end
           param_hash_str = Docstring.join_docstrings([option_tags], block_comment: false)
-          param_hash =
-            if param_hash_str.nil?
-              '# This event has no members'
-            else
-              Docstring.indent(param_hash_str, '      ')
-            end
           m << EventEntry.new(
             name: underscore(n),
-            param_hash: param_hash
+            param_hash: Docstring.indent(param_hash_str, '      ')
           )
           m
         end
