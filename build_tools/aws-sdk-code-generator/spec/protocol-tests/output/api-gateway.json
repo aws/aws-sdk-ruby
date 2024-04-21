@@ -1,0 +1,653 @@
+[
+  {
+    "description": "Test cases for Scalar Payload Members",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "StringMember": {
+            "shape": "__string"
+          },
+          "IntegerMember": {
+            "shape": "__integer"
+          },
+          "NumberMember": {
+            "shape": "__double"
+          },
+          "DateMember": {
+            "shape": "__timestamp"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      },
+      "__integer": {
+        "type": "integer"
+      },
+      "__double": {
+        "type": "double"
+      },
+      "__timestamp": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayUnmarshallsScalarPayloadMembers",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "Scalar members in payload are unmarshalled correctly",
+        "result": {
+          "PayloadMember": {
+            "StringMember": "foo",
+            "IntegerMember": 123,
+            "NumberMember": 9000.1,
+            "DateMember": 1422172801
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body":  "{\"StringMember\": \"foo\", \"IntegerMember\": 123, \"NumberMember\": 9000.1, \"DateMember\":\"2015-01-25T08:00:01.000Z\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Boolean Member",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "BooleanMemberA": {
+            "shape": "__boolean"
+          },
+          "BooleanMemberB": {
+            "shape": "__boolean"
+          }
+        }
+      },
+      "__boolean": {
+        "type": "boolean"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayUnmarshallsBooleanMember",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "Boolean member with value in payload is unmarshalled correctly",
+        "result": {
+          "BooleanMemberA": true,
+          "BooleanMemberB": false
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"BooleanMemberA\": true, \"BooleanMemberB\": false}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Struct Payload Member ",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "NestedStructure": {
+            "shape": "NestedStructure"
+          }
+        }
+      },
+      "NestedStructure": {
+        "type": "structure",
+        "members": {
+          "StringMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayUnmarshallsNestedStructPayload",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "Nested structure in payload is unmarshalled correctly",
+        "result": {
+          "PayloadMember": {
+            "NestedStructure": {
+              "StringMember": "foo"
+            }
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"NestedStructure\": {\"StringMember\": \"foo\"}}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for List of Strings Payload",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "ListOfStrings": {
+            "shape": "ListOfStrings"
+          }
+        }
+      },
+      "ListOfStrings": {
+        "type": "list",
+        "member": {
+          "shape": "__string"
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayUnmarshallListofStringsPayload",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "List of strings in payload is unmarshalled correctly",
+        "result": {
+          "PayloadMember": {
+            "ListOfStrings": [
+              "a",
+              "b",
+              null
+            ]
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"ListOfStrings\": [\"a\", \"b\", null]}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for List of Structs Payload",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "ListOfStructs": {
+            "shape": "ListOfStructs"
+          }
+        }
+      },
+      "ListOfStructs": {
+        "type": "list",
+        "member": {
+          "shape": "ScalarTypes"
+        }
+      },
+      "ScalarTypes": {
+        "type": "structure",
+        "members": {
+          "StringMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayUnmarshallListofStructsPayload",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "List of structs in payload is unmarshalled correctly",
+        "result": {
+          "PayloadMember": {
+            "ListOfStructs": [
+              {
+                "StringMember": "foo"
+              },
+              null,
+              {}
+            ]
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"ListOfStructs\": [{\"StringMember\": \"foo\"}, null, {}]}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Recursive structure with no recursion member",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "RecursiveMember": {
+            "shape": "RecursiveMember"
+          }
+        }
+      },
+      "RecursiveMember": {
+        "type": "structure",
+        "members": {
+          "NoRecursiveMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayUnmarshallRecursiveStructWithNoRecursionMember",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "Recursive structure with no recursion used is unmarshalled correctly",
+        "result": {
+          "PayloadMember": {
+            "RecursiveMember": {
+              "NoRecursiveMember": "foo"
+            }
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"RecursiveMember\": {\"NoRecursiveMember\": \"foo\"}}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Recursive structure with recursion member",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "RecursiveStructure": {
+            "shape": "RecursiveStructure"
+          }
+        },
+        "payload": "RecursiveStructure"
+      },
+      "RecursiveStructure": {
+        "type": "structure",
+        "members": {
+          "RecursiveMember": {
+            "shape": "AnotherRecursiveMember"
+          }
+        }
+      },
+      "AnotherRecursiveMember": {
+        "type": "structure",
+        "members": {
+          "RecursiveMember": {
+            "shape": "RecursiveMember"
+          }
+        }
+      },
+      "RecursiveMember": {
+        "type": "structure",
+        "members": {
+          "NoRecursiveMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayUnmarshallRecrusiveStructwithRecursionMember",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "Recursive structure with multiple levels of recursion is unmarshalled correctly",
+        "result": {
+          "PayloadMember": {
+            "RecursiveStructure": {
+              "RecursiveMember": {
+                "RecursiveMember": {
+                  "NoRecursiveMember": "foo"
+                }
+              }
+            }
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"RecursiveStructure\": {\"RecursiveMember\": {\"RecursiveMember\": {\"NoRecursiveMember\": \"foo\"}}}}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for No Output Defined",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayNoOutput",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          }
+        },
+        "description": "Operation with no output defined ignores any content in body",
+        "result": {
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "THIS ISN'T JSON!!!"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Unmodeled Data",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "NotFoo": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayUnmodeledDataIsIgnored",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "Unmodeled data is ignored",
+        "result": {
+          "PayloadMember": {}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"foo\": \"bar\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for No Headers",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "HeaderMemberOne": {
+            "shape": "__string",
+            "location": "header",
+            "locationName": "x-apig-header-string-one"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayNoHeaders",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "No headers present, does not set modeled header member",
+        "result": {
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": ""
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Multiple Modeled Headers",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "HeaderMemberOne": {
+            "shape": "__string",
+            "location": "header",
+            "locationName": "x-apig-header-string-one"
+          },
+          "HeaderMemberTwo": {
+            "shape": "__string",
+            "location": "header",
+            "locationName": "x-apig-header-string-two"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayMultipleHeaders",
+        "given": {
+          "name": "OperationName",
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "output": {
+            "shape": "OutputShape"
+          }
+        },
+        "description": "Multiple modeled headers in response, sets appropriate header members",
+        "result": {
+          "HeaderMemberOne": "valueOne",
+          "HeaderMemberTwo": "valueTwo"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {
+            "x-apig-header-string-one": "valueOne",
+            "x-apig-header-string-two": "valueTwo"
+          },
+          "body": ""
+        }
+      }
+    ]
+  }
+]
