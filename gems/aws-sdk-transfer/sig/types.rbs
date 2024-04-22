@@ -977,6 +977,20 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class StartDirectoryListingRequest
+      attr_accessor connector_id: ::String
+      attr_accessor remote_directory_path: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor output_directory_path: ::String
+      SENSITIVE: []
+    end
+
+    class StartDirectoryListingResponse
+      attr_accessor listing_id: ::String
+      attr_accessor output_file_name: ::String
+      SENSITIVE: []
+    end
+
     class StartFileTransferRequest
       attr_accessor connector_id: ::String
       attr_accessor send_file_paths: ::Array[::String]

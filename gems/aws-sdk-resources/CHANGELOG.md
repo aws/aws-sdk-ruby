@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.192.0 (2024-04-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-route53profiles` gem.
+
 3.191.0 (2024-04-08)
 ------------------
 

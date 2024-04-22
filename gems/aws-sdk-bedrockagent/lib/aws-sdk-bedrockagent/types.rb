@@ -79,6 +79,11 @@ module Aws::BedrockAgent
     #
     # @note ActionGroupExecutor is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ActionGroupExecutor corresponding to the set member.
     #
+    # @!attribute [rw] custom_control
+    #   To return the action group invocation results directly in the
+    #   `InvokeAgent` response, specify `RETURN_CONTROL`.
+    #   @return [String]
+    #
     # @!attribute [rw] lambda
     #   The Amazon Resource Name (ARN) of the Lambda function containing the
     #   business logic that is carried out upon invoking the action.
@@ -87,12 +92,14 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ActionGroupExecutor AWS API Documentation
     #
     class ActionGroupExecutor < Struct.new(
+      :custom_control,
       :lambda,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class CustomControl < ActionGroupExecutor; end
       class Lambda < ActionGroupExecutor; end
       class Unknown < ActionGroupExecutor; end
     end
@@ -335,6 +342,12 @@ module Aws::BedrockAgent
     #   The description of the action group.
     #   @return [String]
     #
+    # @!attribute [rw] function_schema
+    #   Defines functions that each define parameters that the agent needs
+    #   to invoke from the user. Each function represents an action in an
+    #   action group.
+    #   @return [Types::FunctionSchema]
+    #
     # @!attribute [rw] parent_action_signature
     #   If this field is set as `AMAZON.UserInput`, the agent can request
     #   the user for additional information when trying to complete a task.
@@ -369,6 +382,7 @@ module Aws::BedrockAgent
       :client_token,
       :created_at,
       :description,
+      :function_schema,
       :parent_action_signature,
       :updated_at)
       SENSITIVE = []
@@ -975,6 +989,11 @@ module Aws::BedrockAgent
     #   A description of the action group.
     #   @return [String]
     #
+    # @!attribute [rw] function_schema
+    #   Contains details about the function schema for the action group or
+    #   the JSON or YAML-formatted payload defining the schema.
+    #   @return [Types::FunctionSchema]
+    #
     # @!attribute [rw] parent_action_group_signature
     #   To allow your agent to request the user for additional information
     #   when trying to complete a task, set this field to
@@ -1003,6 +1022,7 @@ module Aws::BedrockAgent
       :api_schema,
       :client_token,
       :description,
+      :function_schema,
       :parent_action_group_signature)
       SENSITIVE = []
       include Aws::Structure
@@ -1707,6 +1727,97 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Defines parameters that the agent needs to invoke from the user to
+    # complete the function. Corresponds to an action in an action group.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [CreateAgentActionGroup request][1]
+    #
+    # * [CreateAgentActionGroup response][2]
+    #
+    # * [UpdateAgentActionGroup request][3]
+    #
+    # * [UpdateAgentActionGroup response][4]
+    #
+    # * [GetAgentActionGroup response][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
+    # [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+    #
+    # @!attribute [rw] description
+    #   A description of the function and its purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters that the agent elicits from the user to fulfill the
+    #   function.
+    #   @return [Hash<String,Types::ParameterDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/Function AWS API Documentation
+    #
+    class Function < Struct.new(
+      :description,
+      :name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines functions that each define parameters that the agent needs to
+    # invoke from the user. Each function represents an action in an action
+    # group.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [CreateAgentActionGroup request][1]
+    #
+    # * [CreateAgentActionGroup response][2]
+    #
+    # * [UpdateAgentActionGroup request][3]
+    #
+    # * [UpdateAgentActionGroup response][4]
+    #
+    # * [GetAgentActionGroup response][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
+    # [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+    #
+    # @note FunctionSchema is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FunctionSchema is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FunctionSchema corresponding to the set member.
+    #
+    # @!attribute [rw] functions
+    #   A list of functions that each define an action in the action group.
+    #   @return [Array<Types::Function>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/FunctionSchema AWS API Documentation
+    #
+    class FunctionSchema < Struct.new(
+      :functions,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Functions < FunctionSchema; end
+      class Unknown < FunctionSchema; end
+    end
+
     # @!attribute [rw] action_group_id
     #   The unique identifier of the action group for which to get
     #   information.
@@ -2022,7 +2133,7 @@ module Aws::BedrockAgent
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax
-    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJob.html#API_agent_ListIngestionJob_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax
     #
     # @!attribute [rw] data_source_id
     #   The unique identifier of the ingested data source.
@@ -2864,6 +2975,52 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Contains details about a parameter in a function for an action group.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [CreateAgentActionGroup request][1]
+    #
+    # * [CreateAgentActionGroup response][2]
+    #
+    # * [UpdateAgentActionGroup request][3]
+    #
+    # * [UpdateAgentActionGroup response][4]
+    #
+    # * [GetAgentActionGroup response][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
+    # [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+    #
+    # @!attribute [rw] description
+    #   A description of the parameter. Helps the foundation model determine
+    #   how to elicit the parameters from the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Whether the parameter is required for the agent to complete the
+    #   function for action group invocation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The data type of the parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ParameterDetail AWS API Documentation
+    #
+    class ParameterDetail < Struct.new(
+      :description,
+      :required,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the storage configuration of the knowledge base
     # in Pinecone. For more information, see [Create a vector index in
     # Pinecone][1].
@@ -3509,6 +3666,11 @@ module Aws::BedrockAgent
     #   Specifies a new name for the action group.
     #   @return [String]
     #
+    # @!attribute [rw] function_schema
+    #   Contains details about the function schema for the action group or
+    #   the JSON or YAML-formatted payload defining the schema.
+    #   @return [Types::FunctionSchema]
+    #
     # @!attribute [rw] parent_action_group_signature
     #   To allow your agent to request the user for additional information
     #   when trying to complete a task, set this field to
@@ -3537,6 +3699,7 @@ module Aws::BedrockAgent
       :agent_version,
       :api_schema,
       :description,
+      :function_schema,
       :parent_action_group_signature)
       SENSITIVE = []
       include Aws::Structure

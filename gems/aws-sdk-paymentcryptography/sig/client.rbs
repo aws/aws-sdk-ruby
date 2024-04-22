@@ -90,25 +90,25 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#create_key-instance_method
       def create_key: (
-                        ?enabled: bool,
-                        exportable: bool,
                         key_attributes: {
-                          key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096"),
+                          key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY"),
                           key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY"),
+                          key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096"),
                           key_modes_of_use: {
-                            decrypt: bool?,
-                            derive_key: bool?,
                             encrypt: bool?,
-                            generate: bool?,
-                            no_restrictions: bool?,
-                            sign: bool?,
+                            decrypt: bool?,
+                            wrap: bool?,
                             unwrap: bool?,
+                            generate: bool?,
+                            sign: bool?,
                             verify: bool?,
-                            wrap: bool?
-                          },
-                          key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY")
+                            derive_key: bool?,
+                            no_restrictions: bool?
+                          }
                         },
                         ?key_check_value_algorithm: ("CMAC" | "ANSI_X9_24"),
+                        exportable: bool,
+                        ?enabled: bool,
                         ?tags: Array[
                           {
                             key: ::String,
@@ -133,8 +133,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#delete_key-instance_method
       def delete_key: (
-                        ?delete_key_in_days: ::Integer,
-                        key_identifier: ::String
+                        key_identifier: ::String,
+                        ?delete_key_in_days: ::Integer
                       ) -> _DeleteKeyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKeyResponseSuccess
 
@@ -144,29 +144,61 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#export_key-instance_method
       def export_key: (
+                        key_material: {
+                          tr_31_key_block: {
+                            wrapping_key_identifier: ::String,
+                            key_block_headers: {
+                              key_modes_of_use: {
+                                encrypt: bool?,
+                                decrypt: bool?,
+                                wrap: bool?,
+                                unwrap: bool?,
+                                generate: bool?,
+                                sign: bool?,
+                                verify: bool?,
+                                derive_key: bool?,
+                                no_restrictions: bool?
+                              }?,
+                              key_exportability: ("EXPORTABLE" | "NON_EXPORTABLE" | "SENSITIVE")?,
+                              key_version: ::String?,
+                              optional_blocks: Hash[::String, ::String]?
+                            }?
+                          }?,
+                          tr_34_key_block: {
+                            certificate_authority_public_key_identifier: ::String,
+                            wrapping_key_certificate: ::String,
+                            export_token: ::String,
+                            key_block_format: ("X9_TR34_2012"),
+                            random_nonce: ::String?,
+                            key_block_headers: {
+                              key_modes_of_use: {
+                                encrypt: bool?,
+                                decrypt: bool?,
+                                wrap: bool?,
+                                unwrap: bool?,
+                                generate: bool?,
+                                sign: bool?,
+                                verify: bool?,
+                                derive_key: bool?,
+                                no_restrictions: bool?
+                              }?,
+                              key_exportability: ("EXPORTABLE" | "NON_EXPORTABLE" | "SENSITIVE")?,
+                              key_version: ::String?,
+                              optional_blocks: Hash[::String, ::String]?
+                            }?
+                          }?,
+                          key_cryptogram: {
+                            certificate_authority_public_key_identifier: ::String,
+                            wrapping_key_certificate: ::String,
+                            wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")?
+                          }?
+                        },
+                        export_key_identifier: ::String,
                         ?export_attributes: {
                           export_dukpt_initial_key: {
                             key_serial_number: ::String
                           }?,
                           key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
-                        },
-                        export_key_identifier: ::String,
-                        key_material: {
-                          key_cryptogram: {
-                            certificate_authority_public_key_identifier: ::String,
-                            wrapping_key_certificate: ::String,
-                            wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")?
-                          }?,
-                          tr_31_key_block: {
-                            wrapping_key_identifier: ::String
-                          }?,
-                          tr_34_key_block: {
-                            certificate_authority_public_key_identifier: ::String,
-                            export_token: ::String,
-                            key_block_format: ("X9_TR34_2012"),
-                            random_nonce: ::String?,
-                            wrapping_key_certificate: ::String
-                          }?
                         }
                       ) -> _ExportKeyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportKeyResponseSuccess
@@ -193,11 +225,11 @@ module Aws
 
       interface _GetParametersForExportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetParametersForExportOutput]
-        def export_token: () -> ::String
-        def parameters_valid_until_timestamp: () -> ::Time
-        def signing_key_algorithm: () -> ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
         def signing_key_certificate: () -> ::String
         def signing_key_certificate_chain: () -> ::String
+        def signing_key_algorithm: () -> ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+        def export_token: () -> ::String
+        def parameters_valid_until_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#get_parameters_for_export-instance_method
       def get_parameters_for_export: (
@@ -208,11 +240,11 @@ module Aws
 
       interface _GetParametersForImportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetParametersForImportOutput]
-        def import_token: () -> ::String
-        def parameters_valid_until_timestamp: () -> ::Time
-        def wrapping_key_algorithm: () -> ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
         def wrapping_key_certificate: () -> ::String
         def wrapping_key_certificate_chain: () -> ::String
+        def wrapping_key_algorithm: () -> ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+        def import_token: () -> ::String
+        def parameters_valid_until_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#get_parameters_for_import-instance_method
       def get_parameters_for_import: (
@@ -238,83 +270,83 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#import_key-instance_method
       def import_key: (
-                        ?enabled: bool,
-                        ?key_check_value_algorithm: ("CMAC" | "ANSI_X9_24"),
                         key_material: {
-                          key_cryptogram: {
-                            exportable: bool,
-                            import_token: ::String,
-                            key_attributes: {
-                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096"),
-                              key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY"),
-                              key_modes_of_use: {
-                                decrypt: bool?,
-                                derive_key: bool?,
-                                encrypt: bool?,
-                                generate: bool?,
-                                no_restrictions: bool?,
-                                sign: bool?,
-                                unwrap: bool?,
-                                verify: bool?,
-                                wrap: bool?
-                              },
-                              key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY")
-                            },
-                            wrapped_key_cryptogram: ::String,
-                            wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")?
-                          }?,
                           root_certificate_public_key: {
                             key_attributes: {
-                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096"),
+                              key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY"),
                               key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY"),
+                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096"),
                               key_modes_of_use: {
-                                decrypt: bool?,
-                                derive_key: bool?,
                                 encrypt: bool?,
-                                generate: bool?,
-                                no_restrictions: bool?,
-                                sign: bool?,
+                                decrypt: bool?,
+                                wrap: bool?,
                                 unwrap: bool?,
+                                generate: bool?,
+                                sign: bool?,
                                 verify: bool?,
-                                wrap: bool?
-                              },
-                              key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY")
+                                derive_key: bool?,
+                                no_restrictions: bool?
+                              }
                             },
                             public_key_certificate: ::String
                           }?,
+                          trusted_certificate_public_key: {
+                            key_attributes: {
+                              key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY"),
+                              key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY"),
+                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096"),
+                              key_modes_of_use: {
+                                encrypt: bool?,
+                                decrypt: bool?,
+                                wrap: bool?,
+                                unwrap: bool?,
+                                generate: bool?,
+                                sign: bool?,
+                                verify: bool?,
+                                derive_key: bool?,
+                                no_restrictions: bool?
+                              }
+                            },
+                            public_key_certificate: ::String,
+                            certificate_authority_public_key_identifier: ::String
+                          }?,
                           tr_31_key_block: {
-                            wrapped_key_block: ::String,
-                            wrapping_key_identifier: ::String
+                            wrapping_key_identifier: ::String,
+                            wrapped_key_block: ::String
                           }?,
                           tr_34_key_block: {
                             certificate_authority_public_key_identifier: ::String,
-                            import_token: ::String,
-                            key_block_format: ("X9_TR34_2012"),
-                            random_nonce: ::String?,
                             signing_key_certificate: ::String,
-                            wrapped_key_block: ::String
+                            import_token: ::String,
+                            wrapped_key_block: ::String,
+                            key_block_format: ("X9_TR34_2012"),
+                            random_nonce: ::String?
                           }?,
-                          trusted_certificate_public_key: {
-                            certificate_authority_public_key_identifier: ::String,
+                          key_cryptogram: {
                             key_attributes: {
-                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096"),
+                              key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY"),
                               key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY"),
+                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096"),
                               key_modes_of_use: {
-                                decrypt: bool?,
-                                derive_key: bool?,
                                 encrypt: bool?,
-                                generate: bool?,
-                                no_restrictions: bool?,
-                                sign: bool?,
+                                decrypt: bool?,
+                                wrap: bool?,
                                 unwrap: bool?,
+                                generate: bool?,
+                                sign: bool?,
                                 verify: bool?,
-                                wrap: bool?
-                              },
-                              key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY")
+                                derive_key: bool?,
+                                no_restrictions: bool?
+                              }
                             },
-                            public_key_certificate: ::String
+                            exportable: bool,
+                            wrapped_key_cryptogram: ::String,
+                            import_token: ::String,
+                            wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")?
                           }?
                         },
+                        ?key_check_value_algorithm: ("CMAC" | "ANSI_X9_24"),
+                        ?enabled: bool,
                         ?tags: Array[
                           {
                             key: ::String,
@@ -331,8 +363,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#list_aliases-instance_method
       def list_aliases: (
-                          ?max_results: ::Integer,
-                          ?next_token: ::String
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
                         ) -> _ListAliasesResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAliasesResponseSuccess
 
@@ -344,21 +376,21 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#list_keys-instance_method
       def list_keys: (
                        ?key_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_COMPLETE"),
-                       ?max_results: ::Integer,
-                       ?next_token: ::String
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
                      ) -> _ListKeysResponseSuccess
                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeysResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
-        def next_token: () -> ::String
         def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#list_tags_for_resource-instance_method
       def list_tags_for_resource: (
-                                    ?max_results: ::Integer,
+                                    resource_arn: ::String,
                                     ?next_token: ::String,
-                                    resource_arn: ::String
+                                    ?max_results: ::Integer
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 

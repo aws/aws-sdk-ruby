@@ -808,6 +808,20 @@ module Aws
                                     ) -> _SendWorkflowStepStateResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendWorkflowStepStateResponseSuccess
 
+      interface _StartDirectoryListingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDirectoryListingResponse]
+        def listing_id: () -> ::String
+        def output_file_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#start_directory_listing-instance_method
+      def start_directory_listing: (
+                                     connector_id: ::String,
+                                     remote_directory_path: ::String,
+                                     ?max_items: ::Integer,
+                                     output_directory_path: ::String
+                                   ) -> _StartDirectoryListingResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDirectoryListingResponseSuccess
+
       interface _StartFileTransferResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartFileTransferResponse]
         def transfer_id: () -> ::String

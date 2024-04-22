@@ -146,6 +146,8 @@ module Aws::Transfer
             Aws::Transfer::Endpoints::ListWorkflows.build(context)
           when :send_workflow_step_state
             Aws::Transfer::Endpoints::SendWorkflowStepState.build(context)
+          when :start_directory_listing
+            Aws::Transfer::Endpoints::StartDirectoryListing.build(context)
           when :start_file_transfer
             Aws::Transfer::Endpoints::StartFileTransfer.build(context)
           when :start_server

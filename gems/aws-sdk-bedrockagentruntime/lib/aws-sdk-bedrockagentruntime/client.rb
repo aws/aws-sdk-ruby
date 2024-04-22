@@ -399,7 +399,8 @@ module Aws::BedrockAgentRuntime
 
     # @!group API Operations
 
-    # Sends a prompt for the agent to process and respond to.
+    # Sends a prompt for the agent to process and respond to. Use return
+    # control event type for function calling.
     #
     # <note markdown="1"> The CLI doesn't support `InvokeAgent`.
     #
@@ -416,8 +417,10 @@ module Aws::BedrockAgentRuntime
     #
     # * End a conversation by setting `endSession` to `true`.
     #
-    # * Include attributes for the session or prompt in the `sessionState`
-    #   object.
+    # * In the `sessionState` object, you can include attributes for the
+    #   session or prompt or parameters returned from the action group.
+    #
+    # * Use return control event type for function calling.
     #
     # The response is returned in the `bytes` field of the `chunk` object.
     #
@@ -450,7 +453,7 @@ module Aws::BedrockAgentRuntime
     # @option params [Boolean] :end_session
     #   Specifies whether to end the session with the agent or not.
     #
-    # @option params [required, String] :input_text
+    # @option params [String] :input_text
     #   The prompt text to send the agent.
     #
     # @option params [required, String] :session_id
@@ -535,6 +538,9 @@ module Aws::BedrockAgentRuntime
     #       handler.on_resource_not_found_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
     #       end
+    #       handler.on_return_control_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #       end
     #       handler.on_service_quota_exceeded_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
     #       end
@@ -574,6 +580,9 @@ module Aws::BedrockAgentRuntime
     #       end
     #       stream.on_resource_not_found_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #       end
+    #       stream.on_return_control_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
     #       end
     #       stream.on_service_quota_exceeded_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
@@ -615,6 +624,9 @@ module Aws::BedrockAgentRuntime
     #       handler.on_resource_not_found_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
     #       end
+    #       handler.on_return_control_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #       end
     #       handler.on_service_quota_exceeded_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
     #       end
@@ -652,12 +664,39 @@ module Aws::BedrockAgentRuntime
     #     agent_id: "AgentId", # required
     #     enable_trace: false,
     #     end_session: false,
-    #     input_text: "InputText", # required
+    #     input_text: "InputText",
     #     session_id: "SessionId", # required
     #     session_state: {
+    #       invocation_id: "String",
     #       prompt_session_attributes: {
     #         "String" => "String",
     #       },
+    #       return_control_invocation_results: [
+    #         {
+    #           api_result: {
+    #             action_group: "String", # required
+    #             api_path: "ApiPath",
+    #             http_method: "String",
+    #             http_status_code: 1,
+    #             response_body: {
+    #               "String" => {
+    #                 body: "String",
+    #               },
+    #             },
+    #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
+    #           },
+    #           function_result: {
+    #             action_group: "String", # required
+    #             function: "String",
+    #             response_body: {
+    #               "String" => {
+    #                 body: "String",
+    #               },
+    #             },
+    #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
+    #           },
+    #         },
+    #       ],
     #       session_attributes: {
     #         "String" => "String",
     #       },
@@ -668,7 +707,7 @@ module Aws::BedrockAgentRuntime
     #
     #   All events are available at resp.completion:
     #   resp.completion #=> Enumerator
-    #   resp.completion.event_types #=> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
+    #   resp.completion.event_types #=> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :internal_server_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
     #
     #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -702,6 +741,28 @@ module Aws::BedrockAgentRuntime
     #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
+    #   For :return_control event available at #on_return_control_event callback and response eventstream enumerator:
+    #   event.invocation_id #=> String
+    #   event.invocation_inputs #=> Array
+    #   event.invocation_inputs[0].api_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.invocation_inputs[0].api_invocation_input.parameters #=> Array
+    #   event.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
+    #   event.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
+    #   event.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
+    #   event.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].function_invocation_input.function #=> String
+    #   event.invocation_inputs[0].function_invocation_input.parameters #=> Array
+    #   event.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
+    #   event.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
+    #   event.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
+    #
     #   For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
@@ -711,11 +772,13 @@ module Aws::BedrockAgentRuntime
     #   For :trace event available at #on_trace_event callback and response eventstream enumerator:
     #   event.agent_alias_id #=> String
     #   event.agent_id #=> String
+    #   event.agent_version #=> String
     #   event.session_id #=> String
     #   event.trace.failure_trace.failure_reason #=> String
     #   event.trace.failure_trace.trace_id #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters #=> Array
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String

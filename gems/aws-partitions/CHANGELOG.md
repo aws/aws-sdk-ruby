@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.917.0 (2024-04-22)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Route53Profiles`.
+
 1.916.0 (2024-04-18)
 ------------------
 

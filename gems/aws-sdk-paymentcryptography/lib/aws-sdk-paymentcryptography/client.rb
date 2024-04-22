@@ -410,28 +410,32 @@ module Aws::PaymentCryptography
     # Services Region, but you can create another alias with the same name
     # in a different Amazon Web Services Region.
     #
-    # To change the key that's associated with the alias, call UpdateAlias.
-    # To delete the alias, call DeleteAlias. These operations don't affect
-    # the underlying key. To get the alias that you created, call
-    # ListAliases.
+    # To change the key that's associated with the alias, call
+    # [UpdateAlias][3]. To delete the alias, call [DeleteAlias][4]. These
+    # operations don't affect the underlying key. To get the alias that you
+    # created, call [ListAliases][5].
     #
     # **Cross-account use**: This operation can't be used across different
     # Amazon Web Services accounts.
     #
     # **Related operations:**
     #
-    # * DeleteAlias
+    # * [DeleteAlias][4]
     #
-    # * GetAlias
+    # * [GetAlias][6]
     #
-    # * ListAliases
+    # * [ListAliases][5]
     #
-    # * UpdateAlias
+    # * [UpdateAlias][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_EncryptData.html
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_DecryptData.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html
     #
     # @option params [required, String] :alias_name
     #   A friendly name that you can use to refer to a key. An alias must
@@ -503,23 +507,18 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * DeleteKey
+    # * [DeleteKey][2]
     #
-    # * GetKey
+    # * [GetKey][3]
     #
-    # * ListKeys
+    # * [ListKeys][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-    #
-    # @option params [Boolean] :enabled
-    #   Specifies whether to enable the key. If the key is enabled, it is
-    #   activated for use within the service. If the key is not enabled, then
-    #   it is created but not activated. The default value is enabled.
-    #
-    # @option params [required, Boolean] :exportable
-    #   Specifies whether the key is exportable from the service.
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetKey.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html
     #
     # @option params [required, Types::KeyAttributes] :key_attributes
     #   The role of the key, the algorithm it supports, and the cryptographic
@@ -537,11 +536,19 @@ module Aws::PaymentCryptography
     #   using a CMAC algorithm where the input data is 16 bytes of zero and
     #   retaining the 3 highest order bytes of the encrypted result.
     #
+    # @option params [required, Boolean] :exportable
+    #   Specifies whether the key is exportable from the service.
+    #
+    # @option params [Boolean] :enabled
+    #   Specifies whether to enable the key. If the key is enabled, it is
+    #   activated for use within the service. If the key is not enabled, then
+    #   it is created but not activated. The default value is enabled.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Assigns one or more tags to the Amazon Web Services Payment
     #   Cryptography key. Use this parameter to tag a key when it is created.
     #   To tag an existing Amazon Web Services Payment Cryptography key, use
-    #   the TagResource operation.
+    #   the [TagResource][1] operation.
     #
     #   Each tag consists of a tag key and a tag value. Both the tag key and
     #   the tag value are required, but the tag value can be an empty (null)
@@ -557,6 +564,10 @@ module Aws::PaymentCryptography
     #
     #    </note>
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
+    #
     # @return [Types::CreateKeyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateKeyOutput#key #key} => Types::Key
@@ -564,25 +575,25 @@ module Aws::PaymentCryptography
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_key({
-    #     enabled: false,
-    #     exportable: false, # required
     #     key_attributes: { # required
-    #       key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, RSA_2048, RSA_3072, RSA_4096
-    #       key_class: "SYMMETRIC_KEY", # required, accepts SYMMETRIC_KEY, ASYMMETRIC_KEY_PAIR, PRIVATE_KEY, PUBLIC_KEY
-    #       key_modes_of_use: { # required
-    #         decrypt: false,
-    #         derive_key: false,
-    #         encrypt: false,
-    #         generate: false,
-    #         no_restrictions: false,
-    #         sign: false,
-    #         unwrap: false,
-    #         verify: false,
-    #         wrap: false,
-    #       },
     #       key_usage: "TR31_B0_BASE_DERIVATION_KEY", # required, accepts TR31_B0_BASE_DERIVATION_KEY, TR31_C0_CARD_VERIFICATION_KEY, TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY, TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION, TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS, TR31_E1_EMV_MKEY_CONFIDENTIALITY, TR31_E2_EMV_MKEY_INTEGRITY, TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS, TR31_E5_EMV_MKEY_CARD_PERSONALIZATION, TR31_E6_EMV_MKEY_OTHER, TR31_K0_KEY_ENCRYPTION_KEY, TR31_K1_KEY_BLOCK_PROTECTION_KEY, TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT, TR31_M3_ISO_9797_3_MAC_KEY, TR31_M1_ISO_9797_1_MAC_KEY, TR31_M6_ISO_9797_5_CMAC_KEY, TR31_M7_HMAC_KEY, TR31_P0_PIN_ENCRYPTION_KEY, TR31_P1_PIN_GENERATION_KEY, TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE, TR31_V1_IBM3624_PIN_VERIFICATION_KEY, TR31_V2_VISA_PIN_VERIFICATION_KEY, TR31_K2_TR34_ASYMMETRIC_KEY
+    #       key_class: "SYMMETRIC_KEY", # required, accepts SYMMETRIC_KEY, ASYMMETRIC_KEY_PAIR, PRIVATE_KEY, PUBLIC_KEY
+    #       key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, RSA_2048, RSA_3072, RSA_4096
+    #       key_modes_of_use: { # required
+    #         encrypt: false,
+    #         decrypt: false,
+    #         wrap: false,
+    #         unwrap: false,
+    #         generate: false,
+    #         sign: false,
+    #         verify: false,
+    #         derive_key: false,
+    #         no_restrictions: false,
+    #       },
     #     },
     #     key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #     exportable: false, # required
+    #     enabled: false,
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -593,30 +604,30 @@ module Aws::PaymentCryptography
     #
     # @example Response structure
     #
-    #   resp.key.create_timestamp #=> Time
-    #   resp.key.delete_pending_timestamp #=> Time
-    #   resp.key.delete_timestamp #=> Time
-    #   resp.key.enabled #=> Boolean
-    #   resp.key.exportable #=> Boolean
     #   resp.key.key_arn #=> String
-    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
-    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
-    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
     #   resp.key.key_attributes.key_usage #=> String, one of "TR31_B0_BASE_DERIVATION_KEY", "TR31_C0_CARD_VERIFICATION_KEY", "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "TR31_E2_EMV_MKEY_INTEGRITY", "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "TR31_E6_EMV_MKEY_OTHER", "TR31_K0_KEY_ENCRYPTION_KEY", "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "TR31_M3_ISO_9797_3_MAC_KEY", "TR31_M1_ISO_9797_1_MAC_KEY", "TR31_M6_ISO_9797_5_CMAC_KEY", "TR31_M7_HMAC_KEY", "TR31_P0_PIN_ENCRYPTION_KEY", "TR31_P1_PIN_GENERATION_KEY", "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "TR31_V2_VISA_PIN_VERIFICATION_KEY", "TR31_K2_TR34_ASYMMETRIC_KEY"
+    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
+    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
     #   resp.key.key_check_value #=> String
     #   resp.key.key_check_value_algorithm #=> String, one of "CMAC", "ANSI_X9_24"
-    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.enabled #=> Boolean
+    #   resp.key.exportable #=> Boolean
     #   resp.key.key_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_COMPLETE"
+    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.create_timestamp #=> Time
     #   resp.key.usage_start_timestamp #=> Time
     #   resp.key.usage_stop_timestamp #=> Time
+    #   resp.key.delete_pending_timestamp #=> Time
+    #   resp.key.delete_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/CreateKey AWS API Documentation
     #
@@ -630,23 +641,31 @@ module Aws::PaymentCryptography
     # Deletes the alias, but doesn't affect the underlying key.
     #
     # Each key can have multiple aliases. To get the aliases of all keys,
-    # use the ListAliases operation. To change the alias of a key, first use
-    # DeleteAlias to delete the current alias and then use CreateAlias to
-    # create a new alias. To associate an existing alias with a different
-    # key, call UpdateAlias.
+    # use the [UpdateAlias][1] operation. To change the alias of a key,
+    # first use [DeleteAlias][2] to delete the current alias and then use
+    # [CreateAlias][3] to create a new alias. To associate an existing alias
+    # with a different key, call [UpdateAlias][1].
     #
     # **Cross-account use:** This operation can't be used across different
     # Amazon Web Services accounts.
     #
     # **Related operations:**
     #
-    # * CreateAlias
+    # * [CreateAlias][3]
     #
-    # * GetAlias
+    # * [GetAlias][4]
     #
-    # * ListAliases
+    # * [ListAliases][5]
     #
-    # * UpdateAlias
+    # * [UpdateAlias][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html
     #
     # @option params [required, String] :alias_name
     #   A friendly name that you can use to refer Amazon Web Services Payment
@@ -689,24 +708,30 @@ module Aws::PaymentCryptography
     # You should delete a key only when you are sure that you don't need to
     # use it anymore and no other parties are utilizing this key. If you
     # aren't sure, consider deactivating it instead by calling
-    # StopKeyUsage.
+    # [StopKeyUsage][1].
     #
     # **Cross-account use:** This operation can't be used across different
     # Amazon Web Services accounts.
     #
     # **Related operations:**
     #
-    # * RestoreKey
+    # * [RestoreKey][2]
     #
-    # * StartKeyUsage
+    # * [StartKeyUsage][3]
     #
-    # * StopKeyUsage
+    # * [StopKeyUsage][1]
     #
-    # @option params [Integer] :delete_key_in_days
-    #   The waiting period for key deletion. The default value is seven days.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_RestoreKey.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html
     #
     # @option params [required, String] :key_identifier
     #   The `KeyARN` of the key that is scheduled for deletion.
+    #
+    # @option params [Integer] :delete_key_in_days
+    #   The waiting period for key deletion. The default value is seven days.
     #
     # @return [Types::DeleteKeyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -715,36 +740,36 @@ module Aws::PaymentCryptography
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_key({
-    #     delete_key_in_days: 1,
     #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     delete_key_in_days: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.key.create_timestamp #=> Time
-    #   resp.key.delete_pending_timestamp #=> Time
-    #   resp.key.delete_timestamp #=> Time
-    #   resp.key.enabled #=> Boolean
-    #   resp.key.exportable #=> Boolean
     #   resp.key.key_arn #=> String
-    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
-    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
-    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
     #   resp.key.key_attributes.key_usage #=> String, one of "TR31_B0_BASE_DERIVATION_KEY", "TR31_C0_CARD_VERIFICATION_KEY", "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "TR31_E2_EMV_MKEY_INTEGRITY", "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "TR31_E6_EMV_MKEY_OTHER", "TR31_K0_KEY_ENCRYPTION_KEY", "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "TR31_M3_ISO_9797_3_MAC_KEY", "TR31_M1_ISO_9797_1_MAC_KEY", "TR31_M6_ISO_9797_5_CMAC_KEY", "TR31_M7_HMAC_KEY", "TR31_P0_PIN_ENCRYPTION_KEY", "TR31_P1_PIN_GENERATION_KEY", "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "TR31_V2_VISA_PIN_VERIFICATION_KEY", "TR31_K2_TR34_ASYMMETRIC_KEY"
+    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
+    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
     #   resp.key.key_check_value #=> String
     #   resp.key.key_check_value_algorithm #=> String, one of "CMAC", "ANSI_X9_24"
-    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.enabled #=> Boolean
+    #   resp.key.exportable #=> Boolean
     #   resp.key.key_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_COMPLETE"
+    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.create_timestamp #=> Time
     #   resp.key.usage_start_timestamp #=> Time
     #   resp.key.usage_stop_timestamp #=> Time
+    #   resp.key.delete_pending_timestamp #=> Time
+    #   resp.key.delete_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/DeleteKey AWS API Documentation
     #
@@ -791,6 +816,25 @@ module Aws::PaymentCryptography
     # within Amazon Web Services Payment Cryptography and has to be
     # re-generated each time during export.
     #
+    # For key exchange using TR-31 or TR-34 key blocks, you can also export
+    # optional blocks within the key block header which contain additional
+    # attribute information about the key. The `KeyVersion` within
+    # `KeyBlockHeaders` indicates the version of the key within the key
+    # block. Furthermore, `KeyExportability` within `KeyBlockHeaders` can be
+    # used to further restrict exportability of the key after export from
+    # Amazon Web Services Payment Cryptography.
+    #
+    # The `OptionalBlocks` contain the additional data related to the key.
+    # For information on data type that can be included within optional
+    # blocks, refer to [ASC X9.143-2022][1].
+    #
+    # <note markdown="1"> Data included in key block headers is signed but transmitted in clear
+    # text. Sensitive or confidential information should not be included in
+    # optional blocks. Refer to ASC X9.143-2022 standard for information on
+    # allowed data type.
+    #
+    #  </note>
+    #
     # **To export initial keys (KEK) or IPEK using TR-34**
     #
     # Using this operation, you can export initial key using TR-34
@@ -803,26 +847,26 @@ module Aws::PaymentCryptography
     # the key.
     #
     # To initiate TR-34 key export, the KRD must obtain an export token by
-    # calling GetParametersForExport. This operation also generates a key
-    # pair for the purpose of key export, signs the key and returns back the
-    # signing public key certificate (also known as KDH signing certificate)
-    # and root certificate chain. The KDH uses the private key to sign the
-    # the export payload and the signing public key certificate is provided
-    # to KRD to verify the signature. The KRD can import the root
-    # certificate into its Hardware Security Module (HSM), as required. The
-    # export token and the associated KDH signing certificate expires after
-    # 7 days.
+    # calling [GetParametersForExport][2]. This operation also generates a
+    # key pair for the purpose of key export, signs the key and returns back
+    # the signing public key certificate (also known as KDH signing
+    # certificate) and root certificate chain. The KDH uses the private key
+    # to sign the the export payload and the signing public key certificate
+    # is provided to KRD to verify the signature. The KRD can import the
+    # root certificate into its Hardware Security Module (HSM), as required.
+    # The export token and the associated KDH signing certificate expires
+    # after 7 days.
     #
     # Next the KRD generates a key pair for the the purpose of encrypting
     # the KDH key and provides the public key cerificate (also known as KRD
     # wrapping certificate) back to KDH. The KRD will also import the root
     # cerificate chain into Amazon Web Services Payment Cryptography by
-    # calling ImportKey for `RootCertificatePublicKey`. The KDH, Amazon Web
-    # Services Payment Cryptography, will use the KRD wrapping cerificate to
-    # encrypt (wrap) the key under export and signs it with signing private
-    # key to generate a TR-34 WrappedKeyBlock. For more information on TR-34
-    # key export, see section [Exporting symmetric keys][1] in the *Amazon
-    # Web Services Payment Cryptography User Guide*.
+    # calling [ImportKey][3] for `RootCertificatePublicKey`. The KDH, Amazon
+    # Web Services Payment Cryptography, will use the KRD wrapping
+    # cerificate to encrypt (wrap) the key under export and signs it with
+    # signing private key to generate a TR-34 WrappedKeyBlock. For more
+    # information on TR-34 key export, see section [Exporting symmetric
+    # keys][4] in the *Amazon Web Services Payment Cryptography User Guide*.
     #
     # Set the following parameters:
     #
@@ -837,7 +881,8 @@ module Aws::PaymentCryptography
     # * `CertificateAuthorityPublicKeyIdentifier`: The `KeyARN` of the
     #   certificate chain that signed the KRD wrapping key certificate.
     #
-    # * `ExportToken`: Obtained from KDH by calling GetParametersForImport.
+    # * `ExportToken`: Obtained from KDH by calling
+    #   [GetParametersForImport][5].
     #
     # * `WrappingKeyCertificate`: The public key certificate in PEM format
     #   (base64 encoded) of the KRD wrapping key Amazon Web Services Payment
@@ -856,7 +901,7 @@ module Aws::PaymentCryptography
     # asymmetric key pair on the receiving HSM and obtain the public key
     # certificate in PEM format (base64 encoded) for the purpose of wrapping
     # and the root certifiate chain. Import the root certificate into Amazon
-    # Web Services Payment Cryptography by calling ImportKey for
+    # Web Services Payment Cryptography by calling [ImportKey][3] for
     # `RootCertificatePublicKey`.
     #
     # Next call `ExportKey` and set the following parameters:
@@ -880,7 +925,7 @@ module Aws::PaymentCryptography
     # Using this operation, you can export working keys or IPEK using TR-31
     # symmetric key exchange. In TR-31, you must use an initial key such as
     # KEK to encrypt or wrap the key under export. To establish a KEK, you
-    # can use CreateKey or ImportKey.
+    # can use [CreateKey][6] or [ImportKey][3].
     #
     # Set the following parameters:
     #
@@ -901,24 +946,29 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * GetParametersForExport
+    # * [GetParametersForExport][2]
     #
-    # * ImportKey
+    # * [ImportKey][3]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-export.html
+    # [1]: https://webstore.ansi.org/standards/ascx9/ansix91432022
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-export.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
     #
-    # @option params [Types::ExportAttributes] :export_attributes
-    #   The attributes for IPEK generation during export.
+    # @option params [required, Types::ExportKeyMaterial] :key_material
+    #   The key block format type, for example, TR-34 or TR-31, to use during
+    #   key material export.
     #
     # @option params [required, String] :export_key_identifier
     #   The `KeyARN` of the key under export from Amazon Web Services Payment
     #   Cryptography.
     #
-    # @option params [required, Types::ExportKeyMaterial] :key_material
-    #   The key block format type, for example, TR-34 or TR-31, to use during
-    #   key material export.
+    # @option params [Types::ExportAttributes] :export_attributes
+    #   The attributes for IPEK generation during export.
     #
     # @return [Types::ExportKeyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -927,39 +977,75 @@ module Aws::PaymentCryptography
     # @example Request syntax with placeholder values
     #
     #   resp = client.export_key({
+    #     key_material: { # required
+    #       tr_31_key_block: {
+    #         wrapping_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         key_block_headers: {
+    #           key_modes_of_use: {
+    #             encrypt: false,
+    #             decrypt: false,
+    #             wrap: false,
+    #             unwrap: false,
+    #             generate: false,
+    #             sign: false,
+    #             verify: false,
+    #             derive_key: false,
+    #             no_restrictions: false,
+    #           },
+    #           key_exportability: "EXPORTABLE", # accepts EXPORTABLE, NON_EXPORTABLE, SENSITIVE
+    #           key_version: "KeyVersion",
+    #           optional_blocks: {
+    #             "OptionalBlockId" => "OptionalBlockValue",
+    #           },
+    #         },
+    #       },
+    #       tr_34_key_block: {
+    #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         wrapping_key_certificate: "CertificateType", # required
+    #         export_token: "ExportTokenId", # required
+    #         key_block_format: "X9_TR34_2012", # required, accepts X9_TR34_2012
+    #         random_nonce: "HexLength16",
+    #         key_block_headers: {
+    #           key_modes_of_use: {
+    #             encrypt: false,
+    #             decrypt: false,
+    #             wrap: false,
+    #             unwrap: false,
+    #             generate: false,
+    #             sign: false,
+    #             verify: false,
+    #             derive_key: false,
+    #             no_restrictions: false,
+    #           },
+    #           key_exportability: "EXPORTABLE", # accepts EXPORTABLE, NON_EXPORTABLE, SENSITIVE
+    #           key_version: "KeyVersion",
+    #           optional_blocks: {
+    #             "OptionalBlockId" => "OptionalBlockValue",
+    #           },
+    #         },
+    #       },
+    #       key_cryptogram: {
+    #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         wrapping_key_certificate: "CertificateType", # required
+    #         wrapping_spec: "RSA_OAEP_SHA_256", # accepts RSA_OAEP_SHA_256, RSA_OAEP_SHA_512
+    #       },
+    #     },
+    #     export_key_identifier: "KeyArnOrKeyAliasType", # required
     #     export_attributes: {
     #       export_dukpt_initial_key: {
     #         key_serial_number: "HexLength20Or24", # required
     #       },
     #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
     #     },
-    #     export_key_identifier: "KeyArnOrKeyAliasType", # required
-    #     key_material: { # required
-    #       key_cryptogram: {
-    #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
-    #         wrapping_key_certificate: "CertificateType", # required
-    #         wrapping_spec: "RSA_OAEP_SHA_256", # accepts RSA_OAEP_SHA_256, RSA_OAEP_SHA_512
-    #       },
-    #       tr_31_key_block: {
-    #         wrapping_key_identifier: "KeyArnOrKeyAliasType", # required
-    #       },
-    #       tr_34_key_block: {
-    #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
-    #         export_token: "ExportTokenId", # required
-    #         key_block_format: "X9_TR34_2012", # required, accepts X9_TR34_2012
-    #         random_nonce: "HexLength16",
-    #         wrapping_key_certificate: "CertificateType", # required
-    #       },
-    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.wrapped_key.wrapping_key_arn #=> String
+    #   resp.wrapped_key.wrapped_key_material_format #=> String, one of "KEY_CRYPTOGRAM", "TR31_KEY_BLOCK", "TR34_KEY_BLOCK"
+    #   resp.wrapped_key.key_material #=> String
     #   resp.wrapped_key.key_check_value #=> String
     #   resp.wrapped_key.key_check_value_algorithm #=> String, one of "CMAC", "ANSI_X9_24"
-    #   resp.wrapped_key.key_material #=> String
-    #   resp.wrapped_key.wrapped_key_material_format #=> String, one of "KEY_CRYPTOGRAM", "TR31_KEY_BLOCK", "TR34_KEY_BLOCK"
-    #   resp.wrapped_key.wrapping_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportKey AWS API Documentation
     #
@@ -978,13 +1064,20 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * CreateAlias
+    # * [CreateAlias][1]
     #
-    # * DeleteAlias
+    # * [DeleteAlias][2]
     #
-    # * ListAliases
+    # * [ListAliases][3]
     #
-    # * UpdateAlias
+    # * [UpdateAlias][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html
     #
     # @option params [required, String] :alias_name
     #   The alias of the Amazon Web Services Payment Cryptography key.
@@ -1022,11 +1115,17 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * CreateKey
+    # * [CreateKey][1]
     #
-    # * DeleteKey
+    # * [DeleteKey][2]
     #
-    # * ListKeys
+    # * [ListKeys][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html
     #
     # @option params [required, String] :key_identifier
     #   The `KeyARN` of the Amazon Web Services Payment Cryptography key.
@@ -1043,30 +1142,30 @@ module Aws::PaymentCryptography
     #
     # @example Response structure
     #
-    #   resp.key.create_timestamp #=> Time
-    #   resp.key.delete_pending_timestamp #=> Time
-    #   resp.key.delete_timestamp #=> Time
-    #   resp.key.enabled #=> Boolean
-    #   resp.key.exportable #=> Boolean
     #   resp.key.key_arn #=> String
-    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
-    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
-    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
     #   resp.key.key_attributes.key_usage #=> String, one of "TR31_B0_BASE_DERIVATION_KEY", "TR31_C0_CARD_VERIFICATION_KEY", "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "TR31_E2_EMV_MKEY_INTEGRITY", "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "TR31_E6_EMV_MKEY_OTHER", "TR31_K0_KEY_ENCRYPTION_KEY", "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "TR31_M3_ISO_9797_3_MAC_KEY", "TR31_M1_ISO_9797_1_MAC_KEY", "TR31_M6_ISO_9797_5_CMAC_KEY", "TR31_M7_HMAC_KEY", "TR31_P0_PIN_ENCRYPTION_KEY", "TR31_P1_PIN_GENERATION_KEY", "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "TR31_V2_VISA_PIN_VERIFICATION_KEY", "TR31_K2_TR34_ASYMMETRIC_KEY"
+    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
+    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
     #   resp.key.key_check_value #=> String
     #   resp.key.key_check_value_algorithm #=> String, one of "CMAC", "ANSI_X9_24"
-    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.enabled #=> Boolean
+    #   resp.key.exportable #=> Boolean
     #   resp.key.key_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_COMPLETE"
+    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.create_timestamp #=> Time
     #   resp.key.usage_start_timestamp #=> Time
     #   resp.key.usage_stop_timestamp #=> Time
+    #   resp.key.delete_pending_timestamp #=> Time
+    #   resp.key.delete_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetKey AWS API Documentation
     #
@@ -1082,18 +1181,23 @@ module Aws::PaymentCryptography
     #
     # The signing key certificate signs the wrapped key under export within
     # the TR-34 key payload. The export token and signing key certificate
-    # must be in place and operational before calling ExportKey. The export
-    # token expires in 7 days. You can use the same export token to export
-    # multiple keys from your service account.
+    # must be in place and operational before calling [ExportKey][1]. The
+    # export token expires in 7 days. You can use the same export token to
+    # export multiple keys from your service account.
     #
     # **Cross-account use:** This operation can't be used across different
     # Amazon Web Services accounts.
     #
     # **Related operations:**
     #
-    # * ExportKey
+    # * [ExportKey][1]
     #
-    # * GetParametersForImport
+    # * [GetParametersForImport][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html
     #
     # @option params [required, String] :key_material_type
     #   The key block format type (for example, TR-34 or TR-31) to use during
@@ -1108,11 +1212,11 @@ module Aws::PaymentCryptography
     #
     # @return [Types::GetParametersForExportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetParametersForExportOutput#export_token #export_token} => String
-    #   * {Types::GetParametersForExportOutput#parameters_valid_until_timestamp #parameters_valid_until_timestamp} => Time
-    #   * {Types::GetParametersForExportOutput#signing_key_algorithm #signing_key_algorithm} => String
     #   * {Types::GetParametersForExportOutput#signing_key_certificate #signing_key_certificate} => String
     #   * {Types::GetParametersForExportOutput#signing_key_certificate_chain #signing_key_certificate_chain} => String
+    #   * {Types::GetParametersForExportOutput#signing_key_algorithm #signing_key_algorithm} => String
+    #   * {Types::GetParametersForExportOutput#export_token #export_token} => String
+    #   * {Types::GetParametersForExportOutput#parameters_valid_until_timestamp #parameters_valid_until_timestamp} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1123,11 +1227,11 @@ module Aws::PaymentCryptography
     #
     # @example Response structure
     #
-    #   resp.export_token #=> String
-    #   resp.parameters_valid_until_timestamp #=> Time
-    #   resp.signing_key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
     #   resp.signing_key_certificate #=> String
     #   resp.signing_key_certificate_chain #=> String
+    #   resp.signing_key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.export_token #=> String
+    #   resp.parameters_valid_until_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetParametersForExport AWS API Documentation
     #
@@ -1145,18 +1249,23 @@ module Aws::PaymentCryptography
     #
     # The wrapping key certificate wraps the key under import. The import
     # token and wrapping key certificate must be in place and operational
-    # before calling ImportKey. The import token expires in 7 days. You can
-    # use the same import token to import multiple keys into your service
-    # account.
+    # before calling [ImportKey][1]. The import token expires in 7 days. You
+    # can use the same import token to import multiple keys into your
+    # service account.
     #
     # **Cross-account use:** This operation can't be used across different
     # Amazon Web Services accounts.
     #
     # **Related operations:**
     #
-    # * GetParametersForExport
+    # * [GetParametersForExport][2]
     #
-    # * ImportKey
+    # * [ImportKey][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html
     #
     # @option params [required, String] :key_material_type
     #   The method to use for key material import. Import token is only
@@ -1177,11 +1286,11 @@ module Aws::PaymentCryptography
     #
     # @return [Types::GetParametersForImportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetParametersForImportOutput#import_token #import_token} => String
-    #   * {Types::GetParametersForImportOutput#parameters_valid_until_timestamp #parameters_valid_until_timestamp} => Time
-    #   * {Types::GetParametersForImportOutput#wrapping_key_algorithm #wrapping_key_algorithm} => String
     #   * {Types::GetParametersForImportOutput#wrapping_key_certificate #wrapping_key_certificate} => String
     #   * {Types::GetParametersForImportOutput#wrapping_key_certificate_chain #wrapping_key_certificate_chain} => String
+    #   * {Types::GetParametersForImportOutput#wrapping_key_algorithm #wrapping_key_algorithm} => String
+    #   * {Types::GetParametersForImportOutput#import_token #import_token} => String
+    #   * {Types::GetParametersForImportOutput#parameters_valid_until_timestamp #parameters_valid_until_timestamp} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1192,11 +1301,11 @@ module Aws::PaymentCryptography
     #
     # @example Response structure
     #
-    #   resp.import_token #=> String
-    #   resp.parameters_valid_until_timestamp #=> Time
-    #   resp.wrapping_key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
     #   resp.wrapping_key_certificate #=> String
     #   resp.wrapping_key_certificate_chain #=> String
+    #   resp.wrapping_key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.import_token #=> String
+    #   resp.parameters_valid_until_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetParametersForImport AWS API Documentation
     #
@@ -1333,13 +1442,13 @@ module Aws::PaymentCryptography
     # Amazon Web Services Payment Cryptography who receives the key.
     #
     # To initiate TR-34 key import, the KDH must obtain an import token by
-    # calling GetParametersForImport. This operation generates an encryption
-    # keypair for the purpose of key import, signs the key and returns back
-    # the wrapping key certificate (also known as KRD wrapping certificate)
-    # and the root certificate chain. The KDH must trust and install the KRD
-    # wrapping certificate on its HSM and use it to encrypt (wrap) the KDH
-    # key during TR-34 WrappedKeyBlock generation. The import token and
-    # associated KRD wrapping certificate expires after 7 days.
+    # calling [GetParametersForImport][1]. This operation generates an
+    # encryption keypair for the purpose of key import, signs the key and
+    # returns back the wrapping key certificate (also known as KRD wrapping
+    # certificate) and the root certificate chain. The KDH must trust and
+    # install the KRD wrapping certificate on its HSM and use it to encrypt
+    # (wrap) the KDH key during TR-34 WrappedKeyBlock generation. The import
+    # token and associated KRD wrapping certificate expires after 7 days.
     #
     # Next the KDH generates a key pair for the purpose of signing the
     # encrypted KDH key and provides the public certificate of the signing
@@ -1347,7 +1456,7 @@ module Aws::PaymentCryptography
     # need to import the root certificate chain of the KDH signing
     # certificate by calling `ImportKey` for `RootCertificatePublicKey`. For
     # more information on TR-34 key import, see section [Importing symmetric
-    # keys][1] in the *Amazon Web Services Payment Cryptography User Guide*.
+    # keys][2] in the *Amazon Web Services Payment Cryptography User Guide*.
     #
     # Set the following parameters:
     #
@@ -1356,7 +1465,8 @@ module Aws::PaymentCryptography
     # * `CertificateAuthorityPublicKeyIdentifier`: The `KeyARN` of the
     #   certificate chain that signed the KDH signing key certificate.
     #
-    # * `ImportToken`: Obtained from KRD by calling GetParametersForImport.
+    # * `ImportToken`: Obtained from KRD by calling
+    #   [GetParametersForImport][1].
     #
     # * `WrappedKeyBlock`: The TR-34 wrapped key material from KDH. It
     #   contains the KDH key under import, wrapped with KRD wrapping
@@ -1374,12 +1484,12 @@ module Aws::PaymentCryptography
     #
     # Using this operation, you can import initial key using asymmetric RSA
     # wrap and unwrap key exchange method. To initiate import, call
-    # GetParametersForImport with `KeyMaterial` set to `KEY_CRYPTOGRAM` to
-    # generate an import token. This operation also generates an encryption
-    # keypair for the purpose of key import, signs the key and returns back
-    # the wrapping key certificate in PEM format (base64 encoded) and its
-    # root certificate chain. The import token and associated KRD wrapping
-    # certificate expires after 7 days.
+    # [GetParametersForImport][1] with `KeyMaterial` set to `KEY_CRYPTOGRAM`
+    # to generate an import token. This operation also generates an
+    # encryption keypair for the purpose of key import, signs the key and
+    # returns back the wrapping key certificate in PEM format (base64
+    # encoded) and its root certificate chain. The import token and
+    # associated KRD wrapping certificate expires after 7 days.
     #
     # You must trust and install the wrapping certificate and its
     # certificate chain on the sending HSM and use it to wrap the key under
@@ -1392,8 +1502,8 @@ module Aws::PaymentCryptography
     # Amazon Web Services Payment Cryptography uses TR-31 symmetric key
     # exchange norm to import working keys. A KEK must be established within
     # Amazon Web Services Payment Cryptography by using TR-34 key import or
-    # by using CreateKey. To initiate a TR-31 key import, set the following
-    # parameters:
+    # by using [CreateKey][3]. To initiate a TR-31 key import, set the
+    # following parameters:
     #
     # * `KeyMaterial`: Use `Tr31KeyBlock` parameters.
     #
@@ -1411,16 +1521,20 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * ExportKey
+    # * [ExportKey][4]
     #
-    # * GetParametersForImport
+    # * [GetParametersForImport][1]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-import.html
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-import.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html
     #
-    # @option params [Boolean] :enabled
-    #   Specifies whether import key is enabled.
+    # @option params [required, Types::ImportKeyMaterial] :key_material
+    #   The key or public key certificate type to use during key material
+    #   import, for example TR-34 or RootCertificatePublicKey.
     #
     # @option params [String] :key_check_value_algorithm
     #   The algorithm that Amazon Web Services Payment Cryptography uses to
@@ -1433,15 +1547,14 @@ module Aws::PaymentCryptography
     #   using a CMAC algorithm where the input data is 16 bytes of zero and
     #   retaining the 3 highest order bytes of the encrypted result.
     #
-    # @option params [required, Types::ImportKeyMaterial] :key_material
-    #   The key or public key certificate type to use during key material
-    #   import, for example TR-34 or RootCertificatePublicKey.
+    # @option params [Boolean] :enabled
+    #   Specifies whether import key is enabled.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Assigns one or more tags to the Amazon Web Services Payment
     #   Cryptography key. Use this parameter to tag a key when it is imported.
     #   To tag an existing Amazon Web Services Payment Cryptography key, use
-    #   the TagResource operation.
+    #   the [TagResource][1] operation.
     #
     #   Each tag consists of a tag key and a tag value. Both the tag key and
     #   the tag value are required, but the tag value can be an empty (null)
@@ -1460,6 +1573,10 @@ module Aws::PaymentCryptography
     #
     #    </note>
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
+    #
     # @return [Types::ImportKeyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportKeyOutput#key #key} => Types::Key
@@ -1467,83 +1584,83 @@ module Aws::PaymentCryptography
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_key({
-    #     enabled: false,
-    #     key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
     #     key_material: { # required
-    #       key_cryptogram: {
-    #         exportable: false, # required
-    #         import_token: "ImportTokenId", # required
-    #         key_attributes: { # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, RSA_2048, RSA_3072, RSA_4096
-    #           key_class: "SYMMETRIC_KEY", # required, accepts SYMMETRIC_KEY, ASYMMETRIC_KEY_PAIR, PRIVATE_KEY, PUBLIC_KEY
-    #           key_modes_of_use: { # required
-    #             decrypt: false,
-    #             derive_key: false,
-    #             encrypt: false,
-    #             generate: false,
-    #             no_restrictions: false,
-    #             sign: false,
-    #             unwrap: false,
-    #             verify: false,
-    #             wrap: false,
-    #           },
-    #           key_usage: "TR31_B0_BASE_DERIVATION_KEY", # required, accepts TR31_B0_BASE_DERIVATION_KEY, TR31_C0_CARD_VERIFICATION_KEY, TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY, TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION, TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS, TR31_E1_EMV_MKEY_CONFIDENTIALITY, TR31_E2_EMV_MKEY_INTEGRITY, TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS, TR31_E5_EMV_MKEY_CARD_PERSONALIZATION, TR31_E6_EMV_MKEY_OTHER, TR31_K0_KEY_ENCRYPTION_KEY, TR31_K1_KEY_BLOCK_PROTECTION_KEY, TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT, TR31_M3_ISO_9797_3_MAC_KEY, TR31_M1_ISO_9797_1_MAC_KEY, TR31_M6_ISO_9797_5_CMAC_KEY, TR31_M7_HMAC_KEY, TR31_P0_PIN_ENCRYPTION_KEY, TR31_P1_PIN_GENERATION_KEY, TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE, TR31_V1_IBM3624_PIN_VERIFICATION_KEY, TR31_V2_VISA_PIN_VERIFICATION_KEY, TR31_K2_TR34_ASYMMETRIC_KEY
-    #         },
-    #         wrapped_key_cryptogram: "WrappedKeyCryptogram", # required
-    #         wrapping_spec: "RSA_OAEP_SHA_256", # accepts RSA_OAEP_SHA_256, RSA_OAEP_SHA_512
-    #       },
     #       root_certificate_public_key: {
     #         key_attributes: { # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, RSA_2048, RSA_3072, RSA_4096
-    #           key_class: "SYMMETRIC_KEY", # required, accepts SYMMETRIC_KEY, ASYMMETRIC_KEY_PAIR, PRIVATE_KEY, PUBLIC_KEY
-    #           key_modes_of_use: { # required
-    #             decrypt: false,
-    #             derive_key: false,
-    #             encrypt: false,
-    #             generate: false,
-    #             no_restrictions: false,
-    #             sign: false,
-    #             unwrap: false,
-    #             verify: false,
-    #             wrap: false,
-    #           },
     #           key_usage: "TR31_B0_BASE_DERIVATION_KEY", # required, accepts TR31_B0_BASE_DERIVATION_KEY, TR31_C0_CARD_VERIFICATION_KEY, TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY, TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION, TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS, TR31_E1_EMV_MKEY_CONFIDENTIALITY, TR31_E2_EMV_MKEY_INTEGRITY, TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS, TR31_E5_EMV_MKEY_CARD_PERSONALIZATION, TR31_E6_EMV_MKEY_OTHER, TR31_K0_KEY_ENCRYPTION_KEY, TR31_K1_KEY_BLOCK_PROTECTION_KEY, TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT, TR31_M3_ISO_9797_3_MAC_KEY, TR31_M1_ISO_9797_1_MAC_KEY, TR31_M6_ISO_9797_5_CMAC_KEY, TR31_M7_HMAC_KEY, TR31_P0_PIN_ENCRYPTION_KEY, TR31_P1_PIN_GENERATION_KEY, TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE, TR31_V1_IBM3624_PIN_VERIFICATION_KEY, TR31_V2_VISA_PIN_VERIFICATION_KEY, TR31_K2_TR34_ASYMMETRIC_KEY
+    #           key_class: "SYMMETRIC_KEY", # required, accepts SYMMETRIC_KEY, ASYMMETRIC_KEY_PAIR, PRIVATE_KEY, PUBLIC_KEY
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, RSA_2048, RSA_3072, RSA_4096
+    #           key_modes_of_use: { # required
+    #             encrypt: false,
+    #             decrypt: false,
+    #             wrap: false,
+    #             unwrap: false,
+    #             generate: false,
+    #             sign: false,
+    #             verify: false,
+    #             derive_key: false,
+    #             no_restrictions: false,
+    #           },
     #         },
     #         public_key_certificate: "CertificateType", # required
     #       },
+    #       trusted_certificate_public_key: {
+    #         key_attributes: { # required
+    #           key_usage: "TR31_B0_BASE_DERIVATION_KEY", # required, accepts TR31_B0_BASE_DERIVATION_KEY, TR31_C0_CARD_VERIFICATION_KEY, TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY, TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION, TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS, TR31_E1_EMV_MKEY_CONFIDENTIALITY, TR31_E2_EMV_MKEY_INTEGRITY, TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS, TR31_E5_EMV_MKEY_CARD_PERSONALIZATION, TR31_E6_EMV_MKEY_OTHER, TR31_K0_KEY_ENCRYPTION_KEY, TR31_K1_KEY_BLOCK_PROTECTION_KEY, TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT, TR31_M3_ISO_9797_3_MAC_KEY, TR31_M1_ISO_9797_1_MAC_KEY, TR31_M6_ISO_9797_5_CMAC_KEY, TR31_M7_HMAC_KEY, TR31_P0_PIN_ENCRYPTION_KEY, TR31_P1_PIN_GENERATION_KEY, TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE, TR31_V1_IBM3624_PIN_VERIFICATION_KEY, TR31_V2_VISA_PIN_VERIFICATION_KEY, TR31_K2_TR34_ASYMMETRIC_KEY
+    #           key_class: "SYMMETRIC_KEY", # required, accepts SYMMETRIC_KEY, ASYMMETRIC_KEY_PAIR, PRIVATE_KEY, PUBLIC_KEY
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, RSA_2048, RSA_3072, RSA_4096
+    #           key_modes_of_use: { # required
+    #             encrypt: false,
+    #             decrypt: false,
+    #             wrap: false,
+    #             unwrap: false,
+    #             generate: false,
+    #             sign: false,
+    #             verify: false,
+    #             derive_key: false,
+    #             no_restrictions: false,
+    #           },
+    #         },
+    #         public_key_certificate: "CertificateType", # required
+    #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
+    #       },
     #       tr_31_key_block: {
-    #         wrapped_key_block: "Tr31WrappedKeyBlock", # required
     #         wrapping_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         wrapped_key_block: "Tr31WrappedKeyBlock", # required
     #       },
     #       tr_34_key_block: {
     #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         signing_key_certificate: "CertificateType", # required
     #         import_token: "ImportTokenId", # required
+    #         wrapped_key_block: "Tr34WrappedKeyBlock", # required
     #         key_block_format: "X9_TR34_2012", # required, accepts X9_TR34_2012
     #         random_nonce: "HexLength16",
-    #         signing_key_certificate: "CertificateType", # required
-    #         wrapped_key_block: "Tr34WrappedKeyBlock", # required
     #       },
-    #       trusted_certificate_public_key: {
-    #         certificate_authority_public_key_identifier: "KeyArnOrKeyAliasType", # required
+    #       key_cryptogram: {
     #         key_attributes: { # required
-    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, RSA_2048, RSA_3072, RSA_4096
-    #           key_class: "SYMMETRIC_KEY", # required, accepts SYMMETRIC_KEY, ASYMMETRIC_KEY_PAIR, PRIVATE_KEY, PUBLIC_KEY
-    #           key_modes_of_use: { # required
-    #             decrypt: false,
-    #             derive_key: false,
-    #             encrypt: false,
-    #             generate: false,
-    #             no_restrictions: false,
-    #             sign: false,
-    #             unwrap: false,
-    #             verify: false,
-    #             wrap: false,
-    #           },
     #           key_usage: "TR31_B0_BASE_DERIVATION_KEY", # required, accepts TR31_B0_BASE_DERIVATION_KEY, TR31_C0_CARD_VERIFICATION_KEY, TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY, TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION, TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS, TR31_E1_EMV_MKEY_CONFIDENTIALITY, TR31_E2_EMV_MKEY_INTEGRITY, TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS, TR31_E5_EMV_MKEY_CARD_PERSONALIZATION, TR31_E6_EMV_MKEY_OTHER, TR31_K0_KEY_ENCRYPTION_KEY, TR31_K1_KEY_BLOCK_PROTECTION_KEY, TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT, TR31_M3_ISO_9797_3_MAC_KEY, TR31_M1_ISO_9797_1_MAC_KEY, TR31_M6_ISO_9797_5_CMAC_KEY, TR31_M7_HMAC_KEY, TR31_P0_PIN_ENCRYPTION_KEY, TR31_P1_PIN_GENERATION_KEY, TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE, TR31_V1_IBM3624_PIN_VERIFICATION_KEY, TR31_V2_VISA_PIN_VERIFICATION_KEY, TR31_K2_TR34_ASYMMETRIC_KEY
+    #           key_class: "SYMMETRIC_KEY", # required, accepts SYMMETRIC_KEY, ASYMMETRIC_KEY_PAIR, PRIVATE_KEY, PUBLIC_KEY
+    #           key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, RSA_2048, RSA_3072, RSA_4096
+    #           key_modes_of_use: { # required
+    #             encrypt: false,
+    #             decrypt: false,
+    #             wrap: false,
+    #             unwrap: false,
+    #             generate: false,
+    #             sign: false,
+    #             verify: false,
+    #             derive_key: false,
+    #             no_restrictions: false,
+    #           },
     #         },
-    #         public_key_certificate: "CertificateType", # required
+    #         exportable: false, # required
+    #         wrapped_key_cryptogram: "WrappedKeyCryptogram", # required
+    #         import_token: "ImportTokenId", # required
+    #         wrapping_spec: "RSA_OAEP_SHA_256", # accepts RSA_OAEP_SHA_256, RSA_OAEP_SHA_512
     #       },
     #     },
+    #     key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #     enabled: false,
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1554,30 +1671,30 @@ module Aws::PaymentCryptography
     #
     # @example Response structure
     #
-    #   resp.key.create_timestamp #=> Time
-    #   resp.key.delete_pending_timestamp #=> Time
-    #   resp.key.delete_timestamp #=> Time
-    #   resp.key.enabled #=> Boolean
-    #   resp.key.exportable #=> Boolean
     #   resp.key.key_arn #=> String
-    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
-    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
-    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
     #   resp.key.key_attributes.key_usage #=> String, one of "TR31_B0_BASE_DERIVATION_KEY", "TR31_C0_CARD_VERIFICATION_KEY", "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "TR31_E2_EMV_MKEY_INTEGRITY", "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "TR31_E6_EMV_MKEY_OTHER", "TR31_K0_KEY_ENCRYPTION_KEY", "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "TR31_M3_ISO_9797_3_MAC_KEY", "TR31_M1_ISO_9797_1_MAC_KEY", "TR31_M6_ISO_9797_5_CMAC_KEY", "TR31_M7_HMAC_KEY", "TR31_P0_PIN_ENCRYPTION_KEY", "TR31_P1_PIN_GENERATION_KEY", "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "TR31_V2_VISA_PIN_VERIFICATION_KEY", "TR31_K2_TR34_ASYMMETRIC_KEY"
+    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
+    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
     #   resp.key.key_check_value #=> String
     #   resp.key.key_check_value_algorithm #=> String, one of "CMAC", "ANSI_X9_24"
-    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.enabled #=> Boolean
+    #   resp.key.exportable #=> Boolean
     #   resp.key.key_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_COMPLETE"
+    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.create_timestamp #=> Time
     #   resp.key.usage_start_timestamp #=> Time
     #   resp.key.usage_stop_timestamp #=> Time
+    #   resp.key.delete_pending_timestamp #=> Time
+    #   resp.key.delete_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKey AWS API Documentation
     #
@@ -1605,17 +1722,26 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * CreateAlias
+    # * [CreateAlias][2]
     #
-    # * DeleteAlias
+    # * [DeleteAlias][3]
     #
-    # * GetAlias
+    # * [GetAlias][4]
     #
-    # * UpdateAlias
+    # * [UpdateAlias][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-managealias.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html
+    #
+    # @option params [String] :next_token
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextToken`
+    #   from the truncated response you just received.
     #
     # @option params [Integer] :max_results
     #   Use this parameter to specify the maximum number of items to return.
@@ -1625,11 +1751,6 @@ module Aws::PaymentCryptography
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 100, inclusive. If you do not include a value, it defaults to 50.
-    #
-    # @option params [String] :next_token
-    #   Use this parameter in a subsequent request after you receive a
-    #   response with truncated results. Set it to the value of `NextToken`
-    #   from the truncated response you just received.
     #
     # @return [Types::ListAliasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1641,8 +1762,8 @@ module Aws::PaymentCryptography
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_aliases({
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -1676,14 +1797,25 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * CreateKey
+    # * [CreateKey][1]
     #
-    # * DeleteKey
+    # * [DeleteKey][2]
     #
-    # * GetKey
+    # * [GetKey][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetKey.html
     #
     # @option params [String] :key_state
     #   The key state of the keys you want to list.
+    #
+    # @option params [String] :next_token
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextToken`
+    #   from the truncated response you just received.
     #
     # @option params [Integer] :max_results
     #   Use this parameter to specify the maximum number of items to return.
@@ -1693,11 +1825,6 @@ module Aws::PaymentCryptography
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 100, inclusive. If you do not include a value, it defaults to 50.
-    #
-    # @option params [String] :next_token
-    #   Use this parameter in a subsequent request after you receive a
-    #   response with truncated results. Set it to the value of `NextToken`
-    #   from the truncated response you just received.
     #
     # @return [Types::ListKeysOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1710,30 +1837,30 @@ module Aws::PaymentCryptography
     #
     #   resp = client.list_keys({
     #     key_state: "CREATE_IN_PROGRESS", # accepts CREATE_IN_PROGRESS, CREATE_COMPLETE, DELETE_PENDING, DELETE_COMPLETE
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.keys #=> Array
-    #   resp.keys[0].enabled #=> Boolean
-    #   resp.keys[0].exportable #=> Boolean
     #   resp.keys[0].key_arn #=> String
-    #   resp.keys[0].key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
-    #   resp.keys[0].key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
-    #   resp.keys[0].key_attributes.key_modes_of_use.decrypt #=> Boolean
-    #   resp.keys[0].key_attributes.key_modes_of_use.derive_key #=> Boolean
-    #   resp.keys[0].key_attributes.key_modes_of_use.encrypt #=> Boolean
-    #   resp.keys[0].key_attributes.key_modes_of_use.generate #=> Boolean
-    #   resp.keys[0].key_attributes.key_modes_of_use.no_restrictions #=> Boolean
-    #   resp.keys[0].key_attributes.key_modes_of_use.sign #=> Boolean
-    #   resp.keys[0].key_attributes.key_modes_of_use.unwrap #=> Boolean
-    #   resp.keys[0].key_attributes.key_modes_of_use.verify #=> Boolean
-    #   resp.keys[0].key_attributes.key_modes_of_use.wrap #=> Boolean
-    #   resp.keys[0].key_attributes.key_usage #=> String, one of "TR31_B0_BASE_DERIVATION_KEY", "TR31_C0_CARD_VERIFICATION_KEY", "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "TR31_E2_EMV_MKEY_INTEGRITY", "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "TR31_E6_EMV_MKEY_OTHER", "TR31_K0_KEY_ENCRYPTION_KEY", "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "TR31_M3_ISO_9797_3_MAC_KEY", "TR31_M1_ISO_9797_1_MAC_KEY", "TR31_M6_ISO_9797_5_CMAC_KEY", "TR31_M7_HMAC_KEY", "TR31_P0_PIN_ENCRYPTION_KEY", "TR31_P1_PIN_GENERATION_KEY", "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "TR31_V2_VISA_PIN_VERIFICATION_KEY", "TR31_K2_TR34_ASYMMETRIC_KEY"
-    #   resp.keys[0].key_check_value #=> String
     #   resp.keys[0].key_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_COMPLETE"
+    #   resp.keys[0].key_attributes.key_usage #=> String, one of "TR31_B0_BASE_DERIVATION_KEY", "TR31_C0_CARD_VERIFICATION_KEY", "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "TR31_E2_EMV_MKEY_INTEGRITY", "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "TR31_E6_EMV_MKEY_OTHER", "TR31_K0_KEY_ENCRYPTION_KEY", "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "TR31_M3_ISO_9797_3_MAC_KEY", "TR31_M1_ISO_9797_1_MAC_KEY", "TR31_M6_ISO_9797_5_CMAC_KEY", "TR31_M7_HMAC_KEY", "TR31_P0_PIN_ENCRYPTION_KEY", "TR31_P1_PIN_GENERATION_KEY", "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "TR31_V2_VISA_PIN_VERIFICATION_KEY", "TR31_K2_TR34_ASYMMETRIC_KEY"
+    #   resp.keys[0].key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
+    #   resp.keys[0].key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.keys[0].key_attributes.key_modes_of_use.encrypt #=> Boolean
+    #   resp.keys[0].key_attributes.key_modes_of_use.decrypt #=> Boolean
+    #   resp.keys[0].key_attributes.key_modes_of_use.wrap #=> Boolean
+    #   resp.keys[0].key_attributes.key_modes_of_use.unwrap #=> Boolean
+    #   resp.keys[0].key_attributes.key_modes_of_use.generate #=> Boolean
+    #   resp.keys[0].key_attributes.key_modes_of_use.sign #=> Boolean
+    #   resp.keys[0].key_attributes.key_modes_of_use.verify #=> Boolean
+    #   resp.keys[0].key_attributes.key_modes_of_use.derive_key #=> Boolean
+    #   resp.keys[0].key_attributes.key_modes_of_use.no_restrictions #=> Boolean
+    #   resp.keys[0].key_check_value #=> String
+    #   resp.keys[0].exportable #=> Boolean
+    #   resp.keys[0].enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ListKeys AWS API Documentation
@@ -1759,9 +1886,22 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * TagResource
+    # * [TagResource][1]
     #
-    # * UntagResource
+    # * [UntagResource][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The `KeyARN` of the key whose tags you are getting.
+    #
+    # @option params [String] :next_token
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextToken`
+    #   from the truncated response you just received.
     #
     # @option params [Integer] :max_results
     #   Use this parameter to specify the maximum number of items to return.
@@ -1772,35 +1912,27 @@ module Aws::PaymentCryptography
     #   This value is optional. If you include a value, it must be between 1
     #   and 100, inclusive. If you do not include a value, it defaults to 50.
     #
-    # @option params [String] :next_token
-    #   Use this parameter in a subsequent request after you receive a
-    #   response with truncated results. Set it to the value of `NextToken`
-    #   from the truncated response you just received.
-    #
-    # @option params [required, String] :resource_arn
-    #   The `KeyARN` of the key whose tags you are getting.
-    #
     # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
     #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     max_results: 1,
-    #     next_token: "NextToken",
     #     resource_arn: "ResourceArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ListTagsForResource AWS API Documentation
     #
@@ -1825,11 +1957,17 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * DeleteKey
+    # * [DeleteKey][1]
     #
-    # * StartKeyUsage
+    # * [StartKeyUsage][2]
     #
-    # * StopKeyUsage
+    # * [StopKeyUsage][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html
     #
     # @option params [required, String] :key_identifier
     #   The `KeyARN` of the key to be restored within Amazon Web Services
@@ -1847,30 +1985,30 @@ module Aws::PaymentCryptography
     #
     # @example Response structure
     #
-    #   resp.key.create_timestamp #=> Time
-    #   resp.key.delete_pending_timestamp #=> Time
-    #   resp.key.delete_timestamp #=> Time
-    #   resp.key.enabled #=> Boolean
-    #   resp.key.exportable #=> Boolean
     #   resp.key.key_arn #=> String
-    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
-    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
-    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
     #   resp.key.key_attributes.key_usage #=> String, one of "TR31_B0_BASE_DERIVATION_KEY", "TR31_C0_CARD_VERIFICATION_KEY", "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "TR31_E2_EMV_MKEY_INTEGRITY", "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "TR31_E6_EMV_MKEY_OTHER", "TR31_K0_KEY_ENCRYPTION_KEY", "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "TR31_M3_ISO_9797_3_MAC_KEY", "TR31_M1_ISO_9797_1_MAC_KEY", "TR31_M6_ISO_9797_5_CMAC_KEY", "TR31_M7_HMAC_KEY", "TR31_P0_PIN_ENCRYPTION_KEY", "TR31_P1_PIN_GENERATION_KEY", "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "TR31_V2_VISA_PIN_VERIFICATION_KEY", "TR31_K2_TR34_ASYMMETRIC_KEY"
+    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
+    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
     #   resp.key.key_check_value #=> String
     #   resp.key.key_check_value_algorithm #=> String, one of "CMAC", "ANSI_X9_24"
-    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.enabled #=> Boolean
+    #   resp.key.exportable #=> Boolean
     #   resp.key.key_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_COMPLETE"
+    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.create_timestamp #=> Time
     #   resp.key.usage_start_timestamp #=> Time
     #   resp.key.usage_stop_timestamp #=> Time
+    #   resp.key.delete_pending_timestamp #=> Time
+    #   resp.key.delete_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/RestoreKey AWS API Documentation
     #
@@ -1890,9 +2028,13 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * StopKeyUsage
+    # * [StopKeyUsage][1]
     #
     # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html
     #
     # @option params [required, String] :key_identifier
     #   The `KeyArn` of the key.
@@ -1909,30 +2051,30 @@ module Aws::PaymentCryptography
     #
     # @example Response structure
     #
-    #   resp.key.create_timestamp #=> Time
-    #   resp.key.delete_pending_timestamp #=> Time
-    #   resp.key.delete_timestamp #=> Time
-    #   resp.key.enabled #=> Boolean
-    #   resp.key.exportable #=> Boolean
     #   resp.key.key_arn #=> String
-    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
-    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
-    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
     #   resp.key.key_attributes.key_usage #=> String, one of "TR31_B0_BASE_DERIVATION_KEY", "TR31_C0_CARD_VERIFICATION_KEY", "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "TR31_E2_EMV_MKEY_INTEGRITY", "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "TR31_E6_EMV_MKEY_OTHER", "TR31_K0_KEY_ENCRYPTION_KEY", "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "TR31_M3_ISO_9797_3_MAC_KEY", "TR31_M1_ISO_9797_1_MAC_KEY", "TR31_M6_ISO_9797_5_CMAC_KEY", "TR31_M7_HMAC_KEY", "TR31_P0_PIN_ENCRYPTION_KEY", "TR31_P1_PIN_GENERATION_KEY", "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "TR31_V2_VISA_PIN_VERIFICATION_KEY", "TR31_K2_TR34_ASYMMETRIC_KEY"
+    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
+    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
     #   resp.key.key_check_value #=> String
     #   resp.key.key_check_value_algorithm #=> String, one of "CMAC", "ANSI_X9_24"
-    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.enabled #=> Boolean
+    #   resp.key.exportable #=> Boolean
     #   resp.key.key_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_COMPLETE"
+    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.create_timestamp #=> Time
     #   resp.key.usage_start_timestamp #=> Time
     #   resp.key.usage_stop_timestamp #=> Time
+    #   resp.key.delete_pending_timestamp #=> Time
+    #   resp.key.delete_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/StartKeyUsage AWS API Documentation
     #
@@ -1946,17 +2088,23 @@ module Aws::PaymentCryptography
     # Disables an Amazon Web Services Payment Cryptography key, which makes
     # it inactive within Amazon Web Services Payment Cryptography.
     #
-    # You can use this operation instead of DeleteKey to deactivate a key.
-    # You can enable the key in the future by calling StartKeyUsage.
+    # You can use this operation instead of [DeleteKey][1] to deactivate a
+    # key. You can enable the key in the future by calling
+    # [StartKeyUsage][2].
     #
     # **Cross-account use:** This operation can't be used across different
     # Amazon Web Services accounts.
     #
     # **Related operations:**
     #
-    # * DeleteKey
+    # * [DeleteKey][1]
     #
-    # * StartKeyUsage
+    # * [StartKeyUsage][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html
     #
     # @option params [required, String] :key_identifier
     #   The `KeyArn` of the key.
@@ -1973,30 +2121,30 @@ module Aws::PaymentCryptography
     #
     # @example Response structure
     #
-    #   resp.key.create_timestamp #=> Time
-    #   resp.key.delete_pending_timestamp #=> Time
-    #   resp.key.delete_timestamp #=> Time
-    #   resp.key.enabled #=> Boolean
-    #   resp.key.exportable #=> Boolean
     #   resp.key.key_arn #=> String
-    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
-    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
-    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
-    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
     #   resp.key.key_attributes.key_usage #=> String, one of "TR31_B0_BASE_DERIVATION_KEY", "TR31_C0_CARD_VERIFICATION_KEY", "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "TR31_E2_EMV_MKEY_INTEGRITY", "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "TR31_E6_EMV_MKEY_OTHER", "TR31_K0_KEY_ENCRYPTION_KEY", "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "TR31_M3_ISO_9797_3_MAC_KEY", "TR31_M1_ISO_9797_1_MAC_KEY", "TR31_M6_ISO_9797_5_CMAC_KEY", "TR31_M7_HMAC_KEY", "TR31_P0_PIN_ENCRYPTION_KEY", "TR31_P1_PIN_GENERATION_KEY", "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "TR31_V2_VISA_PIN_VERIFICATION_KEY", "TR31_K2_TR34_ASYMMETRIC_KEY"
+    #   resp.key.key_attributes.key_class #=> String, one of "SYMMETRIC_KEY", "ASYMMETRIC_KEY_PAIR", "PRIVATE_KEY", "PUBLIC_KEY"
+    #   resp.key.key_attributes.key_algorithm #=> String, one of "TDES_2KEY", "TDES_3KEY", "AES_128", "AES_192", "AES_256", "RSA_2048", "RSA_3072", "RSA_4096"
+    #   resp.key.key_attributes.key_modes_of_use.encrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.decrypt #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.wrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.unwrap #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.generate #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.sign #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.verify #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.derive_key #=> Boolean
+    #   resp.key.key_attributes.key_modes_of_use.no_restrictions #=> Boolean
     #   resp.key.key_check_value #=> String
     #   resp.key.key_check_value_algorithm #=> String, one of "CMAC", "ANSI_X9_24"
-    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.enabled #=> Boolean
+    #   resp.key.exportable #=> Boolean
     #   resp.key.key_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_COMPLETE"
+    #   resp.key.key_origin #=> String, one of "EXTERNAL", "AWS_PAYMENT_CRYPTOGRAPHY"
+    #   resp.key.create_timestamp #=> Time
     #   resp.key.usage_start_timestamp #=> Time
     #   resp.key.usage_stop_timestamp #=> Time
+    #   resp.key.delete_pending_timestamp #=> Time
+    #   resp.key.delete_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/StopKeyUsage AWS API Documentation
     #
@@ -2019,16 +2167,22 @@ module Aws::PaymentCryptography
     # To add a tag, specify a new tag key and a tag value. To edit a tag,
     # specify an existing tag key and a new tag value. You can also add tags
     # to an Amazon Web Services Payment Cryptography key when you create it
-    # with CreateKey.
+    # with [CreateKey][1].
     #
     # **Cross-account use:** This operation can't be used across different
     # Amazon Web Services accounts.
     #
     # **Related operations:**
     #
-    # * ListTagsForResource
+    # * [ListTagsForResource][2]
     #
-    # * UntagResource
+    # * [UntagResource][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html
     #
     # @option params [required, String] :resource_arn
     #   The `KeyARN` of the key whose tags are being updated.
@@ -2045,12 +2199,16 @@ module Aws::PaymentCryptography
     #   field. This field may be displayed in plaintext in CloudTrail logs and
     #   other output.
     #
-    #   To use this parameter, you must have TagResource permission in an IAM
-    #   policy.
+    #   To use this parameter, you must have [TagResource][1] permission in an
+    #   IAM policy.
     #
     #   Don't include personal, confidential or sensitive information in this
     #   field. This field may be displayed in plaintext in CloudTrail logs and
     #   other output.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2087,9 +2245,14 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * ListTagsForResource
+    # * [ListTagsForResource][1]
     #
-    # * TagResource
+    # * [TagResource][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
     #
     # @option params [required, String] :resource_arn
     #   The `KeyARN` of the key whose tags are being removed.
@@ -2100,7 +2263,11 @@ module Aws::PaymentCryptography
     #   If the Amazon Web Services Payment Cryptography key doesn't have the
     #   specified tag key, Amazon Web Services Payment Cryptography doesn't
     #   throw an exception or return a response. To confirm that the operation
-    #   succeeded, use the ListTagsForResource operation.
+    #   succeeded, use the [ListTagsForResource][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2132,13 +2299,20 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * CreateAlias
+    # * [CreateAlias][1]
     #
-    # * DeleteAlias
+    # * [DeleteAlias][2]
     #
-    # * GetAlias
+    # * [GetAlias][3]
     #
-    # * ListAliases
+    # * [ListAliases][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html
     #
     # @option params [required, String] :alias_name
     #   The alias whose associated key is changing.

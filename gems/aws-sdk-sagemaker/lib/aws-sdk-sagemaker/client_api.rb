@@ -3831,6 +3831,10 @@ module Aws::SageMaker
     DefaultSpaceSettings.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroups"))
     DefaultSpaceSettings.add_member(:jupyter_server_app_settings, Shapes::ShapeRef.new(shape: JupyterServerAppSettings, location_name: "JupyterServerAppSettings"))
     DefaultSpaceSettings.add_member(:kernel_gateway_app_settings, Shapes::ShapeRef.new(shape: KernelGatewayAppSettings, location_name: "KernelGatewayAppSettings"))
+    DefaultSpaceSettings.add_member(:jupyter_lab_app_settings, Shapes::ShapeRef.new(shape: JupyterLabAppSettings, location_name: "JupyterLabAppSettings"))
+    DefaultSpaceSettings.add_member(:space_storage_settings, Shapes::ShapeRef.new(shape: DefaultSpaceStorageSettings, location_name: "SpaceStorageSettings"))
+    DefaultSpaceSettings.add_member(:custom_posix_user_config, Shapes::ShapeRef.new(shape: CustomPosixUserConfig, location_name: "CustomPosixUserConfig"))
+    DefaultSpaceSettings.add_member(:custom_file_system_configs, Shapes::ShapeRef.new(shape: CustomFileSystemConfigs, location_name: "CustomFileSystemConfigs"))
     DefaultSpaceSettings.struct_class = Types::DefaultSpaceSettings
 
     DefaultSpaceStorageSettings.add_member(:default_ebs_storage_settings, Shapes::ShapeRef.new(shape: DefaultEbsStorageSettings, location_name: "DefaultEbsStorageSettings"))

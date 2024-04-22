@@ -1942,6 +1942,10 @@ module Aws::SageMaker
       attr_accessor security_groups: ::Array[::String]
       attr_accessor jupyter_server_app_settings: Types::JupyterServerAppSettings
       attr_accessor kernel_gateway_app_settings: Types::KernelGatewayAppSettings
+      attr_accessor jupyter_lab_app_settings: Types::JupyterLabAppSettings
+      attr_accessor space_storage_settings: Types::DefaultSpaceStorageSettings
+      attr_accessor custom_posix_user_config: Types::CustomPosixUserConfig
+      attr_accessor custom_file_system_configs: ::Array[Types::CustomFileSystemConfig]
       SENSITIVE: []
     end
 

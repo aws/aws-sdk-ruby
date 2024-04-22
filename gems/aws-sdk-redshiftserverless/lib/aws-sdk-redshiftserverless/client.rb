@@ -727,17 +727,17 @@ module Aws::RedshiftServerless
     #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
     #
     # @option params [required, Types::Schedule] :schedule
-    #   The schedule for a one-time (at format) or recurring (cron format)
-    #   scheduled action. Schedule invocations must be separated by at least
-    #   one hour.
+    #   The schedule for a one-time (at timestamp format) or recurring (cron
+    #   format) scheduled action. Schedule invocations must be separated by at
+    #   least one hour. Times are in UTC.
     #
-    #   Format of at expressions is "`at(yyyy-mm-ddThh:mm:ss)`". For
-    #   example, "`at(2016-03-04T17:27:00)`".
+    #   * Format of at timestamp is `yyyy-mm-ddThh:mm:ss`. For example,
+    #     `2016-03-04T17:27:00`.
     #
-    #   Format of cron expressions is "`cron(Minutes Hours Day-of-month Month
-    #   Day-of-week Year)`". For example, "`cron(0 10 ? * MON *)`". For
-    #   more information, see [Cron Expressions][1] in the *Amazon CloudWatch
-    #   Events User Guide*.
+    #   * Format of cron expression is `(Minutes Hours Day-of-month Month
+    #     Day-of-week Year)`. For example, `"(0 10 ? * MON *)"`. For more
+    #     information, see [Cron Expressions][1] in the *Amazon CloudWatch
+    #     Events User Guide*.
     #
     #
     #
@@ -3283,17 +3283,17 @@ module Aws::RedshiftServerless
     #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
     #
     # @option params [Types::Schedule] :schedule
-    #   The schedule for a one-time (at format) or recurring (cron format)
-    #   scheduled action. Schedule invocations must be separated by at least
-    #   one hour.
+    #   The schedule for a one-time (at timestamp format) or recurring (cron
+    #   format) scheduled action. Schedule invocations must be separated by at
+    #   least one hour. Times are in UTC.
     #
-    #   Format of at expressions is "`at(yyyy-mm-ddThh:mm:ss)`". For
-    #   example, "`at(2016-03-04T17:27:00)`".
+    #   * Format of at timestamp is `yyyy-mm-ddThh:mm:ss`. For example,
+    #     `2016-03-04T17:27:00`.
     #
-    #   Format of cron expressions is "`cron(Minutes Hours Day-of-month Month
-    #   Day-of-week Year)`". For example, "`cron(0 10 ? * MON *)`". For
-    #   more information, see [Cron Expressions][1] in the *Amazon CloudWatch
-    #   Events User Guide*.
+    #   * Format of cron expression is `(Minutes Hours Day-of-month Month
+    #     Day-of-week Year)`. For example, `"(0 10 ? * MON *)"`. For more
+    #     information, see [Cron Expressions][1] in the *Amazon CloudWatch
+    #     Events User Guide*.
     #
     #
     #

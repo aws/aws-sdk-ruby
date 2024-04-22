@@ -194,11 +194,13 @@ module Aws::Transfer
     ListedUsers = Shapes::ListShape.new(name: 'ListedUsers')
     ListedWorkflow = Shapes::StructureShape.new(name: 'ListedWorkflow')
     ListedWorkflows = Shapes::ListShape.new(name: 'ListedWorkflows')
+    ListingId = Shapes::StringShape.new(name: 'ListingId')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     MapEntry = Shapes::StringShape.new(name: 'MapEntry')
     MapTarget = Shapes::StringShape.new(name: 'MapTarget')
     MapType = Shapes::StringShape.new(name: 'MapType')
+    MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MdnResponse = Shapes::StringShape.new(name: 'MdnResponse')
     MdnSigningAlg = Shapes::StringShape.new(name: 'MdnSigningAlg')
@@ -208,6 +210,7 @@ module Aws::Transfer
     NullableRole = Shapes::StringShape.new(name: 'NullableRole')
     OnPartialUploadWorkflowDetails = Shapes::ListShape.new(name: 'OnPartialUploadWorkflowDetails')
     OnUploadWorkflowDetails = Shapes::ListShape.new(name: 'OnUploadWorkflowDetails')
+    OutputFileName = Shapes::StringShape.new(name: 'OutputFileName')
     OverwriteExisting = Shapes::StringShape.new(name: 'OverwriteExisting')
     PassiveIp = Shapes::StringShape.new(name: 'PassiveIp')
     Policy = Shapes::StringShape.new(name: 'Policy')
@@ -272,6 +275,8 @@ module Aws::Transfer
     SshPublicKeyCount = Shapes::IntegerShape.new(name: 'SshPublicKeyCount')
     SshPublicKeyId = Shapes::StringShape.new(name: 'SshPublicKeyId')
     SshPublicKeys = Shapes::ListShape.new(name: 'SshPublicKeys')
+    StartDirectoryListingRequest = Shapes::StructureShape.new(name: 'StartDirectoryListingRequest')
+    StartDirectoryListingResponse = Shapes::StructureShape.new(name: 'StartDirectoryListingResponse')
     StartFileTransferRequest = Shapes::StructureShape.new(name: 'StartFileTransferRequest')
     StartFileTransferResponse = Shapes::StructureShape.new(name: 'StartFileTransferResponse')
     StartServerRequest = Shapes::StructureShape.new(name: 'StartServerRequest')
@@ -1093,6 +1098,16 @@ module Aws::Transfer
     SshPublicKey.struct_class = Types::SshPublicKey
 
     SshPublicKeys.member = Shapes::ShapeRef.new(shape: SshPublicKey)
+
+    StartDirectoryListingRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
+    StartDirectoryListingRequest.add_member(:remote_directory_path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "RemoteDirectoryPath"))
+    StartDirectoryListingRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location_name: "MaxItems"))
+    StartDirectoryListingRequest.add_member(:output_directory_path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "OutputDirectoryPath"))
+    StartDirectoryListingRequest.struct_class = Types::StartDirectoryListingRequest
+
+    StartDirectoryListingResponse.add_member(:listing_id, Shapes::ShapeRef.new(shape: ListingId, required: true, location_name: "ListingId"))
+    StartDirectoryListingResponse.add_member(:output_file_name, Shapes::ShapeRef.new(shape: OutputFileName, required: true, location_name: "OutputFileName"))
+    StartDirectoryListingResponse.struct_class = Types::StartDirectoryListingResponse
 
     StartFileTransferRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
     StartFileTransferRequest.add_member(:send_file_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "SendFilePaths"))
@@ -1922,6 +1937,19 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_directory_listing, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDirectoryListing"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDirectoryListingRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDirectoryListingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:start_file_transfer, Seahorse::Model::Operation.new.tap do |o|

@@ -130,6 +130,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_agent_action_group-instance_method
       def create_agent_action_group: (
                                        ?action_group_executor: {
+                                         custom_control: ("RETURN_CONTROL")?,
                                          lambda: ::String?
                                        },
                                        action_group_name: ::String,
@@ -145,6 +146,19 @@ module Aws
                                        },
                                        ?client_token: ::String,
                                        ?description: ::String,
+                                       ?function_schema: {
+                                         functions: Array[
+                                           {
+                                             description: ::String?,
+                                             name: ::String,
+                                             parameters: Hash[::String, {
+                                                 description: ::String?,
+                                                 required: bool?,
+                                                 type: ("string" | "number" | "integer" | "boolean" | "array")
+                                               }]?
+                                           },
+                                         ]?
+                                       },
                                        ?parent_action_group_signature: ("AMAZON.UserInput")
                                      ) -> _CreateAgentActionGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentActionGroupResponseSuccess
@@ -653,6 +667,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_agent_action_group-instance_method
       def update_agent_action_group: (
                                        ?action_group_executor: {
+                                         custom_control: ("RETURN_CONTROL")?,
                                          lambda: ::String?
                                        },
                                        action_group_id: ::String,
@@ -668,6 +683,19 @@ module Aws
                                          }?
                                        },
                                        ?description: ::String,
+                                       ?function_schema: {
+                                         functions: Array[
+                                           {
+                                             description: ::String?,
+                                             name: ::String,
+                                             parameters: Hash[::String, {
+                                                 description: ::String?,
+                                                 required: bool?,
+                                                 type: ("string" | "number" | "integer" | "boolean" | "array")
+                                               }]?
+                                           },
+                                         ]?
+                                       },
                                        ?parent_action_group_signature: ("AMAZON.UserInput")
                                      ) -> _UpdateAgentActionGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentActionGroupResponseSuccess

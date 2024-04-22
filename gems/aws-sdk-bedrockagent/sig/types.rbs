@@ -28,10 +28,13 @@ module Aws::BedrockAgent
     end
 
     class ActionGroupExecutor
+      attr_accessor custom_control: ("RETURN_CONTROL")
       attr_accessor lambda: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class CustomControl < ActionGroupExecutor
+      end
       class Lambda < ActionGroupExecutor
       end
       class Unknown < ActionGroupExecutor
@@ -80,6 +83,7 @@ module Aws::BedrockAgent
       attr_accessor client_token: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
+      attr_accessor function_schema: Types::FunctionSchema
       attr_accessor parent_action_signature: ("AMAZON.UserInput")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -216,6 +220,7 @@ module Aws::BedrockAgent
       attr_accessor api_schema: Types::APISchema
       attr_accessor client_token: ::String
       attr_accessor description: ::String
+      attr_accessor function_schema: Types::FunctionSchema
       attr_accessor parent_action_group_signature: ("AMAZON.UserInput")
       SENSITIVE: []
     end
@@ -409,6 +414,24 @@ module Aws::BedrockAgent
       attr_accessor max_tokens: ::Integer
       attr_accessor overlap_percentage: ::Integer
       SENSITIVE: []
+    end
+
+    class Function
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor parameters: ::Hash[::String, Types::ParameterDetail]
+      SENSITIVE: []
+    end
+
+    class FunctionSchema
+      attr_accessor functions: ::Array[Types::Function]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Functions < FunctionSchema
+      end
+      class Unknown < FunctionSchema
+      end
     end
 
     class GetAgentActionGroupRequest
@@ -724,6 +747,13 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class ParameterDetail
+      attr_accessor description: ::String
+      attr_accessor required: bool
+      attr_accessor type: ("string" | "number" | "integer" | "boolean" | "array")
+      SENSITIVE: []
+    end
+
     class PineconeConfiguration
       attr_accessor connection_string: ::String
       attr_accessor credentials_secret_arn: ::String
@@ -880,6 +910,7 @@ module Aws::BedrockAgent
       attr_accessor agent_version: ::String
       attr_accessor api_schema: Types::APISchema
       attr_accessor description: ::String
+      attr_accessor function_schema: Types::FunctionSchema
       attr_accessor parent_action_group_signature: ("AMAZON.UserInput")
       SENSITIVE: []
     end

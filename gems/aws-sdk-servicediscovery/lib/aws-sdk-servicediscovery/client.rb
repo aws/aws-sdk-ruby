@@ -1052,6 +1052,9 @@ module Aws::ServiceDiscovery
     # @option params [required, String] :namespace_name
     #   The `HttpName` name of the namespace. It's found in the
     #   `HttpProperties` member of the `Properties` member of the namespace.
+    #   In most cases, `Name` and `HttpName` match. However, if you reuse
+    #   `Name` for namespace creation, a generated hash is added to `HttpName`
+    #   to distinguish the two.
     #
     # @option params [required, String] :service_name
     #   The name of the service that you specified when you registered the
@@ -1179,6 +1182,21 @@ module Aws::ServiceDiscovery
     # @return [Types::DiscoverInstancesRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DiscoverInstancesRevisionResponse#instances_revision #instances_revision} => Integer
+    #
+    #
+    # @example Example: To discover the revision for a registered instance
+    #
+    #   # The following example discovers the revision ID for a registered instance.
+    #
+    #   resp = client.discover_instances_revision({
+    #     namespace_name: "example-namespace", 
+    #     service_name: "example-service", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instances_revision: 123456, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1867,7 +1885,7 @@ module Aws::ServiceDiscovery
     end
 
     # Lists summary information for all the services that are associated
-    # with one or more specified namespaces.
+    # with one or more namespaces.
     #
     # @option params [String] :next_token
     #   For the first `ListServices` request, omit this value.
@@ -2129,12 +2147,10 @@ module Aws::ServiceDiscovery
     #
     #   * For each attribute, the applicable value.
     #
-    #   <note markdown="1"> Do not include sensitive information in the attributes if the
+    #   Do not include sensitive information in the attributes if the
     #   namespace is discoverable by public DNS queries.
     #
-    #    </note>
-    #
-    #   Supported attribute keys include the following:
+    #   The following are the supported attribute keys.
     #
     #   AWS\_ALIAS\_DNS\_NAME
     #
@@ -2164,6 +2180,9 @@ module Aws::ServiceDiscovery
     #
     #     * If you specify a value for `AWS_ALIAS_DNS_NAME`, don't specify
     #       values for any of the `AWS_INSTANCE` attributes.
+    #
+    #     * The `AWS_ALIAS_DNS_NAME` is not supported in the GovCloud (US)
+    #       Regions.
     #
     #   AWS\_EC2\_INSTANCE\_ID
     #
@@ -2406,6 +2425,23 @@ module Aws::ServiceDiscovery
     #
     #   * {Types::UpdateHttpNamespaceResponse#operation_id #operation_id} => String
     #
+    #
+    # @example Example: To update a HTTP namespace
+    #
+    #   # The following example updates the description of a HTTP namespace.
+    #
+    #   resp = client.update_http_namespace({
+    #     id: "ns-vh4nbmEXAMPLE", 
+    #     namespace: {
+    #       description: "The updated namespace description.", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_http_namespace({
@@ -2505,6 +2541,41 @@ module Aws::ServiceDiscovery
     # @return [Types::UpdatePrivateDnsNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePrivateDnsNamespaceResponse#operation_id #operation_id} => String
+    #
+    #
+    # @example Example: To update a private DNS namespace
+    #
+    #   # The following example updates the description of a private DNS namespace.
+    #
+    #   resp = client.update_private_dns_namespace({
+    #     id: "ns-bk3aEXAMPLE", 
+    #     namespace: {
+    #       description: "The updated namespace description.", 
+    #     }, 
+    #     updater_request_id: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE", 
+    #   }
+    #
+    # @example Example: To update a public DNS namespace
+    #
+    #   # The following example updates the description of a public DNS namespace.
+    #
+    #   resp = client.update_private_dns_namespace({
+    #     id: "ns-bk3aEXAMPLE", 
+    #     namespace: {
+    #       description: "The updated namespace description.", 
+    #     }, 
+    #     updater_request_id: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "ft52xe2koxhoeormaceymagglsdjEXAMPLE", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #

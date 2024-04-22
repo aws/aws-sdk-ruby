@@ -36,10 +36,10 @@ module Aws::PaymentCryptography
     end
 
     class CreateKeyInput
-      attr_accessor enabled: bool
-      attr_accessor exportable: bool
       attr_accessor key_attributes: Types::KeyAttributes
       attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
+      attr_accessor exportable: bool
+      attr_accessor enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -58,8 +58,8 @@ module Aws::PaymentCryptography
     end
 
     class DeleteKeyInput
-      attr_accessor delete_key_in_days: ::Integer
       attr_accessor key_identifier: ::String
+      attr_accessor delete_key_in_days: ::Integer
       SENSITIVE: []
     end
 
@@ -87,24 +87,24 @@ module Aws::PaymentCryptography
     end
 
     class ExportKeyInput
-      attr_accessor export_attributes: Types::ExportAttributes
-      attr_accessor export_key_identifier: ::String
       attr_accessor key_material: Types::ExportKeyMaterial
+      attr_accessor export_key_identifier: ::String
+      attr_accessor export_attributes: Types::ExportAttributes
       SENSITIVE: []
     end
 
     class ExportKeyMaterial
-      attr_accessor key_cryptogram: Types::ExportKeyCryptogram
       attr_accessor tr_31_key_block: Types::ExportTr31KeyBlock
       attr_accessor tr_34_key_block: Types::ExportTr34KeyBlock
+      attr_accessor key_cryptogram: Types::ExportKeyCryptogram
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class KeyCryptogram < ExportKeyMaterial
-      end
       class Tr31KeyBlock < ExportKeyMaterial
       end
       class Tr34KeyBlock < ExportKeyMaterial
+      end
+      class KeyCryptogram < ExportKeyMaterial
       end
       class Unknown < ExportKeyMaterial
       end
@@ -117,15 +117,17 @@ module Aws::PaymentCryptography
 
     class ExportTr31KeyBlock
       attr_accessor wrapping_key_identifier: ::String
+      attr_accessor key_block_headers: Types::KeyBlockHeaders
       SENSITIVE: []
     end
 
     class ExportTr34KeyBlock
       attr_accessor certificate_authority_public_key_identifier: ::String
+      attr_accessor wrapping_key_certificate: ::String
       attr_accessor export_token: ::String
       attr_accessor key_block_format: ("X9_TR34_2012")
       attr_accessor random_nonce: ::String
-      attr_accessor wrapping_key_certificate: ::String
+      attr_accessor key_block_headers: Types::KeyBlockHeaders
       SENSITIVE: [:wrapping_key_certificate]
     end
 
@@ -156,11 +158,11 @@ module Aws::PaymentCryptography
     end
 
     class GetParametersForExportOutput
-      attr_accessor export_token: ::String
-      attr_accessor parameters_valid_until_timestamp: ::Time
-      attr_accessor signing_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
       attr_accessor signing_key_certificate: ::String
       attr_accessor signing_key_certificate_chain: ::String
+      attr_accessor signing_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+      attr_accessor export_token: ::String
+      attr_accessor parameters_valid_until_timestamp: ::Time
       SENSITIVE: [:signing_key_certificate, :signing_key_certificate_chain]
     end
 
@@ -171,11 +173,11 @@ module Aws::PaymentCryptography
     end
 
     class GetParametersForImportOutput
-      attr_accessor import_token: ::String
-      attr_accessor parameters_valid_until_timestamp: ::Time
-      attr_accessor wrapping_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
       attr_accessor wrapping_key_certificate: ::String
       attr_accessor wrapping_key_certificate_chain: ::String
+      attr_accessor wrapping_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+      attr_accessor import_token: ::String
+      attr_accessor parameters_valid_until_timestamp: ::Time
       SENSITIVE: [:wrapping_key_certificate, :wrapping_key_certificate_chain]
     end
 
@@ -191,40 +193,40 @@ module Aws::PaymentCryptography
     end
 
     class ImportKeyCryptogram
-      attr_accessor exportable: bool
-      attr_accessor import_token: ::String
       attr_accessor key_attributes: Types::KeyAttributes
+      attr_accessor exportable: bool
       attr_accessor wrapped_key_cryptogram: ::String
+      attr_accessor import_token: ::String
       attr_accessor wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")
       SENSITIVE: []
     end
 
     class ImportKeyInput
-      attr_accessor enabled: bool
-      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
       attr_accessor key_material: Types::ImportKeyMaterial
+      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
+      attr_accessor enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class ImportKeyMaterial
-      attr_accessor key_cryptogram: Types::ImportKeyCryptogram
       attr_accessor root_certificate_public_key: Types::RootCertificatePublicKey
+      attr_accessor trusted_certificate_public_key: Types::TrustedCertificatePublicKey
       attr_accessor tr_31_key_block: Types::ImportTr31KeyBlock
       attr_accessor tr_34_key_block: Types::ImportTr34KeyBlock
-      attr_accessor trusted_certificate_public_key: Types::TrustedCertificatePublicKey
+      attr_accessor key_cryptogram: Types::ImportKeyCryptogram
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class KeyCryptogram < ImportKeyMaterial
-      end
       class RootCertificatePublicKey < ImportKeyMaterial
+      end
+      class TrustedCertificatePublicKey < ImportKeyMaterial
       end
       class Tr31KeyBlock < ImportKeyMaterial
       end
       class Tr34KeyBlock < ImportKeyMaterial
       end
-      class TrustedCertificatePublicKey < ImportKeyMaterial
+      class KeyCryptogram < ImportKeyMaterial
       end
       class Unknown < ImportKeyMaterial
       end
@@ -236,18 +238,18 @@ module Aws::PaymentCryptography
     end
 
     class ImportTr31KeyBlock
-      attr_accessor wrapped_key_block: ::String
       attr_accessor wrapping_key_identifier: ::String
+      attr_accessor wrapped_key_block: ::String
       SENSITIVE: []
     end
 
     class ImportTr34KeyBlock
       attr_accessor certificate_authority_public_key_identifier: ::String
+      attr_accessor signing_key_certificate: ::String
       attr_accessor import_token: ::String
+      attr_accessor wrapped_key_block: ::String
       attr_accessor key_block_format: ("X9_TR34_2012")
       attr_accessor random_nonce: ::String
-      attr_accessor signing_key_certificate: ::String
-      attr_accessor wrapped_key_block: ::String
       SENSITIVE: [:signing_key_certificate]
     end
 
@@ -257,56 +259,64 @@ module Aws::PaymentCryptography
     end
 
     class Key
-      attr_accessor create_timestamp: ::Time
-      attr_accessor delete_pending_timestamp: ::Time
-      attr_accessor delete_timestamp: ::Time
-      attr_accessor enabled: bool
-      attr_accessor exportable: bool
       attr_accessor key_arn: ::String
       attr_accessor key_attributes: Types::KeyAttributes
       attr_accessor key_check_value: ::String
       attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
-      attr_accessor key_origin: ("EXTERNAL" | "AWS_PAYMENT_CRYPTOGRAPHY")
+      attr_accessor enabled: bool
+      attr_accessor exportable: bool
       attr_accessor key_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_COMPLETE")
+      attr_accessor key_origin: ("EXTERNAL" | "AWS_PAYMENT_CRYPTOGRAPHY")
+      attr_accessor create_timestamp: ::Time
       attr_accessor usage_start_timestamp: ::Time
       attr_accessor usage_stop_timestamp: ::Time
+      attr_accessor delete_pending_timestamp: ::Time
+      attr_accessor delete_timestamp: ::Time
       SENSITIVE: []
     end
 
     class KeyAttributes
-      attr_accessor key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
-      attr_accessor key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY")
-      attr_accessor key_modes_of_use: Types::KeyModesOfUse
       attr_accessor key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY")
+      attr_accessor key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY")
+      attr_accessor key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+      attr_accessor key_modes_of_use: Types::KeyModesOfUse
+      SENSITIVE: []
+    end
+
+    class KeyBlockHeaders
+      attr_accessor key_modes_of_use: Types::KeyModesOfUse
+      attr_accessor key_exportability: ("EXPORTABLE" | "NON_EXPORTABLE" | "SENSITIVE")
+      attr_accessor key_version: ::String
+      attr_accessor optional_blocks: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class KeyModesOfUse
-      attr_accessor decrypt: bool
-      attr_accessor derive_key: bool
       attr_accessor encrypt: bool
-      attr_accessor generate: bool
-      attr_accessor no_restrictions: bool
-      attr_accessor sign: bool
-      attr_accessor unwrap: bool
-      attr_accessor verify: bool
+      attr_accessor decrypt: bool
       attr_accessor wrap: bool
+      attr_accessor unwrap: bool
+      attr_accessor generate: bool
+      attr_accessor sign: bool
+      attr_accessor verify: bool
+      attr_accessor derive_key: bool
+      attr_accessor no_restrictions: bool
       SENSITIVE: []
     end
 
     class KeySummary
-      attr_accessor enabled: bool
-      attr_accessor exportable: bool
       attr_accessor key_arn: ::String
+      attr_accessor key_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_COMPLETE")
       attr_accessor key_attributes: Types::KeyAttributes
       attr_accessor key_check_value: ::String
-      attr_accessor key_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_COMPLETE")
+      attr_accessor exportable: bool
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 
     class ListAliasesInput
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -318,8 +328,8 @@ module Aws::PaymentCryptography
 
     class ListKeysInput
       attr_accessor key_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_COMPLETE")
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -330,15 +340,15 @@ module Aws::PaymentCryptography
     end
 
     class ListTagsForResourceInput
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListTagsForResourceOutput
-      attr_accessor next_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -414,9 +424,9 @@ module Aws::PaymentCryptography
     end
 
     class TrustedCertificatePublicKey
-      attr_accessor certificate_authority_public_key_identifier: ::String
       attr_accessor key_attributes: Types::KeyAttributes
       attr_accessor public_key_certificate: ::String
+      attr_accessor certificate_authority_public_key_identifier: ::String
       SENSITIVE: [:public_key_certificate]
     end
 
@@ -446,11 +456,11 @@ module Aws::PaymentCryptography
     end
 
     class WrappedKey
+      attr_accessor wrapping_key_arn: ::String
+      attr_accessor wrapped_key_material_format: ("KEY_CRYPTOGRAM" | "TR31_KEY_BLOCK" | "TR34_KEY_BLOCK")
+      attr_accessor key_material: ::String
       attr_accessor key_check_value: ::String
       attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
-      attr_accessor key_material: ::String
-      attr_accessor wrapped_key_material_format: ("KEY_CRYPTOGRAM" | "TR31_KEY_BLOCK" | "TR34_KEY_BLOCK")
-      attr_accessor wrapping_key_arn: ::String
       SENSITIVE: [:key_material]
     end
   end

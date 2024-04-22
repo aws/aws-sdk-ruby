@@ -681,6 +681,10 @@ module Aws::BedrockAgent
     # @option params [String] :description
     #   A description of the action group.
     #
+    # @option params [Types::FunctionSchema] :function_schema
+    #   Contains details about the function schema for the action group or the
+    #   JSON or YAML-formatted payload defining the schema.
+    #
     # @option params [String] :parent_action_group_signature
     #   To allow your agent to request the user for additional information
     #   when trying to complete a task, set this field to `AMAZON.UserInput`.
@@ -704,6 +708,7 @@ module Aws::BedrockAgent
     #
     #   resp = client.create_agent_action_group({
     #     action_group_executor: {
+    #       custom_control: "RETURN_CONTROL", # accepts RETURN_CONTROL
     #       lambda: "LambdaArn",
     #     },
     #     action_group_name: "Name", # required
@@ -719,11 +724,27 @@ module Aws::BedrockAgent
     #     },
     #     client_token: "ClientToken",
     #     description: "Description",
+    #     function_schema: {
+    #       functions: [
+    #         {
+    #           description: "FunctionDescription",
+    #           name: "Name", # required
+    #           parameters: {
+    #             "Name" => {
+    #               description: "ParameterDescription",
+    #               required: false,
+    #               type: "string", # required, accepts string, number, integer, boolean, array
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
     #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
     #   })
     #
     # @example Response structure
     #
+    #   resp.agent_action_group.action_group_executor.custom_control #=> String, one of "RETURN_CONTROL"
     #   resp.agent_action_group.action_group_executor.lambda #=> String
     #   resp.agent_action_group.action_group_id #=> String
     #   resp.agent_action_group.action_group_name #=> String
@@ -736,6 +757,13 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.client_token #=> String
     #   resp.agent_action_group.created_at #=> Time
     #   resp.agent_action_group.description #=> String
+    #   resp.agent_action_group.function_schema.functions #=> Array
+    #   resp.agent_action_group.function_schema.functions[0].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].name #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters #=> Hash
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
     #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
     #   resp.agent_action_group.updated_at #=> Time
     #
@@ -1459,6 +1487,7 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
+    #   resp.agent_action_group.action_group_executor.custom_control #=> String, one of "RETURN_CONTROL"
     #   resp.agent_action_group.action_group_executor.lambda #=> String
     #   resp.agent_action_group.action_group_id #=> String
     #   resp.agent_action_group.action_group_name #=> String
@@ -1471,6 +1500,13 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.client_token #=> String
     #   resp.agent_action_group.created_at #=> Time
     #   resp.agent_action_group.description #=> String
+    #   resp.agent_action_group.function_schema.functions #=> Array
+    #   resp.agent_action_group.function_schema.functions[0].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].name #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters #=> Hash
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
     #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
     #   resp.agent_action_group.updated_at #=> Time
     #
@@ -2610,6 +2646,10 @@ module Aws::BedrockAgent
     # @option params [String] :description
     #   Specifies a new name for the action group.
     #
+    # @option params [Types::FunctionSchema] :function_schema
+    #   Contains details about the function schema for the action group or the
+    #   JSON or YAML-formatted payload defining the schema.
+    #
     # @option params [String] :parent_action_group_signature
     #   To allow your agent to request the user for additional information
     #   when trying to complete a task, set this field to `AMAZON.UserInput`.
@@ -2633,6 +2673,7 @@ module Aws::BedrockAgent
     #
     #   resp = client.update_agent_action_group({
     #     action_group_executor: {
+    #       custom_control: "RETURN_CONTROL", # accepts RETURN_CONTROL
     #       lambda: "LambdaArn",
     #     },
     #     action_group_id: "Id", # required
@@ -2648,11 +2689,27 @@ module Aws::BedrockAgent
     #       },
     #     },
     #     description: "Description",
+    #     function_schema: {
+    #       functions: [
+    #         {
+    #           description: "FunctionDescription",
+    #           name: "Name", # required
+    #           parameters: {
+    #             "Name" => {
+    #               description: "ParameterDescription",
+    #               required: false,
+    #               type: "string", # required, accepts string, number, integer, boolean, array
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
     #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
     #   })
     #
     # @example Response structure
     #
+    #   resp.agent_action_group.action_group_executor.custom_control #=> String, one of "RETURN_CONTROL"
     #   resp.agent_action_group.action_group_executor.lambda #=> String
     #   resp.agent_action_group.action_group_id #=> String
     #   resp.agent_action_group.action_group_name #=> String
@@ -2665,6 +2722,13 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.client_token #=> String
     #   resp.agent_action_group.created_at #=> Time
     #   resp.agent_action_group.description #=> String
+    #   resp.agent_action_group.function_schema.functions #=> Array
+    #   resp.agent_action_group.function_schema.functions[0].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].name #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters #=> Hash
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
     #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
     #   resp.agent_action_group.updated_at #=> Time
     #
@@ -3054,7 +3118,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

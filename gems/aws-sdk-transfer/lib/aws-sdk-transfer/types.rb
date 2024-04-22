@@ -2071,14 +2071,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] usage
-    #   Specifies how this certificate is used. It can be used in the
-    #   following ways:
-    #
-    #   * `SIGNING`: For signing AS2 messages
-    #
-    #   * `ENCRYPTION`: For encrypting AS2 messages
-    #
-    #   * `TLS`: For securing AS2 communications sent over HTTPS
+    #   Specifies whether this certificate is used for signing or
+    #   encryption.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3300,14 +3294,8 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] usage
-    #   Specifies how this certificate is used. It can be used in the
-    #   following ways:
-    #
-    #   * `SIGNING`: For signing AS2 messages
-    #
-    #   * `ENCRYPTION`: For encrypting AS2 messages
-    #
-    #   * `TLS`: For securing AS2 communications sent over HTTPS
+    #   Specifies whether this certificate is used for signing or
+    #   encryption.
     #   @return [String]
     #
     # @!attribute [rw] certificate
@@ -4237,14 +4225,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] usage
-    #   Specifies how this certificate is used. It can be used in the
-    #   following ways:
-    #
-    #   * `SIGNING`: For signing AS2 messages
-    #
-    #   * `ENCRYPTION`: For encrypting AS2 messages
-    #
-    #   * `TLS`: For securing AS2 communications sent over HTTPS
+    #   Specifies whether this certificate is used for signing or
+    #   encryption.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5111,6 +5093,55 @@ module Aws::Transfer
       :date_imported,
       :ssh_public_key_body,
       :ssh_public_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
+    #   The unique identifier for the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_directory_path
+    #   Specifies the directory on the remote SFTP server for which you want
+    #   to list its contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   An optional parameter where you can specify the maximum number of
+    #   file/directory names to retrieve. The default value is 1,000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_directory_path
+    #   Specifies the path (bucket and prefix) in Amazon S3 storage to store
+    #   the results of the directory listing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartDirectoryListingRequest AWS API Documentation
+    #
+    class StartDirectoryListingRequest < Struct.new(
+      :connector_id,
+      :remote_directory_path,
+      :max_items,
+      :output_directory_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] listing_id
+    #   Returns a unique identifier for the directory listing call.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_file_name
+    #   Returns the file name where the results are stored. This is a
+    #   combination of the connector ID and the listing ID:
+    #   `<connector-id>-<listing-id>.json`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartDirectoryListingResponse AWS API Documentation
+    #
+    class StartDirectoryListingResponse < Struct.new(
+      :listing_id,
+      :output_file_name)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2024-04-22)
+------------------
+
+* Feature - Releasing the support for simplified configuration and return of control
+
 1.5.0 (2024-04-16)
 ------------------
 
