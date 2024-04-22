@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-s3/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-kms', '~> 1')``
+  spec.add_dependency('aws-sdk-kms', '~> 1')
   spec.add_dependency('aws-sigv4', '~> 1.8')
   spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.192.0')
 
