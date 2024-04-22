@@ -74,6 +74,7 @@ module AwsSdkCodeGenerator
         'signingName' => true,
         'serviceFullName' => true,
         'protocol' => true,
+        'protocols' => true,
         'targetPrefix' => true,
         'jsonVersion' => true,
         'errorPrefix' => true,
