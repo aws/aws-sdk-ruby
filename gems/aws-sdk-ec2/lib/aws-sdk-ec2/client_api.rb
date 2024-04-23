@@ -1168,6 +1168,8 @@ module Aws::EC2
     DisableImageBlockPublicAccessResult = Shapes::StructureShape.new(name: 'DisableImageBlockPublicAccessResult')
     DisableImageDeprecationRequest = Shapes::StructureShape.new(name: 'DisableImageDeprecationRequest')
     DisableImageDeprecationResult = Shapes::StructureShape.new(name: 'DisableImageDeprecationResult')
+    DisableImageDeregistrationProtectionRequest = Shapes::StructureShape.new(name: 'DisableImageDeregistrationProtectionRequest')
+    DisableImageDeregistrationProtectionResult = Shapes::StructureShape.new(name: 'DisableImageDeregistrationProtectionResult')
     DisableImageRequest = Shapes::StructureShape.new(name: 'DisableImageRequest')
     DisableImageResult = Shapes::StructureShape.new(name: 'DisableImageResult')
     DisableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountRequest')
@@ -1300,6 +1302,8 @@ module Aws::EC2
     EnableImageBlockPublicAccessResult = Shapes::StructureShape.new(name: 'EnableImageBlockPublicAccessResult')
     EnableImageDeprecationRequest = Shapes::StructureShape.new(name: 'EnableImageDeprecationRequest')
     EnableImageDeprecationResult = Shapes::StructureShape.new(name: 'EnableImageDeprecationResult')
+    EnableImageDeregistrationProtectionRequest = Shapes::StructureShape.new(name: 'EnableImageDeregistrationProtectionRequest')
+    EnableImageDeregistrationProtectionResult = Shapes::StructureShape.new(name: 'EnableImageDeregistrationProtectionResult')
     EnableImageRequest = Shapes::StructureShape.new(name: 'EnableImageRequest')
     EnableImageResult = Shapes::StructureShape.new(name: 'EnableImageResult')
     EnableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountRequest')
@@ -8017,6 +8021,13 @@ module Aws::EC2
     DisableImageDeprecationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     DisableImageDeprecationResult.struct_class = Types::DisableImageDeprecationResult
 
+    DisableImageDeregistrationProtectionRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    DisableImageDeregistrationProtectionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableImageDeregistrationProtectionRequest.struct_class = Types::DisableImageDeregistrationProtectionRequest
+
+    DisableImageDeregistrationProtectionResult.add_member(:return, Shapes::ShapeRef.new(shape: String, location_name: "return"))
+    DisableImageDeregistrationProtectionResult.struct_class = Types::DisableImageDeregistrationProtectionResult
+
     DisableImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
     DisableImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisableImageRequest.struct_class = Types::DisableImageRequest
@@ -8460,6 +8471,14 @@ module Aws::EC2
 
     EnableImageDeprecationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     EnableImageDeprecationResult.struct_class = Types::EnableImageDeprecationResult
+
+    EnableImageDeregistrationProtectionRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    EnableImageDeregistrationProtectionRequest.add_member(:with_cooldown, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithCooldown"))
+    EnableImageDeregistrationProtectionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableImageDeregistrationProtectionRequest.struct_class = Types::EnableImageDeregistrationProtectionRequest
+
+    EnableImageDeregistrationProtectionResult.add_member(:return, Shapes::ShapeRef.new(shape: String, location_name: "return"))
+    EnableImageDeregistrationProtectionResult.struct_class = Types::EnableImageDeregistrationProtectionResult
 
     EnableImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
     EnableImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -9617,6 +9636,8 @@ module Aws::EC2
     Image.add_member(:deprecation_time, Shapes::ShapeRef.new(shape: String, location_name: "deprecationTime"))
     Image.add_member(:imds_support, Shapes::ShapeRef.new(shape: ImdsSupportValues, location_name: "imdsSupport"))
     Image.add_member(:source_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceInstanceId"))
+    Image.add_member(:deregistration_protection, Shapes::ShapeRef.new(shape: String, location_name: "deregistrationProtection"))
+    Image.add_member(:last_launched_time, Shapes::ShapeRef.new(shape: String, location_name: "lastLaunchedTime"))
     Image.struct_class = Types::Image
 
     ImageAttribute.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingList, location_name: "blockDeviceMapping"))
@@ -9632,6 +9653,7 @@ module Aws::EC2
     ImageAttribute.add_member(:uefi_data, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "uefiData"))
     ImageAttribute.add_member(:last_launched_time, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "lastLaunchedTime"))
     ImageAttribute.add_member(:imds_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "imdsSupport"))
+    ImageAttribute.add_member(:deregistration_protection, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "deregistrationProtection"))
     ImageAttribute.struct_class = Types::ImageAttribute
 
     ImageDiskContainer.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -19426,6 +19448,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisableImageDeprecationResult)
       end)
 
+      api.add_operation(:disable_image_deregistration_protection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableImageDeregistrationProtection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableImageDeregistrationProtectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableImageDeregistrationProtectionResult)
+      end)
+
       api.add_operation(:disable_ipam_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableIpamOrganizationAdminAccount"
         o.http_method = "POST"
@@ -19664,6 +19694,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableImageDeprecationRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableImageDeprecationResult)
+      end)
+
+      api.add_operation(:enable_image_deregistration_protection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableImageDeregistrationProtection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableImageDeregistrationProtectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableImageDeregistrationProtectionResult)
       end)
 
       api.add_operation(:enable_ipam_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|

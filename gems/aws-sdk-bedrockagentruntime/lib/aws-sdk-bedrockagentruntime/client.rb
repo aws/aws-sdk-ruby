@@ -1036,6 +1036,27 @@ module Aws::BedrockAgentRuntime
     #       text: "RetrieveAndGenerateInputTextString", # required
     #     },
     #     retrieve_and_generate_configuration: {
+    #       external_sources_configuration: {
+    #         generation_configuration: {
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #         },
+    #         model_arn: "BedrockModelArn", # required
+    #         sources: [ # required
+    #           {
+    #             byte_content: {
+    #               content_type: "ContentType", # required
+    #               data: "data", # required
+    #               identifier: "Identifier", # required
+    #             },
+    #             s3_location: {
+    #               uri: "S3Uri", # required
+    #             },
+    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
+    #           },
+    #         ],
+    #       },
     #       knowledge_base_configuration: {
     #         generation_configuration: {
     #           prompt_template: {
@@ -1108,7 +1129,7 @@ module Aws::BedrockAgentRuntime
     #           },
     #         },
     #       },
-    #       type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE
+    #       type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE, EXTERNAL_SOURCES
     #     },
     #     session_configuration: {
     #       kms_key_arn: "KmsKeyArn", # required
@@ -1152,7 +1173,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

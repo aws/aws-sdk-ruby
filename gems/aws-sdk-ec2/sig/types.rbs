@@ -4533,7 +4533,7 @@ module Aws::EC2
     end
 
     class DescribeImageAttributeRequest
-      attr_accessor attribute: ("description" | "kernel" | "ramdisk" | "launchPermission" | "productCodes" | "blockDeviceMapping" | "sriovNetSupport" | "bootMode" | "tpmSupport" | "uefiData" | "lastLaunchedTime" | "imdsSupport")
+      attr_accessor attribute: ("description" | "kernel" | "ramdisk" | "launchPermission" | "productCodes" | "blockDeviceMapping" | "sriovNetSupport" | "bootMode" | "tpmSupport" | "uefiData" | "lastLaunchedTime" | "imdsSupport" | "deregistrationProtection")
       attr_accessor image_id: ::String
       attr_accessor dry_run: bool
       SENSITIVE: []
@@ -6372,6 +6372,17 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DisableImageDeregistrationProtectionRequest
+      attr_accessor image_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DisableImageDeregistrationProtectionResult
+      attr_accessor return: ::String
+      SENSITIVE: []
+    end
+
     class DisableImageRequest
       attr_accessor image_id: ::String
       attr_accessor dry_run: bool
@@ -6957,6 +6968,18 @@ module Aws::EC2
 
     class EnableImageDeprecationResult
       attr_accessor return: bool
+      SENSITIVE: []
+    end
+
+    class EnableImageDeregistrationProtectionRequest
+      attr_accessor image_id: ::String
+      attr_accessor with_cooldown: bool
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class EnableImageDeregistrationProtectionResult
+      attr_accessor return: ::String
       SENSITIVE: []
     end
 
@@ -8397,6 +8420,8 @@ module Aws::EC2
       attr_accessor deprecation_time: ::String
       attr_accessor imds_support: ("v2.0")
       attr_accessor source_instance_id: ::String
+      attr_accessor deregistration_protection: ::String
+      attr_accessor last_launched_time: ::String
       SENSITIVE: []
     end
 
@@ -8414,6 +8439,7 @@ module Aws::EC2
       attr_accessor uefi_data: Types::AttributeValue
       attr_accessor last_launched_time: Types::AttributeValue
       attr_accessor imds_support: Types::AttributeValue
+      attr_accessor deregistration_protection: Types::AttributeValue
       SENSITIVE: []
     end
 

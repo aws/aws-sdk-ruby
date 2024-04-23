@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2024-04-23)
+------------------
+
+* Feature - Introducing the ability to create multiple data sources per knowledge base, specify S3 buckets as data sources from external accounts, and exposing levers to define the deletion behavior of the underlying vector store data.
+
 1.6.0 (2024-04-22)
 ------------------
 

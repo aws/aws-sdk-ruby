@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2024-04-23)
+------------------
+
+* Feature - Added additional metadata that might be applicable to your reservation recommendations.
+
 1.97.0 (2024-03-26)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2024-04-23)
+------------------
+
+* Feature - This release introduces Guardrails for Amazon Bedrock.
+
 1.5.0 (2024-01-26)
 ------------------
 

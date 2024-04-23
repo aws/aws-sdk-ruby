@@ -873,6 +873,9 @@ module Aws::BedrockAgent
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
+    # @option params [String] :data_deletion_policy
+    #   The deletion policy for the requested data source
+    #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
     #   Contains metadata about where the data source is stored.
     #
@@ -900,9 +903,11 @@ module Aws::BedrockAgent
     #
     #   resp = client.create_data_source({
     #     client_token: "ClientToken",
+    #     data_deletion_policy: "RETAIN", # accepts RETAIN, DELETE
     #     data_source_configuration: { # required
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
+    #         bucket_owner_account_id: "BucketOwnerAccountId",
     #         inclusion_prefixes: ["S3Prefix"],
     #       },
     #       type: "S3", # required, accepts S3
@@ -927,16 +932,20 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.data_source.created_at #=> Time
+    #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
+    #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
     #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.description #=> String
+    #   resp.data_source.failure_reasons #=> Array
+    #   resp.data_source.failure_reasons[0] #=> String
     #   resp.data_source.knowledge_base_id #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
-    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source.updated_at #=> Time
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
@@ -1110,7 +1119,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_id #=> String
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
-    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -1323,7 +1332,7 @@ module Aws::BedrockAgent
     #
     #   resp.data_source_id #=> String
     #   resp.knowledge_base_id #=> String
-    #   resp.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteDataSource AWS API Documentation
     #
@@ -1359,7 +1368,7 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.knowledge_base_id #=> String
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteKnowledgeBase AWS API Documentation
     #
@@ -1694,16 +1703,20 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.data_source.created_at #=> Time
+    #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
+    #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
     #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.description #=> String
+    #   resp.data_source.failure_reasons #=> Array
+    #   resp.data_source.failure_reasons[0] #=> String
     #   resp.data_source.knowledge_base_id #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
-    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source.updated_at #=> Time
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
@@ -1799,7 +1812,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_id #=> String
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
-    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -2144,7 +2157,7 @@ module Aws::BedrockAgent
     #   resp.data_source_summaries[0].description #=> String
     #   resp.data_source_summaries[0].knowledge_base_id #=> String
     #   resp.data_source_summaries[0].name #=> String
-    #   resp.data_source_summaries[0].status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.data_source_summaries[0].status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2276,7 +2289,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base_summaries[0].description #=> String
     #   resp.knowledge_base_summaries[0].knowledge_base_id #=> String
     #   resp.knowledge_base_summaries[0].name #=> String
-    #   resp.knowledge_base_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.knowledge_base_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #   resp.knowledge_base_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2869,6 +2882,9 @@ module Aws::BedrockAgent
     # You can't change the `chunkingConfiguration` after you create the
     # data source. Specify the existing `chunkingConfiguration`.
     #
+    # @option params [String] :data_deletion_policy
+    #   The data deletion policy of the updated data source.
+    #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
     #   Contains details about the storage configuration of the data source.
     #
@@ -2898,9 +2914,11 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_data_source({
+    #     data_deletion_policy: "RETAIN", # accepts RETAIN, DELETE
     #     data_source_configuration: { # required
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
+    #         bucket_owner_account_id: "BucketOwnerAccountId",
     #         inclusion_prefixes: ["S3Prefix"],
     #       },
     #       type: "S3", # required, accepts S3
@@ -2926,16 +2944,20 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.data_source.created_at #=> Time
+    #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
+    #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
     #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.description #=> String
+    #   resp.data_source.failure_reasons #=> Array
+    #   resp.data_source.failure_reasons[0] #=> String
     #   resp.data_source.knowledge_base_id #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
-    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source.updated_at #=> Time
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
@@ -3068,7 +3090,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_id #=> String
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
-    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -3118,7 +3140,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

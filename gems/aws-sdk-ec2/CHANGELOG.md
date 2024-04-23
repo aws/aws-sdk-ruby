@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.451.0 (2024-04-23)
+------------------
+
+* Feature - This release introduces EC2 AMI Deregistration Protection, a new AMI property that can be enabled by customers to protect an AMI against an unintended deregistration. This release also enables the AMI owners to view the AMI 'LastLaunchedTime' in DescribeImages API.
+
 1.450.0 (2024-04-17)
 ------------------
 

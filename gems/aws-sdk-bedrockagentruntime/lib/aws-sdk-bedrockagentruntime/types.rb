@@ -286,6 +286,31 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # This property contains the document to chat with, along with its
+    # attributes.
+    #
+    # @!attribute [rw] content_type
+    #   The MIME type of the document contained in the wrapper object.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The byte value of the file to upload, encoded as a Base-64 string.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The file name of the document contained in the wrapper object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ByteContentDoc AWS API Documentation
+    #
+    class ByteContentDoc < Struct.new(
+      :content_type,
+      :data,
+      :identifier)
+      SENSITIVE = [:data, :identifier]
+      include Aws::Structure
+    end
+
     # An object containing a segment of the generated response that is based
     # on a source in the knowledge base, alongside information about the
     # source.
@@ -376,6 +401,76 @@ module Aws::BedrockAgentRuntime
       :message,
       :resource_name,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The unique external source of the content contained in the wrapper
+    # object.
+    #
+    # @!attribute [rw] byte_content
+    #   The identifier, contentType, and data of the external source wrapper
+    #   object.
+    #   @return [Types::ByteContentDoc]
+    #
+    # @!attribute [rw] s3_location
+    #   The S3 location of the external source wrapper object.
+    #   @return [Types::S3ObjectDoc]
+    #
+    # @!attribute [rw] source_type
+    #   The source type of the external source wrapper object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ExternalSource AWS API Documentation
+    #
+    class ExternalSource < Struct.new(
+      :byte_content,
+      :s3_location,
+      :source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the generation configuration of the external source wrapper
+    # object.
+    #
+    # @!attribute [rw] prompt_template
+    #   Contain the textPromptTemplate string for the external source
+    #   wrapper object.
+    #   @return [Types::PromptTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ExternalSourcesGenerationConfiguration AWS API Documentation
+    #
+    class ExternalSourcesGenerationConfiguration < Struct.new(
+      :prompt_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configurations of the external source wrapper object in the
+    # retrieveAndGenerate function.
+    #
+    # @!attribute [rw] generation_configuration
+    #   The prompt used with the external source wrapper object with the
+    #   retrieveAndGenerate function.
+    #   @return [Types::ExternalSourcesGenerationConfiguration]
+    #
+    # @!attribute [rw] model_arn
+    #   The modelArn used with the external source wrapper object in the
+    #   retrieveAndGenerate function.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The document used with the external source wrapper object in the
+    #   retrieveAndGenerate function.
+    #   @return [Array<Types::ExternalSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ExternalSourcesRetrieveAndGenerateConfiguration AWS API Documentation
+    #
+    class ExternalSourcesRetrieveAndGenerateConfiguration < Struct.new(
+      :generation_configuration,
+      :model_arn,
+      :sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1834,6 +1929,11 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
     #
+    # @!attribute [rw] external_sources_configuration
+    #   The configuration used with the external source wrapper object in
+    #   the retrieveAndGenerate function.
+    #   @return [Types::ExternalSourcesRetrieveAndGenerateConfiguration]
+    #
     # @!attribute [rw] knowledge_base_configuration
     #   Contains details about the resource being queried.
     #   @return [Types::KnowledgeBaseRetrieveAndGenerateConfiguration]
@@ -1845,6 +1945,7 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerateConfiguration AWS API Documentation
     #
     class RetrieveAndGenerateConfiguration < Struct.new(
+      :external_sources_configuration,
       :knowledge_base_configuration,
       :type)
       SENSITIVE = []
@@ -2105,6 +2206,20 @@ module Aws::BedrockAgentRuntime
       :invocation_id,
       :invocation_inputs,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The unique wrapper object of the document from the S3 location.
+    #
+    # @!attribute [rw] uri
+    #   The file location of the S3 wrapper object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/S3ObjectDoc AWS API Documentation
+    #
+    class S3ObjectDoc < Struct.new(
+      :uri)
       SENSITIVE = []
       include Aws::Structure
     end

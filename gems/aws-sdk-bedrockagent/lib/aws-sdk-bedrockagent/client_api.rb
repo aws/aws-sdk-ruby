@@ -48,6 +48,7 @@ module Aws::BedrockAgent
     BasePromptTemplate = Shapes::StringShape.new(name: 'BasePromptTemplate')
     BedrockEmbeddingModelArn = Shapes::StringShape.new(name: 'BedrockEmbeddingModelArn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BucketOwnerAccountId = Shapes::StringShape.new(name: 'BucketOwnerAccountId')
     ChunkingConfiguration = Shapes::StructureShape.new(name: 'ChunkingConfiguration')
     ChunkingStrategy = Shapes::StringShape.new(name: 'ChunkingStrategy')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -65,6 +66,7 @@ module Aws::BedrockAgent
     CreateKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseResponse')
     CreationMode = Shapes::StringShape.new(name: 'CreationMode')
     CustomControlMethod = Shapes::StringShape.new(name: 'CustomControlMethod')
+    DataDeletionPolicy = Shapes::StringShape.new(name: 'DataDeletionPolicy')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DataSourceStatus = Shapes::StringShape.new(name: 'DataSourceStatus')
@@ -463,6 +465,7 @@ module Aws::BedrockAgent
     CreateAgentResponse.struct_class = Types::CreateAgentResponse
 
     CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSourceRequest.add_member(:data_deletion_policy, Shapes::ShapeRef.new(shape: DataDeletionPolicy, location_name: "dataDeletionPolicy"))
     CreateDataSourceRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
     CreateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
@@ -487,9 +490,11 @@ module Aws::BedrockAgent
     CreateKnowledgeBaseResponse.struct_class = Types::CreateKnowledgeBaseResponse
 
     DataSource.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    DataSource.add_member(:data_deletion_policy, Shapes::ShapeRef.new(shape: DataDeletionPolicy, location_name: "dataDeletionPolicy"))
     DataSource.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
     DataSource.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "dataSourceId"))
     DataSource.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DataSource.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     DataSource.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     DataSource.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     DataSource.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
@@ -889,6 +894,7 @@ module Aws::BedrockAgent
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     S3DataSourceConfiguration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "bucketArn"))
+    S3DataSourceConfiguration.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: BucketOwnerAccountId, location_name: "bucketOwnerAccountId"))
     S3DataSourceConfiguration.add_member(:inclusion_prefixes, Shapes::ShapeRef.new(shape: S3Prefixes, location_name: "inclusionPrefixes"))
     S3DataSourceConfiguration.struct_class = Types::S3DataSourceConfiguration
 
@@ -991,6 +997,7 @@ module Aws::BedrockAgent
     UpdateAgentResponse.add_member(:agent, Shapes::ShapeRef.new(shape: Agent, required: true, location_name: "agent"))
     UpdateAgentResponse.struct_class = Types::UpdateAgentResponse
 
+    UpdateDataSourceRequest.add_member(:data_deletion_policy, Shapes::ShapeRef.new(shape: DataDeletionPolicy, location_name: "dataDeletionPolicy"))
     UpdateDataSourceRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
     UpdateDataSourceRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))

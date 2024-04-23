@@ -205,6 +205,27 @@ module Aws
                                      text: ::String
                                    },
                                    ?retrieve_and_generate_configuration: {
+                                     external_sources_configuration: {
+                                       generation_configuration: {
+                                         prompt_template: {
+                                           text_prompt_template: ::String?
+                                         }?
+                                       }?,
+                                       model_arn: ::String,
+                                       sources: Array[
+                                         {
+                                           byte_content: {
+                                             content_type: ::String,
+                                             data: ::String,
+                                             identifier: ::String
+                                           }?,
+                                           s3_location: {
+                                             uri: ::String
+                                           }?,
+                                           source_type: ("S3" | "BYTE_CONTENT")
+                                         },
+                                       ]
+                                     }?,
                                      knowledge_base_configuration: {
                                        generation_configuration: {
                                          prompt_template: {
@@ -273,7 +294,7 @@ module Aws
                                          }
                                        }?
                                      }?,
-                                     type: ("KNOWLEDGE_BASE")
+                                     type: ("KNOWLEDGE_BASE" | "EXTERNAL_SOURCES")
                                    },
                                    ?session_configuration: {
                                      kms_key_arn: ::String

@@ -72,6 +72,13 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class ByteContentDoc
+      attr_accessor content_type: ::String
+      attr_accessor data: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: [:data, :identifier]
+    end
+
     class Citation
       attr_accessor generated_response_part: Types::GeneratedResponsePart
       attr_accessor retrieved_references: ::Array[Types::RetrievedReference]
@@ -93,6 +100,25 @@ module Aws::BedrockAgentRuntime
       attr_accessor message: ::String
       attr_accessor resource_name: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ExternalSource
+      attr_accessor byte_content: Types::ByteContentDoc
+      attr_accessor s3_location: Types::S3ObjectDoc
+      attr_accessor source_type: ("S3" | "BYTE_CONTENT")
+      SENSITIVE: []
+    end
+
+    class ExternalSourcesGenerationConfiguration
+      attr_accessor prompt_template: Types::PromptTemplate
+      SENSITIVE: []
+    end
+
+    class ExternalSourcesRetrieveAndGenerateConfiguration
+      attr_accessor generation_configuration: Types::ExternalSourcesGenerationConfiguration
+      attr_accessor model_arn: ::String
+      attr_accessor sources: ::Array[Types::ExternalSource]
       SENSITIVE: []
     end
 
@@ -455,8 +481,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class RetrieveAndGenerateConfiguration
+      attr_accessor external_sources_configuration: Types::ExternalSourcesRetrieveAndGenerateConfiguration
       attr_accessor knowledge_base_configuration: Types::KnowledgeBaseRetrieveAndGenerateConfiguration
-      attr_accessor type: ("KNOWLEDGE_BASE")
+      attr_accessor type: ("KNOWLEDGE_BASE" | "EXTERNAL_SOURCES")
       SENSITIVE: []
     end
 
@@ -515,6 +542,11 @@ module Aws::BedrockAgentRuntime
       attr_accessor invocation_id: ::String
       attr_accessor invocation_inputs: ::Array[Types::InvocationInputMember]
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class S3ObjectDoc
+      attr_accessor uri: ::String
       SENSITIVE: []
     end
 

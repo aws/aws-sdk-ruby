@@ -2676,14 +2676,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] certificate_s3_object_key
-    #   The key of the Amazon S3 object ey where the certificate,
-    #   certificate chain, and encrypted private key bundle is stored. The
-    #   object key is formated as follows: `role_arn`/`certificate_arn`.
+    #   The key of the Amazon S3 object where the certificate, certificate
+    #   chain, and encrypted private key bundle are stored. The object key
+    #   is formatted as follows: `role_arn`/`certificate_arn`.
     #   @return [String]
     #
     # @!attribute [rw] encryption_kms_key_id
-    #   The ID of the KMS customer master key (CMK) used to encrypt the
-    #   private key.
+    #   The ID of the KMS key used to encrypt the private key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedRole AWS API Documentation
@@ -8935,11 +8934,9 @@ module Aws::EC2
     #   The tags to apply to the launch template on creation. To tag the
     #   launch template, the resource type must be `launch-template`.
     #
-    #   <note markdown="1"> To specify the tags for the resources that are created when an
+    #   To specify the tags for the resources that are created when an
     #   instance is launched, you must use the `TagSpecifications` parameter
     #   in the [launch template data][1] structure.
-    #
-    #    </note>
     #
     #
     #
@@ -9000,24 +8997,29 @@ module Aws::EC2
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
-    #   but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] source_version
-    #   The version number of the launch template version on which to base
-    #   the new version. The new version inherits the same launch parameters
-    #   as the source version, except for parameters that you specify in
-    #   `LaunchTemplateData`. Snapshots applied to the block device mapping
-    #   are ignored when creating a new version unless they are explicitly
-    #   included.
+    #   The version of the launch template on which to base the new version.
+    #   Snapshots applied to the block device mapping are ignored when
+    #   creating a new version unless they are explicitly included.
+    #
+    #   If you specify this parameter, the new version inherits the launch
+    #   parameters from the source version. If you specify additional launch
+    #   parameters for the new version, they overwrite any corresponding
+    #   launch parameters inherited from the source version.
+    #
+    #   If you omit this parameter, the new version contains only the launch
+    #   parameters that you specify for the new version.
     #   @return [String]
     #
     # @!attribute [rw] version_description
@@ -14127,15 +14129,15 @@ module Aws::EC2
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateRequest AWS API Documentation
@@ -14170,15 +14172,15 @@ module Aws::EC2
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] versions
@@ -21395,8 +21397,8 @@ module Aws::EC2
     #   The ID of the launch template.
     #
     #   To describe one or more versions of a specified launch template, you
-    #   must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     #   To describe all the latest or default launch template versions in
     #   your account, you must omit this parameter.
@@ -21406,8 +21408,8 @@ module Aws::EC2
     #   The name of the launch template.
     #
     #   To describe one or more versions of a specified launch template, you
-    #   must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   must specify either the launch template name or the launch template
+    #   ID, but not both.
     #
     #   To describe all the latest or default launch template versions in
     #   your account, you must omit this parameter.
@@ -23065,7 +23067,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] network_interfaces
-    #   Information about one or more network interfaces.
+    #   Information about the network interfaces.
     #   @return [Array<Types::NetworkInterface>]
     #
     # @!attribute [rw] next_token
@@ -25481,16 +25483,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`customer-gateway` \|
-    #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
-    #     `fpga-image` \| `host-reservation` \| `image` \| `instance` \|
-    #     `internet-gateway` \| `key-pair` \| `launch-template` \|
-    #     `natgateway` \| `network-acl` \| `network-interface` \|
-    #     `placement-group` \| `reserved-instances` \| `route-table` \|
-    #     `security-group` \| `snapshot` \| `spot-instances-request` \|
-    #     `subnet` \| `volume` \| `vpc` \| `vpc-endpoint` \|
-    #     `vpc-endpoint-service` \| `vpc-peering-connection` \|
-    #     `vpn-connection` \| `vpn-gateway`).
+    #   * `resource-type` - The resource type. For a list of possible
+    #     values, see [TagSpecification][1].
     #
     #   * `tag`:&lt;key&gt; - The key/value combination of the tag. For
     #     example, specify "tag:Owner" for the filter name and "TeamA"
@@ -25498,6 +25492,10 @@ module Aws::EC2
     #     "Owner=TeamA".
     #
     #   * `value` - The tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TagSpecification.html
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -28949,6 +28947,39 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageDeregistrationProtectionRequest AWS API Documentation
+    #
+    class DisableImageDeregistrationProtectionRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageDeregistrationProtectionResult AWS API Documentation
+    #
+    class DisableImageDeregistrationProtectionResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageRequest AWS API Documentation
     #
     class DisableImageRequest < Struct.new(
@@ -31210,6 +31241,45 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeprecationResult AWS API Documentation
     #
     class EnableImageDeprecationResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] with_cooldown
+    #   If `true`, enforces deregistration protection for 24 hours after
+    #   deregistration protection is disabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeregistrationProtectionRequest AWS API Documentation
+    #
+    class EnableImageDeregistrationProtectionRequest < Struct.new(
+      :image_id,
+      :with_cooldown,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeregistrationProtectionResult AWS API Documentation
+    #
+    class EnableImageDeregistrationProtectionResult < Struct.new(
       :return)
       SENSITIVE = []
       include Aws::Structure
@@ -37320,6 +37390,25 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
     #   @return [String]
     #
+    # @!attribute [rw] deregistration_protection
+    #   Indicates whether deregistration protection is enabled for the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_launched_time
+    #   The date and time, in [ISO 8601 date-time format][1], when the AMI
+    #   was last used to launch an EC2 instance. When the AMI is used to
+    #   launch an instance, there is a 24-hour delay before that usage is
+    #   reported.
+    #
+    #   <note markdown="1"> `lastLaunchedTime` data is available starting April 2017.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -37353,7 +37442,9 @@ module Aws::EC2
       :tpm_support,
       :deprecation_time,
       :imds_support,
-      :source_instance_id)
+      :source_instance_id,
+      :deregistration_protection,
+      :last_launched_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37445,6 +37536,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #   @return [Types::AttributeValue]
     #
+    # @!attribute [rw] deregistration_protection
+    #   Indicates whether deregistration protection is enabled for the AMI.
+    #   @return [Types::AttributeValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageAttribute AWS API Documentation
     #
     class ImageAttribute < Struct.new(
@@ -37460,7 +37555,8 @@ module Aws::EC2
       :tpm_support,
       :uefi_data,
       :last_launched_time,
-      :imds_support)
+      :imds_support,
+      :deregistration_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45250,31 +45346,29 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The launch template to use. You must specify either the launch
-    # template ID or launch template name in the request, but not both.
+    # Describes the launch template to use.
     #
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify the `LaunchTemplateId` or the `LaunchTemplateName`,
-    #   but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
-    #   but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The launch template version number, `$Latest`, or `$Default`.
     #
-    #   If the value is `$Latest`, Amazon EC2 uses the latest version of the
-    #   launch template.
+    #   A value of `$Latest` uses the latest version of the launch template.
     #
-    #   If the value is `$Default`, Amazon EC2 uses the default version of
-    #   the launch template.
+    #   A value of `$Default` uses the default version of the launch
+    #   template.
     #
     #   Default: The default version of the launch template.
     #   @return [String]
@@ -48493,15 +48587,15 @@ module Aws::EC2
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] default_version
@@ -59018,10 +59112,9 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] launch_template
-    #   The launch template to use to launch the instances. Any parameters
-    #   that you specify in RunInstances override the same parameters in the
-    #   launch template. You can specify either the name or ID of a launch
-    #   template, but not both.
+    #   The launch template. Any additional parameters that you specify for
+    #   the new instance overwrite the corresponding parameters included in
+    #   the launch template.
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] instance_market_options

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2024-04-23)
+------------------
+
+* Feature - Clarifies how aggregation works for GetResourceMetrics in the Performance Insights API.
+
 1.53.0 (2024-01-26)
 ------------------
 

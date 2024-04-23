@@ -6050,8 +6050,8 @@ module Aws::EC2
     #   supported. For more information about NetBIOS node types, see [RFC
     #   2132][2].
     #
-    # * `ipv6-preferred-lease-time` - A value (in seconds, minutes, hours,
-    #   or years) for how frequently a running instance with an IPv6
+    # * `ipv6-address-preferred-lease-time` - A value (in seconds, minutes,
+    #   hours, or years) for how frequently a running instance with an IPv6
     #   assigned to it goes through DHCPv6 lease renewal. Acceptable values
     #   are between 140 and 2147483647 seconds (approximately 68 years). If
     #   no value is entered, the default lease time is 140 seconds. If you
@@ -8126,11 +8126,11 @@ module Aws::EC2
     # For more information, see [Launch an instance from a launch
     # template][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    # If you want to clone an existing launch template as the basis for
-    # creating a new launch template, you can use the Amazon EC2 console.
-    # The API, SDKs, and CLI do not support cloning a template. For more
-    # information, see [Create a launch template from an existing launch
-    # template][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # To clone an existing launch template as the basis for a new launch
+    # template, use the Amazon EC2 console. The API, SDKs, and CLI do not
+    # support cloning a template. For more information, see [Create a launch
+    # template from an existing launch template][2] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
@@ -8167,11 +8167,9 @@ module Aws::EC2
     #   The tags to apply to the launch template on creation. To tag the
     #   launch template, the resource type must be `launch-template`.
     #
-    #   <note markdown="1"> To specify the tags for the resources that are created when an
+    #   To specify the tags for the resources that are created when an
     #   instance is launched, you must use the `TagSpecifications` parameter
     #   in the [launch template data][1] structure.
-    #
-    #    </note>
     #
     #
     #
@@ -8499,17 +8497,18 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a new version of a launch template. You can specify an
-    # existing version of launch template from which to base the new
-    # version.
+    # Creates a new version of a launch template. You must specify an
+    # existing launch template, either by name or ID. You can determine
+    # whether the new version inherits parameters from a source version, and
+    # add or overwrite parameters as needed.
     #
     # Launch template versions are numbered in the order in which they are
-    # created. You cannot specify, change, or replace the numbering of
+    # created. You can't specify, change, or replace the numbering of
     # launch template versions.
     #
     # Launch templates are immutable; after you create a launch template,
     # you can't modify it. Instead, you can create a new version of the
-    # launch template that includes any changes you require.
+    # launch template that includes the changes that you require.
     #
     # For more information, see [Modify a launch template (manage launch
     # template versions)][1] in the *Amazon Elastic Compute Cloud User
@@ -8539,22 +8538,27 @@ module Aws::EC2
     # @option params [String] :launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     # @option params [String] :launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
-    #   but not both.
+    #   You must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     # @option params [String] :source_version
-    #   The version number of the launch template version on which to base the
-    #   new version. The new version inherits the same launch parameters as
-    #   the source version, except for parameters that you specify in
-    #   `LaunchTemplateData`. Snapshots applied to the block device mapping
-    #   are ignored when creating a new version unless they are explicitly
-    #   included.
+    #   The version of the launch template on which to base the new version.
+    #   Snapshots applied to the block device mapping are ignored when
+    #   creating a new version unless they are explicitly included.
+    #
+    #   If you specify this parameter, the new version inherits the launch
+    #   parameters from the source version. If you specify additional launch
+    #   parameters for the new version, they overwrite any corresponding
+    #   launch parameters inherited from the source version.
+    #
+    #   If you omit this parameter, the new version contains only the launch
+    #   parameters that you specify for the new version.
     #
     # @option params [String] :version_description
     #   A description for the version of the launch template.
@@ -16374,14 +16378,14 @@ module Aws::EC2
     # @option params [String] :launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     # @option params [String] :launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   You must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     # @return [Types::DeleteLaunchTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -16465,14 +16469,14 @@ module Aws::EC2
     # @option params [String] :launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     # @option params [String] :launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   You must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     # @option params [required, Array<String>] :versions
     #   The version numbers of one or more launch template versions to delete.
@@ -23360,6 +23364,7 @@ module Aws::EC2
     #   * {Types::ImageAttribute#uefi_data #uefi_data} => Types::AttributeValue
     #   * {Types::ImageAttribute#last_launched_time #last_launched_time} => Types::AttributeValue
     #   * {Types::ImageAttribute#imds_support #imds_support} => Types::AttributeValue
+    #   * {Types::ImageAttribute#deregistration_protection #deregistration_protection} => Types::AttributeValue
     #
     #
     # @example Example: To describe the launch permissions for an AMI
@@ -23384,7 +23389,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_image_attribute({
-    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime, imdsSupport
+    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime, imdsSupport, deregistrationProtection
     #     image_id: "ImageId", # required
     #     dry_run: false,
     #   })
@@ -23422,6 +23427,7 @@ module Aws::EC2
     #   resp.uefi_data #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.last_launched_time #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.imds_support #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.deregistration_protection #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImageAttribute AWS API Documentation
     #
@@ -23444,6 +23450,9 @@ module Aws::EC2
     # reference a deregistered AMI are terminated, specifying the ID of the
     # image will eventually return an error indicating that the AMI ID
     # cannot be found.
+    #
+    # We strongly recommend using only paginated requests. Unpaginated
+    # requests are susceptible to throttling and timeouts.
     #
     # <note markdown="1"> The order of the elements in the response, including those within
     # nested structures, might vary. Applications should not assume the
@@ -23741,6 +23750,8 @@ module Aws::EC2
     #   resp.images[0].deprecation_time #=> String
     #   resp.images[0].imds_support #=> String, one of "v2.0"
     #   resp.images[0].source_instance_id #=> String
+    #   resp.images[0].deregistration_protection #=> String
+    #   resp.images[0].last_launched_time #=> String
     #   resp.next_token #=> String
     #
     #
@@ -25254,6 +25265,9 @@ module Aws::EC2
     # the call fails. If you describe instances and specify only instance
     # IDs that are in an unaffected zone, the call works normally.
     #
+    # We strongly recommend using only paginated requests. Unpaginated
+    # requests are susceptible to throttling and timeouts.
+    #
     # <note markdown="1"> The order of the elements in the response, including those within
     # nested structures, might vary. Applications should not assume the
     # elements appear in a particular order.
@@ -26762,8 +26776,8 @@ module Aws::EC2
     #   The ID of the launch template.
     #
     #   To describe one or more versions of a specified launch template, you
-    #   must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     #   To describe all the latest or default launch template versions in your
     #   account, you must omit this parameter.
@@ -26772,8 +26786,8 @@ module Aws::EC2
     #   The name of the launch template.
     #
     #   To describe one or more versions of a specified launch template, you
-    #   must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   must specify either the launch template name or the launch template
+    #   ID, but not both.
     #
     #   To describe all the latest or default launch template versions in your
     #   account, you must omit this parameter.
@@ -29795,6 +29809,9 @@ module Aws::EC2
     # `mac-address`, `private-dns-name`, `private-ip-address`,
     # `private-dns-name`, `subnet-id`, or `vpc-id`.
     #
+    # We strongly recommend using only paginated requests. Unpaginated
+    # requests are susceptible to throttling and timeouts.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -32240,6 +32257,9 @@ module Aws::EC2
     # For more information about EBS snapshots, see [Amazon EBS
     # snapshots][2] in the *Amazon EBS User Guide*.
     #
+    # We strongly recommend using only paginated requests. Unpaginated
+    # requests are susceptible to throttling and timeouts.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
@@ -33981,6 +34001,9 @@ module Aws::EC2
     # For more information about tags, see [Tag your Amazon EC2
     # resources][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
+    # We strongly recommend using only paginated requests. Unpaginated
+    # requests are susceptible to throttling and timeouts.
+    #
     # <note markdown="1"> The order of the elements in the response, including those within
     # nested structures, might vary. Applications should not assume the
     # elements appear in a particular order.
@@ -34004,22 +34027,18 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`customer-gateway` \|
-    #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
-    #     `fpga-image` \| `host-reservation` \| `image` \| `instance` \|
-    #     `internet-gateway` \| `key-pair` \| `launch-template` \|
-    #     `natgateway` \| `network-acl` \| `network-interface` \|
-    #     `placement-group` \| `reserved-instances` \| `route-table` \|
-    #     `security-group` \| `snapshot` \| `spot-instances-request` \|
-    #     `subnet` \| `volume` \| `vpc` \| `vpc-endpoint` \|
-    #     `vpc-endpoint-service` \| `vpc-peering-connection` \|
-    #     `vpn-connection` \| `vpn-gateway`).
+    #   * `resource-type` - The resource type. For a list of possible values,
+    #     see [TagSpecification][1].
     #
     #   * `tag`:&lt;key&gt; - The key/value combination of the tag. For
     #     example, specify "tag:Owner" for the filter name and "TeamA" for
     #     the filter value to find resources with the tag "Owner=TeamA".
     #
     #   * `value` - The tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TagSpecification.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. This value can
@@ -36025,6 +36044,9 @@ module Aws::EC2
     #
     # For more information about EBS volumes, see [Amazon EBS volumes][2] in
     # the *Amazon EBS User Guide*.
+    #
+    # We strongly recommend using only paginated requests. Unpaginated
+    # requests are susceptible to throttling and timeouts.
     #
     # <note markdown="1"> The order of the elements in the response, including those within
     # nested structures, might vary. Applications should not assume the
@@ -38552,6 +38574,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disables deregistration protection for an AMI. When deregistration
+    # protection is disabled, the AMI can be deregistered.
+    #
+    # If you chose to include a 24-hour cooldown period when you enabled
+    # deregistration protection for the AMI, then, when you disable
+    # deregistration protection, you won’t immediately be able to deregister
+    # the AMI.
+    #
+    # For more information, see [Protect an AMI from deregistration][1] in
+    # the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html#ami-deregistration-protection
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableImageDeregistrationProtectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableImageDeregistrationProtectionResult#return #return} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_image_deregistration_protection({
+    #     image_id: "ImageId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageDeregistrationProtection AWS API Documentation
+    #
+    # @overload disable_image_deregistration_protection(params = {})
+    # @param [Hash] params ({})
+    def disable_image_deregistration_protection(params = {}, options = {})
+      req = build_request(:disable_image_deregistration_protection, params)
+      req.send_request(options)
+    end
+
     # Disable the IPAM account. For more information, see [Enable
     # integration with Organizations][1] in the *Amazon VPC IPAM User
     # Guide*.
@@ -40093,6 +40163,57 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_image_deprecation(params = {}, options = {})
       req = build_request(:enable_image_deprecation, params)
+      req.send_request(options)
+    end
+
+    # Enables deregistration protection for an AMI. When deregistration
+    # protection is enabled, the AMI can't be deregistered.
+    #
+    # To allow the AMI to be deregistered, you must first disable
+    # deregistration protection using DisableImageDeregistrationProtection.
+    #
+    # For more information, see [Protect an AMI from deregistration][1] in
+    # the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html#ami-deregistration-protection
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI.
+    #
+    # @option params [Boolean] :with_cooldown
+    #   If `true`, enforces deregistration protection for 24 hours after
+    #   deregistration protection is disabled.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableImageDeregistrationProtectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableImageDeregistrationProtectionResult#return #return} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_image_deregistration_protection({
+    #     image_id: "ImageId", # required
+    #     with_cooldown: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeregistrationProtection AWS API Documentation
+    #
+    # @overload enable_image_deregistration_protection(params = {})
+    # @param [Hash] params ({})
+    def enable_image_deregistration_protection(params = {}, options = {})
+      req = build_request(:enable_image_deregistration_protection, params)
       req.send_request(options)
     end
 
@@ -48141,14 +48262,14 @@ module Aws::EC2
     # @option params [String] :launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     # @option params [String] :launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   You must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     # @option params [String] :default_version
     #   The version number of the launch template to set as the default
@@ -56131,10 +56252,9 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #
     # @option params [Types::LaunchTemplateSpecification] :launch_template
-    #   The launch template to use to launch the instances. Any parameters
-    #   that you specify in RunInstances override the same parameters in the
-    #   launch template. You can specify either the name or ID of a launch
-    #   template, but not both.
+    #   The launch template. Any additional parameters that you specify for
+    #   the new instance overwrite the corresponding parameters included in
+    #   the launch template.
     #
     # @option params [Types::InstanceMarketOptionsRequest] :instance_market_options
     #   The market (purchasing) option for the instances.
@@ -59142,7 +59262,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.450.0'
+      context[:gem_version] = '1.451.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

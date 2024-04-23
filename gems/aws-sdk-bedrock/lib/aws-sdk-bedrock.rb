@@ -33,7 +33,7 @@ require_relative 'aws-sdk-bedrock/customizations'
 # structure.
 #
 #     bedrock = Aws::Bedrock::Client.new
-#     resp = bedrock.create_model_customization_job(params)
+#     resp = bedrock.create_evaluation_job(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-bedrock/customizations'
 # @!group service
 module Aws::Bedrock
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

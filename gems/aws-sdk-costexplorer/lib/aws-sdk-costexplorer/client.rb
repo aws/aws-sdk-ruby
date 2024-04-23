@@ -1381,8 +1381,11 @@ module Aws::CostExplorer
     # such as `SERVICE` or `AZ`, in a specific time range. For a complete
     # list of valid dimensions, see the [GetDimensionValues][1] operation.
     # Management account in an organization in Organizations have access to
-    # all member accounts. This API is currently available for the Amazon
-    # Elastic Compute Cloud – Compute service only.
+    # all member accounts.
+    #
+    # Hourly granularity is only available for EC2-Instances (Elastic
+    # Compute Cloud) resource-level data. All other resource-level data is
+    # available at daily granularity.
     #
     # <note markdown="1"> This is an opt-in only feature. You can enable this feature from the
     # Cost Explorer Settings page. For information about how to access the
@@ -2811,6 +2814,7 @@ module Aws::CostExplorer
     #
     #   resp.metadata.recommendation_id #=> String
     #   resp.metadata.generation_timestamp #=> String
+    #   resp.metadata.additional_metadata #=> String
     #   resp.recommendations #=> Array
     #   resp.recommendations[0].account_scope #=> String, one of "PAYER", "LINKED"
     #   resp.recommendations[0].lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
@@ -5286,7 +5290,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

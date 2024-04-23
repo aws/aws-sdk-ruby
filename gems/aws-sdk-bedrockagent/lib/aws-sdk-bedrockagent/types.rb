@@ -1206,6 +1206,10 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] data_deletion_policy
+    #   The deletion policy for the requested data source
+    #   @return [String]
+    #
     # @!attribute [rw] data_source_configuration
     #   Contains metadata about where the data source is stored.
     #   @return [Types::DataSourceConfiguration]
@@ -1237,6 +1241,7 @@ module Aws::BedrockAgent
     #
     class CreateDataSourceRequest < Struct.new(
       :client_token,
+      :data_deletion_policy,
       :data_source_configuration,
       :description,
       :knowledge_base_id,
@@ -1333,6 +1338,10 @@ module Aws::BedrockAgent
     #   The time at which the data source was created.
     #   @return [Time]
     #
+    # @!attribute [rw] data_deletion_policy
+    #   The deletion policy for the data source.
+    #   @return [String]
+    #
     # @!attribute [rw] data_source_configuration
     #   Contains details about how the data source is stored.
     #   @return [Types::DataSourceConfiguration]
@@ -1344,6 +1353,10 @@ module Aws::BedrockAgent
     # @!attribute [rw] description
     #   The description of the data source.
     #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The details of the failure reasons related to the data source.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] knowledge_base_id
     #   The unique identifier of the knowledge base to which the data source
@@ -1381,9 +1394,11 @@ module Aws::BedrockAgent
     #
     class DataSource < Struct.new(
       :created_at,
+      :data_deletion_policy,
       :data_source_configuration,
       :data_source_id,
       :description,
+      :failure_reasons,
       :knowledge_base_id,
       :name,
       :server_side_encryption_configuration,
@@ -3402,6 +3417,10 @@ module Aws::BedrockAgent
     #   source.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_owner_account_id
+    #   The account ID for the owner of the S3 bucket.
+    #   @return [String]
+    #
     # @!attribute [rw] inclusion_prefixes
     #   A list of S3 prefixes that define the object containing the data
     #   sources. For more information, see [Organizing objects using
@@ -3416,6 +3435,7 @@ module Aws::BedrockAgent
     #
     class S3DataSourceConfiguration < Struct.new(
       :bucket_arn,
+      :bucket_owner_account_id,
       :inclusion_prefixes)
       SENSITIVE = []
       include Aws::Structure
@@ -3893,6 +3913,10 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] data_deletion_policy
+    #   The data deletion policy of the updated data source.
+    #   @return [String]
+    #
     # @!attribute [rw] data_source_configuration
     #   Contains details about the storage configuration of the data source.
     #   @return [Types::DataSourceConfiguration]
@@ -3926,6 +3950,7 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateDataSourceRequest AWS API Documentation
     #
     class UpdateDataSourceRequest < Struct.new(
+      :data_deletion_policy,
       :data_source_configuration,
       :data_source_id,
       :description,

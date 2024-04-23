@@ -824,6 +824,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisableImageBlockPublicAccess.build(context)
           when :disable_image_deprecation
             Aws::EC2::Endpoints::DisableImageDeprecation.build(context)
+          when :disable_image_deregistration_protection
+            Aws::EC2::Endpoints::DisableImageDeregistrationProtection.build(context)
           when :disable_ipam_organization_admin_account
             Aws::EC2::Endpoints::DisableIpamOrganizationAdminAccount.build(context)
           when :disable_serial_console_access
@@ -884,6 +886,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::EnableImageBlockPublicAccess.build(context)
           when :enable_image_deprecation
             Aws::EC2::Endpoints::EnableImageDeprecation.build(context)
+          when :enable_image_deregistration_protection
+            Aws::EC2::Endpoints::EnableImageDeregistrationProtection.build(context)
           when :enable_ipam_organization_admin_account
             Aws::EC2::Endpoints::EnableIpamOrganizationAdminAccount.build(context)
           when :enable_reachability_analyzer_organization_sharing

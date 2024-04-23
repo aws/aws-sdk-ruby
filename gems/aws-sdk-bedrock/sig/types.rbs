@@ -13,6 +13,11 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class AutomatedEvaluationConfig
+      attr_accessor dataset_metric_configs: ::Array[Types::EvaluationDatasetMetricConfig]
+      SENSITIVE: []
+    end
+
     class CloudWatchConfig
       attr_accessor log_group_name: ::String
       attr_accessor role_arn: ::String
@@ -22,6 +27,60 @@ module Aws::Bedrock
 
     class ConflictException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEvaluationJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor job_description: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor customer_encryption_key_id: ::String
+      attr_accessor job_tags: ::Array[Types::Tag]
+      attr_accessor evaluation_config: Types::EvaluationConfig
+      attr_accessor inference_config: Types::EvaluationInferenceConfig
+      attr_accessor output_data_config: Types::EvaluationOutputDataConfig
+      SENSITIVE: [:job_description]
+    end
+
+    class CreateEvaluationJobResponse
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGuardrailRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor topic_policy_config: Types::GuardrailTopicPolicyConfig
+      attr_accessor content_policy_config: Types::GuardrailContentPolicyConfig
+      attr_accessor word_policy_config: Types::GuardrailWordPolicyConfig
+      attr_accessor sensitive_information_policy_config: Types::GuardrailSensitiveInformationPolicyConfig
+      attr_accessor blocked_input_messaging: ::String
+      attr_accessor blocked_outputs_messaging: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: [:name, :description, :blocked_input_messaging, :blocked_outputs_messaging]
+    end
+
+    class CreateGuardrailResponse
+      attr_accessor guardrail_id: ::String
+      attr_accessor guardrail_arn: ::String
+      attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateGuardrailVersionRequest
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateGuardrailVersionResponse
+      attr_accessor guardrail_id: ::String
+      attr_accessor version: ::String
       SENSITIVE: []
     end
 
@@ -81,6 +140,15 @@ module Aws::Bedrock
     class DeleteCustomModelResponse < Aws::EmptyStructure
     end
 
+    class DeleteGuardrailRequest
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGuardrailResponse < Aws::EmptyStructure
+    end
+
     class DeleteModelInvocationLoggingConfigurationRequest < Aws::EmptyStructure
     end
 
@@ -93,6 +161,88 @@ module Aws::Bedrock
     end
 
     class DeleteProvisionedModelThroughputResponse < Aws::EmptyStructure
+    end
+
+    class EvaluationBedrockModel
+      attr_accessor model_identifier: ::String
+      attr_accessor inference_params: ::String
+      SENSITIVE: [:inference_params]
+    end
+
+    class EvaluationConfig
+      attr_accessor automated: Types::AutomatedEvaluationConfig
+      attr_accessor human: Types::HumanEvaluationConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Automated < EvaluationConfig
+      end
+      class Human < EvaluationConfig
+      end
+      class Unknown < EvaluationConfig
+      end
+    end
+
+    class EvaluationDataset
+      attr_accessor name: ::String
+      attr_accessor dataset_location: Types::EvaluationDatasetLocation
+      SENSITIVE: [:name]
+    end
+
+    class EvaluationDatasetLocation
+      attr_accessor s3_uri: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3Uri < EvaluationDatasetLocation
+      end
+      class Unknown < EvaluationDatasetLocation
+      end
+    end
+
+    class EvaluationDatasetMetricConfig
+      attr_accessor task_type: ("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom")
+      attr_accessor dataset: Types::EvaluationDataset
+      attr_accessor metric_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EvaluationInferenceConfig
+      attr_accessor models: ::Array[Types::EvaluationModelConfig]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Models < EvaluationInferenceConfig
+      end
+      class Unknown < EvaluationInferenceConfig
+      end
+    end
+
+    class EvaluationModelConfig
+      attr_accessor bedrock_model: Types::EvaluationBedrockModel
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BedrockModel < EvaluationModelConfig
+      end
+      class Unknown < EvaluationModelConfig
+      end
+    end
+
+    class EvaluationOutputDataConfig
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationSummary
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor creation_time: ::Time
+      attr_accessor job_type: ("Human" | "Automated")
+      attr_accessor evaluation_task_types: ::Array[("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom")]
+      attr_accessor model_identifiers: ::Array[::String]
+      SENSITIVE: []
     end
 
     class FoundationModelDetails
@@ -151,6 +301,28 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class GetEvaluationJobRequest
+      attr_accessor job_identifier: ::String
+      SENSITIVE: [:job_identifier]
+    end
+
+    class GetEvaluationJobResponse
+      attr_accessor job_name: ::String
+      attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor job_arn: ::String
+      attr_accessor job_description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor customer_encryption_key_id: ::String
+      attr_accessor job_type: ("Human" | "Automated")
+      attr_accessor evaluation_config: Types::EvaluationConfig
+      attr_accessor inference_config: Types::EvaluationInferenceConfig
+      attr_accessor output_data_config: Types::EvaluationOutputDataConfig
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor failure_messages: ::Array[::String]
+      SENSITIVE: [:job_description]
+    end
+
     class GetFoundationModelRequest
       attr_accessor model_identifier: ::String
       SENSITIVE: []
@@ -159,6 +331,33 @@ module Aws::Bedrock
     class GetFoundationModelResponse
       attr_accessor model_details: Types::FoundationModelDetails
       SENSITIVE: []
+    end
+
+    class GetGuardrailRequest
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetGuardrailResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor guardrail_id: ::String
+      attr_accessor guardrail_arn: ::String
+      attr_accessor version: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "VERSIONING" | "READY" | "FAILED" | "DELETING")
+      attr_accessor topic_policy: Types::GuardrailTopicPolicy
+      attr_accessor content_policy: Types::GuardrailContentPolicy
+      attr_accessor word_policy: Types::GuardrailWordPolicy
+      attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicy
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status_reasons: ::Array[::String]
+      attr_accessor failure_recommendations: ::Array[::String]
+      attr_accessor blocked_input_messaging: ::String
+      attr_accessor blocked_outputs_messaging: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: [:name, :description, :blocked_input_messaging, :blocked_outputs_messaging]
     end
 
     class GetModelCustomizationJobRequest
@@ -221,6 +420,160 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class GuardrailContentFilter
+      attr_accessor type: ("SEXUAL" | "VIOLENCE" | "HATE" | "INSULTS" | "MISCONDUCT" | "PROMPT_ATTACK")
+      attr_accessor input_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+      attr_accessor output_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class GuardrailContentFilterConfig
+      attr_accessor type: ("SEXUAL" | "VIOLENCE" | "HATE" | "INSULTS" | "MISCONDUCT" | "PROMPT_ATTACK")
+      attr_accessor input_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+      attr_accessor output_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class GuardrailContentPolicy
+      attr_accessor filters: ::Array[Types::GuardrailContentFilter]
+      SENSITIVE: []
+    end
+
+    class GuardrailContentPolicyConfig
+      attr_accessor filters_config: ::Array[Types::GuardrailContentFilterConfig]
+      SENSITIVE: []
+    end
+
+    class GuardrailManagedWords
+      attr_accessor type: ("PROFANITY")
+      SENSITIVE: []
+    end
+
+    class GuardrailManagedWordsConfig
+      attr_accessor type: ("PROFANITY")
+      SENSITIVE: []
+    end
+
+    class GuardrailPiiEntity
+      attr_accessor type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER")
+      attr_accessor action: ("BLOCK" | "ANONYMIZE")
+      SENSITIVE: []
+    end
+
+    class GuardrailPiiEntityConfig
+      attr_accessor type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER")
+      attr_accessor action: ("BLOCK" | "ANONYMIZE")
+      SENSITIVE: []
+    end
+
+    class GuardrailRegex
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor pattern: ::String
+      attr_accessor action: ("BLOCK" | "ANONYMIZE")
+      SENSITIVE: []
+    end
+
+    class GuardrailRegexConfig
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor pattern: ::String
+      attr_accessor action: ("BLOCK" | "ANONYMIZE")
+      SENSITIVE: []
+    end
+
+    class GuardrailSensitiveInformationPolicy
+      attr_accessor pii_entities: ::Array[Types::GuardrailPiiEntity]
+      attr_accessor regexes: ::Array[Types::GuardrailRegex]
+      SENSITIVE: []
+    end
+
+    class GuardrailSensitiveInformationPolicyConfig
+      attr_accessor pii_entities_config: ::Array[Types::GuardrailPiiEntityConfig]
+      attr_accessor regexes_config: ::Array[Types::GuardrailRegexConfig]
+      SENSITIVE: []
+    end
+
+    class GuardrailSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "VERSIONING" | "READY" | "FAILED" | "DELETING")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:name, :description]
+    end
+
+    class GuardrailTopic
+      attr_accessor name: ::String
+      attr_accessor definition: ::String
+      attr_accessor examples: ::Array[::String]
+      attr_accessor type: ("DENY")
+      SENSITIVE: [:name, :definition]
+    end
+
+    class GuardrailTopicConfig
+      attr_accessor name: ::String
+      attr_accessor definition: ::String
+      attr_accessor examples: ::Array[::String]
+      attr_accessor type: ("DENY")
+      SENSITIVE: [:name, :definition]
+    end
+
+    class GuardrailTopicPolicy
+      attr_accessor topics: ::Array[Types::GuardrailTopic]
+      SENSITIVE: []
+    end
+
+    class GuardrailTopicPolicyConfig
+      attr_accessor topics_config: ::Array[Types::GuardrailTopicConfig]
+      SENSITIVE: []
+    end
+
+    class GuardrailWord
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailWordConfig
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailWordPolicy
+      attr_accessor words: ::Array[Types::GuardrailWord]
+      attr_accessor managed_word_lists: ::Array[Types::GuardrailManagedWords]
+      SENSITIVE: []
+    end
+
+    class GuardrailWordPolicyConfig
+      attr_accessor words_config: ::Array[Types::GuardrailWordConfig]
+      attr_accessor managed_word_lists_config: ::Array[Types::GuardrailManagedWordsConfig]
+      SENSITIVE: []
+    end
+
+    class HumanEvaluationConfig
+      attr_accessor human_workflow_config: Types::HumanWorkflowConfig
+      attr_accessor custom_metrics: ::Array[Types::HumanEvaluationCustomMetric]
+      attr_accessor dataset_metric_configs: ::Array[Types::EvaluationDatasetMetricConfig]
+      SENSITIVE: []
+    end
+
+    class HumanEvaluationCustomMetric
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rating_method: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class HumanWorkflowConfig
+      attr_accessor flow_definition_arn: ::String
+      attr_accessor instructions: ::String
+      SENSITIVE: [:instructions]
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -245,6 +598,24 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class ListEvaluationJobsRequest
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      attr_accessor status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor name_contains: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("CreationTime")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ListEvaluationJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor job_summaries: ::Array[Types::EvaluationSummary]
+      SENSITIVE: []
+    end
+
     class ListFoundationModelsRequest
       attr_accessor by_provider: ::String
       attr_accessor by_customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING")
@@ -255,6 +626,19 @@ module Aws::Bedrock
 
     class ListFoundationModelsResponse
       attr_accessor model_summaries: ::Array[Types::FoundationModelSummary]
+      SENSITIVE: []
+    end
+
+    class ListGuardrailsRequest
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGuardrailsResponse
+      attr_accessor guardrails: ::Array[Types::GuardrailSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -373,6 +757,14 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class StopEvaluationJobRequest
+      attr_accessor job_identifier: ::String
+      SENSITIVE: [:job_identifier]
+    end
+
+    class StopEvaluationJobResponse < Aws::EmptyStructure
+    end
+
     class StopModelCustomizationJobRequest
       attr_accessor job_identifier: ::String
       SENSITIVE: []
@@ -424,6 +816,28 @@ module Aws::Bedrock
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGuardrailRequest
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor topic_policy_config: Types::GuardrailTopicPolicyConfig
+      attr_accessor content_policy_config: Types::GuardrailContentPolicyConfig
+      attr_accessor word_policy_config: Types::GuardrailWordPolicyConfig
+      attr_accessor sensitive_information_policy_config: Types::GuardrailSensitiveInformationPolicyConfig
+      attr_accessor blocked_input_messaging: ::String
+      attr_accessor blocked_outputs_messaging: ::String
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: [:name, :description, :blocked_input_messaging, :blocked_outputs_messaging]
+    end
+
+    class UpdateGuardrailResponse
+      attr_accessor guardrail_id: ::String
+      attr_accessor guardrail_arn: ::String
+      attr_accessor version: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class UpdateProvisionedModelThroughputRequest

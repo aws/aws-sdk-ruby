@@ -5581,10 +5581,11 @@ module Aws
         def uefi_data: () -> Types::AttributeValue
         def last_launched_time: () -> Types::AttributeValue
         def imds_support: () -> Types::AttributeValue
+        def deregistration_protection: () -> Types::AttributeValue
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#describe_image_attribute-instance_method
       def describe_image_attribute: (
-                                      attribute: ("description" | "kernel" | "ramdisk" | "launchPermission" | "productCodes" | "blockDeviceMapping" | "sriovNetSupport" | "bootMode" | "tpmSupport" | "uefiData" | "lastLaunchedTime" | "imdsSupport"),
+                                      attribute: ("description" | "kernel" | "ramdisk" | "launchPermission" | "productCodes" | "blockDeviceMapping" | "sriovNetSupport" | "bootMode" | "tpmSupport" | "uefiData" | "lastLaunchedTime" | "imdsSupport" | "deregistrationProtection"),
                                       image_id: ::String,
                                       ?dry_run: bool
                                     ) -> _DescribeImageAttributeResponseSuccess
@@ -7870,6 +7871,17 @@ module Aws
                                      ) -> _DisableImageDeprecationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableImageDeprecationResponseSuccess
 
+      interface _DisableImageDeregistrationProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableImageDeregistrationProtectionResult]
+        def return: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#disable_image_deregistration_protection-instance_method
+      def disable_image_deregistration_protection: (
+                                                     image_id: ::String,
+                                                     ?dry_run: bool
+                                                   ) -> _DisableImageDeregistrationProtectionResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableImageDeregistrationProtectionResponseSuccess
+
       interface _DisableIpamOrganizationAdminAccountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisableIpamOrganizationAdminAccountResult]
         def success: () -> bool
@@ -8235,6 +8247,18 @@ module Aws
                                       ?dry_run: bool
                                     ) -> _EnableImageDeprecationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableImageDeprecationResponseSuccess
+
+      interface _EnableImageDeregistrationProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableImageDeregistrationProtectionResult]
+        def return: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#enable_image_deregistration_protection-instance_method
+      def enable_image_deregistration_protection: (
+                                                    image_id: ::String,
+                                                    ?with_cooldown: bool,
+                                                    ?dry_run: bool
+                                                  ) -> _EnableImageDeregistrationProtectionResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableImageDeregistrationProtectionResponseSuccess
 
       interface _EnableIpamOrganizationAdminAccountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableIpamOrganizationAdminAccountResult]

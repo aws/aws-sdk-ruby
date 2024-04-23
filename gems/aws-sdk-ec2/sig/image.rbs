@@ -108,6 +108,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#source_instance_id-instance_method
       def source_instance_id: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#deregistration_protection-instance_method
+      def deregistration_protection: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#last_launched_time-instance_method
+      def last_launched_time: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#load-instance_method
@@ -160,7 +166,7 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#describe_attribute-instance_method
       def describe_attribute: (
-                                attribute: ("description" | "kernel" | "ramdisk" | "launchPermission" | "productCodes" | "blockDeviceMapping" | "sriovNetSupport" | "bootMode" | "tpmSupport" | "uefiData" | "lastLaunchedTime" | "imdsSupport"),
+                                attribute: ("description" | "kernel" | "ramdisk" | "launchPermission" | "productCodes" | "blockDeviceMapping" | "sriovNetSupport" | "bootMode" | "tpmSupport" | "uefiData" | "lastLaunchedTime" | "imdsSupport" | "deregistrationProtection"),
                                 ?dry_run: bool
                               ) -> Types::ImageAttribute
                             | (?Hash[Symbol, untyped]) -> Types::ImageAttribute

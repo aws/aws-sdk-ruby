@@ -266,6 +266,7 @@ module Aws::BedrockAgent
 
     class CreateDataSourceRequest
       attr_accessor client_token: ::String
+      attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
       attr_accessor data_source_configuration: Types::DataSourceConfiguration
       attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
@@ -298,13 +299,15 @@ module Aws::BedrockAgent
 
     class DataSource
       attr_accessor created_at: ::Time
+      attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
       attr_accessor data_source_configuration: Types::DataSourceConfiguration
       attr_accessor data_source_id: ::String
       attr_accessor description: ::String
+      attr_accessor failure_reasons: ::Array[::String]
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
-      attr_accessor status: ("AVAILABLE" | "DELETING")
+      attr_accessor status: ("AVAILABLE" | "DELETING" | "DELETE_UNSUCCESSFUL")
       attr_accessor updated_at: ::Time
       attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
       SENSITIVE: []
@@ -321,7 +324,7 @@ module Aws::BedrockAgent
       attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("AVAILABLE" | "DELETING")
+      attr_accessor status: ("AVAILABLE" | "DELETING" | "DELETE_UNSUCCESSFUL")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -385,7 +388,7 @@ module Aws::BedrockAgent
     class DeleteDataSourceResponse
       attr_accessor data_source_id: ::String
       attr_accessor knowledge_base_id: ::String
-      attr_accessor status: ("AVAILABLE" | "DELETING")
+      attr_accessor status: ("AVAILABLE" | "DELETING" | "DELETE_UNSUCCESSFUL")
       SENSITIVE: []
     end
 
@@ -396,7 +399,7 @@ module Aws::BedrockAgent
 
     class DeleteKnowledgeBaseResponse
       attr_accessor knowledge_base_id: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED" | "DELETE_UNSUCCESSFUL")
       SENSITIVE: []
     end
 
@@ -595,7 +598,7 @@ module Aws::BedrockAgent
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
       attr_accessor role_arn: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED" | "DELETE_UNSUCCESSFUL")
       attr_accessor storage_configuration: Types::StorageConfiguration
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -611,7 +614,7 @@ module Aws::BedrockAgent
       attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED" | "DELETE_UNSUCCESSFUL")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -836,6 +839,7 @@ module Aws::BedrockAgent
 
     class S3DataSourceConfiguration
       attr_accessor bucket_arn: ::String
+      attr_accessor bucket_owner_account_id: ::String
       attr_accessor inclusion_prefixes: ::Array[::String]
       SENSITIVE: []
     end
@@ -967,6 +971,7 @@ module Aws::BedrockAgent
     end
 
     class UpdateDataSourceRequest
+      attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
       attr_accessor data_source_configuration: Types::DataSourceConfiguration
       attr_accessor data_source_id: ::String
       attr_accessor description: ::String

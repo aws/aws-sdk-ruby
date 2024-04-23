@@ -17865,7 +17865,7 @@ module Aws::RDS
     # @option params [String] :resource_arn
     #   The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL
     #   Server DB instance. For example,
-    #   `arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db`.
+    #   `arn:aws:rds:us-east-1:12345667890:db:my-orcl-db`.
     #
     # @option params [String] :audit_policy_state
     #   The audit policy state. When a policy is unlocked, it is read/write.
@@ -30770,7 +30770,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.226.0'
+      context[:gem_version] = '1.227.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -32,14 +32,22 @@ module Aws::BedrockAgentRuntime
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BedrockModelArn = Shapes::StringShape.new(name: 'BedrockModelArn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ByteContentBlob = Shapes::BlobShape.new(name: 'ByteContentBlob')
+    ByteContentDoc = Shapes::StructureShape.new(name: 'ByteContentDoc')
     Citation = Shapes::StructureShape.new(name: 'Citation')
     Citations = Shapes::ListShape.new(name: 'Citations')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentBody = Shapes::StructureShape.new(name: 'ContentBody')
     ContentMap = Shapes::MapShape.new(name: 'ContentMap')
+    ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreationMode = Shapes::StringShape.new(name: 'CreationMode')
     DependencyFailedException = Shapes::StructureShape.new(name: 'DependencyFailedException')
     Double = Shapes::FloatShape.new(name: 'Double')
+    ExternalSource = Shapes::StructureShape.new(name: 'ExternalSource')
+    ExternalSourceType = Shapes::StringShape.new(name: 'ExternalSourceType')
+    ExternalSources = Shapes::ListShape.new(name: 'ExternalSources')
+    ExternalSourcesGenerationConfiguration = Shapes::StructureShape.new(name: 'ExternalSourcesGenerationConfiguration')
+    ExternalSourcesRetrieveAndGenerateConfiguration = Shapes::StructureShape.new(name: 'ExternalSourcesRetrieveAndGenerateConfiguration')
     FailureReasonString = Shapes::StringShape.new(name: 'FailureReasonString')
     FailureTrace = Shapes::StructureShape.new(name: 'FailureTrace')
     FilterAttribute = Shapes::StructureShape.new(name: 'FilterAttribute')
@@ -54,6 +62,7 @@ module Aws::BedrockAgentRuntime
     FunctionResult = Shapes::StructureShape.new(name: 'FunctionResult')
     GeneratedResponsePart = Shapes::StructureShape.new(name: 'GeneratedResponsePart')
     GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
+    Identifier = Shapes::StringShape.new(name: 'Identifier')
     InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
     InputText = Shapes::StringShape.new(name: 'InputText')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -134,6 +143,8 @@ module Aws::BedrockAgentRuntime
     RetrievedReferences = Shapes::ListShape.new(name: 'RetrievedReferences')
     ReturnControlInvocationResults = Shapes::ListShape.new(name: 'ReturnControlInvocationResults')
     ReturnControlPayload = Shapes::StructureShape.new(name: 'ReturnControlPayload')
+    S3ObjectDoc = Shapes::StructureShape.new(name: 'S3ObjectDoc')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SearchType = Shapes::StringShape.new(name: 'SearchType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionAttributesMap = Shapes::MapShape.new(name: 'SessionAttributesMap')
@@ -208,6 +219,11 @@ module Aws::BedrockAgentRuntime
     BadGatewayException.add_member(:resource_name, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "resourceName"))
     BadGatewayException.struct_class = Types::BadGatewayException
 
+    ByteContentDoc.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location_name: "contentType"))
+    ByteContentDoc.add_member(:data, Shapes::ShapeRef.new(shape: ByteContentBlob, required: true, location_name: "data"))
+    ByteContentDoc.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "identifier"))
+    ByteContentDoc.struct_class = Types::ByteContentDoc
+
     Citation.add_member(:generated_response_part, Shapes::ShapeRef.new(shape: GeneratedResponsePart, location_name: "generatedResponsePart"))
     Citation.add_member(:retrieved_references, Shapes::ShapeRef.new(shape: RetrievedReferences, location_name: "retrievedReferences"))
     Citation.struct_class = Types::Citation
@@ -226,6 +242,21 @@ module Aws::BedrockAgentRuntime
     DependencyFailedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     DependencyFailedException.add_member(:resource_name, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "resourceName"))
     DependencyFailedException.struct_class = Types::DependencyFailedException
+
+    ExternalSource.add_member(:byte_content, Shapes::ShapeRef.new(shape: ByteContentDoc, location_name: "byteContent"))
+    ExternalSource.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3ObjectDoc, location_name: "s3Location"))
+    ExternalSource.add_member(:source_type, Shapes::ShapeRef.new(shape: ExternalSourceType, required: true, location_name: "sourceType"))
+    ExternalSource.struct_class = Types::ExternalSource
+
+    ExternalSources.member = Shapes::ShapeRef.new(shape: ExternalSource)
+
+    ExternalSourcesGenerationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: PromptTemplate, location_name: "promptTemplate"))
+    ExternalSourcesGenerationConfiguration.struct_class = Types::ExternalSourcesGenerationConfiguration
+
+    ExternalSourcesRetrieveAndGenerateConfiguration.add_member(:generation_configuration, Shapes::ShapeRef.new(shape: ExternalSourcesGenerationConfiguration, location_name: "generationConfiguration"))
+    ExternalSourcesRetrieveAndGenerateConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
+    ExternalSourcesRetrieveAndGenerateConfiguration.add_member(:sources, Shapes::ShapeRef.new(shape: ExternalSources, required: true, location_name: "sources"))
+    ExternalSourcesRetrieveAndGenerateConfiguration.struct_class = Types::ExternalSourcesRetrieveAndGenerateConfiguration
 
     FailureTrace.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReasonString, location_name: "failureReason"))
     FailureTrace.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
@@ -498,6 +529,7 @@ module Aws::BedrockAgentRuntime
     RetrievalResultS3Location.add_member(:uri, Shapes::ShapeRef.new(shape: String, location_name: "uri"))
     RetrievalResultS3Location.struct_class = Types::RetrievalResultS3Location
 
+    RetrieveAndGenerateConfiguration.add_member(:external_sources_configuration, Shapes::ShapeRef.new(shape: ExternalSourcesRetrieveAndGenerateConfiguration, location_name: "externalSourcesConfiguration"))
     RetrieveAndGenerateConfiguration.add_member(:knowledge_base_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseRetrieveAndGenerateConfiguration, location_name: "knowledgeBaseConfiguration"))
     RetrieveAndGenerateConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: RetrieveAndGenerateType, required: true, location_name: "type"))
     RetrieveAndGenerateConfiguration.struct_class = Types::RetrieveAndGenerateConfiguration
@@ -544,6 +576,9 @@ module Aws::BedrockAgentRuntime
     ReturnControlPayload.add_member(:invocation_id, Shapes::ShapeRef.new(shape: String, location_name: "invocationId"))
     ReturnControlPayload.add_member(:invocation_inputs, Shapes::ShapeRef.new(shape: InvocationInputs, location_name: "invocationInputs"))
     ReturnControlPayload.struct_class = Types::ReturnControlPayload
+
+    S3ObjectDoc.add_member(:uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "uri"))
+    S3ObjectDoc.struct_class = Types::S3ObjectDoc
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException

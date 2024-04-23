@@ -58,20 +58,32 @@ module Aws::Bedrock
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :create_evaluation_job
+            Aws::Bedrock::Endpoints::CreateEvaluationJob.build(context)
+          when :create_guardrail
+            Aws::Bedrock::Endpoints::CreateGuardrail.build(context)
+          when :create_guardrail_version
+            Aws::Bedrock::Endpoints::CreateGuardrailVersion.build(context)
           when :create_model_customization_job
             Aws::Bedrock::Endpoints::CreateModelCustomizationJob.build(context)
           when :create_provisioned_model_throughput
             Aws::Bedrock::Endpoints::CreateProvisionedModelThroughput.build(context)
           when :delete_custom_model
             Aws::Bedrock::Endpoints::DeleteCustomModel.build(context)
+          when :delete_guardrail
+            Aws::Bedrock::Endpoints::DeleteGuardrail.build(context)
           when :delete_model_invocation_logging_configuration
             Aws::Bedrock::Endpoints::DeleteModelInvocationLoggingConfiguration.build(context)
           when :delete_provisioned_model_throughput
             Aws::Bedrock::Endpoints::DeleteProvisionedModelThroughput.build(context)
           when :get_custom_model
             Aws::Bedrock::Endpoints::GetCustomModel.build(context)
+          when :get_evaluation_job
+            Aws::Bedrock::Endpoints::GetEvaluationJob.build(context)
           when :get_foundation_model
             Aws::Bedrock::Endpoints::GetFoundationModel.build(context)
+          when :get_guardrail
+            Aws::Bedrock::Endpoints::GetGuardrail.build(context)
           when :get_model_customization_job
             Aws::Bedrock::Endpoints::GetModelCustomizationJob.build(context)
           when :get_model_invocation_logging_configuration
@@ -80,8 +92,12 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::GetProvisionedModelThroughput.build(context)
           when :list_custom_models
             Aws::Bedrock::Endpoints::ListCustomModels.build(context)
+          when :list_evaluation_jobs
+            Aws::Bedrock::Endpoints::ListEvaluationJobs.build(context)
           when :list_foundation_models
             Aws::Bedrock::Endpoints::ListFoundationModels.build(context)
+          when :list_guardrails
+            Aws::Bedrock::Endpoints::ListGuardrails.build(context)
           when :list_model_customization_jobs
             Aws::Bedrock::Endpoints::ListModelCustomizationJobs.build(context)
           when :list_provisioned_model_throughputs
@@ -90,12 +106,16 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::ListTagsForResource.build(context)
           when :put_model_invocation_logging_configuration
             Aws::Bedrock::Endpoints::PutModelInvocationLoggingConfiguration.build(context)
+          when :stop_evaluation_job
+            Aws::Bedrock::Endpoints::StopEvaluationJob.build(context)
           when :stop_model_customization_job
             Aws::Bedrock::Endpoints::StopModelCustomizationJob.build(context)
           when :tag_resource
             Aws::Bedrock::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::Bedrock::Endpoints::UntagResource.build(context)
+          when :update_guardrail
+            Aws::Bedrock::Endpoints::UpdateGuardrail.build(context)
           when :update_provisioned_model_throughput
             Aws::Bedrock::Endpoints::UpdateProvisionedModelThroughput.build(context)
           end

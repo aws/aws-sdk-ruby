@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.227.0 (2024-04-23)
+------------------
+
+* Feature - Fix the example ARN for ModifyActivityStreamRequest
+
 1.226.0 (2024-04-16)
 ------------------
 

@@ -883,7 +883,8 @@ module Aws::PI
 
     # Retrieve Performance Insights metrics for a set of data sources over a
     # time period. You can provide specific dimension groups and dimensions,
-    # and provide aggregation and filtering criteria for each group.
+    # and provide filtering criteria for each group. You must specify an
+    # aggregate function for each metric.
     #
     # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
     # elements, such as SQL statements, only the first 500 bytes are
@@ -911,8 +912,11 @@ module Aws::PI
     #
     # @option params [required, Array<Types::MetricQuery>] :metric_queries
     #   An array of one or more queries to perform. Each query must specify a
-    #   Performance Insights metric, and can optionally specify aggregation
-    #   and filtering criteria.
+    #   Performance Insights metric and specify an aggregate function, and you
+    #   can provide filtering criteria. You must append the aggregate function
+    #   to the metric. For example, to find the average for the metric
+    #   `db.load` you must use `db.load.avg`. Valid values for aggregate
+    #   functions include `.avg`, `.min`, `.max`, and `.sum`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The date and time specifying the beginning of the requested time
@@ -1372,7 +1376,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

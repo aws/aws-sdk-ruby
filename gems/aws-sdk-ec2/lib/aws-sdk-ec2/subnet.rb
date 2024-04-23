@@ -747,10 +747,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     # @option options [Types::LaunchTemplateSpecification] :launch_template
-    #   The launch template to use to launch the instances. Any parameters
-    #   that you specify in RunInstances override the same parameters in the
-    #   launch template. You can specify either the name or ID of a launch
-    #   template, but not both.
+    #   The launch template. Any additional parameters that you specify for
+    #   the new instance overwrite the corresponding parameters included in
+    #   the launch template.
     # @option options [Types::InstanceMarketOptionsRequest] :instance_market_options
     #   The market (purchasing) option for the instances.
     #
