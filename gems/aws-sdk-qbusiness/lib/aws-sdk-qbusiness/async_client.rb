@@ -10,8 +10,6 @@
 begin
   require 'http/2'
 rescue LoadError; end
-require 'seahorse/client/plugins/endpoint.rb'
-require 'seahorse/client/plugins/response_target.rb'
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
@@ -30,7 +28,6 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'seahorse/client/plugins/h2.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
@@ -46,8 +43,6 @@ module Aws::QBusiness
 
     set_api(ClientApi::API)
 
-    add_plugin(Seahorse::Client::Plugins::Endpoint)
-    add_plugin(Seahorse::Client::Plugins::ResponseTarget)
     add_plugin(Aws::Plugins::CredentialsConfiguration)
     add_plugin(Aws::Plugins::Logging)
     add_plugin(Aws::Plugins::ParamConverter)
@@ -66,7 +61,6 @@ module Aws::QBusiness
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Seahorse::Client::Plugins::H2)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
@@ -137,12 +131,6 @@ module Aws::QBusiness
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
     #
-    #   @option options [Integer] :connection_read_timeout (60)
-    #     Connection read timeout in seconds, defaults to 60 sec.
-    #
-    #   @option options [Integer] :connection_timeout (60)
-    #     Connection timeout in seconds, defaults to 60 sec.
-    #
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
@@ -159,21 +147,20 @@ module Aws::QBusiness
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [Boolean] :enable_alpn (false)
-    #     Set to `true` to enable ALPN in HTTP2 over TLS. Requires Openssl version >= 1.0.2.
-    #     Defaults to false. Note: not all service HTTP2 operations supports ALPN on server
-    #     side, please refer to service documentation.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
-    #
-    #   @option options [Boolean] :http_wire_trace (false)
-    #     When `true`, HTTP2 debug output will be sent to the `:logger`.
     #
     #   @option options [Boolean] :ignore_configured_endpoint_urls
     #     Setting to true disables use of endpoint URLs provided via environment
@@ -198,21 +185,12 @@ module Aws::QBusiness
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
-    #   @option options [Integer] :max_concurrent_streams (100)
-    #     Maximum concurrent streams used in HTTP2 connection, defaults to 100. Note that server may send back
-    #     :settings_max_concurrent_streams value which will take priority when initializing new streams.
-    #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
-    #
-    #   @option options [Boolean] :raise_response_errors (true)
-    #     Defaults to `true`, raises errors if exist when #wait or #join! is called upon async response.
-    #
-    #   @option options [Integer] :read_chunk_size (1024)
     #
     #   @option options [Integer] :request_min_compression_size_bytes (10240)
     #     The minimum size in bytes that triggers compression for request
@@ -273,21 +251,6 @@ module Aws::QBusiness
     #
     #   @option options [String] :session_token
     #
-    #   @option options [String] :ssl_ca_bundle
-    #     Full path to the SSL certificate authority bundle file that should be used when
-    #     verifying peer certificates. If you do not pass `:ssl_ca_directory` or `:ssl_ca_bundle`
-    #     the system default will be used if available.
-    #
-    #   @option options [String] :ssl_ca_directory
-    #     Full path of the directory that contains the unbundled SSL certificate authority
-    #     files for verifying peer certificates. If you do not pass `:ssl_ca_bundle` or
-    #     `:ssl_ca_directory` the system default will be used if available.
-    #
-    #   @option options [String] :ssl_ca_store
-    #
-    #   @option options [Boolean] :ssl_verify_peer (true)
-    #     When `true`, SSL peer certificates are verified when establishing a connection.
-    #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
     #     fake responses are generated and returned. You can specify
@@ -326,6 +289,44 @@ module Aws::QBusiness
     #   @option options [Aws::QBusiness::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::QBusiness::EndpointParameters`
     #
+    #   @option options [Integer] :connection_read_timeout (60)
+    #     Connection read timeout in seconds, defaults to 60 sec.
+    #
+    #   @option options [Integer] :connection_timeout (60)
+    #     Connection timeout in seconds, defaults to 60 sec.
+    #
+    #   @option options [Boolean] :enable_alpn (false)
+    #     Set to `true` to enable ALPN in HTTP2 over TLS. Requires Openssl version >= 1.0.2.
+    #     Defaults to false. Note: not all service HTTP2 operations supports ALPN on server
+    #     side, please refer to service documentation.
+    #
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`, HTTP2 debug output will be sent to the `:logger`.
+    #
+    #   @option options [Integer] :max_concurrent_streams (100)
+    #     Maximum concurrent streams used in HTTP2 connection, defaults to 100. Note that server may send back
+    #     :settings_max_concurrent_streams value which will take priority when initializing new streams.
+    #
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     Defaults to `true`, raises errors if exist when #wait or #join! is called upon async response.
+    #
+    #   @option options [Integer] :read_chunk_size (1024)
+    #
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates. If you do not pass `:ssl_ca_directory` or `:ssl_ca_bundle`
+    #     the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate authority
+    #     files for verifying peer certificates. If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
+    #
     def initialize(*args)
       unless Kernel.const_defined?("HTTP2")
         raise "Must include http/2 gem to use AsyncClient instances."
@@ -355,19 +356,20 @@ module Aws::QBusiness
     #
     # @example Bi-directional EventStream Operation Example
     #
-    #   You can signal input events after initial request is
-    #   established, events will be sent to stream
-    #   immediately (once stream connection is established successfully).
+    #   You can signal input events after the initial request is established. Events
+    #   will be sent to the stream immediately once the stream connection is
+    #   established successfully.
     #
-    #   To signal events, you can call #signal methods from an Aws::QBusiness::EventStreams::ChatInputStream object.
-    #   Make sure signal events before calling #wait or #join! at async response.
+    #   To signal events, you can call the #signal methods from an Aws::QBusiness::EventStreams::ChatInputStream
+    #   object. You must signal events before calling #wait or #join! on the async response.
     #
     #     input_stream = Aws::QBusiness::EventStreams::ChatInputStream.new
     #
-    #     async_resp = client.chat( # params input,
+    #     async_resp = client.chat(
+    #       # params input
     #       input_event_stream_handler: input_stream) do |out_stream|
     #
-    #       # register callbacks for events arrival
+    #       # register callbacks for events
     #       out_stream.on_action_review_event_event do |event|
     #         event # => Aws::QBusiness::Types::actionReviewEvent
     #       end
@@ -382,7 +384,7 @@ module Aws::QBusiness
     #       end
     #
     #     end
-    #     # => returns Aws::Seahorse::Client::AsyncResponse
+    #     # => Aws::Seahorse::Client::AsyncResponse
     #
     #     # signal events
     #     input_stream.signal_action_execution_event_event( ... )
@@ -391,19 +393,19 @@ module Aws::QBusiness
     #     input_stream.signal_end_of_input_event_event( ... )
     #     input_stream.signal_text_event_event( ... )
     #
-    #     # make sure signaling :end_stream in the end
+    #     # make sure to signal :end_stream at the end
     #     input_stream.signal_end_stream
     #
-    #     # wait until stream is closed before finalizing sync response
+    #     # wait until stream is closed before finalizing the sync response
     #     resp = async_resp.wait
-    #     # Or close stream and finalizing sync response immediately
+    #     # Or close the stream and finalize sync response immediately
     #     # resp = async_resp.join!
     #
-    #   Inorder to streamingly processing events received, you can also provide an Aws::QBusiness::EventStreams::ChatOutputStream
-    #   object to register callbacks before initializing request instead of processing from request block
+    #   You can also provide an Aws::QBusiness::EventStreams::ChatOutputStream object to register callbacks
+    #   before initializing the request instead of processing from the request block.
     #
     #     output_stream = Aws::QBusiness::EventStreams::ChatOutputStream.new
-    #     # register callbacks for events arrival
+    #     # register callbacks for output events
     #     output_stream.on_action_review_event_event do |event|
     #       event # => Aws::QBusiness::Types::actionReviewEvent
     #     end
@@ -425,15 +427,15 @@ module Aws::QBusiness
     #       # event.error_message => String
     #     end
     #
-    #     async_resp = client.chat ( #params input,
+    #     async_resp = client.chat (
+    #       # params input
     #       input_event_stream_handler: input_stream
     #       output_event_stream_handler: output_stream
     #     )
     #
-    #     resp = async_resp.wait!
+    #     resp = async_resp.join!
     #
-    #   Besides above usage patterns for process events when they arrive immediately, you can also
-    #   iterate through events after response complete.
+    #   You can also iterate through events after the response is complete.
     #
     #   Events are available at resp.output_stream # => Enumerator
     #
