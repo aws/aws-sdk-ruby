@@ -8,7 +8,13 @@ module Seahorse
 
       include HandlerBuilder
 
-      @plugins = PluginList.new
+      @plugins = PluginList.new([
+        Plugins::Endpoint,
+        Plugins::NetHttp,
+        Plugins::RaiseResponseErrors,
+        Plugins::ResponseTarget,
+        Plugins::RequestCallback
+      ])
 
       # @api private
       def initialize(plugins, options)
