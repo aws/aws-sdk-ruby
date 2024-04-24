@@ -47,7 +47,7 @@ module Aws
           if member_ref.eventheader && params[member_name]
             header_value = params[member_name]
             es_headers[member_ref.shape.name] = Aws::EventStream::HeaderValue.new(
-              type: _header_value_type(member_ref.shape, header_value),
+              type: header_value_type(member_ref.shape, header_value),
               value: header_value
             )
           end
@@ -64,17 +64,16 @@ module Aws
           payload = build_payload_members(payload_ref, params)
                       .force_encoding(Encoding::BINARY)
 
-          _, content_type = _content_type(payload_ref.shape)
+
           es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
-            type: "string", value: content_type)
+            type: "string", value: content_type(payload_ref.shape))
         else
           # explicit payload, serialize just the payload member
           event_ref.shape.members.each do |member_name, member_ref|
             if member_ref.eventpayload && params[member_name]
-              streaming, content_type = _content_type(member_ref.shape)
               es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
-                type: "string", value: content_type)
-              payload = _build_payload(streaming, member_ref, params[member_name])
+                type: "string", value: content_type(member_ref.shape))
+              payload = params[member_name]
             end
           end
         end
@@ -85,15 +84,15 @@ module Aws
         )
       end
 
-      def _content_type(shape)
+      def content_type(shape)
         case shape
-        when BlobShape then [true, "application/octet-stream"]
-        when StringShape then [true, "text/plain"]
+        when BlobShape then "application/octet-stream"
+        when StringShape then "text/plain"
         when StructureShape then
           if @serializer_class.name.include?('Xml')
-            [false, "text/xml"]
+            "text/xml"
           elsif @serializer_class.name.include?('Json')
-            [false, "application/json"]
+            "application/json"
           end
         else
           raise Aws::Errors::EventStreamBuilderError.new(
@@ -101,7 +100,7 @@ module Aws
         end
       end
 
-      def _header_value_type(shape, value)
+      def header_value_type(shape, value)
         case shape
         when StringShape then "string"
         when IntegerShape then "integer"
@@ -112,10 +111,6 @@ module Aws
           raise Aws::Errors::EventStreamBuilderError.new(
             "Unsupported eventheader shape: #{shape.name}")
         end
-      end
-
-      def _build_payload(streaming, ref, value)
-        streaming ? value : @serializer_class.new(ref).serialize(value)
       end
 
       def build_payload_members(payload_ref, params)
