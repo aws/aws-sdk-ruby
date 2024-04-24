@@ -8,6 +8,8 @@ module Seahorse
 
       include HandlerBuilder
 
+      # default plugins
+      # @api private
       @plugins = PluginList.new([
         Plugins::Endpoint,
         Plugins::NetHttp,

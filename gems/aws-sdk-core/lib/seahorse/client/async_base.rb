@@ -4,6 +4,8 @@ module Seahorse
   module Client
     class AsyncBase < Seahorse::Client::Base
 
+      # default H2 plugins
+      # @api private
       @plugins = PluginList.new([
         Plugins::Endpoint,
         Plugins::H2,
