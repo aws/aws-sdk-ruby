@@ -6,7 +6,6 @@ module Aws
     def initialize
       @listeners = {}
       @validate_event = true
-      @status = :ready
       @signal_queue = Queue.new
     end
 
