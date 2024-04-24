@@ -94,6 +94,26 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # @!attribute [rw] payload
+    #   @return [Hash<String,Types::ActionExecutionPayloadField>]
+    #
+    # @!attribute [rw] payload_field_name_separator
+    #   @return [String]
+    #
+    # @!attribute [rw] plugin_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ActionExecutionEvent AWS API Documentation
+    #
+    class ActionExecutionEvent < Struct.new(
+      :payload,
+      :payload_field_name_separator,
+      :plugin_id,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A user input field in an plugin action execution payload.
     #
     # @!attribute [rw] value
@@ -139,6 +159,42 @@ module Aws::QBusiness
       :payload_field_name_separator,
       :plugin_id,
       :plugin_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conversation_id
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   @return [Hash<String,Types::ActionReviewPayloadField>]
+    #
+    # @!attribute [rw] payload_field_name_separator
+    #   @return [String]
+    #
+    # @!attribute [rw] plugin_id
+    #   @return [String]
+    #
+    # @!attribute [rw] plugin_type
+    #   @return [String]
+    #
+    # @!attribute [rw] system_message_id
+    #   @return [String]
+    #
+    # @!attribute [rw] user_message_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ActionReviewEvent AWS API Documentation
+    #
+    class ActionReviewEvent < Struct.new(
+      :conversation_id,
+      :payload,
+      :payload_field_name_separator,
+      :plugin_id,
+      :plugin_type,
+      :system_message_id,
+      :user_message_id,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -298,6 +354,19 @@ module Aws::QBusiness
     class AttachmentInput < Struct.new(
       :data,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment
+    #   A file directly uploaded into a web experience chat.
+    #   @return [Types::AttachmentInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/AttachmentInputEvent AWS API Documentation
+    #
+    class AttachmentInputEvent < Struct.new(
+      :attachment,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -610,6 +679,43 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] conversation_id
+    #   @return [String]
+    #
+    # @!attribute [rw] input_stream
+    #   @return [Types::ChatInputStream]
+    #
+    # @!attribute [rw] parent_message_id
+    #   @return [String]
+    #
+    # @!attribute [rw] user_groups
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ChatInput AWS API Documentation
+    #
+    class ChatInput < Struct.new(
+      :application_id,
+      :client_token,
+      :conversation_id,
+      :input_stream,
+      :parent_message_id,
+      :user_groups,
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration information for Amazon Q Business conversation modes.
     #
     # For more information, see [Admin controls and guardrails][1] and
@@ -637,6 +743,17 @@ module Aws::QBusiness
 
       class PluginConfiguration < ChatModeConfiguration; end
       class Unknown < ChatModeConfiguration; end
+    end
+
+    # @!attribute [rw] output_stream
+    #   @return [Types::ChatOutputStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ChatOutput AWS API Documentation
+    #
+    class ChatOutput < Struct.new(
+      :output_stream)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] action_execution
@@ -777,6 +894,37 @@ module Aws::QBusiness
       :system_message,
       :system_message_id,
       :user_message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attribute_filter
+    #   Enables filtering of responses based on document attributes or
+    #   metadata fields.
+    #   @return [Types::AttributeFilter]
+    #
+    # @!attribute [rw] chat_mode
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_mode_configuration
+    #   Configuration information for Amazon Q Business conversation modes.
+    #
+    #   For more information, see [Admin controls and guardrails][1] and
+    #   [Conversation settings][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+    #   [2]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+    #   @return [Types::ChatModeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ConfigurationEvent AWS API Documentation
+    #
+    class ConfigurationEvent < Struct.new(
+      :attribute_filter,
+      :chat_mode,
+      :chat_mode_configuration,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2331,6 +2479,16 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/EndOfInputEvent AWS API Documentation
+    #
+    class EndOfInputEvent < Struct.new(
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about a data source sync error.
     #
     # @!attribute [rw] error_code
@@ -2346,6 +2504,31 @@ module Aws::QBusiness
     class ErrorDetail < Struct.new(
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment
+    #   The details of a file uploaded during chat.
+    #   @return [Types::AttachmentOutput]
+    #
+    # @!attribute [rw] conversation_id
+    #   @return [String]
+    #
+    # @!attribute [rw] system_message_id
+    #   @return [String]
+    #
+    # @!attribute [rw] user_message_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/FailedAttachmentEvent AWS API Documentation
+    #
+    class FailedAttachmentEvent < Struct.new(
+      :attachment,
+      :conversation_id,
+      :system_message_id,
+      :user_message_id,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4127,6 +4310,34 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # @!attribute [rw] conversation_id
+    #   @return [String]
+    #
+    # @!attribute [rw] final_text_message
+    #   @return [String]
+    #
+    # @!attribute [rw] source_attributions
+    #   @return [Array<Types::SourceAttribution>]
+    #
+    # @!attribute [rw] system_message_id
+    #   @return [String]
+    #
+    # @!attribute [rw] user_message_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/MetadataEvent AWS API Documentation
+    #
+    class MetadataEvent < Struct.new(
+      :conversation_id,
+      :final_text_message,
+      :source_attributions,
+      :system_message_id,
+      :user_message_id,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration information for an Amazon Q Business index.
     #
     # @!attribute [rw] boosting_override
@@ -4950,6 +5161,42 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/TextInputEvent AWS API Documentation
+    #
+    class TextInputEvent < Struct.new(
+      :user_message,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conversation_id
+    #   @return [String]
+    #
+    # @!attribute [rw] system_message
+    #   @return [String]
+    #
+    # @!attribute [rw] system_message_id
+    #   @return [String]
+    #
+    # @!attribute [rw] user_message_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/TextOutputEvent AWS API Documentation
+    #
+    class TextOutputEvent < Struct.new(
+      :conversation_id,
+      :system_message,
+      :system_message_id,
+      :user_message_id,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about a text extract in a chat response that can
     # be attributed to a source document.
     #
@@ -5590,6 +5837,43 @@ module Aws::QBusiness
 
       class SamlConfiguration < WebExperienceAuthConfiguration; end
       class Unknown < WebExperienceAuthConfiguration; end
+    end
+
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ChatInputStream AWS API Documentation
+    #
+    class ChatInputStream < Enumerator
+
+      def event_types
+        [
+          :action_execution_event,
+          :attachment_event,
+          :configuration_event,
+          :end_of_input_event,
+          :text_event
+        ]
+      end
+
+    end
+
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ChatOutputStream AWS API Documentation
+    #
+    class ChatOutputStream < Enumerator
+
+      def event_types
+        [
+          :action_review_event,
+          :failed_attachment_event,
+          :metadata_event,
+          :text_event
+        ]
+      end
+
     end
 
   end

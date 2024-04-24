@@ -32,11 +32,14 @@ module Aws
                       ?endpoint_cache_max_threads: Integer,
                       ?endpoint_cache_poll_interval: Integer,
                       ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
                       ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
                       ?log_formatter: untyped,
                       ?log_level: Symbol,
                       ?logger: untyped,
                       ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
                       ?profile: String,
                       ?request_min_compression_size_bytes: Integer,
                       ?retry_backoff: Proc,
@@ -205,6 +208,22 @@ module Aws
                                 ?role_arn: ::String
                               ) -> _BatchPutDocumentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutDocumentResponseSuccess
+
+      interface _ChatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ChatOutput]
+        def output_stream: () -> Types::ChatOutputStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#chat-instance_method
+      def chat: (
+                  application_id: ::String,
+                  ?client_token: ::String,
+                  ?conversation_id: ::String,
+                  input_event_stream_hander: untyped,
+                  ?parent_message_id: ::String,
+                  ?user_groups: Array[::String],
+                  ?user_id: ::String
+                ) ?{ (*untyped) -> void } -> _ChatResponseSuccess
+              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _ChatResponseSuccess
 
       interface _ChatSyncResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ChatSyncOutput]

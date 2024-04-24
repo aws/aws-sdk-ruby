@@ -62,6 +62,8 @@ module Aws::QBusiness
             Aws::QBusiness::Endpoints::BatchDeleteDocument.build(context)
           when :batch_put_document
             Aws::QBusiness::Endpoints::BatchPutDocument.build(context)
+          when :chat
+            Aws::QBusiness::Endpoints::Chat.build(context)
           when :chat_sync
             Aws::QBusiness::Endpoints::ChatSync.build(context)
           when :create_application
