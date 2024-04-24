@@ -8,7 +8,6 @@ module Seahorse
 
       include HandlerBuilder
 
-      # default plugins
       @plugins = PluginList.new
 
       # @api private

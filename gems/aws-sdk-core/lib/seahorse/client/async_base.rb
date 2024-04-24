@@ -4,7 +4,6 @@ module Seahorse
   module Client
     class AsyncBase < Seahorse::Client::Base
 
-      # default H2 plugins
       @plugins = PluginList.new
 
       def initialize(plugins, options)
