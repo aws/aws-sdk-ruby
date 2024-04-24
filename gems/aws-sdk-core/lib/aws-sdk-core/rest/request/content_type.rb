@@ -26,7 +26,6 @@ module Aws
       end
 
       private
-
       def non_empty_body?(body)
         body.respond_to?(:size) && body.size.positive?
       end
@@ -35,6 +34,11 @@ module Aws
       # rest-json: https://smithy.io/2.0/aws/protocols/aws-restxml-protocol.html#content-type
       # rest-xml: https://smithy.io/2.0/aws/protocols/aws-restxml-protocol.html#content-type
       def apply_default_content_type(context)
+        if eventstream?(context)
+          context.http_request.headers['Content-Type'] ||=
+            'application/vnd.amazon.eventstream'
+          return
+        end
         protocol = context.config.api.metadata['protocol']
         case protocol
         when 'rest-json'
@@ -44,6 +48,12 @@ module Aws
           context.http_request.headers['Content-Type'] ||=
             'application/xml'
         else raise "Unsupported protocol #{protocol}"
+        end
+      end
+
+      def eventstream?(context)
+        context.operation.input.shape.members.each do |_, ref|
+          return ref if ref.eventstream
         end
       end
     end
