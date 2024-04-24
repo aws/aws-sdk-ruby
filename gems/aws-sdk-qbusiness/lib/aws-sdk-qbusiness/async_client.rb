@@ -10,6 +10,8 @@
 begin
   require 'http/2'
 rescue LoadError; end
+require 'seahorse/client/plugins/endpoint.rb'
+require 'seahorse/client/plugins/response_target.rb'
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
@@ -21,13 +23,14 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/invocation_id.rb'
+require 'seahorse/client/plugins/h2.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
@@ -43,6 +46,8 @@ module Aws::QBusiness
 
     set_api(ClientApi::API)
 
+    add_plugin(Seahorse::Client::Plugins::Endpoint)
+    add_plugin(Seahorse::Client::Plugins::ResponseTarget)
     add_plugin(Aws::Plugins::CredentialsConfiguration)
     add_plugin(Aws::Plugins::Logging)
     add_plugin(Aws::Plugins::ParamConverter)
@@ -54,13 +59,14 @@ module Aws::QBusiness
     add_plugin(Aws::Plugins::RegionalEndpoint)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::InvocationId)
+    add_plugin(Seahorse::Client::Plugins::H2)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
@@ -131,6 +137,12 @@ module Aws::QBusiness
     #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
     #     not retry instead of sleeping.
     #
+    #   @option options [Integer] :connection_read_timeout (60)
+    #     Connection read timeout in seconds, defaults to 60 sec.
+    #
+    #   @option options [Integer] :connection_timeout (60)
+    #     Connection timeout in seconds, defaults to 60 sec.
+    #
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
@@ -147,6 +159,11 @@ module Aws::QBusiness
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
+    #   @option options [Boolean] :enable_alpn (false)
+    #     Set to `true` to enable ALPN in HTTP2 over TLS. Requires Openssl version >= 1.0.2.
+    #     Defaults to false. Note: not all service HTTP2 operations supports ALPN on server
+    #     side, please refer to service documentation.
+    #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
@@ -154,6 +171,9 @@ module Aws::QBusiness
     #
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`, HTTP2 debug output will be sent to the `:logger`.
     #
     #   @option options [Boolean] :ignore_configured_endpoint_urls
     #     Setting to true disables use of endpoint URLs provided via environment
@@ -178,12 +198,21 @@ module Aws::QBusiness
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
+    #   @option options [Integer] :max_concurrent_streams (100)
+    #     Maximum concurrent streams used in HTTP2 connection, defaults to 100. Note that server may send back
+    #     :settings_max_concurrent_streams value which will take priority when initializing new streams.
+    #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     Defaults to `true`, raises errors if exist when #wait or #join! is called upon async response.
+    #
+    #   @option options [Integer] :read_chunk_size (1024)
     #
     #   @option options [Integer] :request_min_compression_size_bytes (10240)
     #     The minimum size in bytes that triggers compression for request
@@ -243,6 +272,21 @@ module Aws::QBusiness
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
+    #
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates. If you do not pass `:ssl_ca_directory` or `:ssl_ca_bundle`
+    #     the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate authority
+    #     files for verifying peer certificates. If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default

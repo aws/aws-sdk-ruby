@@ -55,11 +55,11 @@ module Aws
 
         # implict payload
         if !explicit_payload && !implicit_payload_members.empty?
-          payload_shape = Shapes::StructureShape.new
+          payload_shape = StructureShape.new
           implicit_payload_members.each do |m_name, m_ref|
             payload_shape.add_member(m_name, m_ref)
           end
-          payload_ref = Shapes::ShapeRef.new(shape: payload_shape)
+          payload_ref = ShapeRef.new(shape: payload_shape)
 
           payload = build_payload_members(payload_ref, params)
         else
@@ -70,6 +70,7 @@ module Aws
               es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
                 type: "string", value: content_type)
               payload = _build_payload(streaming, member_ref, params[member_name])
+              puts "\n\nSTRUCTURE PAYLOAD: #{payload}\n\n"
             end
           end
         end
@@ -114,10 +115,8 @@ module Aws
       end
 
       def build_payload_members(payload_ref, params)
-        # TODO
-        ''
+        @serializer_class.new(payload_ref).serialize(params)
       end
-
     end
   end
 end

@@ -7,7 +7,12 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+require 'seahorse/client/plugins/endpoint.rb'
 require 'seahorse/client/plugins/content_length.rb'
+require 'seahorse/client/plugins/net_http.rb'
+require 'seahorse/client/plugins/raise_response_errors.rb'
+require 'seahorse/client/plugins/response_target.rb'
+require 'seahorse/client/plugins/request_callback.rb'
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
@@ -22,6 +27,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -58,7 +64,12 @@ module Aws::QBusiness
 
     set_api(ClientApi::API)
 
+    add_plugin(Seahorse::Client::Plugins::Endpoint)
     add_plugin(Seahorse::Client::Plugins::ContentLength)
+    add_plugin(Seahorse::Client::Plugins::NetHttp)
+    add_plugin(Seahorse::Client::Plugins::RaiseResponseErrors)
+    add_plugin(Seahorse::Client::Plugins::ResponseTarget)
+    add_plugin(Seahorse::Client::Plugins::RequestCallback)
     add_plugin(Aws::Plugins::CredentialsConfiguration)
     add_plugin(Aws::Plugins::Logging)
     add_plugin(Aws::Plugins::ParamConverter)
@@ -73,6 +84,7 @@ module Aws::QBusiness
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -221,6 +233,18 @@ module Aws::QBusiness
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
+    #   @option options [Integer] :http_continue_timeout (1)
+    #
+    #   @option options [Integer] :http_idle_timeout (5)
+    #
+    #   @option options [Integer] :http_open_timeout (15)
+    #
+    #   @option options [String] :http_proxy
+    #
+    #   @option options [Integer] :http_read_timeout (60)
+    #
+    #   @option options [Boolean] :http_wire_trace (false)
+    #
     #   @option options [Boolean] :ignore_configured_endpoint_urls
     #     Setting to true disables use of endpoint URLs provided via environment
     #     variables and the shared configuration file.
@@ -244,12 +268,27 @@ module Aws::QBusiness
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
     #
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
+    #
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
+    #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
     #   @option options [Integer] :request_min_compression_size_bytes (10240)
     #     The minimum size in bytes that triggers compression for request
@@ -309,6 +348,16 @@ module Aws::QBusiness
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
+    #
+    #   @option options [String] :ssl_ca_bundle
+    #
+    #   @option options [String] :ssl_ca_directory
+    #
+    #   @option options [String] :ssl_ca_store
+    #
+    #   @option options [Float] :ssl_timeout
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
     #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
