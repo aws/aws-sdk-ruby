@@ -62,6 +62,11 @@ module Aws
           payload_ref = ShapeRef.new(shape: payload_shape)
 
           payload = build_payload_members(payload_ref, params)
+                      .force_encoding(Encoding::BINARY)
+
+          _, content_type = _content_type(payload_ref.shape)
+          es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
+            type: "string", value: content_type)
         else
           # explicit payload, serialize just the payload member
           event_ref.shape.members.each do |member_name, member_ref|
@@ -70,7 +75,6 @@ module Aws
               es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
                 type: "string", value: content_type)
               payload = _build_payload(streaming, member_ref, params[member_name])
-              puts "\n\nSTRUCTURE PAYLOAD: #{payload}\n\n"
             end
           end
         end
