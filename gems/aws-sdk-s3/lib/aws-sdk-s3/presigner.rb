@@ -200,6 +200,7 @@ module Aws
         req.handlers.remove(Aws::Plugins::Sign::Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
         req.handlers.remove(Aws::Rest::ContentTypeHandler)
+        req.handlers.remove(Aws::Plugins::InvocationId::Handler)
 
         req.handle(step: :send) do |context|
           # if an endpoint was not provided, force secure or insecure
