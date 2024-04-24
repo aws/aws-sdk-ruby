@@ -22,7 +22,6 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
-require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -34,7 +33,6 @@ require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
-require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:qbusiness)
 
@@ -74,7 +72,6 @@ module Aws::QBusiness
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
-    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -86,7 +83,6 @@ module Aws::QBusiness
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
-    add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::QBusiness::Plugins::Endpoints)
 
     # @overload initialize(options)
@@ -220,15 +216,9 @@ module Aws::QBusiness
     #   @option options [Boolean] :endpoint_discovery (false)
     #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
-    #   @option options [Proc] :event_stream_handler
-    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
-    #
     #   @option options [Boolean] :ignore_configured_endpoint_urls
     #     Setting to true disables use of endpoint URLs provided via environment
     #     variables and the shared configuration file.
-    #
-    #   @option options [Proc] :input_event_stream_handler
-    #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -245,9 +235,6 @@ module Aws::QBusiness
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
-    #
-    #   @option options [Proc] :output_event_stream_handler
-    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file

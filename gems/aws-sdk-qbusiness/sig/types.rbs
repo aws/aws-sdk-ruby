@@ -32,14 +32,6 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
-    class ActionExecutionEvent
-      attr_accessor payload: ::Hash[::String, Types::ActionExecutionPayloadField]
-      attr_accessor payload_field_name_separator: ::String
-      attr_accessor plugin_id: ::String
-      attr_accessor event_type: untyped
-      SENSITIVE: []
-    end
-
     class ActionExecutionPayloadField
       attr_accessor value: untyped
       SENSITIVE: []
@@ -50,18 +42,6 @@ module Aws::QBusiness
       attr_accessor payload_field_name_separator: ::String
       attr_accessor plugin_id: ::String
       attr_accessor plugin_type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
-      SENSITIVE: []
-    end
-
-    class ActionReviewEvent
-      attr_accessor conversation_id: ::String
-      attr_accessor payload: ::Hash[::String, Types::ActionReviewPayloadField]
-      attr_accessor payload_field_name_separator: ::String
-      attr_accessor plugin_id: ::String
-      attr_accessor plugin_type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
-      attr_accessor system_message_id: ::String
-      attr_accessor user_message_id: ::String
-      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -103,12 +83,6 @@ module Aws::QBusiness
     class AttachmentInput
       attr_accessor data: ::String
       attr_accessor name: ::String
-      SENSITIVE: []
-    end
-
-    class AttachmentInputEvent
-      attr_accessor attachment: Types::AttachmentInput
-      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -184,17 +158,6 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
-    class ChatInput
-      attr_accessor application_id: ::String
-      attr_accessor client_token: ::String
-      attr_accessor conversation_id: ::String
-      attr_accessor input_stream: Types::ChatInputStream
-      attr_accessor parent_message_id: ::String
-      attr_accessor user_groups: ::Array[::String]
-      attr_accessor user_id: ::String
-      SENSITIVE: []
-    end
-
     class ChatModeConfiguration
       attr_accessor plugin_configuration: Types::PluginConfiguration
       attr_accessor unknown: untyped
@@ -204,11 +167,6 @@ module Aws::QBusiness
       end
       class Unknown < ChatModeConfiguration
       end
-    end
-
-    class ChatOutput
-      attr_accessor output_stream: Types::ChatOutputStream
-      SENSITIVE: []
     end
 
     class ChatSyncInput
@@ -235,14 +193,6 @@ module Aws::QBusiness
       attr_accessor system_message: ::String
       attr_accessor system_message_id: ::String
       attr_accessor user_message_id: ::String
-      SENSITIVE: []
-    end
-
-    class ConfigurationEvent
-      attr_accessor attribute_filter: Types::AttributeFilter
-      attr_accessor chat_mode: ("RETRIEVAL_MODE" | "CREATOR_MODE" | "PLUGIN_MODE")
-      attr_accessor chat_mode_configuration: Types::ChatModeConfiguration
-      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -651,23 +601,9 @@ module Aws::QBusiness
       SENSITIVE: [:kms_key_id]
     end
 
-    class EndOfInputEvent
-      attr_accessor event_type: untyped
-      SENSITIVE: []
-    end
-
     class ErrorDetail
       attr_accessor error_code: ("InternalError" | "InvalidRequest" | "ResourceInactive" | "ResourceNotFound")
       attr_accessor error_message: ::String
-      SENSITIVE: []
-    end
-
-    class FailedAttachmentEvent
-      attr_accessor attachment: Types::AttachmentOutput
-      attr_accessor conversation_id: ::String
-      attr_accessor system_message_id: ::String
-      attr_accessor user_message_id: ::String
-      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -1118,16 +1054,6 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
-    class MetadataEvent
-      attr_accessor conversation_id: ::String
-      attr_accessor final_text_message: ::String
-      attr_accessor source_attributions: ::Array[Types::SourceAttribution]
-      attr_accessor system_message_id: ::String
-      attr_accessor user_message_id: ::String
-      attr_accessor event_type: untyped
-      SENSITIVE: []
-    end
-
     class NativeIndexConfiguration
       attr_accessor boosting_override: ::Hash[::String, Types::DocumentAttributeBoostingConfiguration]
       attr_accessor index_id: ::String
@@ -1364,21 +1290,6 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
-    class TextInputEvent
-      attr_accessor user_message: ::String
-      attr_accessor event_type: untyped
-      SENSITIVE: []
-    end
-
-    class TextOutputEvent
-      attr_accessor conversation_id: ::String
-      attr_accessor system_message: ::String
-      attr_accessor system_message_id: ::String
-      attr_accessor user_message_id: ::String
-      attr_accessor event_type: untyped
-      SENSITIVE: []
-    end
-
     class TextSegment
       attr_accessor begin_offset: ::Integer
       attr_accessor end_offset: ::Integer
@@ -1561,14 +1472,6 @@ module Aws::QBusiness
       end
       class Unknown < WebExperienceAuthConfiguration
       end
-    end
-
-    class ChatInputStream < Enumerator[untyped, untyped]
-      def event_types: () -> [:action_execution_event, :attachment_event, :configuration_event, :end_of_input_event, :text_event]
-    end
-
-    class ChatOutputStream < Enumerator[untyped, untyped]
-      def event_types: () -> [:action_review_event, :failed_attachment_event, :metadata_event, :text_event]
     end
   end
 end

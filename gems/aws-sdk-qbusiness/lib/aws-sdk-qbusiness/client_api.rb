@@ -18,7 +18,6 @@ module Aws::QBusiness
     AccessControls = Shapes::ListShape.new(name: 'AccessControls')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ActionExecution = Shapes::StructureShape.new(name: 'ActionExecution')
-    ActionExecutionEvent = Shapes::StructureShape.new(name: 'ActionExecutionEvent')
     ActionExecutionPayload = Shapes::MapShape.new(name: 'ActionExecutionPayload')
     ActionExecutionPayloadField = Shapes::StructureShape.new(name: 'ActionExecutionPayloadField')
     ActionPayloadFieldKey = Shapes::StringShape.new(name: 'ActionPayloadFieldKey')
@@ -26,7 +25,6 @@ module Aws::QBusiness
     ActionPayloadFieldType = Shapes::StringShape.new(name: 'ActionPayloadFieldType')
     ActionPayloadFieldValue = Shapes::DocumentShape.new(name: 'ActionPayloadFieldValue', document: true)
     ActionReview = Shapes::StructureShape.new(name: 'ActionReview')
-    ActionReviewEvent = Shapes::StructureShape.new(name: 'ActionReviewEvent')
     ActionReviewPayload = Shapes::MapShape.new(name: 'ActionReviewPayload')
     ActionReviewPayloadField = Shapes::StructureShape.new(name: 'ActionReviewPayloadField')
     ActionReviewPayloadFieldAllowedValue = Shapes::StructureShape.new(name: 'ActionReviewPayloadFieldAllowedValue')
@@ -41,7 +39,6 @@ module Aws::QBusiness
     AppliedAttachmentsConfiguration = Shapes::StructureShape.new(name: 'AppliedAttachmentsConfiguration')
     AppliedCreatorModeConfiguration = Shapes::StructureShape.new(name: 'AppliedCreatorModeConfiguration')
     AttachmentInput = Shapes::StructureShape.new(name: 'AttachmentInput')
-    AttachmentInputEvent = Shapes::StructureShape.new(name: 'AttachmentInputEvent')
     AttachmentName = Shapes::StringShape.new(name: 'AttachmentName')
     AttachmentOutput = Shapes::StructureShape.new(name: 'AttachmentOutput')
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
@@ -65,16 +62,11 @@ module Aws::QBusiness
     BlockedPhrasesConfigurationUpdate = Shapes::StructureShape.new(name: 'BlockedPhrasesConfigurationUpdate')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoostingDurationInSeconds = Shapes::IntegerShape.new(name: 'BoostingDurationInSeconds')
-    ChatInput = Shapes::StructureShape.new(name: 'ChatInput')
-    ChatInputStream = Shapes::StructureShape.new(name: 'ChatInputStream')
     ChatMode = Shapes::StringShape.new(name: 'ChatMode')
     ChatModeConfiguration = Shapes::UnionShape.new(name: 'ChatModeConfiguration')
-    ChatOutput = Shapes::StructureShape.new(name: 'ChatOutput')
-    ChatOutputStream = Shapes::StructureShape.new(name: 'ChatOutputStream')
     ChatSyncInput = Shapes::StructureShape.new(name: 'ChatSyncInput')
     ChatSyncOutput = Shapes::StructureShape.new(name: 'ChatSyncOutput')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
-    ConfigurationEvent = Shapes::StructureShape.new(name: 'ConfigurationEvent')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentBlockerRule = Shapes::StructureShape.new(name: 'ContentBlockerRule')
     ContentRetrievalRule = Shapes::StructureShape.new(name: 'ContentRetrievalRule')
@@ -164,14 +156,12 @@ module Aws::QBusiness
     EligibleDataSource = Shapes::StructureShape.new(name: 'EligibleDataSource')
     EligibleDataSources = Shapes::ListShape.new(name: 'EligibleDataSources')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
-    EndOfInputEvent = Shapes::StructureShape.new(name: 'EndOfInputEvent')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExampleChatMessage = Shapes::StringShape.new(name: 'ExampleChatMessage')
     ExampleChatMessages = Shapes::ListShape.new(name: 'ExampleChatMessages')
     ExecutionId = Shapes::StringShape.new(name: 'ExecutionId')
-    FailedAttachmentEvent = Shapes::StructureShape.new(name: 'FailedAttachmentEvent')
     FailedDocument = Shapes::StructureShape.new(name: 'FailedDocument')
     FailedDocuments = Shapes::ListShape.new(name: 'FailedDocuments')
     GetApplicationRequest = Shapes::StructureShape.new(name: 'GetApplicationRequest')
@@ -274,7 +264,6 @@ module Aws::QBusiness
     MessageUsefulnessFeedback = Shapes::StructureShape.new(name: 'MessageUsefulnessFeedback')
     MessageUsefulnessReason = Shapes::StringShape.new(name: 'MessageUsefulnessReason')
     Messages = Shapes::ListShape.new(name: 'Messages')
-    MetadataEvent = Shapes::StructureShape.new(name: 'MetadataEvent')
     MetricValue = Shapes::StringShape.new(name: 'MetricValue')
     NativeIndexConfiguration = Shapes::StructureShape.new(name: 'NativeIndexConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -348,8 +337,6 @@ module Aws::QBusiness
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
     TextDocumentStatistics = Shapes::StructureShape.new(name: 'TextDocumentStatistics')
-    TextInputEvent = Shapes::StructureShape.new(name: 'TextInputEvent')
-    TextOutputEvent = Shapes::StructureShape.new(name: 'TextOutputEvent')
     TextSegment = Shapes::StructureShape.new(name: 'TextSegment')
     TextSegmentList = Shapes::ListShape.new(name: 'TextSegmentList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -418,11 +405,6 @@ module Aws::QBusiness
     ActionExecution.add_member(:plugin_id, Shapes::ShapeRef.new(shape: PluginId, required: true, location_name: "pluginId"))
     ActionExecution.struct_class = Types::ActionExecution
 
-    ActionExecutionEvent.add_member(:payload, Shapes::ShapeRef.new(shape: ActionExecutionPayload, required: true, location_name: "payload"))
-    ActionExecutionEvent.add_member(:payload_field_name_separator, Shapes::ShapeRef.new(shape: ActionPayloadFieldNameSeparator, required: true, location_name: "payloadFieldNameSeparator"))
-    ActionExecutionEvent.add_member(:plugin_id, Shapes::ShapeRef.new(shape: PluginId, required: true, location_name: "pluginId"))
-    ActionExecutionEvent.struct_class = Types::ActionExecutionEvent
-
     ActionExecutionPayload.key = Shapes::ShapeRef.new(shape: ActionPayloadFieldKey)
     ActionExecutionPayload.value = Shapes::ShapeRef.new(shape: ActionExecutionPayloadField)
 
@@ -434,15 +416,6 @@ module Aws::QBusiness
     ActionReview.add_member(:plugin_id, Shapes::ShapeRef.new(shape: PluginId, location_name: "pluginId"))
     ActionReview.add_member(:plugin_type, Shapes::ShapeRef.new(shape: PluginType, location_name: "pluginType"))
     ActionReview.struct_class = Types::ActionReview
-
-    ActionReviewEvent.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, location_name: "conversationId"))
-    ActionReviewEvent.add_member(:payload, Shapes::ShapeRef.new(shape: ActionReviewPayload, location_name: "payload"))
-    ActionReviewEvent.add_member(:payload_field_name_separator, Shapes::ShapeRef.new(shape: ActionPayloadFieldNameSeparator, location_name: "payloadFieldNameSeparator"))
-    ActionReviewEvent.add_member(:plugin_id, Shapes::ShapeRef.new(shape: PluginId, location_name: "pluginId"))
-    ActionReviewEvent.add_member(:plugin_type, Shapes::ShapeRef.new(shape: PluginType, location_name: "pluginType"))
-    ActionReviewEvent.add_member(:system_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "systemMessageId"))
-    ActionReviewEvent.add_member(:user_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "userMessageId"))
-    ActionReviewEvent.struct_class = Types::ActionReviewEvent
 
     ActionReviewPayload.key = Shapes::ShapeRef.new(shape: ActionPayloadFieldKey)
     ActionReviewPayload.value = Shapes::ShapeRef.new(shape: ActionReviewPayloadField)
@@ -479,9 +452,6 @@ module Aws::QBusiness
     AttachmentInput.add_member(:data, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "data"))
     AttachmentInput.add_member(:name, Shapes::ShapeRef.new(shape: AttachmentName, required: true, location_name: "name"))
     AttachmentInput.struct_class = Types::AttachmentInput
-
-    AttachmentInputEvent.add_member(:attachment, Shapes::ShapeRef.new(shape: AttachmentInput, location_name: "attachment"))
-    AttachmentInputEvent.struct_class = Types::AttachmentInputEvent
 
     AttachmentOutput.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
     AttachmentOutput.add_member(:name, Shapes::ShapeRef.new(shape: AttachmentName, location_name: "name"))
@@ -543,40 +513,11 @@ module Aws::QBusiness
     BlockedPhrasesConfigurationUpdate.add_member(:system_message_override, Shapes::ShapeRef.new(shape: SystemMessageOverride, location_name: "systemMessageOverride"))
     BlockedPhrasesConfigurationUpdate.struct_class = Types::BlockedPhrasesConfigurationUpdate
 
-    ChatInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
-    ChatInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    ChatInput.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, location: "querystring", location_name: "conversationId"))
-    ChatInput.add_member(:input_stream, Shapes::ShapeRef.new(shape: ChatInputStream, eventstream: true, location_name: "inputStream"))
-    ChatInput.add_member(:parent_message_id, Shapes::ShapeRef.new(shape: MessageId, location: "querystring", location_name: "parentMessageId"))
-    ChatInput.add_member(:user_groups, Shapes::ShapeRef.new(shape: UserGroups, location: "querystring", location_name: "userGroups"))
-    ChatInput.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location: "querystring", location_name: "userId"))
-    ChatInput.struct_class = Types::ChatInput
-    ChatInput[:payload] = :input_stream
-    ChatInput[:payload_member] = ChatInput.member(:input_stream)
-
-    ChatInputStream.add_member(:action_execution_event, Shapes::ShapeRef.new(shape: ActionExecutionEvent, event: true, location_name: "actionExecutionEvent"))
-    ChatInputStream.add_member(:attachment_event, Shapes::ShapeRef.new(shape: AttachmentInputEvent, event: true, location_name: "attachmentEvent"))
-    ChatInputStream.add_member(:configuration_event, Shapes::ShapeRef.new(shape: ConfigurationEvent, event: true, location_name: "configurationEvent"))
-    ChatInputStream.add_member(:end_of_input_event, Shapes::ShapeRef.new(shape: EndOfInputEvent, event: true, location_name: "endOfInputEvent"))
-    ChatInputStream.add_member(:text_event, Shapes::ShapeRef.new(shape: TextInputEvent, event: true, location_name: "textEvent"))
-    ChatInputStream.struct_class = Types::ChatInputStream
-
     ChatModeConfiguration.add_member(:plugin_configuration, Shapes::ShapeRef.new(shape: PluginConfiguration, location_name: "pluginConfiguration"))
     ChatModeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ChatModeConfiguration.add_member_subclass(:plugin_configuration, Types::ChatModeConfiguration::PluginConfiguration)
     ChatModeConfiguration.add_member_subclass(:unknown, Types::ChatModeConfiguration::Unknown)
     ChatModeConfiguration.struct_class = Types::ChatModeConfiguration
-
-    ChatOutput.add_member(:output_stream, Shapes::ShapeRef.new(shape: ChatOutputStream, eventstream: true, location_name: "outputStream"))
-    ChatOutput.struct_class = Types::ChatOutput
-    ChatOutput[:payload] = :output_stream
-    ChatOutput[:payload_member] = ChatOutput.member(:output_stream)
-
-    ChatOutputStream.add_member(:action_review_event, Shapes::ShapeRef.new(shape: ActionReviewEvent, event: true, location_name: "actionReviewEvent"))
-    ChatOutputStream.add_member(:failed_attachment_event, Shapes::ShapeRef.new(shape: FailedAttachmentEvent, event: true, location_name: "failedAttachmentEvent"))
-    ChatOutputStream.add_member(:metadata_event, Shapes::ShapeRef.new(shape: MetadataEvent, event: true, location_name: "metadataEvent"))
-    ChatOutputStream.add_member(:text_event, Shapes::ShapeRef.new(shape: TextOutputEvent, event: true, location_name: "textEvent"))
-    ChatOutputStream.struct_class = Types::ChatOutputStream
 
     ChatSyncInput.add_member(:action_execution, Shapes::ShapeRef.new(shape: ActionExecution, location_name: "actionExecution"))
     ChatSyncInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
@@ -600,11 +541,6 @@ module Aws::QBusiness
     ChatSyncOutput.add_member(:system_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "systemMessageId"))
     ChatSyncOutput.add_member(:user_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "userMessageId"))
     ChatSyncOutput.struct_class = Types::ChatSyncOutput
-
-    ConfigurationEvent.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: AttributeFilter, location_name: "attributeFilter"))
-    ConfigurationEvent.add_member(:chat_mode, Shapes::ShapeRef.new(shape: ChatMode, location_name: "chatMode"))
-    ConfigurationEvent.add_member(:chat_mode_configuration, Shapes::ShapeRef.new(shape: ChatModeConfiguration, location_name: "chatModeConfiguration"))
-    ConfigurationEvent.struct_class = Types::ConfigurationEvent
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -919,19 +855,11 @@ module Aws::QBusiness
     EncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
-    EndOfInputEvent.struct_class = Types::EndOfInputEvent
-
     ErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
     ErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
     ErrorDetail.struct_class = Types::ErrorDetail
 
     ExampleChatMessages.member = Shapes::ShapeRef.new(shape: ExampleChatMessage)
-
-    FailedAttachmentEvent.add_member(:attachment, Shapes::ShapeRef.new(shape: AttachmentOutput, location_name: "attachment"))
-    FailedAttachmentEvent.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, location_name: "conversationId"))
-    FailedAttachmentEvent.add_member(:system_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "systemMessageId"))
-    FailedAttachmentEvent.add_member(:user_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "userMessageId"))
-    FailedAttachmentEvent.struct_class = Types::FailedAttachmentEvent
 
     FailedDocument.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "dataSourceId"))
     FailedDocument.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
@@ -1280,13 +1208,6 @@ module Aws::QBusiness
 
     Messages.member = Shapes::ShapeRef.new(shape: Message)
 
-    MetadataEvent.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, location_name: "conversationId"))
-    MetadataEvent.add_member(:final_text_message, Shapes::ShapeRef.new(shape: String, location_name: "finalTextMessage"))
-    MetadataEvent.add_member(:source_attributions, Shapes::ShapeRef.new(shape: SourceAttributions, location_name: "sourceAttributions"))
-    MetadataEvent.add_member(:system_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "systemMessageId"))
-    MetadataEvent.add_member(:user_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "userMessageId"))
-    MetadataEvent.struct_class = Types::MetadataEvent
-
     NativeIndexConfiguration.add_member(:boosting_override, Shapes::ShapeRef.new(shape: DocumentAttributeBoostingOverrideMap, location_name: "boostingOverride"))
     NativeIndexConfiguration.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "indexId"))
     NativeIndexConfiguration.struct_class = Types::NativeIndexConfiguration
@@ -1469,15 +1390,6 @@ module Aws::QBusiness
     TextDocumentStatistics.add_member(:indexed_text_document_count, Shapes::ShapeRef.new(shape: IndexedTextDocument, location_name: "indexedTextDocumentCount"))
     TextDocumentStatistics.struct_class = Types::TextDocumentStatistics
 
-    TextInputEvent.add_member(:user_message, Shapes::ShapeRef.new(shape: UserMessage, required: true, location_name: "userMessage"))
-    TextInputEvent.struct_class = Types::TextInputEvent
-
-    TextOutputEvent.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, location_name: "conversationId"))
-    TextOutputEvent.add_member(:system_message, Shapes::ShapeRef.new(shape: String, location_name: "systemMessage"))
-    TextOutputEvent.add_member(:system_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "systemMessageId"))
-    TextOutputEvent.add_member(:user_message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "userMessageId"))
-    TextOutputEvent.struct_class = Types::TextOutputEvent
-
     TextSegment.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "beginOffset"))
     TextSegment.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "endOffset"))
     TextSegment.struct_class = Types::TextSegment
@@ -1638,7 +1550,6 @@ module Aws::QBusiness
         "endpointPrefix" => "qbusiness",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
-        "protocolSettings" => {"h2"=>"eventstream"},
         "serviceFullName" => "QBusiness",
         "serviceId" => "QBusiness",
         "signatureVersion" => "v4",
@@ -1673,22 +1584,6 @@ module Aws::QBusiness
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-      end)
-
-      api.add_operation(:chat, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "Chat"
-        o.http_method = "POST"
-        o.http_request_uri = "/applications/{applicationId}/conversations"
-        o.input = Shapes::ShapeRef.new(shape: ChatInput)
-        o.output = Shapes::ShapeRef.new(shape: ChatOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: LicenseNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.async = true
       end)
 
       api.add_operation(:chat_sync, Seahorse::Model::Operation.new.tap do |o|

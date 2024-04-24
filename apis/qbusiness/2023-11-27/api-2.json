@@ -5,7 +5,6 @@
     "endpointPrefix":"qbusiness",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
-    "protocolSettings":{"h2":"eventstream"},
     "serviceFullName":"QBusiness",
     "serviceId":"QBusiness",
     "signatureVersion":"v4",
@@ -48,25 +47,6 @@
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ServiceQuotaExceededException"}
-      ]
-    },
-    "Chat":{
-      "name":"Chat",
-      "http":{
-        "method":"POST",
-        "requestUri":"/applications/{applicationId}/conversations",
-        "responseCode":200
-      },
-      "input":{"shape":"ChatInput"},
-      "output":{"shape":"ChatOutput"},
-      "errors":[
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"},
-        {"shape":"LicenseNotFoundException"},
-        {"shape":"ConflictException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
       ]
     },
     "ChatSync":{
@@ -1087,20 +1067,6 @@
         "pluginId":{"shape":"PluginId"}
       }
     },
-    "ActionExecutionEvent":{
-      "type":"structure",
-      "required":[
-        "payload",
-        "payloadFieldNameSeparator",
-        "pluginId"
-      ],
-      "members":{
-        "payload":{"shape":"ActionExecutionPayload"},
-        "payloadFieldNameSeparator":{"shape":"ActionPayloadFieldNameSeparator"},
-        "pluginId":{"shape":"PluginId"}
-      },
-      "event":true
-    },
     "ActionExecutionPayload":{
       "type":"map",
       "key":{"shape":"ActionPayloadFieldKey"},
@@ -1145,19 +1111,6 @@
         "pluginId":{"shape":"PluginId"},
         "pluginType":{"shape":"PluginType"}
       }
-    },
-    "ActionReviewEvent":{
-      "type":"structure",
-      "members":{
-        "conversationId":{"shape":"ConversationId"},
-        "payload":{"shape":"ActionReviewPayload"},
-        "payloadFieldNameSeparator":{"shape":"ActionPayloadFieldNameSeparator"},
-        "pluginId":{"shape":"PluginId"},
-        "pluginType":{"shape":"PluginType"},
-        "systemMessageId":{"shape":"MessageId"},
-        "userMessageId":{"shape":"MessageId"}
-      },
-      "event":true
     },
     "ActionReviewPayload":{
       "type":"map",
@@ -1256,13 +1209,6 @@
         "data":{"shape":"Blob"},
         "name":{"shape":"AttachmentName"}
       }
-    },
-    "AttachmentInputEvent":{
-      "type":"structure",
-      "members":{
-        "attachment":{"shape":"AttachmentInput"}
-      },
-      "event":true
     },
     "AttachmentName":{
       "type":"string",
@@ -1446,56 +1392,6 @@
       "max":999999999,
       "min":0
     },
-    "ChatInput":{
-      "type":"structure",
-      "required":["applicationId"],
-      "members":{
-        "applicationId":{
-          "shape":"ApplicationId",
-          "location":"uri",
-          "locationName":"applicationId"
-        },
-        "clientToken":{
-          "shape":"ClientToken",
-          "idempotencyToken":true,
-          "location":"querystring",
-          "locationName":"clientToken"
-        },
-        "conversationId":{
-          "shape":"ConversationId",
-          "location":"querystring",
-          "locationName":"conversationId"
-        },
-        "inputStream":{"shape":"ChatInputStream"},
-        "parentMessageId":{
-          "shape":"MessageId",
-          "location":"querystring",
-          "locationName":"parentMessageId"
-        },
-        "userGroups":{
-          "shape":"UserGroups",
-          "location":"querystring",
-          "locationName":"userGroups"
-        },
-        "userId":{
-          "shape":"UserId",
-          "location":"querystring",
-          "locationName":"userId"
-        }
-      },
-      "payload":"inputStream"
-    },
-    "ChatInputStream":{
-      "type":"structure",
-      "members":{
-        "actionExecutionEvent":{"shape":"ActionExecutionEvent"},
-        "attachmentEvent":{"shape":"AttachmentInputEvent"},
-        "configurationEvent":{"shape":"ConfigurationEvent"},
-        "endOfInputEvent":{"shape":"EndOfInputEvent"},
-        "textEvent":{"shape":"TextInputEvent"}
-      },
-      "eventstream":true
-    },
     "ChatMode":{
       "type":"string",
       "enum":[
@@ -1510,23 +1406,6 @@
         "pluginConfiguration":{"shape":"PluginConfiguration"}
       },
       "union":true
-    },
-    "ChatOutput":{
-      "type":"structure",
-      "members":{
-        "outputStream":{"shape":"ChatOutputStream"}
-      },
-      "payload":"outputStream"
-    },
-    "ChatOutputStream":{
-      "type":"structure",
-      "members":{
-        "actionReviewEvent":{"shape":"ActionReviewEvent"},
-        "failedAttachmentEvent":{"shape":"FailedAttachmentEvent"},
-        "metadataEvent":{"shape":"MetadataEvent"},
-        "textEvent":{"shape":"TextOutputEvent"}
-      },
-      "eventstream":true
     },
     "ChatSyncInput":{
       "type":"structure",
@@ -1577,15 +1456,6 @@
       "type":"string",
       "max":100,
       "min":1
-    },
-    "ConfigurationEvent":{
-      "type":"structure",
-      "members":{
-        "attributeFilter":{"shape":"AttributeFilter"},
-        "chatMode":{"shape":"ChatMode"},
-        "chatModeConfiguration":{"shape":"ChatModeConfiguration"}
-      },
-      "event":true
     },
     "ConflictException":{
       "type":"structure",
@@ -2479,12 +2349,6 @@
         "kmsKeyId":{"shape":"KmsKeyId"}
       }
     },
-    "EndOfInputEvent":{
-      "type":"structure",
-      "members":{
-      },
-      "event":true
-    },
     "ErrorCode":{
       "type":"string",
       "enum":[
@@ -2524,16 +2388,6 @@
       "max":36,
       "min":36,
       "pattern":"^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-    },
-    "FailedAttachmentEvent":{
-      "type":"structure",
-      "members":{
-        "attachment":{"shape":"AttachmentOutput"},
-        "conversationId":{"shape":"ConversationId"},
-        "systemMessageId":{"shape":"MessageId"},
-        "userMessageId":{"shape":"MessageId"}
-      },
-      "event":true
     },
     "FailedDocument":{
       "type":"structure",
@@ -3659,17 +3513,6 @@
       "type":"list",
       "member":{"shape":"Message"}
     },
-    "MetadataEvent":{
-      "type":"structure",
-      "members":{
-        "conversationId":{"shape":"ConversationId"},
-        "finalTextMessage":{"shape":"String"},
-        "sourceAttributions":{"shape":"SourceAttributions"},
-        "systemMessageId":{"shape":"MessageId"},
-        "userMessageId":{"shape":"MessageId"}
-      },
-      "event":true
-    },
     "MetricValue":{
       "type":"string",
       "pattern":"^(([1-9][0-9]*)|0)$"
@@ -4284,24 +4127,6 @@
         "indexedTextBytes":{"shape":"IndexedTextBytes"},
         "indexedTextDocumentCount":{"shape":"IndexedTextDocument"}
       }
-    },
-    "TextInputEvent":{
-      "type":"structure",
-      "required":["userMessage"],
-      "members":{
-        "userMessage":{"shape":"UserMessage"}
-      },
-      "event":true
-    },
-    "TextOutputEvent":{
-      "type":"structure",
-      "members":{
-        "conversationId":{"shape":"ConversationId"},
-        "systemMessage":{"shape":"String"},
-        "systemMessageId":{"shape":"MessageId"},
-        "userMessageId":{"shape":"MessageId"}
-      },
-      "event":true
     },
     "TextSegment":{
       "type":"structure",

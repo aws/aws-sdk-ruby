@@ -38,19 +38,6 @@ module Aws::QBusiness
       end
     end
 
-    class Chat
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QBusiness::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
     class ChatSync
       def self.build(context)
         unless context.config.regional_endpoint
