@@ -7123,6 +7123,7 @@ module Aws::EC2
     DescribeNetworkInterfaceAttributeResult.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
     DescribeNetworkInterfaceAttributeResult.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
     DescribeNetworkInterfaceAttributeResult.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "sourceDestCheck"))
+    DescribeNetworkInterfaceAttributeResult.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "associatePublicIpAddress"))
     DescribeNetworkInterfaceAttributeResult.struct_class = Types::DescribeNetworkInterfaceAttributeResult
 
     DescribeNetworkInterfacePermissionsRequest.add_member(:network_interface_permission_ids, Shapes::ShapeRef.new(shape: NetworkInterfacePermissionIdList, location_name: "NetworkInterfacePermissionId"))
@@ -11663,6 +11664,7 @@ module Aws::EC2
     ModifyNetworkInterfaceAttributeRequest.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecification, location_name: "EnaSrdSpecification"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:connection_tracking_specification, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationRequest, location_name: "ConnectionTrackingSpecification"))
+    ModifyNetworkInterfaceAttributeRequest.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociatePublicIpAddress"))
     ModifyNetworkInterfaceAttributeRequest.struct_class = Types::ModifyNetworkInterfaceAttributeRequest
 
     ModifyPrivateDnsNameOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))

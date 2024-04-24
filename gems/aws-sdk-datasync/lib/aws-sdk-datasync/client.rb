@@ -1732,12 +1732,11 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Configures a transfer task, which defines where and how DataSync moves
+    # Configures a *task*, which defines where and how DataSync transfers
     # your data.
     #
-    # A task includes a source location, destination location, and the
-    # options for how and when you want to transfer your data (such as
-    # bandwidth limits, scheduling, among other options).
+    # A task includes a source location, destination location, and transfer
+    # options (such as bandwidth limits, scheduling, and more).
     #
     # If you're planning to transfer data to or from an Amazon S3 location,
     # review [how DataSync can affect your S3 request charges][1] and the
@@ -1749,61 +1748,51 @@ module Aws::DataSync
     # [2]: http://aws.amazon.com/datasync/pricing/
     #
     # @option params [required, String] :source_location_arn
-    #   The Amazon Resource Name (ARN) of the source location for the task.
+    #   Specifies the ARN of your transfer's source location.
     #
     # @option params [required, String] :destination_location_arn
-    #   The Amazon Resource Name (ARN) of an Amazon Web Services storage
-    #   resource's location.
+    #   Specifies the ARN of your transfer's destination location.
     #
     # @option params [String] :cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that
-    #   is used to monitor and log events in the task.
+    #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
+    #   group for monitoring your task.
     #
     # @option params [String] :name
-    #   The name of a task. This value is a text reference that is used to
-    #   identify the task in the console.
+    #   Specifies the name of your task.
     #
     # @option params [Types::Options] :options
-    #   Specifies the configuration options for a task. Some options include
-    #   preserving file or object metadata and verifying data integrity.
-    #
-    #   You can also override these options before starting an individual run
-    #   of a task (also known as a *task execution*). For more information,
-    #   see [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Specifies your task's settings, such as preserving file metadata,
+    #   verifying data integrity, among other options.
     #
     # @option params [Array<Types::FilterRule>] :excludes
-    #   Specifies a list of filter rules that exclude specific data during
-    #   your transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   Specifies exclude filters that define the files, objects, and folders
+    #   in your source location that you don't want DataSync to transfer. For
+    #   more information and examples, see [Specifying what DataSync transfers
+    #   by using filters][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #
     # @option params [Types::TaskSchedule] :schedule
-    #   Specifies a schedule used to periodically transfer files from a source
-    #   to a destination location. The schedule should be specified in UTC
-    #   time. For more information, see [Scheduling your task][1].
+    #   Specifies a schedule for when you want your task to run. For more
+    #   information, see [Scheduling your task][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #
     # @option params [Array<Types::TagListEntry>] :tags
-    #   Specifies the tags that you want to apply to the Amazon Resource Name
-    #   (ARN) representing the task.
+    #   Specifies the tags that you want to apply to your task.
     #
     #   *Tags* are key-value pairs that help you manage, filter, and search
     #   for your DataSync resources.
     #
     # @option params [Array<Types::FilterRule>] :includes
-    #   Specifies a list of filter rules that include specific data during
-    #   your transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   Specifies include filters define the files, objects, and folders in
+    #   your source location that you want DataSync to transfer. For more
+    #   information and examples, see [Specifying what DataSync transfers by
+    #   using filters][1].
     #
     #
     #
@@ -1875,6 +1864,7 @@ module Aws::DataSync
     #     ],
     #     schedule: {
     #       schedule_expression: "ScheduleExpressionCron", # required
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     tags: [
     #       {
@@ -2879,10 +2869,12 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Provides information about an DataSync transfer task.
+    # Provides information about a *task*, which defines where and how
+    # DataSync transfers your data.
     #
     # @option params [required, String] :task_arn
-    #   Specifies the Amazon Resource Name (ARN) of the transfer task.
+    #   Specifies the Amazon Resource Name (ARN) of the transfer task that you
+    #   want information about.
     #
     # @return [Types::DescribeTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2904,6 +2896,7 @@ module Aws::DataSync
     #   * {Types::DescribeTaskResponse#includes #includes} => Array&lt;Types::FilterRule&gt;
     #   * {Types::DescribeTaskResponse#manifest_config #manifest_config} => Types::ManifestConfig
     #   * {Types::DescribeTaskResponse#task_report_config #task_report_config} => Types::TaskReportConfig
+    #   * {Types::DescribeTaskResponse#schedule_details #schedule_details} => Types::TaskScheduleDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -2943,6 +2936,7 @@ module Aws::DataSync
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
     #   resp.schedule.schedule_expression #=> String
+    #   resp.schedule.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.error_code #=> String
     #   resp.error_detail #=> String
     #   resp.creation_time #=> Time
@@ -2965,6 +2959,9 @@ module Aws::DataSync
     #   resp.task_report_config.overrides.verified.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
     #   resp.task_report_config.overrides.deleted.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
     #   resp.task_report_config.overrides.skipped.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.schedule_details.status_update_time #=> Time
+    #   resp.schedule_details.disabled_reason #=> String
+    #   resp.schedule_details.disabled_by #=> String, one of "USER", "SERVICE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTask AWS API Documentation
     #
@@ -3595,7 +3592,15 @@ module Aws::DataSync
     #   integrity, set bandwidth limits for your task, among other options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @option params [Array<Types::FilterRule>] :includes
     #   Specifies a list of filter rules that determines which files to
@@ -4347,11 +4352,11 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Updates the configuration of an DataSync transfer task.
+    # Updates the configuration of a *task*, which defines where and how
+    # DataSync transfers your data.
     #
     # @option params [required, String] :task_arn
-    #   The Amazon Resource Name (ARN) of the resource name of the task to
-    #   update.
+    #   Specifies the ARN of the task that you want to update.
     #
     # @option params [Types::Options] :options
     #   Indicates how your transfer task is configured. These options include
@@ -4360,40 +4365,46 @@ module Aws::DataSync
     #   integrity, set bandwidth limits for your task, among other options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @option params [Array<Types::FilterRule>] :excludes
-    #   Specifies a list of filter rules that exclude specific data during
-    #   your transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   Specifies exclude filters that define the files, objects, and folders
+    #   in your source location that you don't want DataSync to transfer. For
+    #   more information and examples, see [Specifying what DataSync transfers
+    #   by using filters][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #
     # @option params [Types::TaskSchedule] :schedule
-    #   Specifies a schedule used to periodically transfer files from a source
-    #   to a destination location. You can configure your task to execute
-    #   hourly, daily, weekly or on specific days of the week. You control
-    #   when in the day or hour you want the task to execute. The time you
-    #   specify is UTC time. For more information, see [Scheduling your
-    #   task][1].
+    #   Specifies a schedule for when you want your task to run. For more
+    #   information, see [Scheduling your task][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #
     # @option params [String] :name
-    #   The name of the task to update.
+    #   Specifies the name of your task.
     #
     # @option params [String] :cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the resource name of the Amazon
-    #   CloudWatch log group.
+    #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
+    #   group for monitoring your task.
     #
     # @option params [Array<Types::FilterRule>] :includes
-    #   Specifies a list of filter rules that include specific data during
-    #   your transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   Specifies include filters define the files, objects, and folders in
+    #   your source location that you want DataSync to transfer. For more
+    #   information and examples, see [Specifying what DataSync transfers by
+    #   using filters][1].
     #
     #
     #
@@ -4465,6 +4476,7 @@ module Aws::DataSync
     #     ],
     #     schedule: {
     #       schedule_expression: "ScheduleExpressionCron", # required
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     name: "TagValue",
     #     cloud_watch_log_group_arn: "LogGroupArn",
@@ -4542,7 +4554,15 @@ module Aws::DataSync
     #   integrity, set bandwidth limits for your task, among other options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4591,7 +4611,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

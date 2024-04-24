@@ -30,6 +30,21 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class BatchDeleteUniqueIdInput
+      attr_accessor input_source: ::String
+      attr_accessor unique_ids: ::Array[::String]
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteUniqueIdOutput
+      attr_accessor deleted: ::Array[Types::DeletedUniqueId]
+      attr_accessor disconnected_unique_ids: ::Array[::String]
+      attr_accessor errors: ::Array[Types::DeleteUniqueIdError]
+      attr_accessor status: ("COMPLETED" | "ACCEPTED")
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -172,6 +187,17 @@ module Aws::EntityResolution
 
     class DeleteSchemaMappingOutput
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUniqueIdError
+      attr_accessor error_type: ("SERVICE_ERROR" | "VALIDATION_ERROR")
+      attr_accessor unique_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletedUniqueId
+      attr_accessor unique_id: ::String
       SENSITIVE: []
     end
 

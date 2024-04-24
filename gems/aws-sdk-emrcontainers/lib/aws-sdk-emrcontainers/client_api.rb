@@ -14,11 +14,13 @@ module Aws::EMRContainers
     include Seahorse::Model
 
     ACMCertArn = Shapes::StringShape.new(name: 'ACMCertArn')
+    AuthorizationConfiguration = Shapes::StructureShape.new(name: 'AuthorizationConfiguration')
     Base64Encoded = Shapes::StringShape.new(name: 'Base64Encoded')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelJobRunRequest = Shapes::StructureShape.new(name: 'CancelJobRunRequest')
     CancelJobRunResponse = Shapes::StructureShape.new(name: 'CancelJobRunResponse')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
+    CertificateProviderType = Shapes::StringShape.new(name: 'CertificateProviderType')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchMonitoringConfiguration = Shapes::StructureShape.new(name: 'CloudWatchMonitoringConfiguration')
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
@@ -33,6 +35,8 @@ module Aws::EMRContainers
     CreateJobTemplateResponse = Shapes::StructureShape.new(name: 'CreateJobTemplateResponse')
     CreateManagedEndpointRequest = Shapes::StructureShape.new(name: 'CreateManagedEndpointRequest')
     CreateManagedEndpointResponse = Shapes::StructureShape.new(name: 'CreateManagedEndpointResponse')
+    CreateSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationRequest')
+    CreateSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationResponse')
     CreateVirtualClusterRequest = Shapes::StructureShape.new(name: 'CreateVirtualClusterRequest')
     CreateVirtualClusterResponse = Shapes::StructureShape.new(name: 'CreateVirtualClusterResponse')
     CredentialType = Shapes::StringShape.new(name: 'CredentialType')
@@ -50,10 +54,13 @@ module Aws::EMRContainers
     DescribeJobTemplateResponse = Shapes::StructureShape.new(name: 'DescribeJobTemplateResponse')
     DescribeManagedEndpointRequest = Shapes::StructureShape.new(name: 'DescribeManagedEndpointRequest')
     DescribeManagedEndpointResponse = Shapes::StructureShape.new(name: 'DescribeManagedEndpointResponse')
+    DescribeSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeSecurityConfigurationRequest')
+    DescribeSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeSecurityConfigurationResponse')
     DescribeVirtualClusterRequest = Shapes::StructureShape.new(name: 'DescribeVirtualClusterRequest')
     DescribeVirtualClusterResponse = Shapes::StructureShape.new(name: 'DescribeVirtualClusterResponse')
     EKSRequestThrottledException = Shapes::StructureShape.new(name: 'EKSRequestThrottledException')
     EksInfo = Shapes::StructureShape.new(name: 'EksInfo')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointArn = Shapes::StringShape.new(name: 'EndpointArn')
     EndpointState = Shapes::StringShape.new(name: 'EndpointState')
@@ -68,6 +75,7 @@ module Aws::EMRContainers
     GetManagedEndpointSessionCredentialsRequest = Shapes::StructureShape.new(name: 'GetManagedEndpointSessionCredentialsRequest')
     GetManagedEndpointSessionCredentialsResponse = Shapes::StructureShape.new(name: 'GetManagedEndpointSessionCredentialsResponse')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
+    InTransitEncryptionConfiguration = Shapes::StructureShape.new(name: 'InTransitEncryptionConfiguration')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JavaInteger = Shapes::IntegerShape.new(name: 'JavaInteger')
     JobArn = Shapes::StringShape.new(name: 'JobArn')
@@ -82,12 +90,15 @@ module Aws::EMRContainers
     JobTemplates = Shapes::ListShape.new(name: 'JobTemplates')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KubernetesNamespace = Shapes::StringShape.new(name: 'KubernetesNamespace')
+    LakeFormationConfiguration = Shapes::StructureShape.new(name: 'LakeFormationConfiguration')
     ListJobRunsRequest = Shapes::StructureShape.new(name: 'ListJobRunsRequest')
     ListJobRunsResponse = Shapes::StructureShape.new(name: 'ListJobRunsResponse')
     ListJobTemplatesRequest = Shapes::StructureShape.new(name: 'ListJobTemplatesRequest')
     ListJobTemplatesResponse = Shapes::StructureShape.new(name: 'ListJobTemplatesResponse')
     ListManagedEndpointsRequest = Shapes::StructureShape.new(name: 'ListManagedEndpointsRequest')
     ListManagedEndpointsResponse = Shapes::StructureShape.new(name: 'ListManagedEndpointsResponse')
+    ListSecurityConfigurationsRequest = Shapes::StructureShape.new(name: 'ListSecurityConfigurationsRequest')
+    ListSecurityConfigurationsResponse = Shapes::StructureShape.new(name: 'ListSecurityConfigurationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListVirtualClustersRequest = Shapes::StructureShape.new(name: 'ListVirtualClustersRequest')
@@ -115,7 +126,14 @@ module Aws::EMRContainers
     RotationSize = Shapes::StringShape.new(name: 'RotationSize')
     RsiArn = Shapes::StringShape.new(name: 'RsiArn')
     S3MonitoringConfiguration = Shapes::StructureShape.new(name: 'S3MonitoringConfiguration')
+    SecretsManagerArn = Shapes::StringShape.new(name: 'SecretsManagerArn')
+    SecureNamespaceInfo = Shapes::StructureShape.new(name: 'SecureNamespaceInfo')
+    SecurityConfiguration = Shapes::StructureShape.new(name: 'SecurityConfiguration')
+    SecurityConfigurationArn = Shapes::StringShape.new(name: 'SecurityConfigurationArn')
+    SecurityConfigurationData = Shapes::StructureShape.new(name: 'SecurityConfigurationData')
+    SecurityConfigurations = Shapes::ListShape.new(name: 'SecurityConfigurations')
     SensitivePropertiesMap = Shapes::MapShape.new(name: 'SensitivePropertiesMap')
+    SessionTagValue = Shapes::StringShape.new(name: 'SessionTagValue')
     SparkSqlJobDriver = Shapes::StructureShape.new(name: 'SparkSqlJobDriver')
     SparkSqlParameters = Shapes::StringShape.new(name: 'SparkSqlParameters')
     SparkSubmitJobDriver = Shapes::StructureShape.new(name: 'SparkSubmitJobDriver')
@@ -128,6 +146,7 @@ module Aws::EMRContainers
     String256 = Shapes::StringShape.new(name: 'String256')
     StringEmpty256 = Shapes::StringShape.new(name: 'StringEmpty256')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    TLSCertificateConfiguration = Shapes::StructureShape.new(name: 'TLSCertificateConfiguration')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -148,6 +167,10 @@ module Aws::EMRContainers
     VirtualClusterState = Shapes::StringShape.new(name: 'VirtualClusterState')
     VirtualClusterStates = Shapes::ListShape.new(name: 'VirtualClusterStates')
     VirtualClusters = Shapes::ListShape.new(name: 'VirtualClusters')
+
+    AuthorizationConfiguration.add_member(:lake_formation_configuration, Shapes::ShapeRef.new(shape: LakeFormationConfiguration, location_name: "lakeFormationConfiguration"))
+    AuthorizationConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    AuthorizationConfiguration.struct_class = Types::AuthorizationConfiguration
 
     CancelJobRunRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "jobRunId"))
     CancelJobRunRequest.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
@@ -221,10 +244,22 @@ module Aws::EMRContainers
     CreateManagedEndpointResponse.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId"))
     CreateManagedEndpointResponse.struct_class = Types::CreateManagedEndpointResponse
 
+    CreateSecurityConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, required: true, location_name: "name"))
+    CreateSecurityConfigurationRequest.add_member(:security_configuration_data, Shapes::ShapeRef.new(shape: SecurityConfigurationData, required: true, location_name: "securityConfigurationData"))
+    CreateSecurityConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSecurityConfigurationRequest.struct_class = Types::CreateSecurityConfigurationRequest
+
+    CreateSecurityConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
+    CreateSecurityConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
+    CreateSecurityConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecurityConfigurationArn, location_name: "arn"))
+    CreateSecurityConfigurationResponse.struct_class = Types::CreateSecurityConfigurationResponse
+
     CreateVirtualClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, required: true, location_name: "name"))
     CreateVirtualClusterRequest.add_member(:container_provider, Shapes::ShapeRef.new(shape: ContainerProvider, required: true, location_name: "containerProvider"))
     CreateVirtualClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateVirtualClusterRequest.add_member(:security_configuration_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "securityConfigurationId"))
     CreateVirtualClusterRequest.struct_class = Types::CreateVirtualClusterRequest
 
     CreateVirtualClusterResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
@@ -278,6 +313,12 @@ module Aws::EMRContainers
     DescribeManagedEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
     DescribeManagedEndpointResponse.struct_class = Types::DescribeManagedEndpointResponse
 
+    DescribeSecurityConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "securityConfigurationId"))
+    DescribeSecurityConfigurationRequest.struct_class = Types::DescribeSecurityConfigurationRequest
+
+    DescribeSecurityConfigurationResponse.add_member(:security_configuration, Shapes::ShapeRef.new(shape: SecurityConfiguration, location_name: "securityConfiguration"))
+    DescribeSecurityConfigurationResponse.struct_class = Types::DescribeSecurityConfigurationResponse
+
     DescribeVirtualClusterRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
     DescribeVirtualClusterRequest.struct_class = Types::DescribeVirtualClusterRequest
 
@@ -289,6 +330,9 @@ module Aws::EMRContainers
 
     EksInfo.add_member(:namespace, Shapes::ShapeRef.new(shape: KubernetesNamespace, location_name: "namespace"))
     EksInfo.struct_class = Types::EksInfo
+
+    EncryptionConfiguration.add_member(:in_transit_encryption_configuration, Shapes::ShapeRef.new(shape: InTransitEncryptionConfiguration, location_name: "inTransitEncryptionConfiguration"))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     Endpoint.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
     Endpoint.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
@@ -331,6 +375,9 @@ module Aws::EMRContainers
     GetManagedEndpointSessionCredentialsResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "credentials"))
     GetManagedEndpointSessionCredentialsResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: Date, location_name: "expiresAt"))
     GetManagedEndpointSessionCredentialsResponse.struct_class = Types::GetManagedEndpointSessionCredentialsResponse
+
+    InTransitEncryptionConfiguration.add_member(:tls_certificate_configuration, Shapes::ShapeRef.new(shape: TLSCertificateConfiguration, location_name: "tlsCertificateConfiguration"))
+    InTransitEncryptionConfiguration.struct_class = Types::InTransitEncryptionConfiguration
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -384,6 +431,11 @@ module Aws::EMRContainers
 
     JobTemplates.member = Shapes::ShapeRef.new(shape: JobTemplate)
 
+    LakeFormationConfiguration.add_member(:authorized_session_tag_value, Shapes::ShapeRef.new(shape: SessionTagValue, location_name: "authorizedSessionTagValue"))
+    LakeFormationConfiguration.add_member(:secure_namespace_info, Shapes::ShapeRef.new(shape: SecureNamespaceInfo, location_name: "secureNamespaceInfo"))
+    LakeFormationConfiguration.add_member(:query_engine_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "queryEngineRoleArn"))
+    LakeFormationConfiguration.struct_class = Types::LakeFormationConfiguration
+
     ListJobRunsRequest.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
     ListJobRunsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdBefore"))
     ListJobRunsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdAfter"))
@@ -419,6 +471,16 @@ module Aws::EMRContainers
     ListManagedEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "endpoints"))
     ListManagedEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListManagedEndpointsResponse.struct_class = Types::ListManagedEndpointsResponse
+
+    ListSecurityConfigurationsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdAfter"))
+    ListSecurityConfigurationsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Date, location: "querystring", location_name: "createdBefore"))
+    ListSecurityConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: JavaInteger, location: "querystring", location_name: "maxResults"))
+    ListSecurityConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSecurityConfigurationsRequest.struct_class = Types::ListSecurityConfigurationsRequest
+
+    ListSecurityConfigurationsResponse.add_member(:security_configurations, Shapes::ShapeRef.new(shape: SecurityConfigurations, location_name: "securityConfigurations"))
+    ListSecurityConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSecurityConfigurationsResponse.struct_class = Types::ListSecurityConfigurationsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: RsiArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -477,6 +539,24 @@ module Aws::EMRContainers
     S3MonitoringConfiguration.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, required: true, location_name: "logUri"))
     S3MonitoringConfiguration.struct_class = Types::S3MonitoringConfiguration
 
+    SecureNamespaceInfo.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "clusterId"))
+    SecureNamespaceInfo.add_member(:namespace, Shapes::ShapeRef.new(shape: KubernetesNamespace, location_name: "namespace"))
+    SecureNamespaceInfo.struct_class = Types::SecureNamespaceInfo
+
+    SecurityConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
+    SecurityConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
+    SecurityConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: SecurityConfigurationArn, location_name: "arn"))
+    SecurityConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
+    SecurityConfiguration.add_member(:created_by, Shapes::ShapeRef.new(shape: RequestIdentityUserArn, location_name: "createdBy"))
+    SecurityConfiguration.add_member(:security_configuration_data, Shapes::ShapeRef.new(shape: SecurityConfigurationData, location_name: "securityConfigurationData"))
+    SecurityConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    SecurityConfiguration.struct_class = Types::SecurityConfiguration
+
+    SecurityConfigurationData.add_member(:authorization_configuration, Shapes::ShapeRef.new(shape: AuthorizationConfiguration, location_name: "authorizationConfiguration"))
+    SecurityConfigurationData.struct_class = Types::SecurityConfigurationData
+
+    SecurityConfigurations.member = Shapes::ShapeRef.new(shape: SecurityConfiguration)
+
     SensitivePropertiesMap.key = Shapes::ShapeRef.new(shape: String1024)
     SensitivePropertiesMap.value = Shapes::ShapeRef.new(shape: String1024)
 
@@ -509,6 +589,11 @@ module Aws::EMRContainers
     StartJobRunResponse.struct_class = Types::StartJobRunResponse
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: String256)
+
+    TLSCertificateConfiguration.add_member(:certificate_provider_type, Shapes::ShapeRef.new(shape: CertificateProviderType, location_name: "certificateProviderType"))
+    TLSCertificateConfiguration.add_member(:public_certificate_secret_arn, Shapes::ShapeRef.new(shape: SecretsManagerArn, location_name: "publicCertificateSecretArn"))
+    TLSCertificateConfiguration.add_member(:private_certificate_secret_arn, Shapes::ShapeRef.new(shape: SecretsManagerArn, location_name: "privateCertificateSecretArn"))
+    TLSCertificateConfiguration.struct_class = Types::TLSCertificateConfiguration
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: String128)
 
@@ -547,6 +632,7 @@ module Aws::EMRContainers
     VirtualCluster.add_member(:container_provider, Shapes::ShapeRef.new(shape: ContainerProvider, location_name: "containerProvider"))
     VirtualCluster.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
     VirtualCluster.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    VirtualCluster.add_member(:security_configuration_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "securityConfigurationId"))
     VirtualCluster.struct_class = Types::VirtualCluster
 
     VirtualClusterStates.member = Shapes::ShapeRef.new(shape: VirtualClusterState)
@@ -600,6 +686,16 @@ module Aws::EMRContainers
         o.output = Shapes::ShapeRef.new(shape: CreateManagedEndpointResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_security_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSecurityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/securityconfigurations"
+        o.input = Shapes::ShapeRef.new(shape: CreateSecurityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSecurityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -678,6 +774,17 @@ module Aws::EMRContainers
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_security_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSecurityConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/securityconfigurations/{securityConfigurationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSecurityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSecurityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_virtual_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeVirtualCluster"
         o.http_method = "GET"
@@ -739,6 +846,22 @@ module Aws::EMRContainers
         o.http_request_uri = "/virtualclusters/{virtualClusterId}/endpoints"
         o.input = Shapes::ShapeRef.new(shape: ListManagedEndpointsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListManagedEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_security_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSecurityConfigurations"
+        o.http_method = "GET"
+        o.http_request_uri = "/securityconfigurations"
+        o.input = Shapes::ShapeRef.new(shape: ListSecurityConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSecurityConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(

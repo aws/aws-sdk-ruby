@@ -5141,7 +5141,7 @@ module Aws::EC2
     end
 
     class DescribeNetworkInterfaceAttributeRequest
-      attr_accessor attribute: ("description" | "groupSet" | "sourceDestCheck" | "attachment")
+      attr_accessor attribute: ("description" | "groupSet" | "sourceDestCheck" | "attachment" | "associatePublicIpAddress")
       attr_accessor dry_run: bool
       attr_accessor network_interface_id: ::String
       SENSITIVE: []
@@ -5153,6 +5153,7 @@ module Aws::EC2
       attr_accessor groups: ::Array[Types::GroupIdentifier]
       attr_accessor network_interface_id: ::String
       attr_accessor source_dest_check: Types::AttributeBooleanValue
+      attr_accessor associate_public_ip_address: bool
       SENSITIVE: []
     end
 
@@ -10685,6 +10686,7 @@ module Aws::EC2
       attr_accessor ena_srd_specification: Types::EnaSrdSpecification
       attr_accessor enable_primary_ipv_6: bool
       attr_accessor connection_tracking_specification: Types::ConnectionTrackingSpecificationRequest
+      attr_accessor associate_public_ip_address: bool
       SENSITIVE: []
     end
 

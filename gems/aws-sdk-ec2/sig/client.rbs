@@ -6405,10 +6405,11 @@ module Aws
         def groups: () -> ::Array[Types::GroupIdentifier]
         def network_interface_id: () -> ::String
         def source_dest_check: () -> Types::AttributeBooleanValue
+        def associate_public_ip_address: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#describe_network_interface_attribute-instance_method
       def describe_network_interface_attribute: (
-                                                  ?attribute: ("description" | "groupSet" | "sourceDestCheck" | "attachment"),
+                                                  ?attribute: ("description" | "groupSet" | "sourceDestCheck" | "attachment" | "associatePublicIpAddress"),
                                                   ?dry_run: bool,
                                                   network_interface_id: ::String
                                                 ) -> _DescribeNetworkInterfaceAttributeResponseSuccess
@@ -10272,7 +10273,8 @@ module Aws
                                                   tcp_established_timeout: ::Integer?,
                                                   udp_stream_timeout: ::Integer?,
                                                   udp_timeout: ::Integer?
-                                                }
+                                                },
+                                                ?associate_public_ip_address: bool
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

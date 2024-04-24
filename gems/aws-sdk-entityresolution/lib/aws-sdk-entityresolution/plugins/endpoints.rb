@@ -60,6 +60,8 @@ module Aws::EntityResolution
           case context.operation_name
           when :add_policy_statement
             Aws::EntityResolution::Endpoints::AddPolicyStatement.build(context)
+          when :batch_delete_unique_id
+            Aws::EntityResolution::Endpoints::BatchDeleteUniqueId.build(context)
           when :create_id_mapping_workflow
             Aws::EntityResolution::Endpoints::CreateIdMappingWorkflow.build(context)
           when :create_id_namespace

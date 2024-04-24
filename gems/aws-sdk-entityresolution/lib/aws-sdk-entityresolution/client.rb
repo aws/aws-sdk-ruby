@@ -448,6 +448,52 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Deletes multiple unique IDs in a matching workflow.
+    #
+    # @option params [String] :input_source
+    #   The input source for the batch delete unique ID operation.
+    #
+    # @option params [required, Array<String>] :unique_ids
+    #   The unique IDs to delete.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the workflow.
+    #
+    # @return [Types::BatchDeleteUniqueIdOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteUniqueIdOutput#deleted #deleted} => Array&lt;Types::DeletedUniqueId&gt;
+    #   * {Types::BatchDeleteUniqueIdOutput#disconnected_unique_ids #disconnected_unique_ids} => Array&lt;String&gt;
+    #   * {Types::BatchDeleteUniqueIdOutput#errors #errors} => Array&lt;Types::DeleteUniqueIdError&gt;
+    #   * {Types::BatchDeleteUniqueIdOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_unique_id({
+    #     input_source: "BatchDeleteUniqueIdInputInputSourceString",
+    #     unique_ids: ["UniqueId"], # required
+    #     workflow_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deleted #=> Array
+    #   resp.deleted[0].unique_id #=> String
+    #   resp.disconnected_unique_ids #=> Array
+    #   resp.disconnected_unique_ids[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_type #=> String, one of "SERVICE_ERROR", "VALIDATION_ERROR"
+    #   resp.errors[0].unique_id #=> String
+    #   resp.status #=> String, one of "COMPLETED", "ACCEPTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/BatchDeleteUniqueId AWS API Documentation
+    #
+    # @overload batch_delete_unique_id(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_unique_id(params = {}, options = {})
+      req = build_request(:batch_delete_unique_id, params)
+      req.send_request(options)
+    end
+
     # Creates an `IdMappingWorkflow` object which stores the configuration
     # of the data processing job to be run. Each `IdMappingWorkflow` must
     # have a unique workflow name. To modify an existing workflow, use the
@@ -2372,7 +2418,7 @@ module Aws::EntityResolution
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

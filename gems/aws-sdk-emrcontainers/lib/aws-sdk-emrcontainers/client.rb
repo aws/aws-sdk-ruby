@@ -629,6 +629,80 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
+    # Creates a security configuration. Security configurations in Amazon
+    # EMR on EKS are templates for different security setups. You can use
+    # security configurations to configure the Lake Formation integration
+    # setup. You can also create a security configuration to re-use a
+    # security setup each time you create a virtual cluster.
+    #
+    # @option params [required, String] :client_token
+    #   The client idempotency token to use when creating the security
+    #   configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The name of the security configuration.
+    #
+    # @option params [required, Types::SecurityConfigurationData] :security_configuration_data
+    #   Security configuration input for the request.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the security configuration.
+    #
+    # @return [Types::CreateSecurityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSecurityConfigurationResponse#id #id} => String
+    #   * {Types::CreateSecurityConfigurationResponse#name #name} => String
+    #   * {Types::CreateSecurityConfigurationResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_security_configuration({
+    #     client_token: "ClientToken", # required
+    #     name: "ResourceNameString", # required
+    #     security_configuration_data: { # required
+    #       authorization_configuration: {
+    #         lake_formation_configuration: {
+    #           authorized_session_tag_value: "SessionTagValue",
+    #           secure_namespace_info: {
+    #             cluster_id: "ClusterId",
+    #             namespace: "KubernetesNamespace",
+    #           },
+    #           query_engine_role_arn: "IAMRoleArn",
+    #         },
+    #         encryption_configuration: {
+    #           in_transit_encryption_configuration: {
+    #             tls_certificate_configuration: {
+    #               certificate_provider_type: "PEM", # accepts PEM
+    #               public_certificate_secret_arn: "SecretsManagerArn",
+    #               private_certificate_secret_arn: "SecretsManagerArn",
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "String128" => "StringEmpty256",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateSecurityConfiguration AWS API Documentation
+    #
+    # @overload create_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_security_configuration(params = {}, options = {})
+      req = build_request(:create_security_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a virtual cluster. Virtual cluster is a managed entity on
     # Amazon EMR on EKS. You can create, describe, list and delete virtual
     # clusters. They do not consume any additional resource in your system.
@@ -650,6 +724,9 @@ module Aws::EMRContainers
     #
     # @option params [Hash<String,String>] :tags
     #   The tags assigned to the virtual cluster.
+    #
+    # @option params [String] :security_configuration_id
+    #   The ID of the security configuration.
     #
     # @return [Types::CreateVirtualClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -674,6 +751,7 @@ module Aws::EMRContainers
     #     tags: {
     #       "String128" => "StringEmpty256",
     #     },
+    #     security_configuration_id: "ResourceIdString",
     #   })
     #
     # @example Response structure
@@ -985,6 +1063,52 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
+    # Displays detailed information about a specified security
+    # configuration. Security configurations in Amazon EMR on EKS are
+    # templates for different security setups. You can use security
+    # configurations to configure the Lake Formation integration setup. You
+    # can also create a security configuration to re-use a security setup
+    # each time you create a virtual cluster.
+    #
+    # @option params [required, String] :id
+    #   The ID of the security configuration.
+    #
+    # @return [Types::DescribeSecurityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSecurityConfigurationResponse#security_configuration #security_configuration} => Types::SecurityConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_security_configuration({
+    #     id: "ResourceIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_configuration.id #=> String
+    #   resp.security_configuration.name #=> String
+    #   resp.security_configuration.arn #=> String
+    #   resp.security_configuration.created_at #=> Time
+    #   resp.security_configuration.created_by #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.lake_formation_configuration.authorized_session_tag_value #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.lake_formation_configuration.secure_namespace_info.cluster_id #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.lake_formation_configuration.secure_namespace_info.namespace #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.lake_formation_configuration.query_engine_role_arn #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.certificate_provider_type #=> String, one of "PEM"
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.public_certificate_secret_arn #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.private_certificate_secret_arn #=> String
+    #   resp.security_configuration.tags #=> Hash
+    #   resp.security_configuration.tags["String128"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeSecurityConfiguration AWS API Documentation
+    #
+    # @overload describe_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_security_configuration(params = {}, options = {})
+      req = build_request(:describe_security_configuration, params)
+      req.send_request(options)
+    end
+
     # Displays detailed information about a specified virtual cluster.
     # Virtual cluster is a managed entity on Amazon EMR on EKS. You can
     # create, describe, list and delete virtual clusters. They do not
@@ -1018,6 +1142,7 @@ module Aws::EMRContainers
     #   resp.virtual_cluster.created_at #=> Time
     #   resp.virtual_cluster.tags #=> Hash
     #   resp.virtual_cluster.tags["String128"] #=> String
+    #   resp.virtual_cluster.security_configuration_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeVirtualCluster AWS API Documentation
     #
@@ -1351,6 +1476,69 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
+    # Lists security configurations based on a set of parameters. Security
+    # configurations in Amazon EMR on EKS are templates for different
+    # security setups. You can use security configurations to configure the
+    # Lake Formation integration setup. You can also create a security
+    # configuration to re-use a security setup each time you create a
+    # virtual cluster.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_after
+    #   The date and time after which the security configuration was created.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_before
+    #   The date and time before which the security configuration was created.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of security configurations the operation can list.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of security configurations to return.
+    #
+    # @return [Types::ListSecurityConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityConfigurationsResponse#security_configurations #security_configurations} => Array&lt;Types::SecurityConfiguration&gt;
+    #   * {Types::ListSecurityConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_configurations({
+    #     created_after: Time.now,
+    #     created_before: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_configurations #=> Array
+    #   resp.security_configurations[0].id #=> String
+    #   resp.security_configurations[0].name #=> String
+    #   resp.security_configurations[0].arn #=> String
+    #   resp.security_configurations[0].created_at #=> Time
+    #   resp.security_configurations[0].created_by #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.lake_formation_configuration.authorized_session_tag_value #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.lake_formation_configuration.secure_namespace_info.cluster_id #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.lake_formation_configuration.secure_namespace_info.namespace #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.lake_formation_configuration.query_engine_role_arn #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.certificate_provider_type #=> String, one of "PEM"
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.public_certificate_secret_arn #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.private_certificate_secret_arn #=> String
+    #   resp.security_configurations[0].tags #=> Hash
+    #   resp.security_configurations[0].tags["String128"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListSecurityConfigurations AWS API Documentation
+    #
+    # @overload list_security_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_security_configurations(params = {}, options = {})
+      req = build_request(:list_security_configurations, params)
+      req.send_request(options)
+    end
+
     # Lists the tags assigned to the resources.
     #
     # @option params [required, String] :resource_arn
@@ -1449,6 +1637,7 @@ module Aws::EMRContainers
     #   resp.virtual_clusters[0].created_at #=> Time
     #   resp.virtual_clusters[0].tags #=> Hash
     #   resp.virtual_clusters[0].tags["String128"] #=> String
+    #   resp.virtual_clusters[0].security_configuration_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListVirtualClusters AWS API Documentation
@@ -1658,7 +1847,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

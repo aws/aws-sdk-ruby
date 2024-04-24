@@ -20,6 +20,9 @@ module Aws::EntityResolution
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsAccountIdList = Shapes::ListShape.new(name: 'AwsAccountIdList')
+    BatchDeleteUniqueIdInput = Shapes::StructureShape.new(name: 'BatchDeleteUniqueIdInput')
+    BatchDeleteUniqueIdInputInputSourceString = Shapes::StringShape.new(name: 'BatchDeleteUniqueIdInputInputSourceString')
+    BatchDeleteUniqueIdOutput = Shapes::StructureShape.new(name: 'BatchDeleteUniqueIdOutput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateIdMappingWorkflowInput = Shapes::StructureShape.new(name: 'CreateIdMappingWorkflowInput')
@@ -40,7 +43,14 @@ module Aws::EntityResolution
     DeletePolicyStatementOutput = Shapes::StructureShape.new(name: 'DeletePolicyStatementOutput')
     DeleteSchemaMappingInput = Shapes::StructureShape.new(name: 'DeleteSchemaMappingInput')
     DeleteSchemaMappingOutput = Shapes::StructureShape.new(name: 'DeleteSchemaMappingOutput')
+    DeleteUniqueIdError = Shapes::StructureShape.new(name: 'DeleteUniqueIdError')
+    DeleteUniqueIdErrorType = Shapes::StringShape.new(name: 'DeleteUniqueIdErrorType')
+    DeleteUniqueIdErrorsList = Shapes::ListShape.new(name: 'DeleteUniqueIdErrorsList')
+    DeleteUniqueIdStatus = Shapes::StringShape.new(name: 'DeleteUniqueIdStatus')
+    DeletedUniqueId = Shapes::StructureShape.new(name: 'DeletedUniqueId')
+    DeletedUniqueIdList = Shapes::ListShape.new(name: 'DeletedUniqueIdList')
     Description = Shapes::StringShape.new(name: 'Description')
+    DisconnectedUniqueIdsList = Shapes::ListShape.new(name: 'DisconnectedUniqueIdsList')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     EntityName = Shapes::StringShape.new(name: 'EntityName')
     EntityNameOrIdMappingWorkflowArn = Shapes::StringShape.new(name: 'EntityNameOrIdMappingWorkflowArn')
@@ -195,6 +205,8 @@ module Aws::EntityResolution
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UniqueId = Shapes::StringShape.new(name: 'UniqueId')
+    UniqueIdList = Shapes::ListShape.new(name: 'UniqueIdList')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateIdMappingWorkflowInput = Shapes::StructureShape.new(name: 'UpdateIdMappingWorkflowInput')
@@ -225,6 +237,17 @@ module Aws::EntityResolution
     AddPolicyStatementOutput.struct_class = Types::AddPolicyStatementOutput
 
     AwsAccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
+
+    BatchDeleteUniqueIdInput.add_member(:input_source, Shapes::ShapeRef.new(shape: BatchDeleteUniqueIdInputInputSourceString, location: "header", location_name: "inputSource"))
+    BatchDeleteUniqueIdInput.add_member(:unique_ids, Shapes::ShapeRef.new(shape: UniqueIdList, required: true, location: "header", location_name: "uniqueIds"))
+    BatchDeleteUniqueIdInput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location: "uri", location_name: "workflowName"))
+    BatchDeleteUniqueIdInput.struct_class = Types::BatchDeleteUniqueIdInput
+
+    BatchDeleteUniqueIdOutput.add_member(:deleted, Shapes::ShapeRef.new(shape: DeletedUniqueIdList, required: true, location_name: "deleted"))
+    BatchDeleteUniqueIdOutput.add_member(:disconnected_unique_ids, Shapes::ShapeRef.new(shape: DisconnectedUniqueIdsList, required: true, location_name: "disconnectedUniqueIds"))
+    BatchDeleteUniqueIdOutput.add_member(:errors, Shapes::ShapeRef.new(shape: DeleteUniqueIdErrorsList, required: true, location_name: "errors"))
+    BatchDeleteUniqueIdOutput.add_member(:status, Shapes::ShapeRef.new(shape: DeleteUniqueIdStatus, required: true, location_name: "status"))
+    BatchDeleteUniqueIdOutput.struct_class = Types::BatchDeleteUniqueIdOutput
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -332,6 +355,19 @@ module Aws::EntityResolution
 
     DeleteSchemaMappingOutput.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     DeleteSchemaMappingOutput.struct_class = Types::DeleteSchemaMappingOutput
+
+    DeleteUniqueIdError.add_member(:error_type, Shapes::ShapeRef.new(shape: DeleteUniqueIdErrorType, required: true, location_name: "errorType"))
+    DeleteUniqueIdError.add_member(:unique_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location_name: "uniqueId"))
+    DeleteUniqueIdError.struct_class = Types::DeleteUniqueIdError
+
+    DeleteUniqueIdErrorsList.member = Shapes::ShapeRef.new(shape: DeleteUniqueIdError)
+
+    DeletedUniqueId.add_member(:unique_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location_name: "uniqueId"))
+    DeletedUniqueId.struct_class = Types::DeletedUniqueId
+
+    DeletedUniqueIdList.member = Shapes::ShapeRef.new(shape: DeletedUniqueId)
+
+    DisconnectedUniqueIdsList.member = Shapes::ShapeRef.new(shape: UniqueId)
 
     ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
     ErrorDetails.struct_class = Types::ErrorDetails
@@ -786,6 +822,8 @@ module Aws::EntityResolution
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UniqueIdList.member = Shapes::ShapeRef.new(shape: UniqueId)
+
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: VeniceGlobalArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
@@ -889,6 +927,17 @@ module Aws::EntityResolution
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:batch_delete_unique_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteUniqueId"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/matchingworkflows/{workflowName}/uniqueids"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteUniqueIdInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteUniqueIdOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 

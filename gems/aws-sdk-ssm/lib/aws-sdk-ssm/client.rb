@@ -1388,6 +1388,12 @@ module Aws::SSM
     #
     #   * `amzn`
     #
+    #   * `AWSEC2`
+    #
+    #   * `AWSConfigRemediation`
+    #
+    #   * `AWSSupport`
+    #
     # @option params [String] :display_name
     #   An optional field where you can specify a friendly name for the SSM
     #   document. This value can differ for each version of the document. You
@@ -1560,6 +1566,11 @@ module Aws::SSM
     #   The date and time, in ISO-8601 Extended format, for when you want the
     #   maintenance window to become active. `StartDate` allows you to delay
     #   activation of the maintenance window until the specified future date.
+    #
+    #   <note markdown="1"> When using a rate schedule, if you provide a start date that occurs in
+    #   the past, the current date and time are used as the start date.
+    #
+    #    </note>
     #
     # @option params [String] :end_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
@@ -4172,6 +4183,93 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_instance_patches(params = {}, options = {})
       req = build_request(:describe_instance_patches, params)
+      req.send_request(options)
+    end
+
+    # An API operation used by the Systems Manager console to display
+    # information about Systems Manager managed nodes.
+    #
+    # @option params [Array<Types::InstancePropertyFilter>] :instance_property_filter_list
+    #   An array of instance property filters.
+    #
+    # @option params [Array<Types::InstancePropertyStringFilter>] :filters_with_operator
+    #   The request filters to use with the operator.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for the call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token provided by a previous request to use to return the next set
+    #   of properties.
+    #
+    # @return [Types::DescribeInstancePropertiesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstancePropertiesResult#instance_properties #instance_properties} => Array&lt;Types::InstanceProperty&gt;
+    #   * {Types::DescribeInstancePropertiesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_properties({
+    #     instance_property_filter_list: [
+    #       {
+    #         key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes, DocumentName, ActivationIds, IamRole, ResourceType, AssociationStatus
+    #         value_set: ["InstancePropertyFilterValue"], # required
+    #       },
+    #     ],
+    #     filters_with_operator: [
+    #       {
+    #         key: "InstancePropertyStringFilterKey", # required
+    #         values: ["InstancePropertyFilterValue"], # required
+    #         operator: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_properties #=> Array
+    #   resp.instance_properties[0].name #=> String
+    #   resp.instance_properties[0].instance_id #=> String
+    #   resp.instance_properties[0].instance_type #=> String
+    #   resp.instance_properties[0].instance_role #=> String
+    #   resp.instance_properties[0].key_name #=> String
+    #   resp.instance_properties[0].instance_state #=> String
+    #   resp.instance_properties[0].architecture #=> String
+    #   resp.instance_properties[0].ip_address #=> String
+    #   resp.instance_properties[0].launch_time #=> Time
+    #   resp.instance_properties[0].ping_status #=> String, one of "Online", "ConnectionLost", "Inactive"
+    #   resp.instance_properties[0].last_ping_date_time #=> Time
+    #   resp.instance_properties[0].agent_version #=> String
+    #   resp.instance_properties[0].platform_type #=> String, one of "Windows", "Linux", "MacOS"
+    #   resp.instance_properties[0].platform_name #=> String
+    #   resp.instance_properties[0].platform_version #=> String
+    #   resp.instance_properties[0].activation_id #=> String
+    #   resp.instance_properties[0].iam_role #=> String
+    #   resp.instance_properties[0].registration_date #=> Time
+    #   resp.instance_properties[0].resource_type #=> String
+    #   resp.instance_properties[0].computer_name #=> String
+    #   resp.instance_properties[0].association_status #=> String
+    #   resp.instance_properties[0].last_association_execution_date #=> Time
+    #   resp.instance_properties[0].last_successful_association_execution_date #=> Time
+    #   resp.instance_properties[0].association_overview.detailed_status #=> String
+    #   resp.instance_properties[0].association_overview.instance_association_status_aggregated_count #=> Hash
+    #   resp.instance_properties[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
+    #   resp.instance_properties[0].source_id #=> String
+    #   resp.instance_properties[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceProperties AWS API Documentation
+    #
+    # @overload describe_instance_properties(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_properties(params = {}, options = {})
+      req = build_request(:describe_instance_properties, params)
       req.send_request(options)
     end
 
@@ -6851,7 +6949,12 @@ module Aws::SSM
     #   To query by parameter label, use `"Name": "name:label"`. To query by
     #   parameter version, use `"Name": "name:version"`.
     #
-    #   For more information about shared parameters, see [Working with shared
+    #   <note markdown="1"> The results for `GetParameters` requests are listed in alphabetical
+    #   order in query responses.
+    #
+    #    </note>
+    #
+    #   For information about shared parameters, see [Working with shared
     #   parameters][1] in the *Amazon Web Services Systems Manager User
     #   Guide*.
     #
@@ -9317,18 +9420,21 @@ module Aws::SSM
     # @option params [String] :service_role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role for Amazon Web
     #   Services Systems Manager to assume when running a maintenance window
-    #   task. If you do not specify a service role ARN, Systems Manager uses
-    #   your account's service-linked role. If no service-linked role for
-    #   Systems Manager exists in your account, it is created when you run
-    #   `RegisterTaskWithMaintenanceWindow`.
+    #   task. If you do not specify a service role ARN, Systems Manager uses a
+    #   service-linked role in your account. If no appropriate service-linked
+    #   role for Systems Manager exists in your account, it is created when
+    #   you run `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Using service-linked roles for Systems
-    #   Manager][1] in the in the *Amazon Web Services Systems Manager User
-    #   Guide*:
+    #   However, for an improved security posture, we strongly recommend
+    #   creating a custom policy and custom service role for running your
+    #   maintenance window tasks. The policy can be crafted to provide only
+    #   the permissions needed for your particular maintenance window tasks.
+    #   For more information, see [Setting up maintenance windows][1] in the
+    #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html
     #
     # @option params [required, String] :task_type
     #   The type of task being registered.
@@ -11258,6 +11364,11 @@ module Aws::SSM
     #   maintenance window to become active. `StartDate` allows you to delay
     #   activation of the maintenance window until the specified future date.
     #
+    #   <note markdown="1"> When using a rate schedule, if you provide a start date that occurs in
+    #   the past, the current date and time are used as the start date.
+    #
+    #    </note>
+    #
     # @option params [String] :end_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
     #   maintenance window to become inactive. `EndDate` allows you to set a
@@ -11537,18 +11648,21 @@ module Aws::SSM
     # @option params [String] :service_role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role for Amazon Web
     #   Services Systems Manager to assume when running a maintenance window
-    #   task. If you do not specify a service role ARN, Systems Manager uses
-    #   your account's service-linked role. If no service-linked role for
-    #   Systems Manager exists in your account, it is created when you run
-    #   `RegisterTaskWithMaintenanceWindow`.
+    #   task. If you do not specify a service role ARN, Systems Manager uses a
+    #   service-linked role in your account. If no appropriate service-linked
+    #   role for Systems Manager exists in your account, it is created when
+    #   you run `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Using service-linked roles for Systems
-    #   Manager][1] in the in the *Amazon Web Services Systems Manager User
-    #   Guide*:
+    #   However, for an improved security posture, we strongly recommend
+    #   creating a custom policy and custom service role for running your
+    #   maintenance window tasks. The policy can be crafted to provide only
+    #   the permissions needed for your particular maintenance window tasks.
+    #   For more information, see [Setting up maintenance windows][1] in the
+    #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
     #   The parameters to modify.
@@ -12428,7 +12542,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.166.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3359,6 +3359,12 @@ module Aws::SSM
     #   * `amazon`
     #
     #   * `amzn`
+    #
+    #   * `AWSEC2`
+    #
+    #   * `AWSConfigRemediation`
+    #
+    #   * `AWSSupport`
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -3464,6 +3470,11 @@ module Aws::SSM
     #   the maintenance window to become active. `StartDate` allows you to
     #   delay activation of the maintenance window until the specified
     #   future date.
+    #
+    #   <note markdown="1"> When using a rate schedule, if you provide a start date that occurs
+    #   in the past, the current date and time are used as the start date.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] end_date
@@ -5408,6 +5419,54 @@ module Aws::SSM
     #
     class DescribeInstancePatchesResult < Struct.new(
       :patches,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_property_filter_list
+    #   An array of instance property filters.
+    #   @return [Array<Types::InstancePropertyFilter>]
+    #
+    # @!attribute [rw] filters_with_operator
+    #   The request filters to use with the operator.
+    #   @return [Array<Types::InstancePropertyStringFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for the call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token provided by a previous request to use to return the next
+    #   set of properties.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePropertiesRequest AWS API Documentation
+    #
+    class DescribeInstancePropertiesRequest < Struct.new(
+      :instance_property_filter_list,
+      :filters_with_operator,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_properties
+    #   Properties for the managed instances.
+    #   @return [Array<Types::InstanceProperty>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of properties to return. Use this token
+    #   to get the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePropertiesResult AWS API Documentation
+    #
+    class DescribeInstancePropertiesResult < Struct.new(
+      :instance_properties,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -8783,9 +8842,14 @@ module Aws::SSM
     #   To query by parameter label, use `"Name": "name:label"`. To query by
     #   parameter version, use `"Name": "name:version"`.
     #
-    #   For more information about shared parameters, see [Working with
-    #   shared parameters][1] in the *Amazon Web Services Systems Manager
-    #   User Guide*.
+    #   <note markdown="1"> The results for `GetParameters` requests are listed in alphabetical
+    #   order in query responses.
+    #
+    #    </note>
+    #
+    #   For information about shared parameters, see [Working with shared
+    #   parameters][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
     #
     #
     #
@@ -9805,6 +9869,200 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # An object containing various properties of a managed node.
+    #
+    # @!attribute [rw] name
+    #   The value of the EC2 `Name` tag associated with the node. If a
+    #   `Name` tag hasn't been applied to the node, this value is blank.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the managed node.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the managed node. For example, t3.large.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_role
+    #   The instance profile attached to the node. If an instance profile
+    #   isn't attached to the node, this value is blank.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair associated with the node. If a key pair
+    #   isnt't associated with the node, this value is blank.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_state
+    #   The current state of the node.
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture
+    #   The CPU architecture of the node. For example, x86\_64.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The public IPv4 address assigned to the node. If a public IPv4
+    #   address isn't assigned to the node, this value is blank.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_time
+    #   The timestamp for when the node was launched.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ping_status
+    #   Connection status of the SSM Agent on the managed node.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_ping_date_time
+    #   The date and time when the SSM Agent last pinged the Systems Manager
+    #   service.
+    #   @return [Time]
+    #
+    # @!attribute [rw] agent_version
+    #   The version of SSM Agent running on your managed node.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_type
+    #   The operating system platform type of the managed node. For example,
+    #   Windows.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_name
+    #   The name of the operating system platform running on your managed
+    #   node.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_version
+    #   The version of the OS platform running on your managed node.
+    #   @return [String]
+    #
+    # @!attribute [rw] activation_id
+    #   The activation ID created by Systems Manager when the server or
+    #   virtual machine (VM) was registered
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role
+    #   The IAM role used in the hybrid activation to register the node with
+    #   Systems Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_date
+    #   The date the node was registered with Systems Manager.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of managed node.
+    #   @return [String]
+    #
+    # @!attribute [rw] computer_name
+    #   The fully qualified host name of the managed node.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   The status of the State Manager association applied to the managed
+    #   node.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_association_execution_date
+    #   The date the association was last run.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_association_execution_date
+    #   The last date the association was successfully run.
+    #   @return [Time]
+    #
+    # @!attribute [rw] association_overview
+    #   Status information about the aggregated associations.
+    #   @return [Types::InstanceAggregatedAssociationOverview]
+    #
+    # @!attribute [rw] source_id
+    #   The ID of the source resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The type of the source resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceProperty AWS API Documentation
+    #
+    class InstanceProperty < Struct.new(
+      :name,
+      :instance_id,
+      :instance_type,
+      :instance_role,
+      :key_name,
+      :instance_state,
+      :architecture,
+      :ip_address,
+      :launch_time,
+      :ping_status,
+      :last_ping_date_time,
+      :agent_version,
+      :platform_type,
+      :platform_name,
+      :platform_version,
+      :activation_id,
+      :iam_role,
+      :registration_date,
+      :resource_type,
+      :computer_name,
+      :association_status,
+      :last_association_execution_date,
+      :last_successful_association_execution_date,
+      :association_overview,
+      :source_id,
+      :source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a filter for a specific list of managed nodes. You can
+    # filter node information by using tags. You specify tags by using a
+    # key-value mapping.
+    #
+    # @!attribute [rw] key
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_set
+    #   The filter values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePropertyFilter AWS API Documentation
+    #
+    class InstancePropertyFilter < Struct.new(
+      :key,
+      :value_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filters to describe or get information about your managed nodes.
+    #
+    # @!attribute [rw] key
+    #   The filter key name to describe your managed nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The filter key name to describe your managed nodes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator used by the filter call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePropertyStringFilter AWS API Documentation
+    #
+    class InstancePropertyStringFilter < Struct.new(
+      :key,
+      :values,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error occurred on the server side.
     #
     # @!attribute [rw] message
@@ -10145,6 +10403,19 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidInstanceInformationFilterValue AWS API Documentation
     #
     class InvalidInstanceInformationFilterValue < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified filter value isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidInstancePropertyFilterValue AWS API Documentation
+    #
+    class InvalidInstancePropertyFilterValue < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -15426,17 +15697,21 @@ module Aws::SSM
     #   The Amazon Resource Name (ARN) of the IAM service role for Amazon
     #   Web Services Systems Manager to assume when running a maintenance
     #   window task. If you do not specify a service role ARN, Systems
-    #   Manager uses your account's service-linked role. If no
-    #   service-linked role for Systems Manager exists in your account, it
-    #   is created when you run `RegisterTaskWithMaintenanceWindow`.
+    #   Manager uses a service-linked role in your account. If no
+    #   appropriate service-linked role for Systems Manager exists in your
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Using service-linked roles for Systems
-    #   Manager][1] in the in the *Amazon Web Services Systems Manager User
-    #   Guide*:
+    #   However, for an improved security posture, we strongly recommend
+    #   creating a custom policy and custom service role for running your
+    #   maintenance window tasks. The policy can be crafted to provide only
+    #   the permissions needed for your particular maintenance window tasks.
+    #   For more information, see [Setting up maintenance windows][1] in the
+    #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -17660,50 +17935,51 @@ module Aws::SSM
     #
     # Supported formats include the following.
     #
-    # * `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>,<instance-id-3>`
+    # **For all Systems Manager capabilities:**
     #
-    # * `Key=tag:<my-tag-key>,Values=<my-tag-value-1>,<my-tag-value-2>`
+    # * `Key=tag-key,Values=tag-value-1,tag-value-2`
     #
-    # * `Key=tag-key,Values=<my-tag-key-1>,<my-tag-key-2>`
+    # ^
     #
-    # * **Run Command and Maintenance window targets only**:
-    #   `Key=resource-groups:Name,Values=<resource-group-name>`
+    # **For Automation and Change Manager:**
     #
-    # * **Maintenance window targets only**:
-    #   `Key=resource-groups:ResourceTypeFilters,Values=<resource-type-1>,<resource-type-2>`
+    # * `Key=tag:tag-key,Values=tag-value`
     #
-    # * **Automation targets only**:
-    #   `Key=ResourceGroup;Values=<resource-group-name>`
+    # * `Key=ResourceGroup,Values=resource-group-name`
     #
-    # For example:
+    # * `Key=ParameterValues,Values=value-1,value-2,value-3`
     #
-    # * `Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE`
+    # * To target all instances in the Amazon Web Services Region:
     #
-    # * `Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3`
+    #   * `Key=AWS::EC2::Instance,Values=*`
     #
-    # * `Key=tag-key,Values=Name,Instance-Type,CostCenter`
+    #   * `Key=InstanceIds,Values=*`
     #
-    # * **Run Command and Maintenance window targets only**:
-    #   `Key=resource-groups:Name,Values=ProductionResourceGroup`
+    # **For Run Command and Maintenance Windows:**
     #
-    #   This example demonstrates how to target all resources in the
-    #   resource group **ProductionResourceGroup** in your maintenance
-    #   window.
+    # * `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3`
     #
-    # * **Maintenance window targets only**:
-    #   `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC`
+    # * `Key=tag:tag-key,Values=tag-value-1,tag-value-2`
     #
-    #   This example demonstrates how to target only Amazon Elastic Compute
-    #   Cloud (Amazon EC2) instances and VPCs in your maintenance window.
+    # * `Key=resource-groups:Name,Values=resource-group-name`
     #
-    # * **Automation targets only**:
-    #   `Key=ResourceGroup,Values=MyResourceGroup`
+    # * Additionally, Maintenance Windows support targeting resource types:
     #
-    # * **State Manager association targets only**:
-    #   `Key=InstanceIds,Values=*`
+    #   * `Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2`
     #
-    #   This example demonstrates how to target all managed instances in the
-    #   Amazon Web Services Region where the association was created.
+    #   ^
+    #
+    # **For State Manager:**
+    #
+    # * `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3`
+    #
+    # * `Key=tag:tag-key,Values=tag-value-1,tag-value-2`
+    #
+    # * To target all instances in the Amazon Web Services Region:
+    #
+    #   * `Key=InstanceIds,Values=*`
+    #
+    #   ^
     #
     # For more information about how to send commands that target managed
     # nodes using `Key,Value` parameters, see [Targeting multiple managed
@@ -18490,6 +18766,11 @@ module Aws::SSM
     #   the maintenance window to become active. `StartDate` allows you to
     #   delay activation of the maintenance window until the specified
     #   future date.
+    #
+    #   <note markdown="1"> When using a rate schedule, if you provide a start date that occurs
+    #   in the past, the current date and time are used as the start date.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] end_date
@@ -18778,17 +19059,21 @@ module Aws::SSM
     #   The Amazon Resource Name (ARN) of the IAM service role for Amazon
     #   Web Services Systems Manager to assume when running a maintenance
     #   window task. If you do not specify a service role ARN, Systems
-    #   Manager uses your account's service-linked role. If no
-    #   service-linked role for Systems Manager exists in your account, it
-    #   is created when you run `RegisterTaskWithMaintenanceWindow`.
+    #   Manager uses a service-linked role in your account. If no
+    #   appropriate service-linked role for Systems Manager exists in your
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see [Using service-linked roles for Systems
-    #   Manager][1] in the in the *Amazon Web Services Systems Manager User
-    #   Guide*:
+    #   However, for an improved security posture, we strongly recommend
+    #   creating a custom policy and custom service role for running your
+    #   maintenance window tasks. The policy can be crafted to provide only
+    #   the permissions needed for your particular maintenance window tasks.
+    #   For more information, see [Setting up maintenance windows][1] in the
+    #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html
     #   @return [String]
     #
     # @!attribute [rw] task_parameters

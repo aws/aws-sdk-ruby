@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2024-04-24)
+------------------
+
+* Feature - Support Batch Unique IDs Deletion.
+
 1.7.0 (2024-04-16)
 ------------------
 

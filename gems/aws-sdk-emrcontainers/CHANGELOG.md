@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2024-04-24)
+------------------
+
+* Feature - EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.
+
 1.32.0 (2024-04-04)
 ------------------
 

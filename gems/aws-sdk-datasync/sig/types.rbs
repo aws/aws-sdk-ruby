@@ -606,6 +606,7 @@ module Aws::DataSync
       attr_accessor includes: ::Array[Types::FilterRule]
       attr_accessor manifest_config: Types::ManifestConfig
       attr_accessor task_report_config: Types::TaskReportConfig
+      attr_accessor schedule_details: Types::TaskScheduleDetails
       SENSITIVE: []
     end
 
@@ -1116,6 +1117,14 @@ module Aws::DataSync
 
     class TaskSchedule
       attr_accessor schedule_expression: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class TaskScheduleDetails
+      attr_accessor status_update_time: ::Time
+      attr_accessor disabled_reason: ::String
+      attr_accessor disabled_by: ("USER" | "SERVICE")
       SENSITIVE: []
     end
 

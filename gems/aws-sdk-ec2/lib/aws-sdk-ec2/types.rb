@@ -22818,6 +22818,12 @@ module Aws::EC2
     #   Indicates whether source/destination checking is enabled.
     #   @return [Types::AttributeBooleanValue]
     #
+    # @!attribute [rw] associate_public_ip_address
+    #   Indicates whether to assign a public IPv4 address to a network
+    #   interface. This option can be enabled for any network interface but
+    #   will only apply to the primary network interface (eth0).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttributeResult AWS API Documentation
     #
     class DescribeNetworkInterfaceAttributeResult < Struct.new(
@@ -22825,7 +22831,8 @@ module Aws::EC2
       :description,
       :groups,
       :network_interface_id,
-      :source_dest_check)
+      :source_dest_check,
+      :associate_public_ip_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48813,6 +48820,12 @@ module Aws::EC2
     #   A connection tracking specification.
     #   @return [Types::ConnectionTrackingSpecificationRequest]
     #
+    # @!attribute [rw] associate_public_ip_address
+    #   Indicates whether to assign a public IPv4 address to a network
+    #   interface. This option can be enabled for any network interface but
+    #   will only apply to the primary network interface (eth0).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeRequest AWS API Documentation
     #
     class ModifyNetworkInterfaceAttributeRequest < Struct.new(
@@ -48824,7 +48837,8 @@ module Aws::EC2
       :source_dest_check,
       :ena_srd_specification,
       :enable_primary_ipv_6,
-      :connection_tracking_specification)
+      :connection_tracking_specification,
+      :associate_public_ip_address)
       SENSITIVE = []
       include Aws::Structure
     end

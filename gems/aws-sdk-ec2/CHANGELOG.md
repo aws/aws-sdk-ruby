@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.452.0 (2024-04-24)
+------------------
+
+* Feature - Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface
+
 1.451.0 (2024-04-23)
 ------------------
 

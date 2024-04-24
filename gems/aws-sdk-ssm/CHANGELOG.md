@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2024-04-24)
+------------------
+
+* Feature - Add SSM DescribeInstanceProperties API to public AWS SDK.
+
 1.166.0 (2024-03-12)
 ------------------
 

@@ -29609,6 +29609,7 @@ module Aws::EC2
     #   * {Types::DescribeNetworkInterfaceAttributeResult#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
     #   * {Types::DescribeNetworkInterfaceAttributeResult#network_interface_id #network_interface_id} => String
     #   * {Types::DescribeNetworkInterfaceAttributeResult#source_dest_check #source_dest_check} => Types::AttributeBooleanValue
+    #   * {Types::DescribeNetworkInterfaceAttributeResult#associate_public_ip_address #associate_public_ip_address} => Boolean
     #
     #
     # @example Example: To describe the attachment attribute of a network interface
@@ -29691,7 +29692,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_network_interface_attribute({
-    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment
+    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment, associatePublicIpAddress
     #     dry_run: false,
     #     network_interface_id: "NetworkInterfaceId", # required
     #   })
@@ -29714,6 +29715,7 @@ module Aws::EC2
     #   resp.groups[0].group_id #=> String
     #   resp.network_interface_id #=> String
     #   resp.source_dest_check.value #=> Boolean
+    #   resp.associate_public_ip_address #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttribute AWS API Documentation
     #
@@ -48544,6 +48546,11 @@ module Aws::EC2
     # @option params [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
     #   A connection tracking specification.
     #
+    # @option params [Boolean] :associate_public_ip_address
+    #   Indicates whether to assign a public IPv4 address to a network
+    #   interface. This option can be enabled for any network interface but
+    #   will only apply to the primary network interface (eth0).
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -48619,6 +48626,7 @@ module Aws::EC2
     #       udp_stream_timeout: 1,
     #       udp_timeout: 1,
     #     },
+    #     associate_public_ip_address: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttribute AWS API Documentation
@@ -59262,7 +59270,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.451.0'
+      context[:gem_version] = '1.452.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-04-24)
+------------------
+
+* Feature - This change allows users to disable and enable the schedules associated with their tasks.
+
 1.73.0 (2024-02-07)
 ------------------
 
