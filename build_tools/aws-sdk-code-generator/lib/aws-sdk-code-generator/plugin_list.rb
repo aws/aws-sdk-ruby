@@ -39,7 +39,12 @@ module AwsSdkCodeGenerator
 
     def default_plugins
       {
+        'Seahorse::Client::Plugins::Endpoint' => "#{seahorse_plugins}/endpoint.rb",
         'Seahorse::Client::Plugins::ContentLength' => "#{seahorse_plugins}/content_length.rb",
+        'Seahorse::Client::Plugins::NetHttp' => "#{seahorse_plugins}/net_http.rb",
+        'Seahorse::Client::Plugins::RaiseResponseErrors' => "#{seahorse_plugins}/raise_response_errors.rb",
+        'Seahorse::Client::Plugins::ResponseTarget' => "#{seahorse_plugins}/response_target.rb",
+        'Seahorse::Client::Plugins::RequestCallback' => "#{seahorse_plugins}/request_callback.rb",
         'Aws::Plugins::CredentialsConfiguration' => "#{core_plugins}/credentials_configuration.rb",
         'Aws::Plugins::Logging' => "#{core_plugins}/logging.rb",
         'Aws::Plugins::ParamConverter' => "#{core_plugins}/param_converter.rb",
@@ -54,6 +59,7 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::ResponsePaging' => "#{core_plugins}/response_paging.rb",
         'Aws::Plugins::StubResponses' => "#{core_plugins}/stub_responses.rb",
         'Aws::Plugins::IdempotencyToken' => "#{core_plugins}/idempotency_token.rb",
+        'Aws::Plugins::InvocationId' => "#{core_plugins}/invocation_id.rb",
         'Aws::Plugins::JsonvalueConverter' => "#{core_plugins}/jsonvalue_converter.rb",
         'Aws::Plugins::ClientMetricsPlugin' => "#{core_plugins}/client_metrics_plugin.rb",
         'Aws::Plugins::ClientMetricsSendPlugin' => "#{core_plugins}/client_metrics_send_plugin.rb",
@@ -68,14 +74,17 @@ module AwsSdkCodeGenerator
 
     def default_async_plugins
       plugins = default_plugins.dup
+      plugins['Seahorse::Client::Plugins::H2'] = "#{seahorse_plugins}/h2.rb"
       plugins.delete('Seahorse::Client::Plugins::ContentLength')
+      plugins.delete('Seahorse::Client::Plugins::NetHttp')
+      plugins.delete('Seahorse::Client::Plugins::RaiseResponseErrors')
+      plugins.delete('Seahorse::Client::Plugins::RequestCallback')
       plugins.delete('Aws::Plugins::ResponsePaging')
       plugins.delete('Aws::Plugins::EndpointDiscovery')
       plugins.delete('Aws::Plugins::EndpointPattern')
       plugins.delete('Aws::Plugins::ClientMetricsPlugin')
       plugins.delete('Aws::Plugins::ClientMetricsSendPlugin')
       plugins.delete('Aws::Plugins::TransferEncoding')
-      plugins['Aws::Plugins::InvocationId'] = "#{core_plugins}/invocation_id.rb"
       plugins
     end
 
