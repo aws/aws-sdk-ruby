@@ -52,6 +52,9 @@ module Aws
     def _ready_for_events?
       return true if @status == :ready
 
+      # TODO: THIS IS A HACK
+      @signal_queue << :ready
+
       # blocked until once initial 200 response is received
       # signal will be available in @signal_queue
       # and this check will no longer be blocked
