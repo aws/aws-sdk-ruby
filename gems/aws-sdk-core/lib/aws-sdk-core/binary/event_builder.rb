@@ -42,27 +42,7 @@ module Aws
           end
         end
 
-        # implict payload
-        if !explicit_payload && !implicit_payload_members.empty?
-          if implicit_payload_members.size > 1
-            payload_shape = Shapes::StructureShape.new
-            implicit_payload_members.each do |m_name, m_ref|
-              payload_shape.add_member(m_name, m_ref)
-            end
-            payload_ref = Shapes::ShapeRef.new(shape: payload_shape)
-
-            payload = build_payload_members(payload_ref, params)
-          else
-            m_name, m_ref = implicit_payload_members.first
-            streaming, content_type = _content_type(m_ref.shape)
-
-            es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
-              type: "string", value: content_type)
-            payload = _build_payload(streaming, m_ref, params[m_name])
-          end
-        end
-
-
+        # handle header members for all cases
         event_ref.shape.members.each do |member_name, member_ref|
           if member_ref.eventheader && params[member_name]
             header_value = params[member_name]
@@ -70,13 +50,27 @@ module Aws
               type: _header_value_type(member_ref.shape, header_value),
               value: header_value
             )
-          elsif member_ref.eventpayload && params[member_name]
-            # explicit payload
-            streaming, content_type = _content_type(member_ref.shape)
+          end
+        end
 
-            es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
-              type: "string", value: content_type)
-            payload = _build_payload(streaming, member_ref, params[member_name])
+        # implict payload
+        if !explicit_payload && !implicit_payload_members.empty?
+          payload_shape = Shapes::StructureShape.new
+          implicit_payload_members.each do |m_name, m_ref|
+            payload_shape.add_member(m_name, m_ref)
+          end
+          payload_ref = Shapes::ShapeRef.new(shape: payload_shape)
+
+          payload = build_payload_members(payload_ref, params)
+        else
+          # explicit payload, serialize just the payload member
+          event_ref.shape.members.each do |member_name, member_ref|
+            if member_ref.eventpayload && params[member_name]
+              streaming, content_type = _content_type(member_ref.shape)
+              es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
+                type: "string", value: content_type)
+              payload = _build_payload(streaming, member_ref, params[member_name])
+            end
           end
         end
 
@@ -117,6 +111,11 @@ module Aws
 
       def _build_payload(streaming, ref, value)
         streaming ? value : @serializer_class.new(ref).serialize(value)
+      end
+
+      def build_payload_members(payload_ref, params)
+        # TODO
+        ''
       end
 
     end
