@@ -39,52 +39,53 @@ module AwsSdkCodeGenerator
       <<-EXAMPLE.strip
 # @example Bi-directional EventStream Operation Example
 #
-#   You can signal input events after initial request is
-#   established, events will be sent to stream
-#   immediately (once stream connection is established successfully).
+#   You can signal input events after the initial request is established. Events
+#   will be sent to the stream immediately once the stream connection is
+#   established successfully.
 #
-#   To signal events, you can call #signal methods from an #{@input_eventstream} object.
-#   Make sure signal events before calling #wait or #join! at async response.
+#   To signal events, you can call the #signal methods from an #{@input_eventstream}
+#   object. You must signal events before calling #wait or #join! on the async response.
 #
 #     input_stream = #{@input_eventstream}.new
 #
-#     async_resp = #{@receiver}.#{@method_name}( # params input,
+#     async_resp = #{@receiver}.#{@method_name}(
+#       # params input
 #       input_event_stream_handler: input_stream) do |out_stream|
 #
-#       # register callbacks for events arrival
+#       # register callbacks for events
 #{event_entry(:output, 'out_stream', 2)}
 #
 #     end
-#     # => returns Aws::Seahorse::Client::AsyncResponse
+#     # => Aws::Seahorse::Client::AsyncResponse
 #
 #     # signal events
 #{event_entry(:input, 'input_stream')}
 #
-#     # make sure signaling :end_stream in the end
+#     # make sure to signal :end_stream at the end
 #     input_stream.signal_end_stream
 #
-#     # wait until stream is closed before finalizing sync response
+#     # wait until stream is closed before finalizing the sync response
 #     resp = async_resp.wait
-#     # Or close stream and finalizing sync response immediately
+#     # Or close the stream and finalize sync response immediately
 #     # resp = async_resp.join!
 #
-#   Inorder to streamingly processing events received, you can also provide an #{@output_eventstream}
-#   object to register callbacks before initializing request instead of processing from request block
+#   You can also provide an #{@output_eventstream} object to register callbacks
+#   before initializing the request instead of processing from the request block.
 #
 #     output_stream = #{@output_eventstream}.new
-#     # register callbacks for events arrival
+#     # register callbacks for output events
 #{event_entry(:output, 'output_stream')}
 #{error_event_entry('output_stream')}
 #
-#     async_resp = #{@receiver}.#{@method_name} ( #params input,
+#     async_resp = #{@receiver}.#{@method_name} (
+#       # params input
 #       input_event_stream_handler: input_stream
 #       output_event_stream_handler: output_stream
 #     )
 #
-#     resp = async_resp.wait!
+#     resp = async_resp.join!
 #
-#   Besides above usage patterns for process events when they arrive immediately, you can also
-#   iterate through events after response complete.
+#   You can also iterate through events after the response is complete.
 #
 #   Events are available at #{@resp_var}.#{@output_eventstream_member} # => Enumerator
       EXAMPLE
@@ -94,22 +95,22 @@ module AwsSdkCodeGenerator
       <<-EXAMPLE.strip
 # @example EventStream Operation Example
 #
-#   You can process event once it arrives immediately, or wait until
-#   full response complete and iterate through eventstream enumerator.
+#   You can process the event once it arrives immediately, or wait until the
+#   full response is complete and iterate through the eventstream enumerator.
 #
 #   To interact with event immediately, you need to register ##{@method_name}
-#   with callbacks, callbacks can be register for specifc events or for all events,
-#   callback for errors in the event stream is also available for register.
+#   with callbacks. Callbacks can be registered for specific events or for all
+#   events, including error events.
 #
-#   Callbacks can be passed in by `:event_stream_handler` option or within block
-#   statement attached to ##{@method_name} call directly. Hybrid pattern of both
-#   is also supported.
+#   Callbacks can be passed into the `:event_stream_handler` option or within a
+#   block statement attached to the ##{@method_name} call directly. Hybrid
+#   pattern of both is also supported.
 #
-#   `:event_stream_handler` option takes in either Proc object or
+#   `:event_stream_handler` option takes in either a Proc object or
 #   #{@output_eventstream} object.
 #
-#   Usage pattern a): callbacks with a block attached to ##{@method_name}
-#     Example for registering callbacks for all event types and error event
+#   Usage pattern a): Callbacks with a block attached to ##{@method_name}
+#     Example for registering callbacks for all event types and an error event
 #
 #     #{@receiver}.#{@method_name}( # params input# ) do |stream|
 #{error_event_entry('stream', 2)}
@@ -122,9 +123,9 @@ module AwsSdkCodeGenerator
 #
 #     end
 #
-#   Usage pattern b): pass in `:event_stream_handler` for ##{@method_name}
+#   Usage pattern b): Pass in `:event_stream_handler` for ##{@method_name}
 #
-#     1) create a #{@output_eventstream} object
+#     1) Create a #{@output_eventstream} object
 #     Example for registering callbacks with specific events
 #
 #       handler = #{@output_eventstream}.new
@@ -132,7 +133,7 @@ module AwsSdkCodeGenerator
 #
 #     #{@receiver}.#{@method_name}( # params input #, event_stream_handler: handler)
 #
-#     2) use a Ruby Proc object
+#     2) Use a Ruby Proc object
 #     Example for registering callbacks with specific events
 #
 #     handler = Proc.new do |stream|
@@ -141,7 +142,7 @@ module AwsSdkCodeGenerator
 #
 #     #{@receiver}.#{@method_name}( # params input #, event_stream_handler: handler)
 #
-#   Usage pattern c): hybird pattern of a) and b)
+#   Usage pattern c): Hybrid pattern of a) and b)
 #
 #       handler = #{@output_eventstream}.new
 #{event_entry(:output, 'handler', 2)}
@@ -150,8 +151,7 @@ module AwsSdkCodeGenerator
 #{error_event_entry('stream', 2)}
 #     end
 #
-#   Besides above usage patterns for process events when they arrive immediately, you can also
-#   iterate through events after response complete.
+#   You can also iterate through events after the response complete.
 #
 #   Events are available at #{@resp_var}.#{@output_eventstream_member} # => Enumerator
 #   For parameter input example, please refer to following request syntax
