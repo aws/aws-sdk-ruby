@@ -39,12 +39,7 @@ module AwsSdkCodeGenerator
 
     def default_plugins
       {
-        'Seahorse::Client::Plugins::Endpoint' => "#{seahorse_plugins}/endpoint.rb",
         'Seahorse::Client::Plugins::ContentLength' => "#{seahorse_plugins}/content_length.rb",
-        'Seahorse::Client::Plugins::NetHttp' => "#{seahorse_plugins}/net_http.rb",
-        'Seahorse::Client::Plugins::RaiseResponseErrors' => "#{seahorse_plugins}/raise_response_errors.rb",
-        'Seahorse::Client::Plugins::ResponseTarget' => "#{seahorse_plugins}/response_target.rb",
-        'Seahorse::Client::Plugins::RequestCallback' => "#{seahorse_plugins}/request_callback.rb",
         'Aws::Plugins::CredentialsConfiguration' => "#{core_plugins}/credentials_configuration.rb",
         'Aws::Plugins::Logging' => "#{core_plugins}/logging.rb",
         'Aws::Plugins::ParamConverter' => "#{core_plugins}/param_converter.rb",
@@ -74,7 +69,6 @@ module AwsSdkCodeGenerator
 
     def default_async_plugins
       plugins = default_plugins.dup
-      plugins['Seahorse::Client::Plugins::H2'] = "#{seahorse_plugins}/h2.rb"
       plugins.delete('Seahorse::Client::Plugins::ContentLength')
       plugins.delete('Seahorse::Client::Plugins::NetHttp')
       plugins.delete('Seahorse::Client::Plugins::RaiseResponseErrors')
