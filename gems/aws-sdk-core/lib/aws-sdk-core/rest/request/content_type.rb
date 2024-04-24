@@ -37,6 +37,7 @@ module Aws
         context.operation.input.shape.members.each do |_, ref|
           return ref if ref.eventstream
         end
+        false
       end
 
       # content-type defaults as noted here:
