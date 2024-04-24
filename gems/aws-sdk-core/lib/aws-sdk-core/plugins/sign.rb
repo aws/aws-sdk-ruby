@@ -161,7 +161,7 @@ module Aws
         def apply_authtype(context, req)
           # only used for eventstreaming at input
           if context[:input_event_emitter]
-            req.headers['x-amz-content-sha256'] = 'STREAMING-AWS4-HMAC-SHA256-EVENTS'
+            req.headers['X-Amz-Content-Sha256'] = 'STREAMING-AWS4-HMAC-SHA256-EVENTS'
           else
             if context.operation['authtype'].eql?('v4-unsigned-body') &&
               req.endpoint.scheme.eql?('https')
