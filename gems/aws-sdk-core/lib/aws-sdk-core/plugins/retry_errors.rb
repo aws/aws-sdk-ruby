@@ -289,7 +289,7 @@ a clock skew correction and retry requests with skewed client clocks.
         # retry quota is updated if the request is successful (both modes)
         def request_bookkeeping(context, response, error_inspector)
           config = context.config
-          unless response.error
+          if response.successful?
             config.retry_quota.release(
               context.metadata[:retries][:capacity_amount]
             )
@@ -302,7 +302,7 @@ a clock skew correction and retry requests with skewed client clocks.
         end
 
         def retryable?(context, response, error_inspector)
-          return false unless response.error
+          return false if response.successful?
 
           error_inspector.retryable?(context) &&
             context.http_response.body.respond_to?(:truncate)

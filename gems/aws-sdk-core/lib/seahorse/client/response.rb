@@ -60,6 +60,12 @@ module Seahorse
         on(200..299, &block)
       end
 
+      # @return [Boolean] Returns `true` if the response is complete with
+      #   a ~ 200 level http status code.
+      def successful?
+        (200..299).cover?(@context.http_response.status_code) && @error.nil?
+      end
+
       # @api private
       def on_complete(&block)
         @context.http_response.on_done(&block)
