@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update event stream documentation.
+* Issue - Move `InvocationId` plugin to all clients.
+* Issue - Handle event streaming content-sha256 header in the signer plugin.
+* Issue - Add the event stream content type to initial requests.
+* Issue - Fix `standard` and `adaptive` retry mode for event streams.
+* Issue - Add `authority` to http2 headers.
+* Issue - Do not treat single members in event stream structures as implicit payloads.
+* Issue - Do not wait for initial response headers to start sending input events.
+
 3.192.1 (2024-04-18)
 ------------------
 
