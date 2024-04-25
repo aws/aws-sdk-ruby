@@ -57,7 +57,7 @@ module Aws::IVS
     # Error related to a specific channel, specified by its ARN.
     #
     # @!attribute [rw] arn
-    #   Channel ARN.
+    #   ARN of an IVS resource; e.g., channel.
     #   @return [String]
     #
     # @!attribute [rw] code

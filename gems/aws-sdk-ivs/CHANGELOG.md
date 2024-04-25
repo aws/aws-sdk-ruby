@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2024-04-25)
+------------------
+
+* Feature - Bug Fix: IVS does not support arns with the `svs` prefix
+
 1.46.0 (2024-04-04)
 ------------------
 

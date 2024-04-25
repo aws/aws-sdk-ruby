@@ -130,6 +130,8 @@ module Aws::States
             Aws::States::Endpoints::UpdateStateMachine.build(context)
           when :update_state_machine_alias
             Aws::States::Endpoints::UpdateStateMachineAlias.build(context)
+          when :validate_state_machine_definition
+            Aws::States::Endpoints::ValidateStateMachineDefinition.build(context)
           end
         end
       end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.228.0 (2024-04-25)
+------------------
+
+* Feature - Updates Amazon RDS documentation for setting local time zones for RDS for Db2 DB instances.
+
 1.227.0 (2024-04-23)
 ------------------
 

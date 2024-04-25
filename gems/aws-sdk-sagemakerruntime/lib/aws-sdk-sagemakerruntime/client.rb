@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -73,6 +74,7 @@ module Aws::SageMakerRuntime
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -198,10 +200,17 @@ module Aws::SageMakerRuntime
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -348,50 +357,65 @@ module Aws::SageMakerRuntime
     #   @option options [Aws::SageMakerRuntime::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SageMakerRuntime::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -803,22 +827,22 @@ module Aws::SageMakerRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process event once it arrives immediately, or wait until
-    #   full response complete and iterate through eventstream enumerator.
+    #   You can process the event once it arrives immediately, or wait until the
+    #   full response is complete and iterate through the eventstream enumerator.
     #
     #   To interact with event immediately, you need to register #invoke_endpoint_with_response_stream
-    #   with callbacks, callbacks can be register for specifc events or for all events,
-    #   callback for errors in the event stream is also available for register.
+    #   with callbacks. Callbacks can be registered for specific events or for all
+    #   events, including error events.
     #
-    #   Callbacks can be passed in by `:event_stream_handler` option or within block
-    #   statement attached to #invoke_endpoint_with_response_stream call directly. Hybrid pattern of both
-    #   is also supported.
+    #   Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   block statement attached to the #invoke_endpoint_with_response_stream call directly. Hybrid
+    #   pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either Proc object or
+    #   `:event_stream_handler` option takes in either a Proc object or
     #   Aws::SageMakerRuntime::EventStreams::ResponseStream object.
     #
-    #   Usage pattern a): callbacks with a block attached to #invoke_endpoint_with_response_stream
-    #     Example for registering callbacks for all event types and error event
+    #   Usage pattern a): Callbacks with a block attached to #invoke_endpoint_with_response_stream
+    #     Example for registering callbacks for all event types and an error event
     #
     #     client.invoke_endpoint_with_response_stream( # params input# ) do |stream|
     #       stream.on_error_event do |event|
@@ -838,9 +862,9 @@ module Aws::SageMakerRuntime
     #
     #     end
     #
-    #   Usage pattern b): pass in `:event_stream_handler` for #invoke_endpoint_with_response_stream
+    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_endpoint_with_response_stream
     #
-    #     1) create a Aws::SageMakerRuntime::EventStreams::ResponseStream object
+    #     1) Create a Aws::SageMakerRuntime::EventStreams::ResponseStream object
     #     Example for registering callbacks with specific events
     #
     #       handler = Aws::SageMakerRuntime::EventStreams::ResponseStream.new
@@ -856,7 +880,7 @@ module Aws::SageMakerRuntime
     #
     #     client.invoke_endpoint_with_response_stream( # params input #, event_stream_handler: handler)
     #
-    #     2) use a Ruby Proc object
+    #     2) Use a Ruby Proc object
     #     Example for registering callbacks with specific events
     #
     #     handler = Proc.new do |stream|
@@ -873,7 +897,7 @@ module Aws::SageMakerRuntime
     #
     #     client.invoke_endpoint_with_response_stream( # params input #, event_stream_handler: handler)
     #
-    #   Usage pattern c): hybird pattern of a) and b)
+    #   Usage pattern c): Hybrid pattern of a) and b)
     #
     #       handler = Aws::SageMakerRuntime::EventStreams::ResponseStream.new
     #       handler.on_payload_part_event do |event|
@@ -897,8 +921,7 @@ module Aws::SageMakerRuntime
     #       end
     #     end
     #
-    #   Besides above usage patterns for process events when they arrive immediately, you can also
-    #   iterate through events after response complete.
+    #   You can also iterate through events after the response complete.
     #
     #   Events are available at resp.body # => Enumerator
     #   For parameter input example, please refer to following request syntax
@@ -977,7 +1000,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

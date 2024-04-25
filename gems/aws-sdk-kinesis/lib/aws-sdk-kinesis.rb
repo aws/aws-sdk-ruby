@@ -55,6 +55,6 @@ require_relative 'aws-sdk-kinesis/event_streams'
 # @!group service
 module Aws::Kinesis
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end

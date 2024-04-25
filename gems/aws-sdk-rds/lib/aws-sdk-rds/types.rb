@@ -4186,11 +4186,13 @@ module Aws::RDS
     #
     # @!attribute [rw] timezone
     #   The time zone of the DB instance. The time zone parameter is
-    #   currently supported only by [Microsoft SQL Server][1].
+    #   currently supported only by [RDS for Db2][1] and [RDS for SQL
+    #   Server][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
@@ -8659,8 +8661,9 @@ module Aws::RDS
     #
     # @!attribute [rw] timezone
     #   The time zone of the DB instance. In most cases, the `Timezone`
-    #   element is empty. `Timezone` content appears only for Microsoft SQL
-    #   Server DB instances that were created with a time zone specified.
+    #   element is empty. `Timezone` content appears only for RDS for Db2
+    #   and RDS for SQL Server DB instances that were created with a time
+    #   zone specified.
     #   @return [String]
     #
     # @!attribute [rw] iam_database_authentication_enabled
@@ -17817,7 +17820,7 @@ module Aws::RDS
     #   change is applied during the next maintenance window, unless you
     #   enable `ApplyImmediately`.
     #
-    #   This parameter doesn't apply to RDS Custom DB instances.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #   Constraints:
     #
@@ -18592,6 +18595,12 @@ module Aws::RDS
     #   The database can't be deleted when deletion protection is enabled.
     #   By default, deletion protection isn't enabled. For more
     #   information, see [ Deleting a DB Instance][1].
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. You can
+    #   enable or disable deletion protection for the DB cluster. For more
+    #   information, see `ModifyDBCluster`. DB instances in a DB cluster can
+    #   be deleted even when deletion protection is enabled for the DB
+    #   cluster.
     #
     #
     #

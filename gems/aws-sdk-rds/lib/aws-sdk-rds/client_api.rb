@@ -4308,6 +4308,7 @@ module Aws::RDS
         "apiVersion" => "2014-10-31",
         "endpointPrefix" => "rds",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "Amazon RDS",
         "serviceFullName" => "Amazon Relational Database Service",
         "serviceId" => "RDS",

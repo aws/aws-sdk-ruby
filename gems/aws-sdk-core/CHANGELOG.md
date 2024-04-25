@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.193.0 (2024-04-25)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Issue - Update event stream documentation.
 * Issue - Move `InvocationId` plugin to all clients.
 * Issue - Handle event streaming content-sha256 header in the signer plugin.
