@@ -8246,6 +8246,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields
     #   @return [String]
     #
+    # @!attribute [rw] supports_limitless_database
+    #   Indicates whether the DB engine version supports Aurora Limitless
+    #   Database.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] supports_certificate_rotation_without_restart
     #   Indicates whether the engine version supports rotating the server
     #   certificate without rebooting the DB instance.
@@ -8311,6 +8316,7 @@ module Aws::RDS
       :tag_list,
       :supports_babelfish,
       :custom_db_engine_version_manifest,
+      :supports_limitless_database,
       :supports_certificate_rotation_without_restart,
       :supported_ca_certificate_identifiers,
       :supports_local_write_forwarding,
@@ -27062,6 +27068,11 @@ module Aws::RDS
     #   the target engine version.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_limitless_database
+    #   Indicates whether the DB engine version supports Aurora Limitless
+    #   Database.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] supports_local_write_forwarding
     #   Indicates whether the target engine version supports forwarding
     #   write operations from reader DB instances to the writer DB instance
@@ -27088,6 +27099,7 @@ module Aws::RDS
       :supports_parallel_query,
       :supports_global_databases,
       :supports_babelfish,
+      :supports_limitless_database,
       :supports_local_write_forwarding,
       :supports_integrations)
       SENSITIVE = []

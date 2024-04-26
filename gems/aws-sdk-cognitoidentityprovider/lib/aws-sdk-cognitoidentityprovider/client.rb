@@ -3814,9 +3814,14 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool.
     #
     # @option params [required, String] :identifier
-    #   A unique resource server identifier for the resource server. This
-    #   could be an HTTPS endpoint where the resource server is located, such
-    #   as `https://my-weather-api.example.com`.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier strings
+    #   increase the size of your access tokens.
     #
     # @option params [required, String] :name
     #   A friendly name for the resource server.
@@ -5045,7 +5050,9 @@ module Aws::CognitoIdentityProvider
     #   A list of allowed logout URLs for the IdPs.
     #
     # @option params [String] :default_redirect_uri
-    #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #   The default redirect URI. In app clients with one assigned IdP,
+    #   replaces `redirect_uri` in authentication requests. Must be in the
+    #   `CallbackURLs` list.
     #
     #   A redirect URI must:
     #
@@ -5055,7 +5062,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * Not include a fragment component.
     #
-    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #   For more information, see [Default redirect URI][1].
     #
     #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
     #   for testing purposes only.
@@ -5064,7 +5071,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html#cognito-user-pools-app-idp-settings-about
     #
     # @option params [Array<String>] :allowed_o_auth_flows
     #   The OAuth grant types that you want your app client to generate. To
@@ -5757,7 +5764,14 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool that hosts the resource server.
     #
     # @option params [required, String] :identifier
-    #   The identifier for the resource server
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier strings
+    #   increase the size of your access tokens.
     #
     # @return [Types::DescribeResourceServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9640,7 +9654,14 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool.
     #
     # @option params [required, String] :identifier
-    #   The identifier for the resource server.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier strings
+    #   increase the size of your access tokens.
     #
     # @option params [required, String] :name
     #   The name of the resource server.
@@ -10777,7 +10798,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

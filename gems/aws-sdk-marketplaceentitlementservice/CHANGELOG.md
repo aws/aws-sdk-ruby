@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2024-04-26)
+------------------
+
+* Feature - Releasing minor endpoint updates.
+
 1.49.0 (2024-04-25)
 ------------------
 

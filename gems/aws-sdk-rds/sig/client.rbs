@@ -332,6 +332,7 @@ module Aws
         def tag_list: () -> ::Array[Types::Tag]
         def supports_babelfish: () -> bool
         def custom_db_engine_version_manifest: () -> ::String
+        def supports_limitless_database: () -> bool
         def supports_certificate_rotation_without_restart: () -> bool
         def supported_ca_certificate_identifiers: () -> ::Array[::String]
         def supports_local_write_forwarding: () -> bool
@@ -946,6 +947,7 @@ module Aws
         def tag_list: () -> ::Array[Types::Tag]
         def supports_babelfish: () -> bool
         def custom_db_engine_version_manifest: () -> ::String
+        def supports_limitless_database: () -> bool
         def supports_certificate_rotation_without_restart: () -> bool
         def supported_ca_certificate_identifiers: () -> ::Array[::String]
         def supports_local_write_forwarding: () -> bool
@@ -2206,6 +2208,7 @@ module Aws
         def tag_list: () -> ::Array[Types::Tag]
         def supports_babelfish: () -> bool
         def custom_db_engine_version_manifest: () -> ::String
+        def supports_limitless_database: () -> bool
         def supports_certificate_rotation_without_restart: () -> bool
         def supported_ca_certificate_identifiers: () -> ::Array[::String]
         def supports_local_write_forwarding: () -> bool

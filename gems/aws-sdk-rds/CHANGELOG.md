@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.229.0 (2024-04-26)
+------------------
+
+* Feature - SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database.
+
 1.228.0 (2024-04-25)
 ------------------
 

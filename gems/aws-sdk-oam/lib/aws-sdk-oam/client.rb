@@ -413,7 +413,11 @@ module Aws::OAM
     # @!group API Operations
 
     # Creates a link between a source account and a sink that you have
-    # created in a monitoring account.
+    # created in a monitoring account. After the link is created, data is
+    # sent from the source account to the monitoring account. When you
+    # create a link, you can optionally specify filters that specify which
+    # metric namespaces and which log groups are shared from the source
+    # account to the monitoring account.
     #
     # Before you create a link, you must create a sink in the monitoring
     # account and create a sink policy in that account. The sink policy must
@@ -446,6 +450,11 @@ module Aws::OAM
     #
     #   * `$AccountEmailNoDomain` is the email address of the account without
     #     the domain name
+    #
+    # @option params [Types::LinkConfiguration] :link_configuration
+    #   Use this structure to optionally create filters that specify that only
+    #   some metric namespaces or log groups are to be shared from the source
+    #   account to the monitoring account.
     #
     # @option params [required, Array<String>] :resource_types
     #   An array of strings that define which types of data that the source
@@ -482,6 +491,7 @@ module Aws::OAM
     #   * {Types::CreateLinkOutput#id #id} => String
     #   * {Types::CreateLinkOutput#label #label} => String
     #   * {Types::CreateLinkOutput#label_template #label_template} => String
+    #   * {Types::CreateLinkOutput#link_configuration #link_configuration} => Types::LinkConfiguration
     #   * {Types::CreateLinkOutput#resource_types #resource_types} => Array&lt;String&gt;
     #   * {Types::CreateLinkOutput#sink_arn #sink_arn} => String
     #   * {Types::CreateLinkOutput#tags #tags} => Hash&lt;String,String&gt;
@@ -490,6 +500,14 @@ module Aws::OAM
     #
     #   resp = client.create_link({
     #     label_template: "LabelTemplate", # required
+    #     link_configuration: {
+    #       log_group_configuration: {
+    #         filter: "LogsFilter", # required
+    #       },
+    #       metric_configuration: {
+    #         filter: "MetricsFilter", # required
+    #       },
+    #     },
     #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application, AWS::InternetMonitor::Monitor
     #     sink_identifier: "ResourceIdentifier", # required
     #     tags: {
@@ -503,6 +521,8 @@ module Aws::OAM
     #   resp.id #=> String
     #   resp.label #=> String
     #   resp.label_template #=> String
+    #   resp.link_configuration.log_group_configuration.filter #=> String
+    #   resp.link_configuration.metric_configuration.filter #=> String
     #   resp.resource_types #=> Array
     #   resp.resource_types[0] #=> String
     #   resp.sink_arn #=> String
@@ -528,8 +548,8 @@ module Aws::OAM
     # source accounts to attach to it. For more information, see
     # [PutSinkPolicy][1].
     #
-    # Each account can contain one sink. If you delete a sink, you can then
-    # create a new one in that account.
+    # Each account can contain one sink per Region. If you delete a sink,
+    # you can then create a new one in that Region.
     #
     #
     #
@@ -649,6 +669,7 @@ module Aws::OAM
     #   * {Types::GetLinkOutput#id #id} => String
     #   * {Types::GetLinkOutput#label #label} => String
     #   * {Types::GetLinkOutput#label_template #label_template} => String
+    #   * {Types::GetLinkOutput#link_configuration #link_configuration} => Types::LinkConfiguration
     #   * {Types::GetLinkOutput#resource_types #resource_types} => Array&lt;String&gt;
     #   * {Types::GetLinkOutput#sink_arn #sink_arn} => String
     #   * {Types::GetLinkOutput#tags #tags} => Hash&lt;String,String&gt;
@@ -665,6 +686,8 @@ module Aws::OAM
     #   resp.id #=> String
     #   resp.label #=> String
     #   resp.label_template #=> String
+    #   resp.link_configuration.log_group_configuration.filter #=> String
+    #   resp.link_configuration.metric_configuration.filter #=> String
     #   resp.resource_types #=> Array
     #   resp.resource_types[0] #=> String
     #   resp.sink_arn #=> String
@@ -731,9 +754,9 @@ module Aws::OAM
     #
     # @return [Types::GetSinkPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetSinkPolicyOutput#policy #policy} => String
     #   * {Types::GetSinkPolicyOutput#sink_arn #sink_arn} => String
     #   * {Types::GetSinkPolicyOutput#sink_id #sink_id} => String
-    #   * {Types::GetSinkPolicyOutput#policy #policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -743,9 +766,9 @@ module Aws::OAM
     #
     # @example Response structure
     #
+    #   resp.policy #=> String
     #   resp.sink_arn #=> String
     #   resp.sink_id #=> String
-    #   resp.policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/GetSinkPolicy AWS API Documentation
     #
@@ -972,9 +995,6 @@ module Aws::OAM
     # See the examples in this section to see how to specify permitted
     # source accounts and data types.
     #
-    # @option params [required, String] :sink_identifier
-    #   The ARN of the sink to attach this policy to.
-    #
     # @option params [required, String] :policy
     #   The JSON policy to use. If you are updating an existing policy, the
     #   entire existing policy is replaced by what you specify here.
@@ -985,24 +1005,27 @@ module Aws::OAM
     #   For examples of different types of policies, see the **Examples**
     #   section on this page.
     #
+    # @option params [required, String] :sink_identifier
+    #   The ARN of the sink to attach this policy to.
+    #
     # @return [Types::PutSinkPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::PutSinkPolicyOutput#policy #policy} => String
     #   * {Types::PutSinkPolicyOutput#sink_arn #sink_arn} => String
     #   * {Types::PutSinkPolicyOutput#sink_id #sink_id} => String
-    #   * {Types::PutSinkPolicyOutput#policy #policy} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_sink_policy({
-    #     sink_identifier: "ResourceIdentifier", # required
     #     policy: "SinkPolicy", # required
+    #     sink_identifier: "ResourceIdentifier", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.policy #=> String
     #   resp.sink_arn #=> String
     #   resp.sink_id #=> String
-    #   resp.policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/PutSinkPolicy AWS API Documentation
     #
@@ -1123,6 +1146,10 @@ module Aws::OAM
     # source account to its linked monitoring account sink. You can't
     # change the sink or change the monitoring account with this operation.
     #
+    # When you update a link, you can optionally specify filters that
+    # specify which metric namespaces and which log groups are shared from
+    # the source account to the monitoring account.
+    #
     # To update the list of tags associated with the sink, use
     # [TagResource][1].
     #
@@ -1132,6 +1159,11 @@ module Aws::OAM
     #
     # @option params [required, String] :identifier
     #   The ARN of the link that you want to update.
+    #
+    # @option params [Types::LinkConfiguration] :link_configuration
+    #   Use this structure to filter which metric namespaces and which log
+    #   groups are to be shared from the source account to the monitoring
+    #   account.
     #
     # @option params [required, Array<String>] :resource_types
     #   An array of strings that define which types of data that the source
@@ -1146,6 +1178,7 @@ module Aws::OAM
     #   * {Types::UpdateLinkOutput#id #id} => String
     #   * {Types::UpdateLinkOutput#label #label} => String
     #   * {Types::UpdateLinkOutput#label_template #label_template} => String
+    #   * {Types::UpdateLinkOutput#link_configuration #link_configuration} => Types::LinkConfiguration
     #   * {Types::UpdateLinkOutput#resource_types #resource_types} => Array&lt;String&gt;
     #   * {Types::UpdateLinkOutput#sink_arn #sink_arn} => String
     #   * {Types::UpdateLinkOutput#tags #tags} => Hash&lt;String,String&gt;
@@ -1154,6 +1187,14 @@ module Aws::OAM
     #
     #   resp = client.update_link({
     #     identifier: "ResourceIdentifier", # required
+    #     link_configuration: {
+    #       log_group_configuration: {
+    #         filter: "LogsFilter", # required
+    #       },
+    #       metric_configuration: {
+    #         filter: "MetricsFilter", # required
+    #       },
+    #     },
     #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application, AWS::InternetMonitor::Monitor
     #   })
     #
@@ -1163,6 +1204,8 @@ module Aws::OAM
     #   resp.id #=> String
     #   resp.label #=> String
     #   resp.label_template #=> String
+    #   resp.link_configuration.log_group_configuration.filter #=> String
+    #   resp.link_configuration.metric_configuration.filter #=> String
     #   resp.resource_types #=> Array
     #   resp.resource_types[0] #=> String
     #   resp.sink_arn #=> String
@@ -1191,7 +1234,7 @@ module Aws::OAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-oam'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

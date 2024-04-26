@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2024-04-26)
+------------------
+
+* Feature - Add LimitExceededException to SignUp errors
+
 1.89.0 (2024-04-25)
 ------------------
 

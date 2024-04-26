@@ -465,6 +465,7 @@ module Aws::Support
         "endpointPrefix" => "support",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Support",
         "serviceId" => "Support",
         "signatureVersion" => "v4",

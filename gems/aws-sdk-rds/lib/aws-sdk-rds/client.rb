@@ -2412,6 +2412,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
+    #   * {Types::DBEngineVersion#supports_limitless_database #supports_limitless_database} => Boolean
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
@@ -2467,6 +2468,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_limitless_database #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
@@ -2493,6 +2495,7 @@ module Aws::RDS
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
     #   resp.custom_db_engine_version_manifest #=> String
+    #   resp.supports_limitless_database #=> Boolean
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
@@ -8592,6 +8595,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
+    #   * {Types::DBEngineVersion#supports_limitless_database #supports_limitless_database} => Boolean
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
@@ -8633,6 +8637,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_limitless_database #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
@@ -8659,6 +8664,7 @@ module Aws::RDS
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
     #   resp.custom_db_engine_version_manifest #=> String
+    #   resp.supports_limitless_database #=> Boolean
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
@@ -12605,6 +12611,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_limitless_database #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
@@ -12631,6 +12638,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].tag_list[0].value #=> String
     #   resp.db_engine_versions[0].supports_babelfish #=> Boolean
     #   resp.db_engine_versions[0].custom_db_engine_version_manifest #=> String
+    #   resp.db_engine_versions[0].supports_limitless_database #=> Boolean
     #   resp.db_engine_versions[0].supports_certificate_rotation_without_restart #=> Boolean
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
@@ -18252,6 +18260,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
+    #   * {Types::DBEngineVersion#supports_limitless_database #supports_limitless_database} => Boolean
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
@@ -18295,6 +18304,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_limitless_database #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
@@ -18321,6 +18331,7 @@ module Aws::RDS
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
     #   resp.custom_db_engine_version_manifest #=> String
+    #   resp.supports_limitless_database #=> Boolean
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
@@ -30801,7 +30812,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.228.0'
+      context[:gem_version] = '1.229.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

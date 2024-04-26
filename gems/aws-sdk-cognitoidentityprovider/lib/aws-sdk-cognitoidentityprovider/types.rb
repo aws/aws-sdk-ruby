@@ -720,12 +720,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Time]
     #
     # @!attribute [rw] user_last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] enabled
@@ -2125,12 +2123,10 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] event_response
@@ -2937,9 +2933,14 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   A unique resource server identifier for the resource server. This
-    #   could be an HTTPS endpoint where the resource server is located,
-    #   such as `https://my-weather-api.example.com`.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier
+    #   strings increase the size of your access tokens.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3220,7 +3221,9 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_redirect_uri
-    #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #   The default redirect URI. In app clients with one assigned IdP,
+    #   replaces `redirect_uri` in authentication requests. Must be in the
+    #   `CallbackURLs` list.
     #
     #   A redirect URI must:
     #
@@ -3230,7 +3233,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * Not include a fragment component.
     #
-    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #   For more information, see [Default redirect URI][1].
     #
     #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
     #   for testing purposes only.
@@ -3239,7 +3242,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html#cognito-user-pools-app-idp-settings-about
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
@@ -3954,7 +3957,14 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The identifier for the resource server
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier
+    #   strings increase the size of your access tokens.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServerRequest AWS API Documentation
@@ -4237,12 +4247,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Time]
     #
     # @!attribute [rw] device_last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] device_last_authenticated_date
@@ -5189,21 +5197,17 @@ module Aws::CognitoIdentityProvider
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GroupType AWS API Documentation
@@ -5387,21 +5391,17 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/IdentityProviderType AWS API Documentation
@@ -6852,12 +6852,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ProviderDescription AWS API Documentation
@@ -7060,7 +7058,14 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The identifier for the resource server.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier
+    #   strings increase the size of your access tokens.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -7362,12 +7367,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::RiskExceptionConfigurationType]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RiskConfigurationType AWS API Documentation
@@ -8287,21 +8290,17 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UICustomizationType AWS API Documentation
@@ -8723,7 +8722,14 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The identifier for the resource server.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier
+    #   strings increase the size of your access tokens.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -9578,12 +9584,10 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] start_date
@@ -9787,21 +9791,17 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] refresh_token_validity
@@ -10192,21 +10192,17 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolDescriptionType AWS API Documentation
@@ -10285,21 +10281,17 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] schema_attributes
@@ -10581,12 +10573,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Time]
     #
     # @!attribute [rw] user_last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] enabled

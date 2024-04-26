@@ -1084,6 +1084,7 @@ module Aws::RDS
       attr_accessor tag_list: ::Array[Types::Tag]
       attr_accessor supports_babelfish: bool
       attr_accessor custom_db_engine_version_manifest: ::String
+      attr_accessor supports_limitless_database: bool
       attr_accessor supports_certificate_rotation_without_restart: bool
       attr_accessor supported_ca_certificate_identifiers: ::Array[::String]
       attr_accessor supports_local_write_forwarding: bool
@@ -4246,6 +4247,7 @@ module Aws::RDS
       attr_accessor supports_parallel_query: bool
       attr_accessor supports_global_databases: bool
       attr_accessor supports_babelfish: bool
+      attr_accessor supports_limitless_database: bool
       attr_accessor supports_local_write_forwarding: bool
       attr_accessor supports_integrations: bool
       SENSITIVE: []

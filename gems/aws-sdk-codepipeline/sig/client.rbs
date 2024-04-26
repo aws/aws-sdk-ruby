@@ -201,7 +201,10 @@ module Aws
                                        namespace: ::String?,
                                        timeout_in_minutes: ::Integer?
                                      },
-                                   ]
+                                   ],
+                                   on_failure: {
+                                     result: ("ROLLBACK")?
+                                   }?
                                  },
                                ],
                                version: ::Integer?,
@@ -423,6 +426,11 @@ module Aws
       def list_pipeline_executions: (
                                       pipeline_name: ::String,
                                       ?max_results: ::Integer,
+                                      ?filter: {
+                                        succeeded_in_stage: {
+                                          stage_name: ::String?
+                                        }?
+                                      },
                                       ?next_token: ::String
                                     ) -> _ListPipelineExecutionsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineExecutionsResponseSuccess
@@ -646,6 +654,18 @@ module Aws
                                  ) -> _RetryStageExecutionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetryStageExecutionResponseSuccess
 
+      interface _RollbackStageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RollbackStageOutput]
+        def pipeline_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#rollback_stage-instance_method
+      def rollback_stage: (
+                            pipeline_name: ::String,
+                            stage_name: ::String,
+                            target_pipeline_execution_id: ::String
+                          ) -> _RollbackStageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RollbackStageResponseSuccess
+
       interface _StartPipelineExecutionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartPipelineExecutionOutput]
         def pipeline_execution_id: () -> ::String
@@ -823,7 +843,10 @@ module Aws
                                        namespace: ::String?,
                                        timeout_in_minutes: ::Integer?
                                      },
-                                   ]
+                                   ],
+                                   on_failure: {
+                                     result: ("ROLLBACK")?
+                                   }?
                                  },
                                ],
                                version: ::Integer?,

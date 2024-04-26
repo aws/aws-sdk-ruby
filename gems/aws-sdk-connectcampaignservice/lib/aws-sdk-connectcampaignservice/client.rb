@@ -460,6 +460,7 @@ module Aws::ConnectCampaignService
     #       connect_queue_id: "QueueId",
     #       answer_machine_detection_config: {
     #         enable_answer_machine_detection: false, # required
+    #         await_answer_machine_prompt: false,
     #       },
     #     },
     #     tags: {
@@ -580,6 +581,7 @@ module Aws::ConnectCampaignService
     #   resp.campaign.outbound_call_config.connect_source_phone_number #=> String
     #   resp.campaign.outbound_call_config.connect_queue_id #=> String
     #   resp.campaign.outbound_call_config.answer_machine_detection_config.enable_answer_machine_detection #=> Boolean
+    #   resp.campaign.outbound_call_config.answer_machine_detection_config.await_answer_machine_prompt #=> Boolean
     #   resp.campaign.tags #=> Hash
     #   resp.campaign.tags["TagKey"] #=> String
     #
@@ -1118,6 +1120,7 @@ module Aws::ConnectCampaignService
     #     connect_source_phone_number: "SourcePhoneNumber",
     #     answer_machine_detection_config: {
     #       enable_answer_machine_detection: false, # required
+    #       await_answer_machine_prompt: false,
     #     },
     #   })
     #
@@ -1143,7 +1146,7 @@ module Aws::ConnectCampaignService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcampaignservice'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

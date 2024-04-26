@@ -45,6 +45,12 @@ module Aws::OAM
     #     without the domain name
     #   @return [String]
     #
+    # @!attribute [rw] link_configuration
+    #   Use this structure to optionally create filters that specify that
+    #   only some metric namespaces or log groups are to be shared from the
+    #   source account to the monitoring account.
+    #   @return [Types::LinkConfiguration]
+    #
     # @!attribute [rw] resource_types
     #   An array of strings that define which types of data that the source
     #   account shares with the monitoring account.
@@ -82,6 +88,7 @@ module Aws::OAM
     #
     class CreateLinkInput < Struct.new(
       :label_template,
+      :link_configuration,
       :resource_types,
       :sink_identifier,
       :tags)
@@ -109,6 +116,12 @@ module Aws::OAM
     #   resolved.
     #   @return [String]
     #
+    # @!attribute [rw] link_configuration
+    #   This structure includes filters that specify which metric namespaces
+    #   and which log groups are shared from the source account to the
+    #   monitoring account.
+    #   @return [Types::LinkConfiguration]
+    #
     # @!attribute [rw] resource_types
     #   The resource types supported by this link.
     #   @return [Array<String>]
@@ -128,6 +141,7 @@ module Aws::OAM
       :id,
       :label,
       :label_template,
+      :link_configuration,
       :resource_types,
       :sink_arn,
       :tags)
@@ -255,6 +269,12 @@ module Aws::OAM
     #   created, with the template variables not resolved.
     #   @return [String]
     #
+    # @!attribute [rw] link_configuration
+    #   This structure includes filters that specify which metric namespaces
+    #   and which log groups are shared from the source account to the
+    #   monitoring account.
+    #   @return [Types::LinkConfiguration]
+    #
     # @!attribute [rw] resource_types
     #   The resource types supported by this link.
     #   @return [Array<String>]
@@ -274,6 +294,7 @@ module Aws::OAM
       :id,
       :label,
       :label_template,
+      :link_configuration,
       :resource_types,
       :sink_arn,
       :tags)
@@ -333,6 +354,10 @@ module Aws::OAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] policy
+    #   The policy that you specified, in JSON format.
+    #   @return [String]
+    #
     # @!attribute [rw] sink_arn
     #   The ARN of the sink.
     #   @return [String]
@@ -342,16 +367,12 @@ module Aws::OAM
     #   the sink ARN.
     #   @return [String]
     #
-    # @!attribute [rw] policy
-    #   The policy that you specified, in JSON format.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/GetSinkPolicyOutput AWS API Documentation
     #
     class GetSinkPolicyOutput < Struct.new(
+      :policy,
       :sink_arn,
-      :sink_id,
-      :policy)
+      :sink_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -376,18 +397,41 @@ module Aws::OAM
 
     # A parameter is specified incorrectly.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @!attribute [rw] amzn_error_type
     #   The name of the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/InvalidParameterException AWS API Documentation
     #
     class InvalidParameterException < Struct.new(
-      :message,
-      :amzn_error_type)
+      :amzn_error_type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use this structure to optionally create filters that specify that only
+    # some metric namespaces or log groups are to be shared from the source
+    # account to the monitoring account.
+    #
+    # @!attribute [rw] log_group_configuration
+    #   Use this structure to filter which log groups are to send log events
+    #   from the source account to the monitoring account.
+    #   @return [Types::LogGroupConfiguration]
+    #
+    # @!attribute [rw] metric_configuration
+    #   Use this structure to filter which metric namespaces are to be
+    #   shared from the source account to the monitoring account.
+    #   @return [Types::MetricConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/LinkConfiguration AWS API Documentation
+    #
+    class LinkConfiguration < Struct.new(
+      :log_group_configuration,
+      :metric_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -636,28 +680,128 @@ module Aws::OAM
       include Aws::Structure
     end
 
-    # A required parameter is missing from the request.
+    # This structure contains the `Filter` parameter which you can use to
+    # specify which log groups are to share log events from this source
+    # account to the monitoring account.
     #
-    # @!attribute [rw] message
+    # @!attribute [rw] filter
+    #   Use this field to specify which log groups are to share their log
+    #   events with the monitoring account. Use the term `LogGroupName` and
+    #   one or more of the following operands. Use single quotation marks
+    #   (') around log group names. The matching of log group names is case
+    #   sensitive. Each filter has a limit of five conditional operands.
+    #   Conditional operands are `AND` and `OR`.
+    #
+    #   * `=` and `!=`
+    #
+    #   * `AND`
+    #
+    #   * `OR`
+    #
+    #   * `LIKE` and `NOT LIKE`. These can be used only as prefix searches.
+    #     Include a `%` at the end of the string that you want to search for
+    #     and include.
+    #
+    #   * `IN` and `NOT IN`, using parentheses `( )`
+    #
+    #   Examples:
+    #
+    #   * `LogGroupName IN ('This-Log-Group', 'Other-Log-Group')` includes
+    #     only the log groups with names `This-Log-Group` and
+    #     `Other-Log-Group`.
+    #
+    #   * `LogGroupName NOT IN ('Private-Log-Group', 'Private-Log-Group-2')`
+    #     includes all log groups except the log groups with names
+    #     `Private-Log-Group` and `Private-Log-Group-2`.
+    #
+    #   * `LogGroupName LIKE 'aws/lambda/%' OR LogGroupName LIKE 'AWSLogs%'`
+    #     includes all log groups that have names that start with
+    #     `aws/lambda/` or `AWSLogs`.
+    #
+    #   <note markdown="1"> If you are updating a link that uses filters, you can specify `*` as
+    #   the only value for the `filter` parameter to delete the filter and
+    #   share all log groups with the monitoring account.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/LogGroupConfiguration AWS API Documentation
+    #
+    class LogGroupConfiguration < Struct.new(
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains the `Filter` parameter which you can use to
+    # specify which metric namespaces are to be shared from this source
+    # account to the monitoring account.
+    #
+    # @!attribute [rw] filter
+    #   Use this field to specify which metrics are to be shared with the
+    #   monitoring account. Use the term `Namespace` and one or more of the
+    #   following operands. Use single quotation marks (') around namespace
+    #   names. The matching of namespace names is case sensitive. Each
+    #   filter has a limit of five conditional operands. Conditional
+    #   operands are `AND` and `OR`.
+    #
+    #   * `=` and `!=`
+    #
+    #   * `AND`
+    #
+    #   * `OR`
+    #
+    #   * `LIKE` and `NOT LIKE`. These can be used only as prefix searches.
+    #     Include a `%` at the end of the string that you want to search for
+    #     and include.
+    #
+    #   * `IN` and `NOT IN`, using parentheses `( )`
+    #
+    #   Examples:
+    #
+    #   * `Namespace NOT LIKE 'AWS/%'` includes only namespaces that don't
+    #     start with `AWS/`, such as custom namespaces.
+    #
+    #   * `Namespace IN ('AWS/EC2', 'AWS/ELB', 'AWS/S3')` includes only the
+    #     metrics in the EC2, Elastic Load Balancing, and Amazon S3
+    #     namespaces.
+    #
+    #   * `Namespace = 'AWS/EC2' OR Namespace NOT LIKE 'AWS/%'` includes
+    #     only the EC2 namespace and your custom namespaces.
+    #
+    #   <note markdown="1"> If you are updating a link that uses filters, you can specify `*` as
+    #   the only value for the `filter` parameter to delete the filter and
+    #   share all metric namespaces with the monitoring account.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/MetricConfiguration AWS API Documentation
+    #
+    class MetricConfiguration < Struct.new(
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A required parameter is missing from the request.
     #
     # @!attribute [rw] amzn_error_type
     #   The name of the exception.
     #   @return [String]
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/MissingRequiredParameterException AWS API Documentation
     #
     class MissingRequiredParameterException < Struct.new(
-      :message,
-      :amzn_error_type)
+      :amzn_error_type,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] sink_identifier
-    #   The ARN of the sink to attach this policy to.
-    #   @return [String]
-    #
     # @!attribute [rw] policy
     #   The JSON policy to use. If you are updating an existing policy, the
     #   entire existing policy is replaced by what you specify here.
@@ -669,15 +813,23 @@ module Aws::OAM
     #   section on this page.
     #   @return [String]
     #
+    # @!attribute [rw] sink_identifier
+    #   The ARN of the sink to attach this policy to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/PutSinkPolicyInput AWS API Documentation
     #
     class PutSinkPolicyInput < Struct.new(
-      :sink_identifier,
-      :policy)
+      :policy,
+      :sink_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] policy
+    #   The policy that you specified.
+    #   @return [String]
+    #
     # @!attribute [rw] sink_arn
     #   The ARN of the sink.
     #   @return [String]
@@ -687,16 +839,12 @@ module Aws::OAM
     #   the sink ARN.
     #   @return [String]
     #
-    # @!attribute [rw] policy
-    #   The policy that you specified.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/PutSinkPolicyOutput AWS API Documentation
     #
     class PutSinkPolicyOutput < Struct.new(
+      :policy,
       :sink_arn,
-      :sink_id,
-      :policy)
+      :sink_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -822,6 +970,12 @@ module Aws::OAM
     #   The ARN of the link that you want to update.
     #   @return [String]
     #
+    # @!attribute [rw] link_configuration
+    #   Use this structure to filter which metric namespaces and which log
+    #   groups are to be shared from the source account to the monitoring
+    #   account.
+    #   @return [Types::LinkConfiguration]
+    #
     # @!attribute [rw] resource_types
     #   An array of strings that define which types of data that the source
     #   account will send to the monitoring account.
@@ -834,6 +988,7 @@ module Aws::OAM
     #
     class UpdateLinkInput < Struct.new(
       :identifier,
+      :link_configuration,
       :resource_types)
       SENSITIVE = []
       include Aws::Structure
@@ -858,6 +1013,12 @@ module Aws::OAM
     #   created, with the template variables not resolved.
     #   @return [String]
     #
+    # @!attribute [rw] link_configuration
+    #   This structure includes filters that specify which metric namespaces
+    #   and which log groups are shared from the source account to the
+    #   monitoring account.
+    #   @return [Types::LinkConfiguration]
+    #
     # @!attribute [rw] resource_types
     #   The resource types now supported by this link.
     #   @return [Array<String>]
@@ -877,6 +1038,7 @@ module Aws::OAM
       :id,
       :label,
       :label_template,
+      :link_configuration,
       :resource_types,
       :sink_arn,
       :tags)
