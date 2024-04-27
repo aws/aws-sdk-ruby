@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add RBS signatures for customizations of S3.
+
 1.148.0 (2024-04-25)
 ------------------
 
