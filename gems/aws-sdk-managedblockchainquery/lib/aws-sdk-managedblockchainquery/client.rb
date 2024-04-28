@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ManagedBlockchainQuery
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ManagedBlockchainQuery
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::ManagedBlockchainQuery
     #   @option options [Aws::ManagedBlockchainQuery::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ManagedBlockchainQuery::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -581,9 +605,17 @@ module Aws::ManagedBlockchainQuery
     #
     # [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
     #
-    # @option params [required, String] :transaction_hash
-    #   The hash of the transaction. It is generated whenever a transaction is
-    #   verified and added to the blockchain.
+    # @option params [String] :transaction_hash
+    #   The hash of a transaction. It is generated when a transaction is
+    #   created.
+    #
+    # @option params [String] :transaction_id
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
+    #
+    #   <note markdown="1"> `transactionId` is only supported on the Bitcoin networks.
+    #
+    #    </note>
     #
     # @option params [required, String] :network
     #   The blockchain network where the transaction occurred.
@@ -595,7 +627,8 @@ module Aws::ManagedBlockchainQuery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transaction({
-    #     transaction_hash: "QueryTransactionHash", # required
+    #     transaction_hash: "QueryTransactionHash",
+    #     transaction_id: "QueryTransactionId",
     #     network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #   })
     #
@@ -646,7 +679,7 @@ module Aws::ManagedBlockchainQuery
     # @option params [Integer] :max_results
     #   The maximum number of contracts to list.
     #
-    #   Default:`100`
+    #   Default: `100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -694,6 +727,124 @@ module Aws::ManagedBlockchainQuery
       req.send_request(options)
     end
 
+    # Lists all the transaction events for an address on the blockchain.
+    #
+    # <note markdown="1"> This operation is only supported on the Bitcoin networks.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :network
+    #   The blockchain network where the transaction occurred.
+    #
+    #   Valid Values: `BITCOIN_MAINNET` \| `BITCOIN_TESTNET`
+    #
+    # @option params [required, Types::AddressIdentifierFilter] :address_identifier_filter
+    #   This is the unique public address on the blockchain for which the
+    #   transaction events are being requested.
+    #
+    # @option params [Types::TimeFilter] :time_filter
+    #   This container specifies the time frame for the transaction events
+    #   returned in the response.
+    #
+    # @option params [Types::VoutFilter] :vout_filter
+    #   This container specifies filtering attributes related to BITCOIN\_VOUT
+    #   event types
+    #
+    # @option params [Types::ConfirmationStatusFilter] :confirmation_status_filter
+    #   The container for the `ConfirmationStatusFilter` that filters for the
+    #   [ *finality* ][1] of the results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
+    #
+    # @option params [Types::ListFilteredTransactionEventsSort] :sort
+    #   The order by which the results will be sorted.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of transaction events to list.
+    #
+    #   Default: `100`
+    #
+    #   <note markdown="1"> Even if additional results can be retrieved, the request can return
+    #   less results than `maxResults` or an empty array of results.
+    #
+    #    To retrieve the next set of results, make another request with the
+    #   returned `nextToken` value. The value of `nextToken` is `null` when
+    #   there are no more results to return
+    #
+    #    </note>
+    #
+    # @return [Types::ListFilteredTransactionEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFilteredTransactionEventsOutput#events #events} => Array&lt;Types::TransactionEvent&gt;
+    #   * {Types::ListFilteredTransactionEventsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_filtered_transaction_events({
+    #     network: "String", # required
+    #     address_identifier_filter: { # required
+    #       transaction_event_to_address: ["ChainAddress"], # required
+    #     },
+    #     time_filter: {
+    #       from: {
+    #         time: Time.now,
+    #       },
+    #       to: {
+    #         time: Time.now,
+    #       },
+    #     },
+    #     vout_filter: {
+    #       vout_spent: false, # required
+    #     },
+    #     confirmation_status_filter: {
+    #       include: ["FINAL"], # required, accepts FINAL, NONFINAL
+    #     },
+    #     sort: {
+    #       sort_by: "blockchainInstant", # accepts blockchainInstant
+    #       sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events #=> Array
+    #   resp.events[0].network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
+    #   resp.events[0].transaction_hash #=> String
+    #   resp.events[0].event_type #=> String, one of "ERC20_TRANSFER", "ERC20_MINT", "ERC20_BURN", "ERC20_DEPOSIT", "ERC20_WITHDRAWAL", "ERC721_TRANSFER", "ERC1155_TRANSFER", "BITCOIN_VIN", "BITCOIN_VOUT", "INTERNAL_ETH_TRANSFER", "ETH_TRANSFER"
+    #   resp.events[0].from #=> String
+    #   resp.events[0].to #=> String
+    #   resp.events[0].value #=> String
+    #   resp.events[0].contract_address #=> String
+    #   resp.events[0].token_id #=> String
+    #   resp.events[0].transaction_id #=> String
+    #   resp.events[0].vout_index #=> Integer
+    #   resp.events[0].vout_spent #=> Boolean
+    #   resp.events[0].spent_vout_transaction_id #=> String
+    #   resp.events[0].spent_vout_transaction_hash #=> String
+    #   resp.events[0].spent_vout_index #=> Integer
+    #   resp.events[0].blockchain_instant.time #=> Time
+    #   resp.events[0].confirmation_status #=> String, one of "FINAL", "NONFINAL"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListFilteredTransactionEvents AWS API Documentation
+    #
+    # @overload list_filtered_transaction_events(params = {})
+    # @param [Hash] params ({})
+    def list_filtered_transaction_events(params = {}, options = {})
+      req = build_request(:list_filtered_transaction_events, params)
+      req.send_request(options)
+    end
+
     # This action returns the following for a given blockchain network:
     #
     # * Lists all token balances owned by an address (either a contract
@@ -730,7 +881,7 @@ module Aws::ManagedBlockchainQuery
     # @option params [Integer] :max_results
     #   The maximum number of token balances to return.
     #
-    #   Default:`100`
+    #   Default: `100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -784,8 +935,7 @@ module Aws::ManagedBlockchainQuery
       req.send_request(options)
     end
 
-    # An array of `TransactionEvent` objects. Each object contains details
-    # about the transaction event.
+    # Lists all the transaction events for a transaction
     #
     # <note markdown="1"> This action will return transaction details for all transactions that
     # are *confirmed* on the blockchain, even if they have not reached
@@ -797,9 +947,17 @@ module Aws::ManagedBlockchainQuery
     #
     # [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
     #
-    # @option params [required, String] :transaction_hash
-    #   The hash of the transaction. It is generated whenever a transaction is
-    #   verified and added to the blockchain.
+    # @option params [String] :transaction_hash
+    #   The hash of a transaction. It is generated when a transaction is
+    #   created.
+    #
+    # @option params [String] :transaction_id
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
+    #
+    #   <note markdown="1"> `transactionId` is only supported on the Bitcoin networks.
+    #
+    #    </note>
     #
     # @option params [required, String] :network
     #   The blockchain network where the transaction events occurred.
@@ -811,7 +969,7 @@ module Aws::ManagedBlockchainQuery
     # @option params [Integer] :max_results
     #   The maximum number of transaction events to list.
     #
-    #   Default:`100`
+    #   Default: `100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -832,7 +990,8 @@ module Aws::ManagedBlockchainQuery
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_transaction_events({
-    #     transaction_hash: "QueryTransactionHash", # required
+    #     transaction_hash: "QueryTransactionHash",
+    #     transaction_id: "QueryTransactionId",
     #     network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -851,6 +1010,12 @@ module Aws::ManagedBlockchainQuery
     #   resp.events[0].token_id #=> String
     #   resp.events[0].transaction_id #=> String
     #   resp.events[0].vout_index #=> Integer
+    #   resp.events[0].vout_spent #=> Boolean
+    #   resp.events[0].spent_vout_transaction_id #=> String
+    #   resp.events[0].spent_vout_transaction_hash #=> String
+    #   resp.events[0].spent_vout_index #=> Integer
+    #   resp.events[0].blockchain_instant.time #=> Time
+    #   resp.events[0].confirmation_status #=> String, one of "FINAL", "NONFINAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListTransactionEvents AWS API Documentation
@@ -862,8 +1027,7 @@ module Aws::ManagedBlockchainQuery
       req.send_request(options)
     end
 
-    # Lists all of the transactions on a given wallet address or to a
-    # specific contract.
+    # Lists all the transaction events for a transaction.
     #
     # @option params [required, String] :address
     #   The address (either a contract or wallet), whose transactions are
@@ -879,8 +1043,7 @@ module Aws::ManagedBlockchainQuery
     #   The container for time.
     #
     # @option params [Types::ListTransactionsSort] :sort
-    #   The order by which the results will be sorted. If `ASCENNDING` is
-    #   selected, the results will be ordered by `fromTime`.
+    #   The order by which the results will be sorted.
     #
     # @option params [String] :next_token
     #   The pagination token that indicates the next set of results to
@@ -889,7 +1052,7 @@ module Aws::ManagedBlockchainQuery
     # @option params [Integer] :max_results
     #   The maximum number of transactions to list.
     #
-    #   Default:`100`
+    #   Default: `100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -903,7 +1066,7 @@ module Aws::ManagedBlockchainQuery
     # @option params [Types::ConfirmationStatusFilter] :confirmation_status_filter
     #   This filter is used to include transactions in the response that
     #   haven't reached [ *finality* ][1]. Transactions that have reached
-    #   finiality are always part of the response.
+    #   finality are always part of the response.
     #
     #
     #
@@ -942,6 +1105,7 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp.transactions #=> Array
     #   resp.transactions[0].transaction_hash #=> String
+    #   resp.transactions[0].transaction_id #=> String
     #   resp.transactions[0].network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.transactions[0].transaction_timestamp #=> Time
     #   resp.transactions[0].confirmation_status #=> String, one of "FINAL", "NONFINAL"
@@ -969,7 +1133,7 @@ module Aws::ManagedBlockchainQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchainquery'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

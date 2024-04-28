@@ -40,6 +40,20 @@ module Aws::RolesAnywhere
       end
     end
 
+    class DeleteAttributeMapping
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::RolesAnywhere::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteCrl
       def self.build(context)
         unless context.config.regional_endpoint
@@ -293,6 +307,20 @@ module Aws::RolesAnywhere
     end
 
     class ListTrustAnchors
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::RolesAnywhere::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class PutAttributeMapping
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

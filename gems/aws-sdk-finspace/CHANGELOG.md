@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2024-03-26)
+------------------
+
+* Feature - Add new operation delete-kx-cluster-node and add status parameter to list-kx-cluster-node operation.
+
+1.30.0 (2024-03-19)
+------------------
+
+* Feature - Adding new attributes readWrite and onDemand to dataview models for Database Maintenance operations.
+
 1.29.0 (2024-01-26)
 ------------------
 

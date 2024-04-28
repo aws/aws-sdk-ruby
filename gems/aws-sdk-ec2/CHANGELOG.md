@@ -1,6 +1,86 @@
 Unreleased Changes
 ------------------
 
+1.453.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.452.0 (2024-04-24)
+------------------
+
+* Feature - Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface
+
+1.451.0 (2024-04-23)
+------------------
+
+* Feature - This release introduces EC2 AMI Deregistration Protection, a new AMI property that can be enabled by customers to protect an AMI against an unintended deregistration. This release also enables the AMI owners to view the AMI 'LastLaunchedTime' in DescribeImages API.
+
+1.450.0 (2024-04-17)
+------------------
+
+* Feature - Documentation updates for Elastic Compute Cloud (EC2).
+
+1.449.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.448.1 (2024-04-12)
+------------------
+
+* Issue - Add default max_results value to Resource methods for legacy APIs that support un-paginated calls by default.
+
+1.448.0 (2024-04-04)
+------------------
+
+* Feature - Amazon EC2 G6 instances powered by NVIDIA L4 Tensor Core GPUs can be used for a wide range of graphics-intensive and machine learning use cases. Gr6 instances also feature NVIDIA L4 GPUs and can be used for graphics workloads with higher memory requirements.
+
+1.447.0 (2024-03-28)
+------------------
+
+* Feature - Amazon EC2 C7gd, M7gd and R7gd metal instances with up to 3.8 TB of local NVMe-based SSD block-level storage have up to 45% improved real-time NVMe storage performance than comparable Graviton2-based instances.
+
+1.446.0 (2024-03-26)
+------------------
+
+* Feature - Documentation updates for Elastic Compute Cloud (EC2).
+
+1.445.0 (2024-03-25)
+------------------
+
+* Feature - Added support for ModifyInstanceMetadataDefaults and GetInstanceMetadataDefaults to set Instance Metadata Service account defaults
+
+1.444.0 (2024-03-19)
+------------------
+
+* Feature - This release adds the new DescribeMacHosts API operation for getting information about EC2 Mac Dedicated Hosts. Users can now see the latest macOS versions that their underlying Apple Mac can support without needing to be updated.
+
+1.443.0 (2024-03-15)
+------------------
+
+* Feature - Add media accelerator and neuron device information on the describe instance types API.
+
+1.442.0 (2024-03-12)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
+1.441.0 (2024-03-07)
+------------------
+
+* Feature - This release adds an optional parameter to RegisterImage and CopyImage APIs to support tagging AMIs at the time of creation.
+
+1.440.0 (2024-03-01)
+------------------
+
+* Feature - With this release, Amazon EC2 Auto Scaling groups, EC2 Fleet, and Spot Fleet improve the default price protection behavior of attribute-based instance type selection of Spot Instances, to consistently select from a wide range of instance types.
+
+1.439.0 (2024-02-28)
+------------------
+
+* Feature - This release increases the range of MaxResults for GetNetworkInsightsAccessScopeAnalysisFindings to 1,000.
+
 1.438.0 (2024-02-14)
 ------------------
 

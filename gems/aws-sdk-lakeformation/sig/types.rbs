@@ -158,6 +158,7 @@ module Aws::LakeFormation
       attr_accessor catalog_id: ::String
       attr_accessor instance_arn: ::String
       attr_accessor external_filtering: Types::ExternalFilteringConfiguration
+      attr_accessor share_recipients: ::Array[Types::DataLakePrincipal]
       SENSITIVE: []
     end
 
@@ -300,6 +301,8 @@ module Aws::LakeFormation
       attr_accessor instance_arn: ::String
       attr_accessor application_arn: ::String
       attr_accessor external_filtering: Types::ExternalFilteringConfiguration
+      attr_accessor share_recipients: ::Array[Types::DataLakePrincipal]
+      attr_accessor resource_share: ::String
       SENSITIVE: []
     end
 
@@ -1009,6 +1012,7 @@ module Aws::LakeFormation
 
     class UpdateLakeFormationIdentityCenterConfigurationRequest
       attr_accessor catalog_id: ::String
+      attr_accessor share_recipients: ::Array[Types::DataLakePrincipal]
       attr_accessor application_status: ("ENABLED" | "DISABLED")
       attr_accessor external_filtering: Types::ExternalFilteringConfiguration
       SENSITIVE: []

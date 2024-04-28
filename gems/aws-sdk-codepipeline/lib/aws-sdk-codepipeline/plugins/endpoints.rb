@@ -124,6 +124,8 @@ module Aws::CodePipeline
             Aws::CodePipeline::Endpoints::RegisterWebhookWithThirdParty.build(context)
           when :retry_stage_execution
             Aws::CodePipeline::Endpoints::RetryStageExecution.build(context)
+          when :rollback_stage
+            Aws::CodePipeline::Endpoints::RollbackStage.build(context)
           when :start_pipeline_execution
             Aws::CodePipeline::Endpoints::StartPipelineExecution.build(context)
           when :stop_pipeline_execution

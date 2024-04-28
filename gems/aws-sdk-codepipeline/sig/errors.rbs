@@ -75,6 +75,9 @@ module Aws
       class PipelineExecutionNotStoppableException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class PipelineExecutionOutdatedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class PipelineNameInUseException < ::Aws::Errors::ServiceError
       end
       class PipelineNotFoundException < ::Aws::Errors::ServiceError
@@ -91,6 +94,9 @@ module Aws
       class StageNotRetryableException < ::Aws::Errors::ServiceError
       end
       class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnableToRollbackStageException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ValidationException < ::Aws::Errors::ServiceError

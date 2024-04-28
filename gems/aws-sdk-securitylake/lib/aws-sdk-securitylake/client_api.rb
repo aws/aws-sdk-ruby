@@ -208,7 +208,7 @@ module Aws::SecurityLake
     CreateAwsLogSourceResponse.add_member(:failed, Shapes::ShapeRef.new(shape: AccountList, location_name: "failed"))
     CreateAwsLogSourceResponse.struct_class = Types::CreateAwsLogSourceResponse
 
-    CreateCustomLogSourceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CustomLogSourceConfiguration, location_name: "configuration"))
+    CreateCustomLogSourceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CustomLogSourceConfiguration, required: true, location_name: "configuration"))
     CreateCustomLogSourceRequest.add_member(:event_classes, Shapes::ShapeRef.new(shape: OcsfEventClassList, location_name: "eventClasses"))
     CreateCustomLogSourceRequest.add_member(:source_name, Shapes::ShapeRef.new(shape: CustomLogSourceName, required: true, location_name: "sourceName"))
     CreateCustomLogSourceRequest.add_member(:source_version, Shapes::ShapeRef.new(shape: CustomLogSourceVersion, location_name: "sourceVersion"))
@@ -224,7 +224,7 @@ module Aws::SecurityLake
 
     CreateDataLakeExceptionSubscriptionResponse.struct_class = Types::CreateDataLakeExceptionSubscriptionResponse
 
-    CreateDataLakeOrganizationConfigurationRequest.add_member(:auto_enable_new_account, Shapes::ShapeRef.new(shape: DataLakeAutoEnableNewAccountConfigurationList, required: true, location_name: "autoEnableNewAccount"))
+    CreateDataLakeOrganizationConfigurationRequest.add_member(:auto_enable_new_account, Shapes::ShapeRef.new(shape: DataLakeAutoEnableNewAccountConfigurationList, location_name: "autoEnableNewAccount"))
     CreateDataLakeOrganizationConfigurationRequest.struct_class = Types::CreateDataLakeOrganizationConfigurationRequest
 
     CreateDataLakeOrganizationConfigurationResponse.struct_class = Types::CreateDataLakeOrganizationConfigurationResponse
@@ -370,7 +370,7 @@ module Aws::SecurityLake
 
     DeleteDataLakeExceptionSubscriptionResponse.struct_class = Types::DeleteDataLakeExceptionSubscriptionResponse
 
-    DeleteDataLakeOrganizationConfigurationRequest.add_member(:auto_enable_new_account, Shapes::ShapeRef.new(shape: DataLakeAutoEnableNewAccountConfigurationList, required: true, location_name: "autoEnableNewAccount"))
+    DeleteDataLakeOrganizationConfigurationRequest.add_member(:auto_enable_new_account, Shapes::ShapeRef.new(shape: DataLakeAutoEnableNewAccountConfigurationList, location_name: "autoEnableNewAccount"))
     DeleteDataLakeOrganizationConfigurationRequest.struct_class = Types::DeleteDataLakeOrganizationConfigurationRequest
 
     DeleteDataLakeOrganizationConfigurationResponse.struct_class = Types::DeleteDataLakeOrganizationConfigurationResponse
@@ -566,6 +566,7 @@ module Aws::SecurityLake
     UpdateDataLakeExceptionSubscriptionResponse.struct_class = Types::UpdateDataLakeExceptionSubscriptionResponse
 
     UpdateDataLakeRequest.add_member(:configurations, Shapes::ShapeRef.new(shape: DataLakeConfigurationList, required: true, location_name: "configurations"))
+    UpdateDataLakeRequest.add_member(:meta_store_manager_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "metaStoreManagerRoleArn"))
     UpdateDataLakeRequest.struct_class = Types::UpdateDataLakeRequest
 
     UpdateDataLakeResponse.add_member(:data_lakes, Shapes::ShapeRef.new(shape: DataLakeResourceList, location_name: "dataLakes"))

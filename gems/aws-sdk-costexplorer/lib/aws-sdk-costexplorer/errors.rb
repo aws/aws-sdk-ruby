@@ -27,6 +27,7 @@ module Aws::CostExplorer
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {BackfillLimitExceededException}
   # * {BillExpirationException}
   # * {DataUnavailableException}
   # * {GenerationExistsException}
@@ -45,6 +46,21 @@ module Aws::CostExplorer
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class BackfillLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CostExplorer::Types::BackfillLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class BillExpirationException < ServiceError
 

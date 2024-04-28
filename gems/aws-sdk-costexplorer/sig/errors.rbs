@@ -11,6 +11,9 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class BackfillLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class BillExpirationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -75,6 +76,7 @@ module Aws::S3Control
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -202,10 +204,17 @@ module Aws::S3Control
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -349,50 +358,65 @@ module Aws::S3Control
     #   @option options [Aws::S3Control::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::S3Control::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -843,6 +867,11 @@ module Aws::S3Control
     #   The Amazon Web Services account ID associated with the S3 bucket
     #   associated with this access point.
     #
+    #   For same account access point when your bucket and access point belong
+    #   to the same account owner, the `BucketAccountId` is not required. For
+    #   cross-account access point when your bucket and access point are not
+    #   in the same account, the `BucketAccountId` is required.
+    #
     # @return [Types::CreateAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccessPointResult#access_point_arn #access_point_arn} => String
@@ -1145,7 +1174,7 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-iam-role-policies.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
@@ -1407,9 +1436,9 @@ module Aws::S3Control
     # *Amazon S3 User Guide*.
     #
     # This action will always be routed to the US West (Oregon) Region. For
-    # more information about the restrictions around managing Multi-Region
-    # Access Points, see [Managing Multi-Region Access Points][2] in the
-    # *Amazon S3 User Guide*.
+    # more information about the restrictions around working with
+    # Multi-Region Access Points, see [Multi-Region Access Point
+    # restrictions and limitations][2] in the *Amazon S3 User Guide*.
     #
     # This request is asynchronous, meaning that you might receive a
     # response before the command has completed. When this request provides
@@ -1429,7 +1458,7 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
@@ -2444,9 +2473,9 @@ module Aws::S3Control
     # Multi-Region Access Point itself.
     #
     # This action will always be routed to the US West (Oregon) Region. For
-    # more information about the restrictions around managing Multi-Region
-    # Access Points, see [Managing Multi-Region Access Points][1] in the
-    # *Amazon S3 User Guide*.
+    # more information about the restrictions around working with
+    # Multi-Region Access Points, see [Multi-Region Access Point
+    # restrictions and limitations][1] in the *Amazon S3 User Guide*.
     #
     # This request is asynchronous, meaning that you might receive a
     # response before the command has completed. When this request provides
@@ -2465,7 +2494,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
@@ -2860,8 +2889,7 @@ module Aws::S3Control
     # Retrieves the status of an asynchronous request to manage a
     # Multi-Region Access Point. For more information about managing
     # Multi-Region Access Points and how asynchronous requests work, see
-    # [Managing Multi-Region Access Points][1] in the *Amazon S3 User
-    # Guide*.
+    # [Using Multi-Region Access Points][1] in the *Amazon S3 User Guide*.
     #
     # The following actions are related to `GetMultiRegionAccessPoint`:
     #
@@ -2875,7 +2903,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MrapOperations.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
@@ -3604,10 +3632,8 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # <note markdown="1"> Gets an Amazon S3 on Outposts bucket. For more information, see [
+    # Gets an Amazon S3 on Outposts bucket. For more information, see [
     # Using Amazon S3 on Outposts][1] in the *Amazon S3 User Guide*.
-    #
-    #  </note>
     #
     # If you are using an identity other than the root user of the Amazon
     # Web Services account that owns the Outposts bucket, the calling
@@ -4223,7 +4249,8 @@ module Aws::S3Control
     # : The IAM role that S3 Access Grants assumes must have the following
     #   permissions specified in the trust policy when registering the
     #   location: `sts:AssumeRole`, for directory users or groups
-    #   `sts:SetContext`, and for IAM users or roles `sts:SourceIdentity`.
+    #   `sts:SetContext`, and for IAM users or roles
+    #   `sts:SetSourceIdentity`.
     #
     #
     #
@@ -4371,9 +4398,9 @@ module Aws::S3Control
     # Access Point.
     #
     # This action will always be routed to the US West (Oregon) Region. For
-    # more information about the restrictions around managing Multi-Region
-    # Access Points, see [Managing Multi-Region Access Points][1] in the
-    # *Amazon S3 User Guide*.
+    # more information about the restrictions around working with
+    # Multi-Region Access Points, see [Multi-Region Access Point
+    # restrictions and limitations][1] in the *Amazon S3 User Guide*.
     #
     # The following actions are related to `GetMultiRegionAccessPoint`:
     #
@@ -4387,7 +4414,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
@@ -4402,8 +4429,8 @@ module Aws::S3Control
     #   information you want to receive. The name of the Multi-Region Access
     #   Point is different from the alias. For more information about the
     #   distinction between the name and the alias of an Multi-Region Access
-    #   Point, see [Managing Multi-Region Access Points][1] in the *Amazon S3
-    #   User Guide*.
+    #   Point, see [Rules for naming Amazon S3 Multi-Region Access Points][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -4452,9 +4479,9 @@ module Aws::S3Control
     # Point.
     #
     # This action will always be routed to the US West (Oregon) Region. For
-    # more information about the restrictions around managing Multi-Region
-    # Access Points, see [Managing Multi-Region Access Points][1] in the
-    # *Amazon S3 User Guide*.
+    # more information about the restrictions around working with
+    # Multi-Region Access Points, see [Multi-Region Access Point
+    # restrictions and limitations][1] in the *Amazon S3 User Guide*.
     #
     # The following actions are related to
     # `GetMultiRegionAccessPointPolicy`:
@@ -4465,7 +4492,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html
     #
@@ -4477,8 +4504,8 @@ module Aws::S3Control
     #   Specifies the Multi-Region Access Point. The name of the Multi-Region
     #   Access Point is different from the alias. For more information about
     #   the distinction between the name and the alias of an Multi-Region
-    #   Access Point, see [Managing Multi-Region Access Points][1] in the
-    #   *Amazon S3 User Guide*.
+    #   Access Point, see [Rules for naming Amazon S3 Multi-Region Access
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -4517,9 +4544,9 @@ module Aws::S3Control
     # access control policy that allows public access.
     #
     # This action will always be routed to the US West (Oregon) Region. For
-    # more information about the restrictions around managing Multi-Region
-    # Access Points, see [Managing Multi-Region Access Points][1] in the
-    # *Amazon S3 User Guide*.
+    # more information about the restrictions around working with
+    # Multi-Region Access Points, see [Multi-Region Access Point
+    # restrictions and limitations][1] in the *Amazon S3 User Guide*.
     #
     # The following actions are related to
     # `GetMultiRegionAccessPointPolicyStatus`:
@@ -4530,7 +4557,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html
     #
@@ -4542,8 +4569,8 @@ module Aws::S3Control
     #   Specifies the Multi-Region Access Point. The name of the Multi-Region
     #   Access Point is different from the alias. For more information about
     #   the distinction between the name and the alias of an Multi-Region
-    #   Access Point, see [Managing Multi-Region Access Points][1] in the
-    #   *Amazon S3 User Guide*.
+    #   Access Point, see [Rules for naming Amazon S3 Multi-Region Access
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -4593,10 +4620,6 @@ module Aws::S3Control
     # * `ap-northeast-1`
     #
     # * `eu-west-1`
-    #
-    # <note markdown="1"> Your Amazon S3 bucket does not need to be in these five Regions.
-    #
-    #  </note>
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
@@ -5320,7 +5343,7 @@ module Aws::S3Control
     end
 
     # Lists current S3 Batch Operations jobs as well as the jobs that have
-    # ended within the last 30 days for the Amazon Web Services account
+    # ended within the last 90 days for the Amazon Web Services account
     # making the request. For more information, see [S3 Batch Operations][1]
     # in the *Amazon S3 User Guide*.
     #
@@ -5420,9 +5443,9 @@ module Aws::S3Control
     # account.
     #
     # This action will always be routed to the US West (Oregon) Region. For
-    # more information about the restrictions around managing Multi-Region
-    # Access Points, see [Managing Multi-Region Access Points][1] in the
-    # *Amazon S3 User Guide*.
+    # more information about the restrictions around working with
+    # Multi-Region Access Points, see [Multi-Region Access Point
+    # restrictions and limitations][1] in the *Amazon S3 User Guide*.
     #
     # The following actions are related to `ListMultiRegionAccessPoint`:
     #
@@ -5436,7 +5459,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
@@ -6742,9 +6765,9 @@ module Aws::S3Control
     # associated with the specified Multi-Region Access Point.
     #
     # This action will always be routed to the US West (Oregon) Region. For
-    # more information about the restrictions around managing Multi-Region
-    # Access Points, see [Managing Multi-Region Access Points][1] in the
-    # *Amazon S3 User Guide*.
+    # more information about the restrictions around working with
+    # Multi-Region Access Points, see [Multi-Region Access Point
+    # restrictions and limitations][1] in the *Amazon S3 User Guide*.
     #
     # The following actions are related to
     # `PutMultiRegionAccessPointPolicy`:
@@ -6755,7 +6778,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html
     #
@@ -7090,10 +7113,6 @@ module Aws::S3Control
     # * `ap-northeast-1`
     #
     # * `eu-west-1`
-    #
-    # <note markdown="1"> Your Amazon S3 bucket does not need to be in these five Regions.
-    #
-    #  </note>
     #
     # @option params [String] :account_id
     #   The Amazon Web Services account ID for the owner of the Multi-Region
@@ -7579,7 +7598,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -976,6 +976,7 @@ module Aws::Pinpoint
       attr_accessor from_address: ::String
       attr_accessor identity: ::String
       attr_accessor role_arn: ::String
+      attr_accessor orchestration_sending_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -994,6 +995,7 @@ module Aws::Pinpoint
       attr_accessor messages_per_second: ::Integer
       attr_accessor platform: ::String
       attr_accessor role_arn: ::String
+      attr_accessor orchestration_sending_role_arn: ::String
       attr_accessor version: ::Integer
       SENSITIVE: []
     end

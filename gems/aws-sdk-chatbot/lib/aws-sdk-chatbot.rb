@@ -22,7 +22,7 @@ require_relative 'aws-sdk-chatbot/endpoint_provider'
 require_relative 'aws-sdk-chatbot/endpoints'
 require_relative 'aws-sdk-chatbot/customizations'
 
-# This module provides support for chatbot. This module is available in the
+# This module provides support for AWS Chatbot. This module is available in the
 # `aws-sdk-chatbot` gem.
 #
 # # Client
@@ -38,13 +38,13 @@ require_relative 'aws-sdk-chatbot/customizations'
 #
 # # Errors
 #
-# Errors returned from chatbot are defined in the
+# Errors returned from AWS Chatbot are defined in the
 # {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Chatbot::Errors::ServiceError
-#       # rescues all chatbot API errors
+#       # rescues all AWS Chatbot API errors
 #     end
 #
 # See {Errors} for more information.
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-chatbot/customizations'
 # @!group service
 module Aws::Chatbot
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.2.0'
 
 end

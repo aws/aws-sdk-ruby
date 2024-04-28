@@ -445,6 +445,7 @@ module Aws::MarketplaceCatalog
       attr_accessor entity_id: Types::OfferEntityIdFilter
       attr_accessor name: Types::OfferNameFilter
       attr_accessor product_id: Types::OfferProductIdFilter
+      attr_accessor resale_authorization_id: Types::OfferResaleAuthorizationIdFilter
       attr_accessor release_date: Types::OfferReleaseDateFilter
       attr_accessor availability_end_date: Types::OfferAvailabilityEndDateFilter
       attr_accessor buyer_accounts: Types::OfferBuyerAccountsFilter
@@ -487,8 +488,13 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class OfferResaleAuthorizationIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class OfferSort
-      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate")
+      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       SENSITIVE: []
     end
@@ -501,6 +507,7 @@ module Aws::MarketplaceCatalog
     class OfferSummary
       attr_accessor name: ::String
       attr_accessor product_id: ::String
+      attr_accessor resale_authorization_id: ::String
       attr_accessor release_date: ::String
       attr_accessor availability_end_date: ::String
       attr_accessor buyer_accounts: ::Array[::String]

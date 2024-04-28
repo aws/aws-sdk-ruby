@@ -164,8 +164,7 @@ module Aws::EC2
       data[:hypervisor]
     end
 
-    # The Amazon Web Services account alias (for example, `amazon`, `self`)
-    # or the Amazon Web Services account ID of the AMI owner.
+    # The owner alias (`amazon` \| `aws-marketplace`).
     # @return [String]
     def image_owner_alias
       data[:image_owner_alias]
@@ -271,6 +270,28 @@ module Aws::EC2
     # @return [String]
     def source_instance_id
       data[:source_instance_id]
+    end
+
+    # Indicates whether deregistration protection is enabled for the AMI.
+    # @return [String]
+    def deregistration_protection
+      data[:deregistration_protection]
+    end
+
+    # The date and time, in [ISO 8601 date-time format][1], when the AMI was
+    # last used to launch an EC2 instance. When the AMI is used to launch an
+    # instance, there is a 24-hour delay before that usage is reported.
+    #
+    # <note markdown="1"> `lastLaunchedTime` data is available starting April 2017.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://www.iso.org/iso/iso8601
+    # @return [String]
+    def last_launched_time
+      data[:last_launched_time]
     end
 
     # @!endgroup
@@ -554,7 +575,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image.describe_attribute({
-    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime, imdsSupport
+    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime, imdsSupport, deregistrationProtection
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

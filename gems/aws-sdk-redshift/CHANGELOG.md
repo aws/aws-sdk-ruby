@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2024-04-12)
+------------------
+
+* Feature - Adds support for Amazon Redshift DescribeClusterSnapshots API to include Snapshot ARN response field.
+
+1.110.0 (2024-03-06)
+------------------
+
+* Feature - Update for documentation only. Covers port ranges, definition updates for data sharing, and definition updates to cluster-snapshot documentation.
+
 1.109.0 (2024-02-07)
 ------------------
 

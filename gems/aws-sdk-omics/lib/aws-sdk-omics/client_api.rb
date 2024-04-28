@@ -56,6 +56,7 @@ module Aws::Omics
     CompleteMultipartReadSetUploadResponse = Shapes::StructureShape.new(name: 'CompleteMultipartReadSetUploadResponse')
     CompleteReadSetUploadPartList = Shapes::ListShape.new(name: 'CompleteReadSetUploadPartList')
     CompleteReadSetUploadPartListItem = Shapes::StructureShape.new(name: 'CompleteReadSetUploadPartListItem')
+    CompleteReadSetUploadPartListItemChecksumString = Shapes::StringShape.new(name: 'CompleteReadSetUploadPartListItemChecksumString')
     CompleteReadSetUploadPartListItemPartNumberInteger = Shapes::IntegerShape.new(name: 'CompleteReadSetUploadPartListItemPartNumberInteger')
     CompletionTime = Shapes::TimestampShape.new(name: 'CompletionTime', timestampFormat: "iso8601")
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -104,6 +105,7 @@ module Aws::Omics
     Description = Shapes::StringShape.new(name: 'Description')
     ETag = Shapes::StructureShape.new(name: 'ETag')
     ETagAlgorithm = Shapes::StringShape.new(name: 'ETagAlgorithm')
+    ETagAlgorithmFamily = Shapes::StringShape.new(name: 'ETagAlgorithmFamily')
     Encoding = Shapes::StringShape.new(name: 'Encoding')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EngineLogStream = Shapes::StringShape.new(name: 'EngineLogStream')
@@ -304,6 +306,7 @@ module Aws::Omics
     ReadSetName = Shapes::StringShape.new(name: 'ReadSetName')
     ReadSetPartSource = Shapes::StringShape.new(name: 'ReadSetPartSource')
     ReadSetPartStreamingBlob = Shapes::BlobShape.new(name: 'ReadSetPartStreamingBlob', requiresLength: true, streaming: true)
+    ReadSetS3Access = Shapes::StructureShape.new(name: 'ReadSetS3Access')
     ReadSetStatus = Shapes::StringShape.new(name: 'ReadSetStatus')
     ReadSetStatusMessage = Shapes::StringShape.new(name: 'ReadSetStatusMessage')
     ReadSetStreamingBlob = Shapes::BlobShape.new(name: 'ReadSetStreamingBlob', streaming: true)
@@ -380,6 +383,7 @@ module Aws::Omics
     RunStatusMessage = Shapes::StringShape.new(name: 'RunStatusMessage')
     RunTimestamp = Shapes::TimestampShape.new(name: 'RunTimestamp', timestampFormat: "iso8601")
     RunUuid = Shapes::StringShape.new(name: 'RunUuid')
+    S3AccessPointArn = Shapes::StringShape.new(name: 'S3AccessPointArn')
     S3Destination = Shapes::StringShape.new(name: 'S3Destination')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SampleId = Shapes::StringShape.new(name: 'SampleId')
@@ -395,6 +399,7 @@ module Aws::Omics
     SequenceStoreFilter = Shapes::StructureShape.new(name: 'SequenceStoreFilter')
     SequenceStoreId = Shapes::StringShape.new(name: 'SequenceStoreId')
     SequenceStoreName = Shapes::StringShape.new(name: 'SequenceStoreName')
+    SequenceStoreS3Access = Shapes::StructureShape.new(name: 'SequenceStoreS3Access')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ShareDetails = Shapes::StructureShape.new(name: 'ShareDetails')
     ShareDetailsList = Shapes::ListShape.new(name: 'ShareDetailsList')
@@ -653,7 +658,7 @@ module Aws::Omics
 
     CompleteReadSetUploadPartListItem.add_member(:part_number, Shapes::ShapeRef.new(shape: CompleteReadSetUploadPartListItemPartNumberInteger, required: true, location_name: "partNumber"))
     CompleteReadSetUploadPartListItem.add_member(:part_source, Shapes::ShapeRef.new(shape: ReadSetPartSource, required: true, location_name: "partSource"))
-    CompleteReadSetUploadPartListItem.add_member(:checksum, Shapes::ShapeRef.new(shape: String, required: true, location_name: "checksum"))
+    CompleteReadSetUploadPartListItem.add_member(:checksum, Shapes::ShapeRef.new(shape: CompleteReadSetUploadPartListItemChecksumString, required: true, location_name: "checksum"))
     CompleteReadSetUploadPartListItem.struct_class = Types::CompleteReadSetUploadPartListItem
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -755,6 +760,7 @@ module Aws::Omics
     CreateSequenceStoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSequenceStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     CreateSequenceStoreRequest.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
+    CreateSequenceStoreRequest.add_member(:e_tag_algorithm_family, Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     CreateSequenceStoreRequest.struct_class = Types::CreateSequenceStoreRequest
 
     CreateSequenceStoreResponse.add_member(:id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location_name: "id"))
@@ -764,6 +770,7 @@ module Aws::Omics
     CreateSequenceStoreResponse.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
     CreateSequenceStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     CreateSequenceStoreResponse.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
+    CreateSequenceStoreResponse.add_member(:e_tag_algorithm_family, Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     CreateSequenceStoreResponse.struct_class = Types::CreateSequenceStoreResponse
 
     CreateShareRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceArn"))
@@ -895,6 +902,7 @@ module Aws::Omics
     FileInformation.add_member(:total_parts, Shapes::ShapeRef.new(shape: FileInformationTotalPartsInteger, location_name: "totalParts"))
     FileInformation.add_member(:part_size, Shapes::ShapeRef.new(shape: FileInformationPartSizeLong, location_name: "partSize"))
     FileInformation.add_member(:content_length, Shapes::ShapeRef.new(shape: FileInformationContentLengthLong, location_name: "contentLength"))
+    FileInformation.add_member(:s3_access, Shapes::ShapeRef.new(shape: ReadSetS3Access, location_name: "s3Access"))
     FileInformation.struct_class = Types::FileInformation
 
     Filter.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "resourceArns"))
@@ -1174,6 +1182,8 @@ module Aws::Omics
     GetSequenceStoreResponse.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
     GetSequenceStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     GetSequenceStoreResponse.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
+    GetSequenceStoreResponse.add_member(:s3_access, Shapes::ShapeRef.new(shape: SequenceStoreS3Access, location_name: "s3Access"))
+    GetSequenceStoreResponse.add_member(:e_tag_algorithm_family, Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     GetSequenceStoreResponse.struct_class = Types::GetSequenceStoreResponse
 
     GetShareRequest.add_member(:share_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "shareId"))
@@ -1603,6 +1613,9 @@ module Aws::Omics
     ReadSetListItem.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "etag"))
     ReadSetListItem.struct_class = Types::ReadSetListItem
 
+    ReadSetS3Access.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri"))
+    ReadSetS3Access.struct_class = Types::ReadSetS3Access
+
     ReadSetUploadPartList.member = Shapes::ShapeRef.new(shape: ReadSetUploadPartListItem)
 
     ReadSetUploadPartListFilter.add_member(:created_after, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAfter"))
@@ -1718,6 +1731,7 @@ module Aws::Omics
     SequenceStoreDetail.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
     SequenceStoreDetail.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     SequenceStoreDetail.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
+    SequenceStoreDetail.add_member(:e_tag_algorithm_family, Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     SequenceStoreDetail.struct_class = Types::SequenceStoreDetail
 
     SequenceStoreDetailList.member = Shapes::ShapeRef.new(shape: SequenceStoreDetail)
@@ -1726,6 +1740,10 @@ module Aws::Omics
     SequenceStoreFilter.add_member(:created_after, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAfter"))
     SequenceStoreFilter.add_member(:created_before, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdBefore"))
     SequenceStoreFilter.struct_class = Types::SequenceStoreFilter
+
+    SequenceStoreS3Access.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri"))
+    SequenceStoreS3Access.add_member(:s3_access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "s3AccessPointArn"))
+    SequenceStoreS3Access.struct_class = Types::SequenceStoreS3Access
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException

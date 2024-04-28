@@ -1498,6 +1498,16 @@ module Aws::CodeBuild
     #   The scaling configuration of the compute fleet.
     #   @return [Types::ScalingConfigurationInput]
     #
+    # @!attribute [rw] overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait
+    #     on the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tag key and value pairs associated with this compute
     #   fleet.
@@ -1514,6 +1524,7 @@ module Aws::CodeBuild
       :environment_type,
       :compute_type,
       :scaling_configuration,
+      :overflow_behavior,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2428,6 +2439,16 @@ module Aws::CodeBuild
     #   The scaling configuration of the compute fleet.
     #   @return [Types::ScalingConfigurationOutput]
     #
+    # @!attribute [rw] overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait
+    #     on the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tag key and value pairs associated with this compute
     #   fleet.
@@ -2449,6 +2470,7 @@ module Aws::CodeBuild
       :environment_type,
       :compute_type,
       :scaling_configuration,
+      :overflow_behavior,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2464,6 +2486,8 @@ module Aws::CodeBuild
     #   * `UPDATING`: The compute fleet is being updated.
     #
     #   * `ROTATING`: The compute fleet is being rotated.
+    #
+    #   * `PENDING_DELETION`: The compute fleet is pending deletion.
     #
     #   * `DELETING`: The compute fleet is being deleted.
     #
@@ -2637,7 +2661,7 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] token
     #   For GitHub or GitHub Enterprise, this is the personal access token.
-    #   For Bitbucket, this is the app password.
+    #   For Bitbucket, this is either the access token or the app password.
     #   @return [String]
     #
     # @!attribute [rw] server_type
@@ -4494,11 +4518,15 @@ module Aws::CodeBuild
     #   * `CODEPIPELINE`: The source code settings are specified in the
     #     source action of a pipeline in CodePipeline.
     #
-    #   * `GITHUB`: The source code is in a GitHub or GitHub Enterprise
-    #     Cloud repository.
+    #   * `GITHUB`: The source code is in a GitHub repository.
     #
     #   * `GITHUB_ENTERPRISE`: The source code is in a GitHub Enterprise
     #     Server repository.
+    #
+    #   * `GITLAB`: The source code is in a GitLab repository.
+    #
+    #   * `GITLAB_SELF_MANAGED`: The source code is in a self-managed GitLab
+    #     repository.
     #
     #   * `NO_SOURCE`: The project does not have input source code.
     #
@@ -4542,6 +4570,21 @@ module Aws::CodeBuild
     #     project. You can leave the CodeBuild console.) To instruct
     #     CodeBuild to use this connection, in the `source` object, set the
     #     `auth` object's `type` value to `OAUTH`.
+    #
+    #   * For source code in an GitLab or self-managed GitLab repository,
+    #     the HTTPS clone URL to the repository that contains the source and
+    #     the buildspec file. You must connect your Amazon Web Services
+    #     account to your GitLab account. Use the CodeBuild console to start
+    #     creating a build project. When you use the console to connect (or
+    #     reconnect) with GitLab, on the Connections **Authorize
+    #     application** page, choose **Authorize**. Then on the
+    #     CodeConnections **Create GitLab connection** page, choose
+    #     **Connect to GitLab**. (After you have connected to your GitLab
+    #     account, you do not need to finish creating the build project. You
+    #     can leave the CodeBuild console.) To instruct CodeBuild to
+    #     override the default connection and use this connection instead,
+    #     set the `auth` object's `type` value to `CODECONNECTIONS` in the
+    #     `source` object.
     #
     #   * For source code in a Bitbucket repository, the HTTPS clone URL to
     #     the repository that contains the source and the buildspec file.
@@ -4600,9 +4643,9 @@ module Aws::CodeBuild
     # @!attribute [rw] report_build_status
     #   Set to true to report the status of a build's start and finish to
     #   your source provider. This option is valid only when your source
-    #   provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set
-    #   and you use a different source provider, an `invalidInputException`
-    #   is thrown.
+    #   provider is GitHub, GitHub Enterprise, GitLab, GitLab Self Managed,
+    #   or Bitbucket. If this is set and you use a different source
+    #   provider, an `invalidInputException` is thrown.
     #
     #   To be able to report the build status to the source provider, the
     #   user associated with the source provider must have write access to
@@ -4671,9 +4714,9 @@ module Aws::CodeBuild
     #
     #   * For CodeCommit: the commit ID, branch, or Git tag to use.
     #
-    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
-    #     name that corresponds to the version of the source code you want
-    #     to build. If a pull request ID is specified, it must use the
+    #   * For GitHub or GitLab: the commit ID, pull request ID, branch name,
+    #     or tag name that corresponds to the version of the source code you
+    #     want to build. If a pull request ID is specified, it must use the
     #     format `pr/pull-request-ID` (for example, `pr/25`). If a branch
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
@@ -5330,12 +5373,8 @@ module Aws::CodeBuild
     # should not get or set this information directly.
     #
     # @!attribute [rw] type
-    #   <note markdown="1"> This data type is deprecated and is no longer accurate or used.
-    #
-    #    </note>
-    #
-    #   The authorization type to use. The only valid value is `OAUTH`,
-    #   which represents the OAuth authorization type.
+    #   The authorization type to use. Valid options are OAUTH or
+    #   CODECONNECTIONS.
     #   @return [String]
     #
     # @!attribute [rw] resource
@@ -5351,8 +5390,8 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Information about the credentials for a GitHub, GitHub Enterprise, or
-    # Bitbucket repository.
+    # Information about the credentials for a GitHub, GitHub Enterprise,
+    # GitLab, GitLab Self Managed, or Bitbucket repository.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the token.
@@ -5360,12 +5399,17 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] server_type
     #   The type of source provider. The valid options are GITHUB,
-    #   GITHUB\_ENTERPRISE, or BITBUCKET.
+    #   GITHUB\_ENTERPRISE, GITLAB, GITLAB\_SELF\_MANAGED, or BITBUCKET.
     #   @return [String]
     #
     # @!attribute [rw] auth_type
     #   The type of authentication used by the credentials. Valid options
-    #   are OAUTH, BASIC\_AUTH, or PERSONAL\_ACCESS\_TOKEN.
+    #   are OAUTH, BASIC\_AUTH, PERSONAL\_ACCESS\_TOKEN, or CODECONNECTIONS.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The connection ARN if your serverType type is GITLAB or
+    #   GITLAB\_SELF\_MANAGED and your authType is CODECONNECTIONS.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceCredentialsInfo AWS API Documentation
@@ -5373,7 +5417,8 @@ module Aws::CodeBuild
     class SourceCredentialsInfo < Struct.new(
       :arn,
       :server_type,
-      :auth_type)
+      :auth_type,
+      :resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5774,8 +5819,9 @@ module Aws::CodeBuild
     #   @return [Types::GitSubmodulesConfig]
     #
     # @!attribute [rw] buildspec_override
-    #   A buildspec file declaration that overrides, for this build only,
-    #   the latest one already defined in the build project.
+    #   A buildspec file declaration that overrides the latest one defined
+    #   in the build project, for this build only. The buildspec defined on
+    #   the project is not changed.
     #
     #   If this value is set, it can be either an inline buildspec
     #   definition, the path to an alternate buildspec file relative to the
@@ -5787,6 +5833,15 @@ module Aws::CodeBuild
     #   not provided or is set to an empty string, the source code must
     #   contain a buildspec file in its root directory. For more
     #   information, see [Buildspec File Name and Storage Location][1].
+    #
+    #   <note markdown="1"> Since this property allows you to change the build commands that
+    #   will run in the container, you should note that an IAM principal
+    #   with the ability to call this API and set this parameter can
+    #   override the default settings. Moreover, we encourage that you use a
+    #   trustworthy buildspec location like a file in your source repository
+    #   or a Amazon S3 bucket.
+    #
+    #    </note>
     #
     #
     #
@@ -6299,6 +6354,16 @@ module Aws::CodeBuild
     #   The scaling configuration of the compute fleet.
     #   @return [Types::ScalingConfigurationInput]
     #
+    # @!attribute [rw] overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait
+    #     on the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tag key and value pairs associated with this compute
     #   fleet.
@@ -6315,6 +6380,7 @@ module Aws::CodeBuild
       :environment_type,
       :compute_type,
       :scaling_configuration,
+      :overflow_behavior,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -6781,71 +6847,105 @@ module Aws::CodeBuild
     # A filter used to determine which webhooks trigger a build.
     #
     # @!attribute [rw] type
-    #   The type of webhook filter. There are six webhook filter types:
+    #   The type of webhook filter. There are nine webhook filter types:
     #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, `FILE_PATH`,
-    #   and `COMMIT_MESSAGE`.
+    #   `COMMIT_MESSAGE`, `TAG_NAME`, `RELEASE_NAME`, and `WORKFLOW_NAME`.
     #
-    #   EVENT
+    #   * EVENT
     #
-    #   : A webhook event triggers a build when the provided `pattern`
-    #     matches one of five event types: `PUSH`, `PULL_REQUEST_CREATED`,
-    #     `PULL_REQUEST_UPDATED`, `PULL_REQUEST_REOPENED`, and
-    #     `PULL_REQUEST_MERGED`. The `EVENT` patterns are specified as a
-    #     comma-separated string. For example, `PUSH, PULL_REQUEST_CREATED,
-    #     PULL_REQUEST_UPDATED` filters all push, pull request created, and
-    #     pull request updated events.
+    #     * A webhook event triggers a build when the provided `pattern`
+    #       matches one of nine event types: `PUSH`, `PULL_REQUEST_CREATED`,
+    #       `PULL_REQUEST_UPDATED`, `PULL_REQUEST_CLOSED`,
+    #       `PULL_REQUEST_REOPENED`, `PULL_REQUEST_MERGED`, `RELEASED`,
+    #       `PRERELEASED`, and `WORKFLOW_JOB_QUEUED`. The `EVENT` patterns
+    #       are specified as a comma-separated string. For example, `PUSH,
+    #       PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all push,
+    #       pull request created, and pull request updated events.
     #
-    #     <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
-    #     Enterprise only.
+    #       <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
+    #       Enterprise only. The `RELEASED`, `PRERELEASED`, and
+    #       `WORKFLOW_JOB_QUEUED` work with GitHub only.
     #
-    #      </note>
+    #        </note>
     #
-    #   ACTOR\_ACCOUNT\_ID
+    #   * ACTOR\_ACCOUNT\_ID
     #
-    #   : A webhook event triggers a build when a GitHub, GitHub Enterprise,
-    #     or Bitbucket account ID matches the regular expression `pattern`.
+    #     * A webhook event triggers a build when a GitHub, GitHub
+    #       Enterprise, or Bitbucket account ID matches the regular
+    #       expression `pattern`.
     #
-    #   HEAD\_REF
+    #     ^
     #
-    #   : A webhook event triggers a build when the head reference matches
-    #     the regular expression `pattern`. For example,
-    #     `refs/heads/branch-name` and `refs/tags/tag-name`.
+    #   * HEAD\_REF
     #
-    #     Works with GitHub and GitHub Enterprise push, GitHub and GitHub
-    #     Enterprise pull request, Bitbucket push, and Bitbucket pull
-    #     request events.
+    #     * A webhook event triggers a build when the head reference matches
+    #       the regular expression `pattern`. For example,
+    #       `refs/heads/branch-name` and `refs/tags/tag-name`.
     #
-    #   BASE\_REF
+    #       <note markdown="1"> Works with GitHub and GitHub Enterprise push, GitHub and GitHub
+    #       Enterprise pull request, Bitbucket push, and Bitbucket pull
+    #       request events.
     #
-    #   : A webhook event triggers a build when the base reference matches
-    #     the regular expression `pattern`. For example,
-    #     `refs/heads/branch-name`.
+    #        </note>
     #
-    #     <note markdown="1"> Works with pull request events only.
+    #   * BASE\_REF
     #
-    #      </note>
+    #     * A webhook event triggers a build when the base reference matches
+    #       the regular expression `pattern`. For example,
+    #       `refs/heads/branch-name`.
     #
-    #   FILE\_PATH
+    #       <note markdown="1"> Works with pull request events only.
     #
-    #   : A webhook triggers a build when the path of a changed file matches
-    #     the regular expression `pattern`.
+    #        </note>
     #
-    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
-    #     events. Also works with GitHub Enterprise push events, but does
-    #     not work with GitHub Enterprise pull request events.
+    #   * FILE\_PATH
     #
-    #      </note>
+    #     * A webhook triggers a build when the path of a changed file
+    #       matches the regular expression `pattern`.
     #
-    #   COMMIT\_MESSAGE
+    #       <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #       events. Also works with GitHub Enterprise push events, but does
+    #       not work with GitHub Enterprise pull request events.
     #
-    #   : A webhook triggers a build when the head commit message matches
-    #     the regular expression `pattern`.
+    #        </note>
     #
-    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
-    #     events. Also works with GitHub Enterprise push events, but does
-    #     not work with GitHub Enterprise pull request events.
+    #   * COMMIT\_MESSAGE
     #
-    #      </note>
+    #     * A webhook triggers a build when the head commit message matches
+    #       the regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #       events. Also works with GitHub Enterprise push events, but does
+    #       not work with GitHub Enterprise pull request events.
+    #
+    #        </note>
+    #
+    #   * TAG\_NAME
+    #
+    #     * A webhook triggers a build when the tag name of the release
+    #       matches the regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
+    #
+    #        </note>
+    #
+    #   * RELEASE\_NAME
+    #
+    #     * A webhook triggers a build when the release name matches the
+    #       regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
+    #
+    #        </note>
+    #
+    #   * WORKFLOW\_NAME
+    #
+    #     * A webhook triggers a build when the workflow name matches the
+    #       regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with `WORKFLOW_JOB_QUEUED` events only.
+    #
+    #        </note>
     #   @return [String]
     #
     # @!attribute [rw] pattern

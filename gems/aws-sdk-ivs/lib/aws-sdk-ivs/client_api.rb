@@ -138,6 +138,9 @@ module Aws::IVS
     S3DestinationBucketName = Shapes::StringShape.new(name: 'S3DestinationBucketName')
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    Srt = Shapes::StructureShape.new(name: 'Srt')
+    SrtEndpoint = Shapes::StringShape.new(name: 'SrtEndpoint')
+    SrtPassphrase = Shapes::StringShape.new(name: 'SrtPassphrase')
     StartViewerSessionRevocationRequest = Shapes::StructureShape.new(name: 'StartViewerSessionRevocationRequest')
     StartViewerSessionRevocationResponse = Shapes::StructureShape.new(name: 'StartViewerSessionRevocationResponse')
     StopStreamRequest = Shapes::StructureShape.new(name: 'StopStreamRequest')
@@ -254,6 +257,7 @@ module Aws::IVS
     Channel.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
     Channel.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     Channel.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
+    Channel.add_member(:srt, Shapes::ShapeRef.new(shape: Srt, location_name: "srt"))
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Channel.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     Channel.struct_class = Types::Channel
@@ -546,6 +550,10 @@ module Aws::IVS
 
     ServiceQuotaExceededException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    Srt.add_member(:endpoint, Shapes::ShapeRef.new(shape: SrtEndpoint, location_name: "endpoint"))
+    Srt.add_member(:passphrase, Shapes::ShapeRef.new(shape: SrtPassphrase, location_name: "passphrase"))
+    Srt.struct_class = Types::Srt
 
     StartViewerSessionRevocationRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
     StartViewerSessionRevocationRequest.add_member(:viewer_id, Shapes::ShapeRef.new(shape: ViewerId, required: true, location_name: "viewerId"))

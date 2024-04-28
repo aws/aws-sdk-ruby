@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::NetworkMonitor
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::NetworkMonitor
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::NetworkMonitor
     #   @option options [Aws::NetworkMonitor::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::NetworkMonitor::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -394,16 +418,35 @@ module Aws::NetworkMonitor
     # and your destination IP addresses. Each probe then aggregates and
     # sends metrics to Amazon CloudWatch.
     #
+    # You can also create a monitor with probes using this command. For each
+    # probe, you define the following:
+    #
+    # * `source`—The subnet IDs where the probes will be created.
+    #
+    # * `destination`— The target destination IP address for the probe.
+    #
+    # * `destinationPort`—Required only if the protocol is `TCP`.
+    #
+    # * `protocol`—The communication protocol between the source and
+    #   destination. This will be either `TCP` or `ICMP`.
+    #
+    # * `packetSize`—The size of the packets. This must be a number between
+    #   `56` and `8500`.
+    #
+    # * (Optional) `tags` —Key-value pairs created and assigned to the
+    #   probe.
+    #
     # @option params [required, String] :monitor_name
     #   The name identifying the monitor. It can contain only letters,
-    #   underscores (\_), or dashes (-), and can be up to 255 characters.
+    #   underscores (\_), or dashes (-), and can be up to 200 characters.
     #
     # @option params [Array<Types::CreateMonitorProbeInput>] :probes
     #   Displays a list of all of the probes created for a monitor.
     #
     # @option params [Integer] :aggregation_period
     #   The time, in seconds, that metrics are aggregated and sent to Amazon
-    #   CloudWatch. Valid values are either `30` or `60`.
+    #   CloudWatch. Valid values are either `30` or `60`. `60` is the default
+    #   if no period is chosen.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure the idempotency of the
@@ -466,11 +509,12 @@ module Aws::NetworkMonitor
 
     # Create a probe within a monitor. Once you create a probe, and it
     # begins monitoring your network traffic, you'll incur billing charges
-    # for that probe.
+    # for that probe. This action requires the `monitorName` parameter. Run
+    # `ListMonitors` to get a list of monitor names. Note the name of the
+    # `monitorName` you want to create the probe for.
     #
     # @option params [required, String] :monitor_name
-    #   The name of the monitor to associated with the probe. To get a list of
-    #   available monitors, use `ListMonitors`.
+    #   The name of the monitor to associated with the probe.
     #
     # @option params [required, Types::ProbeInput] :probe
     #   Describes the details of an individual probe for a monitor.
@@ -549,9 +593,11 @@ module Aws::NetworkMonitor
 
     # Deletes a specified monitor.
     #
+    # This action requires the `monitorName` parameter. Run `ListMonitors`
+    # to get a list of monitor names.
+    #
     # @option params [required, String] :monitor_name
-    #   The name of the monitor to delete. Use the `ListMonitors` action to
-    #   get a list of your current monitors.
+    #   The name of the monitor to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -570,16 +616,19 @@ module Aws::NetworkMonitor
       req.send_request(options)
     end
 
-    # Deletes the specified monitor. Once a probe is deleted you'll no
-    # longer incur any billing fees for that probe.
+    # Deletes the specified probe. Once a probe is deleted you'll no longer
+    # incur any billing fees for that probe.
+    #
+    # This action requires both the `monitorName` and `probeId` parameters.
+    # Run `ListMonitors` to get a list of monitor names. Run `GetMonitor` to
+    # get a list of probes and probe IDs. You can only delete a single probe
+    # at a time using this action.
     #
     # @option params [required, String] :monitor_name
-    #   The name of the monitor to delete. For a list of the available
-    #   monitors, use the `ListMonitors` action.
+    #   The name of the monitor to delete.
     #
     # @option params [required, String] :probe_id
-    #   The ID of the probe to delete. Run `GetMonitor` to get a lst of all
-    #   probes and probe IDs associated with the monitor.
+    #   The ID of the probe to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -600,6 +649,9 @@ module Aws::NetworkMonitor
     end
 
     # Returns details about a specific monitor.
+    #
+    # This action requires the `monitorName` parameter. Run `ListMonitors`
+    # to get a list of monitor names.
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor that details are returned for.
@@ -656,8 +708,10 @@ module Aws::NetworkMonitor
       req.send_request(options)
     end
 
-    # Returns the details about a probe. You'll need both the `monitorName`
-    # and `probeId`.
+    # Returns the details about a probe. This action requires both the
+    # `monitorName` and `probeId` parameters. Run `ListMonitors` to get a
+    # list of monitor names. Run `GetMonitor` to get a list of probes and
+    # probe IDs.
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor associated with the probe. Run `ListMonitors`
@@ -851,11 +905,12 @@ module Aws::NetworkMonitor
     end
 
     # Updates the `aggregationPeriod` for a monitor. Monitors support an
-    # `aggregationPeriod` of either `30` or `60` seconds.
+    # `aggregationPeriod` of either `30` or `60` seconds. This action
+    # requires the `monitorName` and `probeId` parameter. Run `ListMonitors`
+    # to get a list of monitor names.
     #
     # @option params [required, String] :monitor_name
-    #   The name of the monitor to update. Run `ListMonitors` to get a list of
-    #   monitor names.
+    #   The name of the monitor to update.
     #
     # @option params [required, Integer] :aggregation_period
     #   The aggregation time, in seconds, to change to. This must be either
@@ -898,11 +953,29 @@ module Aws::NetworkMonitor
     # and `probeId` parameters. Run `ListMonitors` to get a list of monitor
     # names. Run `GetMonitor` to get a list of probes and probe IDs.
     #
+    # You can update the following para create a monitor with probes using
+    # this command. For each probe, you define the following:
+    #
+    # * `state`—The state of the probe.
+    #
+    # * `destination`— The target destination IP address for the probe.
+    #
+    # * `destinationPort`—Required only if the protocol is `TCP`.
+    #
+    # * `protocol`—The communication protocol between the source and
+    #   destination. This will be either `TCP` or `ICMP`.
+    #
+    # * `packetSize`—The size of the packets. This must be a number between
+    #   `56` and `8500`.
+    #
+    # * (Optional) `tags` —Key-value pairs created and assigned to the
+    #   probe.
+    #
     # @option params [required, String] :monitor_name
     #   The name of the monitor that the probe was updated for.
     #
     # @option params [required, String] :probe_id
-    #   Run `GetMonitor` to get a list of probes and probe IDs.
+    #   The ID of the probe to update.
     #
     # @option params [String] :state
     #   The state of the probe update.
@@ -991,7 +1064,7 @@ module Aws::NetworkMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmonitor'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

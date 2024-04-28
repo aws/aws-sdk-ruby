@@ -93,6 +93,7 @@ module Aws
                                      ],
                                      ?stat: ::String,
                                      ?single_metric_anomaly_detector: {
+                                       account_id: ::String?,
                                        namespace: ::String?,
                                        metric_name: ::String?,
                                        dimensions: Array[
@@ -511,7 +512,11 @@ module Aws
                                     ]?,
                                     metric_timezone: ::String?
                                   },
+                                  ?metric_characteristics: {
+                                    periodic_spikes: bool?
+                                  },
                                   ?single_metric_anomaly_detector: {
+                                    account_id: ::String?,
                                     namespace: ::String?,
                                     metric_name: ::String?,
                                     dimensions: Array[

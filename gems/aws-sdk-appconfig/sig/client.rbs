@@ -190,7 +190,8 @@ module Aws
                                 ]],
                               ?parameters: Hash[::String, {
                                   description: ::String?,
-                                  required: bool?
+                                  required: bool?,
+                                  dynamic: bool?
                                 }],
                               ?tags: Hash[::String, ::String],
                               ?latest_version_number: ::Integer
@@ -603,7 +604,8 @@ module Aws
                               configuration_version: ::String,
                               ?description: ::String,
                               ?tags: Hash[::String, ::String],
-                              ?kms_key_identifier: ::String
+                              ?kms_key_identifier: ::String,
+                              ?dynamic_extension_parameters: Hash[::String, ::String]
                             ) -> _StartDeploymentResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeploymentResponseSuccess
 
@@ -768,7 +770,8 @@ module Aws
                                 ]],
                               ?parameters: Hash[::String, {
                                   description: ::String?,
-                                  required: bool?
+                                  required: bool?,
+                                  dynamic: bool?
                                 }],
                               ?version_number: ::Integer
                             ) -> _UpdateExtensionResponseSuccess

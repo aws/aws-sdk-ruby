@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2024-03-12)
+------------------
+
+* Feature - Added support for specifying the starting position of topic replication in MSK-Replicator.
+
 1.68.0 (2024-01-26)
 ------------------
 

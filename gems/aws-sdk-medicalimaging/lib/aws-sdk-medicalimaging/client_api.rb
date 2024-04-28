@@ -37,6 +37,10 @@ module Aws::MedicalImaging
     DICOMPatientId = Shapes::StringShape.new(name: 'DICOMPatientId')
     DICOMPatientName = Shapes::StringShape.new(name: 'DICOMPatientName')
     DICOMPatientSex = Shapes::StringShape.new(name: 'DICOMPatientSex')
+    DICOMSeriesBodyPart = Shapes::StringShape.new(name: 'DICOMSeriesBodyPart')
+    DICOMSeriesInstanceUID = Shapes::StringShape.new(name: 'DICOMSeriesInstanceUID')
+    DICOMSeriesModality = Shapes::StringShape.new(name: 'DICOMSeriesModality')
+    DICOMSeriesNumber = Shapes::IntegerShape.new(name: 'DICOMSeriesNumber')
     DICOMStudyDate = Shapes::StringShape.new(name: 'DICOMStudyDate')
     DICOMStudyDateAndTime = Shapes::StructureShape.new(name: 'DICOMStudyDateAndTime')
     DICOMStudyDescription = Shapes::StringShape.new(name: 'DICOMStudyDescription')
@@ -111,6 +115,9 @@ module Aws::MedicalImaging
     SearchImageSetsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchImageSetsRequestMaxResultsInteger')
     SearchImageSetsResponse = Shapes::StructureShape.new(name: 'SearchImageSetsResponse')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    Sort = Shapes::StructureShape.new(name: 'Sort')
+    SortField = Shapes::StringShape.new(name: 'SortField')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartDICOMImportJobRequest = Shapes::StructureShape.new(name: 'StartDICOMImportJobRequest')
     StartDICOMImportJobResponse = Shapes::StructureShape.new(name: 'StartDICOMImportJobResponse')
     String = Shapes::StringShape.new(name: 'String')
@@ -222,6 +229,10 @@ module Aws::MedicalImaging
     DICOMTags.add_member(:dicom_number_of_study_related_series, Shapes::ShapeRef.new(shape: DICOMNumberOfStudyRelatedSeries, location_name: "DICOMNumberOfStudyRelatedSeries"))
     DICOMTags.add_member(:dicom_number_of_study_related_instances, Shapes::ShapeRef.new(shape: DICOMNumberOfStudyRelatedInstances, location_name: "DICOMNumberOfStudyRelatedInstances"))
     DICOMTags.add_member(:dicom_accession_number, Shapes::ShapeRef.new(shape: DICOMAccessionNumber, location_name: "DICOMAccessionNumber"))
+    DICOMTags.add_member(:dicom_series_instance_uid, Shapes::ShapeRef.new(shape: DICOMSeriesInstanceUID, location_name: "DICOMSeriesInstanceUID"))
+    DICOMTags.add_member(:dicom_series_modality, Shapes::ShapeRef.new(shape: DICOMSeriesModality, location_name: "DICOMSeriesModality"))
+    DICOMTags.add_member(:dicom_series_body_part, Shapes::ShapeRef.new(shape: DICOMSeriesBodyPart, location_name: "DICOMSeriesBodyPart"))
+    DICOMTags.add_member(:dicom_series_number, Shapes::ShapeRef.new(shape: DICOMSeriesNumber, location_name: "DICOMSeriesNumber"))
     DICOMTags.add_member(:dicom_study_date, Shapes::ShapeRef.new(shape: DICOMStudyDate, location_name: "DICOMStudyDate"))
     DICOMTags.add_member(:dicom_study_time, Shapes::ShapeRef.new(shape: DICOMStudyTime, location_name: "DICOMStudyTime"))
     DICOMTags.struct_class = Types::DICOMTags
@@ -396,19 +407,24 @@ module Aws::MedicalImaging
     SearchByAttributeValue.add_member(:dicom_accession_number, Shapes::ShapeRef.new(shape: DICOMAccessionNumber, location_name: "DICOMAccessionNumber"))
     SearchByAttributeValue.add_member(:dicom_study_id, Shapes::ShapeRef.new(shape: DICOMStudyId, location_name: "DICOMStudyId"))
     SearchByAttributeValue.add_member(:dicom_study_instance_uid, Shapes::ShapeRef.new(shape: DICOMStudyInstanceUID, location_name: "DICOMStudyInstanceUID"))
+    SearchByAttributeValue.add_member(:dicom_series_instance_uid, Shapes::ShapeRef.new(shape: DICOMSeriesInstanceUID, location_name: "DICOMSeriesInstanceUID"))
     SearchByAttributeValue.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
+    SearchByAttributeValue.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt"))
     SearchByAttributeValue.add_member(:dicom_study_date_and_time, Shapes::ShapeRef.new(shape: DICOMStudyDateAndTime, location_name: "DICOMStudyDateAndTime"))
     SearchByAttributeValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SearchByAttributeValue.add_member_subclass(:dicom_patient_id, Types::SearchByAttributeValue::DicomPatientId)
     SearchByAttributeValue.add_member_subclass(:dicom_accession_number, Types::SearchByAttributeValue::DicomAccessionNumber)
     SearchByAttributeValue.add_member_subclass(:dicom_study_id, Types::SearchByAttributeValue::DicomStudyId)
     SearchByAttributeValue.add_member_subclass(:dicom_study_instance_uid, Types::SearchByAttributeValue::DicomStudyInstanceUid)
+    SearchByAttributeValue.add_member_subclass(:dicom_series_instance_uid, Types::SearchByAttributeValue::DicomSeriesInstanceUid)
     SearchByAttributeValue.add_member_subclass(:created_at, Types::SearchByAttributeValue::CreatedAt)
+    SearchByAttributeValue.add_member_subclass(:updated_at, Types::SearchByAttributeValue::UpdatedAt)
     SearchByAttributeValue.add_member_subclass(:dicom_study_date_and_time, Types::SearchByAttributeValue::DicomStudyDateAndTime)
     SearchByAttributeValue.add_member_subclass(:unknown, Types::SearchByAttributeValue::Unknown)
     SearchByAttributeValue.struct_class = Types::SearchByAttributeValue
 
     SearchCriteria.add_member(:filters, Shapes::ShapeRef.new(shape: SearchCriteriaFiltersList, location_name: "filters"))
+    SearchCriteria.add_member(:sort, Shapes::ShapeRef.new(shape: Sort, location_name: "sort"))
     SearchCriteria.struct_class = Types::SearchCriteria
 
     SearchCriteriaFiltersList.member = Shapes::ShapeRef.new(shape: SearchFilter)
@@ -428,11 +444,16 @@ module Aws::MedicalImaging
     SearchImageSetsRequest[:payload_member] = SearchImageSetsRequest.member(:search_criteria)
 
     SearchImageSetsResponse.add_member(:image_sets_metadata_summaries, Shapes::ShapeRef.new(shape: ImageSetsMetadataSummaries, required: true, location_name: "imageSetsMetadataSummaries"))
+    SearchImageSetsResponse.add_member(:sort, Shapes::ShapeRef.new(shape: Sort, location_name: "sort"))
     SearchImageSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     SearchImageSetsResponse.struct_class = Types::SearchImageSetsResponse
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    Sort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "sortOrder"))
+    Sort.add_member(:sort_field, Shapes::ShapeRef.new(shape: SortField, required: true, location_name: "sortField"))
+    Sort.struct_class = Types::Sort
 
     StartDICOMImportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "jobName"))
     StartDICOMImportJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "dataAccessRoleArn"))

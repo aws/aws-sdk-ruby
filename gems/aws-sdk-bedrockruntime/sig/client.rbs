@@ -85,7 +85,10 @@ module Aws
                           body: ::String,
                           ?content_type: ::String,
                           ?accept: ::String,
-                          model_id: ::String
+                          model_id: ::String,
+                          ?trace: ("ENABLED" | "DISABLED"),
+                          ?guardrail_identifier: ::String,
+                          ?guardrail_version: ::String
                         ) -> _InvokeModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeModelResponseSuccess
 
@@ -99,7 +102,10 @@ module Aws
                                                body: ::String,
                                                ?content_type: ::String,
                                                ?accept: ::String,
-                                               model_id: ::String
+                                               model_id: ::String,
+                                               ?trace: ("ENABLED" | "DISABLED"),
+                                               ?guardrail_identifier: ::String,
+                                               ?guardrail_version: ::String
                                              ) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
     end

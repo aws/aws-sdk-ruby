@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::PaymentCryptographyData
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::PaymentCryptographyData
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::PaymentCryptographyData
     #   @option options [Aws::PaymentCryptographyData::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::PaymentCryptographyData::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -388,9 +412,10 @@ module Aws::PaymentCryptographyData
 
     # @!group API Operations
 
-    # Decrypts ciphertext data to plaintext using symmetric, asymmetric, or
-    # DUKPT data encryption key. For more information, see [Decrypt data][1]
-    # in the *Amazon Web Services Payment Cryptography User Guide*.
+    # Decrypts ciphertext data to plaintext using a symmetric (TDES, AES),
+    # asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme. For
+    # more information, see [Decrypt data][1] in the *Amazon Web Services
+    # Payment Cryptography User Guide*.
     #
     # You can use an encryption key generated within Amazon Web Services
     # Payment Cryptography, or you can import your own encryption key by
@@ -403,11 +428,15 @@ module Aws::PaymentCryptographyData
     # [GetPublicCertificate][3].
     #
     # For symmetric and DUKPT decryption, Amazon Web Services Payment
-    # Cryptography supports `TDES` and `AES` algorithms. For asymmetric
-    # decryption, Amazon Web Services Payment Cryptography supports `RSA`.
-    # When you use DUKPT, for `TDES` algorithm, the ciphertext data length
-    # must be a multiple of 16 bytes. For `AES` algorithm, the ciphertext
-    # data length must be a multiple of 32 bytes.
+    # Cryptography supports `TDES` and `AES` algorithms. For EMV decryption,
+    # Amazon Web Services Payment Cryptography supports `TDES` algorithms.
+    # For asymmetric decryption, Amazon Web Services Payment Cryptography
+    # supports `RSA`.
+    #
+    # When you use TDES or TDES DUKPT, the ciphertext data length must be a
+    # multiple of 8 bytes. For AES or AES DUKPT, the ciphertext data length
+    # must be a multiple of 16 bytes. For RSA, it sould be equal to the key
+    # size unless padding is enabled.
     #
     # For information about valid keys for this operation, see
     # [Understanding key attributes][4] and [Key types for specific data
@@ -464,6 +493,14 @@ module Aws::PaymentCryptographyData
     #         key_serial_number: "HexLengthBetween10And24", # required
     #         mode: "ECB", # accepts ECB, CBC
     #       },
+    #       emv: {
+    #         initialization_vector: "HexLength16Or32",
+    #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
+    #         mode: "ECB", # accepts ECB, CBC
+    #         pan_sequence_number: "HexLengthEquals2", # required
+    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         session_derivation_data: "HexLengthEquals16", # required
+    #       },
     #       symmetric: {
     #         initialization_vector: "HexLength16Or32",
     #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
@@ -488,9 +525,10 @@ module Aws::PaymentCryptographyData
       req.send_request(options)
     end
 
-    # Encrypts plaintext data to ciphertext using symmetric, asymmetric, or
-    # DUKPT data encryption key. For more information, see [Encrypt data][1]
-    # in the *Amazon Web Services Payment Cryptography User Guide*.
+    # Encrypts plaintext data to ciphertext using a symmetric (TDES, AES),
+    # asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme. For
+    # more information, see [Encrypt data][1] in the *Amazon Web Services
+    # Payment Cryptography User Guide*.
     #
     # You can generate an encryption key within Amazon Web Services Payment
     # Cryptography by calling [CreateKey][2]. You can import your own
@@ -498,14 +536,24 @@ module Aws::PaymentCryptographyData
     # must have `KeyModesOfUse` set to `Encrypt`. In asymmetric encryption,
     # plaintext is encrypted using public component. You can import the
     # public component of an asymmetric key pair created outside Amazon Web
-    # Services Payment Cryptography by calling [ImportKey][3]).
+    # Services Payment Cryptography by calling [ImportKey][3].
     #
-    # for symmetric and DUKPT encryption, Amazon Web Services Payment
-    # Cryptography supports `TDES` and `AES` algorithms. For asymmetric
-    # encryption, Amazon Web Services Payment Cryptography supports `RSA`.
-    # To encrypt using DUKPT, you must already have a DUKPT key in your
-    # account with `KeyModesOfUse` set to `DeriveKey`, or you can generate a
-    # new DUKPT key by calling [CreateKey][2].
+    # For symmetric and DUKPT encryption, Amazon Web Services Payment
+    # Cryptography supports `TDES` and `AES` algorithms. For EMV encryption,
+    # Amazon Web Services Payment Cryptography supports `TDES`
+    # algorithms.For asymmetric encryption, Amazon Web Services Payment
+    # Cryptography supports `RSA`.
+    #
+    # When you use TDES or TDES DUKPT, the plaintext data length must be a
+    # multiple of 8 bytes. For AES or AES DUKPT, the plaintext data length
+    # must be a multiple of 16 bytes. For RSA, it sould be equal to the key
+    # size unless padding is enabled.
+    #
+    # To encrypt using DUKPT, you must already have a BDK (Base Derivation
+    # Key) key in your account with `KeyModesOfUse` set to `DeriveKey`, or
+    # you can generate a new DUKPT key by calling [CreateKey][2]. To encrypt
+    # using EMV, you must already have an IMK (Issuer Master Key) key in
+    # your account with `KeyModesOfUse` set to `DeriveKey`.
     #
     # For information about valid keys for this operation, see
     # [Understanding key attributes][4] and [Key types for specific data
@@ -544,6 +592,18 @@ module Aws::PaymentCryptographyData
     # @option params [required, String] :plain_text
     #   The plaintext to be encrypted.
     #
+    #   <note markdown="1"> For encryption using asymmetric keys, plaintext data length is
+    #   constrained by encryption key strength that you define in
+    #   `KeyAlgorithm` and padding type that you define in
+    #   `AsymmetricEncryptionAttributes`. For more information, see [Encrypt
+    #   data][1] in the *Amazon Web Services Payment Cryptography User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html
+    #
     # @return [Types::EncryptDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EncryptDataOutput#cipher_text #cipher_text} => String
@@ -563,6 +623,14 @@ module Aws::PaymentCryptographyData
     #         initialization_vector: "HexLength16Or32",
     #         key_serial_number: "HexLengthBetween10And24", # required
     #         mode: "ECB", # accepts ECB, CBC
+    #       },
+    #       emv: {
+    #         initialization_vector: "HexLength16Or32",
+    #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
+    #         mode: "ECB", # accepts ECB, CBC
+    #         pan_sequence_number: "HexLengthEquals2", # required
+    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         session_derivation_data: "HexLengthEquals16", # required
     #       },
     #       symmetric: {
     #         initialization_vector: "HexLength16Or32",
@@ -708,15 +776,19 @@ module Aws::PaymentCryptographyData
     # Generates a Message Authentication Code (MAC) cryptogram within Amazon
     # Web Services Payment Cryptography.
     #
-    # You can use this operation when keys won't be shared but mutual data
-    # is present on both ends for validation. In this case, known data
-    # values are used to generate a MAC on both ends for comparision without
-    # sending or receiving data in ciphertext or plaintext. You can use this
-    # operation to generate a DUPKT, HMAC or EMV MAC by setting generation
-    # attributes and algorithm to the associated values. The MAC generation
-    # encryption key must have valid values for `KeyUsage` such as
-    # `TR31_M7_HMAC_KEY` for HMAC generation, and they key must have
-    # `KeyModesOfUse` set to `Generate` and `Verify`.
+    # You can use this operation to authenticate card-related data by using
+    # known data values to generate MAC for data validation between the
+    # sending and receiving parties. This operation uses message data, a
+    # secret encryption key and MAC algorithm to generate a unique MAC value
+    # for transmission. The receiving party of the MAC must use the same
+    # message data, secret encryption key and MAC algorithm to reproduce
+    # another MAC value for comparision.
+    #
+    # You can use this operation to generate a DUPKT, CMAC, HMAC or EMV MAC
+    # by setting generation attributes and algorithm to the associated
+    # values. The MAC generation encryption key must have valid values for
+    # `KeyUsage` such as `TR31_M7_HMAC_KEY` for HMAC generation, and they
+    # key must have `KeyModesOfUse` set to `Generate` and `Verify`.
     #
     # For information about valid keys for this operation, see
     # [Understanding key attributes][1] and [Key types for specific data
@@ -748,7 +820,8 @@ module Aws::PaymentCryptographyData
     #   The length of a MAC under generation.
     #
     # @option params [required, String] :message_data
-    #   The data for which a MAC is under generation.
+    #   The data for which a MAC is under generation. This value must be
+    #   hexBinary.
     #
     # @return [Types::GenerateMacOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1073,10 +1146,7 @@ module Aws::PaymentCryptographyData
     # can be from PEK (Pin Encryption Key) to BDK (Base Derivation Key) for
     # DUKPT or from BDK for DUKPT to PEK. Amazon Web Services Payment
     # Cryptography supports `TDES` and `AES` key derivation type for DUKPT
-    # tranlations. You can use this operation for P2PE (Point to Point
-    # Encryption) use cases where the encryption keys should change but the
-    # processing system either does not need to, or is not permitted to,
-    # decrypt the data.
+    # translations.
     #
     # The allowed combinations of PIN block format translations are guided
     # by PCI. It is important to note that not all encrypted PIN block
@@ -1090,8 +1160,9 @@ module Aws::PaymentCryptographyData
     # operations][3] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # <note markdown="1"> At this time, Amazon Web Services Payment Cryptography does not
-    # support translations to PIN format 4.
+    # <note markdown="1"> Amazon Web Services Payment Cryptography currently supports ISO PIN
+    # block 4 translation for PIN block built using legacy PAN length. That
+    # is, PAN is the right most 12 digits excluding the check digits.
     #
     #  </note>
     #
@@ -1116,15 +1187,15 @@ module Aws::PaymentCryptographyData
     #
     # @option params [Types::DukptDerivationAttributes] :incoming_dukpt_attributes
     #   The attributes and values to use for incoming DUKPT encryption key for
-    #   PIN block tranlation.
+    #   PIN block translation.
     #
     # @option params [required, String] :incoming_key_identifier
     #   The `keyARN` of the encryption key under which incoming PIN block data
     #   is encrypted. This key type can be PEK or BDK.
     #
     # @option params [required, Types::TranslationIsoFormats] :incoming_translation_attributes
-    #   The format of the incoming PIN block data for tranlation within Amazon
-    #   Web Services Payment Cryptography.
+    #   The format of the incoming PIN block data for translation within
+    #   Amazon Web Services Payment Cryptography.
     #
     # @option params [Types::DukptDerivationAttributes] :outgoing_dukpt_attributes
     #   The attributes and values to use for outgoing DUKPT encryption key
@@ -1135,7 +1206,7 @@ module Aws::PaymentCryptographyData
     #   data. This key type can be PEK or BDK.
     #
     # @option params [required, Types::TranslationIsoFormats] :outgoing_translation_attributes
-    #   The format of the outgoing PIN block data after tranlation by Amazon
+    #   The format of the outgoing PIN block data after translation by Amazon
     #   Web Services Payment Cryptography.
     #
     # @return [Types::TranslatePinDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1460,13 +1531,12 @@ module Aws::PaymentCryptographyData
 
     # Verifies a Message Authentication Code (MAC).
     #
-    # You can use this operation when keys won't be shared but mutual data
-    # is present on both ends for validation. In this case, known data
-    # values are used to generate a MAC on both ends for verification
-    # without sending or receiving data in ciphertext or plaintext. You can
-    # use this operation to verify a DUPKT, HMAC or EMV MAC by setting
-    # generation attributes and algorithm to the associated values. Use the
-    # same encryption key for MAC verification as you use for GenerateMac.
+    # You can use this operation to verify MAC for message data
+    # authentication such as . In this operation, you must use the same
+    # message data, secret encryption key and MAC algorithm that was used to
+    # generate MAC. You can use this operation to verify a DUPKT, CMAC, HMAC
+    # or EMV MAC by setting generation attributes and algorithm to the
+    # associated values.
     #
     # For information about valid keys for this operation, see
     # [Understanding key attributes][1] and [Key types for specific data
@@ -1498,7 +1568,8 @@ module Aws::PaymentCryptographyData
     #   The length of the MAC.
     #
     # @option params [required, String] :message_data
-    #   The data on for which MAC is under verification.
+    #   The data on for which MAC is under verification. This value must be
+    #   hexBinary.
     #
     # @option params [required, Types::MacAttributes] :verification_attributes
     #   The attributes and data values to use for MAC verification within
@@ -1691,7 +1762,7 @@ module Aws::PaymentCryptographyData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

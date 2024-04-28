@@ -16,12 +16,18 @@ module Aws::MigrationHubOrchestrator
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ApplicationConfigurationName = Shapes::StringShape.new(name: 'ApplicationConfigurationName')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateMigrationWorkflowRequest = Shapes::StructureShape.new(name: 'CreateMigrationWorkflowRequest')
     CreateMigrationWorkflowRequestApplicationConfigurationIdString = Shapes::StringShape.new(name: 'CreateMigrationWorkflowRequestApplicationConfigurationIdString')
     CreateMigrationWorkflowRequestDescriptionString = Shapes::StringShape.new(name: 'CreateMigrationWorkflowRequestDescriptionString')
     CreateMigrationWorkflowRequestNameString = Shapes::StringShape.new(name: 'CreateMigrationWorkflowRequestNameString')
     CreateMigrationWorkflowRequestTemplateIdString = Shapes::StringShape.new(name: 'CreateMigrationWorkflowRequestTemplateIdString')
     CreateMigrationWorkflowResponse = Shapes::StructureShape.new(name: 'CreateMigrationWorkflowResponse')
+    CreateTemplateRequest = Shapes::StructureShape.new(name: 'CreateTemplateRequest')
+    CreateTemplateRequestTemplateDescriptionString = Shapes::StringShape.new(name: 'CreateTemplateRequestTemplateDescriptionString')
+    CreateTemplateRequestTemplateNameString = Shapes::StringShape.new(name: 'CreateTemplateRequestTemplateNameString')
+    CreateTemplateResponse = Shapes::StructureShape.new(name: 'CreateTemplateResponse')
     CreateWorkflowStepGroupRequest = Shapes::StructureShape.new(name: 'CreateWorkflowStepGroupRequest')
     CreateWorkflowStepGroupResponse = Shapes::StructureShape.new(name: 'CreateWorkflowStepGroupResponse')
     CreateWorkflowStepRequest = Shapes::StructureShape.new(name: 'CreateWorkflowStepRequest')
@@ -29,6 +35,8 @@ module Aws::MigrationHubOrchestrator
     DataType = Shapes::StringShape.new(name: 'DataType')
     DeleteMigrationWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteMigrationWorkflowRequest')
     DeleteMigrationWorkflowResponse = Shapes::StructureShape.new(name: 'DeleteMigrationWorkflowResponse')
+    DeleteTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTemplateRequest')
+    DeleteTemplateResponse = Shapes::StructureShape.new(name: 'DeleteTemplateResponse')
     DeleteWorkflowStepGroupRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowStepGroupRequest')
     DeleteWorkflowStepGroupResponse = Shapes::StructureShape.new(name: 'DeleteWorkflowStepGroupResponse')
     DeleteWorkflowStepRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowStepRequest')
@@ -66,6 +74,8 @@ module Aws::MigrationHubOrchestrator
     ListWorkflowStepsRequest = Shapes::StructureShape.new(name: 'ListWorkflowStepsRequest')
     ListWorkflowStepsResponse = Shapes::StructureShape.new(name: 'ListWorkflowStepsResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxStringList = Shapes::ListShape.new(name: 'MaxStringList')
+    MaxStringValue = Shapes::StringShape.new(name: 'MaxStringValue')
     MigrationWorkflowDescription = Shapes::StringShape.new(name: 'MigrationWorkflowDescription')
     MigrationWorkflowId = Shapes::StringShape.new(name: 'MigrationWorkflowId')
     MigrationWorkflowName = Shapes::StringShape.new(name: 'MigrationWorkflowName')
@@ -126,6 +136,7 @@ module Aws::MigrationHubOrchestrator
     TemplateInputList = Shapes::ListShape.new(name: 'TemplateInputList')
     TemplateInputName = Shapes::StringShape.new(name: 'TemplateInputName')
     TemplateName = Shapes::StringShape.new(name: 'TemplateName')
+    TemplateSource = Shapes::UnionShape.new(name: 'TemplateSource')
     TemplateStatus = Shapes::StringShape.new(name: 'TemplateStatus')
     TemplateStepGroupSummary = Shapes::StructureShape.new(name: 'TemplateStepGroupSummary')
     TemplateStepGroupSummaryList = Shapes::ListShape.new(name: 'TemplateStepGroupSummaryList')
@@ -143,6 +154,10 @@ module Aws::MigrationHubOrchestrator
     UpdateMigrationWorkflowRequestDescriptionString = Shapes::StringShape.new(name: 'UpdateMigrationWorkflowRequestDescriptionString')
     UpdateMigrationWorkflowRequestNameString = Shapes::StringShape.new(name: 'UpdateMigrationWorkflowRequestNameString')
     UpdateMigrationWorkflowResponse = Shapes::StructureShape.new(name: 'UpdateMigrationWorkflowResponse')
+    UpdateTemplateRequest = Shapes::StructureShape.new(name: 'UpdateTemplateRequest')
+    UpdateTemplateRequestTemplateDescriptionString = Shapes::StringShape.new(name: 'UpdateTemplateRequestTemplateDescriptionString')
+    UpdateTemplateRequestTemplateNameString = Shapes::StringShape.new(name: 'UpdateTemplateRequestTemplateNameString')
+    UpdateTemplateResponse = Shapes::StructureShape.new(name: 'UpdateTemplateResponse')
     UpdateWorkflowStepGroupRequest = Shapes::StructureShape.new(name: 'UpdateWorkflowStepGroupRequest')
     UpdateWorkflowStepGroupResponse = Shapes::StructureShape.new(name: 'UpdateWorkflowStepGroupResponse')
     UpdateWorkflowStepRequest = Shapes::StructureShape.new(name: 'UpdateWorkflowStepRequest')
@@ -161,10 +176,13 @@ module Aws::MigrationHubOrchestrator
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateMigrationWorkflowRequest.add_member(:name, Shapes::ShapeRef.new(shape: CreateMigrationWorkflowRequestNameString, required: true, location_name: "name"))
     CreateMigrationWorkflowRequest.add_member(:description, Shapes::ShapeRef.new(shape: CreateMigrationWorkflowRequestDescriptionString, location_name: "description"))
     CreateMigrationWorkflowRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: CreateMigrationWorkflowRequestTemplateIdString, required: true, location_name: "templateId"))
-    CreateMigrationWorkflowRequest.add_member(:application_configuration_id, Shapes::ShapeRef.new(shape: CreateMigrationWorkflowRequestApplicationConfigurationIdString, required: true, location_name: "applicationConfigurationId"))
+    CreateMigrationWorkflowRequest.add_member(:application_configuration_id, Shapes::ShapeRef.new(shape: CreateMigrationWorkflowRequestApplicationConfigurationIdString, location_name: "applicationConfigurationId"))
     CreateMigrationWorkflowRequest.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StepInputParameters, required: true, location_name: "inputParameters"))
     CreateMigrationWorkflowRequest.add_member(:step_targets, Shapes::ShapeRef.new(shape: StringList, location_name: "stepTargets"))
     CreateMigrationWorkflowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: StringMap, location_name: "tags"))
@@ -182,6 +200,18 @@ module Aws::MigrationHubOrchestrator
     CreateMigrationWorkflowResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     CreateMigrationWorkflowResponse.add_member(:tags, Shapes::ShapeRef.new(shape: StringMap, location_name: "tags"))
     CreateMigrationWorkflowResponse.struct_class = Types::CreateMigrationWorkflowResponse
+
+    CreateTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: CreateTemplateRequestTemplateNameString, required: true, location_name: "templateName"))
+    CreateTemplateRequest.add_member(:template_description, Shapes::ShapeRef.new(shape: CreateTemplateRequestTemplateDescriptionString, location_name: "templateDescription"))
+    CreateTemplateRequest.add_member(:template_source, Shapes::ShapeRef.new(shape: TemplateSource, required: true, location_name: "templateSource"))
+    CreateTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateTemplateRequest.struct_class = Types::CreateTemplateRequest
+
+    CreateTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: String, location_name: "templateId"))
+    CreateTemplateResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: String, location_name: "templateArn"))
+    CreateTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: StringMap, location_name: "tags"))
+    CreateTemplateResponse.struct_class = Types::CreateTemplateResponse
 
     CreateWorkflowStepGroupRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: MigrationWorkflowId, required: true, location_name: "workflowId"))
     CreateWorkflowStepGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: StepGroupName, required: true, location_name: "name"))
@@ -226,6 +256,11 @@ module Aws::MigrationHubOrchestrator
     DeleteMigrationWorkflowResponse.add_member(:status, Shapes::ShapeRef.new(shape: MigrationWorkflowStatusEnum, location_name: "status"))
     DeleteMigrationWorkflowResponse.struct_class = Types::DeleteMigrationWorkflowResponse
 
+    DeleteTemplateRequest.add_member(:id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "id"))
+    DeleteTemplateRequest.struct_class = Types::DeleteTemplateRequest
+
+    DeleteTemplateResponse.struct_class = Types::DeleteTemplateResponse
+
     DeleteWorkflowStepGroupRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: MigrationWorkflowId, required: true, location: "querystring", location_name: "workflowId"))
     DeleteWorkflowStepGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: StepGroupId, required: true, location: "uri", location_name: "id"))
     DeleteWorkflowStepGroupRequest.struct_class = Types::DeleteWorkflowStepGroupRequest
@@ -268,12 +303,17 @@ module Aws::MigrationHubOrchestrator
     GetMigrationWorkflowTemplateRequest.struct_class = Types::GetMigrationWorkflowTemplateRequest
 
     GetMigrationWorkflowTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    GetMigrationWorkflowTemplateResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: String, location_name: "templateArn"))
     GetMigrationWorkflowTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     GetMigrationWorkflowTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     GetMigrationWorkflowTemplateResponse.add_member(:inputs, Shapes::ShapeRef.new(shape: TemplateInputList, location_name: "inputs"))
     GetMigrationWorkflowTemplateResponse.add_member(:tools, Shapes::ShapeRef.new(shape: ToolsList, location_name: "tools"))
-    GetMigrationWorkflowTemplateResponse.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatus, location_name: "status"))
     GetMigrationWorkflowTemplateResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    GetMigrationWorkflowTemplateResponse.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
+    GetMigrationWorkflowTemplateResponse.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatus, location_name: "status"))
+    GetMigrationWorkflowTemplateResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    GetMigrationWorkflowTemplateResponse.add_member(:template_class, Shapes::ShapeRef.new(shape: String, location_name: "templateClass"))
+    GetMigrationWorkflowTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: StringMap, location_name: "tags"))
     GetMigrationWorkflowTemplateResponse.struct_class = Types::GetMigrationWorkflowTemplateResponse
 
     GetTemplateStepGroupRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "templateId"))
@@ -434,6 +474,8 @@ module Aws::MigrationHubOrchestrator
     ListWorkflowStepsResponse.add_member(:workflow_steps_summary, Shapes::ShapeRef.new(shape: WorkflowStepsSummaryList, required: true, location_name: "workflowStepsSummary"))
     ListWorkflowStepsResponse.struct_class = Types::ListWorkflowStepsResponse
 
+    MaxStringList.member = Shapes::ShapeRef.new(shape: MaxStringValue)
+
     MigrationWorkflowSummary.add_member(:id, Shapes::ShapeRef.new(shape: MigrationWorkflowId, location_name: "id"))
     MigrationWorkflowSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     MigrationWorkflowSummary.add_member(:template_id, Shapes::ShapeRef.new(shape: String, location_name: "templateId"))
@@ -497,7 +539,7 @@ module Aws::MigrationHubOrchestrator
     StepAutomationConfiguration.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "targetType"))
     StepAutomationConfiguration.struct_class = Types::StepAutomationConfiguration
 
-    StepInput.add_member(:integer_value, Shapes::ShapeRef.new(shape: Integer, location_name: "integerValue", metadata: {"box"=>true}))
+    StepInput.add_member(:integer_value, Shapes::ShapeRef.new(shape: Integer, location_name: "integerValue"))
     StepInput.add_member(:string_value, Shapes::ShapeRef.new(shape: StringValue, location_name: "stringValue"))
     StepInput.add_member(:list_of_strings_value, Shapes::ShapeRef.new(shape: StringList, location_name: "listOfStringsValue"))
     StepInput.add_member(:map_of_string_value, Shapes::ShapeRef.new(shape: StringMap, location_name: "mapOfStringValue"))
@@ -551,6 +593,12 @@ module Aws::MigrationHubOrchestrator
     TemplateInput.struct_class = Types::TemplateInput
 
     TemplateInputList.member = Shapes::ShapeRef.new(shape: TemplateInput)
+
+    TemplateSource.add_member(:workflow_id, Shapes::ShapeRef.new(shape: MigrationWorkflowId, location_name: "workflowId"))
+    TemplateSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TemplateSource.add_member_subclass(:workflow_id, Types::TemplateSource::WorkflowId)
+    TemplateSource.add_member_subclass(:unknown, Types::TemplateSource::Unknown)
+    TemplateSource.struct_class = Types::TemplateSource
 
     TemplateStepGroupSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     TemplateStepGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -616,6 +664,17 @@ module Aws::MigrationHubOrchestrator
     UpdateMigrationWorkflowResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
     UpdateMigrationWorkflowResponse.add_member(:tags, Shapes::ShapeRef.new(shape: StringMap, location_name: "tags"))
     UpdateMigrationWorkflowResponse.struct_class = Types::UpdateMigrationWorkflowResponse
+
+    UpdateTemplateRequest.add_member(:id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "id"))
+    UpdateTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: UpdateTemplateRequestTemplateNameString, location_name: "templateName"))
+    UpdateTemplateRequest.add_member(:template_description, Shapes::ShapeRef.new(shape: UpdateTemplateRequestTemplateDescriptionString, location_name: "templateDescription"))
+    UpdateTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateTemplateRequest.struct_class = Types::UpdateTemplateRequest
+
+    UpdateTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: String, location_name: "templateId"))
+    UpdateTemplateResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: String, location_name: "templateArn"))
+    UpdateTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: StringMap, location_name: "tags"))
+    UpdateTemplateResponse.struct_class = Types::UpdateTemplateResponse
 
     UpdateWorkflowStepGroupRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: MigrationWorkflowId, required: true, location: "querystring", location_name: "workflowId"))
     UpdateWorkflowStepGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: StepGroupId, required: true, location: "uri", location_name: "id"))
@@ -683,9 +742,9 @@ module Aws::MigrationHubOrchestrator
 
     WorkflowStepOutputList.member = Shapes::ShapeRef.new(shape: WorkflowStepOutput)
 
-    WorkflowStepOutputUnion.add_member(:integer_value, Shapes::ShapeRef.new(shape: Integer, location_name: "integerValue", metadata: {"box"=>true}))
-    WorkflowStepOutputUnion.add_member(:string_value, Shapes::ShapeRef.new(shape: StringValue, location_name: "stringValue"))
-    WorkflowStepOutputUnion.add_member(:list_of_string_value, Shapes::ShapeRef.new(shape: StringList, location_name: "listOfStringValue"))
+    WorkflowStepOutputUnion.add_member(:integer_value, Shapes::ShapeRef.new(shape: Integer, location_name: "integerValue"))
+    WorkflowStepOutputUnion.add_member(:string_value, Shapes::ShapeRef.new(shape: MaxStringValue, location_name: "stringValue"))
+    WorkflowStepOutputUnion.add_member(:list_of_string_value, Shapes::ShapeRef.new(shape: MaxStringList, location_name: "listOfStringValue"))
     WorkflowStepOutputUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     WorkflowStepOutputUnion.add_member_subclass(:integer_value, Types::WorkflowStepOutputUnion::IntegerValue)
     WorkflowStepOutputUnion.add_member_subclass(:string_value, Types::WorkflowStepOutputUnion::StringValue)
@@ -728,6 +787,19 @@ module Aws::MigrationHubOrchestrator
         "uid" => "migrationhuborchestrator-2021-08-28",
       }
 
+      api.add_operation(:create_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/template"
+        o.input = Shapes::ShapeRef.new(shape: CreateTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:create_workflow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateWorkflow"
         o.http_method = "POST"
@@ -762,6 +834,19 @@ module Aws::MigrationHubOrchestrator
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/template/{id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_workflow, Seahorse::Model::Operation.new.tap do |o|
@@ -1070,6 +1155,19 @@ module Aws::MigrationHubOrchestrator
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/template/{id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

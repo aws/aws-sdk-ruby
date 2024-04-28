@@ -75,7 +75,7 @@ module Aws::WAFV2
     end
 
     class AssociationConfig
-      attr_accessor request_body: ::Hash[("CLOUDFRONT"), Types::RequestBodyAssociatedResourceTypeConfig]
+      attr_accessor request_body: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE"), Types::RequestBodyAssociatedResourceTypeConfig]
       SENSITIVE: []
     end
 
@@ -1069,6 +1069,7 @@ module Aws::WAFV2
 
     class RateBasedStatement
       attr_accessor limit: ::Integer
+      attr_accessor evaluation_window_sec: ::Integer
       attr_accessor aggregate_key_type: ("IP" | "FORWARDED_IP" | "CUSTOM_KEYS" | "CONSTANT")
       attr_accessor scope_down_statement: Types::Statement
       attr_accessor forwarded_ip_config: Types::ForwardedIPConfig
@@ -1559,6 +1560,7 @@ module Aws::WAFV2
 
     class WAFLimitsExceededException
       attr_accessor message: ::String
+      attr_accessor source_type: ::String
       SENSITIVE: []
     end
 

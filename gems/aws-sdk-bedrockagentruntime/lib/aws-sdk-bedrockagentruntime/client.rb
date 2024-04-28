@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -73,6 +74,7 @@ module Aws::BedrockAgentRuntime
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -198,10 +200,17 @@ module Aws::BedrockAgentRuntime
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -348,50 +357,65 @@ module Aws::BedrockAgentRuntime
     #   @option options [Aws::BedrockAgentRuntime::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::BedrockAgentRuntime::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -399,30 +423,74 @@ module Aws::BedrockAgentRuntime
 
     # @!group API Operations
 
-    # Invokes the specified Bedrock model to run inference using the input
-    # provided in the request body.
+    # Sends a prompt for the agent to process and respond to. Use return
+    # control event type for function calling.
     #
-    # @option params [Types::SessionState] :session_state
-    #   Session state passed by customer. Base64 encoded json string
-    #   representation of SessionState.
+    # <note markdown="1"> The CLI doesn't support `InvokeAgent`.
     #
-    # @option params [required, String] :agent_id
-    #   Identifier for Agent
+    #  </note>
+    #
+    # * To continue the same conversation with an agent, use the same
+    #   `sessionId` value in the request.
+    #
+    # * To activate trace enablement, turn `enableTrace` to `true`. Trace
+    #   enablement helps you follow the agent's reasoning process that led
+    #   it to the information it processed, the actions it took, and the
+    #   final result it yielded. For more information, see [Trace
+    #   enablement][1].
+    #
+    # * End a conversation by setting `endSession` to `true`.
+    #
+    # * In the `sessionState` object, you can include attributes for the
+    #   session or prompt or parameters returned from the action group.
+    #
+    # * Use return control event type for function calling.
+    #
+    # The response is returned in the `bytes` field of the `chunk` object.
+    #
+    # * The `attribution` object contains citations for parts of the
+    #   response.
+    #
+    # * If you set `enableTrace` to `true` in the request, you can trace the
+    #   agent's steps and reasoning process that led it to the response.
+    #
+    # * Errors are also surfaced in the response.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events
     #
     # @option params [required, String] :agent_alias_id
-    #   Identifier for Agent Alias
+    #   The alias of the agent to use.
     #
-    # @option params [required, String] :session_id
-    #   Identifier used for the current session
-    #
-    # @option params [Boolean] :end_session
-    #   End current session
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent to use.
     #
     # @option params [Boolean] :enable_trace
-    #   Enable agent trace events for improved debugging
+    #   Specifies whether to turn on the trace or not to track the agent's
+    #   reasoning process. For more information, see [Trace enablement][1].
     #
-    # @option params [required, String] :input_text
-    #   Input data in the format specified in the Content-Type request header.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events
+    #
+    # @option params [Boolean] :end_session
+    #   Specifies whether to end the session with the agent or not.
+    #
+    # @option params [String] :input_text
+    #   The prompt text to send the agent.
+    #
+    # @option params [required, String] :session_id
+    #   The unique identifier of the session. Use the same value across
+    #   requests to continue the same conversation.
+    #
+    # @option params [Types::SessionState] :session_state
+    #   Contains parameters that specify various attributes of the session.
+    #   For more information, see [Control session context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #
     # @return [Types::InvokeAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -432,22 +500,22 @@ module Aws::BedrockAgentRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process event once it arrives immediately, or wait until
-    #   full response complete and iterate through eventstream enumerator.
+    #   You can process the event once it arrives immediately, or wait until the
+    #   full response is complete and iterate through the eventstream enumerator.
     #
     #   To interact with event immediately, you need to register #invoke_agent
-    #   with callbacks, callbacks can be register for specifc events or for all events,
-    #   callback for errors in the event stream is also available for register.
+    #   with callbacks. Callbacks can be registered for specific events or for all
+    #   events, including error events.
     #
-    #   Callbacks can be passed in by `:event_stream_handler` option or within block
-    #   statement attached to #invoke_agent call directly. Hybrid pattern of both
-    #   is also supported.
+    #   Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   block statement attached to the #invoke_agent call directly. Hybrid
+    #   pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either Proc object or
+    #   `:event_stream_handler` option takes in either a Proc object or
     #   Aws::BedrockAgentRuntime::EventStreams::ResponseStream object.
     #
-    #   Usage pattern a): callbacks with a block attached to #invoke_agent
-    #     Example for registering callbacks for all event types and error event
+    #   Usage pattern a): Callbacks with a block attached to #invoke_agent
+    #     Example for registering callbacks for all event types and an error event
     #
     #     client.invoke_agent( # params input# ) do |stream|
     #       stream.on_error_event do |event|
@@ -467,35 +535,20 @@ module Aws::BedrockAgentRuntime
     #
     #     end
     #
-    #   Usage pattern b): pass in `:event_stream_handler` for #invoke_agent
+    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_agent
     #
-    #     1) create a Aws::BedrockAgentRuntime::EventStreams::ResponseStream object
+    #     1) Create a Aws::BedrockAgentRuntime::EventStreams::ResponseStream object
     #     Example for registering callbacks with specific events
     #
     #       handler = Aws::BedrockAgentRuntime::EventStreams::ResponseStream.new
-    #       handler.on_chunk_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::chunk
-    #       end
-    #       handler.on_trace_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::trace
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
     #       handler.on_access_denied_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #       end
+    #       handler.on_bad_gateway_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #       end
+    #       handler.on_chunk_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::chunk
     #       end
     #       handler.on_conflict_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::conflictException
@@ -503,39 +556,42 @@ module Aws::BedrockAgentRuntime
     #       handler.on_dependency_failed_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #       handler.on_internal_server_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #       end
+    #       handler.on_resource_not_found_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #       end
+    #       handler.on_return_control_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #       end
+    #       handler.on_service_quota_exceeded_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #       end
+    #       handler.on_throttling_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #       end
+    #       handler.on_trace_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::trace
+    #       end
+    #       handler.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::validationException
     #       end
     #
     #     client.invoke_agent( # params input #, event_stream_handler: handler)
     #
-    #     2) use a Ruby Proc object
+    #     2) Use a Ruby Proc object
     #     Example for registering callbacks with specific events
     #
     #     handler = Proc.new do |stream|
-    #       stream.on_chunk_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::chunk
-    #       end
-    #       stream.on_trace_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::trace
-    #       end
-    #       stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
-    #       stream.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       stream.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       stream.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
     #       stream.on_access_denied_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #       end
+    #       stream.on_bad_gateway_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #       end
+    #       stream.on_chunk_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::chunk
     #       end
     #       stream.on_conflict_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::conflictException
@@ -543,39 +599,42 @@ module Aws::BedrockAgentRuntime
     #       stream.on_dependency_failed_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #       end
-    #       stream.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #       stream.on_internal_server_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #       end
+    #       stream.on_resource_not_found_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #       end
+    #       stream.on_return_control_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #       end
+    #       stream.on_service_quota_exceeded_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #       end
+    #       stream.on_throttling_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #       end
+    #       stream.on_trace_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::trace
+    #       end
+    #       stream.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::validationException
     #       end
     #     end
     #
     #     client.invoke_agent( # params input #, event_stream_handler: handler)
     #
-    #   Usage pattern c): hybird pattern of a) and b)
+    #   Usage pattern c): Hybrid pattern of a) and b)
     #
     #       handler = Aws::BedrockAgentRuntime::EventStreams::ResponseStream.new
-    #       handler.on_chunk_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::chunk
-    #       end
-    #       handler.on_trace_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::trace
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
     #       handler.on_access_denied_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #       end
+    #       handler.on_bad_gateway_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #       end
+    #       handler.on_chunk_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::chunk
     #       end
     #       handler.on_conflict_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::conflictException
@@ -583,8 +642,26 @@ module Aws::BedrockAgentRuntime
     #       handler.on_dependency_failed_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #       handler.on_internal_server_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #       end
+    #       handler.on_resource_not_found_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #       end
+    #       handler.on_return_control_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #       end
+    #       handler.on_service_quota_exceeded_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #       end
+    #       handler.on_throttling_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #       end
+    #       handler.on_trace_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::trace
+    #       end
+    #       handler.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::validationException
     #       end
     #
     #     client.invoke_agent( # params input #, event_stream_handler: handler) do |stream|
@@ -598,8 +675,7 @@ module Aws::BedrockAgentRuntime
     #       end
     #     end
     #
-    #   Besides above usage patterns for process events when they arrive immediately, you can also
-    #   iterate through events after response complete.
+    #   You can also iterate through events after the response complete.
     #
     #   Events are available at resp.completion # => Enumerator
     #   For parameter input example, please refer to following request syntax
@@ -607,65 +683,125 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke_agent({
+    #     agent_alias_id: "AgentAliasId", # required
+    #     agent_id: "AgentId", # required
+    #     enable_trace: false,
+    #     end_session: false,
+    #     input_text: "InputText",
+    #     session_id: "SessionId", # required
     #     session_state: {
-    #       session_attributes: {
-    #         "String" => "String",
-    #       },
+    #       invocation_id: "String",
     #       prompt_session_attributes: {
     #         "String" => "String",
     #       },
+    #       return_control_invocation_results: [
+    #         {
+    #           api_result: {
+    #             action_group: "String", # required
+    #             api_path: "ApiPath",
+    #             http_method: "String",
+    #             http_status_code: 1,
+    #             response_body: {
+    #               "String" => {
+    #                 body: "String",
+    #               },
+    #             },
+    #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
+    #           },
+    #           function_result: {
+    #             action_group: "String", # required
+    #             function: "String",
+    #             response_body: {
+    #               "String" => {
+    #                 body: "String",
+    #               },
+    #             },
+    #             response_state: "FAILURE", # accepts FAILURE, REPROMPT
+    #           },
+    #         },
+    #       ],
+    #       session_attributes: {
+    #         "String" => "String",
+    #       },
     #     },
-    #     agent_id: "AgentId", # required
-    #     agent_alias_id: "AgentAliasId", # required
-    #     session_id: "SessionId", # required
-    #     end_session: false,
-    #     enable_trace: false,
-    #     input_text: "InputText", # required
     #   })
     #
     # @example Response structure
     #
     #   All events are available at resp.completion:
     #   resp.completion #=> Enumerator
-    #   resp.completion.event_types #=> [:chunk, :trace, :internal_server_exception, :validation_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :access_denied_exception, :conflict_exception, :dependency_failed_exception, :bad_gateway_exception]
+    #   resp.completion.event_types #=> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :internal_server_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
+    #
+    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
     #
     #   For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
-    #   event.bytes #=> String
     #   event.attribution.citations #=> Array
-    #   event.attribution.citations[0].generated_response_part.text_response_part.text #=> String
-    #   event.attribution.citations[0].generated_response_part.text_response_part.span.start #=> Integer
     #   event.attribution.citations[0].generated_response_part.text_response_part.span.end #=> Integer
+    #   event.attribution.citations[0].generated_response_part.text_response_part.span.start #=> Integer
+    #   event.attribution.citations[0].generated_response_part.text_response_part.text #=> String
     #   event.attribution.citations[0].retrieved_references #=> Array
     #   event.attribution.citations[0].retrieved_references[0].content.text #=> String
-    #   event.attribution.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
     #   event.attribution.citations[0].retrieved_references[0].location.s3_location.uri #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
+    #   event.attribution.citations[0].retrieved_references[0].metadata #=> Hash
+    #   event.bytes #=> String
+    #
+    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :return_control event available at #on_return_control_event callback and response eventstream enumerator:
+    #   event.invocation_id #=> String
+    #   event.invocation_inputs #=> Array
+    #   event.invocation_inputs[0].api_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].api_invocation_input.api_path #=> String
+    #   event.invocation_inputs[0].api_invocation_input.http_method #=> String
+    #   event.invocation_inputs[0].api_invocation_input.parameters #=> Array
+    #   event.invocation_inputs[0].api_invocation_input.parameters[0].name #=> String
+    #   event.invocation_inputs[0].api_invocation_input.parameters[0].type #=> String
+    #   event.invocation_inputs[0].api_invocation_input.parameters[0].value #=> String
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content #=> Hash
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties #=> Array
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].name #=> String
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
+    #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
+    #   event.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].function_invocation_input.function #=> String
+    #   event.invocation_inputs[0].function_invocation_input.parameters #=> Array
+    #   event.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
+    #   event.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
+    #   event.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
+    #
+    #   For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
     #
     #   For :trace event available at #on_trace_event callback and response eventstream enumerator:
-    #   event.agent_id #=> String
     #   event.agent_alias_id #=> String
+    #   event.agent_id #=> String
+    #   event.agent_version #=> String
     #   event.session_id #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
-    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.pre_processing_trace.model_invocation_output.trace_id #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
-    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
-    #   event.trace.orchestration_trace.rationale.trace_id #=> String
-    #   event.trace.orchestration_trace.rationale.text #=> String
-    #   event.trace.orchestration_trace.invocation_input.trace_id #=> String
-    #   event.trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH"
+    #   event.trace.failure_trace.failure_reason #=> String
+    #   event.trace.failure_trace.trace_id #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
-    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters #=> Array
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
@@ -675,75 +811,68 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].name #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
-    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
+    #   event.trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH"
     #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
-    #   event.trace.orchestration_trace.observation.trace_id #=> String
-    #   event.trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
-    #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3"
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.trace.orchestration_trace.observation.final_response.text #=> String
-    #   event.trace.orchestration_trace.observation.reprompt_response.text #=> String
-    #   event.trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
-    #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.text #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
+    #   event.trace.orchestration_trace.invocation_input.trace_id #=> String
     #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
     #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
     #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_input.inference_configuration.top_p #=> Float
     #   event.trace.orchestration_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
     #   event.trace.orchestration_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.text #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
-    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.orchestration_trace.model_invocation_input.text #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
+    #   event.trace.orchestration_trace.observation.final_response.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
+    #   event.trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
+    #   event.trace.orchestration_trace.observation.reprompt_response.text #=> String
+    #   event.trace.orchestration_trace.observation.trace_id #=> String
+    #   event.trace.orchestration_trace.observation.type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
+    #   event.trace.orchestration_trace.rationale.text #=> String
+    #   event.trace.orchestration_trace.rationale.trace_id #=> String
     #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
     #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
     #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
     #   event.trace.post_processing_trace.model_invocation_input.override_lambda #=> String
-    #   event.trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
     #   event.trace.post_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   event.trace.post_processing_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.post_processing_trace.model_invocation_input.text #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
     #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
-    #   event.trace.failure_trace.trace_id #=> String
-    #   event.trace.failure_trace.failure_reason #=> String
-    #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences[0] #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.temperature #=> Float
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_k #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.top_p #=> Float
+    #   event.trace.pre_processing_trace.model_invocation_input.override_lambda #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.pre_processing_trace.model_invocation_input.prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
+    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
+    #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.trace_id #=> String
     #
     #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
-    #
-    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
     #
     #   resp.content_type #=> String
     #   resp.session_id #=> String
@@ -775,24 +904,31 @@ module Aws::BedrockAgentRuntime
       req.send_request(options, &block)
     end
 
-    # Retrieve from knowledge base.
+    # Queries a knowledge base and retrieves information from it.
     #
     # @option params [required, String] :knowledge_base_id
-    #   Identifier of the KnowledgeBase
-    #
-    # @option params [required, Types::KnowledgeBaseQuery] :retrieval_query
-    #   Knowledge base input query.
-    #
-    # @option params [Types::KnowledgeBaseRetrievalConfiguration] :retrieval_configuration
-    #   Search parameters for retrieving from knowledge base.
+    #   The unique identifier of the knowledge base to query.
     #
     # @option params [String] :next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If there are more results than can fit in the response, the response
+    #   returns a `nextToken`. Use this token in the `nextToken` field of
+    #   another request to retrieve the next batch of results.
+    #
+    # @option params [Types::KnowledgeBaseRetrievalConfiguration] :retrieval_configuration
+    #   Contains configurations for the knowledge base query and retrieval
+    #   process. For more information, see [Query configurations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+    #
+    # @option params [required, Types::KnowledgeBaseQuery] :retrieval_query
+    #   Contains the query to send the knowledge base.
     #
     # @return [Types::RetrieveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::RetrieveResponse#retrieval_results #retrieval_results} => Array&lt;Types::KnowledgeBaseRetrievalResult&gt;
     #   * {Types::RetrieveResponse#next_token #next_token} => String
+    #   * {Types::RetrieveResponse#retrieval_results #retrieval_results} => Array&lt;Types::KnowledgeBaseRetrievalResult&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -800,25 +936,84 @@ module Aws::BedrockAgentRuntime
     #
     #   resp = client.retrieve({
     #     knowledge_base_id: "KnowledgeBaseId", # required
+    #     next_token: "NextToken",
+    #     retrieval_configuration: {
+    #       vector_search_configuration: { # required
+    #         filter: {
+    #           and_all: [
+    #             {
+    #               # recursive RetrievalFilter
+    #             },
+    #           ],
+    #           equals: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           greater_than: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           greater_than_or_equals: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           in: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           less_than: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           less_than_or_equals: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           not_equals: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           not_in: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           or_all: [
+    #             {
+    #               # recursive RetrievalFilter
+    #             },
+    #           ],
+    #           starts_with: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #         },
+    #         number_of_results: 1,
+    #         override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #       },
+    #     },
     #     retrieval_query: { # required
     #       text: "KnowledgeBaseQueryTextString", # required
     #     },
-    #     retrieval_configuration: {
-    #       vector_search_configuration: { # required
-    #         number_of_results: 1, # required
-    #       },
-    #     },
-    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.retrieval_results #=> Array
     #   resp.retrieval_results[0].content.text #=> String
-    #   resp.retrieval_results[0].location.type #=> String, one of "S3"
     #   resp.retrieval_results[0].location.s3_location.uri #=> String
+    #   resp.retrieval_results[0].location.type #=> String, one of "S3"
+    #   resp.retrieval_results[0].metadata #=> Hash
     #   resp.retrieval_results[0].score #=> Float
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/Retrieve AWS API Documentation
     #
@@ -829,57 +1024,155 @@ module Aws::BedrockAgentRuntime
       req.send_request(options)
     end
 
-    # RetrieveAndGenerate API
-    #
-    # @option params [String] :session_id
-    #   Identifier of the session.
+    # Queries a knowledge base and generates responses based on the
+    # retrieved results. The response only cites sources that are relevant
+    # to the query.
     #
     # @option params [required, Types::RetrieveAndGenerateInput] :input
-    #   Customer input of the turn
+    #   Contains the query to be made to the knowledge base.
     #
     # @option params [Types::RetrieveAndGenerateConfiguration] :retrieve_and_generate_configuration
-    #   Configures the retrieval and generation for the session.
+    #   Contains configurations for the knowledge base query and retrieval
+    #   process. For more information, see [Query configurations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
     #
     # @option params [Types::RetrieveAndGenerateSessionConfiguration] :session_configuration
-    #   Configures common parameters of the session.
+    #   Contains details about the session with the knowledge base.
+    #
+    # @option params [String] :session_id
+    #   The unique identifier of the session. Reuse the same value to continue
+    #   the same session with the knowledge base.
     #
     # @return [Types::RetrieveAndGenerateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::RetrieveAndGenerateResponse#session_id #session_id} => String
-    #   * {Types::RetrieveAndGenerateResponse#output #output} => Types::RetrieveAndGenerateOutput
     #   * {Types::RetrieveAndGenerateResponse#citations #citations} => Array&lt;Types::Citation&gt;
+    #   * {Types::RetrieveAndGenerateResponse#output #output} => Types::RetrieveAndGenerateOutput
+    #   * {Types::RetrieveAndGenerateResponse#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.retrieve_and_generate({
-    #     session_id: "SessionId",
     #     input: { # required
     #       text: "RetrieveAndGenerateInputTextString", # required
     #     },
     #     retrieve_and_generate_configuration: {
-    #       type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE
+    #       external_sources_configuration: {
+    #         generation_configuration: {
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #         },
+    #         model_arn: "BedrockModelArn", # required
+    #         sources: [ # required
+    #           {
+    #             byte_content: {
+    #               content_type: "ContentType", # required
+    #               data: "data", # required
+    #               identifier: "Identifier", # required
+    #             },
+    #             s3_location: {
+    #               uri: "S3Uri", # required
+    #             },
+    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
+    #           },
+    #         ],
+    #       },
     #       knowledge_base_configuration: {
+    #         generation_configuration: {
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #         },
     #         knowledge_base_id: "KnowledgeBaseId", # required
     #         model_arn: "BedrockModelArn", # required
+    #         retrieval_configuration: {
+    #           vector_search_configuration: { # required
+    #             filter: {
+    #               and_all: [
+    #                 {
+    #                   # recursive RetrievalFilter
+    #                 },
+    #               ],
+    #               equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               greater_than: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               greater_than_or_equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               in: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               less_than: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               less_than_or_equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               not_equals: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               not_in: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               or_all: [
+    #                 {
+    #                   # recursive RetrievalFilter
+    #                 },
+    #               ],
+    #               starts_with: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #             },
+    #             number_of_results: 1,
+    #             override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #           },
+    #         },
     #       },
+    #       type: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE, EXTERNAL_SOURCES
     #     },
     #     session_configuration: {
     #       kms_key_arn: "KmsKeyArn", # required
     #     },
+    #     session_id: "SessionId",
     #   })
     #
     # @example Response structure
     #
-    #   resp.session_id #=> String
-    #   resp.output.text #=> String
     #   resp.citations #=> Array
-    #   resp.citations[0].generated_response_part.text_response_part.text #=> String
-    #   resp.citations[0].generated_response_part.text_response_part.span.start #=> Integer
     #   resp.citations[0].generated_response_part.text_response_part.span.end #=> Integer
+    #   resp.citations[0].generated_response_part.text_response_part.span.start #=> Integer
+    #   resp.citations[0].generated_response_part.text_response_part.text #=> String
     #   resp.citations[0].retrieved_references #=> Array
     #   resp.citations[0].retrieved_references[0].content.text #=> String
-    #   resp.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
     #   resp.citations[0].retrieved_references[0].location.s3_location.uri #=> String
+    #   resp.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
+    #   resp.citations[0].retrieved_references[0].metadata #=> Hash
+    #   resp.output.text #=> String
+    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerate AWS API Documentation
     #
@@ -903,7 +1196,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

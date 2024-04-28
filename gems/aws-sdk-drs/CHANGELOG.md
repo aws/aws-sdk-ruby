@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2024-04-18)
+------------------
+
+* Feature - Outpost ARN added to Source Server and Recovery Instance
+
 1.29.0 (2024-02-26)
 ------------------
 

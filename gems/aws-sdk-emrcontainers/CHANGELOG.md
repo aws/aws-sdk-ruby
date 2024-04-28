@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2024-04-24)
+------------------
+
+* Feature - EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.
+
+1.32.0 (2024-04-04)
+------------------
+
+* Feature - This release adds support for integration with EKS AccessEntry APIs to enable automatic Cluster Access for EMR on EKS.
+
+1.31.0 (2024-03-25)
+------------------
+
+* Feature - This release increases the number of supported job template parameters from 20 to 100.
+
 1.30.0 (2024-01-26)
 ------------------
 

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Glue
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Glue
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::Glue
     #   @option options [Aws::Glue::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Glue::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -10826,6 +10850,17 @@ module Aws::Glue
     #   resp.table.federated_table.identifier #=> String
     #   resp.table.federated_table.database_identifier #=> String
     #   resp.table.federated_table.connection_name #=> String
+    #   resp.table.view_definition.is_protected #=> Boolean
+    #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.sub_objects #=> Array
+    #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.representations #=> Array
+    #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table.is_multi_dialect_view #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -10993,6 +11028,17 @@ module Aws::Glue
     #   resp.table_version.table.federated_table.identifier #=> String
     #   resp.table_version.table.federated_table.database_identifier #=> String
     #   resp.table_version.table.federated_table.connection_name #=> String
+    #   resp.table_version.table.view_definition.is_protected #=> Boolean
+    #   resp.table_version.table.view_definition.definer #=> String
+    #   resp.table_version.table.view_definition.sub_objects #=> Array
+    #   resp.table_version.table.view_definition.sub_objects[0] #=> String
+    #   resp.table_version.table.view_definition.representations #=> Array
+    #   resp.table_version.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_version.table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table_version.table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table_version.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_version.table.is_multi_dialect_view #=> Boolean
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -11112,6 +11158,17 @@ module Aws::Glue
     #   resp.table_versions[0].table.federated_table.identifier #=> String
     #   resp.table_versions[0].table.federated_table.database_identifier #=> String
     #   resp.table_versions[0].table.federated_table.connection_name #=> String
+    #   resp.table_versions[0].table.view_definition.is_protected #=> Boolean
+    #   resp.table_versions[0].table.view_definition.definer #=> String
+    #   resp.table_versions[0].table.view_definition.sub_objects #=> Array
+    #   resp.table_versions[0].table.view_definition.sub_objects[0] #=> String
+    #   resp.table_versions[0].table.view_definition.representations #=> Array
+    #   resp.table_versions[0].table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_versions[0].table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -11242,6 +11299,17 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.identifier #=> String
     #   resp.table_list[0].federated_table.database_identifier #=> String
     #   resp.table_list[0].federated_table.connection_name #=> String
+    #   resp.table_list[0].view_definition.is_protected #=> Boolean
+    #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.sub_objects #=> Array
+    #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.representations #=> Array
+    #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -11757,8 +11825,8 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves table metadata from the Data Catalog that contains
-    # unfiltered metadata.
+    # Allows a third-party analytical engine to retrieve unfiltered table
+    # metadata from the Data Catalog.
     #
     # For IAM authorization, the public IAM action associated with this API
     # is `glue:GetTable`.
@@ -11781,7 +11849,46 @@ module Aws::Glue
     #   A structure containing Lake Formation audit context information.
     #
     # @option params [required, Array<String>] :supported_permission_types
-    #   (Required) A list of supported permission types.
+    #   Indicates the level of filtering a third-party analytical engine is
+    #   capable of enforcing when calling the `GetUnfilteredTableMetadata` API
+    #   operation. Accepted values are:
+    #
+    #   * `COLUMN_PERMISSION` - Column permissions ensure that users can
+    #     access only specific columns in the table. If there are particular
+    #     columns contain sensitive data, data lake administrators can define
+    #     column filters that exclude access to specific columns.
+    #
+    #   * `CELL_FILTER_PERMISSION` - Cell-level filtering combines column
+    #     filtering (include or exclude columns) and row filter expressions to
+    #     restrict access to individual elements in the table.
+    #
+    #   * `NESTED_PERMISSION` - Nested permissions combines cell-level
+    #     filtering and nested column filtering to restrict access to columns
+    #     and/or nested columns in specific rows based on row filter
+    #     expressions.
+    #
+    #   * `NESTED_CELL_PERMISSION` - Nested cell permissions combines nested
+    #     permission with nested cell-level filtering. This allows different
+    #     subsets of nested columns to be restricted based on an array of row
+    #     filter expressions.
+    #
+    #   Note: Each of these permission types follows a hierarchical order
+    #   where each subsequent permission type includes all permission of the
+    #   previous type.
+    #
+    #   Important: If you provide a supported permission type that doesn't
+    #   match the user's level of permissions on the table, then Lake
+    #   Formation raises an exception. For example, if the third-party engine
+    #   calling the `GetUnfilteredTableMetadata` operation can enforce only
+    #   column-level filtering, and the user has nested cell filtering applied
+    #   on the table, Lake Formation throws an exception, and will not return
+    #   unfiltered table metadata and data access credentials.
+    #
+    # @option params [String] :parent_resource_arn
+    #   The resource ARN of the view.
+    #
+    # @option params [String] :root_resource_arn
+    #   The resource ARN of the root view in a chain of nested views.
     #
     # @option params [Types::SupportedDialect] :supported_dialect
     #   A structure specifying the dialect and dialect version used by the
@@ -11804,8 +11911,11 @@ module Aws::Glue
     #   * {Types::GetUnfilteredTableMetadataResponse#is_registered_with_lake_formation #is_registered_with_lake_formation} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#cell_filters #cell_filters} => Array&lt;Types::ColumnRowFilter&gt;
     #   * {Types::GetUnfilteredTableMetadataResponse#query_authorization_id #query_authorization_id} => String
+    #   * {Types::GetUnfilteredTableMetadataResponse#is_multi_dialect_view #is_multi_dialect_view} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetUnfilteredTableMetadataResponse#is_protected #is_protected} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#permissions #permissions} => Array&lt;String&gt;
+    #   * {Types::GetUnfilteredTableMetadataResponse#row_filter #row_filter} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -11820,6 +11930,8 @@ module Aws::Glue
     #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
+    #     parent_resource_arn: "ArnString",
+    #     root_resource_arn: "ArnString",
     #     supported_dialect: {
     #       dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
     #       dialect_version: "ViewDialectVersionString",
@@ -11905,6 +12017,17 @@ module Aws::Glue
     #   resp.table.federated_table.identifier #=> String
     #   resp.table.federated_table.database_identifier #=> String
     #   resp.table.federated_table.connection_name #=> String
+    #   resp.table.view_definition.is_protected #=> Boolean
+    #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.sub_objects #=> Array
+    #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.representations #=> Array
+    #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table.is_multi_dialect_view #=> Boolean
     #   resp.authorized_columns #=> Array
     #   resp.authorized_columns[0] #=> String
     #   resp.is_registered_with_lake_formation #=> Boolean
@@ -11912,9 +12035,12 @@ module Aws::Glue
     #   resp.cell_filters[0].column_name #=> String
     #   resp.cell_filters[0].row_filter_expression #=> String
     #   resp.query_authorization_id #=> String
+    #   resp.is_multi_dialect_view #=> Boolean
     #   resp.resource_arn #=> String
+    #   resp.is_protected #=> Boolean
     #   resp.permissions #=> Array
     #   resp.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.row_filter #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadata AWS API Documentation
     #
@@ -14362,6 +14488,17 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.identifier #=> String
     #   resp.table_list[0].federated_table.database_identifier #=> String
     #   resp.table_list[0].federated_table.connection_name #=> String
+    #   resp.table_list[0].view_definition.is_protected #=> Boolean
+    #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.sub_objects #=> Array
+    #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.representations #=> Array
+    #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -17008,7 +17145,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.168.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

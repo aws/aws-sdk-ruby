@@ -8,7 +8,8 @@ module AwsSdkCodeGenerator
 
     def initialize(options)
       plugin_options = documented_plugin_options(options.fetch(:plugins)) +
-        documented_plugin_options(options.fetch(:codegenerated_plugins))
+        documented_plugin_options(options.fetch(:codegenerated_plugins)) +
+        documented_plugin_options(options.fetch(:default_plugins, []))
       documentation = {}
       plugin_options.each do |option|
         documentation[option.name] = YardOptionTag.new(

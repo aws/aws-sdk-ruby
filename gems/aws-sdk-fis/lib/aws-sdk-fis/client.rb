@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::FIS
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::FIS
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::FIS
     #   @option options [Aws::FIS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::FIS::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -405,7 +429,7 @@ module Aws::FIS
     #   can define a stop condition as a CloudWatch alarm.
     #
     # For more information, see [experiment templates][1] in the *Fault
-    # Injection Simulator User Guide*.
+    # Injection Service User Guide*.
     #
     #
     #
@@ -513,6 +537,7 @@ module Aws::FIS
     # @example Response structure
     #
     #   resp.experiment_template.id #=> String
+    #   resp.experiment_template.arn #=> String
     #   resp.experiment_template.description #=> String
     #   resp.experiment_template.targets #=> Hash
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].resource_type #=> String
@@ -564,7 +589,7 @@ module Aws::FIS
     # Creates a target account configuration for the experiment template. A
     # target account configuration is required when `accountTargeting` of
     # `experimentOptions` is set to `multi-account`. For more information,
-    # see [experiment options][1] in the *Fault Injection Simulator User
+    # see [experiment options][1] in the *Fault Injection Service User
     # Guide*.
     #
     #
@@ -582,7 +607,7 @@ module Aws::FIS
     #   The experiment template ID.
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role for the target account.
@@ -637,6 +662,7 @@ module Aws::FIS
     # @example Response structure
     #
     #   resp.experiment_template.id #=> String
+    #   resp.experiment_template.arn #=> String
     #   resp.experiment_template.description #=> String
     #   resp.experiment_template.targets #=> Hash
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].resource_type #=> String
@@ -692,7 +718,7 @@ module Aws::FIS
     #   The ID of the experiment template.
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #
     # @return [Types::DeleteTargetAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -738,6 +764,7 @@ module Aws::FIS
     # @example Response structure
     #
     #   resp.action.id #=> String
+    #   resp.action.arn #=> String
     #   resp.action.description #=> String
     #   resp.action.parameters #=> Hash
     #   resp.action.parameters["ActionParameterName"].description #=> String
@@ -774,6 +801,7 @@ module Aws::FIS
     # @example Response structure
     #
     #   resp.experiment.id #=> String
+    #   resp.experiment.arn #=> String
     #   resp.experiment.experiment_template_id #=> String
     #   resp.experiment.role_arn #=> String
     #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
@@ -818,6 +846,7 @@ module Aws::FIS
     #   resp.experiment.log_configuration.log_schema_version #=> Integer
     #   resp.experiment.experiment_options.account_targeting #=> String, one of "single-account", "multi-account"
     #   resp.experiment.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
+    #   resp.experiment.experiment_options.actions_mode #=> String, one of "skip-all", "run-all"
     #   resp.experiment.target_account_configurations_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperiment AWS API Documentation
@@ -836,7 +865,7 @@ module Aws::FIS
     #   The ID of the experiment.
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #
     # @return [Types::GetExperimentTargetAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -882,6 +911,7 @@ module Aws::FIS
     # @example Response structure
     #
     #   resp.experiment_template.id #=> String
+    #   resp.experiment_template.arn #=> String
     #   resp.experiment_template.description #=> String
     #   resp.experiment_template.targets #=> Hash
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].resource_type #=> String
@@ -937,7 +967,7 @@ module Aws::FIS
     #   The ID of the experiment template.
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #
     # @return [Types::GetTargetAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1025,6 +1055,7 @@ module Aws::FIS
     #
     #   resp.actions #=> Array
     #   resp.actions[0].id #=> String
+    #   resp.actions[0].arn #=> String
     #   resp.actions[0].description #=> String
     #   resp.actions[0].targets #=> Hash
     #   resp.actions[0].targets["ActionTargetName"].resource_type #=> String
@@ -1156,6 +1187,7 @@ module Aws::FIS
     #
     #   resp.experiment_templates #=> Array
     #   resp.experiment_templates[0].id #=> String
+    #   resp.experiment_templates[0].arn #=> String
     #   resp.experiment_templates[0].description #=> String
     #   resp.experiment_templates[0].creation_time #=> Time
     #   resp.experiment_templates[0].last_update_time #=> Time
@@ -1182,6 +1214,9 @@ module Aws::FIS
     # @option params [String] :next_token
     #   The token for the next page of results.
     #
+    # @option params [String] :experiment_template_id
+    #   The ID of the experiment template.
+    #
     # @return [Types::ListExperimentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListExperimentsResponse#experiments #experiments} => Array&lt;Types::ExperimentSummary&gt;
@@ -1194,18 +1229,23 @@ module Aws::FIS
     #   resp = client.list_experiments({
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     experiment_template_id: "ExperimentTemplateId",
     #   })
     #
     # @example Response structure
     #
     #   resp.experiments #=> Array
     #   resp.experiments[0].id #=> String
+    #   resp.experiments[0].arn #=> String
     #   resp.experiments[0].experiment_template_id #=> String
     #   resp.experiments[0].state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
     #   resp.experiments[0].state.reason #=> String
     #   resp.experiments[0].creation_time #=> Time
     #   resp.experiments[0].tags #=> Hash
     #   resp.experiments[0].tags["TagKey"] #=> String
+    #   resp.experiments[0].experiment_options.account_targeting #=> String, one of "single-account", "multi-account"
+    #   resp.experiments[0].experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
+    #   resp.experiments[0].experiment_options.actions_mode #=> String, one of "skip-all", "run-all"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListExperiments AWS API Documentation
@@ -1344,6 +1384,9 @@ module Aws::FIS
     # @option params [required, String] :experiment_template_id
     #   The ID of the experiment template.
     #
+    # @option params [Types::StartExperimentExperimentOptionsInput] :experiment_options
+    #   The experiment options for running the experiment.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags to apply to the experiment.
     #
@@ -1356,6 +1399,9 @@ module Aws::FIS
     #   resp = client.start_experiment({
     #     client_token: "ClientToken", # required
     #     experiment_template_id: "ExperimentTemplateId", # required
+    #     experiment_options: {
+    #       actions_mode: "skip-all", # accepts skip-all, run-all
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1364,6 +1410,7 @@ module Aws::FIS
     # @example Response structure
     #
     #   resp.experiment.id #=> String
+    #   resp.experiment.arn #=> String
     #   resp.experiment.experiment_template_id #=> String
     #   resp.experiment.role_arn #=> String
     #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
@@ -1408,6 +1455,7 @@ module Aws::FIS
     #   resp.experiment.log_configuration.log_schema_version #=> Integer
     #   resp.experiment.experiment_options.account_targeting #=> String, one of "single-account", "multi-account"
     #   resp.experiment.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
+    #   resp.experiment.experiment_options.actions_mode #=> String, one of "skip-all", "run-all"
     #   resp.experiment.target_account_configurations_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/StartExperiment AWS API Documentation
@@ -1437,6 +1485,7 @@ module Aws::FIS
     # @example Response structure
     #
     #   resp.experiment.id #=> String
+    #   resp.experiment.arn #=> String
     #   resp.experiment.experiment_template_id #=> String
     #   resp.experiment.role_arn #=> String
     #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
@@ -1481,6 +1530,7 @@ module Aws::FIS
     #   resp.experiment.log_configuration.log_schema_version #=> Integer
     #   resp.experiment.experiment_options.account_targeting #=> String, one of "single-account", "multi-account"
     #   resp.experiment.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
+    #   resp.experiment.experiment_options.actions_mode #=> String, one of "skip-all", "run-all"
     #   resp.experiment.target_account_configurations_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/StopExperiment AWS API Documentation
@@ -1639,6 +1689,7 @@ module Aws::FIS
     # @example Response structure
     #
     #   resp.experiment_template.id #=> String
+    #   resp.experiment_template.arn #=> String
     #   resp.experiment_template.description #=> String
     #   resp.experiment_template.targets #=> Hash
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].resource_type #=> String
@@ -1694,7 +1745,7 @@ module Aws::FIS
     #   The ID of the experiment template.
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role for the target account.
@@ -1743,7 +1794,7 @@ module Aws::FIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fis'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -72,6 +72,20 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CopyClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyClusterSnapshotOutput]
+        def snapshot: () -> Types::ClusterSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#copy_cluster_snapshot-instance_method
+      def copy_cluster_snapshot: (
+                                   ?copy_tags: bool,
+                                   ?kms_key_id: ::String,
+                                   snapshot_arn: ::String,
+                                   ?tags: Hash[::String, ::String],
+                                   target_snapshot_name: ::String
+                                 ) -> _CopyClusterSnapshotResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyClusterSnapshotResponseSuccess
+
       interface _CreateClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterOutput]
         def cluster: () -> Types::Cluster
@@ -81,12 +95,15 @@ module Aws
                             admin_user_name: ::String,
                             admin_user_password: ::String,
                             auth_type: ("PLAIN_TEXT" | "SECRET_ARN"),
+                            ?backup_retention_period: ::Integer,
                             ?client_token: ::String,
                             cluster_name: ::String,
                             ?kms_key_id: ::String,
+                            ?preferred_backup_window: ::String,
                             ?preferred_maintenance_window: ::String,
                             shard_capacity: ::Integer,
                             shard_count: ::Integer,
+                            ?shard_instance_count: ::Integer,
                             ?subnet_ids: Array[::String],
                             ?tags: Hash[::String, ::String],
                             ?vpc_security_group_ids: Array[::String]
@@ -154,7 +171,8 @@ module Aws
       def list_cluster_snapshots: (
                                     ?cluster_arn: ::String,
                                     ?max_results: ::Integer,
-                                    ?next_token: ::String
+                                    ?next_token: ::String,
+                                    ?snapshot_type: ::String
                                   ) -> _ListClusterSnapshotsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterSnapshotsResponseSuccess
 
@@ -188,12 +206,34 @@ module Aws
       def restore_cluster_from_snapshot: (
                                            cluster_name: ::String,
                                            ?kms_key_id: ::String,
+                                           ?shard_capacity: ::Integer,
+                                           ?shard_instance_count: ::Integer,
                                            snapshot_arn: ::String,
                                            ?subnet_ids: Array[::String],
                                            ?tags: Hash[::String, ::String],
                                            ?vpc_security_group_ids: Array[::String]
                                          ) -> _RestoreClusterFromSnapshotResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreClusterFromSnapshotResponseSuccess
+
+      interface _StartClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartClusterOutput]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#start_cluster-instance_method
+      def start_cluster: (
+                           cluster_arn: ::String
+                         ) -> _StartClusterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartClusterResponseSuccess
+
+      interface _StopClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopClusterOutput]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#stop_cluster-instance_method
+      def stop_cluster: (
+                          cluster_arn: ::String
+                        ) -> _StopClusterResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopClusterResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
@@ -223,11 +263,14 @@ module Aws
       def update_cluster: (
                             ?admin_user_password: ::String,
                             ?auth_type: ("PLAIN_TEXT" | "SECRET_ARN"),
+                            ?backup_retention_period: ::Integer,
                             ?client_token: ::String,
                             cluster_arn: ::String,
+                            ?preferred_backup_window: ::String,
                             ?preferred_maintenance_window: ::String,
                             ?shard_capacity: ::Integer,
                             ?shard_count: ::Integer,
+                            ?shard_instance_count: ::Integer,
                             ?subnet_ids: Array[::String],
                             ?vpc_security_group_ids: Array[::String]
                           ) -> _UpdateClusterResponseSuccess

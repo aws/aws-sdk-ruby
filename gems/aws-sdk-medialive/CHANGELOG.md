@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.119.0 (2024-04-11)
+------------------
+
+* Feature - AWS Elemental MediaLive introduces workflow monitor, a new feature that enables the visualization and monitoring of your media workflows. Create signal maps of your existing workflows and monitor them by creating notification and monitoring template groups.
+
+1.118.0 (2024-04-03)
+------------------
+
+* Feature - Cmaf Ingest outputs are now supported in Media Live
+
+1.117.0 (2024-03-25)
+------------------
+
+* Feature - Exposing TileMedia H265 options
+
 1.116.0 (2024-02-21)
 ------------------
 

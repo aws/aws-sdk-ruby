@@ -963,6 +963,17 @@ module Aws
                            ) -> _StopDBClusterResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDBClusterResponseSuccess
 
+      interface _SwitchoverGlobalClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SwitchoverGlobalClusterResult]
+        def global_cluster: () -> Types::GlobalCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#switchover_global_cluster-instance_method
+      def switchover_global_cluster: (
+                                       global_cluster_identifier: ::String,
+                                       target_db_cluster_identifier: ::String
+                                     ) -> _SwitchoverGlobalClusterResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SwitchoverGlobalClusterResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#wait_until-instance_method
       def wait_until: (:db_instance_available waiter_name, 
                     ?db_instance_identifier: ::String,

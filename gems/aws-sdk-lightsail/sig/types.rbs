@@ -657,6 +657,8 @@ module Aws::Lightsail
       attr_accessor bundle_id: ::String
       attr_accessor ip_address_type: ("dualstack" | "ipv4")
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor certificate_name: ::String
+      attr_accessor viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
       SENSITIVE: []
     end
 
@@ -2086,6 +2088,7 @@ module Aws::Lightsail
       attr_accessor name: ::String
       attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
       attr_accessor protocol_policy: ("http-only" | "https-only")
+      attr_accessor response_timeout: ::Integer
       SENSITIVE: []
     end
 
@@ -2275,6 +2278,7 @@ module Aws::Lightsail
       attr_accessor able_to_update_bundle: bool
       attr_accessor ip_address_type: ("dualstack" | "ipv4")
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor viewer_minimum_tls_protocol_version: ::String
       SENSITIVE: []
     end
 
@@ -2456,6 +2460,7 @@ module Aws::Lightsail
       attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
       attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
       attr_accessor protocol_policy: ("http-only" | "https-only")
+      attr_accessor response_timeout: ::Integer
       SENSITIVE: []
     end
 
@@ -3062,6 +3067,9 @@ module Aws::Lightsail
       attr_accessor cache_behavior_settings: Types::CacheSettings
       attr_accessor cache_behaviors: ::Array[Types::CacheBehaviorPerPath]
       attr_accessor is_enabled: bool
+      attr_accessor viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
+      attr_accessor certificate_name: ::String
+      attr_accessor use_default_certificate: bool
       SENSITIVE: []
     end
 

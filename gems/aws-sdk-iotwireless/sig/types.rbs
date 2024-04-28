@@ -487,6 +487,12 @@ module Aws::IoTWireless
       SENSITIVE: []
     end
 
+    class Dimension
+      attr_accessor name: ("DeviceId" | "GatewayId")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class DisassociateAwsAccountFromPartnerAccountRequest
       attr_accessor partner_account_id: ::String
       attr_accessor partner_type: ("Sidewalk")
@@ -663,6 +669,24 @@ module Aws::IoTWireless
       attr_accessor default_log_level: ("INFO" | "ERROR" | "DISABLED")
       attr_accessor wireless_gateway_log_options: ::Array[Types::WirelessGatewayLogOption]
       attr_accessor wireless_device_log_options: ::Array[Types::WirelessDeviceLogOption]
+      SENSITIVE: []
+    end
+
+    class GetMetricConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetMetricConfigurationResponse
+      attr_accessor summary_metric: Types::SummaryMetricConfiguration
+      SENSITIVE: []
+    end
+
+    class GetMetricsRequest
+      attr_accessor summary_metric_queries: ::Array[Types::SummaryMetricQuery]
+      SENSITIVE: []
+    end
+
+    class GetMetricsResponse
+      attr_accessor summary_metric_query_results: ::Array[Types::SummaryMetricQueryResult]
       SENSITIVE: []
     end
 
@@ -1279,6 +1303,7 @@ module Aws::IoTWireless
       attr_accessor frequency: ::Integer
       attr_accessor timestamp: ::String
       attr_accessor gateways: ::Array[Types::LoRaWANGatewayMetadata]
+      attr_accessor public_gateways: ::Array[Types::LoRaWANPublicGatewayMetadata]
       SENSITIVE: []
     end
 
@@ -1412,6 +1437,16 @@ module Aws::IoTWireless
       SENSITIVE: []
     end
 
+    class LoRaWANPublicGatewayMetadata
+      attr_accessor provider_net_id: ::String
+      attr_accessor id: ::String
+      attr_accessor rssi: ::Float
+      attr_accessor snr: ::Float
+      attr_accessor rf_region: ::String
+      attr_accessor dl_allowed: bool
+      SENSITIVE: []
+    end
+
     class LoRaWANSendDataToDevice
       attr_accessor f_port: ::Integer
       attr_accessor participating_gateways: Types::ParticipatingGateways
@@ -1492,6 +1527,16 @@ module Aws::IoTWireless
 
     class MessageDeliveryStatusResourceTypeEventConfiguration
       attr_accessor sidewalk: Types::SidewalkResourceTypeEventConfiguration
+      SENSITIVE: []
+    end
+
+    class MetricQueryValue
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      attr_accessor sum: ::Float
+      attr_accessor avg: ::Float
+      attr_accessor std: ::Float
+      attr_accessor p90: ::Float
       SENSITIVE: []
     end
 
@@ -1848,6 +1893,36 @@ module Aws::IoTWireless
       SENSITIVE: []
     end
 
+    class SummaryMetricConfiguration
+      attr_accessor status: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class SummaryMetricQuery
+      attr_accessor query_id: ::String
+      attr_accessor metric_name: ("DeviceRSSI" | "DeviceSNR" | "DeviceUplinkCount" | "DeviceDownlinkCount" | "DeviceUplinkLostCount" | "DeviceUplinkLostRate" | "DeviceJoinRequestCount" | "DeviceJoinAcceptCount" | "DeviceRoamingUplinkCount" | "DeviceRoamingDownlinkCount" | "GatewayUpTime" | "GatewayDownTime" | "GatewayRSSI" | "GatewaySNR" | "GatewayUplinkCount" | "GatewayDownlinkCount" | "GatewayJoinRequestCount" | "GatewayJoinAcceptCount" | "AwsAccountUplinkCount" | "AwsAccountDownlinkCount" | "AwsAccountUplinkLostCount" | "AwsAccountUplinkLostRate" | "AwsAccountJoinRequestCount" | "AwsAccountJoinAcceptCount" | "AwsAccountRoamingUplinkCount" | "AwsAccountRoamingDownlinkCount" | "AwsAccountDeviceCount" | "AwsAccountGatewayCount" | "AwsAccountActiveDeviceCount" | "AwsAccountActiveGatewayCount")
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor aggregation_period: ("OneHour" | "OneDay" | "OneWeek")
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class SummaryMetricQueryResult
+      attr_accessor query_id: ::String
+      attr_accessor query_status: ("Succeeded" | "Failed")
+      attr_accessor error: ::String
+      attr_accessor metric_name: ("DeviceRSSI" | "DeviceSNR" | "DeviceUplinkCount" | "DeviceDownlinkCount" | "DeviceUplinkLostCount" | "DeviceUplinkLostRate" | "DeviceJoinRequestCount" | "DeviceJoinAcceptCount" | "DeviceRoamingUplinkCount" | "DeviceRoamingDownlinkCount" | "GatewayUpTime" | "GatewayDownTime" | "GatewayRSSI" | "GatewaySNR" | "GatewayUplinkCount" | "GatewayDownlinkCount" | "GatewayJoinRequestCount" | "GatewayJoinAcceptCount" | "AwsAccountUplinkCount" | "AwsAccountDownlinkCount" | "AwsAccountUplinkLostCount" | "AwsAccountUplinkLostRate" | "AwsAccountJoinRequestCount" | "AwsAccountJoinAcceptCount" | "AwsAccountRoamingUplinkCount" | "AwsAccountRoamingDownlinkCount" | "AwsAccountDeviceCount" | "AwsAccountGatewayCount" | "AwsAccountActiveDeviceCount" | "AwsAccountActiveGatewayCount")
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor aggregation_period: ("OneHour" | "OneDay" | "OneWeek")
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor timestamps: ::Array[::Time]
+      attr_accessor values: ::Array[Types::MetricQueryValue]
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -1992,6 +2067,14 @@ module Aws::IoTWireless
     end
 
     class UpdateLogLevelsByResourceTypesResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMetricConfigurationRequest
+      attr_accessor summary_metric: Types::SummaryMetricConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateMetricConfigurationResponse < Aws::EmptyStructure
     end
 
     class UpdateMulticastGroupRequest

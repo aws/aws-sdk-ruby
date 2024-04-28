@@ -52,6 +52,7 @@ module Aws::ManagedGrafana
     DisassociateLicenseRequest = Shapes::StructureShape.new(name: 'DisassociateLicenseRequest')
     DisassociateLicenseResponse = Shapes::StructureShape.new(name: 'DisassociateLicenseResponse')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
+    GrafanaToken = Shapes::StringShape.new(name: 'GrafanaToken')
     GrafanaVersion = Shapes::StringShape.new(name: 'GrafanaVersion')
     GrafanaVersionList = Shapes::ListShape.new(name: 'GrafanaVersionList')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
@@ -156,6 +157,7 @@ module Aws::ManagedGrafana
     AssertionAttributes.add_member(:role, Shapes::ShapeRef.new(shape: AssertionAttribute, location_name: "role"))
     AssertionAttributes.struct_class = Types::AssertionAttributes
 
+    AssociateLicenseRequest.add_member(:grafana_token, Shapes::ShapeRef.new(shape: GrafanaToken, location: "header", location_name: "Grafana-Token"))
     AssociateLicenseRequest.add_member(:license_type, Shapes::ShapeRef.new(shape: LicenseType, required: true, location: "uri", location_name: "licenseType"))
     AssociateLicenseRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     AssociateLicenseRequest.struct_class = Types::AssociateLicenseRequest
@@ -465,6 +467,7 @@ module Aws::ManagedGrafana
     WorkspaceDescription.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "endpoint"))
     WorkspaceDescription.add_member(:free_trial_consumed, Shapes::ShapeRef.new(shape: Boolean, location_name: "freeTrialConsumed"))
     WorkspaceDescription.add_member(:free_trial_expiration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "freeTrialExpiration"))
+    WorkspaceDescription.add_member(:grafana_token, Shapes::ShapeRef.new(shape: GrafanaToken, location_name: "grafanaToken"))
     WorkspaceDescription.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, required: true, location_name: "grafanaVersion"))
     WorkspaceDescription.add_member(:id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "id"))
     WorkspaceDescription.add_member(:license_expiration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "licenseExpiration"))
@@ -489,8 +492,10 @@ module Aws::ManagedGrafana
     WorkspaceSummary.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "created"))
     WorkspaceSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     WorkspaceSummary.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "endpoint"))
+    WorkspaceSummary.add_member(:grafana_token, Shapes::ShapeRef.new(shape: GrafanaToken, location_name: "grafanaToken"))
     WorkspaceSummary.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, required: true, location_name: "grafanaVersion"))
     WorkspaceSummary.add_member(:id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "id"))
+    WorkspaceSummary.add_member(:license_type, Shapes::ShapeRef.new(shape: LicenseType, location_name: "licenseType"))
     WorkspaceSummary.add_member(:modified, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modified"))
     WorkspaceSummary.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "name"))
     WorkspaceSummary.add_member(:notification_destinations, Shapes::ShapeRef.new(shape: NotificationDestinationsList, location_name: "notificationDestinations"))

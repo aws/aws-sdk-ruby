@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::WorkSpacesWeb
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::WorkSpacesWeb
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::WorkSpacesWeb
     #   @option options [Aws::WorkSpacesWeb::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::WorkSpacesWeb::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -612,7 +636,7 @@ module Aws::WorkSpacesWeb
     #   client token returns the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -669,7 +693,7 @@ module Aws::WorkSpacesWeb
     #   client token returns the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -738,6 +762,13 @@ module Aws::WorkSpacesWeb
     #
     #     * `IDPSignout` (boolean) *optional*
     #
+    #     * `IDPInit` (boolean) *optional*
+    #
+    #     * `RequestSigningAlgorithm` (string) *optional* - Only accepts
+    #       `rsa-sha256`
+    #
+    #     * `EncryptedResponses` (boolean) *optional*
+    #
     # @option params [required, String] :identity_provider_name
     #   The identity provider name.
     #
@@ -790,7 +821,7 @@ module Aws::WorkSpacesWeb
     #   client token returns the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -864,7 +895,7 @@ module Aws::WorkSpacesWeb
     #   client token returns the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -932,12 +963,11 @@ module Aws::WorkSpacesWeb
     #   access to your web portal is controlled through your identity
     #   provider.
     #
-    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
-    #   Identity Center (successor to AWS Single Sign-On). They provide
-    #   additional features, such as IdP-initiated authentication. Identity
-    #   sources (including external identity provider integration), plus user
-    #   and group access to your web portal, can be configured in the IAM
-    #   Identity Center.
+    #   `IAM Identity Center` web portals are authenticated through IAM
+    #   Identity Center (successor to Single Sign-On). Identity sources
+    #   (including external identity provider integration), plus user and
+    #   group access to your web portal, can be configured in the IAM Identity
+    #   Center.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -947,7 +977,7 @@ module Aws::WorkSpacesWeb
     #   client token returns the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -958,6 +988,12 @@ module Aws::WorkSpacesWeb
     # @option params [String] :display_name
     #   The name of the web portal. This is not visible to users who log into
     #   the web portal.
+    #
+    # @option params [String] :instance_type
+    #   The type and resources of the underlying instance.
+    #
+    # @option params [Integer] :max_concurrent_sessions
+    #   The maximum number of concurrent sessions for the portal.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to add to the web portal. A tag is a key-value pair.
@@ -977,6 +1013,8 @@ module Aws::WorkSpacesWeb
     #     client_token: "ClientToken",
     #     customer_managed_key: "keyArn",
     #     display_name: "DisplayName",
+    #     instance_type: "standard.regular", # accepts standard.regular, standard.large, standard.xlarge
+    #     max_concurrent_sessions: 1,
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1018,7 +1056,7 @@ module Aws::WorkSpacesWeb
     #   client token returns the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1067,7 +1105,7 @@ module Aws::WorkSpacesWeb
     #   client token returns the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1125,7 +1163,7 @@ module Aws::WorkSpacesWeb
     #   client token returns the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1551,10 +1589,13 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.browser_settings.additional_encryption_context #=> Hash
+    #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
     #   resp.browser_settings.associated_portal_arns #=> Array
     #   resp.browser_settings.associated_portal_arns[0] #=> String
     #   resp.browser_settings.browser_policy #=> String
     #   resp.browser_settings.browser_settings_arn #=> String
+    #   resp.browser_settings.customer_managed_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetBrowserSettings AWS API Documentation
     #
@@ -1614,9 +1655,12 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.ip_access_settings.additional_encryption_context #=> Hash
+    #   resp.ip_access_settings.additional_encryption_context["StringType"] #=> String
     #   resp.ip_access_settings.associated_portal_arns #=> Array
     #   resp.ip_access_settings.associated_portal_arns[0] #=> String
     #   resp.ip_access_settings.creation_date #=> Time
+    #   resp.ip_access_settings.customer_managed_key #=> String
     #   resp.ip_access_settings.description #=> String
     #   resp.ip_access_settings.display_name #=> String
     #   resp.ip_access_settings.ip_access_settings_arn #=> String
@@ -1685,12 +1729,17 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.portal.additional_encryption_context #=> Hash
+    #   resp.portal.additional_encryption_context["StringType"] #=> String
     #   resp.portal.authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
     #   resp.portal.browser_settings_arn #=> String
     #   resp.portal.browser_type #=> String, one of "Chrome"
     #   resp.portal.creation_date #=> Time
+    #   resp.portal.customer_managed_key #=> String
     #   resp.portal.display_name #=> String
+    #   resp.portal.instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
     #   resp.portal.ip_access_settings_arn #=> String
+    #   resp.portal.max_concurrent_sessions #=> Integer
     #   resp.portal.network_settings_arn #=> String
     #   resp.portal.portal_arn #=> String
     #   resp.portal.portal_endpoint #=> String
@@ -1857,6 +1906,8 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.user_settings.additional_encryption_context #=> Hash
+    #   resp.user_settings.additional_encryption_context["StringType"] #=> String
     #   resp.user_settings.associated_portal_arns #=> Array
     #   resp.user_settings.associated_portal_arns[0] #=> String
     #   resp.user_settings.cookie_synchronization_configuration.allowlist #=> Array
@@ -1868,6 +1919,7 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].name #=> String
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].path #=> String
     #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.customer_managed_key #=> String
     #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
@@ -2079,7 +2131,9 @@ module Aws::WorkSpacesWeb
     #   resp.portals[0].browser_type #=> String, one of "Chrome"
     #   resp.portals[0].creation_date #=> Time
     #   resp.portals[0].display_name #=> String
+    #   resp.portals[0].instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
     #   resp.portals[0].ip_access_settings_arn #=> String
+    #   resp.portals[0].max_concurrent_sessions #=> Integer
     #   resp.portals[0].network_settings_arn #=> String
     #   resp.portals[0].portal_arn #=> String
     #   resp.portals[0].portal_endpoint #=> String
@@ -2316,7 +2370,7 @@ module Aws::WorkSpacesWeb
     #   client token returns the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2394,7 +2448,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2413,10 +2467,13 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.browser_settings.additional_encryption_context #=> Hash
+    #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
     #   resp.browser_settings.associated_portal_arns #=> Array
     #   resp.browser_settings.associated_portal_arns[0] #=> String
     #   resp.browser_settings.browser_policy #=> String
     #   resp.browser_settings.browser_settings_arn #=> String
+    #   resp.browser_settings.customer_managed_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateBrowserSettings AWS API Documentation
     #
@@ -2437,7 +2494,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2509,6 +2566,13 @@ module Aws::WorkSpacesWeb
     #
     #     * `IDPSignout` (boolean) *optional*
     #
+    #     * `IDPInit` (boolean) *optional*
+    #
+    #     * `RequestSigningAlgorithm` (string) *optional* - Only accepts
+    #       `rsa-sha256`
+    #
+    #     * `EncryptedResponses` (boolean) *optional*
+    #
     # @option params [String] :identity_provider_name
     #   The name of the identity provider.
     #
@@ -2558,7 +2622,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2596,9 +2660,12 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.ip_access_settings.additional_encryption_context #=> Hash
+    #   resp.ip_access_settings.additional_encryption_context["StringType"] #=> String
     #   resp.ip_access_settings.associated_portal_arns #=> Array
     #   resp.ip_access_settings.associated_portal_arns[0] #=> String
     #   resp.ip_access_settings.creation_date #=> Time
+    #   resp.ip_access_settings.customer_managed_key #=> String
     #   resp.ip_access_settings.description #=> String
     #   resp.ip_access_settings.display_name #=> String
     #   resp.ip_access_settings.ip_access_settings_arn #=> String
@@ -2625,7 +2692,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2691,16 +2758,21 @@ module Aws::WorkSpacesWeb
     #   access to your web portal is controlled through your identity
     #   provider.
     #
-    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
-    #   Identity Center (successor to AWS Single Sign-On). They provide
-    #   additional features, such as IdP-initiated authentication. Identity
-    #   sources (including external identity provider integration), plus user
-    #   and group access to your web portal, can be configured in the IAM
-    #   Identity Center.
+    #   `IAM Identity Center` web portals are authenticated through IAM
+    #   Identity Center (successor to Single Sign-On). Identity sources
+    #   (including external identity provider integration), plus user and
+    #   group access to your web portal, can be configured in the IAM Identity
+    #   Center.
     #
     # @option params [String] :display_name
     #   The name of the web portal. This is not visible to users who log into
     #   the web portal.
+    #
+    # @option params [String] :instance_type
+    #   The type and resources of the underlying instance.
+    #
+    # @option params [Integer] :max_concurrent_sessions
+    #   The maximum number of concurrent sessions for the portal.
     #
     # @option params [required, String] :portal_arn
     #   The ARN of the web portal.
@@ -2714,17 +2786,24 @@ module Aws::WorkSpacesWeb
     #   resp = client.update_portal({
     #     authentication_type: "Standard", # accepts Standard, IAM_Identity_Center
     #     display_name: "DisplayName",
+    #     instance_type: "standard.regular", # accepts standard.regular, standard.large, standard.xlarge
+    #     max_concurrent_sessions: 1,
     #     portal_arn: "ARN", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.portal.additional_encryption_context #=> Hash
+    #   resp.portal.additional_encryption_context["StringType"] #=> String
     #   resp.portal.authentication_type #=> String, one of "Standard", "IAM_Identity_Center"
     #   resp.portal.browser_settings_arn #=> String
     #   resp.portal.browser_type #=> String, one of "Chrome"
     #   resp.portal.creation_date #=> Time
+    #   resp.portal.customer_managed_key #=> String
     #   resp.portal.display_name #=> String
+    #   resp.portal.instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
     #   resp.portal.ip_access_settings_arn #=> String
+    #   resp.portal.max_concurrent_sessions #=> Integer
     #   resp.portal.network_settings_arn #=> String
     #   resp.portal.portal_arn #=> String
     #   resp.portal.portal_endpoint #=> String
@@ -2760,7 +2839,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2804,7 +2883,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2853,7 +2932,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2932,6 +3011,8 @@ module Aws::WorkSpacesWeb
     #
     # @example Response structure
     #
+    #   resp.user_settings.additional_encryption_context #=> Hash
+    #   resp.user_settings.additional_encryption_context["StringType"] #=> String
     #   resp.user_settings.associated_portal_arns #=> Array
     #   resp.user_settings.associated_portal_arns[0] #=> String
     #   resp.user_settings.cookie_synchronization_configuration.allowlist #=> Array
@@ -2943,6 +3024,7 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].name #=> String
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].path #=> String
     #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings.customer_managed_key #=> String
     #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
@@ -2973,7 +3055,7 @@ module Aws::WorkSpacesWeb
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

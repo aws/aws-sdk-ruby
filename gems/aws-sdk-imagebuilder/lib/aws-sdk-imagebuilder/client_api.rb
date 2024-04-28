@@ -1395,6 +1395,8 @@ module Aws::Imagebuilder
     LifecycleExecutionResource.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "region"))
     LifecycleExecutionResource.add_member(:snapshots, Shapes::ShapeRef.new(shape: LifecycleExecutionSnapshotResourceList, location_name: "snapshots"))
     LifecycleExecutionResource.add_member(:image_uris, Shapes::ShapeRef.new(shape: StringList, location_name: "imageUris"))
+    LifecycleExecutionResource.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "startTime"))
+    LifecycleExecutionResource.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "endTime"))
     LifecycleExecutionResource.struct_class = Types::LifecycleExecutionResource
 
     LifecycleExecutionResourceAction.add_member(:name, Shapes::ShapeRef.new(shape: LifecycleExecutionResourceActionName, location_name: "name"))

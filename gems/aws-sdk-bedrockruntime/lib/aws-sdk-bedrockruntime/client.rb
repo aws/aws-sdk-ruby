@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -73,6 +74,7 @@ module Aws::BedrockRuntime
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -198,10 +200,17 @@ module Aws::BedrockRuntime
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -348,50 +357,65 @@ module Aws::BedrockRuntime
     #   @option options [Aws::BedrockRuntime::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::BedrockRuntime::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -399,27 +423,27 @@ module Aws::BedrockRuntime
 
     # @!group API Operations
 
-    # Invokes the specified Bedrock model to run inference using the input
-    # provided in the request body. You use InvokeModel to run inference for
-    # text models, image models, and embedding models.
+    # Invokes the specified Amazon Bedrock model to run inference using the
+    # prompt and inference parameters provided in the request body. You use
+    # model inference to generate text, images, and embeddings.
     #
-    # For more information, see [Run inference][1] in the Bedrock User
-    # Guide.
+    # For example code, see *Invoke model code examples* in the *Amazon
+    # Bedrock User Guide*.
     #
-    # For example requests, see Examples (after the Errors section).
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
+    # This operation requires permission for the `bedrock:InvokeModel`
+    # action.
     #
     # @option params [required, String, StringIO, File] :body
-    #   Input data in the format specified in the content-type request header.
-    #   To see the format and content of this field for different models,
-    #   refer to [Inference parameters][1].
+    #   The prompt and inference parameters in the format specified in the
+    #   `contentType` in the header. To see the format and content of the
+    #   request and response bodies for different models, refer to [Inference
+    #   parameters][1]. For more information, see [Run inference][2] in the
+    #   Bedrock User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
     #
     # @option params [String] :content_type
     #   The MIME type of the input data in the request. The default value is
@@ -430,7 +454,50 @@ module Aws::BedrockRuntime
     #   default value is `application/json`.
     #
     # @option params [required, String] :model_id
-    #   Identifier of the model.
+    #   The unique identifier of the model to invoke to run inference.
+    #
+    #   The `modelId` to provide depends on the type of model that you use:
+    #
+    #   * If you use a base model, specify the model ID or its ARN. For a list
+    #     of model IDs for base models, see [Amazon Bedrock base model IDs
+    #     (on-demand throughput)][1] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a provisioned model, specify the ARN of the Provisioned
+    #     Throughput. For more information, see [Run inference using a
+    #     Provisioned Throughput][2] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a custom model, first purchase Provisioned Throughput for
+    #     it. Then specify the ARN of the resulting provisioned model. For
+    #     more information, see [Use a custom model in Amazon Bedrock][3] in
+    #     the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #
+    # @option params [String] :trace
+    #   Specifies whether to enable or disable the Bedrock trace. If enabled,
+    #   you can see the full Bedrock trace.
+    #
+    # @option params [String] :guardrail_identifier
+    #   The unique identifier of the guardrail that you want to use. If you
+    #   don't provide a value, no guardrail is applied to the invocation.
+    #
+    #   An error will be thrown in the following situations.
+    #
+    #   * You don't provide a guardrail identifier but you specify the
+    #     `amazon-bedrock-guardrailConfig` field in the request body.
+    #
+    #   * You enable the guardrail but the `contentType` isn't
+    #     `application/json`.
+    #
+    #   * You provide a guardrail identifier, but `guardrailVersion` isn't
+    #     specified.
+    #
+    # @option params [String] :guardrail_version
+    #   The version number for the guardrail. The value can also be `DRAFT`.
     #
     # @return [Types::InvokeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -444,6 +511,9 @@ module Aws::BedrockRuntime
     #     content_type: "MimeType",
     #     accept: "MimeType",
     #     model_id: "InvokeModelIdentifier", # required
+    #     trace: "ENABLED", # accepts ENABLED, DISABLED
+    #     guardrail_identifier: "GuardrailIdentifier",
+    #     guardrail_version: "GuardrailVersion",
     #   })
     #
     # @example Response structure
@@ -460,27 +530,38 @@ module Aws::BedrockRuntime
       req.send_request(options)
     end
 
-    # Invoke the specified Bedrock model to run inference using the input
-    # provided. Return the response in a stream.
+    # Invoke the specified Amazon Bedrock model to run inference using the
+    # prompt and inference parameters provided in the request body. The
+    # response is returned in a stream.
     #
-    # For more information, see [Run inference][1] in the Bedrock User
-    # Guide.
+    # To see if a model supports streaming, call [GetFoundationModel][1] and
+    # check the `responseStreamingSupported` field in the response.
     #
-    # For an example request and response, see Examples (after the Errors
-    # section).
+    # <note markdown="1"> The CLI doesn't support `InvokeModelWithResponseStream`.
+    #
+    #  </note>
+    #
+    # For example code, see *Invoke model with streaming code example* in
+    # the *Amazon Bedrock User Guide*.
+    #
+    # This operation requires permissions to perform the
+    # `bedrock:InvokeModelWithResponseStream` action.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html
     #
     # @option params [required, String, StringIO, File] :body
-    #   Inference input in the format specified by the content-type. To see
-    #   the format and content of this field for different models, refer to
-    #   [Inference parameters][1].
+    #   The prompt and inference parameters in the format specified in the
+    #   `contentType` in the header. To see the format and content of the
+    #   request and response bodies for different models, refer to [Inference
+    #   parameters][1]. For more information, see [Run inference][2] in the
+    #   Bedrock User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
     #
     # @option params [String] :content_type
     #   The MIME type of the input data in the request. The default value is
@@ -491,7 +572,50 @@ module Aws::BedrockRuntime
     #   default value is `application/json`.
     #
     # @option params [required, String] :model_id
-    #   Id of the model to invoke using the streaming request.
+    #   The unique identifier of the model to invoke to run inference.
+    #
+    #   The `modelId` to provide depends on the type of model that you use:
+    #
+    #   * If you use a base model, specify the model ID or its ARN. For a list
+    #     of model IDs for base models, see [Amazon Bedrock base model IDs
+    #     (on-demand throughput)][1] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a provisioned model, specify the ARN of the Provisioned
+    #     Throughput. For more information, see [Run inference using a
+    #     Provisioned Throughput][2] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a custom model, first purchase Provisioned Throughput for
+    #     it. Then specify the ARN of the resulting provisioned model. For
+    #     more information, see [Use a custom model in Amazon Bedrock][3] in
+    #     the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #
+    # @option params [String] :trace
+    #   Specifies whether to enable or disable the Bedrock trace. If enabled,
+    #   you can see the full Bedrock trace.
+    #
+    # @option params [String] :guardrail_identifier
+    #   The unique identifier of the guardrail that you want to use. If you
+    #   don't provide a value, no guardrail is applied to the invocation.
+    #
+    #   An error is thrown in the following situations.
+    #
+    #   * You don't provide a guardrail identifier but you specify the
+    #     `amazon-bedrock-guardrailConfig` field in the request body.
+    #
+    #   * You enable the guardrail but the `contentType` isn't
+    #     `application/json`.
+    #
+    #   * You provide a guardrail identifier, but `guardrailVersion` isn't
+    #     specified.
+    #
+    # @option params [String] :guardrail_version
+    #   The version number for the guardrail. The value can also be `DRAFT`.
     #
     # @return [Types::InvokeModelWithResponseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -500,22 +624,22 @@ module Aws::BedrockRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process event once it arrives immediately, or wait until
-    #   full response complete and iterate through eventstream enumerator.
+    #   You can process the event once it arrives immediately, or wait until the
+    #   full response is complete and iterate through the eventstream enumerator.
     #
     #   To interact with event immediately, you need to register #invoke_model_with_response_stream
-    #   with callbacks, callbacks can be register for specifc events or for all events,
-    #   callback for errors in the event stream is also available for register.
+    #   with callbacks. Callbacks can be registered for specific events or for all
+    #   events, including error events.
     #
-    #   Callbacks can be passed in by `:event_stream_handler` option or within block
-    #   statement attached to #invoke_model_with_response_stream call directly. Hybrid pattern of both
-    #   is also supported.
+    #   Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   block statement attached to the #invoke_model_with_response_stream call directly. Hybrid
+    #   pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either Proc object or
+    #   `:event_stream_handler` option takes in either a Proc object or
     #   Aws::BedrockRuntime::EventStreams::ResponseStream object.
     #
-    #   Usage pattern a): callbacks with a block attached to #invoke_model_with_response_stream
-    #     Example for registering callbacks for all event types and error event
+    #   Usage pattern a): Callbacks with a block attached to #invoke_model_with_response_stream
+    #     Example for registering callbacks for all event types and an error event
     #
     #     client.invoke_model_with_response_stream( # params input# ) do |stream|
     #       stream.on_error_event do |event|
@@ -535,9 +659,9 @@ module Aws::BedrockRuntime
     #
     #     end
     #
-    #   Usage pattern b): pass in `:event_stream_handler` for #invoke_model_with_response_stream
+    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_model_with_response_stream
     #
-    #     1) create a Aws::BedrockRuntime::EventStreams::ResponseStream object
+    #     1) Create a Aws::BedrockRuntime::EventStreams::ResponseStream object
     #     Example for registering callbacks with specific events
     #
     #       handler = Aws::BedrockRuntime::EventStreams::ResponseStream.new
@@ -562,7 +686,7 @@ module Aws::BedrockRuntime
     #
     #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler)
     #
-    #     2) use a Ruby Proc object
+    #     2) Use a Ruby Proc object
     #     Example for registering callbacks with specific events
     #
     #     handler = Proc.new do |stream|
@@ -588,7 +712,7 @@ module Aws::BedrockRuntime
     #
     #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler)
     #
-    #   Usage pattern c): hybird pattern of a) and b)
+    #   Usage pattern c): Hybrid pattern of a) and b)
     #
     #       handler = Aws::BedrockRuntime::EventStreams::ResponseStream.new
     #       handler.on_chunk_event do |event|
@@ -621,8 +745,7 @@ module Aws::BedrockRuntime
     #       end
     #     end
     #
-    #   Besides above usage patterns for process events when they arrive immediately, you can also
-    #   iterate through events after response complete.
+    #   You can also iterate through events after the response complete.
     #
     #   Events are available at resp.body # => Enumerator
     #   For parameter input example, please refer to following request syntax
@@ -634,6 +757,9 @@ module Aws::BedrockRuntime
     #     content_type: "MimeType",
     #     accept: "MimeType",
     #     model_id: "InvokeModelIdentifier", # required
+    #     trace: "ENABLED", # accepts ENABLED, DISABLED
+    #     guardrail_identifier: "GuardrailIdentifier",
+    #     guardrail_version: "GuardrailVersion",
     #   })
     #
     # @example Response structure
@@ -704,7 +830,7 @@ module Aws::BedrockRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

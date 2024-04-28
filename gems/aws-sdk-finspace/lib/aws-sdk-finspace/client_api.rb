@@ -63,6 +63,8 @@ module Aws::Finspace
     DbPaths = Shapes::ListShape.new(name: 'DbPaths')
     DeleteEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteEnvironmentRequest')
     DeleteEnvironmentResponse = Shapes::StructureShape.new(name: 'DeleteEnvironmentResponse')
+    DeleteKxClusterNodeRequest = Shapes::StructureShape.new(name: 'DeleteKxClusterNodeRequest')
+    DeleteKxClusterNodeResponse = Shapes::StructureShape.new(name: 'DeleteKxClusterNodeResponse')
     DeleteKxClusterRequest = Shapes::StructureShape.new(name: 'DeleteKxClusterRequest')
     DeleteKxClusterResponse = Shapes::StructureShape.new(name: 'DeleteKxClusterResponse')
     DeleteKxDatabaseRequest = Shapes::StructureShape.new(name: 'DeleteKxDatabaseRequest')
@@ -176,6 +178,7 @@ module Aws::Finspace
     KxNAS1Size = Shapes::IntegerShape.new(name: 'KxNAS1Size')
     KxNAS1Type = Shapes::StringShape.new(name: 'KxNAS1Type')
     KxNode = Shapes::StructureShape.new(name: 'KxNode')
+    KxNodeStatus = Shapes::StringShape.new(name: 'KxNodeStatus')
     KxNodeSummaries = Shapes::ListShape.new(name: 'KxNodeSummaries')
     KxSavedownStorageConfiguration = Shapes::StructureShape.new(name: 'KxSavedownStorageConfiguration')
     KxSavedownStorageSize = Shapes::IntegerShape.new(name: 'KxSavedownStorageSize')
@@ -448,6 +451,7 @@ module Aws::Finspace
     CreateKxDataviewRequest.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
     CreateKxDataviewRequest.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
     CreateKxDataviewRequest.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    CreateKxDataviewRequest.add_member(:read_write, Shapes::ShapeRef.new(shape: booleanValue, location_name: "readWrite"))
     CreateKxDataviewRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateKxDataviewRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
@@ -462,6 +466,7 @@ module Aws::Finspace
     CreateKxDataviewResponse.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
     CreateKxDataviewResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateKxDataviewResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    CreateKxDataviewResponse.add_member(:read_write, Shapes::ShapeRef.new(shape: booleanValue, location_name: "readWrite"))
     CreateKxDataviewResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
     CreateKxDataviewResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
     CreateKxDataviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxDataviewStatus, location_name: "status"))
@@ -551,6 +556,13 @@ module Aws::Finspace
     DeleteEnvironmentRequest.struct_class = Types::DeleteEnvironmentRequest
 
     DeleteEnvironmentResponse.struct_class = Types::DeleteEnvironmentResponse
+
+    DeleteKxClusterNodeRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    DeleteKxClusterNodeRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
+    DeleteKxClusterNodeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: KxClusterNodeIdString, required: true, location: "uri", location_name: "nodeId"))
+    DeleteKxClusterNodeRequest.struct_class = Types::DeleteKxClusterNodeRequest
+
+    DeleteKxClusterNodeResponse.struct_class = Types::DeleteKxClusterNodeResponse
 
     DeleteKxClusterRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     DeleteKxClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
@@ -718,6 +730,7 @@ module Aws::Finspace
     GetKxDataviewResponse.add_member(:active_versions, Shapes::ShapeRef.new(shape: KxDataviewActiveVersionList, location_name: "activeVersions"))
     GetKxDataviewResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetKxDataviewResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    GetKxDataviewResponse.add_member(:read_write, Shapes::ShapeRef.new(shape: booleanValue, location_name: "readWrite"))
     GetKxDataviewResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
     GetKxDataviewResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
     GetKxDataviewResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
@@ -900,6 +913,7 @@ module Aws::Finspace
     KxDataviewListEntry.add_member(:status, Shapes::ShapeRef.new(shape: KxDataviewStatus, location_name: "status"))
     KxDataviewListEntry.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     KxDataviewListEntry.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    KxDataviewListEntry.add_member(:read_write, Shapes::ShapeRef.new(shape: booleanValue, location_name: "readWrite"))
     KxDataviewListEntry.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
     KxDataviewListEntry.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
     KxDataviewListEntry.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxDataviewStatusReason, location_name: "statusReason"))
@@ -907,6 +921,7 @@ module Aws::Finspace
 
     KxDataviewSegmentConfiguration.add_member(:db_paths, Shapes::ShapeRef.new(shape: SegmentConfigurationDbPathList, required: true, location_name: "dbPaths"))
     KxDataviewSegmentConfiguration.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, required: true, location_name: "volumeName"))
+    KxDataviewSegmentConfiguration.add_member(:on_demand, Shapes::ShapeRef.new(shape: booleanValue, location_name: "onDemand"))
     KxDataviewSegmentConfiguration.struct_class = Types::KxDataviewSegmentConfiguration
 
     KxDataviewSegmentConfigurationList.member = Shapes::ShapeRef.new(shape: KxDataviewSegmentConfiguration)
@@ -944,6 +959,7 @@ module Aws::Finspace
     KxNode.add_member(:node_id, Shapes::ShapeRef.new(shape: KxClusterNodeIdString, location_name: "nodeId"))
     KxNode.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     KxNode.add_member(:launch_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "launchTime"))
+    KxNode.add_member(:status, Shapes::ShapeRef.new(shape: KxNodeStatus, location_name: "status"))
     KxNode.struct_class = Types::KxNode
 
     KxNodeSummaries.member = Shapes::ShapeRef.new(shape: KxNode)
@@ -1221,6 +1237,7 @@ module Aws::Finspace
     UpdateKxDataviewResponse.add_member(:active_versions, Shapes::ShapeRef.new(shape: KxDataviewActiveVersionList, location_name: "activeVersions"))
     UpdateKxDataviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxDataviewStatus, location_name: "status"))
     UpdateKxDataviewResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    UpdateKxDataviewResponse.add_member(:read_write, Shapes::ShapeRef.new(shape: booleanValue, location_name: "readWrite"))
     UpdateKxDataviewResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateKxDataviewResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
     UpdateKxDataviewResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
@@ -1510,6 +1527,19 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_kx_cluster_node, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKxClusterNode"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/kx/environments/{environmentId}/clusters/{clusterName}/nodes/{nodeId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKxClusterNodeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKxClusterNodeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::EntityResolution
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::EntityResolution
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,56 +346,177 @@ module Aws::EntityResolution
     #   @option options [Aws::EntityResolution::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::EntityResolution::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Adds a policy statement object. To retrieve a list of existing policy
+    # statements, use the `GetPolicy` API.
+    #
+    # @option params [required, Array<String>] :action
+    #   The action that the principal can use on the resource.
+    #
+    #   For example, `entityresolution:GetIdMappingJob`,
+    #   `entityresolution:GetMatchingJob`.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the resource that will be accessed
+    #   by the principal.
+    #
+    # @option params [String] :condition
+    #   A set of condition keys that you can use in key policies.
+    #
+    # @option params [required, String] :effect
+    #   Determines whether the permissions specified in the policy are to be
+    #   allowed (`Allow`) or denied (`Deny`).
+    #
+    # @option params [required, Array<String>] :principal
+    #   The Amazon Web Services service or Amazon Web Services account that
+    #   can access the resource defined as ARN.
+    #
+    # @option params [required, String] :statement_id
+    #   A statement identifier that differentiates the statement from others
+    #   in the same policy.
+    #
+    # @return [Types::AddPolicyStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddPolicyStatementOutput#arn #arn} => String
+    #   * {Types::AddPolicyStatementOutput#policy #policy} => String
+    #   * {Types::AddPolicyStatementOutput#token #token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_policy_statement({
+    #     action: ["StatementAction"], # required
+    #     arn: "VeniceGlobalArn", # required
+    #     condition: "StatementCondition",
+    #     effect: "Allow", # required, accepts Allow, Deny
+    #     principal: ["StatementPrincipal"], # required
+    #     statement_id: "StatementId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.policy #=> String
+    #   resp.token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/AddPolicyStatement AWS API Documentation
+    #
+    # @overload add_policy_statement(params = {})
+    # @param [Hash] params ({})
+    def add_policy_statement(params = {}, options = {})
+      req = build_request(:add_policy_statement, params)
+      req.send_request(options)
+    end
+
+    # Deletes multiple unique IDs in a matching workflow.
+    #
+    # @option params [String] :input_source
+    #   The input source for the batch delete unique ID operation.
+    #
+    # @option params [required, Array<String>] :unique_ids
+    #   The unique IDs to delete.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the workflow.
+    #
+    # @return [Types::BatchDeleteUniqueIdOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteUniqueIdOutput#deleted #deleted} => Array&lt;Types::DeletedUniqueId&gt;
+    #   * {Types::BatchDeleteUniqueIdOutput#disconnected_unique_ids #disconnected_unique_ids} => Array&lt;String&gt;
+    #   * {Types::BatchDeleteUniqueIdOutput#errors #errors} => Array&lt;Types::DeleteUniqueIdError&gt;
+    #   * {Types::BatchDeleteUniqueIdOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_unique_id({
+    #     input_source: "BatchDeleteUniqueIdInputInputSourceString",
+    #     unique_ids: ["UniqueId"], # required
+    #     workflow_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deleted #=> Array
+    #   resp.deleted[0].unique_id #=> String
+    #   resp.disconnected_unique_ids #=> Array
+    #   resp.disconnected_unique_ids[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_type #=> String, one of "SERVICE_ERROR", "VALIDATION_ERROR"
+    #   resp.errors[0].unique_id #=> String
+    #   resp.status #=> String, one of "COMPLETED", "ACCEPTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/BatchDeleteUniqueId AWS API Documentation
+    #
+    # @overload batch_delete_unique_id(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_unique_id(params = {}, options = {})
+      req = build_request(:batch_delete_unique_id, params)
+      req.send_request(options)
+    end
 
     # Creates an `IdMappingWorkflow` object which stores the configuration
     # of the data processing job to be run. Each `IdMappingWorkflow` must
@@ -404,7 +534,7 @@ module Aws::EntityResolution
     #   A list of `InputSource` objects, which have the fields
     #   `InputSourceARN` and `SchemaName`.
     #
-    # @option params [required, Array<Types::IdMappingWorkflowOutputSource>] :output_source_config
+    # @option params [Array<Types::IdMappingWorkflowOutputSource>] :output_source_config
     #   A list of `IdMappingWorkflowOutputSource` objects, each of which
     #   contains fields `OutputS3Path` and `Output`.
     #
@@ -436,7 +566,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     id_mapping_techniques: { # required
     #       id_mapping_type: "PROVIDER", # required, accepts PROVIDER
-    #       provider_properties: { # required
+    #       provider_properties: {
     #         intermediate_source_configuration: {
     #           intermediate_s3_path: "S3Path", # required
     #         },
@@ -448,10 +578,11 @@ module Aws::EntityResolution
     #     input_source_config: [ # required
     #       {
     #         input_source_arn: "IdMappingWorkflowInputSourceInputSourceARNString", # required
-    #         schema_name: "EntityName", # required
+    #         schema_name: "EntityName",
+    #         type: "SOURCE", # accepts SOURCE, TARGET
     #       },
     #     ],
-    #     output_source_config: [ # required
+    #     output_source_config: [
     #       {
     #         kms_arn: "KMSArn",
     #         output_s3_path: "S3Path", # required
@@ -473,6 +604,7 @@ module Aws::EntityResolution
     #   resp.input_source_config #=> Array
     #   resp.input_source_config[0].input_source_arn #=> String
     #   resp.input_source_config[0].schema_name #=> String
+    #   resp.input_source_config[0].type #=> String, one of "SOURCE", "TARGET"
     #   resp.output_source_config #=> Array
     #   resp.output_source_config[0].kms_arn #=> String
     #   resp.output_source_config[0].output_s3_path #=> String
@@ -486,6 +618,110 @@ module Aws::EntityResolution
     # @param [Hash] params ({})
     def create_id_mapping_workflow(params = {}, options = {})
       req = build_request(:create_id_mapping_workflow, params)
+      req.send_request(options)
+    end
+
+    # Creates an ID namespace object which will help customers provide
+    # metadata explaining their dataset and how to use it. Each ID namespace
+    # must have a unique name. To modify an existing ID namespace, use the
+    # `UpdateIdNamespace` API.
+    #
+    # @option params [String] :description
+    #   The description of the ID namespace.
+    #
+    # @option params [Array<Types::IdNamespaceIdMappingWorkflowProperties>] :id_mapping_workflow_properties
+    #   Determines the properties of `IdMappingWorflow` where this
+    #   `IdNamespace` can be used as a `Source` or a `Target`.
+    #
+    # @option params [required, String] :id_namespace_name
+    #   The name of the ID namespace.
+    #
+    # @option params [Array<Types::IdNamespaceInputSource>] :input_source_config
+    #   A list of `InputSource` objects, which have the fields
+    #   `InputSourceARN` and `SchemaName`.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
+    #   assumes this role to access the resources defined in this
+    #   `IdNamespace` on your behalf as part of the workflow run.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @option params [required, String] :type
+    #   The type of ID namespace. There are two types: `SOURCE` and `TARGET`.
+    #
+    #   The `SOURCE` contains configurations for `sourceId` data that will be
+    #   processed in an ID mapping workflow.
+    #
+    #   The `TARGET` contains a configuration of `targetId` to which all
+    #   `sourceIds` will resolve to.
+    #
+    # @return [Types::CreateIdNamespaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIdNamespaceOutput#created_at #created_at} => Time
+    #   * {Types::CreateIdNamespaceOutput#description #description} => String
+    #   * {Types::CreateIdNamespaceOutput#id_mapping_workflow_properties #id_mapping_workflow_properties} => Array&lt;Types::IdNamespaceIdMappingWorkflowProperties&gt;
+    #   * {Types::CreateIdNamespaceOutput#id_namespace_arn #id_namespace_arn} => String
+    #   * {Types::CreateIdNamespaceOutput#id_namespace_name #id_namespace_name} => String
+    #   * {Types::CreateIdNamespaceOutput#input_source_config #input_source_config} => Array&lt;Types::IdNamespaceInputSource&gt;
+    #   * {Types::CreateIdNamespaceOutput#role_arn #role_arn} => String
+    #   * {Types::CreateIdNamespaceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateIdNamespaceOutput#type #type} => String
+    #   * {Types::CreateIdNamespaceOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_id_namespace({
+    #     description: "Description",
+    #     id_mapping_workflow_properties: [
+    #       {
+    #         id_mapping_type: "PROVIDER", # required, accepts PROVIDER
+    #         provider_properties: {
+    #           provider_configuration: {
+    #           },
+    #           provider_service_arn: "ProviderServiceArn", # required
+    #         },
+    #       },
+    #     ],
+    #     id_namespace_name: "EntityName", # required
+    #     input_source_config: [
+    #       {
+    #         input_source_arn: "IdNamespaceInputSourceInputSourceARNString", # required
+    #         schema_name: "EntityName",
+    #       },
+    #     ],
+    #     role_arn: "RoleArn",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     type: "SOURCE", # required, accepts SOURCE, TARGET
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id_mapping_workflow_properties #=> Array
+    #   resp.id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_workflow_properties[0].provider_properties.provider_service_arn #=> String
+    #   resp.id_namespace_arn #=> String
+    #   resp.id_namespace_name #=> String
+    #   resp.input_source_config #=> Array
+    #   resp.input_source_config[0].input_source_arn #=> String
+    #   resp.input_source_config[0].schema_name #=> String
+    #   resp.role_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.type #=> String, one of "SOURCE", "TARGET"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/CreateIdNamespace AWS API Documentation
+    #
+    # @overload create_id_namespace(params = {})
+    # @param [Hash] params ({})
+    def create_id_namespace(params = {}, options = {})
+      req = build_request(:create_id_namespace, params)
       req.send_request(options)
     end
 
@@ -722,6 +958,34 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Deletes the `IdNamespace` with a given name.
+    #
+    # @option params [required, String] :id_namespace_name
+    #   The name of the ID namespace.
+    #
+    # @return [Types::DeleteIdNamespaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteIdNamespaceOutput#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_id_namespace({
+    #     id_namespace_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/DeleteIdNamespace AWS API Documentation
+    #
+    # @overload delete_id_namespace(params = {})
+    # @param [Hash] params ({})
+    def delete_id_namespace(params = {}, options = {})
+      req = build_request(:delete_id_namespace, params)
+      req.send_request(options)
+    end
+
     # Deletes the `MatchingWorkflow` with a given name. This operation will
     # succeed even if a workflow with the given name does not exist.
     #
@@ -748,6 +1012,43 @@ module Aws::EntityResolution
     # @param [Hash] params ({})
     def delete_matching_workflow(params = {}, options = {})
       req = build_request(:delete_matching_workflow, params)
+      req.send_request(options)
+    end
+
+    # Deletes the policy statement.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the resource for which the policy need to be deleted.
+    #
+    # @option params [required, String] :statement_id
+    #   A statement identifier that differentiates the statement from others
+    #   in the same policy.
+    #
+    # @return [Types::DeletePolicyStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePolicyStatementOutput#arn #arn} => String
+    #   * {Types::DeletePolicyStatementOutput#policy #policy} => String
+    #   * {Types::DeletePolicyStatementOutput#token #token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_policy_statement({
+    #     arn: "VeniceGlobalArn", # required
+    #     statement_id: "StatementId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.policy #=> String
+    #   resp.token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/DeletePolicyStatement AWS API Documentation
+    #
+    # @overload delete_policy_statement(params = {})
+    # @param [Hash] params ({})
+    def delete_policy_statement(params = {}, options = {})
+      req = build_request(:delete_policy_statement, params)
       req.send_request(options)
     end
 
@@ -797,6 +1098,7 @@ module Aws::EntityResolution
     #   * {Types::GetIdMappingJobOutput#error_details #error_details} => Types::ErrorDetails
     #   * {Types::GetIdMappingJobOutput#job_id #job_id} => String
     #   * {Types::GetIdMappingJobOutput#metrics #metrics} => Types::IdMappingJobMetrics
+    #   * {Types::GetIdMappingJobOutput#output_source_config #output_source_config} => Array&lt;Types::IdMappingJobOutputSource&gt;
     #   * {Types::GetIdMappingJobOutput#start_time #start_time} => Time
     #   * {Types::GetIdMappingJobOutput#status #status} => String
     #
@@ -804,7 +1106,7 @@ module Aws::EntityResolution
     #
     #   resp = client.get_id_mapping_job({
     #     job_id: "JobId", # required
-    #     workflow_name: "EntityName", # required
+    #     workflow_name: "EntityNameOrIdMappingWorkflowArn", # required
     #   })
     #
     # @example Response structure
@@ -815,6 +1117,10 @@ module Aws::EntityResolution
     #   resp.metrics.input_records #=> Integer
     #   resp.metrics.records_not_processed #=> Integer
     #   resp.metrics.total_records_processed #=> Integer
+    #   resp.output_source_config #=> Array
+    #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
+    #   resp.output_source_config[0].role_arn #=> String
     #   resp.start_time #=> Time
     #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "QUEUED"
     #
@@ -861,6 +1167,7 @@ module Aws::EntityResolution
     #   resp.input_source_config #=> Array
     #   resp.input_source_config[0].input_source_arn #=> String
     #   resp.input_source_config[0].schema_name #=> String
+    #   resp.input_source_config[0].type #=> String, one of "SOURCE", "TARGET"
     #   resp.output_source_config #=> Array
     #   resp.output_source_config[0].kms_arn #=> String
     #   resp.output_source_config[0].output_s3_path #=> String
@@ -880,8 +1187,65 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Returns the `IdNamespace` with a given name, if it exists.
+    #
+    # @option params [required, String] :id_namespace_name
+    #   The name of the ID namespace.
+    #
+    # @return [Types::GetIdNamespaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdNamespaceOutput#created_at #created_at} => Time
+    #   * {Types::GetIdNamespaceOutput#description #description} => String
+    #   * {Types::GetIdNamespaceOutput#id_mapping_workflow_properties #id_mapping_workflow_properties} => Array&lt;Types::IdNamespaceIdMappingWorkflowProperties&gt;
+    #   * {Types::GetIdNamespaceOutput#id_namespace_arn #id_namespace_arn} => String
+    #   * {Types::GetIdNamespaceOutput#id_namespace_name #id_namespace_name} => String
+    #   * {Types::GetIdNamespaceOutput#input_source_config #input_source_config} => Array&lt;Types::IdNamespaceInputSource&gt;
+    #   * {Types::GetIdNamespaceOutput#role_arn #role_arn} => String
+    #   * {Types::GetIdNamespaceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetIdNamespaceOutput#type #type} => String
+    #   * {Types::GetIdNamespaceOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_id_namespace({
+    #     id_namespace_name: "EntityNameOrIdNamespaceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id_mapping_workflow_properties #=> Array
+    #   resp.id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_workflow_properties[0].provider_properties.provider_service_arn #=> String
+    #   resp.id_namespace_arn #=> String
+    #   resp.id_namespace_name #=> String
+    #   resp.input_source_config #=> Array
+    #   resp.input_source_config[0].input_source_arn #=> String
+    #   resp.input_source_config[0].schema_name #=> String
+    #   resp.role_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.type #=> String, one of "SOURCE", "TARGET"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GetIdNamespace AWS API Documentation
+    #
+    # @overload get_id_namespace(params = {})
+    # @param [Hash] params ({})
+    def get_id_namespace(params = {}, options = {})
+      req = build_request(:get_id_namespace, params)
+      req.send_request(options)
+    end
+
     # Returns the corresponding Match ID of a customer record if the record
     # has been processed.
+    #
+    # @option params [Boolean] :apply_normalization
+    #   Normalizes the attributes defined in the schema in the input data. For
+    #   example, if an attribute has an `AttributeType` of `PHONE_NUMBER`, and
+    #   the data in the input table is in a format of 1234567890, Entity
+    #   Resolution will normalize this field in the output to (123)-456-7890.
     #
     # @option params [required, Hash<String,String>] :record
     #   The record to fetch the Match ID for.
@@ -892,10 +1256,12 @@ module Aws::EntityResolution
     # @return [Types::GetMatchIdOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMatchIdOutput#match_id #match_id} => String
+    #   * {Types::GetMatchIdOutput#match_rule #match_rule} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_match_id({
+    #     apply_normalization: false,
     #     record: { # required
     #       "RecordAttributeMapKeyString" => "RecordAttributeMapValueString",
     #     },
@@ -905,6 +1271,7 @@ module Aws::EntityResolution
     # @example Response structure
     #
     #   resp.match_id #=> String
+    #   resp.match_rule #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GetMatchId AWS API Documentation
     #
@@ -930,6 +1297,7 @@ module Aws::EntityResolution
     #   * {Types::GetMatchingJobOutput#error_details #error_details} => Types::ErrorDetails
     #   * {Types::GetMatchingJobOutput#job_id #job_id} => String
     #   * {Types::GetMatchingJobOutput#metrics #metrics} => Types::JobMetrics
+    #   * {Types::GetMatchingJobOutput#output_source_config #output_source_config} => Array&lt;Types::JobOutputSource&gt;
     #   * {Types::GetMatchingJobOutput#start_time #start_time} => Time
     #   * {Types::GetMatchingJobOutput#status #status} => String
     #
@@ -949,6 +1317,10 @@ module Aws::EntityResolution
     #   resp.metrics.match_i_ds #=> Integer
     #   resp.metrics.records_not_processed #=> Integer
     #   resp.metrics.total_records_processed #=> Integer
+    #   resp.output_source_config #=> Array
+    #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
+    #   resp.output_source_config[0].role_arn #=> String
     #   resp.start_time #=> Time
     #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "QUEUED"
     #
@@ -1026,6 +1398,39 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Returns the resource-based policy.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the resource for which the policy
+    #   need to be returned.
+    #
+    # @return [Types::GetPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPolicyOutput#arn #arn} => String
+    #   * {Types::GetPolicyOutput#policy #policy} => String
+    #   * {Types::GetPolicyOutput#token #token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_policy({
+    #     arn: "VeniceGlobalArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.policy #=> String
+    #   resp.token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GetPolicy AWS API Documentation
+    #
+    # @overload get_policy(params = {})
+    # @param [Hash] params ({})
+    def get_policy(params = {}, options = {})
+      req = build_request(:get_policy, params)
+      req.send_request(options)
+    end
+
     # Returns the `ProviderService` of a given name.
     #
     # @option params [required, String] :provider_name
@@ -1038,10 +1443,13 @@ module Aws::EntityResolution
     # @return [Types::GetProviderServiceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetProviderServiceOutput#anonymized_output #anonymized_output} => Boolean
+    #   * {Types::GetProviderServiceOutput#provider_component_schema #provider_component_schema} => Types::ProviderComponentSchema
     #   * {Types::GetProviderServiceOutput#provider_configuration_definition #provider_configuration_definition} => Hash,Array,String,Numeric,Boolean
     #   * {Types::GetProviderServiceOutput#provider_endpoint_configuration #provider_endpoint_configuration} => Types::ProviderEndpointConfiguration
     #   * {Types::GetProviderServiceOutput#provider_entity_output_definition #provider_entity_output_definition} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetProviderServiceOutput#provider_id_name_space_configuration #provider_id_name_space_configuration} => Types::ProviderIdNameSpaceConfiguration
     #   * {Types::GetProviderServiceOutput#provider_intermediate_data_access_configuration #provider_intermediate_data_access_configuration} => Types::ProviderIntermediateDataAccessConfiguration
+    #   * {Types::GetProviderServiceOutput#provider_job_configuration #provider_job_configuration} => Hash,Array,String,Numeric,Boolean
     #   * {Types::GetProviderServiceOutput#provider_name #provider_name} => String
     #   * {Types::GetProviderServiceOutput#provider_service_arn #provider_service_arn} => String
     #   * {Types::GetProviderServiceOutput#provider_service_display_name #provider_service_display_name} => String
@@ -1058,10 +1466,19 @@ module Aws::EntityResolution
     # @example Response structure
     #
     #   resp.anonymized_output #=> Boolean
+    #   resp.provider_component_schema.provider_schema_attributes #=> Array
+    #   resp.provider_component_schema.provider_schema_attributes[0].field_name #=> String
+    #   resp.provider_component_schema.provider_schema_attributes[0].hashing #=> Boolean
+    #   resp.provider_component_schema.provider_schema_attributes[0].sub_type #=> String
+    #   resp.provider_component_schema.provider_schema_attributes[0].type #=> String, one of "NAME", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "ADDRESS", "ADDRESS_STREET1", "ADDRESS_STREET2", "ADDRESS_STREET3", "ADDRESS_CITY", "ADDRESS_STATE", "ADDRESS_COUNTRY", "ADDRESS_POSTALCODE", "PHONE", "PHONE_NUMBER", "PHONE_COUNTRYCODE", "EMAIL_ADDRESS", "UNIQUE_ID", "DATE", "STRING", "PROVIDER_ID"
+    #   resp.provider_component_schema.schemas #=> Array
+    #   resp.provider_component_schema.schemas[0] #=> Array
+    #   resp.provider_component_schema.schemas[0][0] #=> String
     #   resp.provider_endpoint_configuration.marketplace_configuration.asset_id #=> String
     #   resp.provider_endpoint_configuration.marketplace_configuration.data_set_id #=> String
     #   resp.provider_endpoint_configuration.marketplace_configuration.listing_id #=> String
     #   resp.provider_endpoint_configuration.marketplace_configuration.revision_id #=> String
+    #   resp.provider_id_name_space_configuration.description #=> String
     #   resp.provider_intermediate_data_access_configuration.aws_account_ids #=> Array
     #   resp.provider_intermediate_data_access_configuration.aws_account_ids[0] #=> String
     #   resp.provider_intermediate_data_access_configuration.required_bucket_actions #=> Array
@@ -1152,7 +1569,7 @@ module Aws::EntityResolution
     #   resp = client.list_id_mapping_jobs({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     workflow_name: "EntityName", # required
+    #     workflow_name: "EntityNameOrIdMappingWorkflowArn", # required
     #   })
     #
     # @example Response structure
@@ -1211,6 +1628,48 @@ module Aws::EntityResolution
     # @param [Hash] params ({})
     def list_id_mapping_workflows(params = {}, options = {})
       req = build_request(:list_id_mapping_workflows, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all ID namespaces.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of `IdNamespace` objects returned per page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous API call.
+    #
+    # @return [Types::ListIdNamespacesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdNamespacesOutput#id_namespace_summaries #id_namespace_summaries} => Array&lt;Types::IdNamespaceSummary&gt;
+    #   * {Types::ListIdNamespacesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_id_namespaces({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id_namespace_summaries #=> Array
+    #   resp.id_namespace_summaries[0].created_at #=> Time
+    #   resp.id_namespace_summaries[0].description #=> String
+    #   resp.id_namespace_summaries[0].id_namespace_arn #=> String
+    #   resp.id_namespace_summaries[0].id_namespace_name #=> String
+    #   resp.id_namespace_summaries[0].type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_namespace_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/ListIdNamespaces AWS API Documentation
+    #
+    # @overload list_id_namespaces(params = {})
+    # @param [Hash] params ({})
+    def list_id_namespaces(params = {}, options = {})
+      req = build_request(:list_id_namespaces, params)
       req.send_request(options)
     end
 
@@ -1419,8 +1878,52 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
+    # Updates the resource-based policy.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the resource for which the policy
+    #   needs to be updated.
+    #
+    # @option params [required, String] :policy
+    #   The resource-based policy.
+    #
+    # @option params [String] :token
+    #   A unique identifier for the current revision of the policy.
+    #
+    # @return [Types::PutPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutPolicyOutput#arn #arn} => String
+    #   * {Types::PutPolicyOutput#policy #policy} => String
+    #   * {Types::PutPolicyOutput#token #token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_policy({
+    #     arn: "VeniceGlobalArn", # required
+    #     policy: "PolicyDocument", # required
+    #     token: "PolicyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.policy #=> String
+    #   resp.token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/PutPolicy AWS API Documentation
+    #
+    # @overload put_policy(params = {})
+    # @param [Hash] params ({})
+    def put_policy(params = {}, options = {})
+      req = build_request(:put_policy, params)
+      req.send_request(options)
+    end
+
     # Starts the `IdMappingJob` of a workflow. The workflow must have
     # previously been created using the `CreateIdMappingWorkflow` endpoint.
+    #
+    # @option params [Array<Types::IdMappingJobOutputSource>] :output_source_config
+    #   A list of `OutputSource` objects.
     #
     # @option params [required, String] :workflow_name
     #   The name of the ID mapping job to be retrieved.
@@ -1428,16 +1931,28 @@ module Aws::EntityResolution
     # @return [Types::StartIdMappingJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartIdMappingJobOutput#job_id #job_id} => String
+    #   * {Types::StartIdMappingJobOutput#output_source_config #output_source_config} => Array&lt;Types::IdMappingJobOutputSource&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_id_mapping_job({
-    #     workflow_name: "EntityName", # required
+    #     output_source_config: [
+    #       {
+    #         kms_arn: "KMSArn",
+    #         output_s3_path: "S3Path", # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     ],
+    #     workflow_name: "EntityNameOrIdMappingWorkflowArn", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.output_source_config #=> Array
+    #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
+    #   resp.output_source_config[0].role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/StartIdMappingJob AWS API Documentation
     #
@@ -1560,13 +2075,14 @@ module Aws::EntityResolution
     #   A list of `InputSource` objects, which have the fields
     #   `InputSourceARN` and `SchemaName`.
     #
-    # @option params [required, Array<Types::IdMappingWorkflowOutputSource>] :output_source_config
+    # @option params [Array<Types::IdMappingWorkflowOutputSource>] :output_source_config
     #   A list of `OutputSource` objects, each of which contains fields
     #   `OutputS3Path` and `KMSArn`.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
-    #   assumes this role to access resources on your behalf.
+    #   assumes this role to access Amazon Web Services resources on your
+    #   behalf.
     #
     # @option params [required, String] :workflow_name
     #   The name of the workflow.
@@ -1587,7 +2103,7 @@ module Aws::EntityResolution
     #     description: "Description",
     #     id_mapping_techniques: { # required
     #       id_mapping_type: "PROVIDER", # required, accepts PROVIDER
-    #       provider_properties: { # required
+    #       provider_properties: {
     #         intermediate_source_configuration: {
     #           intermediate_s3_path: "S3Path", # required
     #         },
@@ -1599,10 +2115,11 @@ module Aws::EntityResolution
     #     input_source_config: [ # required
     #       {
     #         input_source_arn: "IdMappingWorkflowInputSourceInputSourceARNString", # required
-    #         schema_name: "EntityName", # required
+    #         schema_name: "EntityName",
+    #         type: "SOURCE", # accepts SOURCE, TARGET
     #       },
     #     ],
-    #     output_source_config: [ # required
+    #     output_source_config: [
     #       {
     #         kms_arn: "KMSArn",
     #         output_s3_path: "S3Path", # required
@@ -1621,6 +2138,7 @@ module Aws::EntityResolution
     #   resp.input_source_config #=> Array
     #   resp.input_source_config[0].input_source_arn #=> String
     #   resp.input_source_config[0].schema_name #=> String
+    #   resp.input_source_config[0].type #=> String, one of "SOURCE", "TARGET"
     #   resp.output_source_config #=> Array
     #   resp.output_source_config[0].kms_arn #=> String
     #   resp.output_source_config[0].output_s3_path #=> String
@@ -1634,6 +2152,88 @@ module Aws::EntityResolution
     # @param [Hash] params ({})
     def update_id_mapping_workflow(params = {}, options = {})
       req = build_request(:update_id_mapping_workflow, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing ID namespace.
+    #
+    # @option params [String] :description
+    #   The description of the ID namespace.
+    #
+    # @option params [Array<Types::IdNamespaceIdMappingWorkflowProperties>] :id_mapping_workflow_properties
+    #   Determines the properties of `IdMappingWorkflow` where this
+    #   `IdNamespace` can be used as a `Source` or a `Target`.
+    #
+    # @option params [required, String] :id_namespace_name
+    #   The name of the ID namespace.
+    #
+    # @option params [Array<Types::IdNamespaceInputSource>] :input_source_config
+    #   A list of `InputSource` objects, which have the fields
+    #   `InputSourceARN` and `SchemaName`.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
+    #   assumes this role to access the resources defined in this
+    #   `IdNamespace` on your behalf as part of a workflow run.
+    #
+    # @return [Types::UpdateIdNamespaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIdNamespaceOutput#created_at #created_at} => Time
+    #   * {Types::UpdateIdNamespaceOutput#description #description} => String
+    #   * {Types::UpdateIdNamespaceOutput#id_mapping_workflow_properties #id_mapping_workflow_properties} => Array&lt;Types::IdNamespaceIdMappingWorkflowProperties&gt;
+    #   * {Types::UpdateIdNamespaceOutput#id_namespace_arn #id_namespace_arn} => String
+    #   * {Types::UpdateIdNamespaceOutput#id_namespace_name #id_namespace_name} => String
+    #   * {Types::UpdateIdNamespaceOutput#input_source_config #input_source_config} => Array&lt;Types::IdNamespaceInputSource&gt;
+    #   * {Types::UpdateIdNamespaceOutput#role_arn #role_arn} => String
+    #   * {Types::UpdateIdNamespaceOutput#type #type} => String
+    #   * {Types::UpdateIdNamespaceOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_id_namespace({
+    #     description: "Description",
+    #     id_mapping_workflow_properties: [
+    #       {
+    #         id_mapping_type: "PROVIDER", # required, accepts PROVIDER
+    #         provider_properties: {
+    #           provider_configuration: {
+    #           },
+    #           provider_service_arn: "ProviderServiceArn", # required
+    #         },
+    #       },
+    #     ],
+    #     id_namespace_name: "EntityName", # required
+    #     input_source_config: [
+    #       {
+    #         input_source_arn: "IdNamespaceInputSourceInputSourceARNString", # required
+    #         schema_name: "EntityName",
+    #       },
+    #     ],
+    #     role_arn: "RoleArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.id_mapping_workflow_properties #=> Array
+    #   resp.id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_workflow_properties[0].provider_properties.provider_service_arn #=> String
+    #   resp.id_namespace_arn #=> String
+    #   resp.id_namespace_name #=> String
+    #   resp.input_source_config #=> Array
+    #   resp.input_source_config[0].input_source_arn #=> String
+    #   resp.input_source_config[0].schema_name #=> String
+    #   resp.role_arn #=> String
+    #   resp.type #=> String, one of "SOURCE", "TARGET"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/UpdateIdNamespace AWS API Documentation
+    #
+    # @overload update_id_namespace(params = {})
+    # @param [Hash] params ({})
+    def update_id_namespace(params = {}, options = {})
+      req = build_request(:update_id_namespace, params)
       req.send_request(options)
     end
 
@@ -1842,7 +2442,7 @@ module Aws::EntityResolution
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

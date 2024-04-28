@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::GuardDuty
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::GuardDuty
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::GuardDuty
     #   @option options [Aws::GuardDuty::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::GuardDuty::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -487,20 +511,35 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Creates a single Amazon GuardDuty detector. A detector is a resource
-    # that represents the GuardDuty service. To start using GuardDuty, you
-    # must create a detector in each Region where you enable the service.
-    # You can have only one detector per account per Region. All data
-    # sources are enabled in a new detector by default.
+    # Creates a single GuardDuty detector. A detector is a resource that
+    # represents the GuardDuty service. To start using GuardDuty, you must
+    # create a detector in each Region where you enable the service. You can
+    # have only one detector per account per Region. All data sources are
+    # enabled in a new detector by default.
+    #
+    # * When you don't specify any `features`, with an exception to
+    #   `RUNTIME_MONITORING`, all the optional features are enabled by
+    #   default.
+    #
+    # * When you specify some of the `features`, any feature that is not
+    #   specified in the API call gets enabled by default, with an exception
+    #   to `RUNTIME_MONITORING`.
+    #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
     #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
     # GuardDuty is presently supported. For more information, see [Regions
-    # and endpoints][1].
+    # and endpoints][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, Boolean] :enable
     #   A Boolean value that specifies whether the detector is to be enabled.
@@ -567,7 +606,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -720,6 +759,8 @@ module Aws::GuardDuty
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.awsApiCallAction.remoteIpDetails.organization.asn
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
@@ -744,6 +785,8 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.networkConnectionAction.remoteIpDetails.organization.asn
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
@@ -754,6 +797,8 @@ module Aws::GuardDuty
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.kubernetesApiCallAction.namespace
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
@@ -763,6 +808,8 @@ module Aws::GuardDuty
     #   * service.action.kubernetesApiCallAction.statusCode
     #
     #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV6
     #
     #   * service.action.networkConnectionAction.protocol
     #
@@ -975,17 +1022,18 @@ module Aws::GuardDuty
     # existing auto-enable settings for your organization, see
     # [DescribeOrganizationConfiguration][1].
     #
-    # If you are adding accounts by invitation, before using
-    # [InviteMembers][2], use `CreateMembers` after GuardDuty has been
-    # enabled in potential member accounts.
-    #
-    # If you disassociate a member from a GuardDuty delegated administrator,
-    # the member account details obtained from this API, including the
+    # If you disassociate a member account that was added by invitation, the
+    # member account details obtained from this API, including the
     # associated email addresses, will be retained. This is done so that the
     # delegated administrator can invoke the [InviteMembers][2] API without
     # the need to invoke the CreateMembers API again. To remove the details
     # associated with a member account, the delegated administrator must
     # invoke the [DeleteMembers][3] API.
+    #
+    # When the member accounts added through Organizations are later
+    # disassociated, you (administrator) can't invite them by calling the
+    # InviteMembers API. You can create an association with these member
+    # accounts again only by calling the CreateMembers API.
     #
     #
     #
@@ -1576,7 +1624,7 @@ module Aws::GuardDuty
     #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS", "RUNTIME_MONITORING"
     #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.features[0].additional_configuration #=> Array
-    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.features[0].additional_configuration[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.next_token #=> String
     #   resp.auto_enable_organization_members #=> String, one of "NEW", "ALL", "NONE"
@@ -1754,6 +1802,19 @@ module Aws::GuardDuty
     # organization set to `ALL`, you'll receive an error if you attempt to
     # disassociate a member account before removing them from your
     # organization.
+    #
+    # If you disassociate a member account that was added by invitation, the
+    # member account details obtained from this API, including the
+    # associated email addresses, will be retained. This is done so that the
+    # delegated administrator can invoke the [InviteMembers][2] API without
+    # the need to invoke the CreateMembers API again. To remove the details
+    # associated with a member account, the delegated administrator must
+    # invoke the [DeleteMembers][3] API.
+    #
+    # When the member accounts added through Organizations are later
+    # disassociated, you (administrator) can't invite them by calling the
+    # InviteMembers API. You can create an association with these member
+    # accounts again only by calling the CreateMembers API.
     #
     #
     #
@@ -1964,7 +2025,7 @@ module Aws::GuardDuty
     #   resp.features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].updated_at #=> Time
     #   resp.features[0].additional_configuration #=> Array
-    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].additional_configuration[0].updated_at #=> Time
     #
@@ -2276,6 +2337,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.organization.isp #=> String
@@ -2295,12 +2357,14 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.network_connection_action.local_port_details.port_name #=> String
     #   resp.findings[0].service.action.network_connection_action.protocol #=> String
     #   resp.findings[0].service.action.network_connection_action.local_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.network_connection_action.local_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_name #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.network_connection_action.remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.organization.isp #=> String
@@ -2312,12 +2376,14 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_port_details.port #=> Integer
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_port_details.port_name #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_name #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.isp #=> String
@@ -2333,6 +2399,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.isp #=> String
@@ -2349,6 +2416,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.ip_address_v6 #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.asn #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.rds_login_attempt_action.remote_ip_details.organization.isp #=> String
@@ -2374,6 +2442,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_list_name #=> String
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_names #=> Array
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_names[0] #=> String
+    #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_file_sha_256 #=> String
     #   resp.findings[0].service.archived #=> Boolean
     #   resp.findings[0].service.count #=> Integer
     #   resp.findings[0].service.detector_id #=> String
@@ -2497,6 +2566,11 @@ module Aws::GuardDuty
     #   resp.findings[0].service.runtime_details.context.iana_protocol_number #=> Integer
     #   resp.findings[0].service.runtime_details.context.memory_regions #=> Array
     #   resp.findings[0].service.runtime_details.context.memory_regions[0] #=> String
+    #   resp.findings[0].service.runtime_details.context.tool_name #=> String
+    #   resp.findings[0].service.runtime_details.context.tool_category #=> String
+    #   resp.findings[0].service.runtime_details.context.service_name #=> String
+    #   resp.findings[0].service.runtime_details.context.command_line_example #=> String
+    #   resp.findings[0].service.runtime_details.context.threat_file_path #=> String
     #   resp.findings[0].service.detection.anomaly.profiles #=> Hash
     #   resp.findings[0].service.detection.anomaly.profiles["String"] #=> Hash
     #   resp.findings[0].service.detection.anomaly.profiles["String"]["String"] #=> Array
@@ -2776,7 +2850,7 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].updated_at #=> Time
     #   resp.member_data_source_configurations[0].features[0].additional_configuration #=> Array
-    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT"
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].updated_at #=> Time
     #   resp.unprocessed_accounts #=> Array
@@ -2839,12 +2913,12 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Retrieves how many active member accounts in your Amazon Web Services
-    # organization have each feature enabled within GuardDuty. Only a
-    # delegated GuardDuty administrator of an organization can run this API.
+    # Retrieves how many active member accounts have each feature enabled
+    # within GuardDuty. Only a delegated GuardDuty administrator of an
+    # organization can run this API.
     #
-    # When you create a new Amazon Web Services organization, it might take
-    # up to 24 hours to generate the statistics for the entire organization.
+    # When you create a new organization, it might take up to 24 hours to
+    # generate the statistics for the entire organization.
     #
     # @return [Types::GetOrganizationStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2861,7 +2935,7 @@ module Aws::GuardDuty
     #   resp.organization_details.organization_statistics.count_by_feature[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS", "RUNTIME_MONITORING"
     #   resp.organization_details.organization_statistics.count_by_feature[0].enabled_accounts_count #=> Integer
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration #=> Array
-    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT"
+    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].enabled_accounts_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetOrganizationStatistics AWS API Documentation
@@ -3014,7 +3088,7 @@ module Aws::GuardDuty
     #       account_ids: ["AccountId"],
     #       data_sources: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
     #       resources: ["String"],
-    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING
+    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING, RDS_DBI_PROTECTION_PROVISIONED, RDS_DBI_PROTECTION_SERVERLESS
     #     },
     #     unit: "String",
     #     max_results: 1,
@@ -3028,7 +3102,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.sum_by_account[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_account[0].total.unit #=> String
     #   resp.usage_statistics.top_accounts_by_feature #=> Array
-    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING"
+    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS"
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts #=> Array
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].account_id #=> String
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].total.amount #=> String
@@ -3046,7 +3120,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.top_resources[0].total.amount #=> String
     #   resp.usage_statistics.top_resources[0].total.unit #=> String
     #   resp.usage_statistics.sum_by_feature #=> Array
-    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING"
+    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS"
     #   resp.usage_statistics.sum_by_feature[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_feature[0].total.unit #=> String
     #   resp.next_token #=> String
@@ -3084,6 +3158,19 @@ module Aws::GuardDuty
     # associated with a member account, you must also invoke
     # [DeleteMembers][5].
     #
+    # If you disassociate a member account that was added by invitation, the
+    # member account details obtained from this API, including the
+    # associated email addresses, will be retained. This is done so that the
+    # delegated administrator can invoke the [InviteMembers][6] API without
+    # the need to invoke the CreateMembers API again. To remove the details
+    # associated with a member account, the delegated administrator must
+    # invoke the [DeleteMembers][5] API.
+    #
+    # When the member accounts added through Organizations are later
+    # disassociated, you (administrator) can't invite them by calling the
+    # InviteMembers API. You can create an association with these member
+    # accounts again only by calling the CreateMembers API.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html
@@ -3091,6 +3178,7 @@ module Aws::GuardDuty
     # [3]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html
     # [4]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
     # [5]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
+    # [6]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -3852,11 +3940,16 @@ module Aws::GuardDuty
     end
 
     # Initiates the malware scan. Invoking this API will automatically
-    # create the [Service-linked role ][1] in the corresponding account.
+    # create the [Service-linked role][1] in the corresponding account.
+    #
+    # When the malware scan starts, you can use the associated scan ID to
+    # track the status of the scan. For more information, see
+    # [DescribeMalwareScans][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeMalwareScans.html
     #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource for which you invoked the
@@ -4049,16 +4142,23 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Updates the GuardDuty detector specified by the detectorId.
+    # Updates the GuardDuty detector specified by the detector ID.
+    #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
     #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
     # GuardDuty is presently supported. For more information, see [Regions
-    # and endpoints][1].
+    # and endpoints][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector to update.
@@ -4114,7 +4214,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -4344,14 +4444,21 @@ module Aws::GuardDuty
 
     # Contains information on member accounts to be updated.
     #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
+    #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
     # GuardDuty is presently supported. For more information, see [Regions
-    # and endpoints][1].
+    # and endpoints][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The detector ID of the administrator account.
@@ -4396,7 +4503,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -4423,14 +4530,21 @@ module Aws::GuardDuty
     # values. You must provide a value for either
     # `autoEnableOrganizationMembers` or `autoEnable`, but not both.
     #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
+    #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
     # GuardDuty is presently supported. For more information, see [Regions
-    # and endpoints][1].
+    # and endpoints][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector that configures the delegated administrator.
@@ -4473,6 +4587,13 @@ module Aws::GuardDuty
     #     for any account in the organization. The administrator must manage
     #     GuardDuty for each account in the organization individually.
     #
+    #     When you update the auto-enable setting from `ALL` or `NEW` to
+    #     `NONE`, this action doesn't disable the corresponding option for
+    #     your existing accounts. This configuration will apply to the new
+    #     accounts that join the organization. After you update the
+    #     auto-enable settings, no new account will have the corresponding
+    #     option as enabled.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4503,7 +4624,7 @@ module Aws::GuardDuty
     #         auto_enable: "NEW", # accepts NEW, NONE, ALL
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
     #             auto_enable: "NEW", # accepts NEW, NONE, ALL
     #           },
     #         ],
@@ -4612,7 +4733,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

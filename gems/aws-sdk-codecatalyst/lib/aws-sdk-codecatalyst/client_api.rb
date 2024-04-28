@@ -491,6 +491,8 @@ module Aws::CodeCatalyst
 
     GetSubscriptionResponse.add_member(:subscription_type, Shapes::ShapeRef.new(shape: String, location_name: "subscriptionType"))
     GetSubscriptionResponse.add_member(:aws_account_name, Shapes::ShapeRef.new(shape: NameString, location_name: "awsAccountName"))
+    GetSubscriptionResponse.add_member(:pending_subscription_type, Shapes::ShapeRef.new(shape: String, location_name: "pendingSubscriptionType"))
+    GetSubscriptionResponse.add_member(:pending_subscription_start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "pendingSubscriptionStartTime"))
     GetSubscriptionResponse.struct_class = Types::GetSubscriptionResponse
 
     GetUserDetailsRequest.add_member(:id, Shapes::ShapeRef.new(shape: GetUserDetailsRequestIdString, location: "querystring", location_name: "id"))

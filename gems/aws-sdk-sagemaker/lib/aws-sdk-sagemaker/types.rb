@@ -1336,6 +1336,11 @@ module Aws::SageMaker
     #   environment variables and entry point.
     #   @return [Types::JupyterLabAppImageConfig]
     #
+    # @!attribute [rw] code_editor_app_image_config
+    #   The configuration for the file system and the runtime, such as the
+    #   environment variables and entry point.
+    #   @return [Types::CodeEditorAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AppImageConfigDetails AWS API Documentation
     #
     class AppImageConfigDetails < Struct.new(
@@ -1344,7 +1349,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :kernel_gateway_image_config,
-      :jupyter_lab_app_image_config)
+      :jupyter_lab_app_image_config,
+      :code_editor_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2313,14 +2319,13 @@ module Aws::SageMaker
     #
     #     * List of available metrics:
     #
-    #       * Regression: `InferenceLatency`, `MAE`, `MSE`, `R2`, `RMSE`
+    #       * Regression: `MAE`, `MSE`, `R2`, `RMSE`
     #
     #       * Binary classification: `Accuracy`, `AUC`, `BalancedAccuracy`,
-    #         `F1`, `InferenceLatency`, `LogLoss`, `Precision`, `Recall`
+    #         `F1`, `Precision`, `Recall`
     #
     #       * Multiclass classification: `Accuracy`, `BalancedAccuracy`,
-    #         `F1macro`, `InferenceLatency`, `LogLoss`, `PrecisionMacro`,
-    #         `RecallMacro`
+    #         `F1macro`, `PrecisionMacro`, `RecallMacro`
     #
     #       For a description of each metric, see [Autopilot metrics for
     #       classification and regression][1].
@@ -4056,15 +4061,25 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The LifeCycle configuration for a SageMaker HyperPod cluster.
+    # The lifecycle configuration for a SageMaker HyperPod cluster.
     #
     # @!attribute [rw] source_s3_uri
-    #   An Amazon S3 bucket path where your LifeCycle scripts are stored.
+    #   An Amazon S3 bucket path where your lifecycle scripts are stored.
+    #
+    #   Make sure that the S3 bucket path starts with `s3://sagemaker-`. The
+    #   [IAM role for SageMaker HyperPod][1] has the managed [
+    #   `AmazonSageMakerClusterInstanceRolePolicy` ][2] attached, which
+    #   allows access to S3 buckets with the specific prefix `sagemaker-`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-iam-role-for-hyperpod
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-cluster.html
     #   @return [String]
     #
     # @!attribute [rw] on_create
-    #   The directory of the LifeCycle script under `SourceS3Uri`. This
-    #   LifeCycle script runs during cluster creation.
+    #   The file name of the entrypoint script of lifecycle scripts under
+    #   `SourceS3Uri`. This entrypoint script runs during cluster creation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterLifeCycleConfig AWS API Documentation
@@ -4186,6 +4201,28 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration for the file system and kernels in a SageMaker image
+    # running as a Code Editor app. The `FileSystemConfig` object is not
+    # supported.
+    #
+    # @!attribute [rw] file_system_config
+    #   The Amazon Elastic File System storage configuration for a SageMaker
+    #   image.
+    #   @return [Types::FileSystemConfig]
+    #
+    # @!attribute [rw] container_config
+    #   The configuration used to run the application image container.
+    #   @return [Types::ContainerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeEditorAppImageConfig AWS API Documentation
+    #
+    class CodeEditorAppImageConfig < Struct.new(
+      :file_system_config,
+      :container_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Code Editor application settings.
     #
     # For more information about Code Editor, see [Get started with Code
@@ -4200,6 +4237,11 @@ module Aws::SageMaker
     #   version, and the instance type that the version runs on.
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] custom_images
+    #   A list of custom SageMaker images that are configured to run as a
+    #   Code Editor app.
+    #   @return [Array<Types::CustomImage>]
+    #
     # @!attribute [rw] lifecycle_config_arns
     #   The Amazon Resource Name (ARN) of the Code Editor application
     #   lifecycle configuration.
@@ -4209,6 +4251,7 @@ module Aws::SageMaker
     #
     class CodeEditorAppSettings < Struct.new(
       :default_resource_spec,
+      :custom_images,
       :lifecycle_config_arns)
       SENSITIVE = []
       include Aws::Structure
@@ -4608,9 +4651,13 @@ module Aws::SageMaker
     #   @return [Types::ModelDataSource]
     #
     # @!attribute [rw] environment
-    #   The environment variables to set in the Docker container. Each key
-    #   and value in the `Environment` string to string map can have length
-    #   of up to 1024. We support up to 16 entries in the map.
+    #   The environment variables to set in the Docker container.
+    #
+    #   The maximum length of each key and value in the `Environment` map is
+    #   1024 bytes. The maximum length of all keys and values in the map,
+    #   combined, is 32 KB. If you pass multiple containers to a
+    #   `CreateModel` request, then the maximum length of all of their maps,
+    #   combined, is also 32 KB.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] model_package_name
@@ -4985,13 +5032,21 @@ module Aws::SageMaker
     #   visible in JupyterLab.
     #   @return [Types::JupyterLabAppImageConfig]
     #
+    # @!attribute [rw] code_editor_app_image_config
+    #   The `CodeEditorAppImageConfig`. You can only specify one image
+    #   kernel in the AppImageConfig API. This kernel is shown to users
+    #   before the image starts. After the image runs, all kernels are
+    #   visible in Code Editor.
+    #   @return [Types::CodeEditorAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppImageConfigRequest AWS API Documentation
     #
     class CreateAppImageConfigRequest < Struct.new(
       :app_image_config_name,
       :tags,
       :kernel_gateway_image_config,
-      :jupyter_lab_app_image_config)
+      :jupyter_lab_app_image_config,
+      :code_editor_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5806,9 +5861,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   SageMaker uses Amazon Web Services KMS to encrypt the EFS volume
-    #   attached to the domain with an Amazon Web Services managed key by
-    #   default. For more control, specify a customer managed key.
+    #   SageMaker uses Amazon Web Services KMS to encrypt EFS and EBS
+    #   volumes attached to the domain with an Amazon Web Services managed
+    #   key by default. For more control, specify a customer managed key.
     #   @return [String]
     #
     # @!attribute [rw] app_security_group_management
@@ -6244,13 +6299,14 @@ module Aws::SageMaker
 
     # @!attribute [rw] feature_group_name
     #   The name of the `FeatureGroup`. The name must be unique within an
-    #   Amazon Web Services Region in an Amazon Web Services account. The
-    #   name:
+    #   Amazon Web Services Region in an Amazon Web Services account.
     #
-    #   * Must start and end with an alphanumeric character.
+    #   The name:
     #
-    #   * Can only contain alphanumeric character and hyphens. Spaces are
-    #     not allowed.
+    #   * Must start with an alphanumeric character.
+    #
+    #   * Can only include alphanumeric characters, underscores, and
+    #     hyphens. Spaces are not allowed.
     #   @return [String]
     #
     # @!attribute [rw] record_identifier_feature_name
@@ -6265,7 +6321,7 @@ module Aws::SageMaker
     #
     #   This name:
     #
-    #   * Must start and end with an alphanumeric character.
+    #   * Must start with an alphanumeric character.
     #
     #   * Can only contains alphanumeric characters, hyphens, underscores.
     #     Spaces are not allowed.
@@ -7778,8 +7834,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] inference_specification
-    #   Specifies details about inference jobs that can be run with models
-    #   based on this model package, including the following:
+    #   Specifies details about inference jobs that you can run with models
+    #   based on this model package, including the following information:
     #
     #   * The Amazon ECR paths of containers that contain the inference code
     #     and model artifacts.
@@ -7905,6 +7961,12 @@ module Aws::SageMaker
     #   Indicates if you want to skip model validation.
     #   @return [String]
     #
+    # @!attribute [rw] source_uri
+    #   The URI of the source for the model package. If you want to clone a
+    #   model package, set it to the model package Amazon Resource Name
+    #   (ARN). If you want to register a model, set it to the model ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
     #
     class CreateModelPackageInput < Struct.new(
@@ -7926,7 +7988,8 @@ module Aws::SageMaker
       :customer_metadata_properties,
       :drift_check_baselines,
       :additional_inference_specifications,
-      :skip_model_validation)
+      :skip_model_validation,
+      :source_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10161,15 +10224,15 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A collection of default EBS storage settings that applies to private
-    # spaces created within a domain or user profile.
+    # A collection of default EBS storage settings that apply to spaces
+    # created within a domain or user profile.
     #
     # @!attribute [rw] default_ebs_volume_size_in_gb
-    #   The default size of the EBS storage volume for a private space.
+    #   The default size of the EBS storage volume for a space.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_ebs_volume_size_in_gb
-    #   The maximum size of the EBS storage volume for a private space.
+    #   The maximum size of the EBS storage volume for a space.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DefaultEbsStorageSettings AWS API Documentation
@@ -10200,21 +10263,44 @@ module Aws::SageMaker
     #   The KernelGateway app settings.
     #   @return [Types::KernelGatewayAppSettings]
     #
+    # @!attribute [rw] jupyter_lab_app_settings
+    #   The settings for the JupyterLab application.
+    #   @return [Types::JupyterLabAppSettings]
+    #
+    # @!attribute [rw] space_storage_settings
+    #   The default storage settings for a space.
+    #   @return [Types::DefaultSpaceStorageSettings]
+    #
+    # @!attribute [rw] custom_posix_user_config
+    #   Details about the POSIX identity that is used for file system
+    #   operations.
+    #   @return [Types::CustomPosixUserConfig]
+    #
+    # @!attribute [rw] custom_file_system_configs
+    #   The settings for assigning a custom file system to a domain.
+    #   Permitted users can access this file system in Amazon SageMaker
+    #   Studio.
+    #   @return [Array<Types::CustomFileSystemConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DefaultSpaceSettings AWS API Documentation
     #
     class DefaultSpaceSettings < Struct.new(
       :execution_role,
       :security_groups,
       :jupyter_server_app_settings,
-      :kernel_gateway_app_settings)
+      :kernel_gateway_app_settings,
+      :jupyter_lab_app_settings,
+      :space_storage_settings,
+      :custom_posix_user_config,
+      :custom_file_system_configs)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The default storage settings for a private space.
+    # The default storage settings for a space.
     #
     # @!attribute [rw] default_ebs_storage_settings
-    #   The default EBS storage settings for a private space.
+    #   The default EBS storage settings for a space.
     #   @return [Types::DefaultEbsStorageSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DefaultSpaceStorageSettings AWS API Documentation
@@ -11475,6 +11561,10 @@ module Aws::SageMaker
     #   The configuration of the JupyterLab app.
     #   @return [Types::JupyterLabAppImageConfig]
     #
+    # @!attribute [rw] code_editor_app_image_config
+    #   The configuration of the Code Editor app.
+    #   @return [Types::CodeEditorAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppImageConfigResponse AWS API Documentation
     #
     class DescribeAppImageConfigResponse < Struct.new(
@@ -11483,7 +11573,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :kernel_gateway_image_config,
-      :jupyter_lab_app_image_config)
+      :jupyter_lab_app_image_config,
+      :code_editor_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11562,7 +11653,16 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] creation_time
-    #   The creation time.
+    #   The creation time of the application.
+    #
+    #   <note markdown="1"> After an application has been shut down for 24 hours, SageMaker
+    #   deletes all metadata for the application. To be considered an update
+    #   and retain application metadata, applications must be restarted
+    #   within 24 hours after the previous application has been shut down.
+    #   After this time window, creation of an application is considered a
+    #   new application rather than an update of the previous application.
+    #
+    #    </note>
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
@@ -15160,7 +15260,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] inference_specification
-    #   Details about inference jobs that can be run with models based on
+    #   Details about inference jobs that you can run with models based on
     #   this model package.
     #   @return [Types::InferenceSpecification]
     #
@@ -15262,6 +15362,10 @@ module Aws::SageMaker
     #   Indicates if you want to skip model validation.
     #   @return [String]
     #
+    # @!attribute [rw] source_uri
+    #   The URI of the source for the model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
     #
     class DescribeModelPackageOutput < Struct.new(
@@ -15290,7 +15394,8 @@ module Aws::SageMaker
       :customer_metadata_properties,
       :drift_check_baselines,
       :additional_inference_specifications,
-      :skip_model_validation)
+      :skip_model_validation,
+      :source_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17897,10 +18002,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A collection of EBS storage settings that applies to private spaces.
+    # A collection of EBS storage settings that apply to both private and
+    # shared spaces.
     #
     # @!attribute [rw] ebs_volume_size_in_gb
-    #   The size of an EBS storage volume for a private space.
+    #   The size of an EBS storage volume for a space.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EbsStorageSettings AWS API Documentation
@@ -19001,6 +19107,13 @@ module Aws::SageMaker
     #   The name of a feature. The type must be a string. `FeatureName`
     #   cannot be any of the following: `is_deleted`, `write_time`,
     #   `api_invocation_time`.
+    #
+    #   The name:
+    #
+    #   * Must start with an alphanumeric character.
+    #
+    #   * Can only include alphanumeric characters, underscores, and
+    #     hyphens. Spaces are not allowed.
     #   @return [String]
     #
     # @!attribute [rw] feature_type
@@ -23730,7 +23843,8 @@ module Aws::SageMaker
     end
 
     # The configuration for the file system and kernels in a SageMaker image
-    # running as a JupyterLab app.
+    # running as a JupyterLab app. The `FileSystemConfig` object is not
+    # supported.
     #
     # @!attribute [rw] file_system_config
     #   The Amazon Elastic File System storage configuration for a SageMaker
@@ -31268,7 +31382,7 @@ module Aws::SageMaker
     #   @return [Types::ModelDataQuality]
     #
     # @!attribute [rw] bias
-    #   Metrics that measure bais in a model.
+    #   Metrics that measure bias in a model.
     #   @return [Types::Bias]
     #
     # @!attribute [rw] explainability
@@ -31419,6 +31533,10 @@ module Aws::SageMaker
     #   An array of additional Inference Specification objects.
     #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
     #
+    # @!attribute [rw] source_uri
+    #   The URI of the source for the model package.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of the tags associated with the model package. For more
     #   information, see [Tagging Amazon Web Services resources][1] in the
@@ -31468,6 +31586,7 @@ module Aws::SageMaker
       :task,
       :sample_payload_url,
       :additional_inference_specifications,
+      :source_uri,
       :tags,
       :customer_metadata_properties,
       :drift_check_baselines,
@@ -31514,6 +31633,11 @@ module Aws::SageMaker
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] model_data_source
+    #   Specifies the location of ML model data to deploy during endpoint
+    #   creation.
+    #   @return [Types::ModelDataSource]
+    #
     # @!attribute [rw] product_id
     #   The Amazon Web Services Marketplace product ID of the model package.
     #   @return [String]
@@ -31555,6 +31679,7 @@ module Aws::SageMaker
       :image,
       :image_digest,
       :model_data_url,
+      :model_data_source,
       :product_id,
       :environment,
       :model_input,
@@ -33800,7 +33925,7 @@ module Aws::SageMaker
     # The collection of ownership settings for a space.
     #
     # @!attribute [rw] owner_user_profile_name
-    #   The user profile who is the owner of the private space.
+    #   The user profile who is the owner of the space.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OwnershipSettings AWS API Documentation
@@ -33814,7 +33939,7 @@ module Aws::SageMaker
     # Specifies summary information about the ownership settings.
     #
     # @!attribute [rw] owner_user_profile_name
-    #   The user profile who is the owner of the private space.
+    #   The user profile who is the owner of the space.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OwnershipSettingsSummary AWS API Documentation
@@ -37978,7 +38103,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The Amazon Simple Storage (Amazon S3) location and and security
+    # The Amazon Simple Storage (Amazon S3) location and security
     # configuration for `OfflineStore`.
     #
     # @!attribute [rw] s3_uri
@@ -38913,6 +39038,11 @@ module Aws::SageMaker
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] model_data_source
+    #   Specifies the location of ML model data to deploy during endpoint
+    #   creation.
+    #   @return [Types::ModelDataSource]
+    #
     # @!attribute [rw] algorithm_name
     #   The name of an algorithm that was used to create the model package.
     #   The algorithm must be either an algorithm resource in your SageMaker
@@ -38924,6 +39054,7 @@ module Aws::SageMaker
     #
     class SourceAlgorithm < Struct.new(
       :model_data_url,
+      :model_data_source,
       :algorithm_name)
       SENSITIVE = []
       include Aws::Structure
@@ -39089,7 +39220,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] space_storage_settings
-    #   The storage settings for a private space.
+    #   The storage settings for a space.
     #   @return [Types::SpaceStorageSettings]
     #
     # @!attribute [rw] custom_file_systems
@@ -39119,7 +39250,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] space_storage_settings
-    #   The storage settings for a private space.
+    #   The storage settings for a space.
     #   @return [Types::SpaceStorageSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceSettingsSummary AWS API Documentation
@@ -39159,10 +39290,10 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The storage settings for a private space.
+    # The storage settings for a space.
     #
     # @!attribute [rw] ebs_storage_settings
-    #   A collection of EBS storage settings for a private space.
+    #   A collection of EBS storage settings for a space.
     #   @return [Types::EbsStorageSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceStorageSettings AWS API Documentation
@@ -42732,12 +42863,17 @@ module Aws::SageMaker
     #   The JupyterLab app running on the image.
     #   @return [Types::JupyterLabAppImageConfig]
     #
+    # @!attribute [rw] code_editor_app_image_config
+    #   The Code Editor app running on the image.
+    #   @return [Types::CodeEditorAppImageConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateAppImageConfigRequest AWS API Documentation
     #
     class UpdateAppImageConfigRequest < Struct.new(
       :app_image_config_name,
       :kernel_gateway_image_config,
-      :jupyter_lab_app_image_config)
+      :jupyter_lab_app_image_config,
+      :code_editor_app_image_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43670,6 +43806,24 @@ module Aws::SageMaker
     #   Generally used with SageMaker Neo to store the compiled artifacts.
     #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
     #
+    # @!attribute [rw] inference_specification
+    #   Specifies details about inference jobs that you can run with models
+    #   based on this model package, including the following information:
+    #
+    #   * The Amazon ECR paths of containers that contain the inference code
+    #     and model artifacts.
+    #
+    #   * The instance types that the model package supports for transform
+    #     jobs and real-time endpoints used for inference.
+    #
+    #   * The input and output content formats that the model package
+    #     supports for inference.
+    #   @return [Types::InferenceSpecification]
+    #
+    # @!attribute [rw] source_uri
+    #   The URI of the source for the model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelPackageInput AWS API Documentation
     #
     class UpdateModelPackageInput < Struct.new(
@@ -43678,7 +43832,9 @@ module Aws::SageMaker
       :approval_description,
       :customer_metadata_properties,
       :customer_metadata_properties_to_remove,
-      :additional_inference_specifications_to_add)
+      :additional_inference_specifications_to_add,
+      :inference_specification,
+      :source_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44618,7 +44774,7 @@ module Aws::SageMaker
     #   @return [Types::JupyterLabAppSettings]
     #
     # @!attribute [rw] space_storage_settings
-    #   The storage settings for a private space.
+    #   The storage settings for a space.
     #   @return [Types::DefaultSpaceStorageSettings]
     #
     # @!attribute [rw] default_landing_uri
@@ -44750,12 +44906,17 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The list of key-value pairs that you specify for your resources.
+    # The list of key-value pairs used to filter your search results. If a
+    # search result contains a key from your list, it is included in the
+    # final search response if the value associated with the key in the
+    # result matches the value you specified. If the value doesn't match,
+    # the result is excluded from the search response. Any resources that
+    # don't have a key from the list that you've provided will also be
+    # included in the search response.
     #
     # @!attribute [rw] key
     #   The key that specifies the tag that you're using to filter the
-    #   search results. It must be in the following format:
-    #   `Tags.<key>/EqualsIfExists`.
+    #   search results. It must be in the following format: `Tags.<key>`.
     #   @return [String]
     #
     # @!attribute [rw] value

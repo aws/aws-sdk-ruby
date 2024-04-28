@@ -82,6 +82,20 @@ module Aws::ManagedBlockchainQuery
       end
     end
 
+    class ListFilteredTransactionEvents
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ManagedBlockchainQuery::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListTokenBalances
       def self.build(context)
         unless context.config.regional_endpoint

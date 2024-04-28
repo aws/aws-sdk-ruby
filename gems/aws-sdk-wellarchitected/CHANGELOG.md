@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2024-04-16)
+------------------
+
+* Feature - AWS Well-Architected now has a Connector for Jira to allow customers to efficiently track workload risks and improvement efforts and create closed-loop mechanisms.
+
 1.33.0 (2024-01-26)
 ------------------
 

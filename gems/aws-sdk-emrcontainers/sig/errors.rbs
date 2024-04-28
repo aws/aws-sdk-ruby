@@ -11,6 +11,9 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class EKSRequestThrottledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InternalServerException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

@@ -44,6 +44,23 @@ module Aws::MediaTailor
       SENSITIVE: []
     end
 
+    class AlternateMedia
+      attr_accessor ad_breaks: ::Array[Types::AdBreak]
+      attr_accessor clip_range: Types::ClipRange
+      attr_accessor duration_millis: ::Integer
+      attr_accessor live_source_name: ::String
+      attr_accessor scheduled_start_time_millis: ::Integer
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class AudienceMedia
+      attr_accessor alternate_media: ::Array[Types::AlternateMedia]
+      attr_accessor audience: ::String
+      SENSITIVE: []
+    end
+
     class AvailMatchingCriteria
       attr_accessor dynamic_variable: ::String
       attr_accessor operator: ("EQUALS")
@@ -76,6 +93,7 @@ module Aws::MediaTailor
 
     class Channel
       attr_accessor arn: ::String
+      attr_accessor audiences: ::Array[::String]
       attr_accessor channel_name: ::String
       attr_accessor channel_state: ::String
       attr_accessor creation_time: ::Time
@@ -91,6 +109,7 @@ module Aws::MediaTailor
 
     class ClipRange
       attr_accessor end_offset_millis: ::Integer
+      attr_accessor start_offset_millis: ::Integer
       SENSITIVE: []
     end
 
@@ -119,6 +138,7 @@ module Aws::MediaTailor
     end
 
     class CreateChannelRequest
+      attr_accessor audiences: ::Array[::String]
       attr_accessor channel_name: ::String
       attr_accessor filler_slate: Types::SlateSource
       attr_accessor outputs: ::Array[Types::RequestOutputItem]
@@ -131,6 +151,7 @@ module Aws::MediaTailor
 
     class CreateChannelResponse
       attr_accessor arn: ::String
+      attr_accessor audiences: ::Array[::String]
       attr_accessor channel_name: ::String
       attr_accessor channel_state: ("RUNNING" | "STOPPED")
       attr_accessor creation_time: ::Time
@@ -184,6 +205,7 @@ module Aws::MediaTailor
 
     class CreateProgramRequest
       attr_accessor ad_breaks: ::Array[Types::AdBreak]
+      attr_accessor audience_media: ::Array[Types::AudienceMedia]
       attr_accessor channel_name: ::String
       attr_accessor live_source_name: ::String
       attr_accessor program_name: ::String
@@ -196,6 +218,7 @@ module Aws::MediaTailor
     class CreateProgramResponse
       attr_accessor ad_breaks: ::Array[Types::AdBreak]
       attr_accessor arn: ::String
+      attr_accessor audience_media: ::Array[Types::AudienceMedia]
       attr_accessor channel_name: ::String
       attr_accessor clip_range: Types::ClipRange
       attr_accessor creation_time: ::Time
@@ -351,6 +374,7 @@ module Aws::MediaTailor
 
     class DescribeChannelResponse
       attr_accessor arn: ::String
+      attr_accessor audiences: ::Array[::String]
       attr_accessor channel_name: ::String
       attr_accessor channel_state: ("RUNNING" | "STOPPED")
       attr_accessor creation_time: ::Time
@@ -391,6 +415,7 @@ module Aws::MediaTailor
     class DescribeProgramResponse
       attr_accessor ad_breaks: ::Array[Types::AdBreak]
       attr_accessor arn: ::String
+      attr_accessor audience_media: ::Array[Types::AudienceMedia]
       attr_accessor channel_name: ::String
       attr_accessor clip_range: Types::ClipRange
       attr_accessor creation_time: ::Time
@@ -450,6 +475,7 @@ module Aws::MediaTailor
     end
 
     class GetChannelScheduleRequest
+      attr_accessor audience: ::String
       attr_accessor channel_name: ::String
       attr_accessor duration_minutes: ::String
       attr_accessor max_results: ::Integer
@@ -476,6 +502,7 @@ module Aws::MediaTailor
       attr_accessor configuration_aliases: ::Hash[::String, ::Hash[::String, ::String]]
       attr_accessor dash_configuration: Types::DashConfiguration
       attr_accessor hls_configuration: Types::HlsConfiguration
+      attr_accessor insertion_mode: ("STITCHED_ONLY" | "PLAYER_SELECT")
       attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration
       attr_accessor log_configuration: Types::LogConfiguration
       attr_accessor manifest_processing_rules: Types::ManifestProcessingRules
@@ -675,6 +702,7 @@ module Aws::MediaTailor
       attr_accessor configuration_aliases: ::Hash[::String, ::Hash[::String, ::String]]
       attr_accessor dash_configuration: Types::DashConfiguration
       attr_accessor hls_configuration: Types::HlsConfiguration
+      attr_accessor insertion_mode: ("STITCHED_ONLY" | "PLAYER_SELECT")
       attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration
       attr_accessor log_configuration: Types::LogConfiguration
       attr_accessor manifest_processing_rules: Types::ManifestProcessingRules
@@ -730,6 +758,7 @@ module Aws::MediaTailor
       attr_accessor cdn_configuration: Types::CdnConfiguration
       attr_accessor configuration_aliases: ::Hash[::String, ::Hash[::String, ::String]]
       attr_accessor dash_configuration: Types::DashConfigurationForPut
+      attr_accessor insertion_mode: ("STITCHED_ONLY" | "PLAYER_SELECT")
       attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration
       attr_accessor manifest_processing_rules: Types::ManifestProcessingRules
       attr_accessor name: ::String
@@ -749,6 +778,7 @@ module Aws::MediaTailor
       attr_accessor configuration_aliases: ::Hash[::String, ::Hash[::String, ::String]]
       attr_accessor dash_configuration: Types::DashConfiguration
       attr_accessor hls_configuration: Types::HlsConfiguration
+      attr_accessor insertion_mode: ("STITCHED_ONLY" | "PLAYER_SELECT")
       attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration
       attr_accessor log_configuration: Types::LogConfiguration
       attr_accessor manifest_processing_rules: Types::ManifestProcessingRules
@@ -799,11 +829,12 @@ module Aws::MediaTailor
       attr_accessor approximate_duration_seconds: ::Integer
       attr_accessor approximate_start_time: ::Time
       attr_accessor arn: ::String
+      attr_accessor audiences: ::Array[::String]
       attr_accessor channel_name: ::String
       attr_accessor live_source_name: ::String
       attr_accessor program_name: ::String
       attr_accessor schedule_ad_breaks: ::Array[Types::ScheduleAdBreak]
-      attr_accessor schedule_entry_type: ("PROGRAM" | "FILLER_SLATE")
+      attr_accessor schedule_entry_type: ("PROGRAM" | "FILLER_SLATE" | "ALTERNATE_MEDIA")
       attr_accessor source_location_name: ::String
       attr_accessor vod_source_name: ::String
       SENSITIVE: []
@@ -909,6 +940,7 @@ module Aws::MediaTailor
     end
 
     class UpdateChannelRequest
+      attr_accessor audiences: ::Array[::String]
       attr_accessor channel_name: ::String
       attr_accessor filler_slate: Types::SlateSource
       attr_accessor outputs: ::Array[Types::RequestOutputItem]
@@ -918,6 +950,7 @@ module Aws::MediaTailor
 
     class UpdateChannelResponse
       attr_accessor arn: ::String
+      attr_accessor audiences: ::Array[::String]
       attr_accessor channel_name: ::String
       attr_accessor channel_state: ("RUNNING" | "STOPPED")
       attr_accessor creation_time: ::Time
@@ -951,6 +984,7 @@ module Aws::MediaTailor
 
     class UpdateProgramRequest
       attr_accessor ad_breaks: ::Array[Types::AdBreak]
+      attr_accessor audience_media: ::Array[Types::AudienceMedia]
       attr_accessor channel_name: ::String
       attr_accessor program_name: ::String
       attr_accessor schedule_configuration: Types::UpdateProgramScheduleConfiguration
@@ -960,6 +994,7 @@ module Aws::MediaTailor
     class UpdateProgramResponse
       attr_accessor ad_breaks: ::Array[Types::AdBreak]
       attr_accessor arn: ::String
+      attr_accessor audience_media: ::Array[Types::AudienceMedia]
       attr_accessor channel_name: ::String
       attr_accessor clip_range: Types::ClipRange
       attr_accessor creation_time: ::Time

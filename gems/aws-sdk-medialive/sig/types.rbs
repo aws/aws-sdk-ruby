@@ -121,6 +121,8 @@ module Aws::MediaLive
       attr_accessor name: ::String
       attr_accessor remix_settings: Types::RemixSettings
       attr_accessor stream_name: ::String
+      attr_accessor audio_dash_roles: ::Array[("ALTERNATE" | "COMMENTARY" | "DESCRIPTION" | "DUB" | "EMERGENCY" | "ENHANCED-AUDIO-INTELLIGIBILITY" | "KARAOKE" | "MAIN" | "SUPPLEMENTARY")]
+      attr_accessor dvb_dash_accessibility: ("DVBDASH_1_VISUALLY_IMPAIRED" | "DVBDASH_2_HARD_OF_HEARING" | "DVBDASH_3_SUPPLEMENTAL_COMMENTARY" | "DVBDASH_4_DIRECTORS_COMMENTARY" | "DVBDASH_5_EDUCATIONAL_NOTES" | "DVBDASH_6_MAIN_PROGRAM" | "DVBDASH_7_CLEAN_FEED")
       SENSITIVE: []
     end
 
@@ -408,6 +410,8 @@ module Aws::MediaLive
       attr_accessor language_code: ::String
       attr_accessor language_description: ::String
       attr_accessor name: ::String
+      attr_accessor caption_dash_roles: ::Array[("ALTERNATE" | "CAPTION" | "COMMENTARY" | "DESCRIPTION" | "DUB" | "EASYREADER" | "EMERGENCY" | "FORCED-SUBTITLE" | "KARAOKE" | "MAIN" | "METADATA" | "SUBTITLE" | "SUPPLEMENTARY")]
+      attr_accessor dvb_dash_accessibility: ("DVBDASH_1_VISUALLY_IMPAIRED" | "DVBDASH_2_HARD_OF_HEARING" | "DVBDASH_3_SUPPLEMENTAL_COMMENTARY" | "DVBDASH_4_DIRECTORS_COMMENTARY" | "DVBDASH_5_EDUCATIONAL_NOTES" | "DVBDASH_6_MAIN_PROGRAM" | "DVBDASH_7_CLEAN_FEED")
       SENSITIVE: []
     end
 
@@ -1424,6 +1428,12 @@ module Aws::MediaLive
       attr_accessor tier: ("HIGH" | "MAIN")
       attr_accessor timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")
       attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
+      attr_accessor mv_over_picture_boundaries: ("DISABLED" | "ENABLED")
+      attr_accessor mv_temporal_predictor: ("DISABLED" | "ENABLED")
+      attr_accessor tile_height: ::Integer
+      attr_accessor tile_padding: ("NONE" | "PADDED")
+      attr_accessor tile_width: ::Integer
+      attr_accessor treeblock_size: ("AUTO" | "TREE_SIZE_32X32")
       SENSITIVE: []
     end
 
@@ -2505,6 +2515,7 @@ module Aws::MediaLive
       attr_accessor multiplex_group_settings: Types::MultiplexGroupSettings
       attr_accessor rtmp_group_settings: Types::RtmpGroupSettings
       attr_accessor udp_group_settings: Types::UdpGroupSettings
+      attr_accessor cmaf_ingest_group_settings: Types::CmafIngestGroupSettings
       SENSITIVE: []
     end
 
@@ -2528,6 +2539,7 @@ module Aws::MediaLive
       attr_accessor multiplex_output_settings: Types::MultiplexOutputSettings
       attr_accessor rtmp_output_settings: Types::RtmpOutputSettings
       attr_accessor udp_output_settings: Types::UdpOutputSettings
+      attr_accessor cmaf_ingest_output_settings: Types::CmafIngestOutputSettings
       SENSITIVE: []
     end
 
@@ -3489,6 +3501,1079 @@ module Aws::MediaLive
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettingsDescription
+      SENSITIVE: []
+    end
+
+    class CmafIngestGroupSettings
+      attr_accessor destination: Types::OutputLocationRef
+      attr_accessor nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")
+      attr_accessor segment_length: ::Integer
+      attr_accessor segment_length_units: ("MILLISECONDS" | "SECONDS")
+      attr_accessor send_delay_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class CmafIngestOutputSettings
+      attr_accessor name_modifier: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestExceptionResponseContent
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchAlarmTemplateGroupSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CloudWatchAlarmTemplateSummary
+      attr_accessor arn: ::String
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor created_at: ::Time
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class ConflictExceptionResponseContent
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudWatchAlarmTemplateGroupRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCloudWatchAlarmTemplateGroupRequestContent
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCloudWatchAlarmTemplateGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCloudWatchAlarmTemplateGroupResponseContent
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCloudWatchAlarmTemplateRequest
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_identifier: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class CreateCloudWatchAlarmTemplateRequestContent
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_identifier: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class CreateCloudWatchAlarmTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor created_at: ::Time
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class CreateCloudWatchAlarmTemplateResponseContent
+      attr_accessor arn: ::String
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor created_at: ::Time
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class CreateEventBridgeRuleTemplateGroupRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventBridgeRuleTemplateGroupRequestContent
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventBridgeRuleTemplateGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventBridgeRuleTemplateGroupResponseContent
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventBridgeRuleTemplateRequest
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventBridgeRuleTemplateRequestContent
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventBridgeRuleTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventBridgeRuleTemplateResponseContent
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSignalMapRequest
+      attr_accessor cloud_watch_alarm_template_group_identifiers: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor event_bridge_rule_template_group_identifiers: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSignalMapRequestContent
+      attr_accessor cloud_watch_alarm_template_group_identifiers: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor event_bridge_rule_template_group_identifiers: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSignalMapResponse
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSignalMapResponseContent
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteCloudWatchAlarmTemplateGroupRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCloudWatchAlarmTemplateRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventBridgeRuleTemplateGroupRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventBridgeRuleTemplateRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSignalMapRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class EventBridgeRuleTemplateGroupSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class EventBridgeRuleTemplateSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor event_target_count: ::Integer
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EventBridgeRuleTemplateTarget
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenExceptionResponseContent
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudWatchAlarmTemplateGroupRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudWatchAlarmTemplateGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetCloudWatchAlarmTemplateGroupResponseContent
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetCloudWatchAlarmTemplateRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudWatchAlarmTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor created_at: ::Time
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class GetCloudWatchAlarmTemplateResponseContent
+      attr_accessor arn: ::String
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor created_at: ::Time
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class GetEventBridgeRuleTemplateGroupRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventBridgeRuleTemplateGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetEventBridgeRuleTemplateGroupResponseContent
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetEventBridgeRuleTemplateRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventBridgeRuleTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetEventBridgeRuleTemplateResponseContent
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSignalMapRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSignalMapResponse
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSignalMapResponseContent
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorExceptionResponseContent
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudWatchAlarmTemplateGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor scope: ::String
+      attr_accessor signal_map_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudWatchAlarmTemplateGroupsResponse
+      attr_accessor cloud_watch_alarm_template_groups: ::Array[Types::CloudWatchAlarmTemplateGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudWatchAlarmTemplateGroupsResponseContent
+      attr_accessor cloud_watch_alarm_template_groups: ::Array[Types::CloudWatchAlarmTemplateGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudWatchAlarmTemplatesRequest
+      attr_accessor group_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor scope: ::String
+      attr_accessor signal_map_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudWatchAlarmTemplatesResponse
+      attr_accessor cloud_watch_alarm_templates: ::Array[Types::CloudWatchAlarmTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudWatchAlarmTemplatesResponseContent
+      attr_accessor cloud_watch_alarm_templates: ::Array[Types::CloudWatchAlarmTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventBridgeRuleTemplateGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor signal_map_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventBridgeRuleTemplateGroupsResponse
+      attr_accessor event_bridge_rule_template_groups: ::Array[Types::EventBridgeRuleTemplateGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventBridgeRuleTemplateGroupsResponseContent
+      attr_accessor event_bridge_rule_template_groups: ::Array[Types::EventBridgeRuleTemplateGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventBridgeRuleTemplatesRequest
+      attr_accessor group_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor signal_map_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventBridgeRuleTemplatesResponse
+      attr_accessor event_bridge_rule_templates: ::Array[Types::EventBridgeRuleTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventBridgeRuleTemplatesResponseContent
+      attr_accessor event_bridge_rule_templates: ::Array[Types::EventBridgeRuleTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSignalMapsRequest
+      attr_accessor cloud_watch_alarm_template_group_identifier: ::String
+      attr_accessor event_bridge_rule_template_group_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSignalMapsResponse
+      attr_accessor next_token: ::String
+      attr_accessor signal_maps: ::Array[Types::SignalMapSummary]
+      SENSITIVE: []
+    end
+
+    class ListSignalMapsResponseContent
+      attr_accessor next_token: ::String
+      attr_accessor signal_maps: ::Array[Types::SignalMapSummary]
+      SENSITIVE: []
+    end
+
+    class MediaResource
+      attr_accessor destinations: ::Array[Types::MediaResourceNeighbor]
+      attr_accessor name: ::String
+      attr_accessor sources: ::Array[Types::MediaResourceNeighbor]
+      SENSITIVE: []
+    end
+
+    class MediaResourceNeighbor
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class MonitorDeployment
+      attr_accessor details_uri: ::String
+      attr_accessor error_message: ::String
+      attr_accessor status: ("NOT_DEPLOYED" | "DRY_RUN_DEPLOYMENT_COMPLETE" | "DRY_RUN_DEPLOYMENT_FAILED" | "DRY_RUN_DEPLOYMENT_IN_PROGRESS" | "DEPLOYMENT_COMPLETE" | "DEPLOYMENT_FAILED" | "DEPLOYMENT_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "DELETE_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class NotFoundExceptionResponseContent
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SignalMapSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_deployment_status: ("NOT_DEPLOYED" | "DRY_RUN_DEPLOYMENT_COMPLETE" | "DRY_RUN_DEPLOYMENT_FAILED" | "DRY_RUN_DEPLOYMENT_IN_PROGRESS" | "DEPLOYMENT_COMPLETE" | "DEPLOYMENT_FAILED" | "DEPLOYMENT_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "DELETE_IN_PROGRESS")
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartDeleteMonitorDeploymentRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartDeleteMonitorDeploymentResponse
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartDeleteMonitorDeploymentResponseContent
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartMonitorDeploymentRequest
+      attr_accessor dry_run: bool
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartMonitorDeploymentRequestContent
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class StartMonitorDeploymentResponse
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartMonitorDeploymentResponseContent
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartUpdateSignalMapRequest
+      attr_accessor cloud_watch_alarm_template_group_identifiers: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor event_bridge_rule_template_group_identifiers: ::Array[::String]
+      attr_accessor force_rediscovery: bool
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartUpdateSignalMapRequestContent
+      attr_accessor cloud_watch_alarm_template_group_identifiers: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor event_bridge_rule_template_group_identifiers: ::Array[::String]
+      attr_accessor force_rediscovery: bool
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartUpdateSignalMapResponse
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartUpdateSignalMapResponseContent
+      attr_accessor arn: ::String
+      attr_accessor cloud_watch_alarm_template_group_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor discovery_entry_point_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor event_bridge_rule_template_group_ids: ::Array[::String]
+      attr_accessor failed_media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor id: ::String
+      attr_accessor last_discovered_at: ::Time
+      attr_accessor last_successful_monitor_deployment: Types::SuccessfulMonitorDeployment
+      attr_accessor media_resource_map: ::Hash[::String, Types::MediaResource]
+      attr_accessor modified_at: ::Time
+      attr_accessor monitor_changes_pending_deployment: bool
+      attr_accessor monitor_deployment: Types::MonitorDeployment
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_REVERTED" | "UPDATE_FAILED" | "READY" | "NOT_READY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SuccessfulMonitorDeployment
+      attr_accessor details_uri: ::String
+      attr_accessor status: ("NOT_DEPLOYED" | "DRY_RUN_DEPLOYMENT_COMPLETE" | "DRY_RUN_DEPLOYMENT_FAILED" | "DRY_RUN_DEPLOYMENT_IN_PROGRESS" | "DEPLOYMENT_COMPLETE" | "DEPLOYMENT_FAILED" | "DEPLOYMENT_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "DELETE_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsExceptionResponseContent
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCloudWatchAlarmTemplateGroupRequest
+      attr_accessor description: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCloudWatchAlarmTemplateGroupRequestContent
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCloudWatchAlarmTemplateGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCloudWatchAlarmTemplateGroupResponseContent
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCloudWatchAlarmTemplateRequest
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class UpdateCloudWatchAlarmTemplateRequestContent
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_identifier: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class UpdateCloudWatchAlarmTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor created_at: ::Time
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class UpdateCloudWatchAlarmTemplateResponseContent
+      attr_accessor arn: ::String
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor created_at: ::Time
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor description: ::String
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor period: ::Integer
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET")
+      attr_accessor threshold: ::Float
+      attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+      SENSITIVE: []
+    end
+
+    class UpdateEventBridgeRuleTemplateGroupRequest
+      attr_accessor description: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEventBridgeRuleTemplateGroupRequestContent
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEventBridgeRuleTemplateGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateEventBridgeRuleTemplateGroupResponseContent
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateEventBridgeRuleTemplateRequest
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEventBridgeRuleTemplateRequestContent
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEventBridgeRuleTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateEventBridgeRuleTemplateResponseContent
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor event_targets: ::Array[Types::EventBridgeRuleTemplateTarget]
+      attr_accessor event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE")
+      attr_accessor group_id: ::String
+      attr_accessor id: ::String
+      attr_accessor modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
   end

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -73,6 +74,7 @@ module Aws::RDS
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -198,10 +200,17 @@ module Aws::RDS
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -339,50 +348,65 @@ module Aws::RDS
     #   @option options [Aws::RDS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::RDS::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -2239,8 +2263,16 @@ module Aws::RDS
     # Creates a custom DB engine version (CEV).
     #
     # @option params [required, String] :engine
-    #   The database engine to use for your custom engine version (CEV). The
-    #   only supported value is `custom-oracle-ee`.
+    #   The database engine. RDS Custom for Oracle supports the following
+    #   values:
+    #
+    #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
     #
     # @option params [required, String] :engine_version
     #   The name of your CEV. The name format is 19.*customized\_string*. For
@@ -2380,6 +2412,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
+    #   * {Types::DBEngineVersion#supports_limitless_database #supports_limitless_database} => Boolean
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
@@ -2435,6 +2468,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_limitless_database #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
@@ -2461,6 +2495,7 @@ module Aws::RDS
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
     #   resp.custom_db_engine_version_manifest #=> String
+    #   resp.supports_limitless_database #=> Boolean
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
@@ -2914,7 +2949,8 @@ module Aws::RDS
     #   `serverless`.
     #
     #   The `serverless` engine mode only applies for Aurora Serverless v1 DB
-    #   clusters.
+    #   clusters. Aurora Serverless v2 DB clusters use the `provisioned`
+    #   engine mode.
     #
     #   For information about limitations and requirements for Serverless DB
     #   clusters, see the following sections in the *Amazon Aurora User
@@ -3064,7 +3100,7 @@ module Aws::RDS
     #
     #   * Aurora DB clusters - `aurora | aurora-iopt1`
     #
-    #   * Multi-AZ DB clusters - `io1`
+    #   * Multi-AZ DB clusters - `io1 | io2 | gp3`
     #
     #   Default:
     #
@@ -3319,6 +3355,19 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters only
     #
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide*.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3529,6 +3578,7 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     enable_local_write_forwarding: false,
+    #     ca_certificate_identifier: "String",
     #     source_region: "String",
     #   })
     #
@@ -3643,6 +3693,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -3666,6 +3718,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -4179,7 +4233,9 @@ module Aws::RDS
     #
     #   : The name of the database to create when the DB instance is created.
     #     If this parameter isn't specified, no database is created in the DB
-    #     instance.
+    #     instance. In some cases, we recommend that you don't add a database
+    #     name. For more information, see [Additional considerations][1] in
+    #     the *Amazon RDS User Guide*.
     #
     #     Constraints:
     #
@@ -4253,6 +4309,10 @@ module Aws::RDS
     #
     #   : Not applicable. Must be null.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-db-instance-prereqs.html#db2-prereqs-additional-considerations
+    #
     # @option params [required, String] :db_instance_identifier
     #   The identifier for this DB instance. This parameter is stored as a
     #   lowercase string.
@@ -4285,7 +4345,7 @@ module Aws::RDS
     #       40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for
     #       SQL Server.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 40 to
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 40 to
     #       65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #       Server.
     #
@@ -4295,10 +4355,10 @@ module Aws::RDS
     #     following:
     #
     #     * General Purpose (SSD) storage (gp3): Must be an integer from 20 to
-    #       64000.
+    #       65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       64000.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #   RDS for MariaDB
     #
@@ -4308,8 +4368,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -4321,8 +4381,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -4334,8 +4394,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -4347,8 +4407,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -4364,7 +4424,7 @@ module Aws::RDS
     #
     #       * Web and Express editions: Must be an integer from 20 to 16384.
     #
-    #     * Provisioned IOPS storage (io1):
+    #     * Provisioned IOPS storage (io1, io2):
     #
     #       * Enterprise and Standard editions: Must be an integer from 100 to
     #         16384.
@@ -4406,6 +4466,10 @@ module Aws::RDS
     #   * `custom-oracle-ee` (for RDS Custom for Oracle DB instances)
     #
     #   * `custom-oracle-ee-cdb` (for RDS Custom for Oracle DB instances)
+    #
+    #   * `custom-oracle-se2` (for RDS Custom for Oracle DB instances)
+    #
+    #   * `custom-oracle-se2-cdb` (for RDS Custom for Oracle DB instances)
     #
     #   * `custom-sqlserver-ee` (for RDS Custom for SQL Server DB instances)
     #
@@ -4857,13 +4921,13 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   This setting doesn't apply to Amazon Aurora DB instances. Storage is
     #   managed by the DB cluster.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -5044,11 +5108,12 @@ module Aws::RDS
     #
     # @option params [String] :timezone
     #   The time zone of the DB instance. The time zone parameter is currently
-    #   supported only by [Microsoft SQL Server][1].
+    #   supported only by [RDS for Db2][1] and [RDS for SQL Server][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   Specifies whether to enable mapping of Amazon Web Services Identity
@@ -5929,10 +5994,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   The storage type to associate with the read replica.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1` if the `Iops` parameter is specified. Otherwise, `gp2`.
     #
@@ -6379,6 +6444,22 @@ module Aws::RDS
     #   replica. This option migrates the read replica from the old storage
     #   file system layout to the preferred layout.
     #
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the read replica's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -6466,6 +6547,7 @@ module Aws::RDS
     #     source_db_cluster_identifier: "String",
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
+    #     ca_certificate_identifier: "String",
     #     source_region: "String",
     #   })
     #
@@ -7877,6 +7959,20 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
+    # @option params [String] :data_filter
+    #   Data filtering options for the integration. For more information, see
+    #   [Data filtering for Aurora zero-ETL integrations with Amazon
+    #   Redshift][1].
+    #
+    #   Valid for: Integrations with Aurora MySQL source DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html
+    #
+    # @option params [String] :description
+    #   A description of the integration.
+    #
     # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Integration#source_arn #source_arn} => String
@@ -7889,6 +7985,8 @@ module Aws::RDS
     #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Integration#create_time #create_time} => Time
     #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #   * {Types::Integration#data_filter #data_filter} => String
+    #   * {Types::Integration#description #description} => String
     #
     #
     # @example Example: To create a zero-ETL integration
@@ -7904,6 +8002,7 @@ module Aws::RDS
     #   resp.to_h outputs the following:
     #   {
     #     create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #     integration_arn: "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
     #     integration_name: "my-integration", 
     #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
     #     source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
@@ -7929,6 +8028,8 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
+    #     data_filter: "DataFilter",
+    #     description: "IntegrationDescription",
     #   })
     #
     # @example Response structure
@@ -7948,6 +8049,8 @@ module Aws::RDS
     #   resp.errors #=> Array
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
+    #   resp.data_filter #=> String
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateIntegration AWS API Documentation
     #
@@ -8444,8 +8547,16 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.delete
     #
     # @option params [required, String] :engine
-    #   The database engine. The only supported engines are `custom-oracle-ee`
-    #   and `custom-oracle-ee-cdb`.
+    #   The database engine. RDS Custom for Oracle supports the following
+    #   values:
+    #
+    #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
     #
     # @option params [required, String] :engine_version
     #   The custom engine version (CEV) for your DB instance. This option is
@@ -8484,6 +8595,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
+    #   * {Types::DBEngineVersion#supports_limitless_database #supports_limitless_database} => Boolean
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
@@ -8525,6 +8637,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_limitless_database #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
@@ -8551,6 +8664,7 @@ module Aws::RDS
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
     #   resp.custom_db_engine_version_manifest #=> String
+    #   resp.supports_limitless_database #=> Boolean
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
@@ -8786,6 +8900,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -8809,6 +8925,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -10092,6 +10210,8 @@ module Aws::RDS
     #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Integration#create_time #create_time} => Time
     #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #   * {Types::Integration#data_filter #data_filter} => String
+    #   * {Types::Integration#description #description} => String
     #
     #
     # @example Example: To delete a zero-ETL integration
@@ -10105,6 +10225,7 @@ module Aws::RDS
     #   resp.to_h outputs the following:
     #   {
     #     create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #     integration_arn: "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
     #     integration_name: "my-integration", 
     #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
     #     source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
@@ -10137,6 +10258,8 @@ module Aws::RDS
     #   resp.errors #=> Array
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
+    #   resp.data_filter #=> String
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteIntegration AWS API Documentation
     #
@@ -12206,6 +12329,8 @@ module Aws::RDS
     #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
     #   resp.db_clusters[0].pending_modified_values.storage_type #=> String
+    #   resp.db_clusters[0].pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_clusters[0].pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_clusters[0].db_cluster_instance_class #=> String
     #   resp.db_clusters[0].storage_type #=> String
     #   resp.db_clusters[0].iops #=> Integer
@@ -12229,6 +12354,8 @@ module Aws::RDS
     #   resp.db_clusters[0].limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_clusters[0].limitless_database.min_required_acu #=> Float
     #   resp.db_clusters[0].storage_throughput #=> Integer
+    #   resp.db_clusters[0].certificate_details.ca_identifier #=> String
+    #   resp.db_clusters[0].certificate_details.valid_till #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -12257,6 +12384,12 @@ module Aws::RDS
     #   * `aurora-postgresql`
     #
     #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
     #
     #   * `db2-ae`
     #
@@ -12478,6 +12611,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_limitless_database #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
@@ -12504,6 +12638,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].tag_list[0].value #=> String
     #   resp.db_engine_versions[0].supports_babelfish #=> Boolean
     #   resp.db_engine_versions[0].custom_db_engine_version_manifest #=> String
+    #   resp.db_engine_versions[0].supports_limitless_database #=> Boolean
     #   resp.db_engine_versions[0].supports_certificate_rotation_without_restart #=> Boolean
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
@@ -14755,6 +14890,8 @@ module Aws::RDS
     #
     #   * `custom-oracle-ee-19`
     #
+    #   * `custom-oracle-ee-cdb-19`
+    #
     #   * `db2-ae`
     #
     #   * `db2-se`
@@ -15527,7 +15664,14 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter isn't currently supported.
+    #   A filter that specifies one or more global database clusters to
+    #   describe. This parameter is case-sensitive.
+    #
+    #   Currently, the only supported filter is `region`.
+    #
+    #   If used, the request returns information about any global cluster with
+    #   at least one member (primary or secondary) in the specified Amazon Web
+    #   Services Regions.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -15671,6 +15815,7 @@ module Aws::RDS
     #     integrations: [
     #       {
     #         create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #         integration_arn: "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
     #         integration_name: "my-integration", 
     #         kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
     #         source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
@@ -15715,6 +15860,8 @@ module Aws::RDS
     #   resp.integrations[0].errors #=> Array
     #   resp.integrations[0].errors[0].error_code #=> String
     #   resp.integrations[0].errors[0].error_message #=> String
+    #   resp.integrations[0].data_filter #=> String
+    #   resp.integrations[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeIntegrations AWS API Documentation
     #
@@ -16060,7 +16207,7 @@ module Aws::RDS
     # Describes the orderable DB instance options for a specified DB engine.
     #
     # @option params [required, String] :engine
-    #   The name of the engine to describe DB instance options for.
+    #   The name of the database engine to describe DB instance options for.
     #
     #   Valid Values:
     #
@@ -16069,6 +16216,12 @@ module Aws::RDS
     #   * `aurora-postgresql`
     #
     #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
     #
     #   * `db2-ae`
     #
@@ -16138,7 +16291,7 @@ module Aws::RDS
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 10000.
+    #   Constraints: Minimum 20, maximum 1000.
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous
@@ -17475,6 +17628,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -17498,6 +17653,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -17741,7 +17898,7 @@ module Aws::RDS
     # @option params [String] :resource_arn
     #   The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL
     #   Server DB instance. For example,
-    #   `arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db`.
+    #   `arn:aws:rds:us-east-1:12345667890:db:my-orcl-db`.
     #
     # @option params [String] :audit_policy_state
     #   The audit policy state. When a policy is unlocked, it is read/write.
@@ -18030,8 +18187,16 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify
     #
     # @option params [required, String] :engine
-    #   The DB engine. The only supported values are `custom-oracle-ee` and
-    #   `custom-oracle-ee-cdb`.
+    #   The database engine. RDS Custom for Oracle supports the following
+    #   values:
+    #
+    #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
     #
     # @option params [required, String] :engine_version
     #   The custom engine version (CEV) that you want to modify. This option
@@ -18095,6 +18260,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
+    #   * {Types::DBEngineVersion#supports_limitless_database #supports_limitless_database} => Boolean
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
@@ -18138,6 +18304,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_limitless_database #=> Boolean
     #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.valid_upgrade_target[0].supports_integrations #=> Boolean
     #   resp.supported_timezones #=> Array
@@ -18164,6 +18331,7 @@ module Aws::RDS
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
     #   resp.custom_db_engine_version_manifest #=> String
+    #   resp.supports_limitless_database #=> Boolean
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
@@ -18592,7 +18760,7 @@ module Aws::RDS
     #
     #   * Aurora DB clusters - `aurora | aurora-iopt1`
     #
-    #   * Multi-AZ DB clusters - `io1`
+    #   * Multi-AZ DB clusters - `io1 | io2 | gp3`
     #
     #   Default:
     #
@@ -18876,6 +19044,19 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters only
     #
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide*.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -19015,6 +19196,7 @@ module Aws::RDS
     #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     enable_limitless_database: false,
+    #     ca_certificate_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -19128,6 +19310,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -19151,6 +19335,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -19537,6 +19723,15 @@ module Aws::RDS
     #   For the valid values for allocated storage for each engine, see
     #   `CreateDBInstance`.
     #
+    #   Constraints:
+    #
+    #   * When you increase the allocated storage for a DB instance that uses
+    #     Provisioned IOPS (`gp3`, `io1`, or `io2` storage type), you must
+    #     also specify the `Iops` parameter. You can use the current value for
+    #     `Iops`.
+    #
+    #   ^
+    #
     # @option params [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example
     #   `db.m4.large`. Not all DB instance classes are available in all Amazon
@@ -19582,7 +19777,7 @@ module Aws::RDS
     #   change is applied during the next maintenance window, unless you
     #   enable `ApplyImmediately`.
     #
-    #   This parameter doesn't apply to RDS Custom DB instances.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #   Constraints:
     #
@@ -19932,7 +20127,9 @@ module Aws::RDS
     #     existing value are rounded up so that they are 10% greater than the
     #     current value.
     #
-    #   ^
+    #   * When you increase the Provisioned IOPS, you must also specify the
+    #     `AllocatedStorage` parameter. You can use the current value for
+    #     `AllocatedStorage`.
     #
     #   Default: Uses existing setting
     #
@@ -19977,7 +20174,7 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify Provisioned IOPS (`io1`), you must also include a value
+    #   If you specify `io1`, `io2`, or `gp3` you must also include a value
     #   for the `Iops` parameter.
     #
     #   If you choose to migrate your DB instance from using standard storage
@@ -19995,7 +20192,7 @@ module Aws::RDS
     #   rebooting the instance, deleting the instance, creating a read replica
     #   for the instance, and creating a DB snapshot of the instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -20303,6 +20500,12 @@ module Aws::RDS
     #   database can't be deleted when deletion protection is enabled. By
     #   default, deletion protection isn't enabled. For more information, see
     #   [ Deleting a DB Instance][1].
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. You can
+    #   enable or disable deletion protection for the DB cluster. For more
+    #   information, see `ModifyDBCluster`. DB instances in a DB cluster can
+    #   be deleted even when deletion protection is enabled for the DB
+    #   cluster.
     #
     #
     #
@@ -22066,6 +22269,108 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Modifies a zero-ETL integration with Amazon Redshift.
+    #
+    # <note markdown="1"> Currently, you can only modify integrations that have Aurora MySQL
+    # source DB clusters. Integrations with Aurora PostgreSQL and RDS
+    # sources currently don't support modifying the integration.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :integration_identifier
+    #   The unique identifier of the integration to modify.
+    #
+    # @option params [String] :integration_name
+    #   A new name for the integration.
+    #
+    # @option params [String] :data_filter
+    #   A new data filter for the integration. For more information, see [Data
+    #   filtering for Aurora zero-ETL integrations with Amazon Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html
+    #
+    # @option params [String] :description
+    #   A new description for the integration.
+    #
+    # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Integration#source_arn #source_arn} => String
+    #   * {Types::Integration#target_arn #target_arn} => String
+    #   * {Types::Integration#integration_name #integration_name} => String
+    #   * {Types::Integration#integration_arn #integration_arn} => String
+    #   * {Types::Integration#kms_key_id #kms_key_id} => String
+    #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::Integration#status #status} => String
+    #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #   * {Types::Integration#data_filter #data_filter} => String
+    #   * {Types::Integration#description #description} => String
+    #
+    #
+    # @example Example: To modify a zero-ETL integration
+    #
+    #   # The following example modifies the name of an existing zero-ETL integration.
+    #
+    #   resp = client.modify_integration({
+    #     integration_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     integration_name: "my-renamed-integration", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #     data_filter: "include: *.*", 
+    #     integration_arn: "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
+    #     integration_name: "my-renamed-integration", 
+    #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
+    #     source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
+    #     status: "active", 
+    #     tags: [
+    #     ], 
+    #     target_arn: "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_integration({
+    #     integration_identifier: "IntegrationIdentifier", # required
+    #     integration_name: "IntegrationName",
+    #     data_filter: "DataFilter",
+    #     description: "IntegrationDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_arn #=> String
+    #   resp.target_arn #=> String
+    #   resp.integration_name #=> String
+    #   resp.integration_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.additional_encryption_context #=> Hash
+    #   resp.additional_encryption_context["String"] #=> String
+    #   resp.status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.create_time #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.data_filter #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyIntegration AWS API Documentation
+    #
+    # @overload modify_integration(params = {})
+    # @param [Hash] params ({})
+    def modify_integration(params = {}, options = {})
+      req = build_request(:modify_integration, params)
+      req.send_request(options)
+    end
+
     # Modifies an existing option group.
     #
     # @option params [required, String] :option_group_name
@@ -22694,6 +22999,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -22717,6 +23024,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -22985,6 +23294,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -23008,6 +23319,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -24509,6 +24822,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -24532,6 +24847,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -25224,6 +25541,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -25247,6 +25566,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -25914,6 +26235,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -25937,6 +26260,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -26170,10 +26495,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
@@ -26474,6 +26799,22 @@ module Aws::RDS
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
     #
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -26569,6 +26910,7 @@ module Aws::RDS
     #     db_cluster_snapshot_identifier: "String",
     #     allocated_storage: 1,
     #     dedicated_log_volume: false,
+    #     ca_certificate_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -26997,10 +27339,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified; otherwise `gp2`
     #
@@ -27243,6 +27585,22 @@ module Aws::RDS
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
     #
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -27309,6 +27667,7 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     dedicated_log_volume: false,
+    #     ca_certificate_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -27731,15 +28090,15 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
     #
     #   Constraints:
     #
-    #   * If you specify `io1` or `gp3`, you must also include a value for the
-    #     `Iops` parameter.
+    #   * If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #     for the `Iops` parameter.
     #
     #   ^
     #
@@ -28026,6 +28385,22 @@ module Aws::RDS
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
     #
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -28184,6 +28559,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     allocated_storage: 1,
     #     dedicated_log_volume: false,
+    #     ca_certificate_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -28721,6 +29097,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -28744,6 +29122,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -29558,6 +29938,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -29581,6 +29963,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -30428,7 +30812,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.219.0'
+      context[:gem_version] = '1.229.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

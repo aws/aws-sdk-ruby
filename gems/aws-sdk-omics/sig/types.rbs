@@ -284,6 +284,7 @@ module Aws::Omics
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       attr_accessor fallback_location: ::String
+      attr_accessor e_tag_algorithm_family: ("MD5up" | "SHA256up" | "SHA512up")
       SENSITIVE: []
     end
 
@@ -295,6 +296,7 @@ module Aws::Omics
       attr_accessor sse_config: Types::SseConfig
       attr_accessor creation_time: ::Time
       attr_accessor fallback_location: ::String
+      attr_accessor e_tag_algorithm_family: ("MD5up" | "SHA256up" | "SHA512up")
       SENSITIVE: []
     end
 
@@ -438,7 +440,7 @@ module Aws::Omics
     end
 
     class ETag
-      attr_accessor algorithm: ("FASTQ_MD5up" | "BAM_MD5up" | "CRAM_MD5up")
+      attr_accessor algorithm: ("FASTQ_MD5up" | "BAM_MD5up" | "CRAM_MD5up" | "FASTQ_SHA256up" | "BAM_SHA256up" | "CRAM_SHA256up" | "FASTQ_SHA512up" | "BAM_SHA512up" | "CRAM_SHA512up")
       attr_accessor source1: ::String
       attr_accessor source2: ::String
       SENSITIVE: []
@@ -477,6 +479,7 @@ module Aws::Omics
       attr_accessor total_parts: ::Integer
       attr_accessor part_size: ::Integer
       attr_accessor content_length: ::Integer
+      attr_accessor s3_access: Types::ReadSetS3Access
       SENSITIVE: []
     end
 
@@ -821,6 +824,8 @@ module Aws::Omics
       attr_accessor sse_config: Types::SseConfig
       attr_accessor creation_time: ::Time
       attr_accessor fallback_location: ::String
+      attr_accessor s3_access: Types::SequenceStoreS3Access
+      attr_accessor e_tag_algorithm_family: ("MD5up" | "SHA256up" | "SHA512up")
       SENSITIVE: []
     end
 
@@ -1367,6 +1372,11 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class ReadSetS3Access
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
     class ReadSetUploadPartListFilter
       attr_accessor created_after: ::Time
       attr_accessor created_before: ::Time
@@ -1496,6 +1506,7 @@ module Aws::Omics
       attr_accessor sse_config: Types::SseConfig
       attr_accessor creation_time: ::Time
       attr_accessor fallback_location: ::String
+      attr_accessor e_tag_algorithm_family: ("MD5up" | "SHA256up" | "SHA512up")
       SENSITIVE: []
     end
 
@@ -1503,6 +1514,12 @@ module Aws::Omics
       attr_accessor name: ::String
       attr_accessor created_after: ::Time
       attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class SequenceStoreS3Access
+      attr_accessor s3_uri: ::String
+      attr_accessor s3_access_point_arn: ::String
       SENSITIVE: []
     end
 

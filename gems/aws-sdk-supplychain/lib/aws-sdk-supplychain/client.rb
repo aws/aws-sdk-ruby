@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::SupplyChain
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::SupplyChain
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::SupplyChain
     #   @option options [Aws::SupplyChain::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SupplyChain::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -412,6 +436,20 @@ module Aws::SupplyChain
     # @return [Types::CreateBillOfMaterialsImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBillOfMaterialsImportJobResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: Invoke CreateBillOfMaterialsImportJob
+    #
+    #   resp = client.create_bill_of_materials_import_job({
+    #     client_token: "550e8400-e29b-41d4-a716-446655440000", 
+    #     instance_id: "60f82bbd-71f7-4fcd-a941-472f574c5243", 
+    #     s3uri: "s3://mybucketname/pathelemene/file.csv", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "f79b359b-1515-4436-a3bf-bae7b33e47b4", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -446,6 +484,42 @@ module Aws::SupplyChain
     #
     #   * {Types::GetBillOfMaterialsImportJobResponse#job #job} => Types::BillOfMaterialsImportJob
     #
+    #
+    # @example Example: Invoke GetBillOfMaterialsImportJob for a successful job
+    #
+    #   resp = client.get_bill_of_materials_import_job({
+    #     instance_id: "60f82bbd-71f7-4fcd-a941-472f574c5243", 
+    #     job_id: "f79b359b-1515-4436-a3bf-bae7b33e47b4", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job: {
+    #       instance_id: "60f82bbd-71f7-4fcd-a941-472f574c5243", 
+    #       job_id: "f79b359b-1515-4436-a3bf-bae7b33e47b4", 
+    #       message: "Import job completed successfully.", 
+    #       s3uri: "s3://mybucketname/pathelemene/file.csv", 
+    #       status: "SUCCESS", 
+    #     }, 
+    #   }
+    #
+    # @example Example: Invoke GetBillOfMaterialsImportJob for an in-progress job
+    #
+    #   resp = client.get_bill_of_materials_import_job({
+    #     instance_id: "60f82bbd-71f7-4fcd-a941-472f574c5243", 
+    #     job_id: "f79b359b-1515-4436-a3bf-bae7b33e47b4", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job: {
+    #       instance_id: "60f82bbd-71f7-4fcd-a941-472f574c5243", 
+    #       job_id: "f79b359b-1515-4436-a3bf-bae7b33e47b4", 
+    #       s3uri: "s3://mybucketname/pathelemene/file.csv", 
+    #       status: "IN_PROGRESS", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bill_of_materials_import_job({
@@ -470,6 +544,285 @@ module Aws::SupplyChain
       req.send_request(options)
     end
 
+    # Send transactional data events with real-time data for analysis or
+    # monitoring.
+    #
+    # @option params [required, String] :instance_id
+    #   The AWS Supply Chain instance identifier.
+    #
+    # @option params [required, String] :event_type
+    #   The data event type.
+    #
+    # @option params [required, String] :data
+    #   The data payload of the event.
+    #
+    # @option params [required, String] :event_group_id
+    #   Event identifier (for example, orderId for InboundOrder) used for data
+    #   sharing or partitioning.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :event_timestamp
+    #   The event timestamp (in epoch seconds).
+    #
+    # @option params [String] :client_token
+    #   The idempotent client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SendDataIntegrationEventResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendDataIntegrationEventResponse#event_id #event_id} => String
+    #
+    #
+    # @example Example: Successful SendDataIntegrationEvent for inboundorder event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"id\": \"inbound-order-id-test-123\", \"tpartner_id\": \"partner-id-test-123\" }", 
+    #     event_group_id: "inboundOrderId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.inboundorder", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "c4132c1d-8f60-44a2-9932-f723c4f7b8a7", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for inboundorderline event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"id\": \"inbound-order-line-id-test-123\", \"order_id\": \"order-id-test-123\", \"tpartner_id\": \"partner-id-test-123\", \"product_id\": \"product-id-test-123\", \"quantity_submitted\": \"100.0\" }", 
+    #     event_group_id: "inboundOrderLineId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.inboundorderline", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "45d95db2-d106-40e0-aa98-f1204230a691", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for inboundorderlineschedule event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"id\": \"inbound-order-line-schedule-id-test-123\", \"order_id\": \"order-id-test-123\", \"order_line_id\": \"order-line-id-test-123\", \"product_id\": \"product-id-test-123\"}", 
+    #     event_group_id: "inboundOrderLineScheduleId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.inboundorderlineschedule", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "5abba995-7735-4d1e-95c4-7cc93e48cf9f", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for forecast event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"snapshot_date\": \"1672470400000\", \"product_id\": \"product-id-test-123\", \"site_id\": \"site-id-test-123\", \"region_id\": \"region-id-test-123\", \"product_group_id\": \"product-group-id-test-123\", \"forecast_start_dttm\": \"1672470400000\", \"forecast_end_dttm\": \"1672470400000\" }", 
+    #     event_group_id: "forecastId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.forecast", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "29312d5b-f499-4dcd-b017-3dab3cd34d61", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for inventorylevel event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"snapshot_date\": \"1672470400000\", \"site_id\": \"site-id-test-123\", \"product_id\": \"product-id-test-123\", \"on_hand_inventory\": \"100.0\", \"inv_condition\": \"good\", \"lot_number\": \"lot-number-test-123\"}", 
+    #     event_group_id: "inventoryLevelId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.inventorylevel", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "3aa78324-acd8-4fdd-a19e-231ea003c2b3", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for outboundorderline event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"id\": \"outbound-orderline-id-test-123\", \"cust_order_id\": \"cust-order-id-test-123\", \"product_id\": \"product-id-test-123\" }", 
+    #     event_group_id: "outboundOrderLineId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.outboundorderline", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "959b7ef9-5e2d-4795-b1ca-5b16a3eb6b89", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for outboundshipment event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"id\": \"outbound-shipment-id-test-123\", \"cust_order_id\": \"cust-order-id-test-123\", \"cust_order_line_id\": \"cust-order-line-id-test-123\", \"product_id\": \"product-id-test-123\" }", 
+    #     event_group_id: "outboundShipmentId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.outboundshipment", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "59feded3-5e46-4126-81bf-0137ca176ee0", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for processheader event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"process_id\": \"process-id-test-123\" }", 
+    #     event_group_id: "processHeaderId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.processheader", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "564130eb-2d8a-4550-a768-ddf0daf7b4a9", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for processoperation event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"process_operation_id\": \"process-operation-id-test-123\", \"process_id\": \"process-id-test-123\" }", 
+    #     event_group_id: "processOperationId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.processoperation", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "db5df408-89c7-4b9f-a326-016f6c2b3396", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for processproduct event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"process_product_id\": \"process-product-id-test-123\", \"process_id\": \"process-id-test-123\" }", 
+    #     event_group_id: "processProductId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.processproduct", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "6929b275-485e-4035-a798-99077ca6d669", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for reservation event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"reservation_id\": \"reservation-id-test-123\", \"reservation_detail_id\": \"reservation-detail-id-test-123\" }", 
+    #     event_group_id: "reservationId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.reservation", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "f6c55a8b-fde2-44f6-848a-9b4336c77209", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for shipment event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"id\": \"shipment-id-test-123\", \"supplier_tpartner_id\": \"supplier-tpartner-id-test-123\", \"product_id\": \"product-id-test-123\", \"order_id\": \"order-id-test-123\", \"order_line_id\": \"order-line-id-test-123\", \"package_id\": \"package-id-test-123\" }", 
+    #     event_group_id: "shipmentId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.shipment", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "61d079d8-3f56-49bb-b35a-c0271a4e4f0a", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for shipmentstop event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"shipment_stop_id\": \"shipment-stop-id-test-123\", \"shipment_id\": \"shipment-id-test-123\" }", 
+    #     event_group_id: "shipmentStopId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.shipmentstop", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "3610992a-fc2f-4da4-9beb-724994622ba1", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for shipmentstoporder event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"shipment_stop_order_id\": \"shipment-stop-order-id-test-123\", \"shipment_stop_id\": \"shipment-stop-id-test-123\", \"shipment_id\": \"shipment-id-test-123\" }", 
+    #     event_group_id: "shipmentStopOrderId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.shipmentstoporder", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "1d550a60-9321-4d25-a132-9dd4b2d9e934", 
+    #   }
+    #
+    # @example Example: Successful SendDataIntegrationEvent for supplyplan event type
+    #
+    #   resp = client.send_data_integration_event({
+    #     data: "{\"supply_plan_id\": \"supply-plan-id-test-123\" }", 
+    #     event_group_id: "supplyPlanId", 
+    #     event_timestamp: Time.parse(1515531081.123), 
+    #     event_type: "scn.data.supplyplan", 
+    #     instance_id: "8928ae12-15e5-4441-825d-ec2184f0a43a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_id: "9abaee56-5dc4-4c31-8250-3206a651d8a1", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_data_integration_event({
+    #     instance_id: "UUID", # required
+    #     event_type: "scn.data.forecast", # required, accepts scn.data.forecast, scn.data.inventorylevel, scn.data.inboundorder, scn.data.inboundorderline, scn.data.inboundorderlineschedule, scn.data.outboundorderline, scn.data.outboundshipment, scn.data.processheader, scn.data.processoperation, scn.data.processproduct, scn.data.reservation, scn.data.shipment, scn.data.shipmentstop, scn.data.shipmentstoporder, scn.data.supplyplan
+    #     data: "DataIntegrationEventData", # required
+    #     event_group_id: "DataIntegrationEventGroupId", # required
+    #     event_timestamp: Time.now,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/SendDataIntegrationEvent AWS API Documentation
+    #
+    # @overload send_data_integration_event(params = {})
+    # @param [Hash] params ({})
+    def send_data_integration_event(params = {}, options = {})
+      req = build_request(:send_data_integration_event, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -483,7 +836,7 @@ module Aws::SupplyChain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-supplychain'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

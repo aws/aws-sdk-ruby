@@ -238,7 +238,8 @@ module Aws
                             },
                           ],
                           ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
-                          ?deletion_protection_enabled: bool
+                          ?deletion_protection_enabled: bool,
+                          ?resource_policy: ::String
                         ) -> _CreateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableResponseSuccess
 
@@ -278,6 +279,17 @@ module Aws
                          ?return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
                        ) -> _DeleteItemResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteItemResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyOutput]
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String,
+                                    ?expected_revision_id: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
 
       interface _DeleteTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTableOutput]
@@ -541,6 +553,17 @@ module Aws
                     ) -> _GetItemResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetItemResponseSuccess
 
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyOutput]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
       interface _ImportTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ImportTableOutput]
         def import_table_description: () -> Types::ImportTableDescription
@@ -726,6 +749,19 @@ module Aws
                       ?return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
                     ) -> _PutItemResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutItemResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyOutput]
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy: ::String,
+                                 ?expected_revision_id: ::String,
+                                 ?confirm_remove_self_resource_access: bool
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
 
       interface _QueryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::QueryOutput]

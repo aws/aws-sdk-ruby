@@ -557,6 +557,7 @@ module Aws::ElastiCache
 
     class DataStorage
       attr_accessor maximum: ::Integer
+      attr_accessor minimum: ::Integer
       attr_accessor unit: ("GB")
       SENSITIVE: []
     end
@@ -925,6 +926,7 @@ module Aws::ElastiCache
 
     class ECPUPerSecond
       attr_accessor maximum: ::Integer
+      attr_accessor minimum: ::Integer
       SENSITIVE: []
     end
 

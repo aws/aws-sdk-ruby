@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2024-04-02)
+------------------
+
+* Feature - Doc-only update. Changed "Resources" to "Key Concepts" in docs and updated text.
+
 1.20.0 (2024-01-26)
 ------------------
 

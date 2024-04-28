@@ -73,9 +73,71 @@ module Aws::VerifiedPermissions
       SENSITIVE: []
     end
 
+    class BatchIsAuthorizedWithTokenInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor identity_token: ::String
+      attr_accessor access_token: ::String
+      attr_accessor entities: Types::EntitiesDefinition
+      attr_accessor requests: ::Array[Types::BatchIsAuthorizedWithTokenInputItem]
+      SENSITIVE: [:identity_token, :access_token]
+    end
+
+    class BatchIsAuthorizedWithTokenInputItem
+      attr_accessor action: Types::ActionIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      attr_accessor context: Types::ContextDefinition
+      SENSITIVE: []
+    end
+
+    class BatchIsAuthorizedWithTokenOutput
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor results: ::Array[Types::BatchIsAuthorizedWithTokenOutputItem]
+      SENSITIVE: []
+    end
+
+    class BatchIsAuthorizedWithTokenOutputItem
+      attr_accessor request: Types::BatchIsAuthorizedWithTokenInputItem
+      attr_accessor decision: ("ALLOW" | "DENY")
+      attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
+      attr_accessor errors: ::Array[Types::EvaluationErrorItem]
+      SENSITIVE: []
+    end
+
+    class CognitoGroupConfiguration
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_entity_type]
+    end
+
+    class CognitoGroupConfigurationDetail
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_entity_type]
+    end
+
+    class CognitoGroupConfigurationItem
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_entity_type]
+    end
+
     class CognitoUserPoolConfiguration
       attr_accessor user_pool_arn: ::String
       attr_accessor client_ids: ::Array[::String]
+      attr_accessor group_configuration: Types::CognitoGroupConfiguration
+      SENSITIVE: []
+    end
+
+    class CognitoUserPoolConfigurationDetail
+      attr_accessor user_pool_arn: ::String
+      attr_accessor client_ids: ::Array[::String]
+      attr_accessor issuer: ::String
+      attr_accessor group_configuration: Types::CognitoGroupConfigurationDetail
+      SENSITIVE: []
+    end
+
+    class CognitoUserPoolConfigurationItem
+      attr_accessor user_pool_arn: ::String
+      attr_accessor client_ids: ::Array[::String]
+      attr_accessor issuer: ::String
+      attr_accessor group_configuration: Types::CognitoGroupConfigurationItem
       SENSITIVE: []
     end
 
@@ -87,6 +149,28 @@ module Aws::VerifiedPermissions
       class CognitoUserPoolConfiguration < Configuration
       end
       class Unknown < Configuration
+      end
+    end
+
+    class ConfigurationDetail
+      attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CognitoUserPoolConfiguration < ConfigurationDetail
+      end
+      class Unknown < ConfigurationDetail
+      end
+    end
+
+    class ConfigurationItem
+      attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationItem
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CognitoUserPoolConfiguration < ConfigurationItem
+      end
+      class Unknown < ConfigurationItem
       end
     end
 
@@ -268,6 +352,7 @@ module Aws::VerifiedPermissions
       attr_accessor last_updated_date: ::Time
       attr_accessor policy_store_id: ::String
       attr_accessor principal_entity_type: ::String
+      attr_accessor configuration: Types::ConfigurationDetail
       SENSITIVE: [:principal_entity_type]
     end
 
@@ -354,6 +439,7 @@ module Aws::VerifiedPermissions
       attr_accessor last_updated_date: ::Time
       attr_accessor policy_store_id: ::String
       attr_accessor principal_entity_type: ::String
+      attr_accessor configuration: Types::ConfigurationItem
       SENSITIVE: [:principal_entity_type]
     end
 
@@ -402,6 +488,7 @@ module Aws::VerifiedPermissions
       attr_accessor decision: ("ALLOW" | "DENY")
       attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
       attr_accessor errors: ::Array[Types::EvaluationErrorItem]
+      attr_accessor principal: Types::EntityIdentifier
       SENSITIVE: []
     end
 
@@ -630,9 +717,15 @@ module Aws::VerifiedPermissions
       SENSITIVE: []
     end
 
+    class UpdateCognitoGroupConfiguration
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_entity_type]
+    end
+
     class UpdateCognitoUserPoolConfiguration
       attr_accessor user_pool_arn: ::String
       attr_accessor client_ids: ::Array[::String]
+      attr_accessor group_configuration: Types::UpdateCognitoGroupConfiguration
       SENSITIVE: []
     end
 

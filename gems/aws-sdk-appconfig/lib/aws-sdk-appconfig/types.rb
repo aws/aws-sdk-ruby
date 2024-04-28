@@ -2130,8 +2130,8 @@ module Aws::AppConfig
     # A value such as an Amazon Resource Name (ARN) or an Amazon Simple
     # Notification Service topic entered in an extension when invoked.
     # Parameter values are specified in an extension association. For more
-    # information about extensions, see [Working with AppConfig
-    # extensions][1] in the *AppConfig User Guide*.
+    # information about extensions, see [Extending workflows][1] in the
+    # *AppConfig User Guide*.
     #
     #
     #
@@ -2145,11 +2145,18 @@ module Aws::AppConfig
     #   A parameter value must be specified in the extension association.
     #   @return [Boolean]
     #
+    # @!attribute [rw] dynamic
+    #   Indicates whether this parameter's value can be supplied at the
+    #   extension's action point instead of during extension association.
+    #   Dynamic parameters can't be marked `Required`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
       :description,
-      :required)
+      :required,
+      :dynamic)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2281,6 +2288,11 @@ module Aws::AppConfig
     #   managed key.
     #   @return [String]
     #
+    # @!attribute [rw] dynamic_extension_parameters
+    #   A map of dynamic extension parameter names to values to pass to
+    #   associated extensions with `PRE_START_DEPLOYMENT` actions.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StartDeploymentRequest AWS API Documentation
     #
     class StartDeploymentRequest < Struct.new(
@@ -2291,7 +2303,8 @@ module Aws::AppConfig
       :configuration_version,
       :description,
       :tags,
-      :kms_key_identifier)
+      :kms_key_identifier,
+      :dynamic_extension_parameters)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ElastiCache
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ElastiCache
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::ElastiCache
     #   @option options [Aws::ElastiCache::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ElastiCache::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -2048,9 +2072,9 @@ module Aws::ElastiCache
     # or a secondary replication group associated with a Global datastore.
     #
     # A Redis (cluster mode disabled) replication group is a collection of
-    # clusters, where one of the clusters is a read/write primary and the
-    # others are read-only replicas. Writes to the primary are
-    # asynchronously propagated to the replicas.
+    # nodes, where one of the nodes is a read/write primary and the others
+    # are read-only replicas. Writes to the primary are asynchronously
+    # propagated to the replicas.
     #
     # A Redis cluster-mode enabled cluster is comprised of from 1 to 90
     # shards (API/CLI: node groups). Each shard has a primary node and up to
@@ -2394,11 +2418,6 @@ module Aws::ElastiCache
     #   the new replication group is being created.
     #
     # @option params [String] :preferred_maintenance_window
-    #   Specifies the weekly time range during which maintenance on the
-    #   cluster is performed. It is specified as a range in the format
-    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-    #   window is a 60 minute period. Valid values for `ddd` are:
-    #
     #   Specifies the weekly time range during which maintenance on the
     #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
@@ -2912,11 +2931,13 @@ module Aws::ElastiCache
     #     major_engine_version: "String",
     #     cache_usage_limits: {
     #       data_storage: {
-    #         maximum: 1, # required
+    #         maximum: 1,
+    #         minimum: 1,
     #         unit: "GB", # required, accepts GB
     #       },
     #       ecpu_per_second: {
-    #         maximum: 1, # required
+    #         maximum: 1,
+    #         minimum: 1,
     #       },
     #     },
     #     kms_key_id: "String",
@@ -2944,8 +2965,10 @@ module Aws::ElastiCache
     #   resp.serverless_cache.major_engine_version #=> String
     #   resp.serverless_cache.full_engine_version #=> String
     #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
     #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
     #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
     #   resp.serverless_cache.kms_key_id #=> String
     #   resp.serverless_cache.security_group_ids #=> Array
     #   resp.serverless_cache.security_group_ids[0] #=> String
@@ -4174,8 +4197,10 @@ module Aws::ElastiCache
     #   resp.serverless_cache.major_engine_version #=> String
     #   resp.serverless_cache.full_engine_version #=> String
     #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
     #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
     #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
     #   resp.serverless_cache.kms_key_id #=> String
     #   resp.serverless_cache.security_group_ids #=> Array
     #   resp.serverless_cache.security_group_ids[0] #=> String
@@ -7746,8 +7771,10 @@ module Aws::ElastiCache
     #   resp.serverless_caches[0].major_engine_version #=> String
     #   resp.serverless_caches[0].full_engine_version #=> String
     #   resp.serverless_caches[0].cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_caches[0].cache_usage_limits.data_storage.minimum #=> Integer
     #   resp.serverless_caches[0].cache_usage_limits.data_storage.unit #=> String, one of "GB"
     #   resp.serverless_caches[0].cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_caches[0].cache_usage_limits.ecpu_per_second.minimum #=> Integer
     #   resp.serverless_caches[0].kms_key_id #=> String
     #   resp.serverless_caches[0].security_group_ids #=> Array
     #   resp.serverless_caches[0].security_group_ids[0] #=> String
@@ -10188,11 +10215,13 @@ module Aws::ElastiCache
     #     description: "String",
     #     cache_usage_limits: {
     #       data_storage: {
-    #         maximum: 1, # required
+    #         maximum: 1,
+    #         minimum: 1,
     #         unit: "GB", # required, accepts GB
     #       },
     #       ecpu_per_second: {
-    #         maximum: 1, # required
+    #         maximum: 1,
+    #         minimum: 1,
     #       },
     #     },
     #     remove_user_group: false,
@@ -10212,8 +10241,10 @@ module Aws::ElastiCache
     #   resp.serverless_cache.major_engine_version #=> String
     #   resp.serverless_cache.full_engine_version #=> String
     #   resp.serverless_cache.cache_usage_limits.data_storage.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.data_storage.minimum #=> Integer
     #   resp.serverless_cache.cache_usage_limits.data_storage.unit #=> String, one of "GB"
     #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.maximum #=> Integer
+    #   resp.serverless_cache.cache_usage_limits.ecpu_per_second.minimum #=> Integer
     #   resp.serverless_cache.kms_key_id #=> String
     #   resp.serverless_cache.security_group_ids #=> Array
     #   resp.serverless_cache.security_group_ids[0] #=> String
@@ -11300,7 +11331,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

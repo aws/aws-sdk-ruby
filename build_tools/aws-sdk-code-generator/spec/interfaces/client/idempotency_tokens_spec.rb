@@ -25,7 +25,6 @@ describe 'Client Interface:' do
     end
 
     it 'does not modify given idempotency tokens' do
-      expect(SecureRandom).not_to receive(:uuid)
       resp = client.operation_with_idempotency_token(client_token: 'xyz')
       expect(resp.context.params[:client_token]).to eq('xyz')
     end

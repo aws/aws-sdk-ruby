@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2024-03-07)
+------------------
+
+* Feature - Adds support for the new GrafanaToken as part of the Amazon Managed Grafana Enterprise plugins upgrade to associate your AWS account with a Grafana Labs account.
+
 1.25.0 (2024-01-26)
 ------------------
 

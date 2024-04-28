@@ -72,6 +72,8 @@ module Aws::SavingsPlans
             Aws::SavingsPlans::Endpoints::DescribeSavingsPlansOfferings.build(context)
           when :list_tags_for_resource
             Aws::SavingsPlans::Endpoints::ListTagsForResource.build(context)
+          when :return_savings_plan
+            Aws::SavingsPlans::Endpoints::ReturnSavingsPlan.build(context)
           when :tag_resource
             Aws::SavingsPlans::Endpoints::TagResource.build(context)
           when :untag_resource

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ECS
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ECS
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::ECS
     #   @option options [Aws::ECS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ECS::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -757,14 +781,10 @@ module Aws::ECS
     # specified cluster. To update an existing service, see the
     # UpdateService action.
     #
-    # <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    # customers to Amazon Elastic Inference (EI), and will help current
-    # customers migrate their workloads to options that offer better price
-    # and performance. After April 15, 2023, new customers will not be able
-    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
-    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
-    # at least once during the past 30-day period are considered current
-    # customers and will be able to continue using the service.
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
     #
     #  </note>
     #
@@ -866,7 +886,16 @@ module Aws::ECS
     # When the service scheduler launches new tasks, it determines task
     # placement. For information about task placement and task placement
     # strategies, see [Amazon ECS task placement][5] in the *Amazon Elastic
-    # Container Service Developer Guide*.
+    # Container Service Developer Guide*
+    #
+    # Starting April 15, 2023, Amazon Web Services will not onboard new
+    # customers to Amazon Elastic Inference (EI), and will help current
+    # customers migrate their workloads to options that offer better price
+    # and performance. After April 15, 2023, new customers will not be able
+    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    # at least once during the past 30-day period are considered current
+    # customers and will be able to continue using the service.
     #
     #
     #
@@ -996,7 +1025,7 @@ module Aws::ECS
     #
     #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
     #   provider strategy must be used. For more information, see [Fargate
-    #   capacity providers][2] in the *Amazon ECS User Guide for Fargate*.
+    #   capacity providers][2] in the *Amazon ECS Developer Guide*.
     #
     #    </note>
     #
@@ -1201,11 +1230,16 @@ module Aws::ECS
     #   can only be propagated to the task during task creation. To add tags
     #   to a task after task creation, use the [TagResource][1] API action.
     #
+    #   You must set this to a value other than `NONE` when you use Cost
+    #   Explorer. For more information, see [Amazon ECS usage reports][2] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
+    #
     #   The default is `NONE`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/usage-reports.html
     #
     # @option params [Boolean] :enable_execute_command
     #   Determines whether the execute command functionality is turned on for
@@ -1689,6 +1723,13 @@ module Aws::ECS
     # when a service uses the `EXTERNAL` deployment controller type. For
     # more information, see [Amazon ECS deployment types][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
+    #
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
     #
     # For information about the maximum number of task sets and otther
     # quotas, see [Amazon ECS service quotas][2] in the *Amazon Elastic
@@ -7174,6 +7215,13 @@ module Aws::ECS
 
     # Starts a new task using the specified task definition.
     #
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
     # You can allow Amazon ECS to place tasks for you, or you can customize
     # how Amazon ECS places tasks using placement constraints and placement
     # strategies. For more information, see [Scheduling Tasks][1] in the
@@ -7182,7 +7230,7 @@ module Aws::ECS
     # Alternatively, you can use StartTask to use your own scheduler or
     # place tasks manually on specific container instances.
     #
-    # <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    # Starting April 15, 2023, Amazon Web Services will not onboard new
     # customers to Amazon Elastic Inference (EI), and will help current
     # customers migrate their workloads to options that offer better price
     # and performance. After April 15, 2023, new customers will not be able
@@ -7190,8 +7238,6 @@ module Aws::ECS
     # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
     # at least once during the past 30-day period are considered current
     # customers and will be able to continue using the service.
-    #
-    #  </note>
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
     # the volume when creating or updating a service. For more infomation,
@@ -7408,28 +7454,22 @@ module Aws::ECS
     #   task definition to run. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
-    #   When you create a policy for run-task, you can set the resource to be
-    #   the latest task definition revision, or a specific revision.
-    #
     #   The full ARN value must match the value that you specified as the
     #   `Resource` of the principal's permissions policy.
     #
-    #   When you specify the policy resource as the latest task definition
-    #   version (by setting the `Resource` in the policy to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`),
-    #   then set this value to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`.
+    #   When you specify a task definition, you must either specify a specific
+    #   revision, or all revisions in the ARN.
     #
-    #   When you specify the policy resource as a specific task definition
-    #   version (by setting the `Resource` in the policy to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`
-    #   or
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*`),
-    #   then set this value to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`.
+    #   To specify a specific revision, include the revision number in the
+    #   ARN. For example, to specify revision 2, use
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:2`.
+    #
+    #   To specify all revisions, use the wildcard (*) in the ARN. For
+    #   example, to specify all revisions, use
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*`.
     #
     #   For more information, see [Policy Resources for Amazon ECS][1] in the
-    #   Amazon Elastic Container Service developer Guide.
+    #   Amazon Elastic Container Service Developer Guide.
     #
     #
     #
@@ -7748,7 +7788,14 @@ module Aws::ECS
     # Starts a new task from the specified task definition on the specified
     # container instance or instances.
     #
-    # <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
+    # Starting April 15, 2023, Amazon Web Services will not onboard new
     # customers to Amazon Elastic Inference (EI), and will help current
     # customers migrate their workloads to options that offer better price
     # and performance. After April 15, 2023, new customers will not be able
@@ -7756,8 +7803,6 @@ module Aws::ECS
     # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
     # at least once during the past 30-day period are considered current
     # customers and will be able to continue using the service.
-    #
-    #  </note>
     #
     # Alternatively, you can use RunTask to place tasks for you. For more
     # information, see [Scheduling Tasks][1] in the *Amazon Elastic
@@ -9146,6 +9191,13 @@ module Aws::ECS
 
     # Modifies the parameters of a service.
     #
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
     # For services using the rolling update (`ECS`) you can update the
     # desired count, deployment configuration, network configuration, load
     # balancers, service registries, enable ECS managed tags option,
@@ -10225,7 +10277,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

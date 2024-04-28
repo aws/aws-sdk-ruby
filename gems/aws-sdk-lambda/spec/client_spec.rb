@@ -26,7 +26,7 @@ module Aws
 
           resp = client.get_function(function_name: 'name')
           expect(resp.configuration.last_modified).to be_kind_of(Time)
-          expect(resp.configuration.last_modified.iso8601).to eq(time)
+          expect(resp.configuration.last_modified).to eq(Time.parse(time))
         end
 
       end

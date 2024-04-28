@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::RolesAnywhere
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::RolesAnywhere
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::RolesAnywhere
     #   @option options [Aws::RolesAnywhere::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::RolesAnywhere::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -395,7 +419,14 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:CreateProfile`.
     #
     # @option params [Integer] :duration_seconds
-    #   The number of seconds the vended session credentials are valid for.
+    #   Used to determine how long sessions vended using this profile are
+    #   valid for. See the `Expiration` section of the [CreateSession API
+    #   documentation][1] page for more details. In requests, if this value is
+    #   not provided, the default value will be 3600.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object
     #
     # @option params [Boolean] :enabled
     #   Specifies whether the profile is enabled.
@@ -446,6 +477,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -553,6 +588,62 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
+    # Delete an entry from the attribute mapping rules enforced by a given
+    # profile.
+    #
+    # @option params [required, String] :certificate_field
+    #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
+    #   certificates.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile.
+    #
+    # @option params [Array<String>] :specifiers
+    #   A list of specifiers of a certificate field; for example, CN, OU, UID
+    #   from a Subject.
+    #
+    # @return [Types::DeleteAttributeMappingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAttributeMappingResponse#profile #profile} => Types::ProfileDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_attribute_mapping({
+    #     certificate_field: "x509Subject", # required, accepts x509Subject, x509Issuer, x509SAN
+    #     profile_id: "Uuid", # required
+    #     specifiers: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.created_by #=> String
+    #   resp.profile.duration_seconds #=> Integer
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteAttributeMapping AWS API Documentation
+    #
+    # @overload delete_attribute_mapping(params = {})
+    # @param [Hash] params ({})
+    def delete_attribute_mapping(params = {}, options = {})
+      req = build_request(:delete_attribute_mapping, params)
+      req.send_request(options)
+    end
+
     # Deletes a certificate revocation list (CRL).
     #
     # <b>Required permissions: </b> `rolesanywhere:DeleteCrl`.
@@ -609,6 +700,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -734,6 +829,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -861,6 +960,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -986,6 +1089,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -1108,8 +1215,9 @@ module Aws::RolesAnywhere
 
     # Imports the certificate revocation list (CRL). A CRL is a list of
     # certificates that have been revoked by the issuing certificate
-    # Authority (CA). IAM Roles Anywhere validates against the CRL before
-    # issuing credentials.
+    # Authority (CA).In order to be properly imported, a CRL must be in PEM
+    # format. IAM Roles Anywhere validates against the CRL before issuing
+    # credentials.
     #
     # <b>Required permissions: </b> `rolesanywhere:ImportCrl`.
     #
@@ -1248,6 +1356,10 @@ module Aws::RolesAnywhere
     #
     #   resp.next_token #=> String
     #   resp.profiles #=> Array
+    #   resp.profiles[0].attribute_mappings #=> Array
+    #   resp.profiles[0].attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profiles[0].attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profiles[0].attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profiles[0].created_at #=> Time
     #   resp.profiles[0].created_by #=> String
     #   resp.profiles[0].duration_seconds #=> Integer
@@ -1405,6 +1517,66 @@ module Aws::RolesAnywhere
     # @param [Hash] params ({})
     def list_trust_anchors(params = {}, options = {})
       req = build_request(:list_trust_anchors, params)
+      req.send_request(options)
+    end
+
+    # Put an entry in the attribute mapping rules that will be enforced by a
+    # given profile. A mapping specifies a certificate field and one or more
+    # specifiers that have contextual meanings.
+    #
+    # @option params [required, String] :certificate_field
+    #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
+    #   certificates.
+    #
+    # @option params [required, Array<Types::MappingRule>] :mapping_rules
+    #   A list of mapping entries for every supported specifier or sub-field.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile.
+    #
+    # @return [Types::PutAttributeMappingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAttributeMappingResponse#profile #profile} => Types::ProfileDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_attribute_mapping({
+    #     certificate_field: "x509Subject", # required, accepts x509Subject, x509Issuer, x509SAN
+    #     mapping_rules: [ # required
+    #       {
+    #         specifier: "MappingRuleSpecifierString", # required
+    #       },
+    #     ],
+    #     profile_id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.created_by #=> String
+    #   resp.profile.duration_seconds #=> Integer
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutAttributeMapping AWS API Documentation
+    #
+    # @overload put_attribute_mapping(params = {})
+    # @param [Hash] params ({})
+    def put_attribute_mapping(params = {}, options = {})
+      req = build_request(:put_attribute_mapping, params)
       req.send_request(options)
     end
 
@@ -1639,7 +1811,14 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:UpdateProfile`.
     #
     # @option params [Integer] :duration_seconds
-    #   The number of seconds the vended session credentials are valid for.
+    #   Used to determine how long sessions vended using this profile are
+    #   valid for. See the `Expiration` section of the [CreateSession API
+    #   documentation][1] page for more details. In requests, if this value is
+    #   not provided, the default value will be 3600.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object
     #
     # @option params [Array<String>] :managed_policy_arns
     #   A list of managed policy ARNs that apply to the vended session
@@ -1676,6 +1855,10 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.attribute_mappings #=> Array
+    #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
+    #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
+    #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.created_at #=> Time
     #   resp.profile.created_by #=> String
     #   resp.profile.duration_seconds #=> Integer
@@ -1777,7 +1960,7 @@ module Aws::RolesAnywhere
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

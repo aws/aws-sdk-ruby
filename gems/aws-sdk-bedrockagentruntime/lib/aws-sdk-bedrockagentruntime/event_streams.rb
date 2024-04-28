@@ -15,36 +15,16 @@ module Aws::BedrockAgentRuntime
         @event_emitter = Aws::EventEmitter.new
       end
 
-      def on_chunk_event(&block)
-        @event_emitter.on(:chunk, block) if block_given?
-      end
-
-      def on_trace_event(&block)
-        @event_emitter.on(:trace, block) if block_given?
-      end
-
-      def on_internal_server_exception_event(&block)
-        @event_emitter.on(:internal_server_exception, block) if block_given?
-      end
-
-      def on_validation_exception_event(&block)
-        @event_emitter.on(:validation_exception, block) if block_given?
-      end
-
-      def on_resource_not_found_exception_event(&block)
-        @event_emitter.on(:resource_not_found_exception, block) if block_given?
-      end
-
-      def on_service_quota_exceeded_exception_event(&block)
-        @event_emitter.on(:service_quota_exceeded_exception, block) if block_given?
-      end
-
-      def on_throttling_exception_event(&block)
-        @event_emitter.on(:throttling_exception, block) if block_given?
-      end
-
       def on_access_denied_exception_event(&block)
         @event_emitter.on(:access_denied_exception, block) if block_given?
+      end
+
+      def on_bad_gateway_exception_event(&block)
+        @event_emitter.on(:bad_gateway_exception, block) if block_given?
+      end
+
+      def on_chunk_event(&block)
+        @event_emitter.on(:chunk, block) if block_given?
       end
 
       def on_conflict_exception_event(&block)
@@ -55,8 +35,32 @@ module Aws::BedrockAgentRuntime
         @event_emitter.on(:dependency_failed_exception, block) if block_given?
       end
 
-      def on_bad_gateway_exception_event(&block)
-        @event_emitter.on(:bad_gateway_exception, block) if block_given?
+      def on_internal_server_exception_event(&block)
+        @event_emitter.on(:internal_server_exception, block) if block_given?
+      end
+
+      def on_resource_not_found_exception_event(&block)
+        @event_emitter.on(:resource_not_found_exception, block) if block_given?
+      end
+
+      def on_return_control_event(&block)
+        @event_emitter.on(:return_control, block) if block_given?
+      end
+
+      def on_service_quota_exceeded_exception_event(&block)
+        @event_emitter.on(:service_quota_exceeded_exception, block) if block_given?
+      end
+
+      def on_throttling_exception_event(&block)
+        @event_emitter.on(:throttling_exception, block) if block_given?
+      end
+
+      def on_trace_event(&block)
+        @event_emitter.on(:trace, block) if block_given?
+      end
+
+      def on_validation_exception_event(&block)
+        @event_emitter.on(:validation_exception, block) if block_given?
       end
 
       def on_error_event(&block)
@@ -72,17 +76,18 @@ module Aws::BedrockAgentRuntime
       end
 
       def on_event(&block)
-        on_chunk_event(&block)
-        on_trace_event(&block)
-        on_internal_server_exception_event(&block)
-        on_validation_exception_event(&block)
-        on_resource_not_found_exception_event(&block)
-        on_service_quota_exceeded_exception_event(&block)
-        on_throttling_exception_event(&block)
         on_access_denied_exception_event(&block)
+        on_bad_gateway_exception_event(&block)
+        on_chunk_event(&block)
         on_conflict_exception_event(&block)
         on_dependency_failed_exception_event(&block)
-        on_bad_gateway_exception_event(&block)
+        on_internal_server_exception_event(&block)
+        on_resource_not_found_exception_event(&block)
+        on_return_control_event(&block)
+        on_service_quota_exceeded_exception_event(&block)
+        on_throttling_exception_event(&block)
+        on_trace_event(&block)
+        on_validation_exception_event(&block)
         on_error_event(&block)
         on_initial_response_event(&block)
         on_unknown_event(&block)

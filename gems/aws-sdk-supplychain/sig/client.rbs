@@ -94,6 +94,21 @@ module Aws
                                               job_id: ::String
                                             ) -> _GetBillOfMaterialsImportJobResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillOfMaterialsImportJobResponseSuccess
+
+      interface _SendDataIntegrationEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendDataIntegrationEventResponse]
+        def event_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#send_data_integration_event-instance_method
+      def send_data_integration_event: (
+                                         instance_id: ::String,
+                                         event_type: ("scn.data.forecast" | "scn.data.inventorylevel" | "scn.data.inboundorder" | "scn.data.inboundorderline" | "scn.data.inboundorderlineschedule" | "scn.data.outboundorderline" | "scn.data.outboundshipment" | "scn.data.processheader" | "scn.data.processoperation" | "scn.data.processproduct" | "scn.data.reservation" | "scn.data.shipment" | "scn.data.shipmentstop" | "scn.data.shipmentstoporder" | "scn.data.supplyplan"),
+                                         data: ::String,
+                                         event_group_id: ::String,
+                                         ?event_timestamp: ::Time,
+                                         ?client_token: ::String
+                                       ) -> _SendDataIntegrationEventResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDataIntegrationEventResponseSuccess
     end
   end
 end

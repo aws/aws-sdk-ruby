@@ -3201,7 +3201,8 @@
       "type":"string",
       "enum":[
         "EKS_ADDON_MANAGEMENT",
-        "ECS_FARGATE_AGENT_MANAGEMENT"
+        "ECS_FARGATE_AGENT_MANAGEMENT",
+        "EC2_AGENT_MANAGEMENT"
       ]
     },
     "FeatureStatus":{
@@ -4989,6 +4990,10 @@
         "IpAddressV4":{
           "shape":"SensitiveString",
           "locationName":"ipAddressV4"
+        },
+        "IpAddressV6":{
+          "shape":"SensitiveString",
+          "locationName":"ipAddressV6"
         }
       }
     },
@@ -5406,7 +5411,8 @@
       "type":"string",
       "enum":[
         "EKS_ADDON_MANAGEMENT",
-        "ECS_FARGATE_AGENT_MANAGEMENT"
+        "ECS_FARGATE_AGENT_MANAGEMENT",
+        "EC2_AGENT_MANAGEMENT"
       ]
     },
     "OrgFeatureStatus":{
@@ -6023,6 +6029,10 @@
           "shape":"SensitiveString",
           "locationName":"ipAddressV4"
         },
+        "IpAddressV6":{
+          "shape":"SensitiveString",
+          "locationName":"ipAddressV6"
+        },
         "Organization":{
           "shape":"Organization",
           "locationName":"organization"
@@ -6202,6 +6212,26 @@
         "MemoryRegions":{
           "shape":"MemoryRegionsList",
           "locationName":"memoryRegions"
+        },
+        "ToolName":{
+          "shape":"String",
+          "locationName":"toolName"
+        },
+        "ToolCategory":{
+          "shape":"String",
+          "locationName":"toolCategory"
+        },
+        "ServiceName":{
+          "shape":"String",
+          "locationName":"serviceName"
+        },
+        "CommandLineExample":{
+          "shape":"String",
+          "locationName":"commandLineExample"
+        },
+        "ThreatFilePath":{
+          "shape":"String",
+          "locationName":"threatFilePath"
         }
       }
     },
@@ -6872,6 +6902,10 @@
         "ThreatNames":{
           "shape":"ThreatNames",
           "locationName":"threatNames"
+        },
+        "ThreatFileSha256":{
+          "shape":"String",
+          "locationName":"threatFileSha256"
         }
       }
     },
@@ -7377,7 +7411,9 @@
         "LAMBDA_NETWORK_LOGS",
         "EKS_RUNTIME_MONITORING",
         "FARGATE_RUNTIME_MONITORING",
-        "EC2_RUNTIME_MONITORING"
+        "EC2_RUNTIME_MONITORING",
+        "RDS_DBI_PROTECTION_PROVISIONED",
+        "RDS_DBI_PROTECTION_SERVERLESS"
       ]
     },
     "UsageFeatureList":{

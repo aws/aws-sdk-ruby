@@ -16,15 +16,19 @@ module Aws::DocDBElastic
     class Cluster
       attr_accessor admin_user_name: ::String
       attr_accessor auth_type: ("PLAIN_TEXT" | "SECRET_ARN")
+      attr_accessor backup_retention_period: ::Integer
       attr_accessor cluster_arn: ::String
       attr_accessor cluster_endpoint: ::String
       attr_accessor cluster_name: ::String
       attr_accessor create_time: ::String
       attr_accessor kms_key_id: ::String
+      attr_accessor preferred_backup_window: ::String
       attr_accessor preferred_maintenance_window: ::String
       attr_accessor shard_capacity: ::Integer
       attr_accessor shard_count: ::Integer
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS")
+      attr_accessor shard_instance_count: ::Integer
+      attr_accessor shards: ::Array[Types::Shard]
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor vpc_security_group_ids: ::Array[::String]
       SENSITIVE: []
@@ -33,7 +37,7 @@ module Aws::DocDBElastic
     class ClusterInList
       attr_accessor cluster_arn: ::String
       attr_accessor cluster_name: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
       SENSITIVE: []
     end
 
@@ -45,7 +49,8 @@ module Aws::DocDBElastic
       attr_accessor snapshot_arn: ::String
       attr_accessor snapshot_creation_time: ::String
       attr_accessor snapshot_name: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS")
+      attr_accessor snapshot_type: ("MANUAL" | "AUTOMATED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor vpc_security_group_ids: ::Array[::String]
       SENSITIVE: []
@@ -56,7 +61,7 @@ module Aws::DocDBElastic
       attr_accessor snapshot_arn: ::String
       attr_accessor snapshot_creation_time: ::String
       attr_accessor snapshot_name: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
       SENSITIVE: []
     end
 
@@ -67,16 +72,33 @@ module Aws::DocDBElastic
       SENSITIVE: []
     end
 
+    class CopyClusterSnapshotInput
+      attr_accessor copy_tags: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class CopyClusterSnapshotOutput
+      attr_accessor snapshot: Types::ClusterSnapshot
+      SENSITIVE: []
+    end
+
     class CreateClusterInput
       attr_accessor admin_user_name: ::String
       attr_accessor admin_user_password: ::String
       attr_accessor auth_type: ("PLAIN_TEXT" | "SECRET_ARN")
+      attr_accessor backup_retention_period: ::Integer
       attr_accessor client_token: ::String
       attr_accessor cluster_name: ::String
       attr_accessor kms_key_id: ::String
+      attr_accessor preferred_backup_window: ::String
       attr_accessor preferred_maintenance_window: ::String
       attr_accessor shard_capacity: ::Integer
       attr_accessor shard_count: ::Integer
+      attr_accessor shard_instance_count: ::Integer
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc_security_group_ids: ::Array[::String]
@@ -149,6 +171,7 @@ module Aws::DocDBElastic
       attr_accessor cluster_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor snapshot_type: ::String
       SENSITIVE: []
     end
 
@@ -190,6 +213,8 @@ module Aws::DocDBElastic
     class RestoreClusterFromSnapshotInput
       attr_accessor cluster_name: ::String
       attr_accessor kms_key_id: ::String
+      attr_accessor shard_capacity: ::Integer
+      attr_accessor shard_instance_count: ::Integer
       attr_accessor snapshot_arn: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -204,6 +229,33 @@ module Aws::DocDBElastic
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Shard
+      attr_accessor create_time: ::String
+      attr_accessor shard_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StartClusterInput
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartClusterOutput
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class StopClusterInput
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopClusterOutput
+      attr_accessor cluster: Types::Cluster
       SENSITIVE: []
     end
 
@@ -234,11 +286,14 @@ module Aws::DocDBElastic
     class UpdateClusterInput
       attr_accessor admin_user_password: ::String
       attr_accessor auth_type: ("PLAIN_TEXT" | "SECRET_ARN")
+      attr_accessor backup_retention_period: ::Integer
       attr_accessor client_token: ::String
       attr_accessor cluster_arn: ::String
+      attr_accessor preferred_backup_window: ::String
       attr_accessor preferred_maintenance_window: ::String
       attr_accessor shard_capacity: ::Integer
       attr_accessor shard_count: ::Integer
+      attr_accessor shard_instance_count: ::Integer
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor vpc_security_group_ids: ::Array[::String]
       SENSITIVE: [:admin_user_password]

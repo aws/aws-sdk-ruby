@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.229.0 (2024-04-26)
+------------------
+
+* Feature - SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database.
+
+1.228.0 (2024-04-25)
+------------------
+
+* Feature - Updates Amazon RDS documentation for setting local time zones for RDS for Db2 DB instances.
+
+1.227.0 (2024-04-23)
+------------------
+
+* Feature - Fix the example ARN for ModifyActivityStreamRequest
+
+1.226.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.225.0 (2024-04-11)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Standard Edition 2 support in RDS Custom for Oracle.
+
+1.224.0 (2024-04-09)
+------------------
+
+* Feature - This release adds support for specifying the CA certificate to use for the new db instance when restoring from db snapshot, restoring from s3, restoring to point in time, and creating a db instance read replica.
+
+1.223.0 (2024-03-18)
+------------------
+
+* Feature - This release launches the ModifyIntegration API and support for data filtering for zero-ETL Integrations.
+
+1.222.0 (2024-03-14)
+------------------
+
+* Feature - Updates Amazon RDS documentation for EBCDIC collation for RDS for Db2.
+
+1.221.0 (2024-03-07)
+------------------
+
+* Feature - Updates Amazon RDS documentation for io2 storage for Multi-AZ DB clusters
+
+1.220.0 (2024-03-06)
+------------------
+
+* Feature - Updated the input of CreateDBCluster and ModifyDBCluster to support setting CA certificates. Updated the output of DescribeDBCluster to show current CA certificate setting value.
+
 1.219.0 (2024-02-26)
 ------------------
 

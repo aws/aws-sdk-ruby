@@ -21,6 +21,7 @@ module Aws::ConnectCampaignService
 
     class AnswerMachineDetectionConfig
       attr_accessor enable_answer_machine_detection: bool
+      attr_accessor await_answer_machine_prompt: bool
       SENSITIVE: []
     end
 

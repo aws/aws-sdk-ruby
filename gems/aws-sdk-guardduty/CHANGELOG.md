@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.90.0 (2024-04-18)
+------------------
+
+* Feature - Added IPv6Address fields for local and remote IP addresses
+
+1.89.0 (2024-03-28)
+------------------
+
+* Feature - Add EC2 support for GuardDuty Runtime Monitoring auto management.
+
+1.88.0 (2024-03-08)
+------------------
+
+* Feature - Add RDS Provisioned and Serverless Usage types
+
 1.87.0 (2024-01-26)
 ------------------
 

@@ -572,7 +572,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the cluster.
+    #   The name of the cluster. This parameter can't contain the
+    #   characters &lt;, &gt;, $, \|, or ` (backtick).
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3566,8 +3567,8 @@ module Aws::EMR
     #
     # @!attribute [rw] keep_job_flow_alive_when_no_steps
     #   Specifies whether the cluster should remain available after
-    #   completing all steps. Defaults to `true`. For more information about
-    #   configuring cluster termination, see [Control Cluster
+    #   completing all steps. Defaults to `false`. For more information
+    #   about configuring cluster termination, see [Control Cluster
     #   Termination][1] in the *EMR Management Guide*.
     #
     #

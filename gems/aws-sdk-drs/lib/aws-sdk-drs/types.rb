@@ -433,6 +433,10 @@ module Aws::Drs
     #   AWS Availability zone into which data is being replicated.
     #   @return [String]
     #
+    # @!attribute [rw] staging_outpost_arn
+    #   The ARN of the staging Outpost
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DataReplicationInfo AWS API Documentation
     #
     class DataReplicationInfo < Struct.new(
@@ -442,7 +446,8 @@ module Aws::Drs
       :eta_date_time,
       :lag_duration,
       :replicated_disks,
-      :staging_availability_zone)
+      :staging_availability_zone,
+      :staging_outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2308,6 +2313,10 @@ module Aws::Drs
     #   Properties of the Recovery Instance machine.
     #   @return [Types::RecoveryInstanceProperties]
     #
+    # @!attribute [rw] source_outpost_arn
+    #   The ARN of the source Outpost
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   The Source Server ID that this Recovery Instance is associated with.
     #   @return [String]
@@ -2332,6 +2341,7 @@ module Aws::Drs
       :point_in_time_snapshot_date_time,
       :recovery_instance_id,
       :recovery_instance_properties,
+      :source_outpost_arn,
       :source_server_id,
       :tags)
       SENSITIVE = [:tags]
@@ -2387,6 +2397,10 @@ module Aws::Drs
     #   AWS Availability zone into which data is being replicated.
     #   @return [String]
     #
+    # @!attribute [rw] staging_outpost_arn
+    #   The ARN of the staging Outpost
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstanceDataReplicationInfo AWS API Documentation
     #
     class RecoveryInstanceDataReplicationInfo < Struct.new(
@@ -2396,7 +2410,8 @@ module Aws::Drs
       :eta_date_time,
       :lag_duration,
       :replicated_disks,
-      :staging_availability_zone)
+      :staging_availability_zone,
+      :staging_outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3029,12 +3044,17 @@ module Aws::Drs
     #   AWS Region for an EC2-originated Source Server.
     #   @return [String]
     #
+    # @!attribute [rw] source_outpost_arn
+    #   The ARN of the source Outpost
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceCloudProperties AWS API Documentation
     #
     class SourceCloudProperties < Struct.new(
       :origin_account_id,
       :origin_availability_zone,
-      :origin_region)
+      :origin_region,
+      :source_outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end

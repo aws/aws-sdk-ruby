@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2024-03-28)
+------------------
+
+* Feature - This release adds support for understanding pending changes to subscriptions by including two new response parameters for the GetSubscription API for Amazon CodeCatalyst.
+
 1.16.0 (2024-01-26)
 ------------------
 

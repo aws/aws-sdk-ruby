@@ -1,0 +1,90 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Deadline
+    module Waiters
+
+      class FleetActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    farm_id: ::String,
+                    fleet_id: ::String
+                  ) -> Client::_GetFleetResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFleetResponseSuccess
+      end
+
+      class JobCreateComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    farm_id: ::String,
+                    job_id: ::String,
+                    queue_id: ::String
+                  ) -> Client::_GetJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetJobResponseSuccess
+      end
+
+      class LicenseEndpointDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    license_endpoint_id: ::String
+                  ) -> Client::_GetLicenseEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLicenseEndpointResponseSuccess
+      end
+
+      class LicenseEndpointValid
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    license_endpoint_id: ::String
+                  ) -> Client::_GetLicenseEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLicenseEndpointResponseSuccess
+      end
+
+      class QueueFleetAssociationStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    farm_id: ::String,
+                    fleet_id: ::String,
+                    queue_id: ::String
+                  ) -> Client::_GetQueueFleetAssociationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetQueueFleetAssociationResponseSuccess
+      end
+
+      class QueueScheduling
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    farm_id: ::String,
+                    queue_id: ::String
+                  ) -> Client::_GetQueueResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetQueueResponseSuccess
+      end
+
+      class QueueSchedulingBlocked
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    farm_id: ::String,
+                    queue_id: ::String
+                  ) -> Client::_GetQueueResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetQueueResponseSuccess
+      end
+    end
+  end
+end

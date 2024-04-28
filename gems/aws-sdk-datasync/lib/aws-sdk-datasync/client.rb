@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::DataSync
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::DataSync
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::DataSync
     #   @option options [Aws::DataSync::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::DataSync::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -1732,12 +1756,11 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Configures a transfer task, which defines where and how DataSync moves
+    # Configures a *task*, which defines where and how DataSync transfers
     # your data.
     #
-    # A task includes a source location, destination location, and the
-    # options for how and when you want to transfer your data (such as
-    # bandwidth limits, scheduling, among other options).
+    # A task includes a source location, destination location, and transfer
+    # options (such as bandwidth limits, scheduling, and more).
     #
     # If you're planning to transfer data to or from an Amazon S3 location,
     # review [how DataSync can affect your S3 request charges][1] and the
@@ -1749,61 +1772,51 @@ module Aws::DataSync
     # [2]: http://aws.amazon.com/datasync/pricing/
     #
     # @option params [required, String] :source_location_arn
-    #   The Amazon Resource Name (ARN) of the source location for the task.
+    #   Specifies the ARN of your transfer's source location.
     #
     # @option params [required, String] :destination_location_arn
-    #   The Amazon Resource Name (ARN) of an Amazon Web Services storage
-    #   resource's location.
+    #   Specifies the ARN of your transfer's destination location.
     #
     # @option params [String] :cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that
-    #   is used to monitor and log events in the task.
+    #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
+    #   group for monitoring your task.
     #
     # @option params [String] :name
-    #   The name of a task. This value is a text reference that is used to
-    #   identify the task in the console.
+    #   Specifies the name of your task.
     #
     # @option params [Types::Options] :options
-    #   Specifies the configuration options for a task. Some options include
-    #   preserving file or object metadata and verifying data integrity.
-    #
-    #   You can also override these options before starting an individual run
-    #   of a task (also known as a *task execution*). For more information,
-    #   see [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Specifies your task's settings, such as preserving file metadata,
+    #   verifying data integrity, among other options.
     #
     # @option params [Array<Types::FilterRule>] :excludes
-    #   Specifies a list of filter rules that exclude specific data during
-    #   your transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   Specifies exclude filters that define the files, objects, and folders
+    #   in your source location that you don't want DataSync to transfer. For
+    #   more information and examples, see [Specifying what DataSync transfers
+    #   by using filters][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #
     # @option params [Types::TaskSchedule] :schedule
-    #   Specifies a schedule used to periodically transfer files from a source
-    #   to a destination location. The schedule should be specified in UTC
-    #   time. For more information, see [Scheduling your task][1].
+    #   Specifies a schedule for when you want your task to run. For more
+    #   information, see [Scheduling your task][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #
     # @option params [Array<Types::TagListEntry>] :tags
-    #   Specifies the tags that you want to apply to the Amazon Resource Name
-    #   (ARN) representing the task.
+    #   Specifies the tags that you want to apply to your task.
     #
     #   *Tags* are key-value pairs that help you manage, filter, and search
     #   for your DataSync resources.
     #
     # @option params [Array<Types::FilterRule>] :includes
-    #   Specifies a list of filter rules that include specific data during
-    #   your transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   Specifies include filters define the files, objects, and folders in
+    #   your source location that you want DataSync to transfer. For more
+    #   information and examples, see [Specifying what DataSync transfers by
+    #   using filters][1].
     #
     #
     #
@@ -1875,6 +1888,7 @@ module Aws::DataSync
     #     ],
     #     schedule: {
     #       schedule_expression: "ScheduleExpressionCron", # required
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     tags: [
     #       {
@@ -2879,10 +2893,12 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Provides information about an DataSync transfer task.
+    # Provides information about a *task*, which defines where and how
+    # DataSync transfers your data.
     #
     # @option params [required, String] :task_arn
-    #   Specifies the Amazon Resource Name (ARN) of the transfer task.
+    #   Specifies the Amazon Resource Name (ARN) of the transfer task that you
+    #   want information about.
     #
     # @return [Types::DescribeTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2904,6 +2920,7 @@ module Aws::DataSync
     #   * {Types::DescribeTaskResponse#includes #includes} => Array&lt;Types::FilterRule&gt;
     #   * {Types::DescribeTaskResponse#manifest_config #manifest_config} => Types::ManifestConfig
     #   * {Types::DescribeTaskResponse#task_report_config #task_report_config} => Types::TaskReportConfig
+    #   * {Types::DescribeTaskResponse#schedule_details #schedule_details} => Types::TaskScheduleDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -2943,6 +2960,7 @@ module Aws::DataSync
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
     #   resp.schedule.schedule_expression #=> String
+    #   resp.schedule.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.error_code #=> String
     #   resp.error_detail #=> String
     #   resp.creation_time #=> Time
@@ -2965,6 +2983,9 @@ module Aws::DataSync
     #   resp.task_report_config.overrides.verified.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
     #   resp.task_report_config.overrides.deleted.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
     #   resp.task_report_config.overrides.skipped.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.schedule_details.status_update_time #=> Time
+    #   resp.schedule_details.disabled_reason #=> String
+    #   resp.schedule_details.disabled_by #=> String, one of "USER", "SERVICE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTask AWS API Documentation
     #
@@ -3595,7 +3616,15 @@ module Aws::DataSync
     #   integrity, set bandwidth limits for your task, among other options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @option params [Array<Types::FilterRule>] :includes
     #   Specifies a list of filter rules that determines which files to
@@ -4347,11 +4376,11 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Updates the configuration of an DataSync transfer task.
+    # Updates the configuration of a *task*, which defines where and how
+    # DataSync transfers your data.
     #
     # @option params [required, String] :task_arn
-    #   The Amazon Resource Name (ARN) of the resource name of the task to
-    #   update.
+    #   Specifies the ARN of the task that you want to update.
     #
     # @option params [Types::Options] :options
     #   Indicates how your transfer task is configured. These options include
@@ -4360,40 +4389,46 @@ module Aws::DataSync
     #   integrity, set bandwidth limits for your task, among other options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @option params [Array<Types::FilterRule>] :excludes
-    #   Specifies a list of filter rules that exclude specific data during
-    #   your transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   Specifies exclude filters that define the files, objects, and folders
+    #   in your source location that you don't want DataSync to transfer. For
+    #   more information and examples, see [Specifying what DataSync transfers
+    #   by using filters][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #
     # @option params [Types::TaskSchedule] :schedule
-    #   Specifies a schedule used to periodically transfer files from a source
-    #   to a destination location. You can configure your task to execute
-    #   hourly, daily, weekly or on specific days of the week. You control
-    #   when in the day or hour you want the task to execute. The time you
-    #   specify is UTC time. For more information, see [Scheduling your
-    #   task][1].
+    #   Specifies a schedule for when you want your task to run. For more
+    #   information, see [Scheduling your task][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #
     # @option params [String] :name
-    #   The name of the task to update.
+    #   Specifies the name of your task.
     #
     # @option params [String] :cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the resource name of the Amazon
-    #   CloudWatch log group.
+    #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
+    #   group for monitoring your task.
     #
     # @option params [Array<Types::FilterRule>] :includes
-    #   Specifies a list of filter rules that include specific data during
-    #   your transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   Specifies include filters define the files, objects, and folders in
+    #   your source location that you want DataSync to transfer. For more
+    #   information and examples, see [Specifying what DataSync transfers by
+    #   using filters][1].
     #
     #
     #
@@ -4465,6 +4500,7 @@ module Aws::DataSync
     #     ],
     #     schedule: {
     #       schedule_expression: "ScheduleExpressionCron", # required
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     name: "TagValue",
     #     cloud_watch_log_group_arn: "LogGroupArn",
@@ -4542,7 +4578,15 @@ module Aws::DataSync
     #   integrity, set bandwidth limits for your task, among other options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4591,7 +4635,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

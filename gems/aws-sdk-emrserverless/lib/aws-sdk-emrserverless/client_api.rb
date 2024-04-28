@@ -33,6 +33,8 @@ module Aws::EMRServerless
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationList = Shapes::ListShape.new(name: 'ConfigurationList')
     ConfigurationOverrides = Shapes::StructureShape.new(name: 'ConfigurationOverrides')
+    ConfigurationPropertyKey = Shapes::StringShape.new(name: 'ConfigurationPropertyKey')
+    ConfigurationPropertyValue = Shapes::StringShape.new(name: 'ConfigurationPropertyValue')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CpuSize = Shapes::StringShape.new(name: 'CpuSize')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
@@ -41,6 +43,7 @@ module Aws::EMRServerless
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DiskSize = Shapes::StringShape.new(name: 'DiskSize')
+    DiskType = Shapes::StringShape.new(name: 'DiskType')
     Double = Shapes::FloatShape.new(name: 'Double')
     Duration = Shapes::IntegerShape.new(name: 'Duration')
     EncryptionKeyArn = Shapes::StringShape.new(name: 'EncryptionKeyArn')
@@ -94,6 +97,8 @@ module Aws::EMRServerless
     MonitoringConfiguration = Shapes::StructureShape.new(name: 'MonitoringConfiguration')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    PrometheusMonitoringConfiguration = Shapes::StructureShape.new(name: 'PrometheusMonitoringConfiguration')
+    PrometheusUrlString = Shapes::StringShape.new(name: 'PrometheusUrlString')
     Query = Shapes::StringShape.new(name: 'Query')
     ReleaseLabel = Shapes::StringShape.new(name: 'ReleaseLabel')
     RequestIdentityUserArn = Shapes::StringShape.new(name: 'RequestIdentityUserArn')
@@ -375,11 +380,15 @@ module Aws::EMRServerless
     MonitoringConfiguration.add_member(:s3_monitoring_configuration, Shapes::ShapeRef.new(shape: S3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
     MonitoringConfiguration.add_member(:managed_persistence_monitoring_configuration, Shapes::ShapeRef.new(shape: ManagedPersistenceMonitoringConfiguration, location_name: "managedPersistenceMonitoringConfiguration"))
     MonitoringConfiguration.add_member(:cloud_watch_logging_configuration, Shapes::ShapeRef.new(shape: CloudWatchLoggingConfiguration, location_name: "cloudWatchLoggingConfiguration"))
+    MonitoringConfiguration.add_member(:prometheus_monitoring_configuration, Shapes::ShapeRef.new(shape: PrometheusMonitoringConfiguration, location_name: "prometheusMonitoringConfiguration"))
     MonitoringConfiguration.struct_class = Types::MonitoringConfiguration
 
     NetworkConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "subnetIds"))
     NetworkConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
+
+    PrometheusMonitoringConfiguration.add_member(:remote_write_url, Shapes::ShapeRef.new(shape: PrometheusUrlString, location_name: "remoteWriteUrl"))
+    PrometheusMonitoringConfiguration.struct_class = Types::PrometheusMonitoringConfiguration
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -395,8 +404,8 @@ module Aws::EMRServerless
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupString)
 
-    SensitivePropertiesMap.key = Shapes::ShapeRef.new(shape: String1024)
-    SensitivePropertiesMap.value = Shapes::ShapeRef.new(shape: String1024)
+    SensitivePropertiesMap.key = Shapes::ShapeRef.new(shape: ConfigurationPropertyKey)
+    SensitivePropertiesMap.value = Shapes::ShapeRef.new(shape: ConfigurationPropertyValue)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -479,6 +488,7 @@ module Aws::EMRServerless
     WorkerResourceConfig.add_member(:cpu, Shapes::ShapeRef.new(shape: CpuSize, required: true, location_name: "cpu"))
     WorkerResourceConfig.add_member(:memory, Shapes::ShapeRef.new(shape: MemorySize, required: true, location_name: "memory"))
     WorkerResourceConfig.add_member(:disk, Shapes::ShapeRef.new(shape: DiskSize, location_name: "disk"))
+    WorkerResourceConfig.add_member(:disk_type, Shapes::ShapeRef.new(shape: DiskType, location_name: "diskType"))
     WorkerResourceConfig.struct_class = Types::WorkerResourceConfig
 
     WorkerTypeSpecification.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfiguration, location_name: "imageConfiguration"))

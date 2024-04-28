@@ -68,6 +68,9 @@ module Aws
       class NoSuchEntityException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class OpenIdIdpCommunicationErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class PasswordPolicyViolationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

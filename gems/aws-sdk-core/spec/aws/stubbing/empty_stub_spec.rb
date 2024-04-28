@@ -80,6 +80,41 @@ module Aws
         expect(stub[:is_truncated]).to be(false)
       end
 
+      it 'supports unions' do
+
+        svc = ApiHelper.sample_service(
+          api: {
+            'operations' => {
+              'OperationName' => {
+                'http' => { 'method' => 'POST', 'requestUri' => '/' },
+                'input' => { 'shape' => 'StructureShape' },
+                'output' => { 'shape' => 'StructureShape' }
+              }
+            },
+            'shapes' => {
+              'StructureShape' => {
+                'type' => 'structure',
+                'members' => {
+                  'UnionMember' => { 'shape' => 'UnionShape' },
+                }
+              },
+              'UnionShape' => {
+                'type' => 'structure',
+                'union' => true,
+                'members' => {
+                  'StringMember' => { 'shape' => 'String' },
+                }
+              },
+              'String' => { 'type' => 'string' },
+            }
+          }
+        )
+
+        client = svc::Client.new(stub_responses: true)
+        stub = client.operation_name
+        expect(stub.union_member.member).to eq(:string_member)
+      end
+
     end
   end
 end

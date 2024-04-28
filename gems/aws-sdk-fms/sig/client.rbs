@@ -226,7 +226,7 @@ module Aws
       interface _GetProtectionStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetProtectionStatusResponse]
         def admin_account_id: () -> ::String
-        def service_type: () -> ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")
+        def service_type: () -> ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL" | "NETWORK_ACL_COMMON")
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_protection_status-instance_method
@@ -455,7 +455,7 @@ module Aws
                                    all_regions_enabled: bool?
                                  }?,
                                  policy_type_scope: {
-                                   policy_types: Array[("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")]?,
+                                   policy_types: Array[("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL" | "NETWORK_ACL_COMMON")]?,
                                    all_policy_types_enabled: bool?
                                  }?
                                }
@@ -518,7 +518,7 @@ module Aws
                           policy_name: ::String,
                           policy_update_token: ::String?,
                           security_service_policy_data: {
-                            type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL"),
+                            type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL" | "NETWORK_ACL_COMMON"),
                             managed_service_data: ::String?,
                             policy_option: {
                               network_firewall_policy: {
@@ -526,6 +526,46 @@ module Aws
                               }?,
                               third_party_firewall_policy: {
                                 firewall_deployment_model: ("CENTRALIZED" | "DISTRIBUTED")?
+                              }?,
+                              network_acl_common_policy: {
+                                network_acl_entry_set: {
+                                  first_entries: Array[
+                                    {
+                                      icmp_type_code: {
+                                        code: ::Integer?,
+                                        type: ::Integer?
+                                      }?,
+                                      protocol: ::String,
+                                      port_range: {
+                                        from: ::Integer?,
+                                        to: ::Integer?
+                                      }?,
+                                      cidr_block: ::String?,
+                                      ipv_6_cidr_block: ::String?,
+                                      rule_action: ("allow" | "deny"),
+                                      egress: bool
+                                    },
+                                  ]?,
+                                  force_remediate_for_first_entries: bool,
+                                  last_entries: Array[
+                                    {
+                                      icmp_type_code: {
+                                        code: ::Integer?,
+                                        type: ::Integer?
+                                      }?,
+                                      protocol: ::String,
+                                      port_range: {
+                                        from: ::Integer?,
+                                        to: ::Integer?
+                                      }?,
+                                      cidr_block: ::String?,
+                                      ipv_6_cidr_block: ::String?,
+                                      rule_action: ("allow" | "deny"),
+                                      egress: bool
+                                    },
+                                  ]?,
+                                  force_remediate_for_last_entries: bool
+                                }
                               }?
                             }?
                           },

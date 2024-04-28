@@ -505,25 +505,49 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   A timestamp that indicates when the rule was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
     #   A timestamp that indicates when the rule was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -651,15 +675,27 @@ module Aws::SecurityHub
     #   captured by a finding was first observed by the security findings
     #   product.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] last_observed_at
@@ -667,44 +703,80 @@ module Aws::SecurityHub
     #   captured by a finding was most recently observed by the security
     #   findings product.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] created_at
     #   A timestamp that indicates when this finding record was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] updated_at
     #   A timestamp that indicates when the finding record was most recently
     #   updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] confidence
@@ -891,16 +963,29 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] note_updated_at
-    #   The timestamp of when the note was updated. Uses the date-time
-    #   format specified in [RFC 3339 section 5.6, Internet Date/Time
-    #   Format][1]. The value cannot contain spaces. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   The timestamp of when the note was updated.
+    #
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] note_updated_by
@@ -1027,25 +1112,49 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   A timestamp that indicates when the rule was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
     #   A timestamp that indicates when the rule was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -1433,31 +1542,52 @@ module Aws::SecurityHub
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] first_seen
-    #   An ISO8601-formatted timestamp that indicates when the API call was
-    #   first observed.
+    #   A timestamp that indicates when the API call was first observed.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_seen
-    #   An ISO8601-formatted timestamp that indicates when the API call was
-    #   most recently observed.
+    #   A timestamp that indicates when the API call was most recently
+    #   observed.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiCallAction AWS API Documentation
@@ -1680,14 +1810,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_date
     #   Indicates when the API was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1807,27 +1948,49 @@ module Aws::SecurityHub
     # @!attribute [rw] created_date
     #   Indicates when the stage was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_updated_date
     #   Indicates when the stage was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] web_acl_arn
@@ -1879,14 +2042,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_date
     #   Indicates when the API was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1993,14 +2167,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_date
     #   Indicates when the stage was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2018,14 +2203,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_updated_date
     #   Indicates when the stage was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] route_settings
@@ -2460,14 +2656,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_time
     #   Indicates when the auto scaling group was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] mixed_instances_policy
@@ -2803,14 +3010,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_time
     #   The creation date and time for the launch configuration.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] ebs_optimized
@@ -3476,14 +3694,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   Indicates when the certificate was requested.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -3521,14 +3750,25 @@ module Aws::SecurityHub
     #   Indicates when the certificate was imported. Provided if the
     #   certificate type is `IMPORTED`.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] in_use_by
@@ -3540,14 +3780,25 @@ module Aws::SecurityHub
     #   Indicates when the certificate was issued. Provided if the
     #   certificate type is `AMAZON_ISSUED`.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] issuer
@@ -3569,27 +3820,49 @@ module Aws::SecurityHub
     # @!attribute [rw] not_after
     #   The time after which the certificate becomes invalid.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] not_before
     #   The time before which the certificate is not valid.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -3812,14 +4085,25 @@ module Aws::SecurityHub
     # @!attribute [rw] updated_at
     #   Indicates when the renewal summary was last updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCertificateManagerCertificateRenewalSummary AWS API Documentation
@@ -4081,14 +4365,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_modified_time
     #   Indicates when that the distribution was last modified.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -5479,14 +5774,25 @@ module Aws::SecurityHub
     #   If the billing mode is `PAY_PER_REQUEST`, indicates when the billing
     #   mode was set to that value.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableBillingModeSummary AWS API Documentation
@@ -5511,14 +5817,25 @@ module Aws::SecurityHub
     # @!attribute [rw] creation_date_time
     #   Indicates when the table was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] global_secondary_indexes
@@ -5781,27 +6098,49 @@ module Aws::SecurityHub
     # @!attribute [rw] last_decrease_date_time
     #   Indicates when the provisioned throughput was last decreased.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_increase_date_time
     #   Indicates when the provisioned throughput was last increased.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] number_of_decreases_today
@@ -5929,14 +6268,25 @@ module Aws::SecurityHub
     # @!attribute [rw] restore_date_time
     #   Indicates the point in time that the table was restored to.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] restore_in_progress
@@ -5960,14 +6310,25 @@ module Aws::SecurityHub
     #   If the key is inaccessible, the date and time when DynamoDB detected
     #   that the key was inaccessible.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6392,14 +6753,25 @@ module Aws::SecurityHub
     # @!attribute [rw] launched_at
     #   Indicates when the instance was launched.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
@@ -7897,14 +8269,25 @@ module Aws::SecurityHub
     # @!attribute [rw] attach_time
     #   Indicates when the attachment initiated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] attachment_id
@@ -8488,14 +8871,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_time
     #   Indicates when the volume was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] device_name
@@ -9025,14 +9419,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_status_change
     #   The date and time of the last change in status.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] outside_ip_address
@@ -9093,14 +9498,25 @@ module Aws::SecurityHub
     # @!attribute [rw] image_published_at
     #   The date and time when the image was pushed to the repository.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcrContainerImageDetails AWS API Documentation
@@ -12270,14 +12686,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_time
     #   Indicates when the load balancer was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -12567,14 +12994,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_time
     #   Indicates when the load balancer was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -13132,14 +13570,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   Indicates when the IAM access key was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -13211,14 +13660,25 @@ module Aws::SecurityHub
     # @!attribute [rw] creation_date
     #   Indicates when the session was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAccessKeySessionContextAttributes AWS API Documentation
@@ -13295,14 +13755,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the IAM group was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -13357,14 +13828,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the instance profile was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_id
@@ -13409,14 +13891,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the role was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -13474,14 +13967,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   When the policy was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] default_version_id
@@ -13520,14 +14024,25 @@ module Aws::SecurityHub
     # @!attribute [rw] update_date
     #   When the policy was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamPolicyDetails AWS API Documentation
@@ -13561,14 +14076,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the version was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamPolicyVersion AWS API Documentation
@@ -13595,14 +14121,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the role was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_list
@@ -13675,14 +14212,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the user was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] group_list
@@ -13807,14 +14355,25 @@ module Aws::SecurityHub
     # @!attribute [rw] creation_date
     #   Indicates when the KMS key was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Float]
     #
     # @!attribute [rw] key_id
@@ -13960,14 +14519,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_modified
     #   Indicates when the function was last updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] layers
@@ -14178,14 +14748,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_date
     #   Indicates when the version was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaLayerVersionDetails AWS API Documentation
@@ -15187,14 +15768,25 @@ module Aws::SecurityHub
     #   Indicates when the DB cluster was created, in Universal Coordinated
     #   Time (UTC).
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] enabled_cloud_watch_logs_exports
@@ -15420,14 +16012,25 @@ module Aws::SecurityHub
     # @!attribute [rw] snapshot_create_time
     #   Indicates when the snapshot was taken.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -15456,14 +16059,25 @@ module Aws::SecurityHub
     #   Indicates when the DB cluster was created, in Universal Coordinated
     #   Time (UTC).
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] master_username
@@ -15699,14 +16313,25 @@ module Aws::SecurityHub
     # @!attribute [rw] instance_create_time
     #   Indicates when the DB instance was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -15807,14 +16432,25 @@ module Aws::SecurityHub
     #   Specifies the latest time to which a database can be restored with
     #   point-in-time restore.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -16621,14 +17257,25 @@ module Aws::SecurityHub
     # @!attribute [rw] subscription_creation_time
     #   The datetime when the event notification subscription was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsEventSubscriptionDetails AWS API Documentation
@@ -16813,14 +17460,25 @@ module Aws::SecurityHub
     # @!attribute [rw] defer_maintenance_end_time
     #   The end of the time window for which maintenance was deferred.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] defer_maintenance_identifier
@@ -16830,14 +17488,25 @@ module Aws::SecurityHub
     # @!attribute [rw] defer_maintenance_start_time
     #   The start of the time window for which maintenance was deferred.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterDeferredMaintenanceWindow AWS API Documentation
@@ -16885,14 +17554,25 @@ module Aws::SecurityHub
     # @!attribute [rw] cluster_create_time
     #   Indicates when the cluster was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] cluster_identifier
@@ -16989,14 +17669,25 @@ module Aws::SecurityHub
     #   cluster must have a valid snapshot schedule and have backups
     #   enabled.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] expected_next_snapshot_schedule_time_status
@@ -17044,14 +17735,25 @@ module Aws::SecurityHub
     # @!attribute [rw] next_maintenance_window_start_time
     #   Indicates the start of the next maintenance window.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] node_type
@@ -17279,27 +17981,49 @@ module Aws::SecurityHub
     # @!attribute [rw] last_failure_time
     #   The last time when logs failed to be delivered.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_successful_delivery_time
     #   The last time that logs were delivered successfully.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] logging_enabled
@@ -17758,14 +18482,25 @@ module Aws::SecurityHub
     # @!attribute [rw] expiration_date
     #   The date when objects are moved or deleted.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] expiration_in_days
@@ -17968,14 +18703,25 @@ module Aws::SecurityHub
     #   A date on which to transition objects to the specified storage
     #   class. If you provide `Date`, you cannot provide `Days`.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] days
@@ -18049,14 +18795,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   Indicates when the S3 bucket was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -18498,14 +19255,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_modified
     #   Indicates when the object was last modified.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -18862,56 +19630,100 @@ module Aws::SecurityHub
     #   Indicates when the security findings provider first observed the
     #   potential security issue that a finding captured.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_observed_at
     #   Indicates when the security findings provider most recently observed
     #   the potential security issue that a finding captured.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] created_at
     #   Indicates when the security findings provider created the potential
     #   security issue that a finding captured.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] updated_at
     #   Indicates when the security findings provider last updated the
     #   finding record.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] severity
@@ -19074,17 +19886,28 @@ module Aws::SecurityHub
     #   @return [Types::GeneratorDetails]
     #
     # @!attribute [rw] processed_at
-    #   An ISO8601-formatted timestamp that indicates when Security Hub
-    #   received a finding and begins to process it.
+    #   A imestamp that indicates when Security Hub received a finding and
+    #   begins to process it.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] aws_account_name
@@ -19181,62 +20004,104 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] first_observed_at
-    #   An ISO8601-formatted timestamp that indicates when the security
-    #   findings provider first observed the potential security issue that a
-    #   finding captured.
+    #   A timestamp that indicates when the security findings provider first
+    #   observed the potential security issue that a finding captured.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] last_observed_at
-    #   An ISO8601-formatted timestamp that indicates when the security
-    #   findings provider most recently observed the potential security
-    #   issue that a finding captured.
+    #   A timestamp that indicates when the security findings provider most
+    #   recently observed the potential security issue that a finding
+    #   captured.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] created_at
-    #   An ISO8601-formatted timestamp that indicates when the security
-    #   findings provider captured the potential security issue that a
-    #   finding captured.
+    #   A timestamp that indicates when the security findings provider
+    #   created the potential security issue that a finding reflects.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] updated_at
-    #   An ISO8601-formatted timestamp that indicates when the security
-    #   findings provider last updated the finding record.
+    #   A timestamp that indicates when the security findings provider last
+    #   updated the finding record.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] severity_product
@@ -19395,27 +20260,49 @@ module Aws::SecurityHub
     # @!attribute [rw] process_launched_at
     #   A timestamp that identifies when the process was launched.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] process_terminated_at
     #   A timestamp that identifies when the process was terminated.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] threat_intel_indicator_type
@@ -19545,14 +20432,25 @@ module Aws::SecurityHub
     # @!attribute [rw] resource_container_launched_at
     #   A timestamp that identifies when the container was started.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] resource_details_other
@@ -22456,14 +23354,25 @@ module Aws::SecurityHub
     # @!attribute [rw] launched_at
     #   Indicates when the container started.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] volume_mounts
@@ -22976,27 +23885,49 @@ module Aws::SecurityHub
     # @!attribute [rw] start
     #   A timestamp that provides the start date for the date filter.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] end
     #   A timestamp that provides the end date for the date filter.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] date_range
@@ -23819,17 +24750,28 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingIdentifier]
     #
     # @!attribute [rw] update_time
-    #   An ISO 8601-formatted timestamp that indicates when Security Hub
-    #   processed the updated finding record.
+    #   A timestamp that indicates when Security Hub processed the updated
+    #   finding record.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] finding_created
@@ -24398,11 +25340,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingIdentifier]
     #
     # @!attribute [rw] start_time
-    #   An ISO 8601-formatted timestamp that indicates the start time of the
-    #   requested finding history. A correctly formatted example is
-    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For more information, see
-    #   [RFC 3339 section 5.6, Internet Date/Time Format][1].
+    #   A timestamp that indicates the start time of the requested finding
+    #   history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security
     #   Hub returns finding history for the specified time period. If you
@@ -24410,25 +25349,41 @@ module Aws::SecurityHub
     #   returns finding history from the `StartTime` to the time at which
     #   the API is called. If you provide a value for `EndTime` but not for
     #   `StartTime`, Security Hub returns finding history from the
-    #   [CreatedAt][2] timestamp of the finding to the `EndTime`. If you
+    #   [CreatedAt][1] timestamp of the finding to the `EndTime`. If you
     #   provide neither `StartTime` nor `EndTime`, Security Hub returns
     #   finding history from the CreatedAt timestamp of the finding to the
     #   time at which the API is called. In all of these scenarios, the
     #   response is limited to 100 results, and the maximum time period is
     #   limited to 90 days.
     #
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
-    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   An ISO 8601-formatted timestamp that indicates the end time of the
-    #   requested finding history. A correctly formatted example is
-    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For more information, see
-    #   [RFC 3339 section 5.6, Internet Date/Time Format][1].
+    #   requested finding history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security
     #   Hub returns finding history for the specified time period. If you
@@ -24436,17 +25391,36 @@ module Aws::SecurityHub
     #   returns finding history from the `StartTime` to the time at which
     #   the API is called. If you provide a value for `EndTime` but not for
     #   `StartTime`, Security Hub returns finding history from the
-    #   [CreatedAt][2] timestamp of the finding to the `EndTime`. If you
+    #   [CreatedAt][1] timestamp of the finding to the `EndTime`. If you
     #   provide neither `StartTime` nor `EndTime`, Security Hub returns
     #   finding history from the CreatedAt timestamp of the finding to the
     #   time at which the API is called. In all of these scenarios, the
     #   response is limited to 100 results, and the maximum time period is
     #   limited to 90 days.
     #
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
-    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
     #   @return [Time]
     #
     # @!attribute [rw] next_token
@@ -24780,8 +25754,9 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] filters
     #   One or more attributes used to filter the findings included in the
-    #   insight. The insight only includes findings that match the criteria
-    #   defined in the filters.
+    #   insight. You can filter by up to ten finding attributes. For each
+    #   attribute, you can provide up to 20 filter values. The insight only
+    #   includes findings that match the criteria defined in the filters.
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] group_by_attribute
@@ -26043,16 +27018,27 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp of when the note was updated.
+    #   A timestamp that indicates when the note was updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Note AWS API Documentation
@@ -26096,11 +27082,6 @@ module Aws::SecurityHub
     #   querying for findings.
     #   @return [Float]
     #
-    # @!attribute [rw] eq
-    #   The equal-to condition to be applied to a single field when querying
-    #   for findings.
-    #   @return [Float]
-    #
     # @!attribute [rw] gt
     #   The greater-than condition to be applied to a single field when
     #   querying for findings.
@@ -26111,14 +27092,19 @@ module Aws::SecurityHub
     #   querying for findings.
     #   @return [Float]
     #
+    # @!attribute [rw] eq
+    #   The equal-to condition to be applied to a single field when querying
+    #   for findings.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NumberFilter AWS API Documentation
     #
     class NumberFilter < Struct.new(
       :gte,
       :lte,
-      :eq,
       :gt,
-      :lt)
+      :lt,
+      :eq)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26396,27 +27382,49 @@ module Aws::SecurityHub
     # @!attribute [rw] operation_start_time
     #   Indicates when the operation started.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] operation_end_time
     #   Indicates when the operation completed.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] reboot_option
@@ -26586,27 +27594,49 @@ module Aws::SecurityHub
     # @!attribute [rw] launched_at
     #   Indicates when the process was launched.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] terminated_at
     #   Indicates when the process was terminated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProcessDetails AWS API Documentation
@@ -29461,14 +30491,25 @@ module Aws::SecurityHub
     #   Indicates when the most recent instance of a threat intelligence
     #   indicator was observed.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -30292,6 +31333,11 @@ module Aws::SecurityHub
     #   Whether an exploit is available for a finding.
     #   @return [String]
     #
+    # @!attribute [rw] last_known_exploit_at
+    #   The date and time of the last exploit associated with a finding
+    #   discovered in your environment.
+    #   @return [String]
+    #
     # @!attribute [rw] code_vulnerabilities
     #   The vulnerabilities found in your Lambda function code. This field
     #   pertains to findings that Security Hub receives from Amazon
@@ -30310,6 +31356,7 @@ module Aws::SecurityHub
       :fix_available,
       :epss_score,
       :exploit_available,
+      :last_known_exploit_at,
       :code_vulnerabilities)
       SENSITIVE = []
       include Aws::Structure
@@ -30361,27 +31408,49 @@ module Aws::SecurityHub
     # @!attribute [rw] vendor_created_at
     #   Indicates when the vulnerability advisory was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] vendor_updated_at
     #   Indicates when the vulnerability advisory was last updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/VulnerabilityVendor AWS API Documentation

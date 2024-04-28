@@ -318,6 +318,7 @@ module Aws::DynamoDB
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor resource_policy: ::String
       SENSITIVE: []
     end
 
@@ -391,6 +392,17 @@ module Aws::DynamoDB
 
     class DeleteRequest
       attr_accessor key: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyInput
+      attr_accessor resource_arn: ::String
+      attr_accessor expected_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyOutput
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 
@@ -687,6 +699,17 @@ module Aws::DynamoDB
     class GetItemOutput
       attr_accessor item: ::Hash[::String, Types::AttributeValue]
       attr_accessor consumed_capacity: Types::ConsumedCapacity
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyOutput
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 
@@ -1060,6 +1083,11 @@ module Aws::DynamoDB
       SENSITIVE: []
     end
 
+    class PolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Projection
       attr_accessor projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")
       attr_accessor non_key_attributes: ::Array[::String]
@@ -1125,6 +1153,19 @@ module Aws::DynamoDB
 
     class PutRequest
       attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyInput
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor expected_revision_id: ::String
+      attr_accessor confirm_remove_self_resource_access: bool
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyOutput
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 

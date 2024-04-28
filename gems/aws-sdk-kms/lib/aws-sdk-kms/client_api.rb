@@ -31,6 +31,7 @@ module Aws::KMS
     CloudHsmClusterNotActiveException = Shapes::StructureShape.new(name: 'CloudHsmClusterNotActiveException')
     CloudHsmClusterNotFoundException = Shapes::StructureShape.new(name: 'CloudHsmClusterNotFoundException')
     CloudHsmClusterNotRelatedException = Shapes::StructureShape.new(name: 'CloudHsmClusterNotRelatedException')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectCustomKeyStoreRequest = Shapes::StructureShape.new(name: 'ConnectCustomKeyStoreRequest')
     ConnectCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'ConnectCustomKeyStoreResponse')
     ConnectionErrorCodeType = Shapes::StringShape.new(name: 'ConnectionErrorCodeType')
@@ -150,6 +151,8 @@ module Aws::KMS
     ListGrantsResponse = Shapes::StructureShape.new(name: 'ListGrantsResponse')
     ListKeyPoliciesRequest = Shapes::StructureShape.new(name: 'ListKeyPoliciesRequest')
     ListKeyPoliciesResponse = Shapes::StructureShape.new(name: 'ListKeyPoliciesResponse')
+    ListKeyRotationsRequest = Shapes::StructureShape.new(name: 'ListKeyRotationsRequest')
+    ListKeyRotationsResponse = Shapes::StructureShape.new(name: 'ListKeyRotationsResponse')
     ListKeysRequest = Shapes::StructureShape.new(name: 'ListKeysRequest')
     ListKeysResponse = Shapes::StructureShape.new(name: 'ListKeysResponse')
     ListResourceTagsRequest = Shapes::StructureShape.new(name: 'ListResourceTagsRequest')
@@ -184,6 +187,12 @@ module Aws::KMS
     ReplicateKeyResponse = Shapes::StructureShape.new(name: 'ReplicateKeyResponse')
     RetireGrantRequest = Shapes::StructureShape.new(name: 'RetireGrantRequest')
     RevokeGrantRequest = Shapes::StructureShape.new(name: 'RevokeGrantRequest')
+    RotateKeyOnDemandRequest = Shapes::StructureShape.new(name: 'RotateKeyOnDemandRequest')
+    RotateKeyOnDemandResponse = Shapes::StructureShape.new(name: 'RotateKeyOnDemandResponse')
+    RotationPeriodInDaysType = Shapes::IntegerShape.new(name: 'RotationPeriodInDaysType')
+    RotationType = Shapes::StringShape.new(name: 'RotationType')
+    RotationsList = Shapes::ListShape.new(name: 'RotationsList')
+    RotationsListEntry = Shapes::StructureShape.new(name: 'RotationsListEntry')
     ScheduleKeyDeletionRequest = Shapes::StructureShape.new(name: 'ScheduleKeyDeletionRequest')
     ScheduleKeyDeletionResponse = Shapes::StructureShape.new(name: 'ScheduleKeyDeletionResponse')
     SignRequest = Shapes::StructureShape.new(name: 'SignRequest')
@@ -265,6 +274,9 @@ module Aws::KMS
 
     CloudHsmClusterNotRelatedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     CloudHsmClusterNotRelatedException.struct_class = Types::CloudHsmClusterNotRelatedException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     ConnectCustomKeyStoreRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, required: true, location_name: "CustomKeyStoreId"))
     ConnectCustomKeyStoreRequest.struct_class = Types::ConnectCustomKeyStoreRequest
@@ -413,6 +425,7 @@ module Aws::KMS
     EnableKeyRequest.struct_class = Types::EnableKeyRequest
 
     EnableKeyRotationRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    EnableKeyRotationRequest.add_member(:rotation_period_in_days, Shapes::ShapeRef.new(shape: RotationPeriodInDaysType, location_name: "RotationPeriodInDays"))
     EnableKeyRotationRequest.struct_class = Types::EnableKeyRotationRequest
 
     EncryptRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
@@ -514,16 +527,21 @@ module Aws::KMS
     GenerateRandomResponse.struct_class = Types::GenerateRandomResponse
 
     GetKeyPolicyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
-    GetKeyPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, required: true, location_name: "PolicyName"))
+    GetKeyPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, location_name: "PolicyName"))
     GetKeyPolicyRequest.struct_class = Types::GetKeyPolicyRequest
 
     GetKeyPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyType, location_name: "Policy"))
+    GetKeyPolicyResponse.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, location_name: "PolicyName"))
     GetKeyPolicyResponse.struct_class = Types::GetKeyPolicyResponse
 
     GetKeyRotationStatusRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     GetKeyRotationStatusRequest.struct_class = Types::GetKeyRotationStatusRequest
 
     GetKeyRotationStatusResponse.add_member(:key_rotation_enabled, Shapes::ShapeRef.new(shape: BooleanType, location_name: "KeyRotationEnabled"))
+    GetKeyRotationStatusResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+    GetKeyRotationStatusResponse.add_member(:rotation_period_in_days, Shapes::ShapeRef.new(shape: RotationPeriodInDaysType, location_name: "RotationPeriodInDays"))
+    GetKeyRotationStatusResponse.add_member(:next_rotation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "NextRotationDate"))
+    GetKeyRotationStatusResponse.add_member(:on_demand_rotation_start_date, Shapes::ShapeRef.new(shape: DateType, location_name: "OnDemandRotationStartDate"))
     GetKeyRotationStatusResponse.struct_class = Types::GetKeyRotationStatusResponse
 
     GetParametersForImportRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
@@ -695,6 +713,16 @@ module Aws::KMS
     ListKeyPoliciesResponse.add_member(:truncated, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Truncated"))
     ListKeyPoliciesResponse.struct_class = Types::ListKeyPoliciesResponse
 
+    ListKeyRotationsRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    ListKeyRotationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
+    ListKeyRotationsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
+    ListKeyRotationsRequest.struct_class = Types::ListKeyRotationsRequest
+
+    ListKeyRotationsResponse.add_member(:rotations, Shapes::ShapeRef.new(shape: RotationsList, location_name: "Rotations"))
+    ListKeyRotationsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "NextMarker"))
+    ListKeyRotationsResponse.add_member(:truncated, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Truncated"))
+    ListKeyRotationsResponse.struct_class = Types::ListKeyRotationsResponse
+
     ListKeysRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
     ListKeysRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
     ListKeysRequest.struct_class = Types::ListKeysRequest
@@ -741,7 +769,7 @@ module Aws::KMS
     PolicyNameList.member = Shapes::ShapeRef.new(shape: PolicyNameType)
 
     PutKeyPolicyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
-    PutKeyPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, required: true, location_name: "PolicyName"))
+    PutKeyPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, location_name: "PolicyName"))
     PutKeyPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "Policy"))
     PutKeyPolicyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BypassPolicyLockoutSafetyCheck"))
     PutKeyPolicyRequest.struct_class = Types::PutKeyPolicyRequest
@@ -791,6 +819,19 @@ module Aws::KMS
     RevokeGrantRequest.add_member(:grant_id, Shapes::ShapeRef.new(shape: GrantIdType, required: true, location_name: "GrantId"))
     RevokeGrantRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     RevokeGrantRequest.struct_class = Types::RevokeGrantRequest
+
+    RotateKeyOnDemandRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    RotateKeyOnDemandRequest.struct_class = Types::RotateKeyOnDemandRequest
+
+    RotateKeyOnDemandResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+    RotateKeyOnDemandResponse.struct_class = Types::RotateKeyOnDemandResponse
+
+    RotationsList.member = Shapes::ShapeRef.new(shape: RotationsListEntry)
+
+    RotationsListEntry.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+    RotationsListEntry.add_member(:rotation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "RotationDate"))
+    RotationsListEntry.add_member(:rotation_type, Shapes::ShapeRef.new(shape: RotationType, location_name: "RotationType"))
+    RotationsListEntry.struct_class = Types::RotationsListEntry
 
     ScheduleKeyDeletionRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     ScheduleKeyDeletionRequest.add_member(:pending_window_in_days, Shapes::ShapeRef.new(shape: PendingWindowInDaysType, location_name: "PendingWindowInDays"))
@@ -1131,6 +1172,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1423,6 +1465,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1444,6 +1487,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1463,6 +1507,28 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
+          limit_key: "limit",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_key_rotations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListKeyRotations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListKeyRotationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListKeyRotationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1480,6 +1546,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1498,6 +1565,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1517,6 +1585,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o[:pager] = Aws::Pager.new(
+          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1606,6 +1675,23 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
+      end)
+
+      api.add_operation(:rotate_key_on_demand, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RotateKeyOnDemand"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RotateKeyOnDemandRequest)
+        o.output = Shapes::ShapeRef.new(shape: RotateKeyOnDemandResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:schedule_key_deletion, Seahorse::Model::Operation.new.tap do |o|

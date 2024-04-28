@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2024-04-03)
+------------------
+
+* Feature - This release adds visibilityStartTime and visibilityEndTime to DescribeContact and ListContacts responses.
+
 1.44.0 (2024-01-26)
 ------------------
 

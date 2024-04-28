@@ -63,6 +63,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Event.html#hook_failure_mode-instance_method
       def hook_failure_mode: () -> ("FAIL" | "WARN")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Event.html#detailed_status-instance_method
+      def detailed_status: () -> ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
+
       def client: () -> Client
 
 

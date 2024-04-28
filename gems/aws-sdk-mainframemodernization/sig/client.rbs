@@ -298,11 +298,12 @@ module Aws
         def execution_id: () -> ::String
         def job_id: () -> ::String
         def job_name: () -> ::String
+        def job_step_restart_marker: () -> Types::JobStepRestartMarker
         def job_type: () -> ("VSE" | "JES2" | "JES3")
         def job_user: () -> ::String
         def return_code: () -> ::String
         def start_time: () -> ::Time
-        def status: () -> ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+        def status: () -> ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Purged" | "Succeeded With Warning")
         def status_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#get_batch_job_execution-instance_method
@@ -455,9 +456,20 @@ module Aws
                                        ?next_token: ::String,
                                        ?started_after: ::Time,
                                        ?started_before: ::Time,
-                                       ?status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+                                       ?status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Purged" | "Succeeded With Warning")
                                      ) -> _ListBatchJobExecutionsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBatchJobExecutionsResponseSuccess
+
+      interface _ListBatchJobRestartPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBatchJobRestartPointsResponse]
+        def batch_job_steps: () -> ::Array[Types::JobStep]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_batch_job_restart_points-instance_method
+      def list_batch_job_restart_points: (
+                                           application_id: ::String,
+                                           execution_id: ::String
+                                         ) -> _ListBatchJobRestartPointsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBatchJobRestartPointsResponseSuccess
 
       interface _ListDataSetImportHistoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSetImportHistoryResponse]
@@ -557,6 +569,15 @@ module Aws
                                file_batch_job_identifier: {
                                  file_name: ::String,
                                  folder_path: ::String?
+                               }?,
+                               restart_batch_job_identifier: {
+                                 execution_id: ::String,
+                                 job_step_restart_marker: {
+                                   from_proc_step: ::String?,
+                                   from_step: ::String,
+                                   to_proc_step: ::String?,
+                                   to_step: ::String?
+                                 }
                                }?,
                                s3_batch_job_identifier: {
                                  bucket: ::String,

@@ -1394,7 +1394,12 @@ module Aws::TimestreamQuery
     #
     # @!attribute [rw] scalar_type
     #   Indicates if the column is of type string, integer, Boolean, double,
-    #   timestamp, date, time.
+    #   timestamp, date, time. For more information, see [Supported data
+    #   types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/supported-data-types.html
     #   @return [String]
     #
     # @!attribute [rw] array_column_info

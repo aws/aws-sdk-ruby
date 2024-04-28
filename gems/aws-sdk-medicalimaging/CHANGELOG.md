@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.7.0 (2024-04-03)
+------------------
+
+* Feature - SearchImageSets API now supports following enhancements - Additional support for searching on UpdatedAt and SeriesInstanceUID - Support for searching existing filters between dates/times - Support for sorting the search result by Ascending/Descending - Additional parameters returned in the response
+
 1.6.0 (2024-01-26)
 ------------------
 

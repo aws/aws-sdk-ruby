@@ -45,8 +45,8 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents an attribute for describing the key schema for the table
-    # and indexes.
+    # Represents an attribute for describing the schema for the table and
+    # indexes.
     #
     # @!attribute [rw] attribute_name
     #   A name for the attribute.
@@ -737,9 +737,10 @@ module Aws::DynamoDB
     # Represents the input of a `BatchGetItem` operation.
     #
     # @!attribute [rw] request_items
-    #   A map of one or more table names and, for each table, a map that
-    #   describes one or more items to retrieve from that table. Each table
-    #   name can be used only once per `BatchGetItem` request.
+    #   A map of one or more table names or table ARNs and, for each table,
+    #   a map that describes one or more items to retrieve from that table.
+    #   Each table name or ARN can be used only once per `BatchGetItem`
+    #   request.
     #
     #   Each element in the map of items to retrieve consists of the
     #   following:
@@ -857,9 +858,9 @@ module Aws::DynamoDB
     # Represents the output of a `BatchGetItem` operation.
     #
     # @!attribute [rw] responses
-    #   A map of table name to a list of items. Each object in `Responses`
-    #   consists of a table name, along with a map of attribute data
-    #   consisting of the data type and attribute value.
+    #   A map of table name or table ARN to a list of items. Each object in
+    #   `Responses` consists of a table name or ARN, along with a map of
+    #   attribute data consisting of the data type and attribute value.
     #   @return [Hash<String,Array<Hash<String,Types::AttributeValue>>>]
     #
     # @!attribute [rw] unprocessed_keys
@@ -995,9 +996,9 @@ module Aws::DynamoDB
     # Represents the input of a `BatchWriteItem` operation.
     #
     # @!attribute [rw] request_items
-    #   A map of one or more table names and, for each table, a list of
-    #   operations to be performed (`DeleteRequest` or `PutRequest`). Each
-    #   element in the map consists of the following:
+    #   A map of one or more table names or table ARNs and, for each table,
+    #   a list of operations to be performed (`DeleteRequest` or
+    #   `PutRequest`). Each element in the map consists of the following:
     #
     #   * `DeleteRequest` - Perform a `DeleteItem` operation on the
     #     specified item. The item to be deleted is identified by a `Key`
@@ -1075,9 +1076,9 @@ module Aws::DynamoDB
     #   subsequent `BatchWriteItem` operation. For more information, see
     #   `RequestItems` in the Request Parameters section.
     #
-    #   Each `UnprocessedItems` entry consists of a table name and, for that
-    #   table, a list of operations to perform (`DeleteRequest` or
-    #   `PutRequest`).
+    #   Each `UnprocessedItems` entry consists of a table name or table ARN
+    #   and, for that table, a list of operations to perform
+    #   (`DeleteRequest` or `PutRequest`).
     #
     #   * `DeleteRequest` - Perform a `DeleteItem` operation on the
     #     specified item. The item to be deleted is identified by a `Key`
@@ -1474,7 +1475,8 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] table_name
-    #   Name of the table for the check item request.
+    #   Name of the table for the check item request. You can also provide
+    #   the Amazon Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] condition_expression
@@ -1558,7 +1560,9 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #
     # @!attribute [rw] table_name
-    #   The name of the table that was affected by the operation.
+    #   The name of the table that was affected by the operation. If you had
+    #   specified the Amazon Resource Name (ARN) of a table in the input,
+    #   you'll see the table ARN in the response.
     #   @return [String]
     #
     # @!attribute [rw] capacity_units
@@ -1663,7 +1667,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] backup_name
@@ -1823,7 +1828,8 @@ module Aws::DynamoDB
     #   @return [Array<Types::AttributeDefinition>]
     #
     # @!attribute [rw] table_name
-    #   The name of the table to create.
+    #   The name of the table to create. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] key_schema
@@ -2040,6 +2046,25 @@ module Aws::DynamoDB
     #   disabled (false) on the table.
     #   @return [Boolean]
     #
+    # @!attribute [rw] resource_policy
+    #   An Amazon Web Services resource-based policy document in JSON format
+    #   that will be attached to the table.
+    #
+    #   When you attach a resource-based policy while creating a table, the
+    #   policy creation is *strongly consistent*.
+    #
+    #   The maximum size supported for a resource-based policy document is
+    #   20 KB. DynamoDB counts whitespaces when calculating the size of a
+    #   policy against this limit. You can’t request an increase for this
+    #   limit. For a full list of all considerations that you should keep in
+    #   mind while attaching a resource-based policy, see [Resource-based
+    #   policy considerations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableInput AWS API Documentation
     #
     class CreateTableInput < Struct.new(
@@ -2054,7 +2079,8 @@ module Aws::DynamoDB
       :sse_specification,
       :tags,
       :table_class,
-      :deletion_protection_enabled)
+      :deletion_protection_enabled,
+      :resource_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2105,7 +2131,9 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] table_name
-    #   Name of the table in which the item to be deleted resides.
+    #   Name of the table in which the item to be deleted resides. You can
+    #   also provide the Amazon Resource Name (ARN) of the table in this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] condition_expression
@@ -2184,7 +2212,9 @@ module Aws::DynamoDB
     # Represents the input of a `DeleteItem` operation.
     #
     # @!attribute [rw] table_name
-    #   The name of the table from which to delete the item.
+    #   The name of the table from which to delete the item. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -2501,10 +2531,54 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB resource from which
+    #   the policy will be removed. The resources you can specify include
+    #   tables and streams. If you remove the policy of a table, it will
+    #   also remove the permissions for the table's indexes defined in that
+    #   policy document. This is because index permissions are defined in
+    #   the table's policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   A string value that you can use to conditionally delete your policy.
+    #   When you provide an expected revision ID, if the revision ID of the
+    #   existing policy on the resource doesn't match or if there's no
+    #   policy attached to the resource, the request will fail and return a
+    #   `PolicyNotFoundException`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteResourcePolicyInput AWS API Documentation
+    #
+    class DeleteResourcePolicyInput < Struct.new(
+      :resource_arn,
+      :expected_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] revision_id
+    #   A unique string that represents the revision ID of the policy. If
+    #   you are comparing revision IDs, make sure to always use string
+    #   comparison logic.
+    #
+    #   This value will be empty if you make a request against a resource
+    #   without a policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteResourcePolicyOutput AWS API Documentation
+    #
+    class DeleteResourcePolicyOutput < Struct.new(
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `DeleteTable` operation.
     #
     # @!attribute [rw] table_name
-    #   The name of the table to delete.
+    #   The name of the table to delete. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTableInput AWS API Documentation
@@ -2556,6 +2630,9 @@ module Aws::DynamoDB
     # @!attribute [rw] table_name
     #   Name of the table for which the customer wants to check the
     #   continuous backups and point in time recovery settings.
+    #
+    #   You can also provide the Amazon Resource Name (ARN) of the table in
+    #   this parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackupsInput AWS API Documentation
@@ -2580,7 +2657,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The name of the table to describe.
+    #   The name of the table to describe. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -2773,7 +2851,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The name of the table being described.
+    #   The name of the table being described. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestinationInput AWS API Documentation
@@ -2849,7 +2928,8 @@ module Aws::DynamoDB
     # Represents the input of a `DescribeTable` operation.
     #
     # @!attribute [rw] table_name
-    #   The name of the table to describe.
+    #   The name of the table to describe. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableInput AWS API Documentation
@@ -2875,7 +2955,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableReplicaAutoScalingInput AWS API Documentation
@@ -2899,7 +2980,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The name of the table to be described.
+    #   The name of the table to be described. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLiveInput AWS API Documentation
@@ -3628,6 +3710,11 @@ module Aws::DynamoDB
     # @!attribute [rw] s3_bucket_owner
     #   The ID of the Amazon Web Services account that owns the bucket the
     #   export will be stored in.
+    #
+    #   <note markdown="1"> S3BucketOwner is a required parameter when exporting to a S3 bucket
+    #   in another account.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -3724,7 +3811,9 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] table_name
-    #   The name of the table from which to retrieve the specified item.
+    #   The name of the table from which to retrieve the specified item. You
+    #   can also provide the Amazon Resource Name (ARN) of the table in this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] projection_expression
@@ -3755,7 +3844,9 @@ module Aws::DynamoDB
     # Represents the input of a `GetItem` operation.
     #
     # @!attribute [rw] table_name
-    #   The name of the table containing the requested item.
+    #   The name of the table containing the requested item. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -3915,6 +4006,40 @@ module Aws::DynamoDB
     class GetItemOutput < Struct.new(
       :item,
       :consumed_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB resource to which the
+    #   policy is attached. The resources you can specify include tables and
+    #   streams.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetResourcePolicyInput AWS API Documentation
+    #
+    class GetResourcePolicyInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource-based policy document attached to the resource, which
+    #   can be a table or stream, in JSON format.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique string that represents the revision ID of the policy. If
+    #   you are comparing revision IDs, make sure to always use string
+    #   comparison logic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetResourcePolicyOutput AWS API Documentation
+    #
+    class GetResourcePolicyOutput < Struct.new(
+      :policy,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4962,7 +5087,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The name of the DynamoDB table.
+    #   The name of the DynamoDB table. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] stream_arn
@@ -5049,7 +5175,9 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The backups from the table specified by `TableName` are listed.
+    #   Lists the backups from the table specified in `TableName`. You can
+    #   also provide the Amazon Resource Name (ARN) of the table in this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -5129,7 +5257,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -5632,6 +5761,23 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The operation tried to access a nonexistent resource-based policy.
+    #
+    # If you specified an `ExpectedRevisionId`, it's possible that a policy
+    # is present for the resource but its revision ID didn't match the
+    # expected value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PolicyNotFoundException AWS API Documentation
+    #
+    class PolicyNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents attributes that are copied (projected) from the table into
     # an index. These are in addition to the primary key attributes and
     # index key attributes, which are automatically projected.
@@ -5647,6 +5793,8 @@ module Aws::DynamoDB
     #     attributes that you specify.
     #
     #   * `ALL` - All of the table attributes are projected into the index.
+    #
+    #   When using the DynamoDB console, `ALL` is selected by default.
     #   @return [String]
     #
     # @!attribute [rw] non_key_attributes
@@ -5818,7 +5966,8 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] table_name
-    #   Name of the table in which to write the item.
+    #   Name of the table in which to write the item. You can also provide
+    #   the Amazon Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] condition_expression
@@ -5858,7 +6007,8 @@ module Aws::DynamoDB
     # Represents the input of a `PutItem` operation.
     #
     # @!attribute [rw] table_name
-    #   The name of the table to contain the item.
+    #   The name of the table to contain the item. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] item
@@ -6171,10 +6321,84 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB resource to which the
+    #   policy will be attached. The resources you can specify include
+    #   tables and streams.
+    #
+    #   You can control index permissions using the base table's policy. To
+    #   specify the same permission level for your table and its indexes,
+    #   you can provide both the table and index Amazon Resource Name (ARN)s
+    #   in the `Resource` field of a given `Statement` in your policy
+    #   document. Alternatively, to specify different permissions for your
+    #   table, indexes, or both, you can define multiple `Statement` fields
+    #   in your policy document.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   An Amazon Web Services resource-based policy document in JSON
+    #   format.
+    #
+    #   The maximum size supported for a resource-based policy document is
+    #   20 KB. DynamoDB counts whitespaces when calculating the size of a
+    #   policy against this limit. For a full list of all considerations
+    #   that you should keep in mind while attaching a resource-based
+    #   policy, see [Resource-based policy considerations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   A string value that you can use to conditionally update your policy.
+    #   You can provide the revision ID of your existing policy to make
+    #   mutating requests against that policy. When you provide an expected
+    #   revision ID, if the revision ID of the existing policy on the
+    #   resource doesn't match or if there's no policy attached to the
+    #   resource, your request will be rejected with a
+    #   `PolicyNotFoundException`.
+    #
+    #   To conditionally put a policy when no policy exists for the
+    #   resource, specify `NO_POLICY` for the revision ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] confirm_remove_self_resource_access
+    #   Set this parameter to `true` to confirm that you want to remove your
+    #   permissions to change the policy of this resource in the future.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutResourcePolicyInput AWS API Documentation
+    #
+    class PutResourcePolicyInput < Struct.new(
+      :resource_arn,
+      :policy,
+      :expected_revision_id,
+      :confirm_remove_self_resource_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] revision_id
+    #   A unique string that represents the revision ID of the policy. If
+    #   you are comparing revision IDs, make sure to always use string
+    #   comparison logic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutResourcePolicyOutput AWS API Documentation
+    #
+    class PutResourcePolicyOutput < Struct.new(
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `Query` operation.
     #
     # @!attribute [rw] table_name
-    #   The name of the table containing the requested items.
+    #   The name of the table containing the requested items. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -6391,7 +6615,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.FilterExpression.html
     #   @return [String]
     #
     # @!attribute [rw] key_condition_expression
@@ -7556,9 +7780,12 @@ module Aws::DynamoDB
     # Represents the input of a `Scan` operation.
     #
     # @!attribute [rw] table_name
-    #   The name of the table containing the requested items; or, if you
+    #   The name of the table containing the requested items or if you
     #   provide `IndexName`, the name of the table to which that index
     #   belongs.
+    #
+    #   You can also provide the Amazon Resource Name (ARN) of the table in
+    #   this parameter.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -9161,7 +9388,8 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   Name of the table for the `UpdateItem` request.
+    #   Name of the table for the `UpdateItem` request. You can also provide
+    #   the Amazon Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] condition_expression
@@ -9200,7 +9428,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] point_in_time_recovery_specification
@@ -9230,7 +9459,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -9408,7 +9638,9 @@ module Aws::DynamoDB
     # Represents the input of an `UpdateItem` operation.
     #
     # @!attribute [rw] table_name
-    #   The name of the table containing the item to update.
+    #   The name of the table containing the item to update. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -9811,11 +10043,12 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] table_name
-    #   The table name for the Kinesis streaming destination input.
+    #   The table name for the Kinesis streaming destination input. You can
+    #   also provide the ARN of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] stream_arn
-    #   The ARN for the Kinesis stream input.
+    #   The Amazon Resource Name (ARN) for the Kinesis stream input.
     #   @return [String]
     #
     # @!attribute [rw] update_kinesis_streaming_configuration
@@ -9911,7 +10144,8 @@ module Aws::DynamoDB
     #   @return [Array<Types::AttributeDefinition>]
     #
     # @!attribute [rw] table_name
-    #   The name of the table to be updated.
+    #   The name of the table to be updated. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] billing_mode
@@ -10038,7 +10272,8 @@ module Aws::DynamoDB
     #   @return [Array<Types::GlobalSecondaryIndexAutoScalingUpdate>]
     #
     # @!attribute [rw] table_name
-    #   The name of the global table to be updated.
+    #   The name of the global table to be updated. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_write_capacity_auto_scaling_update
@@ -10078,7 +10313,8 @@ module Aws::DynamoDB
     # Represents the input of an `UpdateTimeToLive` operation.
     #
     # @!attribute [rw] table_name
-    #   The name of the table to be configured.
+    #   The name of the table to be configured. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #   @return [String]
     #
     # @!attribute [rw] time_to_live_specification

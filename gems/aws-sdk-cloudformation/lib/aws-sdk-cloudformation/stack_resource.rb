@@ -57,7 +57,7 @@ module Aws::CloudFormation
     end
 
     # Type of resource. For more information, go to [Amazon Web Services
-    # Resource Types Reference][1] in the CloudFormation User Guide.
+    # Resource Types Reference][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -92,8 +92,8 @@ module Aws::CloudFormation
     end
 
     # The content of the `Metadata` attribute declared for the resource. For
-    # more information, see [Metadata Attribute][1] in the CloudFormation
-    # User Guide.
+    # more information, see [Metadata Attribute][1] in the *CloudFormation
+    # User Guide*.
     #
     #
     #

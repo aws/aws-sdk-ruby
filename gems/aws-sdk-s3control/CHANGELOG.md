@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2024-04-11)
+------------------
+
+* Feature - Documentation updates for Amazon S3-control.
+
 1.78.0 (2024-02-14)
 ------------------
 

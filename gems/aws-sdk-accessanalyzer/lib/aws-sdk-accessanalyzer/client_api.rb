@@ -73,6 +73,10 @@ module Aws::AccessAnalyzer
     Criterion = Shapes::StructureShape.new(name: 'Criterion')
     DeleteAnalyzerRequest = Shapes::StructureShape.new(name: 'DeleteAnalyzerRequest')
     DeleteArchiveRuleRequest = Shapes::StructureShape.new(name: 'DeleteArchiveRuleRequest')
+    DynamodbStreamConfiguration = Shapes::StructureShape.new(name: 'DynamodbStreamConfiguration')
+    DynamodbStreamPolicy = Shapes::StringShape.new(name: 'DynamodbStreamPolicy')
+    DynamodbTableConfiguration = Shapes::StructureShape.new(name: 'DynamodbTableConfiguration')
+    DynamodbTablePolicy = Shapes::StringShape.new(name: 'DynamodbTablePolicy')
     EbsGroup = Shapes::StringShape.new(name: 'EbsGroup')
     EbsGroupList = Shapes::ListShape.new(name: 'EbsGroupList')
     EbsSnapshotConfiguration = Shapes::StructureShape.new(name: 'EbsSnapshotConfiguration')
@@ -434,6 +438,8 @@ module Aws::AccessAnalyzer
     Configuration.add_member(:sns_topic, Shapes::ShapeRef.new(shape: SnsTopicConfiguration, location_name: "snsTopic"))
     Configuration.add_member(:sqs_queue, Shapes::ShapeRef.new(shape: SqsQueueConfiguration, location_name: "sqsQueue"))
     Configuration.add_member(:s3_express_directory_bucket, Shapes::ShapeRef.new(shape: S3ExpressDirectoryBucketConfiguration, location_name: "s3ExpressDirectoryBucket"))
+    Configuration.add_member(:dynamodb_stream, Shapes::ShapeRef.new(shape: DynamodbStreamConfiguration, location_name: "dynamodbStream"))
+    Configuration.add_member(:dynamodb_table, Shapes::ShapeRef.new(shape: DynamodbTableConfiguration, location_name: "dynamodbTable"))
     Configuration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Configuration.add_member_subclass(:ebs_snapshot, Types::Configuration::EbsSnapshot)
     Configuration.add_member_subclass(:ecr_repository, Types::Configuration::EcrRepository)
@@ -447,6 +453,8 @@ module Aws::AccessAnalyzer
     Configuration.add_member_subclass(:sns_topic, Types::Configuration::SnsTopic)
     Configuration.add_member_subclass(:sqs_queue, Types::Configuration::SqsQueue)
     Configuration.add_member_subclass(:s3_express_directory_bucket, Types::Configuration::S3ExpressDirectoryBucket)
+    Configuration.add_member_subclass(:dynamodb_stream, Types::Configuration::DynamodbStream)
+    Configuration.add_member_subclass(:dynamodb_table, Types::Configuration::DynamodbTable)
     Configuration.add_member_subclass(:unknown, Types::Configuration::Unknown)
     Configuration.struct_class = Types::Configuration
 
@@ -497,6 +505,12 @@ module Aws::AccessAnalyzer
     DeleteArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "ruleName"))
     DeleteArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteArchiveRuleRequest.struct_class = Types::DeleteArchiveRuleRequest
+
+    DynamodbStreamConfiguration.add_member(:stream_policy, Shapes::ShapeRef.new(shape: DynamodbStreamPolicy, location_name: "streamPolicy"))
+    DynamodbStreamConfiguration.struct_class = Types::DynamodbStreamConfiguration
+
+    DynamodbTableConfiguration.add_member(:table_policy, Shapes::ShapeRef.new(shape: DynamodbTablePolicy, location_name: "tablePolicy"))
+    DynamodbTableConfiguration.struct_class = Types::DynamodbTableConfiguration
 
     EbsGroupList.member = Shapes::ShapeRef.new(shape: EbsGroup)
 

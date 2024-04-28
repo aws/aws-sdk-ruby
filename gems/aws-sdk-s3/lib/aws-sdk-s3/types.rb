@@ -59,7 +59,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -940,7 +940,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -1455,7 +1455,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -2447,7 +2447,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information
     #   about bucket naming restrictions, see [Directory bucket naming
     #   rules][2] in the *Amazon S3 User Guide*
     #
@@ -2749,7 +2749,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -3586,7 +3586,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information
     #   about bucket naming restrictions, see [Directory bucket naming
     #   rules][1] in the *Amazon S3 User Guide*
     #
@@ -3646,7 +3646,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information
     #   about bucket naming restrictions, see [Directory bucket naming
     #   rules][1] in the *Amazon S3 User Guide*
     #
@@ -3840,7 +3840,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -4056,7 +4056,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -5315,8 +5315,16 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the Amazon S3 object key name to filter on and whether to
-    # filter on the suffix or prefix of the key name.
+    # Specifies the Amazon S3 object key name to filter on. An object key
+    # name is the name assigned to an object in your Amazon S3 bucket. You
+    # specify whether to filter on the suffix or prefix of the object key
+    # name. A prefix is a specific string of characters at the beginning of
+    # an object key name, which you can use to organize objects. For
+    # example, you can start the key names of related objects with a prefix,
+    # such as `2023-` or `engineering/`. Then, you can use `FilterRule` to
+    # find objects in a bucket with key names that have the same prefix. A
+    # suffix is similar to a prefix, but it is at the end of the object key
+    # name instead of at the beginning.
     #
     # @!attribute [rw] name
     #   The object key name prefix or suffix identifying one or more objects
@@ -5927,7 +5935,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information
     #   about bucket naming restrictions, see [Directory bucket naming
     #   rules][1] in the *Amazon S3 User Guide*
     #
@@ -6440,7 +6448,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -7066,7 +7074,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -7785,7 +7793,7 @@ module Aws::S3
     #   The name of the location where the bucket will be created.
     #
     #   For directory buckets, the AZ ID of the Availability Zone where the
-    #   bucket is created. An example AZ ID value is `usw2-az2`.
+    #   bucket is created. An example AZ ID value is `usw2-az1`.
     #
     #   <note markdown="1"> This functionality is only supported by directory buckets.
     #
@@ -7829,7 +7837,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -8317,7 +8325,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -9190,8 +9198,10 @@ module Aws::S3
     end
 
     # The `Filter` is used to identify objects that a Lifecycle Rule applies
-    # to. A `Filter` must have exactly one of `Prefix`, `Tag`, or `And`
-    # specified.
+    # to. A `Filter` can have exactly one of `Prefix`, `Tag`,
+    # `ObjectSizeGreaterThan`, `ObjectSizeLessThan`, or `And` specified. If
+    # the `Filter` element is left empty, the Lifecycle Rule applies to all
+    # objects in the bucket.
     #
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
@@ -9545,7 +9555,12 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] upload_id_marker
-    #   Upload ID after which listing began.
+    #   Together with key-marker, specifies the multipart upload after which
+    #   listing should begin. If key-marker is not specified, the
+    #   upload-id-marker parameter is ignored. Otherwise, any multipart
+    #   uploads for a key equal to the key-marker might be included in the
+    #   list only if they have an upload ID lexicographically greater than
+    #   the specified `upload-id-marker`.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -9668,7 +9683,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -10105,7 +10120,9 @@ module Aws::S3
     #
     # @!attribute [rw] encoding_type
     #   Encoding type used by Amazon S3 to encode object keys in the
-    #   response.
+    #   response. If using `url`, non-ASCII characters used in an object's
+    #   key name will be URL encoded. For example, the object
+    #   test\_file(3).png will appear as test\_file%283%29.png.
     #   @return [String]
     #
     # @!attribute [rw] request_charged
@@ -10144,7 +10161,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -10401,7 +10418,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -10459,7 +10476,9 @@ module Aws::S3
     #
     # @!attribute [rw] encoding_type
     #   Encoding type used by Amazon S3 to encode object keys in the
-    #   response.
+    #   response. If using `url`, non-ASCII characters used in an object's
+    #   key name will be URL encoded. For example, the object
+    #   test\_file(3).png will appear as test\_file%283%29.png.
     #   @return [String]
     #
     # @!attribute [rw] max_keys
@@ -10596,9 +10615,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] part_number_marker
-    #   When a list is truncated, this element specifies the last part in
-    #   the list, as well as the value to use for the part-number-marker
-    #   request parameter in a subsequent request.
+    #   Specifies the part after which listing should begin. Only parts with
+    #   higher part numbers will be listed.
     #   @return [Integer]
     #
     # @!attribute [rw] next_part_number_marker
@@ -10695,7 +10713,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -10857,8 +10875,9 @@ module Aws::S3
     # @!attribute [rw] name
     #   The name of the location where the bucket will be created.
     #
-    #   For directory buckets, the AZ ID of the Availability Zone where the
-    #   bucket will be created. An example AZ ID value is `usw2-az2`.
+    #   For directory buckets, the name of the location is the AZ ID of the
+    #   Availability Zone where the bucket will be created. An example AZ ID
+    #   value is `usw2-az1`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LocationInfo AWS API Documentation
@@ -12704,7 +12723,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information
     #   about bucket naming restrictions, see [Directory bucket naming
     #   rules][1] in the *Amazon S3 User Guide*
     #
@@ -13767,7 +13786,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -15741,7 +15760,7 @@ module Aws::S3
     #   Amazon Web Services Key Management Service (KMS) customer Amazon Web
     #   Services KMS key ID to use for the default encryption. This
     #   parameter is allowed if and only if `SSEAlgorithm` is set to
-    #   `aws:kms`.
+    #   `aws:kms` or `aws:kms:dsse`.
     #
     #   You can specify the key ID, key alias, or the Amazon Resource Name
     #   (ARN) of the KMS key.
@@ -16346,7 +16365,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -16813,7 +16832,7 @@ module Aws::S3
     #   requests are not supported. Directory bucket names must be unique in
     #   the chosen Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #

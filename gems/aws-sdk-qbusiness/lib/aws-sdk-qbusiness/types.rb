@@ -66,12 +66,13 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Performs an Amazon Q plugin action during a non-streaming chat
-    # conversation.
+    # Performs an Amazon Q Business plugin action during a non-streaming
+    # chat conversation.
     #
     # @!attribute [rw] payload
     #   A mapping of field names to the field values in input that an end
-    #   user provides to Amazon Q requests to perform their plugin action.
+    #   user provides to Amazon Q Business requests to perform their plugin
+    #   action.
     #   @return [Hash<String,Types::ActionExecutionPayloadField>]
     #
     # @!attribute [rw] payload_field_name_separator
@@ -108,14 +109,14 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # An output event that Amazon Q returns to an user who wants to perform
-    # a plugin action during a non-streaming chat conversation. It contains
-    # information about the selected action with a list of possible user
-    # input fields, some pre-populated by Amazon Q.
+    # An output event that Amazon Q Business returns to an user who wants to
+    # perform a plugin action during a non-streaming chat conversation. It
+    # contains information about the selected action with a list of possible
+    # user input fields, some pre-populated by Amazon Q Business.
     #
     # @!attribute [rw] payload
-    #   Field values that an end user needs to provide to Amazon Q for
-    #   Amazon Q to perform the requested plugin action.
+    #   Field values that an end user needs to provide to Amazon Q Business
+    #   for Amazon Q Business to perform the requested plugin action.
     #   @return [Hash<String,Types::ActionReviewPayloadField>]
     #
     # @!attribute [rw] payload_field_name_separator
@@ -146,8 +147,8 @@ module Aws::QBusiness
     #
     # @!attribute [rw] allowed_values
     #   Information about the field values that an end user can use to
-    #   provide to Amazon Q for Amazon Q to perform the requested plugin
-    #   action.
+    #   provide to Amazon Q Business for Amazon Q Business to perform the
+    #   requested plugin action.
     #   @return [Array<Types::ActionReviewPayloadFieldAllowedValue>]
     #
     # @!attribute [rw] display_name
@@ -184,7 +185,8 @@ module Aws::QBusiness
     end
 
     # Information about the field values that an end user can use to provide
-    # to Amazon Q for Amazon Q to perform the requested plugin action.
+    # to Amazon Q Business for Amazon Q Business to perform the requested
+    # plugin action.
     #
     # @!attribute [rw] display_value
     #   The name of the field.
@@ -203,27 +205,29 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Summary information for an Amazon Q application.
+    # Summary information for an Amazon Q Business application.
     #
     # @!attribute [rw] application_id
-    #   The identifier for the Amazon Q application.
+    #   The identifier for the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp when the Amazon Q application was created.
+    #   The Unix timestamp when the Amazon Q Business application was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] display_name
-    #   The name of the Amazon Q application.
+    #   The name of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the Amazon Q application. The application is ready to
-    #   use when the status is `ACTIVE`.
+    #   The status of the Amazon Q Business application. The application is
+    #   ready to use when the status is `ACTIVE`.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The Unix timestamp when the Amazon Q application was last updated.
+    #   The Unix timestamp when the Amazon Q Business application was last
+    #   updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/Application AWS API Documentation
@@ -250,6 +254,31 @@ module Aws::QBusiness
     #
     class AppliedAttachmentsConfiguration < Struct.new(
       :attachments_control_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The creator mode specific admin controls configured for an Amazon Q
+    # Business application. Determines whether an end user can generate
+    # LLM-only responses when they use the web experience.
+    #
+    # For more information, see [Admin controls and guardrails][1] and
+    # [Conversation settings][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+    #
+    # @!attribute [rw] creator_mode_control
+    #   Information about whether creator mode is enabled or disabled for an
+    #   Amazon Q Business application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/AppliedCreatorModeConfiguration AWS API Documentation
+    #
+    class AppliedCreatorModeConfiguration < Struct.new(
+      :creator_mode_control)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -321,41 +350,74 @@ module Aws::QBusiness
     #
     # @!attribute [rw] contains_all
     #   Returns `true` when a document contains all the specified document
-    #   attributes or metadata fields.
+    #   attributes or metadata fields. Supported for the following [document
+    #   attribute value types][1]: `stringListValue`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] contains_any
     #   Returns `true` when a document contains any of the specified
-    #   document attributes or metadata fields.
+    #   document attributes or metadata fields. Supported for the following
+    #   [document attribute value types][1]: `dateValue`, `longValue`,
+    #   `stringListValue` and `stringValue`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] equals_to
     #   Performs an equals operation on two document attributes or metadata
-    #   fields.
+    #   fields. Supported for the following [document attribute value
+    #   types][1]: `dateValue`, `longValue`, `stringListValue` and
+    #   `stringValue`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] greater_than
     #   Performs a greater than operation on two document attributes or
-    #   metadata fields. Use with a document attribute of type `Date` or
-    #   `Long`.
+    #   metadata fields. Supported for the following [document attribute
+    #   value types][1]: `dateValue` and `longValue`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] greater_than_or_equals
     #   Performs a greater or equals than operation on two document
-    #   attributes or metadata fields. Use with a document attribute of type
-    #   `Date` or `Long`.
+    #   attributes or metadata fields. Supported for the following [document
+    #   attribute value types][1]: `dateValue` and `longValue`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than
     #   Performs a less than operation on two document attributes or
-    #   metadata fields. Use with a document attribute of type `Date` or
-    #   `Long`.
+    #   metadata fields. Supported for the following [document attribute
+    #   value types][1]: `dateValue` and `longValue`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than_or_equals
     #   Performs a less than or equals operation on two document attributes
-    #   or metadata fields. Use with a document attribute of type `Date` or
-    #   `Long`.
+    #   or metadata fields.Supported for the following [document attribute
+    #   value type][1]: `dateValue` and `longValue`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] not_filter
@@ -387,7 +449,7 @@ module Aws::QBusiness
     # configure a plugin.
     #
     # @!attribute [rw] role_arn
-    #   The ARN of an IAM role used by Amazon Q to access the basic
+    #   The ARN of an IAM role used by Amazon Q Business to access the basic
     #   authentication credentials stored in a Secrets Manager secret.
     #   @return [String]
     #
@@ -406,7 +468,7 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] data_source_sync_id
@@ -415,12 +477,12 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] documents
-    #   Documents deleted from the Amazon Q index.
+    #   Documents deleted from the Amazon Q Business index.
     #   @return [Array<Types::DeleteDocument>]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the Amazon Q index that contains the documents to
-    #   delete.
+    #   The identifier of the Amazon Q Business index that contains the
+    #   documents to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/BatchDeleteDocumentRequest AWS API Documentation
@@ -436,8 +498,8 @@ module Aws::QBusiness
 
     # @!attribute [rw] failed_documents
     #   A list of documents that couldn't be removed from the Amazon Q
-    #   index. Each entry contains an error message that indicates why the
-    #   document couldn't be removed from the index.
+    #   Business index. Each entry contains an error message that indicates
+    #   why the document couldn't be removed from the index.
     #   @return [Array<Types::FailedDocument>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/BatchDeleteDocumentResponse AWS API Documentation
@@ -449,7 +511,7 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] data_source_sync_id
@@ -462,7 +524,8 @@ module Aws::QBusiness
     #   @return [Array<Types::Document>]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the Amazon Q index to add the documents to.
+    #   The identifier of the Amazon Q Business index to add the documents
+    #   to.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -483,8 +546,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] failed_documents
-    #   A list of documents that were not added to the Amazon Q index
-    #   because the document failed a validation check. Each document
+    #   A list of documents that were not added to the Amazon Q Business
+    #   index because the document failed a validation check. Each document
     #   contains an error message that indicates why the document couldn't
     #   be added to the index.
     #   @return [Array<Types::FailedDocument>]
@@ -501,7 +564,8 @@ module Aws::QBusiness
     # control configuration.
     #
     # @!attribute [rw] blocked_phrases
-    #   A list of phrases blocked from a Amazon Q web experience chat.
+    #   A list of phrases blocked from a Amazon Q Business web experience
+    #   chat.
     #   @return [Array<String>]
     #
     # @!attribute [rw] system_message_override
@@ -518,15 +582,16 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Updates a blocked phrases configuration in your Amazon Q application.
+    # Updates a blocked phrases configuration in your Amazon Q Business
+    # application.
     #
     # @!attribute [rw] blocked_phrases_to_create_or_update
     #   Creates or updates a blocked phrases configuration in your Amazon Q
-    #   application.
+    #   Business application.
     #   @return [Array<String>]
     #
     # @!attribute [rw] blocked_phrases_to_delete
-    #   Deletes a blocked phrases configuration in your Amazon Q
+    #   Deletes a blocked phrases configuration in your Amazon Q Business
     #   application.
     #   @return [Array<String>]
     #
@@ -545,13 +610,43 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Configuration information for Amazon Q Business conversation modes.
+    #
+    # For more information, see [Admin controls and guardrails][1] and
+    # [Conversation settings][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+    #
+    # @note ChatModeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] plugin_configuration
+    #   Configuration information required to invoke chat in `PLUGIN_MODE`.
+    #   @return [Types::PluginConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ChatModeConfiguration AWS API Documentation
+    #
+    class ChatModeConfiguration < Struct.new(
+      :plugin_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PluginConfiguration < ChatModeConfiguration; end
+      class Unknown < ChatModeConfiguration; end
+    end
+
     # @!attribute [rw] action_execution
-    #   A request from an end user to perform an Amazon Q plugin action.
+    #   A request from an end user to perform an Amazon Q Business plugin
+    #   action.
     #   @return [Types::ActionExecution]
     #
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application linked to the Amazon Q
-    #   conversation.
+    #   The identifier of the Amazon Q Business application linked to the
+    #   Amazon Q Business conversation.
     #   @return [String]
     #
     # @!attribute [rw] attachments
@@ -560,9 +655,38 @@ module Aws::QBusiness
     #   @return [Array<Types::AttachmentInput>]
     #
     # @!attribute [rw] attribute_filter
-    #   Enables filtering of Amazon Q web experience responses based on
-    #   document attributes or metadata fields.
+    #   Enables filtering of Amazon Q Business web experience responses
+    #   based on document attributes or metadata fields.
     #   @return [Types::AttributeFilter]
+    #
+    # @!attribute [rw] chat_mode
+    #   The chat modes available in an Amazon Q Business web experience.
+    #
+    #   * `RETRIEVAL_MODE` - The default chat mode for an Amazon Q Business
+    #     application. When this mode is enabled, Amazon Q Business
+    #     generates responses only from data sources connected to an Amazon
+    #     Q Business application.
+    #
+    #   * `CREATOR_MODE` - By selecting this mode, users can choose to
+    #     generate responses only from the LLM knowledge, without consulting
+    #     connected data sources, for a chat request.
+    #
+    #   * `PLUGIN_MODE` - By selecting this mode, users can choose to use
+    #     plugins in chat.
+    #
+    #   For more information, see [Admin controls and guardrails][1],
+    #   [Plugins][2], and [Conversation settings][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+    #   [2]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html
+    #   [3]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_mode_configuration
+    #   The chat mode configuration for an Amazon Q Business application.
+    #   @return [Types::ChatModeConfiguration]
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify a chat request.
@@ -572,7 +696,7 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] conversation_id
-    #   The identifier of the Amazon Q conversation.
+    #   The identifier of the Amazon Q Business conversation.
     #   @return [String]
     #
     # @!attribute [rw] parent_message_id
@@ -599,6 +723,8 @@ module Aws::QBusiness
       :application_id,
       :attachments,
       :attribute_filter,
+      :chat_mode,
+      :chat_mode_configuration,
       :client_token,
       :conversation_id,
       :parent_message_id,
@@ -610,12 +736,13 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] action_review
-    #   A request from Amazon Q to the end user for information Amazon Q
-    #   needs to successfully complete a requested plugin action.
+    #   A request from Amazon Q Business to the end user for information
+    #   Amazon Q Business needs to successfully complete a requested plugin
+    #   action.
     #   @return [Types::ActionReview]
     #
     # @!attribute [rw] conversation_id
-    #   The identifier of the Amazon Q conversation.
+    #   The identifier of the Amazon Q Business conversation.
     #   @return [String]
     #
     # @!attribute [rw] failed_attachments
@@ -631,13 +758,13 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] system_message_id
-    #   The identifier of an Amazon Q AI generated message within the
-    #   conversation.
+    #   The identifier of an Amazon Q Business AI generated message within
+    #   the conversation.
     #   @return [String]
     #
     # @!attribute [rw] user_message_id
-    #   The identifier of an Amazon Q end user text input message within the
-    #   conversation.
+    #   The identifier of an Amazon Q Business end user text input message
+    #   within the conversation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ChatSyncOutput AWS API Documentation
@@ -680,10 +807,10 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # A rule for configuring how Amazon Q responds when it encounters a a
-    # blocked topic. You can configure a custom message to inform your end
-    # users that they have asked about a restricted topic and suggest any
-    # next steps they should take.
+    # A rule for configuring how Amazon Q Business responds when it
+    # encounters a a blocked topic. You can configure a custom message to
+    # inform your end users that they have asked about a restricted topic
+    # and suggest any next steps they should take.
     #
     # @!attribute [rw] system_message_override
     #   The configured custom message displayed to an end user informing
@@ -699,11 +826,11 @@ module Aws::QBusiness
     end
 
     # Rules for retrieving content from data sources connected to a Amazon Q
-    # application for a specific topic control configuration.
+    # Business application for a specific topic control configuration.
     #
     # @!attribute [rw] eligible_data_sources
-    #   Specifies data sources in a Amazon Q application to use for content
-    #   generation.
+    #   Specifies data sources in a Amazon Q Business application to use for
+    #   content generation.
     #   @return [Array<Types::EligibleDataSource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ContentRetrievalRule AWS API Documentation
@@ -714,10 +841,10 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # A conversation in an Amazon Q application.
+    # A conversation in an Amazon Q Business application.
     #
     # @!attribute [rw] conversation_id
-    #   The identifier of the Amazon Q conversation.
+    #   The identifier of the Amazon Q Business conversation.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -744,24 +871,30 @@ module Aws::QBusiness
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create your
-    #   Amazon Q application.
+    #   Amazon Q Business application.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Q application.
+    #   A description for the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   A name for the Amazon Q application.
+    #   A name for the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] encryption_configuration
     #   The identifier of the KMS key that is used to encrypt your data.
-    #   Amazon Q doesn't support asymmetric keys.
+    #   Amazon Q Business doesn't support asymmetric keys.
     #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   you are either creating for—or connecting to—your Amazon Q Business
+    #   application.
+    #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permissions to
@@ -770,10 +903,10 @@ module Aws::QBusiness
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that identify or categorize your Amazon Q
-    #   application. You can also use tags to help control access to the
-    #   application. Tag keys and values can consist of Unicode letters,
-    #   digits, white space, and any of the following symbols: \_ . : / = +
-    #   - @.
+    #   Business application. You can also use tags to help control access
+    #   to the application. Tag keys and values can consist of Unicode
+    #   letters, digits, white space, and any of the following symbols: \_ .
+    #   \: / = + - @.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateApplicationRequest AWS API Documentation
@@ -784,6 +917,7 @@ module Aws::QBusiness
       :description,
       :display_name,
       :encryption_configuration,
+      :identity_center_instance_arn,
       :role_arn,
       :tags)
       SENSITIVE = []
@@ -791,11 +925,11 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Q application.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateApplicationResponse AWS API Documentation
@@ -808,8 +942,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application the data source will be
-    #   attached to.
+    #   The identifier of the Amazon Q Business application the data source
+    #   will be attached to.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -828,7 +962,7 @@ module Aws::QBusiness
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html.html
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] description
@@ -861,9 +995,9 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] sync_schedule
-    #   Sets the frequency for Amazon Q to check the documents in your data
-    #   source repository and update your index. If you don't set a
-    #   schedule, Amazon Q won't periodically update the index.
+    #   Sets the frequency for Amazon Q Business to check the documents in
+    #   your data source repository and update your index. If you don't set
+    #   a schedule, Amazon Q Business won't periodically update the index.
     #
     #   Specify a `cron-` format schedule string or an empty string to
     #   indicate that the index is updated on demand. You can't specify the
@@ -882,7 +1016,7 @@ module Aws::QBusiness
     # @!attribute [rw] vpc_configuration
     #   Configuration information for an Amazon VPC (Virtual Private Cloud)
     #   to connect to your data source. For more information, see [Using
-    #   Amazon VPC with Amazon Q connectors][1].
+    #   Amazon VPC with Amazon Q Business connectors][1].
     #
     #
     #
@@ -909,7 +1043,7 @@ module Aws::QBusiness
 
     # @!attribute [rw] data_source_arn
     #   The Amazon Resource Name (ARN) of a data source in an Amazon Q
-    #   application.
+    #   Business application.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -926,7 +1060,7 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application using the index.
+    #   The identifier of the Amazon Q Business application using the index.
     #   @return [String]
     #
     # @!attribute [rw] capacity_configuration
@@ -944,11 +1078,11 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Q index.
+    #   A description for the Amazon Q Business index.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   A name for the Amazon Q index.
+    #   A name for the Amazon Q Business index.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -972,11 +1106,11 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] index_arn
-    #   The Amazon Resource Name (ARN) of an Amazon Q index.
+    #   The Amazon Resource Name (ARN) of an Amazon Q Business index.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier for the Amazon Q index.
+    #   The identifier for the Amazon Q Business index.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateIndexResponse AWS API Documentation
@@ -993,12 +1127,13 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] auth_configuration
-    #   Authentication configuration information for an Amazon Q plugin.
+    #   Authentication configuration information for an Amazon Q Business
+    #   plugin.
     #   @return [Types::PluginAuthConfiguration]
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create your
-    #   Amazon Q plugin.
+    #   Amazon Q Business plugin.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1056,12 +1191,12 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of your Amazon Q application.
+    #   The identifier of your Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create your
-    #   Amazon Q application retriever.
+    #   Amazon Q Business application retriever.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1069,7 +1204,7 @@ module Aws::QBusiness
     #
     # @!attribute [rw] configuration
     #   Provides information on how the retriever used for your Amazon Q
-    #   application is configured.
+    #   Business application is configured.
     #   @return [Types::RetrieverConfiguration]
     #
     # @!attribute [rw] display_name
@@ -1077,7 +1212,7 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of an IAM role used by Amazon Q to access the basic
+    #   The ARN of an IAM role used by Amazon Q Business to access the basic
     #   authentication credentials stored in a Secrets Manager secret.
     #   @return [String]
     #
@@ -1131,7 +1266,7 @@ module Aws::QBusiness
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create your
-    #   Amazon Q user mapping.
+    #   Amazon Q Business user mapping.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1161,15 +1296,20 @@ module Aws::QBusiness
     class CreateUserResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q web experience.
+    #   The identifier of the Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A token you provide to identify a request to create an Amazon Q web
-    #   experience.
+    #   A token you provide to identify a request to create an Amazon Q
+    #   Business web experience.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service role attached to your
+    #   web experience.
     #   @return [String]
     #
     # @!attribute [rw] sample_prompts_control_mode
@@ -1178,24 +1318,24 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] subtitle
-    #   A subtitle to personalize your Amazon Q web experience.
+    #   A subtitle to personalize your Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that identify or categorize your Amazon Q
-    #   web experience. You can also use tags to help control access to the
-    #   web experience. Tag keys and values can consist of Unicode letters,
-    #   digits, white space, and any of the following symbols: \_ . : / = +
-    #   - @.
+    #   Business web experience. You can also use tags to help control
+    #   access to the web experience. Tag keys and values can consist of
+    #   Unicode letters, digits, white space, and any of the following
+    #   symbols: \_ . : / = + - @.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] title
-    #   The title for your Amazon Q web experience.
+    #   The title for your Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] welcome_message
-    #   The customized welcome message for end users of an Amazon Q web
-    #   experience.
+    #   The customized welcome message for end users of an Amazon Q Business
+    #   web experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateWebExperienceRequest AWS API Documentation
@@ -1203,6 +1343,7 @@ module Aws::QBusiness
     class CreateWebExperienceRequest < Struct.new(
       :application_id,
       :client_token,
+      :role_arn,
       :sample_prompts_control_mode,
       :subtitle,
       :tags,
@@ -1213,11 +1354,12 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] web_experience_arn
-    #   The Amazon Resource Name (ARN) of an Amazon Q web experience.
+    #   The Amazon Resource Name (ARN) of an Amazon Q Business web
+    #   experience.
     #   @return [String]
     #
     # @!attribute [rw] web_experience_id
-    #   The identifier of the Amazon Q web experience.
+    #   The identifier of the Amazon Q Business web experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateWebExperienceResponse AWS API Documentation
@@ -1229,30 +1371,55 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # A data source in an Amazon Q application.
+    # Configuration information required to invoke chat in `CREATOR_MODE`.
+    #
+    # For more information, see [Admin controls and guardrails][1] and
+    # [Conversation settings][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+    #
+    # @!attribute [rw] creator_mode_control
+    #   Status information about whether `CREATOR_MODE` has been enabled or
+    #   disabled. The default status is `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreatorModeConfiguration AWS API Documentation
+    #
+    class CreatorModeConfiguration < Struct.new(
+      :creator_mode_control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A data source in an Amazon Q Business application.
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp when the Amazon Q data source was created.
+    #   The Unix timestamp when the Amazon Q Business data source was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] data_source_id
-    #   The identifier of the Amazon Q data source.
+    #   The identifier of the Amazon Q Business data source.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name of the Amazon Q data source.
+    #   The name of the Amazon Q Business data source.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the Amazon Q data source.
+    #   The status of the Amazon Q Business data source.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the Amazon Q data source.
+    #   The type of the Amazon Q Business data source.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The Unix timestamp when the Amazon Q data source was last updated.
+    #   The Unix timestamp when the Amazon Q Business data source was last
+    #   updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DataSource AWS API Documentation
@@ -1268,7 +1435,7 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Provides information about an Amazon Q data source connector
+    # Provides information about an Amazon Q Business data source connector
     # synchronization job.
     #
     # @!attribute [rw] data_source_error_code
@@ -1322,8 +1489,8 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Maps a batch delete document request to a specific Amazon Q data
-    # source connector sync job.
+    # Maps a batch delete document request to a specific Amazon Q Business
+    # data source connector sync job.
     #
     # @!attribute [rw] documents_added
     #   The current count of documents added from the data source during the
@@ -1367,8 +1534,8 @@ module Aws::QBusiness
     #
     # @!attribute [rw] security_group_ids
     #   A list of identifiers of security groups within your Amazon VPC. The
-    #   security groups should enable Amazon Q to connect to the data
-    #   source.
+    #   security groups should enable Amazon Q Business to connect to the
+    #   data source.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
@@ -1389,7 +1556,7 @@ module Aws::QBusiness
     # Provides information on boosting `DATE` type document attributes.
     #
     # For more information on how boosting document attributes work in
-    # Amazon Q, see [Boosting using document attributes][1].
+    # Amazon Q Business, see [Boosting using document attributes][1].
     #
     #
     #
@@ -1414,7 +1581,7 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteApplicationRequest AWS API Documentation
@@ -1447,13 +1614,13 @@ module Aws::QBusiness
     class DeleteChatControlsConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application associated with the
-    #   conversation.
+    #   The identifier of the Amazon Q Business application associated with
+    #   the conversation.
     #   @return [String]
     #
     # @!attribute [rw] conversation_id
-    #   The identifier of the Amazon Q web experience conversation being
-    #   deleted.
+    #   The identifier of the Amazon Q Business web experience conversation
+    #   being deleted.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -1475,8 +1642,8 @@ module Aws::QBusiness
     class DeleteConversationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application used with the data source
-    #   connector.
+    #   The identifier of the Amazon Q Business application used with the
+    #   data source connector.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -1501,7 +1668,7 @@ module Aws::QBusiness
     #
     class DeleteDataSourceResponse < Aws::EmptyStructure; end
 
-    # A document deleted from an Amazon Q data source connector.
+    # A document deleted from an Amazon Q Business data source connector.
     #
     # @!attribute [rw] document_id
     #   The identifier of the deleted document.
@@ -1558,12 +1725,12 @@ module Aws::QBusiness
     class DeleteGroupResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application the Amazon Q index is
-    #   linked to.
+    #   The identifier of the Amazon Q Business application the Amazon Q
+    #   Business index is linked to.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the Amazon Q index.
+    #   The identifier of the Amazon Q Business index.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteIndexRequest AWS API Documentation
@@ -1580,7 +1747,8 @@ module Aws::QBusiness
     class DeleteIndexResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier the application attached to the Amazon Q plugin.
+    #   The identifier the application attached to the Amazon Q Business
+    #   plugin.
     #   @return [String]
     #
     # @!attribute [rw] plugin_id
@@ -1601,7 +1769,8 @@ module Aws::QBusiness
     class DeletePluginResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application using the retriever.
+    #   The identifier of the Amazon Q Business application using the
+    #   retriever.
     #   @return [String]
     #
     # @!attribute [rw] retriever_id
@@ -1644,12 +1813,13 @@ module Aws::QBusiness
     class DeleteUserResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application linked to the Amazon Q
-    #   web experience.
+    #   The identifier of the Amazon Q Business application linked to the
+    #   Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] web_experience_id
-    #   The identifier of the Amazon Q web experience being deleted.
+    #   The identifier of the Amazon Q Business web experience being
+    #   deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteWebExperienceRequest AWS API Documentation
@@ -1665,15 +1835,15 @@ module Aws::QBusiness
     #
     class DeleteWebExperienceResponse < Aws::EmptyStructure; end
 
-    # A document in an Amazon Q application.
+    # A document in an Amazon Q Business application.
     #
     # @!attribute [rw] access_configuration
     #   Configuration information for access permission to a document.
     #   @return [Types::AccessConfiguration]
     #
     # @!attribute [rw] attributes
-    #   Custom attributes to apply to the document for refining Amazon Q web
-    #   experience responses.
+    #   Custom attributes to apply to the document for refining Amazon Q
+    #   Business web experience responses.
     #   @return [Array<Types::DocumentAttribute>]
     #
     # @!attribute [rw] content
@@ -1734,10 +1904,11 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Provides information on boosting supported Amazon Q document attribute
-    # types. When an end user chat query matches document attributes that
-    # have been boosted, Amazon Q prioritizes generating responses from
-    # content that matches the boosted document attributes.
+    # Provides information on boosting supported Amazon Q Business document
+    # attribute types. When an end user chat query matches document
+    # attributes that have been boosted, Amazon Q Business prioritizes
+    # generating responses from content that matches the boosted document
+    # attributes.
     #
     # <note markdown="1"> For `STRING` and `STRING_LIST` type document attributes to be used for
     # boosting on the console and the API, they must be enabled for search
@@ -1749,7 +1920,7 @@ module Aws::QBusiness
     #  </note>
     #
     # For more information on how boosting document attributes work in
-    # Amazon Q, see [Boosting using document attributes][3].
+    # Amazon Q Business, see [Boosting using document attributes][3].
     #
     #
     #
@@ -1798,7 +1969,7 @@ module Aws::QBusiness
     end
 
     # The condition used for the target document attribute or metadata field
-    # when ingesting documents into Amazon Q. You use this with [
+    # when ingesting documents into Amazon Q Business. You use this with [
     # `DocumentAttributeTarget` ][1] to apply the condition.
     #
     # For example, you can create the 'Department' target field and have
@@ -1808,11 +1979,11 @@ module Aws::QBusiness
     # then prefill the target field 'Department' with the target value
     # 'Finance' for the document.
     #
-    # Amazon Q can't create a target field if it has not already been
-    # created as an index field. After you create your index field, you can
-    # create a document metadata field using `DocumentAttributeTarget`.
-    # Amazon Q then will map your newly created metadata field to your index
-    # field.
+    # Amazon Q Business can't create a target field if it has not already
+    # been created as an index field. After you create your index field, you
+    # can create a document metadata field using `DocumentAttributeTarget`.
+    # Amazon Q Business then will map your newly created metadata field to
+    # your index field.
     #
     #
     #
@@ -1825,8 +1996,8 @@ module Aws::QBusiness
     #   attribute or metadata field that contains source URIs associated
     #   with the documents.
     #
-    #   Amazon Q currently doesn't support `_document_body` as an attribute
-    #   key used for the condition.
+    #   Amazon Q Business currently doesn't support `_document_body` as an
+    #   attribute key used for the condition.
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -1889,7 +2060,7 @@ module Aws::QBusiness
     end
 
     # The target document attribute or metadata field you want to alter when
-    # ingesting documents into Amazon Q.
+    # ingesting documents into Amazon Q Business.
     #
     # For example, you can delete all customer identification numbers
     # associated with the documents, stored in the document metadata field
@@ -1898,11 +2069,11 @@ module Aws::QBusiness
     # in the field 'Customer\_ID'. This would scrub personally
     # identifiable information from each document's metadata.
     #
-    # Amazon Q can't create a target field if it has not already been
-    # created as an index field. After you create your index field, you can
-    # create a document metadata field using [ `DocumentAttributeTarget`
-    # ][1]. Amazon Q will then map your newly created document attribute to
-    # your index field.
+    # Amazon Q Business can't create a target field if it has not already
+    # been created as an index field. After you create your index field, you
+    # can create a document metadata field using [ `DocumentAttributeTarget`
+    # ][1]. Amazon Q Business will then map your newly created document
+    # attribute to your index field.
     #
     # You can also use this with [ `DocumentAttributeCondition` ][2].
     #
@@ -1994,9 +2165,9 @@ module Aws::QBusiness
     #   The contents of the document. Documents passed to the `blob`
     #   parameter must be base64 encoded. Your code might not need to encode
     #   the document file bytes if you're using an Amazon Web Services SDK
-    #   to call Amazon Q APIs. If you are calling the Amazon Q endpoint
-    #   directly using REST, you must base64 encode the contents before
-    #   sending.
+    #   to call Amazon Q Business APIs. If you are calling the Amazon Q
+    #   Business endpoint directly using REST, you must base64 encode the
+    #   contents before sending.
     #   @return [String]
     #
     # @!attribute [rw] s3
@@ -2018,7 +2189,7 @@ module Aws::QBusiness
       class Unknown < DocumentContent; end
     end
 
-    # The details of a document within an Amazon Q index.
+    # The details of a document within an Amazon Q Business index.
     #
     # @!attribute [rw] created_at
     #   The timestamp for when the document was created.
@@ -2063,20 +2234,20 @@ module Aws::QBusiness
     #
     # @!attribute [rw] inline_configurations
     #   Configuration information to alter document attributes or metadata
-    #   fields and content when ingesting documents into Amazon Q.
+    #   fields and content when ingesting documents into Amazon Q Business.
     #   @return [Array<Types::InlineDocumentEnrichmentConfiguration>]
     #
     # @!attribute [rw] post_extraction_hook_configuration
     #   Provides the configuration information for invoking a Lambda
     #   function in Lambda to alter document metadata and content when
-    #   ingesting documents into Amazon Q.
+    #   ingesting documents into Amazon Q Business.
     #
     #   You can configure your Lambda function using
     #   [PreExtractionHookConfiguration][1] if you want to apply advanced
     #   alterations on the original or raw documents.
     #
-    #   If you want to apply advanced alterations on the Amazon Q structured
-    #   documents, you must configure your Lambda function using
+    #   If you want to apply advanced alterations on the Amazon Q Business
+    #   structured documents, you must configure your Lambda function using
     #   [PostExtractionHookConfiguration][1].
     #
     #   You can only invoke one Lambda function. However, this function can
@@ -2093,14 +2264,14 @@ module Aws::QBusiness
     # @!attribute [rw] pre_extraction_hook_configuration
     #   Provides the configuration information for invoking a Lambda
     #   function in Lambda to alter document metadata and content when
-    #   ingesting documents into Amazon Q.
+    #   ingesting documents into Amazon Q Business.
     #
     #   You can configure your Lambda function using
     #   [PreExtractionHookConfiguration][1] if you want to apply advanced
     #   alterations on the original or raw documents.
     #
-    #   If you want to apply advanced alterations on the Amazon Q structured
-    #   documents, you must configure your Lambda function using
+    #   If you want to apply advanced alterations on the Amazon Q Business
+    #   structured documents, you must configure your Lambda function using
     #   [PostExtractionHookConfiguration][1].
     #
     #   You can only invoke one Lambda function. However, this function can
@@ -2124,8 +2295,8 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # The identifier of the data source Amazon Q will generate responses
-    # from.
+    # The identifier of the data source Amazon Q Business will generate
+    # responses from.
     #
     # @!attribute [rw] data_source_id
     #   The identifier of the data source.
@@ -2145,11 +2316,11 @@ module Aws::QBusiness
     end
 
     # Provides the identifier of the KMS key used to encrypt data indexed by
-    # Amazon Q. Amazon Q doesn't support asymmetric keys.
+    # Amazon Q Business. Amazon Q Business doesn't support asymmetric keys.
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the KMS key. Amazon Q doesn't support asymmetric
-    #   keys.
+    #   The identifier of the KMS key. Amazon Q Business doesn't support
+    #   asymmetric keys.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/EncryptionConfiguration AWS API Documentation
@@ -2179,13 +2350,13 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # A list of documents that could not be removed from an Amazon Q index.
-    # Each entry contains an error message that indicates why the document
-    # couldn't be removed from the index.
+    # A list of documents that could not be removed from an Amazon Q
+    # Business index. Each entry contains an error message that indicates
+    # why the document couldn't be removed from the index.
     #
     # @!attribute [rw] data_source_id
-    #   The identifier of the Amazon Q data source connector that contains
-    #   the failed document.
+    #   The identifier of the Amazon Q Business data source connector that
+    #   contains the failed document.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -2195,7 +2366,7 @@ module Aws::QBusiness
     #
     # @!attribute [rw] id
     #   The identifier of the document that couldn't be removed from the
-    #   Amazon Q index.
+    #   Amazon Q Business index.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/FailedDocument AWS API Documentation
@@ -2209,7 +2380,7 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetApplicationRequest AWS API Documentation
@@ -2221,11 +2392,11 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Q application.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] attachments_configuration
@@ -2234,20 +2405,22 @@ module Aws::QBusiness
     #   @return [Types::AppliedAttachmentsConfiguration]
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp when the Amazon Q application was last updated.
+    #   The Unix timestamp when the Amazon Q Business application was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Q application.
+    #   A description for the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name of the Amazon Q application.
+    #   The name of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] encryption_configuration
     #   The identifier of the Amazon Web Services KMS key that is used to
-    #   encrypt your data. Amazon Q doesn't support asymmetric keys.
+    #   encrypt your data. Amazon Q Business doesn't support asymmetric
+    #   keys.
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] error
@@ -2256,17 +2429,23 @@ module Aws::QBusiness
     #   to fail.
     #   @return [Types::ErrorDetail]
     #
+    # @!attribute [rw] identity_center_application_arn
+    #   The Amazon Resource Name (ARN) of the AWS IAM Identity Center
+    #   instance attached to your Amazon Q Business application.
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM with permissions to access
     #   your CloudWatch logs and metrics.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the Amazon Q application.
+    #   The status of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The Unix timestamp when the Amazon Q application was last updated.
+    #   The Unix timestamp when the Amazon Q Business application was last
+    #   updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetApplicationResponse AWS API Documentation
@@ -2280,6 +2459,7 @@ module Aws::QBusiness
       :display_name,
       :encryption_configuration,
       :error,
+      :identity_center_application_arn,
       :role_arn,
       :status,
       :updated_at)
@@ -2298,9 +2478,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of Amazon Q chat controls configured.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of Amazon Q Business chat controls configured.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetChatControlsConfigurationRequest AWS API Documentation
@@ -2317,29 +2497,35 @@ module Aws::QBusiness
     #   The phrases blocked from chat by your chat control configuration.
     #   @return [Types::BlockedPhrasesConfiguration]
     #
+    # @!attribute [rw] creator_mode_configuration
+    #   The configuration details for `CREATOR_MODE`.
+    #   @return [Types::AppliedCreatorModeConfiguration]
+    #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of Amazon Q chat controls configured.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of Amazon Q Business chat controls configured.
     #   @return [String]
     #
     # @!attribute [rw] response_scope
-    #   The response scope configured for a Amazon Q application. This
-    #   determines whether your application uses its retrieval augmented
-    #   generation (RAG) system to generate answers only from your
+    #   The response scope configured for a Amazon Q Business application.
+    #   This determines whether your application uses its retrieval
+    #   augmented generation (RAG) system to generate answers only from your
     #   enterprise data, or also uses the large language models (LLM)
     #   knowledge to respons to end user questions in chat.
     #   @return [String]
     #
     # @!attribute [rw] topic_configurations
-    #   The topic specific controls configured for a Amazon Q application.
+    #   The topic specific controls configured for a Amazon Q Business
+    #   application.
     #   @return [Array<Types::TopicConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetChatControlsConfigurationResponse AWS API Documentation
     #
     class GetChatControlsConfigurationResponse < Struct.new(
       :blocked_phrases,
+      :creator_mode_configuration,
       :next_token,
       :response_scope,
       :topic_configurations)
@@ -2348,7 +2534,7 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -2370,7 +2556,7 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -2431,7 +2617,7 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] sync_schedule
-    #   The schedule for Amazon Q to update the index.
+    #   The schedule for Amazon Q Business to update the index.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2515,11 +2701,13 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application connected to the index.
+    #   The identifier of the Amazon Q Business application connected to the
+    #   index.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the Amazon Q index you want information on.
+    #   The identifier of the Amazon Q Business index you want information
+    #   on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetIndexRequest AWS API Documentation
@@ -2532,24 +2720,24 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application associated with the
-    #   index.
+    #   The identifier of the Amazon Q Business application associated with
+    #   the index.
     #   @return [String]
     #
     # @!attribute [rw] capacity_configuration
-    #   The storage capacity units chosen for your Amazon Q index.
+    #   The storage capacity units chosen for your Amazon Q Business index.
     #   @return [Types::IndexCapacityConfiguration]
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp when the Amazon Q index was created.
+    #   The Unix timestamp when the Amazon Q Business index was created.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   The description for the Amazon Q index.
+    #   The description for the Amazon Q Business index.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name of the Amazon Q index.
+    #   The name of the Amazon Q Business index.
     #   @return [String]
     #
     # @!attribute [rw] document_attribute_configurations
@@ -2569,11 +2757,11 @@ module Aws::QBusiness
     #   @return [Types::ErrorDetail]
     #
     # @!attribute [rw] index_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Q index.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Business index.
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the Amazon Q index.
+    #   The identifier of the Amazon Q Business index.
     #   @return [String]
     #
     # @!attribute [rw] index_statistics
@@ -2587,7 +2775,8 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The Unix timestamp when the Amazon Q index was last updated.
+    #   The Unix timestamp when the Amazon Q Business index was last
+    #   updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetIndexResponse AWS API Documentation
@@ -2631,7 +2820,8 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] auth_configuration
-    #   Authentication configuration information for an Amazon Q plugin.
+    #   Authentication configuration information for an Amazon Q Business
+    #   plugin.
     #   @return [Types::PluginAuthConfiguration]
     #
     # @!attribute [rw] created_at
@@ -2685,7 +2875,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application using the retriever.
+    #   The identifier of the Amazon Q Business application using the
+    #   retriever.
     #   @return [String]
     #
     # @!attribute [rw] retriever_id
@@ -2702,12 +2893,13 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application using the retriever.
+    #   The identifier of the Amazon Q Business application using the
+    #   retriever.
     #   @return [String]
     #
     # @!attribute [rw] configuration
     #   Provides information on how the retriever used for your Amazon Q
-    #   application is configured.
+    #   Business application is configured.
     #   @return [Types::RetrieverConfiguration]
     #
     # @!attribute [rw] created_at
@@ -2791,12 +2983,12 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application linked to the web
-    #   experience.
+    #   The identifier of the Amazon Q Business application linked to the
+    #   web experience.
     #   @return [String]
     #
     # @!attribute [rw] web_experience_id
-    #   The identifier of the Amazon Q web experience.
+    #   The identifier of the Amazon Q Business web experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetWebExperienceRequest AWS API Documentation
@@ -2809,13 +3001,13 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application linked to the web
-    #   experience.
+    #   The identifier of the Amazon Q Business application linked to the
+    #   web experience.
     #   @return [String]
     #
     # @!attribute [rw] authentication_configuration
-    #   The authentication configuration information for your Amazon Q web
-    #   experience.
+    #   The authentication configuration information for your Amazon Q
+    #   Business web experience.
     #   @return [Types::WebExperienceAuthConfiguration]
     #
     # @!attribute [rw] created_at
@@ -2823,7 +3015,7 @@ module Aws::QBusiness
     #   @return [Time]
     #
     # @!attribute [rw] default_endpoint
-    #   The endpoint of your Amazon Q web experience.
+    #   The endpoint of your Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -2832,24 +3024,29 @@ module Aws::QBusiness
     #   connector to fail.
     #   @return [Types::ErrorDetail]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service role attached to your
+    #   web experience.
+    #   @return [String]
+    #
     # @!attribute [rw] sample_prompts_control_mode
     #   Determines whether sample prompts are enabled in the web experience
     #   for an end user.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the Amazon Q web experience. When the `Status`
-    #   field value is `FAILED`, the `ErrorMessage` field contains a
-    #   description of the error that caused the data source connector to
+    #   The current status of the Amazon Q Business web experience. When the
+    #   `Status` field value is `FAILED`, the `ErrorMessage` field contains
+    #   a description of the error that caused the data source connector to
     #   fail.
     #   @return [String]
     #
     # @!attribute [rw] subtitle
-    #   The subtitle for your Amazon Q web experience.
+    #   The subtitle for your Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   The title for your Amazon Q web experience.
+    #   The title for your Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
@@ -2858,16 +3055,16 @@ module Aws::QBusiness
     #
     # @!attribute [rw] web_experience_arn
     #   The Amazon Resource Name (ARN) of the role with the permission to
-    #   access the Amazon Q web experience and required resources.
+    #   access the Amazon Q Business web experience and required resources.
     #   @return [String]
     #
     # @!attribute [rw] web_experience_id
-    #   The identifier of the Amazon Q web experience.
+    #   The identifier of the Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] welcome_message
-    #   The customized welcome message for end users of an Amazon Q web
-    #   experience.
+    #   The customized welcome message for end users of an Amazon Q Business
+    #   web experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetWebExperienceResponse AWS API Documentation
@@ -2878,6 +3075,7 @@ module Aws::QBusiness
       :created_at,
       :default_endpoint,
       :error,
+      :role_arn,
       :sample_prompts_control_mode,
       :status,
       :subtitle,
@@ -2891,8 +3089,8 @@ module Aws::QBusiness
     end
 
     # A list of users or sub groups that belong to a group. This is for
-    # generating Amazon Q chat results only from document a user has access
-    # to.
+    # generating Amazon Q Business chat results only from document a user
+    # has access to.
     #
     # @!attribute [rw] member_groups
     #   A list of sub groups that belong to a group. For example, the sub
@@ -2921,7 +3119,8 @@ module Aws::QBusiness
     #   @return [Types::ErrorDetail]
     #
     # @!attribute [rw] last_updated_at
-    #   The Unix timestamp when the Amazon Q application was last updated.
+    #   The Unix timestamp when the Amazon Q Business application was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -2954,14 +3153,14 @@ module Aws::QBusiness
 
     # Provides the configuration information for invoking a Lambda function
     # in Lambda to alter document metadata and content when ingesting
-    # documents into Amazon Q.
+    # documents into Amazon Q Business.
     #
     # You can configure your Lambda function using
     # [PreExtractionHookConfiguration][1] if you want to apply advanced
     # alterations on the original or raw documents.
     #
-    # If you want to apply advanced alterations on the Amazon Q structured
-    # documents, you must configure your Lambda function using
+    # If you want to apply advanced alterations on the Amazon Q Business
+    # structured documents, you must configure your Lambda function using
     # [PostExtractionHookConfiguration][1].
     #
     # You can only invoke one Lambda function. However, this function can
@@ -2978,8 +3177,8 @@ module Aws::QBusiness
     #   The condition used for when a Lambda function should be invoked.
     #
     #   For example, you can specify a condition that if there are empty
-    #   date-time values, then Amazon Q should invoke a function that
-    #   inserts the current date-time.
+    #   date-time values, then Amazon Q Business should invoke a function
+    #   that inserts the current date-time.
     #   @return [Types::DocumentAttributeCondition]
     #
     # @!attribute [rw] lambda_arn
@@ -3020,7 +3219,7 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Summary information for your Amazon Q index.
+    # Summary information for your Amazon Q Business index.
     #
     # @!attribute [rw] created_at
     #   The Unix timestamp when the index was created.
@@ -3058,7 +3257,8 @@ module Aws::QBusiness
     # Provides information about index capacity configuration.
     #
     # @!attribute [rw] units
-    #   The number of storage units configured for an Amazon Q index.
+    #   The number of storage units configured for an Amazon Q Business
+    #   index.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/IndexCapacityConfiguration AWS API Documentation
@@ -3085,7 +3285,7 @@ module Aws::QBusiness
 
     # Provides the configuration information for applying basic logic to
     # alter document metadata and content when ingesting documents into
-    # Amazon Q.
+    # Amazon Q Business.
     #
     # To apply advanced logic, to go beyond what you can do with basic
     # logic, see [ `HookConfiguration` ][1].
@@ -3099,8 +3299,8 @@ module Aws::QBusiness
     #
     # @!attribute [rw] condition
     #   The condition used for the target document attribute or metadata
-    #   field when ingesting documents into Amazon Q. You use this with [
-    #   `DocumentAttributeTarget` ][1] to apply the condition.
+    #   field when ingesting documents into Amazon Q Business. You use this
+    #   with [ `DocumentAttributeTarget` ][1] to apply the condition.
     #
     #   For example, you can create the 'Department' target field and have
     #   it prefill department names associated with the documents based on
@@ -3109,11 +3309,11 @@ module Aws::QBusiness
     #   then prefill the target field 'Department' with the target value
     #   'Finance' for the document.
     #
-    #   Amazon Q can't create a target field if it has not already been
-    #   created as an index field. After you create your index field, you
-    #   can create a document metadata field using
-    #   `DocumentAttributeTarget`. Amazon Q then will map your newly created
-    #   metadata field to your index field.
+    #   Amazon Q Business can't create a target field if it has not already
+    #   been created as an index field. After you create your index field,
+    #   you can create a document metadata field using
+    #   `DocumentAttributeTarget`. Amazon Q Business then will map your
+    #   newly created metadata field to your index field.
     #
     #
     #
@@ -3127,7 +3327,7 @@ module Aws::QBusiness
     #
     # @!attribute [rw] target
     #   The target document attribute or metadata field you want to alter
-    #   when ingesting documents into Amazon Q.
+    #   when ingesting documents into Amazon Q Business.
     #
     #   For example, you can delete all customer identification numbers
     #   associated with the documents, stored in the document metadata field
@@ -3136,11 +3336,11 @@ module Aws::QBusiness
     #   customer ID values in the field 'Customer\_ID'. This would scrub
     #   personally identifiable information from each document's metadata.
     #
-    #   Amazon Q can't create a target field if it has not already been
-    #   created as an index field. After you create your index field, you
-    #   can create a document metadata field using [
-    #   `DocumentAttributeTarget` ][1]. Amazon Q will then map your newly
-    #   created document attribute to your index field.
+    #   Amazon Q Business can't create a target field if it has not already
+    #   been created as an index field. After you create your index field,
+    #   you can create a document metadata field using [
+    #   `DocumentAttributeTarget` ][1]. Amazon Q Business will then map your
+    #   newly created document attribute to your index field.
     #
     #   You can also use this with [ `DocumentAttributeCondition` ][2].
     #
@@ -3161,8 +3361,8 @@ module Aws::QBusiness
     end
 
     # An issue occurred with the internal server used for your Amazon Q
-    # service. Wait some minutes and try again, or contact [Support][1] for
-    # help.
+    # Business service. Wait some minutes and try again, or contact
+    # [Support][1] for help.
     #
     #
     #
@@ -3209,14 +3409,14 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of Amazon Q applications to return.
+    #   The maximum number of Amazon Q Business applications to return.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of Amazon Q applications.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of Amazon Q Business applications.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListApplicationsRequest AWS API Documentation
@@ -3230,13 +3430,13 @@ module Aws::QBusiness
 
     # @!attribute [rw] applications
     #   An array of summary information on the configuration of one or more
-    #   Amazon Q applications.
+    #   Amazon Q Business applications.
     #   @return [Array<Types::Application>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Q returns this token. You can
-    #   use this token in a subsequent request to retrieve the next set of
-    #   applications.
+    #   If the response is truncated, Amazon Q Business returns this token.
+    #   You can use this token in a subsequent request to retrieve the next
+    #   set of applications.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListApplicationsResponse AWS API Documentation
@@ -3249,23 +3449,23 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of Amazon Q conversations to return.
+    #   The maximum number of Amazon Q Business conversations to return.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of Amazon Q conversations.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of Amazon Q Business conversations.
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The identifier of the user involved in the Amazon Q web experience
-    #   conversation.
+    #   The identifier of the user involved in the Amazon Q Business web
+    #   experience conversation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListConversationsRequest AWS API Documentation
@@ -3281,12 +3481,13 @@ module Aws::QBusiness
 
     # @!attribute [rw] conversations
     #   An array of summary information on the configuration of one or more
-    #   Amazon Q web experiences.
+    #   Amazon Q Business web experiences.
     #   @return [Array<Types::Conversation>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Q returns this token, which you
-    #   can use in a later request to list the next set of messages.
+    #   If the response is truncated, Amazon Q Business returns this token,
+    #   which you can use in a later request to list the next set of
+    #   messages.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListConversationsResponse AWS API Documentation
@@ -3299,8 +3500,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application connected to the data
-    #   source.
+    #   The identifier of the Amazon Q Business application connected to the
+    #   data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -3312,8 +3513,8 @@ module Aws::QBusiness
     #   @return [Time]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index used with the Amazon Q data source
-    #   connector.
+    #   The identifier of the index used with the Amazon Q Business data
+    #   source connector.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3323,9 +3524,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incpmplete because there is more
-    #   data to retriever, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of responses.
+    #   data to retriever, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of responses.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -3357,9 +3558,9 @@ module Aws::QBusiness
     #   @return [Array<Types::DataSourceSyncJob>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Q returns this token. You can
-    #   use this token in any subsequent request to retrieve the next set of
-    #   jobs.
+    #   If the response is truncated, Amazon Q Business returns this token.
+    #   You can use this token in any subsequent request to retrieve the
+    #   next set of jobs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListDataSourceSyncJobsResponse AWS API Documentation
@@ -3372,8 +3573,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application linked to the data source
-    #   connectors.
+    #   The identifier of the Amazon Q Business application linked to the
+    #   data source connectors.
     #   @return [String]
     #
     # @!attribute [rw] index_id
@@ -3387,9 +3588,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of Amazon Q data source connectors.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of Amazon Q Business data source connectors.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListDataSourcesRequest AWS API Documentation
@@ -3409,9 +3610,9 @@ module Aws::QBusiness
     #   @return [Array<Types::DataSource>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Q returns this token. You can
-    #   use this token in a subsequent request to retrieve the next set of
-    #   data source connectors.
+    #   If the response is truncated, Amazon Q Business returns this token.
+    #   You can use this token in a subsequent request to retrieve the next
+    #   set of data source connectors.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListDataSourcesResponse AWS API Documentation
@@ -3441,9 +3642,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of documents.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of documents.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListDocumentsRequest AWS API Documentation
@@ -3464,9 +3665,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of documents.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of documents.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListDocumentsResponse AWS API Documentation
@@ -3499,9 +3700,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the previous response was incomplete (because there is more data
-    #   to retrieve), Amazon Q returns a pagination token in the response.
-    #   You can use this pagination token to retrieve the next set of groups
-    #   that are mapped to users.
+    #   to retrieve), Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of groups that are mapped to users.
     #   @return [String]
     #
     # @!attribute [rw] updated_earlier_than
@@ -3527,9 +3728,9 @@ module Aws::QBusiness
     #   @return [Array<Types::GroupSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Q returns this token that you
-    #   can use in the subsequent request to retrieve the next set of groups
-    #   that are mapped to users.
+    #   If the response is truncated, Amazon Q Business returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of groups that are mapped to users.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListGroupsResponse AWS API Documentation
@@ -3542,7 +3743,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application connected to the index.
+    #   The identifier of the Amazon Q Business application connected to the
+    #   index.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3551,9 +3753,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the maxResults response was incomplete because there is more data
-    #   to retrieve, Amazon Q returns a pagination token in the response.
-    #   You can use this pagination token to retrieve the next set of Amazon
-    #   Q indices.
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of Amazon Q Business indices.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListIndicesRequest AWS API Documentation
@@ -3571,9 +3773,9 @@ module Aws::QBusiness
     #   @return [Array<Types::Index>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Q returns this token that you
-    #   can use in the subsequent request to retrieve the next set of
-    #   indexes.
+    #   If the response is truncated, Amazon Q Business returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of indexes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListIndicesResponse AWS API Documentation
@@ -3586,11 +3788,11 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier for the Amazon Q application.
+    #   The identifier for the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] conversation_id
-    #   The identifier of the Amazon Q web experience conversation.
+    #   The identifier of the Amazon Q Business web experience conversation.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3599,13 +3801,13 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the number of retrievers returned exceeds `maxResults`, Amazon Q
-    #   returns a next token as a pagination token to retrieve the next set
-    #   of messages.
+    #   Business returns a next token as a pagination token to retrieve the
+    #   next set of messages.
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The identifier of the user involved in the Amazon Q web experience
-    #   conversation.
+    #   The identifier of the user involved in the Amazon Q Business web
+    #   experience conversation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListMessagesRequest AWS API Documentation
@@ -3625,8 +3827,9 @@ module Aws::QBusiness
     #   @return [Array<Types::Message>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Q returns this token, which you
-    #   can use in a later request to list the next set of messages.
+    #   If the response is truncated, Amazon Q Business returns this token,
+    #   which you can use in a later request to list the next set of
+    #   messages.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListMessagesResponse AWS API Documentation
@@ -3648,9 +3851,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of plugins.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of plugins.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListPluginsRequest AWS API Documentation
@@ -3665,9 +3868,9 @@ module Aws::QBusiness
 
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of plugins.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of plugins.
     #   @return [String]
     #
     # @!attribute [rw] plugins
@@ -3684,7 +3887,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application using the retriever.
+    #   The identifier of the Amazon Q Business application using the
+    #   retriever.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3693,8 +3897,8 @@ module Aws::QBusiness
     #
     # @!attribute [rw] next_token
     #   If the number of retrievers returned exceeds `maxResults`, Amazon Q
-    #   returns a next token as a pagination token to retrieve the next set
-    #   of retrievers.
+    #   Business returns a next token as a pagination token to retrieve the
+    #   next set of retrievers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListRetrieversRequest AWS API Documentation
@@ -3708,8 +3912,9 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Q returns this token, which you
-    #   can use in a later request to list the next set of retrievers.
+    #   If the response is truncated, Amazon Q Business returns this token,
+    #   which you can use in a later request to list the next set of
+    #   retrievers.
     #   @return [String]
     #
     # @!attribute [rw] retrievers
@@ -3726,8 +3931,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Q application or data
-    #   source to get a list of tags for.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Business application
+    #   or data source to get a list of tags for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListTagsForResourceRequest AWS API Documentation
@@ -3739,8 +3944,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] tags
-    #   A list of tags associated with the Amazon Q application or data
-    #   source.
+    #   A list of tags associated with the Amazon Q Business application or
+    #   data source.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListTagsForResourceResponse AWS API Documentation
@@ -3752,19 +3957,19 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application linked to the listed web
-    #   experiences.
+    #   The identifier of the Amazon Q Business application linked to the
+    #   listed web experiences.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of Amazon Q Web Experiences to return.
+    #   The maximum number of Amazon Q Business Web Experiences to return.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   If the `maxResults` response was incomplete because there is more
-    #   data to retrieve, Amazon Q returns a pagination token in the
-    #   response. You can use this pagination token to retrieve the next set
-    #   of Amazon Q conversations.
+    #   data to retrieve, Amazon Q Business returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of Amazon Q Business conversations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListWebExperiencesRequest AWS API Documentation
@@ -3778,12 +3983,13 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon Q returns this token, which you
-    #   can use in a later request to list the next set of messages.
+    #   If the response is truncated, Amazon Q Business returns this token,
+    #   which you can use in a later request to list the next set of
+    #   messages.
     #   @return [String]
     #
     # @!attribute [rw] web_experiences
-    #   An array of summary information for one or more Amazon Q
+    #   An array of summary information for one or more Amazon Q Business
     #   experiences.
     #   @return [Array<Types::WebExperience>]
     #
@@ -3834,43 +4040,45 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # A message in an Amazon Q web experience.
+    # A message in an Amazon Q Business web experience.
     #
     # @!attribute [rw] action_execution
-    #   Performs an Amazon Q plugin action during a non-streaming chat
-    #   conversation.
+    #   Performs an Amazon Q Business plugin action during a non-streaming
+    #   chat conversation.
     #   @return [Types::ActionExecution]
     #
     # @!attribute [rw] action_review
-    #   An output event that Amazon Q returns to an user who wants to
-    #   perform a plugin action during a non-streaming chat conversation. It
-    #   contains information about the selected action with a list of
-    #   possible user input fields, some pre-populated by Amazon Q.
+    #   An output event that Amazon Q Business returns to an user who wants
+    #   to perform a plugin action during a non-streaming chat conversation.
+    #   It contains information about the selected action with a list of
+    #   possible user input fields, some pre-populated by Amazon Q Business.
     #   @return [Types::ActionReview]
     #
     # @!attribute [rw] attachments
-    #   A file directly uploaded into an Amazon Q web experience chat.
+    #   A file directly uploaded into an Amazon Q Business web experience
+    #   chat.
     #   @return [Array<Types::AttachmentOutput>]
     #
     # @!attribute [rw] body
-    #   The content of the Amazon Q web experience message.
+    #   The content of the Amazon Q Business web experience message.
     #   @return [String]
     #
     # @!attribute [rw] message_id
-    #   The identifier of the Amazon Q web experience message.
+    #   The identifier of the Amazon Q Business web experience message.
     #   @return [String]
     #
     # @!attribute [rw] source_attribution
-    #   The source documents used to generate Amazon Q web experience
-    #   message.
+    #   The source documents used to generate Amazon Q Business web
+    #   experience message.
     #   @return [Array<Types::SourceAttribution>]
     #
     # @!attribute [rw] time
-    #   The timestamp of the first Amazon Q web experience message.
+    #   The timestamp of the first Amazon Q Business web experience message.
     #   @return [Time]
     #
     # @!attribute [rw] type
-    #   The type of Amazon Q message, whether `HUMAN` or `AI` generated.
+    #   The type of Amazon Q Business message, whether `HUMAN` or `AI`
+    #   generated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/Message AWS API Documentation
@@ -3919,15 +4127,15 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Configuration information for an Amazon Q index.
+    # Configuration information for an Amazon Q Business index.
     #
     # @!attribute [rw] boosting_override
-    #   Overrides the default boosts applied by Amazon Q to supported
-    #   document attribute data types.
+    #   Overrides the default boosts applied by Amazon Q Business to
+    #   supported document attribute data types.
     #   @return [Hash<String,Types::DocumentAttributeBoostingConfiguration>]
     #
     # @!attribute [rw] index_id
-    #   The identifier for the Amazon Q index.
+    #   The identifier for the Amazon Q Business index.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/NativeIndexConfiguration AWS API Documentation
@@ -3942,7 +4150,7 @@ module Aws::QBusiness
     # Provides information on boosting `NUMBER` type document attributes.
     #
     # For more information on how boosting document attributes work in
-    # Amazon Q, see [Boosting using document attributes][1].
+    # Amazon Q Business, see [Boosting using document attributes][1].
     #
     #
     #
@@ -3970,8 +4178,8 @@ module Aws::QBusiness
     # to configure a plugin.
     #
     # @!attribute [rw] role_arn
-    #   The ARN of an IAM role used by Amazon Q to access the OAuth 2.0
-    #   authentication credentials stored in a Secrets Manager secret.
+    #   The ARN of an IAM role used by Amazon Q Business to access the OAuth
+    #   2.0 authentication credentials stored in a Secrets Manager secret.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -3988,7 +4196,7 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Information about an Amazon Q plugin and its configuration.
+    # Information about an Amazon Q Business plugin and its configuration.
     #
     # @!attribute [rw] created_at
     #   The timestamp for when the plugin was created.
@@ -4032,7 +4240,8 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Authentication configuration information for an Amazon Q plugin.
+    # Authentication configuration information for an Amazon Q Business
+    # plugin.
     #
     # @note PluginAuthConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -4063,8 +4272,31 @@ module Aws::QBusiness
       class Unknown < PluginAuthConfiguration; end
     end
 
+    # Configuration information required to invoke chat in `PLUGIN_MODE`.
+    #
+    # For more information, see [Admin controls and guardrails][1],
+    # [Plugins][2], and [Conversation settings][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html
+    # [3]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+    #
+    # @!attribute [rw] plugin_id
+    #   The identifier of the plugin you want to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/PluginConfiguration AWS API Documentation
+    #
+    class PluginConfiguration < Struct.new(
+      :plugin_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides user and group information used for filtering documents to
-    # use for generating Amazon Q conversation responses.
+    # use for generating Amazon Q Business conversation responses.
     #
     # @note Principal is a union - when making an API calls you must set exactly one of the members.
     #
@@ -4196,8 +4428,8 @@ module Aws::QBusiness
     #
     # @!attribute [rw] group_members
     #   A list of users or sub groups that belong to a group. This is for
-    #   generating Amazon Q chat results only from document a user has
-    #   access to.
+    #   generating Amazon Q Business chat results only from document a user
+    #   has access to.
     #   @return [Types::GroupMembers]
     #
     # @!attribute [rw] group_name
@@ -4264,11 +4496,12 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Summary information for the retriever used for your Amazon Q
+    # Summary information for the retriever used for your Amazon Q Business
     # application.
     #
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application using the retriever.
+    #   The identifier of the Amazon Q Business application using the
+    #   retriever.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -4276,7 +4509,8 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] retriever_id
-    #   The identifier of the retriever used by your Amazon Q application.
+    #   The identifier of the retriever used by your Amazon Q Business
+    #   application.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4300,7 +4534,7 @@ module Aws::QBusiness
     end
 
     # Provides information on how the retriever used for your Amazon Q
-    # application is configured.
+    # Business application is configured.
     #
     # @note RetrieverConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -4308,12 +4542,12 @@ module Aws::QBusiness
     #
     # @!attribute [rw] kendra_index_configuration
     #   Provides information on how the Amazon Kendra index used as a
-    #   retriever for your Amazon Q application is configured.
+    #   retriever for your Amazon Q Business application is configured.
     #   @return [Types::KendraIndexConfiguration]
     #
     # @!attribute [rw] native_index_configuration
-    #   Provides information on how a Amazon Q index used as a retriever for
-    #   your Amazon Q application is configured.
+    #   Provides information on how a Amazon Q Business index used as a
+    #   retriever for your Amazon Q Business application is configured.
     #   @return [Types::NativeIndexConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/RetrieverConfiguration AWS API Documentation
@@ -4331,8 +4565,8 @@ module Aws::QBusiness
       class Unknown < RetrieverConfiguration; end
     end
 
-    # Guardrail rules for an Amazon Q application. Amazon Q supports only
-    # one rule at a time.
+    # Guardrail rules for an Amazon Q Business application. Amazon Q
+    # Business supports only one rule at a time.
     #
     # @!attribute [rw] excluded_users_and_groups
     #   Users and groups to be excluded from a rule.
@@ -4368,13 +4602,13 @@ module Aws::QBusiness
     # @note RuleConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RuleConfiguration corresponding to the set member.
     #
     # @!attribute [rw] content_blocker_rule
-    #   A rule for configuring how Amazon Q responds when it encounters a a
-    #   blocked topic.
+    #   A rule for configuring how Amazon Q Business responds when it
+    #   encounters a a blocked topic.
     #   @return [Types::ContentBlockerRule]
     #
     # @!attribute [rw] content_retrieval_rule
     #   Rules for retrieving content from data sources connected to a Amazon
-    #   Q application for a specific topic control configuration.
+    #   Q Business application for a specific topic control configuration.
     #   @return [Types::ContentRetrievalRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/RuleConfiguration AWS API Documentation
@@ -4392,8 +4626,8 @@ module Aws::QBusiness
       class Unknown < RuleConfiguration; end
     end
 
-    # Information required for Amazon Q to find a specific file in an Amazon
-    # S3 bucket.
+    # Information required for Amazon Q Business to find a specific file in
+    # an Amazon S3 bucket.
     #
     # @!attribute [rw] bucket
     #   The name of the S3 bucket that contains the file.
@@ -4413,7 +4647,8 @@ module Aws::QBusiness
     end
 
     # Provides the SAML 2.0 compliant identity provider (IdP) configuration
-    # information Amazon Q needs to deploy a Amazon Q web experience.
+    # information Amazon Q Business needs to deploy a Amazon Q Business web
+    # experience.
     #
     # @!attribute [rw] metadata_xml
     #   The metadata XML that your IdP generated.
@@ -4421,8 +4656,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of an IAM role assumed by users when
-    #   they authenticate into their Amazon Q web experience, containing the
-    #   relevant Amazon Q permissions for conversing with Amazon Q.
+    #   they authenticate into their Amazon Q Business web experience,
+    #   containing the relevant Amazon Q Business permissions for conversing
+    #   with Amazon Q Business.
     #   @return [String]
     #
     # @!attribute [rw] user_group_attribute
@@ -4444,7 +4680,7 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # You have exceeded the set limits for your Amazon Q service.
+    # You have exceeded the set limits for your Amazon Q Business service.
     #
     # @!attribute [rw] message
     #   The message describing a `ServiceQuotaExceededException`.
@@ -4468,10 +4704,12 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # The documents used to generate an Amazon Q web experience response.
+    # The documents used to generate an Amazon Q Business web experience
+    # response.
     #
     # @!attribute [rw] citation_number
-    #   The number attached to a citation in an Amazon Q generated response.
+    #   The number attached to a citation in an Amazon Q Business generated
+    #   response.
     #   @return [Integer]
     #
     # @!attribute [rw] snippet
@@ -4486,16 +4724,17 @@ module Aws::QBusiness
     #
     # @!attribute [rw] title
     #   The title of the document which is the source for the Amazon Q
-    #   generated response.
+    #   Business generated response.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The Unix timestamp when the Amazon Q application was last updated.
+    #   The Unix timestamp when the Amazon Q Business application was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] url
     #   The URL of the document which is the source for the Amazon Q
-    #   generated response.
+    #   Business generated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/SourceAttribution AWS API Documentation
@@ -4512,8 +4751,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of Amazon Q application the data source is connected
-    #   to.
+    #   The identifier of Amazon Q Business application the data source is
+    #   connected to.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -4547,8 +4786,8 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application that the data source is
-    #   connected to.
+    #   The identifier of the Amazon Q Business application that the data
+    #   source is connected to.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -4556,8 +4795,8 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the index used with the Amazon Q data source
-    #   connector.
+    #   The identifier of the index used with the Amazon Q Business data
+    #   source connector.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/StopDataSourceSyncJobRequest AWS API Documentation
@@ -4586,7 +4825,7 @@ module Aws::QBusiness
     #  </note>
     #
     # For more information on how boosting document attributes work in
-    # Amazon Q, see [Boosting using document attributes][3].
+    # Amazon Q Business, see [Boosting using document attributes][3].
     #
     #
     #
@@ -4625,7 +4864,7 @@ module Aws::QBusiness
     #  </note>
     #
     # For more information on how boosting document attributes work in
-    # Amazon Q, see [Boosting using document attributes][3].
+    # Amazon Q Business, see [Boosting using document attributes][3].
     #
     #
     #
@@ -4651,7 +4890,7 @@ module Aws::QBusiness
     #
     # @!attribute [rw] key
     #   The key for the tag. Keys are not case sensitive and must be unique
-    #   for the Amazon Q application or data source.
+    #   for the Amazon Q Business application or data source.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -4669,14 +4908,14 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Q application or data
-    #   source to tag.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Business application
+    #   or data source to tag.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tag keys to add to the Amazon Q application or data
-    #   source. If a tag already exists, the existing value is replaced with
-    #   the new value.
+    #   A list of tag keys to add to the Amazon Q Business application or
+    #   data source. If a tag already exists, the existing value is replaced
+    #   with the new value.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/TagResourceRequest AWS API Documentation
@@ -4747,7 +4986,8 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # The topic specific controls configured for an Amazon Q application.
+    # The topic specific controls configured for an Amazon Q Business
+    # application.
     #
     # @!attribute [rw] description
     #   A description for your topic control configuration. Use this to
@@ -4780,13 +5020,14 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Q application, or data
-    #   source to remove the tag from.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Business application,
+    #   or data source to remove the tag from.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   A list of tag keys to remove from the Amazon Q application or data
-    #   source. If a tag key does not exist on the resource, it is ignored.
+    #   A list of tag keys to remove from the Amazon Q Business application
+    #   or data source. If a tag key does not exist on the resource, it is
+    #   ignored.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UntagResourceRequest AWS API Documentation
@@ -4803,7 +5044,7 @@ module Aws::QBusiness
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] attachments_configuration
@@ -4811,17 +5052,17 @@ module Aws::QBusiness
     #   @return [Types::AttachmentsConfiguration]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Q application.
+    #   A description for the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   A name for the Amazon Q application.
+    #   A name for the Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   An Amazon Web Services Identity and Access Management (IAM) role
-    #   that gives Amazon Q permission to access Amazon CloudWatch logs and
-    #   metrics.
+    #   that gives Amazon Q Business permission to access Amazon CloudWatch
+    #   logs and metrics.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateApplicationRequest AWS API Documentation
@@ -4851,11 +5092,15 @@ module Aws::QBusiness
     #
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to update a Amazon
-    #   Q application chat configuration.
+    #   Q Business application chat configuration.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
+    #
+    # @!attribute [rw] creator_mode_configuration
+    #   The configuration details for `CREATOR_MODE`.
+    #   @return [Types::CreatorModeConfiguration]
     #
     # @!attribute [rw] response_scope
     #   The response scope configured for your application. This determines
@@ -4879,6 +5124,7 @@ module Aws::QBusiness
       :application_id,
       :blocked_phrases_configuration_update,
       :client_token,
+      :creator_mode_configuration,
       :response_scope,
       :topic_configurations_to_create_or_update,
       :topic_configurations_to_delete)
@@ -4891,12 +5137,13 @@ module Aws::QBusiness
     class UpdateChatControlsConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application the data source is
-    #   attached to.
+    #   The identifier of the Amazon Q Business application the data source
+    #   is attached to.
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Provides the configuration information for an Amazon Q data source.
+    #   Provides the configuration information for an Amazon Q Business data
+    #   source.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] data_source_id
@@ -4962,20 +5209,22 @@ module Aws::QBusiness
     class UpdateDataSourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application connected to the index.
+    #   The identifier of the Amazon Q Business application connected to the
+    #   index.
     #   @return [String]
     #
     # @!attribute [rw] capacity_configuration
     #   The storage capacity units you want to provision for your Amazon Q
-    #   index. You can add and remove capacity to fit your usage needs.
+    #   Business index. You can add and remove capacity to fit your usage
+    #   needs.
     #   @return [Types::IndexCapacityConfiguration]
     #
     # @!attribute [rw] description
-    #   The description of the Amazon Q index.
+    #   The description of the Amazon Q Business index.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name of the Amazon Q index.
+    #   The name of the Amazon Q Business index.
     #   @return [String]
     #
     # @!attribute [rw] document_attribute_configurations
@@ -4991,7 +5240,7 @@ module Aws::QBusiness
     #   @return [Array<Types::DocumentAttributeConfiguration>]
     #
     # @!attribute [rw] index_id
-    #   The identifier of the Amazon Q index.
+    #   The identifier of the Amazon Q Business index.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateIndexRequest AWS API Documentation
@@ -5053,12 +5302,12 @@ module Aws::QBusiness
     class UpdatePluginResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
-    #   The identifier of your Amazon Q application.
+    #   The identifier of your Amazon Q Business application.
     #   @return [String]
     #
     # @!attribute [rw] configuration
     #   Provides information on how the retriever used for your Amazon Q
-    #   application is configured.
+    #   Business application is configured.
     #   @return [Types::RetrieverConfiguration]
     #
     # @!attribute [rw] display_name
@@ -5140,12 +5389,13 @@ module Aws::QBusiness
     end
 
     # @!attribute [rw] application_id
-    #   The identifier of the Amazon Q application attached to the web
-    #   experience.
+    #   The identifier of the Amazon Q Business application attached to the
+    #   web experience.
     #   @return [String]
     #
     # @!attribute [rw] authentication_configuration
-    #   The authentication configuration of the Amazon Q web experience.
+    #   The authentication configuration of the Amazon Q Business web
+    #   experience.
     #   @return [Types::WebExperienceAuthConfiguration]
     #
     # @!attribute [rw] sample_prompts_control_mode
@@ -5154,20 +5404,20 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] subtitle
-    #   The subtitle of the Amazon Q web experience.
+    #   The subtitle of the Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   The title of the Amazon Q web experience.
+    #   The title of the Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] web_experience_id
-    #   The identifier of the Amazon Q web experience.
+    #   The identifier of the Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] welcome_message
-    #   A customized welcome message for an end user in an Amazon Q web
-    #   experience.
+    #   A customized welcome message for an end user in an Amazon Q Business
+    #   web experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateWebExperienceRequest AWS API Documentation
@@ -5188,7 +5438,7 @@ module Aws::QBusiness
     #
     class UpdateWebExperienceResponse < Aws::EmptyStructure; end
 
-    # Aliases attached to a user id within an Amazon Q application.
+    # Aliases attached to a user id within an Amazon Q Business application.
     #
     # @!attribute [rw] data_source_id
     #   The identifier of the data source that the user aliases are
@@ -5234,8 +5484,8 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # The input doesn't meet the constraints set by the Amazon Q service.
-    # Provide the correct input and try again.
+    # The input doesn't meet the constraints set by the Amazon Q Business
+    # service. Provide the correct input and try again.
     #
     # @!attribute [rw] fields
     #   The input field(s) that failed validation.
@@ -5259,8 +5509,8 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # The input failed to meet the constraints specified by Amazon Q in a
-    # specified field.
+    # The input failed to meet the constraints specified by Amazon Q
+    # Business in a specified field.
     #
     # @!attribute [rw] message
     #   A message about the validation exception.
@@ -5279,27 +5529,29 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Provides information for an Amazon Q web experience.
+    # Provides information for an Amazon Q Business web experience.
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp when the Amazon Q application was last updated.
+    #   The Unix timestamp when the Amazon Q Business application was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] default_endpoint
-    #   The endpoint URLs for your Amazon Q web experience. The URLs are
-    #   unique and fully hosted by Amazon Web Services.
+    #   The endpoint URLs for your Amazon Q Business web experience. The
+    #   URLs are unique and fully hosted by Amazon Web Services.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of your Amazon Q web experience.
+    #   The status of your Amazon Q Business web experience.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The Unix timestamp when your Amazon Q web experience was updated.
+    #   The Unix timestamp when your Amazon Q Business web experience was
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] web_experience_id
-    #   The identifier of your Amazon Q web experience.
+    #   The identifier of your Amazon Q Business web experience.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/WebExperience AWS API Documentation
@@ -5315,7 +5567,7 @@ module Aws::QBusiness
     end
 
     # Provides the authorization configuration information needed to deploy
-    # a Amazon Q web experience to end users.
+    # a Amazon Q Business web experience to end users.
     #
     # @note WebExperienceAuthConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -5323,8 +5575,8 @@ module Aws::QBusiness
     #
     # @!attribute [rw] saml_configuration
     #   Provides the SAML 2.0 compliant identity provider (IdP)
-    #   configuration information Amazon Q needs to deploy a Amazon Q web
-    #   experience.
+    #   configuration information Amazon Q Business needs to deploy a Amazon
+    #   Q Business web experience.
     #   @return [Types::SamlConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/WebExperienceAuthConfiguration AWS API Documentation

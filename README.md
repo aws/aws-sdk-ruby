@@ -345,6 +345,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Budgets                                           | Aws::Budgets                             | aws-sdk-budgets                             | 2016-10-20  |
 | AWS Certificate Manager                               | Aws::ACM                                 | aws-sdk-acm                                 | 2015-12-08  |
 | AWS Certificate Manager Private Certificate Authority | Aws::ACMPCA                              | aws-sdk-acmpca                              | 2017-08-22  |
+| AWS Chatbot                                           | Aws::Chatbot                             | aws-sdk-chatbot                             | 2017-10-11  |
 | AWS Clean Rooms ML                                    | Aws::CleanRoomsML                        | aws-sdk-cleanroomsml                        | 2023-09-06  |
 | AWS Clean Rooms Service                               | Aws::CleanRooms                          | aws-sdk-cleanrooms                          | 2022-02-17  |
 | AWS Cloud Control API                                 | Aws::CloudControlApi                     | aws-sdk-cloudcontrolapi                     | 2021-09-30  |
@@ -356,6 +357,7 @@ RubyGems.org page under "LINKS" section.
 | AWS CloudTrail Data Service                           | Aws::CloudTrailData                      | aws-sdk-cloudtraildata                      | 2021-08-11  |
 | AWS CodeBuild                                         | Aws::CodeBuild                           | aws-sdk-codebuild                           | 2016-10-06  |
 | AWS CodeCommit                                        | Aws::CodeCommit                          | aws-sdk-codecommit                          | 2015-04-13  |
+| AWS CodeConnections                                   | Aws::CodeConnections                     | aws-sdk-codeconnections                     | 2023-12-01  |
 | AWS CodeDeploy                                        | Aws::CodeDeploy                          | aws-sdk-codedeploy                          | 2014-10-06  |
 | AWS CodePipeline                                      | Aws::CodePipeline                        | aws-sdk-codepipeline                        | 2015-07-09  |
 | AWS CodeStar                                          | Aws::CodeStar                            | aws-sdk-codestar                            | 2017-04-19  |
@@ -364,6 +366,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Comprehend Medical                                | Aws::ComprehendMedical                   | aws-sdk-comprehendmedical                   | 2018-10-30  |
 | AWS Compute Optimizer                                 | Aws::ComputeOptimizer                    | aws-sdk-computeoptimizer                    | 2019-11-01  |
 | AWS Config                                            | Aws::ConfigService                       | aws-sdk-configservice                       | 2014-11-12  |
+| AWS Control Catalog                                   | Aws::ControlCatalog                      | aws-sdk-controlcatalog                      | 2018-05-10  |
 | AWS Control Tower                                     | Aws::ControlTower                        | aws-sdk-controltower                        | 2018-05-10  |
 | AWS Cost Explorer Service                             | Aws::CostExplorer                        | aws-sdk-costexplorer                        | 2017-10-25  |
 | AWS Cost and Usage Report Service                     | Aws::CostandUsageReportService           | aws-sdk-costandusagereportservice           | 2017-01-06  |
@@ -407,7 +410,6 @@ RubyGems.org page under "LINKS" section.
 | AWS IoT FleetWise                                     | Aws::IoTFleetWise                        | aws-sdk-iotfleetwise                        | 2021-06-17  |
 | AWS IoT Greengrass V2                                 | Aws::GreengrassV2                        | aws-sdk-greengrassv2                        | 2020-11-30  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                    | aws-sdk-iotjobsdataplane                    | 2017-09-29  |
-| AWS IoT RoboRunner                                    | Aws::IoTRoboRunner                       | aws-sdk-iotroborunner                       | 2018-05-10  |
 | AWS IoT Secure Tunneling                              | Aws::IoTSecureTunneling                  | aws-sdk-iotsecuretunneling                  | 2018-10-05  |
 | AWS IoT SiteWise                                      | Aws::IoTSiteWise                         | aws-sdk-iotsitewise                         | 2019-12-02  |
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                      | aws-sdk-iotthingsgraph                      | 2018-09-06  |
@@ -486,6 +488,7 @@ RubyGems.org page under "LINKS" section.
 | AWS X-Ray                                             | Aws::XRay                                | aws-sdk-xray                                | 2016-04-12  |
 | AWS re:Post Private                                   | Aws::Repostspace                         | aws-sdk-repostspace                         | 2022-05-13  |
 | AWSBillingConductor                                   | Aws::BillingConductor                    | aws-sdk-billingconductor                    | 2021-07-30  |
+| AWSDeadlineCloud                                      | Aws::Deadline                            | aws-sdk-deadline                            | 2023-10-12  |
 | AWSKendraFrontendService                              | Aws::Kendra                              | aws-sdk-kendra                              | 2019-02-03  |
 | AWSMainframeModernization                             | Aws::MainframeModernization              | aws-sdk-mainframemodernization              | 2021-04-28  |
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering                 | aws-sdk-marketplacemetering                 | 2016-01-14  |
@@ -698,12 +701,13 @@ RubyGems.org page under "LINKS" section.
 | QBusiness                                             | Aws::QBusiness                           | aws-sdk-qbusiness                           | 2023-11-27  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService              | aws-sdk-redshiftdataapiservice              | 2019-12-20  |
 | Redshift Serverless                                   | Aws::RedshiftServerless                  | aws-sdk-redshiftserverless                  | 2021-04-21  |
+| Route 53 Profiles                                     | Aws::Route53Profiles                     | aws-sdk-route53profiles                     | 2018-05-10  |
 | Route53 Recovery Cluster                              | Aws::Route53RecoveryCluster              | aws-sdk-route53recoverycluster              | 2019-12-02  |
 | Schemas                                               | Aws::Schemas                             | aws-sdk-schemas                             | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                       | aws-sdk-servicequotas                       | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                          | aws-sdk-synthetics                          | 2017-10-11  |
+| Timestream InfluxDB                                   | Aws::TimestreamInfluxDB                  | aws-sdk-timestreaminfluxdb                  | 2023-01-27  |
 | TrustedAdvisor Public API                             | Aws::TrustedAdvisor                      | aws-sdk-trustedadvisor                      | 2022-09-15  |
-| chatbot                                               | Aws::Chatbot                             | aws-sdk-chatbot                             | 2017-10-11  |
 
 ## License
 

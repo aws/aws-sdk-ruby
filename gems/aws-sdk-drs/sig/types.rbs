@@ -129,6 +129,7 @@ module Aws::Drs
       attr_accessor lag_duration: ::String
       attr_accessor replicated_disks: ::Array[Types::DataReplicationInfoReplicatedDisk]
       attr_accessor staging_availability_zone: ::String
+      attr_accessor staging_outpost_arn: ::String
       SENSITIVE: []
     end
 
@@ -138,7 +139,7 @@ module Aws::Drs
       attr_accessor replicated_storage_bytes: ::Integer
       attr_accessor rescanned_storage_bytes: ::Integer
       attr_accessor total_storage_bytes: ::Integer
-      attr_accessor volume_status: ("REGULAR" | "CONTAINS_MARKETPLACE_PRODUCT_CODES" | "MISSING_VOLUME_ATTRIBUTES" | "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE")
+      attr_accessor volume_status: ("REGULAR" | "CONTAINS_MARKETPLACE_PRODUCT_CODES" | "MISSING_VOLUME_ATTRIBUTES" | "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE" | "PENDING")
       SENSITIVE: []
     end
 
@@ -706,6 +707,7 @@ module Aws::Drs
       attr_accessor point_in_time_snapshot_date_time: ::String
       attr_accessor recovery_instance_id: ::String
       attr_accessor recovery_instance_properties: Types::RecoveryInstanceProperties
+      attr_accessor source_outpost_arn: ::String
       attr_accessor source_server_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
@@ -725,6 +727,7 @@ module Aws::Drs
       attr_accessor lag_duration: ::String
       attr_accessor replicated_disks: ::Array[Types::RecoveryInstanceDataReplicationInfoReplicatedDisk]
       attr_accessor staging_availability_zone: ::String
+      attr_accessor staging_outpost_arn: ::String
       SENSITIVE: []
     end
 
@@ -886,6 +889,7 @@ module Aws::Drs
       attr_accessor origin_account_id: ::String
       attr_accessor origin_availability_zone: ::String
       attr_accessor origin_region: ::String
+      attr_accessor source_outpost_arn: ::String
       SENSITIVE: []
     end
 

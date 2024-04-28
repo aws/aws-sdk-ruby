@@ -106,6 +106,8 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::GetAnswer.build(context)
           when :get_consolidated_report
             Aws::WellArchitected::Endpoints::GetConsolidatedReport.build(context)
+          when :get_global_settings
+            Aws::WellArchitected::Endpoints::GetGlobalSettings.build(context)
           when :get_lens
             Aws::WellArchitected::Endpoints::GetLens.build(context)
           when :get_lens_review
@@ -176,6 +178,8 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::UpdateAnswer.build(context)
           when :update_global_settings
             Aws::WellArchitected::Endpoints::UpdateGlobalSettings.build(context)
+          when :update_integration
+            Aws::WellArchitected::Endpoints::UpdateIntegration.build(context)
           when :update_lens_review
             Aws::WellArchitected::Endpoints::UpdateLensReview.build(context)
           when :update_profile

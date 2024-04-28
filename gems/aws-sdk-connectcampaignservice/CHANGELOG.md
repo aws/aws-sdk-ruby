@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-04-26)
+------------------
+
+* Feature - This release adds support for specifying if Answering Machine should wait for prompt sound.
+
+1.15.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2024-01-26)
 ------------------
 

@@ -72,6 +72,164 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateEvaluationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEvaluationJobResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_evaluation_job-instance_method
+      def create_evaluation_job: (
+                                   job_name: ::String,
+                                   ?job_description: ::String,
+                                   ?client_request_token: ::String,
+                                   role_arn: ::String,
+                                   ?customer_encryption_key_id: ::String,
+                                   ?job_tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   evaluation_config: {
+                                     automated: {
+                                       dataset_metric_configs: Array[
+                                         {
+                                           task_type: ("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom"),
+                                           dataset: {
+                                             name: ::String,
+                                             dataset_location: {
+                                               s3_uri: ::String?
+                                             }?
+                                           },
+                                           metric_names: Array[::String]
+                                         },
+                                       ]
+                                     }?,
+                                     human: {
+                                       human_workflow_config: {
+                                         flow_definition_arn: ::String,
+                                         instructions: ::String?
+                                       }?,
+                                       custom_metrics: Array[
+                                         {
+                                           name: ::String,
+                                           description: ::String?,
+                                           rating_method: ::String
+                                         },
+                                       ]?,
+                                       dataset_metric_configs: Array[
+                                         {
+                                           task_type: ("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom"),
+                                           dataset: {
+                                             name: ::String,
+                                             dataset_location: {
+                                               s3_uri: ::String?
+                                             }?
+                                           },
+                                           metric_names: Array[::String]
+                                         },
+                                       ]
+                                     }?
+                                   },
+                                   inference_config: {
+                                     models: Array[
+                                       {
+                                         bedrock_model: {
+                                           model_identifier: ::String,
+                                           inference_params: ::String
+                                         }?
+                                       },
+                                     ]?
+                                   },
+                                   output_data_config: {
+                                     s3_uri: ::String
+                                   }
+                                 ) -> _CreateEvaluationJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEvaluationJobResponseSuccess
+
+      interface _CreateGuardrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGuardrailResponse]
+        def guardrail_id: () -> ::String
+        def guardrail_arn: () -> ::String
+        def version: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_guardrail-instance_method
+      def create_guardrail: (
+                              name: ::String,
+                              ?description: ::String,
+                              ?topic_policy_config: {
+                                topics_config: Array[
+                                  {
+                                    name: ::String,
+                                    definition: ::String,
+                                    examples: Array[::String]?,
+                                    type: ("DENY")
+                                  },
+                                ]
+                              },
+                              ?content_policy_config: {
+                                filters_config: Array[
+                                  {
+                                    type: ("SEXUAL" | "VIOLENCE" | "HATE" | "INSULTS" | "MISCONDUCT" | "PROMPT_ATTACK"),
+                                    input_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
+                                    output_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+                                  },
+                                ]
+                              },
+                              ?word_policy_config: {
+                                words_config: Array[
+                                  {
+                                    text: ::String
+                                  },
+                                ]?,
+                                managed_word_lists_config: Array[
+                                  {
+                                    type: ("PROFANITY")
+                                  },
+                                ]?
+                              },
+                              ?sensitive_information_policy_config: {
+                                pii_entities_config: Array[
+                                  {
+                                    type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER"),
+                                    action: ("BLOCK" | "ANONYMIZE")
+                                  },
+                                ]?,
+                                regexes_config: Array[
+                                  {
+                                    name: ::String,
+                                    description: ::String?,
+                                    pattern: ::String,
+                                    action: ("BLOCK" | "ANONYMIZE")
+                                  },
+                                ]?
+                              },
+                              blocked_input_messaging: ::String,
+                              blocked_outputs_messaging: ::String,
+                              ?kms_key_id: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              ?client_request_token: ::String
+                            ) -> _CreateGuardrailResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGuardrailResponseSuccess
+
+      interface _CreateGuardrailVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGuardrailVersionResponse]
+        def guardrail_id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_guardrail_version-instance_method
+      def create_guardrail_version: (
+                                      guardrail_identifier: ::String,
+                                      ?description: ::String,
+                                      ?client_request_token: ::String
+                                    ) -> _CreateGuardrailVersionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGuardrailVersionResponseSuccess
+
       interface _CreateModelCustomizationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelCustomizationJobResponse]
         def job_arn: () -> ::String
@@ -147,6 +305,16 @@ module Aws
                                ) -> _DeleteCustomModelResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomModelResponseSuccess
 
+      interface _DeleteGuardrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGuardrailResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_guardrail-instance_method
+      def delete_guardrail: (
+                              guardrail_identifier: ::String,
+                              ?guardrail_version: ::String
+                            ) -> _DeleteGuardrailResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGuardrailResponseSuccess
+
       interface _DeleteModelInvocationLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteModelInvocationLoggingConfigurationResponse]
       end
@@ -187,6 +355,28 @@ module Aws
                             ) -> _GetCustomModelResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomModelResponseSuccess
 
+      interface _GetEvaluationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEvaluationJobResponse]
+        def job_name: () -> ::String
+        def status: () -> ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+        def job_arn: () -> ::String
+        def job_description: () -> ::String
+        def role_arn: () -> ::String
+        def customer_encryption_key_id: () -> ::String
+        def job_type: () -> ("Human" | "Automated")
+        def evaluation_config: () -> Types::EvaluationConfig
+        def inference_config: () -> Types::EvaluationInferenceConfig
+        def output_data_config: () -> Types::EvaluationOutputDataConfig
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def failure_messages: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_evaluation_job-instance_method
+      def get_evaluation_job: (
+                                job_identifier: ::String
+                              ) -> _GetEvaluationJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEvaluationJobResponseSuccess
+
       interface _GetFoundationModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFoundationModelResponse]
         def model_details: () -> Types::FoundationModelDetails
@@ -196,6 +386,33 @@ module Aws
                                   model_identifier: ::String
                                 ) -> _GetFoundationModelResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFoundationModelResponseSuccess
+
+      interface _GetGuardrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGuardrailResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def guardrail_id: () -> ::String
+        def guardrail_arn: () -> ::String
+        def version: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "VERSIONING" | "READY" | "FAILED" | "DELETING")
+        def topic_policy: () -> Types::GuardrailTopicPolicy
+        def content_policy: () -> Types::GuardrailContentPolicy
+        def word_policy: () -> Types::GuardrailWordPolicy
+        def sensitive_information_policy: () -> Types::GuardrailSensitiveInformationPolicy
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status_reasons: () -> ::Array[::String]
+        def failure_recommendations: () -> ::Array[::String]
+        def blocked_input_messaging: () -> ::String
+        def blocked_outputs_messaging: () -> ::String
+        def kms_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_guardrail-instance_method
+      def get_guardrail: (
+                           guardrail_identifier: ::String,
+                           ?guardrail_version: ::String
+                         ) -> _GetGuardrailResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGuardrailResponseSuccess
 
       interface _GetModelCustomizationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetModelCustomizationJobResponse]
@@ -277,6 +494,24 @@ module Aws
                               ) -> _ListCustomModelsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomModelsResponseSuccess
 
+      interface _ListEvaluationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEvaluationJobsResponse]
+        def next_token: () -> ::String
+        def job_summaries: () -> ::Array[Types::EvaluationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_evaluation_jobs-instance_method
+      def list_evaluation_jobs: (
+                                  ?creation_time_after: ::Time,
+                                  ?creation_time_before: ::Time,
+                                  ?status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped"),
+                                  ?name_contains: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?sort_by: ("CreationTime"),
+                                  ?sort_order: ("Ascending" | "Descending")
+                                ) -> _ListEvaluationJobsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEvaluationJobsResponseSuccess
+
       interface _ListFoundationModelsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFoundationModelsResponse]
         def model_summaries: () -> ::Array[Types::FoundationModelSummary]
@@ -289,6 +524,19 @@ module Aws
                                     ?by_inference_type: ("ON_DEMAND" | "PROVISIONED")
                                   ) -> _ListFoundationModelsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFoundationModelsResponseSuccess
+
+      interface _ListGuardrailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGuardrailsResponse]
+        def guardrails: () -> ::Array[Types::GuardrailSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_guardrails-instance_method
+      def list_guardrails: (
+                             ?guardrail_identifier: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListGuardrailsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGuardrailsResponseSuccess
 
       interface _ListModelCustomizationJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListModelCustomizationJobsResponse]
@@ -362,6 +610,15 @@ module Aws
                                                       ) -> _PutModelInvocationLoggingConfigurationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutModelInvocationLoggingConfigurationResponseSuccess
 
+      interface _StopEvaluationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopEvaluationJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#stop_evaluation_job-instance_method
+      def stop_evaluation_job: (
+                                 job_identifier: ::String
+                               ) -> _StopEvaluationJobResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopEvaluationJobResponseSuccess
+
       interface _StopModelCustomizationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopModelCustomizationJobResponse]
       end
@@ -395,6 +652,71 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateGuardrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGuardrailResponse]
+        def guardrail_id: () -> ::String
+        def guardrail_arn: () -> ::String
+        def version: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#update_guardrail-instance_method
+      def update_guardrail: (
+                              guardrail_identifier: ::String,
+                              name: ::String,
+                              ?description: ::String,
+                              ?topic_policy_config: {
+                                topics_config: Array[
+                                  {
+                                    name: ::String,
+                                    definition: ::String,
+                                    examples: Array[::String]?,
+                                    type: ("DENY")
+                                  },
+                                ]
+                              },
+                              ?content_policy_config: {
+                                filters_config: Array[
+                                  {
+                                    type: ("SEXUAL" | "VIOLENCE" | "HATE" | "INSULTS" | "MISCONDUCT" | "PROMPT_ATTACK"),
+                                    input_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
+                                    output_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+                                  },
+                                ]
+                              },
+                              ?word_policy_config: {
+                                words_config: Array[
+                                  {
+                                    text: ::String
+                                  },
+                                ]?,
+                                managed_word_lists_config: Array[
+                                  {
+                                    type: ("PROFANITY")
+                                  },
+                                ]?
+                              },
+                              ?sensitive_information_policy_config: {
+                                pii_entities_config: Array[
+                                  {
+                                    type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER"),
+                                    action: ("BLOCK" | "ANONYMIZE")
+                                  },
+                                ]?,
+                                regexes_config: Array[
+                                  {
+                                    name: ::String,
+                                    description: ::String?,
+                                    pattern: ::String,
+                                    action: ("BLOCK" | "ANONYMIZE")
+                                  },
+                                ]?
+                              },
+                              blocked_input_messaging: ::String,
+                              blocked_outputs_messaging: ::String,
+                              ?kms_key_id: ::String
+                            ) -> _UpdateGuardrailResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGuardrailResponseSuccess
 
       interface _UpdateProvisionedModelThroughputResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProvisionedModelThroughputResponse]

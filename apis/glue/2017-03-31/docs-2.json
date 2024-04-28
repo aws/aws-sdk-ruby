@@ -133,7 +133,7 @@
     "GetTriggers": "<p>Gets all the triggers associated with a job.</p>",
     "GetUnfilteredPartitionMetadata": "<p>Retrieves partition metadata from the Data Catalog that contains unfiltered metadata.</p> <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetPartition</code>.</p>",
     "GetUnfilteredPartitionsMetadata": "<p>Retrieves partition metadata from the Data Catalog that contains unfiltered metadata.</p> <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetPartitions</code>.</p>",
-    "GetUnfilteredTableMetadata": "<p>Retrieves table metadata from the Data Catalog that contains unfiltered metadata.</p> <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetTable</code>.</p>",
+    "GetUnfilteredTableMetadata": "<p>Allows a third-party analytical engine to retrieve unfiltered table metadata from the Data Catalog.</p> <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetTable</code>.</p>",
     "GetUserDefinedFunction": "<p>Retrieves a specified function definition from the Data Catalog.</p>",
     "GetUserDefinedFunctions": "<p>Retrieves multiple function definitions from the Data Catalog.</p>",
     "GetWorkflow": "<p>Retrieves resource metadata for a workflow.</p>",
@@ -349,8 +349,12 @@
     "ArnString": {
       "base": null,
       "refs": {
+        "GetUnfilteredTableMetadataRequest$ParentResourceArn": "<p>The resource ARN of the view.</p>",
+        "GetUnfilteredTableMetadataRequest$RootResourceArn": "<p>The resource ARN of the root view in a chain of nested views.</p>",
         "GetUnfilteredTableMetadataResponse$ResourceArn": "<p>The resource ARN of the parent resource extracted from the request.</p>",
-        "TableOptimizerConfiguration$roleArn": "<p>A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.</p>"
+        "TableOptimizerConfiguration$roleArn": "<p>A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.</p>",
+        "ViewDefinition$Definer": "<p>The definer of a view in SQL.</p>",
+        "ViewSubObjectsList$member": null
       }
     },
     "AthenaConnectorSource": {
@@ -813,6 +817,8 @@
         "GetConnectionsRequest$HidePassword": "<p>Allows you to retrieve the connection metadata without returning the password. For instance, the Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.</p>",
         "GetUnfilteredPartitionMetadataResponse$IsRegisteredWithLakeFormation": "<p>A Boolean value that indicates whether the partition location is registered with Lake Formation.</p>",
         "GetUnfilteredTableMetadataResponse$IsRegisteredWithLakeFormation": "<p>A Boolean value that indicates whether the partition location is registered with Lake Formation.</p>",
+        "GetUnfilteredTableMetadataResponse$IsMultiDialectView": "<p>Specifies whether the view supports the SQL dialects of one or more different query engines and can therefore be read by those engines.</p>",
+        "GetUnfilteredTableMetadataResponse$IsProtected": "<p>A flag that instructs the engine not to push user-provided operations into the logical plan of the view during query planning. However, if set this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.</p>",
         "StorageDescriptor$Compressed": "<p> <code>True</code> if the data in the table is compressed, or <code>False</code> if not.</p>",
         "StorageDescriptor$StoredAsSubDirectories": "<p> <code>True</code> if the table data is stored in subdirectories, or <code>False</code> if not.</p>",
         "Table$IsRegisteredWithLakeFormation": "<p>Indicates whether the table has been registered with Lake Formation.</p>",
@@ -922,8 +928,8 @@
         "KafkaStreamingSourceOptions$PollTimeoutMs": "<p>The timeout in milliseconds to poll data from Kafka in Spark job executors. The default value is <code>512</code>.</p>",
         "KafkaStreamingSourceOptions$RetryIntervalMs": "<p>The time in milliseconds to wait before retrying to fetch Kafka offsets. The default value is <code>10</code>.</p>",
         "KafkaStreamingSourceOptions$MaxOffsetsPerTrigger": "<p>The rate limit on the maximum number of offsets that are processed per trigger interval. The specified total number of offsets is proportionally split across <code>topicPartitions</code> of different volumes. The default value is null, which means that the consumer reads all offsets until the known latest offset.</p>",
-        "KinesisStreamingSourceOptions$MaxFetchTimeInMs": "<p>The maximum time spent in the job executor to fetch a record from the Kinesis data stream per shard, specified in milliseconds (ms). The default value is <code>1000</code>.</p>",
-        "KinesisStreamingSourceOptions$MaxFetchRecordsPerShard": "<p>The maximum number of records to fetch per shard in the Kinesis data stream. The default value is <code>100000</code>.</p>",
+        "KinesisStreamingSourceOptions$MaxFetchTimeInMs": "<p>The maximum time spent for the job executor to read records for the current batch from the Kinesis data stream, specified in milliseconds (ms). Multiple <code>GetRecords</code> API calls may be made within this time. The default value is <code>1000</code>.</p>",
+        "KinesisStreamingSourceOptions$MaxFetchRecordsPerShard": "<p>The maximum number of records to fetch per shard in the Kinesis data stream per microbatch. Note: The client can exceed this limit if the streaming job has already read extra records from Kinesis (in the same get-records call). If <code>MaxFetchRecordsPerShard</code> needs to be strict then it needs to be a multiple of <code>MaxRecordPerRead</code>. The default value is <code>100000</code>.</p>",
         "KinesisStreamingSourceOptions$MaxRecordPerRead": "<p>The maximum number of records to fetch from the Kinesis data stream in each getRecords operation. The default value is <code>10000</code>.</p>",
         "KinesisStreamingSourceOptions$IdleTimeBetweenReadsInMs": "<p>The minimum time delay between two consecutive getRecords operations, specified in ms. The default value is <code>1000</code>. This option is only configurable for Glue version 2.0 and above.</p>",
         "KinesisStreamingSourceOptions$DescribeShardInterval": "<p>The minimum time interval between two ListShards API calls for your script to consider resharding. The default value is <code>1s</code>.</p>",
@@ -6257,10 +6263,13 @@
         "InvalidInputException$FromFederationSource": "<p>Indicates whether or not the exception relates to a federated source.</p>",
         "LakeFormationConfiguration$UseLakeFormationCredentials": "<p>Specifies whether to use Lake Formation credentials for the crawler instead of the IAM role credentials.</p>",
         "MongoDBTarget$ScanAll": "<p>Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.</p> <p>A value of <code>true</code> means to scan all records, while a value of <code>false</code> means to sample the records. If no value is specified, the value defaults to <code>true</code>.</p>",
+        "Table$IsMultiDialectView": "<p>Specifies whether the view supports the SQL dialects of one or more different query engines and can therefore be read by those engines.</p>",
         "TableOptimizerConfiguration$enabled": "<p>Whether table optimization is enabled. </p>",
         "UpdateCsvClassifierRequest$DisableValueTrimming": "<p>Specifies not to trim values before identifying the type of column values. The default value is true.</p>",
         "UpdateCsvClassifierRequest$AllowSingleColumn": "<p>Enables the processing of files that contain only one column.</p>",
-        "UpdateCsvClassifierRequest$CustomDatatypeConfigured": "<p>Specifies the configuration of custom datatypes.</p>"
+        "UpdateCsvClassifierRequest$CustomDatatypeConfigured": "<p>Specifies the configuration of custom datatypes.</p>",
+        "ViewDefinition$IsProtected": "<p>You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.</p>",
+        "ViewRepresentation$IsStale": "<p>Dialects marked as stale are no longer valid and must be updated before they can be queried in their respective query engines.</p>"
       }
     },
     "NullableDouble": {
@@ -6759,7 +6768,7 @@
       "refs": {
         "GetUnfilteredPartitionMetadataRequest$SupportedPermissionTypes": "<p>(Required) A list of supported permission types. </p>",
         "GetUnfilteredPartitionsMetadataRequest$SupportedPermissionTypes": "<p>A list of supported permission types. </p>",
-        "GetUnfilteredTableMetadataRequest$SupportedPermissionTypes": "<p>(Required) A list of supported permission types. </p>"
+        "GetUnfilteredTableMetadataRequest$SupportedPermissionTypes": "<p>Indicates the level of filtering a third-party analytical engine is capable of enforcing when calling the <code>GetUnfilteredTableMetadata</code> API operation. Accepted values are:</p> <ul> <li> <p> <code>COLUMN_PERMISSION</code> - Column permissions ensure that users can access only specific columns in the table. If there are particular columns contain sensitive data, data lake administrators can define column filters that exclude access to specific columns.</p> </li> <li> <p> <code>CELL_FILTER_PERMISSION</code> - Cell-level filtering combines column filtering (include or exclude columns) and row filter expressions to restrict access to individual elements in the table.</p> </li> <li> <p> <code>NESTED_PERMISSION</code> - Nested permissions combines cell-level filtering and nested column filtering to restrict access to columns and/or nested columns in specific rows based on row filter expressions.</p> </li> <li> <p> <code>NESTED_CELL_PERMISSION</code> - Nested cell permissions combines nested permission with nested cell-level filtering. This allows different subsets of nested columns to be restricted based on an array of row filter expressions. </p> </li> </ul> <p>Note: Each of these permission types follows a hierarchical order where each subsequent permission type includes all permission of the previous type.</p> <p>Important: If you provide a supported permission type that doesn't match the user's level of permissions on the table, then Lake Formation raises an exception. For example, if the third-party engine calling the <code>GetUnfilteredTableMetadata</code> operation can enforce only column-level filtering, and the user has nested cell filtering applied on the table, Lake Formation throws an exception, and will not return unfiltered table metadata and data access credentials.</p>"
       }
     },
     "PermissionTypeMismatchException": {
@@ -6843,7 +6852,8 @@
       "refs": {
         "ColumnRowFilter$RowFilterExpression": "<p>A string containing the row-level filter expression.</p>",
         "GetPartitionsRequest$Expression": "<p>An expression that filters the partitions to be returned.</p> <p>The expression uses SQL syntax similar to the SQL <code>WHERE</code> filter clause. The SQL statement parser <a href=\"http://jsqlparser.sourceforge.net/home.php\">JSQLParser</a> parses the expression. </p> <p> <i>Operators</i>: The following are the operators that you can use in the <code>Expression</code> API call:</p> <dl> <dt>=</dt> <dd> <p>Checks whether the values of the two operands are equal; if yes, then the condition becomes true.</p> <p>Example: Assume 'variable a' holds 10 and 'variable b' holds 20. </p> <p>(a = b) is not true.</p> </dd> <dt>&lt; &gt;</dt> <dd> <p>Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true.</p> <p>Example: (a &lt; &gt; b) is true.</p> </dd> <dt>&gt;</dt> <dd> <p>Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt; b) is not true.</p> </dd> <dt>&lt;</dt> <dd> <p>Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt; b) is true.</p> </dd> <dt>&gt;=</dt> <dd> <p>Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt;= b) is not true.</p> </dd> <dt>&lt;=</dt> <dd> <p>Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt;= b) is true.</p> </dd> <dt>AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL</dt> <dd> <p>Logical operators.</p> </dd> </dl> <p> <i>Supported Partition Key Types</i>: The following are the supported partition keys.</p> <ul> <li> <p> <code>string</code> </p> </li> <li> <p> <code>date</code> </p> </li> <li> <p> <code>timestamp</code> </p> </li> <li> <p> <code>int</code> </p> </li> <li> <p> <code>bigint</code> </p> </li> <li> <p> <code>long</code> </p> </li> <li> <p> <code>tinyint</code> </p> </li> <li> <p> <code>smallint</code> </p> </li> <li> <p> <code>decimal</code> </p> </li> </ul> <p>If an type is encountered that is not valid, an exception is thrown. </p> <p>The following list shows the valid operators on each type. When you define a crawler, the <code>partitionKey</code> type is created as a <code>STRING</code>, to be compatible with the catalog partitions. </p> <p> <i>Sample API Call</i>: </p>",
-        "GetUnfilteredPartitionsMetadataRequest$Expression": "<p>An expression that filters the partitions to be returned.</p> <p>The expression uses SQL syntax similar to the SQL <code>WHERE</code> filter clause. The SQL statement parser <a href=\"http://jsqlparser.sourceforge.net/home.php\">JSQLParser</a> parses the expression. </p> <p> <i>Operators</i>: The following are the operators that you can use in the <code>Expression</code> API call:</p> <dl> <dt>=</dt> <dd> <p>Checks whether the values of the two operands are equal; if yes, then the condition becomes true.</p> <p>Example: Assume 'variable a' holds 10 and 'variable b' holds 20. </p> <p>(a = b) is not true.</p> </dd> <dt>&lt; &gt;</dt> <dd> <p>Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true.</p> <p>Example: (a &lt; &gt; b) is true.</p> </dd> <dt>&gt;</dt> <dd> <p>Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt; b) is not true.</p> </dd> <dt>&lt;</dt> <dd> <p>Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt; b) is true.</p> </dd> <dt>&gt;=</dt> <dd> <p>Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt;= b) is not true.</p> </dd> <dt>&lt;=</dt> <dd> <p>Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt;= b) is true.</p> </dd> <dt>AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL</dt> <dd> <p>Logical operators.</p> </dd> </dl> <p> <i>Supported Partition Key Types</i>: The following are the supported partition keys.</p> <ul> <li> <p> <code>string</code> </p> </li> <li> <p> <code>date</code> </p> </li> <li> <p> <code>timestamp</code> </p> </li> <li> <p> <code>int</code> </p> </li> <li> <p> <code>bigint</code> </p> </li> <li> <p> <code>long</code> </p> </li> <li> <p> <code>tinyint</code> </p> </li> <li> <p> <code>smallint</code> </p> </li> <li> <p> <code>decimal</code> </p> </li> </ul> <p>If an type is encountered that is not valid, an exception is thrown. </p>"
+        "GetUnfilteredPartitionsMetadataRequest$Expression": "<p>An expression that filters the partitions to be returned.</p> <p>The expression uses SQL syntax similar to the SQL <code>WHERE</code> filter clause. The SQL statement parser <a href=\"http://jsqlparser.sourceforge.net/home.php\">JSQLParser</a> parses the expression. </p> <p> <i>Operators</i>: The following are the operators that you can use in the <code>Expression</code> API call:</p> <dl> <dt>=</dt> <dd> <p>Checks whether the values of the two operands are equal; if yes, then the condition becomes true.</p> <p>Example: Assume 'variable a' holds 10 and 'variable b' holds 20. </p> <p>(a = b) is not true.</p> </dd> <dt>&lt; &gt;</dt> <dd> <p>Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true.</p> <p>Example: (a &lt; &gt; b) is true.</p> </dd> <dt>&gt;</dt> <dd> <p>Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt; b) is not true.</p> </dd> <dt>&lt;</dt> <dd> <p>Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt; b) is true.</p> </dd> <dt>&gt;=</dt> <dd> <p>Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &gt;= b) is not true.</p> </dd> <dt>&lt;=</dt> <dd> <p>Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true.</p> <p>Example: (a &lt;= b) is true.</p> </dd> <dt>AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL</dt> <dd> <p>Logical operators.</p> </dd> </dl> <p> <i>Supported Partition Key Types</i>: The following are the supported partition keys.</p> <ul> <li> <p> <code>string</code> </p> </li> <li> <p> <code>date</code> </p> </li> <li> <p> <code>timestamp</code> </p> </li> <li> <p> <code>int</code> </p> </li> <li> <p> <code>bigint</code> </p> </li> <li> <p> <code>long</code> </p> </li> <li> <p> <code>tinyint</code> </p> </li> <li> <p> <code>smallint</code> </p> </li> <li> <p> <code>decimal</code> </p> </li> </ul> <p>If an type is encountered that is not valid, an exception is thrown. </p>",
+        "GetUnfilteredTableMetadataResponse$RowFilter": "<p>The filter that applies to the table. For example when applying the filter in SQL, it would go in the <code>WHERE</code> clause and can be evaluated by using an <code>AND</code> operator with any other predicates applied by the user querying the table.</p>"
       }
     },
     "PrincipalPermissions": {
@@ -9172,16 +9182,42 @@
         "DeleteSchemaVersionsInput$Versions": "<p>A version range may be supplied which may be of the format:</p> <ul> <li> <p>a single version number, 5</p> </li> <li> <p>a range, 5-8 : deletes versions 5, 6, 7, 8</p> </li> </ul>"
       }
     },
+    "ViewDefinition": {
+      "base": "<p>A structure containing details for representations.</p>",
+      "refs": {
+        "Table$ViewDefinition": "<p>A structure that contains all the information that defines the view, including the dialect or dialects for the view, and the query.</p>"
+      }
+    },
     "ViewDialect": {
       "base": null,
       "refs": {
-        "SupportedDialect$Dialect": "<p>The dialect of the query engine.</p>"
+        "SupportedDialect$Dialect": "<p>The dialect of the query engine.</p>",
+        "ViewRepresentation$Dialect": "<p>The dialect of the query engine.</p>"
       }
     },
     "ViewDialectVersionString": {
       "base": null,
       "refs": {
-        "SupportedDialect$DialectVersion": "<p>The version of the dialect of the query engine. For example, 3.0.0.</p>"
+        "SupportedDialect$DialectVersion": "<p>The version of the dialect of the query engine. For example, 3.0.0.</p>",
+        "ViewRepresentation$DialectVersion": "<p>The version of the dialect of the query engine. For example, 3.0.0.</p>"
+      }
+    },
+    "ViewRepresentation": {
+      "base": "<p>A structure that contains the dialect of the view, and the query that defines the view.</p>",
+      "refs": {
+        "ViewRepresentationList$member": null
+      }
+    },
+    "ViewRepresentationList": {
+      "base": null,
+      "refs": {
+        "ViewDefinition$Representations": "<p>A list of representations.</p>"
+      }
+    },
+    "ViewSubObjectsList": {
+      "base": null,
+      "refs": {
+        "ViewDefinition$SubObjects": "<p>A list of table Amazon Resource Names (ARNs).</p>"
       }
     },
     "ViewTextString": {
@@ -9190,7 +9226,9 @@
         "Table$ViewOriginalText": "<p>Included for Apache Hive compatibility. Not used in the normal course of Glue operations. If the table is a <code>VIRTUAL_VIEW</code>, certain Athena configuration encoded in base64.</p>",
         "Table$ViewExpandedText": "<p>Included for Apache Hive compatibility. Not used in the normal course of Glue operations.</p>",
         "TableInput$ViewOriginalText": "<p>Included for Apache Hive compatibility. Not used in the normal course of Glue operations. If the table is a <code>VIRTUAL_VIEW</code>, certain Athena configuration encoded in base64.</p>",
-        "TableInput$ViewExpandedText": "<p>Included for Apache Hive compatibility. Not used in the normal course of Glue operations.</p>"
+        "TableInput$ViewExpandedText": "<p>Included for Apache Hive compatibility. Not used in the normal course of Glue operations.</p>",
+        "ViewRepresentation$ViewOriginalText": "<p>The <code>SELECT</code> query provided by the customer during <code>CREATE VIEW DDL</code>. This SQL is not used during a query on a view (<code>ViewExpandedText</code> is used instead). <code>ViewOriginalText</code> is used for cases like <code>SHOW CREATE VIEW</code> where users want to see the original DDL command that created the view.</p>",
+        "ViewRepresentation$ViewExpandedText": "<p>The expanded SQL for the view. This SQL is used by engines while processing a query on a view. Engines may perform operations during view creation to transform <code>ViewOriginalText</code> to <code>ViewExpandedText</code>. For example:</p> <ul> <li> <p>Fully qualify identifiers: <code>SELECT * from table1 → SELECT * from db1.table1</code> </p> </li> </ul>"
       }
     },
     "WorkerType": {

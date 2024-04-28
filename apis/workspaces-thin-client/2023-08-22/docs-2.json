@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "service": "<p>Amazon WorkSpaces Thin Client is a affordable device built to work with Amazon Web Services End User Computing (EUC) virtual desktops to provide users with a complete cloud desktop solution. WorkSpaces Thin Client is a compact device designed to connect up to two monitors and USB devices like a keyboard, mouse, headset, and webcam. To maximize endpoint security, WorkSpaces Thin Client devices do not allow local data storage or installation of unapproved applications. The WorkSpaces Thin Client device ships preloaded with device management software.</p> <p>You can use these APIs to complete WorkSpaces Thin Client tasks, such as creating environments or viewing devices. For more information about WorkSpaces Thin Client, including the required permissions to use the service, see the <a href=\"https://docs.aws.amazon.com/workspaces-thin-client/latest/ag/\">Amazon WorkSpaces Thin Client Administrator Guide</a>. For more information about using the Command Line Interface (CLI) to manage your WorkSpaces Thin Client resources, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/workspaces-thin-client/index.html\">WorkSpaces Thin Client section of the CLI Reference</a>.</p>",
+  "service": "<p>Amazon WorkSpaces Thin Client is an affordable device built to work with Amazon Web Services End User Computing (EUC) virtual desktops to provide users with a complete cloud desktop solution. WorkSpaces Thin Client is a compact device designed to connect up to two monitors and USB devices like a keyboard, mouse, headset, and webcam. To maximize endpoint security, WorkSpaces Thin Client devices do not allow local data storage or installation of unapproved applications. The WorkSpaces Thin Client device ships preloaded with device management software.</p> <p>You can use these APIs to complete WorkSpaces Thin Client tasks, such as creating environments or viewing devices. For more information about WorkSpaces Thin Client, including the required permissions to use the service, see the <a href=\"https://docs.aws.amazon.com/workspaces-thin-client/latest/ag/\">Amazon WorkSpaces Thin Client Administrator Guide</a>. For more information about using the Command Line Interface (CLI) to manage your WorkSpaces Thin Client resources, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/workspaces-thin-client/index.html\">WorkSpaces Thin Client section of the CLI Reference</a>.</p>",
   "operations": {
     "CreateEnvironment": "<p>Creates an environment for your thin client devices.</p>",
     "DeleteDevice": "<p>Deletes a thin client device.</p>",
@@ -186,15 +186,6 @@
         "UpdateDeviceResponse$device": "<p>Describes a device.</p>"
       }
     },
-    "EmbeddedTag": {
-      "base": "<p>The resource and internal ID of a resource to tag.</p>",
-      "refs": {
-        "Device$tags": "<p>The tag keys and optional values for the resource.</p>",
-        "DeviceSummary$tags": "<p>The tag keys and optional values for the resource.</p>",
-        "Environment$tags": "<p>The tag keys and optional values for the resource.</p>",
-        "EnvironmentSummary$tags": "<p>The tag keys and optional values for the resource.</p>"
-      }
-    },
     "Environment": {
       "base": "<p>Describes an environment.</p>",
       "refs": {
@@ -248,7 +239,6 @@
         "AccessDeniedException$message": null,
         "ConflictException$message": null,
         "InternalServerException$message": null,
-        "InternalServiceException$message": null,
         "ResourceNotFoundException$message": null,
         "ServiceQuotaExceededException$message": null,
         "ThrottlingException$message": null,
@@ -310,18 +300,12 @@
       "refs": {
       }
     },
-    "InternalServiceException": {
-      "base": "<p>Request processing failed due to some unknown error, exception, or failure.</p>",
-      "refs": {
-      }
-    },
     "KmsKeyArn": {
       "base": null,
       "refs": {
         "CreateEnvironmentRequest$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the Key Management Service key to use to encrypt the environment.</p>",
         "Device$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the device.</p>",
-        "Environment$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the environment.</p>",
-        "UpdateDeviceRequest$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the Key Management Service key to use for the update.</p>"
+        "Environment$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the Key Management Service key used to encrypt the environment.</p>"
       }
     },
     "ListDevicesRequest": {
@@ -437,7 +421,6 @@
       "base": null,
       "refs": {
         "InternalServerException$retryAfterSeconds": "<p>The number of seconds to wait before retrying the next request.</p>",
-        "InternalServiceException$retryAfterSeconds": "<p>The number of seconds to wait before retrying the next request.</p>",
         "ThrottlingException$retryAfterSeconds": "<p>The number of seconds to wait before retrying the next request.</p>"
       }
     },
@@ -554,8 +537,6 @@
         "Device$pendingSoftwareSetVersion": "<p>The version of the software set that is pending to be installed on the device.</p>",
         "DeviceSummary$serialNumber": "<p>The hardware serial number of the device.</p>",
         "DeviceSummary$model": "<p>The model number of the device.</p>",
-        "EmbeddedTag$resourceArn": "<p>The Amazon Resource Name (ARN) of a resource to tag.</p>",
-        "EmbeddedTag$internalId": "<p>The internal ID of a resource to tag.</p>",
         "Environment$pendingSoftwareSetVersion": "<p>The version of the software set that is pending to be installed.</p>",
         "ListTagsForResourceRequest$resourceArn": "<p>The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.</p>",
         "Software$name": "<p>The name of the software component.</p>",
@@ -589,7 +570,10 @@
       "base": null,
       "refs": {
         "CreateEnvironmentRequest$tags": "<p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>",
+        "Device$tags": "<p>The tag keys and optional values for the resource.</p>",
+        "Environment$tags": "<p>The tag keys and optional values for the resource.</p>",
         "ListTagsForResourceResponse$tags": "<p>A map of the key-value pairs for the tag or tags assigned to the specified resource.</p>",
+        "SoftwareSet$tags": "<p>The tag keys and optional values for the resource.</p>",
         "TagResourceRequest$tags": "<p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>"
       }
     },

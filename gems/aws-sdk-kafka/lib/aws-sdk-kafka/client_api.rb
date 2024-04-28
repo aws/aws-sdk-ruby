@@ -162,6 +162,8 @@ module Aws::Kafka
     ReplicationInfo = Shapes::StructureShape.new(name: 'ReplicationInfo')
     ReplicationInfoDescription = Shapes::StructureShape.new(name: 'ReplicationInfoDescription')
     ReplicationInfoSummary = Shapes::StructureShape.new(name: 'ReplicationInfoSummary')
+    ReplicationStartingPosition = Shapes::StructureShape.new(name: 'ReplicationStartingPosition')
+    ReplicationStartingPositionType = Shapes::StringShape.new(name: 'ReplicationStartingPositionType')
     ReplicationStateInfo = Shapes::StructureShape.new(name: 'ReplicationStateInfo')
     ReplicatorState = Shapes::StringShape.new(name: 'ReplicatorState')
     ReplicatorSummary = Shapes::StructureShape.new(name: 'ReplicatorSummary')
@@ -980,6 +982,9 @@ module Aws::Kafka
     ReplicationInfoSummary.add_member(:target_kafka_cluster_alias, Shapes::ShapeRef.new(shape: __string, location_name: "targetKafkaClusterAlias"))
     ReplicationInfoSummary.struct_class = Types::ReplicationInfoSummary
 
+    ReplicationStartingPosition.add_member(:type, Shapes::ShapeRef.new(shape: ReplicationStartingPositionType, location_name: "type"))
+    ReplicationStartingPosition.struct_class = Types::ReplicationStartingPosition
+
     ReplicationStateInfo.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
     ReplicationStateInfo.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ReplicationStateInfo.struct_class = Types::ReplicationStateInfo
@@ -1047,6 +1052,7 @@ module Aws::Kafka
     TopicReplication.add_member(:copy_access_control_lists_for_topics, Shapes::ShapeRef.new(shape: __boolean, location_name: "copyAccessControlListsForTopics"))
     TopicReplication.add_member(:copy_topic_configurations, Shapes::ShapeRef.new(shape: __boolean, location_name: "copyTopicConfigurations"))
     TopicReplication.add_member(:detect_and_copy_new_topics, Shapes::ShapeRef.new(shape: __boolean, location_name: "detectAndCopyNewTopics"))
+    TopicReplication.add_member(:starting_position, Shapes::ShapeRef.new(shape: ReplicationStartingPosition, location_name: "startingPosition"))
     TopicReplication.add_member(:topics_to_exclude, Shapes::ShapeRef.new(shape: __listOf__stringMax249, location_name: "topicsToExclude"))
     TopicReplication.add_member(:topics_to_replicate, Shapes::ShapeRef.new(shape: __listOf__stringMax249, required: true, location_name: "topicsToReplicate"))
     TopicReplication.struct_class = Types::TopicReplication

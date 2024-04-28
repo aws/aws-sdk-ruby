@@ -96,6 +96,23 @@ module Aws
                             ) -> _BatchGetSchemaResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetSchemaResponseSuccess
 
+      interface _BatchGetSchemaAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetSchemaAnalysisRuleOutput]
+        def analysis_rules: () -> ::Array[Types::AnalysisRule]
+        def errors: () -> ::Array[Types::BatchGetSchemaAnalysisRuleError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#batch_get_schema_analysis_rule-instance_method
+      def batch_get_schema_analysis_rule: (
+                                            collaboration_identifier: ::String,
+                                            schema_analysis_rule_requests: Array[
+                                              {
+                                                name: ::String,
+                                                type: ("AGGREGATION" | "LIST" | "CUSTOM")
+                                              },
+                                            ]
+                                          ) -> _BatchGetSchemaAnalysisRuleResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetSchemaAnalysisRuleResponseSuccess
+
       interface _CreateAnalysisTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnalysisTemplateOutput]
         def analysis_template: () -> Types::AnalysisTemplate
@@ -219,7 +236,7 @@ module Aws
                                                          join_required: ("QUERY_RUNNER")?,
                                                          allowed_join_operators: Array[("OR" | "AND")]?,
                                                          dimension_columns: Array[::String],
-                                                         scalar_functions: Array[("TRUNC" | "ABS" | "CEILING" | "FLOOR" | "LN" | "LOG" | "ROUND" | "SQRT" | "CAST" | "LOWER" | "RTRIM" | "UPPER" | "COALESCE")],
+                                                         scalar_functions: Array[("ABS" | "CAST" | "CEILING" | "COALESCE" | "CONVERT" | "CURRENT_DATE" | "DATEADD" | "EXTRACT" | "FLOOR" | "GETDATE" | "LN" | "LOG" | "LOWER" | "ROUND" | "RTRIM" | "SQRT" | "SUBSTRING" | "TO_CHAR" | "TO_DATE" | "TO_NUMBER" | "TO_TIMESTAMP" | "TRIM" | "TRUNC" | "UPPER")],
                                                          output_constraints: Array[
                                                            {
                                                              column_name: ::String,
@@ -888,7 +905,7 @@ module Aws
                                                          join_required: ("QUERY_RUNNER")?,
                                                          allowed_join_operators: Array[("OR" | "AND")]?,
                                                          dimension_columns: Array[::String],
-                                                         scalar_functions: Array[("TRUNC" | "ABS" | "CEILING" | "FLOOR" | "LN" | "LOG" | "ROUND" | "SQRT" | "CAST" | "LOWER" | "RTRIM" | "UPPER" | "COALESCE")],
+                                                         scalar_functions: Array[("ABS" | "CAST" | "CEILING" | "COALESCE" | "CONVERT" | "CURRENT_DATE" | "DATEADD" | "EXTRACT" | "FLOOR" | "GETDATE" | "LN" | "LOG" | "LOWER" | "ROUND" | "RTRIM" | "SQRT" | "SUBSTRING" | "TO_CHAR" | "TO_DATE" | "TO_NUMBER" | "TO_TIMESTAMP" | "TRIM" | "TRUNC" | "UPPER")],
                                                          output_constraints: Array[
                                                            {
                                                              column_name: ::String,

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2024-04-19)
+------------------
+
+* Feature - This update introduces the GetInternetEvent and ListInternetEvents APIs, which provide access to internet events displayed on the Amazon CloudWatch Internet Weather Map.
+
+1.16.0 (2024-03-29)
+------------------
+
+* Feature - This release adds support to allow customers to track cross account monitors through ListMonitor, GetMonitor, ListHealthEvents, GetHealthEvent, StartQuery APIs.
+
 1.15.0 (2024-02-22)
 ------------------
 

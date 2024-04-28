@@ -159,7 +159,8 @@ module Aws
                                              ?principals: Array[::String],
                                              ?resources: Array[
                                                {
-                                                 endpoint_id: ::String,
+                                                 endpoint_id: ::String?,
+                                                 cidr: ::String?,
                                                  region: ::String?
                                                },
                                              ],
@@ -689,13 +690,15 @@ module Aws
                                              ?remove_principals: Array[::String],
                                              ?add_resources: Array[
                                                {
-                                                 endpoint_id: ::String,
+                                                 endpoint_id: ::String?,
+                                                 cidr: ::String?,
                                                  region: ::String?
                                                },
                                              ],
                                              ?remove_resources: Array[
                                                {
-                                                 endpoint_id: ::String,
+                                                 endpoint_id: ::String?,
+                                                 cidr: ::String?,
                                                  region: ::String?
                                                },
                                              ]

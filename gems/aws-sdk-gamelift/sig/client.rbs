@@ -148,6 +148,69 @@ module Aws
                         ) -> _CreateBuildResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBuildResponseSuccess
 
+      interface _CreateContainerGroupDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContainerGroupDefinitionOutput]
+        def container_group_definition: () -> Types::ContainerGroupDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_container_group_definition-instance_method
+      def create_container_group_definition: (
+                                               name: ::String,
+                                               ?scheduling_strategy: ("REPLICA" | "DAEMON"),
+                                               total_memory_limit: ::Integer,
+                                               total_cpu_limit: ::Integer,
+                                               container_definitions: Array[
+                                                 {
+                                                   container_name: ::String,
+                                                   image_uri: ::String,
+                                                   memory_limits: {
+                                                     soft_limit: ::Integer?,
+                                                     hard_limit: ::Integer?
+                                                   }?,
+                                                   port_configuration: {
+                                                     container_port_ranges: Array[
+                                                       {
+                                                         from_port: ::Integer,
+                                                         to_port: ::Integer,
+                                                         protocol: ("TCP" | "UDP")
+                                                       },
+                                                     ]
+                                                   }?,
+                                                   cpu: ::Integer?,
+                                                   health_check: {
+                                                     command: Array[::String],
+                                                     interval: ::Integer?,
+                                                     timeout: ::Integer?,
+                                                     retries: ::Integer?,
+                                                     start_period: ::Integer?
+                                                   }?,
+                                                   command: Array[::String]?,
+                                                   essential: bool?,
+                                                   entry_point: Array[::String]?,
+                                                   working_directory: ::String?,
+                                                   environment: Array[
+                                                     {
+                                                       name: ::String,
+                                                       value: ::String
+                                                     },
+                                                   ]?,
+                                                   depends_on: Array[
+                                                     {
+                                                       container_name: ::String,
+                                                       condition: ("START" | "COMPLETE" | "SUCCESS" | "HEALTHY")
+                                                     },
+                                                   ]?
+                                                 },
+                                               ],
+                                               operating_system: ("AMAZON_LINUX_2023"),
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String
+                                                 },
+                                               ]
+                                             ) -> _CreateContainerGroupDefinitionResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerGroupDefinitionResponseSuccess
+
       interface _CreateFleetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFleetOutput]
         def fleet_attributes: () -> Types::FleetAttributes
@@ -206,11 +269,19 @@ module Aws
                               value: ::String
                             },
                           ],
-                          ?compute_type: ("EC2" | "ANYWHERE"),
+                          ?compute_type: ("EC2" | "ANYWHERE" | "CONTAINER"),
                           ?anywhere_configuration: {
                             cost: ::String
                           },
-                          ?instance_role_credentials_provider: ("SHARED_CREDENTIAL_FILE")
+                          ?instance_role_credentials_provider: ("SHARED_CREDENTIAL_FILE"),
+                          ?container_groups_configuration: {
+                            container_group_definition_names: Array[::String],
+                            connection_port_range: {
+                              from_port: ::Integer,
+                              to_port: ::Integer
+                            },
+                            desired_replica_container_groups_per_instance: ::Integer?
+                          }
                         ) -> _CreateFleetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
 
@@ -480,6 +551,12 @@ module Aws
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_container_group_definition-instance_method
+      def delete_container_group_definition: (
+                                               name: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_fleet-instance_method
       def delete_fleet: (
                           fleet_id: ::String
@@ -626,6 +703,16 @@ module Aws
                               compute_name: ::String
                             ) -> _DescribeComputeResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComputeResponseSuccess
+
+      interface _DescribeContainerGroupDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContainerGroupDefinitionOutput]
+        def container_group_definition: () -> Types::ContainerGroupDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_container_group_definition-instance_method
+      def describe_container_group_definition: (
+                                                 name: ::String
+                                               ) -> _DescribeContainerGroupDefinitionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContainerGroupDefinitionResponseSuccess
 
       interface _DescribeEC2InstanceLimitsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEC2InstanceLimitsOutput]
@@ -966,6 +1053,7 @@ module Aws
         def compute_name: () -> ::String
         def compute_arn: () -> ::String
         def credentials: () -> Types::AwsCredentials
+        def target: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#get_compute_access-instance_method
       def get_compute_access: (
@@ -1052,6 +1140,19 @@ module Aws
                         ) -> _ListComputeResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComputeResponseSuccess
 
+      interface _ListContainerGroupDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContainerGroupDefinitionsOutput]
+        def container_group_definitions: () -> ::Array[Types::ContainerGroupDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_container_group_definitions-instance_method
+      def list_container_group_definitions: (
+                                              ?scheduling_strategy: ("REPLICA" | "DAEMON"),
+                                              ?limit: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListContainerGroupDefinitionsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContainerGroupDefinitionsResponseSuccess
+
       interface _ListFleetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFleetsOutput]
         def fleet_ids: () -> ::Array[::String]
@@ -1061,6 +1162,7 @@ module Aws
       def list_fleets: (
                          ?build_id: ::String,
                          ?script_id: ::String,
+                         ?container_group_definition_name: ::String,
                          ?limit: ::Integer,
                          ?next_token: ::String
                        ) -> _ListFleetsResponseSuccess

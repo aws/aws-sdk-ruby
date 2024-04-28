@@ -1375,6 +1375,7 @@ module Aws::Pinpoint
     EmailChannelRequest.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "FromAddress"))
     EmailChannelRequest.add_member(:identity, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Identity"))
     EmailChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
+    EmailChannelRequest.add_member(:orchestration_sending_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "OrchestrationSendingRoleArn"))
     EmailChannelRequest.struct_class = Types::EmailChannelRequest
 
     EmailChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
@@ -1391,6 +1392,7 @@ module Aws::Pinpoint
     EmailChannelResponse.add_member(:messages_per_second, Shapes::ShapeRef.new(shape: __integer, location_name: "MessagesPerSecond"))
     EmailChannelResponse.add_member(:platform, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Platform"))
     EmailChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
+    EmailChannelResponse.add_member(:orchestration_sending_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "OrchestrationSendingRoleArn"))
     EmailChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
     EmailChannelResponse.struct_class = Types::EmailChannelResponse
 

@@ -1160,6 +1160,8 @@ module Aws::Imagebuilder
       attr_accessor region: ::String
       attr_accessor snapshots: ::Array[Types::LifecycleExecutionSnapshotResource]
       attr_accessor image_uris: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: []
     end
 
@@ -1187,7 +1189,7 @@ module Aws::Imagebuilder
     end
 
     class LifecycleExecutionState
-      attr_accessor status: ("IN_PROGRESS" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS")
+      attr_accessor status: ("IN_PROGRESS" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS" | "PENDING")
       attr_accessor reason: ::String
       SENSITIVE: []
     end

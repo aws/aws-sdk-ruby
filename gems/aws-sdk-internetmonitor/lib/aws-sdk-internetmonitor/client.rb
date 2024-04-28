@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::InternetMonitor
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::InternetMonitor
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::InternetMonitor
     #   @option options [Aws::InternetMonitor::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::InternetMonitor::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -567,7 +591,7 @@ module Aws::InternetMonitor
       req.send_request(options)
     end
 
-    # Gets information the Amazon CloudWatch Internet Monitor has created
+    # Gets information that Amazon CloudWatch Internet Monitor has created
     # and stored about a health event for a specified monitor. This
     # information includes the impacted locations, and all the information
     # related to the event, by location.
@@ -586,6 +610,18 @@ module Aws::InternetMonitor
     #   The internally-generated identifier of a health event. Because
     #   `EventID` contains the forward slash (“/”) character, you must
     #   URL-encode the `EventID` field in the request URL.
+    #
+    # @option params [String] :linked_account_id
+    #   The account ID for an account that you've set up cross-account
+    #   sharing for in Amazon CloudWatch Internet Monitor. You configure
+    #   cross-account sharing by using Amazon CloudWatch Observability Access
+    #   Manager. For more information, see [Internet Monitor cross-account
+    #   observability][1] in the Amazon CloudWatch Internet Monitor User
+    #   Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
     #
     # @return [Types::GetHealthEventOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -606,6 +642,7 @@ module Aws::InternetMonitor
     #   resp = client.get_health_event({
     #     monitor_name: "ResourceName", # required
     #     event_id: "HealthEventName", # required
+    #     linked_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -661,6 +698,61 @@ module Aws::InternetMonitor
       req.send_request(options)
     end
 
+    # Gets information that Amazon CloudWatch Internet Monitor has generated
+    # about an internet event. Internet Monitor displays information about
+    # recent global health events, called internet events, on a global
+    # outages map that is available to all Amazon Web Services customers.
+    #
+    # The information returned here includes the impacted location, when the
+    # event started and (if the event is over) ended, the type of event
+    # (`PERFORMANCE` or `AVAILABILITY`), and the status (`ACTIVE` or
+    # `RESOLVED`).
+    #
+    # @option params [required, String] :event_id
+    #   The `EventId` of the internet event to return information for.
+    #
+    # @return [Types::GetInternetEventOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInternetEventOutput#event_id #event_id} => String
+    #   * {Types::GetInternetEventOutput#event_arn #event_arn} => String
+    #   * {Types::GetInternetEventOutput#started_at #started_at} => Time
+    #   * {Types::GetInternetEventOutput#ended_at #ended_at} => Time
+    #   * {Types::GetInternetEventOutput#client_location #client_location} => Types::ClientLocation
+    #   * {Types::GetInternetEventOutput#event_type #event_type} => String
+    #   * {Types::GetInternetEventOutput#event_status #event_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_internet_event({
+    #     event_id: "InternetEventId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_id #=> String
+    #   resp.event_arn #=> String
+    #   resp.started_at #=> Time
+    #   resp.ended_at #=> Time
+    #   resp.client_location.as_name #=> String
+    #   resp.client_location.as_number #=> Integer
+    #   resp.client_location.country #=> String
+    #   resp.client_location.subdivision #=> String
+    #   resp.client_location.metro #=> String
+    #   resp.client_location.city #=> String
+    #   resp.client_location.latitude #=> Float
+    #   resp.client_location.longitude #=> Float
+    #   resp.event_type #=> String, one of "AVAILABILITY", "PERFORMANCE"
+    #   resp.event_status #=> String, one of "ACTIVE", "RESOLVED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetInternetEvent AWS API Documentation
+    #
+    # @overload get_internet_event(params = {})
+    # @param [Hash] params ({})
+    def get_internet_event(params = {}, options = {})
+      req = build_request(:get_internet_event, params)
+      req.send_request(options)
+    end
+
     # Gets information about a monitor in Amazon CloudWatch Internet Monitor
     # based on a monitor name. The information returned includes the Amazon
     # Resource Name (ARN), create time, modified time, resources included in
@@ -668,6 +760,18 @@ module Aws::InternetMonitor
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor.
+    #
+    # @option params [String] :linked_account_id
+    #   The account ID for an account that you've set up cross-account
+    #   sharing for in Amazon CloudWatch Internet Monitor. You configure
+    #   cross-account sharing by using Amazon CloudWatch Observability Access
+    #   Manager. For more information, see [Internet Monitor cross-account
+    #   observability][1] in the Amazon CloudWatch Internet Monitor User
+    #   Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
     #
     # @return [Types::GetMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -689,6 +793,7 @@ module Aws::InternetMonitor
     #
     #   resp = client.get_monitor({
     #     monitor_name: "ResourceName", # required
+    #     linked_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -837,7 +942,7 @@ module Aws::InternetMonitor
 
     # Lists all health events for a monitor in Amazon CloudWatch Internet
     # Monitor. Returns information for health events including the event
-    # start and end time and the status.
+    # start and end times, and the status.
     #
     # <note markdown="1"> Health events that have start times during the time frame that is
     # requested are not included in the list of health events.
@@ -865,6 +970,18 @@ module Aws::InternetMonitor
     # @option params [String] :event_status
     #   The status of a health event.
     #
+    # @option params [String] :linked_account_id
+    #   The account ID for an account that you've set up cross-account
+    #   sharing for in Amazon CloudWatch Internet Monitor. You configure
+    #   cross-account sharing by using Amazon CloudWatch Observability Access
+    #   Manager. For more information, see [Internet Monitor cross-account
+    #   observability][1] in the Amazon CloudWatch Internet Monitor User
+    #   Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
+    #
     # @return [Types::ListHealthEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListHealthEventsOutput#health_events #health_events} => Array&lt;Types::HealthEvent&gt;
@@ -881,6 +998,7 @@ module Aws::InternetMonitor
     #     next_token: "String",
     #     max_results: 1,
     #     event_status: "ACTIVE", # accepts ACTIVE, RESOLVED
+    #     linked_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -938,6 +1056,88 @@ module Aws::InternetMonitor
       req.send_request(options)
     end
 
+    # Lists internet events that cause performance or availability issues
+    # for client locations. Amazon CloudWatch Internet Monitor displays
+    # information about recent global health events, called internet events,
+    # on a global outages map that is available to all Amazon Web Services
+    # customers.
+    #
+    # You can constrain the list of internet events returned by providing a
+    # start time and end time to define a total time frame for events you
+    # want to list. Both start time and end time specify the time when an
+    # event started. End time is optional. If you don't include it, the
+    # default end time is the current time.
+    #
+    # You can also limit the events returned to a specific status (`ACTIVE`
+    # or `RESOLVED`) or type (`PERFORMANCE` or `AVAILABILITY`).
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @option params [Integer] :max_results
+    #   The number of query results that you want to return with this call.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start time of the time window that you want to get a list of
+    #   internet events for.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end time of the time window that you want to get a list of
+    #   internet events for.
+    #
+    # @option params [String] :event_status
+    #   The status of an internet event.
+    #
+    # @option params [String] :event_type
+    #   The type of network impairment.
+    #
+    # @return [Types::ListInternetEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInternetEventsOutput#internet_events #internet_events} => Array&lt;Types::InternetEventSummary&gt;
+    #   * {Types::ListInternetEventsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_internet_events({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     event_status: "String",
+    #     event_type: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.internet_events #=> Array
+    #   resp.internet_events[0].event_id #=> String
+    #   resp.internet_events[0].event_arn #=> String
+    #   resp.internet_events[0].started_at #=> Time
+    #   resp.internet_events[0].ended_at #=> Time
+    #   resp.internet_events[0].client_location.as_name #=> String
+    #   resp.internet_events[0].client_location.as_number #=> Integer
+    #   resp.internet_events[0].client_location.country #=> String
+    #   resp.internet_events[0].client_location.subdivision #=> String
+    #   resp.internet_events[0].client_location.metro #=> String
+    #   resp.internet_events[0].client_location.city #=> String
+    #   resp.internet_events[0].client_location.latitude #=> Float
+    #   resp.internet_events[0].client_location.longitude #=> Float
+    #   resp.internet_events[0].event_type #=> String, one of "AVAILABILITY", "PERFORMANCE"
+    #   resp.internet_events[0].event_status #=> String, one of "ACTIVE", "RESOLVED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ListInternetEvents AWS API Documentation
+    #
+    # @overload list_internet_events(params = {})
+    # @param [Hash] params ({})
+    def list_internet_events(params = {}, options = {})
+      req = build_request(:list_internet_events, params)
+      req.send_request(options)
+    end
+
     # Lists all of your monitors for Amazon CloudWatch Internet Monitor and
     # their statuses, along with the Amazon Resource Name (ARN) and name of
     # each monitor.
@@ -959,6 +1159,19 @@ module Aws::InternetMonitor
     #
     #   [1]: https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html
     #
+    # @option params [Boolean] :include_linked_accounts
+    #   A boolean option that you can set to `TRUE` to include monitors for
+    #   linked accounts in a list of monitors, when you've set up
+    #   cross-account sharing in Amazon CloudWatch Internet Monitor. You
+    #   configure cross-account sharing by using Amazon CloudWatch
+    #   Observability Access Manager. For more information, see [Internet
+    #   Monitor cross-account observability][1] in the Amazon CloudWatch
+    #   Internet Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
+    #
     # @return [Types::ListMonitorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMonitorsOutput#monitors #monitors} => Array&lt;Types::Monitor&gt;
@@ -972,6 +1185,7 @@ module Aws::InternetMonitor
     #     next_token: "String",
     #     max_results: 1,
     #     monitor_status: "String",
+    #     include_linked_accounts: false,
     #   })
     #
     # @example Response structure
@@ -1087,6 +1301,18 @@ module Aws::InternetMonitor
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
     #
+    # @option params [String] :linked_account_id
+    #   The account ID for an account that you've set up cross-account
+    #   sharing for in Amazon CloudWatch Internet Monitor. You configure
+    #   cross-account sharing by using Amazon CloudWatch Observability Access
+    #   Manager. For more information, see [Internet Monitor cross-account
+    #   observability][1] in the Amazon CloudWatch Internet Monitor User
+    #   Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
+    #
     # @return [Types::StartQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartQueryOutput#query_id #query_id} => String
@@ -1105,6 +1331,7 @@ module Aws::InternetMonitor
     #         values: ["String"],
     #       },
     #     ],
+    #     linked_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1362,7 +1589,7 @@ module Aws::InternetMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-internetmonitor'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

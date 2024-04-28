@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2024-04-10)
+------------------
+
+* Feature - Added support for ContentType to content moderation detections.
+
 1.93.0 (2024-01-26)
 ------------------
 

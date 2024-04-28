@@ -1836,6 +1836,21 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains details about the configuration of a Amazon Bedrock knowledge
+    # base.
+    #
+    # @!attribute [rw] bedrock_knowledge_base_arn
+    #   The ARN of the knowledge base used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BedrockKnowledgeStoreConfiguration AWS API Documentation
+    #
+    class BedrockKnowledgeStoreConfiguration < Struct.new(
+      :bedrock_knowledge_base_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the Amazon Bedrock model used to interpret
     # the prompt used in descriptive bot building.
     #
@@ -3946,6 +3961,13 @@ module Aws::LexModelsV2
     #   the beginning of a conversation, before eliciting slot values.
     #   @return [Types::InitialResponseSetting]
     #
+    # @!attribute [rw] qn_a_intent_configuration
+    #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
+    #   another intent to invoke. If you specify this field, you can't
+    #   specify the `kendraConfiguration` field.
+    #   @return [Types::QnAIntentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateIntentRequest AWS API Documentation
     #
     class CreateIntentRequest < Struct.new(
@@ -3963,7 +3985,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      :initial_response_setting)
+      :initial_response_setting,
+      :qn_a_intent_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4038,6 +4061,11 @@ module Aws::LexModelsV2
     #   the beginning of a conversation, before eliciting slot values.
     #   @return [Types::InitialResponseSetting]
     #
+    # @!attribute [rw] qn_a_intent_configuration
+    #   Details about the the configuration of the built-in
+    #   `Amazon.QnAIntent`.
+    #   @return [Types::QnAIntentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateIntentResponse AWS API Documentation
     #
     class CreateIntentResponse < Struct.new(
@@ -4057,7 +4085,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :creation_date_time,
-      :initial_response_setting)
+      :initial_response_setting,
+      :qn_a_intent_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4787,6 +4816,51 @@ module Aws::LexModelsV2
     #
     class DataPrivacy < Struct.new(
       :child_directed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the configuration of the knowledge store used
+    # for the `AMAZON.QnAIntent`. You must have already created the
+    # knowledge store and indexed the documents within it.
+    #
+    # @!attribute [rw] opensearch_configuration
+    #   Contains details about the configuration of the Amazon OpenSearch
+    #   Service database used for the `AMAZON.QnAIntent`. To create a
+    #   domain, follow the steps at [Creating and managing Amazon OpenSearch
+    #   Service domains][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html
+    #   @return [Types::OpensearchConfiguration]
+    #
+    # @!attribute [rw] kendra_configuration
+    #   Contains details about the configuration of the Amazon Kendra index
+    #   used for the `AMAZON.QnAIntent`. To create a Amazon Kendra index,
+    #   follow the steps at [Creating an index][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/create-index.html
+    #   @return [Types::QnAKendraConfiguration]
+    #
+    # @!attribute [rw] bedrock_knowledge_store_configuration
+    #   Contains details about the configuration of the Amazon Bedrock
+    #   knowledge base used for the `AMAZON.QnAIntent`. To set up a
+    #   knowledge base, follow the steps at [Building a knowledge base][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html
+    #   @return [Types::BedrockKnowledgeStoreConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DataSourceConfiguration AWS API Documentation
+    #
+    class DataSourceConfiguration < Struct.new(
+      :opensearch_configuration,
+      :kendra_configuration,
+      :bedrock_knowledge_store_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6418,6 +6492,10 @@ module Aws::LexModelsV2
     #   Lex starts eliciting slots.
     #   @return [Types::InitialResponseSetting]
     #
+    # @!attribute [rw] qn_a_intent_configuration
+    #   Details about the configuration of the built-in `Amazon.QnAIntent`.
+    #   @return [Types::QnAIntentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeIntentResponse AWS API Documentation
     #
     class DescribeIntentResponse < Struct.new(
@@ -6439,7 +6517,8 @@ module Aws::LexModelsV2
       :locale_id,
       :creation_date_time,
       :last_updated_date_time,
-      :initial_response_setting)
+      :initial_response_setting,
+      :qn_a_intent_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7176,6 +7255,28 @@ module Aws::LexModelsV2
       :bot_locale_export_password,
       :associated_transcripts_password)
       SENSITIVE = [:bot_locale_export_password, :associated_transcripts_password]
+      include Aws::Structure
+    end
+
+    # Contains the names of the fields used for an exact response to the
+    # user.
+    #
+    # @!attribute [rw] question_field
+    #   The name of the field that contains the query made to the OpenSearch
+    #   Service database.
+    #   @return [String]
+    #
+    # @!attribute [rw] answer_field
+    #   The name of the field that contains the answer to the query made to
+    #   the OpenSearch Service database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExactResponseFields AWS API Documentation
+    #
+    class ExactResponseFields < Struct.new(
+      :question_field,
+      :answer_field)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10986,6 +11087,45 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains details about the configuration of the Amazon OpenSearch
+    # Service database used for the `AMAZON.QnAIntent`.
+    #
+    # @!attribute [rw] domain_endpoint
+    #   The endpoint of the Amazon OpenSearch Service domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the Amazon OpenSearch Service index.
+    #   @return [String]
+    #
+    # @!attribute [rw] exact_response
+    #   Specifies whether to return an exact response or to return an answer
+    #   generated by the model using the fields you specify from the
+    #   database.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exact_response_fields
+    #   Contains the names of the fields used for an exact response to the
+    #   user.
+    #   @return [Types::ExactResponseFields]
+    #
+    # @!attribute [rw] include_fields
+    #   Contains a list of fields from the Amazon OpenSearch Service that
+    #   the model can use to generate the answer to the query.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/OpensearchConfiguration AWS API Documentation
+    #
+    class OpensearchConfiguration < Struct.new(
+      :domain_endpoint,
+      :index_name,
+      :exact_response,
+      :exact_response_fields,
+      :include_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a session context that is activated when an intent is
     # fulfilled.
     #
@@ -11353,6 +11493,72 @@ module Aws::LexModelsV2
       :allow_interrupt,
       :message_selection_strategy,
       :prompt_attempts_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the the configuration of the built-in
+    # `Amazon.QnAIntent`.
+    #
+    # @!attribute [rw] data_source_configuration
+    #   Contains details about the configuration of the data source used for
+    #   the `AMAZON.QnAIntent`.
+    #   @return [Types::DataSourceConfiguration]
+    #
+    # @!attribute [rw] bedrock_model_configuration
+    #   Contains information about the Amazon Bedrock model used to
+    #   interpret the prompt used in descriptive bot building.
+    #   @return [Types::BedrockModelSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/QnAIntentConfiguration AWS API Documentation
+    #
+    class QnAIntentConfiguration < Struct.new(
+      :data_source_configuration,
+      :bedrock_model_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the configuration of the Amazon Kendra index
+    # used for the `AMAZON.QnAIntent`.
+    #
+    # @!attribute [rw] kendra_index
+    #   The ARN of the Amazon Kendra index to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_filter_string_enabled
+    #   Specifies whether to enable an Amazon Kendra filter string or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] query_filter_string
+    #   Contains the Amazon Kendra filter string to use if enabled. For more
+    #   information on the Amazon Kendra search filter JSON format, see
+    #   [Using document attributes to filter search results][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering
+    #   @return [String]
+    #
+    # @!attribute [rw] exact_response
+    #   Specifies whether to return an exact response from the Amazon Kendra
+    #   index or to let the Amazon Bedrock model you select generate a
+    #   response based on the results. To use this feature, you must first
+    #   add FAQ questions to your index by following the steps at [Adding
+    #   frequently asked questions (FAQs) to an index][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/QnAKendraConfiguration AWS API Documentation
+    #
+    class QnAKendraConfiguration < Struct.new(
+      :kendra_index,
+      :query_filter_string_enabled,
+      :query_filter_string,
+      :exact_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14531,6 +14737,13 @@ module Aws::LexModelsV2
     #   Lex starts eliciting slots.
     #   @return [Types::InitialResponseSetting]
     #
+    # @!attribute [rw] qn_a_intent_configuration
+    #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
+    #   another intent to invoke. If you specify this field, you can't
+    #   specify the `kendraConfiguration` field.
+    #   @return [Types::QnAIntentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateIntentRequest AWS API Documentation
     #
     class UpdateIntentRequest < Struct.new(
@@ -14550,7 +14763,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      :initial_response_setting)
+      :initial_response_setting,
+      :qn_a_intent_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14641,6 +14855,10 @@ module Aws::LexModelsV2
     #   Lex starts eliciting slots.
     #   @return [Types::InitialResponseSetting]
     #
+    # @!attribute [rw] qn_a_intent_configuration
+    #   Details about the configuration of the built-in `Amazon.QnAIntent`.
+    #   @return [Types::QnAIntentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateIntentResponse AWS API Documentation
     #
     class UpdateIntentResponse < Struct.new(
@@ -14662,7 +14880,8 @@ module Aws::LexModelsV2
       :locale_id,
       :creation_date_time,
       :last_updated_date_time,
-      :initial_response_setting)
+      :initial_response_setting,
+      :qn_a_intent_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -80,30 +80,46 @@ module Aws::CloudTrail
     #
     class AddTagsResponse < Aws::EmptyStructure; end
 
-    # Advanced event selectors let you create fine-grained selectors for the
-    # following CloudTrail event record ﬁelds. They help you control costs
-    # by logging only those events that are important to you. For more
-    # information about advanced event selectors, see [Logging data
-    # events][1] in the *CloudTrail User Guide*.
-    #
-    # * `readOnly`
-    #
-    # * `eventSource`
-    #
-    # * `eventName`
-    #
-    # * `eventCategory`
-    #
-    # * `resources.type`
-    #
-    # * `resources.ARN`
+    # Advanced event selectors let you create fine-grained selectors for
+    # CloudTrail management and data events. They help you control costs by
+    # logging only those events that are important to you. For more
+    # information about advanced event selectors, see [Logging management
+    # events][1] and [Logging data events][2] in the *CloudTrail User
+    # Guide*.
     #
     # You cannot apply both event selectors and advanced event selectors to
     # a trail.
     #
+    # **Supported CloudTrail event record fields for management events**
+    #
+    # * `eventCategory` (required)
+    #
+    # * `eventSource`
+    #
+    # * `readOnly`
+    #
+    # **Supported CloudTrail event record fields for data events**
+    #
+    # * `eventCategory` (required)
+    #
+    # * `resources.type` (required)
+    #
+    # * `readOnly`
+    #
+    # * `eventName`
+    #
+    # * `resources.ARN`
+    #
+    # <note markdown="1"> For event data stores for CloudTrail Insights events, Config
+    # configuration items, Audit Manager evidence, or events outside of
+    # Amazon Web Services, the only supported field is `eventCategory`.
+    #
+    #  </note>
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
     #
     # @!attribute [rw] name
     #   An optional, descriptive name for an advanced event selector, such
@@ -187,6 +203,8 @@ module Aws::CloudTrail
     #
     #     * `AWS::S3::Object`
     #
+    #     * `AWS::AppConfig::Configuration`
+    #
     #     * `AWS::B2BI::Transformer`
     #
     #     * `AWS::Bedrock::AgentAlias`
@@ -215,7 +233,19 @@ module Aws::CloudTrail
     #
     #     * `AWS::Glue::Table`
     #
+    #     * `AWS::GreengrassV2::ComponentVersion`
+    #
+    #     * `AWS::GreengrassV2::Deployment`
+    #
     #     * `AWS::GuardDuty::Detector`
+    #
+    #     * `AWS::IoT::Certificate`
+    #
+    #     * `AWS::IoT::Thing`
+    #
+    #     * `AWS::IoTSiteWise::Asset`
+    #
+    #     * `AWS::IoTSiteWise::TimeSeries`
     #
     #     * `AWS::IoTTwinMaker::Entity`
     #
@@ -245,6 +275,12 @@ module Aws::CloudTrail
     #
     #     * `AWS::RDS::DBCluster`
     #
+    #     * `AWS::S3::AccessPoint`
+    #
+    #     * `AWS::S3ObjectLambda::AccessPoint`
+    #
+    #     * `AWS::S3Outposts::Object`
+    #
     #     * `AWS::SageMaker::Endpoint`
     #
     #     * `AWS::SageMaker::ExperimentTrialComponent`
@@ -261,13 +297,9 @@ module Aws::CloudTrail
     #
     #     * `AWS::SNS::Topic`
     #
+    #     * `AWS::SWF::Domain`
+    #
     #     * `AWS::SQS::Queue`
-    #
-    #     * `AWS::S3::AccessPoint`
-    #
-    #     * `AWS::S3ObjectLambda::AccessPoint`
-    #
-    #     * `AWS::S3Outposts::Object`
     #
     #     * `AWS::SSMMessages::ControlChannel`
     #
@@ -314,6 +346,14 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:<partition>:lambda:<region>:<account_ID>:function:<function_name>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::AppConfig::Configuration`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:appconfig:<region>:<account_ID>:application/<application_ID>/environment/<environment_ID>/configuration/<configuration_profile_ID>`
     #
     #     ^
     #
@@ -429,11 +469,59 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals
+    #     `AWS::GreengrassV2::ComponentVersion`, and the operator is set to
+    #     `Equals` or `NotEquals`, the ARN must be in the following format:
+    #
+    #     * `arn:<partition>:greengrass:<region>:<account_ID>:components/<component_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::GreengrassV2::Deployment`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:greengrass:<region>:<account_ID>:deployments/<deployment_ID`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::GuardDuty::Detector`, and the
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
     #     * `arn:<partition>:guardduty:<region>:<account_ID>:detector/<detector_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::IoT::Certificate`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:iot:<region>:<account_ID>:cert/<certificate_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::IoT::Thing`, and the operator
+    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:iot:<region>:<account_ID>:thing/<thing_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::IoTSiteWise::Asset`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:iotsitewise:<region>:<account_ID>:asset/<asset_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::IoTSiteWise::TimeSeries`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:iotsitewise:<region>:<account_ID>:timeseries/<timeseries_ID>`
     #
     #     ^
     #
@@ -549,6 +637,33 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::S3::AccessPoint`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in one
+    #     of the following formats. To log events on all objects in an S3
+    #     access point, we recommend that you use only the access point ARN,
+    #     don’t include the object path, and use the `StartsWith` or
+    #     `NotStartsWith` operators.
+    #
+    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>`
+    #
+    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path>`
+    #
+    #     When `resources.type` equals `AWS::S3ObjectLambda::AccessPoint`,
+    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
+    #     be in the following format:
+    #
+    #     * `arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::S3Outposts::Object`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::SageMaker::Endpoint`, and the
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
@@ -614,38 +729,19 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::SWF::Domain`, and the operator
+    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:swf:<region>:<account_ID>:domain/<domain_name>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::SQS::Queue`, and the operator
     #     is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
     #     * `arn:<partition>:sqs:<region>:<account_ID>:<queue_name>`
-    #
-    #     ^
-    #
-    #     When `resources.type` equals `AWS::S3::AccessPoint`, and the
-    #     operator is set to `Equals` or `NotEquals`, the ARN must be in one
-    #     of the following formats. To log events on all objects in an S3
-    #     access point, we recommend that you use only the access point ARN,
-    #     don’t include the object path, and use the `StartsWith` or
-    #     `NotStartsWith` operators.
-    #
-    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>`
-    #
-    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path>`
-    #
-    #     When `resources.type` equals `AWS::S3ObjectLambda::AccessPoint`,
-    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
-    #     be in the following format:
-    #
-    #     * `arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name>`
-    #
-    #     ^
-    #
-    #     When `resources.type` equals `AWS::S3Outposts::Object`, and the
-    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
-    #     following format:
-    #
-    #     * `arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path>`
     #
     #     ^
     #
@@ -3854,7 +3950,11 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
-    #   Specifies a value for the specified AttributeKey.
+    #   Specifies a value for the specified `AttributeKey`.
+    #
+    #   The maximum length for the `AttributeValue` is 2000 characters. The
+    #   following characters ('`_`', '` `', '`,`', '`\\n`') count as
+    #   two characters towards the 2000 character limit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupAttribute AWS API Documentation

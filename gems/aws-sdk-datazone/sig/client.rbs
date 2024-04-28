@@ -82,8 +82,9 @@ module Aws
       def accept_predictions: (
                                 ?accept_choices: Array[
                                   {
+                                    edited_value: ::String?,
                                     prediction_choice: ::Integer?,
-                                    prediction_target: ::String?
+                                    prediction_target: ::String
                                   },
                                 ],
                                 ?accept_rule: {
@@ -120,6 +121,16 @@ module Aws
                                        ) -> _AcceptSubscriptionRequestResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptSubscriptionRequestResponseSuccess
 
+      interface _CancelMetadataGenerationRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMetadataGenerationRunOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#cancel_metadata_generation_run-instance_method
+      def cancel_metadata_generation_run: (
+                                            domain_identifier: ::String,
+                                            identifier: ::String
+                                          ) -> _CancelMetadataGenerationRunResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMetadataGenerationRunResponseSuccess
+
       interface _CancelSubscriptionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelSubscriptionOutput]
         def created_at: () -> ::Time
@@ -153,6 +164,7 @@ module Aws
         def forms_output: () -> ::Array[Types::FormOutput]
         def glossary_terms: () -> ::Array[::String]
         def id: () -> ::String
+        def latest_time_series_data_point_forms_output: () -> ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
         def listing: () -> Types::AssetListingDetails
         def name: () -> ::String
         def owning_project_id: () -> ::String
@@ -201,6 +213,7 @@ module Aws
         def forms_output: () -> ::Array[Types::FormOutput]
         def glossary_terms: () -> ::Array[::String]
         def id: () -> ::String
+        def latest_time_series_data_point_forms_output: () -> ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
         def listing: () -> Types::AssetListingDetails
         def name: () -> ::String
         def owning_project_id: () -> ::String
@@ -300,6 +313,7 @@ module Aws
                                 ?client_token: ::String,
                                 ?configuration: {
                                   glue_run_configuration: {
+                                    auto_import_data_quality_result: bool?,
                                     data_access_role: ::String?,
                                     relational_filter_configurations: Array[
                                       {
@@ -912,6 +926,19 @@ module Aws
                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DeleteTimeSeriesDataPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTimeSeriesDataPointsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_time_series_data_points-instance_method
+      def delete_time_series_data_points: (
+                                            ?client_token: ::String,
+                                            domain_identifier: ::String,
+                                            entity_identifier: ::String,
+                                            entity_type: ("ASSET" | "LISTING"),
+                                            form_name: ::String
+                                          ) -> _DeleteTimeSeriesDataPointsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTimeSeriesDataPointsResponseSuccess
+
       interface _GetAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetOutput]
         def created_at: () -> ::Time
@@ -924,6 +951,7 @@ module Aws
         def forms_output: () -> ::Array[Types::FormOutput]
         def glossary_terms: () -> ::Array[::String]
         def id: () -> ::String
+        def latest_time_series_data_point_forms_output: () -> ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
         def listing: () -> Types::AssetListingDetails
         def name: () -> ::String
         def owning_project_id: () -> ::String
@@ -1241,6 +1269,24 @@ module Aws
                        ) -> _GetListingResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetListingResponseSuccess
 
+      interface _GetMetadataGenerationRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMetadataGenerationRunOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def owning_project_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+        def target: () -> Types::MetadataGenerationRunTarget
+        def type: () -> ("BUSINESS_DESCRIPTIONS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_metadata_generation_run-instance_method
+      def get_metadata_generation_run: (
+                                         domain_identifier: ::String,
+                                         identifier: ::String
+                                       ) -> _GetMetadataGenerationRunResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetadataGenerationRunResponseSuccess
+
       interface _GetProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetProjectOutput]
         def created_at: () -> ::Time
@@ -1350,6 +1396,24 @@ module Aws
                                      identifier: ::String
                                    ) -> _GetSubscriptionTargetResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionTargetResponseSuccess
+
+      interface _GetTimeSeriesDataPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTimeSeriesDataPointOutput]
+        def domain_id: () -> ::String
+        def entity_id: () -> ::String
+        def entity_type: () -> ("ASSET" | "LISTING")
+        def form: () -> Types::TimeSeriesDataPointFormOutput
+        def form_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_time_series_data_point-instance_method
+      def get_time_series_data_point: (
+                                        domain_identifier: ::String,
+                                        entity_identifier: ::String,
+                                        entity_type: ("ASSET" | "LISTING"),
+                                        form_name: ::String,
+                                        identifier: ::String
+                                      ) -> _GetTimeSeriesDataPointResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTimeSeriesDataPointResponseSuccess
 
       interface _GetUserProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetUserProfileOutput]
@@ -1509,6 +1573,21 @@ module Aws
                              ) -> _ListEnvironmentsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
 
+      interface _ListMetadataGenerationRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMetadataGenerationRunsOutput]
+        def items: () -> ::Array[Types::MetadataGenerationRunItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_metadata_generation_runs-instance_method
+      def list_metadata_generation_runs: (
+                                           domain_identifier: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           ?status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED"),
+                                           ?type: ("BUSINESS_DESCRIPTIONS")
+                                         ) -> _ListMetadataGenerationRunsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMetadataGenerationRunsResponseSuccess
+
       interface _ListNotificationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationsOutput]
         def next_token: () -> ::String
@@ -1643,6 +1722,49 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListTimeSeriesDataPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTimeSeriesDataPointsOutput]
+        def items: () -> ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_time_series_data_points-instance_method
+      def list_time_series_data_points: (
+                                          domain_identifier: ::String,
+                                          ?ended_at: ::Time,
+                                          entity_identifier: ::String,
+                                          entity_type: ("ASSET" | "LISTING"),
+                                          form_name: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String,
+                                          ?started_at: ::Time
+                                        ) -> _ListTimeSeriesDataPointsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTimeSeriesDataPointsResponseSuccess
+
+      interface _PostTimeSeriesDataPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PostTimeSeriesDataPointsOutput]
+        def domain_id: () -> ::String
+        def entity_id: () -> ::String
+        def entity_type: () -> ("ASSET" | "LISTING")
+        def forms: () -> ::Array[Types::TimeSeriesDataPointFormOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#post_time_series_data_points-instance_method
+      def post_time_series_data_points: (
+                                          ?client_token: ::String,
+                                          domain_identifier: ::String,
+                                          entity_identifier: ::String,
+                                          entity_type: ("ASSET" | "LISTING"),
+                                          forms: Array[
+                                            {
+                                              content: ::String?,
+                                              form_name: ::String,
+                                              timestamp: ::Time,
+                                              type_identifier: ::String,
+                                              type_revision: ::String?
+                                            },
+                                          ]
+                                        ) -> _PostTimeSeriesDataPointsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostTimeSeriesDataPointsResponseSuccess
+
       interface _PutEnvironmentBlueprintConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutEnvironmentBlueprintConfigurationOutput]
         def created_at: () -> ::Time
@@ -1679,7 +1801,7 @@ module Aws
                                 ?reject_choices: Array[
                                   {
                                     prediction_choices: Array[::Integer]?,
-                                    prediction_target: ::String?
+                                    prediction_target: ::String
                                   },
                                 ],
                                 ?reject_rule: {
@@ -1743,7 +1865,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#search-instance_method
       def search: (
-                    ?additional_attributes: Array[("FORMS")],
+                    ?additional_attributes: Array[("FORMS" | "TIME_SERIES_DATA_POINT_FORMS")],
                     domain_identifier: ::String,
                     ?filters: {
                       and: Array[
@@ -1797,7 +1919,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#search_listings-instance_method
       def search_listings: (
-                             ?additional_attributes: Array[("FORMS")],
+                             ?additional_attributes: Array[("FORMS" | "TIME_SERIES_DATA_POINT_FORMS")],
                              domain_identifier: ::String,
                              ?filters: {
                                and: Array[
@@ -1903,6 +2025,30 @@ module Aws
                                  ) -> _StartDataSourceRunResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataSourceRunResponseSuccess
 
+      interface _StartMetadataGenerationRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMetadataGenerationRunOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def owning_project_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+        def type: () -> ("BUSINESS_DESCRIPTIONS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#start_metadata_generation_run-instance_method
+      def start_metadata_generation_run: (
+                                           ?client_token: ::String,
+                                           domain_identifier: ::String,
+                                           owning_project_identifier: ::String,
+                                           target: {
+                                             identifier: ::String,
+                                             revision: ::String?,
+                                             type: ("ASSET")
+                                           },
+                                           type: ("BUSINESS_DESCRIPTIONS")
+                                         ) -> _StartMetadataGenerationRunResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataGenerationRunResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -1958,6 +2104,7 @@ module Aws
                                 ],
                                 ?configuration: {
                                   glue_run_configuration: {
+                                    auto_import_data_quality_result: bool?,
                                     data_access_role: ::String?,
                                     relational_filter_configurations: Array[
                                       {

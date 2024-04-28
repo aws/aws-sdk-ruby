@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::AppConfig
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::AppConfig
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::AppConfig
     #   @option options [Aws::AppConfig::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::AppConfig::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -892,8 +916,8 @@ module Aws::AppConfig
     # * For a custom Amazon SQS notification extension, enter the ARN of an
     #   Amazon SQS message queue in the `Uri` field.
     #
-    # For more information about extensions, see [Working with AppConfig
-    # extensions][1] in the *AppConfig User Guide*.
+    # For more information about extensions, see [Extending workflows][1] in
+    # the *AppConfig User Guide*.
     #
     #
     #
@@ -955,6 +979,7 @@ module Aws::AppConfig
     #       "ExtensionOrParameterName" => {
     #         description: "Description",
     #         required: false,
+    #         dynamic: false,
     #       },
     #     },
     #     tags: {
@@ -979,6 +1004,7 @@ module Aws::AppConfig
     #   resp.parameters #=> Hash
     #   resp.parameters["ExtensionOrParameterName"].description #=> String
     #   resp.parameters["ExtensionOrParameterName"].required #=> Boolean
+    #   resp.parameters["ExtensionOrParameterName"].dynamic #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateExtension AWS API Documentation
     #
@@ -999,8 +1025,8 @@ module Aws::AppConfig
     # AppConfig resource is called an *extension association*. An extension
     # association is a specified relationship between an extension and an
     # AppConfig resource, such as an application or a configuration profile.
-    # For more information about extensions and associations, see [Working
-    # with AppConfig extensions][1] in the *AppConfig User Guide*.
+    # For more information about extensions and associations, see [Extending
+    # workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -1988,6 +2014,7 @@ module Aws::AppConfig
     #   resp.parameters #=> Hash
     #   resp.parameters["ExtensionOrParameterName"].description #=> String
     #   resp.parameters["ExtensionOrParameterName"].required #=> Boolean
+    #   resp.parameters["ExtensionOrParameterName"].dynamic #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetExtension AWS API Documentation
     #
@@ -1999,8 +2026,8 @@ module Aws::AppConfig
     end
 
     # Returns information about an AppConfig extension association. For more
-    # information about extensions and associations, see [Working with
-    # AppConfig extensions][1] in the *AppConfig User Guide*.
+    # information about extensions and associations, see [Extending
+    # workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -2496,8 +2523,8 @@ module Aws::AppConfig
     end
 
     # Lists all AppConfig extension associations in the account. For more
-    # information about extensions and associations, see [Working with
-    # AppConfig extensions][1] in the *AppConfig User Guide*.
+    # information about extensions and associations, see [Extending
+    # workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -2556,8 +2583,8 @@ module Aws::AppConfig
     end
 
     # Lists all custom and Amazon Web Services authored AppConfig extensions
-    # in the account. For more information about extensions, see [Working
-    # with AppConfig extensions][1] in the *AppConfig User Guide*.
+    # in the account. For more information about extensions, see [Extending
+    # workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -2773,6 +2800,10 @@ module Aws::AppConfig
     #   this ID to encrypt the configuration data using a customer managed
     #   key.
     #
+    # @option params [Hash<String,String>] :dynamic_extension_parameters
+    #   A map of dynamic extension parameter names to values to pass to
+    #   associated extensions with `PRE_START_DEPLOYMENT` actions.
+    #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Deployment#application_id #application_id} => String
@@ -2855,6 +2886,9 @@ module Aws::AppConfig
     #       "TagKey" => "TagValue",
     #     },
     #     kms_key_identifier: "KmsKeyIdentifier",
+    #     dynamic_extension_parameters: {
+    #       "DynamicParameterKey" => "StringWithLengthBetween1And2048",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3466,8 +3500,7 @@ module Aws::AppConfig
     end
 
     # Updates an AppConfig extension. For more information about extensions,
-    # see [Working with AppConfig extensions][1] in the *AppConfig User
-    # Guide*.
+    # see [Extending workflows][1] in the *AppConfig User Guide*.
     #
     #
     #
@@ -3517,6 +3550,7 @@ module Aws::AppConfig
     #       "ExtensionOrParameterName" => {
     #         description: "Description",
     #         required: false,
+    #         dynamic: false,
     #       },
     #     },
     #     version_number: 1,
@@ -3538,6 +3572,7 @@ module Aws::AppConfig
     #   resp.parameters #=> Hash
     #   resp.parameters["ExtensionOrParameterName"].description #=> String
     #   resp.parameters["ExtensionOrParameterName"].required #=> Boolean
+    #   resp.parameters["ExtensionOrParameterName"].dynamic #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateExtension AWS API Documentation
     #
@@ -3549,8 +3584,8 @@ module Aws::AppConfig
     end
 
     # Updates an association. For more information about extensions and
-    # associations, see [Working with AppConfig extensions][1] in the
-    # *AppConfig User Guide*.
+    # associations, see [Extending workflows][1] in the *AppConfig User
+    # Guide*.
     #
     #
     #
@@ -3654,7 +3689,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -126,6 +126,18 @@ module Aws
                                ) -> _CreateTrustAnchorResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustAnchorResponseSuccess
 
+      interface _DeleteAttributeMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAttributeMappingResponse]
+        def profile: () -> Types::ProfileDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#delete_attribute_mapping-instance_method
+      def delete_attribute_mapping: (
+                                      certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN"),
+                                      profile_id: ::String,
+                                      ?specifiers: Array[::String]
+                                    ) -> _DeleteAttributeMappingResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAttributeMappingResponseSuccess
+
       interface _DeleteCrlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CrlDetailResponse]
         def crl: () -> Types::CrlDetail
@@ -332,6 +344,22 @@ module Aws
                                 ?page_size: ::Integer
                               ) -> _ListTrustAnchorsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrustAnchorsResponseSuccess
+
+      interface _PutAttributeMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAttributeMappingResponse]
+        def profile: () -> Types::ProfileDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#put_attribute_mapping-instance_method
+      def put_attribute_mapping: (
+                                   certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN"),
+                                   mapping_rules: Array[
+                                     {
+                                       specifier: ::String
+                                     },
+                                   ],
+                                   profile_id: ::String
+                                 ) -> _PutAttributeMappingResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAttributeMappingResponseSuccess
 
       interface _PutNotificationSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutNotificationSettingsResponse]

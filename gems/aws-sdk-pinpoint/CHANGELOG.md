@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.87.0 (2024-04-09)
+------------------
+
+* Feature - The OrchestrationSendingRoleArn has been added to the email channel and is used to send emails from campaigns or journeys.
+
 1.86.0 (2024-01-26)
 ------------------
 

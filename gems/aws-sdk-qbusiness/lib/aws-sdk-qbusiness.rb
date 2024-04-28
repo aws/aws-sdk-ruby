@@ -52,6 +52,6 @@ require_relative 'aws-sdk-qbusiness/customizations'
 # @!group service
 module Aws::QBusiness
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.4.0'
 
 end

@@ -93,12 +93,19 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # Defines the Amazon S3 bucket where the training data for the
-    # configured audience is stored.
+    # Defines the Amazon S3 bucket where the seed audience for the
+    # generating audience is stored.
     #
     # @!attribute [rw] data_source
-    #   The Amazon S3 bucket where the training data for the configured
-    #   audience is stored.
+    #   Defines the Amazon S3 bucket where the seed audience for the
+    #   generating audience is stored. A valid data source is a JSON line
+    #   file in the following format:
+    #
+    #   `\{"user_id": "111111"\}`
+    #
+    #   `\{"user_id": "222222"\}`
+    #
+    #   `...`
     #   @return [Types::S3ConfigMap]
     #
     # @!attribute [rw] role_arn
@@ -172,30 +179,6 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # The audience model metrics.
-    #
-    # @!attribute [rw] for_top_k_item_predictions
-    #   The number of users that were used to generate these model metrics.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] type
-    #   The audience model metric.
-    #   @return [String]
-    #
-    # @!attribute [rw] value
-    #   The value of the audience model metric
-    #   @return [Float]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AudienceModelMetric AWS API Documentation
-    #
-    class AudienceModelMetric < Struct.new(
-      :for_top_k_item_predictions,
-      :type,
-      :value)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Information about the audience model.
     #
     # @!attribute [rw] audience_model_arn
@@ -243,6 +226,16 @@ module Aws::CleanRoomsML
 
     # Metrics that describe the quality of the generated audience.
     #
+    # @!attribute [rw] recall_metric
+    #   The recall score of the generated audience. Recall is the percentage
+    #   of the most similar users (by default, the most similar 20%) from a
+    #   sample of the training data that are included in the seed audience
+    #   by the audience generation job. Values range from 0-1, larger values
+    #   indicate a better audience. A recall value approximately equal to
+    #   the maximum bin size indicates that the audience model is equivalent
+    #   to random selection.
+    #   @return [Float]
+    #
     # @!attribute [rw] relevance_metrics
     #   The relevance scores of the generated audience.
     #   @return [Array<Types::RelevanceMetric>]
@@ -250,6 +243,7 @@ module Aws::CleanRoomsML
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AudienceQualityMetrics AWS API Documentation
     #
     class AudienceQualityMetrics < Struct.new(
+      :recall_metric,
       :relevance_metrics)
       SENSITIVE = []
       include Aws::Structure
@@ -397,7 +391,8 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # A resource with that name already exists in this region.
+    # You can't complete this action because another resource depends on
+    # this resource.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -452,9 +447,9 @@ module Aws::CleanRoomsML
     #     such as a prefix for keys as it is reserved for AWS use. You
     #     cannot edit or delete tag keys with this prefix. Values can have
     #     this prefix. If a tag value has aws as its prefix but the key does
-    #     not, then Forecast considers it to be a user tag and will count
-    #     against the limit of 50 tags. Tags with only the key prefix of aws
-    #     do not count against your tags per resource limit.
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] training_data_end_time
@@ -531,7 +526,8 @@ module Aws::CleanRoomsML
     #
     # @!attribute [rw] min_matching_seed_size
     #   The minimum number of users from the seed audience that must match
-    #   with users in the training data of the audience model.
+    #   with users in the training data of the audience model. The default
+    #   value is 500.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -579,9 +575,9 @@ module Aws::CleanRoomsML
     #     such as a prefix for keys as it is reserved for AWS use. You
     #     cannot edit or delete tag keys with this prefix. Values can have
     #     this prefix. If a tag value has aws as its prefix but the key does
-    #     not, then Forecast considers it to be a user tag and will count
-    #     against the limit of 50 tags. Tags with only the key prefix of aws
-    #     do not count against your tags per resource limit.
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateConfiguredAudienceModelRequest AWS API Documentation
@@ -861,7 +857,8 @@ module Aws::CleanRoomsML
     #   @return [Boolean]
     #
     # @!attribute [rw] metrics
-    #   The relevance scores for different audience sizes.
+    #   The relevance scores for different audience sizes and the recall
+    #   score of the generated audience.
     #   @return [Types::AudienceQualityMetrics]
     #
     # @!attribute [rw] name
@@ -945,10 +942,6 @@ module Aws::CleanRoomsML
     #   The KMS key ARN used for the audience model.
     #   @return [String]
     #
-    # @!attribute [rw] metrics
-    #   Accuracy metrics for the model.
-    #   @return [Array<Types::AudienceModelMetric>]
-    #
     # @!attribute [rw] name
     #   The name of the audience model.
     #   @return [String]
@@ -989,7 +982,6 @@ module Aws::CleanRoomsML
       :create_time,
       :description,
       :kms_key_arn,
-      :metrics,
       :name,
       :status,
       :status_details,
@@ -1639,9 +1631,9 @@ module Aws::CleanRoomsML
     #     such as a prefix for keys as it is reserved for AWS use. You
     #     cannot edit or delete tag keys with this prefix. Values can have
     #     this prefix. If a tag value has aws as its prefix but the key does
-    #     not, then Forecast considers it to be a user tag and will count
-    #     against the limit of 50 tags. Tags with only the key prefix of aws
-    #     do not count against your tags per resource limit.
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StartAudienceGenerationJobRequest AWS API Documentation
@@ -1726,7 +1718,7 @@ module Aws::CleanRoomsML
     #     such as a prefix for keys as it is reserved for AWS use. You
     #     cannot edit or delete tag keys with this prefix. Values can have
     #     this prefix. If a tag value has aws as its prefix but the key does
-    #     not, then Forecast considers it to be a user tag and will count
+    #     not, then Clean Rooms considers it to be a user tag and will count
     #     against the limit of 50 tags. Tags with only the key prefix of aws
     #     do not count against your tags per resource limit.
     #   @return [Hash<String,String>]

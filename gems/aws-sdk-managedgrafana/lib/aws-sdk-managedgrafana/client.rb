@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ManagedGrafana
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ManagedGrafana
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::ManagedGrafana
     #   @option options [Aws::ManagedGrafana::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ManagedGrafana::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -396,8 +420,22 @@ module Aws::ManagedGrafana
     #
     # [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html
     #
+    # @option params [String] :grafana_token
+    #   A token from Grafana Labs that ties your Amazon Web Services account
+    #   with a Grafana Labs account. For more information, see [Register with
+    #   Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    #
     # @option params [required, String] :license_type
     #   The type of license to associate with the workspace.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana Enterprise
+    #   free trials.
+    #
+    #    </note>
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to associate the license with.
@@ -409,6 +447,7 @@ module Aws::ManagedGrafana
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_license({
+    #     grafana_token: "GrafanaToken",
     #     license_type: "ENTERPRISE", # required, accepts ENTERPRISE, ENTERPRISE_FREE_TRIAL
     #     workspace_id: "WorkspaceId", # required
     #   })
@@ -426,6 +465,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -482,10 +522,10 @@ module Aws::ManagedGrafana
     #   `workspaceOrganizationalUnits` parameter.
     #
     # @option params [required, Array<String>] :authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
-    #   (successor to Single Sign-On), or both to authenticate users for using
-    #   the Grafana console within a workspace. For more information, see
-    #   [User authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
     #
     #
     #
@@ -512,9 +552,10 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #
     # @option params [String] :grafana_version
-    #   Specifies the version of Grafana to support in the new workspace.
+    #   Specifies the version of Grafana to support in the new workspace. If
+    #   not specified, defaults to the latest version (for example, 9.4).
     #
-    #   To get a list of supported version, use the `ListVersions` operation.
+    #   To get a list of supported versions, use the `ListVersions` operation.
     #
     # @option params [Types::NetworkAccessConfiguration] :network_access_control
     #   Configuration for network access to your workspace.
@@ -652,6 +693,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -770,6 +812,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -867,6 +910,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -1011,6 +1055,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -1227,8 +1272,10 @@ module Aws::ManagedGrafana
     #   resp.workspaces[0].created #=> Time
     #   resp.workspaces[0].description #=> String
     #   resp.workspaces[0].endpoint #=> String
+    #   resp.workspaces[0].grafana_token #=> String
     #   resp.workspaces[0].grafana_version #=> String
     #   resp.workspaces[0].id #=> String
+    #   resp.workspaces[0].license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspaces[0].modified #=> Time
     #   resp.workspaces[0].name #=> String
     #   resp.workspaces[0].notification_destinations #=> Array
@@ -1531,6 +1578,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -1578,10 +1626,10 @@ module Aws::ManagedGrafana
     #  </note>
     #
     # @option params [required, Array<String>] :authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
-    #   (successor to Single Sign-On), or both to authenticate users for using
-    #   the Grafana console within a workspace. For more information, see
-    #   [User authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
     #
     #
     #
@@ -1674,13 +1722,18 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #
     # @option params [String] :grafana_version
-    #   Specifies the version of Grafana to support in the new workspace.
+    #   Specifies the version of Grafana to support in the workspace. If not
+    #   specified, keeps the current version of the workspace.
     #
     #   Can only be used to upgrade (for example, from 8.4 to 9.4), not
     #   downgrade (for example, from 9.4 to 8.4).
     #
     #   To know what versions are available to upgrade to for a specific
-    #   workspace, see the `ListVersions` operation.
+    #   workspace, see the [ListVersions][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to update.
@@ -1717,7 +1770,7 @@ module Aws::ManagedGrafana
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

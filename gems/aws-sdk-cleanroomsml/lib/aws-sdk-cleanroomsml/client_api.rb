@@ -26,9 +26,6 @@ module Aws::CleanRoomsML
     AudienceGenerationJobSummary = Shapes::StructureShape.new(name: 'AudienceGenerationJobSummary')
     AudienceModelArn = Shapes::StringShape.new(name: 'AudienceModelArn')
     AudienceModelList = Shapes::ListShape.new(name: 'AudienceModelList')
-    AudienceModelMetric = Shapes::StructureShape.new(name: 'AudienceModelMetric')
-    AudienceModelMetricType = Shapes::StringShape.new(name: 'AudienceModelMetricType')
-    AudienceModelMetrics = Shapes::ListShape.new(name: 'AudienceModelMetrics')
     AudienceModelStatus = Shapes::StringShape.new(name: 'AudienceModelStatus')
     AudienceModelSummary = Shapes::StructureShape.new(name: 'AudienceModelSummary')
     AudienceQualityMetrics = Shapes::StructureShape.new(name: 'AudienceQualityMetrics')
@@ -82,7 +79,6 @@ module Aws::CleanRoomsML
     GlueTableName = Shapes::StringShape.new(name: 'GlueTableName')
     Hash = Shapes::StringShape.new(name: 'Hash')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
-    Integer = Shapes::IntegerShape.new(name: 'Integer')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     ListAudienceExportJobsRequest = Shapes::StructureShape.new(name: 'ListAudienceExportJobsRequest')
     ListAudienceExportJobsResponse = Shapes::StructureShape.new(name: 'ListAudienceExportJobsResponse')
@@ -176,13 +172,6 @@ module Aws::CleanRoomsML
 
     AudienceModelList.member = Shapes::ShapeRef.new(shape: AudienceModelSummary)
 
-    AudienceModelMetric.add_member(:for_top_k_item_predictions, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "forTopKItemPredictions"))
-    AudienceModelMetric.add_member(:type, Shapes::ShapeRef.new(shape: AudienceModelMetricType, required: true, location_name: "type"))
-    AudienceModelMetric.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "value"))
-    AudienceModelMetric.struct_class = Types::AudienceModelMetric
-
-    AudienceModelMetrics.member = Shapes::ShapeRef.new(shape: AudienceModelMetric)
-
     AudienceModelSummary.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
     AudienceModelSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
     AudienceModelSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
@@ -192,6 +181,7 @@ module Aws::CleanRoomsML
     AudienceModelSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
     AudienceModelSummary.struct_class = Types::AudienceModelSummary
 
+    AudienceQualityMetrics.add_member(:recall_metric, Shapes::ShapeRef.new(shape: Double, location_name: "recallMetric"))
     AudienceQualityMetrics.add_member(:relevance_metrics, Shapes::ShapeRef.new(shape: RelevanceMetrics, required: true, location_name: "relevanceMetrics"))
     AudienceQualityMetrics.struct_class = Types::AudienceQualityMetrics
 
@@ -324,7 +314,6 @@ module Aws::CleanRoomsML
     GetAudienceModelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
     GetAudienceModelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     GetAudienceModelResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
-    GetAudienceModelResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: AudienceModelMetrics, location_name: "metrics"))
     GetAudienceModelResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
     GetAudienceModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: AudienceModelStatus, required: true, location_name: "status"))
     GetAudienceModelResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))

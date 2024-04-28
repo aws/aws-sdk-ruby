@@ -123,6 +123,66 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
+    # The impacted location, such as a city, that Amazon Web Services
+    # clients access application resources from.
+    #
+    # @!attribute [rw] as_name
+    #   The name of the internet service provider (ISP) or network (ASN).
+    #   @return [String]
+    #
+    # @!attribute [rw] as_number
+    #   The Autonomous System Number (ASN) of the network at an impacted
+    #   location.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] country
+    #   The name of the country where the internet event is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdivision
+    #   The subdivision location where the health event is located. The
+    #   subdivision usually maps to states in most countries (including the
+    #   United States). For United Kingdom, it maps to a country (England,
+    #   Scotland, Wales) or province (Northern Ireland).
+    #   @return [String]
+    #
+    # @!attribute [rw] metro
+    #   The metro area where the health event is located.
+    #
+    #   Metro indicates a metropolitan region in the United States, such as
+    #   the region around New York City. In non-US countries, this is a
+    #   second-level subdivision. For example, in the United Kingdom, it
+    #   could be a county, a London borough, a unitary authority, council
+    #   area, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] city
+    #   The name of the city where the internet event is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] latitude
+    #   The latitude where the internet event is located.
+    #   @return [Float]
+    #
+    # @!attribute [rw] longitude
+    #   The longitude where the internet event is located.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ClientLocation AWS API Documentation
+    #
+    class ClientLocation < Struct.new(
+      :as_name,
+      :as_number,
+      :country,
+      :subdivision,
+      :metro,
+      :city,
+      :latitude,
+      :longitude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested resource is in use.
     #
     # @!attribute [rw] message
@@ -337,11 +397,25 @@ module Aws::InternetMonitor
     #   URL-encode the `EventID` field in the request URL.
     #   @return [String]
     #
+    # @!attribute [rw] linked_account_id
+    #   The account ID for an account that you've set up cross-account
+    #   sharing for in Amazon CloudWatch Internet Monitor. You configure
+    #   cross-account sharing by using Amazon CloudWatch Observability
+    #   Access Manager. For more information, see [Internet Monitor
+    #   cross-account observability][1] in the Amazon CloudWatch Internet
+    #   Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetHealthEventInput AWS API Documentation
     #
     class GetHealthEventInput < Struct.new(
       :monitor_name,
-      :event_id)
+      :event_id,
+      :linked_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -417,14 +491,84 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
+    # @!attribute [rw] event_id
+    #   The `EventId` of the internet event to return information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetInternetEventInput AWS API Documentation
+    #
+    class GetInternetEventInput < Struct.new(
+      :event_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_id
+    #   The internally-generated identifier of an internet event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_arn
+    #   The Amazon Resource Name (ARN) of the internet event.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The time when the internet event started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The time when the internet event ended. If the event hasn't ended
+    #   yet, this value is empty.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_location
+    #   The impacted location, such as a city, where clients access Amazon
+    #   Web Services application resources.
+    #   @return [Types::ClientLocation]
+    #
+    # @!attribute [rw] event_type
+    #   The type of network impairment.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_status
+    #   The status of the internet event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetInternetEventOutput AWS API Documentation
+    #
+    class GetInternetEventOutput < Struct.new(
+      :event_id,
+      :event_arn,
+      :started_at,
+      :ended_at,
+      :client_location,
+      :event_type,
+      :event_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] monitor_name
     #   The name of the monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_account_id
+    #   The account ID for an account that you've set up cross-account
+    #   sharing for in Amazon CloudWatch Internet Monitor. You configure
+    #   cross-account sharing by using Amazon CloudWatch Observability
+    #   Access Manager. For more information, see [Internet Monitor
+    #   cross-account observability][1] in the Amazon CloudWatch Internet
+    #   Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitorInput AWS API Documentation
     #
     class GetMonitorInput < Struct.new(
-      :monitor_name)
+      :monitor_name,
+      :linked_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -660,7 +804,7 @@ module Aws::InternetMonitor
     #   @return [Array<Types::ImpactedLocation>]
     #
     # @!attribute [rw] status
-    #   Health event list member.
+    #   The status of a health event.
     #   @return [String]
     #
     # @!attribute [rw] percent_of_total_traffic_impacted
@@ -770,7 +914,7 @@ module Aws::InternetMonitor
     # locations.
     #
     # @!attribute [rw] as_name
-    #   The name of the network at an impacted location.
+    #   The name of the internet service provider (ISP) or network (ASN).
     #   @return [String]
     #
     # @!attribute [rw] as_number
@@ -893,6 +1037,57 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
+    # A summary of information about an internet event in Amazon CloudWatch
+    # Internet Monitor. Internet events are issues that cause performance
+    # degradation or availability problems for impacted Amazon Web Services
+    # client locations. Internet Monitor displays information about recent
+    # global health events, called internet events, on a global outages map
+    # that is available to all Amazon Web Services customers.
+    #
+    # @!attribute [rw] event_id
+    #   The internally-generated identifier of an internet event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_arn
+    #   The Amazon Resource Name (ARN) of the internet event.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The time when an internet event started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The time when an internet event ended. If the event hasn't ended
+    #   yet, this value is empty.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_location
+    #   The impacted location, such as a city, that Amazon Web Services
+    #   clients access application resources from.
+    #   @return [Types::ClientLocation]
+    #
+    # @!attribute [rw] event_type
+    #   The type of network impairment.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_status
+    #   The status of an internet event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/InternetEventSummary AWS API Documentation
+    #
+    class InternetEventSummary < Struct.new(
+      :event_id,
+      :event_arn,
+      :started_at,
+      :ended_at,
+      :client_location,
+      :event_type,
+      :event_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Internet health includes measurements calculated by Amazon CloudWatch
     # Internet Monitor about the performance and availability for your
     # application on the internet. Amazon Web Services has substantial
@@ -1006,6 +1201,19 @@ module Aws::InternetMonitor
     #   The status of a health event.
     #   @return [String]
     #
+    # @!attribute [rw] linked_account_id
+    #   The account ID for an account that you've set up cross-account
+    #   sharing for in Amazon CloudWatch Internet Monitor. You configure
+    #   cross-account sharing by using Amazon CloudWatch Observability
+    #   Access Manager. For more information, see [Internet Monitor
+    #   cross-account observability][1] in the Amazon CloudWatch Internet
+    #   Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ListHealthEventsInput AWS API Documentation
     #
     class ListHealthEventsInput < Struct.new(
@@ -1014,7 +1222,8 @@ module Aws::InternetMonitor
       :end_time,
       :next_token,
       :max_results,
-      :event_status)
+      :event_status,
+      :linked_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1043,6 +1252,64 @@ module Aws::InternetMonitor
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The number of query results that you want to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the time window that you want to get a list of
+    #   internet events for.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the time window that you want to get a list of
+    #   internet events for.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_status
+    #   The status of an internet event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The type of network impairment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ListInternetEventsInput AWS API Documentation
+    #
+    class ListInternetEventsInput < Struct.new(
+      :next_token,
+      :max_results,
+      :start_time,
+      :end_time,
+      :event_status,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] internet_events
+    #   A set of internet events returned for the list operation.
+    #   @return [Array<Types::InternetEventSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ListInternetEventsOutput AWS API Documentation
+    #
+    class ListInternetEventsOutput < Struct.new(
+      :internet_events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
     #   The number of monitor objects that you want to return with this
     #   call.
     #   @return [Integer]
@@ -1058,12 +1325,27 @@ module Aws::InternetMonitor
     #   [1]: https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] include_linked_accounts
+    #   A boolean option that you can set to `TRUE` to include monitors for
+    #   linked accounts in a list of monitors, when you've set up
+    #   cross-account sharing in Amazon CloudWatch Internet Monitor. You
+    #   configure cross-account sharing by using Amazon CloudWatch
+    #   Observability Access Manager. For more information, see [Internet
+    #   Monitor cross-account observability][1] in the Amazon CloudWatch
+    #   Internet Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ListMonitorsInput AWS API Documentation
     #
     class ListMonitorsInput < Struct.new(
       :next_token,
       :max_results,
-      :monitor_status)
+      :monitor_status,
+      :include_linked_accounts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1192,11 +1474,11 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
-    # An internet service provider (ISP) or network in Amazon CloudWatch
-    # Internet Monitor.
+    # An internet service provider (ISP) or network (ASN) in Amazon
+    # CloudWatch Internet Monitor.
     #
     # @!attribute [rw] as_name
-    #   The internet provider name or network name.
+    #   The name of the internet service provider (ISP) or network (ASN).
     #   @return [String]
     #
     # @!attribute [rw] as_number
@@ -1226,7 +1508,7 @@ module Aws::InternetMonitor
     #   @return [Array<Types::Network>]
     #
     # @!attribute [rw] network_event_type
-    #   Type of network impairment.
+    #   The type of network impairment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/NetworkImpairment AWS API Documentation
@@ -1507,6 +1789,19 @@ module Aws::InternetMonitor
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
     #   @return [Array<Types::FilterParameter>]
     #
+    # @!attribute [rw] linked_account_id
+    #   The account ID for an account that you've set up cross-account
+    #   sharing for in Amazon CloudWatch Internet Monitor. You configure
+    #   cross-account sharing by using Amazon CloudWatch Observability
+    #   Access Manager. For more information, see [Internet Monitor
+    #   cross-account observability][1] in the Amazon CloudWatch Internet
+    #   Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/StartQueryInput AWS API Documentation
     #
     class StartQueryInput < Struct.new(
@@ -1514,7 +1809,8 @@ module Aws::InternetMonitor
       :start_time,
       :end_time,
       :query_type,
-      :filter_parameters)
+      :filter_parameters,
+      :linked_account_id)
       SENSITIVE = []
       include Aws::Structure
     end

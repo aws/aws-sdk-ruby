@@ -20,6 +20,7 @@ module Aws::IoTWireless
     Accuracy = Shapes::StructureShape.new(name: 'Accuracy')
     AckModeRetryDurationSecs = Shapes::IntegerShape.new(name: 'AckModeRetryDurationSecs')
     AddGwMetadata = Shapes::BooleanShape.new(name: 'AddGwMetadata')
+    AggregationPeriod = Shapes::StringShape.new(name: 'AggregationPeriod')
     AmazonId = Shapes::StringShape.new(name: 'AmazonId')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ApId = Shapes::StringShape.new(name: 'ApId')
@@ -47,6 +48,7 @@ module Aws::IoTWireless
     AssociateWirelessGatewayWithThingRequest = Shapes::StructureShape.new(name: 'AssociateWirelessGatewayWithThingRequest')
     AssociateWirelessGatewayWithThingResponse = Shapes::StructureShape.new(name: 'AssociateWirelessGatewayWithThingResponse')
     AutoCreateTasks = Shapes::BooleanShape.new(name: 'AutoCreateTasks')
+    Avg = Shapes::FloatShape.new(name: 'Avg')
     BCCH = Shapes::IntegerShape.new(name: 'BCCH')
     BSIC = Shapes::IntegerShape.new(name: 'BSIC')
     BaseLat = Shapes::FloatShape.new(name: 'BaseLat')
@@ -155,6 +157,10 @@ module Aws::IoTWireless
     DeviceRegistrationStateResourceTypeEventConfiguration = Shapes::StructureShape.new(name: 'DeviceRegistrationStateResourceTypeEventConfiguration')
     DeviceState = Shapes::StringShape.new(name: 'DeviceState')
     DeviceTypeId = Shapes::StringShape.new(name: 'DeviceTypeId')
+    Dimension = Shapes::StructureShape.new(name: 'Dimension')
+    DimensionName = Shapes::StringShape.new(name: 'DimensionName')
+    DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
+    Dimensions = Shapes::ListShape.new(name: 'Dimensions')
     DisassociateAwsAccountFromPartnerAccountRequest = Shapes::StructureShape.new(name: 'DisassociateAwsAccountFromPartnerAccountRequest')
     DisassociateAwsAccountFromPartnerAccountResponse = Shapes::StructureShape.new(name: 'DisassociateAwsAccountFromPartnerAccountResponse')
     DisassociateMulticastGroupFromFuotaTaskRequest = Shapes::StructureShape.new(name: 'DisassociateMulticastGroupFromFuotaTaskRequest')
@@ -169,6 +175,7 @@ module Aws::IoTWireless
     DisassociateWirelessGatewayFromCertificateResponse = Shapes::StructureShape.new(name: 'DisassociateWirelessGatewayFromCertificateResponse')
     DisassociateWirelessGatewayFromThingRequest = Shapes::StructureShape.new(name: 'DisassociateWirelessGatewayFromThingRequest')
     DisassociateWirelessGatewayFromThingResponse = Shapes::StructureShape.new(name: 'DisassociateWirelessGatewayFromThingResponse')
+    DlAllowed = Shapes::BooleanShape.new(name: 'DlAllowed')
     DlBucketSize = Shapes::IntegerShape.new(name: 'DlBucketSize')
     DlClass = Shapes::StringShape.new(name: 'DlClass')
     DlDr = Shapes::IntegerShape.new(name: 'DlDr')
@@ -232,6 +239,10 @@ module Aws::IoTWireless
     GetFuotaTaskResponse = Shapes::StructureShape.new(name: 'GetFuotaTaskResponse')
     GetLogLevelsByResourceTypesRequest = Shapes::StructureShape.new(name: 'GetLogLevelsByResourceTypesRequest')
     GetLogLevelsByResourceTypesResponse = Shapes::StructureShape.new(name: 'GetLogLevelsByResourceTypesResponse')
+    GetMetricConfigurationRequest = Shapes::StructureShape.new(name: 'GetMetricConfigurationRequest')
+    GetMetricConfigurationResponse = Shapes::StructureShape.new(name: 'GetMetricConfigurationResponse')
+    GetMetricsRequest = Shapes::StructureShape.new(name: 'GetMetricsRequest')
+    GetMetricsResponse = Shapes::StructureShape.new(name: 'GetMetricsResponse')
     GetMulticastGroupRequest = Shapes::StructureShape.new(name: 'GetMulticastGroupRequest')
     GetMulticastGroupResponse = Shapes::StructureShape.new(name: 'GetMulticastGroupResponse')
     GetMulticastGroupSessionRequest = Shapes::StructureShape.new(name: 'GetMulticastGroupSessionRequest')
@@ -287,6 +298,7 @@ module Aws::IoTWireless
     HrAllowed = Shapes::BooleanShape.new(name: 'HrAllowed')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     ISODateTimeString = Shapes::StringShape.new(name: 'ISODateTimeString')
+    Id = Shapes::StringShape.new(name: 'Id')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IdentifierType = Shapes::StringShape.new(name: 'IdentifierType')
     ImportTaskArn = Shapes::StringShape.new(name: 'ImportTaskArn')
@@ -361,6 +373,8 @@ module Aws::IoTWireless
     LoRaWANMulticastGet = Shapes::StructureShape.new(name: 'LoRaWANMulticastGet')
     LoRaWANMulticastMetadata = Shapes::StructureShape.new(name: 'LoRaWANMulticastMetadata')
     LoRaWANMulticastSession = Shapes::StructureShape.new(name: 'LoRaWANMulticastSession')
+    LoRaWANPublicGatewayMetadata = Shapes::StructureShape.new(name: 'LoRaWANPublicGatewayMetadata')
+    LoRaWANPublicGatewayMetadataList = Shapes::ListShape.new(name: 'LoRaWANPublicGatewayMetadataList')
     LoRaWANSendDataToDevice = Shapes::StructureShape.new(name: 'LoRaWANSendDataToDevice')
     LoRaWANServiceProfile = Shapes::StructureShape.new(name: 'LoRaWANServiceProfile')
     LoRaWANStartFuotaTask = Shapes::StructureShape.new(name: 'LoRaWANStartFuotaTask')
@@ -378,6 +392,7 @@ module Aws::IoTWireless
     MNC = Shapes::IntegerShape.new(name: 'MNC')
     MacAddress = Shapes::StringShape.new(name: 'MacAddress')
     MacVersion = Shapes::StringShape.new(name: 'MacVersion')
+    Max = Shapes::FloatShape.new(name: 'Max')
     MaxAllowedSignature = Shapes::IntegerShape.new(name: 'MaxAllowedSignature')
     MaxDutyCycle = Shapes::IntegerShape.new(name: 'MaxDutyCycle')
     MaxEirp = Shapes::IntegerShape.new(name: 'MaxEirp')
@@ -388,6 +403,18 @@ module Aws::IoTWireless
     MessageDeliveryStatusResourceTypeEventConfiguration = Shapes::StructureShape.new(name: 'MessageDeliveryStatusResourceTypeEventConfiguration')
     MessageId = Shapes::StringShape.new(name: 'MessageId')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
+    MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MetricQueryEndTimestamp = Shapes::TimestampShape.new(name: 'MetricQueryEndTimestamp')
+    MetricQueryError = Shapes::StringShape.new(name: 'MetricQueryError')
+    MetricQueryId = Shapes::StringShape.new(name: 'MetricQueryId')
+    MetricQueryStartTimestamp = Shapes::TimestampShape.new(name: 'MetricQueryStartTimestamp')
+    MetricQueryStatus = Shapes::StringShape.new(name: 'MetricQueryStatus')
+    MetricQueryTimestamp = Shapes::TimestampShape.new(name: 'MetricQueryTimestamp')
+    MetricQueryTimestamps = Shapes::ListShape.new(name: 'MetricQueryTimestamps')
+    MetricQueryValue = Shapes::StructureShape.new(name: 'MetricQueryValue')
+    MetricQueryValues = Shapes::ListShape.new(name: 'MetricQueryValues')
+    MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
+    Min = Shapes::FloatShape.new(name: 'Min')
     MinGwDiversity = Shapes::IntegerShape.new(name: 'MinGwDiversity')
     Model = Shapes::StringShape.new(name: 'Model')
     MulticastDeviceStatus = Shapes::StringShape.new(name: 'MulticastDeviceStatus')
@@ -422,6 +449,7 @@ module Aws::IoTWireless
     OnboardStatusReason = Shapes::StringShape.new(name: 'OnboardStatusReason')
     OtaaV1_0_x = Shapes::StructureShape.new(name: 'OtaaV1_0_x')
     OtaaV1_1 = Shapes::StructureShape.new(name: 'OtaaV1_1')
+    P90 = Shapes::FloatShape.new(name: 'P90')
     PCI = Shapes::IntegerShape.new(name: 'PCI')
     PSC = Shapes::IntegerShape.new(name: 'PSC')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
@@ -454,6 +482,7 @@ module Aws::IoTWireless
     PrAllowed = Shapes::BooleanShape.new(name: 'PrAllowed')
     PresetFreq = Shapes::IntegerShape.new(name: 'PresetFreq')
     PrivateKeysList = Shapes::ListShape.new(name: 'PrivateKeysList')
+    ProviderNetId = Shapes::StringShape.new(name: 'ProviderNetId')
     ProximityEventConfiguration = Shapes::StructureShape.new(name: 'ProximityEventConfiguration')
     ProximityResourceTypeEventConfiguration = Shapes::StructureShape.new(name: 'ProximityResourceTypeEventConfiguration')
     PutPositionConfigurationRequest = Shapes::StructureShape.new(name: 'PutPositionConfigurationRequest')
@@ -541,8 +570,16 @@ module Aws::IoTWireless
     StartWirelessDeviceImportTaskResponse = Shapes::StructureShape.new(name: 'StartWirelessDeviceImportTaskResponse')
     Station = Shapes::StringShape.new(name: 'Station')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
+    Std = Shapes::FloatShape.new(name: 'Std')
     SubBand = Shapes::IntegerShape.new(name: 'SubBand')
     SubBands = Shapes::ListShape.new(name: 'SubBands')
+    Sum = Shapes::FloatShape.new(name: 'Sum')
+    SummaryMetricConfiguration = Shapes::StructureShape.new(name: 'SummaryMetricConfiguration')
+    SummaryMetricConfigurationStatus = Shapes::StringShape.new(name: 'SummaryMetricConfigurationStatus')
+    SummaryMetricQueries = Shapes::ListShape.new(name: 'SummaryMetricQueries')
+    SummaryMetricQuery = Shapes::StructureShape.new(name: 'SummaryMetricQuery')
+    SummaryMetricQueryResult = Shapes::StructureShape.new(name: 'SummaryMetricQueryResult')
+    SummaryMetricQueryResults = Shapes::ListShape.new(name: 'SummaryMetricQueryResults')
     SupportedRfRegion = Shapes::StringShape.new(name: 'SupportedRfRegion')
     Supports32BitFCnt = Shapes::BooleanShape.new(name: 'Supports32BitFCnt')
     SupportsClassB = Shapes::BooleanShape.new(name: 'SupportsClassB')
@@ -592,6 +629,8 @@ module Aws::IoTWireless
     UpdateFuotaTaskResponse = Shapes::StructureShape.new(name: 'UpdateFuotaTaskResponse')
     UpdateLogLevelsByResourceTypesRequest = Shapes::StructureShape.new(name: 'UpdateLogLevelsByResourceTypesRequest')
     UpdateLogLevelsByResourceTypesResponse = Shapes::StructureShape.new(name: 'UpdateLogLevelsByResourceTypesResponse')
+    UpdateMetricConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateMetricConfigurationRequest')
+    UpdateMetricConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateMetricConfigurationResponse')
     UpdateMulticastGroupRequest = Shapes::StructureShape.new(name: 'UpdateMulticastGroupRequest')
     UpdateMulticastGroupResponse = Shapes::StructureShape.new(name: 'UpdateMulticastGroupResponse')
     UpdateNetworkAnalyzerConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateNetworkAnalyzerConfigurationRequest')
@@ -1019,6 +1058,12 @@ module Aws::IoTWireless
     DeviceRegistrationStateResourceTypeEventConfiguration.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkResourceTypeEventConfiguration, location_name: "Sidewalk"))
     DeviceRegistrationStateResourceTypeEventConfiguration.struct_class = Types::DeviceRegistrationStateResourceTypeEventConfiguration
 
+    Dimension.add_member(:name, Shapes::ShapeRef.new(shape: DimensionName, location_name: "name"))
+    Dimension.add_member(:value, Shapes::ShapeRef.new(shape: DimensionValue, location_name: "value"))
+    Dimension.struct_class = Types::Dimension
+
+    Dimensions.member = Shapes::ShapeRef.new(shape: Dimension)
+
     DisassociateAwsAccountFromPartnerAccountRequest.add_member(:partner_account_id, Shapes::ShapeRef.new(shape: PartnerAccountId, required: true, location: "uri", location_name: "PartnerAccountId"))
     DisassociateAwsAccountFromPartnerAccountRequest.add_member(:partner_type, Shapes::ShapeRef.new(shape: PartnerType, required: true, location: "querystring", location_name: "partnerType"))
     DisassociateAwsAccountFromPartnerAccountRequest.struct_class = Types::DisassociateAwsAccountFromPartnerAccountRequest
@@ -1156,6 +1201,17 @@ module Aws::IoTWireless
     GetLogLevelsByResourceTypesResponse.add_member(:wireless_gateway_log_options, Shapes::ShapeRef.new(shape: WirelessGatewayLogOptionList, location_name: "WirelessGatewayLogOptions"))
     GetLogLevelsByResourceTypesResponse.add_member(:wireless_device_log_options, Shapes::ShapeRef.new(shape: WirelessDeviceLogOptionList, location_name: "WirelessDeviceLogOptions"))
     GetLogLevelsByResourceTypesResponse.struct_class = Types::GetLogLevelsByResourceTypesResponse
+
+    GetMetricConfigurationRequest.struct_class = Types::GetMetricConfigurationRequest
+
+    GetMetricConfigurationResponse.add_member(:summary_metric, Shapes::ShapeRef.new(shape: SummaryMetricConfiguration, location_name: "SummaryMetric"))
+    GetMetricConfigurationResponse.struct_class = Types::GetMetricConfigurationResponse
+
+    GetMetricsRequest.add_member(:summary_metric_queries, Shapes::ShapeRef.new(shape: SummaryMetricQueries, location_name: "SummaryMetricQueries"))
+    GetMetricsRequest.struct_class = Types::GetMetricsRequest
+
+    GetMetricsResponse.add_member(:summary_metric_query_results, Shapes::ShapeRef.new(shape: SummaryMetricQueryResults, location_name: "SummaryMetricQueryResults"))
+    GetMetricsResponse.struct_class = Types::GetMetricsResponse
 
     GetMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
     GetMulticastGroupRequest.struct_class = Types::GetMulticastGroupRequest
@@ -1603,6 +1659,7 @@ module Aws::IoTWireless
     LoRaWANDeviceMetadata.add_member(:frequency, Shapes::ShapeRef.new(shape: Integer, location_name: "Frequency"))
     LoRaWANDeviceMetadata.add_member(:timestamp, Shapes::ShapeRef.new(shape: ISODateTimeString, location_name: "Timestamp"))
     LoRaWANDeviceMetadata.add_member(:gateways, Shapes::ShapeRef.new(shape: LoRaWANGatewayMetadataList, location_name: "Gateways"))
+    LoRaWANDeviceMetadata.add_member(:public_gateways, Shapes::ShapeRef.new(shape: LoRaWANPublicGatewayMetadataList, location_name: "PublicGateways"))
     LoRaWANDeviceMetadata.struct_class = Types::LoRaWANDeviceMetadata
 
     LoRaWANDeviceProfile.add_member(:supports_class_b, Shapes::ShapeRef.new(shape: SupportsClassB, location_name: "SupportsClassB"))
@@ -1707,6 +1764,16 @@ module Aws::IoTWireless
     LoRaWANMulticastSession.add_member(:ping_slot_period, Shapes::ShapeRef.new(shape: PingSlotPeriod, location_name: "PingSlotPeriod"))
     LoRaWANMulticastSession.struct_class = Types::LoRaWANMulticastSession
 
+    LoRaWANPublicGatewayMetadata.add_member(:provider_net_id, Shapes::ShapeRef.new(shape: ProviderNetId, location_name: "ProviderNetId"))
+    LoRaWANPublicGatewayMetadata.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    LoRaWANPublicGatewayMetadata.add_member(:rssi, Shapes::ShapeRef.new(shape: Double, location_name: "Rssi"))
+    LoRaWANPublicGatewayMetadata.add_member(:snr, Shapes::ShapeRef.new(shape: Double, location_name: "Snr"))
+    LoRaWANPublicGatewayMetadata.add_member(:rf_region, Shapes::ShapeRef.new(shape: RfRegion, location_name: "RfRegion"))
+    LoRaWANPublicGatewayMetadata.add_member(:dl_allowed, Shapes::ShapeRef.new(shape: DlAllowed, location_name: "DlAllowed"))
+    LoRaWANPublicGatewayMetadata.struct_class = Types::LoRaWANPublicGatewayMetadata
+
+    LoRaWANPublicGatewayMetadataList.member = Shapes::ShapeRef.new(shape: LoRaWANPublicGatewayMetadata)
+
     LoRaWANSendDataToDevice.add_member(:f_port, Shapes::ShapeRef.new(shape: FPort, location_name: "FPort"))
     LoRaWANSendDataToDevice.add_member(:participating_gateways, Shapes::ShapeRef.new(shape: ParticipatingGateways, location_name: "ParticipatingGateways"))
     LoRaWANSendDataToDevice.struct_class = Types::LoRaWANSendDataToDevice
@@ -1771,6 +1838,18 @@ module Aws::IoTWireless
 
     MessageDeliveryStatusResourceTypeEventConfiguration.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkResourceTypeEventConfiguration, location_name: "Sidewalk"))
     MessageDeliveryStatusResourceTypeEventConfiguration.struct_class = Types::MessageDeliveryStatusResourceTypeEventConfiguration
+
+    MetricQueryTimestamps.member = Shapes::ShapeRef.new(shape: MetricQueryTimestamp)
+
+    MetricQueryValue.add_member(:min, Shapes::ShapeRef.new(shape: Min, location_name: "Min"))
+    MetricQueryValue.add_member(:max, Shapes::ShapeRef.new(shape: Max, location_name: "Max"))
+    MetricQueryValue.add_member(:sum, Shapes::ShapeRef.new(shape: Sum, location_name: "Sum"))
+    MetricQueryValue.add_member(:avg, Shapes::ShapeRef.new(shape: Avg, location_name: "Avg"))
+    MetricQueryValue.add_member(:std, Shapes::ShapeRef.new(shape: Std, location_name: "Std"))
+    MetricQueryValue.add_member(:p90, Shapes::ShapeRef.new(shape: P90, location_name: "P90"))
+    MetricQueryValue.struct_class = Types::MetricQueryValue
+
+    MetricQueryValues.member = Shapes::ShapeRef.new(shape: MetricQueryValue)
 
     MulticastGroup.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, location_name: "Id"))
     MulticastGroup.add_member(:arn, Shapes::ShapeRef.new(shape: MulticastGroupArn, location_name: "Arn"))
@@ -2039,6 +2118,34 @@ module Aws::IoTWireless
 
     SubBands.member = Shapes::ShapeRef.new(shape: SubBand)
 
+    SummaryMetricConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: SummaryMetricConfigurationStatus, location_name: "Status"))
+    SummaryMetricConfiguration.struct_class = Types::SummaryMetricConfiguration
+
+    SummaryMetricQueries.member = Shapes::ShapeRef.new(shape: SummaryMetricQuery)
+
+    SummaryMetricQuery.add_member(:query_id, Shapes::ShapeRef.new(shape: MetricQueryId, location_name: "QueryId"))
+    SummaryMetricQuery.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    SummaryMetricQuery.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    SummaryMetricQuery.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "AggregationPeriod"))
+    SummaryMetricQuery.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: MetricQueryStartTimestamp, location_name: "StartTimestamp"))
+    SummaryMetricQuery.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: MetricQueryEndTimestamp, location_name: "EndTimestamp"))
+    SummaryMetricQuery.struct_class = Types::SummaryMetricQuery
+
+    SummaryMetricQueryResult.add_member(:query_id, Shapes::ShapeRef.new(shape: MetricQueryId, location_name: "QueryId"))
+    SummaryMetricQueryResult.add_member(:query_status, Shapes::ShapeRef.new(shape: MetricQueryStatus, location_name: "QueryStatus"))
+    SummaryMetricQueryResult.add_member(:error, Shapes::ShapeRef.new(shape: MetricQueryError, location_name: "Error"))
+    SummaryMetricQueryResult.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    SummaryMetricQueryResult.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
+    SummaryMetricQueryResult.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "AggregationPeriod"))
+    SummaryMetricQueryResult.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: MetricQueryStartTimestamp, location_name: "StartTimestamp"))
+    SummaryMetricQueryResult.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: MetricQueryEndTimestamp, location_name: "EndTimestamp"))
+    SummaryMetricQueryResult.add_member(:timestamps, Shapes::ShapeRef.new(shape: MetricQueryTimestamps, location_name: "Timestamps"))
+    SummaryMetricQueryResult.add_member(:values, Shapes::ShapeRef.new(shape: MetricQueryValues, location_name: "Values"))
+    SummaryMetricQueryResult.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, location_name: "Unit"))
+    SummaryMetricQueryResult.struct_class = Types::SummaryMetricQueryResult
+
+    SummaryMetricQueryResults.member = Shapes::ShapeRef.new(shape: SummaryMetricQueryResult)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -2150,6 +2257,11 @@ module Aws::IoTWireless
     UpdateLogLevelsByResourceTypesRequest.struct_class = Types::UpdateLogLevelsByResourceTypesRequest
 
     UpdateLogLevelsByResourceTypesResponse.struct_class = Types::UpdateLogLevelsByResourceTypesResponse
+
+    UpdateMetricConfigurationRequest.add_member(:summary_metric, Shapes::ShapeRef.new(shape: SummaryMetricConfiguration, location_name: "SummaryMetric"))
+    UpdateMetricConfigurationRequest.struct_class = Types::UpdateMetricConfigurationRequest
+
+    UpdateMetricConfigurationResponse.struct_class = Types::UpdateMetricConfigurationResponse
 
     UpdateMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
     UpdateMulticastGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: MulticastGroupName, location_name: "Name"))
@@ -2947,6 +3059,34 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_metric_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetricConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/metric-configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetMetricConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMetricConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/metrics"
+        o.input = Shapes::ShapeRef.new(shape: GetMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_multicast_group, Seahorse::Model::Operation.new.tap do |o|
@@ -3752,6 +3892,20 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_metric_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMetricConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/metric-configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMetricConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMetricConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_multicast_group, Seahorse::Model::Operation.new.tap do |o|

@@ -58,6 +58,8 @@ module Aws::DocDBElastic
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :copy_cluster_snapshot
+            Aws::DocDBElastic::Endpoints::CopyClusterSnapshot.build(context)
           when :create_cluster
             Aws::DocDBElastic::Endpoints::CreateCluster.build(context)
           when :create_cluster_snapshot
@@ -78,6 +80,10 @@ module Aws::DocDBElastic
             Aws::DocDBElastic::Endpoints::ListTagsForResource.build(context)
           when :restore_cluster_from_snapshot
             Aws::DocDBElastic::Endpoints::RestoreClusterFromSnapshot.build(context)
+          when :start_cluster
+            Aws::DocDBElastic::Endpoints::StartCluster.build(context)
+          when :stop_cluster
+            Aws::DocDBElastic::Endpoints::StopCluster.build(context)
           when :tag_resource
             Aws::DocDBElastic::Endpoints::TagResource.build(context)
           when :untag_resource

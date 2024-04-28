@@ -106,6 +106,8 @@ module Aws::NeptuneGraph
             Aws::NeptuneGraph::Endpoints::ResetGraph.build(context)
           when :restore_graph_from_snapshot
             Aws::NeptuneGraph::Endpoints::RestoreGraphFromSnapshot.build(context)
+          when :start_import_task
+            Aws::NeptuneGraph::Endpoints::StartImportTask.build(context)
           when :tag_resource
             Aws::NeptuneGraph::Endpoints::TagResource.build(context)
           when :untag_resource

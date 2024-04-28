@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Backup
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Backup
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::Backup
     #   @option options [Aws::Backup::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Backup::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -2839,6 +2863,19 @@ module Aws::Backup
     #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
     #   sum.
     #
+    #   `Completed with issues` is a status found only in the Backup console.
+    #   For API, this status refers to jobs with a state of `COMPLETED` and a
+    #   `MessageCategory` with a value other than `SUCCESS`; that is, the
+    #   status is completed but comes with a status message. To obtain the job
+    #   count for `Completed with issues`, run two GET requests, and subtract
+    #   the second, smaller number:
+    #
+    #   GET
+    #   /audit/backup-job-summaries?AggregationPeriod=FOURTEEN\_DAYS&amp;State=COMPLETED
+    #
+    #   GET
+    #   /audit/backup-job-summaries?AggregationPeriod=FOURTEEN\_DAYS&amp;MessageCategory=SUCCESS&amp;State=COMPLETED
+    #
     # @option params [String] :resource_type
     #   Returns the job count for the specified resource type. Use request
     #   `GetSupportedResourceTypes` to obtain strings for supported resource
@@ -2958,6 +2995,18 @@ module Aws::Backup
     #
     # @option params [String] :by_state
     #   Returns only backup jobs that are in the specified state.
+    #
+    #   `Completed with issues` is a status found only in the Backup console.
+    #   For API, this status refers to jobs with a state of `COMPLETED` and a
+    #   `MessageCategory` with a value other than `SUCCESS`; that is, the
+    #   status is completed but comes with a status message.
+    #
+    #   To obtain the job count for `Completed with issues`, run two GET
+    #   requests, and subtract the second, smaller number:
+    #
+    #   GET /backup-jobs/?state=COMPLETED
+    #
+    #   GET /backup-jobs/?messageCategory=SUCCESS&amp;state=COMPLETED
     #
     # @option params [String] :by_backup_vault_name
     #   Returns only backup jobs that will be stored in the specified backup
@@ -4078,6 +4127,17 @@ module Aws::Backup
     #
     #    </note>
     #
+    # @option params [Boolean] :managed_by_aws_backup_only
+    #   This attribute filters recovery points based on ownership.
+    #
+    #   If this is set to `TRUE`, the response will contain recovery points
+    #   associated with the selected resources that are managed by Backup.
+    #
+    #   If this is set to `FALSE`, the response will contain all recovery
+    #   points associated with the selected resource.
+    #
+    #   Type: Boolean
+    #
     # @return [Types::ListRecoveryPointsByResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRecoveryPointsByResourceOutput#next_token #next_token} => String
@@ -4091,6 +4151,7 @@ module Aws::Backup
     #     resource_arn: "ARN", # required
     #     next_token: "string",
     #     max_results: 1,
+    #     managed_by_aws_backup_only: false,
     #   })
     #
     # @example Response structure
@@ -4107,6 +4168,7 @@ module Aws::Backup
     #   resp.recovery_points[0].is_parent #=> Boolean
     #   resp.recovery_points[0].parent_recovery_point_arn #=> String
     #   resp.recovery_points[0].resource_name #=> String
+    #   resp.recovery_points[0].vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByResource AWS API Documentation
     #
@@ -5336,9 +5398,9 @@ module Aws::Backup
     # Attempts to cancel a job to create a one-time backup of a resource.
     #
     # This action is not supported for the following services: Amazon FSx
-    # for Windows File Server, Amazon FSx for Lustre, FSx for ONTAP , Amazon
-    # FSx for OpenZFS, Amazon DocumentDB (with MongoDB compatibility),
-    # Amazon RDS, Amazon Aurora, and Amazon Neptune.
+    # for Windows File Server, Amazon FSx for Lustre, Amazon FSx for NetApp
+    # ONTAP , Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB
+    # compatibility), Amazon RDS, Amazon Aurora, and Amazon Neptune.
     #
     # @option params [required, String] :backup_job_id
     #   Uniquely identifies a request to Backup to back up a resource.
@@ -5972,7 +6034,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

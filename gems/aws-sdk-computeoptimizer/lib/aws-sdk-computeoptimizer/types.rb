@@ -454,11 +454,21 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] threshold
     #   The threshold value used for the specified metric parameter.
+    #
+    #   <note markdown="1"> You can only specify the threshold value for CPU utilization.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] headroom
-    #   The headroom threshold value in percentage used for the specified
-    #   metric parameter.
+    #   The headroom value in percentage used for the specified metric
+    #   parameter.
+    #
+    #   The following lists the valid values for CPU and memory utilization.
+    #
+    #   * CPU utilization: `PERCENT_30 | PERCENT_20 | PERCENT_0`
+    #
+    #   * Memory utilization: `PERCENT_30 | PERCENT_20 | PERCENT_10`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/CustomizableMetricParameters AWS API Documentation
@@ -1384,7 +1394,7 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] utilization_preferences
-    #   The resource’s CPU utilization threshold preferences, such as
+    #   The resource’s CPU and memory utilization preferences, such as
     #   threshold and headroom, that are used to generate rightsizing
     #   recommendations.
     #
@@ -2868,7 +2878,7 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] utilization_preferences
-    #   The resource’s CPU utilization threshold preferences, such as
+    #   The resource’s CPU and memory utilization preferences, such as
     #   threshold and headroom, that were used to generate rightsizing
     #   recommendations. It considers all applicable preferences that you
     #   set at the resource, account, and organization level.
@@ -5027,16 +5037,26 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] utilization_preferences
-    #   The preference to control the resource’s CPU utilization thresholds
-    #   - threshold and headroom. When this preference isn't specified, we
-    #   use the following default values:
+    #   The preference to control the resource’s CPU utilization threshold,
+    #   CPU utilization headroom, and memory utilization headroom. When this
+    #   preference isn't specified, we use the following default values.
+    #
+    #   CPU utilization:
     #
     #   * `P99_5` for threshold
     #
-    #   * `PERCENT_17` for headroom
+    #   * `PERCENT_20` for headroom
     #
-    #   <note markdown="1"> You can only set this preference for the Amazon EC2 instance
-    #   resource type.
+    #   Memory utilization:
+    #
+    #   * `PERCENT_20` for headroom
+    #
+    #   ^
+    #
+    #   <note markdown="1"> * You can only set CPU and memory utilization preferences for the
+    #     Amazon EC2 instance resource type.
+    #
+    #   * The threshold setting isn’t available for memory utilization.
     #
     #    </note>
     #   @return [Array<Types::UtilizationPreference>]
@@ -5262,9 +5282,9 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] utilization_preferences
-    #   The preference to control the resource’s CPU utilization thresholds
-    #   - threshold and headroom. If the preference isn’t set, this object
-    #   is null.
+    #   The preference to control the resource’s CPU utilization threshold,
+    #   CPU utilization headroom, and memory utilization headroom. If the
+    #   preference isn’t set, this object is null.
     #
     #   <note markdown="1"> This preference is only available for the Amazon EC2 instance
     #   resource type.
@@ -5964,10 +5984,6 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] metric_name
     #   The name of the resource utilization metric name to customize.
-    #
-    #   <note markdown="1"> Compute Optimizer only supports `CpuUtilization`.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] metric_parameters

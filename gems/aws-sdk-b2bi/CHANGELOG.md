@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2024-04-04)
+------------------
+
+* Feature - Adding support for X12 5010 HIPAA EDI version and associated transaction sets.
+
+1.5.0 (2024-03-29)
+------------------
+
+* Feature - Supporting new EDI X12 transaction sets for X12 versions 4010, 4030, and 5010.
+
 1.4.0 (2024-01-26)
 ------------------
 

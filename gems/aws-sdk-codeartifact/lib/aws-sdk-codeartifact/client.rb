@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CodeArtifact
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CodeArtifact
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::CodeArtifact
     #   @option options [Aws::CodeArtifact::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CodeArtifact::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -492,19 +516,29 @@ module Aws::CodeArtifact
     #
     # @option params [String] :namespace
     #   The namespace of the package versions to be copied. The package
-    #   version component that specifies its namespace depends on its type.
-    #   For example:
+    #   component that specifies its namespace depends on its type. For
+    #   example:
     #
-    #   * The namespace of a Maven package version is its `groupId`. The
-    #     namespace is required when copying Maven package versions.
+    #   <note markdown="1"> The namespace is required when copying package versions of the
+    #   following formats:
     #
-    #   * The namespace of an npm package version is its `scope`.
+    #    * Maven
+    #
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
+    #
+    #   * The namespace of a Maven package version is its `groupId`.
+    #
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
-    #
-    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the versions to be copied.
@@ -664,6 +698,81 @@ module Aws::CodeArtifact
     # @param [Hash] params ({})
     def create_domain(params = {}, options = {})
       req = build_request(:create_domain, params)
+      req.send_request(options)
+    end
+
+    # Creates a package group. For more information about creating package
+    # groups, including example CLI commands, see [Create a package
+    # group][1] in the *CodeArtifact User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/create-package-group.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain in which you want to create a package group.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :package_group
+    #   The pattern of the package group to create. The pattern is also the
+    #   identifier of the package group.
+    #
+    # @option params [String] :contact_info
+    #   The contact information for the created package group.
+    #
+    # @option params [String] :description
+    #   A description of the package group.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tag key-value pairs for the package group.
+    #
+    # @return [Types::CreatePackageGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePackageGroupResult#package_group #package_group} => Types::PackageGroupDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_package_group({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     package_group: "PackageGroupPattern", # required
+    #     contact_info: "PackageGroupContactInfo",
+    #     description: "Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_group.arn #=> String
+    #   resp.package_group.pattern #=> String
+    #   resp.package_group.domain_name #=> String
+    #   resp.package_group.domain_owner #=> String
+    #   resp.package_group.created_time #=> Time
+    #   resp.package_group.contact_info #=> String
+    #   resp.package_group.description #=> String
+    #   resp.package_group.origin_configuration.restrictions #=> Hash
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].effective_mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.arn #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.pattern #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].repositories_count #=> Integer
+    #   resp.package_group.parent.arn #=> String
+    #   resp.package_group.parent.pattern #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/CreatePackageGroup AWS API Documentation
+    #
+    # @overload create_package_group(params = {})
+    # @param [Hash] params ({})
+    def create_package_group(params = {}, options = {})
+      req = build_request(:create_package_group, params)
       req.send_request(options)
     end
 
@@ -855,15 +964,26 @@ module Aws::CodeArtifact
     #   The namespace of the package to delete. The package component that
     #   specifies its namespace depends on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`. The namespace is
-    #     required when deleting Maven package versions.
+    #   <note markdown="1"> The namespace is required when deleting packages of the following
+    #   formats:
     #
-    #   * The namespace of an npm package is its `scope`.
+    #    * Maven
     #
-    #   * Python and NuGet packages do not contain corresponding components,
-    #     packages of those formats do not have a namespace.
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
+    #
+    #   * The namespace of a Maven package version is its `groupId`.
+    #
+    #   * The namespace of an npm or Swift package version is its `scope`.
     #
     #   * The namespace of a generic package is its `namespace`.
+    #
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #
     # @option params [required, String] :package
     #   The name of the package to delete.
@@ -900,6 +1020,62 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Deletes a package group. Deleting a package group does not delete
+    # packages or package versions associated with the package group. When a
+    # package group is deleted, the direct child package groups will become
+    # children of the package group's direct parent package group.
+    # Therefore, if any of the child groups are inheriting any settings from
+    # the parent, those settings could change.
+    #
+    # @option params [required, String] :domain
+    #   The domain that contains the package group to be deleted.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :package_group
+    #   The pattern of the package group to be deleted.
+    #
+    # @return [Types::DeletePackageGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePackageGroupResult#package_group #package_group} => Types::PackageGroupDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_package_group({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     package_group: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_group.arn #=> String
+    #   resp.package_group.pattern #=> String
+    #   resp.package_group.domain_name #=> String
+    #   resp.package_group.domain_owner #=> String
+    #   resp.package_group.created_time #=> Time
+    #   resp.package_group.contact_info #=> String
+    #   resp.package_group.description #=> String
+    #   resp.package_group.origin_configuration.restrictions #=> Hash
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].effective_mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.arn #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.pattern #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].repositories_count #=> Integer
+    #   resp.package_group.parent.arn #=> String
+    #   resp.package_group.parent.pattern #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeletePackageGroup AWS API Documentation
+    #
+    # @overload delete_package_group(params = {})
+    # @param [Hash] params ({})
+    def delete_package_group(params = {}, options = {})
+      req = build_request(:delete_package_group, params)
+      req.send_request(options)
+    end
+
     # Deletes one or more versions of a package. A deleted package version
     # cannot be restored in your repository. If you want to remove a package
     # version from your repository and be able to restore it later, set its
@@ -929,19 +1105,29 @@ module Aws::CodeArtifact
     #
     # @option params [String] :namespace
     #   The namespace of the package versions to be deleted. The package
-    #   version component that specifies its namespace depends on its type.
-    #   For example:
+    #   component that specifies its namespace depends on its type. For
+    #   example:
     #
-    #   * The namespace of a Maven package version is its `groupId`. The
-    #     namespace is required when deleting Maven package versions.
+    #   <note markdown="1"> The namespace is required when deleting package versions of the
+    #   following formats:
     #
-    #   * The namespace of an npm package version is its `scope`.
+    #    * Maven
+    #
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
+    #
+    #   * The namespace of a Maven package version is its `groupId`.
+    #
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
-    #
-    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package with the versions to delete.
@@ -1165,15 +1351,26 @@ module Aws::CodeArtifact
     #   The namespace of the requested package. The package component that
     #   specifies its namespace depends on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`. The namespace is
-    #     required when requesting Maven packages.
+    #   <note markdown="1"> The namespace is required when requesting packages of the following
+    #   formats:
     #
-    #   * The namespace of an npm package is its `scope`.
+    #    * Maven
     #
-    #   * Python and NuGet packages do not contain a corresponding component,
-    #     packages of those formats do not have a namespace.
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
+    #
+    #   * The namespace of a Maven package version is its `groupId`.
+    #
+    #   * The namespace of an npm or Swift package version is its `scope`.
     #
     #   * The namespace of a generic package is its `namespace`.
+    #
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #
     # @option params [required, String] :package
     #   The name of the requested package.
@@ -1210,6 +1407,62 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Returns a [PackageGroupDescription][1] object that contains
+    # information about the requested package group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroupDescription.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain that contains the package group.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :package_group
+    #   The pattern of the requested package group.
+    #
+    # @return [Types::DescribePackageGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePackageGroupResult#package_group #package_group} => Types::PackageGroupDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_package_group({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     package_group: "PackageGroupPattern", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_group.arn #=> String
+    #   resp.package_group.pattern #=> String
+    #   resp.package_group.domain_name #=> String
+    #   resp.package_group.domain_owner #=> String
+    #   resp.package_group.created_time #=> Time
+    #   resp.package_group.contact_info #=> String
+    #   resp.package_group.description #=> String
+    #   resp.package_group.origin_configuration.restrictions #=> Hash
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].effective_mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.arn #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.pattern #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].repositories_count #=> Integer
+    #   resp.package_group.parent.arn #=> String
+    #   resp.package_group.parent.pattern #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribePackageGroup AWS API Documentation
+    #
+    # @overload describe_package_group(params = {})
+    # @param [Hash] params ({})
+    def describe_package_group(params = {}, options = {})
+      req = build_request(:describe_package_group, params)
+      req.send_request(options)
+    end
+
     # Returns a [PackageVersionDescription][1] object that contains
     # information about the requested package version.
     #
@@ -1232,19 +1485,29 @@ module Aws::CodeArtifact
     #   A format that specifies the type of the requested package version.
     #
     # @option params [String] :namespace
-    #   The namespace of the requested package version. The package version
-    #   component that specifies its namespace depends on its type. For
-    #   example:
+    #   The namespace of the requested package version. The package component
+    #   that specifies its namespace depends on its type. For example:
+    #
+    #   <note markdown="1"> The namespace is required when requesting package versions of the
+    #   following formats:
+    #
+    #    * Maven
+    #
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
     #
     #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package version is its `scope`.
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
-    #
-    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the requested package version.
@@ -1437,18 +1700,29 @@ module Aws::CodeArtifact
     #
     # @option params [String] :namespace
     #   The namespace of the package versions to be disposed. The package
-    #   version component that specifies its namespace depends on its type.
-    #   For example:
+    #   component that specifies its namespace depends on its type. For
+    #   example:
+    #
+    #   <note markdown="1"> The namespace is required when disposing package versions of the
+    #   following formats:
+    #
+    #    * Maven
+    #
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
     #
     #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package version is its `scope`.
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
-    #
-    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package with the versions you want to dispose.
@@ -1498,6 +1772,105 @@ module Aws::CodeArtifact
     # @param [Hash] params ({})
     def dispose_package_versions(params = {}, options = {})
       req = build_request(:dispose_package_versions, params)
+      req.send_request(options)
+    end
+
+    # Returns the most closely associated package group to the specified
+    # package. This API does not require that the package exist in any
+    # repository in the domain. As such, `GetAssociatedPackageGroup` can be
+    # used to see which package group's origin configuration applies to a
+    # package before that package is in a repository. This can be helpful to
+    # check if public packages are blocked without ingesting them.
+    #
+    # For information package group association and matching, see [Package
+    # group definition syntax and matching behavior][1] in the *CodeArtifact
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain that contains the package from which to get the
+    #   associated package group.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :format
+    #   The format of the package from which to get the associated package
+    #   group.
+    #
+    # @option params [String] :namespace
+    #   The namespace of the package from which to get the associated package
+    #   group. The package component that specifies its namespace depends on
+    #   its type. For example:
+    #
+    #   <note markdown="1"> The namespace is required when getting associated package groups from
+    #   packages of the following formats:
+    #
+    #    * Maven
+    #
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
+    #
+    #   * The namespace of a Maven package version is its `groupId`.
+    #
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
+    #
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
+    #
+    # @option params [required, String] :package
+    #   The package from which to get the associated package group.
+    #
+    # @return [Types::GetAssociatedPackageGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAssociatedPackageGroupResult#package_group #package_group} => Types::PackageGroupDescription
+    #   * {Types::GetAssociatedPackageGroupResult#association_type #association_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_associated_package_group({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     namespace: "PackageNamespace",
+    #     package: "PackageName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_group.arn #=> String
+    #   resp.package_group.pattern #=> String
+    #   resp.package_group.domain_name #=> String
+    #   resp.package_group.domain_owner #=> String
+    #   resp.package_group.created_time #=> Time
+    #   resp.package_group.contact_info #=> String
+    #   resp.package_group.description #=> String
+    #   resp.package_group.origin_configuration.restrictions #=> Hash
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].effective_mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.arn #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.pattern #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].repositories_count #=> Integer
+    #   resp.package_group.parent.arn #=> String
+    #   resp.package_group.parent.pattern #=> String
+    #   resp.association_type #=> String, one of "STRONG", "WEAK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/GetAssociatedPackageGroup AWS API Documentation
+    #
+    # @overload get_associated_package_group(params = {})
+    # @param [Hash] params ({})
+    def get_associated_package_group(params = {}, options = {})
+      req = build_request(:get_associated_package_group, params)
       req.send_request(options)
     end
 
@@ -1642,18 +2015,29 @@ module Aws::CodeArtifact
     #
     # @option params [String] :namespace
     #   The namespace of the package version with the requested asset file.
-    #   The package version component that specifies its namespace depends on
-    #   its type. For example:
+    #   The package component that specifies its namespace depends on its
+    #   type. For example:
+    #
+    #   <note markdown="1"> The namespace is required when requesting assets from package versions
+    #   of the following formats:
+    #
+    #    * Maven
+    #
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
     #
     #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package version is its `scope`.
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
-    #
-    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the requested asset.
@@ -1728,10 +2112,25 @@ module Aws::CodeArtifact
     #
     # @option params [String] :namespace
     #   The namespace of the package version with the requested readme file.
-    #   The package version component that specifies its namespace depends on
-    #   its type. For example:
+    #   The package component that specifies its namespace depends on its
+    #   type. For example:
     #
-    #   * The namespace of an npm package version is its `scope`.
+    #   <note markdown="1"> The namespace is required when requesting the readme from package
+    #   versions of the following formats:
+    #
+    #    * Maven
+    #
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
+    #
+    #   * The namespace of a Maven package version is its `groupId`.
+    #
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
@@ -1786,6 +2185,8 @@ module Aws::CodeArtifact
     # Returns the endpoint of a repository for a specific package format. A
     # repository has one endpoint for each package format:
     #
+    # * `generic`
+    #
     # * `maven`
     #
     # * `npm`
@@ -1793,6 +2194,8 @@ module Aws::CodeArtifact
     # * `nuget`
     #
     # * `pypi`
+    #
+    # * `swift`
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the repository.
@@ -1876,6 +2279,142 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Lists the repositories in the added repositories list of the specified
+    # restriction type for a package group. For more information about
+    # restriction types and added repository lists, see [Package group
+    # origin controls][1] in the *CodeArtifact User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-origin-controls.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain that contains the package group from which to
+    #   list allowed repositories.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :package_group
+    #   The pattern of the package group from which to list allowed
+    #   repositories.
+    #
+    # @option params [required, String] :origin_restriction_type
+    #   The origin configuration restriction type of which to list allowed
+    #   repositories.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListAllowedRepositoriesForGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAllowedRepositoriesForGroupResult#allowed_repositories #allowed_repositories} => Array&lt;String&gt;
+    #   * {Types::ListAllowedRepositoriesForGroupResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_allowed_repositories_for_group({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     package_group: "PackageGroupPattern", # required
+    #     origin_restriction_type: "EXTERNAL_UPSTREAM", # required, accepts EXTERNAL_UPSTREAM, INTERNAL_UPSTREAM, PUBLISH
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.allowed_repositories #=> Array
+    #   resp.allowed_repositories[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListAllowedRepositoriesForGroup AWS API Documentation
+    #
+    # @overload list_allowed_repositories_for_group(params = {})
+    # @param [Hash] params ({})
+    def list_allowed_repositories_for_group(params = {}, options = {})
+      req = build_request(:list_allowed_repositories_for_group, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of packages associated with the requested package
+    # group. For information package group association and matching, see
+    # [Package group definition syntax and matching behavior][1] in the
+    # *CodeArtifact User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain that contains the package group from which to
+    #   list associated packages.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :package_group
+    #   The pattern of the package group from which to list associated
+    #   packages.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Boolean] :preview
+    #   When this flag is included, `ListAssociatedPackages` will return a
+    #   list of packages that would be associated with a package group, even
+    #   if it does not exist.
+    #
+    # @return [Types::ListAssociatedPackagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssociatedPackagesResult#packages #packages} => Array&lt;Types::AssociatedPackage&gt;
+    #   * {Types::ListAssociatedPackagesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_associated_packages({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     package_group: "PackageGroupPattern", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     preview: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.packages #=> Array
+    #   resp.packages[0].format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.packages[0].namespace #=> String
+    #   resp.packages[0].package #=> String
+    #   resp.packages[0].association_type #=> String, one of "STRONG", "WEAK"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListAssociatedPackages AWS API Documentation
+    #
+    # @overload list_associated_packages(params = {})
+    # @param [Hash] params ({})
+    def list_associated_packages(params = {}, options = {})
+      req = build_request(:list_associated_packages, params)
+      req.send_request(options)
+    end
+
     # Returns a list of [DomainSummary][1] objects for all domains owned by
     # the Amazon Web Services account that makes this call. Each returned
     # `DomainSummary` object contains information about a domain.
@@ -1926,6 +2465,74 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Returns a list of package groups in the requested domain.
+    #
+    # @option params [required, String] :domain
+    #   The domain for which you want to list package groups.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [String] :prefix
+    #   A prefix for which to search package groups. When included,
+    #   `ListPackageGroups` will return only package groups with patterns that
+    #   match the prefix.
+    #
+    # @return [Types::ListPackageGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPackageGroupsResult#package_groups #package_groups} => Array&lt;Types::PackageGroupSummary&gt;
+    #   * {Types::ListPackageGroupsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_package_groups({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     prefix: "PackageGroupPatternPrefix",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_groups #=> Array
+    #   resp.package_groups[0].arn #=> String
+    #   resp.package_groups[0].pattern #=> String
+    #   resp.package_groups[0].domain_name #=> String
+    #   resp.package_groups[0].domain_owner #=> String
+    #   resp.package_groups[0].created_time #=> Time
+    #   resp.package_groups[0].contact_info #=> String
+    #   resp.package_groups[0].description #=> String
+    #   resp.package_groups[0].origin_configuration.restrictions #=> Hash
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].effective_mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.arn #=> String
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.pattern #=> String
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].repositories_count #=> Integer
+    #   resp.package_groups[0].parent.arn #=> String
+    #   resp.package_groups[0].parent.pattern #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListPackageGroups AWS API Documentation
+    #
+    # @overload list_package_groups(params = {})
+    # @param [Hash] params ({})
+    def list_package_groups(params = {}, options = {})
+      req = build_request(:list_package_groups, params)
+      req.send_request(options)
+    end
+
     # Returns a list of [AssetSummary][1] objects for assets in a package
     # version.
     #
@@ -1951,18 +2558,29 @@ module Aws::CodeArtifact
     #
     # @option params [String] :namespace
     #   The namespace of the package version that contains the requested
-    #   package version assets. The package version component that specifies
-    #   its namespace depends on its type. For example:
+    #   package version assets. The package component that specifies its
+    #   namespace depends on its type. For example:
+    #
+    #   <note markdown="1"> The namespace is required requesting assets from package versions of
+    #   the following formats:
+    #
+    #    * Maven
+    #
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
     #
     #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package version is its `scope`.
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
-    #
-    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the requested package version
@@ -2057,18 +2675,29 @@ module Aws::CodeArtifact
     #
     # @option params [String] :namespace
     #   The namespace of the package version with the requested dependencies.
-    #   The package version component that specifies its namespace depends on
-    #   its type. For example:
+    #   The package component that specifies its namespace depends on its
+    #   type. For example:
+    #
+    #   <note markdown="1"> The namespace is required when listing dependencies from package
+    #   versions of the following formats:
+    #
+    #    * Maven
+    #
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
     #
     #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package version is its `scope`.
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
-    #
-    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package versions' package.
@@ -2156,14 +2785,26 @@ module Aws::CodeArtifact
     #   versions. The package component that specifies its namespace depends
     #   on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   <note markdown="1"> The namespace is required when deleting package versions of the
+    #   following formats:
     #
-    #   * The namespace of an npm package is its `scope`.
+    #    * Maven
     #
-    #   * Python and NuGet packages do not contain a corresponding component,
-    #     packages of those formats do not have a namespace.
+    #   * Swift
+    #
+    #   * generic
+    #
+    #    </note>
+    #
+    #   * The namespace of a Maven package version is its `groupId`.
+    #
+    #   * The namespace of an npm or Swift package version is its `scope`.
     #
     #   * The namespace of a generic package is its `namespace`.
+    #
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #
     # @option params [required, String] :package
     #   The name of the package for which you want to request package
@@ -2268,14 +2909,15 @@ module Aws::CodeArtifact
     #
     #   Each package format uses namespace as follows:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
-    #
-    #   * Python and NuGet packages do not contain a corresponding component,
-    #     packages of those formats do not have a namespace.
+    #   * The namespace of an npm or Swift package version is its `scope`.
     #
     #   * The namespace of a generic package is its `namespace`.
+    #
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #
     # @option params [String] :package_prefix
     #   A prefix used to filter requested packages. Only packages with names
@@ -2475,6 +3117,81 @@ module Aws::CodeArtifact
     # @param [Hash] params ({})
     def list_repositories_in_domain(params = {}, options = {})
       req = build_request(:list_repositories_in_domain, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of direct children of the specified package group.
+    #
+    # For information package group hierarchy, see [Package group definition
+    # syntax and matching behavior][1] in the *CodeArtifact User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain which contains the package group from which to
+    #   list sub package groups.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :package_group
+    #   The pattern of the package group from which to list sub package
+    #   groups.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListSubPackageGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSubPackageGroupsResult#package_groups #package_groups} => Array&lt;Types::PackageGroupSummary&gt;
+    #   * {Types::ListSubPackageGroupsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sub_package_groups({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     package_group: "PackageGroupPattern", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_groups #=> Array
+    #   resp.package_groups[0].arn #=> String
+    #   resp.package_groups[0].pattern #=> String
+    #   resp.package_groups[0].domain_name #=> String
+    #   resp.package_groups[0].domain_owner #=> String
+    #   resp.package_groups[0].created_time #=> Time
+    #   resp.package_groups[0].contact_info #=> String
+    #   resp.package_groups[0].description #=> String
+    #   resp.package_groups[0].origin_configuration.restrictions #=> Hash
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].effective_mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.arn #=> String
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.pattern #=> String
+    #   resp.package_groups[0].origin_configuration.restrictions["PackageGroupOriginRestrictionType"].repositories_count #=> Integer
+    #   resp.package_groups[0].parent.arn #=> String
+    #   resp.package_groups[0].parent.pattern #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListSubPackageGroups AWS API Documentation
+    #
+    # @overload list_sub_package_groups(params = {})
+    # @param [Hash] params ({})
+    def list_sub_package_groups(params = {}, options = {})
+      req = build_request(:list_sub_package_groups, params)
       req.send_request(options)
     end
 
@@ -2731,14 +3448,15 @@ module Aws::CodeArtifact
     #   The namespace of the package to be updated. The package component that
     #   specifies its namespace depends on its type. For example:
     #
-    #   * The namespace of a Maven package is its `groupId`.
+    #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package is its `scope`.
-    #
-    #   * Python and NuGet packages do not contain a corresponding component,
-    #     packages of those formats do not have a namespace.
+    #   * The namespace of an npm or Swift package version is its `scope`.
     #
     #   * The namespace of a generic package is its `namespace`.
+    #
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #
     # @option params [required, String] :package
     #   The name of the package to be updated.
@@ -2909,6 +3627,169 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Updates a package group. This API cannot be used to update a package
+    # group's origin configuration or pattern. To update a package group's
+    # origin configuration, use [UpdatePackageGroupOriginConfiguration][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageGroupOriginConfiguration.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain which contains the package group to be updated.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :package_group
+    #   The pattern of the package group to be updated.
+    #
+    # @option params [String] :contact_info
+    #   Contact information which you want to update the requested package
+    #   group with.
+    #
+    # @option params [String] :description
+    #   The description you want to update the requested package group with.
+    #
+    # @return [Types::UpdatePackageGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePackageGroupResult#package_group #package_group} => Types::PackageGroupDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_package_group({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     package_group: "PackageGroupPattern", # required
+    #     contact_info: "PackageGroupContactInfo",
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_group.arn #=> String
+    #   resp.package_group.pattern #=> String
+    #   resp.package_group.domain_name #=> String
+    #   resp.package_group.domain_owner #=> String
+    #   resp.package_group.created_time #=> Time
+    #   resp.package_group.contact_info #=> String
+    #   resp.package_group.description #=> String
+    #   resp.package_group.origin_configuration.restrictions #=> Hash
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].effective_mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.arn #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.pattern #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].repositories_count #=> Integer
+    #   resp.package_group.parent.arn #=> String
+    #   resp.package_group.parent.pattern #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UpdatePackageGroup AWS API Documentation
+    #
+    # @overload update_package_group(params = {})
+    # @param [Hash] params ({})
+    def update_package_group(params = {}, options = {})
+      req = build_request(:update_package_group, params)
+      req.send_request(options)
+    end
+
+    # Updates the package origin configuration for a package group.
+    #
+    # The package origin configuration determines how new versions of a
+    # package can be added to a repository. You can allow or block direct
+    # publishing of new package versions, or ingestion and retaining of new
+    # package versions from an external connection or upstream source. For
+    # more information about package group origin controls and
+    # configuration, see [Package group origin controls][1] in the
+    # *CodeArtifact User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-origin-controls.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain which contains the package group for which to
+    #   update the origin configuration.
+    #
+    # @option params [String] :domain_owner
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
+    #
+    # @option params [required, String] :package_group
+    #   The pattern of the package group for which to update the origin
+    #   configuration.
+    #
+    # @option params [Hash<String,String>] :restrictions
+    #   The origin configuration settings that determine how package versions
+    #   can enter repositories.
+    #
+    # @option params [Array<Types::PackageGroupAllowedRepository>] :add_allowed_repositories
+    #   The repository name and restrictions to add to the allowed repository
+    #   list of the specified package group.
+    #
+    # @option params [Array<Types::PackageGroupAllowedRepository>] :remove_allowed_repositories
+    #   The repository name and restrictions to remove from the allowed
+    #   repository list of the specified package group.
+    #
+    # @return [Types::UpdatePackageGroupOriginConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePackageGroupOriginConfigurationResult#package_group #package_group} => Types::PackageGroupDescription
+    #   * {Types::UpdatePackageGroupOriginConfigurationResult#allowed_repository_updates #allowed_repository_updates} => Hash&lt;String,Hash&lt;String,Array&lt;String&gt;&gt;&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_package_group_origin_configuration({
+    #     domain: "DomainName", # required
+    #     domain_owner: "AccountId",
+    #     package_group: "PackageGroupPattern", # required
+    #     restrictions: {
+    #       "EXTERNAL_UPSTREAM" => "ALLOW", # accepts ALLOW, ALLOW_SPECIFIC_REPOSITORIES, BLOCK, INHERIT
+    #     },
+    #     add_allowed_repositories: [
+    #       {
+    #         repository_name: "RepositoryName",
+    #         origin_restriction_type: "EXTERNAL_UPSTREAM", # accepts EXTERNAL_UPSTREAM, INTERNAL_UPSTREAM, PUBLISH
+    #       },
+    #     ],
+    #     remove_allowed_repositories: [
+    #       {
+    #         repository_name: "RepositoryName",
+    #         origin_restriction_type: "EXTERNAL_UPSTREAM", # accepts EXTERNAL_UPSTREAM, INTERNAL_UPSTREAM, PUBLISH
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_group.arn #=> String
+    #   resp.package_group.pattern #=> String
+    #   resp.package_group.domain_name #=> String
+    #   resp.package_group.domain_owner #=> String
+    #   resp.package_group.created_time #=> Time
+    #   resp.package_group.contact_info #=> String
+    #   resp.package_group.description #=> String
+    #   resp.package_group.origin_configuration.restrictions #=> Hash
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].effective_mode #=> String, one of "ALLOW", "ALLOW_SPECIFIC_REPOSITORIES", "BLOCK", "INHERIT"
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.arn #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].inherited_from.pattern #=> String
+    #   resp.package_group.origin_configuration.restrictions["PackageGroupOriginRestrictionType"].repositories_count #=> Integer
+    #   resp.package_group.parent.arn #=> String
+    #   resp.package_group.parent.pattern #=> String
+    #   resp.allowed_repository_updates #=> Hash
+    #   resp.allowed_repository_updates["PackageGroupOriginRestrictionType"] #=> Hash
+    #   resp.allowed_repository_updates["PackageGroupOriginRestrictionType"]["PackageGroupAllowedRepositoryUpdateType"] #=> Array
+    #   resp.allowed_repository_updates["PackageGroupOriginRestrictionType"]["PackageGroupAllowedRepositoryUpdateType"][0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UpdatePackageGroupOriginConfiguration AWS API Documentation
+    #
+    # @overload update_package_group_origin_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_package_group_origin_configuration(params = {}, options = {})
+      req = build_request(:update_package_group_origin_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the status of one or more versions of a package. Using
     # `UpdatePackageVersionsStatus`, you can update the status of package
     # versions to `Archived`, `Published`, or `Unlisted`. To set the status
@@ -2936,18 +3817,18 @@ module Aws::CodeArtifact
     #
     # @option params [String] :namespace
     #   The namespace of the package version to be updated. The package
-    #   version component that specifies its namespace depends on its type.
-    #   For example:
+    #   component that specifies its namespace depends on its type. For
+    #   example:
     #
     #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm package version is its `scope`.
+    #   * The namespace of an npm or Swift package version is its `scope`.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #
     #   * Python and NuGet package versions do not contain a corresponding
     #     component, package versions of those formats do not have a
     #     namespace.
-    #
-    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package with the version statuses to update.
@@ -3092,7 +3973,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

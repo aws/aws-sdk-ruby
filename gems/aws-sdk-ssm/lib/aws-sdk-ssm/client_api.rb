@@ -38,6 +38,7 @@ module Aws::SSM
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     ApplyOnlyAtCronInterval = Shapes::BooleanShape.new(name: 'ApplyOnlyAtCronInterval')
     ApproveAfterDays = Shapes::IntegerShape.new(name: 'ApproveAfterDays')
+    Architecture = Shapes::StringShape.new(name: 'Architecture')
     AssociateOpsItemRelatedItemRequest = Shapes::StructureShape.new(name: 'AssociateOpsItemRelatedItemRequest')
     AssociateOpsItemRelatedItemResponse = Shapes::StructureShape.new(name: 'AssociateOpsItemRelatedItemResponse')
     AssociatedInstances = Shapes::StructureShape.new(name: 'AssociatedInstances')
@@ -289,6 +290,9 @@ module Aws::SSM
     DescribeInstancePatchStatesResult = Shapes::StructureShape.new(name: 'DescribeInstancePatchStatesResult')
     DescribeInstancePatchesRequest = Shapes::StructureShape.new(name: 'DescribeInstancePatchesRequest')
     DescribeInstancePatchesResult = Shapes::StructureShape.new(name: 'DescribeInstancePatchesResult')
+    DescribeInstancePropertiesMaxResults = Shapes::IntegerShape.new(name: 'DescribeInstancePropertiesMaxResults')
+    DescribeInstancePropertiesRequest = Shapes::StructureShape.new(name: 'DescribeInstancePropertiesRequest')
+    DescribeInstancePropertiesResult = Shapes::StructureShape.new(name: 'DescribeInstancePropertiesResult')
     DescribeInventoryDeletionsRequest = Shapes::StructureShape.new(name: 'DescribeInventoryDeletionsRequest')
     DescribeInventoryDeletionsResult = Shapes::StructureShape.new(name: 'DescribeInventoryDeletionsResult')
     DescribeMaintenanceWindowExecutionTaskInvocationsRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionTaskInvocationsRequest')
@@ -485,6 +489,7 @@ module Aws::SSM
     InstanceInformationStringFilter = Shapes::StructureShape.new(name: 'InstanceInformationStringFilter')
     InstanceInformationStringFilterKey = Shapes::StringShape.new(name: 'InstanceInformationStringFilterKey')
     InstanceInformationStringFilterList = Shapes::ListShape.new(name: 'InstanceInformationStringFilterList')
+    InstanceName = Shapes::StringShape.new(name: 'InstanceName')
     InstancePatchState = Shapes::StructureShape.new(name: 'InstancePatchState')
     InstancePatchStateFilter = Shapes::StructureShape.new(name: 'InstancePatchStateFilter')
     InstancePatchStateFilterKey = Shapes::StringShape.new(name: 'InstancePatchStateFilterKey')
@@ -494,7 +499,21 @@ module Aws::SSM
     InstancePatchStateList = Shapes::ListShape.new(name: 'InstancePatchStateList')
     InstancePatchStateOperatorType = Shapes::StringShape.new(name: 'InstancePatchStateOperatorType')
     InstancePatchStatesList = Shapes::ListShape.new(name: 'InstancePatchStatesList')
+    InstanceProperties = Shapes::ListShape.new(name: 'InstanceProperties')
+    InstanceProperty = Shapes::StructureShape.new(name: 'InstanceProperty')
+    InstancePropertyFilter = Shapes::StructureShape.new(name: 'InstancePropertyFilter')
+    InstancePropertyFilterKey = Shapes::StringShape.new(name: 'InstancePropertyFilterKey')
+    InstancePropertyFilterList = Shapes::ListShape.new(name: 'InstancePropertyFilterList')
+    InstancePropertyFilterOperator = Shapes::StringShape.new(name: 'InstancePropertyFilterOperator')
+    InstancePropertyFilterValue = Shapes::StringShape.new(name: 'InstancePropertyFilterValue')
+    InstancePropertyFilterValueSet = Shapes::ListShape.new(name: 'InstancePropertyFilterValueSet')
+    InstancePropertyStringFilter = Shapes::StructureShape.new(name: 'InstancePropertyStringFilter')
+    InstancePropertyStringFilterKey = Shapes::StringShape.new(name: 'InstancePropertyStringFilterKey')
+    InstancePropertyStringFilterList = Shapes::ListShape.new(name: 'InstancePropertyStringFilterList')
+    InstanceRole = Shapes::StringShape.new(name: 'InstanceRole')
+    InstanceState = Shapes::StringShape.new(name: 'InstanceState')
     InstanceTagName = Shapes::StringShape.new(name: 'InstanceTagName')
+    InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstancesCount = Shapes::IntegerShape.new(name: 'InstancesCount')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
@@ -522,6 +541,7 @@ module Aws::SSM
     InvalidFilterValue = Shapes::StructureShape.new(name: 'InvalidFilterValue')
     InvalidInstanceId = Shapes::StructureShape.new(name: 'InvalidInstanceId')
     InvalidInstanceInformationFilterValue = Shapes::StructureShape.new(name: 'InvalidInstanceInformationFilterValue')
+    InvalidInstancePropertyFilterValue = Shapes::StructureShape.new(name: 'InvalidInstancePropertyFilterValue')
     InvalidInventoryGroupException = Shapes::StructureShape.new(name: 'InvalidInventoryGroupException')
     InvalidInventoryItemContextException = Shapes::StructureShape.new(name: 'InvalidInventoryItemContextException')
     InvalidInventoryRequestException = Shapes::StructureShape.new(name: 'InvalidInventoryRequestException')
@@ -598,6 +618,7 @@ module Aws::SSM
     ItemContentMismatchException = Shapes::StructureShape.new(name: 'ItemContentMismatchException')
     ItemSizeLimitExceededException = Shapes::StructureShape.new(name: 'ItemSizeLimitExceededException')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
+    KeyName = Shapes::StringShape.new(name: 'KeyName')
     LabelParameterVersionRequest = Shapes::StructureShape.new(name: 'LabelParameterVersionRequest')
     LabelParameterVersionResult = Shapes::StructureShape.new(name: 'LabelParameterVersionResult')
     LastResourceDataSyncMessage = Shapes::StringShape.new(name: 'LastResourceDataSyncMessage')
@@ -958,8 +979,10 @@ module Aws::SSM
     PatchVendor = Shapes::StringShape.new(name: 'PatchVendor')
     PatchVersion = Shapes::StringShape.new(name: 'PatchVersion')
     PingStatus = Shapes::StringShape.new(name: 'PingStatus')
+    PlatformName = Shapes::StringShape.new(name: 'PlatformName')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     PlatformTypeList = Shapes::ListShape.new(name: 'PlatformTypeList')
+    PlatformVersion = Shapes::StringShape.new(name: 'PlatformVersion')
     PoliciesLimitExceededException = Shapes::StructureShape.new(name: 'PoliciesLimitExceededException')
     Policy = Shapes::StringShape.new(name: 'Policy')
     PolicyHash = Shapes::StringShape.new(name: 'PolicyHash')
@@ -2132,6 +2155,16 @@ module Aws::SSM
     DescribeInstancePatchesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeInstancePatchesResult.struct_class = Types::DescribeInstancePatchesResult
 
+    DescribeInstancePropertiesRequest.add_member(:instance_property_filter_list, Shapes::ShapeRef.new(shape: InstancePropertyFilterList, location_name: "InstancePropertyFilterList"))
+    DescribeInstancePropertiesRequest.add_member(:filters_with_operator, Shapes::ShapeRef.new(shape: InstancePropertyStringFilterList, location_name: "FiltersWithOperator"))
+    DescribeInstancePropertiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeInstancePropertiesMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeInstancePropertiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstancePropertiesRequest.struct_class = Types::DescribeInstancePropertiesRequest
+
+    DescribeInstancePropertiesResult.add_member(:instance_properties, Shapes::ShapeRef.new(shape: InstanceProperties, location_name: "InstanceProperties"))
+    DescribeInstancePropertiesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstancePropertiesResult.struct_class = Types::DescribeInstancePropertiesResult
+
     DescribeInventoryDeletionsRequest.add_member(:deletion_id, Shapes::ShapeRef.new(shape: UUID, location_name: "DeletionId"))
     DescribeInventoryDeletionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeInventoryDeletionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -2915,6 +2948,51 @@ module Aws::SSM
 
     InstancePatchStatesList.member = Shapes::ShapeRef.new(shape: InstancePatchState)
 
+    InstanceProperties.member = Shapes::ShapeRef.new(shape: InstanceProperty)
+
+    InstanceProperty.add_member(:name, Shapes::ShapeRef.new(shape: InstanceName, location_name: "Name"))
+    InstanceProperty.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    InstanceProperty.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
+    InstanceProperty.add_member(:instance_role, Shapes::ShapeRef.new(shape: InstanceRole, location_name: "InstanceRole"))
+    InstanceProperty.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyName, location_name: "KeyName"))
+    InstanceProperty.add_member(:instance_state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "InstanceState"))
+    InstanceProperty.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "Architecture"))
+    InstanceProperty.add_member(:ip_address, Shapes::ShapeRef.new(shape: IPAddress, location_name: "IPAddress"))
+    InstanceProperty.add_member(:launch_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LaunchTime"))
+    InstanceProperty.add_member(:ping_status, Shapes::ShapeRef.new(shape: PingStatus, location_name: "PingStatus"))
+    InstanceProperty.add_member(:last_ping_date_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastPingDateTime"))
+    InstanceProperty.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, location_name: "AgentVersion"))
+    InstanceProperty.add_member(:platform_type, Shapes::ShapeRef.new(shape: PlatformType, location_name: "PlatformType"))
+    InstanceProperty.add_member(:platform_name, Shapes::ShapeRef.new(shape: PlatformName, location_name: "PlatformName"))
+    InstanceProperty.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "PlatformVersion"))
+    InstanceProperty.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, location_name: "ActivationId"))
+    InstanceProperty.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, location_name: "IamRole"))
+    InstanceProperty.add_member(:registration_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "RegistrationDate"))
+    InstanceProperty.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    InstanceProperty.add_member(:computer_name, Shapes::ShapeRef.new(shape: ComputerName, location_name: "ComputerName"))
+    InstanceProperty.add_member(:association_status, Shapes::ShapeRef.new(shape: StatusName, location_name: "AssociationStatus"))
+    InstanceProperty.add_member(:last_association_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastAssociationExecutionDate"))
+    InstanceProperty.add_member(:last_successful_association_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastSuccessfulAssociationExecutionDate"))
+    InstanceProperty.add_member(:association_overview, Shapes::ShapeRef.new(shape: InstanceAggregatedAssociationOverview, location_name: "AssociationOverview"))
+    InstanceProperty.add_member(:source_id, Shapes::ShapeRef.new(shape: SourceId, location_name: "SourceId"))
+    InstanceProperty.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
+    InstanceProperty.struct_class = Types::InstanceProperty
+
+    InstancePropertyFilter.add_member(:key, Shapes::ShapeRef.new(shape: InstancePropertyFilterKey, required: true, location_name: "key"))
+    InstancePropertyFilter.add_member(:value_set, Shapes::ShapeRef.new(shape: InstancePropertyFilterValueSet, required: true, location_name: "valueSet"))
+    InstancePropertyFilter.struct_class = Types::InstancePropertyFilter
+
+    InstancePropertyFilterList.member = Shapes::ShapeRef.new(shape: InstancePropertyFilter)
+
+    InstancePropertyFilterValueSet.member = Shapes::ShapeRef.new(shape: InstancePropertyFilterValue)
+
+    InstancePropertyStringFilter.add_member(:key, Shapes::ShapeRef.new(shape: InstancePropertyStringFilterKey, required: true, location_name: "Key"))
+    InstancePropertyStringFilter.add_member(:values, Shapes::ShapeRef.new(shape: InstancePropertyFilterValueSet, required: true, location_name: "Values"))
+    InstancePropertyStringFilter.add_member(:operator, Shapes::ShapeRef.new(shape: InstancePropertyFilterOperator, location_name: "Operator"))
+    InstancePropertyStringFilter.struct_class = Types::InstancePropertyStringFilter
+
+    InstancePropertyStringFilterList.member = Shapes::ShapeRef.new(shape: InstancePropertyStringFilter)
+
     InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerError.struct_class = Types::InternalServerError
 
@@ -2987,6 +3065,9 @@ module Aws::SSM
 
     InvalidInstanceInformationFilterValue.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidInstanceInformationFilterValue.struct_class = Types::InvalidInstanceInformationFilterValue
+
+    InvalidInstancePropertyFilterValue.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidInstancePropertyFilterValue.struct_class = Types::InvalidInstancePropertyFilterValue
 
     InvalidInventoryGroupException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidInventoryGroupException.struct_class = Types::InvalidInventoryGroupException
@@ -4753,6 +4834,7 @@ module Aws::SSM
         "endpointPrefix" => "ssm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon SSM",
         "serviceFullName" => "Amazon Simple Systems Manager (SSM)",
         "serviceId" => "SSM",
@@ -5365,6 +5447,27 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_instance_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstancePropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstancePropertiesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActivationId)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInstancePropertyFilterValue)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

@@ -207,13 +207,14 @@ module Aws::CleanRooms
     # privacy.
     #
     # @!attribute [rw] allowed_analyses
-    #   The analysis templates that are allowed by the custom analysis rule.
+    #   The ARN of the analysis templates that are allowed by the custom
+    #   analysis rule.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_analysis_providers
-    #   The Amazon Web Services accounts that are allowed to query by the
-    #   custom analysis rule. Required when `allowedAnalyses` is
-    #   `ANY_QUERY`.
+    #   The IDs of the Amazon Web Services accounts that are allowed to
+    #   query by the custom analysis rule. Required when `allowedAnalyses`
+    #   is `ANY_QUERY`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] differential_privacy
@@ -413,6 +414,11 @@ module Aws::CleanRooms
     #   The parameters of the analysis template.
     #   @return [Array<Types::AnalysisParameter>]
     #
+    # @!attribute [rw] validations
+    #   Information about the validations performed on the analysis
+    #   template.
+    #   @return [Array<Types::AnalysisTemplateValidationStatusDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplate AWS API Documentation
     #
     class AnalysisTemplate < Struct.new(
@@ -429,7 +435,8 @@ module Aws::CleanRooms
       :schema,
       :format,
       :source,
-      :analysis_parameters)
+      :analysis_parameters,
+      :validations)
       SENSITIVE = [:source]
       include Aws::Structure
     end
@@ -492,6 +499,58 @@ module Aws::CleanRooms
       :collaboration_arn,
       :collaboration_id,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status details of the analysis template validation. Clean Rooms
+    # Differential Privacy uses a general-purpose query structure to support
+    # complex SQL queries and validates whether an analysis template fits
+    # that general-purpose query structure. Validation is performed when
+    # analysis templates are created and fetched. Because analysis templates
+    # are immutable by design, we recommend that you create analysis
+    # templates after you associate the configured tables with their
+    # analysis rule to your collaboration.
+    #
+    # For more information, see
+    # [https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy
+    #
+    # @!attribute [rw] type
+    #   The type of validation that was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   The reasons for the validation results.
+    #   @return [Array<Types::AnalysisTemplateValidationStatusReason>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateValidationStatusDetail AWS API Documentation
+    #
+    class AnalysisTemplateValidationStatusDetail < Struct.new(
+      :type,
+      :status,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reasons for the validation results.
+    #
+    # @!attribute [rw] message
+    #   The validation message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateValidationStatusReason AWS API Documentation
+    #
+    class AnalysisTemplateValidationStatusReason < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -559,6 +618,72 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # An error that describes why a schema could not be fetched.
+    #
+    # @!attribute [rw] name
+    #   An error name for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The analysis rule type.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   An error code for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of why the call failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetSchemaAnalysisRuleError AWS API Documentation
+    #
+    class BatchGetSchemaAnalysisRuleError < Struct.new(
+      :name,
+      :type,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   The unique identifier of the collaboration that contains the schema
+    #   analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_analysis_rule_requests
+    #   The information that's necessary to retrieve a schema analysis
+    #   rule.
+    #   @return [Array<Types::SchemaAnalysisRuleRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetSchemaAnalysisRuleInput AWS API Documentation
+    #
+    class BatchGetSchemaAnalysisRuleInput < Struct.new(
+      :collaboration_identifier,
+      :schema_analysis_rule_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_rules
+    #   The retrieved list of analysis rules.
+    #   @return [Array<Types::AnalysisRule>]
+    #
+    # @!attribute [rw] errors
+    #   Error reasons for schemas that could not be retrieved. One error is
+    #   returned for every schema that could not be retrieved.
+    #   @return [Array<Types::BatchGetSchemaAnalysisRuleError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetSchemaAnalysisRuleOutput AWS API Documentation
+    #
+    class BatchGetSchemaAnalysisRuleOutput < Struct.new(
+      :analysis_rules,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error describing why a schema could not be fetched.
     #
     # @!attribute [rw] name
@@ -589,7 +714,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] names
-    #   The names for the schema objects to retrieve.&gt;
+    #   The names for the schema objects to retrieve.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetSchemaInput AWS API Documentation
@@ -757,6 +882,10 @@ module Aws::CleanRooms
     #   template.
     #   @return [Array<Types::AnalysisParameter>]
     #
+    # @!attribute [rw] validations
+    #   The validations that were performed.
+    #   @return [Array<Types::AnalysisTemplateValidationStatusDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplate AWS API Documentation
     #
     class CollaborationAnalysisTemplate < Struct.new(
@@ -772,7 +901,8 @@ module Aws::CleanRooms
       :schema,
       :format,
       :source,
-      :analysis_parameters)
+      :analysis_parameters,
+      :validations)
       SENSITIVE = [:source]
       include Aws::Structure
     end
@@ -4953,6 +5083,11 @@ module Aws::CleanRooms
     #   The type of schema. The only valid value is currently `TABLE`.
     #   @return [String]
     #
+    # @!attribute [rw] schema_status_details
+    #   Details about the status of the schema. Currently, only one entry is
+    #   present.
+    #   @return [Array<Types::SchemaStatusDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Schema AWS API Documentation
     #
     class Schema < Struct.new(
@@ -4967,7 +5102,84 @@ module Aws::CleanRooms
       :description,
       :create_time,
       :update_time,
+      :type,
+      :schema_status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the information that's necessary to retrieve an analysis rule
+    # schema. Schema analysis rules are uniquely identiﬁed by a combination
+    # of the schema name and the analysis rule type for a given
+    # collaboration.
+    #
+    # @!attribute [rw] name
+    #   The name of the analysis rule schema that you are requesting.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of analysis rule schema that you are requesting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaAnalysisRuleRequest AWS API Documentation
+    #
+    class SchemaAnalysisRuleRequest < Struct.new(
+      :name,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the schema status.
+    #
+    # A status of `READY` means that based on the schema analysis rule,
+    # queries of the given analysis rule type are properly configured to run
+    # queries on this schema.
+    #
+    # @!attribute [rw] status
+    #   The status of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   The reasons why the schema status is set to its current state.
+    #   @return [Array<Types::SchemaStatusReason>]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The analysis rule type for which the schema status has been
+    #   evaluated.
+    #   @return [String]
+    #
+    # @!attribute [rw] configurations
+    #   The configuration details of the schema analysis rule for the given
+    #   type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaStatusDetail AWS API Documentation
+    #
+    class SchemaStatusDetail < Struct.new(
+      :status,
+      :reasons,
+      :analysis_rule_type,
+      :configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reason why the schema status is set to its current value.
+    #
+    # @!attribute [rw] code
+    #   The schema status reason code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An explanation of the schema status reason code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaStatusReason AWS API Documentation
+    #
+    class SchemaStatusReason < Struct.new(
+      :code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

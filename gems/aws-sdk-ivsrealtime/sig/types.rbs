@@ -251,6 +251,10 @@ module Aws::IVSRealTime
 
     class GridConfiguration
       attr_accessor featured_participant_attribute: ::String
+      attr_accessor grid_gap: ::Integer
+      attr_accessor omit_stopped_video: bool
+      attr_accessor video_aspect_ratio: ("AUTO" | "VIDEO" | "SQUARE" | "PORTRAIT")
+      attr_accessor video_fill_mode: ("FILL" | "COVER" | "CONTAIN")
       SENSITIVE: []
     end
 
@@ -261,6 +265,7 @@ module Aws::IVSRealTime
 
     class LayoutConfiguration
       attr_accessor grid: Types::GridConfiguration
+      attr_accessor pip: Types::PipConfiguration
       SENSITIVE: []
     end
 
@@ -415,6 +420,20 @@ module Aws::IVSRealTime
 
     class PendingVerification
       attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class PipConfiguration
+      attr_accessor featured_participant_attribute: ::String
+      attr_accessor grid_gap: ::Integer
+      attr_accessor omit_stopped_video: bool
+      attr_accessor pip_behavior: ("STATIC" | "DYNAMIC")
+      attr_accessor pip_height: ::Integer
+      attr_accessor pip_offset: ::Integer
+      attr_accessor pip_participant_attribute: ::String
+      attr_accessor pip_position: ("TOP_LEFT" | "TOP_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_RIGHT")
+      attr_accessor pip_width: ::Integer
+      attr_accessor video_fill_mode: ("FILL" | "COVER" | "CONTAIN")
       SENSITIVE: []
     end
 

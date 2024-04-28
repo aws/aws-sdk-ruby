@@ -135,7 +135,7 @@ module Aws
                                 partner_profile_id: ::String?,
                                 message_subject: ::String?,
                                 compression: ("ZLIB" | "DISABLED")?,
-                                encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "NONE")?,
+                                encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "DES_EDE3_CBC" | "NONE")?,
                                 signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")?,
                                 mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")?,
                                 mdn_response: ("SYNC" | "NONE")?,
@@ -152,7 +152,8 @@ module Aws
                               ?sftp_config: {
                                 user_secret_id: ::String?,
                                 trusted_host_keys: Array[::String]?
-                              }
+                              },
+                              ?security_policy_name: ::String
                             ) -> _CreateConnectorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
 
@@ -590,7 +591,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#import_certificate-instance_method
       def import_certificate: (
-                                usage: ("SIGNING" | "ENCRYPTION"),
+                                usage: ("SIGNING" | "ENCRYPTION" | "TLS"),
                                 certificate: ::String,
                                 ?certificate_chain: ::String,
                                 ?private_key: ::String,
@@ -807,6 +808,20 @@ module Aws
                                     ) -> _SendWorkflowStepStateResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendWorkflowStepStateResponseSuccess
 
+      interface _StartDirectoryListingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDirectoryListingResponse]
+        def listing_id: () -> ::String
+        def output_file_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#start_directory_listing-instance_method
+      def start_directory_listing: (
+                                     connector_id: ::String,
+                                     remote_directory_path: ::String,
+                                     ?max_items: ::Integer,
+                                     output_directory_path: ::String
+                                   ) -> _StartDirectoryListingResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDirectoryListingResponseSuccess
+
       interface _StartFileTransferResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartFileTransferResponse]
         def transfer_id: () -> ::String
@@ -952,7 +967,7 @@ module Aws
                                 partner_profile_id: ::String?,
                                 message_subject: ::String?,
                                 compression: ("ZLIB" | "DISABLED")?,
-                                encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "NONE")?,
+                                encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "DES_EDE3_CBC" | "NONE")?,
                                 signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")?,
                                 mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")?,
                                 mdn_response: ("SYNC" | "NONE")?,
@@ -963,7 +978,8 @@ module Aws
                               ?sftp_config: {
                                 user_secret_id: ::String?,
                                 trusted_host_keys: Array[::String]?
-                              }
+                              },
+                              ?security_policy_name: ::String
                             ) -> _UpdateConnectorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorResponseSuccess
 

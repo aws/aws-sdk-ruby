@@ -4142,6 +4142,11 @@ module Aws::Pinpoint
     #   data for the channel.
     #   @return [String]
     #
+    # @!attribute [rw] orchestration_sending_role_arn
+    #   The ARN of an IAM role for Amazon Pinpoint to use to send email from
+    #   your campaigns or journeys through Amazon SES.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailChannelRequest AWS API Documentation
     #
     class EmailChannelRequest < Struct.new(
@@ -4149,7 +4154,8 @@ module Aws::Pinpoint
       :enabled,
       :from_address,
       :identity,
-      :role_arn)
+      :role_arn,
+      :orchestration_sending_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4230,6 +4236,11 @@ module Aws::Pinpoint
     #   channel.
     #   @return [String]
     #
+    # @!attribute [rw] orchestration_sending_role_arn
+    #   The ARN of an IAM role for Amazon Pinpoint to use to send email from
+    #   your campaigns or journeys through Amazon SES.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The current version of the email channel.
     #   @return [Integer]
@@ -4251,6 +4262,7 @@ module Aws::Pinpoint
       :messages_per_second,
       :platform,
       :role_arn,
+      :orchestration_sending_role_arn,
       :version)
       SENSITIVE = []
       include Aws::Structure
@@ -4800,8 +4812,6 @@ module Aws::Pinpoint
     #
     #   * THROTTLED - Amazon Pinpoint throttled the operation to send the
     #     message to the endpoint.
-    #
-    #   * TIMEOUT - The message couldn't be sent within the timeout period.
     #
     #   * UNKNOWN\_FAILURE - An unknown error occurred.
     #   @return [String]
@@ -9499,8 +9509,6 @@ module Aws::Pinpoint
     #
     #   * THROTTLED - Amazon Pinpoint throttled the operation to send the
     #     message to the endpoint address.
-    #
-    #   * TIMEOUT - The message couldn't be sent within the timeout period.
     #
     #   * UNKNOWN\_FAILURE - An unknown error occurred.
     #   @return [String]

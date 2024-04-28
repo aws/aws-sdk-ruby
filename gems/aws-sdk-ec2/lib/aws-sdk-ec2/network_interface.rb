@@ -529,7 +529,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.describe_attribute({
-    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment
+    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment, associatePublicIpAddress
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -617,6 +617,7 @@ module Aws::EC2
     #       udp_stream_timeout: 1,
     #       udp_timeout: 1,
     #     },
+    #     associate_public_ip_address: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
@@ -663,6 +664,10 @@ module Aws::EC2
     #   the primary IPv6 address.
     # @option options [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
     #   A connection tracking specification.
+    # @option options [Boolean] :associate_public_ip_address
+    #   Indicates whether to assign a public IPv4 address to a network
+    #   interface. This option can be enabled for any network interface but
+    #   will only apply to the primary network interface (eth0).
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)

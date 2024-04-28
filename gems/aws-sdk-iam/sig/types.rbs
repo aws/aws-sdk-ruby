@@ -1440,6 +1440,11 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class OpenIdIdpCommunicationErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class OrganizationsDecisionDetail
       attr_accessor allowed_by_organizations: bool
       SENSITIVE: []

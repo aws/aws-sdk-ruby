@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Redshift
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Redshift
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::Redshift
     #   @option options [Aws::Redshift::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Redshift::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -492,15 +516,15 @@ module Aws::Redshift
     #
     # @option params [required, String] :data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare that the consumer is
-    #   to use with the account or the namespace.
+    #   to use.
     #
     # @option params [Boolean] :associate_entire_account
     #   A value that specifies whether the datashare is associated with the
     #   entire account.
     #
     # @option params [String] :consumer_arn
-    #   The Amazon Resource Name (ARN) of the consumer that is associated with
-    #   the datashare.
+    #   The Amazon Resource Name (ARN) of the consumer namespace associated
+    #   with the datashare.
     #
     # @option params [String] :consumer_region
     #   From a datashare consumer account, associates a datashare with all
@@ -644,8 +668,8 @@ module Aws::Redshift
     # correct access permissions.
     #
     # @option params [required, String] :data_share_arn
-    #   The Amazon Resource Name (ARN) of the datashare that producers are to
-    #   authorize sharing for.
+    #   The Amazon Resource Name (ARN) of the datashare namespace that
+    #   producers are to authorize sharing for.
     #
     # @option params [required, String] :consumer_identifier
     #   The identifier of the data consumer that is authorized to access the
@@ -766,10 +790,16 @@ module Aws::Redshift
     #   The Amazon Resource Name (ARN) of the snapshot to authorize access to.
     #
     # @option params [String] :snapshot_cluster_identifier
-    #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
-    #   the cluster name.
+    #   The identifier of the cluster the snapshot was created from.
+    #
+    #   * *If the snapshot to access doesn't exist and the associated IAM
+    #     policy doesn't allow access to all (*) snapshots* - This parameter
+    #     is required. Otherwise, permissions aren't available to check if
+    #     the snapshot exists.
+    #
+    #   * *If the snapshot to access exists* - This parameter isn't required.
+    #     Redshift can retrieve the cluster identifier and use it to validate
+    #     snapshot authorization.
     #
     # @option params [required, String] :account_with_restore_access
     #   The identifier of the Amazon Web Services account authorized to
@@ -834,6 +864,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess AWS API Documentation
     #
@@ -1119,6 +1150,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot AWS API Documentation
     #
@@ -1391,7 +1423,15 @@ module Aws::Redshift
     #
     #   Default: `5439`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid Values:
+    #
+    #   * For clusters with ra3 nodes - Select a port within the ranges
+    #     `5431-5455` or `8191-8215`. (If you have an existing cluster with
+    #     ra3 nodes, it isn't required that you change the port to these
+    #     ranges.)
+    #
+    #   * For clusters with ds2 or dc2 nodes - Select a port within the range
+    #     `1150-65535`.
     #
     # @option params [String] :cluster_version
     #   The version of the Amazon Redshift engine software that you want to
@@ -2020,6 +2060,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot AWS API Documentation
     #
@@ -2983,7 +3024,7 @@ module Aws::Redshift
     # specified datashare.
     #
     # @option params [required, String] :data_share_arn
-    #   The Amazon Resource Name (ARN) of the datashare to remove
+    #   The namespace Amazon Resource Name (ARN) of the datashare to remove
     #   authorization from.
     #
     # @option params [required, String] :consumer_identifier
@@ -3431,6 +3472,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot AWS API Documentation
     #
@@ -4463,6 +4505,7 @@ module Aws::Redshift
     #   resp.snapshots[0].snapshot_retention_start_time #=> Time
     #   resp.snapshots[0].master_password_secret_arn #=> String
     #   resp.snapshots[0].master_password_secret_kms_key_id #=> String
+    #   resp.snapshots[0].snapshot_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5004,7 +5047,8 @@ module Aws::Redshift
     # the specified account.
     #
     # @option params [String] :data_share_arn
-    #   The identifier of the datashare to describe details of.
+    #   The Amazon resource name (ARN) of the datashare to describe details
+    #   of.
     #
     # @option params [Integer] :max_records
     #   The maximum number of response records to return in each call. If the
@@ -5067,8 +5111,8 @@ module Aws::Redshift
     # is a consumer account identifier.
     #
     # @option params [String] :consumer_arn
-    #   The Amazon Resource Name (ARN) of the consumer that returns in the
-    #   list of datashares.
+    #   The Amazon Resource Name (ARN) of the consumer namespace that returns
+    #   in the list of datashares.
     #
     # @option params [String] :status
     #   An identifier giving the status of a datashare in the consumer
@@ -5137,8 +5181,8 @@ module Aws::Redshift
     # is a producer account identifier.
     #
     # @option params [String] :producer_arn
-    #   The Amazon Resource Name (ARN) of the producer that returns in the
-    #   list of datashares.
+    #   The Amazon Resource Name (ARN) of the producer namespace that returns
+    #   in the list of datashares.
     #
     # @option params [String] :status
     #   An identifier giving the status of a datashare in the producer. If
@@ -7414,8 +7458,8 @@ module Aws::Redshift
     #   removed from the entire account.
     #
     # @option params [String] :consumer_arn
-    #   The Amazon Resource Name (ARN) of the consumer that association for
-    #   the datashare is removed from.
+    #   The Amazon Resource Name (ARN) of the consumer namespace that
+    #   association for the datashare is removed from.
     #
     # @option params [String] :consumer_region
     #   From a datashare consumer account, removes association of a datashare
@@ -8756,6 +8800,16 @@ module Aws::Redshift
     # @option params [Integer] :port
     #   The option to change the port of an Amazon Redshift cluster.
     #
+    #   Valid Values:
+    #
+    #   * For clusters with ra3 nodes - Select a port within the ranges
+    #     `5431-5455` or `8191-8215`. (If you have an existing cluster with
+    #     ra3 nodes, it isn't required that you change the port to these
+    #     ranges.)
+    #
+    #   * For clusters with ds2 or dc2 nodes - Select a port within the range
+    #     `1150-65535`.
+    #
     # @option params [Boolean] :manage_master_password
     #   If `true`, Amazon Redshift uses Secrets Manager to manage this
     #   cluster's admin credentials. You can't use `MasterUserPassword` if
@@ -9630,6 +9684,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshot AWS API Documentation
     #
@@ -11220,7 +11275,9 @@ module Aws::Redshift
     #
     #   Default: The same port as the original cluster.
     #
-    #   Constraints: Must be between `1115` and `65535`.
+    #   Valid values: For clusters with ds2 or dc2 nodes, must be within the
+    #   range `1150`-`65535`. For clusters with ra3 nodes, must be within the
+    #   ranges `5431`-`5455` or `8191`-`8215`.
     #
     # @option params [String] :availability_zone
     #   The Amazon EC2 Availability Zone in which to restore the cluster.
@@ -12128,6 +12185,7 @@ module Aws::Redshift
     #   resp.snapshot.snapshot_retention_start_time #=> Time
     #   resp.snapshot.master_password_secret_arn #=> String
     #   resp.snapshot.master_password_secret_kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess AWS API Documentation
     #
@@ -12365,7 +12423,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

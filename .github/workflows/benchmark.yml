@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [jruby-9.2, 2.6, 2.7, 3.2]
+        ruby: [jruby-9.2, 2.6, 2.7, 3.2, 3.3]
 
     steps:
       - name: Setup Ruby

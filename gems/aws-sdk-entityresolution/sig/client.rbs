@@ -72,6 +72,38 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AddPolicyStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddPolicyStatementOutput]
+        def arn: () -> ::String
+        def policy: () -> ::String
+        def token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#add_policy_statement-instance_method
+      def add_policy_statement: (
+                                  action: Array[::String],
+                                  arn: ::String,
+                                  ?condition: ::String,
+                                  effect: ("Allow" | "Deny"),
+                                  principal: Array[::String],
+                                  statement_id: ::String
+                                ) -> _AddPolicyStatementResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddPolicyStatementResponseSuccess
+
+      interface _BatchDeleteUniqueIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteUniqueIdOutput]
+        def deleted: () -> ::Array[Types::DeletedUniqueId]
+        def disconnected_unique_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::DeleteUniqueIdError]
+        def status: () -> ("COMPLETED" | "ACCEPTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#batch_delete_unique_id-instance_method
+      def batch_delete_unique_id: (
+                                    ?input_source: ::String,
+                                    unique_ids: Array[::String],
+                                    workflow_name: ::String
+                                  ) -> _BatchDeleteUniqueIdResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteUniqueIdResponseSuccess
+
       interface _CreateIdMappingWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdMappingWorkflowOutput]
         def description: () -> ::String
@@ -94,15 +126,16 @@ module Aws
                                             provider_configuration: {
                                             }?,
                                             provider_service_arn: ::String
-                                          }
+                                          }?
                                         },
                                         input_source_config: Array[
                                           {
                                             input_source_arn: ::String,
-                                            schema_name: ::String
+                                            schema_name: ::String?,
+                                            type: ("SOURCE" | "TARGET")?
                                           },
                                         ],
-                                        output_source_config: Array[
+                                        ?output_source_config: Array[
                                           {
                                             kms_arn: ::String?,
                                             output_s3_path: ::String
@@ -113,6 +146,45 @@ module Aws
                                         workflow_name: ::String
                                       ) -> _CreateIdMappingWorkflowResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdMappingWorkflowResponseSuccess
+
+      interface _CreateIdNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdNamespaceOutput]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id_mapping_workflow_properties: () -> ::Array[Types::IdNamespaceIdMappingWorkflowProperties]
+        def id_namespace_arn: () -> ::String
+        def id_namespace_name: () -> ::String
+        def input_source_config: () -> ::Array[Types::IdNamespaceInputSource]
+        def role_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ("SOURCE" | "TARGET")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#create_id_namespace-instance_method
+      def create_id_namespace: (
+                                 ?description: ::String,
+                                 ?id_mapping_workflow_properties: Array[
+                                   {
+                                     id_mapping_type: ("PROVIDER"),
+                                     provider_properties: {
+                                       provider_configuration: {
+                                       }?,
+                                       provider_service_arn: ::String
+                                     }?
+                                   },
+                                 ],
+                                 id_namespace_name: ::String,
+                                 ?input_source_config: Array[
+                                   {
+                                     input_source_arn: ::String,
+                                     schema_name: ::String?
+                                   },
+                                 ],
+                                 ?role_arn: ::String,
+                                 ?tags: Hash[::String, ::String],
+                                 type: ("SOURCE" | "TARGET")
+                               ) -> _CreateIdNamespaceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdNamespaceResponseSuccess
 
       interface _CreateMatchingWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateMatchingWorkflowOutput]
@@ -211,6 +283,16 @@ module Aws
                                       ) -> _DeleteIdMappingWorkflowResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdMappingWorkflowResponseSuccess
 
+      interface _DeleteIdNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdNamespaceOutput]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#delete_id_namespace-instance_method
+      def delete_id_namespace: (
+                                 id_namespace_name: ::String
+                               ) -> _DeleteIdNamespaceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdNamespaceResponseSuccess
+
       interface _DeleteMatchingWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMatchingWorkflowOutput]
         def message: () -> ::String
@@ -220,6 +302,19 @@ module Aws
                                       workflow_name: ::String
                                     ) -> _DeleteMatchingWorkflowResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMatchingWorkflowResponseSuccess
+
+      interface _DeletePolicyStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePolicyStatementOutput]
+        def arn: () -> ::String
+        def policy: () -> ::String
+        def token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#delete_policy_statement-instance_method
+      def delete_policy_statement: (
+                                     arn: ::String,
+                                     statement_id: ::String
+                                   ) -> _DeletePolicyStatementResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePolicyStatementResponseSuccess
 
       interface _DeleteSchemaMappingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSchemaMappingOutput]
@@ -237,6 +332,7 @@ module Aws
         def error_details: () -> Types::ErrorDetails
         def job_id: () -> ::String
         def metrics: () -> Types::IdMappingJobMetrics
+        def output_source_config: () -> ::Array[Types::IdMappingJobOutputSource]
         def start_time: () -> ::Time
         def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "QUEUED")
       end
@@ -266,12 +362,33 @@ module Aws
                                    ) -> _GetIdMappingWorkflowResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdMappingWorkflowResponseSuccess
 
+      interface _GetIdNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdNamespaceOutput]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id_mapping_workflow_properties: () -> ::Array[Types::IdNamespaceIdMappingWorkflowProperties]
+        def id_namespace_arn: () -> ::String
+        def id_namespace_name: () -> ::String
+        def input_source_config: () -> ::Array[Types::IdNamespaceInputSource]
+        def role_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ("SOURCE" | "TARGET")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_id_namespace-instance_method
+      def get_id_namespace: (
+                              id_namespace_name: ::String
+                            ) -> _GetIdNamespaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdNamespaceResponseSuccess
+
       interface _GetMatchIdResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMatchIdOutput]
         def match_id: () -> ::String
+        def match_rule: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_match_id-instance_method
       def get_match_id: (
+                          ?apply_normalization: bool,
                           record: Hash[::String, ::String],
                           workflow_name: ::String
                         ) -> _GetMatchIdResponseSuccess
@@ -283,6 +400,7 @@ module Aws
         def error_details: () -> Types::ErrorDetails
         def job_id: () -> ::String
         def metrics: () -> Types::JobMetrics
+        def output_source_config: () -> ::Array[Types::JobOutputSource]
         def start_time: () -> ::Time
         def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "QUEUED")
       end
@@ -313,13 +431,28 @@ module Aws
                                  ) -> _GetMatchingWorkflowResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMatchingWorkflowResponseSuccess
 
+      interface _GetPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyOutput]
+        def arn: () -> ::String
+        def policy: () -> ::String
+        def token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_policy-instance_method
+      def get_policy: (
+                        arn: ::String
+                      ) -> _GetPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyResponseSuccess
+
       interface _GetProviderServiceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetProviderServiceOutput]
         def anonymized_output: () -> bool
+        def provider_component_schema: () -> Types::ProviderComponentSchema
         def provider_configuration_definition: () -> untyped
         def provider_endpoint_configuration: () -> Types::ProviderEndpointConfiguration
         def provider_entity_output_definition: () -> untyped
+        def provider_id_name_space_configuration: () -> Types::ProviderIdNameSpaceConfiguration
         def provider_intermediate_data_access_configuration: () -> Types::ProviderIntermediateDataAccessConfiguration
+        def provider_job_configuration: () -> untyped
         def provider_name: () -> ::String
         def provider_service_arn: () -> ::String
         def provider_service_display_name: () -> ::String
@@ -374,6 +507,18 @@ module Aws
                                        ?next_token: ::String
                                      ) -> _ListIdMappingWorkflowsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdMappingWorkflowsResponseSuccess
+
+      interface _ListIdNamespacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdNamespacesOutput]
+        def id_namespace_summaries: () -> ::Array[Types::IdNamespaceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#list_id_namespaces-instance_method
+      def list_id_namespaces: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListIdNamespacesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdNamespacesResponseSuccess
 
       interface _ListMatchingJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMatchingJobsOutput]
@@ -435,12 +580,34 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _PutPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPolicyOutput]
+        def arn: () -> ::String
+        def policy: () -> ::String
+        def token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#put_policy-instance_method
+      def put_policy: (
+                        arn: ::String,
+                        policy: ::String,
+                        ?token: ::String
+                      ) -> _PutPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPolicyResponseSuccess
+
       interface _StartIdMappingJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartIdMappingJobOutput]
         def job_id: () -> ::String
+        def output_source_config: () -> ::Array[Types::IdMappingJobOutputSource]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#start_id_mapping_job-instance_method
       def start_id_mapping_job: (
+                                  ?output_source_config: Array[
+                                    {
+                                      kms_arn: ::String?,
+                                      output_s3_path: ::String,
+                                      role_arn: ::String
+                                    },
+                                  ],
                                   workflow_name: ::String
                                 ) -> _StartIdMappingJobResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIdMappingJobResponseSuccess
@@ -497,15 +664,16 @@ module Aws
                                             provider_configuration: {
                                             }?,
                                             provider_service_arn: ::String
-                                          }
+                                          }?
                                         },
                                         input_source_config: Array[
                                           {
                                             input_source_arn: ::String,
-                                            schema_name: ::String
+                                            schema_name: ::String?,
+                                            type: ("SOURCE" | "TARGET")?
                                           },
                                         ],
-                                        output_source_config: Array[
+                                        ?output_source_config: Array[
                                           {
                                             kms_arn: ::String?,
                                             output_s3_path: ::String
@@ -515,6 +683,42 @@ module Aws
                                         workflow_name: ::String
                                       ) -> _UpdateIdMappingWorkflowResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdMappingWorkflowResponseSuccess
+
+      interface _UpdateIdNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIdNamespaceOutput]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id_mapping_workflow_properties: () -> ::Array[Types::IdNamespaceIdMappingWorkflowProperties]
+        def id_namespace_arn: () -> ::String
+        def id_namespace_name: () -> ::String
+        def input_source_config: () -> ::Array[Types::IdNamespaceInputSource]
+        def role_arn: () -> ::String
+        def type: () -> ("SOURCE" | "TARGET")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#update_id_namespace-instance_method
+      def update_id_namespace: (
+                                 ?description: ::String,
+                                 ?id_mapping_workflow_properties: Array[
+                                   {
+                                     id_mapping_type: ("PROVIDER"),
+                                     provider_properties: {
+                                       provider_configuration: {
+                                       }?,
+                                       provider_service_arn: ::String
+                                     }?
+                                   },
+                                 ],
+                                 id_namespace_name: ::String,
+                                 ?input_source_config: Array[
+                                   {
+                                     input_source_arn: ::String,
+                                     schema_name: ::String?
+                                   },
+                                 ],
+                                 ?role_arn: ::String
+                               ) -> _UpdateIdNamespaceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdNamespaceResponseSuccess
 
       interface _UpdateMatchingWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMatchingWorkflowOutput]

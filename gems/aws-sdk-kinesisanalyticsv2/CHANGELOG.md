@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2024-03-15)
+------------------
+
+* Feature - Support for Flink 1.18 in Managed Service for Apache Flink
+
+1.53.0 (2024-03-13)
+------------------
+
+* Feature - Support new RuntimeEnvironmentUpdate parameter within UpdateApplication API allowing callers to change the Flink version upon which their application runs.
+
 1.52.0 (2024-01-26)
 ------------------
 

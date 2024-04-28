@@ -86,6 +86,7 @@ module Aws::IVS
       attr_accessor playback_url: ::String
       attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
       attr_accessor recording_configuration_arn: ::String
+      attr_accessor srt: Types::Srt
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
       SENSITIVE: []
@@ -487,6 +488,12 @@ module Aws::IVS
     class ServiceQuotaExceededException
       attr_accessor exception_message: ::String
       SENSITIVE: []
+    end
+
+    class Srt
+      attr_accessor endpoint: ::String
+      attr_accessor passphrase: ::String
+      SENSITIVE: [:passphrase]
     end
 
     class StartViewerSessionRevocationRequest

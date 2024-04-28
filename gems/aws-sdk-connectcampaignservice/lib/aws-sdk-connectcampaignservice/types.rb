@@ -50,10 +50,15 @@ module Aws::ConnectCampaignService
     #   Enable or disable answering machine detection
     #   @return [Boolean]
     #
+    # @!attribute [rw] await_answer_machine_prompt
+    #   Enable or disable await answer machine prompt
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaigns-2021-01-30/AnswerMachineDetectionConfig AWS API Documentation
     #
     class AnswerMachineDetectionConfig < Struct.new(
-      :enable_answer_machine_detection)
+      :enable_answer_machine_detection,
+      :await_answer_machine_prompt)
       SENSITIVE = []
       include Aws::Structure
     end

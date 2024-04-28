@@ -270,6 +270,11 @@ module Aws::MainframeModernization
     #   Specifies a file associated with a specific batch job.
     #   @return [Types::FileBatchJobIdentifier]
     #
+    # @!attribute [rw] restart_batch_job_identifier
+    #   Specifies the required information for restart, including execution
+    #   ID and jobsteprestartmarker.
+    #   @return [Types::RestartBatchJobIdentifier]
+    #
     # @!attribute [rw] s3_batch_job_identifier
     #   Specifies an Amazon S3 location that identifies the batch jobs that
     #   you want to run. Use this identifier to run ad hoc batch jobs.
@@ -284,6 +289,7 @@ module Aws::MainframeModernization
     #
     class BatchJobIdentifier < Struct.new(
       :file_batch_job_identifier,
+      :restart_batch_job_identifier,
       :s3_batch_job_identifier,
       :script_batch_job_identifier,
       :unknown)
@@ -292,6 +298,7 @@ module Aws::MainframeModernization
       include Aws::Structure::Union
 
       class FileBatchJobIdentifier < BatchJobIdentifier; end
+      class RestartBatchJobIdentifier < BatchJobIdentifier; end
       class S3BatchJobIdentifier < BatchJobIdentifier; end
       class ScriptBatchJobIdentifier < BatchJobIdentifier; end
       class Unknown < BatchJobIdentifier; end
@@ -1514,6 +1521,10 @@ module Aws::MainframeModernization
     #   The name of this batch job.
     #   @return [String]
     #
+    # @!attribute [rw] job_step_restart_marker
+    #   The restart steps information for the most recent restart operation.
+    #   @return [Types::JobStepRestartMarker]
+    #
     # @!attribute [rw] job_type
     #   The type of job.
     #   @return [String]
@@ -1553,6 +1564,7 @@ module Aws::MainframeModernization
       :execution_id,
       :job_id,
       :job_name,
+      :job_step_restart_marker,
       :job_type,
       :job_user,
       :return_code,
@@ -1947,6 +1959,75 @@ module Aws::MainframeModernization
       class Unknown < JobIdentifier; end
     end
 
+    # Provides information related to a job step.
+    #
+    # @!attribute [rw] proc_step_name
+    #   The name of a procedure step.
+    #   @return [String]
+    #
+    # @!attribute [rw] proc_step_number
+    #   The number of a procedure step.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] step_cond_code
+    #   The condition code of a step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_name
+    #   The name of a step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_number
+    #   The number of a step.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] step_restartable
+    #   Specifies if a step can be restarted or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/JobStep AWS API Documentation
+    #
+    class JobStep < Struct.new(
+      :proc_step_name,
+      :proc_step_number,
+      :step_cond_code,
+      :step_name,
+      :step_number,
+      :step_restartable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides restart step information for the most recent restart
+    # operation.
+    #
+    # @!attribute [rw] from_proc_step
+    #   The procedure step name that a job was restarted from.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_step
+    #   The step name that a batch job restart was from.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_proc_step
+    #   The procedure step name that a batch job was restarted to.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_step
+    #   The step name that a job was restarted to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/JobStepRestartMarker AWS API Documentation
+    #
+    class JobStepRestartMarker < Struct.new(
+      :from_proc_step,
+      :from_step,
+      :to_proc_step,
+      :to_step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The unique identifier of the application.
     #   @return [String]
@@ -2149,6 +2230,36 @@ module Aws::MainframeModernization
     class ListBatchJobExecutionsResponse < Struct.new(
       :batch_job_executions,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The unique identifier of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The unique identifier of each batch job execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListBatchJobRestartPointsRequest AWS API Documentation
+    #
+    class ListBatchJobRestartPointsRequest < Struct.new(
+      :application_id,
+      :execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] batch_job_steps
+    #   Returns all the batch job steps and related information for a batch
+    #   job that previously ran.
+    #   @return [Array<Types::JobStep>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListBatchJobRestartPointsResponse AWS API Documentation
+    #
+    class ListBatchJobRestartPointsResponse < Struct.new(
+      :batch_job_steps)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2619,6 +2730,27 @@ module Aws::MainframeModernization
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An identifier for the StartBatchJob API to show that it is a restart
+    # operation.
+    #
+    # @!attribute [rw] execution_id
+    #   The executionId from the StartBatchJob response when the job ran for
+    #   the first time.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_step_restart_marker
+    #   The restart step information for the most recent restart operation.
+    #   @return [Types::JobStepRestartMarker]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/RestartBatchJobIdentifier AWS API Documentation
+    #
+    class RestartBatchJobIdentifier < Struct.new(
+      :execution_id,
+      :job_step_restart_marker)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -269,6 +269,7 @@ module Aws::QConnect
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor name: ::String
+      attr_accessor tag_filter: Types::TagFilter
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -694,6 +695,20 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class OrCondition
+      attr_accessor and_conditions: ::Array[Types::TagCondition]
+      attr_accessor tag_condition: Types::TagCondition
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AndConditions < OrCondition
+      end
+      class TagCondition < OrCondition
+      end
+      class Unknown < OrCondition
+      end
+    end
+
     class PreconditionFailedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1010,6 +1025,7 @@ module Aws::QConnect
       attr_accessor name: ::String
       attr_accessor session_arn: ::String
       attr_accessor session_id: ::String
+      attr_accessor tag_filter: Types::TagFilter
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -1074,6 +1090,29 @@ module Aws::QConnect
     class StartImportJobResponse
       attr_accessor import_job: Types::ImportJobData
       SENSITIVE: []
+    end
+
+    class TagCondition
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagFilter
+      attr_accessor and_conditions: ::Array[Types::TagCondition]
+      attr_accessor or_conditions: ::Array[Types::OrCondition]
+      attr_accessor tag_condition: Types::TagCondition
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AndConditions < TagFilter
+      end
+      class OrConditions < TagFilter
+      end
+      class TagCondition < TagFilter
+      end
+      class Unknown < TagFilter
+      end
     end
 
     class TagResourceRequest
@@ -1154,6 +1193,19 @@ module Aws::QConnect
 
     class UpdateQuickResponseResponse
       attr_accessor quick_response: Types::QuickResponseData
+      SENSITIVE: []
+    end
+
+    class UpdateSessionRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor description: ::String
+      attr_accessor session_id: ::String
+      attr_accessor tag_filter: Types::TagFilter
+      SENSITIVE: []
+    end
+
+    class UpdateSessionResponse
+      attr_accessor session: Types::SessionData
       SENSITIVE: []
     end
 

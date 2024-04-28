@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2024-03-27)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
 1.90.0 (2024-01-26)
 ------------------
 

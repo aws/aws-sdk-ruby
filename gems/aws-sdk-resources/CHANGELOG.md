@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+3.192.0 (2024-04-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-route53profiles` gem.
+
+3.191.0 (2024-04-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-controlcatalog` gem.
+
+3.190.0 (2024-04-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-deadline` gem.
+
+3.189.0 (2024-03-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-codeconnections` gem.
+
+3.188.0 (2024-03-14)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-timestreaminfluxdb` gem.
+
 3.187.0 (2024-02-19)
 ------------------
 

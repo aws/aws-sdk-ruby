@@ -98,6 +98,8 @@ module Aws::MainframeModernization
             Aws::MainframeModernization::Endpoints::ListBatchJobDefinitions.build(context)
           when :list_batch_job_executions
             Aws::MainframeModernization::Endpoints::ListBatchJobExecutions.build(context)
+          when :list_batch_job_restart_points
+            Aws::MainframeModernization::Endpoints::ListBatchJobRestartPoints.build(context)
           when :list_data_set_import_history
             Aws::MainframeModernization::Endpoints::ListDataSetImportHistory.build(context)
           when :list_data_sets

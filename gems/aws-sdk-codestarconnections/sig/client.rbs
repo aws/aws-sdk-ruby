@@ -147,7 +147,9 @@ module Aws
                                        repository_link_id: ::String,
                                        resource_name: ::String,
                                        role_arn: ::String,
-                                       sync_type: ("CFN_STACK_SYNC")
+                                       sync_type: ("CFN_STACK_SYNC"),
+                                       ?publish_deployment_status: ("ENABLED" | "DISABLED"),
+                                       ?trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
                                      ) -> _CreateSyncConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSyncConfigurationResponseSuccess
 
@@ -422,7 +424,9 @@ module Aws
                                        ?repository_link_id: ::String,
                                        resource_name: ::String,
                                        ?role_arn: ::String,
-                                       sync_type: ("CFN_STACK_SYNC")
+                                       sync_type: ("CFN_STACK_SYNC"),
+                                       ?publish_deployment_status: ("ENABLED" | "DISABLED"),
+                                       ?trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
                                      ) -> _UpdateSyncConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSyncConfigurationResponseSuccess
     end

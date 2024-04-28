@@ -79,7 +79,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about
     #   bucket naming restrictions, see [Directory bucket naming rules][2] in
     #   the *Amazon S3 User Guide*
     #

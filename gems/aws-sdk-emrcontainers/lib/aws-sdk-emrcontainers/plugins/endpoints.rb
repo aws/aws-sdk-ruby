@@ -64,6 +64,8 @@ module Aws::EMRContainers
             Aws::EMRContainers::Endpoints::CreateJobTemplate.build(context)
           when :create_managed_endpoint
             Aws::EMRContainers::Endpoints::CreateManagedEndpoint.build(context)
+          when :create_security_configuration
+            Aws::EMRContainers::Endpoints::CreateSecurityConfiguration.build(context)
           when :create_virtual_cluster
             Aws::EMRContainers::Endpoints::CreateVirtualCluster.build(context)
           when :delete_job_template
@@ -78,6 +80,8 @@ module Aws::EMRContainers
             Aws::EMRContainers::Endpoints::DescribeJobTemplate.build(context)
           when :describe_managed_endpoint
             Aws::EMRContainers::Endpoints::DescribeManagedEndpoint.build(context)
+          when :describe_security_configuration
+            Aws::EMRContainers::Endpoints::DescribeSecurityConfiguration.build(context)
           when :describe_virtual_cluster
             Aws::EMRContainers::Endpoints::DescribeVirtualCluster.build(context)
           when :get_managed_endpoint_session_credentials
@@ -88,6 +92,8 @@ module Aws::EMRContainers
             Aws::EMRContainers::Endpoints::ListJobTemplates.build(context)
           when :list_managed_endpoints
             Aws::EMRContainers::Endpoints::ListManagedEndpoints.build(context)
+          when :list_security_configurations
+            Aws::EMRContainers::Endpoints::ListSecurityConfigurations.build(context)
           when :list_tags_for_resource
             Aws::EMRContainers::Endpoints::ListTagsForResource.build(context)
           when :list_virtual_clusters

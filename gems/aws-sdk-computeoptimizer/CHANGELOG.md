@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2024-03-28)
+------------------
+
+* Feature - This release enables AWS Compute Optimizer to analyze and generate recommendations with a new customization preference, Memory Utilization.
+
 1.53.0 (2024-01-26)
 ------------------
 

@@ -69,6 +69,8 @@ module Aws
       def map(ref, values, target = nil)
         target = {} if target.nil?
         values.each do |key, value|
+          next if value.nil?
+
           target[key] = parse_ref(ref.shape.value, value)
         end
         target
@@ -85,6 +87,7 @@ module Aws
           when TimestampShape then time(value)
           when BlobShape then Base64.decode64(value)
           when BooleanShape then value.to_s == 'true'
+          when FloatShape then Util.deserialize_number(value)
           else value
           end
         end
@@ -93,7 +96,7 @@ module Aws
       # @param [String, Integer] value
       # @return [Time]
       def time(value)
-        value.is_a?(Numeric) ? Time.at(value) : Time.parse(value)
+        value.is_a?(Numeric) ? Time.at(value) : Aws::Util.deserialize_time(value)
       end
 
       def flattened_list?(shape)

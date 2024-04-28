@@ -57,7 +57,7 @@ module Aws::IVS
     # Error related to a specific channel, specified by its ARN.
     #
     # @!attribute [rw] arn
-    #   Channel ARN.
+    #   ARN of an IVS resource; e.g., channel.
     #   @return [String]
     #
     # @!attribute [rw] code
@@ -272,6 +272,11 @@ module Aws::IVS
     #   recording is disabled).
     #   @return [String]
     #
+    # @!attribute [rw] srt
+    #   Specifies the endpoint and optional passphrase for streaming with
+    #   the SRT protocol.
+    #   @return [Types::Srt]
+    #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
     #   `string:string (key:value)`. See [Tagging Amazon Web Services
@@ -308,6 +313,7 @@ module Aws::IVS
       :playback_url,
       :preset,
       :recording_configuration_arn,
+      :srt,
       :tags,
       :type)
       SENSITIVE = []
@@ -429,7 +435,8 @@ module Aws::IVS
     #   @return [Boolean]
     #
     # @!attribute [rw] insecure_ingest
-    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] latency_mode
@@ -1734,6 +1741,28 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Specifies information needed to stream using the SRT protocol.
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint to be used when streaming with IVS using the SRT
+    #   protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] passphrase
+    #   Auto-generated passphrase to enable encryption. This field is
+    #   applicable only if the end user has *not* enabled the
+    #   `insecureIngest` option for the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/Srt AWS API Documentation
+    #
+    class Srt < Struct.new(
+      :endpoint,
+      :passphrase)
+      SENSITIVE = [:passphrase]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_arn
     #   The ARN of the channel associated with the viewer session to revoke.
     #   @return [String]
@@ -2236,7 +2265,8 @@ module Aws::IVS
     #   @return [Boolean]
     #
     # @!attribute [rw] insecure_ingest
-    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] latency_mode

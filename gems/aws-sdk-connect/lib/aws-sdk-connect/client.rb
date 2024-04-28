@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Connect
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Connect
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::Connect
     #   @option options [Aws::Connect::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Connect::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -675,7 +699,27 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :resource_type
-    #   A valid resource type.
+    #   A valid resource type. To [enable streaming for real-time analysis of
+    #   contacts][1], use the following types:
+    #
+    #   * For chat contacts, use `REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS`.
+    #
+    #   * For voice contacts, use `REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS`.
+    #
+    #   <note markdown="1"> `REAL_TIME_CONTACT_ANALYSIS_SEGMENTS` is deprecated, but it is still
+    #   supported and will apply only to VOICE channel contacts. Use
+    #   `REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS` for voice contacts moving
+    #   forward.
+    #
+    #    If you have previously associated a stream with
+    #   `REAL_TIME_CONTACT_ANALYSIS_SEGMENTS`, no action is needed to update
+    #   the stream to `REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-contact-analysis-segment-streams.html
     #
     # @option params [required, Types::InstanceStorageConfig] :storage_config
     #   A valid storage type.
@@ -688,7 +732,7 @@ module Aws::Connect
     #
     #   resp = client.associate_instance_storage_config({
     #     instance_id: "InstanceId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #     storage_config: { # required
     #       association_id: "AssociationId",
     #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
@@ -2601,7 +2645,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS, SUBMIT_AUTO_EVALUATION
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -2660,6 +2704,9 @@ module Aws::Connect
     #           ],
     #         },
     #         end_associated_tasks_action: {
+    #         },
+    #         submit_auto_evaluation_action: {
+    #           evaluation_form_id: "EvaluationFormId", # required
     #         },
     #       },
     #     ],
@@ -2720,11 +2767,17 @@ module Aws::Connect
     #   \| `SecurityProfile` \| `Queue` \| `RoutingProfile`
     #
     # @option params [Array<Types::Application>] :applications
-    #   This API is in preview release for Amazon Connect and is subject to
-    #   change.
-    #
     #   A list of third-party applications that the security profile will give
     #   access to.
+    #
+    # @option params [Array<String>] :hierarchy_restricted_resources
+    #   The list of resources that a security profile applies hierarchy
+    #   restrictions to in Amazon Connect. Following are acceptable
+    #   ResourceNames: `User`.
+    #
+    # @option params [String] :allowed_access_control_hierarchy_group_id
+    #   The identifier of the hierarchy group that a security profile uses to
+    #   restrict access to resources in Amazon Connect.
     #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2751,6 +2804,8 @@ module Aws::Connect
     #         application_permissions: ["Permission"],
     #       },
     #     ],
+    #     hierarchy_restricted_resources: ["HierarchyRestrictedResourceName"],
+    #     allowed_access_control_hierarchy_group_id: "HierarchyGroupId",
     #   })
     #
     # @example Response structure
@@ -3042,6 +3097,14 @@ module Aws::Connect
     #   identity management, the user name can include up to 20 characters. If
     #   you are using SAML for identity management, the user name can include
     #   up to 64 characters from \[a-zA-Z0-9\_-.\\@\]+.
+    #
+    #   Username can include @ only if used in an email format. For example:
+    #
+    #   * Correct: testuser
+    #
+    #   * Correct: testuser@example.com
+    #
+    #   * Incorrect: testuser@example
     #
     # @option params [String] :password
     #   The password for the user account. A password is required if you are
@@ -3813,6 +3876,24 @@ module Aws::Connect
 
     # Deletes a quick connect.
     #
+    # After calling [DeleteUser][1], it's important to call
+    # `DeleteQuickConnect` to delete any records related to the deleted
+    # users. This will help you:
+    #
+    #  * Avoid dangling resources that impact your service quotas.
+    #
+    # * Remove deleted users so they don't appear to agents as transfer
+    #   options.
+    #
+    # * Avoid the disruption of other Amazon Connect processes, such as
+    #   instance replication and syncing if you're using [Amazon Connect
+    #   Global Resiliency][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteUser.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -4041,9 +4122,23 @@ module Aws::Connect
     # account is deleted, see [Delete Users from Your Amazon Connect
     # Instance][1] in the *Amazon Connect Administrator Guide*.
     #
+    # After calling DeleteUser, call [DeleteQuickConnect][2] to delete any
+    # records related to the deleted users. This will help you:
+    #
+    #  * Avoid dangling resources that impact your service quotas.
+    #
+    # * Remove deleted users so they don't appear to agents as transfer
+    #   options.
+    #
+    # * Avoid the disruption of other Amazon Connect processes, such as
+    #   instance replication and syncing if you're using [Amazon Connect
+    #   Global Resiliency][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteQuickConnect.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -4789,7 +4884,7 @@ module Aws::Connect
     #   resp = client.describe_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #   })
     #
     # @example Response structure
@@ -5139,7 +5234,7 @@ module Aws::Connect
     #   resp.rule.trigger_event_source.integration_association_id #=> String
     #   resp.rule.function #=> String
     #   resp.rule.actions #=> Array
-    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS"
+    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION"
     #   resp.rule.actions[0].task_action.name #=> String
     #   resp.rule.actions[0].task_action.description #=> String
     #   resp.rule.actions[0].task_action.contact_flow_id #=> String
@@ -5166,6 +5261,7 @@ module Aws::Connect
     #   resp.rule.actions[0].update_case_action.fields[0].value.boolean_value #=> Boolean
     #   resp.rule.actions[0].update_case_action.fields[0].value.double_value #=> Float
     #   resp.rule.actions[0].update_case_action.fields[0].value.string_value #=> String
+    #   resp.rule.actions[0].submit_auto_evaluation_action.evaluation_form_id #=> String
     #   resp.rule.publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule.created_time #=> Time
     #   resp.rule.last_updated_time #=> Time
@@ -5221,6 +5317,9 @@ module Aws::Connect
     #   resp.security_profile.tag_restricted_resources[0] #=> String
     #   resp.security_profile.last_modified_time #=> Time
     #   resp.security_profile.last_modified_region #=> String
+    #   resp.security_profile.hierarchy_restricted_resources #=> Array
+    #   resp.security_profile.hierarchy_restricted_resources[0] #=> String
+    #   resp.security_profile.allowed_access_control_hierarchy_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfile AWS API Documentation
     #
@@ -5752,7 +5851,7 @@ module Aws::Connect
     #   resp = client.disassociate_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateInstanceStorageConfig AWS API Documentation
@@ -7046,7 +7145,8 @@ module Aws::Connect
     #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
-    #     `FEATURE` \| `contact/segmentAttributes/connect:Subtype` \|
+    #     `FEATURE` \| `CASE_TEMPLATE_ARN` \| `CASE_STATUS` \|
+    #     `contact/segmentAttributes/connect:Subtype` \|
     #     `ROUTING_STEP_EXPRESSION`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in a
@@ -7084,7 +7184,8 @@ module Aws::Connect
     #   Valid grouping keys: `QUEUE` \| `ROUTING_PROFILE` \| `AGENT` \|
     #   `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #   `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
-    #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`,
+    #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
+    #   `CASE_TEMPLATE_ARN` \| `CASE_STATUS` \|
     #   `contact/segmentAttributes/connect:Subtype` \|
     #   `ROUTING_STEP_EXPRESSION`
     #
@@ -7101,15 +7202,19 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Abandonment rate][2]
+    #
     #   AGENT\_ADHERENT\_TIME
     #
     #   : This metric is available only in Amazon Web Services Regions where
-    #     [Forecasting, capacity planning, and scheduling][2] is available.
+    #     [Forecasting, capacity planning, and scheduling][3] is available.
     #
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [Adherent time][4]
     #
     #   AGENT\_ANSWER\_RATE
     #
@@ -7118,6 +7223,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Agent answer rate][5]
+    #
     #   AGENT\_NON\_ADHERENT\_TIME
     #
     #   : Unit: Seconds
@@ -7125,12 +7232,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Non-adherent time][6]
+    #
     #   AGENT\_NON\_RESPONSE
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [Agent non-response][7]
     #
     #   AGENT\_NON\_RESPONSE\_WITHOUT\_CUSTOMER\_ABANDONS
     #
@@ -7142,31 +7253,39 @@ module Aws::Connect
     #     Data for this metric is available starting from October 1, 2023
     #     0:00:00 GMT.
     #
+    #     UI name: [Agent non-response without customer abandons][8]
+    #
     #   AGENT\_OCCUPANCY
     #
     #   : Unit: Percentage
     #
     #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
+    #     UI name: [Occupancy][9]
+    #
     #   AGENT\_SCHEDULE\_ADHERENCE
     #
     #   : This metric is available only in Amazon Web Services Regions where
-    #     [Forecasting, capacity planning, and scheduling][2] is available.
+    #     [Forecasting, capacity planning, and scheduling][3] is available.
     #
     #     Unit: Percent
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Adherence][10]
+    #
     #   AGENT\_SCHEDULED\_TIME
     #
     #   : This metric is available only in Amazon Web Services Regions where
-    #     [Forecasting, capacity planning, and scheduling][2] is available.
+    #     [Forecasting, capacity planning, and scheduling][3] is available.
     #
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [Scheduled time][11]
     #
     #   AVG\_ABANDON\_TIME
     #
@@ -7175,12 +7294,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average queue abandon time][12]
+    #
     #   AVG\_ACTIVE\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [Average active time][13]
     #
     #   AVG\_AFTER\_CONTACT\_WORK\_TIME
     #
@@ -7190,6 +7313,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Average after contact work time][14]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7206,6 +7331,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Average agent API connecting time][15]
+    #
     #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for this
     #     metric.
     #
@@ -7218,12 +7345,36 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Average agent pause time][16]
+    #
+    #   AVG\_CASE\_RELATED\_CONTACTS
+    #
+    #   : Unit: Count
+    #
+    #     Required filter key: CASE\_TEMPLATE\_ARN
+    #
+    #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
+    #
+    #     UI name: [Average contacts per case][17]
+    #
+    #   AVG\_CASE\_RESOLUTION\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Required filter key: CASE\_TEMPLATE\_ARN
+    #
+    #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
+    #
+    #     UI name: [Average case resolution time][18]
+    #
     #   AVG\_CONTACT\_DURATION
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Average contact duration][19]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7236,6 +7387,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average conversation duration][20]
+    #
     #   AVG\_GREETING\_TIME\_AGENT
     #
     #   : This metric is available only for contacts analyzed by Contact Lens
@@ -7246,6 +7399,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average greeting time agent ][21]
+    #
     #   AVG\_HANDLE\_TIME
     #
     #   : Unit: Seconds
@@ -7253,6 +7408,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
     #     RoutingStepExpression
+    #
+    #     UI name: [Average handle time][22]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7265,6 +7422,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average customer hold time][23]
+    #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
@@ -7276,12 +7435,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average customer hold time all contacts][24]
+    #
     #   AVG\_HOLDS
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Average holds][25]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7294,6 +7457,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average agent interaction and customer hold time][26]
+    #
     #   AVG\_INTERACTION\_TIME
     #
     #   : Unit: Seconds
@@ -7302,6 +7467,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Average agent interaction time][27]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7317,6 +7484,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average interruptions agent ][28]
+    #
     #   AVG\_INTERRUPTION\_TIME\_AGENT
     #
     #   : This metric is available only for contacts analyzed by Contact Lens
@@ -7326,6 +7495,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Average interruption time agent][29]
     #
     #   AVG\_NON\_TALK\_TIME
     #
@@ -7337,12 +7508,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average non-talk time][30]
+    #
     #   AVG\_QUEUE\_ANSWER\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Average queue answer time][31]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7355,6 +7530,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average resolution time][32]
+    #
     #   AVG\_TALK\_TIME
     #
     #   : This metric is available only for contacts analyzed by Contact Lens
@@ -7364,6 +7541,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Average talk time][33]
     #
     #   AVG\_TALK\_TIME\_AGENT
     #
@@ -7375,6 +7554,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average talk time agent][34]
+    #
     #   AVG\_TALK\_TIME\_CUSTOMER
     #
     #   : This metric is available only for contacts analyzed by Contact Lens
@@ -7385,6 +7566,18 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Average talk time customer][35]
+    #
+    #   CASES\_CREATED
+    #
+    #   : Unit: Count
+    #
+    #     Required filter key: CASE\_TEMPLATE\_ARN
+    #
+    #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
+    #
+    #     UI name: [Cases created][36]
+    #
     #   CONTACTS\_ABANDONED
     #
     #   : Unit: Count
@@ -7392,6 +7585,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     RoutingStepExpression
+    #
+    #     UI name: [Contact abandoned][37]
     #
     #   CONTACTS\_CREATED
     #
@@ -7401,6 +7596,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Contacts created][38]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7416,6 +7613,8 @@ module Aws::Connect
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
     #     RoutingStepExpression
     #
+    #     UI name: [API contacts handled][39]
+    #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
@@ -7429,12 +7628,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
     #     contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Contacts handled by Connected to agent][40]
+    #
     #   CONTACTS\_HOLD\_ABANDONS
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Contacts hold disconnect][40]
     #
     #   CONTACTS\_ON\_HOLD\_AGENT\_DISCONNECT
     #
@@ -7443,12 +7646,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Contacts hold agent disconnect][41]
+    #
     #   CONTACTS\_ON\_HOLD\_CUSTOMER\_DISCONNECT
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [Contacts hold customer disconnect][42]
     #
     #   CONTACTS\_PUT\_ON\_HOLD
     #
@@ -7457,12 +7664,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Contacts put on hold][42]
+    #
     #   CONTACTS\_TRANSFERRED\_OUT\_EXTERNAL
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [Contacts transferred out external][43]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_INTERNAL
     #
@@ -7471,6 +7682,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Contacts transferred out internal][44]
+    #
     #   CONTACTS\_QUEUED
     #
     #   : Unit: Count
@@ -7478,12 +7691,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Contacts queued][45]
+    #
     #   CONTACTS\_QUEUED\_BY\_ENQUEUE
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
     #     contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Contacts queued by Enqueue][46]
     #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
@@ -7496,12 +7713,16 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
+    #     UI name: [Contacts resolved in X][47]
+    #
     #   CONTACTS\_TRANSFERRED\_OUT
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Contacts transferred out][48]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7514,12 +7735,26 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Contacts transferred out by agent][49]
+    #
     #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Contacts transferred out queue][49]
+    #
+    #   CURRENT\_CASES
+    #
+    #   : Unit: Count
+    #
+    #     Required filter key: CASE\_TEMPLATE\_ARN
+    #
+    #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
+    #
+    #     UI name: [Current cases][50]
     #
     #   MAX\_QUEUED\_TIME
     #
@@ -7528,17 +7763,33 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Maximum queued time][51]
+    #
+    #   PERCENT\_CASES\_FIRST\_CONTACT\_RESOLVED
+    #
+    #   : Unit: Percent
+    #
+    #     Required filter key: CASE\_TEMPLATE\_ARN
+    #
+    #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
+    #
+    #     UI name: [Cases resolved on first contact][52]
+    #
     #   PERCENT\_CONTACTS\_STEP\_EXPIRED
     #
     #   : Unit: Percent
     #
     #     Valid groupings and filters: Queue, RoutingStepExpression
     #
+    #     UI name: Not available
+    #
     #   PERCENT\_CONTACTS\_STEP\_JOINED
     #
     #   : Unit: Percent
     #
     #     Valid groupings and filters: Queue, RoutingStepExpression
+    #
+    #     UI name: Not available
     #
     #   PERCENT\_NON\_TALK\_TIME
     #
@@ -7550,6 +7801,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Non-talk time percent][53]
+    #
     #   PERCENT\_TALK\_TIME
     #
     #   : This metric is available only for contacts analyzed by Contact Lens
@@ -7559,6 +7812,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Talk time percent][54]
     #
     #   PERCENT\_TALK\_TIME\_AGENT
     #
@@ -7570,6 +7825,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Talk time agent percent][55]
+    #
     #   PERCENT\_TALK\_TIME\_CUSTOMER
     #
     #   : This metric is available only for contacts analyzed by Contact Lens
@@ -7579,6 +7836,28 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #     UI name: [Talk time customer percent][56]
+    #
+    #   REOPENED\_CASE\_ACTIONS
+    #
+    #   : Unit: Count
+    #
+    #     Required filter key: CASE\_TEMPLATE\_ARN
+    #
+    #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
+    #
+    #     UI name: [Cases reopened][57]
+    #
+    #   RESOLVED\_CASE\_ACTIONS
+    #
+    #   : Unit: Count
+    #
+    #     Required filter key: CASE\_TEMPLATE\_ARN
+    #
+    #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
+    #
+    #     UI name: [Cases resolved][58]
     #
     #   SERVICE\_LEVEL
     #
@@ -7592,11 +7871,15 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
+    #     UI name: [Service level X][59]
+    #
     #   STEP\_CONTACTS\_QUEUED
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, RoutingStepExpression
+    #
+    #     UI name: Not available
     #
     #   SUM\_AFTER\_CONTACT\_WORK\_TIME
     #
@@ -7604,6 +7887,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [After contact work time][60]
     #
     #   SUM\_CONNECTING\_TIME\_AGENT
     #
@@ -7615,6 +7900,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [Agent API connecting time][61]
     #
     #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for this
     #     metric.
@@ -7628,12 +7915,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Contact flow time][62]
+    #
     #   SUM\_CONTACT\_TIME\_AGENT
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [Agent on contact time][63]
     #
     #   SUM\_CONTACTS\_ANSWERED\_IN\_X
     #
@@ -7646,6 +7937,8 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
+    #     UI name: [Contacts answered in X seconds][64]
+    #
     #   SUM\_CONTACTS\_ABANDONED\_IN\_X
     #
     #   : Unit: Count
@@ -7657,6 +7950,8 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
+    #     UI name: [Contacts abandoned in X seconds][65]
+    #
     #   SUM\_CONTACTS\_DISCONNECTED
     #
     #   : Valid metric filter key: `DISCONNECT_REASON`
@@ -7666,12 +7961,16 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Contact disconnected][66]
+    #
     #   SUM\_ERROR\_STATUS\_TIME\_AGENT
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #     UI name: [Error status time][67]
     #
     #   SUM\_HANDLE\_TIME
     #
@@ -7680,6 +7979,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Contact handle time][68]
+    #
     #   SUM\_HOLD\_TIME
     #
     #   : Unit: Count
@@ -7687,11 +7988,15 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Customer hold time][69]
+    #
     #   SUM\_IDLE\_TIME\_AGENT
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
+    #
+    #     UI name: [Agent idle time][70]
     #
     #   SUM\_INTERACTION\_AND\_HOLD\_TIME
     #
@@ -7700,6 +8005,8 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Agent interaction and hold time][71]
+    #
     #   SUM\_INTERACTION\_TIME
     #
     #   : Unit: Seconds
@@ -7707,17 +8014,23 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
+    #     UI name: [Agent interaction time][72]
+    #
     #   SUM\_NON\_PRODUCTIVE\_TIME\_AGENT
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
+    #     UI name: [Non-Productive Time][73]
+    #
     #   SUM\_ONLINE\_TIME\_AGENT
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
+    #
+    #     UI name: [Online time][74]
     #
     #   SUM\_RETRY\_CALLBACK\_ATTEMPTS
     #
@@ -7726,10 +8039,85 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     contact/segmentAttributes/connect:Subtype
     #
+    #     UI name: [Callback attempts][75]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
-    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#abandonment-rate-historical
+    #   [3]: https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region
+    #   [4]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherent-time-historical
+    #   [5]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-answer-rate-historical
+    #   [6]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#non-adherent-time
+    #   [7]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-non-response
+    #   [8]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-nonresponse-no-abandon-historical
+    #   [9]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#occupancy-historical
+    #   [10]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherence-historical
+    #   [11]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#scheduled-time-historical
+    #   [12]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-abandon-time-historical
+    #   [13]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-active-time-historical
+    #   [14]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-acw-time-historical
+    #   [15]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-avg-agent-api-connecting-time
+    #   [16]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-pause-time-historical
+    #   [17]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contacts-case-historical
+    #   [18]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-case-resolution-time-historical
+    #   [19]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contact-duration-historical
+    #   [20]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-conversation-duration-historical
+    #   [21]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-greeting-time-agent-historical
+    #   [22]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-handle-time-historical
+    #   [23]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-customer-hold-time-historical
+    #   [24]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#avg-customer-hold-time-all-contacts-historical
+    #   [25]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-holds-historical
+    #   [26]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-customer-hold-time-historical
+    #   [27]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-time-historical
+    #   [28]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-agent-historical
+    #   [29]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-time-agent-historical
+    #   [30]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##average-non-talk-time-historical
+    #   [31]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-answer-time-historical
+    #   [32]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-resolution-time-historical
+    #   [33]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-historical
+    #   [34]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-agent-historical
+    #   [35]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-customer-historical
+    #   [36]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##cases-created-historical
+    #   [37]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
+    #   [38]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-created-historical
+    #   [39]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#api-contacts-handled-historical
+    #   [40]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
+    #   [41]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-agent-disconnect-historical
+    #   [42]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
+    #   [43]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-external-historical
+    #   [44]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical
+    #   [45]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical
+    #   [46]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical
+    #   [47]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
+    #   [48]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical
+    #   [49]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
+    #   [50]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical
+    #   [51]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical
+    #   [52]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
+    #   [53]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical
+    #   [54]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#tt-historical
+    #   [55]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
+    #   [56]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical
+    #   [57]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical
+    #   [58]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historicall
+    #   [59]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical
+    #   [60]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical
+    #   [61]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-agent-api-connecting-time
+    #   [62]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-flow-time-historical
+    #   [63]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-on-contact-time-historical
+    #   [64]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical
+    #   [65]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical
+    #   [66]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical
+    #   [67]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#error-status-time-historical
+    #   [68]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-handle-time-historical
+    #   [69]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#customer-hold-time-historical
+    #   [70]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-idle-time-historica
+    #   [71]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-hold-time-historical
+    #   [72]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-time-historical
+    #   [73]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#npt-historical
+    #   [74]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#online-time-historical
+    #   [75]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#callback-attempts-historical
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -8470,7 +8858,8 @@ module Aws::Connect
     # change.
     #
     # For the specified `referenceTypes`, returns a list of references
-    # associated with the contact.
+    # associated with the contact. *References* are links to documents that
+    # are related to a contact, such as emails, attachments, or URLs.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -8922,7 +9311,7 @@ module Aws::Connect
     #
     #   resp = client.list_instance_storage_configs({
     #     instance_id: "InstanceId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -9952,7 +10341,7 @@ module Aws::Connect
     #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate"
     #   resp.rule_summary_list[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule_summary_list[0].action_summaries #=> Array
-    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS"
+    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION"
     #   resp.rule_summary_list[0].created_time #=> Time
     #   resp.rule_summary_list[0].last_updated_time #=> Time
     #   resp.next_token #=> String
@@ -12154,6 +12543,42 @@ module Aws::Connect
     #           tag_value: "String",
     #         },
     #       },
+    #       user_attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #             hierarchy_group_condition: {
+    #               value: "String",
+    #               hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #             },
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #           hierarchy_group_condition: {
+    #             value: "String",
+    #             hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #           },
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #         hierarchy_group_condition: {
+    #           value: "String",
+    #           hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #         },
+    #       },
     #     },
     #     search_criteria: {
     #       or_conditions: [
@@ -12430,7 +12855,9 @@ module Aws::Connect
     #   Information identifying the participant.
     #
     # @option params [Types::ChatMessage] :initial_message
-    #   The initial message to be sent to the newly created chat.
+    #   The initial message to be sent to the newly created chat. If you have
+    #   a Lex bot in your flow, the initial message is not delivered to the
+    #   Lex bot.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -13242,8 +13669,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Ends the specified contact. This call does not work for voice contacts
-    # that use the following initiation methods:
+    # Ends the specified contact. Use this API to stop queued callbacks. It
+    # does not work for voice contacts that use the following initiation
+    # methods:
     #
     # * DISCONNECT
     #
@@ -13251,8 +13679,8 @@ module Aws::Connect
     #
     # * QUEUE\_TRANSFER
     #
-    # Chat and task contacts, however, can be terminated in any state,
-    # regardless of initiation method.
+    # Chat and task contacts can be terminated in any state, regardless of
+    # initiation method.
     #
     # @option params [required, String] :contact_id
     #   The ID of the contact.
@@ -14570,7 +14998,7 @@ module Aws::Connect
     #   resp = client.update_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #     storage_config: { # required
     #       association_id: "AssociationId",
     #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
@@ -15460,7 +15888,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS, SUBMIT_AUTO_EVALUATION
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -15520,6 +15948,9 @@ module Aws::Connect
     #         },
     #         end_associated_tasks_action: {
     #         },
+    #         submit_auto_evaluation_action: {
+    #           evaluation_form_id: "EvaluationFormId", # required
+    #         },
     #       },
     #     ],
     #     publish_status: "DRAFT", # required, accepts DRAFT, PUBLISHED
@@ -15567,10 +15998,16 @@ module Aws::Connect
     #   to in Amazon Connect.
     #
     # @option params [Array<Types::Application>] :applications
-    #   This API is in preview release for Amazon Connect and is subject to
-    #   change.
-    #
     #   A list of the third-party application's metadata.
+    #
+    # @option params [Array<String>] :hierarchy_restricted_resources
+    #   The list of resources that a security profile applies hierarchy
+    #   restrictions to in Amazon Connect. Following are acceptable
+    #   ResourceNames: `User`.
+    #
+    # @option params [String] :allowed_access_control_hierarchy_group_id
+    #   The identifier of the hierarchy group that a security profile uses to
+    #   restrict access to resources in Amazon Connect.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -15591,6 +16028,8 @@ module Aws::Connect
     #         application_permissions: ["Permission"],
     #       },
     #     ],
+    #     hierarchy_restricted_resources: ["HierarchyRestrictedResourceName"],
+    #     allowed_access_control_hierarchy_group_id: "HierarchyGroupId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfile AWS API Documentation
@@ -16267,7 +16706,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.155.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

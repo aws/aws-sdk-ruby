@@ -139,7 +139,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -565,7 +565,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -671,7 +671,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -873,7 +873,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1036,7 +1036,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
     #   @return [Types::ImageConfig]
     #
     # @!attribute [rw] code_signing_config_arn
@@ -1107,7 +1107,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1268,7 +1268,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1326,7 +1326,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1350,7 +1350,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1374,7 +1374,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -1405,7 +1405,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function or version.
+    #   The name or ARN of the Lambda function or version.
     #
     #   **Name formats**
     #
@@ -1437,7 +1437,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1483,7 +1483,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2541,7 +2541,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2607,7 +2607,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2636,7 +2636,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2661,7 +2661,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2698,7 +2698,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2730,7 +2730,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2761,7 +2761,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2828,7 +2828,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3068,7 +3068,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -3116,7 +3116,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3191,7 +3191,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3441,7 +3441,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -3552,7 +3552,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3636,7 +3636,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4001,7 +4001,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4117,7 +4117,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4175,7 +4175,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4227,7 +4227,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4493,7 +4493,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4570,7 +4570,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4954,7 +4954,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5005,7 +5005,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5035,7 +5035,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5060,7 +5060,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5089,7 +5089,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -5149,7 +5149,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5230,7 +5230,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5376,7 +5376,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -5937,7 +5937,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -6036,7 +6036,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -6196,7 +6196,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -6280,7 +6280,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -6427,7 +6427,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
     #   @return [Types::ImageConfig]
     #
     # @!attribute [rw] ephemeral_storage
@@ -6480,7 +6480,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -6540,7 +6540,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2024-04-12)
+------------------
+
+* Feature - Documentation updates for AWS IoT Fleet Hub to clarify that Fleet Hub supports organization instance of IAM Identity Center.
+
 1.23.0 (2024-01-26)
 ------------------
 

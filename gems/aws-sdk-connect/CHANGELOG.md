@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.154.0 (2024-04-10)
+------------------
+
+* Feature - This release adds new Submit Auto Evaluation Action for Amazon Connect Rules.
+
+1.153.0 (2024-03-20)
+------------------
+
+* Feature - This release updates the *InstanceStorageConfig APIs to support a new ResourceType: REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS. Use this resource type to enable streaming for real-time analysis of chat contacts and to associate a Kinesis stream where real-time analysis chat segments will be published.
+
+1.152.0 (2024-03-15)
+------------------
+
+* Feature - This release adds Hierarchy based Access Control fields to Security Profile public APIs and adds support for UserAttributeFilter to SearchUsers API.
+
+1.151.0 (2024-03-12)
+------------------
+
+* Feature - This release increases MaxResults limit to 500 in request for SearchUsers, SearchQueues and SearchRoutingProfiles APIs of Amazon Connect.
+
 1.150.0 (2024-01-26)
 ------------------
 

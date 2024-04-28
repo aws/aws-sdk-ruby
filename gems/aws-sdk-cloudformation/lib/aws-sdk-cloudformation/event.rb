@@ -61,7 +61,7 @@ module Aws::CloudFormation
     end
 
     # Type of resource. (For more information, go to [Amazon Web Services
-    # Resource Types Reference][1] in the CloudFormation User Guide.)
+    # Resource Types Reference][1] in the *CloudFormation User Guide*.)
     #
     #
     #
@@ -149,6 +149,30 @@ module Aws::CloudFormation
     # @return [String]
     def hook_failure_mode
       data[:hook_failure_mode]
+    end
+
+    # An optional field containing information about the detailed status of
+    # the stack event.
+    #
+    # * `CONFIGURATION_COMPLETE` - all of the resources in the stack have
+    #   reached that event. For more information, see [CloudFormation stack
+    #   deployment][1] in the *CloudFormation User Guide*.
+    #
+    # ^
+    # ^
+    #
+    # * `VALIDATION_FAILED` - template validation failed because of invalid
+    #   properties in the template. The `ResourceStatusReason` field shows
+    #   what properties are defined incorrectly.
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
+    # @return [String]
+    def detailed_status
+      data[:detailed_status]
     end
 
     # @!endgroup

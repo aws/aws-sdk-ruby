@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2024-02-29)
+------------------
+
+* Feature - This release makes AMAZON.QnAIntent generally available in Amazon Lex. This generative AI feature leverages large language models available through Amazon Bedrock to automate frequently asked questions (FAQ) experience for end-users.
+
 1.48.0 (2024-02-07)
 ------------------
 

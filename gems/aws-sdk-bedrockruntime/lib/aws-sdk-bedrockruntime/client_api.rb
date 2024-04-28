@@ -15,6 +15,8 @@ module Aws::BedrockRuntime
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Body = Shapes::BlobShape.new(name: 'Body')
+    GuardrailIdentifier = Shapes::StringShape.new(name: 'GuardrailIdentifier')
+    GuardrailVersion = Shapes::StringShape.new(name: 'GuardrailVersion')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvokeModelIdentifier = Shapes::StringShape.new(name: 'InvokeModelIdentifier')
     InvokeModelRequest = Shapes::StructureShape.new(name: 'InvokeModelRequest')
@@ -34,6 +36,7 @@ module Aws::BedrockRuntime
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Trace = Shapes::StringShape.new(name: 'Trace')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
@@ -46,6 +49,9 @@ module Aws::BedrockRuntime
     InvokeModelRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, location: "header", location_name: "Content-Type"))
     InvokeModelRequest.add_member(:accept, Shapes::ShapeRef.new(shape: MimeType, location: "header", location_name: "Accept"))
     InvokeModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: InvokeModelIdentifier, required: true, location: "uri", location_name: "modelId"))
+    InvokeModelRequest.add_member(:trace, Shapes::ShapeRef.new(shape: Trace, location: "header", location_name: "X-Amzn-Bedrock-Trace"))
+    InvokeModelRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location: "header", location_name: "X-Amzn-Bedrock-GuardrailIdentifier"))
+    InvokeModelRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location: "header", location_name: "X-Amzn-Bedrock-GuardrailVersion"))
     InvokeModelRequest.struct_class = Types::InvokeModelRequest
     InvokeModelRequest[:payload] = :body
     InvokeModelRequest[:payload_member] = InvokeModelRequest.member(:body)
@@ -60,6 +66,9 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, location: "header", location_name: "Content-Type"))
     InvokeModelWithResponseStreamRequest.add_member(:accept, Shapes::ShapeRef.new(shape: MimeType, location: "header", location_name: "X-Amzn-Bedrock-Accept"))
     InvokeModelWithResponseStreamRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: InvokeModelIdentifier, required: true, location: "uri", location_name: "modelId"))
+    InvokeModelWithResponseStreamRequest.add_member(:trace, Shapes::ShapeRef.new(shape: Trace, location: "header", location_name: "X-Amzn-Bedrock-Trace"))
+    InvokeModelWithResponseStreamRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location: "header", location_name: "X-Amzn-Bedrock-GuardrailIdentifier"))
+    InvokeModelWithResponseStreamRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location: "header", location_name: "X-Amzn-Bedrock-GuardrailVersion"))
     InvokeModelWithResponseStreamRequest.struct_class = Types::InvokeModelWithResponseStreamRequest
     InvokeModelWithResponseStreamRequest[:payload] = :body
     InvokeModelWithResponseStreamRequest[:payload_member] = InvokeModelWithResponseStreamRequest.member(:body)

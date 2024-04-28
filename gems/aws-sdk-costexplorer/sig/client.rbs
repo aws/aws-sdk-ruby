@@ -333,6 +333,20 @@ module Aws
                                      ) -> _GetAnomalySubscriptionsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnomalySubscriptionsResponseSuccess
 
+      interface _GetApproximateUsageRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApproximateUsageRecordsResponse]
+        def services: () -> ::Hash[::String, ::Integer]
+        def total_records: () -> ::Integer
+        def lookback_period: () -> Types::DateInterval
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_approximate_usage_records-instance_method
+      def get_approximate_usage_records: (
+                                           granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                                           ?services: Array[::String],
+                                           approximation_dimension: ("SERVICE" | "RESOURCE")
+                                         ) -> _GetApproximateUsageRecordsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApproximateUsageRecordsResponseSuccess
+
       interface _GetCostAndUsageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCostAndUsageResponse]
         def next_page_token: () -> ::String
@@ -1057,6 +1071,18 @@ module Aws
                               ) -> _GetUsageForecastResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsageForecastResponseSuccess
 
+      interface _ListCostAllocationTagBackfillHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCostAllocationTagBackfillHistoryResponse]
+        def backfill_requests: () -> ::Array[Types::CostAllocationTagBackfillRequest]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#list_cost_allocation_tag_backfill_history-instance_method
+      def list_cost_allocation_tag_backfill_history: (
+                                                       ?next_token: ::String,
+                                                       ?max_results: ::Integer
+                                                     ) -> _ListCostAllocationTagBackfillHistoryResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCostAllocationTagBackfillHistoryResponseSuccess
+
       interface _ListCostAllocationTagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCostAllocationTagsResponse]
         def cost_allocation_tags: () -> ::Array[Types::CostAllocationTag]
@@ -1119,6 +1145,16 @@ module Aws
                                       feedback: ("YES" | "NO" | "PLANNED_ACTIVITY")
                                     ) -> _ProvideAnomalyFeedbackResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ProvideAnomalyFeedbackResponseSuccess
+
+      interface _StartCostAllocationTagBackfillResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCostAllocationTagBackfillResponse]
+        def backfill_request: () -> Types::CostAllocationTagBackfillRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#start_cost_allocation_tag_backfill-instance_method
+      def start_cost_allocation_tag_backfill: (
+                                                backfill_from: ::String
+                                              ) -> _StartCostAllocationTagBackfillResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCostAllocationTagBackfillResponseSuccess
 
       interface _StartSavingsPlansPurchaseRecommendationGenerationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartSavingsPlansPurchaseRecommendationGenerationResponse]

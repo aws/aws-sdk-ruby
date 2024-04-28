@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2024-04-10)
+------------------
+
+* Feature - AWS Clean Rooms Differential Privacy is now fully available. Differential privacy protects against user-identification attempts.
+
+1.17.0 (2024-04-04)
+------------------
+
+* Feature - Feature: New schemaStatusDetails field to the existing Schema object that displays a status on Schema API responses to show whether a schema is queryable or not. New BatchGetSchemaAnalysisRule API to retrieve multiple schemaAnalysisRules using a single API call.
+
 1.16.0 (2024-01-26)
 ------------------
 

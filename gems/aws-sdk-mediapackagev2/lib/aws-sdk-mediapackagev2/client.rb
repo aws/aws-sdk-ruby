@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::MediaPackageV2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::MediaPackageV2
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::MediaPackageV2
     #   @option options [Aws::MediaPackageV2::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::MediaPackageV2::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -436,6 +460,7 @@ module Aws::MediaPackageV2
     #   * {Types::CreateChannelResponse#modified_at #modified_at} => Time
     #   * {Types::CreateChannelResponse#description #description} => String
     #   * {Types::CreateChannelResponse#ingest_endpoints #ingest_endpoints} => Array&lt;Types::IngestEndpoint&gt;
+    #   * {Types::CreateChannelResponse#etag #etag} => String
     #   * {Types::CreateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -461,6 +486,7 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -512,6 +538,7 @@ module Aws::MediaPackageV2
     #   * {Types::CreateChannelGroupResponse#egress_domain #egress_domain} => String
     #   * {Types::CreateChannelGroupResponse#created_at #created_at} => Time
     #   * {Types::CreateChannelGroupResponse#modified_at #modified_at} => Time
+    #   * {Types::CreateChannelGroupResponse#etag #etag} => String
     #   * {Types::CreateChannelGroupResponse#description #description} => String
     #   * {Types::CreateChannelGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -533,6 +560,7 @@ module Aws::MediaPackageV2
     #   resp.egress_domain #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
+    #   resp.etag #=> String
     #   resp.description #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -602,6 +630,9 @@ module Aws::MediaPackageV2
     # @option params [Array<Types::CreateLowLatencyHlsManifestConfiguration>] :low_latency_hls_manifests
     #   A low-latency HLS manifest configuration.
     #
+    # @option params [Array<Types::CreateDashManifestConfiguration>] :dash_manifests
+    #   A DASH manifest configuration.
+    #
     # @option params [Hash<String,String>] :tags
     #   A comma-separated list of tag key:value pairs that you define. For
     #   example:
@@ -624,6 +655,8 @@ module Aws::MediaPackageV2
     #   * {Types::CreateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::CreateOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::CreateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::CreateOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
+    #   * {Types::CreateOriginEndpointResponse#etag #etag} => String
     #   * {Types::CreateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -698,6 +731,31 @@ module Aws::MediaPackageV2
     #         },
     #       },
     #     ],
+    #     dash_manifests: [
+    #       {
+    #         manifest_name: "ManifestName", # required
+    #         manifest_window_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
+    #         min_update_period_seconds: 1,
+    #         min_buffer_time_seconds: 1,
+    #         suggested_presentation_delay_seconds: 1,
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE
+    #         period_triggers: ["AVAILS"], # accepts AVAILS, DRM_KEY_ROTATION, SOURCE_CHANGES, SOURCE_DISRUPTIONS, NONE
+    #         scte_dash: {
+    #           ad_marker_dash: "BINARY", # accepts BINARY, XML
+    #         },
+    #         drm_signaling: "INDIVIDUAL", # accepts INDIVIDUAL, REFERENCED
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", # accepts HTTP_HEAD, HTTP_ISO, HTTP_XSDATE, UTC_DIRECT
+    #           timing_source: "DashUtcTimingTimingSourceString",
+    #         },
+    #       },
+    #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -754,6 +812,25 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests #=> Array
+    #   resp.dash_manifests[0].manifest_name #=> String
+    #   resp.dash_manifests[0].url #=> String
+    #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.start #=> Time
+    #   resp.dash_manifests[0].filter_configuration.end #=> Time
+    #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
+    #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
+    #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE"
+    #   resp.dash_manifests[0].period_triggers #=> Array
+    #   resp.dash_manifests[0].period_triggers[0] #=> String, one of "AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"
+    #   resp.dash_manifests[0].scte_dash.ad_marker_dash #=> String, one of "BINARY", "XML"
+    #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
+    #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
+    #   resp.dash_manifests[0].utc_timing.timing_source #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -952,6 +1029,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetChannelResponse#modified_at #modified_at} => Time
     #   * {Types::GetChannelResponse#description #description} => String
     #   * {Types::GetChannelResponse#ingest_endpoints #ingest_endpoints} => Array&lt;Types::IngestEndpoint&gt;
+    #   * {Types::GetChannelResponse#etag #etag} => String
     #   * {Types::GetChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -972,6 +1050,7 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1001,6 +1080,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetChannelGroupResponse#created_at #created_at} => Time
     #   * {Types::GetChannelGroupResponse#modified_at #modified_at} => Time
     #   * {Types::GetChannelGroupResponse#description #description} => String
+    #   * {Types::GetChannelGroupResponse#etag #etag} => String
     #   * {Types::GetChannelGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1017,6 +1097,7 @@ module Aws::MediaPackageV2
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1104,7 +1185,9 @@ module Aws::MediaPackageV2
     #   * {Types::GetOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::GetOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::GetOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::GetOriginEndpointResponse#etag #etag} => String
     #   * {Types::GetOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1165,8 +1248,27 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.dash_manifests #=> Array
+    #   resp.dash_manifests[0].manifest_name #=> String
+    #   resp.dash_manifests[0].url #=> String
+    #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.start #=> Time
+    #   resp.dash_manifests[0].filter_configuration.end #=> Time
+    #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
+    #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
+    #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE"
+    #   resp.dash_manifests[0].period_triggers #=> Array
+    #   resp.dash_manifests[0].period_triggers[0] #=> String, one of "AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"
+    #   resp.dash_manifests[0].scte_dash.ad_marker_dash #=> String, one of "BINARY", "XML"
+    #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
+    #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
+    #   resp.dash_manifests[0].utc_timing.timing_source #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetOriginEndpoint AWS API Documentation
     #
@@ -1376,6 +1478,9 @@ module Aws::MediaPackageV2
     #   resp.items[0].low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.items[0].low_latency_hls_manifests[0].child_manifest_name #=> String
     #   resp.items[0].low_latency_hls_manifests[0].url #=> String
+    #   resp.items[0].dash_manifests #=> Array
+    #   resp.items[0].dash_manifests[0].manifest_name #=> String
+    #   resp.items[0].dash_manifests[0].url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListOriginEndpoints AWS API Documentation
@@ -1578,6 +1683,11 @@ module Aws::MediaPackageV2
     #   identifier for the channel, and must be unique for your account in the
     #   AWS Region and channel group.
     #
+    # @option params [String] :etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag, the
+    #   update request will be rejected.
+    #
     # @option params [String] :description
     #   Any descriptive information that you want to add to the channel for
     #   future identification purposes.
@@ -1591,6 +1701,7 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateChannelResponse#modified_at #modified_at} => Time
     #   * {Types::UpdateChannelResponse#description #description} => String
     #   * {Types::UpdateChannelResponse#ingest_endpoints #ingest_endpoints} => Array&lt;Types::IngestEndpoint&gt;
+    #   * {Types::UpdateChannelResponse#etag #etag} => String
     #   * {Types::UpdateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1598,6 +1709,7 @@ module Aws::MediaPackageV2
     #   resp = client.update_channel({
     #     channel_group_name: "ResourceName", # required
     #     channel_name: "ResourceName", # required
+    #     etag: "EntityTag",
     #     description: "ResourceDescription",
     #   })
     #
@@ -1612,6 +1724,7 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1636,6 +1749,11 @@ module Aws::MediaPackageV2
     #   identifier for the channel group, and must be unique for your account
     #   in the AWS Region.
     #
+    # @option params [String] :etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag, the
+    #   update request will be rejected.
+    #
     # @option params [String] :description
     #   Any descriptive information that you want to add to the channel group
     #   for future identification purposes.
@@ -1648,12 +1766,14 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateChannelGroupResponse#created_at #created_at} => Time
     #   * {Types::UpdateChannelGroupResponse#modified_at #modified_at} => Time
     #   * {Types::UpdateChannelGroupResponse#description #description} => String
+    #   * {Types::UpdateChannelGroupResponse#etag #etag} => String
     #   * {Types::UpdateChannelGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_channel_group({
     #     channel_group_name: "ResourceName", # required
+    #     etag: "EntityTag",
     #     description: "ResourceDescription",
     #   })
     #
@@ -1665,6 +1785,7 @@ module Aws::MediaPackageV2
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1724,6 +1845,14 @@ module Aws::MediaPackageV2
     # @option params [Array<Types::CreateLowLatencyHlsManifestConfiguration>] :low_latency_hls_manifests
     #   A low-latency HLS manifest configuration.
     #
+    # @option params [Array<Types::CreateDashManifestConfiguration>] :dash_manifests
+    #   A DASH manifest configuration.
+    #
+    # @option params [String] :etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag, the
+    #   update request will be rejected.
+    #
     # @return [Types::UpdateOriginEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateOriginEndpointResponse#arn #arn} => String
@@ -1738,7 +1867,9 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::UpdateOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::UpdateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::UpdateOriginEndpointResponse#etag #etag} => String
     #   * {Types::UpdateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1811,6 +1942,32 @@ module Aws::MediaPackageV2
     #         },
     #       },
     #     ],
+    #     dash_manifests: [
+    #       {
+    #         manifest_name: "ManifestName", # required
+    #         manifest_window_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
+    #         min_update_period_seconds: 1,
+    #         min_buffer_time_seconds: 1,
+    #         suggested_presentation_delay_seconds: 1,
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE
+    #         period_triggers: ["AVAILS"], # accepts AVAILS, DRM_KEY_ROTATION, SOURCE_CHANGES, SOURCE_DISRUPTIONS, NONE
+    #         scte_dash: {
+    #           ad_marker_dash: "BINARY", # accepts BINARY, XML
+    #         },
+    #         drm_signaling: "INDIVIDUAL", # accepts INDIVIDUAL, REFERENCED
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", # accepts HTTP_HEAD, HTTP_ISO, HTTP_XSDATE, UTC_DIRECT
+    #           timing_source: "DashUtcTimingTimingSourceString",
+    #         },
+    #       },
+    #     ],
+    #     etag: "EntityTag",
     #   })
     #
     # @example Response structure
@@ -1864,8 +2021,27 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.dash_manifests #=> Array
+    #   resp.dash_manifests[0].manifest_name #=> String
+    #   resp.dash_manifests[0].url #=> String
+    #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.start #=> Time
+    #   resp.dash_manifests[0].filter_configuration.end #=> Time
+    #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
+    #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
+    #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE"
+    #   resp.dash_manifests[0].period_triggers #=> Array
+    #   resp.dash_manifests[0].period_triggers[0] #=> String, one of "AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"
+    #   resp.dash_manifests[0].scte_dash.ad_marker_dash #=> String, one of "BINARY", "XML"
+    #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
+    #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
+    #   resp.dash_manifests[0].utc_timing.timing_source #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateOriginEndpoint AWS API Documentation
     #
@@ -1889,7 +2065,7 @@ module Aws::MediaPackageV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

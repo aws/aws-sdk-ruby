@@ -18,10 +18,13 @@ module Aws
         # @param [Hash] params
         def apply(http_req, params)
           body = build_body(params)
+
           # for rest-json, ensure we send at least an empty object
           # don't send an empty object for streaming? case.
-          if body.nil? && @serializer_class == Json::Builder &&
-             modeled_body? && !streaming?
+          if body.nil? &&
+             json_builder? &&
+             modeled_body? &&
+             !streaming?
             body = '{}'
           end
           http_req.body = body
@@ -45,11 +48,27 @@ module Aws
             params[@rules[:payload]]
           elsif @rules[:payload]
             params = params[@rules[:payload]]
-            serialize(@rules[:payload_member], params) if params
+            if params
+              if xml_builder? &&
+                 @rules.shape.member?(@rules[:payload_member].location_name)
+                # serializing payload member name for rest-xml is as follows:
+                # 1. Use the member locationName if the member value doesn't match the member's name (default)
+                # 2. Use the value of the locationName on the member's target if present
+                # 3. Use the shape name of the member's target
+                serialize(@rules[:payload_member], params, location_name: payload_location_name)
+              else
+                serialize(@rules[:payload_member], params)
+              end
+            end
           else
             params = body_params(params)
             serialize(@rules, params) unless params.empty?
           end
+        end
+
+        def payload_location_name
+          @rules[:payload_member].shape['locationName'] ||
+            @rules[:payload_member].shape.name
         end
 
         def streaming?
@@ -59,8 +78,16 @@ module Aws
           )
         end
 
-        def serialize(rules, params)
-          @serializer_class.new(rules).serialize(params)
+        def xml_builder?
+          @serializer_class == Xml::Builder
+        end
+
+        def json_builder?
+          @serializer_class == Json::Builder
+        end
+
+        def serialize(rules, params, location_name: nil)
+          @serializer_class.new(rules, location_name: location_name).serialize(params)
         end
 
         def body_params(params)

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2024-04-23)
+------------------
+
+* Feature - Added additional metadata that might be applicable to your reservation recommendations.
+
+1.97.0 (2024-03-26)
+------------------
+
+* Feature - Adds support for backfill of cost allocation tags, with new StartCostAllocationTagBackfill and ListCostAllocationTagBackfillHistory API.
+
+1.96.0 (2024-02-28)
+------------------
+
+* Feature - This release introduces the new API 'GetApproximateUsageRecords', which retrieves estimated usage records for hourly granularity or resource-level data at daily granularity.
+
 1.95.0 (2024-01-26)
 ------------------
 

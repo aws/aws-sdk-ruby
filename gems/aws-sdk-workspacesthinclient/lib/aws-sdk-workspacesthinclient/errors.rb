@@ -30,7 +30,6 @@ module Aws::WorkSpacesThinClient
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
-  # * {InternalServiceException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
@@ -87,26 +86,6 @@ module Aws::WorkSpacesThinClient
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::WorkSpacesThinClient::Types::InternalServerException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-      # @return [String]
-      def retry_after_seconds
-        @data[:retry_after_seconds]
-      end
-    end
-
-    class InternalServiceException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::WorkSpacesThinClient::Types::InternalServiceException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

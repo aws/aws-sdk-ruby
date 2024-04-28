@@ -314,6 +314,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionResponse]
         def subscription_type: () -> ::String
         def aws_account_name: () -> ::String
+        def pending_subscription_type: () -> ::String
+        def pending_subscription_start_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_subscription-instance_method
       def get_subscription: (

@@ -396,6 +396,7 @@ module Aws
         def locale_id: () -> ::String
         def creation_date_time: () -> ::Time
         def initial_response_setting: () -> Types::InitialResponseSetting
+        def qn_a_intent_configuration: () -> Types::QnAIntentConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#create_intent-instance_method
       def create_intent: (
@@ -3899,6 +3900,32 @@ module Aws
                                  }?
                                }
                              }?
+                           },
+                           ?qn_a_intent_configuration: {
+                             data_source_configuration: {
+                               opensearch_configuration: {
+                                 domain_endpoint: ::String,
+                                 index_name: ::String,
+                                 exact_response: bool?,
+                                 exact_response_fields: {
+                                   question_field: ::String,
+                                   answer_field: ::String
+                                 }?,
+                                 include_fields: Array[::String]?
+                               }?,
+                               kendra_configuration: {
+                                 kendra_index: ::String,
+                                 query_filter_string_enabled: bool?,
+                                 query_filter_string: ::String?,
+                                 exact_response: bool?
+                               }?,
+                               bedrock_knowledge_store_configuration: {
+                                 bedrock_knowledge_base_arn: ::String
+                               }?
+                             }?,
+                             bedrock_model_configuration: {
+                               model_arn: ::String
+                             }?
                            }
                          ) -> _CreateIntentResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntentResponseSuccess
@@ -6166,6 +6193,7 @@ module Aws
         def creation_date_time: () -> ::Time
         def last_updated_date_time: () -> ::Time
         def initial_response_setting: () -> Types::InitialResponseSetting
+        def qn_a_intent_configuration: () -> Types::QnAIntentConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#describe_intent-instance_method
       def describe_intent: (
@@ -7563,6 +7591,7 @@ module Aws
         def creation_date_time: () -> ::Time
         def last_updated_date_time: () -> ::Time
         def initial_response_setting: () -> Types::InitialResponseSetting
+        def qn_a_intent_configuration: () -> Types::QnAIntentConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#update_intent-instance_method
       def update_intent: (
@@ -11072,6 +11101,32 @@ module Aws
                                    }
                                  }?
                                }
+                             }?
+                           },
+                           ?qn_a_intent_configuration: {
+                             data_source_configuration: {
+                               opensearch_configuration: {
+                                 domain_endpoint: ::String,
+                                 index_name: ::String,
+                                 exact_response: bool?,
+                                 exact_response_fields: {
+                                   question_field: ::String,
+                                   answer_field: ::String
+                                 }?,
+                                 include_fields: Array[::String]?
+                               }?,
+                               kendra_configuration: {
+                                 kendra_index: ::String,
+                                 query_filter_string_enabled: bool?,
+                                 query_filter_string: ::String?,
+                                 exact_response: bool?
+                               }?,
+                               bedrock_knowledge_store_configuration: {
+                                 bedrock_knowledge_base_arn: ::String
+                               }?
+                             }?,
+                             bedrock_model_configuration: {
+                               model_arn: ::String
                              }?
                            }
                          ) -> _UpdateIntentResponseSuccess

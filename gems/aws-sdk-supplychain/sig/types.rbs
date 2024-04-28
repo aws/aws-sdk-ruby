@@ -60,6 +60,21 @@ module Aws::SupplyChain
       SENSITIVE: []
     end
 
+    class SendDataIntegrationEventRequest
+      attr_accessor instance_id: ::String
+      attr_accessor event_type: ("scn.data.forecast" | "scn.data.inventorylevel" | "scn.data.inboundorder" | "scn.data.inboundorderline" | "scn.data.inboundorderlineschedule" | "scn.data.outboundorderline" | "scn.data.outboundshipment" | "scn.data.processheader" | "scn.data.processoperation" | "scn.data.processproduct" | "scn.data.reservation" | "scn.data.shipment" | "scn.data.shipmentstop" | "scn.data.shipmentstoporder" | "scn.data.supplyplan")
+      attr_accessor data: ::String
+      attr_accessor event_group_id: ::String
+      attr_accessor event_timestamp: ::Time
+      attr_accessor client_token: ::String
+      SENSITIVE: [:data]
+    end
+
+    class SendDataIntegrationEventResponse
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       SENSITIVE: []

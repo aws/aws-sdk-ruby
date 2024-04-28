@@ -18,7 +18,13 @@ module Aws
       end
       class ComputeNotCompatibleException < ::Aws::Errors::ServiceError
       end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class IncompatibleApplicationsException < ::Aws::Errors::ServiceError
+      end
+      class InternalServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class InvalidParameterValuesException < ::Aws::Errors::ServiceError
         def message: () -> ::String
@@ -63,6 +69,9 @@ module Aws
         def message: () -> ::String
       end
       class UnsupportedWorkspaceConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class WorkspacesDefaultRoleNotFoundException < ::Aws::Errors::ServiceError

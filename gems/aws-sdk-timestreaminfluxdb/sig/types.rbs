@@ -1,0 +1,303 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::TimestreamInfluxDB
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDbInstanceInput
+      attr_accessor name: ::String
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor organization: ::String
+      attr_accessor bucket: ::String
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor db_parameter_group_identifier: ::String
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:username, :password]
+    end
+
+    class CreateDbInstanceOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED")
+      attr_accessor endpoint: ::String
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor db_parameter_group_identifier: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor secondary_availability_zone: ::String
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor influx_auth_parameters_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDbParameterGroupInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: Types::Parameters
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDbParameterGroupOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: Types::Parameters
+      SENSITIVE: []
+    end
+
+    class DbInstanceSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED")
+      attr_accessor endpoint: ::String
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
+      SENSITIVE: []
+    end
+
+    class DbParameterGroupSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDbInstanceInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDbInstanceOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED")
+      attr_accessor endpoint: ::String
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor db_parameter_group_identifier: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor secondary_availability_zone: ::String
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor influx_auth_parameters_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDbInstanceInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDbInstanceOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED")
+      attr_accessor endpoint: ::String
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor db_parameter_group_identifier: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor secondary_availability_zone: ::String
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor influx_auth_parameters_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDbParameterGroupInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDbParameterGroupOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: Types::Parameters
+      SENSITIVE: []
+    end
+
+    class InfluxDBv2Parameters
+      attr_accessor flux_log_enabled: bool
+      attr_accessor log_level: ("debug" | "info" | "error")
+      attr_accessor no_tasks: bool
+      attr_accessor query_concurrency: ::Integer
+      attr_accessor query_queue_size: ::Integer
+      attr_accessor tracing_type: ("log" | "jaeger")
+      attr_accessor metrics_disabled: bool
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDbInstancesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDbInstancesOutput
+      attr_accessor items: ::Array[Types::DbInstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDbParameterGroupsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDbParameterGroupsOutput
+      attr_accessor items: ::Array[Types::DbParameterGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LogDeliveryConfiguration
+      attr_accessor s3_configuration: Types::S3Configuration
+      SENSITIVE: []
+    end
+
+    class Parameters
+      attr_accessor influx_d_bv_2: Types::InfluxDBv2Parameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class InfluxDBv2 < Parameters
+      end
+      class Unknown < Parameters
+      end
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3Configuration
+      attr_accessor bucket_name: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateDbInstanceInput
+      attr_accessor identifier: ::String
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor db_parameter_group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDbInstanceOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED")
+      attr_accessor endpoint: ::String
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor db_parameter_group_identifier: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor secondary_availability_zone: ::String
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor influx_auth_parameters_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("FIELD_VALIDATION_FAILED" | "OTHER")
+      SENSITIVE: []
+    end
+  end
+end

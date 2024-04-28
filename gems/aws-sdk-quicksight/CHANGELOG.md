@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2024-04-18)
+------------------
+
+* Feature - This release adds support for the Cross Sheet Filter and Control features, and support for warnings in asset imports for any permitted errors encountered during execution
+
+1.107.0 (2024-04-05)
+------------------
+
+* Feature - Adding IAMIdentityCenterInstanceArn parameter to CreateAccountSubscription
+
+1.106.0 (2024-03-28)
+------------------
+
+* Feature - Amazon QuickSight: Adds support for setting up VPC Endpoint restrictions for accessing QuickSight Website.
+
+1.105.0 (2024-02-29)
+------------------
+
+* Feature - TooltipTarget for Combo chart visuals; ColumnConfiguration limit increase to 2000; Documentation Update
+
 1.104.0 (2024-02-08)
 ------------------
 

@@ -1007,7 +1007,7 @@ module Aws
                                   cloud_watch_logs_role_arn: ::String,
                                   exclude_verbose_content: bool?
                                 },
-                                ?authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
+                                authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
                                 ?user_pool_config: {
                                   user_pool_id: ::String,
                                   aws_region: ::String,

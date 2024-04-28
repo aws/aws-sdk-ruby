@@ -214,7 +214,12 @@ module Aws
                              },
                              ?applications: Array[::String],
                              ?profile_arns: Array[::String],
-                             ?review_template_arns: Array[::String]
+                             ?review_template_arns: Array[::String],
+                             ?jira_configuration: {
+                               issue_management_status: ("ENABLED" | "DISABLED" | "INHERIT")?,
+                               issue_management_type: ("AUTO" | "MANUAL")?,
+                               jira_project_key: ::String?
+                             }
                            ) -> _CreateWorkloadResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkloadResponseSuccess
 
@@ -349,6 +354,16 @@ module Aws
                                      ?max_results: ::Integer
                                    ) -> _GetConsolidatedReportResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConsolidatedReportResponseSuccess
+
+      interface _GetGlobalSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGlobalSettingsOutput]
+        def organization_sharing_status: () -> ("ENABLED" | "DISABLED")
+        def discovery_integration_status: () -> ("ENABLED" | "DISABLED")
+        def jira_configuration: () -> Types::AccountJiraConfigurationOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_global_settings-instance_method
+      def get_global_settings: () -> _GetGlobalSettingsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGlobalSettingsResponseSuccess
 
       interface _GetLensResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLensOutput]
@@ -838,9 +853,23 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_global_settings-instance_method
       def update_global_settings: (
                                     ?organization_sharing_status: ("ENABLED" | "DISABLED"),
-                                    ?discovery_integration_status: ("ENABLED" | "DISABLED")
+                                    ?discovery_integration_status: ("ENABLED" | "DISABLED"),
+                                    ?jira_configuration: {
+                                      issue_management_status: ("ENABLED" | "DISABLED")?,
+                                      issue_management_type: ("AUTO" | "MANUAL")?,
+                                      jira_project_key: ::String?,
+                                      integration_status: ("NOT_CONFIGURED")?
+                                    }
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_integration-instance_method
+      def update_integration: (
+                                workload_id: ::String,
+                                client_request_token: ::String,
+                                integrating_service: ("JIRA")
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _UpdateLensReviewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLensReviewOutput]
@@ -852,7 +881,15 @@ module Aws
                                 workload_id: ::String,
                                 lens_alias: ::String,
                                 ?lens_notes: ::String,
-                                ?pillar_notes: Hash[::String, ::String]
+                                ?pillar_notes: Hash[::String, ::String],
+                                ?jira_configuration: {
+                                  selected_pillars: Array[
+                                    {
+                                      pillar_id: ::String?,
+                                      selected_question_ids: Array[::String]?
+                                    },
+                                  ]?
+                                }
                               ) -> _UpdateLensReviewResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLensReviewResponseSuccess
 
@@ -961,7 +998,12 @@ module Aws
                                trusted_advisor_integration_status: ("ENABLED" | "DISABLED")?,
                                workload_resource_definition: Array[("WORKLOAD_METADATA" | "APP_REGISTRY")]?
                              },
-                             ?applications: Array[::String]
+                             ?applications: Array[::String],
+                             ?jira_configuration: {
+                               issue_management_status: ("ENABLED" | "DISABLED" | "INHERIT")?,
+                               issue_management_type: ("AUTO" | "MANUAL")?,
+                               jira_project_key: ::String?
+                             }
                            ) -> _UpdateWorkloadResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkloadResponseSuccess
 

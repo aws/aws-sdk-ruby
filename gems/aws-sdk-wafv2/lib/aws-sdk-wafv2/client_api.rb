@@ -105,11 +105,13 @@ module Aws::WAFV2
     DisassociateWebACLResponse = Shapes::StructureShape.new(name: 'DisassociateWebACLResponse')
     DownloadUrl = Shapes::StringShape.new(name: 'DownloadUrl')
     EmailField = Shapes::StructureShape.new(name: 'EmailField')
+    EnableMachineLearning = Shapes::BooleanShape.new(name: 'EnableMachineLearning')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
+    EvaluationWindowSec = Shapes::IntegerShape.new(name: 'EvaluationWindowSec')
     ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FailureCode = Shapes::IntegerShape.new(name: 'FailureCode')
@@ -350,6 +352,7 @@ module Aws::WAFV2
     SizeConstraintStatement = Shapes::StructureShape.new(name: 'SizeConstraintStatement')
     SizeInspectionLimit = Shapes::StringShape.new(name: 'SizeInspectionLimit')
     SolveTimestamp = Shapes::IntegerShape.new(name: 'SolveTimestamp')
+    SourceType = Shapes::StringShape.new(name: 'SourceType')
     SqliMatchStatement = Shapes::StructureShape.new(name: 'SqliMatchStatement')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     Statements = Shapes::ListShape.new(name: 'Statements')
@@ -442,7 +445,7 @@ module Aws::WAFV2
     AWSManagedRulesATPRuleSet.struct_class = Types::AWSManagedRulesATPRuleSet
 
     AWSManagedRulesBotControlRuleSet.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, required: true, location_name: "InspectionLevel"))
-    AWSManagedRulesBotControlRuleSet.add_member(:enable_machine_learning, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableMachineLearning"))
+    AWSManagedRulesBotControlRuleSet.add_member(:enable_machine_learning, Shapes::ShapeRef.new(shape: EnableMachineLearning, location_name: "EnableMachineLearning"))
     AWSManagedRulesBotControlRuleSet.struct_class = Types::AWSManagedRulesBotControlRuleSet
 
     ActionCondition.add_member(:action, Shapes::ShapeRef.new(shape: ActionValue, required: true, location_name: "Action"))
@@ -1215,6 +1218,7 @@ module Aws::WAFV2
     QueryString.struct_class = Types::QueryString
 
     RateBasedStatement.add_member(:limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "Limit"))
+    RateBasedStatement.add_member(:evaluation_window_sec, Shapes::ShapeRef.new(shape: EvaluationWindowSec, location_name: "EvaluationWindowSec"))
     RateBasedStatement.add_member(:aggregate_key_type, Shapes::ShapeRef.new(shape: RateBasedStatementAggregateKeyType, required: true, location_name: "AggregateKeyType"))
     RateBasedStatement.add_member(:scope_down_statement, Shapes::ShapeRef.new(shape: Statement, location_name: "ScopeDownStatement"))
     RateBasedStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))
@@ -1625,6 +1629,7 @@ module Aws::WAFV2
     WAFInvalidResourceException.struct_class = Types::WAFInvalidResourceException
 
     WAFLimitsExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFLimitsExceededException.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
     WAFLimitsExceededException.struct_class = Types::WAFLimitsExceededException
 
     WAFLogDestinationPermissionIssueException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -1942,6 +1947,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: DescribeAllManagedProductsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
       end)
 
       api.add_operation(:describe_managed_products_by_vendor, Seahorse::Model::Operation.new.tap do |o|
@@ -2000,6 +2006,7 @@ module Aws::WAFV2
         o.input = Shapes::ShapeRef.new(shape: GetDecryptedAPIKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDecryptedAPIKeyResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)

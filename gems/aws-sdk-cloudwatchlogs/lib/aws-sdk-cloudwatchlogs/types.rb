@@ -146,7 +146,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_samples
     #   An array of sample log event messages that are considered to be part
     #   of this anomaly.
-    #   @return [Array<String>]
+    #   @return [Array<Types::LogEvent>]
     #
     # @!attribute [rw] pattern_tokens
     #   An array of structures where each structure contains information
@@ -925,7 +925,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] delivery_destination_type
     #   Displays whether the delivery destination associated with this
-    #   delivery is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
+    #   delivery is CloudWatch Logs, Amazon S3, or Firehose.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -948,8 +948,8 @@ module Aws::CloudWatchLogs
     # This structure contains information about one *delivery destination*
     # in your account. A delivery destination is an Amazon Web Services
     # resource that represents an Amazon Web Services service that logs can
-    # be sent to. CloudWatch Logs, Amazon S3, are supported as Kinesis Data
-    # Firehose delivery destinations.
+    # be sent to. CloudWatch Logs, Amazon S3, are supported as Firehose
+    # delivery destinations.
     #
     # To configure logs delivery between a supported Amazon Web Services
     # service and a destination, you must do the following:
@@ -991,7 +991,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] delivery_destination_type
     #   Displays whether this delivery destination is CloudWatch Logs,
-    #   Amazon S3, or Kinesis Data Firehose.
+    #   Amazon S3, or Firehose.
     #   @return [String]
     #
     # @!attribute [rw] output_format
@@ -1027,7 +1027,7 @@ module Aws::CloudWatchLogs
     #   The ARN of the Amazon Web Services destination that this delivery
     #   destination represents. That Amazon Web Services destination can be
     #   a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery
-    #   stream in Kinesis Data Firehose.
+    #   stream in Firehose.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeliveryDestinationConfiguration AWS API Documentation
@@ -1041,7 +1041,7 @@ module Aws::CloudWatchLogs
     # This structure contains information about one *delivery source* in
     # your account. A delivery source is an Amazon Web Services resource
     # that sends logs to an Amazon Web Services destination. The destination
-    # can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
+    # can be CloudWatch Logs, Amazon S3, or Firehose.
     #
     # Only some Amazon Web Services services support being configured as a
     # delivery source. These services are listed as **Supported \[V2
@@ -3006,6 +3006,26 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # This structure contains the information for one sample log event that
+    # is associated with an anomaly found by a log anomaly detector.
+    #
+    # @!attribute [rw] timestamp
+    #   The time stamp of the log event.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   The message content of the log event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogEvent AWS API Documentation
+    #
+    class LogEvent < Struct.new(
+      :timestamp,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a log group.
     #
     # @!attribute [rw] log_group_name
@@ -3493,8 +3513,7 @@ module Aws::CloudWatchLogs
     #     `FindingsDestination` object. You can optionally use that
     #     `FindingsDestination` object to list one or more destinations to
     #     send audit findings to. If you specify destinations such as log
-    #     groups, Kinesis Data Firehose streams, and S3 buckets, they must
-    #     already exist.
+    #     groups, Firehose streams, and S3 buckets, they must already exist.
     #
     #   * The second block must include both a `DataIdentifer` array and an
     #     `Operation` property with an `Deidentify` action. The
@@ -3530,16 +3549,15 @@ module Aws::CloudWatchLogs
     #     * An Kinesis Data Streams data stream in the same account as the
     #       subscription policy, for same-account delivery.
     #
-    #     * An Kinesis Data Firehose data stream in the same account as the
-    #       subscription policy, for same-account delivery.
+    #     * An Firehose data stream in the same account as the subscription
+    #       policy, for same-account delivery.
     #
     #     * A Lambda function in the same account as the subscription
     #       policy, for same-account delivery.
     #
     #     * A logical destination in a different account created with
     #       [PutDestination][2], for cross-account delivery. Kinesis Data
-    #       Streams and Kinesis Data Firehose are supported as logical
-    #       destinations.
+    #       Streams and Firehose are supported as logical destinations.
     #
     #   * **RoleArn** The ARN of an IAM role that grants CloudWatch Logs
     #     permissions to deliver ingested log events to the destination
@@ -3635,8 +3653,7 @@ module Aws::CloudWatchLogs
     #     `FindingsDestination` object. You can optionally use that
     #     `FindingsDestination` object to list one or more destinations to
     #     send audit findings to. If you specify destinations such as log
-    #     groups, Kinesis Data Firehose streams, and S3 buckets, they must
-    #     already exist.
+    #     groups, Firehose streams, and S3 buckets, they must already exist.
     #
     #   * The second block must include both a `DataIdentifer` array and an
     #     `Operation` property with an `Deidentify` action. The
@@ -3786,8 +3803,15 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] log_type
-    #   Defines the type of log that the source is sending. For Amazon
-    #   CodeWhisperer, the valid value is `EVENT_LOGS`.
+    #   Defines the type of log that the source is sending.
+    #
+    #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
+    #
+    #   * For IAM Identity Centerr, the valid value is `ERROR_LOGS`.
+    #
+    #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
+    #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`, and
+    #     `WORKMAIL_MAILBOX_ACCESS_LOGS`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4380,11 +4404,13 @@ module Aws::CloudWatchLogs
     # Represents the rejected events.
     #
     # @!attribute [rw] too_new_log_event_start_index
-    #   The log events that are too new.
+    #   The index of the first log event that is too new. This field is
+    #   inclusive.
     #   @return [Integer]
     #
     # @!attribute [rw] too_old_log_event_end_index
-    #   The log events that are dated too far in the past.
+    #   The index of the last log event that is too old. This field is
+    #   exclusive.
     #   @return [Integer]
     #
     # @!attribute [rw] expired_log_event_end_index

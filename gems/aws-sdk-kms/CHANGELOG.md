@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2024-04-12)
+------------------
+
+* Feature - This feature supports the ability to specify a custom rotation period for automatic key rotations, the ability to perform on-demand key rotations, and visibility into your key material rotations.
+
+1.78.0 (2024-03-18)
+------------------
+
+* Feature - Adds the ability to use the default policy name by omitting the policyName parameter in calls to PutKeyPolicy and GetKeyPolicy
+
 1.77.0 (2024-01-26)
 ------------------
 
