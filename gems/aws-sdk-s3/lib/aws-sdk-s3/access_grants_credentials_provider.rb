@@ -3,9 +3,12 @@
 module Aws
   module S3
     # @api private
-    ACCESS_GRANTS_CREDENTIALS_CACHE = LRUCache.new
+    ACCESS_GRANTS_CREDENTIALS_CACHE = LRUCache.new(max_entries: 100)
     # @api private
-    ACCESS_GRANTS_ACCOUNT_ID_CACHE = LRUCache.new(expiration: 60 * 10)
+    ACCESS_GRANTS_ACCOUNT_ID_CACHE = LRUCache.new(
+      max_entries: 100,
+      expiration: 60 * 10
+    )
 
     # Returns Credentials class for S3 Access Grants. Accepts GetDataAccess
     # params and other configuration as options. See

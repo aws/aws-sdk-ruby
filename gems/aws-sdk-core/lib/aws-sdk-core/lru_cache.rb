@@ -4,6 +4,9 @@ module Aws
   # @api private
   # A simple thread safe LRU cache
   class LRUCache
+    # @param [Hash] options
+    # @option options [Integer] :max_entries (100) Maximum number of entries
+    # @option options [Integer] :expiration (nil) Expiration time in seconds
     def initialize(options = {})
       @max_entries = options[:max_entries] || 100
       @expiration = options[:expiration]
