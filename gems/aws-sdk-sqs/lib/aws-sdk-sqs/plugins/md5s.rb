@@ -6,7 +6,6 @@ module Aws
   module SQS
     module Plugins
       class Md5s < Seahorse::Client::Plugin
-
         # @api private
         class Handler < Seahorse::Client::Handler
           def call(context)
@@ -26,9 +25,9 @@ module Aws
             'String' => 1,
             'Binary' => 2,
             'Number' => 1
-          }
+          }.freeze
 
-          DATA_TYPE = /\A(String|Binary|Number)(\..+)?\z/
+          DATA_TYPE = /\A(String|Binary|Number)(\..+)?\z/.freeze
 
           NORMALIZED_ENCODING = Encoding::UTF_8
 
@@ -65,40 +64,43 @@ module Aws
           def validate_body(body, response)
             calculated_md5 = md5_of_message_body(body)
             returned_md5 = response.md5_of_message_body
-            if calculated_md5 != returned_md5
-              error_message =  mismatch_error_message(
-                'message body',
-                calculated_md5,
-                returned_md5,
-                response)
-              raise Aws::Errors::ChecksumError, error_message
-            end
+            return unless calculated_md5 != returned_md5
+
+            error_message = mismatch_error_message(
+              'message body',
+              calculated_md5,
+              returned_md5,
+              response
+            )
+            raise Aws::Errors::ChecksumError, error_message
           end
 
           def validate_attributes(attributes, response)
             calculated_md5 = md5_of_message_attributes(attributes)
             returned_md5 = response.md5_of_message_attributes
-            if returned_md5 != calculated_md5
-              error_message =  mismatch_error_message(
-                'message attributes',
-                calculated_md5,
-                returned_md5,
-                response)
-              raise Aws::Errors::ChecksumError, error_message
-            end
+            return unless returned_md5 != calculated_md5
+
+            error_message = mismatch_error_message(
+              'message attributes',
+              calculated_md5,
+              returned_md5,
+              response
+            )
+            raise Aws::Errors::ChecksumError, error_message
           end
 
           def validate_system_attributes(system_attributes, response)
             calculated_md5 = md5_of_message_system_attributes(system_attributes)
             returned_md5 = response.md5_of_message_system_attributes
-            if returned_md5 != calculated_md5
-              error_message =  mismatch_error_message(
-                'message system attributes',
-                calculated_md5,
-                returned_md5,
-                response)
-              raise Aws::Errors::ChecksumError, error_message
-            end
+            return unless returned_md5 != calculated_md5
+
+            error_message = mismatch_error_message(
+              'message system attributes',
+              calculated_md5,
+              returned_md5,
+              response
+            )
+            raise Aws::Errors::ChecksumError, error_message
           end
 
           def md5_of_message_body(message_body)
@@ -110,18 +112,18 @@ module Aws
           # they are modeled as two different shapes.
           ###
           def md5_of_message_attributes(message_attributes)
-            encoded = { }
+            encoded = {}
             message_attributes.each do |name, attribute|
               name = name.to_s
               encoded[name] = String.new
               data_type_without_label = DATA_TYPE.match(attribute[:data_type])[1]
               encoded[name] << encode_length_and_bytes(name) <<
-              encode_length_and_bytes(attribute[:data_type]) <<
-              [TRANSPORT_TYPE_ENCODINGS[data_type_without_label]].pack('C'.freeze)
+                encode_length_and_bytes(attribute[:data_type]) <<
+                [TRANSPORT_TYPE_ENCODINGS[data_type_without_label]].pack('C')
 
-              if attribute[:string_value] != nil
+              if !attribute[:string_value].nil?
                 encoded[name] << encode_length_and_string(attribute[:string_value])
-              elsif attribute[:binary_value] != nil
+              elsif !attribute[:binary_value].nil?
                 encoded[name] << encode_length_and_bytes(attribute[:binary_value])
               end
             end
@@ -133,18 +135,18 @@ module Aws
           end
 
           def md5_of_message_system_attributes(message_system_attributes)
-            encoded = { }
+            encoded = {}
             message_system_attributes.each do |name, attribute|
               name = name.to_s
               encoded[name] = String.new
               data_type_without_label = DATA_TYPE.match(attribute[:data_type])[1]
               encoded[name] << encode_length_and_bytes(name) <<
-              encode_length_and_bytes(attribute[:data_type]) <<
-              [TRANSPORT_TYPE_ENCODINGS[data_type_without_label]].pack('C'.freeze)
+                encode_length_and_bytes(attribute[:data_type]) <<
+                [TRANSPORT_TYPE_ENCODINGS[data_type_without_label]].pack('C')
 
-              if attribute[:string_value] != nil
+              if !attribute[:string_value].nil?
                 encoded[name] << encode_length_and_string(attribute[:string_value])
-              elsif attribute[:binary_value] != nil
+              elsif !attribute[:binary_value].nil?
                 encoded[name] << encode_length_and_bytes(attribute[:binary_value])
               end
             end
@@ -163,7 +165,7 @@ module Aws
           end
 
           def encode_length_and_bytes(bytes)
-            [bytes.bytesize, bytes].pack('L>a*'.freeze)
+            [bytes.bytesize, bytes].pack('L>a*')
           end
 
           def mismatch_error_message(section, local_md5, returned_md5, response)
@@ -200,13 +202,14 @@ not match.
         end
 
         def add_handlers(handlers, config)
-          if config.verify_checksums
-            handlers.add(Handler, {
-              priority: 10 ,
-              step: :validate,
-              operations: [:send_message, :send_message_batch]
-            })
-          end
+          return unless config.verify_checksums
+
+          handlers.add(
+            Handler,
+            priority: 10,
+            step: :validate,
+            operations: %i[send_message send_message_batch]
+          )
         end
       end
     end
