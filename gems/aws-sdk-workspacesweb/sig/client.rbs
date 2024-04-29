@@ -234,6 +234,8 @@ module Aws
                            ?client_token: ::String,
                            ?customer_managed_key: ::String,
                            ?display_name: ::String,
+                           ?instance_type: ("standard.regular" | "standard.large" | "standard.xlarge"),
+                           ?max_concurrent_sessions: ::Integer,
                            ?tags: Array[
                              {
                                key: ::String,
@@ -761,6 +763,8 @@ module Aws
       def update_portal: (
                            ?authentication_type: ("Standard" | "IAM_Identity_Center"),
                            ?display_name: ::String,
+                           ?instance_type: ("standard.regular" | "standard.large" | "standard.xlarge"),
+                           ?max_concurrent_sessions: ::Integer,
                            portal_arn: ::String
                          ) -> _UpdatePortalResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortalResponseSuccess

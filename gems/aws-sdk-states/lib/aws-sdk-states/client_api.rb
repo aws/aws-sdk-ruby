@@ -238,6 +238,15 @@ module Aws::States
     UpdateStateMachineAliasOutput = Shapes::StructureShape.new(name: 'UpdateStateMachineAliasOutput')
     UpdateStateMachineInput = Shapes::StructureShape.new(name: 'UpdateStateMachineInput')
     UpdateStateMachineOutput = Shapes::StructureShape.new(name: 'UpdateStateMachineOutput')
+    ValidateStateMachineDefinitionCode = Shapes::StringShape.new(name: 'ValidateStateMachineDefinitionCode')
+    ValidateStateMachineDefinitionDiagnostic = Shapes::StructureShape.new(name: 'ValidateStateMachineDefinitionDiagnostic')
+    ValidateStateMachineDefinitionDiagnosticList = Shapes::ListShape.new(name: 'ValidateStateMachineDefinitionDiagnosticList')
+    ValidateStateMachineDefinitionInput = Shapes::StructureShape.new(name: 'ValidateStateMachineDefinitionInput')
+    ValidateStateMachineDefinitionLocation = Shapes::StringShape.new(name: 'ValidateStateMachineDefinitionLocation')
+    ValidateStateMachineDefinitionMessage = Shapes::StringShape.new(name: 'ValidateStateMachineDefinitionMessage')
+    ValidateStateMachineDefinitionOutput = Shapes::StructureShape.new(name: 'ValidateStateMachineDefinitionOutput')
+    ValidateStateMachineDefinitionResultCode = Shapes::StringShape.new(name: 'ValidateStateMachineDefinitionResultCode')
+    ValidateStateMachineDefinitionSeverity = Shapes::StringShape.new(name: 'ValidateStateMachineDefinitionSeverity')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
@@ -1028,6 +1037,22 @@ module Aws::States
     UpdateStateMachineOutput.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineVersionArn"))
     UpdateStateMachineOutput.struct_class = Types::UpdateStateMachineOutput
 
+    ValidateStateMachineDefinitionDiagnostic.add_member(:severity, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionSeverity, required: true, location_name: "severity"))
+    ValidateStateMachineDefinitionDiagnostic.add_member(:code, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionCode, required: true, location_name: "code"))
+    ValidateStateMachineDefinitionDiagnostic.add_member(:message, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionMessage, required: true, location_name: "message"))
+    ValidateStateMachineDefinitionDiagnostic.add_member(:location, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionLocation, location_name: "location"))
+    ValidateStateMachineDefinitionDiagnostic.struct_class = Types::ValidateStateMachineDefinitionDiagnostic
+
+    ValidateStateMachineDefinitionDiagnosticList.member = Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionDiagnostic)
+
+    ValidateStateMachineDefinitionInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
+    ValidateStateMachineDefinitionInput.add_member(:type, Shapes::ShapeRef.new(shape: StateMachineType, location_name: "type"))
+    ValidateStateMachineDefinitionInput.struct_class = Types::ValidateStateMachineDefinitionInput
+
+    ValidateStateMachineDefinitionOutput.add_member(:result, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionResultCode, required: true, location_name: "result"))
+    ValidateStateMachineDefinitionOutput.add_member(:diagnostics, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionDiagnosticList, required: true, location_name: "diagnostics"))
+    ValidateStateMachineDefinitionOutput.struct_class = Types::ValidateStateMachineDefinitionOutput
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
     ValidationException.struct_class = Types::ValidationException
@@ -1043,6 +1068,7 @@ module Aws::States
         "endpointPrefix" => "states",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "AWS SFN",
         "serviceFullName" => "AWS Step Functions",
         "serviceId" => "SFN",
@@ -1353,6 +1379,7 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: ExecutionNotRedrivable)
         o.errors << Shapes::ShapeRef.new(shape: ExecutionLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:send_task_failure, Seahorse::Model::Operation.new.tap do |o|
@@ -1509,6 +1536,15 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
+      end)
+
+      api.add_operation(:validate_state_machine_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ValidateStateMachineDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionInput)
+        o.output = Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end
 

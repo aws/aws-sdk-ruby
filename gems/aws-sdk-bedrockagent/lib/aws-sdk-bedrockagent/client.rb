@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::BedrockAgent
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::BedrockAgent
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::BedrockAgent
     #   @option options [Aws::BedrockAgent::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::BedrockAgent::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -681,6 +705,10 @@ module Aws::BedrockAgent
     # @option params [String] :description
     #   A description of the action group.
     #
+    # @option params [Types::FunctionSchema] :function_schema
+    #   Contains details about the function schema for the action group or the
+    #   JSON or YAML-formatted payload defining the schema.
+    #
     # @option params [String] :parent_action_group_signature
     #   To allow your agent to request the user for additional information
     #   when trying to complete a task, set this field to `AMAZON.UserInput`.
@@ -704,6 +732,7 @@ module Aws::BedrockAgent
     #
     #   resp = client.create_agent_action_group({
     #     action_group_executor: {
+    #       custom_control: "RETURN_CONTROL", # accepts RETURN_CONTROL
     #       lambda: "LambdaArn",
     #     },
     #     action_group_name: "Name", # required
@@ -719,11 +748,27 @@ module Aws::BedrockAgent
     #     },
     #     client_token: "ClientToken",
     #     description: "Description",
+    #     function_schema: {
+    #       functions: [
+    #         {
+    #           description: "FunctionDescription",
+    #           name: "Name", # required
+    #           parameters: {
+    #             "Name" => {
+    #               description: "ParameterDescription",
+    #               required: false,
+    #               type: "string", # required, accepts string, number, integer, boolean, array
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
     #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
     #   })
     #
     # @example Response structure
     #
+    #   resp.agent_action_group.action_group_executor.custom_control #=> String, one of "RETURN_CONTROL"
     #   resp.agent_action_group.action_group_executor.lambda #=> String
     #   resp.agent_action_group.action_group_id #=> String
     #   resp.agent_action_group.action_group_name #=> String
@@ -736,6 +781,13 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.client_token #=> String
     #   resp.agent_action_group.created_at #=> Time
     #   resp.agent_action_group.description #=> String
+    #   resp.agent_action_group.function_schema.functions #=> Array
+    #   resp.agent_action_group.function_schema.functions[0].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].name #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters #=> Hash
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
     #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
     #   resp.agent_action_group.updated_at #=> Time
     #
@@ -845,6 +897,9 @@ module Aws::BedrockAgent
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
+    # @option params [String] :data_deletion_policy
+    #   The deletion policy for the requested data source
+    #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
     #   Contains metadata about where the data source is stored.
     #
@@ -872,9 +927,11 @@ module Aws::BedrockAgent
     #
     #   resp = client.create_data_source({
     #     client_token: "ClientToken",
+    #     data_deletion_policy: "RETAIN", # accepts RETAIN, DELETE
     #     data_source_configuration: { # required
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
+    #         bucket_owner_account_id: "BucketOwnerAccountId",
     #         inclusion_prefixes: ["S3Prefix"],
     #       },
     #       type: "S3", # required, accepts S3
@@ -899,16 +956,20 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.data_source.created_at #=> Time
+    #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
+    #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
     #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.description #=> String
+    #   resp.data_source.failure_reasons #=> Array
+    #   resp.data_source.failure_reasons[0] #=> String
     #   resp.data_source.knowledge_base_id #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
-    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source.updated_at #=> Time
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
@@ -1082,7 +1143,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_id #=> String
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
-    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -1295,7 +1356,7 @@ module Aws::BedrockAgent
     #
     #   resp.data_source_id #=> String
     #   resp.knowledge_base_id #=> String
-    #   resp.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteDataSource AWS API Documentation
     #
@@ -1331,7 +1392,7 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.knowledge_base_id #=> String
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteKnowledgeBase AWS API Documentation
     #
@@ -1459,6 +1520,7 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
+    #   resp.agent_action_group.action_group_executor.custom_control #=> String, one of "RETURN_CONTROL"
     #   resp.agent_action_group.action_group_executor.lambda #=> String
     #   resp.agent_action_group.action_group_id #=> String
     #   resp.agent_action_group.action_group_name #=> String
@@ -1471,6 +1533,13 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.client_token #=> String
     #   resp.agent_action_group.created_at #=> Time
     #   resp.agent_action_group.description #=> String
+    #   resp.agent_action_group.function_schema.functions #=> Array
+    #   resp.agent_action_group.function_schema.functions[0].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].name #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters #=> Hash
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
     #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
     #   resp.agent_action_group.updated_at #=> Time
     #
@@ -1658,16 +1727,20 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.data_source.created_at #=> Time
+    #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
+    #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
     #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.description #=> String
+    #   resp.data_source.failure_reasons #=> Array
+    #   resp.data_source.failure_reasons[0] #=> String
     #   resp.data_source.knowledge_base_id #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
-    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source.updated_at #=> Time
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
@@ -1763,7 +1836,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_id #=> String
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
-    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -2108,7 +2181,7 @@ module Aws::BedrockAgent
     #   resp.data_source_summaries[0].description #=> String
     #   resp.data_source_summaries[0].knowledge_base_id #=> String
     #   resp.data_source_summaries[0].name #=> String
-    #   resp.data_source_summaries[0].status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.data_source_summaries[0].status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2240,7 +2313,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base_summaries[0].description #=> String
     #   resp.knowledge_base_summaries[0].knowledge_base_id #=> String
     #   resp.knowledge_base_summaries[0].name #=> String
-    #   resp.knowledge_base_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.knowledge_base_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #   resp.knowledge_base_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2610,6 +2683,10 @@ module Aws::BedrockAgent
     # @option params [String] :description
     #   Specifies a new name for the action group.
     #
+    # @option params [Types::FunctionSchema] :function_schema
+    #   Contains details about the function schema for the action group or the
+    #   JSON or YAML-formatted payload defining the schema.
+    #
     # @option params [String] :parent_action_group_signature
     #   To allow your agent to request the user for additional information
     #   when trying to complete a task, set this field to `AMAZON.UserInput`.
@@ -2633,6 +2710,7 @@ module Aws::BedrockAgent
     #
     #   resp = client.update_agent_action_group({
     #     action_group_executor: {
+    #       custom_control: "RETURN_CONTROL", # accepts RETURN_CONTROL
     #       lambda: "LambdaArn",
     #     },
     #     action_group_id: "Id", # required
@@ -2648,11 +2726,27 @@ module Aws::BedrockAgent
     #       },
     #     },
     #     description: "Description",
+    #     function_schema: {
+    #       functions: [
+    #         {
+    #           description: "FunctionDescription",
+    #           name: "Name", # required
+    #           parameters: {
+    #             "Name" => {
+    #               description: "ParameterDescription",
+    #               required: false,
+    #               type: "string", # required, accepts string, number, integer, boolean, array
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
     #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
     #   })
     #
     # @example Response structure
     #
+    #   resp.agent_action_group.action_group_executor.custom_control #=> String, one of "RETURN_CONTROL"
     #   resp.agent_action_group.action_group_executor.lambda #=> String
     #   resp.agent_action_group.action_group_id #=> String
     #   resp.agent_action_group.action_group_name #=> String
@@ -2665,6 +2759,13 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.client_token #=> String
     #   resp.agent_action_group.created_at #=> Time
     #   resp.agent_action_group.description #=> String
+    #   resp.agent_action_group.function_schema.functions #=> Array
+    #   resp.agent_action_group.function_schema.functions[0].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].name #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters #=> Hash
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
     #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
     #   resp.agent_action_group.updated_at #=> Time
     #
@@ -2805,6 +2906,9 @@ module Aws::BedrockAgent
     # You can't change the `chunkingConfiguration` after you create the
     # data source. Specify the existing `chunkingConfiguration`.
     #
+    # @option params [String] :data_deletion_policy
+    #   The data deletion policy of the updated data source.
+    #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
     #   Contains details about the storage configuration of the data source.
     #
@@ -2834,9 +2938,11 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_data_source({
+    #     data_deletion_policy: "RETAIN", # accepts RETAIN, DELETE
     #     data_source_configuration: { # required
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
+    #         bucket_owner_account_id: "BucketOwnerAccountId",
     #         inclusion_prefixes: ["S3Prefix"],
     #       },
     #       type: "S3", # required, accepts S3
@@ -2862,16 +2968,20 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.data_source.created_at #=> Time
+    #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
+    #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
     #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.description #=> String
+    #   resp.data_source.failure_reasons #=> Array
+    #   resp.data_source.failure_reasons[0] #=> String
     #   resp.data_source.knowledge_base_id #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
-    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source.updated_at #=> Time
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
@@ -3004,7 +3114,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_id #=> String
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
-    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -3054,7 +3164,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -41,6 +41,9 @@ module Aws
       class NotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class NotReadyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class OutOfCapacityException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

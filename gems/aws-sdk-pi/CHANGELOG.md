@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2024-04-23)
+------------------
+
+* Feature - Clarifies how aggregation works for GetResourceMetrics in the Performance Insights API.
+
 1.53.0 (2024-01-26)
 ------------------
 

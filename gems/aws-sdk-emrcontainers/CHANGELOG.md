@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2024-04-24)
+------------------
+
+* Feature - EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.
+
 1.32.0 (2024-04-04)
 ------------------
 

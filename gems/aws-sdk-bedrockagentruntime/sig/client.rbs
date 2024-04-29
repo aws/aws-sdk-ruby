@@ -87,10 +87,33 @@ module Aws
                           agent_id: ::String,
                           ?enable_trace: bool,
                           ?end_session: bool,
-                          input_text: ::String,
+                          ?input_text: ::String,
                           session_id: ::String,
                           ?session_state: {
+                            invocation_id: ::String?,
                             prompt_session_attributes: Hash[::String, ::String]?,
+                            return_control_invocation_results: Array[
+                              {
+                                api_result: {
+                                  action_group: ::String,
+                                  api_path: ::String?,
+                                  http_method: ::String?,
+                                  http_status_code: ::Integer?,
+                                  response_body: Hash[::String, {
+                                      body: ::String?
+                                    }]?,
+                                  response_state: ("FAILURE" | "REPROMPT")?
+                                }?,
+                                function_result: {
+                                  action_group: ::String,
+                                  function: ::String?,
+                                  response_body: Hash[::String, {
+                                      body: ::String?
+                                    }]?,
+                                  response_state: ("FAILURE" | "REPROMPT")?
+                                }?
+                              },
+                            ]?,
                             session_attributes: Hash[::String, ::String]?
                           }
                         ) ?{ (*untyped) -> void } -> _InvokeAgentResponseSuccess
@@ -182,6 +205,27 @@ module Aws
                                      text: ::String
                                    },
                                    ?retrieve_and_generate_configuration: {
+                                     external_sources_configuration: {
+                                       generation_configuration: {
+                                         prompt_template: {
+                                           text_prompt_template: ::String?
+                                         }?
+                                       }?,
+                                       model_arn: ::String,
+                                       sources: Array[
+                                         {
+                                           byte_content: {
+                                             content_type: ::String,
+                                             data: ::String,
+                                             identifier: ::String
+                                           }?,
+                                           s3_location: {
+                                             uri: ::String
+                                           }?,
+                                           source_type: ("S3" | "BYTE_CONTENT")
+                                         },
+                                       ]
+                                     }?,
                                      knowledge_base_configuration: {
                                        generation_configuration: {
                                          prompt_template: {
@@ -250,7 +294,7 @@ module Aws
                                          }
                                        }?
                                      }?,
-                                     type: ("KNOWLEDGE_BASE")
+                                     type: ("KNOWLEDGE_BASE" | "EXTERNAL_SOURCES")
                                    },
                                    ?session_configuration: {
                                      kms_key_arn: ::String

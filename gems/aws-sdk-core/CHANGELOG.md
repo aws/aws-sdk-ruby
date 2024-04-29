@@ -7,6 +7,24 @@ Unreleased Changes
 
 * Issue - Enhance, refactor, and rebase protocols to be consistent. Ensure protocol tests are run for each engine.
 
+3.193.0 (2024-04-25)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Issue - Update event stream documentation.
+* Issue - Move `InvocationId` plugin to all clients.
+* Issue - Handle event streaming content-sha256 header in the signer plugin.
+* Issue - Add the event stream content type to initial requests.
+* Issue - Fix `standard` and `adaptive` retry mode for event streams.
+* Issue - Add `authority` to http2 headers.
+* Issue - Do not treat single members in event stream structures as implicit payloads.
+* Issue - Do not wait for initial response headers to start sending input events.
+
 3.192.1 (2024-04-18)
 ------------------
 

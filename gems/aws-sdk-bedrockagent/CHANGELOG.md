@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.7.0 (2024-04-23)
+------------------
+
+* Feature - Introducing the ability to create multiple data sources per knowledge base, specify S3 buckets as data sources from external accounts, and exposing levers to define the deletion behavior of the underlying vector store data.
+
+1.6.0 (2024-04-22)
+------------------
+
+* Feature - Releasing the support for simplified configuration and return of control
+
 1.5.0 (2024-04-16)
 ------------------
 

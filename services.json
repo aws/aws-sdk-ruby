@@ -983,6 +983,9 @@
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
   },
+  "Route53Profiles": {
+    "models": "route53profiles/2018-05-10"
+  },
   "Route53RecoveryCluster": {
     "models": "route53-recovery-cluster/2019-12-02"
   },

@@ -70,6 +70,20 @@ module Aws::MarketplaceEntitlementService
       end
     end
 
+    context 'For region cn-northwest-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://entitlement-marketplace.cn-northwest-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://entitlement.marketplace-fips.cn-north-1.api.amazonwebservices.com.cn"}}

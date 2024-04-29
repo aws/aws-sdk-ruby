@@ -552,6 +552,7 @@ module Aws
             'RolesAnywhere' => 'rolesanywhere',
             'Route53' => 'route53',
             'Route53Domains' => 'route53domains',
+            'Route53Profiles' => 'route53profiles',
             'Route53RecoveryCluster' => 'route53-recovery-cluster',
             'Route53RecoveryControlConfig' => 'route53-recovery-control-config',
             'Route53RecoveryReadiness' => 'route53-recovery-readiness',

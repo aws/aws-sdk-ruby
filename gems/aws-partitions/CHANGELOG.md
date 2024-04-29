@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.921.0 (2024-04-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.920.0 (2024-04-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.919.0 (2024-04-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.918.0 (2024-04-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.917.0 (2024-04-22)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Route53Profiles`.
+
 1.916.0 (2024-04-18)
 ------------------
 

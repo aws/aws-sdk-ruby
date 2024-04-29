@@ -32,6 +32,7 @@ module Aws::OAM
     InternalServiceFault = Shapes::StructureShape.new(name: 'InternalServiceFault')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     LabelTemplate = Shapes::StringShape.new(name: 'LabelTemplate')
+    LinkConfiguration = Shapes::StructureShape.new(name: 'LinkConfiguration')
     ListAttachedLinksInput = Shapes::StructureShape.new(name: 'ListAttachedLinksInput')
     ListAttachedLinksItem = Shapes::StructureShape.new(name: 'ListAttachedLinksItem')
     ListAttachedLinksItems = Shapes::ListShape.new(name: 'ListAttachedLinksItems')
@@ -49,6 +50,10 @@ module Aws::OAM
     ListSinksOutput = Shapes::StructureShape.new(name: 'ListSinksOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    LogGroupConfiguration = Shapes::StructureShape.new(name: 'LogGroupConfiguration')
+    LogsFilter = Shapes::StringShape.new(name: 'LogsFilter')
+    MetricConfiguration = Shapes::StructureShape.new(name: 'MetricConfiguration')
+    MetricsFilter = Shapes::StringShape.new(name: 'MetricsFilter')
     MissingRequiredParameterException = Shapes::StructureShape.new(name: 'MissingRequiredParameterException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PutSinkPolicyInput = Shapes::StructureShape.new(name: 'PutSinkPolicyInput')
@@ -81,6 +86,7 @@ module Aws::OAM
     ConflictException.struct_class = Types::ConflictException
 
     CreateLinkInput.add_member(:label_template, Shapes::ShapeRef.new(shape: LabelTemplate, required: true, location_name: "LabelTemplate"))
+    CreateLinkInput.add_member(:link_configuration, Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
     CreateLinkInput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypesInput, required: true, location_name: "ResourceTypes"))
     CreateLinkInput.add_member(:sink_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "SinkIdentifier"))
     CreateLinkInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMapInput, location_name: "Tags"))
@@ -90,6 +96,7 @@ module Aws::OAM
     CreateLinkOutput.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     CreateLinkOutput.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
     CreateLinkOutput.add_member(:label_template, Shapes::ShapeRef.new(shape: String, location_name: "LabelTemplate"))
+    CreateLinkOutput.add_member(:link_configuration, Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
     CreateLinkOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypesOutput, location_name: "ResourceTypes"))
     CreateLinkOutput.add_member(:sink_arn, Shapes::ShapeRef.new(shape: String, location_name: "SinkArn"))
     CreateLinkOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
@@ -122,6 +129,7 @@ module Aws::OAM
     GetLinkOutput.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     GetLinkOutput.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
     GetLinkOutput.add_member(:label_template, Shapes::ShapeRef.new(shape: String, location_name: "LabelTemplate"))
+    GetLinkOutput.add_member(:link_configuration, Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
     GetLinkOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypesOutput, location_name: "ResourceTypes"))
     GetLinkOutput.add_member(:sink_arn, Shapes::ShapeRef.new(shape: String, location_name: "SinkArn"))
     GetLinkOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
@@ -139,18 +147,22 @@ module Aws::OAM
     GetSinkPolicyInput.add_member(:sink_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "SinkIdentifier"))
     GetSinkPolicyInput.struct_class = Types::GetSinkPolicyInput
 
+    GetSinkPolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
     GetSinkPolicyOutput.add_member(:sink_arn, Shapes::ShapeRef.new(shape: String, location_name: "SinkArn"))
     GetSinkPolicyOutput.add_member(:sink_id, Shapes::ShapeRef.new(shape: String, location_name: "SinkId"))
-    GetSinkPolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
     GetSinkPolicyOutput.struct_class = Types::GetSinkPolicyOutput
 
     InternalServiceFault.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServiceFault.add_member(:amzn_error_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amzn-ErrorType"))
     InternalServiceFault.struct_class = Types::InternalServiceFault
 
-    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidParameterException.add_member(:amzn_error_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amzn-ErrorType"))
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    LinkConfiguration.add_member(:log_group_configuration, Shapes::ShapeRef.new(shape: LogGroupConfiguration, location_name: "LogGroupConfiguration"))
+    LinkConfiguration.add_member(:metric_configuration, Shapes::ShapeRef.new(shape: MetricConfiguration, location_name: "MetricConfiguration"))
+    LinkConfiguration.struct_class = Types::LinkConfiguration
 
     ListAttachedLinksInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAttachedLinksMaxResults, location_name: "MaxResults"))
     ListAttachedLinksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -206,17 +218,23 @@ module Aws::OAM
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
-    MissingRequiredParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LogGroupConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: LogsFilter, required: true, location_name: "Filter"))
+    LogGroupConfiguration.struct_class = Types::LogGroupConfiguration
+
+    MetricConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: MetricsFilter, required: true, location_name: "Filter"))
+    MetricConfiguration.struct_class = Types::MetricConfiguration
+
     MissingRequiredParameterException.add_member(:amzn_error_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amzn-ErrorType"))
+    MissingRequiredParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     MissingRequiredParameterException.struct_class = Types::MissingRequiredParameterException
 
-    PutSinkPolicyInput.add_member(:sink_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "SinkIdentifier"))
     PutSinkPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: SinkPolicy, required: true, location_name: "Policy"))
+    PutSinkPolicyInput.add_member(:sink_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "SinkIdentifier"))
     PutSinkPolicyInput.struct_class = Types::PutSinkPolicyInput
 
+    PutSinkPolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
     PutSinkPolicyOutput.add_member(:sink_arn, Shapes::ShapeRef.new(shape: String, location_name: "SinkArn"))
     PutSinkPolicyOutput.add_member(:sink_id, Shapes::ShapeRef.new(shape: String, location_name: "SinkId"))
-    PutSinkPolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
     PutSinkPolicyOutput.struct_class = Types::PutSinkPolicyOutput
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -255,6 +273,7 @@ module Aws::OAM
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateLinkInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "Identifier"))
+    UpdateLinkInput.add_member(:link_configuration, Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
     UpdateLinkInput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypesInput, required: true, location_name: "ResourceTypes"))
     UpdateLinkInput.struct_class = Types::UpdateLinkInput
 
@@ -262,6 +281,7 @@ module Aws::OAM
     UpdateLinkOutput.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     UpdateLinkOutput.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
     UpdateLinkOutput.add_member(:label_template, Shapes::ShapeRef.new(shape: LabelTemplate, location_name: "LabelTemplate"))
+    UpdateLinkOutput.add_member(:link_configuration, Shapes::ShapeRef.new(shape: LinkConfiguration, location_name: "LinkConfiguration"))
     UpdateLinkOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypesOutput, location_name: "ResourceTypes"))
     UpdateLinkOutput.add_member(:sink_arn, Shapes::ShapeRef.new(shape: String, location_name: "SinkArn"))
     UpdateLinkOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "Tags"))
@@ -281,6 +301,7 @@ module Aws::OAM
         "endpointPrefix" => "oam",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "CloudWatch Observability Access Manager",
         "serviceId" => "OAM",
         "signatureVersion" => "v4",

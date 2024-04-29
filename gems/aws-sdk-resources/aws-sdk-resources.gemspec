@@ -325,6 +325,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-rolesanywhere', '~> 1')
   spec.add_dependency('aws-sdk-route53', '~> 1')
   spec.add_dependency('aws-sdk-route53domains', '~> 1')
+  spec.add_dependency('aws-sdk-route53profiles', '~> 1')
   spec.add_dependency('aws-sdk-route53recoverycluster', '~> 1')
   spec.add_dependency('aws-sdk-route53recoverycontrolconfig', '~> 1')
   spec.add_dependency('aws-sdk-route53recoveryreadiness', '~> 1')

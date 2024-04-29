@@ -17,15 +17,47 @@ module Aws::BedrockAgentRuntime
     class ActionGroupInvocationInput
       attr_accessor action_group_name: ::String
       attr_accessor api_path: ::String
+      attr_accessor function: ::String
       attr_accessor parameters: ::Array[Types::Parameter]
       attr_accessor request_body: Types::RequestBody
       attr_accessor verb: ::String
-      SENSITIVE: [:action_group_name, :api_path, :verb]
+      SENSITIVE: [:action_group_name, :api_path, :function, :verb]
     end
 
     class ActionGroupInvocationOutput
       attr_accessor text: ::String
       SENSITIVE: [:text]
+    end
+
+    class ApiInvocationInput
+      attr_accessor action_group: ::String
+      attr_accessor api_path: ::String
+      attr_accessor http_method: ::String
+      attr_accessor parameters: ::Array[Types::ApiParameter]
+      attr_accessor request_body: Types::ApiRequestBody
+      SENSITIVE: [:api_path]
+    end
+
+    class ApiParameter
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ApiRequestBody
+      attr_accessor content: ::Hash[::String, Types::PropertyParameters]
+      SENSITIVE: []
+    end
+
+    class ApiResult
+      attr_accessor action_group: ::String
+      attr_accessor api_path: ::String
+      attr_accessor http_method: ::String
+      attr_accessor http_status_code: ::Integer
+      attr_accessor response_body: ::Hash[::String, Types::ContentBody]
+      attr_accessor response_state: ("FAILURE" | "REPROMPT")
+      SENSITIVE: [:api_path]
     end
 
     class Attribution
@@ -40,6 +72,13 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class ByteContentDoc
+      attr_accessor content_type: ::String
+      attr_accessor data: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: [:data, :identifier]
+    end
+
     class Citation
       attr_accessor generated_response_part: Types::GeneratedResponsePart
       attr_accessor retrieved_references: ::Array[Types::RetrievedReference]
@@ -52,10 +91,34 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class ContentBody
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
     class DependencyFailedException
       attr_accessor message: ::String
       attr_accessor resource_name: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ExternalSource
+      attr_accessor byte_content: Types::ByteContentDoc
+      attr_accessor s3_location: Types::S3ObjectDoc
+      attr_accessor source_type: ("S3" | "BYTE_CONTENT")
+      SENSITIVE: []
+    end
+
+    class ExternalSourcesGenerationConfiguration
+      attr_accessor prompt_template: Types::PromptTemplate
+      SENSITIVE: []
+    end
+
+    class ExternalSourcesRetrieveAndGenerateConfiguration
+      attr_accessor generation_configuration: Types::ExternalSourcesGenerationConfiguration
+      attr_accessor model_arn: ::String
+      attr_accessor sources: ::Array[Types::ExternalSource]
       SENSITIVE: []
     end
 
@@ -74,6 +137,28 @@ module Aws::BedrockAgentRuntime
     class FinalResponse
       attr_accessor text: ::String
       SENSITIVE: [:text]
+    end
+
+    class FunctionInvocationInput
+      attr_accessor action_group: ::String
+      attr_accessor function: ::String
+      attr_accessor parameters: ::Array[Types::FunctionParameter]
+      SENSITIVE: []
+    end
+
+    class FunctionParameter
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionResult
+      attr_accessor action_group: ::String
+      attr_accessor function: ::String
+      attr_accessor response_body: ::Hash[::String, Types::ContentBody]
+      attr_accessor response_state: ("FAILURE" | "REPROMPT")
+      SENSITIVE: []
     end
 
     class GeneratedResponsePart
@@ -107,6 +192,34 @@ module Aws::BedrockAgentRuntime
       attr_accessor knowledge_base_lookup_input: Types::KnowledgeBaseLookupInput
       attr_accessor trace_id: ::String
       SENSITIVE: []
+    end
+
+    class InvocationInputMember
+      attr_accessor api_invocation_input: Types::ApiInvocationInput
+      attr_accessor function_invocation_input: Types::FunctionInvocationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ApiInvocationInput < InvocationInputMember
+      end
+      class FunctionInvocationInput < InvocationInputMember
+      end
+      class Unknown < InvocationInputMember
+      end
+    end
+
+    class InvocationResultMember
+      attr_accessor api_result: Types::ApiResult
+      attr_accessor function_result: Types::FunctionResult
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ApiResult < InvocationResultMember
+      end
+      class FunctionResult < InvocationResultMember
+      end
+      class Unknown < InvocationResultMember
+      end
     end
 
     class InvokeAgentRequest
@@ -282,6 +395,11 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: [:text_prompt_template]
     end
 
+    class PropertyParameters
+      attr_accessor properties: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
     class Rationale
       attr_accessor text: ::String
       attr_accessor trace_id: ::String
@@ -363,8 +481,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class RetrieveAndGenerateConfiguration
+      attr_accessor external_sources_configuration: Types::ExternalSourcesRetrieveAndGenerateConfiguration
       attr_accessor knowledge_base_configuration: Types::KnowledgeBaseRetrieveAndGenerateConfiguration
-      attr_accessor type: ("KNOWLEDGE_BASE")
+      attr_accessor type: ("KNOWLEDGE_BASE" | "EXTERNAL_SOURCES")
       SENSITIVE: []
     end
 
@@ -419,6 +538,18 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: [:content, :location, :metadata]
     end
 
+    class ReturnControlPayload
+      attr_accessor invocation_id: ::String
+      attr_accessor invocation_inputs: ::Array[Types::InvocationInputMember]
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class S3ObjectDoc
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
@@ -426,7 +557,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class SessionState
+      attr_accessor invocation_id: ::String
       attr_accessor prompt_session_attributes: ::Hash[::String, ::String]
+      attr_accessor return_control_invocation_results: ::Array[Types::InvocationResultMember]
       attr_accessor session_attributes: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -472,6 +605,7 @@ module Aws::BedrockAgentRuntime
     class TracePart
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
       attr_accessor session_id: ::String
       attr_accessor trace: Types::Trace
       attr_accessor event_type: untyped
@@ -485,7 +619,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class ResponseStream < Enumerator[untyped, untyped]
-      def event_types: () -> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
+      def event_types: () -> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :internal_server_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
     end
   end
 end

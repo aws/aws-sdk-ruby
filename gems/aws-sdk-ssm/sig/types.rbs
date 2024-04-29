@@ -1109,6 +1109,20 @@ module Aws::SSM
       SENSITIVE: []
     end
 
+    class DescribeInstancePropertiesRequest
+      attr_accessor instance_property_filter_list: ::Array[Types::InstancePropertyFilter]
+      attr_accessor filters_with_operator: ::Array[Types::InstancePropertyStringFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstancePropertiesResult
+      attr_accessor instance_properties: ::Array[Types::InstanceProperty]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeInventoryDeletionsRequest
       attr_accessor deletion_id: ::String
       attr_accessor next_token: ::String
@@ -2087,6 +2101,49 @@ module Aws::SSM
       SENSITIVE: []
     end
 
+    class InstanceProperty
+      attr_accessor name: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor instance_role: ::String
+      attr_accessor key_name: ::String
+      attr_accessor instance_state: ::String
+      attr_accessor architecture: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor launch_time: ::Time
+      attr_accessor ping_status: ("Online" | "ConnectionLost" | "Inactive")
+      attr_accessor last_ping_date_time: ::Time
+      attr_accessor agent_version: ::String
+      attr_accessor platform_type: ("Windows" | "Linux" | "MacOS")
+      attr_accessor platform_name: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor activation_id: ::String
+      attr_accessor iam_role: ::String
+      attr_accessor registration_date: ::Time
+      attr_accessor resource_type: ::String
+      attr_accessor computer_name: ::String
+      attr_accessor association_status: ::String
+      attr_accessor last_association_execution_date: ::Time
+      attr_accessor last_successful_association_execution_date: ::Time
+      attr_accessor association_overview: Types::InstanceAggregatedAssociationOverview
+      attr_accessor source_id: ::String
+      attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance")
+      SENSITIVE: []
+    end
+
+    class InstancePropertyFilter
+      attr_accessor key: ("InstanceIds" | "AgentVersion" | "PingStatus" | "PlatformTypes" | "DocumentName" | "ActivationIds" | "IamRole" | "ResourceType" | "AssociationStatus")
+      attr_accessor value_set: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InstancePropertyStringFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan")
+      SENSITIVE: []
+    end
+
     class InternalServerError
       attr_accessor message: ::String
       SENSITIVE: []
@@ -2204,6 +2261,11 @@ module Aws::SSM
     end
 
     class InvalidInstanceInformationFilterValue
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInstancePropertyFilterValue
       attr_accessor message: ::String
       SENSITIVE: []
     end

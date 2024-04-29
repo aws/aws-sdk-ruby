@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.229.0 (2024-04-26)
+------------------
+
+* Feature - SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database.
+
+1.228.0 (2024-04-25)
+------------------
+
+* Feature - Updates Amazon RDS documentation for setting local time zones for RDS for Db2 DB instances.
+
+1.227.0 (2024-04-23)
+------------------
+
+* Feature - Fix the example ARN for ModifyActivityStreamRequest
+
 1.226.0 (2024-04-16)
 ------------------
 

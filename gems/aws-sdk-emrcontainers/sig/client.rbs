@@ -182,6 +182,41 @@ module Aws
                                    ) -> _CreateManagedEndpointResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateManagedEndpointResponseSuccess
 
+      interface _CreateSecurityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSecurityConfigurationResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#create_security_configuration-instance_method
+      def create_security_configuration: (
+                                           client_token: ::String,
+                                           name: ::String,
+                                           security_configuration_data: {
+                                             authorization_configuration: {
+                                               lake_formation_configuration: {
+                                                 authorized_session_tag_value: ::String?,
+                                                 secure_namespace_info: {
+                                                   cluster_id: ::String?,
+                                                   namespace: ::String?
+                                                 }?,
+                                                 query_engine_role_arn: ::String?
+                                               }?,
+                                               encryption_configuration: {
+                                                 in_transit_encryption_configuration: {
+                                                   tls_certificate_configuration: {
+                                                     certificate_provider_type: ("PEM")?,
+                                                     public_certificate_secret_arn: ::String?,
+                                                     private_certificate_secret_arn: ::String?
+                                                   }?
+                                                 }?
+                                               }?
+                                             }?
+                                           },
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _CreateSecurityConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityConfigurationResponseSuccess
+
       interface _CreateVirtualClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateVirtualClusterResponse]
         def id: () -> ::String
@@ -201,7 +236,8 @@ module Aws
                                       }?
                                     },
                                     client_token: ::String,
-                                    ?tags: Hash[::String, ::String]
+                                    ?tags: Hash[::String, ::String],
+                                    ?security_configuration_id: ::String
                                   ) -> _CreateVirtualClusterResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVirtualClusterResponseSuccess
 
@@ -268,6 +304,16 @@ module Aws
                                        virtual_cluster_id: ::String
                                      ) -> _DescribeManagedEndpointResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeManagedEndpointResponseSuccess
+
+      interface _DescribeSecurityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSecurityConfigurationResponse]
+        def security_configuration: () -> Types::SecurityConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#describe_security_configuration-instance_method
+      def describe_security_configuration: (
+                                             id: ::String
+                                           ) -> _DescribeSecurityConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSecurityConfigurationResponseSuccess
 
       interface _DescribeVirtualClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVirtualClusterResponse]
@@ -344,6 +390,20 @@ module Aws
                                     ?next_token: ::String
                                   ) -> _ListManagedEndpointsResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedEndpointsResponseSuccess
+
+      interface _ListSecurityConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityConfigurationsResponse]
+        def security_configurations: () -> ::Array[Types::SecurityConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#list_security_configurations-instance_method
+      def list_security_configurations: (
+                                          ?created_after: ::Time,
+                                          ?created_before: ::Time,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListSecurityConfigurationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityConfigurationsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]

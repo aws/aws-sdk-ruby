@@ -5581,10 +5581,11 @@ module Aws
         def uefi_data: () -> Types::AttributeValue
         def last_launched_time: () -> Types::AttributeValue
         def imds_support: () -> Types::AttributeValue
+        def deregistration_protection: () -> Types::AttributeValue
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#describe_image_attribute-instance_method
       def describe_image_attribute: (
-                                      attribute: ("description" | "kernel" | "ramdisk" | "launchPermission" | "productCodes" | "blockDeviceMapping" | "sriovNetSupport" | "bootMode" | "tpmSupport" | "uefiData" | "lastLaunchedTime" | "imdsSupport"),
+                                      attribute: ("description" | "kernel" | "ramdisk" | "launchPermission" | "productCodes" | "blockDeviceMapping" | "sriovNetSupport" | "bootMode" | "tpmSupport" | "uefiData" | "lastLaunchedTime" | "imdsSupport" | "deregistrationProtection"),
                                       image_id: ::String,
                                       ?dry_run: bool
                                     ) -> _DescribeImageAttributeResponseSuccess
@@ -6404,10 +6405,11 @@ module Aws
         def groups: () -> ::Array[Types::GroupIdentifier]
         def network_interface_id: () -> ::String
         def source_dest_check: () -> Types::AttributeBooleanValue
+        def associate_public_ip_address: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#describe_network_interface_attribute-instance_method
       def describe_network_interface_attribute: (
-                                                  ?attribute: ("description" | "groupSet" | "sourceDestCheck" | "attachment"),
+                                                  ?attribute: ("description" | "groupSet" | "sourceDestCheck" | "attachment" | "associatePublicIpAddress"),
                                                   ?dry_run: bool,
                                                   network_interface_id: ::String
                                                 ) -> _DescribeNetworkInterfaceAttributeResponseSuccess
@@ -7870,6 +7872,17 @@ module Aws
                                      ) -> _DisableImageDeprecationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableImageDeprecationResponseSuccess
 
+      interface _DisableImageDeregistrationProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableImageDeregistrationProtectionResult]
+        def return: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#disable_image_deregistration_protection-instance_method
+      def disable_image_deregistration_protection: (
+                                                     image_id: ::String,
+                                                     ?dry_run: bool
+                                                   ) -> _DisableImageDeregistrationProtectionResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableImageDeregistrationProtectionResponseSuccess
+
       interface _DisableIpamOrganizationAdminAccountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisableIpamOrganizationAdminAccountResult]
         def success: () -> bool
@@ -8235,6 +8248,18 @@ module Aws
                                       ?dry_run: bool
                                     ) -> _EnableImageDeprecationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableImageDeprecationResponseSuccess
+
+      interface _EnableImageDeregistrationProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableImageDeregistrationProtectionResult]
+        def return: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#enable_image_deregistration_protection-instance_method
+      def enable_image_deregistration_protection: (
+                                                    image_id: ::String,
+                                                    ?with_cooldown: bool,
+                                                    ?dry_run: bool
+                                                  ) -> _EnableImageDeregistrationProtectionResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableImageDeregistrationProtectionResponseSuccess
 
       interface _EnableIpamOrganizationAdminAccountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableIpamOrganizationAdminAccountResult]
@@ -10248,7 +10273,8 @@ module Aws
                                                   tcp_established_timeout: ::Integer?,
                                                   udp_stream_timeout: ::Integer?,
                                                   udp_timeout: ::Integer?
-                                                }
+                                                },
+                                                ?associate_public_ip_address: bool
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

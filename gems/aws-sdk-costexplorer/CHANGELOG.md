@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2024-04-23)
+------------------
+
+* Feature - Added additional metadata that might be applicable to your reservation recommendations.
+
 1.97.0 (2024-03-26)
 ------------------
 

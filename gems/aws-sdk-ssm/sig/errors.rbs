@@ -164,6 +164,9 @@ module Aws
       class InvalidInstanceInformationFilterValue < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class InvalidInstancePropertyFilterValue < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InvalidInventoryGroupException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

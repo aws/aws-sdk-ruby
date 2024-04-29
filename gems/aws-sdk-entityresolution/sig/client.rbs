@@ -89,6 +89,21 @@ module Aws
                                 ) -> _AddPolicyStatementResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddPolicyStatementResponseSuccess
 
+      interface _BatchDeleteUniqueIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteUniqueIdOutput]
+        def deleted: () -> ::Array[Types::DeletedUniqueId]
+        def disconnected_unique_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::DeleteUniqueIdError]
+        def status: () -> ("COMPLETED" | "ACCEPTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#batch_delete_unique_id-instance_method
+      def batch_delete_unique_id: (
+                                    ?input_source: ::String,
+                                    unique_ids: Array[::String],
+                                    workflow_name: ::String
+                                  ) -> _BatchDeleteUniqueIdResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteUniqueIdResponseSuccess
+
       interface _CreateIdMappingWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdMappingWorkflowOutput]
         def description: () -> ::String

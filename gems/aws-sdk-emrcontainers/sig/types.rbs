@@ -8,6 +8,12 @@
 module Aws::EMRContainers
   module Types
 
+    class AuthorizationConfiguration
+      attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
     class CancelJobRunRequest
       attr_accessor id: ::String
       attr_accessor virtual_cluster_id: ::String
@@ -107,11 +113,27 @@ module Aws::EMRContainers
       SENSITIVE: []
     end
 
+    class CreateSecurityConfigurationRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor security_configuration_data: Types::SecurityConfigurationData
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSecurityConfigurationResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateVirtualClusterRequest
       attr_accessor name: ::String
       attr_accessor container_provider: Types::ContainerProvider
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor security_configuration_id: ::String
       SENSITIVE: []
     end
 
@@ -197,6 +219,16 @@ module Aws::EMRContainers
       SENSITIVE: []
     end
 
+    class DescribeSecurityConfigurationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityConfigurationResponse
+      attr_accessor security_configuration: Types::SecurityConfiguration
+      SENSITIVE: []
+    end
+
     class DescribeVirtualClusterRequest
       attr_accessor id: ::String
       SENSITIVE: []
@@ -214,6 +246,11 @@ module Aws::EMRContainers
 
     class EksInfo
       attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor in_transit_encryption_configuration: Types::InTransitEncryptionConfiguration
       SENSITIVE: []
     end
 
@@ -254,6 +291,11 @@ module Aws::EMRContainers
       attr_accessor id: ::String
       attr_accessor credentials: Types::Credentials
       attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InTransitEncryptionConfiguration
+      attr_accessor tls_certificate_configuration: Types::TLSCertificateConfiguration
       SENSITIVE: []
     end
 
@@ -313,6 +355,13 @@ module Aws::EMRContainers
       SENSITIVE: []
     end
 
+    class LakeFormationConfiguration
+      attr_accessor authorized_session_tag_value: ::String
+      attr_accessor secure_namespace_info: Types::SecureNamespaceInfo
+      attr_accessor query_engine_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class ListJobRunsRequest
       attr_accessor virtual_cluster_id: ::String
       attr_accessor created_before: ::Time
@@ -357,6 +406,20 @@ module Aws::EMRContainers
 
     class ListManagedEndpointsResponse
       attr_accessor endpoints: ::Array[Types::Endpoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityConfigurationsRequest
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityConfigurationsResponse
+      attr_accessor security_configurations: ::Array[Types::SecurityConfiguration]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -446,6 +509,28 @@ module Aws::EMRContainers
       SENSITIVE: []
     end
 
+    class SecureNamespaceInfo
+      attr_accessor cluster_id: ::String
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityConfiguration
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor security_configuration_data: Types::SecurityConfigurationData
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SecurityConfigurationData
+      attr_accessor authorization_configuration: Types::AuthorizationConfiguration
+      SENSITIVE: []
+    end
+
     class SparkSqlJobDriver
       attr_accessor entry_point: ::String
       attr_accessor spark_sql_parameters: ::String
@@ -479,6 +564,13 @@ module Aws::EMRContainers
       attr_accessor name: ::String
       attr_accessor arn: ::String
       attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class TLSCertificateConfiguration
+      attr_accessor certificate_provider_type: ("PEM")
+      attr_accessor public_certificate_secret_arn: ::String
+      attr_accessor private_certificate_secret_arn: ::String
       SENSITIVE: []
     end
 
@@ -519,6 +611,7 @@ module Aws::EMRContainers
       attr_accessor container_provider: Types::ContainerProvider
       attr_accessor created_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor security_configuration_id: ::String
       SENSITIVE: []
     end
   end

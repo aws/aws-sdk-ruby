@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.237.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.236.0 (2024-04-22)
+------------------
+
+* Feature - This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.
+
 1.235.0 (2024-04-18)
 ------------------
 

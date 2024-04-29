@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Transfer
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Transfer
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::Transfer
     #   @option options [Aws::Transfer::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Transfer::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -2523,14 +2547,7 @@ module Aws::Transfer
     # create local (AS2) profiles and partner profiles.
     #
     # @option params [required, String] :usage
-    #   Specifies how this certificate is used. It can be used in the
-    #   following ways:
-    #
-    #   * `SIGNING`: For signing AS2 messages
-    #
-    #   * `ENCRYPTION`: For encrypting AS2 messages
-    #
-    #   * `TLS`: For securing AS2 communications sent over HTTPS
+    #   Specifies whether this certificate is used for signing or encryption.
     #
     # @option params [required, String] :certificate
     #   * For the CLI, provide a file path for a certificate in URI format.
@@ -3360,6 +3377,89 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Retrieves a list of the contents of a directory from a remote SFTP
+    # server. You specify the connector ID, the output path, and the remote
+    # directory path. You can also specify the optional `MaxItems` value to
+    # control the maximum number of items that are listed from the remote
+    # directory. This API returns a list of all files and directories in the
+    # remote directory (up to the maximum value), but does not return files
+    # or folders in sub-directories. That is, it only returns a list of
+    # files and directories one-level deep.
+    #
+    # After you receive the listing file, you can provide the files that you
+    # want to transfer to the `RetrieveFilePaths` parameter of the
+    # `StartFileTransfer` API call.
+    #
+    # The naming convention for the output file is `
+    # connector-ID-listing-ID.json`. The output file contains the following
+    # information:
+    #
+    # * `filePath`: the complete path of a remote file, relative to the
+    #   directory of the listing request for your SFTP connector on the
+    #   remote server.
+    #
+    # * `modifiedTimestamp`: the last time the file was modified, in UTC
+    #   time format. This field is optional. If the remote file attributes
+    #   don't contain a timestamp, it is omitted from the file listing.
+    #
+    # * `size`: the size of the file, in bytes. This field is optional. If
+    #   the remote file attributes don't contain a file size, it is omitted
+    #   from the file listing.
+    #
+    # * `path`: the complete path of a remote directory, relative to the
+    #   directory of the listing request for your SFTP connector on the
+    #   remote server.
+    #
+    # * `truncated`: a flag indicating whether the list output contains all
+    #   of the items contained in the remote directory or not. If your
+    #   `Truncated` output value is true, you can increase the value
+    #   provided in the optional `max-items` input attribute to be able to
+    #   list more items (up to the maximum allowed list size of 10,000
+    #   items).
+    #
+    # @option params [required, String] :connector_id
+    #   The unique identifier for the connector.
+    #
+    # @option params [required, String] :remote_directory_path
+    #   Specifies the directory on the remote SFTP server for which you want
+    #   to list its contents.
+    #
+    # @option params [Integer] :max_items
+    #   An optional parameter where you can specify the maximum number of
+    #   file/directory names to retrieve. The default value is 1,000.
+    #
+    # @option params [required, String] :output_directory_path
+    #   Specifies the path (bucket and prefix) in Amazon S3 storage to store
+    #   the results of the directory listing.
+    #
+    # @return [Types::StartDirectoryListingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDirectoryListingResponse#listing_id #listing_id} => String
+    #   * {Types::StartDirectoryListingResponse#output_file_name #output_file_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_directory_listing({
+    #     connector_id: "ConnectorId", # required
+    #     remote_directory_path: "FilePath", # required
+    #     max_items: 1,
+    #     output_directory_path: "FilePath", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.listing_id #=> String
+    #   resp.output_file_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartDirectoryListing AWS API Documentation
+    #
+    # @overload start_directory_listing(params = {})
+    # @param [Hash] params ({})
+    def start_directory_listing(params = {}, options = {})
+      req = build_request(:start_directory_listing, params)
+      req.send_request(options)
+    end
+
     # Begins a file transfer between local Amazon Web Services storage and a
     # remote AS2 or SFTP server.
     #
@@ -3372,7 +3472,7 @@ module Aws::Transfer
     #
     #   * If you are transferring file from a partner's SFTP server to
     #     Amazon Web Services storage, you specify one or more
-    #     `RetreiveFilePaths` to identify the files you want to transfer,
+    #     `RetrieveFilePaths` to identify the files you want to transfer,
     #     and a `LocalDirectoryPath` to specify the destination folder.
     #
     #   * If you are transferring file to a partner's SFTP server from
@@ -4708,7 +4808,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

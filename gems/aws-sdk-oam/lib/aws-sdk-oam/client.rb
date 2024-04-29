@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::OAM
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::OAM
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::OAM
     #   @option options [Aws::OAM::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::OAM::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -389,7 +413,11 @@ module Aws::OAM
     # @!group API Operations
 
     # Creates a link between a source account and a sink that you have
-    # created in a monitoring account.
+    # created in a monitoring account. After the link is created, data is
+    # sent from the source account to the monitoring account. When you
+    # create a link, you can optionally specify filters that specify which
+    # metric namespaces and which log groups are shared from the source
+    # account to the monitoring account.
     #
     # Before you create a link, you must create a sink in the monitoring
     # account and create a sink policy in that account. The sink policy must
@@ -422,6 +450,11 @@ module Aws::OAM
     #
     #   * `$AccountEmailNoDomain` is the email address of the account without
     #     the domain name
+    #
+    # @option params [Types::LinkConfiguration] :link_configuration
+    #   Use this structure to optionally create filters that specify that only
+    #   some metric namespaces or log groups are to be shared from the source
+    #   account to the monitoring account.
     #
     # @option params [required, Array<String>] :resource_types
     #   An array of strings that define which types of data that the source
@@ -458,6 +491,7 @@ module Aws::OAM
     #   * {Types::CreateLinkOutput#id #id} => String
     #   * {Types::CreateLinkOutput#label #label} => String
     #   * {Types::CreateLinkOutput#label_template #label_template} => String
+    #   * {Types::CreateLinkOutput#link_configuration #link_configuration} => Types::LinkConfiguration
     #   * {Types::CreateLinkOutput#resource_types #resource_types} => Array&lt;String&gt;
     #   * {Types::CreateLinkOutput#sink_arn #sink_arn} => String
     #   * {Types::CreateLinkOutput#tags #tags} => Hash&lt;String,String&gt;
@@ -466,6 +500,14 @@ module Aws::OAM
     #
     #   resp = client.create_link({
     #     label_template: "LabelTemplate", # required
+    #     link_configuration: {
+    #       log_group_configuration: {
+    #         filter: "LogsFilter", # required
+    #       },
+    #       metric_configuration: {
+    #         filter: "MetricsFilter", # required
+    #       },
+    #     },
     #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application, AWS::InternetMonitor::Monitor
     #     sink_identifier: "ResourceIdentifier", # required
     #     tags: {
@@ -479,6 +521,8 @@ module Aws::OAM
     #   resp.id #=> String
     #   resp.label #=> String
     #   resp.label_template #=> String
+    #   resp.link_configuration.log_group_configuration.filter #=> String
+    #   resp.link_configuration.metric_configuration.filter #=> String
     #   resp.resource_types #=> Array
     #   resp.resource_types[0] #=> String
     #   resp.sink_arn #=> String
@@ -504,8 +548,8 @@ module Aws::OAM
     # source accounts to attach to it. For more information, see
     # [PutSinkPolicy][1].
     #
-    # Each account can contain one sink. If you delete a sink, you can then
-    # create a new one in that account.
+    # Each account can contain one sink per Region. If you delete a sink,
+    # you can then create a new one in that Region.
     #
     #
     #
@@ -625,6 +669,7 @@ module Aws::OAM
     #   * {Types::GetLinkOutput#id #id} => String
     #   * {Types::GetLinkOutput#label #label} => String
     #   * {Types::GetLinkOutput#label_template #label_template} => String
+    #   * {Types::GetLinkOutput#link_configuration #link_configuration} => Types::LinkConfiguration
     #   * {Types::GetLinkOutput#resource_types #resource_types} => Array&lt;String&gt;
     #   * {Types::GetLinkOutput#sink_arn #sink_arn} => String
     #   * {Types::GetLinkOutput#tags #tags} => Hash&lt;String,String&gt;
@@ -641,6 +686,8 @@ module Aws::OAM
     #   resp.id #=> String
     #   resp.label #=> String
     #   resp.label_template #=> String
+    #   resp.link_configuration.log_group_configuration.filter #=> String
+    #   resp.link_configuration.metric_configuration.filter #=> String
     #   resp.resource_types #=> Array
     #   resp.resource_types[0] #=> String
     #   resp.sink_arn #=> String
@@ -707,9 +754,9 @@ module Aws::OAM
     #
     # @return [Types::GetSinkPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetSinkPolicyOutput#policy #policy} => String
     #   * {Types::GetSinkPolicyOutput#sink_arn #sink_arn} => String
     #   * {Types::GetSinkPolicyOutput#sink_id #sink_id} => String
-    #   * {Types::GetSinkPolicyOutput#policy #policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -719,9 +766,9 @@ module Aws::OAM
     #
     # @example Response structure
     #
+    #   resp.policy #=> String
     #   resp.sink_arn #=> String
     #   resp.sink_id #=> String
-    #   resp.policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/GetSinkPolicy AWS API Documentation
     #
@@ -948,9 +995,6 @@ module Aws::OAM
     # See the examples in this section to see how to specify permitted
     # source accounts and data types.
     #
-    # @option params [required, String] :sink_identifier
-    #   The ARN of the sink to attach this policy to.
-    #
     # @option params [required, String] :policy
     #   The JSON policy to use. If you are updating an existing policy, the
     #   entire existing policy is replaced by what you specify here.
@@ -961,24 +1005,27 @@ module Aws::OAM
     #   For examples of different types of policies, see the **Examples**
     #   section on this page.
     #
+    # @option params [required, String] :sink_identifier
+    #   The ARN of the sink to attach this policy to.
+    #
     # @return [Types::PutSinkPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::PutSinkPolicyOutput#policy #policy} => String
     #   * {Types::PutSinkPolicyOutput#sink_arn #sink_arn} => String
     #   * {Types::PutSinkPolicyOutput#sink_id #sink_id} => String
-    #   * {Types::PutSinkPolicyOutput#policy #policy} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_sink_policy({
-    #     sink_identifier: "ResourceIdentifier", # required
     #     policy: "SinkPolicy", # required
+    #     sink_identifier: "ResourceIdentifier", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.policy #=> String
     #   resp.sink_arn #=> String
     #   resp.sink_id #=> String
-    #   resp.policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/PutSinkPolicy AWS API Documentation
     #
@@ -1099,6 +1146,10 @@ module Aws::OAM
     # source account to its linked monitoring account sink. You can't
     # change the sink or change the monitoring account with this operation.
     #
+    # When you update a link, you can optionally specify filters that
+    # specify which metric namespaces and which log groups are shared from
+    # the source account to the monitoring account.
+    #
     # To update the list of tags associated with the sink, use
     # [TagResource][1].
     #
@@ -1108,6 +1159,11 @@ module Aws::OAM
     #
     # @option params [required, String] :identifier
     #   The ARN of the link that you want to update.
+    #
+    # @option params [Types::LinkConfiguration] :link_configuration
+    #   Use this structure to filter which metric namespaces and which log
+    #   groups are to be shared from the source account to the monitoring
+    #   account.
     #
     # @option params [required, Array<String>] :resource_types
     #   An array of strings that define which types of data that the source
@@ -1122,6 +1178,7 @@ module Aws::OAM
     #   * {Types::UpdateLinkOutput#id #id} => String
     #   * {Types::UpdateLinkOutput#label #label} => String
     #   * {Types::UpdateLinkOutput#label_template #label_template} => String
+    #   * {Types::UpdateLinkOutput#link_configuration #link_configuration} => Types::LinkConfiguration
     #   * {Types::UpdateLinkOutput#resource_types #resource_types} => Array&lt;String&gt;
     #   * {Types::UpdateLinkOutput#sink_arn #sink_arn} => String
     #   * {Types::UpdateLinkOutput#tags #tags} => Hash&lt;String,String&gt;
@@ -1130,6 +1187,14 @@ module Aws::OAM
     #
     #   resp = client.update_link({
     #     identifier: "ResourceIdentifier", # required
+    #     link_configuration: {
+    #       log_group_configuration: {
+    #         filter: "LogsFilter", # required
+    #       },
+    #       metric_configuration: {
+    #         filter: "MetricsFilter", # required
+    #       },
+    #     },
     #     resource_types: ["AWS::CloudWatch::Metric"], # required, accepts AWS::CloudWatch::Metric, AWS::Logs::LogGroup, AWS::XRay::Trace, AWS::ApplicationInsights::Application, AWS::InternetMonitor::Monitor
     #   })
     #
@@ -1139,6 +1204,8 @@ module Aws::OAM
     #   resp.id #=> String
     #   resp.label #=> String
     #   resp.label_template #=> String
+    #   resp.link_configuration.log_group_configuration.filter #=> String
+    #   resp.link_configuration.metric_configuration.filter #=> String
     #   resp.resource_types #=> Array
     #   resp.resource_types[0] #=> String
     #   resp.sink_arn #=> String
@@ -1167,7 +1234,7 @@ module Aws::OAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-oam'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

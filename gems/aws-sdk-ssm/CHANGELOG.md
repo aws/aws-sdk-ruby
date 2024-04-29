@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.167.0 (2024-04-24)
+------------------
+
+* Feature - Add SSM DescribeInstanceProperties API to public AWS SDK.
+
 1.166.0 (2024-03-12)
 ------------------
 

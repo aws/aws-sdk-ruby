@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::FMS
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::FMS
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::FMS
     #   @option options [Aws::FMS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::FMS::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -771,11 +795,11 @@ module Aws::FMS
     end
 
     # Returns information about the specified account's administrative
-    # scope. The admistrative scope defines the resources that an Firewall
+    # scope. The administrative scope defines the resources that an Firewall
     # Manager administrator can manage.
     #
     # @option params [required, String] :admin_account
-    #   The administator account that you want to get the details for.
+    #   The administrator account that you want to get the details for.
     #
     # @return [Types::GetAdminScopeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -802,7 +826,7 @@ module Aws::FMS
     #   resp.admin_scope.region_scope.regions[0] #=> String
     #   resp.admin_scope.region_scope.all_regions_enabled #=> Boolean
     #   resp.admin_scope.policy_type_scope.policy_types #=> Array
-    #   resp.admin_scope.policy_type_scope.policy_types[0] #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
+    #   resp.admin_scope.policy_type_scope.policy_types[0] #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL", "NETWORK_ACL_COMMON"
     #   resp.admin_scope.policy_type_scope.all_policy_types_enabled #=> Boolean
     #   resp.status #=> String, one of "ONBOARDING", "ONBOARDING_COMPLETE", "OFFBOARDING", "OFFBOARDING_COMPLETE"
     #
@@ -869,23 +893,8 @@ module Aws::FMS
     # account. Details include resources that are in and out of compliance
     # with the specified policy.
     #
-    # * Resources are considered noncompliant for WAF and Shield Advanced
-    #   policies if the specified policy has not been applied to them.
-    #
-    # * Resources are considered noncompliant for security group policies if
-    #   they are in scope of the policy, they violate one or more of the
-    #   policy rules, and remediation is disabled or not possible.
-    #
-    # * Resources are considered noncompliant for Network Firewall policies
-    #   if a firewall is missing in the VPC, if the firewall endpoint isn't
-    #   set up in an expected Availability Zone and subnet, if a subnet
-    #   created by the Firewall Manager doesn't have the expected route
-    #   table, and for modifications to a firewall policy that violate the
-    #   Firewall Manager policy's rules.
-    #
-    # * Resources are considered noncompliant for DNS Firewall policies if a
-    #   DNS Firewall rule group is missing from the rule group associations
-    #   for the VPC.
+    # The reasons for resources being considered compliant depend on the
+    # Firewall Manager policy type.
     #
     # @option params [required, String] :policy_id
     #   The ID of the policy that you want to get the details for. `PolicyId`
@@ -913,7 +922,7 @@ module Aws::FMS
     #   resp.policy_compliance_detail.member_account #=> String
     #   resp.policy_compliance_detail.violators #=> Array
     #   resp.policy_compliance_detail.violators[0].resource_id #=> String
-    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "FMS_CREATED_SECURITY_GROUP_EDITED", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED", "FIREWALL_SUBNET_IS_OUT_OF_SCOPE", "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE", "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE", "UNEXPECTED_FIREWALL_ROUTES", "UNEXPECTED_TARGET_GATEWAY_ROUTES", "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY", "INVALID_ROUTE_CONFIGURATION", "MISSING_TARGET_GATEWAY", "INTERNET_TRAFFIC_NOT_INSPECTED", "BLACK_HOLE_ROUTE_DETECTED", "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET", "RESOURCE_MISSING_DNS_FIREWALL", "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT", "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT"
+    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "FMS_CREATED_SECURITY_GROUP_EDITED", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED", "FIREWALL_SUBNET_IS_OUT_OF_SCOPE", "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE", "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE", "UNEXPECTED_FIREWALL_ROUTES", "UNEXPECTED_TARGET_GATEWAY_ROUTES", "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY", "INVALID_ROUTE_CONFIGURATION", "MISSING_TARGET_GATEWAY", "INTERNET_TRAFFIC_NOT_INSPECTED", "BLACK_HOLE_ROUTE_DETECTED", "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET", "RESOURCE_MISSING_DNS_FIREWALL", "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT", "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT", "INVALID_NETWORK_ACL_ENTRY"
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
     #   resp.policy_compliance_detail.violators[0].metadata #=> Hash
     #   resp.policy_compliance_detail.violators[0].metadata["LengthBoundedString"] #=> String
@@ -974,10 +983,32 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL", "NETWORK_ACL_COMMON"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.security_service_policy_data.policy_option.network_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
     #   resp.policy.security_service_policy_data.policy_option.third_party_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries #=> Array
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].icmp_type_code.code #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].icmp_type_code.type #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].protocol #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].port_range.from #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].port_range.to #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].cidr_block #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].ipv_6_cidr_block #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].rule_action #=> String, one of "allow", "deny"
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].egress #=> Boolean
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.force_remediate_for_first_entries #=> Boolean
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries #=> Array
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].icmp_type_code.code #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].icmp_type_code.type #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].protocol #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].port_range.from #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].port_range.to #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].cidr_block #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].ipv_6_cidr_block #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].rule_action #=> String, one of "allow", "deny"
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].egress #=> Boolean
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.force_remediate_for_last_entries #=> Boolean
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
     #   resp.policy.resource_type_list[0] #=> String
@@ -1067,7 +1098,7 @@ module Aws::FMS
     # @example Response structure
     #
     #   resp.admin_account_id #=> String
-    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
+    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL", "NETWORK_ACL_COMMON"
     #   resp.data #=> String
     #   resp.next_token #=> String
     #
@@ -1209,6 +1240,8 @@ module Aws::FMS
     #   * Network Firewall
     #
     #   * Security group content audit
+    #
+    #   * Network ACL
     #
     #   * Third-party firewall
     #
@@ -1457,6 +1490,95 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].dns_rule_group_limit_exceeded_violation.violation_target #=> String
     #   resp.violation_detail.resource_violations[0].dns_rule_group_limit_exceeded_violation.violation_target_description #=> String
     #   resp.violation_detail.resource_violations[0].dns_rule_group_limit_exceeded_violation.number_of_rule_groups_already_associated #=> Integer
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.firewall_subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.vpc_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.subnet_availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.subnet_availability_zone_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.vpc_endpoint_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.vpc_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.route_table_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes #=> Array
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].destination #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].target #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_availability_zone_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.current_firewall_subnet_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes #=> Array
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].destination #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].target #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.current_internet_gateway_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes #=> Array
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].destination #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].target #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.target_violation_reason #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.target_violation_reason #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.current_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.expected_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.firewall_subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.vpc_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.subnet_availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.subnet_availability_zone_id #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.subnet #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.subnet_availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.current_associated_network_acl #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations #=> Array
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_detail.icmp_type_code.code #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_detail.icmp_type_code.type #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_detail.protocol #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_detail.port_range.from #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_detail.port_range.to #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_detail.cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_detail.ipv_6_cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_detail.rule_action #=> String, one of "allow", "deny"
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_detail.egress #=> Boolean
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_rule_number #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_entry.entry_type #=> String, one of "FMS_MANAGED_FIRST_ENTRY", "FMS_MANAGED_LAST_ENTRY", "CUSTOM_ENTRY"
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].expected_evaluation_order #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].actual_evaluation_order #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_detail.icmp_type_code.code #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_detail.icmp_type_code.type #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_detail.protocol #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_detail.port_range.from #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_detail.port_range.to #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_detail.cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_detail.ipv_6_cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_detail.rule_action #=> String, one of "allow", "deny"
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_detail.egress #=> Boolean
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_rule_number #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_at_expected_evaluation_order.entry_type #=> String, one of "FMS_MANAGED_FIRST_ENTRY", "FMS_MANAGED_LAST_ENTRY", "CUSTOM_ENTRY"
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts #=> Array
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_detail.icmp_type_code.code #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_detail.icmp_type_code.type #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_detail.protocol #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_detail.port_range.from #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_detail.port_range.to #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_detail.cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_detail.ipv_6_cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_detail.rule_action #=> String, one of "allow", "deny"
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_detail.egress #=> Boolean
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_rule_number #=> Integer
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entries_with_conflicts[0].entry_type #=> String, one of "FMS_MANAGED_FIRST_ENTRY", "FMS_MANAGED_LAST_ENTRY", "CUSTOM_ENTRY"
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_violation_reasons #=> Array
+    #   resp.violation_detail.resource_violations[0].invalid_network_acl_entries_violation.entry_violations[0].entry_violation_reasons[0] #=> String, one of "MISSING_EXPECTED_ENTRY", "INCORRECT_ENTRY_ORDER", "ENTRY_CONFLICT"
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.description #=> String
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions #=> Array
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].description #=> String
@@ -1508,54 +1630,50 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.ec2_create_route_table_action.vpc_id.description #=> String
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.fms_policy_update_firewall_creation_config_action.description #=> String
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.fms_policy_update_firewall_creation_config_action.firewall_creation_config #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_action.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_action.vpc.resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_action.vpc.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_action.fms_can_remediate #=> Boolean
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.replace_network_acl_association_action.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.replace_network_acl_association_action.association_id.resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.replace_network_acl_association_action.association_id.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.replace_network_acl_association_action.network_acl_id.resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.replace_network_acl_association_action.network_acl_id.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.replace_network_acl_association_action.fms_can_remediate #=> Boolean
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_id.resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_id.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created #=> Array
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_detail.icmp_type_code.code #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_detail.icmp_type_code.type #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_detail.protocol #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_detail.port_range.from #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_detail.port_range.to #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_detail.cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_detail.ipv_6_cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_detail.rule_action #=> String, one of "allow", "deny"
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_detail.egress #=> Boolean
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_rule_number #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.network_acl_entries_to_be_created[0].entry_type #=> String, one of "FMS_MANAGED_FIRST_ENTRY", "FMS_MANAGED_LAST_ENTRY", "CUSTOM_ENTRY"
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.create_network_acl_entries_action.fms_can_remediate #=> Boolean
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_id.resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_id.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted #=> Array
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_detail.icmp_type_code.code #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_detail.icmp_type_code.type #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_detail.protocol #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_detail.port_range.from #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_detail.port_range.to #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_detail.cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_detail.ipv_6_cidr_block #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_detail.rule_action #=> String, one of "allow", "deny"
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_detail.egress #=> Boolean
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_rule_number #=> Integer
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.network_acl_entries_to_be_deleted[0].entry_type #=> String, one of "FMS_MANAGED_FIRST_ENTRY", "FMS_MANAGED_LAST_ENTRY", "CUSTOM_ENTRY"
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.fms_can_remediate #=> Boolean
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].order #=> Integer
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].is_default_action #=> Boolean
-    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.firewall_subnet_id #=> String
-    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.vpc_id #=> String
-    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.subnet_availability_zone #=> String
-    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.subnet_availability_zone_id #=> String
-    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.vpc_endpoint_id #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_id #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.vpc_id #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.route_table_id #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes #=> Array
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].destination #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].target #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_availability_zone #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_availability_zone_id #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.current_firewall_subnet_route_table #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_id #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes #=> Array
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].destination #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].target #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_id #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.current_internet_gateway_route_table #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes #=> Array
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].destination #=> String
-    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].target #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.violation_target #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.vpc #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.availability_zone #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_firewall_violation.target_violation_reason #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.violation_target #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.vpc #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.availability_zone #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_subnet_violation.target_violation_reason #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.violation_target #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.vpc #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.availability_zone #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.current_route_table #=> String
-    #   resp.violation_detail.resource_violations[0].third_party_firewall_missing_expected_route_table_violation.expected_route_table #=> String
-    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.firewall_subnet_id #=> String
-    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.vpc_id #=> String
-    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.subnet_availability_zone #=> String
-    #   resp.violation_detail.resource_violations[0].firewall_subnet_missing_vpc_endpoint_violation.subnet_availability_zone_id #=> String
     #   resp.violation_detail.resource_tags #=> Array
     #   resp.violation_detail.resource_tags[0].key #=> String
     #   resp.violation_detail.resource_tags[0].value #=> String
@@ -1937,7 +2055,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL", "NETWORK_ACL_COMMON"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.policy_list[0].delete_unused_fm_managed_resources #=> Boolean
     #   resp.policy_list[0].policy_status #=> String, one of "ACTIVE", "OUT_OF_ADMIN_SCOPE"
@@ -2249,7 +2367,7 @@ module Aws::FMS
     #         all_regions_enabled: false,
     #       },
     #       policy_type_scope: {
-    #         policy_types: ["WAF"], # accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
+    #         policy_types: ["WAF"], # accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL, NETWORK_ACL_COMMON
     #         all_policy_types_enabled: false,
     #       },
     #     },
@@ -2393,6 +2511,9 @@ module Aws::FMS
     #
     # Firewall Manager provides the following types of policies:
     #
+    # * **WAF policy** - This policy applies WAF web ACL protections to
+    #   specified accounts and resources.
+    #
     # * **Shield Advanced policy** - This policy applies Shield Advanced
     #   protection to specified accounts and resources.
     #
@@ -2400,6 +2521,11 @@ module Aws::FMS
     #   over security groups that are in use throughout your organization in
     #   Organizations and lets you enforce a baseline set of rules across
     #   your organization.
+    #
+    # * **Network ACL policy** - This type of policy gives you control over
+    #   the network ACLs that are in use throughout your organization in
+    #   Organizations and lets you enforce a baseline set of first and last
+    #   network ACL rules across your organization.
     #
     # * **Network Firewall policy** - This policy applies Network Firewall
     #   protection to your organization's VPCs.
@@ -2447,7 +2573,7 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL, NETWORK_ACL_COMMON
     #         managed_service_data: "ManagedServiceData",
     #         policy_option: {
     #           network_firewall_policy: {
@@ -2455,6 +2581,46 @@ module Aws::FMS
     #           },
     #           third_party_firewall_policy: {
     #             firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED, DISTRIBUTED
+    #           },
+    #           network_acl_common_policy: {
+    #             network_acl_entry_set: { # required
+    #               first_entries: [
+    #                 {
+    #                   icmp_type_code: {
+    #                     code: 1,
+    #                     type: 1,
+    #                   },
+    #                   protocol: "LengthBoundedString", # required
+    #                   port_range: {
+    #                     from: 1,
+    #                     to: 1,
+    #                   },
+    #                   cidr_block: "LengthBoundedNonEmptyString",
+    #                   ipv_6_cidr_block: "LengthBoundedNonEmptyString",
+    #                   rule_action: "allow", # required, accepts allow, deny
+    #                   egress: false, # required
+    #                 },
+    #               ],
+    #               force_remediate_for_first_entries: false, # required
+    #               last_entries: [
+    #                 {
+    #                   icmp_type_code: {
+    #                     code: 1,
+    #                     type: 1,
+    #                   },
+    #                   protocol: "LengthBoundedString", # required
+    #                   port_range: {
+    #                     from: 1,
+    #                     to: 1,
+    #                   },
+    #                   cidr_block: "LengthBoundedNonEmptyString",
+    #                   ipv_6_cidr_block: "LengthBoundedNonEmptyString",
+    #                   rule_action: "allow", # required, accepts allow, deny
+    #                   egress: false, # required
+    #                 },
+    #               ],
+    #               force_remediate_for_last_entries: false, # required
+    #             },
     #           },
     #         },
     #       },
@@ -2492,10 +2658,32 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL", "NETWORK_ACL_COMMON"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.security_service_policy_data.policy_option.network_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
     #   resp.policy.security_service_policy_data.policy_option.third_party_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries #=> Array
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].icmp_type_code.code #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].icmp_type_code.type #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].protocol #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].port_range.from #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].port_range.to #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].cidr_block #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].ipv_6_cidr_block #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].rule_action #=> String, one of "allow", "deny"
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries[0].egress #=> Boolean
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.force_remediate_for_first_entries #=> Boolean
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries #=> Array
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].icmp_type_code.code #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].icmp_type_code.type #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].protocol #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].port_range.from #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].port_range.to #=> Integer
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].cidr_block #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].ipv_6_cidr_block #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].rule_action #=> String, one of "allow", "deny"
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries[0].egress #=> Boolean
+    #   resp.policy.security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.force_remediate_for_last_entries #=> Boolean
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
     #   resp.policy.resource_type_list[0] #=> String
@@ -2720,7 +2908,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

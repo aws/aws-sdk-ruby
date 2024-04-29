@@ -86,9 +86,11 @@ module Aws::WorkSpacesWeb
     end
 
     class BrowserSettings
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor associated_portal_arns: ::Array[::String]
       attr_accessor browser_policy: ::String
       attr_accessor browser_settings_arn: ::String
+      attr_accessor customer_managed_key: ::String
       SENSITIVE: [:browser_policy]
     end
 
@@ -127,7 +129,7 @@ module Aws::WorkSpacesWeb
       attr_accessor domain: ::String
       attr_accessor name: ::String
       attr_accessor path: ::String
-      SENSITIVE: []
+      SENSITIVE: [:domain, :name, :path]
     end
 
     class CookieSynchronizationConfiguration
@@ -200,6 +202,8 @@ module Aws::WorkSpacesWeb
       attr_accessor client_token: ::String
       attr_accessor customer_managed_key: ::String
       attr_accessor display_name: ::String
+      attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
+      attr_accessor max_concurrent_sessions: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:display_name]
     end
@@ -492,8 +496,10 @@ module Aws::WorkSpacesWeb
     end
 
     class IpAccessSettings
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor associated_portal_arns: ::Array[::String]
       attr_accessor creation_date: ::Time
+      attr_accessor customer_managed_key: ::String
       attr_accessor description: ::String
       attr_accessor display_name: ::String
       attr_accessor ip_access_settings_arn: ::String
@@ -652,12 +658,16 @@ module Aws::WorkSpacesWeb
     end
 
     class Portal
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
       attr_accessor browser_settings_arn: ::String
       attr_accessor browser_type: ("Chrome")
       attr_accessor creation_date: ::Time
+      attr_accessor customer_managed_key: ::String
       attr_accessor display_name: ::String
+      attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
       attr_accessor ip_access_settings_arn: ::String
+      attr_accessor max_concurrent_sessions: ::Integer
       attr_accessor network_settings_arn: ::String
       attr_accessor portal_arn: ::String
       attr_accessor portal_endpoint: ::String
@@ -676,7 +686,9 @@ module Aws::WorkSpacesWeb
       attr_accessor browser_type: ("Chrome")
       attr_accessor creation_date: ::Time
       attr_accessor display_name: ::String
+      attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
       attr_accessor ip_access_settings_arn: ::String
+      attr_accessor max_concurrent_sessions: ::Integer
       attr_accessor network_settings_arn: ::String
       attr_accessor portal_arn: ::String
       attr_accessor portal_endpoint: ::String
@@ -811,6 +823,8 @@ module Aws::WorkSpacesWeb
     class UpdatePortalRequest
       attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
       attr_accessor display_name: ::String
+      attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
+      attr_accessor max_concurrent_sessions: ::Integer
       attr_accessor portal_arn: ::String
       SENSITIVE: [:display_name]
     end
@@ -878,9 +892,11 @@ module Aws::WorkSpacesWeb
     end
 
     class UserSettings
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor associated_portal_arns: ::Array[::String]
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
       attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor customer_managed_key: ::String
       attr_accessor disconnect_timeout_in_minutes: ::Integer
       attr_accessor download_allowed: ("Disabled" | "Enabled")
       attr_accessor idle_disconnect_timeout_in_minutes: ::Integer

@@ -5803,22 +5803,27 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Information about this specific recommendation, such as the timestamp
-    # for when Amazon Web Services made a specific recommendation.
+    # Information about a recommendation, such as the timestamp for when
+    # Amazon Web Services made a specific recommendation.
     #
     # @!attribute [rw] recommendation_id
-    #   The ID for this specific recommendation.
+    #   The ID for the recommendation.
     #   @return [String]
     #
     # @!attribute [rw] generation_timestamp
-    #   The timestamp for when Amazon Web Services made this recommendation.
+    #   The timestamp for when Amazon Web Services made the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_metadata
+    #   Additional metadata that might be applicable to the recommendation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationPurchaseRecommendationMetadata AWS API Documentation
     #
     class ReservationPurchaseRecommendationMetadata < Struct.new(
       :recommendation_id,
-      :generation_timestamp)
+      :generation_timestamp,
+      :additional_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6055,19 +6060,19 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Metadata for this recommendation set.
+    # Metadata for a recommendation set.
     #
     # @!attribute [rw] recommendation_id
-    #   The ID for this specific recommendation.
+    #   The ID for the recommendation.
     #   @return [String]
     #
     # @!attribute [rw] generation_timestamp
-    #   The timestamp for when Amazon Web Services made this recommendation.
+    #   The timestamp for when Amazon Web Services made the recommendation.
     #   @return [String]
     #
     # @!attribute [rw] lookback_period_in_days
     #   The number of days of previous usage that Amazon Web Services
-    #   considers when making this recommendation.
+    #   considers when making the recommendation.
     #   @return [String]
     #
     # @!attribute [rw] additional_metadata

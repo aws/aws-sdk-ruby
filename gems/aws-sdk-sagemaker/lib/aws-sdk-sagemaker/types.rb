@@ -10224,15 +10224,15 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A collection of default EBS storage settings that applies to private
-    # spaces created within a domain or user profile.
+    # A collection of default EBS storage settings that apply to spaces
+    # created within a domain or user profile.
     #
     # @!attribute [rw] default_ebs_volume_size_in_gb
-    #   The default size of the EBS storage volume for a private space.
+    #   The default size of the EBS storage volume for a space.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_ebs_volume_size_in_gb
-    #   The maximum size of the EBS storage volume for a private space.
+    #   The maximum size of the EBS storage volume for a space.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DefaultEbsStorageSettings AWS API Documentation
@@ -10263,21 +10263,44 @@ module Aws::SageMaker
     #   The KernelGateway app settings.
     #   @return [Types::KernelGatewayAppSettings]
     #
+    # @!attribute [rw] jupyter_lab_app_settings
+    #   The settings for the JupyterLab application.
+    #   @return [Types::JupyterLabAppSettings]
+    #
+    # @!attribute [rw] space_storage_settings
+    #   The default storage settings for a space.
+    #   @return [Types::DefaultSpaceStorageSettings]
+    #
+    # @!attribute [rw] custom_posix_user_config
+    #   Details about the POSIX identity that is used for file system
+    #   operations.
+    #   @return [Types::CustomPosixUserConfig]
+    #
+    # @!attribute [rw] custom_file_system_configs
+    #   The settings for assigning a custom file system to a domain.
+    #   Permitted users can access this file system in Amazon SageMaker
+    #   Studio.
+    #   @return [Array<Types::CustomFileSystemConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DefaultSpaceSettings AWS API Documentation
     #
     class DefaultSpaceSettings < Struct.new(
       :execution_role,
       :security_groups,
       :jupyter_server_app_settings,
-      :kernel_gateway_app_settings)
+      :kernel_gateway_app_settings,
+      :jupyter_lab_app_settings,
+      :space_storage_settings,
+      :custom_posix_user_config,
+      :custom_file_system_configs)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The default storage settings for a private space.
+    # The default storage settings for a space.
     #
     # @!attribute [rw] default_ebs_storage_settings
-    #   The default EBS storage settings for a private space.
+    #   The default EBS storage settings for a space.
     #   @return [Types::DefaultEbsStorageSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DefaultSpaceStorageSettings AWS API Documentation
@@ -17979,10 +18002,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A collection of EBS storage settings that applies to private spaces.
+    # A collection of EBS storage settings that apply to both private and
+    # shared spaces.
     #
     # @!attribute [rw] ebs_volume_size_in_gb
-    #   The size of an EBS storage volume for a private space.
+    #   The size of an EBS storage volume for a space.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EbsStorageSettings AWS API Documentation
@@ -33901,7 +33925,7 @@ module Aws::SageMaker
     # The collection of ownership settings for a space.
     #
     # @!attribute [rw] owner_user_profile_name
-    #   The user profile who is the owner of the private space.
+    #   The user profile who is the owner of the space.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OwnershipSettings AWS API Documentation
@@ -33915,7 +33939,7 @@ module Aws::SageMaker
     # Specifies summary information about the ownership settings.
     #
     # @!attribute [rw] owner_user_profile_name
-    #   The user profile who is the owner of the private space.
+    #   The user profile who is the owner of the space.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OwnershipSettingsSummary AWS API Documentation
@@ -39196,7 +39220,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] space_storage_settings
-    #   The storage settings for a private space.
+    #   The storage settings for a space.
     #   @return [Types::SpaceStorageSettings]
     #
     # @!attribute [rw] custom_file_systems
@@ -39226,7 +39250,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] space_storage_settings
-    #   The storage settings for a private space.
+    #   The storage settings for a space.
     #   @return [Types::SpaceStorageSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceSettingsSummary AWS API Documentation
@@ -39266,10 +39290,10 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The storage settings for a private space.
+    # The storage settings for a space.
     #
     # @!attribute [rw] ebs_storage_settings
-    #   A collection of EBS storage settings for a private space.
+    #   A collection of EBS storage settings for a space.
     #   @return [Types::EbsStorageSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceStorageSettings AWS API Documentation
@@ -44750,7 +44774,7 @@ module Aws::SageMaker
     #   @return [Types::JupyterLabAppSettings]
     #
     # @!attribute [rw] space_storage_settings
-    #   The storage settings for a private space.
+    #   The storage settings for a space.
     #   @return [Types::DefaultSpaceStorageSettings]
     #
     # @!attribute [rw] default_landing_uri

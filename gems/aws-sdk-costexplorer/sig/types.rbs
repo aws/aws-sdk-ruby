@@ -1031,6 +1031,7 @@ module Aws::CostExplorer
     class ReservationPurchaseRecommendationMetadata
       attr_accessor recommendation_id: ::String
       attr_accessor generation_timestamp: ::String
+      attr_accessor additional_metadata: ::String
       SENSITIVE: []
     end
 

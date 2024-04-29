@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2024-04-23)
+------------------
+
+* Feature - This release introduces zero-setup file upload support for the RetrieveAndGenerate API. This allows you to chat with your data without setting up a Knowledge Base.
+
 1.5.0 (2024-03-27)
 ------------------
 

@@ -267,7 +267,10 @@ module Aws::DataSync
     S3ObjectVersionId = Shapes::StringShape.new(name: 'S3ObjectVersionId')
     S3StorageClass = Shapes::StringShape.new(name: 'S3StorageClass')
     S3Subdirectory = Shapes::StringShape.new(name: 'S3Subdirectory')
+    ScheduleDisabledBy = Shapes::StringShape.new(name: 'ScheduleDisabledBy')
+    ScheduleDisabledReason = Shapes::StringShape.new(name: 'ScheduleDisabledReason')
     ScheduleExpressionCron = Shapes::StringShape.new(name: 'ScheduleExpressionCron')
+    ScheduleStatus = Shapes::StringShape.new(name: 'ScheduleStatus')
     SecretsManagerArn = Shapes::StringShape.new(name: 'SecretsManagerArn')
     ServerHostname = Shapes::StringShape.new(name: 'ServerHostname')
     SmbDomain = Shapes::StringShape.new(name: 'SmbDomain')
@@ -311,6 +314,7 @@ module Aws::DataSync
     TaskQueueing = Shapes::StringShape.new(name: 'TaskQueueing')
     TaskReportConfig = Shapes::StructureShape.new(name: 'TaskReportConfig')
     TaskSchedule = Shapes::StructureShape.new(name: 'TaskSchedule')
+    TaskScheduleDetails = Shapes::StructureShape.new(name: 'TaskScheduleDetails')
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     Throughput = Shapes::StructureShape.new(name: 'Throughput')
     Time = Shapes::TimestampShape.new(name: 'Time')
@@ -799,6 +803,7 @@ module Aws::DataSync
     DescribeTaskResponse.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
     DescribeTaskResponse.add_member(:manifest_config, Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
     DescribeTaskResponse.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
+    DescribeTaskResponse.add_member(:schedule_details, Shapes::ShapeRef.new(shape: TaskScheduleDetails, location_name: "ScheduleDetails"))
     DescribeTaskResponse.struct_class = Types::DescribeTaskResponse
 
     DestinationNetworkInterfaceArns.member = Shapes::ShapeRef.new(shape: NetworkInterfaceArn)
@@ -1229,7 +1234,13 @@ module Aws::DataSync
     TaskReportConfig.struct_class = Types::TaskReportConfig
 
     TaskSchedule.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpressionCron, required: true, location_name: "ScheduleExpression"))
+    TaskSchedule.add_member(:status, Shapes::ShapeRef.new(shape: ScheduleStatus, location_name: "Status"))
     TaskSchedule.struct_class = Types::TaskSchedule
+
+    TaskScheduleDetails.add_member(:status_update_time, Shapes::ShapeRef.new(shape: Time, location_name: "StatusUpdateTime"))
+    TaskScheduleDetails.add_member(:disabled_reason, Shapes::ShapeRef.new(shape: ScheduleDisabledReason, location_name: "DisabledReason"))
+    TaskScheduleDetails.add_member(:disabled_by, Shapes::ShapeRef.new(shape: ScheduleDisabledBy, location_name: "DisabledBy"))
+    TaskScheduleDetails.struct_class = Types::TaskScheduleDetails
 
     Throughput.add_member(:read, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "Read"))
     Throughput.add_member(:write, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "Write"))

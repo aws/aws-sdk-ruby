@@ -232,6 +232,10 @@ module Aws::WorkSpacesWeb
     # how the browser will behave once a user starts a streaming session for
     # the web portal.
     #
+    # @!attribute [rw] additional_encryption_context
+    #   The additional encryption context of the browser settings.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] associated_portal_arns
     #   A list of web portal ARNs that this browser settings is associated
     #   with.
@@ -246,12 +250,19 @@ module Aws::WorkSpacesWeb
     #   The ARN of the browser settings.
     #   @return [String]
     #
+    # @!attribute [rw] customer_managed_key
+    #   The customer managed key used to encrypt sensitive information in
+    #   the browser settings.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/BrowserSettings AWS API Documentation
     #
     class BrowserSettings < Struct.new(
+      :additional_encryption_context,
       :associated_portal_arns,
       :browser_policy,
-      :browser_settings_arn)
+      :browser_settings_arn,
+      :customer_managed_key)
       SENSITIVE = [:browser_policy]
       include Aws::Structure
     end
@@ -386,7 +397,7 @@ module Aws::WorkSpacesWeb
       :domain,
       :name,
       :path)
-      SENSITIVE = []
+      SENSITIVE = [:domain, :name, :path]
       include Aws::Structure
     end
 
@@ -430,7 +441,7 @@ module Aws::WorkSpacesWeb
     #   request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -478,7 +489,7 @@ module Aws::WorkSpacesWeb
     #   request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -547,6 +558,13 @@ module Aws::WorkSpacesWeb
     #     * `MetadataFile` OR `MetadataURL`
     #
     #     * `IDPSignout` (boolean) *optional*
+    #
+    #     * `IDPInit` (boolean) *optional*
+    #
+    #     * `RequestSigningAlgorithm` (string) *optional* - Only accepts
+    #       `rsa-sha256`
+    #
+    #     * `EncryptedResponses` (boolean) *optional*
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] identity_provider_name
@@ -598,7 +616,7 @@ module Aws::WorkSpacesWeb
     #   request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -660,7 +678,7 @@ module Aws::WorkSpacesWeb
     #   request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -724,12 +742,11 @@ module Aws::WorkSpacesWeb
     #   group access to your web portal is controlled through your identity
     #   provider.
     #
-    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
-    #   Identity Center (successor to AWS Single Sign-On). They provide
-    #   additional features, such as IdP-initiated authentication. Identity
-    #   sources (including external identity provider integration), plus
-    #   user and group access to your web portal, can be configured in the
-    #   IAM Identity Center.
+    #   `IAM Identity Center` web portals are authenticated through IAM
+    #   Identity Center (successor to Single Sign-On). Identity sources
+    #   (including external identity provider integration), plus user and
+    #   group access to your web portal, can be configured in the IAM
+    #   Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -741,7 +758,7 @@ module Aws::WorkSpacesWeb
     #   request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -756,6 +773,14 @@ module Aws::WorkSpacesWeb
     #   into the web portal.
     #   @return [String]
     #
+    # @!attribute [rw] instance_type
+    #   The type and resources of the underlying instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrent_sessions
+    #   The maximum number of concurrent sessions for the portal.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tags
     #   The tags to add to the web portal. A tag is a key-value pair.
     #   @return [Array<Types::Tag>]
@@ -768,6 +793,8 @@ module Aws::WorkSpacesWeb
       :client_token,
       :customer_managed_key,
       :display_name,
+      :instance_type,
+      :max_concurrent_sessions,
       :tags)
       SENSITIVE = [:display_name]
       include Aws::Structure
@@ -804,7 +831,7 @@ module Aws::WorkSpacesWeb
     #   request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -845,7 +872,7 @@ module Aws::WorkSpacesWeb
     #   request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -895,7 +922,7 @@ module Aws::WorkSpacesWeb
     #   request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1530,7 +1557,14 @@ module Aws::WorkSpacesWeb
     #
     #     * `MetadataFile` OR `MetadataURL`
     #
-    #     * `IDPSignout` *optional*
+    #     * `IDPSignout` (boolean) *optional*
+    #
+    #     * `IDPInit` (boolean) *optional*
+    #
+    #     * `RequestSigningAlgorithm` (string) *optional* - Only accepts
+    #       `rsa-sha256`
+    #
+    #     * `EncryptedResponses` (boolean) *optional*
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] identity_provider_name
@@ -1597,6 +1631,10 @@ module Aws::WorkSpacesWeb
     # The IP access settings resource that can be associated with a web
     # portal.
     #
+    # @!attribute [rw] additional_encryption_context
+    #   The additional encryption context of the IP access settings.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] associated_portal_arns
     #   A list of web portal ARNs that this IP access settings resource is
     #   associated with.
@@ -1605,6 +1643,11 @@ module Aws::WorkSpacesWeb
     # @!attribute [rw] creation_date
     #   The creation date timestamp of the IP access settings.
     #   @return [Time]
+    #
+    # @!attribute [rw] customer_managed_key
+    #   The customer managed key used to encrypt sensitive information in
+    #   the IP access settings.
+    #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the IP access settings.
@@ -1625,8 +1668,10 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/IpAccessSettings AWS API Documentation
     #
     class IpAccessSettings < Struct.new(
+      :additional_encryption_context,
       :associated_portal_arns,
       :creation_date,
+      :customer_managed_key,
       :description,
       :display_name,
       :ip_access_settings_arn,
@@ -2107,6 +2152,10 @@ module Aws::WorkSpacesWeb
 
     # The web portal.
     #
+    # @!attribute [rw] additional_encryption_context
+    #   The additional encryption context of the portal.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] authentication_type
     #   The type of authentication integration points used when signing into
     #   the web portal. Defaults to `Standard`.
@@ -2117,12 +2166,11 @@ module Aws::WorkSpacesWeb
     #   group access to your web portal is controlled through your identity
     #   provider.
     #
-    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
-    #   Identity Center (successor to AWS Single Sign-On). They provide
-    #   additional features, such as IdP-initiated authentication. Identity
-    #   sources (including external identity provider integration), plus
-    #   user and group access to your web portal, can be configured in the
-    #   IAM Identity Center.
+    #   `IAM Identity Center` web portals are authenticated through IAM
+    #   Identity Center (successor to Single Sign-On). Identity sources
+    #   (including external identity provider integration), plus user and
+    #   group access to your web portal, can be configured in the IAM
+    #   Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] browser_settings_arn
@@ -2138,13 +2186,26 @@ module Aws::WorkSpacesWeb
     #   The creation date of the web portal.
     #   @return [Time]
     #
+    # @!attribute [rw] customer_managed_key
+    #   The customer managed key used to encrypt sensitive information in
+    #   the portal.
+    #   @return [String]
+    #
     # @!attribute [rw] display_name
     #   The name of the web portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The type and resources of the underlying instance.
     #   @return [String]
     #
     # @!attribute [rw] ip_access_settings_arn
     #   The ARN of the IP access settings.
     #   @return [String]
+    #
+    # @!attribute [rw] max_concurrent_sessions
+    #   The maximum number of concurrent sessions for the portal.
+    #   @return [Integer]
     #
     # @!attribute [rw] network_settings_arn
     #   The ARN of the network settings that is associated with the web
@@ -2188,12 +2249,16 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/Portal AWS API Documentation
     #
     class Portal < Struct.new(
+      :additional_encryption_context,
       :authentication_type,
       :browser_settings_arn,
       :browser_type,
       :creation_date,
+      :customer_managed_key,
       :display_name,
+      :instance_type,
       :ip_access_settings_arn,
+      :max_concurrent_sessions,
       :network_settings_arn,
       :portal_arn,
       :portal_endpoint,
@@ -2219,12 +2284,11 @@ module Aws::WorkSpacesWeb
     #   group access to your web portal is controlled through your identity
     #   provider.
     #
-    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
-    #   Identity Center (successor to AWS Single Sign-On). They provide
-    #   additional features, such as IdP-initiated authentication. Identity
-    #   sources (including external identity provider integration), plus
-    #   user and group access to your web portal, can be configured in the
-    #   IAM Identity Center.
+    #   `IAM Identity Center` web portals are authenticated through IAM
+    #   Identity Center (successor to Single Sign-On). Identity sources
+    #   (including external identity provider integration), plus user and
+    #   group access to your web portal, can be configured in the IAM
+    #   Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] browser_settings_arn
@@ -2244,9 +2308,17 @@ module Aws::WorkSpacesWeb
     #   The name of the web portal.
     #   @return [String]
     #
+    # @!attribute [rw] instance_type
+    #   The type and resources of the underlying instance.
+    #   @return [String]
+    #
     # @!attribute [rw] ip_access_settings_arn
     #   The ARN of the IP access settings.
     #   @return [String]
+    #
+    # @!attribute [rw] max_concurrent_sessions
+    #   The maximum number of concurrent sessions for the portal.
+    #   @return [Integer]
     #
     # @!attribute [rw] network_settings_arn
     #   The ARN of the network settings that is associated with the web
@@ -2291,7 +2363,9 @@ module Aws::WorkSpacesWeb
       :browser_type,
       :creation_date,
       :display_name,
+      :instance_type,
       :ip_access_settings_arn,
+      :max_concurrent_sessions,
       :network_settings_arn,
       :portal_arn,
       :portal_endpoint,
@@ -2388,7 +2462,7 @@ module Aws::WorkSpacesWeb
     #   request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2539,7 +2613,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2575,7 +2649,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2648,6 +2722,13 @@ module Aws::WorkSpacesWeb
     #     * `MetadataFile` OR `MetadataURL`
     #
     #     * `IDPSignout` (boolean) *optional*
+    #
+    #     * `IDPInit` (boolean) *optional*
+    #
+    #     * `RequestSigningAlgorithm` (string) *optional* - Only accepts
+    #       `rsa-sha256`
+    #
+    #     * `EncryptedResponses` (boolean) *optional*
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] identity_provider_name
@@ -2690,7 +2771,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2744,7 +2825,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2803,18 +2884,25 @@ module Aws::WorkSpacesWeb
     #   group access to your web portal is controlled through your identity
     #   provider.
     #
-    #   `IAM_Identity_Center` web portals are authenticated through AWS IAM
-    #   Identity Center (successor to AWS Single Sign-On). They provide
-    #   additional features, such as IdP-initiated authentication. Identity
-    #   sources (including external identity provider integration), plus
-    #   user and group access to your web portal, can be configured in the
-    #   IAM Identity Center.
+    #   `IAM Identity Center` web portals are authenticated through IAM
+    #   Identity Center (successor to Single Sign-On). Identity sources
+    #   (including external identity provider integration), plus user and
+    #   group access to your web portal, can be configured in the IAM
+    #   Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] display_name
     #   The name of the web portal. This is not visible to users who log
     #   into the web portal.
     #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The type and resources of the underlying instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_concurrent_sessions
+    #   The maximum number of concurrent sessions for the portal.
+    #   @return [Integer]
     #
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
@@ -2825,6 +2913,8 @@ module Aws::WorkSpacesWeb
     class UpdatePortalRequest < Struct.new(
       :authentication_type,
       :display_name,
+      :instance_type,
+      :max_concurrent_sessions,
       :portal_arn)
       SENSITIVE = [:display_name]
       include Aws::Structure
@@ -2858,7 +2948,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2899,7 +2989,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2943,7 +3033,7 @@ module Aws::WorkSpacesWeb
     #   client token return the result from the original successful request.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3075,6 +3165,10 @@ module Aws::WorkSpacesWeb
     # Once associated with a web portal, user settings control how users can
     # transfer data between a streaming session and the their local devices.
     #
+    # @!attribute [rw] additional_encryption_context
+    #   The additional encryption context of the user settings.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] associated_portal_arns
     #   A list of web portal ARNs that this user settings is associated
     #   with.
@@ -3089,6 +3183,11 @@ module Aws::WorkSpacesWeb
     # @!attribute [rw] copy_allowed
     #   Specifies whether the user can copy text from the streaming session
     #   to the local device.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_managed_key
+    #   The customer managed key used to encrypt sensitive information in
+    #   the user settings.
     #   @return [String]
     #
     # @!attribute [rw] disconnect_timeout_in_minutes
@@ -3128,9 +3227,11 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UserSettings AWS API Documentation
     #
     class UserSettings < Struct.new(
+      :additional_encryption_context,
       :associated_portal_arns,
       :cookie_synchronization_configuration,
       :copy_allowed,
+      :customer_managed_key,
       :disconnect_timeout_in_minutes,
       :download_allowed,
       :idle_disconnect_timeout_in_minutes,

@@ -24,6 +24,9 @@ module Aws::BedrockRuntime
       attr_accessor content_type: ::String
       attr_accessor accept: ::String
       attr_accessor model_id: ::String
+      attr_accessor trace: ("ENABLED" | "DISABLED")
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
       SENSITIVE: [:body]
     end
 
@@ -38,6 +41,9 @@ module Aws::BedrockRuntime
       attr_accessor content_type: ::String
       attr_accessor accept: ::String
       attr_accessor model_id: ::String
+      attr_accessor trace: ("ENABLED" | "DISABLED")
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
       SENSITIVE: [:body]
     end
 

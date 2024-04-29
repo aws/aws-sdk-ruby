@@ -5,9 +5,10 @@ module Aws
     # NOTE: headers could be already populated if specified on input shape
     class ContentTypeHandler < Seahorse::Client::Handler
       def call(context)
-        body = context.http_request.body
-
-        if (payload = context.operation.input[:payload_member])
+        if eventstream?(context)
+          context.http_request.headers['Content-Type'] ||=
+            'application/vnd.amazon.eventstream'
+        elsif (payload = context.operation.input[:payload_member])
           case payload.shape
           when Seahorse::Model::Shapes::BlobShape
             context.http_request.headers['Content-Type'] ||=
@@ -18,7 +19,8 @@ module Aws
           else
             apply_default_content_type(context)
           end
-        elsif !body.respond_to?(:size) || non_empty_body?(body)
+        elsif (body = context.http_request.body) &&
+              (!body.respond_to?(:size) || non_empty_body?(body))
           apply_default_content_type(context)
         end
 
@@ -29,6 +31,13 @@ module Aws
 
       def non_empty_body?(body)
         body.respond_to?(:size) && body.size.positive?
+      end
+
+      def eventstream?(context)
+        context.operation.input.shape.members.each do |_, ref|
+          return ref if ref.eventstream
+        end
+        false
       end
 
       # content-type defaults as noted here:

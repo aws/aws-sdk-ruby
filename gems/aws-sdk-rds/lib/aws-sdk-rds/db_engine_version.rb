@@ -254,6 +254,13 @@ module Aws::RDS
       data[:custom_db_engine_version_manifest]
     end
 
+    # Indicates whether the DB engine version supports Aurora Limitless
+    # Database.
+    # @return [Boolean]
+    def supports_limitless_database
+      data[:supports_limitless_database]
+    end
+
     # Indicates whether the engine version supports rotating the server
     # certificate without rebooting the DB instance.
     # @return [Boolean]

@@ -315,6 +315,7 @@ module Aws
   autoload :RolesAnywhere, 'aws-sdk-rolesanywhere'
   autoload :Route53, 'aws-sdk-route53'
   autoload :Route53Domains, 'aws-sdk-route53domains'
+  autoload :Route53Profiles, 'aws-sdk-route53profiles'
   autoload :Route53RecoveryCluster, 'aws-sdk-route53recoverycluster'
   autoload :Route53RecoveryControlConfig, 'aws-sdk-route53recoverycontrolconfig'
   autoload :Route53RecoveryReadiness, 'aws-sdk-route53recoveryreadiness'

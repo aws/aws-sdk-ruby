@@ -130,6 +130,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_agent_action_group-instance_method
       def create_agent_action_group: (
                                        ?action_group_executor: {
+                                         custom_control: ("RETURN_CONTROL")?,
                                          lambda: ::String?
                                        },
                                        action_group_name: ::String,
@@ -145,6 +146,19 @@ module Aws
                                        },
                                        ?client_token: ::String,
                                        ?description: ::String,
+                                       ?function_schema: {
+                                         functions: Array[
+                                           {
+                                             description: ::String?,
+                                             name: ::String,
+                                             parameters: Hash[::String, {
+                                                 description: ::String?,
+                                                 required: bool?,
+                                                 type: ("string" | "number" | "integer" | "boolean" | "array")
+                                               }]?
+                                           },
+                                         ]?
+                                       },
                                        ?parent_action_group_signature: ("AMAZON.UserInput")
                                      ) -> _CreateAgentActionGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentActionGroupResponseSuccess
@@ -175,9 +189,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_data_source-instance_method
       def create_data_source: (
                                 ?client_token: ::String,
+                                ?data_deletion_policy: ("RETAIN" | "DELETE"),
                                 data_source_configuration: {
                                   s3_configuration: {
                                     bucket_arn: ::String,
+                                    bucket_owner_account_id: ::String?,
                                     inclusion_prefixes: Array[::String]?
                                   }?,
                                   type: ("S3")
@@ -318,7 +334,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceResponse]
         def data_source_id: () -> ::String
         def knowledge_base_id: () -> ::String
-        def status: () -> ("AVAILABLE" | "DELETING")
+        def status: () -> ("AVAILABLE" | "DELETING" | "DELETE_UNSUCCESSFUL")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_data_source-instance_method
       def delete_data_source: (
@@ -330,7 +346,7 @@ module Aws
       interface _DeleteKnowledgeBaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKnowledgeBaseResponse]
         def knowledge_base_id: () -> ::String
-        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED" | "DELETE_UNSUCCESSFUL")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_knowledge_base-instance_method
       def delete_knowledge_base: (
@@ -653,6 +669,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_agent_action_group-instance_method
       def update_agent_action_group: (
                                        ?action_group_executor: {
+                                         custom_control: ("RETURN_CONTROL")?,
                                          lambda: ::String?
                                        },
                                        action_group_id: ::String,
@@ -668,6 +685,19 @@ module Aws
                                          }?
                                        },
                                        ?description: ::String,
+                                       ?function_schema: {
+                                         functions: Array[
+                                           {
+                                             description: ::String?,
+                                             name: ::String,
+                                             parameters: Hash[::String, {
+                                                 description: ::String?,
+                                                 required: bool?,
+                                                 type: ("string" | "number" | "integer" | "boolean" | "array")
+                                               }]?
+                                           },
+                                         ]?
+                                       },
                                        ?parent_action_group_signature: ("AMAZON.UserInput")
                                      ) -> _UpdateAgentActionGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentActionGroupResponseSuccess
@@ -710,9 +740,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_data_source-instance_method
       def update_data_source: (
+                                ?data_deletion_policy: ("RETAIN" | "DELETE"),
                                 data_source_configuration: {
                                   s3_configuration: {
                                     bucket_arn: ::String,
+                                    bucket_owner_account_id: ::String?,
                                     inclusion_prefixes: Array[::String]?
                                   }?,
                                   type: ("S3")

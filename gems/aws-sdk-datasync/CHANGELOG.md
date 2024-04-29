@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2024-04-24)
+------------------
+
+* Feature - This change allows users to disable and enable the schedules associated with their tasks.
+
 1.73.0 (2024-02-07)
 ------------------
 

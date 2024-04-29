@@ -52,6 +52,6 @@ require_relative 'aws-sdk-cloudtraildata/customizations'
 # @!group service
 module Aws::CloudTrailData
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end

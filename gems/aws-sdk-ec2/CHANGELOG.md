@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.453.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.452.0 (2024-04-24)
+------------------
+
+* Feature - Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface
+
+1.451.0 (2024-04-23)
+------------------
+
+* Feature - This release introduces EC2 AMI Deregistration Protection, a new AMI property that can be enabled by customers to protect an AMI against an unintended deregistration. This release also enables the AMI owners to view the AMI 'LastLaunchedTime' in DescribeImages API.
+
 1.450.0 (2024-04-17)
 ------------------
 

@@ -48,6 +48,7 @@ module Aws::BedrockAgent
     BasePromptTemplate = Shapes::StringShape.new(name: 'BasePromptTemplate')
     BedrockEmbeddingModelArn = Shapes::StringShape.new(name: 'BedrockEmbeddingModelArn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BucketOwnerAccountId = Shapes::StringShape.new(name: 'BucketOwnerAccountId')
     ChunkingConfiguration = Shapes::StructureShape.new(name: 'ChunkingConfiguration')
     ChunkingStrategy = Shapes::StringShape.new(name: 'ChunkingStrategy')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -64,6 +65,8 @@ module Aws::BedrockAgent
     CreateKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseRequest')
     CreateKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseResponse')
     CreationMode = Shapes::StringShape.new(name: 'CreationMode')
+    CustomControlMethod = Shapes::StringShape.new(name: 'CustomControlMethod')
+    DataDeletionPolicy = Shapes::StringShape.new(name: 'DataDeletionPolicy')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DataSourceStatus = Shapes::StringShape.new(name: 'DataSourceStatus')
@@ -93,6 +96,10 @@ module Aws::BedrockAgent
     FixedSizeChunkingConfiguration = Shapes::StructureShape.new(name: 'FixedSizeChunkingConfiguration')
     FixedSizeChunkingConfigurationMaxTokensInteger = Shapes::IntegerShape.new(name: 'FixedSizeChunkingConfigurationMaxTokensInteger')
     FixedSizeChunkingConfigurationOverlapPercentageInteger = Shapes::IntegerShape.new(name: 'FixedSizeChunkingConfigurationOverlapPercentageInteger')
+    Function = Shapes::StructureShape.new(name: 'Function')
+    FunctionDescription = Shapes::StringShape.new(name: 'FunctionDescription')
+    FunctionSchema = Shapes::UnionShape.new(name: 'FunctionSchema')
+    Functions = Shapes::ListShape.new(name: 'Functions')
     GetAgentActionGroupRequest = Shapes::StructureShape.new(name: 'GetAgentActionGroupRequest')
     GetAgentActionGroupResponse = Shapes::StructureShape.new(name: 'GetAgentActionGroupResponse')
     GetAgentAliasRequest = Shapes::StructureShape.new(name: 'GetAgentAliasRequest')
@@ -167,6 +174,9 @@ module Aws::BedrockAgent
     OpenSearchServerlessConfiguration = Shapes::StructureShape.new(name: 'OpenSearchServerlessConfiguration')
     OpenSearchServerlessFieldMapping = Shapes::StructureShape.new(name: 'OpenSearchServerlessFieldMapping')
     OpenSearchServerlessIndexName = Shapes::StringShape.new(name: 'OpenSearchServerlessIndexName')
+    ParameterDescription = Shapes::StringShape.new(name: 'ParameterDescription')
+    ParameterDetail = Shapes::StructureShape.new(name: 'ParameterDetail')
+    ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
     Payload = Shapes::StringShape.new(name: 'Payload')
     PineconeConfiguration = Shapes::StructureShape.new(name: 'PineconeConfiguration')
     PineconeConnectionString = Shapes::StringShape.new(name: 'PineconeConnectionString')
@@ -220,6 +230,7 @@ module Aws::BedrockAgent
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TopK = Shapes::IntegerShape.new(name: 'TopK')
     TopP = Shapes::FloatShape.new(name: 'TopP')
+    Type = Shapes::StringShape.new(name: 'Type')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAgentActionGroupRequest = Shapes::StructureShape.new(name: 'UpdateAgentActionGroupRequest')
@@ -252,8 +263,10 @@ module Aws::BedrockAgent
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    ActionGroupExecutor.add_member(:custom_control, Shapes::ShapeRef.new(shape: CustomControlMethod, location_name: "customControl"))
     ActionGroupExecutor.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "lambda"))
     ActionGroupExecutor.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ActionGroupExecutor.add_member_subclass(:custom_control, Types::ActionGroupExecutor::CustomControl)
     ActionGroupExecutor.add_member_subclass(:lambda, Types::ActionGroupExecutor::Lambda)
     ActionGroupExecutor.add_member_subclass(:unknown, Types::ActionGroupExecutor::Unknown)
     ActionGroupExecutor.struct_class = Types::ActionGroupExecutor
@@ -297,6 +310,7 @@ module Aws::BedrockAgent
     AgentActionGroup.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     AgentActionGroup.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     AgentActionGroup.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AgentActionGroup.add_member(:function_schema, Shapes::ShapeRef.new(shape: FunctionSchema, location_name: "functionSchema"))
     AgentActionGroup.add_member(:parent_action_signature, Shapes::ShapeRef.new(shape: ActionGroupSignature, location_name: "parentActionSignature"))
     AgentActionGroup.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentActionGroup.struct_class = Types::AgentActionGroup
@@ -417,6 +431,7 @@ module Aws::BedrockAgent
     CreateAgentActionGroupRequest.add_member(:api_schema, Shapes::ShapeRef.new(shape: APISchema, location_name: "apiSchema"))
     CreateAgentActionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAgentActionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateAgentActionGroupRequest.add_member(:function_schema, Shapes::ShapeRef.new(shape: FunctionSchema, location_name: "functionSchema"))
     CreateAgentActionGroupRequest.add_member(:parent_action_group_signature, Shapes::ShapeRef.new(shape: ActionGroupSignature, location_name: "parentActionGroupSignature"))
     CreateAgentActionGroupRequest.struct_class = Types::CreateAgentActionGroupRequest
 
@@ -450,6 +465,7 @@ module Aws::BedrockAgent
     CreateAgentResponse.struct_class = Types::CreateAgentResponse
 
     CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSourceRequest.add_member(:data_deletion_policy, Shapes::ShapeRef.new(shape: DataDeletionPolicy, location_name: "dataDeletionPolicy"))
     CreateDataSourceRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
     CreateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateDataSourceRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
@@ -474,9 +490,11 @@ module Aws::BedrockAgent
     CreateKnowledgeBaseResponse.struct_class = Types::CreateKnowledgeBaseResponse
 
     DataSource.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    DataSource.add_member(:data_deletion_policy, Shapes::ShapeRef.new(shape: DataDeletionPolicy, location_name: "dataDeletionPolicy"))
     DataSource.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
     DataSource.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "dataSourceId"))
     DataSource.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DataSource.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     DataSource.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     DataSource.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     DataSource.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
@@ -562,6 +580,19 @@ module Aws::BedrockAgent
     FixedSizeChunkingConfiguration.add_member(:max_tokens, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfigurationMaxTokensInteger, required: true, location_name: "maxTokens"))
     FixedSizeChunkingConfiguration.add_member(:overlap_percentage, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfigurationOverlapPercentageInteger, required: true, location_name: "overlapPercentage"))
     FixedSizeChunkingConfiguration.struct_class = Types::FixedSizeChunkingConfiguration
+
+    Function.add_member(:description, Shapes::ShapeRef.new(shape: FunctionDescription, location_name: "description"))
+    Function.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    Function.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "parameters"))
+    Function.struct_class = Types::Function
+
+    FunctionSchema.add_member(:functions, Shapes::ShapeRef.new(shape: Functions, location_name: "functions"))
+    FunctionSchema.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FunctionSchema.add_member_subclass(:functions, Types::FunctionSchema::Functions)
+    FunctionSchema.add_member_subclass(:unknown, Types::FunctionSchema::Unknown)
+    FunctionSchema.struct_class = Types::FunctionSchema
+
+    Functions.member = Shapes::ShapeRef.new(shape: Function)
 
     GetAgentActionGroupRequest.add_member(:action_group_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "actionGroupId"))
     GetAgentActionGroupRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
@@ -792,6 +823,14 @@ module Aws::BedrockAgent
     OpenSearchServerlessFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
     OpenSearchServerlessFieldMapping.struct_class = Types::OpenSearchServerlessFieldMapping
 
+    ParameterDetail.add_member(:description, Shapes::ShapeRef.new(shape: ParameterDescription, location_name: "description"))
+    ParameterDetail.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required"))
+    ParameterDetail.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "type"))
+    ParameterDetail.struct_class = Types::ParameterDetail
+
+    ParameterMap.key = Shapes::ShapeRef.new(shape: Name)
+    ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterDetail)
+
     PineconeConfiguration.add_member(:connection_string, Shapes::ShapeRef.new(shape: PineconeConnectionString, required: true, location_name: "connectionString"))
     PineconeConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
     PineconeConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: PineconeFieldMapping, required: true, location_name: "fieldMapping"))
@@ -855,6 +894,7 @@ module Aws::BedrockAgent
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     S3DataSourceConfiguration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "bucketArn"))
+    S3DataSourceConfiguration.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: BucketOwnerAccountId, location_name: "bucketOwnerAccountId"))
     S3DataSourceConfiguration.add_member(:inclusion_prefixes, Shapes::ShapeRef.new(shape: S3Prefixes, location_name: "inclusionPrefixes"))
     S3DataSourceConfiguration.struct_class = Types::S3DataSourceConfiguration
 
@@ -916,6 +956,7 @@ module Aws::BedrockAgent
     UpdateAgentActionGroupRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
     UpdateAgentActionGroupRequest.add_member(:api_schema, Shapes::ShapeRef.new(shape: APISchema, location_name: "apiSchema"))
     UpdateAgentActionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAgentActionGroupRequest.add_member(:function_schema, Shapes::ShapeRef.new(shape: FunctionSchema, location_name: "functionSchema"))
     UpdateAgentActionGroupRequest.add_member(:parent_action_group_signature, Shapes::ShapeRef.new(shape: ActionGroupSignature, location_name: "parentActionGroupSignature"))
     UpdateAgentActionGroupRequest.struct_class = Types::UpdateAgentActionGroupRequest
 
@@ -956,6 +997,7 @@ module Aws::BedrockAgent
     UpdateAgentResponse.add_member(:agent, Shapes::ShapeRef.new(shape: Agent, required: true, location_name: "agent"))
     UpdateAgentResponse.struct_class = Types::UpdateAgentResponse
 
+    UpdateDataSourceRequest.add_member(:data_deletion_policy, Shapes::ShapeRef.new(shape: DataDeletionPolicy, location_name: "dataDeletionPolicy"))
     UpdateDataSourceRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
     UpdateDataSourceRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))

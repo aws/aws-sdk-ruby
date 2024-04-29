@@ -25,7 +25,13 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Contains information about the action group being invoked.
+    # Contains information about the action group being invoked. For more
+    # information about the possible structures, see the InvocationInput tab
+    # in [OrchestrationTrace][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/trace-orchestration.html
     #
     # @!attribute [rw] action_group_name
     #   The name of the action group.
@@ -33,6 +39,10 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] api_path
     #   The path to the API to call, based off the action group.
+    #   @return [String]
+    #
+    # @!attribute [rw] function
+    #   The function in the action group to call.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -52,10 +62,11 @@ module Aws::BedrockAgentRuntime
     class ActionGroupInvocationInput < Struct.new(
       :action_group_name,
       :api_path,
+      :function,
       :parameters,
       :request_body,
       :verb)
-      SENSITIVE = [:action_group_name, :api_path, :verb]
+      SENSITIVE = [:action_group_name, :api_path, :function, :verb]
       include Aws::Structure
     end
 
@@ -72,6 +83,170 @@ module Aws::BedrockAgentRuntime
     class ActionGroupInvocationOutput < Struct.new(
       :text)
       SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # Contains information about the API operation that the agent predicts
+    # should be called.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * In the `returnControl` field of the [Retrieve response][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    #
+    # @!attribute [rw] action_group
+    #   The action group that the API operation belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_path
+    #   The path to the API operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_method
+    #   The HTTP method of the API operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters to provide for the API request, as the agent elicited
+    #   from the user.
+    #   @return [Array<Types::ApiParameter>]
+    #
+    # @!attribute [rw] request_body
+    #   The request body to provide for the API request, as the agent
+    #   elicited from the user.
+    #   @return [Types::ApiRequestBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ApiInvocationInput AWS API Documentation
+    #
+    class ApiInvocationInput < Struct.new(
+      :action_group,
+      :api_path,
+      :http_method,
+      :parameters,
+      :request_body)
+      SENSITIVE = [:api_path]
+      include Aws::Structure
+    end
+
+    # Information about a parameter to provide to the API request.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve response][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type for the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ApiParameter AWS API Documentation
+    #
+    class ApiParameter < Struct.new(
+      :name,
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request body to provide for the API request, as the agent elicited
+    # from the user.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve response][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    #
+    # @!attribute [rw] content
+    #   The content of the request body. The key of the object in this field
+    #   is a media type defining the format of the request body.
+    #   @return [Hash<String,Types::PropertyParameters>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ApiRequestBody AWS API Documentation
+    #
+    class ApiRequestBody < Struct.new(
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the API operation that was called from the
+    # action group and the response body that was returned.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * In the `returnControlInvocationResults` of the [Retrieve request][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    #
+    # @!attribute [rw] action_group
+    #   The action group that the API operation belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_path
+    #   The path to the API operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_method
+    #   The HTTP method for the API operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_status_code
+    #   http status code from API execution response (for example: 200, 400,
+    #   500).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] response_body
+    #   The response body from the API operation. The key of the object is
+    #   the content type. The response may be returned directly or from the
+    #   Lambda function.
+    #   @return [Hash<String,Types::ContentBody>]
+    #
+    # @!attribute [rw] response_state
+    #   Controls the final response state returned to end user when
+    #   API/Function execution failed. When this state is FAILURE, the
+    #   request would fail with dependency failure exception. When this
+    #   state is REPROMPT, the API/function response will be sent to model
+    #   for re-prompt
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ApiResult AWS API Documentation
+    #
+    class ApiResult < Struct.new(
+      :action_group,
+      :api_path,
+      :http_method,
+      :http_status_code,
+      :response_body,
+      :response_state)
+      SENSITIVE = [:api_path]
       include Aws::Structure
     end
 
@@ -108,6 +283,31 @@ module Aws::BedrockAgentRuntime
       :resource_name,
       :event_type)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This property contains the document to chat with, along with its
+    # attributes.
+    #
+    # @!attribute [rw] content_type
+    #   The MIME type of the document contained in the wrapper object.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The byte value of the file to upload, encoded as a Base-64 string.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The file name of the document contained in the wrapper object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ByteContentDoc AWS API Documentation
+    #
+    class ByteContentDoc < Struct.new(
+      :content_type,
+      :data,
+      :identifier)
+      SENSITIVE = [:data, :identifier]
       include Aws::Structure
     end
 
@@ -159,6 +359,31 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Contains the body of the API response.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * In the `returnControlInvocationResults` field of the [Retrieve
+    #   request][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    #
+    # @!attribute [rw] body
+    #   The body of the API response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ContentBody AWS API Documentation
+    #
+    class ContentBody < Struct.new(
+      :body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There was an issue with a dependency. Check the resource
     # configurations and retry the request.
     #
@@ -176,6 +401,76 @@ module Aws::BedrockAgentRuntime
       :message,
       :resource_name,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The unique external source of the content contained in the wrapper
+    # object.
+    #
+    # @!attribute [rw] byte_content
+    #   The identifier, contentType, and data of the external source wrapper
+    #   object.
+    #   @return [Types::ByteContentDoc]
+    #
+    # @!attribute [rw] s3_location
+    #   The S3 location of the external source wrapper object.
+    #   @return [Types::S3ObjectDoc]
+    #
+    # @!attribute [rw] source_type
+    #   The source type of the external source wrapper object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ExternalSource AWS API Documentation
+    #
+    class ExternalSource < Struct.new(
+      :byte_content,
+      :s3_location,
+      :source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the generation configuration of the external source wrapper
+    # object.
+    #
+    # @!attribute [rw] prompt_template
+    #   Contain the textPromptTemplate string for the external source
+    #   wrapper object.
+    #   @return [Types::PromptTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ExternalSourcesGenerationConfiguration AWS API Documentation
+    #
+    class ExternalSourcesGenerationConfiguration < Struct.new(
+      :prompt_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configurations of the external source wrapper object in the
+    # retrieveAndGenerate function.
+    #
+    # @!attribute [rw] generation_configuration
+    #   The prompt used with the external source wrapper object with the
+    #   retrieveAndGenerate function.
+    #   @return [Types::ExternalSourcesGenerationConfiguration]
+    #
+    # @!attribute [rw] model_arn
+    #   The modelArn used with the external source wrapper object in the
+    #   retrieveAndGenerate function.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The document used with the external source wrapper object in the
+    #   retrieveAndGenerate function.
+    #   @return [Array<Types::ExternalSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ExternalSourcesRetrieveAndGenerateConfiguration AWS API Documentation
+    #
+    class ExternalSourcesRetrieveAndGenerateConfiguration < Struct.new(
+      :generation_configuration,
+      :model_arn,
+      :sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -242,6 +537,120 @@ module Aws::BedrockAgentRuntime
     class FinalResponse < Struct.new(
       :text)
       SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # Contains information about the function that the agent predicts should
+    # be called.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * In the `returnControl` field of the [Retrieve response][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    #
+    # @!attribute [rw] action_group
+    #   The action group that the function belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] function
+    #   The name of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   A list of parameters of the function.
+    #   @return [Array<Types::FunctionParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FunctionInvocationInput AWS API Documentation
+    #
+    class FunctionInvocationInput < Struct.new(
+      :action_group,
+      :function,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a parameter of the function.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * In the `returnControl` field of the [Retrieve response][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FunctionParameter AWS API Documentation
+    #
+    class FunctionParameter < Struct.new(
+      :name,
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the function that was called from the
+    # action group and the response that was returned.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * In the `returnControlInvocationResults` of the [Retrieve request][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    #
+    # @!attribute [rw] action_group
+    #   The action group that the function belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] function
+    #   The name of the function that was called.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_body
+    #   The response from the function call using the parameters. The
+    #   response may be returned directly or from the Lambda function.
+    #   @return [Hash<String,Types::ContentBody>]
+    #
+    # @!attribute [rw] response_state
+    #   Controls the final response state returned to end user when
+    #   API/Function execution failed. When this state is FAILURE, the
+    #   request would fail with dependency failure exception. When this
+    #   state is REPROMPT, the API/function response will be sent to model
+    #   for re-prompt
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FunctionResult AWS API Documentation
+    #
+    class FunctionResult < Struct.new(
+      :action_group,
+      :function,
+      :response_body,
+      :response_state)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -400,6 +809,83 @@ module Aws::BedrockAgentRuntime
       :trace_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains details about the API operation or function that the agent
+    # predicts should be called.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * In the `returnControl` field of the [Retrieve response][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    #
+    # @note InvocationInputMember is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InvocationInputMember corresponding to the set member.
+    #
+    # @!attribute [rw] api_invocation_input
+    #   Contains information about the API operation that the agent predicts
+    #   should be called.
+    #   @return [Types::ApiInvocationInput]
+    #
+    # @!attribute [rw] function_invocation_input
+    #   Contains information about the function that the agent predicts
+    #   should be called.
+    #   @return [Types::FunctionInvocationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvocationInputMember AWS API Documentation
+    #
+    class InvocationInputMember < Struct.new(
+      :api_invocation_input,
+      :function_invocation_input,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ApiInvocationInput < InvocationInputMember; end
+      class FunctionInvocationInput < InvocationInputMember; end
+      class Unknown < InvocationInputMember; end
+    end
+
+    # A result from the action group invocation.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve request][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    #
+    # @note InvocationResultMember is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] api_result
+    #   The result from the API response from the action group invocation.
+    #   @return [Types::ApiResult]
+    #
+    # @!attribute [rw] function_result
+    #   The result from the function from the action group invocation.
+    #   @return [Types::FunctionResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvocationResultMember AWS API Documentation
+    #
+    class InvocationResultMember < Struct.new(
+      :api_result,
+      :function_result,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ApiResult < InvocationResultMember; end
+      class FunctionResult < InvocationResultMember; end
+      class Unknown < InvocationResultMember; end
     end
 
     # @!attribute [rw] agent_alias_id
@@ -901,7 +1387,7 @@ module Aws::BedrockAgentRuntime
       class Unknown < OrchestrationTrace; end
     end
 
-    # A parameter in the Lambda input event.
+    # A parameter for the API request or function.
     #
     # @!attribute [rw] name
     #   The name of the parameter.
@@ -1145,6 +1631,20 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Contains the parameters in the request body.
+    #
+    # @!attribute [rw] properties
+    #   A list of parameters in the request body.
+    #   @return [Array<Types::Parameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/PropertyParameters AWS API Documentation
+    #
+    class PropertyParameters < Struct.new(
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the reasoning, based on the input, that the agent uses to
     # justify carrying out an action group or getting information from a
     # knowledge base.
@@ -1185,7 +1685,7 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # The parameters in the request body for the Lambda input event.
+    # The parameters in the API request body.
     #
     # @!attribute [rw] content
     #   The content in the request body.
@@ -1199,8 +1699,8 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # The specified resource ARN was not found. Check the ARN and try your
-    # request again.
+    # The specified resource Amazon Resource Name (ARN) was not found. Check
+    # the Amazon Resource Name (ARN) and try your request again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1429,6 +1929,11 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
     #
+    # @!attribute [rw] external_sources_configuration
+    #   The configuration used with the external source wrapper object in
+    #   the retrieveAndGenerate function.
+    #   @return [Types::ExternalSourcesRetrieveAndGenerateConfiguration]
+    #
     # @!attribute [rw] knowledge_base_configuration
     #   Contains details about the resource being queried.
     #   @return [Types::KnowledgeBaseRetrieveAndGenerateConfiguration]
@@ -1440,6 +1945,7 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerateConfiguration AWS API Documentation
     #
     class RetrieveAndGenerateConfiguration < Struct.new(
+      :external_sources_configuration,
       :knowledge_base_configuration,
       :type)
       SENSITIVE = []
@@ -1671,6 +2177,53 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Contains information to return from the action group that the agent
+    # has predicted to invoke.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve response][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    #
+    # @!attribute [rw] invocation_id
+    #   The identifier of the action group invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_inputs
+    #   A list of objects that contain information about the parameters and
+    #   inputs that need to be sent into the API operation or function,
+    #   based on what the agent determines from its session with the user.
+    #   @return [Array<Types::InvocationInputMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ReturnControlPayload AWS API Documentation
+    #
+    class ReturnControlPayload < Struct.new(
+      :invocation_id,
+      :invocation_inputs,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The unique wrapper object of the document from the S3 location.
+    #
+    # @!attribute [rw] uri
+    #   The file location of the S3 wrapper object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/S3ObjectDoc AWS API Documentation
+    #
+    class S3ObjectDoc < Struct.new(
+      :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The number of requests exceeds the service quota. Resubmit your
     # request later.
     #
@@ -1700,6 +2253,10 @@ module Aws::BedrockAgentRuntime
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
     # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #
+    # @!attribute [rw] invocation_id
+    #   The identifier of the invocation.
+    #   @return [String]
+    #
     # @!attribute [rw] prompt_session_attributes
     #   Contains attributes that persist across a prompt and the values of
     #   those attributes. These attributes replace the
@@ -1712,6 +2269,11 @@ module Aws::BedrockAgentRuntime
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] return_control_invocation_results
+    #   Contains information about the results from the action group
+    #   invocation.
+    #   @return [Array<Types::InvocationResultMember>]
+    #
     # @!attribute [rw] session_attributes
     #   Contains attributes that persist across a session and the values of
     #   those attributes.
@@ -1720,7 +2282,9 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/SessionState AWS API Documentation
     #
     class SessionState < Struct.new(
+      :invocation_id,
       :prompt_session_attributes,
+      :return_control_invocation_results,
       :session_attributes)
       SENSITIVE = []
       include Aws::Structure
@@ -1871,6 +2435,10 @@ module Aws::BedrockAgentRuntime
     #   The unique identifier of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] agent_version
+    #   The version of the agent.
+    #   @return [String]
+    #
     # @!attribute [rw] session_id
     #   The unique identifier of the session with the agent.
     #   @return [String]
@@ -1892,6 +2460,7 @@ module Aws::BedrockAgentRuntime
     class TracePart < Struct.new(
       :agent_alias_id,
       :agent_id,
+      :agent_version,
       :session_id,
       :trace,
       :event_type)
@@ -1933,6 +2502,7 @@ module Aws::BedrockAgentRuntime
           :dependency_failed_exception,
           :internal_server_exception,
           :resource_not_found_exception,
+          :return_control,
           :service_quota_exceeded_exception,
           :throttling_exception,
           :trace,

@@ -91,6 +91,55 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
+    # @!attribute [rw] input_source
+    #   The input source for the batch delete unique ID operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] unique_ids
+    #   The unique IDs to delete.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] workflow_name
+    #   The name of the workflow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/BatchDeleteUniqueIdInput AWS API Documentation
+    #
+    class BatchDeleteUniqueIdInput < Struct.new(
+      :input_source,
+      :unique_ids,
+      :workflow_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deleted
+    #   The unique IDs that were deleted.
+    #   @return [Array<Types::DeletedUniqueId>]
+    #
+    # @!attribute [rw] disconnected_unique_ids
+    #   The unique IDs that were disconnected.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   The errors from deleting multiple unique IDs.
+    #   @return [Array<Types::DeleteUniqueIdError>]
+    #
+    # @!attribute [rw] status
+    #   The status of the batch delete unique ID operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/BatchDeleteUniqueIdOutput AWS API Documentation
+    #
+    class BatchDeleteUniqueIdOutput < Struct.new(
+      :deleted,
+      :disconnected_unique_ids,
+      :errors,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request could not be processed because of conflict in the current
     # state of the resource. Example: Workflow already exists, Schema
     # already exists, Workflow is currently running, etc. `HTTP Status Code:
@@ -629,6 +678,39 @@ module Aws::EntityResolution
     #
     class DeleteSchemaMappingOutput < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Delete Unique Id error.
+    #
+    # @!attribute [rw] error_type
+    #   The error type for the batch delete unique ID operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] unique_id
+    #   The unique ID that could not be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/DeleteUniqueIdError AWS API Documentation
+    #
+    class DeleteUniqueIdError < Struct.new(
+      :error_type,
+      :unique_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The deleted unique ID.
+    #
+    # @!attribute [rw] unique_id
+    #   The unique ID of the deleted item.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/DeletedUniqueId AWS API Documentation
+    #
+    class DeletedUniqueId < Struct.new(
+      :unique_id)
       SENSITIVE = []
       include Aws::Structure
     end

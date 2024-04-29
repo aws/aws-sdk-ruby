@@ -953,8 +953,11 @@ module Aws::PI
     #
     # @!attribute [rw] metric_queries
     #   An array of one or more queries to perform. Each query must specify
-    #   a Performance Insights metric, and can optionally specify
-    #   aggregation and filtering criteria.
+    #   a Performance Insights metric and specify an aggregate function, and
+    #   you can provide filtering criteria. You must append the aggregate
+    #   function to the metric. For example, to find the average for the
+    #   metric `db.load` you must use `db.load.avg`. Valid values for
+    #   aggregate functions include `.avg`, `.min`, `.max`, and `.sum`.
     #   @return [Array<Types::MetricQuery>]
     #
     # @!attribute [rw] start_time
@@ -1456,11 +1459,15 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # A single query to be processed. You must provide the metric to query.
-    # If no other parameters are specified, Performance Insights returns all
-    # data points for the specified metric. Optionally, you can request that
-    # the data points be aggregated by dimension group (`GroupBy`), and
-    # return only those data points that match your criteria (`Filter`).
+    # A single query to be processed. You must provide the metric to query
+    # and append an aggregate function to the metric. For example, to find
+    # the average for the metric `db.load` you must use `db.load.avg`. Valid
+    # values for aggregate functions include `.avg`, `.min`, `.max`, and
+    # `.sum`. If no other parameters are specified, Performance Insights
+    # returns all data points for the specified metric. Optionally, you can
+    # request that the data points be aggregated by dimension group
+    # (`GroupBy`), and return only those data points that match your
+    # criteria (`Filter`).
     #
     # @!attribute [rw] metric
     #   The name of a Performance Insights metric to be measured.
@@ -1476,6 +1483,9 @@ module Aws::PI
     #   * The counter metrics listed in [Performance Insights operating
     #     system counters][1] in the *Amazon Aurora User Guide*.
     #
+    #   * The counter metrics listed in [Performance Insights operating
+    #     system counters][2] in the *Amazon RDS User Guide*.
+    #
     #   If the number of active sessions is less than an internal
     #   Performance Insights threshold, `db.load.avg` and
     #   `db.sampledload.avg` are the same value. If the number of active
@@ -1488,6 +1498,7 @@ module Aws::PI
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS
     #   @return [String]
     #
     # @!attribute [rw] group_by
@@ -1640,6 +1651,9 @@ module Aws::PI
     #   * The counter metrics listed in [Performance Insights operating
     #     system counters][1] in the *Amazon Aurora User Guide*.
     #
+    #   * The counter metrics listed in [Performance Insights operating
+    #     system counters][2] in the *Amazon RDS User Guide*.
+    #
     #   If the number of active sessions is less than an internal
     #   Performance Insights threshold, `db.load.avg` and
     #   `db.sampledload.avg` are the same value. If the number of active
@@ -1652,6 +1666,7 @@ module Aws::PI
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS
     #   @return [String]
     #
     # @!attribute [rw] dimensions

@@ -92,13 +92,13 @@ module Aws::OAM
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def amzn_error_type
+        @data[:amzn_error_type]
       end
 
       # @return [String]
-      def amzn_error_type
-        @data[:amzn_error_type]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -112,13 +112,13 @@ module Aws::OAM
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def amzn_error_type
+        @data[:amzn_error_type]
       end
 
       # @return [String]
-      def amzn_error_type
-        @data[:amzn_error_type]
+      def message
+        @message || @data[:message]
       end
     end
 

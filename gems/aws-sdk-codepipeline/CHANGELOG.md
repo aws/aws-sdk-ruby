@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2024-04-26)
+------------------
+
+* Feature - Add ability to manually and automatically roll back a pipeline stage to a previously successful execution.
+
+1.70.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.69.0 (2024-02-08)
 ------------------
 

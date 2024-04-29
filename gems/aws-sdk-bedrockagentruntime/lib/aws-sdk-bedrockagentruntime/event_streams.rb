@@ -43,6 +43,10 @@ module Aws::BedrockAgentRuntime
         @event_emitter.on(:resource_not_found_exception, block) if block_given?
       end
 
+      def on_return_control_event(&block)
+        @event_emitter.on(:return_control, block) if block_given?
+      end
+
       def on_service_quota_exceeded_exception_event(&block)
         @event_emitter.on(:service_quota_exceeded_exception, block) if block_given?
       end
@@ -79,6 +83,7 @@ module Aws::BedrockAgentRuntime
         on_dependency_failed_exception_event(&block)
         on_internal_server_exception_event(&block)
         on_resource_not_found_exception_event(&block)
+        on_return_control_event(&block)
         on_service_quota_exceeded_exception_event(&block)
         on_throttling_exception_event(&block)
         on_trace_event(&block)
