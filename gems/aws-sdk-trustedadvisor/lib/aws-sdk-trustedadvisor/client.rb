@@ -412,6 +412,43 @@ module Aws::TrustedAdvisor
 
     # @!group API Operations
 
+    # Update one or more exclusion status for a list of recommendation
+    # resources
+    #
+    # @option params [required, Array<Types::RecommendationResourceExclusion>] :recommendation_resource_exclusions
+    #   A list of recommendation resource ARNs and exclusion status to update
+    #
+    # @return [Types::BatchUpdateRecommendationResourceExclusionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateRecommendationResourceExclusionResponse#batch_update_recommendation_resource_exclusion_errors #batch_update_recommendation_resource_exclusion_errors} => Array&lt;Types::UpdateRecommendationResourceExclusionError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_recommendation_resource_exclusion({
+    #     recommendation_resource_exclusions: [ # required
+    #       {
+    #         arn: "RecommendationResourceArn", # required
+    #         is_excluded: false, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_update_recommendation_resource_exclusion_errors #=> Array
+    #   resp.batch_update_recommendation_resource_exclusion_errors[0].arn #=> String
+    #   resp.batch_update_recommendation_resource_exclusion_errors[0].error_code #=> String
+    #   resp.batch_update_recommendation_resource_exclusion_errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/BatchUpdateRecommendationResourceExclusion AWS API Documentation
+    #
+    # @overload batch_update_recommendation_resource_exclusion(params = {})
+    # @param [Hash] params ({})
+    def batch_update_recommendation_resource_exclusion(params = {}, options = {})
+      req = build_request(:batch_update_recommendation_resource_exclusion, params)
+      req.send_request(options)
+    end
+
     # Get a specific recommendation within an AWS Organizations
     # organization. This API supports only prioritized recommendations.
     #
@@ -647,6 +684,9 @@ module Aws::TrustedAdvisor
     # @option params [String] :affected_account_id
     #   An account affected by this organization recommendation
     #
+    # @option params [String] :exclusion_status
+    #   The exclusion status of the resource
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
     #
@@ -675,6 +715,7 @@ module Aws::TrustedAdvisor
     #
     #   resp = client.list_organization_recommendation_resources({
     #     affected_account_id: "AccountId",
+    #     exclusion_status: "excluded", # accepts excluded, included
     #     max_results: 1,
     #     next_token: "ListOrganizationRecommendationResourcesRequestNextTokenString",
     #     organization_recommendation_identifier: "OrganizationRecommendationIdentifier", # required
@@ -689,6 +730,7 @@ module Aws::TrustedAdvisor
     #   resp.organization_recommendation_resource_summaries[0].account_id #=> String
     #   resp.organization_recommendation_resource_summaries[0].arn #=> String
     #   resp.organization_recommendation_resource_summaries[0].aws_resource_id #=> String
+    #   resp.organization_recommendation_resource_summaries[0].exclusion_status #=> String, one of "excluded", "included"
     #   resp.organization_recommendation_resource_summaries[0].id #=> String
     #   resp.organization_recommendation_resource_summaries[0].last_updated_at #=> Time
     #   resp.organization_recommendation_resource_summaries[0].metadata #=> Hash
@@ -798,6 +840,9 @@ module Aws::TrustedAdvisor
 
     # List Resources of a Recommendation
     #
+    # @option params [String] :exclusion_status
+    #   The exclusion status of the resource
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
     #
@@ -825,6 +870,7 @@ module Aws::TrustedAdvisor
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_recommendation_resources({
+    #     exclusion_status: "excluded", # accepts excluded, included
     #     max_results: 1,
     #     next_token: "ListRecommendationResourcesRequestNextTokenString",
     #     recommendation_identifier: "AccountRecommendationIdentifier", # required
@@ -838,6 +884,7 @@ module Aws::TrustedAdvisor
     #   resp.recommendation_resource_summaries #=> Array
     #   resp.recommendation_resource_summaries[0].arn #=> String
     #   resp.recommendation_resource_summaries[0].aws_resource_id #=> String
+    #   resp.recommendation_resource_summaries[0].exclusion_status #=> String, one of "excluded", "included"
     #   resp.recommendation_resource_summaries[0].id #=> String
     #   resp.recommendation_resource_summaries[0].last_updated_at #=> Time
     #   resp.recommendation_resource_summaries[0].metadata #=> Hash
@@ -944,7 +991,7 @@ module Aws::TrustedAdvisor
       req.send_request(options)
     end
 
-    # Update the lifecyle of a Recommendation within an Organization. This
+    # Update the lifecycle of a Recommendation within an Organization. This
     # API only supports prioritized recommendations.
     #
     # @option params [required, String] :lifecycle_stage
@@ -1029,7 +1076,7 @@ module Aws::TrustedAdvisor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-trustedadvisor'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

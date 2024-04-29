@@ -72,6 +72,21 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchUpdateRecommendationResourceExclusionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateRecommendationResourceExclusionResponse]
+        def batch_update_recommendation_resource_exclusion_errors: () -> ::Array[Types::UpdateRecommendationResourceExclusionError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#batch_update_recommendation_resource_exclusion-instance_method
+      def batch_update_recommendation_resource_exclusion: (
+                                                            recommendation_resource_exclusions: Array[
+                                                              {
+                                                                arn: ::String,
+                                                                is_excluded: bool
+                                                              },
+                                                            ]
+                                                          ) -> _BatchUpdateRecommendationResourceExclusionResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateRecommendationResourceExclusionResponseSuccess
+
       interface _GetOrganizationRecommendationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetOrganizationRecommendationResponse]
         def organization_recommendation: () -> Types::OrganizationRecommendation
@@ -130,6 +145,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#list_organization_recommendation_resources-instance_method
       def list_organization_recommendation_resources: (
                                                         ?affected_account_id: ::String,
+                                                        ?exclusion_status: ("excluded" | "included"),
                                                         ?max_results: ::Integer,
                                                         ?next_token: ::String,
                                                         organization_recommendation_identifier: ::String,
@@ -165,6 +181,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#list_recommendation_resources-instance_method
       def list_recommendation_resources: (
+                                           ?exclusion_status: ("excluded" | "included"),
                                            ?max_results: ::Integer,
                                            ?next_token: ::String,
                                            recommendation_identifier: ::String,

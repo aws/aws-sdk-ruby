@@ -261,6 +261,36 @@ module Aws
                          ) -> _DeleteDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
 
+      interface _DeleteFieldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFieldResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_field-instance_method
+      def delete_field: (
+                          domain_id: ::String,
+                          field_id: ::String
+                        ) -> _DeleteFieldResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFieldResponseSuccess
+
+      interface _DeleteLayoutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLayoutResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_layout-instance_method
+      def delete_layout: (
+                           domain_id: ::String,
+                           layout_id: ::String
+                         ) -> _DeleteLayoutResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLayoutResponseSuccess
+
+      interface _DeleteTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_template-instance_method
+      def delete_template: (
+                             domain_id: ::String,
+                             template_id: ::String
+                           ) -> _DeleteTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTemplateResponseSuccess
+
       interface _GetCaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCaseResponse]
         def fields: () -> ::Array[Types::FieldValue]
@@ -323,6 +353,9 @@ module Aws
       interface _GetLayoutResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLayoutResponse]
         def content: () -> Types::LayoutContent
+        def created_time: () -> ::Time
+        def deleted: () -> bool
+        def last_modified_time: () -> ::Time
         def layout_arn: () -> ::String
         def layout_id: () -> ::String
         def name: () -> ::String
@@ -337,7 +370,10 @@ module Aws
 
       interface _GetTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateResponse]
+        def created_time: () -> ::Time
+        def deleted: () -> bool
         def description: () -> ::String
+        def last_modified_time: () -> ::Time
         def layout_configuration: () -> Types::LayoutConfiguration
         def name: () -> ::String
         def required_fields: () -> ::Array[Types::RequiredField]

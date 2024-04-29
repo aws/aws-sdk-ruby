@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2024-04-29)
+------------------
+
+* Feature - This release adds the BatchUpdateRecommendationResourceExclusion API to support batch updates of Recommendation Resource exclusion statuses and introduces a new exclusion status filter to the ListRecommendationResources and ListOrganizationRecommendationResources APIs.
+
 1.4.0 (2024-04-25)
 ------------------
 

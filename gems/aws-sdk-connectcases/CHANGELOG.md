@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2024-04-29)
+------------------
+
+* Feature - This feature releases DeleteField, DeletedLayout, and DeleteTemplate API's
+
 1.21.0 (2024-04-25)
 ------------------
 

@@ -18,12 +18,17 @@ module Aws::TranscribeService
     BaseModelName = Shapes::StringShape.new(name: 'BaseModelName')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CLMLanguageCode = Shapes::StringShape.new(name: 'CLMLanguageCode')
+    CallAnalyticsFeature = Shapes::StringShape.new(name: 'CallAnalyticsFeature')
     CallAnalyticsJob = Shapes::StructureShape.new(name: 'CallAnalyticsJob')
+    CallAnalyticsJobDetails = Shapes::StructureShape.new(name: 'CallAnalyticsJobDetails')
     CallAnalyticsJobName = Shapes::StringShape.new(name: 'CallAnalyticsJobName')
     CallAnalyticsJobSettings = Shapes::StructureShape.new(name: 'CallAnalyticsJobSettings')
     CallAnalyticsJobStatus = Shapes::StringShape.new(name: 'CallAnalyticsJobStatus')
     CallAnalyticsJobSummaries = Shapes::ListShape.new(name: 'CallAnalyticsJobSummaries')
     CallAnalyticsJobSummary = Shapes::StructureShape.new(name: 'CallAnalyticsJobSummary')
+    CallAnalyticsSkippedFeature = Shapes::StructureShape.new(name: 'CallAnalyticsSkippedFeature')
+    CallAnalyticsSkippedFeatureList = Shapes::ListShape.new(name: 'CallAnalyticsSkippedFeatureList')
+    CallAnalyticsSkippedReasonCode = Shapes::StringShape.new(name: 'CallAnalyticsSkippedReasonCode')
     CategoryName = Shapes::StringShape.new(name: 'CategoryName')
     CategoryProperties = Shapes::StructureShape.new(name: 'CategoryProperties')
     CategoryPropertiesList = Shapes::ListShape.new(name: 'CategoryPropertiesList')
@@ -234,6 +239,7 @@ module Aws::TranscribeService
 
     CallAnalyticsJob.add_member(:call_analytics_job_name, Shapes::ShapeRef.new(shape: CallAnalyticsJobName, location_name: "CallAnalyticsJobName"))
     CallAnalyticsJob.add_member(:call_analytics_job_status, Shapes::ShapeRef.new(shape: CallAnalyticsJobStatus, location_name: "CallAnalyticsJobStatus"))
+    CallAnalyticsJob.add_member(:call_analytics_job_details, Shapes::ShapeRef.new(shape: CallAnalyticsJobDetails, location_name: "CallAnalyticsJobDetails"))
     CallAnalyticsJob.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     CallAnalyticsJob.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
     CallAnalyticsJob.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, location_name: "MediaFormat"))
@@ -248,6 +254,9 @@ module Aws::TranscribeService
     CallAnalyticsJob.add_member(:settings, Shapes::ShapeRef.new(shape: CallAnalyticsJobSettings, location_name: "Settings"))
     CallAnalyticsJob.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: ChannelDefinitions, location_name: "ChannelDefinitions"))
     CallAnalyticsJob.struct_class = Types::CallAnalyticsJob
+
+    CallAnalyticsJobDetails.add_member(:skipped, Shapes::ShapeRef.new(shape: CallAnalyticsSkippedFeatureList, location_name: "Skipped"))
+    CallAnalyticsJobDetails.struct_class = Types::CallAnalyticsJobDetails
 
     CallAnalyticsJobSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
     CallAnalyticsJobSettings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
@@ -267,8 +276,16 @@ module Aws::TranscribeService
     CallAnalyticsJobSummary.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
     CallAnalyticsJobSummary.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     CallAnalyticsJobSummary.add_member(:call_analytics_job_status, Shapes::ShapeRef.new(shape: CallAnalyticsJobStatus, location_name: "CallAnalyticsJobStatus"))
+    CallAnalyticsJobSummary.add_member(:call_analytics_job_details, Shapes::ShapeRef.new(shape: CallAnalyticsJobDetails, location_name: "CallAnalyticsJobDetails"))
     CallAnalyticsJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     CallAnalyticsJobSummary.struct_class = Types::CallAnalyticsJobSummary
+
+    CallAnalyticsSkippedFeature.add_member(:feature, Shapes::ShapeRef.new(shape: CallAnalyticsFeature, location_name: "Feature"))
+    CallAnalyticsSkippedFeature.add_member(:reason_code, Shapes::ShapeRef.new(shape: CallAnalyticsSkippedReasonCode, location_name: "ReasonCode"))
+    CallAnalyticsSkippedFeature.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    CallAnalyticsSkippedFeature.struct_class = Types::CallAnalyticsSkippedFeature
+
+    CallAnalyticsSkippedFeatureList.member = Shapes::ShapeRef.new(shape: CallAnalyticsSkippedFeature)
 
     CategoryProperties.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, location_name: "CategoryName"))
     CategoryProperties.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, location_name: "Rules"))
@@ -998,6 +1015,7 @@ module Aws::TranscribeService
         "endpointPrefix" => "transcribe",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Transcribe Service",
         "serviceId" => "Transcribe",
         "signatureVersion" => "v4",

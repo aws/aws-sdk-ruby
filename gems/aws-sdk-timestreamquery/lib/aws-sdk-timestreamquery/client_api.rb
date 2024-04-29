@@ -27,6 +27,8 @@ module Aws::TimestreamQuery
     Datum = Shapes::StructureShape.new(name: 'Datum')
     DatumList = Shapes::ListShape.new(name: 'DatumList')
     DeleteScheduledQueryRequest = Shapes::StructureShape.new(name: 'DeleteScheduledQueryRequest')
+    DescribeAccountSettingsRequest = Shapes::StructureShape.new(name: 'DescribeAccountSettingsRequest')
+    DescribeAccountSettingsResponse = Shapes::StructureShape.new(name: 'DescribeAccountSettingsResponse')
     DescribeEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeEndpointsRequest')
     DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
     DescribeScheduledQueryRequest = Shapes::StructureShape.new(name: 'DescribeScheduledQueryRequest')
@@ -49,6 +51,7 @@ module Aws::TimestreamQuery
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxQueryCapacity = Shapes::IntegerShape.new(name: 'MaxQueryCapacity')
     MaxQueryResults = Shapes::IntegerShape.new(name: 'MaxQueryResults')
     MaxScheduledQueriesResults = Shapes::IntegerShape.new(name: 'MaxScheduledQueriesResults')
     MaxTagsForResourceResult = Shapes::IntegerShape.new(name: 'MaxTagsForResourceResult')
@@ -69,6 +72,7 @@ module Aws::TimestreamQuery
     PrepareQueryResponse = Shapes::StructureShape.new(name: 'PrepareQueryResponse')
     QueryExecutionException = Shapes::StructureShape.new(name: 'QueryExecutionException')
     QueryId = Shapes::StringShape.new(name: 'QueryId')
+    QueryPricingModel = Shapes::StringShape.new(name: 'QueryPricingModel')
     QueryRequest = Shapes::StructureShape.new(name: 'QueryRequest')
     QueryResponse = Shapes::StructureShape.new(name: 'QueryResponse')
     QueryStatus = Shapes::StructureShape.new(name: 'QueryStatus')
@@ -123,6 +127,8 @@ module Aws::TimestreamQuery
     Type = Shapes::StructureShape.new(name: 'Type')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAccountSettingsRequest = Shapes::StructureShape.new(name: 'UpdateAccountSettingsRequest')
+    UpdateAccountSettingsResponse = Shapes::StructureShape.new(name: 'UpdateAccountSettingsResponse')
     UpdateScheduledQueryRequest = Shapes::StructureShape.new(name: 'UpdateScheduledQueryRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
@@ -171,6 +177,12 @@ module Aws::TimestreamQuery
     DeleteScheduledQueryRequest.add_member(:scheduled_query_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ScheduledQueryArn"))
     DeleteScheduledQueryRequest.struct_class = Types::DeleteScheduledQueryRequest
 
+    DescribeAccountSettingsRequest.struct_class = Types::DescribeAccountSettingsRequest
+
+    DescribeAccountSettingsResponse.add_member(:max_query_tcu, Shapes::ShapeRef.new(shape: MaxQueryCapacity, location_name: "MaxQueryTCU"))
+    DescribeAccountSettingsResponse.add_member(:query_pricing_model, Shapes::ShapeRef.new(shape: QueryPricingModel, location_name: "QueryPricingModel"))
+    DescribeAccountSettingsResponse.struct_class = Types::DescribeAccountSettingsResponse
+
     DescribeEndpointsRequest.struct_class = Types::DescribeEndpointsRequest
 
     DescribeEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, required: true, location_name: "Endpoints"))
@@ -208,6 +220,7 @@ module Aws::TimestreamQuery
     ExecutionStats.add_member(:execution_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ExecutionTimeInMillis"))
     ExecutionStats.add_member(:data_writes, Shapes::ShapeRef.new(shape: Long, location_name: "DataWrites"))
     ExecutionStats.add_member(:bytes_metered, Shapes::ShapeRef.new(shape: Long, location_name: "BytesMetered"))
+    ExecutionStats.add_member(:cumulative_bytes_scanned, Shapes::ShapeRef.new(shape: Long, location_name: "CumulativeBytesScanned"))
     ExecutionStats.add_member(:records_ingested, Shapes::ShapeRef.new(shape: Long, location_name: "RecordsIngested"))
     ExecutionStats.add_member(:query_result_rows, Shapes::ShapeRef.new(shape: Long, location_name: "QueryResultRows"))
     ExecutionStats.struct_class = Types::ExecutionStats
@@ -424,6 +437,14 @@ module Aws::TimestreamQuery
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateAccountSettingsRequest.add_member(:max_query_tcu, Shapes::ShapeRef.new(shape: MaxQueryCapacity, location_name: "MaxQueryTCU"))
+    UpdateAccountSettingsRequest.add_member(:query_pricing_model, Shapes::ShapeRef.new(shape: QueryPricingModel, location_name: "QueryPricingModel"))
+    UpdateAccountSettingsRequest.struct_class = Types::UpdateAccountSettingsRequest
+
+    UpdateAccountSettingsResponse.add_member(:max_query_tcu, Shapes::ShapeRef.new(shape: MaxQueryCapacity, location_name: "MaxQueryTCU"))
+    UpdateAccountSettingsResponse.add_member(:query_pricing_model, Shapes::ShapeRef.new(shape: QueryPricingModel, location_name: "QueryPricingModel"))
+    UpdateAccountSettingsResponse.struct_class = Types::UpdateAccountSettingsResponse
+
     UpdateScheduledQueryRequest.add_member(:scheduled_query_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ScheduledQueryArn"))
     UpdateScheduledQueryRequest.add_member(:state, Shapes::ShapeRef.new(shape: ScheduledQueryState, required: true, location_name: "State"))
     UpdateScheduledQueryRequest.struct_class = Types::UpdateScheduledQueryRequest
@@ -442,6 +463,7 @@ module Aws::TimestreamQuery
         "endpointPrefix" => "query.timestream",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Timestream Query",
         "serviceFullName" => "Amazon Timestream Query",
         "serviceId" => "Timestream Query",
@@ -501,6 +523,21 @@ module Aws::TimestreamQuery
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
+      end)
+
+      api.add_operation(:describe_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+          "required" => true,
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
       end)
 
@@ -661,6 +698,22 @@ module Aws::TimestreamQuery
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
+      end)
+
+      api.add_operation(:update_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+          "required" => true,
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccountSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
       end)
 

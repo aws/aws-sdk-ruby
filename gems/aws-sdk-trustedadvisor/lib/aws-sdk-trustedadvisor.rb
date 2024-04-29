@@ -32,7 +32,7 @@ require_relative 'aws-sdk-trustedadvisor/customizations'
 # structure.
 #
 #     trusted_advisor = Aws::TrustedAdvisor::Client.new
-#     resp = trusted_advisor.get_organization_recommendation(params)
+#     resp = trusted_advisor.batch_update_recommendation_resource_exclusion(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-trustedadvisor/customizations'
 # @!group service
 module Aws::TrustedAdvisor
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

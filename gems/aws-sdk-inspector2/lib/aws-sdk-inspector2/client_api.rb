@@ -221,12 +221,17 @@ module Aws::Inspector2
     DisassociateMemberRequest = Shapes::StructureShape.new(name: 'DisassociateMemberRequest')
     DisassociateMemberResponse = Shapes::StructureShape.new(name: 'DisassociateMemberResponse')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Ec2Configuration = Shapes::StructureShape.new(name: 'Ec2Configuration')
+    Ec2ConfigurationState = Shapes::StructureShape.new(name: 'Ec2ConfigurationState')
     Ec2DeepInspectionStatus = Shapes::StringShape.new(name: 'Ec2DeepInspectionStatus')
     Ec2InstanceAggregation = Shapes::StructureShape.new(name: 'Ec2InstanceAggregation')
     Ec2InstanceAggregationResponse = Shapes::StructureShape.new(name: 'Ec2InstanceAggregationResponse')
     Ec2InstanceSortBy = Shapes::StringShape.new(name: 'Ec2InstanceSortBy')
     Ec2Metadata = Shapes::StructureShape.new(name: 'Ec2Metadata')
     Ec2Platform = Shapes::StringShape.new(name: 'Ec2Platform')
+    Ec2ScanMode = Shapes::StringShape.new(name: 'Ec2ScanMode')
+    Ec2ScanModeState = Shapes::StructureShape.new(name: 'Ec2ScanModeState')
+    Ec2ScanModeStatus = Shapes::StringShape.new(name: 'Ec2ScanModeStatus')
     EcrConfiguration = Shapes::StructureShape.new(name: 'EcrConfiguration')
     EcrConfigurationState = Shapes::StructureShape.new(name: 'EcrConfigurationState')
     EcrContainerImageMetadata = Shapes::StructureShape.new(name: 'EcrContainerImageMetadata')
@@ -479,6 +484,7 @@ module Aws::Inspector2
     RuleId = Shapes::StringShape.new(name: 'RuleId')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
     SbomReportFormat = Shapes::StringShape.new(name: 'SbomReportFormat')
+    ScanMode = Shapes::StringShape.new(name: 'ScanMode')
     ScanStatus = Shapes::StructureShape.new(name: 'ScanStatus')
     ScanStatusCode = Shapes::StringShape.new(name: 'ScanStatusCode')
     ScanStatusReason = Shapes::StringShape.new(name: 'ScanStatusReason')
@@ -1079,6 +1085,7 @@ module Aws::Inspector2
     CoverageFilterCriteria.add_member(:last_scanned_at, Shapes::ShapeRef.new(shape: CoverageDateFilterList, location_name: "lastScannedAt"))
     CoverageFilterCriteria.add_member(:resource_id, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "resourceId"))
     CoverageFilterCriteria.add_member(:resource_type, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "resourceType"))
+    CoverageFilterCriteria.add_member(:scan_mode, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "scanMode"))
     CoverageFilterCriteria.add_member(:scan_status_code, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "scanStatusCode"))
     CoverageFilterCriteria.add_member(:scan_status_reason, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "scanStatusReason"))
     CoverageFilterCriteria.add_member(:scan_type, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "scanType"))
@@ -1102,6 +1109,7 @@ module Aws::Inspector2
     CoveredResource.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     CoveredResource.add_member(:resource_metadata, Shapes::ShapeRef.new(shape: ResourceScanMetadata, location_name: "resourceMetadata"))
     CoveredResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: CoverageResourceType, required: true, location_name: "resourceType"))
+    CoveredResource.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, location_name: "scanMode"))
     CoveredResource.add_member(:scan_status, Shapes::ShapeRef.new(shape: ScanStatus, location_name: "scanStatus"))
     CoveredResource.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, required: true, location_name: "scanType"))
     CoveredResource.struct_class = Types::CoveredResource
@@ -1253,6 +1261,12 @@ module Aws::Inspector2
     DisassociateMemberResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     DisassociateMemberResponse.struct_class = Types::DisassociateMemberResponse
 
+    Ec2Configuration.add_member(:scan_mode, Shapes::ShapeRef.new(shape: Ec2ScanMode, required: true, location_name: "scanMode"))
+    Ec2Configuration.struct_class = Types::Ec2Configuration
+
+    Ec2ConfigurationState.add_member(:scan_mode_state, Shapes::ShapeRef.new(shape: Ec2ScanModeState, location_name: "scanModeState"))
+    Ec2ConfigurationState.struct_class = Types::Ec2ConfigurationState
+
     Ec2InstanceAggregation.add_member(:amis, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "amis"))
     Ec2InstanceAggregation.add_member(:instance_ids, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "instanceIds"))
     Ec2InstanceAggregation.add_member(:instance_tags, Shapes::ShapeRef.new(shape: MapFilterList, location_name: "instanceTags"))
@@ -1274,6 +1288,10 @@ module Aws::Inspector2
     Ec2Metadata.add_member(:platform, Shapes::ShapeRef.new(shape: Ec2Platform, location_name: "platform"))
     Ec2Metadata.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Ec2Metadata.struct_class = Types::Ec2Metadata
+
+    Ec2ScanModeState.add_member(:scan_mode, Shapes::ShapeRef.new(shape: Ec2ScanMode, location_name: "scanMode"))
+    Ec2ScanModeState.add_member(:scan_mode_status, Shapes::ShapeRef.new(shape: Ec2ScanModeStatus, location_name: "scanModeStatus"))
+    Ec2ScanModeState.struct_class = Types::Ec2ScanModeState
 
     EcrConfiguration.add_member(:pull_date_rescan_duration, Shapes::ShapeRef.new(shape: EcrPullDateRescanDuration, location_name: "pullDateRescanDuration"))
     EcrConfiguration.add_member(:rescan_duration, Shapes::ShapeRef.new(shape: EcrRescanDuration, required: true, location_name: "rescanDuration"))
@@ -1513,6 +1531,7 @@ module Aws::Inspector2
 
     GetConfigurationRequest.struct_class = Types::GetConfigurationRequest
 
+    GetConfigurationResponse.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2ConfigurationState, location_name: "ec2Configuration"))
     GetConfigurationResponse.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: EcrConfigurationState, location_name: "ecrConfiguration"))
     GetConfigurationResponse.struct_class = Types::GetConfigurationResponse
 
@@ -2193,7 +2212,8 @@ module Aws::Inspector2
     UpdateCisTargets.add_member(:target_resource_tags, Shapes::ShapeRef.new(shape: TargetResourceTags, location_name: "targetResourceTags"))
     UpdateCisTargets.struct_class = Types::UpdateCisTargets
 
-    UpdateConfigurationRequest.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: EcrConfiguration, required: true, location_name: "ecrConfiguration"))
+    UpdateConfigurationRequest.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2Configuration, location_name: "ec2Configuration"))
+    UpdateConfigurationRequest.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: EcrConfiguration, location_name: "ecrConfiguration"))
     UpdateConfigurationRequest.struct_class = Types::UpdateConfigurationRequest
 
     UpdateConfigurationResponse.struct_class = Types::UpdateConfigurationResponse
@@ -2321,6 +2341,7 @@ module Aws::Inspector2
         "endpointPrefix" => "inspector2",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Inspector2",
         "serviceFullName" => "Inspector2",
         "serviceId" => "Inspector2",

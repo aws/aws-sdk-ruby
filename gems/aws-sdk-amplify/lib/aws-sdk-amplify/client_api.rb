@@ -162,6 +162,7 @@ module Aws::Amplify
     LogUrl = Shapes::StringShape.new(name: 'LogUrl')
     MD5Hash = Shapes::StringShape.new(name: 'MD5Hash')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxResultsForListApps = Shapes::IntegerShape.new(name: 'MaxResultsForListApps')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
@@ -585,7 +586,7 @@ module Aws::Amplify
     LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAppsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListAppsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAppsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsForListApps, location: "querystring", location_name: "maxResults"))
     ListAppsRequest.struct_class = Types::ListAppsRequest
 
     ListAppsResult.add_member(:apps, Shapes::ShapeRef.new(shape: Apps, required: true, location_name: "apps"))
@@ -839,6 +840,7 @@ module Aws::Amplify
         "endpointPrefix" => "amplify",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amplify",
         "serviceFullName" => "AWS Amplify",
         "serviceId" => "Amplify",

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2024-04-29)
+------------------
+
+* Feature - This update provides error messaging for generative call summarization in Transcribe Call Analytics
+
 1.96.0 (2024-04-25)
 ------------------
 
