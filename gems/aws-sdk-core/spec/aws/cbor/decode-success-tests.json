@@ -1,128 +1,16 @@
 [
   {
-    "description": "atomic - uint/2/min",
-    "input": "190000",
-    "expect": {
-      "uint": 0
-    }
-  },
-  {
-    "description": "atomic - negint/4/max",
-    "input": "3affffffff",
-    "expect": {
-      "negint": 4294967295
-    }
-  },
-  {
-    "description": "atomic - undefined",
-    "input": "f7",
-    "expect": {
-      "undefined": {}
-    }
-  },
-  {
-    "description": "atomic - true",
-    "input": "f5",
-    "expect": {
-      "bool": true
-    }
-  },
-  {
-    "description": "atomic - uint/0/min",
-    "input": "00",
-    "expect": {
-      "uint": 0
-    }
-  },
-  {
-    "description": "atomic - uint/1/min",
-    "input": "1800",
-    "expect": {
-      "uint": 0
-    }
-  },
-  {
-    "description": "atomic - negint/0/max",
-    "input": "37",
-    "expect": {
-      "negint": 23
-    }
-  },
-  {
-    "description": "atomic - negint/2/min",
-    "input": "390000",
-    "expect": {
-      "negint": 0
-    }
-  },
-  {
     "description": "atomic - negint/1/max",
     "input": "38ff",
     "expect": {
-      "negint": 255
+      "negint": -256
     }
   },
   {
-    "description": "atomic - negint/4/min",
-    "input": "3a00000000",
+    "description": "atomic - float64/1.625",
+    "input": "fb3ffa000000000000",
     "expect": {
-      "negint": 0
-    }
-  },
-  {
-    "description": "atomic - negint/8/max",
-    "input": "3bfffffffffffffffe",
-    "expect": {
-      "negint": 18446744073709551614
-    }
-  },
-  {
-    "description": "atomic - null",
-    "input": "f6",
-    "expect": {
-      "null": {}
-    }
-  },
-  {
-    "description": "atomic - uint/4/min",
-    "input": "1a00000000",
-    "expect": {
-      "uint": 0
-    }
-  },
-  {
-    "description": "atomic - uint/4/max",
-    "input": "1affffffff",
-    "expect": {
-      "uint": 4294967295
-    }
-  },
-  {
-    "description": "atomic - negint/0/min",
-    "input": "20",
-    "expect": {
-      "negint": 0
-    }
-  },
-  {
-    "description": "atomic - negint/1/min",
-    "input": "3800",
-    "expect": {
-      "negint": 0
-    }
-  },
-  {
-    "description": "atomic - negint/2/max",
-    "input": "39ffff",
-    "expect": {
-      "negint": 65535
-    }
-  },
-  {
-    "description": "atomic - uint/1/max",
-    "input": "18ff",
-    "expect": {
-      "uint": 255
+      "float64": 4609997168567123968
     }
   },
   {
@@ -133,17 +21,17 @@
     }
   },
   {
-    "description": "atomic - uint/8/min",
-    "input": "1b0000000000000000",
+    "description": "atomic - negint/4/min",
+    "input": "3a00000000",
     "expect": {
-      "uint": 0
+      "negint": -1
     }
   },
   {
-    "description": "atomic - uint/8/max",
-    "input": "1bffffffffffffffff",
+    "description": "atomic - negint/8/max",
+    "input": "3bfffffffffffffffe",
     "expect": {
-      "uint": 18446744073709551615
+      "negint": -18446744073709551615
     }
   },
   {
@@ -154,24 +42,80 @@
     }
   },
   {
-    "description": "atomic - float16/NaN/LSB",
-    "input": "f97c01",
+    "description": "atomic - null",
+    "input": "f6",
     "expect": {
-      "float32": 2139103232
+      "null": {}
     }
   },
   {
-    "description": "atomic - uint/0/max",
-    "input": "17",
+    "description": "atomic - float32/1.625",
+    "input": "fa3fd00000",
     "expect": {
-      "uint": 23
+      "float32": 1070596096
+    }
+  },
+  {
+    "description": "atomic - negint/1/min",
+    "input": "3800",
+    "expect": {
+      "negint": -1
+    }
+  },
+  {
+    "description": "atomic - uint/4/max",
+    "input": "1affffffff",
+    "expect": {
+      "uint": 4294967295
+    }
+  },
+  {
+    "description": "atomic - uint/8/max",
+    "input": "1bffffffffffffffff",
+    "expect": {
+      "uint": 18446744073709551615
+    }
+  },
+  {
+    "description": "atomic - negint/2/max",
+    "input": "39ffff",
+    "expect": {
+      "negint": -65536
+    }
+  },
+  {
+    "description": "atomic - float16/subnormal",
+    "input": "f90050",
+    "expect": {
+      "float32": 916455424
+    }
+  },
+  {
+    "description": "atomic - float32/+Inf",
+    "input": "fa7f800000",
+    "expect": {
+      "float32": 2139095040
+    }
+  },
+  {
+    "description": "atomic - float64/+Inf",
+    "input": "fb7ff0000000000000",
+    "expect": {
+      "float64": 9218868437227405312
+    }
+  },
+  {
+    "description": "atomic - uint/1/min",
+    "input": "1800",
+    "expect": {
+      "uint": 0
     }
   },
   {
     "description": "atomic - negint/8/min",
     "input": "3b0000000000000000",
     "expect": {
-      "negint": 0
+      "negint": -1
     }
   },
   {
@@ -182,10 +126,73 @@
     }
   },
   {
+    "description": "atomic - uint/0/max",
+    "input": "17",
+    "expect": {
+      "uint": 23
+    }
+  },
+  {
+    "description": "atomic - uint/8/min",
+    "input": "1b0000000000000000",
+    "expect": {
+      "uint": 0
+    }
+  },
+  {
+    "description": "atomic - uint/4/min",
+    "input": "1a00000000",
+    "expect": {
+      "uint": 0
+    }
+  },
+  {
+    "description": "atomic - negint/0/max",
+    "input": "37",
+    "expect": {
+      "negint": -24
+    }
+  },
+  {
+    "description": "atomic - negint/2/min",
+    "input": "390000",
+    "expect": {
+      "negint": -1
+    }
+  },
+  {
     "description": "atomic - float16/+Inf",
     "input": "f97c00",
     "expect": {
       "float32": 2139095040
+    }
+  },
+  {
+    "description": "atomic - uint/2/min",
+    "input": "190000",
+    "expect": {
+      "uint": 0
+    }
+  },
+  {
+    "description": "atomic - negint/0/min",
+    "input": "20",
+    "expect": {
+      "negint": -1
+    }
+  },
+  {
+    "description": "atomic - negint/4/max",
+    "input": "3affffffff",
+    "expect": {
+      "negint": -4294967296
+    }
+  },
+  {
+    "description": "atomic - true",
+    "input": "f5",
+    "expect": {
+      "bool": true
     }
   },
   {
@@ -196,17 +203,31 @@
     }
   },
   {
-    "description": "atomic - float32",
-    "input": "fa7f800000",
+    "description": "atomic - float16/NaN/LSB",
+    "input": "f97c01",
     "expect": {
-      "float32": 2139095040
+      "float32": 2139103232
     }
   },
   {
-    "description": "atomic - float64",
-    "input": "fb7ff0000000000000",
+    "description": "atomic - uint/0/min",
+    "input": "00",
     "expect": {
-      "float64": 9218868437227405312
+      "uint": 0
+    }
+  },
+  {
+    "description": "atomic - undefined",
+    "input": "f7",
+    "expect": {
+      "undefined": {}
+    }
+  },
+  {
+    "description": "atomic - uint/1/max",
+    "input": "18ff",
+    "expect": {
+      "uint": 255
     }
   },
   {
@@ -242,6 +263,28 @@
     }
   },
   {
+    "description": "indefinite slice - len = 0, len \u003e 0",
+    "input": "5f4043666f6fff",
+    "expect": {
+      "bytestring": [
+        102,
+        111,
+        111
+      ]
+    }
+  },
+  {
+    "description": "indefinite slice - len \u003e 0, len = 0",
+    "input": "5f43666f6f40ff",
+    "expect": {
+      "bytestring": [
+        102,
+        111,
+        111
+      ]
+    }
+  },
+  {
     "description": "indefinite slice - len \u003e 0, len \u003e 0",
     "input": "5f43666f6f43666f6fff",
     "expect": {
@@ -270,42 +313,6 @@
     }
   },
   {
-    "description": "indefinite slice - len = 0, len \u003e 0",
-    "input": "5f4043666f6fff",
-    "expect": {
-      "bytestring": [
-        102,
-        111,
-        111
-      ]
-    }
-  },
-  {
-    "description": "indefinite slice - len \u003e 0, len = 0",
-    "input": "5f43666f6f40ff",
-    "expect": {
-      "bytestring": [
-        102,
-        111,
-        111
-      ]
-    }
-  },
-  {
-    "description": "indefinite string - len = 0, explicit",
-    "input": "7f60ff",
-    "expect": {
-      "string": ""
-    }
-  },
-  {
-    "description": "indefinite string - len = 0, len \u003e 0",
-    "input": "7f6063666f6fff",
-    "expect": {
-      "string": "foo"
-    }
-  },
-  {
     "description": "indefinite string - len \u003e 0, len = 0",
     "input": "7f63666f6f60ff",
     "expect": {
@@ -327,146 +334,17 @@
     }
   },
   {
-    "description": "list - [undefined]",
-    "input": "81f7",
+    "description": "indefinite string - len = 0, explicit",
+    "input": "7f60ff",
     "expect": {
-      "list": [
-        {
-          "undefined": {}
-        }
-      ]
+      "string": ""
     }
   },
   {
-    "description": "list - [_ uint/2/max]",
-    "input": "9f19ffffff",
+    "description": "indefinite string - len = 0, len \u003e 0",
+    "input": "7f6063666f6fff",
     "expect": {
-      "list": [
-        {
-          "uint": 65535
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [uint/1/max]",
-    "input": "8118ff",
-    "expect": {
-      "list": [
-        {
-          "uint": 255
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [negint/2/min]",
-    "input": "81390000",
-    "expect": {
-      "list": [
-        {
-          "negint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ negint/1/max]",
-    "input": "9f38ffff",
-    "expect": {
-      "list": [
-        {
-          "negint": 255
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ true]",
-    "input": "9ff5ff",
-    "expect": {
-      "list": [
-        {
-          "bool": true
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [uint/2/max]",
-    "input": "8119ffff",
-    "expect": {
-      "list": [
-        {
-          "uint": 65535
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ uint/0/min]",
-    "input": "9f00ff",
-    "expect": {
-      "list": [
-        {
-          "uint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ undefined]",
-    "input": "9ff7ff",
-    "expect": {
-      "list": [
-        {
-          "undefined": {}
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ uint/0/max]",
-    "input": "9f17ff",
-    "expect": {
-      "list": [
-        {
-          "uint": 23
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ uint/4/min]",
-    "input": "9f1a00000000ff",
-    "expect": {
-      "list": [
-        {
-          "uint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ negint/4/min]",
-    "input": "9f3a00000000ff",
-    "expect": {
-      "list": [
-        {
-          "negint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ negint/8/min]",
-    "input": "9f3b0000000000000000ff",
-    "expect": {
-      "list": [
-        {
-          "negint": 0
-        }
-      ]
+      "string": "foo"
     }
   },
   {
@@ -481,118 +359,19 @@
     }
   },
   {
-    "description": "list - [negint/8/min]",
-    "input": "813b0000000000000000",
+    "description": "list - [null]",
+    "input": "81f6",
     "expect": {
       "list": [
         {
-          "negint": 0
+          "null": {}
         }
       ]
     }
   },
   {
-    "description": "list - [true]",
-    "input": "81f5",
-    "expect": {
-      "list": [
-        {
-          "bool": true
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [false]",
-    "input": "81f4",
-    "expect": {
-      "list": [
-        {
-          "bool": false
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ float16/+Inf]",
-    "input": "9ff97c00ff",
-    "expect": {
-      "list": [
-        {
-          "float32": 2139095040
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ float16/NaN/MSB]",
-    "input": "9ff97e00ff",
-    "expect": {
-      "list": [
-        {
-          "float32": 2143289344
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [uint/4/min]",
-    "input": "811a00000000",
-    "expect": {
-      "list": [
-        {
-          "uint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [negint/2/max]",
-    "input": "8139ffff",
-    "expect": {
-      "list": [
-        {
-          "negint": 65535
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [negint/4/min]",
-    "input": "813a00000000",
-    "expect": {
-      "list": [
-        {
-          "negint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ negint/0/min]",
-    "input": "9f20ff",
-    "expect": {
-      "list": [
-        {
-          "negint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [float16/NaN/LSB]",
-    "input": "81f97c01",
-    "expect": {
-      "list": [
-        {
-          "float32": 2139103232
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ uint/1/min]",
-    "input": "9f1800ff",
+    "description": "list - [_ uint/4/min]",
+    "input": "9f1a00000000ff",
     "expect": {
       "list": [
         {
@@ -613,67 +392,12 @@
     }
   },
   {
-    "description": "list - [_ negint/4/max]",
-    "input": "9f3affffffffff",
+    "description": "list - [negint/4/max]",
+    "input": "813affffffff",
     "expect": {
       "list": [
         {
-          "negint": 4294967295
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ negint/8/max]",
-    "input": "9f3bfffffffffffffffeff",
-    "expect": {
-      "list": [
-        {
-          "negint": 18446744073709551614
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ false]",
-    "input": "9ff4ff",
-    "expect": {
-      "list": [
-        {
-          "bool": false
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ float16/NaN/LSB]",
-    "input": "9ff97c01ff",
-    "expect": {
-      "list": [
-        {
-          "float32": 2139103232
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [float16/+Inf]",
-    "input": "81f97c00",
-    "expect": {
-      "list": [
-        {
-          "float32": 2139095040
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [float16/-Inf]",
-    "input": "81f9fc00",
-    "expect": {
-      "list": [
-        {
-          "float32": 4286578688
+          "negint": -4294967296
         }
       ]
     }
@@ -690,56 +414,23 @@
     }
   },
   {
-    "description": "list - [_ uint/8/min]",
-    "input": "9f1b0000000000000000ff",
+    "description": "list - [float16/NaN/LSB]",
+    "input": "81f97c01",
     "expect": {
       "list": [
         {
-          "uint": 0
+          "float32": 2139103232
         }
       ]
     }
   },
   {
-    "description": "list - [_ uint/4/max]",
-    "input": "9f1affffffffff",
+    "description": "list - [_ negint/1/min]",
+    "input": "9f3800ff",
     "expect": {
       "list": [
         {
-          "uint": 4294967295
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ negint/2/min]",
-    "input": "9f390000ff",
-    "expect": {
-      "list": [
-        {
-          "negint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [uint/8/min]",
-    "input": "811b0000000000000000",
-    "expect": {
-      "list": [
-        {
-          "uint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [negint/1/min]",
-    "input": "813800",
-    "expect": {
-      "list": [
-        {
-          "negint": 0
+          "negint": -1
         }
       ]
     }
@@ -756,6 +447,17 @@
     }
   },
   {
+    "description": "list - [_ float16/+Inf]",
+    "input": "9ff97c00ff",
+    "expect": {
+      "list": [
+        {
+          "float32": 2139095040
+        }
+      ]
+    }
+  },
+  {
     "description": "list - [uint/0/max]",
     "input": "8117",
     "expect": {
@@ -767,34 +469,23 @@
     }
   },
   {
-    "description": "list - [negint/1/max]",
-    "input": "8138ff",
+    "description": "list - [negint/0/max]",
+    "input": "8137",
     "expect": {
       "list": [
         {
-          "negint": 255
+          "negint": -24
         }
       ]
     }
   },
   {
-    "description": "list - [_ uint/1/max]",
-    "input": "9f18ffff",
+    "description": "list - [_ false]",
+    "input": "9ff4ff",
     "expect": {
       "list": [
         {
-          "uint": 255
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ uint/2/min]",
-    "input": "9f190000ff",
-    "expect": {
-      "list": [
-        {
-          "uint": 0
+          "bool": false
         }
       ]
     }
@@ -811,89 +502,45 @@
     }
   },
   {
-    "description": "list - [negint/0/min]",
-    "input": "8120",
+    "description": "list - [uint/1/max]",
+    "input": "8118ff",
     "expect": {
       "list": [
         {
-          "negint": 0
+          "uint": 255
         }
       ]
     }
   },
   {
-    "description": "list - [negint/8/max]",
-    "input": "813bfffffffffffffffe",
+    "description": "list - [true]",
+    "input": "81f5",
     "expect": {
       "list": [
         {
-          "negint": 18446744073709551614
+          "bool": true
         }
       ]
     }
   },
   {
-    "description": "list - [float32]",
-    "input": "81fa7f800000",
+    "description": "list - [float16/-Inf]",
+    "input": "81f9fc00",
     "expect": {
       "list": [
         {
-          "float32": 2139095040
+          "float32": 4286578688
         }
       ]
     }
   },
   {
-    "description": "list - [float64]",
-    "input": "81fb7ff0000000000000",
-    "expect": {
-      "list": [
-        {
-          "float64": 9218868437227405312
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [negint/4/max]",
-    "input": "813affffffff",
-    "expect": {
-      "list": [
-        {
-          "negint": 4294967295
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [uint/0/min]",
-    "input": "8100",
+    "description": "list - [_ uint/2/min]",
+    "input": "9f190000ff",
     "expect": {
       "list": [
         {
           "uint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [uint/2/min]",
-    "input": "81190000",
-    "expect": {
-      "list": [
-        {
-          "uint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [uint/8/max]",
-    "input": "811bffffffffffffffff",
-    "expect": {
-      "list": [
-        {
-          "uint": 18446744073709551615
         }
       ]
     }
@@ -904,73 +551,51 @@
     "expect": {
       "list": [
         {
-          "negint": 65535
+          "negint": -65536
         }
       ]
     }
   },
   {
-    "description": "list - [uint/4/max]",
-    "input": "811affffffff",
+    "description": "list - [negint/8/max]",
+    "input": "813bfffffffffffffffe",
     "expect": {
       "list": [
         {
-          "uint": 4294967295
+          "negint": -18446744073709551615
         }
       ]
     }
   },
   {
-    "description": "list - [null]",
-    "input": "81f6",
+    "description": "list - [_ negint/8/max]",
+    "input": "9f3bfffffffffffffffeff",
     "expect": {
       "list": [
         {
-          "null": {}
+          "negint": -18446744073709551615
         }
       ]
     }
   },
   {
-    "description": "list - [_ negint/0/max]",
-    "input": "9f37ff",
+    "description": "list - [_ uint/0/min]",
+    "input": "9f00ff",
     "expect": {
       "list": [
         {
-          "negint": 23
+          "uint": 0
         }
       ]
     }
   },
   {
-    "description": "list - [_ negint/1/min]",
-    "input": "9f3800ff",
+    "description": "list - [_ negint/2/min]",
+    "input": "9f390000ff",
     "expect": {
       "list": [
         {
-          "negint": 0
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [negint/0/max]",
-    "input": "8137",
-    "expect": {
-      "list": [
-        {
-          "negint": 23
-        }
-      ]
-    }
-  },
-  {
-    "description": "list - [_ float32]",
-    "input": "9ffa7f800000ff",
-    "expect": {
-      "list": [
-        {
-          "float32": 2139095040
+          "negint": -1
         }
       ]
     }
@@ -987,102 +612,399 @@
     }
   },
   {
-    "description": "map - {negint/8/min}",
-    "input": "a163666f6f3b0000000000000000",
+    "description": "list - [uint/2/max]",
+    "input": "8119ffff",
     "expect": {
-      "map": {
-        "foo": {
-          "negint": 0
+      "list": [
+        {
+          "uint": 65535
         }
-      }
+      ]
     }
   },
   {
-    "description": "map - {float16/NaN/MSB}",
-    "input": "a163666f6ff97e00",
+    "description": "list - [_ uint/1/min]",
+    "input": "9f1800ff",
     "expect": {
-      "map": {
-        "foo": {
-          "float32": 2143289344
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ negint/4/max}",
-    "input": "bf63666f6f3affffffffff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 4294967295
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ float16/+Inf}",
-    "input": "bf63666f6ff97c00ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "float32": 2139095040
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {uint/4/min}",
-    "input": "a163666f6f1a00000000",
-    "expect": {
-      "map": {
-        "foo": {
+      "list": [
+        {
           "uint": 0
         }
-      }
+      ]
     }
   },
   {
-    "description": "map - {negint/8/max}",
-    "input": "a163666f6f3bfffffffffffffffe",
+    "description": "list - [_ float16/NaN/MSB]",
+    "input": "9ff97e00ff",
     "expect": {
-      "map": {
-        "foo": {
-          "negint": 18446744073709551614
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ negint/0/max}",
-    "input": "bf63666f6f37ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 23
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ float16/NaN/MSB}",
-    "input": "bf63666f6ff97e00ff",
-    "expect": {
-      "map": {
-        "foo": {
+      "list": [
+        {
           "float32": 2143289344
         }
-      }
+      ]
     }
   },
   {
-    "description": "map - {negint/0/min}",
-    "input": "a163666f6f20",
+    "description": "list - [uint/4/max]",
+    "input": "811affffffff",
     "expect": {
-      "map": {
-        "foo": {
-          "negint": 0
+      "list": [
+        {
+          "uint": 4294967295
         }
-      }
+      ]
+    }
+  },
+  {
+    "description": "list - [negint/2/min]",
+    "input": "81390000",
+    "expect": {
+      "list": [
+        {
+          "negint": -1
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ uint/2/max]",
+    "input": "9f19ffffff",
+    "expect": {
+      "list": [
+        {
+          "uint": 65535
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ float32]",
+    "input": "9ffa7f800000ff",
+    "expect": {
+      "list": [
+        {
+          "float32": 2139095040
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [float16/+Inf]",
+    "input": "81f97c00",
+    "expect": {
+      "list": [
+        {
+          "float32": 2139095040
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ negint/0/max]",
+    "input": "9f37ff",
+    "expect": {
+      "list": [
+        {
+          "negint": -24
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ negint/4/max]",
+    "input": "9f3affffffffff",
+    "expect": {
+      "list": [
+        {
+          "negint": -4294967296
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [uint/0/min]",
+    "input": "8100",
+    "expect": {
+      "list": [
+        {
+          "uint": 0
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [uint/8/min]",
+    "input": "811b0000000000000000",
+    "expect": {
+      "list": [
+        {
+          "uint": 0
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [negint/2/max]",
+    "input": "8139ffff",
+    "expect": {
+      "list": [
+        {
+          "negint": -65536
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ uint/0/max]",
+    "input": "9f17ff",
+    "expect": {
+      "list": [
+        {
+          "uint": 23
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [uint/2/min]",
+    "input": "81190000",
+    "expect": {
+      "list": [
+        {
+          "uint": 0
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [negint/1/max]",
+    "input": "8138ff",
+    "expect": {
+      "list": [
+        {
+          "negint": -256
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [negint/4/min]",
+    "input": "813a00000000",
+    "expect": {
+      "list": [
+        {
+          "negint": -1
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [negint/8/min]",
+    "input": "813b0000000000000000",
+    "expect": {
+      "list": [
+        {
+          "negint": -1
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ uint/4/max]",
+    "input": "9f1affffffffff",
+    "expect": {
+      "list": [
+        {
+          "uint": 4294967295
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ undefined]",
+    "input": "9ff7ff",
+    "expect": {
+      "list": [
+        {
+          "undefined": {}
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [negint/1/min]",
+    "input": "813800",
+    "expect": {
+      "list": [
+        {
+          "negint": -1
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ negint/1/max]",
+    "input": "9f38ffff",
+    "expect": {
+      "list": [
+        {
+          "negint": -256
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ float16/NaN/LSB]",
+    "input": "9ff97c01ff",
+    "expect": {
+      "list": [
+        {
+          "float32": 2139103232
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [uint/8/max]",
+    "input": "811bffffffffffffffff",
+    "expect": {
+      "list": [
+        {
+          "uint": 18446744073709551615
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [false]",
+    "input": "81f4",
+    "expect": {
+      "list": [
+        {
+          "bool": false
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [float64]",
+    "input": "81fb7ff0000000000000",
+    "expect": {
+      "list": [
+        {
+          "float64": 9218868437227405312
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [uint/4/min]",
+    "input": "811a00000000",
+    "expect": {
+      "list": [
+        {
+          "uint": 0
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [undefined]",
+    "input": "81f7",
+    "expect": {
+      "list": [
+        {
+          "undefined": {}
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [float32]",
+    "input": "81fa7f800000",
+    "expect": {
+      "list": [
+        {
+          "float32": 2139095040
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ negint/0/min]",
+    "input": "9f20ff",
+    "expect": {
+      "list": [
+        {
+          "negint": -1
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [negint/0/min]",
+    "input": "8120",
+    "expect": {
+      "list": [
+        {
+          "negint": -1
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ uint/8/min]",
+    "input": "9f1b0000000000000000ff",
+    "expect": {
+      "list": [
+        {
+          "uint": 0
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ true]",
+    "input": "9ff5ff",
+    "expect": {
+      "list": [
+        {
+          "bool": true
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ uint/1/max]",
+    "input": "9f18ffff",
+    "expect": {
+      "list": [
+        {
+          "uint": 255
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ negint/4/min]",
+    "input": "9f3a00000000ff",
+    "expect": {
+      "list": [
+        {
+          "negint": -1
+        }
+      ]
+    }
+  },
+  {
+    "description": "list - [_ negint/8/min]",
+    "input": "9f3b0000000000000000ff",
+    "expect": {
+      "list": [
+        {
+          "negint": -1
+        }
+      ]
     }
   },
   {
@@ -1097,144 +1019,12 @@
     }
   },
   {
-    "description": "map - {_ float64}",
-    "input": "bf63666f6ffb7ff0000000000000ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "float64": 9218868437227405312
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {uint/1/max}",
-    "input": "a163666f6f18ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 255
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ uint/0/min}",
-    "input": "bf63666f6f00ff",
+    "description": "map - {_ uint/1/min}",
+    "input": "bf63666f6f1800ff",
     "expect": {
       "map": {
         "foo": {
           "uint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {float16/-Inf}",
-    "input": "a163666f6ff9fc00",
-    "expect": {
-      "map": {
-        "foo": {
-          "float32": 4286578688
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ uint/2/min}",
-    "input": "bf63666f6f190000ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ negint/0/min}",
-    "input": "bf63666f6f20ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ negint/8/min}",
-    "input": "bf63666f6f3b0000000000000000ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {uint/8/min}",
-    "input": "a163666f6f1b0000000000000000",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {negint/4/min}",
-    "input": "a163666f6f3a00000000",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ null}",
-    "input": "bf63666f6ff6ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "null": {}
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {null}",
-    "input": "a163666f6ff6",
-    "expect": {
-      "map": {
-        "foo": {
-          "null": {}
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ negint/1/max}",
-    "input": "bf63666f6f38ffff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 255
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ uint/0/max}",
-    "input": "bf63666f6f17ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 23
         }
       }
     }
@@ -1267,315 +1057,51 @@
     "expect": {
       "map": {
         "foo": {
-          "negint": 0
+          "negint": -1
         }
       }
     }
   },
   {
-    "description": "map - {_ float16/-Inf}",
-    "input": "bf63666f6ff9fc00ff",
+    "description": "map - {_ negint/4/max}",
+    "input": "bf63666f6f3affffffffff",
     "expect": {
       "map": {
         "foo": {
-          "float32": 4286578688
+          "negint": -4294967296
         }
       }
     }
   },
   {
-    "description": "map - {negint/1/max}",
-    "input": "a163666f6f38ff",
+    "description": "map - {_ negint/8/min}",
+    "input": "bf63666f6f3b0000000000000000ff",
     "expect": {
       "map": {
         "foo": {
-          "negint": 255
+          "negint": -1
         }
       }
     }
   },
   {
-    "description": "map - {negint/2/max}",
-    "input": "a163666f6f39ffff",
+    "description": "map - {negint/0/min}",
+    "input": "a163666f6f20",
     "expect": {
       "map": {
         "foo": {
-          "negint": 65535
+          "negint": -1
         }
       }
     }
   },
   {
-    "description": "map - {float32}",
-    "input": "a163666f6ffa7f800000",
-    "expect": {
-      "map": {
-        "foo": {
-          "float32": 2139095040
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ negint/2/max}",
-    "input": "bf63666f6f39ffffff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 65535
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ negint/8/max}",
-    "input": "bf63666f6f3bfffffffffffffffeff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 18446744073709551614
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ undefined}",
-    "input": "bf63666f6ff7ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "undefined": {}
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {uint/0/max}",
-    "input": "a163666f6f17",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 23
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {negint/0/max}",
-    "input": "a163666f6f37",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 23
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {uint/8/max}",
-    "input": "a163666f6f1bffffffffffffffff",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 18446744073709551615
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ negint/2/min}",
-    "input": "bf63666f6f390000ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {float16/NaN/LSB}",
-    "input": "a163666f6ff97c01",
-    "expect": {
-      "map": {
-        "foo": {
-          "float32": 2139103232
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ uint/1/max}",
-    "input": "bf63666f6f18ffff",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 255
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ float16/NaN/LSB}",
-    "input": "bf63666f6ff97c01ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "float32": 2139103232
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {uint/1/min}",
-    "input": "a163666f6f1800",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {undefined}",
-    "input": "a163666f6ff7",
-    "expect": {
-      "map": {
-        "foo": {
-          "undefined": {}
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ negint/4/min}",
-    "input": "bf63666f6f3a00000000ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {float64}",
-    "input": "a163666f6ffb7ff0000000000000",
+    "description": "map - {_ float64}",
+    "input": "bf63666f6ffb7ff0000000000000ff",
     "expect": {
       "map": {
         "foo": {
           "float64": 9218868437227405312
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ uint/2/max}",
-    "input": "bf63666f6f19ffffff",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 65535
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ uint/8/min}",
-    "input": "bf63666f6f1b0000000000000000ff",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {uint/0/min}",
-    "input": "a163666f6f00",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {negint/4/max}",
-    "input": "a163666f6f3affffffff",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 4294967295
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {negint/1/min}",
-    "input": "a163666f6f3800",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {negint/2/min}",
-    "input": "a163666f6f390000",
-    "expect": {
-      "map": {
-        "foo": {
-          "negint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {false}",
-    "input": "a163666f6ff4",
-    "expect": {
-      "map": {
-        "foo": {
-          "bool": false
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {_ uint/4/max}",
-    "input": "bf63666f6f1affffffffff",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 4294967295
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {uint/2/min}",
-    "input": "a163666f6f190000",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 0
-        }
-      }
-    }
-  },
-  {
-    "description": "map - {uint/4/max}",
-    "input": "a163666f6f1affffffff",
-    "expect": {
-      "map": {
-        "foo": {
-          "uint": 4294967295
         }
       }
     }
@@ -1592,30 +1118,74 @@
     }
   },
   {
-    "description": "map - {uint/2/max}",
-    "input": "a163666f6f19ffff",
+    "description": "map - {_ negint/0/max}",
+    "input": "bf63666f6f37ff",
     "expect": {
       "map": {
         "foo": {
-          "uint": 65535
+          "negint": -24
         }
       }
     }
   },
   {
-    "description": "map - {true}",
-    "input": "a163666f6ff5",
+    "description": "map - {_ float16/NaN/MSB}",
+    "input": "bf63666f6ff97e00ff",
     "expect": {
       "map": {
         "foo": {
-          "bool": true
+          "float32": 2143289344
         }
       }
     }
   },
   {
-    "description": "map - {_ float32}",
-    "input": "bf63666f6ffa7f800000ff",
+    "description": "map - {null}",
+    "input": "a163666f6ff6",
+    "expect": {
+      "map": {
+        "foo": {
+          "null": {}
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {float16/NaN/MSB}",
+    "input": "a163666f6ff97e00",
+    "expect": {
+      "map": {
+        "foo": {
+          "float32": 2143289344
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ uint/4/max}",
+    "input": "bf63666f6f1affffffffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 4294967295
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ null}",
+    "input": "bf63666f6ff6ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "null": {}
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ float16/+Inf}",
+    "input": "bf63666f6ff97c00ff",
     "expect": {
       "map": {
         "foo": {
@@ -1625,12 +1195,221 @@
     }
   },
   {
-    "description": "map - {_ uint/1/min}",
-    "input": "bf63666f6f1800ff",
+    "description": "map - {negint/8/min}",
+    "input": "a163666f6f3b0000000000000000",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -1
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {negint/1/max}",
+    "input": "a163666f6f38ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -256
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {negint/4/max}",
+    "input": "a163666f6f3affffffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -4294967296
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ negint/2/min}",
+    "input": "bf63666f6f390000ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -1
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {uint/4/max}",
+    "input": "a163666f6f1affffffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 4294967295
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {float16/NaN/LSB}",
+    "input": "a163666f6ff97c01",
+    "expect": {
+      "map": {
+        "foo": {
+          "float32": 2139103232
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ negint/8/max}",
+    "input": "bf63666f6f3bfffffffffffffffeff",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -18446744073709551615
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {uint/0/max}",
+    "input": "a163666f6f17",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 23
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ negint/0/min}",
+    "input": "bf63666f6f20ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -1
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ undefined}",
+    "input": "bf63666f6ff7ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "undefined": {}
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ uint/0/max}",
+    "input": "bf63666f6f17ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 23
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {negint/2/max}",
+    "input": "a163666f6f39ffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -65536
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {negint/8/max}",
+    "input": "a163666f6f3bfffffffffffffffe",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -18446744073709551615
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ negint/2/max}",
+    "input": "bf63666f6f39ffffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -65536
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {negint/0/max}",
+    "input": "a163666f6f37",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -24
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ uint/1/max}",
+    "input": "bf63666f6f18ffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 255
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {float16/-Inf}",
+    "input": "a163666f6ff9fc00",
+    "expect": {
+      "map": {
+        "foo": {
+          "float32": 4286578688
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ uint/0/min}",
+    "input": "bf63666f6f00ff",
     "expect": {
       "map": {
         "foo": {
           "uint": 0
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {uint/8/max}",
+    "input": "a163666f6f1bffffffffffffffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 18446744073709551615
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {negint/2/min}",
+    "input": "a163666f6f390000",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -1
         }
       }
     }
@@ -1647,61 +1426,243 @@
     }
   },
   {
-    "description": "tag - 4/min",
-    "input": "da0000000001",
+    "description": "map - {_ float16/NaN/LSB}",
+    "input": "bf63666f6ff97c01ff",
     "expect": {
-      "tag": {
-        "id": 0,
-        "value": {
-          "uint": 1
+      "map": {
+        "foo": {
+          "float32": 2139103232
         }
       }
     }
   },
   {
-    "description": "tag - 8/max",
-    "input": "dbffffffffffffffff01",
+    "description": "map - {uint/2/min}",
+    "input": "a163666f6f190000",
     "expect": {
-      "tag": {
-        "id": 18446744073709551615,
-        "value": {
-          "uint": 1
+      "map": {
+        "foo": {
+          "uint": 0
         }
       }
     }
   },
   {
-    "description": "tag - 1/min",
-    "input": "d80001",
+    "description": "map - {uint/1/max}",
+    "input": "a163666f6f18ff",
     "expect": {
-      "tag": {
-        "id": 0,
-        "value": {
-          "uint": 1
+      "map": {
+        "foo": {
+          "uint": 255
         }
       }
     }
   },
   {
-    "description": "tag - 0/max",
-    "input": "d701",
+    "description": "map - {uint/8/min}",
+    "input": "a163666f6f1b0000000000000000",
     "expect": {
-      "tag": {
-        "id": 23,
-        "value": {
-          "uint": 1
+      "map": {
+        "foo": {
+          "uint": 0
         }
       }
     }
   },
   {
-    "description": "tag - 1/max",
-    "input": "d8ff01",
+    "description": "map - {false}",
+    "input": "a163666f6ff4",
     "expect": {
-      "tag": {
-        "id": 255,
-        "value": {
-          "uint": 1
+      "map": {
+        "foo": {
+          "bool": false
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {undefined}",
+    "input": "a163666f6ff7",
+    "expect": {
+      "map": {
+        "foo": {
+          "undefined": {}
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ uint/2/min}",
+    "input": "bf63666f6f190000ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 0
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ float32}",
+    "input": "bf63666f6ffa7f800000ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "float32": 2139095040
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {uint/0/min}",
+    "input": "a163666f6f00",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 0
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ negint/4/min}",
+    "input": "bf63666f6f3a00000000ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -1
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ float16/-Inf}",
+    "input": "bf63666f6ff9fc00ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "float32": 4286578688
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {float64}",
+    "input": "a163666f6ffb7ff0000000000000",
+    "expect": {
+      "map": {
+        "foo": {
+          "float64": 9218868437227405312
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {float32}",
+    "input": "a163666f6ffa7f800000",
+    "expect": {
+      "map": {
+        "foo": {
+          "float32": 2139095040
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {negint/1/min}",
+    "input": "a163666f6f3800",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -1
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {uint/2/max}",
+    "input": "a163666f6f19ffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 65535
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {uint/4/min}",
+    "input": "a163666f6f1a00000000",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 0
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {negint/4/min}",
+    "input": "a163666f6f3a00000000",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -1
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {true}",
+    "input": "a163666f6ff5",
+    "expect": {
+      "map": {
+        "foo": {
+          "bool": true
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ uint/8/min}",
+    "input": "bf63666f6f1b0000000000000000ff",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 0
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ negint/1/max}",
+    "input": "bf63666f6f38ffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "negint": -256
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {uint/1/min}",
+    "input": "a163666f6f1800",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 0
+        }
+      }
+    }
+  },
+  {
+    "description": "map - {_ uint/2/max}",
+    "input": "bf63666f6f19ffffff",
+    "expect": {
+      "map": {
+        "foo": {
+          "uint": 65535
         }
       }
     }
@@ -1724,6 +1685,30 @@
     "expect": {
       "tag": {
         "id": 65535,
+        "value": {
+          "uint": 1
+        }
+      }
+    }
+  },
+  {
+    "description": "tag - 8/max",
+    "input": "dbffffffffffffffff01",
+    "expect": {
+      "tag": {
+        "id": 18446744073709551615,
+        "value": {
+          "uint": 1
+        }
+      }
+    }
+  },
+  {
+    "description": "tag - 4/min",
+    "input": "da0000000001",
+    "expect": {
+      "tag": {
+        "id": 0,
         "value": {
           "uint": 1
         }
@@ -1760,6 +1745,42 @@
     "expect": {
       "tag": {
         "id": 0,
+        "value": {
+          "uint": 1
+        }
+      }
+    }
+  },
+  {
+    "description": "tag - 0/max",
+    "input": "d701",
+    "expect": {
+      "tag": {
+        "id": 23,
+        "value": {
+          "uint": 1
+        }
+      }
+    }
+  },
+  {
+    "description": "tag - 1/min",
+    "input": "d80001",
+    "expect": {
+      "tag": {
+        "id": 0,
+        "value": {
+          "uint": 1
+        }
+      }
+    }
+  },
+  {
+    "description": "tag - 1/max",
+    "input": "d8ff01",
+    "expect": {
+      "tag": {
+        "id": 255,
         "value": {
           "uint": 1
         }

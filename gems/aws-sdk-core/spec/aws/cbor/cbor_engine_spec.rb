@@ -12,7 +12,7 @@ module Aws
 
           case expect.keys.first
           when 'uint' then expect['uint']
-          when 'negint' then -1 - expect['negint']
+          when 'negint' then expect['negint']
           when 'bytestring' then expect['bytestring'].pack('c*')
           when 'string' then expect['string']
           when 'list'
