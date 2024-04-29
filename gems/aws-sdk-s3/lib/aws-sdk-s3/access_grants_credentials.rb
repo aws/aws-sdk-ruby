@@ -46,7 +46,7 @@ module Aws
         # @api private
         def get_data_access_options
           @gdao ||= begin
-            input = S3Control::Client.api.operation(:get_data_access).input
+            input = Aws::S3Control::Client.api.operation(:get_data_access).input
             Set.new(input.shape.member_names)
           end
         end

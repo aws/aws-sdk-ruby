@@ -7,7 +7,7 @@ module Aws
     describe AccessGrantsCredentials do
 
       let(:client) do
-        S3Control::Client.new(region: 'us-east-1', stub_responses: true)
+        Aws::S3Control::Client.new(region: 'us-east-1', stub_responses: true)
       end
 
       let(:in_five_minutes) { Time.now + 60 * 5 }
