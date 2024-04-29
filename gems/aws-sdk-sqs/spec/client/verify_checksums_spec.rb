@@ -59,6 +59,16 @@ module Aws
           expect(client.config.verify_checksums).to be(true)
         end
 
+        it 'is disabled when response stubbing is enabled' do
+          client = Client.new(stub_responses: true)
+          expect(client.config.verify_checksums).to be(false)
+        end
+
+        it 'can be enabled with response stubbing is enabled' do
+          client = Client.new(stub_responses: true, verify_checksums: true)
+          expect(client.config.verify_checksums).to be(true)
+        end
+
         describe '#send_message' do
           let(:md5_of_attributes) { '756d7f4338696745d063b420a2f7e502' }
           let(:md5_of_system_attributes) { '756d7f4338696745d063b420a2f7e502' }
