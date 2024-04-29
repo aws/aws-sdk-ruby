@@ -9,7 +9,7 @@ module Aws
     describe Client do
       let(:client) { Client.new }
 
-      before(:each) do
+      before do
         Aws.config[:s3] = {
           region: 'us-east-1',
           credentials: Credentials.new('akid', 'secret'),
@@ -17,9 +17,9 @@ module Aws
         }
       end
 
-      after(:each) do
+      after do
         Aws.config = {}
-        S3::BUCKET_REGIONS.clear
+        Aws::S3.bucket_region_cache.clear
       end
 
       it 'raises an error when region is missing' do

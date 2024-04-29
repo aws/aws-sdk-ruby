@@ -46,7 +46,7 @@ module Aws
       after do
         Aws::S3.access_grants_credentials_cache.clear
         Aws::S3.access_grants_account_id_cache.clear
-        BUCKET_REGIONS.clear
+        Aws::S3.bucket_region_cache.clear
       end
 
       describe '#access_grants_credentials_for' do

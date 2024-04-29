@@ -46,7 +46,7 @@ module Aws
         @fallback = options.delete(:fallback) || false
         @caching = options.delete(:caching) != false
         @s3_control_clients = {}
-        @bucket_region_cache = BUCKET_REGIONS # shared cache with s3_signer
+        @bucket_region_cache = Aws::S3.bucket_region_cache
         return unless @caching
 
         @credentials_cache = Aws::S3.access_grants_credentials_cache

@@ -15,7 +15,7 @@ module Aws
       # Registers a block as a callback. This listener is called when a
       # new bucket/region pair is added to the cache.
       #
-      #     S3::BUCKET_REGIONS.bucket_added do |bucket_name, region_name|
+      #     Aws::S3.bucket_region_cache.bucket_added do |bucket_name, region_name|
       #       # ...
       #     end
       #
@@ -81,9 +81,5 @@ module Aws
       alias to_h to_hash
 
     end
-
-    # @api private
-    BUCKET_REGIONS = BucketRegionCache.new
-
   end
 end
