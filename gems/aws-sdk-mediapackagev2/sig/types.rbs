@@ -52,6 +52,7 @@ module Aws::MediaPackageV2
       attr_accessor egress_domain: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
+      attr_accessor etag: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -74,7 +75,23 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
       attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDashManifestConfiguration
+      attr_accessor manifest_name: ::String
+      attr_accessor manifest_window_seconds: ::Integer
+      attr_accessor filter_configuration: Types::FilterConfiguration
+      attr_accessor min_update_period_seconds: ::Integer
+      attr_accessor min_buffer_time_seconds: ::Integer
+      attr_accessor suggested_presentation_delay_seconds: ::Integer
+      attr_accessor segment_template_format: ("NUMBER_WITH_TIMELINE")
+      attr_accessor period_triggers: ::Array[("AVAILS" | "DRM_KEY_ROTATION" | "SOURCE_CHANGES" | "SOURCE_DISRUPTIONS" | "NONE")]
+      attr_accessor scte_dash: Types::ScteDash
+      attr_accessor drm_signaling: ("INDIVIDUAL" | "REFERENCED")
+      attr_accessor utc_timing: Types::DashUtcTiming
       SENSITIVE: []
     end
 
@@ -109,6 +126,7 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::CreateHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::CreateLowLatencyHlsManifestConfiguration]
+      attr_accessor dash_manifests: ::Array[Types::CreateDashManifestConfiguration]
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -126,7 +144,15 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor dash_manifests: ::Array[Types::GetDashManifestConfiguration]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DashUtcTiming
+      attr_accessor timing_mode: ("HTTP_HEAD" | "HTTP_ISO" | "HTTP_XSDATE" | "UTC_DIRECT")
+      attr_accessor timing_source: ::String
       SENSITIVE: []
     end
 
@@ -216,6 +242,7 @@ module Aws::MediaPackageV2
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -247,7 +274,24 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
       attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetDashManifestConfiguration
+      attr_accessor manifest_name: ::String
+      attr_accessor url: ::String
+      attr_accessor manifest_window_seconds: ::Integer
+      attr_accessor filter_configuration: Types::FilterConfiguration
+      attr_accessor min_update_period_seconds: ::Integer
+      attr_accessor min_buffer_time_seconds: ::Integer
+      attr_accessor suggested_presentation_delay_seconds: ::Integer
+      attr_accessor segment_template_format: ("NUMBER_WITH_TIMELINE")
+      attr_accessor period_triggers: ::Array[("AVAILS" | "DRM_KEY_ROTATION" | "SOURCE_CHANGES" | "SOURCE_DISRUPTIONS" | "NONE")]
+      attr_accessor scte_dash: Types::ScteDash
+      attr_accessor drm_signaling: ("INDIVIDUAL" | "REFERENCED")
+      attr_accessor utc_timing: Types::DashUtcTiming
       SENSITIVE: []
     end
 
@@ -308,7 +352,9 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor dash_manifests: ::Array[Types::GetDashManifestConfiguration]
       SENSITIVE: []
     end
 
@@ -345,6 +391,12 @@ module Aws::MediaPackageV2
     class ListChannelsResponse
       attr_accessor items: ::Array[Types::ChannelListConfiguration]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDashManifestConfiguration
+      attr_accessor manifest_name: ::String
+      attr_accessor url: ::String
       SENSITIVE: []
     end
 
@@ -397,6 +449,7 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor hls_manifests: ::Array[Types::ListHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::ListLowLatencyHlsManifestConfiguration]
+      attr_accessor dash_manifests: ::Array[Types::ListDashManifestConfiguration]
       SENSITIVE: []
     end
 
@@ -429,6 +482,11 @@ module Aws::MediaPackageV2
 
     class Scte
       attr_accessor scte_filter: ::Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY" | "PROGRAM")]
+      SENSITIVE: []
+    end
+
+    class ScteDash
+      attr_accessor ad_marker_dash: ("BINARY" | "XML")
       SENSITIVE: []
     end
 
@@ -481,6 +539,7 @@ module Aws::MediaPackageV2
 
     class UpdateChannelGroupRequest
       attr_accessor channel_group_name: ::String
+      attr_accessor etag: ::String
       attr_accessor description: ::String
       SENSITIVE: []
     end
@@ -492,6 +551,7 @@ module Aws::MediaPackageV2
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -499,6 +559,7 @@ module Aws::MediaPackageV2
     class UpdateChannelRequest
       attr_accessor channel_group_name: ::String
       attr_accessor channel_name: ::String
+      attr_accessor etag: ::String
       attr_accessor description: ::String
       SENSITIVE: []
     end
@@ -511,6 +572,7 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
       attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -525,6 +587,8 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::CreateHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::CreateLowLatencyHlsManifestConfiguration]
+      attr_accessor dash_manifests: ::Array[Types::CreateDashManifestConfiguration]
+      attr_accessor etag: ::String
       SENSITIVE: []
     end
 
@@ -541,13 +605,15 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor dash_manifests: ::Array[Types::GetDashManifestConfiguration]
       SENSITIVE: []
     end
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME")
+      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME" | "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST" | "DIRECT_MODE_WITH_TIMING_SOURCE" | "NONE_MODE_WITH_TIMING_SOURCE" | "TIMING_SOURCE_MISSING" | "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION" | "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES" | "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS")
       SENSITIVE: []
     end
   end

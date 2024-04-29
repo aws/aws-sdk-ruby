@@ -93,6 +93,7 @@ module Aws::CodeStarconnections
     OwnerId = Shapes::StringShape.new(name: 'OwnerId')
     Parent = Shapes::StringShape.new(name: 'Parent')
     ProviderType = Shapes::StringShape.new(name: 'ProviderType')
+    PublishDeploymentStatus = Shapes::StringShape.new(name: 'PublishDeploymentStatus')
     RepositoryLinkArn = Shapes::StringShape.new(name: 'RepositoryLinkArn')
     RepositoryLinkId = Shapes::StringShape.new(name: 'RepositoryLinkId')
     RepositoryLinkInfo = Shapes::StructureShape.new(name: 'RepositoryLinkInfo')
@@ -143,6 +144,7 @@ module Aws::CodeStarconnections
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TlsCertificate = Shapes::StringShape.new(name: 'TlsCertificate')
+    TriggerResourceUpdateOn = Shapes::StringShape.new(name: 'TriggerResourceUpdateOn')
     Type = Shapes::StringShape.new(name: 'Type')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UnsupportedProviderTypeException = Shapes::StructureShape.new(name: 'UnsupportedProviderTypeException')
@@ -220,6 +222,8 @@ module Aws::CodeStarconnections
     CreateSyncConfigurationInput.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ResourceName"))
     CreateSyncConfigurationInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "RoleArn"))
     CreateSyncConfigurationInput.add_member(:sync_type, Shapes::ShapeRef.new(shape: SyncConfigurationType, required: true, location_name: "SyncType"))
+    CreateSyncConfigurationInput.add_member(:publish_deployment_status, Shapes::ShapeRef.new(shape: PublishDeploymentStatus, location_name: "PublishDeploymentStatus"))
+    CreateSyncConfigurationInput.add_member(:trigger_resource_update_on, Shapes::ShapeRef.new(shape: TriggerResourceUpdateOn, location_name: "TriggerResourceUpdateOn"))
     CreateSyncConfigurationInput.struct_class = Types::CreateSyncConfigurationInput
 
     CreateSyncConfigurationOutput.add_member(:sync_configuration, Shapes::ShapeRef.new(shape: SyncConfiguration, required: true, location_name: "SyncConfiguration"))
@@ -476,6 +480,8 @@ module Aws::CodeStarconnections
     SyncConfiguration.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ResourceName"))
     SyncConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "RoleArn"))
     SyncConfiguration.add_member(:sync_type, Shapes::ShapeRef.new(shape: SyncConfigurationType, required: true, location_name: "SyncType"))
+    SyncConfiguration.add_member(:publish_deployment_status, Shapes::ShapeRef.new(shape: PublishDeploymentStatus, location_name: "PublishDeploymentStatus"))
+    SyncConfiguration.add_member(:trigger_resource_update_on, Shapes::ShapeRef.new(shape: TriggerResourceUpdateOn, location_name: "TriggerResourceUpdateOn"))
     SyncConfiguration.struct_class = Types::SyncConfiguration
 
     SyncConfigurationList.member = Shapes::ShapeRef.new(shape: SyncConfiguration)
@@ -547,6 +553,8 @@ module Aws::CodeStarconnections
     UpdateSyncConfigurationInput.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ResourceName"))
     UpdateSyncConfigurationInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
     UpdateSyncConfigurationInput.add_member(:sync_type, Shapes::ShapeRef.new(shape: SyncConfigurationType, required: true, location_name: "SyncType"))
+    UpdateSyncConfigurationInput.add_member(:publish_deployment_status, Shapes::ShapeRef.new(shape: PublishDeploymentStatus, location_name: "PublishDeploymentStatus"))
+    UpdateSyncConfigurationInput.add_member(:trigger_resource_update_on, Shapes::ShapeRef.new(shape: TriggerResourceUpdateOn, location_name: "TriggerResourceUpdateOn"))
     UpdateSyncConfigurationInput.struct_class = Types::UpdateSyncConfigurationInput
 
     UpdateSyncConfigurationOutput.add_member(:sync_configuration, Shapes::ShapeRef.new(shape: SyncConfiguration, required: true, location_name: "SyncConfiguration"))

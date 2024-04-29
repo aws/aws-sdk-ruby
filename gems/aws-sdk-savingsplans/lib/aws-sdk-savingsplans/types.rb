@@ -15,7 +15,8 @@ module Aws::SavingsPlans
     #   @return [String]
     #
     # @!attribute [rw] commitment
-    #   The hourly commitment, in USD. This is a value between 0.001 and 1
+    #   The hourly commitment, in the same currency of the
+    #   `savingsPlanOfferingId`. This is a value between 0.001 and 1
     #   million. You cannot specify more than five digits after the decimal
     #   point.
     #   @return [String]
@@ -23,16 +24,16 @@ module Aws::SavingsPlans
     # @!attribute [rw] upfront_payment_amount
     #   The up-front payment amount. This is a whole number between 50 and
     #   99 percent of the total value of the Savings Plan. This parameter is
-    #   supported only if the payment option is `Partial Upfront`.
+    #   only supported if the payment option is `Partial Upfront`.
     #   @return [String]
     #
     # @!attribute [rw] purchase_time
-    #   The time at which to purchase the Savings Plan, in UTC format
+    #   The purchase time of the Savings Plan in UTC format
     #   (YYYY-MM-DDTHH:MM:SSZ).
     #   @return [Time]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -118,7 +119,7 @@ module Aws::SavingsPlans
     #   @return [String]
     #
     # @!attribute [rw] search_results
-    #   Information about the Savings Plans rates.
+    #   Information about the Savings Plan rates.
     #   @return [Array<Types::SavingsPlanRate>]
     #
     # @!attribute [rw] next_token
@@ -149,7 +150,7 @@ module Aws::SavingsPlans
     #   @return [Array<String>]
     #
     # @!attribute [rw] products
-    #   The AWS products.
+    #   The Amazon Web Services products.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_codes
@@ -161,7 +162,8 @@ module Aws::SavingsPlans
     #   @return [Array<String>]
     #
     # @!attribute [rw] operations
-    #   The specific AWS operation for the line item in the billing report.
+    #   The specific Amazon Web Services operation for the line item in the
+    #   billing report.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -226,11 +228,11 @@ module Aws::SavingsPlans
     #   @return [String]
     #
     # @!attribute [rw] plan_types
-    #   The plan type.
+    #   The plan types.
     #   @return [Array<String>]
     #
     # @!attribute [rw] durations
-    #   The durations, in seconds.
+    #   The duration, in seconds.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] currencies
@@ -250,7 +252,8 @@ module Aws::SavingsPlans
     #   @return [Array<String>]
     #
     # @!attribute [rw] operations
-    #   The specific AWS operation for the line item in the billing report.
+    #   The specific Amazon Web Services operation for the line item in the
+    #   billing report.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -324,7 +327,7 @@ module Aws::SavingsPlans
     #   @return [Integer]
     #
     # @!attribute [rw] states
-    #   The states.
+    #   The current states of the Savings Plans.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -451,6 +454,39 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
+    # @!attribute [rw] savings_plan_id
+    #   The ID of the Savings Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/ReturnSavingsPlanRequest AWS API Documentation
+    #
+    class ReturnSavingsPlanRequest < Struct.new(
+      :savings_plan_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] savings_plan_id
+    #   The ID of the Savings Plan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/ReturnSavingsPlanResponse AWS API Documentation
+    #
+    class ReturnSavingsPlanResponse < Struct.new(
+      :savings_plan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a Savings Plan.
     #
     # @!attribute [rw] offering_id
@@ -478,11 +514,11 @@ module Aws::SavingsPlans
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state.
+    #   The current state.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region.
+    #   The Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_family
@@ -506,7 +542,7 @@ module Aws::SavingsPlans
     #   @return [String]
     #
     # @!attribute [rw] commitment
-    #   The hourly commitment, in USD.
+    #   The hourly commitment amount in the specified currency.
     #   @return [String]
     #
     # @!attribute [rw] upfront_payment_amount
@@ -524,6 +560,12 @@ module Aws::SavingsPlans
     # @!attribute [rw] tags
     #   One or more tags.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] returnable_until
+    #   The time until when a return for the Savings Plan can be requested.
+    #   If the Savings Plan is not returnable, the field reflects the
+    #   Savings Plan start time.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/SavingsPlan AWS API Documentation
     #
@@ -545,12 +587,13 @@ module Aws::SavingsPlans
       :upfront_payment_amount,
       :recurring_payment_amount,
       :term_duration_in_seconds,
-      :tags)
+      :tags,
+      :returnable_until)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Information about a filter.
+    # Information about a Savings Plan filter.
     #
     # @!attribute [rw] name
     #   The filter name.
@@ -608,7 +651,8 @@ module Aws::SavingsPlans
     #   @return [String]
     #
     # @!attribute [rw] operation
-    #   The specific AWS operation for the line item in the billing report.
+    #   The specific Amazon Web Services operation for the line item in the
+    #   billing report.
     #   @return [String]
     #
     # @!attribute [rw] properties
@@ -633,7 +677,7 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # Information about a filter.
+    # Information about a Savings Plan offering filter.
     #
     # @!attribute [rw] name
     #   The filter name.
@@ -652,7 +696,7 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # Information about a property.
+    # Information about a Savings Plan offering property.
     #
     # @!attribute [rw] name
     #   The property name.
@@ -698,7 +742,8 @@ module Aws::SavingsPlans
     #   @return [String]
     #
     # @!attribute [rw] operation
-    #   The specific AWS operation for the line item in the billing report.
+    #   The specific Amazon Web Services operation for the line item in the
+    #   billing report.
     #   @return [String]
     #
     # @!attribute [rw] properties
@@ -720,7 +765,7 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # Information about a filter.
+    # Information about a Savings Plan offering rate filter.
     #
     # @!attribute [rw] name
     #   The filter name.
@@ -739,7 +784,7 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # Information about a property.
+    # Information about a Savings Plan offering rate property.
     #
     # @!attribute [rw] name
     #   The property name.
@@ -785,7 +830,8 @@ module Aws::SavingsPlans
     #   @return [String]
     #
     # @!attribute [rw] operation
-    #   The specific AWS operation for the line item in the billing report.
+    #   The specific Amazon Web Services operation for the line item in the
+    #   billing report.
     #   @return [String]
     #
     # @!attribute [rw] properties
@@ -807,7 +853,7 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # Information about a filter.
+    # Information about a Savings Plan rate filter.
     #
     # @!attribute [rw] name
     #   The filter name.
@@ -826,7 +872,7 @@ module Aws::SavingsPlans
       include Aws::Structure
     end
 
-    # Information about a property.
+    # Information about a Savings Plan rate property.
     #
     # @!attribute [rw] name
     #   The property name.

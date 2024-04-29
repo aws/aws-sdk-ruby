@@ -142,6 +142,8 @@ module Aws::QConnect
             Aws::QConnect::Endpoints::UpdateKnowledgeBaseTemplateUri.build(context)
           when :update_quick_response
             Aws::QConnect::Endpoints::UpdateQuickResponse.build(context)
+          when :update_session
+            Aws::QConnect::Endpoints::UpdateSession.build(context)
           end
         end
       end

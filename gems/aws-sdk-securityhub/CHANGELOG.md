@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2024-04-02)
+------------------
+
+* Feature - Documentation updates for AWS Security Hub
+
+1.102.0 (2024-03-22)
+------------------
+
+* Feature - Added new resource detail object to ASFF, including resource for LastKnownExploitAt
+
 1.101.0 (2024-01-26)
 ------------------
 

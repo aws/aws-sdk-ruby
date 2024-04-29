@@ -4933,6 +4933,16 @@ module Aws::Imagebuilder
     #   associated container images distributed to ECR repositories.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] start_time
+    #   The starting timestamp from the lifecycle action that was applied to
+    #   the resource.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The ending timestamp from the lifecycle action that was applied to
+    #   the resource.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/LifecycleExecutionResource AWS API Documentation
     #
     class LifecycleExecutionResource < Struct.new(
@@ -4942,7 +4952,9 @@ module Aws::Imagebuilder
       :action,
       :region,
       :snapshots,
-      :image_uris)
+      :image_uris,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5196,7 +5208,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] tag_map
     #   Contains a list of tags that Image Builder uses to skip lifecycle
-    #   actions for resources that have them.
+    #   actions for Image Builder image resources that have them.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] amis
@@ -5325,8 +5337,8 @@ module Aws::Imagebuilder
     #   @return [Array<Types::LifecyclePolicyResourceSelectionRecipe>]
     #
     # @!attribute [rw] tag_map
-    #   A list of tags that are used as selection criteria for the resources
-    #   that the lifecycle policy applies to.
+    #   A list of tags that are used as selection criteria for the Image
+    #   Builder image resources that the lifecycle policy applies to.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/LifecyclePolicyResourceSelection AWS API Documentation

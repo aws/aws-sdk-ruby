@@ -40,9 +40,14 @@ module Aws::HealthLake
     DescribeFHIRImportJobRequest = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobRequest')
     DescribeFHIRImportJobResponse = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobResponse')
     EncryptionKeyID = Shapes::StringShape.new(name: 'EncryptionKeyID')
+    ErrorCategory = Shapes::StringShape.new(name: 'ErrorCategory')
+    ErrorCause = Shapes::StructureShape.new(name: 'ErrorCause')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExportJobProperties = Shapes::StructureShape.new(name: 'ExportJobProperties')
     ExportJobPropertiesList = Shapes::ListShape.new(name: 'ExportJobPropertiesList')
     FHIRVersion = Shapes::StringShape.new(name: 'FHIRVersion')
+    GenericDouble = Shapes::FloatShape.new(name: 'GenericDouble')
+    GenericLong = Shapes::IntegerShape.new(name: 'GenericLong')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdentityProviderConfiguration = Shapes::StructureShape.new(name: 'IdentityProviderConfiguration')
     ImportJobProperties = Shapes::StructureShape.new(name: 'ImportJobProperties')
@@ -51,6 +56,7 @@ module Aws::HealthLake
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobName = Shapes::StringShape.new(name: 'JobName')
+    JobProgressReport = Shapes::StructureShape.new(name: 'JobProgressReport')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     KmsEncryptionConfig = Shapes::StructureShape.new(name: 'KmsEncryptionConfig')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
@@ -127,6 +133,7 @@ module Aws::HealthLake
     DatastoreProperties.add_member(:sse_configuration, Shapes::ShapeRef.new(shape: SseConfiguration, location_name: "SseConfiguration"))
     DatastoreProperties.add_member(:preload_data_config, Shapes::ShapeRef.new(shape: PreloadDataConfig, location_name: "PreloadDataConfig"))
     DatastoreProperties.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "IdentityProviderConfiguration"))
+    DatastoreProperties.add_member(:error_cause, Shapes::ShapeRef.new(shape: ErrorCause, location_name: "ErrorCause"))
     DatastoreProperties.struct_class = Types::DatastoreProperties
 
     DatastorePropertiesList.member = Shapes::ShapeRef.new(shape: DatastoreProperties)
@@ -160,6 +167,10 @@ module Aws::HealthLake
     DescribeFHIRImportJobResponse.add_member(:import_job_properties, Shapes::ShapeRef.new(shape: ImportJobProperties, required: true, location_name: "ImportJobProperties"))
     DescribeFHIRImportJobResponse.struct_class = Types::DescribeFHIRImportJobResponse
 
+    ErrorCause.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    ErrorCause.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "ErrorCategory"))
+    ErrorCause.struct_class = Types::ErrorCause
+
     ExportJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     ExportJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     ExportJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "JobStatus"))
@@ -187,6 +198,7 @@ module Aws::HealthLake
     ImportJobProperties.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
     ImportJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
     ImportJobProperties.add_member(:job_output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "JobOutputDataConfig"))
+    ImportJobProperties.add_member(:job_progress_report, Shapes::ShapeRef.new(shape: JobProgressReport, location_name: "JobProgressReport"))
     ImportJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     ImportJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ImportJobProperties.struct_class = Types::ImportJobProperties
@@ -201,6 +213,16 @@ module Aws::HealthLake
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    JobProgressReport.add_member(:total_number_of_scanned_files, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfScannedFiles"))
+    JobProgressReport.add_member(:total_size_of_scanned_files_in_mb, Shapes::ShapeRef.new(shape: GenericDouble, location_name: "TotalSizeOfScannedFilesInMB"))
+    JobProgressReport.add_member(:total_number_of_imported_files, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfImportedFiles"))
+    JobProgressReport.add_member(:total_number_of_resources_scanned, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfResourcesScanned"))
+    JobProgressReport.add_member(:total_number_of_resources_imported, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfResourcesImported"))
+    JobProgressReport.add_member(:total_number_of_resources_with_customer_error, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfResourcesWithCustomerError"))
+    JobProgressReport.add_member(:total_number_of_files_read_with_customer_error, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfFilesReadWithCustomerError"))
+    JobProgressReport.add_member(:throughput, Shapes::ShapeRef.new(shape: GenericDouble, location_name: "Throughput"))
+    JobProgressReport.struct_class = Types::JobProgressReport
 
     KmsEncryptionConfig.add_member(:cmk_type, Shapes::ShapeRef.new(shape: CmkType, required: true, location_name: "CmkType"))
     KmsEncryptionConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EncryptionKeyID, location_name: "KmsKeyId"))

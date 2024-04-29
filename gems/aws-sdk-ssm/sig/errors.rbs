@@ -164,6 +164,9 @@ module Aws
       class InvalidInstanceInformationFilterValue < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class InvalidInstancePropertyFilterValue < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InvalidInventoryGroupException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -243,6 +246,9 @@ module Aws
       end
       class ItemSizeLimitExceededException < ::Aws::Errors::ServiceError
         def type_name: () -> ::String
+        def message: () -> ::String
+      end
+      class MalformedResourcePolicyDocumentException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class MaxDocumentSizeExceeded < ::Aws::Errors::ServiceError
@@ -344,6 +350,9 @@ module Aws
       class ResourceLimitExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ResourcePolicyConflictException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -354,6 +363,9 @@ module Aws
       class ResourcePolicyLimitExceededException < ::Aws::Errors::ServiceError
         def limit: () -> ::String
         def limit_type: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourcePolicyNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ServiceSettingNotFound < ::Aws::Errors::ServiceError

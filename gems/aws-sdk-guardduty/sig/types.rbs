@@ -51,7 +51,7 @@ module Aws::GuardDuty
     class AccountDetail
       attr_accessor account_id: ::String
       attr_accessor email: ::String
-      SENSITIVE: []
+      SENSITIVE: [:email]
     end
 
     class AccountFreeTrialInfo
@@ -582,13 +582,13 @@ module Aws::GuardDuty
     end
 
     class DetectorAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class DetectorAdditionalConfigurationResult
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1325,7 +1325,8 @@ module Aws::GuardDuty
 
     class LocalIpDetails
       attr_accessor ip_address_v4: ::String
-      SENSITIVE: []
+      attr_accessor ip_address_v6: ::String
+      SENSITIVE: [:ip_address_v4, :ip_address_v6]
     end
 
     class LocalPortDetails
@@ -1375,17 +1376,17 @@ module Aws::GuardDuty
       attr_accessor invited_at: ::String
       attr_accessor updated_at: ::String
       attr_accessor administrator_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:email]
     end
 
     class MemberAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class MemberAdditionalConfigurationResult
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1435,7 +1436,7 @@ module Aws::GuardDuty
       attr_accessor security_groups: ::Array[Types::SecurityGroup]
       attr_accessor subnet_id: ::String
       attr_accessor vpc_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:private_ip_address]
     end
 
     class Observations
@@ -1452,13 +1453,13 @@ module Aws::GuardDuty
     end
 
     class OrganizationAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
       SENSITIVE: []
     end
 
     class OrganizationAdditionalConfigurationResult
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
       SENSITIVE: []
     end
@@ -1515,7 +1516,7 @@ module Aws::GuardDuty
     end
 
     class OrganizationFeatureStatisticsAdditionalConfiguration
-      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT")
+      attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor enabled_accounts_count: ::Integer
       SENSITIVE: []
     end
@@ -1606,7 +1607,7 @@ module Aws::GuardDuty
     class PrivateIpAddressDetails
       attr_accessor private_dns_name: ::String
       attr_accessor private_ip_address: ::String
-      SENSITIVE: []
+      SENSITIVE: [:private_ip_address]
     end
 
     class ProcessDetails
@@ -1674,8 +1675,9 @@ module Aws::GuardDuty
       attr_accessor country: Types::Country
       attr_accessor geo_location: Types::GeoLocation
       attr_accessor ip_address_v4: ::String
+      attr_accessor ip_address_v6: ::String
       attr_accessor organization: Types::Organization
-      SENSITIVE: []
+      SENSITIVE: [:ip_address_v4, :ip_address_v6]
     end
 
     class RemotePortDetails
@@ -1726,6 +1728,11 @@ module Aws::GuardDuty
       attr_accessor address_family: ::String
       attr_accessor iana_protocol_number: ::Integer
       attr_accessor memory_regions: ::Array[::String]
+      attr_accessor tool_name: ::String
+      attr_accessor tool_category: ::String
+      attr_accessor service_name: ::String
+      attr_accessor command_line_example: ::String
+      attr_accessor threat_file_path: ::String
       SENSITIVE: []
     end
 
@@ -1940,6 +1947,7 @@ module Aws::GuardDuty
     class ThreatIntelligenceDetail
       attr_accessor threat_list_name: ::String
       attr_accessor threat_names: ::Array[::String]
+      attr_accessor threat_file_sha_256: ::String
       SENSITIVE: []
     end
 
@@ -2106,7 +2114,7 @@ module Aws::GuardDuty
       attr_accessor account_ids: ::Array[::String]
       attr_accessor data_sources: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_LOGS" | "KUBERNETES_AUDIT_LOGS" | "EC2_MALWARE_SCAN")]
       attr_accessor resources: ::Array[::String]
-      attr_accessor features: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING")]
+      attr_accessor features: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")]
       SENSITIVE: []
     end
 
@@ -2117,7 +2125,7 @@ module Aws::GuardDuty
     end
 
     class UsageFeatureResult
-      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING")
+      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")
       attr_accessor total: Types::Total
       SENSITIVE: []
     end
@@ -2145,7 +2153,7 @@ module Aws::GuardDuty
     end
 
     class UsageTopAccountsResult
-      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING")
+      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")
       attr_accessor accounts: ::Array[Types::UsageTopAccountResult]
       SENSITIVE: []
     end

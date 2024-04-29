@@ -179,7 +179,8 @@ module Aws
                             },
                           ],
                           ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
-                          ?deletion_protection_enabled: bool
+                          ?deletion_protection_enabled: bool,
+                          ?resource_policy: ::String
                         ) -> Table
                       | (?Hash[Symbol, untyped]) -> Table
 

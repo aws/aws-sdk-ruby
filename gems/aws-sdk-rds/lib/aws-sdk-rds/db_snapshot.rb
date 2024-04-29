@@ -706,6 +706,7 @@ module Aws::RDS
     #     db_cluster_snapshot_identifier: "String",
     #     allocated_storage: 1,
     #     dedicated_log_volume: false,
+    #     ca_certificate_identifier: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -875,10 +876,10 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     # @option options [String] :tde_credential_arn
@@ -1119,8 +1120,7 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @option options [String] :db_cluster_snapshot_identifier
-    #   The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to
-    #   restore from.
+    #   The identifier for the Multi-AZ DB cluster snapshot to restore from.
     #
     #   For more information on Multi-AZ DB clusters, see [ Multi-AZ DB
     #   cluster deployments][1] in the *Amazon RDS User Guide*.
@@ -1140,9 +1140,6 @@ module Aws::RDS
     #
     #   * Can't be the identifier of an Aurora DB cluster snapshot.
     #
-    #   * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB
-    #     cluster snapshot.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
@@ -1158,6 +1155,21 @@ module Aws::RDS
     # @option options [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
+    # @option options [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

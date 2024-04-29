@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2024-04-05)
+------------------
+
+* Feature - Adding BatchIsAuthorizedWithToken API which supports multiple authorization requests against a PolicyStore given a bearer token.
+
+1.18.0 (2024-04-04)
+------------------
+
+* Feature - Adds GroupConfiguration field to Identity Source API's
+
+1.17.0 (2024-03-06)
+------------------
+
+* Feature - Deprecating details in favor of configuration for GetIdentitySource and ListIdentitySources APIs.
+
 1.16.0 (2024-01-26)
 ------------------
 

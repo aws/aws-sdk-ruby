@@ -431,6 +431,9 @@ module Aws::ServiceDiscovery
     # @!attribute [rw] namespace_name
     #   The `HttpName` name of the namespace. It's found in the
     #   `HttpProperties` member of the `Properties` member of the namespace.
+    #   In most cases, `Name` and `HttpName` match. However, if you reuse
+    #   `Name` for namespace creation, a generated hash is added to
+    #   `HttpName` to distinguish the two.
     #   @return [String]
     #
     # @!attribute [rw] service_name
@@ -2507,12 +2510,10 @@ module Aws::ServiceDiscovery
     #
     #   * For each attribute, the applicable value.
     #
-    #   <note markdown="1"> Do not include sensitive information in the attributes if the
+    #   Do not include sensitive information in the attributes if the
     #   namespace is discoverable by public DNS queries.
     #
-    #    </note>
-    #
-    #   Supported attribute keys include the following:
+    #   The following are the supported attribute keys.
     #
     #   AWS\_ALIAS\_DNS\_NAME
     #
@@ -2542,6 +2543,9 @@ module Aws::ServiceDiscovery
     #
     #     * If you specify a value for `AWS_ALIAS_DNS_NAME`, don't specify
     #       values for any of the `AWS_INSTANCE` attributes.
+    #
+    #     * The `AWS_ALIAS_DNS_NAME` is not supported in the GovCloud (US)
+    #       Regions.
     #
     #   AWS\_EC2\_INSTANCE\_ID
     #

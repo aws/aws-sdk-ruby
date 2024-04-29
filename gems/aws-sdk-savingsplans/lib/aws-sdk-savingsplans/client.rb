@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::SavingsPlans
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::SavingsPlans
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::SavingsPlans
     #   @option options [Aws::SavingsPlans::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SavingsPlans::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -394,21 +418,21 @@ module Aws::SavingsPlans
     #   The ID of the offering.
     #
     # @option params [required, String] :commitment
-    #   The hourly commitment, in USD. This is a value between 0.001 and 1
-    #   million. You cannot specify more than five digits after the decimal
-    #   point.
+    #   The hourly commitment, in the same currency of the
+    #   `savingsPlanOfferingId`. This is a value between 0.001 and 1 million.
+    #   You cannot specify more than five digits after the decimal point.
     #
     # @option params [String] :upfront_payment_amount
     #   The up-front payment amount. This is a whole number between 50 and 99
-    #   percent of the total value of the Savings Plan. This parameter is
-    #   supported only if the payment option is `Partial Upfront`.
+    #   percent of the total value of the Savings Plan. This parameter is only
+    #   supported if the payment option is `Partial Upfront`.
     #
     # @option params [Time,DateTime,Date,Integer,String] :purchase_time
-    #   The time at which to purchase the Savings Plan, in UTC format
+    #   The purchase time of the Savings Plan in UTC format
     #   (YYYY-MM-DDTHH:MM:SSZ).
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -469,7 +493,7 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
-    # Describes the specified Savings Plans rates.
+    # Describes the rates for the specified Savings Plan.
     #
     # @option params [required, String] :savings_plan_id
     #   The ID of the Savings Plan.
@@ -547,7 +571,7 @@ module Aws::SavingsPlans
     #   value.
     #
     # @option params [Array<String>] :states
-    #   The states.
+    #   The current states of the Savings Plans.
     #
     # @option params [Array<Types::SavingsPlanFilter>] :filters
     #   The filters.
@@ -564,7 +588,7 @@ module Aws::SavingsPlans
     #     savings_plan_ids: ["SavingsPlanId"],
     #     next_token: "PaginationToken",
     #     max_results: 1,
-    #     states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired, queued, queued-deleted
+    #     states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired, queued, queued-deleted, pending-return, returned
     #     filters: [
     #       {
     #         name: "region", # accepts region, ec2-instance-family, commitment, upfront, term, savings-plan-type, payment-option, start, end
@@ -582,7 +606,7 @@ module Aws::SavingsPlans
     #   resp.savings_plans[0].description #=> String
     #   resp.savings_plans[0].start #=> String
     #   resp.savings_plans[0].end #=> String
-    #   resp.savings_plans[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired", "queued", "queued-deleted"
+    #   resp.savings_plans[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired", "queued", "queued-deleted", "pending-return", "returned"
     #   resp.savings_plans[0].region #=> String
     #   resp.savings_plans[0].ec2_instance_family #=> String
     #   resp.savings_plans[0].savings_plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker"
@@ -596,6 +620,7 @@ module Aws::SavingsPlans
     #   resp.savings_plans[0].term_duration_in_seconds #=> Integer
     #   resp.savings_plans[0].tags #=> Hash
     #   resp.savings_plans[0].tags["TagKey"] #=> String
+    #   resp.savings_plans[0].returnable_until #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/DescribeSavingsPlans AWS API Documentation
@@ -607,7 +632,7 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
-    # Describes the specified Savings Plans offering rates.
+    # Describes the offering rates for the specified Savings Plans.
     #
     # @option params [Array<String>] :savings_plan_offering_ids
     #   The IDs of the offerings.
@@ -619,7 +644,7 @@ module Aws::SavingsPlans
     #   The plan types.
     #
     # @option params [Array<String>] :products
-    #   The AWS products.
+    #   The Amazon Web Services products.
     #
     # @option params [Array<String>] :service_codes
     #   The services.
@@ -628,7 +653,8 @@ module Aws::SavingsPlans
     #   The usage details of the line item in the billing report.
     #
     # @option params [Array<String>] :operations
-    #   The specific AWS operation for the line item in the billing report.
+    #   The specific Amazon Web Services operation for the line item in the
+    #   billing report.
     #
     # @option params [Array<Types::SavingsPlanOfferingRateFilterElement>] :filters
     #   The filters.
@@ -695,7 +721,7 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
-    # Describes the specified Savings Plans offerings.
+    # Describes the offerings for the specified Savings Plans.
     #
     # @option params [Array<String>] :offering_ids
     #   The IDs of the offerings.
@@ -707,10 +733,10 @@ module Aws::SavingsPlans
     #   The product type.
     #
     # @option params [Array<String>] :plan_types
-    #   The plan type.
+    #   The plan types.
     #
     # @option params [Array<Integer>] :durations
-    #   The durations, in seconds.
+    #   The duration, in seconds.
     #
     # @option params [Array<String>] :currencies
     #   The currencies.
@@ -725,7 +751,8 @@ module Aws::SavingsPlans
     #   The usage details of the line item in the billing report.
     #
     # @option params [Array<String>] :operations
-    #   The specific AWS operation for the line item in the billing report.
+    #   The specific Amazon Web Services operation for the line item in the
+    #   billing report.
     #
     # @option params [Array<Types::SavingsPlanOfferingFilterElement>] :filters
     #   The filters.
@@ -823,6 +850,42 @@ module Aws::SavingsPlans
       req.send_request(options)
     end
 
+    # Returns the specified Savings Plan.
+    #
+    # @option params [required, String] :savings_plan_id
+    #   The ID of the Savings Plan.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ReturnSavingsPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReturnSavingsPlanResponse#savings_plan_id #savings_plan_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.return_savings_plan({
+    #     savings_plan_id: "SavingsPlanId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.savings_plan_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/ReturnSavingsPlan AWS API Documentation
+    #
+    # @overload return_savings_plan(params = {})
+    # @param [Hash] params ({})
+    def return_savings_plan(params = {}, options = {})
+      req = build_request(:return_savings_plan, params)
+      req.send_request(options)
+    end
+
     # Adds the specified tags to the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -891,7 +954,7 @@ module Aws::SavingsPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-savingsplans'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

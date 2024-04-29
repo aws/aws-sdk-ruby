@@ -24,12 +24,25 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedOutput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutput')
     BatchIsAuthorizedOutputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutputItem')
     BatchIsAuthorizedOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedOutputList')
+    BatchIsAuthorizedWithTokenInput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenInput')
+    BatchIsAuthorizedWithTokenInputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenInputItem')
+    BatchIsAuthorizedWithTokenInputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedWithTokenInputList')
+    BatchIsAuthorizedWithTokenOutput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenOutput')
+    BatchIsAuthorizedWithTokenOutputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenOutputItem')
+    BatchIsAuthorizedWithTokenOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedWithTokenOutputList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientIds = Shapes::ListShape.new(name: 'ClientIds')
+    CognitoGroupConfiguration = Shapes::StructureShape.new(name: 'CognitoGroupConfiguration')
+    CognitoGroupConfigurationDetail = Shapes::StructureShape.new(name: 'CognitoGroupConfigurationDetail')
+    CognitoGroupConfigurationItem = Shapes::StructureShape.new(name: 'CognitoGroupConfigurationItem')
     CognitoUserPoolConfiguration = Shapes::StructureShape.new(name: 'CognitoUserPoolConfiguration')
+    CognitoUserPoolConfigurationDetail = Shapes::StructureShape.new(name: 'CognitoUserPoolConfigurationDetail')
+    CognitoUserPoolConfigurationItem = Shapes::StructureShape.new(name: 'CognitoUserPoolConfigurationItem')
     Configuration = Shapes::UnionShape.new(name: 'Configuration')
+    ConfigurationDetail = Shapes::UnionShape.new(name: 'ConfigurationDetail')
+    ConfigurationItem = Shapes::UnionShape.new(name: 'ConfigurationItem')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContextDefinition = Shapes::UnionShape.new(name: 'ContextDefinition')
     ContextMap = Shapes::MapShape.new(name: 'ContextMap')
@@ -73,6 +86,7 @@ module Aws::VerifiedPermissions
     GetPolicyTemplateOutput = Shapes::StructureShape.new(name: 'GetPolicyTemplateOutput')
     GetSchemaInput = Shapes::StructureShape.new(name: 'GetSchemaInput')
     GetSchemaOutput = Shapes::StructureShape.new(name: 'GetSchemaOutput')
+    GroupEntityType = Shapes::StringShape.new(name: 'GroupEntityType')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdentitySourceDetails = Shapes::StructureShape.new(name: 'IdentitySourceDetails')
     IdentitySourceFilter = Shapes::StructureShape.new(name: 'IdentitySourceFilter')
@@ -86,6 +100,7 @@ module Aws::VerifiedPermissions
     IsAuthorizedOutput = Shapes::StructureShape.new(name: 'IsAuthorizedOutput')
     IsAuthorizedWithTokenInput = Shapes::StructureShape.new(name: 'IsAuthorizedWithTokenInput')
     IsAuthorizedWithTokenOutput = Shapes::StructureShape.new(name: 'IsAuthorizedWithTokenOutput')
+    Issuer = Shapes::StringShape.new(name: 'Issuer')
     ListIdentitySourcesInput = Shapes::StructureShape.new(name: 'ListIdentitySourcesInput')
     ListIdentitySourcesMaxResults = Shapes::IntegerShape.new(name: 'ListIdentitySourcesMaxResults')
     ListIdentitySourcesOutput = Shapes::StructureShape.new(name: 'ListIdentitySourcesOutput')
@@ -144,6 +159,7 @@ module Aws::VerifiedPermissions
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimestampFormat = Shapes::TimestampShape.new(name: 'TimestampFormat', timestampFormat: "iso8601")
     Token = Shapes::StringShape.new(name: 'Token')
+    UpdateCognitoGroupConfiguration = Shapes::StructureShape.new(name: 'UpdateCognitoGroupConfiguration')
     UpdateCognitoUserPoolConfiguration = Shapes::StructureShape.new(name: 'UpdateCognitoUserPoolConfiguration')
     UpdateConfiguration = Shapes::UnionShape.new(name: 'UpdateConfiguration')
     UpdateIdentitySourceInput = Shapes::StructureShape.new(name: 'UpdateIdentitySourceInput')
@@ -210,17 +226,77 @@ module Aws::VerifiedPermissions
 
     BatchIsAuthorizedOutputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutputItem)
 
+    BatchIsAuthorizedWithTokenInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    BatchIsAuthorizedWithTokenInput.add_member(:identity_token, Shapes::ShapeRef.new(shape: Token, location_name: "identityToken"))
+    BatchIsAuthorizedWithTokenInput.add_member(:access_token, Shapes::ShapeRef.new(shape: Token, location_name: "accessToken"))
+    BatchIsAuthorizedWithTokenInput.add_member(:entities, Shapes::ShapeRef.new(shape: EntitiesDefinition, location_name: "entities"))
+    BatchIsAuthorizedWithTokenInput.add_member(:requests, Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInputList, required: true, location_name: "requests"))
+    BatchIsAuthorizedWithTokenInput.struct_class = Types::BatchIsAuthorizedWithTokenInput
+
+    BatchIsAuthorizedWithTokenInputItem.add_member(:action, Shapes::ShapeRef.new(shape: ActionIdentifier, location_name: "action"))
+    BatchIsAuthorizedWithTokenInputItem.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    BatchIsAuthorizedWithTokenInputItem.add_member(:context, Shapes::ShapeRef.new(shape: ContextDefinition, location_name: "context"))
+    BatchIsAuthorizedWithTokenInputItem.struct_class = Types::BatchIsAuthorizedWithTokenInputItem
+
+    BatchIsAuthorizedWithTokenInputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInputItem)
+
+    BatchIsAuthorizedWithTokenOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
+    BatchIsAuthorizedWithTokenOutput.add_member(:results, Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutputList, required: true, location_name: "results"))
+    BatchIsAuthorizedWithTokenOutput.struct_class = Types::BatchIsAuthorizedWithTokenOutput
+
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:request, Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInputItem, required: true, location_name: "request"))
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:decision, Shapes::ShapeRef.new(shape: Decision, required: true, location_name: "decision"))
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:determining_policies, Shapes::ShapeRef.new(shape: DeterminingPolicyList, required: true, location_name: "determiningPolicies"))
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
+    BatchIsAuthorizedWithTokenOutputItem.struct_class = Types::BatchIsAuthorizedWithTokenOutputItem
+
+    BatchIsAuthorizedWithTokenOutputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutputItem)
+
     ClientIds.member = Shapes::ShapeRef.new(shape: ClientId)
+
+    CognitoGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    CognitoGroupConfiguration.struct_class = Types::CognitoGroupConfiguration
+
+    CognitoGroupConfigurationDetail.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, location_name: "groupEntityType"))
+    CognitoGroupConfigurationDetail.struct_class = Types::CognitoGroupConfigurationDetail
+
+    CognitoGroupConfigurationItem.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, location_name: "groupEntityType"))
+    CognitoGroupConfigurationItem.struct_class = Types::CognitoGroupConfigurationItem
 
     CognitoUserPoolConfiguration.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
     CognitoUserPoolConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    CognitoUserPoolConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: CognitoGroupConfiguration, location_name: "groupConfiguration"))
     CognitoUserPoolConfiguration.struct_class = Types::CognitoUserPoolConfiguration
+
+    CognitoUserPoolConfigurationDetail.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
+    CognitoUserPoolConfigurationDetail.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, required: true, location_name: "clientIds"))
+    CognitoUserPoolConfigurationDetail.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    CognitoUserPoolConfigurationDetail.add_member(:group_configuration, Shapes::ShapeRef.new(shape: CognitoGroupConfigurationDetail, location_name: "groupConfiguration"))
+    CognitoUserPoolConfigurationDetail.struct_class = Types::CognitoUserPoolConfigurationDetail
+
+    CognitoUserPoolConfigurationItem.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
+    CognitoUserPoolConfigurationItem.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, required: true, location_name: "clientIds"))
+    CognitoUserPoolConfigurationItem.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    CognitoUserPoolConfigurationItem.add_member(:group_configuration, Shapes::ShapeRef.new(shape: CognitoGroupConfigurationItem, location_name: "groupConfiguration"))
+    CognitoUserPoolConfigurationItem.struct_class = Types::CognitoUserPoolConfigurationItem
 
     Configuration.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfiguration, location_name: "cognitoUserPoolConfiguration"))
     Configuration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Configuration.add_member_subclass(:cognito_user_pool_configuration, Types::Configuration::CognitoUserPoolConfiguration)
     Configuration.add_member_subclass(:unknown, Types::Configuration::Unknown)
     Configuration.struct_class = Types::Configuration
+
+    ConfigurationDetail.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfigurationDetail, location_name: "cognitoUserPoolConfiguration"))
+    ConfigurationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConfigurationDetail.add_member_subclass(:cognito_user_pool_configuration, Types::ConfigurationDetail::CognitoUserPoolConfiguration)
+    ConfigurationDetail.add_member_subclass(:unknown, Types::ConfigurationDetail::Unknown)
+    ConfigurationDetail.struct_class = Types::ConfigurationDetail
+
+    ConfigurationItem.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfigurationItem, location_name: "cognitoUserPoolConfiguration"))
+    ConfigurationItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConfigurationItem.add_member_subclass(:cognito_user_pool_configuration, Types::ConfigurationItem::CognitoUserPoolConfiguration)
+    ConfigurationItem.add_member_subclass(:unknown, Types::ConfigurationItem::Unknown)
+    ConfigurationItem.struct_class = Types::ConfigurationItem
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceConflictList, required: true, location_name: "resources"))
@@ -350,11 +426,12 @@ module Aws::VerifiedPermissions
     GetIdentitySourceInput.struct_class = Types::GetIdentitySourceInput
 
     GetIdentitySourceOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
-    GetIdentitySourceOutput.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceDetails, required: true, location_name: "details"))
+    GetIdentitySourceOutput.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceDetails, deprecated: true, location_name: "details", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration"}))
     GetIdentitySourceOutput.add_member(:identity_source_id, Shapes::ShapeRef.new(shape: IdentitySourceId, required: true, location_name: "identitySourceId"))
     GetIdentitySourceOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     GetIdentitySourceOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     GetIdentitySourceOutput.add_member(:principal_entity_type, Shapes::ShapeRef.new(shape: PrincipalEntityType, required: true, location_name: "principalEntityType"))
+    GetIdentitySourceOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationDetail, location_name: "configuration"))
     GetIdentitySourceOutput.struct_class = Types::GetIdentitySourceOutput
 
     GetPolicyInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -404,10 +481,10 @@ module Aws::VerifiedPermissions
     GetSchemaOutput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespaceList, location_name: "namespaces"))
     GetSchemaOutput.struct_class = Types::GetSchemaOutput
 
-    IdentitySourceDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
-    IdentitySourceDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, location_name: "userPoolArn"))
-    IdentitySourceDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, location_name: "discoveryUrl"))
-    IdentitySourceDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, location_name: "openIdIssuer"))
+    IdentitySourceDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, deprecated: true, location_name: "clientIds", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"}))
+    IdentitySourceDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, deprecated: true, location_name: "userPoolArn", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"}))
+    IdentitySourceDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, deprecated: true, location_name: "discoveryUrl", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"}))
+    IdentitySourceDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, deprecated: true, location_name: "openIdIssuer", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration"}))
     IdentitySourceDetails.struct_class = Types::IdentitySourceDetails
 
     IdentitySourceFilter.add_member(:principal_entity_type, Shapes::ShapeRef.new(shape: PrincipalEntityType, location_name: "principalEntityType"))
@@ -416,17 +493,18 @@ module Aws::VerifiedPermissions
     IdentitySourceFilters.member = Shapes::ShapeRef.new(shape: IdentitySourceFilter)
 
     IdentitySourceItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
-    IdentitySourceItem.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceItemDetails, required: true, location_name: "details"))
+    IdentitySourceItem.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceItemDetails, deprecated: true, location_name: "details", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration"}))
     IdentitySourceItem.add_member(:identity_source_id, Shapes::ShapeRef.new(shape: IdentitySourceId, required: true, location_name: "identitySourceId"))
     IdentitySourceItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     IdentitySourceItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     IdentitySourceItem.add_member(:principal_entity_type, Shapes::ShapeRef.new(shape: PrincipalEntityType, required: true, location_name: "principalEntityType"))
+    IdentitySourceItem.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationItem, location_name: "configuration"))
     IdentitySourceItem.struct_class = Types::IdentitySourceItem
 
-    IdentitySourceItemDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
-    IdentitySourceItemDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, location_name: "userPoolArn"))
-    IdentitySourceItemDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, location_name: "discoveryUrl"))
-    IdentitySourceItemDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, location_name: "openIdIssuer"))
+    IdentitySourceItemDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, deprecated: true, location_name: "clientIds", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"}))
+    IdentitySourceItemDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, deprecated: true, location_name: "userPoolArn", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"}))
+    IdentitySourceItemDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, deprecated: true, location_name: "discoveryUrl", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"}))
+    IdentitySourceItemDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, deprecated: true, location_name: "openIdIssuer", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration"}))
     IdentitySourceItemDetails.struct_class = Types::IdentitySourceItemDetails
 
     IdentitySources.member = Shapes::ShapeRef.new(shape: IdentitySourceItem)
@@ -459,6 +537,7 @@ module Aws::VerifiedPermissions
     IsAuthorizedWithTokenOutput.add_member(:decision, Shapes::ShapeRef.new(shape: Decision, required: true, location_name: "decision"))
     IsAuthorizedWithTokenOutput.add_member(:determining_policies, Shapes::ShapeRef.new(shape: DeterminingPolicyList, required: true, location_name: "determiningPolicies"))
     IsAuthorizedWithTokenOutput.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
+    IsAuthorizedWithTokenOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     IsAuthorizedWithTokenOutput.struct_class = Types::IsAuthorizedWithTokenOutput
 
     ListIdentitySourcesInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -632,8 +711,12 @@ module Aws::VerifiedPermissions
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UpdateCognitoGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    UpdateCognitoGroupConfiguration.struct_class = Types::UpdateCognitoGroupConfiguration
+
     UpdateCognitoUserPoolConfiguration.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
     UpdateCognitoUserPoolConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    UpdateCognitoUserPoolConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: UpdateCognitoGroupConfiguration, location_name: "groupConfiguration"))
     UpdateCognitoUserPoolConfiguration.struct_class = Types::UpdateCognitoUserPoolConfiguration
 
     UpdateConfiguration.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: UpdateCognitoUserPoolConfiguration, location_name: "cognitoUserPoolConfiguration"))
@@ -739,6 +822,19 @@ module Aws::VerifiedPermissions
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchIsAuthorizedInput)
         o.output = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_is_authorized_with_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchIsAuthorizedWithToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

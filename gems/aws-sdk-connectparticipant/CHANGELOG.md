@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2024-02-16)
+------------------
+
+* Feature - Doc only update to GetTranscript API reference guide to inform users about presence of events in the chat transcript.
+
 1.40.0 (2024-01-26)
 ------------------
 

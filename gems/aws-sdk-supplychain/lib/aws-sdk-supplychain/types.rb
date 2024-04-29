@@ -172,6 +172,63 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
+    # The request parameters for SendDataIntegrationEvent.
+    #
+    # @!attribute [rw] instance_id
+    #   The AWS Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The data event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The data payload of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_group_id
+    #   Event identifier (for example, orderId for InboundOrder) used for
+    #   data sharing or partitioning.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_timestamp
+    #   The event timestamp (in epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotent client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/SendDataIntegrationEventRequest AWS API Documentation
+    #
+    class SendDataIntegrationEventRequest < Struct.new(
+      :instance_id,
+      :event_type,
+      :data,
+      :event_group_id,
+      :event_timestamp,
+      :client_token)
+      SENSITIVE = [:data]
+      include Aws::Structure
+    end
+
+    # The response parameters for SendDataIntegrationEvent.
+    #
+    # @!attribute [rw] event_id
+    #   The unique event identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/SendDataIntegrationEventResponse AWS API Documentation
+    #
+    class SendDataIntegrationEventResponse < Struct.new(
+      :event_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request would cause a service quota to be exceeded.
     #
     # @!attribute [rw] message

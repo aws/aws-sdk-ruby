@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CloudFormation
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CloudFormation
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::CloudFormation
     #   @option options [Aws::CloudFormation::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CloudFormation::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -417,7 +441,7 @@ module Aws::CloudFormation
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html
     # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #
     # @option params [String] :type
     #   The extension type.
@@ -531,7 +555,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #
     # @option params [required, Array<Types::TypeConfigurationIdentifier>] :type_configuration_identifiers
     #   The list of identifiers for the desired extension configurations.
@@ -802,7 +826,8 @@ module Aws::CloudFormation
     #   must point to a template (max size: 460,800 bytes) that's located in
     #   an Amazon S3 bucket or a Systems Manager document. CloudFormation
     #   generates the change set by comparing this template with the stack
-    #   that you specified.
+    #   that you specified. The location for an Amazon S3 bucket must start
+    #   with `https://`.
     #
     #   Conditional: You must specify only `TemplateBody` or `TemplateURL`.
     #
@@ -1236,7 +1261,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to the
-    #   [Template anatomy][1] in the *CloudFormation User Guide*.
+    #   [Template anatomy][1] in the *CloudFormation User Guide*. The location
+    #   for an Amazon S3 bucket must start with `https://`.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -1303,17 +1329,17 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [AWS::IAM::Group][2]
     #
     #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
@@ -1430,8 +1456,9 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   Region as the stack. You can specify either the `StackPolicyBody` or
-    #   the `StackPolicyURL` parameter, but not both.
+    #   Region as the stack. The location for an Amazon S3 bucket must start
+    #   with `https://`. You can specify either the `StackPolicyBody` or the
+    #   `StackPolicyURL` parameter, but not both.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs to associate with this stack. CloudFormation also
@@ -1717,7 +1744,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   The structure that contains the template body, with a minimum length
     #   of 1 byte and a maximum length of 51,200 bytes. For more information,
-    #   see [Template Anatomy][1] in the CloudFormation User Guide.
+    #   see [Template Anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify either the TemplateBody or the
     #   TemplateURL parameter, but not both.
@@ -1730,8 +1757,8 @@ module Aws::CloudFormation
     #   The location of the file that contains the template body. The URL must
     #   point to a template (maximum size: 460,800 bytes) that's located in
     #   an Amazon S3 bucket or a Systems Manager document. For more
-    #   information, see [Template Anatomy][1] in the CloudFormation User
-    #   Guide.
+    #   information, see [Template Anatomy][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   Conditional: You must specify either the TemplateBody or the
     #   TemplateURL parameter, but not both.
@@ -1775,17 +1802,17 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [AWS::IAM::Group][2]
     #
     #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
@@ -2470,6 +2497,10 @@ module Aws::CloudFormation
     #   A string (provided by the DescribeChangeSet response output) that
     #   identifies the next page of information that you want to retrieve.
     #
+    # @option params [Boolean] :include_property_values
+    #   If `true`, the returned changes include detailed changes in the
+    #   property values.
+    #
     # @return [Types::DescribeChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeChangeSetOutput#change_set_name #change_set_name} => String
@@ -2500,6 +2531,7 @@ module Aws::CloudFormation
     #     change_set_name: "ChangeSetNameOrId", # required
     #     stack_name: "StackNameOrId",
     #     next_token: "NextToken",
+    #     include_property_values: false,
     #   })
     #
     # @example Response structure
@@ -2532,6 +2564,7 @@ module Aws::CloudFormation
     #   resp.changes #=> Array
     #   resp.changes[0].type #=> String, one of "Resource"
     #   resp.changes[0].hook_invocation_count #=> Integer
+    #   resp.changes[0].resource_change.policy_action #=> String, one of "Delete", "Retain", "Snapshot", "ReplaceAndDelete", "ReplaceAndRetain", "ReplaceAndSnapshot"
     #   resp.changes[0].resource_change.action #=> String, one of "Add", "Modify", "Remove", "Import", "Dynamic"
     #   resp.changes[0].resource_change.logical_resource_id #=> String
     #   resp.changes[0].resource_change.physical_resource_id #=> String
@@ -2543,12 +2576,18 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.details[0].target.attribute #=> String, one of "Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "UpdateReplacePolicy", "Tags"
     #   resp.changes[0].resource_change.details[0].target.name #=> String
     #   resp.changes[0].resource_change.details[0].target.requires_recreation #=> String, one of "Never", "Conditionally", "Always"
+    #   resp.changes[0].resource_change.details[0].target.path #=> String
+    #   resp.changes[0].resource_change.details[0].target.before_value #=> String
+    #   resp.changes[0].resource_change.details[0].target.after_value #=> String
+    #   resp.changes[0].resource_change.details[0].target.attribute_change_type #=> String, one of "Add", "Remove", "Modify"
     #   resp.changes[0].resource_change.details[0].evaluation #=> String, one of "Static", "Dynamic"
     #   resp.changes[0].resource_change.details[0].change_source #=> String, one of "ResourceReference", "ParameterReference", "ResourceAttribute", "DirectModification", "Automatic"
     #   resp.changes[0].resource_change.details[0].causing_entity #=> String
     #   resp.changes[0].resource_change.change_set_id #=> String
     #   resp.changes[0].resource_change.module_info.type_hierarchy #=> String
     #   resp.changes[0].resource_change.module_info.logical_id_hierarchy #=> String
+    #   resp.changes[0].resource_change.before_context #=> String
+    #   resp.changes[0].resource_change.after_context #=> String
     #   resp.next_token #=> String
     #   resp.include_nested_stacks #=> Boolean
     #   resp.parent_change_set_id #=> String
@@ -3043,7 +3082,8 @@ module Aws::CloudFormation
 
     # Returns all stack related events for a specified stack in reverse
     # chronological order. For more information about a stack's event
-    # history, go to [Stacks][1] in the *CloudFormation User Guide*.
+    # history, see [CloudFormation stack creation events][1] in the
+    # *CloudFormation User Guide*.
     #
     # <note markdown="1"> You can list events for stacks that have failed to create or have been
     # deleted by specifying the unique stack identifier (stack ID).
@@ -3052,7 +3092,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
     #
     # @option params [String] :stack_name
     #   The name or the unique stack ID that's associated with the stack,
@@ -3102,6 +3142,7 @@ module Aws::CloudFormation
     #   resp.stack_events[0].hook_status_reason #=> String
     #   resp.stack_events[0].hook_invocation_point #=> String, one of "PRE_PROVISION"
     #   resp.stack_events[0].hook_failure_mode #=> String, one of "FAIL", "WARN"
+    #   resp.stack_events[0].detailed_status #=> String, one of "CONFIGURATION_COMPLETE", "VALIDATION_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEvents AWS API Documentation
@@ -3177,7 +3218,7 @@ module Aws::CloudFormation
     #   resp.stack_instance.parameter_overrides[0].use_previous_value #=> Boolean
     #   resp.stack_instance.parameter_overrides[0].resolved_value #=> String
     #   resp.stack_instance.status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
-    #   resp.stack_instance.stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE", "SKIPPED_SUSPENDED_ACCOUNT"
+    #   resp.stack_instance.stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE", "SKIPPED_SUSPENDED_ACCOUNT", "FAILED_IMPORT"
     #   resp.stack_instance.status_reason #=> String
     #   resp.stack_instance.organizational_unit_id #=> String
     #   resp.stack_instance.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
@@ -3622,10 +3663,17 @@ module Aws::CloudFormation
 
     # Returns the description for the specified stack; if no stack name was
     # specified, then it returns the description for all the stacks created.
+    # For more information about a stack's event history, see
+    # [CloudFormation stack creation events][1] in the *CloudFormation User
+    # Guide*.
     #
     # <note markdown="1"> If the stack doesn't exist, a `ValidationError` is returned.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
     #
     # @option params [String] :stack_name
     #   <note markdown="1"> If you don't pass a parameter to `StackName`, the API returns a
@@ -3717,6 +3765,7 @@ module Aws::CloudFormation
     #   resp.stacks[0].drift_information.stack_drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.stacks[0].drift_information.last_check_timestamp #=> Time
     #   resp.stacks[0].retain_except_on_create #=> Boolean
+    #   resp.stacks[0].detailed_status #=> String, one of "CONFIGURATION_COMPLETE", "VALIDATION_FAILED"
     #   resp.next_token #=> String
     #
     #
@@ -4188,7 +4237,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template that's located in an Amazon S3 bucket or a Systems Manager
     #   document. For more information, go to [Template Anatomy][1] in the
-    #   *CloudFormation User Guide*.
+    #   *CloudFormation User Guide*. The location for an Amazon S3 bucket must
+    #   start with `https://`.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -4515,7 +4565,8 @@ module Aws::CloudFormation
     #   template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information about
     #   templates, see [Template anatomy][1] in the *CloudFormation User
-    #   Guide*.
+    #   Guide*. The location for an Amazon S3 bucket must start with
+    #   `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -5486,7 +5537,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].stack_id #=> String
     #   resp.summaries[0].status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
     #   resp.summaries[0].status_reason #=> String
-    #   resp.summaries[0].stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE", "SKIPPED_SUSPENDED_ACCOUNT"
+    #   resp.summaries[0].stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE", "SKIPPED_SUSPENDED_ACCOUNT", "FAILED_IMPORT"
     #   resp.summaries[0].organizational_unit_id #=> String
     #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.summaries[0].last_drift_check_timestamp #=> Time
@@ -5557,6 +5608,75 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def list_stack_resources(params = {}, options = {})
       req = build_request(:list_stack_resources, params)
+      req.send_request(options)
+    end
+
+    # Returns summary information about deployment targets for a stack set.
+    #
+    # @option params [required, String] :stack_set_name
+    #   The name or unique ID of the stack set that you want to get automatic
+    #   deployment targets for.
+    #
+    # @option params [String] :next_token
+    #   A string that identifies the next page of stack set deployment targets
+    #   that you want to retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #
+    # @option params [String] :call_as
+    #   Specifies whether you are acting as an account administrator in the
+    #   organization's management account or as a delegated administrator in
+    #   a member account.
+    #
+    #   By default, `SELF` is specified. Use `SELF` for StackSets with
+    #   self-managed permissions.
+    #
+    #   * If you are signed in to the management account, specify `SELF`.
+    #
+    #   * If you are signed in to a delegated administrator account, specify
+    #     `DELEGATED_ADMIN`.
+    #
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
+    #
+    # @return [Types::ListStackSetAutoDeploymentTargetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStackSetAutoDeploymentTargetsOutput#summaries #summaries} => Array&lt;Types::StackSetAutoDeploymentTargetSummary&gt;
+    #   * {Types::ListStackSetAutoDeploymentTargetsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_stack_set_auto_deployment_targets({
+    #     stack_set_name: "StackSetNameOrId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.summaries #=> Array
+    #   resp.summaries[0].organizational_unit_id #=> String
+    #   resp.summaries[0].regions #=> Array
+    #   resp.summaries[0].regions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetAutoDeploymentTargets AWS API Documentation
+    #
+    # @overload list_stack_set_auto_deployment_targets(params = {})
+    # @param [Hash] params ({})
+    def list_stack_set_auto_deployment_targets(params = {}, options = {})
+      req = build_request(:list_stack_set_auto_deployment_targets, params)
       req.send_request(options)
     end
 
@@ -6445,7 +6565,7 @@ module Aws::CloudFormation
     # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html
     # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html
     # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    # [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #
     # @option params [String] :type
     #   The kind of extension.
@@ -6648,7 +6768,8 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an Amazon S3 bucket in the
-    #   same Amazon Web Services Region as the stack. You can specify either
+    #   same Amazon Web Services Region as the stack. The location for an
+    #   Amazon S3 bucket must start with `https://`. You can specify either
     #   the `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -6686,17 +6807,17 @@ module Aws::CloudFormation
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     # [3]: https://docs.aws.amazon.com/
     #
     # @option params [String] :type_arn
     #   The Amazon Resource Name (ARN) for the extension, in this account and
     #   Region.
     #
-    #   For public extensions, this will be the ARN assigned when you
-    #   [activate the type][1] in this account and Region. For private
-    #   extensions, this will be the ARN assigned when you [register the
-    #   type][2] in this account and Region.
+    #   For public extensions, this will be the ARN assigned when you call the
+    #   [ActivateType][1] API operation in this account and Region. For
+    #   private extensions, this will be the ARN assigned when you call the
+    #   [RegisterType][2] API operation in this account and Region.
     #
     #   Do not include the extension versions suffix at the end of the ARN.
     #   You can set the configuration for an extension, but not for a specific
@@ -7228,7 +7349,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template that's located in an Amazon S3 bucket or a Systems Manager
     #   document. For more information, go to [Template Anatomy][1] in the
-    #   *CloudFormation User Guide*.
+    #   *CloudFormation User Guide*. The location for an Amazon S3 bucket must
+    #   start with `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -7259,7 +7381,8 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_during_update_url
     #   Location of a file containing the temporary overriding stack policy.
     #   The URL must point to a policy (max size: 16KB) located in an S3
-    #   bucket in the same Region as the stack. You can specify either the
+    #   bucket in the same Region as the stack. The location for an Amazon S3
+    #   bucket must start with `https://`. You can specify either the
     #   `StackPolicyDuringUpdateBody` or the `StackPolicyDuringUpdateURL`
     #   parameter, but not both.
     #
@@ -7310,7 +7433,7 @@ module Aws::CloudFormation
     #
     #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
     #     * [ AWS::IAM::Role][5]
     #
@@ -7422,8 +7545,9 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_url
     #   Location of a file containing the updated stack policy. The URL must
     #   point to a policy (max size: 16KB) located in an S3 bucket in the same
-    #   Region as the stack. You can specify either the `StackPolicyBody` or
-    #   the `StackPolicyURL` parameter, but not both.
+    #   Region as the stack. The location for an Amazon S3 bucket must start
+    #   with `https://`. You can specify either the `StackPolicyBody` or the
+    #   `StackPolicyURL` parameter, but not both.
     #
     #   You might update the stack policy, for example, in order to protect a
     #   new resource that you created during a stack update. If you don't
@@ -7741,7 +7865,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   The structure that contains the template body, with a minimum length
     #   of 1 byte and a maximum length of 51,200 bytes. For more information,
-    #   see [Template Anatomy][1] in the CloudFormation User Guide.
+    #   see [Template Anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to true.
@@ -7754,8 +7878,8 @@ module Aws::CloudFormation
     #   The location of the file that contains the template body. The URL must
     #   point to a template (maximum size: 460,800 bytes) that is located in
     #   an Amazon S3 bucket or a Systems Manager document. For more
-    #   information, see [Template Anatomy][1] in the CloudFormation User
-    #   Guide.
+    #   information, see [Template Anatomy][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to true.
@@ -7802,19 +7926,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [AWS::IAM::Group][2]
     #
-    #     * [ AWS::IAM::InstanceProfile][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [AWS::IAM::User][6]
     #
-    #     * [ AWS::IAM::UserToGroupAddition][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -8181,7 +8305,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that is located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to
-    #   [Template Anatomy][1] in the *CloudFormation User Guide*.
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*. The location
+    #   for an Amazon S3 bucket must start with `https://`.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -8241,7 +8366,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

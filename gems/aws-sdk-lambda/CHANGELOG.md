@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.118.0 (2024-04-03)
+------------------
+
+* Feature - Add Ruby 3.3 (ruby3.3) support to AWS Lambda
+
+1.117.0 (2024-03-07)
+------------------
+
+* Feature - Documentation updates for AWS Lambda
+
+1.116.0 (2024-02-20)
+------------------
+
+* Feature - Add .NET 8 (dotnet8) Runtime support to AWS Lambda.
+
+1.115.0 (2024-02-16)
+------------------
+
+* Feature - Documentation-only updates for Lambda to clarify a number of existing actions and properties.
+
 1.114.0 (2024-01-26)
 ------------------
 

@@ -272,8 +272,10 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The configuration for applying a filter to all sheets. You can apply
-    # this filter to all visuals on every sheet.
+    # An empty object that represents that the `AllSheets` option is the
+    # chosen value for the `FilterScopeConfiguration` parameter. This
+    # structure applies the filter to all visuals on all sheets of an
+    # Analysis, Dashboard, or Template.
     #
     # This is a union type structure. For this structure to be valid, only
     # one of the attributes can be defined.
@@ -1142,8 +1144,8 @@ module Aws::QuickSight
     end
 
     # The option to relax the validation that is required to export each
-    # asset. When `StrictModeForAllResource` is set to true, validation is
-    # skipped for specific UI errors.
+    # asset. When `StrictModeForAllResource` is set to `false`, validation
+    # is skipped for specific UI errors.
     #
     # @!attribute [rw] strict_mode_for_all_resources
     #   A Boolean value that indicates whether to export resources under
@@ -1898,6 +1900,26 @@ module Aws::QuickSight
     class AssetBundleImportJobVPCConnectionOverrideTags < Struct.new(
       :vpc_connection_ids,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a warning that occurred during an Asset Bundle import job.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the resource that the warning occurred for.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the warning that occurred during an Asset Bundle
+    #   import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobWarning AWS API Documentation
+    #
+    class AssetBundleImportJobWarning < Struct.new(
+      :arn,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3229,7 +3251,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The numeric equality type drill down filter.
+    # The category drill down filter.
     #
     # @!attribute [rw] column
     #   The column that the filter is applied to.
@@ -3271,12 +3293,18 @@ module Aws::QuickSight
     #   The configuration for a `CategoryFilter`.
     #   @return [Types::CategoryFilterConfiguration]
     #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configurations for the associated controls. This applies
+    #   only for filters that are scoped to multiple sheets.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CategoryFilter AWS API Documentation
     #
     class CategoryFilter < Struct.new(
       :filter_id,
       :column,
-      :configuration)
+      :configuration,
+      :default_filter_control_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3694,13 +3722,19 @@ module Aws::QuickSight
     #   The aggregation function of the column tooltip item.
     #   @return [Types::AggregationFunction]
     #
+    # @!attribute [rw] tooltip_target
+    #   Determines the target of the column tooltip item in a combo chart
+    #   visual.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnTooltipItem AWS API Documentation
     #
     class ColumnTooltipItem < Struct.new(
       :column,
       :label,
       :visibility,
-      :aggregation)
+      :aggregation,
+      :tooltip_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4545,6 +4579,10 @@ module Aws::QuickSight
     #   QuickSight account.
     #   @return [String]
     #
+    # @!attribute [rw] iam_identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccountSubscriptionRequest AWS API Documentation
     #
     class CreateAccountSubscriptionRequest < Struct.new(
@@ -4562,7 +4600,8 @@ module Aws::QuickSight
       :first_name,
       :last_name,
       :email_address,
-      :contact_number)
+      :contact_number,
+      :iam_identity_center_instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8428,7 +8467,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A dataset parameter.
+    # A parameter that is created in a dataset. The parameter can be a
+    # string, integer, decimal, or datetime data type.
     #
     # @!attribute [rw] string_dataset_parameter
     #   A string parameter that is created in the dataset.
@@ -8944,6 +8984,165 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The default options that correspond to the filter control type of a
+    # `DateTimePicker`.
+    #
+    # @!attribute [rw] type
+    #   The date time picker type of the
+    #   `DefaultDateTimePickerControlOptions`. Choose one of the following
+    #   options:
+    #
+    #   * `SINGLE_VALUED`: The filter condition is a fixed date.
+    #
+    #   * `DATE_RANGE`: The filter condition is a date time range.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::DateTimePickerControlDisplayOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultDateTimePickerControlOptions AWS API Documentation
+    #
+    class DefaultDateTimePickerControlOptions < Struct.new(
+      :type,
+      :display_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default configuration for all dependent controls of the filter.
+    #
+    # @!attribute [rw] title
+    #   The title of the `DefaultFilterControlConfiguration`. This title is
+    #   shared by all controls that are tied to this filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_options
+    #   The control option for the `DefaultFilterControlConfiguration`.
+    #   @return [Types::DefaultFilterControlOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultFilterControlConfiguration AWS API Documentation
+    #
+    class DefaultFilterControlConfiguration < Struct.new(
+      :title,
+      :control_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The option that corresponds to the control type of the filter.
+    #
+    # @!attribute [rw] default_date_time_picker_options
+    #   The default options that correspond to the filter control type of a
+    #   `DateTimePicker`.
+    #   @return [Types::DefaultDateTimePickerControlOptions]
+    #
+    # @!attribute [rw] default_list_options
+    #   The default options that correspond to the `List` filter control
+    #   type.
+    #   @return [Types::DefaultFilterListControlOptions]
+    #
+    # @!attribute [rw] default_dropdown_options
+    #   The default options that correspond to the `Dropdown` filter control
+    #   type.
+    #   @return [Types::DefaultFilterDropDownControlOptions]
+    #
+    # @!attribute [rw] default_text_field_options
+    #   The default options that correspond to the `TextField` filter
+    #   control type.
+    #   @return [Types::DefaultTextFieldControlOptions]
+    #
+    # @!attribute [rw] default_text_area_options
+    #   The default options that correspond to the `TextArea` filter control
+    #   type.
+    #   @return [Types::DefaultTextAreaControlOptions]
+    #
+    # @!attribute [rw] default_slider_options
+    #   The default options that correspond to the `Slider` filter control
+    #   type.
+    #   @return [Types::DefaultSliderControlOptions]
+    #
+    # @!attribute [rw] default_relative_date_time_options
+    #   The default options that correspond to the `RelativeDateTime` filter
+    #   control type.
+    #   @return [Types::DefaultRelativeDateTimeControlOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultFilterControlOptions AWS API Documentation
+    #
+    class DefaultFilterControlOptions < Struct.new(
+      :default_date_time_picker_options,
+      :default_list_options,
+      :default_dropdown_options,
+      :default_text_field_options,
+      :default_text_area_options,
+      :default_slider_options,
+      :default_relative_date_time_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default options that correspond to the `Dropdown` filter control
+    # type.
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::DropDownControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `FilterDropDownControl`. Choose one of the following
+    #   options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from a
+    #     dropdown menu.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from a
+    #     dropdown menu.
+    #   @return [String]
+    #
+    # @!attribute [rw] selectable_values
+    #   A list of selectable values that are used in a control.
+    #   @return [Types::FilterSelectableValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultFilterDropDownControlOptions AWS API Documentation
+    #
+    class DefaultFilterDropDownControlOptions < Struct.new(
+      :display_options,
+      :type,
+      :selectable_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default options that correspond to the `List` filter control type.
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::ListControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `DefaultFilterListControlOptions`. Choose one of the
+    #   following options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from the
+    #     list.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] selectable_values
+    #   A list of selectable values that are used in a control.
+    #   @return [Types::FilterSelectableValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultFilterListControlOptions AWS API Documentation
+    #
+    class DefaultFilterListControlOptions < Struct.new(
+      :display_options,
+      :type,
+      :selectable_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that represents a default formatting definition.
     #
     # @!attribute [rw] display_format
@@ -9058,6 +9257,21 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The default options that correspond to the `RelativeDateTime` filter
+    # control type.
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::RelativeDateTimeControlDisplayOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultRelativeDateTimeControlOptions AWS API Documentation
+    #
+    class DefaultRelativeDateTimeControlOptions < Struct.new(
+      :display_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The options that determine the default settings for a section-based
     # layout configuration.
     #
@@ -9070,6 +9284,81 @@ module Aws::QuickSight
     #
     class DefaultSectionBasedLayoutConfiguration < Struct.new(
       :canvas_size_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default options that correspond to the `Slider` filter control
+    # type.
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::SliderControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `DefaultSliderControlOptions`. Choose one of the
+    #   following options:
+    #
+    #   * `SINGLE_POINT`: Filter against(equals) a single data point.
+    #
+    #   * `RANGE`: Filter data that is in a specified range.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_value
+    #   The larger value that is displayed at the right of the slider.
+    #   @return [Float]
+    #
+    # @!attribute [rw] minimum_value
+    #   The smaller value that is displayed at the left of the slider.
+    #   @return [Float]
+    #
+    # @!attribute [rw] step_size
+    #   The number of increments that the slider bar is divided into.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultSliderControlOptions AWS API Documentation
+    #
+    class DefaultSliderControlOptions < Struct.new(
+      :display_options,
+      :type,
+      :maximum_value,
+      :minimum_value,
+      :step_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default options that correspond to the `TextArea` filter control
+    # type.
+    #
+    # @!attribute [rw] delimiter
+    #   The delimiter that is used to separate the lines in text.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::TextAreaControlDisplayOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultTextAreaControlOptions AWS API Documentation
+    #
+    class DefaultTextAreaControlOptions < Struct.new(
+      :delimiter,
+      :display_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default options that correspond to the `TextField` filter control
+    # type.
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::TextFieldControlDisplayOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultTextFieldControlOptions AWS API Documentation
+    #
+    class DefaultTextFieldControlOptions < Struct.new(
+      :display_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10865,6 +11154,11 @@ module Aws::QuickSight
     #   import.
     #   @return [Types::AssetBundleImportJobOverrideValidationStrategy]
     #
+    # @!attribute [rw] warnings
+    #   An array of warning records that describe all permitted errors that
+    #   are encountered during the import job.
+    #   @return [Array<Types::AssetBundleImportJobWarning>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleImportJobResponse AWS API Documentation
     #
     class DescribeAssetBundleImportJobResponse < Struct.new(
@@ -10882,7 +11176,8 @@ module Aws::QuickSight
       :status,
       :override_permissions,
       :override_tags,
-      :override_validation_strategy)
+      :override_validation_strategy,
+      :warnings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11902,6 +12197,14 @@ module Aws::QuickSight
     #   A map that describes the IP rules with CIDR range and description.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc_id_restriction_rule_map
+    #   A map of allowed VPC IDs and their rule descriptions.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_endpoint_id_restriction_rule_map
+    #   A map of allowed VPC endpoint IDs and their rule descriptions.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] enabled
     #   A value that specifies whether IP rules are turned on.
     #   @return [Boolean]
@@ -11919,6 +12222,8 @@ module Aws::QuickSight
     class DescribeIpRestrictionResponse < Struct.new(
       :aws_account_id,
       :ip_restriction_rule_map,
+      :vpc_id_restriction_rule_map,
+      :vpc_endpoint_id_restriction_rule_map,
       :enabled,
       :request_id,
       :status)
@@ -13383,12 +13688,18 @@ module Aws::QuickSight
     #   The visibility of the tooltip item.
     #   @return [String]
     #
+    # @!attribute [rw] tooltip_target
+    #   Determines the target of the field tooltip item in a combo chart
+    #   visual.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FieldTooltipItem AWS API Documentation
     #
     class FieldTooltipItem < Struct.new(
       :field_id,
       :label,
-      :visibility)
+      :visibility,
+      :tooltip_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13694,6 +14005,11 @@ module Aws::QuickSight
     #   date.
     #   @return [Types::FilterRelativeDateTimeControl]
     #
+    # @!attribute [rw] cross_sheet
+    #   A control from a filter that is scoped across more than one sheet.
+    #   This represents your filter control on a sheet
+    #   @return [Types::FilterCrossSheetControl]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterControl AWS API Documentation
     #
     class FilterControl < Struct.new(
@@ -13703,7 +14019,35 @@ module Aws::QuickSight
       :text_field,
       :text_area,
       :slider,
-      :relative_date_time)
+      :relative_date_time,
+      :cross_sheet)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A control from a filter that is scoped across more than one sheet.
+    # This represents your filter control on a sheet
+    #
+    # @!attribute [rw] filter_control_id
+    #   The ID of the `FilterCrossSheetControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_filter_id
+    #   The source filter ID of the `FilterCrossSheetControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cascading_control_configuration
+    #   The values that are displayed in a control can be configured to only
+    #   show values that are valid based on what's selected in other
+    #   controls.
+    #   @return [Types::CascadingControlConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterCrossSheetControl AWS API Documentation
+    #
+    class FilterCrossSheetControl < Struct.new(
+      :filter_control_id,
+      :source_filter_id,
+      :cascading_control_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13727,12 +14071,14 @@ module Aws::QuickSight
     #   @return [Types::DateTimePickerControlDisplayOptions]
     #
     # @!attribute [rw] type
-    #   The date time picker type of a `FilterDateTimePickerControl`. Choose
-    #   one of the following options:
+    #   The type of the `FilterDropDownControl`. Choose one of the following
+    #   options:
     #
-    #   * `SINGLE_VALUED`: The filter condition is a fixed date.
+    #   * `MULTI_SELECT`: The user can select multiple entries from a
+    #     dropdown menu.
     #
-    #   * `DATE_RANGE`: The filter condition is a date time range.
+    #   * `SINGLE_SELECT`: The user can select a single entry from a
+    #     dropdown menu.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterDateTimePickerControl AWS API Documentation
@@ -13915,7 +14261,7 @@ module Aws::QuickSight
     #   @return [Types::ListControlDisplayOptions]
     #
     # @!attribute [rw] type
-    #   The type of `FilterListControl`. Choose one of the following
+    #   The type of the `FilterListControl`. Choose one of the following
     #   options:
     #
     #   * `MULTI_SELECT`: The user can select multiple entries from the
@@ -14057,7 +14403,11 @@ module Aws::QuickSight
     #   @return [Types::SelectedSheetsFilterScopeConfiguration]
     #
     # @!attribute [rw] all_sheets
-    #   The configuration for applying a filter to all sheets.
+    #   The configuration that applies a filter to all sheets. When you
+    #   choose `AllSheets` as the value for a `FilterScopeConfiguration`,
+    #   this filter is applied to all visuals of all sheets in an Analysis,
+    #   Dashboard, or Template. The `AllSheetsFilterScopeConfiguration` is
+    #   chosen.
     #   @return [Types::AllSheetsFilterScopeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterScopeConfiguration AWS API Documentation
@@ -14103,7 +14453,7 @@ module Aws::QuickSight
     #   @return [Types::SliderControlDisplayOptions]
     #
     # @!attribute [rw] type
-    #   The type of `FilterSliderControl`. Choose one of the following
+    #   The type of the `FilterSliderControl`. Choose one of the following
     #   options:
     #
     #   * `SINGLE_POINT`: Filter against(equals) a single data point.
@@ -14112,11 +14462,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] maximum_value
-    #   The smaller value that is displayed at the left of the slider.
+    #   The larger value that is displayed at the right of the slider.
     #   @return [Float]
     #
     # @!attribute [rw] minimum_value
-    #   The larger value that is displayed at the right of the slider.
+    #   The smaller value that is displayed at the left of the slider.
     #   @return [Float]
     #
     # @!attribute [rw] step_size
@@ -15226,10 +15576,16 @@ module Aws::QuickSight
     # @!attribute [rw] authorized_resource_arns
     #   The Amazon Resource Names (ARNs) for the Amazon QuickSight resources
     #   that the user is authorized to access during the lifetime of the
-    #   session. If you choose `Dashboard` embedding experience, pass the
-    #   list of dashboard ARNs in the account that you want the user to be
-    #   able to view. Currently, you can pass up to 25 dashboard ARNs in
-    #   each API call.
+    #   session.
+    #
+    #   If you choose `Dashboard` embedding experience, pass the list of
+    #   dashboard ARNs in the account that you want the user to be able to
+    #   view.
+    #
+    #   If you want to make changes to the theme of your embedded content,
+    #   pass a list of theme ARNs that the anonymous users need access to.
+    #
+    #   Currently, you can pass up to 25 theme ARNs in each API call.
     #   @return [Array<String>]
     #
     # @!attribute [rw] experience_configuration
@@ -20424,7 +20780,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The category drill down filter.
+    # The numeric equality type drill down filter.
     #
     # @!attribute [rw] column
     #   The column that the filter is applied to.
@@ -20492,6 +20848,11 @@ module Aws::QuickSight
     #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
     #   @return [String]
     #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configurations for the associated controls. This applies
+    #   only for filters that are scoped to multiple sheets.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NumericEqualityFilter AWS API Documentation
     #
     class NumericEqualityFilter < Struct.new(
@@ -20502,7 +20863,8 @@ module Aws::QuickSight
       :match_operator,
       :aggregation_function,
       :parameter_name,
-      :null_option)
+      :null_option,
+      :default_filter_control_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20589,6 +20951,11 @@ module Aws::QuickSight
     #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
     #   @return [String]
     #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configurations for the associated controls. This applies
+    #   only for filters that are scoped to multiple sheets.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NumericRangeFilter AWS API Documentation
     #
     class NumericRangeFilter < Struct.new(
@@ -20600,7 +20967,8 @@ module Aws::QuickSight
       :range_maximum,
       :select_all_options,
       :aggregation_function,
-      :null_option)
+      :null_option,
+      :default_filter_control_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21174,11 +21542,11 @@ module Aws::QuickSight
     #   @return [Types::SliderControlDisplayOptions]
     #
     # @!attribute [rw] maximum_value
-    #   The smaller value that is displayed at the left of the slider.
+    #   The larger value that is displayed at the right of the slider.
     #   @return [Float]
     #
     # @!attribute [rw] minimum_value
-    #   The larger value that is displayed at the right of the slider.
+    #   The smaller value that is displayed at the left of the slider.
     #   @return [Float]
     #
     # @!attribute [rw] step_size
@@ -23720,6 +24088,11 @@ module Aws::QuickSight
     #   The configuration for the exclude period of the filter.
     #   @return [Types::ExcludePeriodConfiguration]
     #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configurations for the associated controls. This applies
+    #   only for filters that are scoped to multiple sheets.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RelativeDatesFilter AWS API Documentation
     #
     class RelativeDatesFilter < Struct.new(
@@ -23732,7 +24105,8 @@ module Aws::QuickSight
       :relative_date_value,
       :parameter_name,
       :null_option,
-      :exclude_period_configuration)
+      :exclude_period_configuration,
+      :default_filter_control_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28358,6 +28732,11 @@ module Aws::QuickSight
     #   This field is mutually exclusive to `Value` and `ParameterName`.
     #   @return [Types::RollingDateConfiguration]
     #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configurations for the associated controls. This applies
+    #   only for filters that are scoped to multiple sheets.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TimeEqualityFilter AWS API Documentation
     #
     class TimeEqualityFilter < Struct.new(
@@ -28366,7 +28745,8 @@ module Aws::QuickSight
       :value,
       :parameter_name,
       :time_granularity,
-      :rolling_date)
+      :rolling_date,
+      :default_filter_control_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28451,6 +28831,11 @@ module Aws::QuickSight
     #   values.
     #   @return [String]
     #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configurations for the associated controls. This applies
+    #   only for filters that are scoped to multiple sheets.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TimeRangeFilter AWS API Documentation
     #
     class TimeRangeFilter < Struct.new(
@@ -28462,7 +28847,8 @@ module Aws::QuickSight
       :range_maximum_value,
       :null_option,
       :exclude_period_configuration,
-      :time_granularity)
+      :time_granularity,
+      :default_filter_control_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28574,6 +28960,11 @@ module Aws::QuickSight
     #   The parameter whose value should be used for the filter value.
     #   @return [String]
     #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configurations for the associated controls. This applies
+    #   only for filters that are scoped to multiple sheets.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopBottomFilter AWS API Documentation
     #
     class TopBottomFilter < Struct.new(
@@ -28582,7 +28973,8 @@ module Aws::QuickSight
       :limit,
       :aggregation_sort_configurations,
       :time_granularity,
-      :parameter_name)
+      :parameter_name,
+      :default_filter_control_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31244,6 +31636,17 @@ module Aws::QuickSight
     #   descriptions.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc_id_restriction_rule_map
+    #   A map of VPC IDs and their corresponding rules. When you configure
+    #   this parameter, traffic from all VPC endpoints that are present in
+    #   the specified VPC is allowed.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_endpoint_id_restriction_rule_map
+    #   A map of allowed VPC endpoint IDs and their corresponding rule
+    #   descriptions.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] enabled
     #   A value that specifies whether IP rules are turned on.
     #   @return [Boolean]
@@ -31253,6 +31656,8 @@ module Aws::QuickSight
     class UpdateIpRestrictionRequest < Struct.new(
       :aws_account_id,
       :ip_restriction_rule_map,
+      :vpc_id_restriction_rule_map,
+      :vpc_endpoint_id_restriction_rule_map,
       :enabled)
       SENSITIVE = []
       include Aws::Structure

@@ -41,7 +41,7 @@ module Aws::SNS
 
     class CheckIfPhoneNumberIsOptedOutInput
       attr_accessor phone_number: ::String
-      SENSITIVE: []
+      SENSITIVE: [:phone_number]
     end
 
     class CheckIfPhoneNumberIsOptedOutResponse
@@ -94,7 +94,7 @@ module Aws::SNS
     class CreateSMSSandboxPhoneNumberInput
       attr_accessor phone_number: ::String
       attr_accessor language_code: ("en-US" | "en-GB" | "es-419" | "es-ES" | "de-DE" | "fr-CA" | "fr-FR" | "it-IT" | "ja-JP" | "pt-BR" | "kr-KR" | "zh-CN" | "zh-TW")
-      SENSITIVE: []
+      SENSITIVE: [:phone_number]
     end
 
     class CreateSMSSandboxPhoneNumberResult < Aws::EmptyStructure
@@ -125,7 +125,7 @@ module Aws::SNS
 
     class DeleteSMSSandboxPhoneNumberInput
       attr_accessor phone_number: ::String
-      SENSITIVE: []
+      SENSITIVE: [:phone_number]
     end
 
     class DeleteSMSSandboxPhoneNumberResult < Aws::EmptyStructure
@@ -401,7 +401,7 @@ module Aws::SNS
 
     class OptInPhoneNumberInput
       attr_accessor phone_number: ::String
-      SENSITIVE: []
+      SENSITIVE: [:phone_number]
     end
 
     class OptInPhoneNumberResponse < Aws::EmptyStructure
@@ -419,7 +419,7 @@ module Aws::SNS
       attr_accessor iso_2_country_code: ::String
       attr_accessor route_type: ("Transactional" | "Promotional" | "Premium")
       attr_accessor number_capabilities: ::Array[("SMS" | "MMS" | "VOICE")]
-      SENSITIVE: []
+      SENSITIVE: [:phone_number]
     end
 
     class PlatformApplication
@@ -473,7 +473,7 @@ module Aws::SNS
       attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
       attr_accessor message_deduplication_id: ::String
       attr_accessor message_group_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:phone_number]
     end
 
     class PublishResponse
@@ -507,7 +507,7 @@ module Aws::SNS
     class SMSSandboxPhoneNumber
       attr_accessor phone_number: ::String
       attr_accessor status: ("Pending" | "Verified")
-      SENSITIVE: []
+      SENSITIVE: [:phone_number]
     end
 
     class SetEndpointAttributesInput
@@ -655,7 +655,7 @@ module Aws::SNS
     class VerifySMSSandboxPhoneNumberInput
       attr_accessor phone_number: ::String
       attr_accessor one_time_password: ::String
-      SENSITIVE: []
+      SENSITIVE: [:phone_number]
     end
 
     class VerifySMSSandboxPhoneNumberResult < Aws::EmptyStructure

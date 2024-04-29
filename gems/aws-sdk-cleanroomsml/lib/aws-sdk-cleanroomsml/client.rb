@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CleanRoomsML
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CleanRoomsML
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::CleanRoomsML
     #   @option options [Aws::CleanRoomsML::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CleanRoomsML::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -432,8 +456,8 @@ module Aws::CleanRoomsML
     #   * Do not use aws:, AWS:, or any upper or lowercase combination of such
     #     as a prefix for keys as it is reserved for AWS use. You cannot edit
     #     or delete tag keys with this prefix. Values can have this prefix. If
-    #     a tag value has aws as its prefix but the key does not, then
-    #     Forecast considers it to be a user tag and will count against the
+    #     a tag value has aws as its prefix but the key does not, then Clean
+    #     Rooms ML considers it to be a user tag and will count against the
     #     limit of 50 tags. Tags with only the key prefix of aws do not count
     #     against your tags per resource limit.
     #
@@ -512,7 +536,8 @@ module Aws::CleanRoomsML
     #
     # @option params [Integer] :min_matching_seed_size
     #   The minimum number of users from the seed audience that must match
-    #   with users in the training data of the audience model.
+    #   with users in the training data of the audience model. The default
+    #   value is 500.
     #
     # @option params [required, String] :name
     #   The name of the configured audience model.
@@ -555,8 +580,8 @@ module Aws::CleanRoomsML
     #   * Do not use aws:, AWS:, or any upper or lowercase combination of such
     #     as a prefix for keys as it is reserved for AWS use. You cannot edit
     #     or delete tag keys with this prefix. Values can have this prefix. If
-    #     a tag value has aws as its prefix but the key does not, then
-    #     Forecast considers it to be a user tag and will count against the
+    #     a tag value has aws as its prefix but the key does not, then Clean
+    #     Rooms ML considers it to be a user tag and will count against the
     #     limit of 50 tags. Tags with only the key prefix of aws do not count
     #     against your tags per resource limit.
     #
@@ -603,10 +628,9 @@ module Aws::CleanRoomsML
       req.send_request(options)
     end
 
-    # Defines the information necessary to create a training dataset, or
-    # seed audience. In Clean Rooms ML, the `TrainingDataset` is metadata
-    # that points to a Glue table, which is read only during `AudienceModel`
-    # creation.
+    # Defines the information necessary to create a training dataset. In
+    # Clean Rooms ML, the `TrainingDataset` is metadata that points to a
+    # Glue table, which is read only during `AudienceModel` creation.
     #
     # @option params [String] :description
     #   The description of the training dataset.
@@ -870,6 +894,7 @@ module Aws::CleanRoomsML
     #   resp.create_time #=> Time
     #   resp.description #=> String
     #   resp.include_seed_in_output #=> Boolean
+    #   resp.metrics.recall_metric #=> Float
     #   resp.metrics.relevance_metrics #=> Array
     #   resp.metrics.relevance_metrics[0].audience_size.type #=> String, one of "ABSOLUTE", "PERCENTAGE"
     #   resp.metrics.relevance_metrics[0].audience_size.value #=> Integer
@@ -906,7 +931,6 @@ module Aws::CleanRoomsML
     #   * {Types::GetAudienceModelResponse#create_time #create_time} => Time
     #   * {Types::GetAudienceModelResponse#description #description} => String
     #   * {Types::GetAudienceModelResponse#kms_key_arn #kms_key_arn} => String
-    #   * {Types::GetAudienceModelResponse#metrics #metrics} => Array&lt;Types::AudienceModelMetric&gt;
     #   * {Types::GetAudienceModelResponse#name #name} => String
     #   * {Types::GetAudienceModelResponse#status #status} => String
     #   * {Types::GetAudienceModelResponse#status_details #status_details} => Types::StatusDetails
@@ -928,10 +952,6 @@ module Aws::CleanRoomsML
     #   resp.create_time #=> Time
     #   resp.description #=> String
     #   resp.kms_key_arn #=> String
-    #   resp.metrics #=> Array
-    #   resp.metrics[0].for_top_k_item_predictions #=> Integer
-    #   resp.metrics[0].type #=> String, one of "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN", "MEAN_RECIPROCAL_RANK", "PRECISION", "RECALL"
-    #   resp.metrics[0].value #=> Float
     #   resp.name #=> String
     #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #   resp.status_details.message #=> String
@@ -1503,8 +1523,8 @@ module Aws::CleanRoomsML
     #   * Do not use aws:, AWS:, or any upper or lowercase combination of such
     #     as a prefix for keys as it is reserved for AWS use. You cannot edit
     #     or delete tag keys with this prefix. Values can have this prefix. If
-    #     a tag value has aws as its prefix but the key does not, then
-    #     Forecast considers it to be a user tag and will count against the
+    #     a tag value has aws as its prefix but the key does not, then Clean
+    #     Rooms ML considers it to be a user tag and will count against the
     #     limit of 50 tags. Tags with only the key prefix of aws do not count
     #     against your tags per resource limit.
     #
@@ -1577,9 +1597,9 @@ module Aws::CleanRoomsML
     #   * Do not use aws:, AWS:, or any upper or lowercase combination of such
     #     as a prefix for keys as it is reserved for AWS use. You cannot edit
     #     or delete tag keys with this prefix. Values can have this prefix. If
-    #     a tag value has aws as its prefix but the key does not, then
-    #     Forecast considers it to be a user tag and will count against the
-    #     limit of 50 tags. Tags with only the key prefix of aws do not count
+    #     a tag value has aws as its prefix but the key does not, then Clean
+    #     Rooms considers it to be a user tag and will count against the limit
+    #     of 50 tags. Tags with only the key prefix of aws do not count
     #     against your tags per resource limit.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1709,7 +1729,7 @@ module Aws::CleanRoomsML
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

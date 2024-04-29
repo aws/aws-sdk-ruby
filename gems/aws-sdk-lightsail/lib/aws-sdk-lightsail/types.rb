@@ -3605,6 +3605,22 @@ module Aws::Lightsail
     #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] certificate_name
+    #   The name of the SSL/TLS certificate that you want to attach to the
+    #   distribution.
+    #
+    #   Use the [GetCertificates][1] action to get a list of certificate
+    #   names that you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_minimum_tls_protocol_version
+    #   The minimum TLS protocol version for the SSL/TLS certificate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDistributionRequest AWS API Documentation
     #
     class CreateDistributionRequest < Struct.new(
@@ -3615,7 +3631,9 @@ module Aws::Lightsail
       :cache_behaviors,
       :bundle_id,
       :ip_address_type,
-      :tags)
+      :tags,
+      :certificate_name,
+      :viewer_minimum_tls_protocol_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9799,12 +9817,20 @@ module Aws::Lightsail
     #   establishing a connection with your origin to pull content.
     #   @return [String]
     #
+    # @!attribute [rw] response_timeout
+    #   The amount of time, in seconds, that the distribution waits for a
+    #   response after forwarding a request to the origin. The minimum
+    #   timeout is 1 second, the maximum is 60 seconds, and the default (if
+    #   you don't specify otherwise) is 30 seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InputOrigin AWS API Documentation
     #
     class InputOrigin < Struct.new(
       :name,
       :region_name,
-      :protocol_policy)
+      :protocol_policy,
+      :response_timeout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11020,6 +11046,11 @@ module Aws::Lightsail
     #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] viewer_minimum_tls_protocol_version
+    #   The minimum TLS protocol version that the distribution can use to
+    #   communicate with viewers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LightsailDistribution AWS API Documentation
     #
     class LightsailDistribution < Struct.new(
@@ -11042,7 +11073,8 @@ module Aws::Lightsail
       :cache_behaviors,
       :able_to_update_bundle,
       :ip_address_type,
-      :tags)
+      :tags,
+      :viewer_minimum_tls_protocol_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11970,13 +12002,21 @@ module Aws::Lightsail
     #   establishing a connection with your origin to pull content.
     #   @return [String]
     #
+    # @!attribute [rw] response_timeout
+    #   The amount of time, in seconds, that the distribution waits for a
+    #   response after forwarding a request to the origin. The minimum
+    #   timeout is 1 second, the maximum is 60 seconds, and the default (if
+    #   you don't specify otherwise) is 30 seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Origin AWS API Documentation
     #
     class Origin < Struct.new(
       :name,
       :resource_type,
       :region_name,
-      :protocol_policy)
+      :protocol_policy,
+      :response_timeout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14592,6 +14632,36 @@ module Aws::Lightsail
     #   Indicates whether to enable the distribution.
     #   @return [Boolean]
     #
+    # @!attribute [rw] viewer_minimum_tls_protocol_version
+    #   Use this parameter to update the minimum TLS protocol version for
+    #   the SSL/TLS certificate that's attached to the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_name
+    #   The name of the SSL/TLS certificate that you want to attach to the
+    #   distribution.
+    #
+    #   Only certificates with a status of `ISSUED` can be attached to a
+    #   distribution.
+    #
+    #   Use the [GetCertificates][1] action to get a list of certificate
+    #   names that you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html
+    #   @return [String]
+    #
+    # @!attribute [rw] use_default_certificate
+    #   Indicates whether the default SSL/TLS certificate is attached to the
+    #   distribution. The default value is `true`. When `true`, the
+    #   distribution uses the default domain name such as
+    #   `d111111abcdef8.cloudfront.net`.
+    #
+    #   Set this value to `false` to attach a new certificate to the
+    #   distribution.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDistributionRequest AWS API Documentation
     #
     class UpdateDistributionRequest < Struct.new(
@@ -14600,7 +14670,10 @@ module Aws::Lightsail
       :default_cache_behavior,
       :cache_behavior_settings,
       :cache_behaviors,
-      :is_enabled)
+      :is_enabled,
+      :viewer_minimum_tls_protocol_version,
+      :certificate_name,
+      :use_default_certificate)
       SENSITIVE = []
       include Aws::Structure
     end

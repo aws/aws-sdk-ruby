@@ -10,40 +10,58 @@
 module Aws::BedrockAgent
   module Types
 
-    # Contains information about the API Schema for the Action Group
+    # Contains details about the OpenAPI schema for the action group. For
+    # more information, see [Action group OpenAPI schemas][1]. You can
+    # either include the schema directly in the `payload` field or you can
+    # upload it to an S3 bucket and specify the S3 bucket location in the
+    # `s3` field.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
     #
     # @note APISchema is a union - when making an API calls you must set exactly one of the members.
     #
     # @note APISchema is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of APISchema corresponding to the set member.
     #
-    # @!attribute [rw] s3
-    #   The identifier for the S3 resource.
-    #   @return [Types::S3Identifier]
-    #
     # @!attribute [rw] payload
-    #   String OpenAPI Payload
+    #   The JSON or YAML-formatted payload defining the OpenAPI schema for
+    #   the action group. For more information, see [Action group OpenAPI
+    #   schemas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
     #   @return [String]
+    #
+    # @!attribute [rw] s3
+    #   Contains details about the S3 object containing the OpenAPI schema
+    #   for the action group. For more information, see [Action group
+    #   OpenAPI schemas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
+    #   @return [Types::S3Identifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/APISchema AWS API Documentation
     #
     class APISchema < Struct.new(
-      :s3,
       :payload,
+      :s3,
       :unknown)
       SENSITIVE = [:payload]
       include Aws::Structure
       include Aws::Structure::Union
 
-      class S3 < APISchema; end
       class Payload < APISchema; end
+      class S3 < APISchema; end
       class Unknown < APISchema; end
     end
 
-    # This exception is thrown when a request is denied per access
-    # permissions
+    # The request is denied because of missing access permissions.
     #
     # @!attribute [rw] message
-    #   Non Blank String
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AccessDeniedException AWS API Documentation
@@ -54,49 +72,63 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Type of Executors for an Action Group
+    # Contains details about the Lambda function containing the business
+    # logic that is carried out upon invoking the action.
     #
     # @note ActionGroupExecutor is a union - when making an API calls you must set exactly one of the members.
     #
     # @note ActionGroupExecutor is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ActionGroupExecutor corresponding to the set member.
     #
+    # @!attribute [rw] custom_control
+    #   To return the action group invocation results directly in the
+    #   `InvokeAgent` response, specify `RETURN_CONTROL`.
+    #   @return [String]
+    #
     # @!attribute [rw] lambda
-    #   ARN of a Lambda.
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ActionGroupExecutor AWS API Documentation
     #
     class ActionGroupExecutor < Struct.new(
+      :custom_control,
       :lambda,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class CustomControl < ActionGroupExecutor; end
       class Lambda < ActionGroupExecutor; end
       class Unknown < ActionGroupExecutor; end
     end
 
-    # ActionGroup Summary
+    # Contains details about an action group.
     #
     # @!attribute [rw] action_group_id
-    #   Identifier for a resource.
+    #   The unique identifier of the action group.
     #   @return [String]
     #
     # @!attribute [rw] action_group_name
-    #   Name for a resource.
+    #   The name of the action group.
     #   @return [String]
     #
     # @!attribute [rw] action_group_state
-    #   State of the action group
+    #   Specifies whether the action group is available for the agent to
+    #   invoke or not when sending an [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The description of the action group.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the action group was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ActionGroupSummary AWS API Documentation
@@ -111,267 +143,366 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains the information of an agent
+    # Contains details about an agent.
+    #
+    # @!attribute [rw] agent_arn
+    #   The Amazon Resource Name (ARN) of the agent.
+    #   @return [String]
     #
     # @!attribute [rw] agent_id
-    #   Identifier for a resource.
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_name
-    #   Name for a resource.
+    #   The name of the agent.
     #   @return [String]
     #
-    # @!attribute [rw] agent_arn
-    #   Arn representation of the Agent.
-    #   @return [String]
-    #
-    # @!attribute [rw] agent_version
-    #   Draft Agent Version.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   Client specified token used for idempotency checks
-    #   @return [String]
-    #
-    # @!attribute [rw] instruction
-    #   Instruction for the agent.
+    # @!attribute [rw] agent_resource_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_status
-    #   Schema Type for Action APIs.
+    #   The status of the agent and whether it is ready for use. The
+    #   following statuses are possible:
+    #
+    #   * CREATING – The agent is being created.
+    #
+    #   * PREPARING – The agent is being prepared.
+    #
+    #   * PREPARED – The agent is prepared and ready to be invoked.
+    #
+    #   * NOT\_PREPARED – The agent has been created but not yet prepared.
+    #
+    #   * FAILED – The agent API operation failed.
+    #
+    #   * UPDATING – The agent is being updated.
+    #
+    #   * DELETING – The agent is being deleted.
     #   @return [String]
     #
-    # @!attribute [rw] foundation_model
-    #   ARN or name of a Bedrock model.
+    # @!attribute [rw] agent_version
+    #   The version of the agent.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   Description of the Resource.
-    #   @return [String]
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
-    # @!attribute [rw] idle_session_ttl_in_seconds
-    #   Max Session Time.
-    #   @return [Integer]
     #
-    # @!attribute [rw] agent_resource_role_arn
-    #   ARN of a IAM role.
-    #   @return [String]
     #
-    # @!attribute [rw] customer_encryption_key_arn
-    #   A KMS key ARN
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Time Stamp.
+    #   The time at which the agent was created.
     #   @return [Time]
     #
-    # @!attribute [rw] updated_at
-    #   Time Stamp.
-    #   @return [Time]
+    # @!attribute [rw] customer_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key that encrypts the
+    #   agent.
+    #   @return [String]
     #
-    # @!attribute [rw] prepared_at
-    #   Time Stamp.
-    #   @return [Time]
+    # @!attribute [rw] description
+    #   The description of the agent.
+    #   @return [String]
     #
     # @!attribute [rw] failure_reasons
-    #   Failure Reasons for Error.
+    #   Contains reasons that the agent-related API that you invoked failed.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] recommended_actions
-    #   The recommended actions users can take to resolve an error in
-    #   failureReasons.
-    #   @return [Array<String>]
+    # @!attribute [rw] foundation_model
+    #   The foundation model used for orchestration by the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] idle_session_ttl_in_seconds
+    #   The number of seconds for which Amazon Bedrock keeps information
+    #   about a user's conversation with the agent.
+    #
+    #   A user interaction remains active for the amount of time specified.
+    #   If no conversation occurs during this time, the session expires and
+    #   Amazon Bedrock deletes any data provided before the timeout.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instruction
+    #   Instructions that tell the agent what it should do and how it should
+    #   interact with users.
+    #   @return [String]
+    #
+    # @!attribute [rw] prepared_at
+    #   The time at which the agent was last prepared.
+    #   @return [Time]
     #
     # @!attribute [rw] prompt_override_configuration
-    #   Configuration for prompt override.
+    #   Contains configurations to override prompt templates in different
+    #   parts of an agent sequence. For more information, see [Advanced
+    #   prompts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #   @return [Types::PromptOverrideConfiguration]
+    #
+    # @!attribute [rw] recommended_actions
+    #   Contains recommended actions to take for the agent-related API that
+    #   you invoked to succeed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the agent was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/Agent AWS API Documentation
     #
     class Agent < Struct.new(
+      :agent_arn,
       :agent_id,
       :agent_name,
-      :agent_arn,
+      :agent_resource_role_arn,
+      :agent_status,
       :agent_version,
       :client_token,
-      :instruction,
-      :agent_status,
-      :foundation_model,
-      :description,
-      :idle_session_ttl_in_seconds,
-      :agent_resource_role_arn,
-      :customer_encryption_key_arn,
       :created_at,
-      :updated_at,
-      :prepared_at,
+      :customer_encryption_key_arn,
+      :description,
       :failure_reasons,
+      :foundation_model,
+      :idle_session_ttl_in_seconds,
+      :instruction,
+      :prepared_at,
+      :prompt_override_configuration,
       :recommended_actions,
-      :prompt_override_configuration)
+      :updated_at)
       SENSITIVE = [:instruction, :prompt_override_configuration]
       include Aws::Structure
     end
 
-    # Contains the information of an Agent Action Group
+    # Contains details about an action group.
     #
-    # @!attribute [rw] agent_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] agent_version
-    #   Agent Version.
-    #   @return [String]
+    # @!attribute [rw] action_group_executor
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
+    #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_id
-    #   Identifier for a resource.
+    #   The unique identifier of the action group.
     #   @return [String]
     #
     # @!attribute [rw] action_group_name
-    #   Name for a resource.
+    #   The name of the action group.
     #   @return [String]
+    #
+    # @!attribute [rw] action_group_state
+    #   Specifies whether the action group is available for the agent to
+    #   invoke or not when sending an [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_id
+    #   The unique identifier of the agent to which the action group
+    #   belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_version
+    #   The version of the agent to which the action group belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_schema
+    #   Contains either details about the S3 object containing the OpenAPI
+    #   schema for the action group or the JSON or YAML-formatted payload
+    #   defining the schema. For more information, see [Action group OpenAPI
+    #   schemas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
+    #   @return [Types::APISchema]
     #
     # @!attribute [rw] client_token
-    #   Client specified token used for idempotency checks
-    #   @return [String]
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
-    # @!attribute [rw] description
-    #   Description of the Resource.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Time Stamp.
+    #   The time at which the action group was created.
     #   @return [Time]
     #
-    # @!attribute [rw] updated_at
-    #   Time Stamp.
-    #   @return [Time]
+    # @!attribute [rw] description
+    #   The description of the action group.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_schema
+    #   Defines functions that each define parameters that the agent needs
+    #   to invoke from the user. Each function represents an action in an
+    #   action group.
+    #   @return [Types::FunctionSchema]
     #
     # @!attribute [rw] parent_action_signature
-    #   Action Group Signature for a BuiltIn Action
+    #   If this field is set as `AMAZON.UserInput`, the agent can request
+    #   the user for additional information when trying to complete a task.
+    #   The `description`, `apiSchema`, and `actionGroupExecutor` fields
+    #   must be blank for this action group.
+    #
+    #   During orchestration, if the agent determines that it needs to
+    #   invoke an API in an action group, but doesn't have enough
+    #   information to complete the API request, it will invoke this action
+    #   group instead and return an [Observation][1] reprompting the user
+    #   for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #   @return [String]
     #
-    # @!attribute [rw] action_group_executor
-    #   Type of Executors for an Action Group
-    #   @return [Types::ActionGroupExecutor]
-    #
-    # @!attribute [rw] api_schema
-    #   Contains information about the API Schema for the Action Group
-    #   @return [Types::APISchema]
-    #
-    # @!attribute [rw] action_group_state
-    #   State of the action group
-    #   @return [String]
+    # @!attribute [rw] updated_at
+    #   The time at which the action group was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentActionGroup AWS API Documentation
     #
     class AgentActionGroup < Struct.new(
-      :agent_id,
-      :agent_version,
+      :action_group_executor,
       :action_group_id,
       :action_group_name,
-      :client_token,
-      :description,
-      :created_at,
-      :updated_at,
-      :parent_action_signature,
-      :action_group_executor,
+      :action_group_state,
+      :agent_id,
+      :agent_version,
       :api_schema,
-      :action_group_state)
+      :client_token,
+      :created_at,
+      :description,
+      :function_schema,
+      :parent_action_signature,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Contains the information of an agent alias
+    # Contains details about an alias of an agent.
     #
-    # @!attribute [rw] agent_id
-    #   Identifier for a resource.
+    # @!attribute [rw] agent_alias_arn
+    #   The Amazon Resource Name (ARN) of the alias of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] agent_alias_history_events
+    #   Contains details about the history of the alias.
+    #   @return [Array<Types::AgentAliasHistoryEvent>]
+    #
     # @!attribute [rw] agent_alias_id
-    #   Id for an Agent Alias generated at the server side.
+    #   The unique identifier of the alias of the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_alias_name
-    #   Name for a resource.
+    #   The name of the alias of the agent.
     #   @return [String]
     #
-    # @!attribute [rw] agent_alias_arn
-    #   Arn representation of the Agent Alias.
+    # @!attribute [rw] agent_alias_status
+    #   The status of the alias of the agent and whether it is ready for
+    #   use. The following statuses are possible:
+    #
+    #   * CREATING – The agent alias is being created.
+    #
+    #   * PREPARED – The agent alias is finished being created or updated
+    #     and is ready to be invoked.
+    #
+    #   * FAILED – The agent alias API operation failed.
+    #
+    #   * UPDATING – The agent alias is being updated.
+    #
+    #   * DELETING – The agent alias is being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_id
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The time at which the alias of the agent was created.
+    #   @return [Time]
+    #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The description of the alias of the agent.
     #   @return [String]
     #
     # @!attribute [rw] routing_configuration
-    #   Routing configuration for an Agent alias.
+    #   Contains details about the routing configuration of the alias.
     #   @return [Array<Types::AgentAliasRoutingConfigurationListItem>]
     #
-    # @!attribute [rw] created_at
-    #   Time Stamp.
-    #   @return [Time]
-    #
     # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the alias was last updated.
     #   @return [Time]
-    #
-    # @!attribute [rw] agent_alias_history_events
-    #   The list of history events for an alias for an Agent.
-    #   @return [Array<Types::AgentAliasHistoryEvent>]
-    #
-    # @!attribute [rw] agent_alias_status
-    #   The statuses an Agent Alias can be in.
-    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentAlias AWS API Documentation
     #
     class AgentAlias < Struct.new(
-      :agent_id,
+      :agent_alias_arn,
+      :agent_alias_history_events,
       :agent_alias_id,
       :agent_alias_name,
-      :agent_alias_arn,
+      :agent_alias_status,
+      :agent_id,
       :client_token,
+      :created_at,
       :description,
       :routing_configuration,
-      :created_at,
-      :updated_at,
-      :agent_alias_history_events,
-      :agent_alias_status)
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # History event for an alias for an Agent.
-    #
-    # @!attribute [rw] routing_configuration
-    #   Routing configuration for an Agent alias.
-    #   @return [Array<Types::AgentAliasRoutingConfigurationListItem>]
+    # Contains details about the history of the alias.
     #
     # @!attribute [rw] end_date
-    #   Time Stamp.
+    #   The date that the alias stopped being associated to the version in
+    #   the `routingConfiguration` object
     #   @return [Time]
     #
+    # @!attribute [rw] routing_configuration
+    #   Contains details about the version of the agent with which the alias
+    #   is associated.
+    #   @return [Array<Types::AgentAliasRoutingConfigurationListItem>]
+    #
     # @!attribute [rw] start_date
-    #   Time Stamp.
+    #   The date that the alias began being associated to the version in the
+    #   `routingConfiguration` object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentAliasHistoryEvent AWS API Documentation
     #
     class AgentAliasHistoryEvent < Struct.new(
-      :routing_configuration,
       :end_date,
+      :routing_configuration,
       :start_date)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Details about the routing configuration for an Agent alias.
+    # Contains details about the routing configuration of the alias.
     #
     # @!attribute [rw] agent_version
-    #   Agent Version.
+    #   The version of the agent with which the alias is associated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentAliasRoutingConfigurationListItem AWS API Documentation
@@ -382,34 +513,35 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Summary of an alias for an Agent.
+    # Contains details about an alias of an agent.
     #
     # @!attribute [rw] agent_alias_id
-    #   Id for an Agent Alias generated at the server side.
+    #   Contains details about
     #   @return [String]
     #
     # @!attribute [rw] agent_alias_name
-    #   Name for a resource.
+    #   The name of the alias.
     #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] routing_configuration
-    #   Routing configuration for an Agent alias.
-    #   @return [Array<Types::AgentAliasRoutingConfigurationListItem>]
     #
     # @!attribute [rw] agent_alias_status
-    #   The statuses an Agent Alias can be in.
+    #   The status of the alias.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Time Stamp.
+    #   The time at which the alias of the agent was created.
     #   @return [Time]
     #
+    # @!attribute [rw] description
+    #   The description of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_configuration
+    #   Contains details about the version of the agent with which the alias
+    #   is associated.
+    #   @return [Array<Types::AgentAliasRoutingConfigurationListItem>]
+    #
     # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the alias was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentAliasSummary AWS API Documentation
@@ -417,113 +549,132 @@ module Aws::BedrockAgent
     class AgentAliasSummary < Struct.new(
       :agent_alias_id,
       :agent_alias_name,
-      :description,
-      :routing_configuration,
       :agent_alias_status,
       :created_at,
+      :description,
+      :routing_configuration,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Contains the information of an Agent Knowledge Base.
+    # Contains details about a knowledge base that is associated with an
+    # agent.
     #
     # @!attribute [rw] agent_id
-    #   Identifier for a resource.
+    #   The unique identifier of the agent with which the knowledge base is
+    #   associated.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Agent Version.
-    #   @return [String]
-    #
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The version of the agent with which the knowledge base is
+    #   associated.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Time Stamp.
+    #   The time at which the association between the agent and the
+    #   knowledge base was created.
     #   @return [Time]
     #
-    # @!attribute [rw] updated_at
-    #   Time Stamp.
-    #   @return [Time]
+    # @!attribute [rw] description
+    #   The description of the association between the agent and the
+    #   knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the association between the agent and the
+    #   knowledge base.
+    #   @return [String]
     #
     # @!attribute [rw] knowledge_base_state
-    #   State of the knowledge base; whether it is enabled or disabled
+    #   Specifies whether to use the knowledge base or not when sending an
+    #   [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
     #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the association between the agent and the
+    #   knowledge base was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentKnowledgeBase AWS API Documentation
     #
     class AgentKnowledgeBase < Struct.new(
       :agent_id,
       :agent_version,
-      :knowledge_base_id,
-      :description,
       :created_at,
-      :updated_at,
-      :knowledge_base_state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Agent Knowledge Base Summary
-    #
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] knowledge_base_state
-    #   State of the knowledge base; whether it is enabled or disabled
-    #   @return [String]
-    #
-    # @!attribute [rw] updated_at
-    #   Time Stamp.
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentKnowledgeBaseSummary AWS API Documentation
-    #
-    class AgentKnowledgeBaseSummary < Struct.new(
-      :knowledge_base_id,
       :description,
+      :knowledge_base_id,
       :knowledge_base_state,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Summary of Agent.
-    #
-    # @!attribute [rw] agent_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] agent_name
-    #   Name for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] agent_status
-    #   Schema Type for Action APIs.
-    #   @return [String]
+    # Contains details about a knowledge base associated with an agent.
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The description of the knowledge base associated with an agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base associated with an
+    #   agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_state
+    #   Specifies whether the agent uses the knowledge base or not when
+    #   sending an [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the knowledge base associated with an agent was
+    #   last updated.
     #   @return [Time]
     #
-    # @!attribute [rw] latest_agent_version
-    #   Agent Version.
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentKnowledgeBaseSummary AWS API Documentation
+    #
+    class AgentKnowledgeBaseSummary < Struct.new(
+      :description,
+      :knowledge_base_id,
+      :knowledge_base_state,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an agent.
+    #
+    # @!attribute [rw] agent_id
+    #   The unique identifier of the agent.
     #   @return [String]
+    #
+    # @!attribute [rw] agent_name
+    #   The name of the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_status
+    #   The status of the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_agent_version
+    #   The latest version of the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the agent was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentSummary AWS API Documentation
     #
@@ -532,127 +683,141 @@ module Aws::BedrockAgent
       :agent_name,
       :agent_status,
       :description,
-      :updated_at,
-      :latest_agent_version)
+      :latest_agent_version,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Contains the information of an agent version.
+    # Contains details about a version of an agent.
+    #
+    # @!attribute [rw] agent_arn
+    #   The Amazon Resource Name (ARN) of the agent that the version belongs
+    #   to.
+    #   @return [String]
     #
     # @!attribute [rw] agent_id
-    #   Identifier for a resource.
+    #   The unique identifier of the agent that the version belongs to.
     #   @return [String]
     #
     # @!attribute [rw] agent_name
-    #   Name for a resource.
+    #   The name of the agent that the version belongs to.
     #   @return [String]
     #
-    # @!attribute [rw] agent_arn
-    #   Arn representation of the Agent.
-    #   @return [String]
-    #
-    # @!attribute [rw] version
-    #   Numerical Agent Version.
-    #   @return [String]
-    #
-    # @!attribute [rw] instruction
-    #   Instruction for the agent.
+    # @!attribute [rw] agent_resource_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_status
-    #   Schema Type for Action APIs.
-    #   @return [String]
-    #
-    # @!attribute [rw] foundation_model
-    #   ARN or name of a Bedrock model.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] idle_session_ttl_in_seconds
-    #   Max Session Time.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] agent_resource_role_arn
-    #   ARN of a IAM role.
-    #   @return [String]
-    #
-    # @!attribute [rw] customer_encryption_key_arn
-    #   A KMS key ARN
+    #   The status of the agent that the version belongs to.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Time Stamp.
+    #   The time at which the version was created.
     #   @return [Time]
     #
-    # @!attribute [rw] updated_at
-    #   Time Stamp.
-    #   @return [Time]
+    # @!attribute [rw] customer_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key that encrypts the
+    #   agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version.
+    #   @return [String]
     #
     # @!attribute [rw] failure_reasons
-    #   Failure Reasons for Error.
+    #   A list of reasons that the API operation on the version failed.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] recommended_actions
-    #   The recommended actions users can take to resolve an error in
-    #   failureReasons.
-    #   @return [Array<String>]
+    # @!attribute [rw] foundation_model
+    #   The foundation model that the version invokes.
+    #   @return [String]
+    #
+    # @!attribute [rw] idle_session_ttl_in_seconds
+    #   The number of seconds for which Amazon Bedrock keeps information
+    #   about a user's conversation with the agent.
+    #
+    #   A user interaction remains active for the amount of time specified.
+    #   If no conversation occurs during this time, the session expires and
+    #   Amazon Bedrock deletes any data provided before the timeout.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instruction
+    #   The instructions provided to the agent.
+    #   @return [String]
     #
     # @!attribute [rw] prompt_override_configuration
-    #   Configuration for prompt override.
+    #   Contains configurations to override prompt templates in different
+    #   parts of an agent sequence. For more information, see [Advanced
+    #   prompts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #   @return [Types::PromptOverrideConfiguration]
+    #
+    # @!attribute [rw] recommended_actions
+    #   A list of recommended actions to take for the failed API operation
+    #   on the version to succeed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the version was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentVersion AWS API Documentation
     #
     class AgentVersion < Struct.new(
+      :agent_arn,
       :agent_id,
       :agent_name,
-      :agent_arn,
-      :version,
-      :instruction,
-      :agent_status,
-      :foundation_model,
-      :description,
-      :idle_session_ttl_in_seconds,
       :agent_resource_role_arn,
-      :customer_encryption_key_arn,
+      :agent_status,
       :created_at,
-      :updated_at,
+      :customer_encryption_key_arn,
+      :description,
       :failure_reasons,
+      :foundation_model,
+      :idle_session_ttl_in_seconds,
+      :instruction,
+      :prompt_override_configuration,
       :recommended_actions,
-      :prompt_override_configuration)
+      :updated_at,
+      :version)
       SENSITIVE = [:instruction, :prompt_override_configuration]
       include Aws::Structure
     end
 
-    # Summary of agent version.
+    # Contains details about a version of an agent.
     #
     # @!attribute [rw] agent_name
-    #   Name for a resource.
+    #   The name of the agent to which the version belongs.
     #   @return [String]
     #
     # @!attribute [rw] agent_status
-    #   Schema Type for Action APIs.
+    #   The status of the agent to which the version belongs.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Agent Version.
+    #   The version of the agent.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Time Stamp.
-    #   @return [Time]
-    #
-    # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the version was created.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The description of the version of the agent.
     #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the version was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentVersionSummary AWS API Documentation
     #
@@ -661,32 +826,38 @@ module Aws::BedrockAgent
       :agent_status,
       :agent_version,
       :created_at,
-      :updated_at,
-      :description)
+      :description,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Associate Agent Knowledge Base Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent with which you want to associate
+    #   the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Draft Version of the Agent.
-    #   @return [String]
-    #
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
+    #   The version of the agent with which you want to associate the
+    #   knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   A description of what the agent should use the knowledge base for.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to associate with the
+    #   agent.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_state
-    #   State of the knowledge base; whether it is enabled or disabled
+    #   Specifies whether to use the knowledge base or not when sending an
+    #   [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AssociateAgentKnowledgeBaseRequest AWS API Documentation
@@ -694,17 +865,16 @@ module Aws::BedrockAgent
     class AssociateAgentKnowledgeBaseRequest < Struct.new(
       :agent_id,
       :agent_version,
-      :knowledge_base_id,
       :description,
+      :knowledge_base_id,
       :knowledge_base_state)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Associate Agent Knowledge Base Response
-    #
     # @!attribute [rw] agent_knowledge_base
-    #   Contains the information of an Agent Knowledge Base.
+    #   Contains details about the knowledge base that has been associated
+    #   with the agent.
     #   @return [Types::AgentKnowledgeBase]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AssociateAgentKnowledgeBaseResponse AWS API Documentation
@@ -715,14 +885,30 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Configures chunking strategy
+    # Details about how to chunk the documents in the data source. A *chunk*
+    # refers to an excerpt from a data source that is returned when the
+    # knowledge base that it belongs to is queried.
     #
     # @!attribute [rw] chunking_strategy
-    #   The type of chunking strategy
+    #   Knowledge base can split your source data into chunks. A *chunk*
+    #   refers to an excerpt from a data source that is returned when the
+    #   knowledge base that it belongs to is queried. You have the following
+    #   options for chunking your data. If you opt for `NONE`, then you may
+    #   want to pre-process your files by splitting them up such that each
+    #   file corresponds to a chunk.
+    #
+    #   * `FIXED_SIZE` – Amazon Bedrock splits your source data into chunks
+    #     of the approximate size that you set in the
+    #     `fixedSizeChunkingConfiguration`.
+    #
+    #   * `NONE` – Amazon Bedrock treats each file as one chunk. If you
+    #     choose this option, you may want to pre-process your documents by
+    #     splitting them into separate files.
     #   @return [String]
     #
     # @!attribute [rw] fixed_size_chunking_configuration
-    #   Configures fixed size chunking strategy
+    #   Configurations for when you choose fixed-size chunking. If you set
+    #   the `chunkingStrategy` as `NONE`, exclude this field.
     #   @return [Types::FixedSizeChunkingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ChunkingConfiguration AWS API Documentation
@@ -734,11 +920,9 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # This exception is thrown when there is a conflict performing an
-    # operation
+    # There was a conflict performing an operation.
     #
     # @!attribute [rw] message
-    #   Non Blank String
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ConflictException AWS API Documentation
@@ -749,67 +933,103 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Create Action Group Request
+    # @!attribute [rw] action_group_executor
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
+    #   @return [Types::ActionGroupExecutor]
+    #
+    # @!attribute [rw] action_group_name
+    #   The name to give the action group.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_group_state
+    #   Specifies whether the action group is available for the agent to
+    #   invoke or not when sending an [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
+    #   @return [String]
     #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent for which to create the action
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Draft Version of the Agent.
+    #   The version of the agent for which to create the action group.
     #   @return [String]
     #
-    # @!attribute [rw] action_group_name
-    #   Name for a resource.
-    #   @return [String]
+    # @!attribute [rw] api_schema
+    #   Contains either details about the S3 object containing the OpenAPI
+    #   schema for the action group or the JSON or YAML-formatted payload
+    #   defining the schema. For more information, see [Action group OpenAPI
+    #   schemas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
+    #   @return [Types::APISchema]
     #
     # @!attribute [rw] client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   A description of the action group.
     #   @return [String]
+    #
+    # @!attribute [rw] function_schema
+    #   Contains details about the function schema for the action group or
+    #   the JSON or YAML-formatted payload defining the schema.
+    #   @return [Types::FunctionSchema]
     #
     # @!attribute [rw] parent_action_group_signature
-    #   Action Group Signature for a BuiltIn Action
-    #   @return [String]
+    #   To allow your agent to request the user for additional information
+    #   when trying to complete a task, set this field to
+    #   `AMAZON.UserInput`. You must leave the `description`, `apiSchema`,
+    #   and `actionGroupExecutor` fields blank for this action group.
     #
-    # @!attribute [rw] action_group_executor
-    #   Type of Executors for an Action Group
-    #   @return [Types::ActionGroupExecutor]
+    #   During orchestration, if your agent determines that it needs to
+    #   invoke an API in an action group, but doesn't have enough
+    #   information to complete the API request, it will invoke this action
+    #   group instead and return an [Observation][1] reprompting the user
+    #   for more information.
     #
-    # @!attribute [rw] api_schema
-    #   Contains information about the API Schema for the Action Group
-    #   @return [Types::APISchema]
     #
-    # @!attribute [rw] action_group_state
-    #   State of the action group
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentActionGroupRequest AWS API Documentation
     #
     class CreateAgentActionGroupRequest < Struct.new(
+      :action_group_executor,
+      :action_group_name,
+      :action_group_state,
       :agent_id,
       :agent_version,
-      :action_group_name,
+      :api_schema,
       :client_token,
       :description,
-      :parent_action_group_signature,
-      :action_group_executor,
-      :api_schema,
-      :action_group_state)
+      :function_schema,
+      :parent_action_group_signature)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Create Action Group Response
-    #
     # @!attribute [rw] agent_action_group
-    #   Contains the information of an Agent Action Group
+    #   Contains details about the action group that was created.
     #   @return [Types::AgentActionGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentActionGroupResponse AWS API Documentation
@@ -820,40 +1040,45 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Create Agent Alias Request
-    #
-    # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    # @!attribute [rw] agent_alias_name
+    #   The name of the alias.
     #   @return [String]
     #
-    # @!attribute [rw] agent_alias_name
-    #   Name for a resource.
+    # @!attribute [rw] agent_id
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   A description of the alias of the agent.
     #   @return [String]
     #
     # @!attribute [rw] routing_configuration
-    #   Routing configuration for an Agent alias.
+    #   Contains details about the routing configuration of the alias.
     #   @return [Array<Types::AgentAliasRoutingConfigurationListItem>]
     #
     # @!attribute [rw] tags
-    #   A map of tag keys and values
+    #   Any tags that you want to attach to the alias of the agent.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentAliasRequest AWS API Documentation
     #
     class CreateAgentAliasRequest < Struct.new(
-      :agent_id,
       :agent_alias_name,
+      :agent_id,
       :client_token,
       :description,
       :routing_configuration,
@@ -862,10 +1087,8 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Create Agent Alias Response
-    #
     # @!attribute [rw] agent_alias
-    #   Contains the information of an agent alias
+    #   Contains details about the alias that was created.
     #   @return [Types::AgentAlias]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentAliasResponse AWS API Documentation
@@ -876,72 +1099,89 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Create Agent Request
-    #
     # @!attribute [rw] agent_name
-    #   Name for a resource.
+    #   A name for the agent that you create.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_resource_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
-    #   @return [String]
     #
-    # @!attribute [rw] instruction
-    #   Instruction for the agent.
-    #   @return [String]
     #
-    # @!attribute [rw] foundation_model
-    #   ARN or name of a Bedrock model.
-    #   @return [String]
     #
-    # @!attribute [rw] description
-    #   Description of the Resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] idle_session_ttl_in_seconds
-    #   Max Session Time.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] agent_resource_role_arn
-    #   ARN of a IAM role.
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] customer_encryption_key_arn
-    #   A KMS key ARN
+    #   The Amazon Resource Name (ARN) of the KMS key with which to encrypt
+    #   the agent.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   A map of tag keys and values
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] description
+    #   A description of the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] foundation_model
+    #   The foundation model to be used for orchestration by the agent you
+    #   create.
+    #   @return [String]
+    #
+    # @!attribute [rw] idle_session_ttl_in_seconds
+    #   The number of seconds for which Amazon Bedrock keeps information
+    #   about a user's conversation with the agent.
+    #
+    #   A user interaction remains active for the amount of time specified.
+    #   If no conversation occurs during this time, the session expires and
+    #   Amazon Bedrock deletes any data provided before the timeout.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instruction
+    #   Instructions that tell the agent what it should do and how it should
+    #   interact with users.
+    #   @return [String]
     #
     # @!attribute [rw] prompt_override_configuration
-    #   Configuration for prompt override.
+    #   Contains configurations to override prompts in different parts of an
+    #   agent sequence. For more information, see [Advanced prompts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #   @return [Types::PromptOverrideConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   Any tags that you want to attach to the agent.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentRequest AWS API Documentation
     #
     class CreateAgentRequest < Struct.new(
       :agent_name,
-      :client_token,
-      :instruction,
-      :foundation_model,
-      :description,
-      :idle_session_ttl_in_seconds,
       :agent_resource_role_arn,
+      :client_token,
       :customer_encryption_key_arn,
-      :tags,
-      :prompt_override_configuration)
+      :description,
+      :foundation_model,
+      :idle_session_ttl_in_seconds,
+      :instruction,
+      :prompt_override_configuration,
+      :tags)
       SENSITIVE = [:instruction, :prompt_override_configuration]
       include Aws::Structure
     end
 
-    # Create Agent Response
-    #
     # @!attribute [rw] agent
-    #   Contains the information of an agent
+    #   Contains details about the agent created.
     #   @return [Types::Agent]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentResponse AWS API Documentation
@@ -952,45 +1192,60 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
     # @!attribute [rw] client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   Name for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
+    # @!attribute [rw] data_deletion_policy
+    #   The deletion policy for the requested data source
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
-    #   Specifies a raw data source location to ingest.
+    #   Contains metadata about where the data source is stored.
     #   @return [Types::DataSourceConfiguration]
     #
+    # @!attribute [rw] description
+    #   A description of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to which to add the data
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
     # @!attribute [rw] server_side_encryption_configuration
-    #   Server-side encryption configuration.
+    #   Contains details about the server-side encryption for the data
+    #   source.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] vector_ingestion_configuration
-    #   Configures ingestion for a vector knowledge base
+    #   Contains details about how to ingest the documents in the data
+    #   source.
     #   @return [Types::VectorIngestionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
-      :knowledge_base_id,
       :client_token,
-      :name,
-      :description,
+      :data_deletion_policy,
       :data_source_configuration,
+      :description,
+      :knowledge_base_id,
+      :name,
       :server_side_encryption_configuration,
       :vector_ingestion_configuration)
       SENSITIVE = []
@@ -998,7 +1253,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] data_source
-    #   Contains the information of a data source.
+    #   Contains details about the data source.
     #   @return [Types::DataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateDataSourceResponse AWS API Documentation
@@ -1010,45 +1265,55 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
-    #   @return [String]
     #
-    # @!attribute [rw] name
-    #   Name for a resource.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   ARN of a IAM role.
+    #   A description of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_configuration
-    #   Configures a bedrock knowledge base.
+    #   Contains details about the embeddings model used for the knowledge
+    #   base.
     #   @return [Types::KnowledgeBaseConfiguration]
     #
+    # @!attribute [rw] name
+    #   A name for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the knowledge base.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_configuration
-    #   Configures the physical storage of ingested data in a knowledge
-    #   base.
+    #   Contains details about the configuration of the vector database used
+    #   for the knowledge base.
     #   @return [Types::StorageConfiguration]
     #
     # @!attribute [rw] tags
-    #   A map of tag keys and values
+    #   Specify the key-value pairs for the tags that you want to attach to
+    #   your knowledge base in this object.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateKnowledgeBaseRequest AWS API Documentation
     #
     class CreateKnowledgeBaseRequest < Struct.new(
       :client_token,
-      :name,
       :description,
-      :role_arn,
       :knowledge_base_configuration,
+      :name,
+      :role_arn,
       :storage_configuration,
       :tags)
       SENSITIVE = []
@@ -1056,7 +1321,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] knowledge_base
-    #   Contains the information of a knowledge base.
+    #   Contains details about the knowledge base.
     #   @return [Types::KnowledgeBase]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateKnowledgeBaseResponse AWS API Documentation
@@ -1067,211 +1332,223 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains the information of a data source.
+    # Contains details about a data source.
     #
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
+    # @!attribute [rw] created_at
+    #   The time at which the data source was created.
+    #   @return [Time]
     #
-    # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   Name for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of a data source.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
+    # @!attribute [rw] data_deletion_policy
+    #   The deletion policy for the data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
-    #   Specifies a raw data source location to ingest.
+    #   Contains details about how the data source is stored.
     #   @return [Types::DataSourceConfiguration]
     #
+    # @!attribute [rw] data_source_id
+    #   The unique identifier of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The details of the failure reasons related to the data source.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to which the data source
+    #   belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
     # @!attribute [rw] server_side_encryption_configuration
-    #   Server-side encryption configuration.
+    #   Contains details about the configuration of the server-side
+    #   encryption.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
-    # @!attribute [rw] vector_ingestion_configuration
-    #   Configures ingestion for a vector knowledge base
-    #   @return [Types::VectorIngestionConfiguration]
+    # @!attribute [rw] status
+    #   The status of the data source. The following statuses are possible:
     #
-    # @!attribute [rw] created_at
-    #   Time Stamp.
-    #   @return [Time]
+    #   * Available – The data source has been created and is ready for
+    #     ingestion into the knowledge base.
+    #
+    #   * Deleting – The data source is being deleted.
+    #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the data source was last updated.
     #   @return [Time]
+    #
+    # @!attribute [rw] vector_ingestion_configuration
+    #   Contains details about how to ingest the documents in the data
+    #   source.
+    #   @return [Types::VectorIngestionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
-      :knowledge_base_id,
-      :data_source_id,
-      :name,
-      :status,
-      :description,
-      :data_source_configuration,
-      :server_side_encryption_configuration,
-      :vector_ingestion_configuration,
       :created_at,
-      :updated_at)
+      :data_deletion_policy,
+      :data_source_configuration,
+      :data_source_id,
+      :description,
+      :failure_reasons,
+      :knowledge_base_id,
+      :name,
+      :server_side_encryption_configuration,
+      :status,
+      :updated_at,
+      :vector_ingestion_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Specifies a raw data source location to ingest.
-    #
-    # @!attribute [rw] type
-    #   The type of the data source location.
-    #   @return [String]
+    # Contains details about how a data source is stored.
     #
     # @!attribute [rw] s3_configuration
-    #   Configures an S3 data source location.
+    #   Contains details about the configuration of the S3 object containing
+    #   the data source.
     #   @return [Types::S3DataSourceConfiguration]
+    #
+    # @!attribute [rw] type
+    #   The type of storage for the data source.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
-      :type,
-      :s3_configuration)
+      :s3_configuration,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Summary information of a data source.
-    #
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
+    # Contains details about a data source.
     #
     # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   Name for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of a data source.
+    #   The unique identifier of the data source.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The description of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to which the data source
+    #   belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data source.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the data source was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DataSourceSummary AWS API Documentation
     #
     class DataSourceSummary < Struct.new(
-      :knowledge_base_id,
       :data_source_id,
+      :description,
+      :knowledge_base_id,
       :name,
       :status,
-      :description,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Delete Action Group Request
+    # @!attribute [rw] action_group_id
+    #   The unique identifier of the action group to delete.
+    #   @return [String]
     #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent that the action group belongs to.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Draft Version of the Agent.
-    #   @return [String]
-    #
-    # @!attribute [rw] action_group_id
-    #   Id generated at the server side when an Agent ActionGroup is created
+    #   The version of the agent that the action group belongs to.
     #   @return [String]
     #
     # @!attribute [rw] skip_resource_in_use_check
-    #   Skips checking if resource is in use when set to true. Defaults to
-    #   false
+    #   By default, this value is `false` and deletion is stopped if the
+    #   resource is in use. If you set it to `true`, the resource will be
+    #   deleted even if the resource is in use.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentActionGroupRequest AWS API Documentation
     #
     class DeleteAgentActionGroupRequest < Struct.new(
+      :action_group_id,
       :agent_id,
       :agent_version,
-      :action_group_id,
       :skip_resource_in_use_check)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Delete Action Group Response
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentActionGroupResponse AWS API Documentation
     #
     class DeleteAgentActionGroupResponse < Aws::EmptyStructure; end
 
-    # Delete Agent Alias Request
-    #
-    # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    # @!attribute [rw] agent_alias_id
+    #   The unique identifier of the alias to delete.
     #   @return [String]
     #
-    # @!attribute [rw] agent_alias_id
-    #   Id generated at the server side when an Agent Alias is created
+    # @!attribute [rw] agent_id
+    #   The unique identifier of the agent that the alias belongs to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentAliasRequest AWS API Documentation
     #
     class DeleteAgentAliasRequest < Struct.new(
-      :agent_id,
-      :agent_alias_id)
+      :agent_alias_id,
+      :agent_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Delete Agent Alias Response
-    #
-    # @!attribute [rw] agent_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
     # @!attribute [rw] agent_alias_id
-    #   Id for an Agent Alias generated at the server side.
+    #   The unique identifier of the alias that was deleted.
     #   @return [String]
     #
     # @!attribute [rw] agent_alias_status
-    #   The statuses an Agent Alias can be in.
+    #   The status of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_id
+    #   The unique identifier of the agent that the alias belongs to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentAliasResponse AWS API Documentation
     #
     class DeleteAgentAliasResponse < Struct.new(
-      :agent_id,
       :agent_alias_id,
-      :agent_alias_status)
+      :agent_alias_status,
+      :agent_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Delete Agent Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent to delete.
     #   @return [String]
     #
     # @!attribute [rw] skip_resource_in_use_check
-    #   Skips checking if resource is in use when set to true. Defaults to
-    #   false
+    #   By default, this value is `false` and deletion is stopped if the
+    #   resource is in use. If you set it to `true`, the resource will be
+    #   deleted even if the resource is in use.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentRequest AWS API Documentation
@@ -1283,14 +1560,12 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Delete Agent Response
-    #
     # @!attribute [rw] agent_id
-    #   Identifier for a resource.
+    #   The unique identifier of the agent that was deleted.
     #   @return [String]
     #
     # @!attribute [rw] agent_status
-    #   Schema Type for Action APIs.
+    #   The status of the agent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentResponse AWS API Documentation
@@ -1302,19 +1577,18 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Delete Agent Version Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent that the version belongs to.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Numerical Agent Version.
+    #   The version of the agent to delete.
     #   @return [String]
     #
     # @!attribute [rw] skip_resource_in_use_check
-    #   Skips checking if resource is in use when set to true. Defaults to
-    #   false
+    #   By default, this value is `false` and deletion is stopped if the
+    #   resource is in use. If you set it to `true`, the resource will be
+    #   deleted even if the resource is in use.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentVersionRequest AWS API Documentation
@@ -1327,71 +1601,71 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Delete Agent Version Response
-    #
     # @!attribute [rw] agent_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] agent_version
-    #   Numerical Agent Version.
+    #   The unique identifier of the agent that the version belongs to.
     #   @return [String]
     #
     # @!attribute [rw] agent_status
-    #   Schema Type for Action APIs.
+    #   The status of the agent version.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_version
+    #   The version that was deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentVersionResponse AWS API Documentation
     #
     class DeleteAgentVersionResponse < Struct.new(
       :agent_id,
-      :agent_version,
-      :agent_status)
+      :agent_status,
+      :agent_version)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
+    # @!attribute [rw] data_source_id
+    #   The unique identifier of the data source to delete.
     #   @return [String]
     #
-    # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base from which to delete the
+    #   data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteDataSourceRequest AWS API Documentation
     #
     class DeleteDataSourceRequest < Struct.new(
-      :knowledge_base_id,
-      :data_source_id)
+      :data_source_id,
+      :knowledge_base_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
+    # @!attribute [rw] data_source_id
+    #   The unique identifier of the data source that was deleted.
     #   @return [String]
     #
-    # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to which the data source
+    #   that was deleted belonged.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a data source.
+    #   The status of the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteDataSourceResponse AWS API Documentation
     #
     class DeleteDataSourceResponse < Struct.new(
-      :knowledge_base_id,
       :data_source_id,
+      :knowledge_base_id,
       :status)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
+    #   The unique identifier of the knowledge base to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteKnowledgeBaseRequest AWS API Documentation
@@ -1403,11 +1677,12 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
+    #   The unique identifier of the knowledge base that was deleted.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a knowledge base.
+    #   The status of the knowledge base and whether it has been
+    #   successfully deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteKnowledgeBaseResponse AWS API Documentation
@@ -1419,19 +1694,18 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Disassociate Agent Knowledge Base Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent from which to disassociate the
+    #   knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Draft Version of the Agent.
+    #   The version of the agent from which to disassociate the knowledge
+    #   base.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   Id generated at the server side when a Knowledge Base is associated
-    #   to an Agent
+    #   The unique identifier of the knowledge base to disassociate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DisassociateAgentKnowledgeBaseRequest AWS API Documentation
@@ -1444,20 +1718,19 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Disassociate Agent Knowledge Base Response
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DisassociateAgentKnowledgeBaseResponse AWS API Documentation
     #
     class DisassociateAgentKnowledgeBaseResponse < Aws::EmptyStructure; end
 
-    # Configures fixed size chunking strategy
+    # Configurations for when you choose fixed-size chunking. If you set the
+    # `chunkingStrategy` as `NONE`, exclude this field.
     #
     # @!attribute [rw] max_tokens
-    #   The maximum number of tokens per chunk.
+    #   The maximum number of tokens to include in a chunk.
     #   @return [Integer]
     #
     # @!attribute [rw] overlap_percentage
-    #   The overlap percentage between adjacent chunks.
+    #   The percentage of overlap between adjacent chunks of a data source.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/FixedSizeChunkingConfiguration AWS API Documentation
@@ -1469,35 +1742,122 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Get Action Group Request
+    # Defines parameters that the agent needs to invoke from the user to
+    # complete the function. Corresponds to an action in an action group.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [CreateAgentActionGroup request][1]
+    #
+    # * [CreateAgentActionGroup response][2]
+    #
+    # * [UpdateAgentActionGroup request][3]
+    #
+    # * [UpdateAgentActionGroup response][4]
+    #
+    # * [GetAgentActionGroup response][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
+    # [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+    #
+    # @!attribute [rw] description
+    #   A description of the function and its purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters that the agent elicits from the user to fulfill the
+    #   function.
+    #   @return [Hash<String,Types::ParameterDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/Function AWS API Documentation
+    #
+    class Function < Struct.new(
+      :description,
+      :name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines functions that each define parameters that the agent needs to
+    # invoke from the user. Each function represents an action in an action
+    # group.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [CreateAgentActionGroup request][1]
+    #
+    # * [CreateAgentActionGroup response][2]
+    #
+    # * [UpdateAgentActionGroup request][3]
+    #
+    # * [UpdateAgentActionGroup response][4]
+    #
+    # * [GetAgentActionGroup response][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
+    # [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+    #
+    # @note FunctionSchema is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FunctionSchema is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FunctionSchema corresponding to the set member.
+    #
+    # @!attribute [rw] functions
+    #   A list of functions that each define an action in the action group.
+    #   @return [Array<Types::Function>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/FunctionSchema AWS API Documentation
+    #
+    class FunctionSchema < Struct.new(
+      :functions,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Functions < FunctionSchema; end
+      class Unknown < FunctionSchema; end
+    end
+
+    # @!attribute [rw] action_group_id
+    #   The unique identifier of the action group for which to get
+    #   information.
+    #   @return [String]
     #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent that the action group belongs to.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Version number generated when a version is created
-    #   @return [String]
-    #
-    # @!attribute [rw] action_group_id
-    #   Id generated at the server side when an Agent Action Group is
-    #   created
+    #   The version of the agent that the action group belongs to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentActionGroupRequest AWS API Documentation
     #
     class GetAgentActionGroupRequest < Struct.new(
+      :action_group_id,
       :agent_id,
-      :agent_version,
-      :action_group_id)
+      :agent_version)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Get Action Group Response
-    #
     # @!attribute [rw] agent_action_group
-    #   Contains the information of an Agent Action Group
+    #   Contains details about the action group.
     #   @return [Types::AgentActionGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentActionGroupResponse AWS API Documentation
@@ -1508,29 +1868,26 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Get Agent Alias Request
-    #
-    # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    # @!attribute [rw] agent_alias_id
+    #   The unique identifier of the alias for which to get information.
     #   @return [String]
     #
-    # @!attribute [rw] agent_alias_id
-    #   Id generated at the server side when an Agent Alias is created
+    # @!attribute [rw] agent_id
+    #   The unique identifier of the agent to which the alias to get
+    #   information belongs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentAliasRequest AWS API Documentation
     #
     class GetAgentAliasRequest < Struct.new(
-      :agent_id,
-      :agent_alias_id)
+      :agent_alias_id,
+      :agent_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Get Agent Alias Response
-    #
     # @!attribute [rw] agent_alias
-    #   Contains the information of an agent alias
+    #   Contains information about the alias.
     #   @return [Types::AgentAlias]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentAliasResponse AWS API Documentation
@@ -1541,18 +1898,19 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Get Agent Knowledge Base Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent with which the knowledge base is
+    #   associated.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Version number generated when a version is created
+    #   The version of the agent with which the knowledge base is
+    #   associated.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   Id generated at the server side when a Knowledge Base is associated
+    #   The unique identifier of the knowledge base associated with the
+    #   agent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentKnowledgeBaseRequest AWS API Documentation
@@ -1565,10 +1923,8 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Get Agent Knowledge Base Response
-    #
     # @!attribute [rw] agent_knowledge_base
-    #   Contains the information of an Agent Knowledge Base.
+    #   Contains details about a knowledge base attached to an agent.
     #   @return [Types::AgentKnowledgeBase]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentKnowledgeBaseResponse AWS API Documentation
@@ -1579,10 +1935,8 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Get Agent Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentRequest AWS API Documentation
@@ -1593,10 +1947,8 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Get Agent Response
-    #
     # @!attribute [rw] agent
-    #   Contains the information of an agent
+    #   Contains details about the agent.
     #   @return [Types::Agent]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentResponse AWS API Documentation
@@ -1607,14 +1959,12 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Get Agent Version Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Numerical Agent Version.
+    #   The version of the agent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentVersionRequest AWS API Documentation
@@ -1626,10 +1976,8 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Get Agent Version Response
-    #
     # @!attribute [rw] agent_version
-    #   Contains the information of an agent version.
+    #   Contains details about the version of the agent.
     #   @return [Types::AgentVersion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentVersionResponse AWS API Documentation
@@ -1640,25 +1988,26 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
+    # @!attribute [rw] data_source_id
+    #   The unique identifier of the data source.
     #   @return [String]
     #
-    # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base that the data source was
+    #   added to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetDataSourceRequest AWS API Documentation
     #
     class GetDataSourceRequest < Struct.new(
-      :knowledge_base_id,
-      :data_source_id)
+      :data_source_id,
+      :knowledge_base_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] data_source
-    #   Contains the information of a data source.
+    #   Contains details about the data source.
     #   @return [Types::DataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetDataSourceResponse AWS API Documentation
@@ -1669,30 +2018,31 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
     # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
+    #   The unique identifier of the data source in the ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_job_id
-    #   Identifier for a resource.
+    #   The unique identifier of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base for which the ingestion
+    #   job applies.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetIngestionJobRequest AWS API Documentation
     #
     class GetIngestionJobRequest < Struct.new(
-      :knowledge_base_id,
       :data_source_id,
-      :ingestion_job_id)
+      :ingestion_job_id,
+      :knowledge_base_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] ingestion_job
-    #   Contains the information of an ingestion job.
+    #   Contains details about the ingestion job.
     #   @return [Types::IngestionJob]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetIngestionJobResponse AWS API Documentation
@@ -1704,7 +2054,8 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
+    #   The unique identifier of the knowledge base for which to get
+    #   information.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetKnowledgeBaseRequest AWS API Documentation
@@ -1716,7 +2067,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] knowledge_base
-    #   Contains the information of a knowledge base.
+    #   Contains details about the knowledge base.
     #   @return [Types::KnowledgeBase]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetKnowledgeBaseResponse AWS API Documentation
@@ -1727,106 +2078,143 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Configuration for inference in prompt configuration
+    # Contains inference parameters to use when the agent invokes a
+    # foundation model in the part of the agent sequence defined by the
+    # `promptType`. For more information, see [Inference parameters for
+    # foundation models][1].
     #
-    # @!attribute [rw] temperature
-    #   Controls randomness, higher values increase diversity
-    #   @return [Float]
     #
-    # @!attribute [rw] top_p
-    #   Cumulative probability cutoff for token selection
-    #   @return [Float]
     #
-    # @!attribute [rw] top_k
-    #   Sample from the k most likely next tokens
-    #   @return [Integer]
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
     #
     # @!attribute [rw] maximum_length
-    #   Maximum length of output
+    #   The maximum number of tokens to allow in the generated response.
     #   @return [Integer]
     #
     # @!attribute [rw] stop_sequences
-    #   List of stop sequences
+    #   A list of stop sequences. A stop sequence is a sequence of
+    #   characters that causes the model to stop generating the response.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] temperature
+    #   The likelihood of the model selecting higher-probability options
+    #   while generating a response. A lower value makes the model more
+    #   likely to choose higher-probability options, while a higher value
+    #   makes the model more likely to choose lower-probability options.
+    #   @return [Float]
+    #
+    # @!attribute [rw] top_k
+    #   While generating a response, the model determines the probability of
+    #   the following token at each point of generation. The value that you
+    #   set for `topK` is the number of most-likely candidates from which
+    #   the model chooses the next token in the sequence. For example, if
+    #   you set `topK` to 50, the model selects the next token from among
+    #   the top 50 most likely choices.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] top_p
+    #   While generating a response, the model determines the probability of
+    #   the following token at each point of generation. The value that you
+    #   set for `Top P` determines the number of most-likely candidates from
+    #   which the model chooses the next token in the sequence. For example,
+    #   if you set `topP` to 80, the model only selects the next token from
+    #   the top 80% of the probability distribution of next tokens.
+    #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/InferenceConfiguration AWS API Documentation
     #
     class InferenceConfiguration < Struct.new(
-      :temperature,
-      :top_p,
-      :top_k,
       :maximum_length,
-      :stop_sequences)
+      :stop_sequences,
+      :temperature,
+      :top_k,
+      :top_p)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Contains the information of an ingestion job.
+    # Contains details about an ingestion job, which converts a data source
+    # to embeddings for a vector store in knowledge base.
     #
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
+    # This data type is used in the following API operations:
+    #
+    # * [StartIngestionJob response][1]
+    #
+    # * [GetIngestionJob response][2]
+    #
+    # * [ListIngestionJob response][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax
     #
     # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] ingestion_job_id
-    #   Identifier for a resource.
+    #   The unique identifier of the ingested data source.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The description of the ingestion job.
     #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of an ingestion job.
-    #   @return [String]
-    #
-    # @!attribute [rw] statistics
-    #   The document level statistics of an ingestion job
-    #   @return [Types::IngestionJobStatistics]
     #
     # @!attribute [rw] failure_reasons
-    #   Failure Reasons for Error.
+    #   A list of reasons that the ingestion job failed.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ingestion_job_id
+    #   The unique identifier of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to which the data source
+    #   is being added.
+    #   @return [String]
+    #
     # @!attribute [rw] started_at
-    #   Time Stamp.
+    #   The time at which the ingestion job started.
     #   @return [Time]
     #
+    # @!attribute [rw] statistics
+    #   Contains statistics about the ingestion job.
+    #   @return [Types::IngestionJobStatistics]
+    #
+    # @!attribute [rw] status
+    #   The status of the ingestion job.
+    #   @return [String]
+    #
     # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the ingestion job was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJob AWS API Documentation
     #
     class IngestionJob < Struct.new(
-      :knowledge_base_id,
       :data_source_id,
-      :ingestion_job_id,
       :description,
-      :status,
-      :statistics,
       :failure_reasons,
+      :ingestion_job_id,
+      :knowledge_base_id,
       :started_at,
+      :statistics,
+      :status,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Filters the response returned by ListIngestionJobs operation.
+    # Defines a filter by which to filter the results.
     #
     # @!attribute [rw] attribute
-    #   The name of the field to filter ingestion jobs.
+    #   The attribute by which to filter the results.
     #   @return [String]
     #
     # @!attribute [rw] operator
-    #   The operator used to filter ingestion jobs.
+    #   The operation to carry out between the attribute and the values.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The list of values used to filter ingestion jobs.
+    #   A list of values for the attribute.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJobFilter AWS API Documentation
@@ -1839,14 +2227,14 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Sorts the response returned by ListIngestionJobs operation.
+    # Parameters by which to sort the results.
     #
     # @!attribute [rw] attribute
-    #   The name of the field to sort ingestion jobs.
+    #   The attribute by which to sort the results.
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   Order to sort results by.
+    #   The order by which to sort the results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJobSortBy AWS API Documentation
@@ -1858,94 +2246,107 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # The document level statistics of an ingestion job
-    #
-    # @!attribute [rw] number_of_documents_scanned
-    #   Number of scanned documents
-    #   @return [Integer]
-    #
-    # @!attribute [rw] number_of_new_documents_indexed
-    #   Number of indexed documents
-    #   @return [Integer]
-    #
-    # @!attribute [rw] number_of_modified_documents_indexed
-    #   Number of modified documents indexed
-    #   @return [Integer]
+    # Contains the statistics for the ingestion job.
     #
     # @!attribute [rw] number_of_documents_deleted
-    #   Number of deleted documents
+    #   The number of source documents that was deleted.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_documents_failed
-    #   Number of failed documents
+    #   The number of source documents that failed to be ingested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_documents_scanned
+    #   The total number of source documents that were scanned. Includes
+    #   new, updated, and unchanged documents.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_metadata_documents_modified
+    #   The number of metadata files that were updated or deleted.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_metadata_documents_scanned
+    #   The total number of metadata files that were scanned. Includes new,
+    #   updated, and unchanged files.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_modified_documents_indexed
+    #   The number of modified source documents in the data source that were
+    #   successfully indexed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_new_documents_indexed
+    #   The number of new source documents in the data source that were
+    #   successfully indexed.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJobStatistics AWS API Documentation
     #
     class IngestionJobStatistics < Struct.new(
-      :number_of_documents_scanned,
-      :number_of_new_documents_indexed,
-      :number_of_modified_documents_indexed,
       :number_of_documents_deleted,
-      :number_of_documents_failed)
+      :number_of_documents_failed,
+      :number_of_documents_scanned,
+      :number_of_metadata_documents_modified,
+      :number_of_metadata_documents_scanned,
+      :number_of_modified_documents_indexed,
+      :number_of_new_documents_indexed)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Summary information of an ingestion job.
-    #
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
+    # Contains details about an ingestion job.
     #
     # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] ingestion_job_id
-    #   Identifier for a resource.
+    #   The unique identifier of the data source in the ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The description of the ingestion job.
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   The status of an ingestion job.
+    # @!attribute [rw] ingestion_job_id
+    #   The unique identifier of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to which the data source
+    #   is added.
     #   @return [String]
     #
     # @!attribute [rw] started_at
-    #   Time Stamp.
-    #   @return [Time]
-    #
-    # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the ingestion job was started.
     #   @return [Time]
     #
     # @!attribute [rw] statistics
-    #   The document level statistics of an ingestion job
+    #   Contains statistics for the ingestion job.
     #   @return [Types::IngestionJobStatistics]
+    #
+    # @!attribute [rw] status
+    #   The status of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the ingestion job was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJobSummary AWS API Documentation
     #
     class IngestionJobSummary < Struct.new(
-      :knowledge_base_id,
       :data_source_id,
-      :ingestion_job_id,
       :description,
-      :status,
+      :ingestion_job_id,
+      :knowledge_base_id,
       :started_at,
-      :updated_at,
-      :statistics)
+      :statistics,
+      :status,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # This exception is thrown if there was an unexpected error during
-    # processing of request
+    # An internal server error occurred. Retry your request.
     #
     # @!attribute [rw] message
-    #   Non Blank String
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/InternalServerException AWS API Documentation
@@ -1956,79 +2357,96 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains the information of a knowledge base.
+    # Contains information about a knowledge base.
     #
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   Name for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] knowledge_base_arn
-    #   ARN of a KnowledgeBase
-    #   @return [String]
+    # @!attribute [rw] created_at
+    #   The time at which the knowledge base was created.
+    #   @return [Time]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The description of the knowledge base.
     #   @return [String]
     #
-    # @!attribute [rw] role_arn
-    #   ARN of a IAM role.
+    # @!attribute [rw] failure_reasons
+    #   A list of reasons that the API operation on the knowledge base
+    #   failed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_configuration
-    #   Configures a bedrock knowledge base.
+    #   Contains details about the embeddings configuration of the knowledge
+    #   base.
     #   @return [Types::KnowledgeBaseConfiguration]
     #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the knowledge base. The following statuses are
+    #   possible:
+    #
+    #   * CREATING – The knowledge base is being created.
+    #
+    #   * ACTIVE – The knowledge base is ready to be queried.
+    #
+    #   * DELETING – The knowledge base is being deleted.
+    #
+    #   * UPDATING – The knowledge base is being updated.
+    #
+    #   * FAILED – The knowledge base API operation failed.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_configuration
-    #   Configures the physical storage of ingested data in a knowledge
+    #   Contains details about the storage configuration of the knowledge
     #   base.
     #   @return [Types::StorageConfiguration]
     #
-    # @!attribute [rw] status
-    #   The status of a knowledge base.
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   Time Stamp.
-    #   @return [Time]
-    #
     # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the knowledge base was last updated.
     #   @return [Time]
-    #
-    # @!attribute [rw] failure_reasons
-    #   Failure Reasons for Error.
-    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBase AWS API Documentation
     #
     class KnowledgeBase < Struct.new(
+      :created_at,
+      :description,
+      :failure_reasons,
+      :knowledge_base_arn,
+      :knowledge_base_configuration,
       :knowledge_base_id,
       :name,
-      :knowledge_base_arn,
-      :description,
       :role_arn,
-      :knowledge_base_configuration,
-      :storage_configuration,
       :status,
-      :created_at,
-      :updated_at,
-      :failure_reasons)
+      :storage_configuration,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Configures a bedrock knowledge base.
+    # Contains details about the embeddings configuration of the knowledge
+    # base.
     #
     # @!attribute [rw] type
-    #   The type of a knowledge base.
+    #   The type of data that the data source is converted into for the
+    #   knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] vector_knowledge_base_configuration
-    #   Configurations for a vector knowledge base.
+    #   Contains details about the embeddings model that'sused to convert
+    #   the data source.
     #   @return [Types::VectorKnowledgeBaseConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBaseConfiguration AWS API Documentation
@@ -2040,56 +2458,60 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Summary information of a knowledge base.
+    # Contains details about a knowledge base.
+    #
+    # @!attribute [rw] description
+    #   The description of the knowledge base.
+    #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
+    #   The unique identifier of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
+    #   The name of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a knowledge base.
+    #   The status of the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Time Stamp.
+    #   The time at which the knowledge base was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBaseSummary AWS API Documentation
     #
     class KnowledgeBaseSummary < Struct.new(
+      :description,
       :knowledge_base_id,
       :name,
-      :description,
       :status,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # List Action Groups Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is Listed
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Id generated at the server side when an Agent is Listed
+    #   The version of the agent.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentActionGroupsRequest AWS API Documentation
@@ -2103,14 +2525,16 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # List Action Groups Response
-    #
     # @!attribute [rw] action_group_summaries
-    #   List of ActionGroup Summaries
+    #   A list of objects, each of which contains information about an
+    #   action group.
     #   @return [Array<Types::ActionGroupSummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentActionGroupsResponse AWS API Documentation
@@ -2122,18 +2546,22 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # List Agent Aliases Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentAliasesRequest AWS API Documentation
@@ -2146,14 +2574,16 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # List Agent Aliases Response
-    #
     # @!attribute [rw] agent_alias_summaries
-    #   The list of summaries of all the aliases for an Agent.
+    #   A list of objects, each of which contains information about an alias
+    #   of the agent.
     #   @return [Array<Types::AgentAliasSummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentAliasesResponse AWS API Documentation
@@ -2165,22 +2595,28 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # List Agent Knowledge Bases Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent for which to return information
+    #   about knowledge bases associated with it.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Version number generated when a version is created
+    #   The version of the agent for which to return information about
+    #   knowledge bases associated with it.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentKnowledgeBasesRequest AWS API Documentation
@@ -2194,14 +2630,16 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # List Agent Knowledge Bases Response
-    #
     # @!attribute [rw] agent_knowledge_base_summaries
-    #   List of Agent Knowledge Base Summaries
+    #   A list of objects, each of which contains information about a
+    #   knowledge base associated with the agent.
     #   @return [Array<Types::AgentKnowledgeBaseSummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentKnowledgeBasesResponse AWS API Documentation
@@ -2213,18 +2651,22 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # List Agent Versions Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentVersionsRequest AWS API Documentation
@@ -2237,14 +2679,16 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # List Agent Versions Response
-    #
     # @!attribute [rw] agent_version_summaries
-    #   List of AgentVersionSummary.
+    #   A list of objects, each of which contains information about a
+    #   version of the agent.
     #   @return [Array<Types::AgentVersionSummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentVersionsResponse AWS API Documentation
@@ -2256,14 +2700,18 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # List Agent Request
-    #
     # @!attribute [rw] max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentsRequest AWS API Documentation
@@ -2275,14 +2723,16 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # List Agent Response
-    #
     # @!attribute [rw] agent_summaries
-    #   List of AgentSummary.
+    #   A list of objects, each of which contains information about an
+    #   agent.
     #   @return [Array<Types::AgentSummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentsResponse AWS API Documentation
@@ -2295,15 +2745,22 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
+    #   The unique identifier of the knowledge base for which to return a
+    #   list of information.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListDataSourcesRequest AWS API Documentation
@@ -2317,11 +2774,15 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] data_source_summaries
-    #   list of data source summaries
+    #   A list of objects, each of which contains information about a data
+    #   source.
     #   @return [Array<Types::DataSourceSummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListDataSourcesResponse AWS API Documentation
@@ -2333,49 +2794,61 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
     # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
+    #   The unique identifier of the data source for which to return
+    #   ingestion jobs.
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   List of IngestionJobFilters
+    #   Contains a definition of a filter for which to filter the results.
     #   @return [Array<Types::IngestionJobFilter>]
     #
-    # @!attribute [rw] sort_by
-    #   Sorts the response returned by ListIngestionJobs operation.
-    #   @return [Types::IngestionJobSortBy]
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base for which to return
+    #   ingestion jobs.
+    #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Contains details about how to sort the results.
+    #   @return [Types::IngestionJobSortBy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListIngestionJobsRequest AWS API Documentation
     #
     class ListIngestionJobsRequest < Struct.new(
-      :knowledge_base_id,
       :data_source_id,
       :filters,
-      :sort_by,
+      :knowledge_base_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :sort_by)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] ingestion_job_summaries
-    #   List of IngestionJobSummaries
+    #   A list of objects, each of which contains information about an
+    #   ingestion job.
     #   @return [Array<Types::IngestionJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListIngestionJobsResponse AWS API Documentation
@@ -2388,11 +2861,17 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListKnowledgeBasesRequest AWS API Documentation
@@ -2405,11 +2884,15 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] knowledge_base_summaries
-    #   List of KnowledgeBaseSummaries
+    #   A list of objects, each of which contains information about a
+    #   knowledge base.
     #   @return [Array<Types::KnowledgeBaseSummary>]
     #
     # @!attribute [rw] next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListKnowledgeBasesResponse AWS API Documentation
@@ -2422,7 +2905,8 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] resource_arn
-    #   ARN of Taggable resources: \[Agent, AgentAlias, Knowledge-Base\]
+    #   The Amazon Resource Name (ARN) of the resource for which to list
+    #   tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListTagsForResourceRequest AWS API Documentation
@@ -2434,7 +2918,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] tags
-    #   A map of tag keys and values
+    #   The key-value pairs for the tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListTagsForResourceResponse AWS API Documentation
@@ -2445,110 +2929,176 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains the configurations to use OpenSearch Serverless to store
-    # knowledge base data.
+    # Contains details about the storage configuration of the knowledge base
+    # in Amazon OpenSearch Service. For more information, see [Create a
+    # vector index in Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
     #
     # @!attribute [rw] collection_arn
-    #   Arn of an OpenSearch Serverless collection.
-    #   @return [String]
-    #
-    # @!attribute [rw] vector_index_name
-    #   Arn of an OpenSearch Serverless index.
+    #   The Amazon Resource Name (ARN) of the OpenSearch Service vector
+    #   store.
     #   @return [String]
     #
     # @!attribute [rw] field_mapping
-    #   A mapping of Bedrock Knowledge Base fields to OpenSearch Serverless
-    #   field names
+    #   Contains the names of the fields to which to map information about
+    #   the vector store.
     #   @return [Types::OpenSearchServerlessFieldMapping]
+    #
+    # @!attribute [rw] vector_index_name
+    #   The name of the vector store.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/OpenSearchServerlessConfiguration AWS API Documentation
     #
     class OpenSearchServerlessConfiguration < Struct.new(
       :collection_arn,
-      :vector_index_name,
-      :field_mapping)
+      :field_mapping,
+      :vector_index_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A mapping of Bedrock Knowledge Base fields to OpenSearch Serverless
-    # field names
+    # Contains the names of the fields to which to map information about the
+    # vector store.
     #
-    # @!attribute [rw] vector_field
-    #   Name of the field
+    # @!attribute [rw] metadata_field
+    #   The name of the field in which Amazon Bedrock stores metadata about
+    #   the vector store.
     #   @return [String]
     #
     # @!attribute [rw] text_field
-    #   Name of the field
+    #   The name of the field in which Amazon Bedrock stores the raw text
+    #   from your data. The text is split according to the chunking strategy
+    #   you choose.
     #   @return [String]
     #
-    # @!attribute [rw] metadata_field
-    #   Name of the field
+    # @!attribute [rw] vector_field
+    #   The name of the field in which Amazon Bedrock stores the vector
+    #   embeddings for your data sources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/OpenSearchServerlessFieldMapping AWS API Documentation
     #
     class OpenSearchServerlessFieldMapping < Struct.new(
-      :vector_field,
+      :metadata_field,
       :text_field,
-      :metadata_field)
+      :vector_field)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Contains the configurations to use Pinecone to store knowledge base
-    # data.
+    # Contains details about a parameter in a function for an action group.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [CreateAgentActionGroup request][1]
+    #
+    # * [CreateAgentActionGroup response][2]
+    #
+    # * [UpdateAgentActionGroup request][3]
+    #
+    # * [UpdateAgentActionGroup response][4]
+    #
+    # * [GetAgentActionGroup response][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
+    # [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+    #
+    # @!attribute [rw] description
+    #   A description of the parameter. Helps the foundation model determine
+    #   how to elicit the parameters from the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Whether the parameter is required for the agent to complete the
+    #   function for action group invocation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The data type of the parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ParameterDetail AWS API Documentation
+    #
+    class ParameterDetail < Struct.new(
+      :description,
+      :required,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the storage configuration of the knowledge base
+    # in Pinecone. For more information, see [Create a vector index in
+    # Pinecone][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html
     #
     # @!attribute [rw] connection_string
-    #   Pinecone connection string
+    #   The endpoint URL for your index management page.
     #   @return [String]
     #
     # @!attribute [rw] credentials_secret_arn
-    #   Arn of a SecretsManager Secret.
-    #   @return [String]
-    #
-    # @!attribute [rw] namespace
-    #   Pinecone namespace
+    #   The Amazon Resource Name (ARN) of the secret that you created in
+    #   Secrets Manager that is linked to your Pinecone API key.
     #   @return [String]
     #
     # @!attribute [rw] field_mapping
-    #   A mapping of Bedrock Knowledge Base fields to Pinecone field names
+    #   Contains the names of the fields to which to map information about
+    #   the vector store.
     #   @return [Types::PineconeFieldMapping]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace to be used to write new data to your database.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PineconeConfiguration AWS API Documentation
     #
     class PineconeConfiguration < Struct.new(
       :connection_string,
       :credentials_secret_arn,
-      :namespace,
-      :field_mapping)
+      :field_mapping,
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A mapping of Bedrock Knowledge Base fields to Pinecone field names
-    #
-    # @!attribute [rw] text_field
-    #   Name of the field
-    #   @return [String]
+    # Contains the names of the fields to which to map information about the
+    # vector store.
     #
     # @!attribute [rw] metadata_field
-    #   Name of the field
+    #   The name of the field in which Amazon Bedrock stores metadata about
+    #   the vector store.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_field
+    #   The name of the field in which Amazon Bedrock stores the raw text
+    #   from your data. The text is split according to the chunking strategy
+    #   you choose.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PineconeFieldMapping AWS API Documentation
     #
     class PineconeFieldMapping < Struct.new(
-      :text_field,
-      :metadata_field)
+      :metadata_field,
+      :text_field)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # PrepareAgent Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent for which to create a `DRAFT`
+    #   version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PrepareAgentRequest AWS API Documentation
@@ -2559,22 +3109,22 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # PrepareAgent Response
-    #
     # @!attribute [rw] agent_id
-    #   Identifier for a resource.
+    #   The unique identifier of the agent for which the `DRAFT` version was
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] agent_status
-    #   Schema Type for Action APIs.
+    #   The status of the `DRAFT` version and whether it is ready for use.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Agent Version.
+    #   The version of the agent.
     #   @return [String]
     #
     # @!attribute [rw] prepared_at
-    #   Time Stamp.
+    #   The time at which the `DRAFT` version of the agent was last
+    #   prepared.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PrepareAgentResponse AWS API Documentation
@@ -2588,187 +3138,268 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # BasePromptConfiguration per Prompt Type.
+    # Contains configurations to override a prompt template in one part of
+    # an agent sequence. For more information, see [Advanced prompts][1].
     #
-    # @!attribute [rw] prompt_type
-    #   Prompt Type.
-    #   @return [String]
     #
-    # @!attribute [rw] prompt_creation_mode
-    #   Creation Mode for Prompt Configuration.
-    #   @return [String]
     #
-    # @!attribute [rw] prompt_state
-    #   Prompt State.
-    #   @return [String]
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #
     # @!attribute [rw] base_prompt_template
-    #   Base Prompt Template.
+    #   Defines the prompt template with which to replace the default prompt
+    #   template. You can use placeholder variables in the base prompt
+    #   template to customize the prompt. For more information, see [Prompt
+    #   template placeholder variables][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
     #   @return [String]
     #
     # @!attribute [rw] inference_configuration
-    #   Configuration for inference in prompt configuration
+    #   Contains inference parameters to use when the agent invokes a
+    #   foundation model in the part of the agent sequence defined by the
+    #   `promptType`. For more information, see [Inference parameters for
+    #   foundation models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
     #   @return [Types::InferenceConfiguration]
     #
     # @!attribute [rw] parser_mode
-    #   Creation Mode for Prompt Configuration.
+    #   Specifies whether to override the default parser Lambda function
+    #   when parsing the raw foundation model output in the part of the
+    #   agent sequence defined by the `promptType`. If you set the field as
+    #   `OVERRIDEN`, the `overrideLambda` field in the
+    #   [PromptOverrideConfiguration][1] must be specified with the ARN of a
+    #   Lambda function.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
+    #   @return [String]
+    #
+    # @!attribute [rw] prompt_creation_mode
+    #   Specifies whether to override the default prompt template for this
+    #   `promptType`. Set this value to `OVERRIDDEN` to use the prompt that
+    #   you provide in the `basePromptTemplate`. If you leave it as
+    #   `DEFAULT`, the agent uses a default prompt template.
+    #   @return [String]
+    #
+    # @!attribute [rw] prompt_state
+    #   Specifies whether to allow the agent to carry out the step specified
+    #   in the `promptType`. If you set this value to `DISABLED`, the agent
+    #   skips that step. The default state for each `promptType` is as
+    #   follows.
+    #
+    #   * `PRE_PROCESSING` – `ENABLED`
+    #
+    #   * `ORCHESTRATION` – `ENABLED`
+    #
+    #   * `KNOWLEDGE_BASE_RESPONSE_GENERATION` – `ENABLED`
+    #
+    #   * `POST_PROCESSING` – `DISABLED`
+    #   @return [String]
+    #
+    # @!attribute [rw] prompt_type
+    #   The step in the agent sequence that this prompt configuration
+    #   applies to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptConfiguration AWS API Documentation
     #
     class PromptConfiguration < Struct.new(
-      :prompt_type,
-      :prompt_creation_mode,
-      :prompt_state,
       :base_prompt_template,
       :inference_configuration,
-      :parser_mode)
+      :parser_mode,
+      :prompt_creation_mode,
+      :prompt_state,
+      :prompt_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Configuration for prompt override.
+    # Contains configurations to override prompts in different parts of an
+    # agent sequence. For more information, see [Advanced prompts][1].
     #
-    # @!attribute [rw] prompt_configurations
-    #   List of BasePromptConfiguration
-    #   @return [Array<Types::PromptConfiguration>]
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #
     # @!attribute [rw] override_lambda
-    #   ARN of a Lambda.
+    #   The ARN of the Lambda function to use when parsing the raw
+    #   foundation model output in parts of the agent sequence. If you
+    #   specify this field, at least one of the `promptConfigurations` must
+    #   contain a `parserMode` value that is set to `OVERRIDDEN`.
     #   @return [String]
+    #
+    # @!attribute [rw] prompt_configurations
+    #   Contains configurations to override a prompt template in one part of
+    #   an agent sequence. For more information, see [Advanced prompts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+    #   @return [Array<Types::PromptConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptOverrideConfiguration AWS API Documentation
     #
     class PromptOverrideConfiguration < Struct.new(
-      :prompt_configurations,
-      :override_lambda)
+      :override_lambda,
+      :prompt_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Contains the configurations to use RDS to store knowledge base data.
+    # Contains details about the storage configuration of the knowledge base
+    # in Amazon RDS. For more information, see [Create a vector index in
+    # Amazon RDS][1].
     #
-    # @!attribute [rw] resource_arn
-    #   Arn of a RDS Resource.
-    #   @return [String]
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
     #
     # @!attribute [rw] credentials_secret_arn
-    #   Arn of a SecretsManager Secret.
+    #   The Amazon Resource Name (ARN) of the secret that you created in
+    #   Secrets Manager that is linked to your Amazon RDS database.
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   Name of the database within RDS
-    #   @return [String]
-    #
-    # @!attribute [rw] table_name
-    #   Name of the table within RDS
+    #   The name of your Amazon RDS database.
     #   @return [String]
     #
     # @!attribute [rw] field_mapping
-    #   A mapping of Bedrock Knowledge Base fields to RDS column names
+    #   Contains the names of the fields to which to map information about
+    #   the vector store.
     #   @return [Types::RdsFieldMapping]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the vector store.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table in the database.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RdsConfiguration AWS API Documentation
     #
     class RdsConfiguration < Struct.new(
-      :resource_arn,
       :credentials_secret_arn,
       :database_name,
-      :table_name,
-      :field_mapping)
+      :field_mapping,
+      :resource_arn,
+      :table_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A mapping of Bedrock Knowledge Base fields to RDS column names
+    # Contains the names of the fields to which to map information about the
+    # vector store.
     #
-    # @!attribute [rw] primary_key_field
-    #   Name of the column
+    # @!attribute [rw] metadata_field
+    #   The name of the field in which Amazon Bedrock stores metadata about
+    #   the vector store.
     #   @return [String]
     #
-    # @!attribute [rw] vector_field
-    #   Name of the column
+    # @!attribute [rw] primary_key_field
+    #   The name of the field in which Amazon Bedrock stores the ID for each
+    #   entry.
     #   @return [String]
     #
     # @!attribute [rw] text_field
-    #   Name of the column
+    #   The name of the field in which Amazon Bedrock stores the raw text
+    #   from your data. The text is split according to the chunking strategy
+    #   you choose.
     #   @return [String]
     #
-    # @!attribute [rw] metadata_field
-    #   Name of the column
+    # @!attribute [rw] vector_field
+    #   The name of the field in which Amazon Bedrock stores the vector
+    #   embeddings for your data sources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RdsFieldMapping AWS API Documentation
     #
     class RdsFieldMapping < Struct.new(
+      :metadata_field,
       :primary_key_field,
-      :vector_field,
       :text_field,
-      :metadata_field)
+      :vector_field)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Contains the configurations to use Redis Enterprise Cloud to store
-    # knowledge base data.
+    # Contains details about the storage configuration of the knowledge base
+    # in Redis Enterprise Cloud. For more information, see [Create a vector
+    # index in Redis Enterprise Cloud][1].
     #
-    # @!attribute [rw] endpoint
-    #   Redis enterprise cloud endpoint
-    #   @return [String]
     #
-    # @!attribute [rw] vector_index_name
-    #   Name of a redis enterprise cloud index
-    #   @return [String]
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
     #
     # @!attribute [rw] credentials_secret_arn
-    #   Arn of a SecretsManager Secret.
+    #   The Amazon Resource Name (ARN) of the secret that you created in
+    #   Secrets Manager that is linked to your Redis Enterprise Cloud
+    #   database.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint URL of the Redis Enterprise Cloud database.
     #   @return [String]
     #
     # @!attribute [rw] field_mapping
-    #   A mapping of Bedrock Knowledge Base fields to Redis Cloud field
-    #   names
+    #   Contains the names of the fields to which to map information about
+    #   the vector store.
     #   @return [Types::RedisEnterpriseCloudFieldMapping]
+    #
+    # @!attribute [rw] vector_index_name
+    #   The name of the vector index.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RedisEnterpriseCloudConfiguration AWS API Documentation
     #
     class RedisEnterpriseCloudConfiguration < Struct.new(
-      :endpoint,
-      :vector_index_name,
       :credentials_secret_arn,
-      :field_mapping)
+      :endpoint,
+      :field_mapping,
+      :vector_index_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A mapping of Bedrock Knowledge Base fields to Redis Cloud field names
+    # Contains the names of the fields to which to map information about the
+    # vector store.
     #
-    # @!attribute [rw] vector_field
-    #   Name of the field
+    # @!attribute [rw] metadata_field
+    #   The name of the field in which Amazon Bedrock stores metadata about
+    #   the vector store.
     #   @return [String]
     #
     # @!attribute [rw] text_field
-    #   Name of the field
+    #   The name of the field in which Amazon Bedrock stores the raw text
+    #   from your data. The text is split according to the chunking strategy
+    #   you choose.
     #   @return [String]
     #
-    # @!attribute [rw] metadata_field
-    #   Name of the field
+    # @!attribute [rw] vector_field
+    #   The name of the field in which Amazon Bedrock stores the vector
+    #   embeddings for your data sources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RedisEnterpriseCloudFieldMapping AWS API Documentation
     #
     class RedisEnterpriseCloudFieldMapping < Struct.new(
-      :vector_field,
+      :metadata_field,
       :text_field,
-      :metadata_field)
+      :vector_field)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # This exception is thrown when a resource referenced by the operation
-    # does not exist
+    # The specified resource Amazon Resource Name (ARN) was not found. Check
+    # the Amazon Resource Name (ARN) and try your request again.
     #
     # @!attribute [rw] message
-    #   Non Blank String
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ResourceNotFoundException AWS API Documentation
@@ -2779,33 +3410,45 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Configures an S3 data source location.
+    # Contains information about the S3 configuration of the data source.
     #
     # @!attribute [rw] bucket_arn
-    #   A S3 bucket ARN
+    #   The Amazon Resource Name (ARN) of the bucket that contains the data
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_owner_account_id
+    #   The account ID for the owner of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] inclusion_prefixes
-    #   A list of S3 prefixes.
+    #   A list of S3 prefixes that define the object containing the data
+    #   sources. For more information, see [Organizing objects using
+    #   prefixes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/S3DataSourceConfiguration AWS API Documentation
     #
     class S3DataSourceConfiguration < Struct.new(
       :bucket_arn,
+      :bucket_owner_account_id,
       :inclusion_prefixes)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The identifier for the S3 resource.
+    # Contains information about the S3 object containing the resource.
     #
     # @!attribute [rw] s3_bucket_name
-    #   A bucket in S3.
+    #   The name of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] s3_object_key
-    #   A object key in S3.
+    #   The S3 object key containing the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/S3Identifier AWS API Documentation
@@ -2817,10 +3460,11 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Server-side encryption configuration.
+    # Contains the configuration for server-side encryption.
     #
     # @!attribute [rw] kms_key_arn
-    #   A KMS key ARN
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ServerSideEncryptionConfiguration AWS API Documentation
@@ -2831,11 +3475,10 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # This exception is thrown when a request is made beyond the service
-    # quota
+    # The number of requests exceeds the service quota. Resubmit your
+    # request later.
     #
     # @!attribute [rw] message
-    #   Non Blank String
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ServiceQuotaExceededException AWS API Documentation
@@ -2846,38 +3489,46 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
     # @!attribute [rw] client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The unique identifier of the data source to ingest.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   A description of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to which to add the data
+    #   source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StartIngestionJobRequest AWS API Documentation
     #
     class StartIngestionJobRequest < Struct.new(
-      :knowledge_base_id,
-      :data_source_id,
       :client_token,
-      :description)
+      :data_source_id,
+      :description,
+      :knowledge_base_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] ingestion_job
-    #   Contains the information of an ingestion job.
+    #   An object containing information about the ingestion job.
     #   @return [Types::IngestionJob]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StartIngestionJobResponse AWS API Documentation
@@ -2888,49 +3539,56 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Configures the physical storage of ingested data in a knowledge base.
-    #
-    # @!attribute [rw] type
-    #   The storage type of a knowledge base.
-    #   @return [String]
+    # Contains the storage configuration of the knowledge base.
     #
     # @!attribute [rw] opensearch_serverless_configuration
-    #   Contains the configurations to use OpenSearch Serverless to store
-    #   knowledge base data.
+    #   Contains the storage configuration of the knowledge base in Amazon
+    #   OpenSearch Service.
     #   @return [Types::OpenSearchServerlessConfiguration]
     #
     # @!attribute [rw] pinecone_configuration
-    #   Contains the configurations to use Pinecone to store knowledge base
-    #   data.
+    #   Contains the storage configuration of the knowledge base in
+    #   Pinecone.
     #   @return [Types::PineconeConfiguration]
     #
+    # @!attribute [rw] rds_configuration
+    #   Contains details about the storage configuration of the knowledge
+    #   base in Amazon RDS. For more information, see [Create a vector index
+    #   in Amazon RDS][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
+    #   @return [Types::RdsConfiguration]
+    #
     # @!attribute [rw] redis_enterprise_cloud_configuration
-    #   Contains the configurations to use Redis Enterprise Cloud to store
-    #   knowledge base data.
+    #   Contains the storage configuration of the knowledge base in Redis
+    #   Enterprise Cloud.
     #   @return [Types::RedisEnterpriseCloudConfiguration]
     #
-    # @!attribute [rw] rds_configuration
-    #   Contains the configurations to use RDS to store knowledge base data.
-    #   @return [Types::RdsConfiguration]
+    # @!attribute [rw] type
+    #   The vector store service in which the knowledge base is stored.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StorageConfiguration AWS API Documentation
     #
     class StorageConfiguration < Struct.new(
-      :type,
       :opensearch_serverless_configuration,
       :pinecone_configuration,
+      :rds_configuration,
       :redis_enterprise_cloud_configuration,
-      :rds_configuration)
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] resource_arn
-    #   ARN of Taggable resources: \[Agent, AgentAlias, Knowledge-Base\]
+    #   The Amazon Resource Name (ARN) of the resource to tag.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A map of tag keys and values
+    #   An object containing key-value pairs that define the tags to attach
+    #   to the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/TagResourceRequest AWS API Documentation
@@ -2946,10 +3604,9 @@ module Aws::BedrockAgent
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # This exception is thrown when the number of requests exceeds the limit
+    # The number of requests exceeds the limit. Resubmit your request later.
     #
     # @!attribute [rw] message
-    #   Non Blank String
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ThrottlingException AWS API Documentation
@@ -2961,11 +3618,12 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] resource_arn
-    #   ARN of Taggable resources: \[Agent, AgentAlias, Knowledge-Base\]
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   List of Tag Keys
+    #   A list of keys of the tags to remove from the resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UntagResourceRequest AWS API Documentation
@@ -2981,65 +3639,94 @@ module Aws::BedrockAgent
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # Update Action Group Request
-    #
-    # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
-    #   @return [String]
-    #
-    # @!attribute [rw] agent_version
-    #   Draft Version of the Agent.
-    #   @return [String]
+    # @!attribute [rw] action_group_executor
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
+    #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_id
-    #   Id generated at the server side when an Action Group is created
-    #   under Agent
+    #   The unique identifier of the action group.
     #   @return [String]
     #
     # @!attribute [rw] action_group_name
-    #   Name for a resource.
+    #   Specifies a new name for the action group.
     #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] parent_action_group_signature
-    #   Action Group Signature for a BuiltIn Action
-    #   @return [String]
-    #
-    # @!attribute [rw] action_group_executor
-    #   Type of Executors for an Action Group
-    #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_state
-    #   State of the action group
+    #   Specifies whether the action group is available for the agent to
+    #   invoke or not when sending an [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_id
+    #   The unique identifier of the agent for which to update the action
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_version
+    #   The unique identifier of the agent version for which to update the
+    #   action group.
     #   @return [String]
     #
     # @!attribute [rw] api_schema
-    #   Contains information about the API Schema for the Action Group
+    #   Contains either details about the S3 object containing the OpenAPI
+    #   schema for the action group or the JSON or YAML-formatted payload
+    #   defining the schema. For more information, see [Action group OpenAPI
+    #   schemas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
     #   @return [Types::APISchema]
+    #
+    # @!attribute [rw] description
+    #   Specifies a new name for the action group.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_schema
+    #   Contains details about the function schema for the action group or
+    #   the JSON or YAML-formatted payload defining the schema.
+    #   @return [Types::FunctionSchema]
+    #
+    # @!attribute [rw] parent_action_group_signature
+    #   To allow your agent to request the user for additional information
+    #   when trying to complete a task, set this field to
+    #   `AMAZON.UserInput`. You must leave the `description`, `apiSchema`,
+    #   and `actionGroupExecutor` fields blank for this action group.
+    #
+    #   During orchestration, if your agent determines that it needs to
+    #   invoke an API in an action group, but doesn't have enough
+    #   information to complete the API request, it will invoke this action
+    #   group instead and return an [Observation][1] reprompting the user
+    #   for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentActionGroupRequest AWS API Documentation
     #
     class UpdateAgentActionGroupRequest < Struct.new(
-      :agent_id,
-      :agent_version,
+      :action_group_executor,
       :action_group_id,
       :action_group_name,
-      :description,
-      :parent_action_group_signature,
-      :action_group_executor,
       :action_group_state,
-      :api_schema)
+      :agent_id,
+      :agent_version,
+      :api_schema,
+      :description,
+      :function_schema,
+      :parent_action_group_signature)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Update Action Group Response
-    #
     # @!attribute [rw] agent_action_group
-    #   Contains the information of an Agent Action Group
+    #   Contains details about the action group that was updated.
     #   @return [Types::AgentActionGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentActionGroupResponse AWS API Documentation
@@ -3050,44 +3737,40 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Update Agent Alias Request
-    #
-    # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
-    #   @return [String]
-    #
     # @!attribute [rw] agent_alias_id
-    #   Id generated at the server side when an Agent Alias is created
+    #   The unique identifier of the alias.
     #   @return [String]
     #
     # @!attribute [rw] agent_alias_name
-    #   Name for a resource.
+    #   Specifies a new name for the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_id
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   Specifies a new description for the alias.
     #   @return [String]
     #
     # @!attribute [rw] routing_configuration
-    #   Routing configuration for an Agent alias.
+    #   Contains details about the routing configuration of the alias.
     #   @return [Array<Types::AgentAliasRoutingConfigurationListItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentAliasRequest AWS API Documentation
     #
     class UpdateAgentAliasRequest < Struct.new(
-      :agent_id,
       :agent_alias_id,
       :agent_alias_name,
+      :agent_id,
       :description,
       :routing_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Update Agent Alias Response
-    #
     # @!attribute [rw] agent_alias
-    #   Contains the information of an agent alias
+    #   Contains details about the alias that was updated.
     #   @return [Types::AgentAlias]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentAliasResponse AWS API Documentation
@@ -3098,27 +3781,33 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Update Agent Knowledge Base Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent associated with the knowledge
+    #   base that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   Draft Version of the Agent.
-    #   @return [String]
-    #
-    # @!attribute [rw] knowledge_base_id
-    #   Id generated at the server side when a Knowledge Base is associated
-    #   to an Agent
+    #   The version of the agent associated with the knowledge base that you
+    #   want to update.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the Resource.
+    #   Specifies a new description for the knowledge base associated with
+    #   an agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base that has been associated
+    #   with an agent.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_state
-    #   State of the knowledge base; whether it is enabled or disabled
+    #   Specifies whether the agent uses the knowledge base or not when
+    #   sending an [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentKnowledgeBaseRequest AWS API Documentation
@@ -3126,17 +3815,16 @@ module Aws::BedrockAgent
     class UpdateAgentKnowledgeBaseRequest < Struct.new(
       :agent_id,
       :agent_version,
-      :knowledge_base_id,
       :description,
+      :knowledge_base_id,
       :knowledge_base_state)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Update Agent Knowledge Base Response
-    #
     # @!attribute [rw] agent_knowledge_base
-    #   Contains the information of an Agent Knowledge Base.
+    #   Contains details about the knowledge base that has been associated
+    #   with an agent.
     #   @return [Types::AgentKnowledgeBase]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentKnowledgeBaseResponse AWS API Documentation
@@ -3147,42 +3835,54 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Update Agent Request
-    #
     # @!attribute [rw] agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_name
-    #   Name for a resource.
+    #   Specifies a new name for the agent.
     #   @return [String]
-    #
-    # @!attribute [rw] instruction
-    #   Instruction for the agent.
-    #   @return [String]
-    #
-    # @!attribute [rw] foundation_model
-    #   ARN or name of a Bedrock model.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] idle_session_ttl_in_seconds
-    #   Max Session Time.
-    #   @return [Integer]
     #
     # @!attribute [rw] agent_resource_role_arn
-    #   ARN of a IAM role.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #   @return [String]
     #
     # @!attribute [rw] customer_encryption_key_arn
-    #   A KMS key ARN
+    #   The Amazon Resource Name (ARN) of the KMS key with which to encrypt
+    #   the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Specifies a new description of the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] foundation_model
+    #   Specifies a new foundation model to be used for orchestration by the
+    #   agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] idle_session_ttl_in_seconds
+    #   The number of seconds for which Amazon Bedrock keeps information
+    #   about a user's conversation with the agent.
+    #
+    #   A user interaction remains active for the amount of time specified.
+    #   If no conversation occurs during this time, the session expires and
+    #   Amazon Bedrock deletes any data provided before the timeout.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instruction
+    #   Specifies new instructions that tell the agent what it should do and
+    #   how it should interact with users.
     #   @return [String]
     #
     # @!attribute [rw] prompt_override_configuration
-    #   Configuration for prompt override.
+    #   Contains configurations to override prompts in different parts of an
+    #   agent sequence. For more information, see [Advanced prompts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #   @return [Types::PromptOverrideConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentRequest AWS API Documentation
@@ -3190,21 +3890,19 @@ module Aws::BedrockAgent
     class UpdateAgentRequest < Struct.new(
       :agent_id,
       :agent_name,
-      :instruction,
-      :foundation_model,
-      :description,
-      :idle_session_ttl_in_seconds,
       :agent_resource_role_arn,
       :customer_encryption_key_arn,
+      :description,
+      :foundation_model,
+      :idle_session_ttl_in_seconds,
+      :instruction,
       :prompt_override_configuration)
       SENSITIVE = [:instruction, :prompt_override_configuration]
       include Aws::Structure
     end
 
-    # Update Agent Response
-    #
     # @!attribute [rw] agent
-    #   Contains the information of an agent
+    #   Contains details about the agent that was updated.
     #   @return [Types::Agent]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentResponse AWS API Documentation
@@ -3215,42 +3913,49 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] data_source_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   Name for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Description of the Resource.
+    # @!attribute [rw] data_deletion_policy
+    #   The data deletion policy of the updated data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
-    #   Specifies a raw data source location to ingest.
+    #   Contains details about the storage configuration of the data source.
     #   @return [Types::DataSourceConfiguration]
     #
+    # @!attribute [rw] data_source_id
+    #   The unique identifier of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Specifies a new description for the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to which the data source
+    #   belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies a new name for the data source.
+    #   @return [String]
+    #
     # @!attribute [rw] server_side_encryption_configuration
-    #   Server-side encryption configuration.
+    #   Contains details about server-side encryption of the data source.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] vector_ingestion_configuration
-    #   Configures ingestion for a vector knowledge base
+    #   Contains details about how to ingest the documents in the data
+    #   source.
     #   @return [Types::VectorIngestionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateDataSourceRequest AWS API Documentation
     #
     class UpdateDataSourceRequest < Struct.new(
-      :knowledge_base_id,
-      :data_source_id,
-      :name,
-      :description,
+      :data_deletion_policy,
       :data_source_configuration,
+      :data_source_id,
+      :description,
+      :knowledge_base_id,
+      :name,
       :server_side_encryption_configuration,
       :vector_ingestion_configuration)
       SENSITIVE = []
@@ -3258,7 +3963,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] data_source
-    #   Contains the information of a data source.
+    #   Contains details about the data source.
     #   @return [Types::DataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateDataSourceResponse AWS API Documentation
@@ -3269,46 +3974,50 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # @!attribute [rw] knowledge_base_id
-    #   Identifier for a resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   Name for a resource.
-    #   @return [String]
-    #
     # @!attribute [rw] description
-    #   Description of the Resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   ARN of a IAM role.
+    #   Specifies a new description for the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_configuration
-    #   Configures a bedrock knowledge base.
+    #   Specifies the configuration for the embeddings model used for the
+    #   knowledge base. You must use the same configuration as when the
+    #   knowledge base was created.
     #   @return [Types::KnowledgeBaseConfiguration]
     #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies a new name for the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   Specifies a different Amazon Resource Name (ARN) of the IAM role
+    #   with permissions to invoke API operations on the knowledge base.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_configuration
-    #   Configures the physical storage of ingested data in a knowledge
-    #   base.
+    #   Specifies the configuration for the vector store used for the
+    #   knowledge base. You must use the same configuration as when the
+    #   knowledge base was created.
     #   @return [Types::StorageConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateKnowledgeBaseRequest AWS API Documentation
     #
     class UpdateKnowledgeBaseRequest < Struct.new(
+      :description,
+      :knowledge_base_configuration,
       :knowledge_base_id,
       :name,
-      :description,
       :role_arn,
-      :knowledge_base_configuration,
       :storage_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] knowledge_base
-    #   Contains the information of a knowledge base.
+    #   Contains details about the knowledge base.
     #   @return [Types::KnowledgeBase]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateKnowledgeBaseResponse AWS API Documentation
@@ -3319,49 +4028,52 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # This exception is thrown when the request's input validation fails
-    #
-    # @!attribute [rw] message
-    #   Non Blank String
-    #   @return [String]
+    # Input validation failed. Check your request parameters and retry the
+    # request.
     #
     # @!attribute [rw] field_list
-    #   list of ValidationExceptionField
+    #   A list of objects containing fields that caused validation errors
+    #   and their corresponding validation error messages.
     #   @return [Array<Types::ValidationExceptionField>]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :message,
-      :field_list)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Stores information about a field passed inside a request that resulted
-    # in an exception
-    #
-    # @!attribute [rw] name
-    #   Non Blank String
-    #   @return [String]
-    #
-    # @!attribute [rw] message
-    #   Non Blank String
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ValidationExceptionField AWS API Documentation
-    #
-    class ValidationExceptionField < Struct.new(
-      :name,
+      :field_list,
       :message)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Configures ingestion for a vector knowledge base
+    # Stores information about a field passed inside a request that resulted
+    # in an validation error.
+    #
+    # @!attribute [rw] message
+    #   A message describing why this field failed validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ValidationExceptionField AWS API Documentation
+    #
+    class ValidationExceptionField < Struct.new(
+      :message,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about how to ingest the documents in a data source.
     #
     # @!attribute [rw] chunking_configuration
-    #   Configures chunking strategy
+    #   Details about how to chunk the documents in the data source. A
+    #   *chunk* refers to an excerpt from a data source that is returned
+    #   when the knowledge base that it belongs to is queried.
     #   @return [Types::ChunkingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VectorIngestionConfiguration AWS API Documentation
@@ -3372,10 +4084,12 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Configurations for a vector knowledge base.
+    # Contains details about the model used to create vector embeddings for
+    # the knowledge base.
     #
     # @!attribute [rw] embedding_model_arn
-    #   Arn of a Bedrock model.
+    #   The Amazon Resource Name (ARN) of the model used to create vector
+    #   embeddings for the knowledge base.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VectorKnowledgeBaseConfiguration AWS API Documentation

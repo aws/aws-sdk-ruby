@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2024-04-26)
+------------------
+
+* Feature - This release introduces support for Source Accounts to define which Metrics and Logs to share with the Monitoring Account
+
+1.14.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2024-03-28)
+------------------
+
+* Feature - This release adds support for sharing AWS::InternetMonitor::Monitor resources.
+
 1.12.0 (2024-01-26)
 ------------------
 

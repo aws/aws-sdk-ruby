@@ -64,6 +64,7 @@ module Aws::LookoutEquipment
       attr_accessor inference_scheduler_arn: ::String
       attr_accessor inference_scheduler_name: ::String
       attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor model_quality: ("QUALITY_THRESHOLD_MET" | "CANNOT_DETERMINE_QUALITY" | "POOR_QUALITY_DETECTED")
       SENSITIVE: []
     end
 
@@ -362,6 +363,7 @@ module Aws::LookoutEquipment
       attr_accessor accumulated_inference_data_end_time: ::Time
       attr_accessor retraining_scheduler_status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
       attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration
+      attr_accessor model_quality: ("QUALITY_THRESHOLD_MET" | "CANNOT_DETERMINE_QUALITY" | "POOR_QUALITY_DETECTED")
       SENSITIVE: []
     end
 
@@ -406,6 +408,7 @@ module Aws::LookoutEquipment
       attr_accessor auto_promotion_result_reason: ::String
       attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration
       attr_accessor model_diagnostics_results_object: Types::S3Object
+      attr_accessor model_quality: ("QUALITY_THRESHOLD_MET" | "CANNOT_DETERMINE_QUALITY" | "POOR_QUALITY_DETECTED")
       SENSITIVE: []
     end
 
@@ -844,6 +847,7 @@ module Aws::LookoutEquipment
       attr_accessor next_scheduled_retraining_start_date: ::Time
       attr_accessor retraining_scheduler_status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
       attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration
+      attr_accessor model_quality: ("QUALITY_THRESHOLD_MET" | "CANNOT_DETERMINE_QUALITY" | "POOR_QUALITY_DETECTED")
       SENSITIVE: []
     end
 
@@ -855,6 +859,7 @@ module Aws::LookoutEquipment
       attr_accessor created_at: ::Time
       attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
       attr_accessor source_type: ("TRAINING" | "RETRAINING" | "IMPORT")
+      attr_accessor model_quality: ("QUALITY_THRESHOLD_MET" | "CANNOT_DETERMINE_QUALITY" | "POOR_QUALITY_DETECTED")
       SENSITIVE: []
     end
 

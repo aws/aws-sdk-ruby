@@ -276,6 +276,17 @@ module Aws::CodePipeline
     #   produced as output by this action fall under this namespace.
     #   @return [String]
     #
+    # @!attribute [rw] timeout_in_minutes
+    #   A timeout duration in minutes that can be applied against the
+    #   ActionType’s default timeout value specified in [Quotas for
+    #   CodePipeline ][1]. This attribute is available only to the manual
+    #   approval ActionType.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionDeclaration AWS API Documentation
     #
     class ActionDeclaration < Struct.new(
@@ -287,7 +298,8 @@ module Aws::CodePipeline
       :input_artifacts,
       :role_arn,
       :region,
-      :namespace)
+      :namespace,
+      :timeout_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1741,6 +1753,22 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The configuration that specifies the result, such as rollback, to
+    # occur upon stage failure.
+    #
+    # @!attribute [rw] result
+    #   The specified result for when the failure conditions are met, such
+    #   as rolling back the stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/FailureConditions AWS API Documentation
+    #
+    class FailureConditions < Struct.new(
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents information about failure details.
     #
     # @!attribute [rw] type
@@ -2633,6 +2661,10 @@ module Aws::CodePipeline
     #   100.
     #   @return [Integer]
     #
+    # @!attribute [rw] filter
+    #   The pipeline execution to filter on.
+    #   @return [Types::PipelineExecutionFilter]
+    #
     # @!attribute [rw] next_token
     #   The token that was returned from the previous
     #   `ListPipelineExecutions` call, which can be used to return the next
@@ -2644,6 +2676,7 @@ module Aws::CodePipeline
     class ListPipelineExecutionsInput < Struct.new(
       :pipeline_name,
       :max_results,
+      :filter,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3117,6 +3150,14 @@ module Aws::CodePipeline
     #   The default mode is SUPERSEDED.
     #   @return [String]
     #
+    # @!attribute [rw] execution_type
+    #   The type of the pipeline execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] rollback_metadata
+    #   The metadata about the execution pertaining to stage rollback.
+    #   @return [Types::PipelineRollbackMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecution AWS API Documentation
     #
     class PipelineExecution < Struct.new(
@@ -3128,7 +3169,24 @@ module Aws::CodePipeline
       :artifact_revisions,
       :variables,
       :trigger,
-      :execution_mode)
+      :execution_mode,
+      :execution_type,
+      :rollback_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pipeline execution to filter on.
+    #
+    # @!attribute [rw] succeeded_in_stage
+    #   Filter for pipeline executions where the stage was successful in the
+    #   current pipeline version.
+    #   @return [Types::SucceededInStageFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionFilter AWS API Documentation
+    #
+    class PipelineExecutionFilter < Struct.new(
+      :succeeded_in_stage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3149,6 +3207,20 @@ module Aws::CodePipeline
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionNotStoppableException AWS API Documentation
     #
     class PipelineExecutionNotStoppableException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified pipeline execution is outdated and cannot be used as a
+    # target pipeline execution for rollback.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionOutdatedException AWS API Documentation
+    #
+    class PipelineExecutionOutdatedException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -3188,6 +3260,10 @@ module Aws::CodePipeline
     #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded
     #   @return [String]
     #
+    # @!attribute [rw] status_summary
+    #   Status summary for the pipeline.
+    #   @return [String]
+    #
     # @!attribute [rw] start_time
     #   The date and time when the pipeline execution began, in timestamp
     #   format.
@@ -3217,17 +3293,28 @@ module Aws::CodePipeline
     #   The default mode is SUPERSEDED.
     #   @return [String]
     #
+    # @!attribute [rw] execution_type
+    #   Type of the pipeline execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] rollback_metadata
+    #   The metadata for the stage execution to be rolled back.
+    #   @return [Types::PipelineRollbackMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionSummary AWS API Documentation
     #
     class PipelineExecutionSummary < Struct.new(
       :pipeline_execution_id,
       :status,
+      :status_summary,
       :start_time,
       :last_update_time,
       :source_revisions,
       :trigger,
       :stop_trigger,
-      :execution_mode)
+      :execution_mode,
+      :execution_type,
+      :rollback_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3283,6 +3370,20 @@ module Aws::CodePipeline
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineNotFoundException AWS API Documentation
     #
     class PipelineNotFoundException < Aws::EmptyStructure; end
+
+    # The metadata for the stage execution to be rolled back.
+    #
+    # @!attribute [rw] rollback_target_pipeline_execution_id
+    #   The pipeline execution ID to which the stage will be rolled back.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineRollbackMetadata AWS API Documentation
+    #
+    class PipelineRollbackMetadata < Struct.new(
+      :rollback_target_pipeline_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Returns a summary of a pipeline.
     #
@@ -3880,6 +3981,41 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # @!attribute [rw] pipeline_name
+    #   The name of the pipeline for which the stage will be rolled back.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage in the pipeline to be rolled back.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_pipeline_execution_id
+    #   The pipeline execution ID for the stage to be rolled back to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RollbackStageInput AWS API Documentation
+    #
+    class RollbackStageInput < Struct.new(
+      :pipeline_name,
+      :stage_name,
+      :target_pipeline_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_id
+    #   The execution ID of the pipeline execution for the stage that has
+    #   been rolled back.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RollbackStageOutput AWS API Documentation
+    #
+    class RollbackStageOutput < Struct.new(
+      :pipeline_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The location of the S3 bucket that contains a revision.
     #
     # @!attribute [rw] bucket_name
@@ -4015,12 +4151,20 @@ module Aws::CodePipeline
     #   The actions included in a stage.
     #   @return [Array<Types::ActionDeclaration>]
     #
+    # @!attribute [rw] on_failure
+    #   The method to use when a stage has not completed successfully. For
+    #   example, configuring this field for rollback will roll back a failed
+    #   stage automatically to the last successful pipeline execution in the
+    #   stage.
+    #   @return [Types::FailureConditions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageDeclaration AWS API Documentation
     #
     class StageDeclaration < Struct.new(
       :name,
       :blockers,
-      :actions)
+      :actions,
+      :on_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4041,11 +4185,17 @@ module Aws::CodePipeline
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of pipeline execution for the stage, such as a rollback
+    #   pipeline execution.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageExecution AWS API Documentation
     #
     class StageExecution < Struct.new(
       :pipeline_execution_id,
-      :status)
+      :status,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4216,6 +4366,22 @@ module Aws::CodePipeline
     #
     class StopPipelineExecutionOutput < Struct.new(
       :pipeline_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filter for pipeline executions that have successfully completed the
+    # stage in the current pipeline version.
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage for filtering for pipeline executions where
+    #   the stage was successful in the current pipeline version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/SucceededInStageFilter AWS API Documentation
+    #
+    class SucceededInStageFilter < Struct.new(
+      :stage_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4419,6 +4585,22 @@ module Aws::CodePipeline
       :last_changed_by,
       :last_changed_at,
       :disabled_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Unable to roll back the stage. The cause might be if the pipeline
+    # version has changed since the target pipeline execution was deployed,
+    # the stage is currently running, or an incorrect target pipeline
+    # execution ID was provided.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UnableToRollbackStageException AWS API Documentation
+    #
+    class UnableToRollbackStageException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

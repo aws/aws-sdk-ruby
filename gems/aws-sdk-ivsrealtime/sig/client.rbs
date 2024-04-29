@@ -368,7 +368,23 @@ module Aws
                                ?idempotency_token: ::String,
                                ?layout: {
                                  grid: {
-                                   featured_participant_attribute: ::String?
+                                   featured_participant_attribute: ::String?,
+                                   grid_gap: ::Integer?,
+                                   omit_stopped_video: bool?,
+                                   video_aspect_ratio: ("AUTO" | "VIDEO" | "SQUARE" | "PORTRAIT")?,
+                                   video_fill_mode: ("FILL" | "COVER" | "CONTAIN")?
+                                 }?,
+                                 pip: {
+                                   featured_participant_attribute: ::String?,
+                                   grid_gap: ::Integer?,
+                                   omit_stopped_video: bool?,
+                                   pip_behavior: ("STATIC" | "DYNAMIC")?,
+                                   pip_height: ::Integer?,
+                                   pip_offset: ::Integer?,
+                                   pip_participant_attribute: ::String?,
+                                   pip_position: ("TOP_LEFT" | "TOP_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_RIGHT")?,
+                                   pip_width: ::Integer?,
+                                   video_fill_mode: ("FILL" | "COVER" | "CONTAIN")?
                                  }?
                                },
                                stage_arn: ::String,

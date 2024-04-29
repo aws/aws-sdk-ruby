@@ -350,6 +350,8 @@ module Aws::Firehose
       attr_accessor s3_backup_configuration: Types::S3DestinationConfiguration
       attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration
       attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration
+      attr_accessor file_extension: ::String
+      attr_accessor custom_time_zone: ::String
       SENSITIVE: []
     end
 
@@ -367,6 +369,8 @@ module Aws::Firehose
       attr_accessor s3_backup_description: Types::S3DestinationDescription
       attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration
       attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration
+      attr_accessor file_extension: ::String
+      attr_accessor custom_time_zone: ::String
       SENSITIVE: []
     end
 
@@ -384,6 +388,8 @@ module Aws::Firehose
       attr_accessor s3_backup_update: Types::S3DestinationUpdate
       attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration
       attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration
+      attr_accessor file_extension: ::String
+      attr_accessor custom_time_zone: ::String
       SENSITIVE: []
     end
 
@@ -602,13 +608,13 @@ module Aws::Firehose
     end
 
     class Processor
-      attr_accessor type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord")
+      attr_accessor type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord")
       attr_accessor parameters: ::Array[Types::ProcessorParameter]
       SENSITIVE: []
     end
 
     class ProcessorParameter
-      attr_accessor parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat")
+      attr_accessor parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction")
       attr_accessor parameter_value: ::String
       SENSITIVE: []
     end

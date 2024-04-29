@@ -1443,6 +1443,34 @@ module Aws::MediaConvert
     #   data from your input captions, if present.
     #   @return [String]
     #
+    # @!attribute [rw] font_file_bold
+    #   Specify a bold TrueType font file to use when rendering your output
+    #   captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must
+    #   also separately specify a regular, an italic, and a bold italic font
+    #   file.
+    #   @return [String]
+    #
+    # @!attribute [rw] font_file_bold_italic
+    #   Specify a bold italic TrueType font file to use when rendering your
+    #   output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you
+    #   must also separately specify a regular, a bold, and an italic font
+    #   file.
+    #   @return [String]
+    #
+    # @!attribute [rw] font_file_italic
+    #   Specify an italic TrueType font file to use when rendering your
+    #   output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you
+    #   must also separately specify a regular, a bold, and a bold italic
+    #   font file.
+    #   @return [String]
+    #
+    # @!attribute [rw] font_file_regular
+    #   Specify a regular TrueType font file to use when rendering your
+    #   output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you
+    #   must also separately specify a bold, an italic, and a bold italic
+    #   font file.
+    #   @return [String]
+    #
     # @!attribute [rw] font_opacity
     #   Specify the opacity of the burned-in captions. 255 is opaque; 0 is
     #   transparent.
@@ -1515,15 +1543,17 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] style_passthrough
-    #   Set Style passthrough to ENABLED to use the available style, color,
-    #   and position information from your input captions. MediaConvert uses
-    #   default settings for any missing style and position information in
-    #   your input captions. Set Style passthrough to DISABLED, or leave
-    #   blank, to ignore the style and position information from your input
-    #   captions and use default settings: white text with black outlining,
-    #   bottom-center positioning, and automatic sizing. Whether you set
-    #   Style passthrough to enabled or not, you can also choose to manually
-    #   override any of the individual style and position settings.
+    #   To use the available style, color, and position information from
+    #   your input captions: Set Style passthrough to Enabled. Note that
+    #   MediaConvert uses default settings for any missing style or position
+    #   information in your input captions To ignore the style and position
+    #   information from your input captions and use default settings: Leave
+    #   blank or keep the default value, Disabled. Default settings include
+    #   white text with black outlining, bottom-center positioning, and
+    #   automatic sizing. Whether you set Style passthrough to enabled or
+    #   not, you can also choose to manually override any of the individual
+    #   style and position settings. You can also override any fonts by
+    #   manually specifying custom font files.
     #   @return [String]
     #
     # @!attribute [rw] teletext_spacing
@@ -1559,6 +1589,10 @@ module Aws::MediaConvert
       :background_opacity,
       :fallback_font,
       :font_color,
+      :font_file_bold,
+      :font_file_bold_italic,
+      :font_file_italic,
+      :font_file_regular,
       :font_opacity,
       :font_resolution,
       :font_script,
@@ -3992,6 +4026,34 @@ module Aws::MediaConvert
     #   your DVB-Sub settings must be identical.
     #   @return [String]
     #
+    # @!attribute [rw] font_file_bold
+    #   Specify a bold TrueType font file to use when rendering your output
+    #   captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must
+    #   also separately specify a regular, an italic, and a bold italic font
+    #   file.
+    #   @return [String]
+    #
+    # @!attribute [rw] font_file_bold_italic
+    #   Specify a bold italic TrueType font file to use when rendering your
+    #   output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you
+    #   must also separately specify a regular, a bold, and an italic font
+    #   file.
+    #   @return [String]
+    #
+    # @!attribute [rw] font_file_italic
+    #   Specify an italic TrueType font file to use when rendering your
+    #   output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you
+    #   must also separately specify a regular, a bold, and a bold italic
+    #   font file.
+    #   @return [String]
+    #
+    # @!attribute [rw] font_file_regular
+    #   Specify a regular TrueType font file to use when rendering your
+    #   output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you
+    #   must also separately specify a bold, an italic, and a bold italic
+    #   font file.
+    #   @return [String]
+    #
     # @!attribute [rw] font_opacity
     #   Specify the opacity of the burned-in captions. 255 is opaque; 0 is
     #   transparent. Within your job settings, all of your DVB-Sub settings
@@ -4082,15 +4144,17 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] style_passthrough
-    #   Set Style passthrough to ENABLED to use the available style, color,
-    #   and position information from your input captions. MediaConvert uses
-    #   default settings for any missing style and position information in
-    #   your input captions. Set Style passthrough to DISABLED, or leave
-    #   blank, to ignore the style and position information from your input
-    #   captions and use default settings: white text with black outlining,
-    #   bottom-center positioning, and automatic sizing. Whether you set
-    #   Style passthrough to enabled or not, you can also choose to manually
-    #   override any of the individual style and position settings.
+    #   To use the available style, color, and position information from
+    #   your input captions: Set Style passthrough to Enabled. Note that
+    #   MediaConvert uses default settings for any missing style or position
+    #   information in your input captions To ignore the style and position
+    #   information from your input captions and use default settings: Leave
+    #   blank or keep the default value, Disabled. Default settings include
+    #   white text with black outlining, bottom-center positioning, and
+    #   automatic sizing. Whether you set Style passthrough to enabled or
+    #   not, you can also choose to manually override any of the individual
+    #   style and position settings. You can also override any fonts by
+    #   manually specifying custom font files.
     #   @return [String]
     #
     # @!attribute [rw] subtitling_type
@@ -4146,6 +4210,10 @@ module Aws::MediaConvert
       :dds_y_coordinate,
       :fallback_font,
       :font_color,
+      :font_file_bold,
+      :font_file_bold_italic,
+      :font_file_italic,
+      :font_file_regular,
       :font_opacity,
       :font_resolution,
       :font_script,
@@ -7924,7 +7992,8 @@ module Aws::MediaConvert
     # @!attribute [rw] color_conversion_3_dlut_settings
     #   Use 3D LUTs to specify custom color mapping behavior when you
     #   convert from one color space into another. You can include up to 8
-    #   different 3D LUTs.
+    #   different 3D LUTs. For more information, see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/3d-luts.html
     #   @return [Array<Types::ColorConversion3DLUTSetting>]
     #
     # @!attribute [rw] esam
@@ -8142,7 +8211,8 @@ module Aws::MediaConvert
     # @!attribute [rw] color_conversion_3_dlut_settings
     #   Use 3D LUTs to specify custom color mapping behavior when you
     #   convert from one color space into another. You can include up to 8
-    #   different 3D LUTs.
+    #   different 3D LUTs. For more information, see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/3d-luts.html
     #   @return [Array<Types::ColorConversion3DLUTSetting>]
     #
     # @!attribute [rw] esam
@@ -8855,6 +8925,18 @@ module Aws::MediaConvert
     #   itself. Default is 480.
     #   @return [Integer]
     #
+    # @!attribute [rw] prevent_buffer_underflow
+    #   Specify whether MediaConvert automatically attempts to prevent
+    #   decoder buffer underflows in your transport stream output. Use if
+    #   you are seeing decoder buffer underflows in your output and are
+    #   unable to increase your transport stream's bitrate. For most
+    #   workflows: We recommend that you keep the default value, Disabled.
+    #   To prevent decoder buffer underflows in your output, when possible:
+    #   Choose Enabled. Note that if MediaConvert prevents a decoder buffer
+    #   underflow in your output, output video quality is reduced and your
+    #   job will take longer to complete.
+    #   @return [String]
+    #
     # @!attribute [rw] private_metadata_pid
     #   Specify the packet identifier (PID) of the private metadata stream.
     #   Default is 503.
@@ -8993,6 +9075,7 @@ module Aws::MediaConvert
       :pcr_pid,
       :pmt_interval,
       :pmt_pid,
+      :prevent_buffer_underflow,
       :private_metadata_pid,
       :program_number,
       :pts_offset,

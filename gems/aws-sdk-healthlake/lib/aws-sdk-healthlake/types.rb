@@ -198,6 +198,10 @@ module Aws::HealthLake
     #   store.
     #   @return [Types::IdentityProviderConfiguration]
     #
+    # @!attribute [rw] error_cause
+    #   The error cause for the current data store operation.
+    #   @return [Types::ErrorCause]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DatastoreProperties AWS API Documentation
     #
     class DatastoreProperties < Struct.new(
@@ -210,7 +214,8 @@ module Aws::HealthLake
       :datastore_endpoint,
       :sse_configuration,
       :preload_data_config,
-      :identity_provider_configuration)
+      :identity_provider_configuration,
+      :error_cause)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -334,13 +339,33 @@ module Aws::HealthLake
 
     # @!attribute [rw] import_job_properties
     #   The properties of the Import job request, including the ID, ARN,
-    #   name, and the status of the job.
+    #   name, status of the job, and the progress report of the job.
     #   @return [Types::ImportJobProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRImportJobResponse AWS API Documentation
     #
     class DescribeFHIRImportJobResponse < Struct.new(
       :import_job_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error info of the create/delete data store operation.
+    #
+    # @!attribute [rw] error_message
+    #   The text of the error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_category
+    #   The error category of the create/delete data store operation.
+    #   Possible statuses are RETRYABLE\_ERROR or NON\_RETRYABLE\_ERROR.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ErrorCause AWS API Documentation
+    #
+    class ErrorCause < Struct.new(
+      :error_message,
+      :error_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -464,7 +489,7 @@ module Aws::HealthLake
     end
 
     # Displays the properties of the import job, including the ID, Arn,
-    # Name, and the status of the data store.
+    # Name, the status of the job, and the progress report of the job.
     #
     # @!attribute [rw] job_id
     #   The AWS-generated id number for the Import job.
@@ -501,6 +526,11 @@ module Aws::HealthLake
     #   was created.
     #   @return [Types::OutputDataConfig]
     #
+    # @!attribute [rw] job_progress_report
+    #   Displays the progress of the import job, including total resources
+    #   scanned, total resources ingested, and total size of data ingested.
+    #   @return [Types::JobProgressReport]
+    #
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) that gives AWS HealthLake access to
     #   your input data.
@@ -522,6 +552,7 @@ module Aws::HealthLake
       :datastore_id,
       :input_data_config,
       :job_output_data_config,
+      :job_progress_report,
       :data_access_role_arn,
       :message)
       SENSITIVE = []
@@ -561,6 +592,56 @@ module Aws::HealthLake
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The progress report of an import job.
+    #
+    # @!attribute [rw] total_number_of_scanned_files
+    #   The number of files scanned from input S3 bucket.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_size_of_scanned_files_in_mb
+    #   The size (in MB) of the files scanned from the input S3 bucket.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_number_of_imported_files
+    #   The number of files imported so far.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_number_of_resources_scanned
+    #   The number of resources scanned from the input S3 bucket.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_number_of_resources_imported
+    #   The number of resources imported so far.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_number_of_resources_with_customer_error
+    #   The number of resources that failed due to customer error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_number_of_files_read_with_customer_error
+    #   The number of files that failed to be read from the input S3 bucket
+    #   due to customer error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput
+    #   The throughput (in MB/sec) of the import job.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/JobProgressReport AWS API Documentation
+    #
+    class JobProgressReport < Struct.new(
+      :total_number_of_scanned_files,
+      :total_size_of_scanned_files_in_mb,
+      :total_number_of_imported_files,
+      :total_number_of_resources_scanned,
+      :total_number_of_resources_imported,
+      :total_number_of_resources_with_customer_error,
+      :total_number_of_files_read_with_customer_error,
+      :throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -748,7 +829,7 @@ module Aws::HealthLake
 
     # @!attribute [rw] import_job_properties_list
     #   The properties of a listed FHIR import jobs, including the ID, ARN,
-    #   name, and the status of the job.
+    #   name, the status of the job, and the progress report of the job.
     #   @return [Array<Types::ImportJobProperties>]
     #
     # @!attribute [rw] next_token

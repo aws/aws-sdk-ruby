@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.172.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.171.0 (2024-04-19)
+------------------
+
+* Feature - Adding RowFilter in the response for GetUnfilteredTableMetadata API
+
+1.170.0 (2024-04-12)
+------------------
+
+* Feature - Modifying request for GetUnfilteredTableMetadata for view-related fields.
+
+1.169.0 (2024-04-02)
+------------------
+
+* Feature - Adding View related fields to responses of read-only Table APIs.
+
 1.168.0 (2024-02-05)
 ------------------
 

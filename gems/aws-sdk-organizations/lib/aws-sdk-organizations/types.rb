@@ -3826,7 +3826,8 @@ module Aws::Organizations
     # accounts contained in that OU and in any child OUs.
     #
     # @!attribute [rw] id
-    #   The unique identifier (ID) associated with this OU.
+    #   The unique identifier (ID) associated with this OU. The ID is unique
+    #   to the organization only.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
     #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
@@ -4383,7 +4384,8 @@ module Aws::Organizations
     # account in the organization.
     #
     # @!attribute [rw] id
-    #   The unique identifier (ID) for the root.
+    #   The unique identifier (ID) for the root. The ID is unique to the
+    #   organization only.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
     #   by from 4 to 32 lowercase letters or digits.

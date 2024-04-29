@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -73,6 +74,7 @@ module Aws::Lambda
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -198,10 +200,17 @@ module Aws::Lambda
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -348,50 +357,65 @@ module Aws::Lambda
     #   @option options [Aws::Lambda::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Lambda::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -500,7 +524,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -617,7 +641,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -828,14 +852,19 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** – The ARN of the queue.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** – The ARN of the
-    #     cluster.
+    #     cluster or the ARN of the VPC connection (for [cross-account event
+    #     source mappings][1]).
     #
     #   * **Amazon MQ** – The ARN of the broker.
     #
     #   * **Amazon DocumentDB** – The ARN of the DocumentDB change stream.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc
+    #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -922,8 +951,9 @@ module Aws::Lambda
     #   start reading. `StartingPositionTimestamp` cannot be in the future.
     #
     # @option params [Types::DestinationConfig] :destination_config
-    #   (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or
-    #   standard Amazon SNS topic destination for discarded records.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only) A
+    #   configuration object that specifies the destination of an event after
+    #   Lambda processes it.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
     #   (Kinesis and DynamoDB Streams only) Discard records older than the
@@ -1194,7 +1224,7 @@ module Aws::Lambda
     # [6]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1339,7 +1369,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
     #
     # @option params [String] :code_signing_config_arn
     #   To enable code signing for this function, specify the ARN of a
@@ -1354,7 +1384,12 @@ module Aws::Lambda
     #
     # @option params [Types::EphemeralStorage] :ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default value
-    #   is 512, but can be any whole number between 512 and 10,240 MB.
+    #   is 512, but can be any whole number between 512 and 10,240 MB. For
+    #   more information, see [Configuring ephemeral storage (console)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
     #
     # @option params [Types::SnapStart] :snap_start
     #   The function's [SnapStart][1] setting.
@@ -1409,7 +1444,7 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, ruby3.3, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     role: "RoleArn", # required
     #     handler: "Handler",
     #     code: { # required
@@ -1476,7 +1511,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1552,7 +1587,7 @@ module Aws::Lambda
     # can use to invoke your function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1666,7 +1701,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1834,7 +1869,7 @@ module Aws::Lambda
     # you originally configured it.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function or version.
+    #   The name or ARN of the Lambda function or version.
     #
     #   **Name formats**
     #
@@ -1875,7 +1910,7 @@ module Aws::Lambda
     # Removes the code signing configuration from the function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1909,7 +1944,7 @@ module Aws::Lambda
     # Removes a concurrent execution limit from a function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1947,7 +1982,7 @@ module Aws::Lambda
     # PutFunctionEventInvokeConfig.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -1989,7 +2024,7 @@ module Aws::Lambda
     # URL address.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2059,7 +2094,7 @@ module Aws::Lambda
     # Deletes the provisioned concurrency configuration for a function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2132,7 +2167,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2316,7 +2351,7 @@ module Aws::Lambda
     # that version are returned.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2354,7 +2389,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -2442,7 +2477,7 @@ module Aws::Lambda
     # Returns the code signing configuration for the specified function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2486,7 +2521,7 @@ module Aws::Lambda
     # PutFunctionConcurrency.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2531,7 +2566,7 @@ module Aws::Lambda
     # settings, use GetFunction.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2601,7 +2636,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2686,7 +2721,7 @@ module Aws::Lambda
     # PutFunctionEventInvokeConfig.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2741,7 +2776,7 @@ module Aws::Lambda
     # Returns details about a Lambda function URL.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2848,7 +2883,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -2903,7 +2938,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -2964,7 +2999,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -3013,7 +3048,7 @@ module Aws::Lambda
     # alias or version.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3076,7 +3111,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3180,7 +3215,7 @@ module Aws::Lambda
     # [9]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -3217,7 +3252,9 @@ module Aws::Lambda
     #
     # @option params [String] :client_context
     #   Up to 3,583 bytes of base64-encoded data about the invoking client to
-    #   pass to the function in the context object.
+    #   pass to the function in the context object. Lambda passes the
+    #   `ClientContext` object to your function for synchronous invocations
+    #   only.
     #
     # @option params [String, StringIO, File] :payload
     #   The JSON that you want to provide to your Lambda function as input.
@@ -3270,8 +3307,14 @@ module Aws::Lambda
     #
     # Invokes a function asynchronously.
     #
+    # <note markdown="1"> If you do use the InvokeAsync action, note that it doesn't support
+    # the use of X-Ray active tracing. Trace ID is not propagated to the
+    # function, even if X-Ray active tracing is turned on.
+    #
+    #  </note>
+    #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3327,7 +3370,7 @@ module Aws::Lambda
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3379,22 +3422,22 @@ module Aws::Lambda
     #
     # @example EventStream Operation Example
     #
-    #   You can process event once it arrives immediately, or wait until
-    #   full response complete and iterate through eventstream enumerator.
+    #   You can process the event once it arrives immediately, or wait until the
+    #   full response is complete and iterate through the eventstream enumerator.
     #
     #   To interact with event immediately, you need to register #invoke_with_response_stream
-    #   with callbacks, callbacks can be register for specifc events or for all events,
-    #   callback for errors in the event stream is also available for register.
+    #   with callbacks. Callbacks can be registered for specific events or for all
+    #   events, including error events.
     #
-    #   Callbacks can be passed in by `:event_stream_handler` option or within block
-    #   statement attached to #invoke_with_response_stream call directly. Hybrid pattern of both
-    #   is also supported.
+    #   Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   block statement attached to the #invoke_with_response_stream call directly. Hybrid
+    #   pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either Proc object or
+    #   `:event_stream_handler` option takes in either a Proc object or
     #   Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent object.
     #
-    #   Usage pattern a): callbacks with a block attached to #invoke_with_response_stream
-    #     Example for registering callbacks for all event types and error event
+    #   Usage pattern a): Callbacks with a block attached to #invoke_with_response_stream
+    #     Example for registering callbacks for all event types and an error event
     #
     #     client.invoke_with_response_stream( # params input# ) do |stream|
     #       stream.on_error_event do |event|
@@ -3414,9 +3457,9 @@ module Aws::Lambda
     #
     #     end
     #
-    #   Usage pattern b): pass in `:event_stream_handler` for #invoke_with_response_stream
+    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_with_response_stream
     #
-    #     1) create a Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent object
+    #     1) Create a Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent object
     #     Example for registering callbacks with specific events
     #
     #       handler = Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent.new
@@ -3429,7 +3472,7 @@ module Aws::Lambda
     #
     #     client.invoke_with_response_stream( # params input #, event_stream_handler: handler)
     #
-    #     2) use a Ruby Proc object
+    #     2) Use a Ruby Proc object
     #     Example for registering callbacks with specific events
     #
     #     handler = Proc.new do |stream|
@@ -3443,7 +3486,7 @@ module Aws::Lambda
     #
     #     client.invoke_with_response_stream( # params input #, event_stream_handler: handler)
     #
-    #   Usage pattern c): hybird pattern of a) and b)
+    #   Usage pattern c): Hybrid pattern of a) and b)
     #
     #       handler = Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent.new
     #       handler.on_payload_chunk_event do |event|
@@ -3464,8 +3507,7 @@ module Aws::Lambda
     #       end
     #     end
     #
-    #   Besides above usage patterns for process events when they arrive immediately, you can also
-    #   iterate through events after response complete.
+    #   You can also iterate through events after the response complete.
     #
     #   Events are available at resp.event_stream # => Enumerator
     #   For parameter input example, please refer to following request syntax
@@ -3533,7 +3575,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3659,14 +3701,19 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** – The ARN of the queue.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** – The ARN of the
-    #     cluster.
+    #     cluster or the ARN of the VPC connection (for [cross-account event
+    #     source mappings][1]).
     #
     #   * **Amazon MQ** – The ARN of the broker.
     #
     #   * **Amazon DocumentDB** – The ARN of the DocumentDB change stream.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc
+    #
     # @option params [String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3766,7 +3813,7 @@ module Aws::Lambda
     # PutFunctionEventInvokeConfig.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3825,7 +3872,7 @@ module Aws::Lambda
     # Returns a list of Lambda function URLs for the specified function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3949,7 +3996,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -4076,7 +4123,7 @@ module Aws::Lambda
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
     #
     # @option params [String] :compatible_runtime
-    #   A runtime identifier. For example, `go1.x`.
+    #   A runtime identifier. For example, `java21`.
     #
     #   The following list includes deprecated runtimes. For more information,
     #   see [Runtime deprecation policy][1].
@@ -4111,7 +4158,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layer_versions({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, ruby3.3, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     layer_name: "LayerName", # required
     #     marker: "String",
     #     max_items: 1,
@@ -4127,7 +4174,7 @@ module Aws::Lambda
     #   resp.layer_versions[0].description #=> String
     #   resp.layer_versions[0].created_date #=> Time
     #   resp.layer_versions[0].compatible_runtimes #=> Array
-    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.layer_versions[0].license_info #=> String
     #   resp.layer_versions[0].compatible_architectures #=> Array
     #   resp.layer_versions[0].compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -4154,7 +4201,7 @@ module Aws::Lambda
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
     #
     # @option params [String] :compatible_runtime
-    #   A runtime identifier. For example, `go1.x`.
+    #   A runtime identifier. For example, `java21`.
     #
     #   The following list includes deprecated runtimes. For more information,
     #   see [Runtime deprecation policy][1].
@@ -4186,7 +4233,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layers({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, ruby3.3, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     marker: "String",
     #     max_items: 1,
     #     compatible_architecture: "x86_64", # accepts x86_64, arm64
@@ -4203,7 +4250,7 @@ module Aws::Lambda
     #   resp.layers[0].latest_matching_version.description #=> String
     #   resp.layers[0].latest_matching_version.created_date #=> Time
     #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
-    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.layers[0].latest_matching_version.license_info #=> String
     #   resp.layers[0].latest_matching_version.compatible_architectures #=> Array
     #   resp.layers[0].latest_matching_version.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -4221,7 +4268,7 @@ module Aws::Lambda
     # function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4321,7 +4368,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4365,7 +4412,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -4512,7 +4559,7 @@ module Aws::Lambda
     #       s3_object_version: "S3ObjectVersion",
     #       zip_file: "data",
     #     },
-    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
+    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, ruby3.3, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     license_info: "LicenseInfo",
     #     compatible_architectures: ["x86_64"], # accepts x86_64, arm64
     #   })
@@ -4530,7 +4577,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.license_info #=> String
     #   resp.compatible_architectures #=> Array
     #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
@@ -4561,7 +4608,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4643,7 +4690,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4722,7 +4769,7 @@ module Aws::Lambda
     #   The The Amazon Resource Name (ARN) of the code signing configuration.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4782,7 +4829,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4849,7 +4896,7 @@ module Aws::Lambda
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -4937,7 +4984,7 @@ module Aws::Lambda
     # version.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5001,7 +5048,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5133,7 +5180,7 @@ module Aws::Lambda
     # the output of GetPolicy.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -5250,7 +5297,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5459,7 +5506,7 @@ module Aws::Lambda
     #   The identifier of the event source mapping.
     #
     # @option params [String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5532,8 +5579,9 @@ module Aws::Lambda
     #   `MaximumBatchingWindowInSeconds` to at least 1.
     #
     # @option params [Types::DestinationConfig] :destination_config
-    #   (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or
-    #   standard Amazon SNS topic destination for discarded records.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only) A
+    #   configuration object that specifies the destination of an event after
+    #   Lambda processes it.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
     #   (Kinesis and DynamoDB Streams only) Discard records older than the
@@ -5735,7 +5783,7 @@ module Aws::Lambda
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5849,7 +5897,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -5945,7 +5993,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -6077,11 +6125,16 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
     #
     # @option params [Types::EphemeralStorage] :ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default value
-    #   is 512, but can be any whole number between 512 and 10,240 MB.
+    #   is 512, but can be any whole number between 512 and 10,240 MB. For
+    #   more information, see [Configuring ephemeral storage (console)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
     #
     # @option params [Types::SnapStart] :snap_start
     #   The function's [SnapStart][1] setting.
@@ -6151,7 +6204,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, python3.11, nodejs20.x, provided.al2023, python3.12, java21
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, dotnet8, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x, python3.10, java17, ruby3.2, ruby3.3, python3.11, nodejs20.x, provided.al2023, python3.12, java21
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -6190,7 +6243,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "nodejs16.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "dotnet6", "dotnet8", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2", "nodejs18.x", "python3.10", "java17", "ruby3.2", "ruby3.3", "python3.11", "nodejs20.x", "provided.al2023", "python3.12", "java21"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -6268,7 +6321,7 @@ module Aws::Lambda
     # PutFunctionEventInvokeConfig.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -6355,7 +6408,7 @@ module Aws::Lambda
     # Updates the configuration for a Lambda function URL.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -6477,7 +6530,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

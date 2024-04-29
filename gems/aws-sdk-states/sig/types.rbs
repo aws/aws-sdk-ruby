@@ -1067,6 +1067,26 @@ module Aws::States
       SENSITIVE: []
     end
 
+    class ValidateStateMachineDefinitionDiagnostic
+      attr_accessor severity: ("ERROR")
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateStateMachineDefinitionInput
+      attr_accessor definition: ::String
+      attr_accessor type: ("STANDARD" | "EXPRESS")
+      SENSITIVE: [:definition]
+    end
+
+    class ValidateStateMachineDefinitionOutput
+      attr_accessor result: ("OK" | "FAIL")
+      attr_accessor diagnostics: ::Array[Types::ValidateStateMachineDefinitionDiagnostic]
+      SENSITIVE: []
+    end
+
     class ValidationException
       attr_accessor message: ::String
       attr_accessor reason: ("API_DOES_NOT_SUPPORT_LABELED_ARNS" | "MISSING_REQUIRED_PARAMETER" | "CANNOT_UPDATE_COMPLETED_MAP_RUN" | "INVALID_ROUTING_CONFIGURATION")

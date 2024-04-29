@@ -2,6 +2,7 @@
 
 require 'time'
 require 'base64'
+require_relative 'header_list_parser'
 
 module Aws
   module Rest
@@ -36,12 +37,16 @@ module Aws
         def cast_value(ref, value)
           value = extract_json_trait(value) if ref['jsonvalue']
           case ref.shape
-          when StringShape then value
+          when StringShape then value.to_s
           when IntegerShape then value.to_i
-          when FloatShape then value.to_f
+          when FloatShape then Util.deserialize_number(value)
           when BooleanShape then value == 'true'
           when ListShape then
-            value.split(",").map { |v| cast_value(ref.shape.member, v) }
+            case ref.shape.member.shape
+            when StringShape then HeaderListParser.parse_string_list(value)
+            when TimestampShape then HeaderListParser.parse_timestamp_list(value, ref.shape.member)
+            else value.split(', ').map { |v| cast_value(ref.shape.member, v) }
+            end
           when TimestampShape
             if value =~ /^\d+(\.\d*)/
               Time.at(value.to_f)

@@ -413,8 +413,10 @@ module Aws::WAFV2
     # ACL and protected resources.
     #
     # Use this to customize the maximum size of the request body that your
-    # protected CloudFront distributions forward to WAF for inspection. The
-    # default is 16 KB (16,384 bytes).
+    # protected resources forward to WAF for inspection. You can customize
+    # this setting for CloudFront, API Gateway, Amazon Cognito, App Runner,
+    # or Verified Access resources. The default setting is 16 KB (16,384
+    # bytes).
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
@@ -422,20 +424,31 @@ module Aws::WAFV2
     #
     #  </note>
     #
+    # For Application Load Balancer and AppSync, the limit is fixed at 8 KB
+    # (8,192 bytes).
+    #
     #
     #
     # [1]: http://aws.amazon.com/waf/pricing/
     #
     # @!attribute [rw] request_body
     #   Customizes the maximum size of the request body that your protected
-    #   CloudFront distributions forward to WAF for inspection. The default
-    #   size is 16 KB (16,384 bytes).
+    #   CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
+    #   Access resources forward to WAF for inspection. The default size is
+    #   16 KB (16,384 bytes). You can change the setting for any of the
+    #   available resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
     #   information, see [WAF Pricing][1].
     #
     #    </note>
+    #
+    #   Example JSON: ` \{ "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE":
+    #   "KB_32" \}`
+    #
+    #   For Application Load Balancer and AppSync, the limit is fixed at 8
+    #   KB (8,192 bytes).
     #
     #
     #
@@ -483,17 +496,21 @@ module Aws::WAFV2
     # FieldToMatch specification.
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the body is larger than WAF can inspect. WAF
-    #   does not support inspecting the entire contents of the web request
-    #   body if the body exceeds the limit for the resource type. If the
-    #   body is larger than the limit, the underlying host service only
-    #   forwards the contents that are below the limit to WAF for
-    #   inspection.
+    #   What WAF should do if the body is larger than WAF can inspect.
     #
-    #   The default limit is 8 KB (8,192 bytes) for regional resources and
-    #   16 KB (16,384 bytes) for CloudFront distributions. For CloudFront
-    #   distributions, you can increase the limit in the web ACL
-    #   `AssociationConfig`, for additional processing fees.
+    #   WAF does not support inspecting the entire contents of the web
+    #   request body if the body exceeds the limit for the resource type.
+    #   When a web request body is larger than the limit, the underlying
+    #   host service only forwards the contents that are within the limit to
+    #   WAF for inspection.
+    #
+    #   * For Application Load Balancer and AppSync, the limit is fixed at 8
+    #     KB (8,192 bytes).
+    #
+    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
+    #     Verified Access, the default limit is 16 KB (16,384 bytes), and
+    #     you can increase the limit for each resource type in the web ACL
+    #     `AssociationConfig`, for additional processing fees.
     #
     #   The options for oversize handling are the following:
     #
@@ -1470,14 +1487,19 @@ module Aws::WAFV2
     #   ACL and protected resources.
     #
     #   Use this to customize the maximum size of the request body that your
-    #   protected CloudFront distributions forward to WAF for inspection.
-    #   The default is 16 KB (16,384 bytes).
+    #   protected resources forward to WAF for inspection. You can customize
+    #   this setting for CloudFront, API Gateway, Amazon Cognito, App
+    #   Runner, or Verified Access resources. The default setting is 16 KB
+    #   (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
     #   information, see [WAF Pricing][1].
     #
     #    </note>
+    #
+    #   For Application Load Balancer and AppSync, the limit is fixed at 8
+    #   KB (8,192 bytes).
     #
     #
     #
@@ -2325,20 +2347,37 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The part of the web request that you want WAF to inspect. Include the
-    # single `FieldToMatch` type that you want to inspect, with additional
-    # specifications as needed, according to the type. You specify a single
-    # request component in `FieldToMatch` for each rule statement that
-    # requires it. To inspect more than one component of the web request,
-    # create a separate rule statement for each component.
+    # Specifies a web request component to be used in a rule match statement
+    # or in a logging configuration.
     #
-    # Example JSON for a `QueryString` field to match:
+    # * In a rule statement, this is the part of the web request that you
+    #   want WAF to inspect. Include the single `FieldToMatch` type that you
+    #   want to inspect, with additional specifications as needed, according
+    #   to the type. You specify a single request component in
+    #   `FieldToMatch` for each rule statement that requires it. To inspect
+    #   more than one component of the web request, create a separate rule
+    #   statement for each component.
     #
-    # ` "FieldToMatch": \{ "QueryString": \{\} \}`
+    #   Example JSON for a `QueryString` field to match:
     #
-    # Example JSON for a `Method` field to match specification:
+    #   ` "FieldToMatch": \{ "QueryString": \{\} \}`
     #
-    # ` "FieldToMatch": \{ "Method": \{ "Name": "DELETE" \} \}`
+    #   Example JSON for a `Method` field to match specification:
+    #
+    #   ` "FieldToMatch": \{ "Method": \{ "Name": "DELETE" \} \}`
+    #
+    # * In a logging configuration, this is used in the `RedactedFields`
+    #   property to specify a field to redact from the logging records. For
+    #   this use case, note the following:
+    #
+    #   * Even though all `FieldToMatch` settings are available, the only
+    #     valid settings for field redaction are `UriPath`, `QueryString`,
+    #     `SingleHeader`, and `Method`.
+    #
+    #   * In this documentation, the descriptions of the individual fields
+    #     talk about specifying the web request component to inspect, but
+    #     for field redaction, you are specifying the component type to
+    #     redact from the logs.
     #
     # @!attribute [rw] single_header
     #   Inspect a single header. Provide the name of the header to inspect,
@@ -2379,12 +2418,19 @@ module Aws::WAFV2
     #   contains any additional data that you want to send to your web
     #   server as the HTTP request body, such as data from a form.
     #
-    #   A limited amount of the request body is forwarded to WAF for
-    #   inspection by the underlying host service. For regional resources,
-    #   the limit is 8 KB (8,192 bytes) and for CloudFront distributions,
-    #   the limit is 16 KB (16,384 bytes). For CloudFront distributions, you
-    #   can increase the limit in the web ACL's `AssociationConfig`, for
-    #   additional processing fees.
+    #   WAF does not support inspecting the entire contents of the web
+    #   request body if the body exceeds the limit for the resource type.
+    #   When a web request body is larger than the limit, the underlying
+    #   host service only forwards the contents that are within the limit to
+    #   WAF for inspection.
+    #
+    #   * For Application Load Balancer and AppSync, the limit is fixed at 8
+    #     KB (8,192 bytes).
+    #
+    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
+    #     Verified Access, the default limit is 16 KB (16,384 bytes), and
+    #     you can increase the limit for each resource type in the web ACL
+    #     `AssociationConfig`, for additional processing fees.
     #
     #   For information about how to handle oversized request bodies, see
     #   the `Body` object configuration.
@@ -2401,12 +2447,19 @@ module Aws::WAFV2
     #   contains any additional data that you want to send to your web
     #   server as the HTTP request body, such as data from a form.
     #
-    #   A limited amount of the request body is forwarded to WAF for
-    #   inspection by the underlying host service. For regional resources,
-    #   the limit is 8 KB (8,192 bytes) and for CloudFront distributions,
-    #   the limit is 16 KB (16,384 bytes). For CloudFront distributions, you
-    #   can increase the limit in the web ACL's `AssociationConfig`, for
-    #   additional processing fees.
+    #   WAF does not support inspecting the entire contents of the web
+    #   request body if the body exceeds the limit for the resource type.
+    #   When a web request body is larger than the limit, the underlying
+    #   host service only forwards the contents that are within the limit to
+    #   WAF for inspection.
+    #
+    #   * For Application Load Balancer and AppSync, the limit is fixed at 8
+    #     KB (8,192 bytes).
+    #
+    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
+    #     Verified Access, the default limit is 16 KB (16,384 bytes), and
+    #     you can increase the limit for each resource type in the web ACL
+    #     `AssociationConfig`, for additional processing fees.
     #
     #   For information about how to handle oversized request bodies, see
     #   the `JsonBody` object configuration.
@@ -4017,17 +4070,21 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the body is larger than WAF can inspect. WAF
-    #   does not support inspecting the entire contents of the web request
-    #   body if the body exceeds the limit for the resource type. If the
-    #   body is larger than the limit, the underlying host service only
-    #   forwards the contents that are below the limit to WAF for
-    #   inspection.
+    #   What WAF should do if the body is larger than WAF can inspect.
     #
-    #   The default limit is 8 KB (8,192 bytes) for regional resources and
-    #   16 KB (16,384 bytes) for CloudFront distributions. For CloudFront
-    #   distributions, you can increase the limit in the web ACL
-    #   `AssociationConfig`, for additional processing fees.
+    #   WAF does not support inspecting the entire contents of the web
+    #   request body if the body exceeds the limit for the resource type.
+    #   When a web request body is larger than the limit, the underlying
+    #   host service only forwards the contents that are within the limit to
+    #   WAF for inspection.
+    #
+    #   * For Application Load Balancer and AppSync, the limit is fixed at 8
+    #     KB (8,192 bytes).
+    #
+    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
+    #     Verified Access, the default limit is 16 KB (16,384 bytes), and
+    #     you can increase the limit for each resource type in the web ACL
+    #     `AssociationConfig`, for additional processing fees.
     #
     #   The options for oversize handling are the following:
     #
@@ -6056,6 +6113,12 @@ module Aws::WAFV2
     # according to your aggregation criteria, collects them into aggregation
     # instances, and counts and rate limits the requests for each instance.
     #
+    # <note markdown="1"> If you change any of these settings in a rule that's currently in
+    # use, the change resets the rule's rate limiting counts. This can
+    # pause the rule's rate limiting activities for up to a minute.
+    #
+    #  </note>
+    #
     # You can specify individual aggregation keys, like IP address or HTTP
     # method. You can also specify aggregation key combinations, like IP
     # address and HTTP method, or HTTP method, query argument, and cookie.
@@ -6161,6 +6224,20 @@ module Aws::WAFV2
     #     method, city pair.
     #   @return [Integer]
     #
+    # @!attribute [rw] evaluation_window_sec
+    #   The amount of time, in seconds, that WAF should include in its
+    #   request counts, looking back from the current time. For example, for
+    #   a setting of 120, when WAF checks the rate, it counts the requests
+    #   for the 2 minutes immediately preceding the current time. Valid
+    #   settings are 60, 120, 300, and 600.
+    #
+    #   This setting doesn't determine how often WAF checks the rate, but
+    #   how far back it looks each time it checks. WAF checks the rate about
+    #   every 10 seconds.
+    #
+    #   Default: `300` (5 minutes)
+    #   @return [Integer]
+    #
     # @!attribute [rw] aggregate_key_type
     #   Setting that indicates how to aggregate the request counts.
     #
@@ -6240,6 +6317,7 @@ module Aws::WAFV2
     #
     class RateBasedStatement < Struct.new(
       :limit,
+      :evaluation_window_sec,
       :aggregate_key_type,
       :scope_down_statement,
       :forwarded_ip_config,
@@ -6818,14 +6896,22 @@ module Aws::WAFV2
     end
 
     # Customizes the maximum size of the request body that your protected
-    # CloudFront distributions forward to WAF for inspection. The default
-    # size is 16 KB (16,384 bytes).
+    # CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
+    # Access resources forward to WAF for inspection. The default size is 16
+    # KB (16,384 bytes). You can change the setting for any of the available
+    # resource types.
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
     # [WAF Pricing][1].
     #
     #  </note>
+    #
+    # Example JSON: ` \{ "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE":
+    # "KB_32" \}`
+    #
+    # For Application Load Balancer and AppSync, the limit is fixed at 8 KB
+    # (8,192 bytes).
     #
     # This is used in the `AssociationConfig` of the web ACL.
     #
@@ -6835,9 +6921,10 @@ module Aws::WAFV2
     #
     # @!attribute [rw] default_size_inspection_limit
     #   Specifies the maximum size of the web request body component that an
-    #   associated CloudFront distribution should send to WAF for
-    #   inspection. This applies to statements in the web ACL that inspect
-    #   the body or JSON body.
+    #   associated CloudFront, API Gateway, Amazon Cognito, App Runner, or
+    #   Verified Access resource should send to WAF for inspection. This
+    #   applies to statements in the web ACL that inspect the body or JSON
+    #   body.
     #
     #   Default: `16 KB (16,384 bytes)`
     #   @return [String]
@@ -7902,14 +7989,12 @@ module Aws::WAFV2
     # statement to look for query strings that are longer than 100 bytes.
     #
     # If you configure WAF to inspect the request body, WAF inspects only
-    # the number of bytes of the body up to the limit for the web ACL. By
-    # default, for regional web ACLs, this limit is 8 KB (8,192 bytes) and
-    # for CloudFront web ACLs, this limit is 16 KB (16,384 bytes). For
-    # CloudFront web ACLs, you can increase the limit in the web ACL
-    # `AssociationConfig`, for additional fees. If you know that the request
-    # body for your web requests should never exceed the inspection limit,
-    # you could use a size constraint statement to block requests that have
-    # a larger request body size.
+    # the number of bytes in the body up to the limit for the web ACL and
+    # protected resource type. If you know that the request body for your
+    # web requests should never exceed the inspection limit, you can use a
+    # size constraint statement to block requests that have a larger request
+    # body size. For more information about the inspection limits, see
+    # `Body` and `JsonBody` settings for the `FieldToMatch` data type.
     #
     # If you choose URI for the value of Part of the request to filter on,
     # the slash (/) in the URI counts as one character. For example, the URI
@@ -8037,14 +8122,12 @@ module Aws::WAFV2
     #   100 bytes.
     #
     #   If you configure WAF to inspect the request body, WAF inspects only
-    #   the number of bytes of the body up to the limit for the web ACL. By
-    #   default, for regional web ACLs, this limit is 8 KB (8,192 bytes) and
-    #   for CloudFront web ACLs, this limit is 16 KB (16,384 bytes). For
-    #   CloudFront web ACLs, you can increase the limit in the web ACL
-    #   `AssociationConfig`, for additional fees. If you know that the
-    #   request body for your web requests should never exceed the
-    #   inspection limit, you could use a size constraint statement to block
-    #   requests that have a larger request body size.
+    #   the number of bytes in the body up to the limit for the web ACL and
+    #   protected resource type. If you know that the request body for your
+    #   web requests should never exceed the inspection limit, you can use a
+    #   size constraint statement to block requests that have a larger
+    #   request body size. For more information about the inspection limits,
+    #   see `Body` and `JsonBody` settings for the `FieldToMatch` data type.
     #
     #   If you choose URI for the value of Part of the request to filter on,
     #   the slash (/) in the URI counts as one character. For example, the
@@ -8135,6 +8218,12 @@ module Aws::WAFV2
     #   requests according to your aggregation criteria, collects them into
     #   aggregation instances, and counts and rate limits the requests for
     #   each instance.
+    #
+    #   <note markdown="1"> If you change any of these settings in a rule that's currently in
+    #   use, the change resets the rule's rate limiting counts. This can
+    #   pause the rule's rate limiting activities for up to a minute.
+    #
+    #    </note>
     #
     #   You can specify individual aggregation keys, like IP address or HTTP
     #   method. You can also specify aggregation key combinations, like IP
@@ -9000,14 +9089,19 @@ module Aws::WAFV2
     #   ACL and protected resources.
     #
     #   Use this to customize the maximum size of the request body that your
-    #   protected CloudFront distributions forward to WAF for inspection.
-    #   The default is 16 KB (16,384 bytes).
+    #   protected resources forward to WAF for inspection. You can customize
+    #   this setting for CloudFront, API Gateway, Amazon Cognito, App
+    #   Runner, or Verified Access resources. The default setting is 16 KB
+    #   (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
     #   information, see [WAF Pricing][1].
     #
     #    </note>
+    #
+    #   For Application Load Balancer and AppSync, the limit is fixed at 8
+    #   KB (8,192 bytes).
     #
     #
     #
@@ -9376,10 +9470,15 @@ module Aws::WAFV2
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] source_type
+    #   Source type for the exception.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFLimitsExceededException AWS API Documentation
     #
     class WAFLimitsExceededException < Struct.new(
-      :message)
+      :message,
+      :source_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9697,14 +9796,19 @@ module Aws::WAFV2
     #   ACL and protected resources.
     #
     #   Use this to customize the maximum size of the request body that your
-    #   protected CloudFront distributions forward to WAF for inspection.
-    #   The default is 16 KB (16,384 bytes).
+    #   protected resources forward to WAF for inspection. You can customize
+    #   this setting for CloudFront, API Gateway, Amazon Cognito, App
+    #   Runner, or Verified Access resources. The default setting is 16 KB
+    #   (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
     #   information, see [WAF Pricing][1].
     #
     #    </note>
+    #
+    #   For Application Load Balancer and AppSync, the limit is fixed at 8
+    #   KB (8,192 bytes).
     #
     #
     #

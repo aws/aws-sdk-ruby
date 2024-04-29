@@ -288,6 +288,7 @@ module Aws
         def sse_config: () -> Types::SseConfig
         def creation_time: () -> ::Time
         def fallback_location: () -> ::String
+        def e_tag_algorithm_family: () -> ("MD5up" | "SHA256up" | "SHA512up")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_sequence_store-instance_method
       def create_sequence_store: (
@@ -299,7 +300,8 @@ module Aws
                                    },
                                    ?tags: Hash[::String, ::String],
                                    ?client_token: ::String,
-                                   ?fallback_location: ::String
+                                   ?fallback_location: ::String,
+                                   ?e_tag_algorithm_family: ("MD5up" | "SHA256up" | "SHA512up")
                                  ) -> _CreateSequenceStoreResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSequenceStoreResponseSuccess
 
@@ -773,6 +775,8 @@ module Aws
         def sse_config: () -> Types::SseConfig
         def creation_time: () -> ::Time
         def fallback_location: () -> ::String
+        def s3_access: () -> Types::SequenceStoreS3Access
+        def e_tag_algorithm_family: () -> ("MD5up" | "SHA256up" | "SHA512up")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_sequence_store-instance_method
       def get_sequence_store: (

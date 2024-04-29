@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2024-02-21)
+------------------
+
+* Feature - This release adds a field exposing model quality to read APIs for models. It also adds a model quality field to the API response when creating an inference scheduler.
+
 1.28.0 (2024-02-14)
 ------------------
 

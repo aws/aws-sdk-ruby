@@ -143,7 +143,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#get_transaction-instance_method
       def get_transaction: (
-                             transaction_hash: ::String,
+                             ?transaction_hash: ::String,
+                             ?transaction_id: ::String,
                              network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
                            ) -> _GetTransactionResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransactionResponseSuccess
@@ -164,6 +165,40 @@ module Aws
                                   ?max_results: ::Integer
                                 ) -> _ListAssetContractsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetContractsResponseSuccess
+
+      interface _ListFilteredTransactionEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFilteredTransactionEventsOutput]
+        def events: () -> ::Array[Types::TransactionEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#list_filtered_transaction_events-instance_method
+      def list_filtered_transaction_events: (
+                                              network: ::String,
+                                              address_identifier_filter: {
+                                                transaction_event_to_address: Array[::String]
+                                              },
+                                              ?time_filter: {
+                                                from: {
+                                                  time: ::Time?
+                                                }?,
+                                                to: {
+                                                  time: ::Time?
+                                                }?
+                                              },
+                                              ?vout_filter: {
+                                                vout_spent: bool
+                                              },
+                                              ?confirmation_status_filter: {
+                                                include: Array[("FINAL" | "NONFINAL")]
+                                              },
+                                              ?sort: {
+                                                sort_by: ("blockchainInstant")?,
+                                                sort_order: ("ASCENDING" | "DESCENDING")?
+                                              },
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _ListFilteredTransactionEventsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFilteredTransactionEventsResponseSuccess
 
       interface _ListTokenBalancesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTokenBalancesOutput]
@@ -192,7 +227,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#list_transaction_events-instance_method
       def list_transaction_events: (
-                                     transaction_hash: ::String,
+                                     ?transaction_hash: ::String,
+                                     ?transaction_id: ::String,
                                      network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET"),
                                      ?next_token: ::String,
                                      ?max_results: ::Integer

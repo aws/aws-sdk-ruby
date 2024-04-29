@@ -94,7 +94,7 @@ module Aws::ComputeOptimizer
 
     class CustomizableMetricParameters
       attr_accessor threshold: ("P90" | "P95" | "P99_5")
-      attr_accessor headroom: ("PERCENT_30" | "PERCENT_20" | "PERCENT_0")
+      attr_accessor headroom: ("PERCENT_30" | "PERCENT_20" | "PERCENT_10" | "PERCENT_0")
       SENSITIVE: []
     end
 
@@ -985,7 +985,7 @@ module Aws::ComputeOptimizer
     end
 
     class UtilizationPreference
-      attr_accessor metric_name: ("CpuUtilization")
+      attr_accessor metric_name: ("CpuUtilization" | "MemoryUtilization")
       attr_accessor metric_parameters: Types::CustomizableMetricParameters
       SENSITIVE: []
     end

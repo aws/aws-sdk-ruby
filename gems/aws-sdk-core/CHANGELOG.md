@@ -3,6 +3,73 @@ Unreleased Changes
 
 * Feature - Add an API private cache for S3 Express and Access Grants.
 
+3.193.0 (2024-04-25)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Issue - Update event stream documentation.
+* Issue - Move `InvocationId` plugin to all clients.
+* Issue - Handle event streaming content-sha256 header in the signer plugin.
+* Issue - Add the event stream content type to initial requests.
+* Issue - Fix `standard` and `adaptive` retry mode for event streams.
+* Issue - Add `authority` to http2 headers.
+* Issue - Do not treat single members in event stream structures as implicit payloads.
+* Issue - Do not wait for initial response headers to start sending input events.
+
+3.192.1 (2024-04-18)
+------------------
+
+* Issue - Drop key/value pair if value is `nil` when deserializing json maps.
+
+3.192.0 (2024-04-16)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Update serializing/deserializing for all protocols to align with Smithy protocol-tests.
+* Issue - Allow `nil` values in lists and maps.
+* Issue - Populate headers for XML and JSON error responses.
+* Issue - Support fractional seconds when parsing `DateTime` timestamps.
+* Issue - Correctly serialize flattened lists for Query protocol.
+* Issue - Correctly serialize payload name in Rest-XML requests.
+* Issue - Fix an issue where Rest-XML requests do not have a default `Content-Type` header applied.
+* Issue - Apply appropriate `Content-Type` header for payloads in Rest services.
+* Issue - Correctly serialize URI label bindings in Rest requests.
+* Issue - Correctly serialize and parse header bindings in Rest services.
+* Issue - Ensure that null and empty headers are not sent in Rest requests.
+* Issue - Ensure keys in query maps do not override modeled keys in Rest requests.
+* Issue - Ensure empty blob payloads are omitted in Rest requests.
+* Issue - Support parsing of `NaN`, `Infinity` and `-Infinity` float values.
+* Issue - Apply appropriate `xmlName` for flattened lists and maps in Rest-XML services.
+* Issue - Handle serializing of different formats of `xmlNamespace` on shapes.
+* Issue - Fix deserializing of an empty blob to produce an empty string.
+* Issue - Fix deserializing an empty self-closed blob to produce an empty string.
+* Issue - Support parsing of different formats of error data in Rest-XML services.
+
+3.191.6 (2024-04-02)
+------------------
+* Issue - Performance optimization: ensure presence and order of instance variables in `PluginOptions` (#3002).
+
+3.191.5 (2024-03-26)
+------------------
+
+* Issue - Fix `EC2Metadata` and `InstanceProfileCredentials` to respect the port from a configured endpoint from code, ENV, or shared config.
+
+3.191.4 (2024-03-15)
+------------------
+
+* Issue - Ensure output unions work correctly with stub_responses.
+
+3.191.3 (2024-02-20)
+------------------
+
+* Issue - Remove base64 as dependency.
+
 3.191.2 (2024-02-14)
 ------------------
 
@@ -22,7 +89,7 @@ Unreleased Changes
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
-* Feature - Add RBS signature files to support static type checking.
+* Feature - Add RBS signature files to support static type checking
 
 3.190.3 (2024-01-16)
 ------------------

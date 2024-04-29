@@ -1099,7 +1099,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] eks_anywhere_version
-    #   The version of EKS Anywhere on the Snow Family device.
+    #   The optional version of EKS Anywhere on the Snow Family device.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/EKSOnDeviceServiceConfiguration AWS API Documentation

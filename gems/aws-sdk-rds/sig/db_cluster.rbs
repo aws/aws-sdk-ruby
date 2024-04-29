@@ -246,6 +246,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#limitless_database-instance_method
       def limitless_database: () -> Types::LimitlessDatabase
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#storage_throughput-instance_method
+      def storage_throughput: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#certificate_details-instance_method
+      def certificate_details: () -> Types::CertificateDetails
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#load-instance_method
@@ -331,6 +337,7 @@ module Aws
                     ?manage_master_user_password: bool,
                     ?master_user_secret_kms_key_id: ::String,
                     ?enable_local_write_forwarding: bool,
+                    ?ca_certificate_identifier: ::String,
                     ?source_region: ::String
                   ) -> DBCluster
                 | (?Hash[Symbol, untyped]) -> DBCluster
@@ -418,7 +425,8 @@ module Aws
                     ?allow_engine_mode_change: bool,
                     ?enable_local_write_forwarding: bool,
                     ?aws_backup_recovery_point_arn: ::String,
-                    ?enable_limitless_database: bool
+                    ?enable_limitless_database: bool,
+                    ?ca_certificate_identifier: ::String
                   ) -> DBCluster
                 | (?Hash[Symbol, untyped]) -> DBCluster
 

@@ -57,12 +57,13 @@ module Seahorse
 
           describe 'initial request' do
 
-            it 'sends :scheme, :method, :path headers and others in H2 format' do
+            it 'sends :scheme, :method, :path, :authority headers and others in H2 format' do
               expected_headers = {
-                ":path" => "/foo/path?query=abc",
-                ":scheme" => "https",
-                ":method" => "GET",
-                "abc" => "xyz"
+                ':path' => '/foo/path?query=abc',
+                ':scheme' => 'https',
+                ':method' => 'GET',
+                ':authority' => 'test.endpoint.api',
+                'abc' => 'xyz'
               }
               expect(stream).to receive(:headers)
                 .with(expected_headers, end_stream: false)

@@ -434,8 +434,9 @@ module Aws::RDS
     end
 
     # The time zone of the DB instance. In most cases, the `Timezone`
-    # element is empty. `Timezone` content appears only for Microsoft SQL
-    # Server DB instances that were created with a time zone specified.
+    # element is empty. `Timezone` content appears only for RDS for Db2 and
+    # RDS for SQL Server DB instances that were created with a time zone
+    # specified.
     # @return [String]
     def timezone
       data[:timezone]
@@ -1056,7 +1057,9 @@ module Aws::RDS
     #
     #   : The name of the database to create when the DB instance is created.
     #     If this parameter isn't specified, no database is created in the DB
-    #     instance.
+    #     instance. In some cases, we recommend that you don't add a database
+    #     name. For more information, see [Additional considerations][1] in
+    #     the *Amazon RDS User Guide*.
     #
     #     Constraints:
     #
@@ -1129,6 +1132,10 @@ module Aws::RDS
     #   RDS for SQL Server
     #
     #   : Not applicable. Must be null.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-db-instance-prereqs.html#db2-prereqs-additional-considerations
     # @option options [Integer] :allocated_storage
     #   The amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
@@ -1147,7 +1154,7 @@ module Aws::RDS
     #       40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for
     #       SQL Server.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 40 to
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 40 to
     #       65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #       Server.
     #
@@ -1157,10 +1164,10 @@ module Aws::RDS
     #     following:
     #
     #     * General Purpose (SSD) storage (gp3): Must be an integer from 20 to
-    #       64000.
+    #       65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       64000.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #   RDS for MariaDB
     #
@@ -1170,8 +1177,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -1183,8 +1190,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -1196,8 +1203,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -1209,8 +1216,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -1226,7 +1233,7 @@ module Aws::RDS
     #
     #       * Web and Express editions: Must be an integer from 20 to 16384.
     #
-    #     * Provisioned IOPS storage (io1):
+    #     * Provisioned IOPS storage (io1, io2):
     #
     #       * Enterprise and Standard editions: Must be an integer from 100 to
     #         16384.
@@ -1266,6 +1273,10 @@ module Aws::RDS
     #   * `custom-oracle-ee` (for RDS Custom for Oracle DB instances)
     #
     #   * `custom-oracle-ee-cdb` (for RDS Custom for Oracle DB instances)
+    #
+    #   * `custom-oracle-se2` (for RDS Custom for Oracle DB instances)
+    #
+    #   * `custom-oracle-se2-cdb` (for RDS Custom for Oracle DB instances)
     #
     #   * `custom-sqlserver-ee` (for RDS Custom for SQL Server DB instances)
     #
@@ -1694,13 +1705,13 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   This setting doesn't apply to Amazon Aurora DB instances. Storage is
     #   managed by the DB cluster.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -1866,11 +1877,12 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance
     # @option options [String] :timezone
     #   The time zone of the DB instance. The time zone parameter is currently
-    #   supported only by [Microsoft SQL Server][1].
+    #   supported only by [RDS for Db2][1] and [RDS for SQL Server][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
     # @option options [Boolean] :enable_iam_database_authentication
     #   Specifies whether to enable mapping of Amazon Web Services Identity
     #   and Access Management (IAM) accounts to database accounts. By default,
@@ -2227,6 +2239,7 @@ module Aws::RDS
     #     source_db_cluster_identifier: "String",
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
+    #     ca_certificate_identifier: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -2365,10 +2378,10 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   The storage type to associate with the read replica.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1` if the `Iops` parameter is specified. Otherwise, `gp2`.
     # @option options [Boolean] :copy_tags_to_snapshot
@@ -2785,6 +2798,21 @@ module Aws::RDS
     #   Whether to upgrade the storage file system configuration on the read
     #   replica. This option migrates the read replica from the old storage
     #   file system layout to the preferred layout.
+    # @option options [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the read replica's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2998,6 +3026,15 @@ module Aws::RDS
     #
     #   For the valid values for allocated storage for each engine, see
     #   `CreateDBInstance`.
+    #
+    #   Constraints:
+    #
+    #   * When you increase the allocated storage for a DB instance that uses
+    #     Provisioned IOPS (`gp3`, `io1`, or `io2` storage type), you must
+    #     also specify the `Iops` parameter. You can use the current value for
+    #     `Iops`.
+    #
+    #   ^
     # @option options [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example
     #   `db.m4.large`. Not all DB instance classes are available in all Amazon
@@ -3042,7 +3079,7 @@ module Aws::RDS
     #   change is applied during the next maintenance window, unless you
     #   enable `ApplyImmediately`.
     #
-    #   This parameter doesn't apply to RDS Custom DB instances.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #   Constraints:
     #
@@ -3378,7 +3415,9 @@ module Aws::RDS
     #     existing value are rounded up so that they are 10% greater than the
     #     current value.
     #
-    #   ^
+    #   * When you increase the Provisioned IOPS, you must also specify the
+    #     `AllocatedStorage` parameter. You can use the current value for
+    #     `AllocatedStorage`.
     #
     #   Default: Uses existing setting
     # @option options [String] :option_group_name
@@ -3420,7 +3459,7 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify Provisioned IOPS (`io1`), you must also include a value
+    #   If you specify `io1`, `io2`, or `gp3` you must also include a value
     #   for the `Iops` parameter.
     #
     #   If you choose to migrate your DB instance from using standard storage
@@ -3438,7 +3477,7 @@ module Aws::RDS
     #   rebooting the instance, deleting the instance, creating a read replica
     #   for the instance, and creating a DB snapshot of the instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -3722,6 +3761,12 @@ module Aws::RDS
     #   database can't be deleted when deletion protection is enabled. By
     #   default, deletion protection isn't enabled. For more information, see
     #   [ Deleting a DB Instance][1].
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. You can
+    #   enable or disable deletion protection for the DB cluster. For more
+    #   information, see `ModifyDBCluster`. DB instances in a DB cluster can
+    #   be deleted even when deletion protection is enabled for the DB
+    #   cluster.
     #
     #
     #
@@ -4128,6 +4173,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     allocated_storage: 1,
     #     dedicated_log_volume: false,
+    #     ca_certificate_identifier: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -4333,15 +4379,15 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
     #
     #   Constraints:
     #
-    #   * If you specify `io1` or `gp3`, you must also include a value for the
-    #     `Iops` parameter.
+    #   * If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #     for the `Iops` parameter.
     #
     #   ^
     # @option options [String] :tde_credential_arn
@@ -4602,6 +4648,21 @@ module Aws::RDS
     # @option options [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
+    # @option options [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

@@ -209,7 +209,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::LaunchConfigurationTemplate]
         def arn: () -> ::String
         def associate_public_ip_address: () -> bool
-        def boot_mode: () -> ("LEGACY_BIOS" | "UEFI")
+        def boot_mode: () -> ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE")
         def copy_private_ip: () -> bool
         def copy_tags: () -> bool
         def ec2_launch_template_id: () -> ::String
@@ -228,7 +228,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#create_launch_configuration_template-instance_method
       def create_launch_configuration_template: (
                                                   ?associate_public_ip_address: bool,
-                                                  ?boot_mode: ("LEGACY_BIOS" | "UEFI"),
+                                                  ?boot_mode: ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE"),
                                                   ?copy_private_ip: bool,
                                                   ?copy_tags: bool,
                                                   ?enable_map_auto_tagging: bool,
@@ -567,7 +567,7 @@ module Aws
 
       interface _GetLaunchConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::LaunchConfiguration]
-        def boot_mode: () -> ("LEGACY_BIOS" | "UEFI")
+        def boot_mode: () -> ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE")
         def copy_private_ip: () -> bool
         def copy_tags: () -> bool
         def ec2_launch_template_id: () -> ::String
@@ -835,7 +835,7 @@ module Aws
         def action_id: () -> ::String
         def action_name: () -> ::String
         def active: () -> bool
-        def category: () -> ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+        def category: () -> ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "REFACTORING" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
         def description: () -> ::String
         def document_identifier: () -> ::String
         def document_version: () -> ::String
@@ -851,7 +851,7 @@ module Aws
                                       action_id: ::String,
                                       action_name: ::String,
                                       ?active: bool,
-                                      ?category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER"),
+                                      ?category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "REFACTORING" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER"),
                                       ?description: ::String,
                                       document_identifier: ::String,
                                       ?document_version: ::String,
@@ -876,7 +876,7 @@ module Aws
         def action_id: () -> ::String
         def action_name: () -> ::String
         def active: () -> bool
-        def category: () -> ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+        def category: () -> ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "REFACTORING" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
         def description: () -> ::String
         def document_identifier: () -> ::String
         def document_version: () -> ::String
@@ -892,7 +892,7 @@ module Aws
                                  action_id: ::String,
                                  action_name: ::String,
                                  ?active: bool,
-                                 ?category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER"),
+                                 ?category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "REFACTORING" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER"),
                                  ?description: ::String,
                                  document_identifier: ::String,
                                  ?document_version: ::String,
@@ -1192,7 +1192,7 @@ module Aws
 
       interface _UpdateLaunchConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::LaunchConfiguration]
-        def boot_mode: () -> ("LEGACY_BIOS" | "UEFI")
+        def boot_mode: () -> ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE")
         def copy_private_ip: () -> bool
         def copy_tags: () -> bool
         def ec2_launch_template_id: () -> ::String
@@ -1208,7 +1208,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_launch_configuration-instance_method
       def update_launch_configuration: (
                                          ?account_id: ::String,
-                                         ?boot_mode: ("LEGACY_BIOS" | "UEFI"),
+                                         ?boot_mode: ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE"),
                                          ?copy_private_ip: bool,
                                          ?copy_tags: bool,
                                          ?enable_map_auto_tagging: bool,
@@ -1250,7 +1250,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::LaunchConfigurationTemplate]
         def arn: () -> ::String
         def associate_public_ip_address: () -> bool
-        def boot_mode: () -> ("LEGACY_BIOS" | "UEFI")
+        def boot_mode: () -> ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE")
         def copy_private_ip: () -> bool
         def copy_tags: () -> bool
         def ec2_launch_template_id: () -> ::String
@@ -1269,7 +1269,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_launch_configuration_template-instance_method
       def update_launch_configuration_template: (
                                                   ?associate_public_ip_address: bool,
-                                                  ?boot_mode: ("LEGACY_BIOS" | "UEFI"),
+                                                  ?boot_mode: ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE"),
                                                   ?copy_private_ip: bool,
                                                   ?copy_tags: bool,
                                                   ?enable_map_auto_tagging: bool,

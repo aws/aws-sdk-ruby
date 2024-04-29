@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2024-03-05)
+------------------
+
+* Feature - Documentation updates for Amazon API Gateway
+
+1.92.0 (2024-02-26)
+------------------
+
+* Feature - Documentation updates for Amazon API Gateway.
+
 1.91.0 (2024-01-26)
 ------------------
 

@@ -1,0 +1,131 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ControlCatalog
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedDomainSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedObjectiveSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CommonControlFilter
+      attr_accessor objectives: ::Array[Types::ObjectiveResourceFilter]
+      SENSITIVE: []
+    end
+
+    class CommonControlSummary
+      attr_accessor arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain: Types::AssociatedDomainSummary
+      attr_accessor last_update_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor objective: Types::AssociatedObjectiveSummary
+      SENSITIVE: []
+    end
+
+    class DomainResourceFilter
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DomainSummary
+      attr_accessor arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_update_time: ::Time
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCommonControlsRequest
+      attr_accessor common_control_filter: Types::CommonControlFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCommonControlsResponse
+      attr_accessor common_controls: ::Array[Types::CommonControlSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsResponse
+      attr_accessor domains: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListObjectivesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor objective_filter: Types::ObjectiveFilter
+      SENSITIVE: []
+    end
+
+    class ListObjectivesResponse
+      attr_accessor next_token: ::String
+      attr_accessor objectives: ::Array[Types::ObjectiveSummary]
+      SENSITIVE: []
+    end
+
+    class ObjectiveFilter
+      attr_accessor domains: ::Array[Types::DomainResourceFilter]
+      SENSITIVE: []
+    end
+
+    class ObjectiveResourceFilter
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ObjectiveSummary
+      attr_accessor arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain: Types::AssociatedDomainSummary
+      attr_accessor last_update_time: ::Time
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

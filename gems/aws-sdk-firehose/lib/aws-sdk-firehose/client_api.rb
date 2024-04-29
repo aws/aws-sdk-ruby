@@ -55,6 +55,7 @@ module Aws::Firehose
     CopyOptions = Shapes::StringShape.new(name: 'CopyOptions')
     CreateDeliveryStreamInput = Shapes::StructureShape.new(name: 'CreateDeliveryStreamInput')
     CreateDeliveryStreamOutput = Shapes::StructureShape.new(name: 'CreateDeliveryStreamOutput')
+    CustomTimeZone = Shapes::StringShape.new(name: 'CustomTimeZone')
     Data = Shapes::BlobShape.new(name: 'Data')
     DataFormatConversionConfiguration = Shapes::StructureShape.new(name: 'DataFormatConversionConfiguration')
     DataTableColumns = Shapes::StringShape.new(name: 'DataTableColumns')
@@ -105,6 +106,7 @@ module Aws::Firehose
     ExtendedS3DestinationDescription = Shapes::StructureShape.new(name: 'ExtendedS3DestinationDescription')
     ExtendedS3DestinationUpdate = Shapes::StructureShape.new(name: 'ExtendedS3DestinationUpdate')
     FailureDescription = Shapes::StructureShape.new(name: 'FailureDescription')
+    FileExtension = Shapes::StringShape.new(name: 'FileExtension')
     HECAcknowledgmentTimeoutInSeconds = Shapes::IntegerShape.new(name: 'HECAcknowledgmentTimeoutInSeconds')
     HECEndpoint = Shapes::StringShape.new(name: 'HECEndpoint')
     HECEndpointType = Shapes::StringShape.new(name: 'HECEndpointType')
@@ -540,6 +542,8 @@ module Aws::Firehose
     ExtendedS3DestinationConfiguration.add_member(:s3_backup_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3BackupConfiguration"))
     ExtendedS3DestinationConfiguration.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
     ExtendedS3DestinationConfiguration.add_member(:dynamic_partitioning_configuration, Shapes::ShapeRef.new(shape: DynamicPartitioningConfiguration, location_name: "DynamicPartitioningConfiguration"))
+    ExtendedS3DestinationConfiguration.add_member(:file_extension, Shapes::ShapeRef.new(shape: FileExtension, location_name: "FileExtension"))
+    ExtendedS3DestinationConfiguration.add_member(:custom_time_zone, Shapes::ShapeRef.new(shape: CustomTimeZone, location_name: "CustomTimeZone"))
     ExtendedS3DestinationConfiguration.struct_class = Types::ExtendedS3DestinationConfiguration
 
     ExtendedS3DestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
@@ -555,6 +559,8 @@ module Aws::Firehose
     ExtendedS3DestinationDescription.add_member(:s3_backup_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3BackupDescription"))
     ExtendedS3DestinationDescription.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
     ExtendedS3DestinationDescription.add_member(:dynamic_partitioning_configuration, Shapes::ShapeRef.new(shape: DynamicPartitioningConfiguration, location_name: "DynamicPartitioningConfiguration"))
+    ExtendedS3DestinationDescription.add_member(:file_extension, Shapes::ShapeRef.new(shape: FileExtension, location_name: "FileExtension"))
+    ExtendedS3DestinationDescription.add_member(:custom_time_zone, Shapes::ShapeRef.new(shape: CustomTimeZone, location_name: "CustomTimeZone"))
     ExtendedS3DestinationDescription.struct_class = Types::ExtendedS3DestinationDescription
 
     ExtendedS3DestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -570,6 +576,8 @@ module Aws::Firehose
     ExtendedS3DestinationUpdate.add_member(:s3_backup_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3BackupUpdate"))
     ExtendedS3DestinationUpdate.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
     ExtendedS3DestinationUpdate.add_member(:dynamic_partitioning_configuration, Shapes::ShapeRef.new(shape: DynamicPartitioningConfiguration, location_name: "DynamicPartitioningConfiguration"))
+    ExtendedS3DestinationUpdate.add_member(:file_extension, Shapes::ShapeRef.new(shape: FileExtension, location_name: "FileExtension"))
+    ExtendedS3DestinationUpdate.add_member(:custom_time_zone, Shapes::ShapeRef.new(shape: CustomTimeZone, location_name: "CustomTimeZone"))
     ExtendedS3DestinationUpdate.struct_class = Types::ExtendedS3DestinationUpdate
 
     FailureDescription.add_member(:type, Shapes::ShapeRef.new(shape: DeliveryStreamFailureType, required: true, location_name: "Type"))

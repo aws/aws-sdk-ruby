@@ -54,7 +54,8 @@ module Aws::SNS
     #   APNS (Apple Push Notification Service), APNS\_SANDBOX, and GCM
     #   (Firebase Cloud Messaging).
     # @option options [required, Hash<String,String>] :attributes
-    #   For a list of attributes, see [SetPlatformApplicationAttributes][1].
+    #   For a list of attributes, see [ `SetPlatformApplicationAttributes`
+    #   ][1].
     #
     #
     #

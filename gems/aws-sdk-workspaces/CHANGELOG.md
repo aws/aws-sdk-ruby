@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.101.0 (2024-04-18)
+------------------
+
+* Feature - Adds new APIs for managing and sharing WorkSpaces BYOL configuration across accounts.
+
+1.100.0 (2024-03-07)
+------------------
+
+* Feature - Added note for user decoupling
+
 1.99.0 (2024-02-08)
 ------------------
 

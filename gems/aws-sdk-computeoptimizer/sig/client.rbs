@@ -511,10 +511,10 @@ module Aws
                                             ?look_back_period: ("DAYS_14" | "DAYS_32" | "DAYS_93"),
                                             ?utilization_preferences: Array[
                                               {
-                                                metric_name: ("CpuUtilization")?,
+                                                metric_name: ("CpuUtilization" | "MemoryUtilization")?,
                                                 metric_parameters: {
                                                   threshold: ("P90" | "P95" | "P99_5")?,
-                                                  headroom: ("PERCENT_30" | "PERCENT_20" | "PERCENT_0")?
+                                                  headroom: ("PERCENT_30" | "PERCENT_20" | "PERCENT_10" | "PERCENT_0")?
                                                 }?
                                               },
                                             ],

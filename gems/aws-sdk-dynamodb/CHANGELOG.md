@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.106.0 (2024-03-20)
+------------------
+
+* Feature - This release introduces 3 new APIs ('GetResourcePolicy', 'PutResourcePolicy' and 'DeleteResourcePolicy') and modifies the existing 'CreateTable' API for the resource-based policy support. It also modifies several APIs to accept a 'TableArn' for the 'TableName' parameter.
+
+1.105.0 (2024-03-06)
+------------------
+
+* Feature - Doc only updates for DynamoDB documentation
+
+1.104.0 (2024-02-20)
+------------------
+
+* Feature - Publishing quick fix for doc only update.
+
 1.103.0 (2024-02-14)
 ------------------
 

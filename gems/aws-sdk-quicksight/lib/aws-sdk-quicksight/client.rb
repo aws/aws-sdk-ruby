@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::QuickSight
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::QuickSight
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::QuickSight
     #   @option options [Aws::QuickSight::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::QuickSight::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -694,6 +718,9 @@ module Aws::QuickSight
     #   `ENTERPPRISE_AND_Q` is the selected edition of the new Amazon
     #   QuickSight account.
     #
+    # @option params [String] :iam_identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+    #
     # @return [Types::CreateAccountSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccountSubscriptionResponse#signup_response #signup_response} => Types::SignupResponse
@@ -718,6 +745,7 @@ module Aws::QuickSight
     #     last_name: "String",
     #     email_address: "String",
     #     contact_number: "String",
+    #     iam_identity_center_instance_arn: "String",
     #   })
     #
     # @example Response structure
@@ -4475,7 +4503,7 @@ module Aws::QuickSight
     #   resp.cloud_formation_override_property_configuration.data_sources #=> Array
     #   resp.cloud_formation_override_property_configuration.data_sources[0].arn #=> String
     #   resp.cloud_formation_override_property_configuration.data_sources[0].properties #=> Array
-    #   resp.cloud_formation_override_property_configuration.data_sources[0].properties[0] #=> String, one of "Name", "DisableSsl", "SecretArn", "Username", "Password", "Domain", "WorkGroup", "Host", "Port", "Database", "DataSetName", "Catalog", "InstanceId", "ClusterId", "ManifestFileLocation", "Warehouse", "RoleArn"
+    #   resp.cloud_formation_override_property_configuration.data_sources[0].properties[0] #=> String, one of "Name", "DisableSsl", "SecretArn", "Username", "Password", "Domain", "WorkGroup", "Host", "Port", "Database", "DataSetName", "Catalog", "InstanceId", "ClusterId", "ManifestFileLocation", "Warehouse", "RoleArn", "ProductType"
     #   resp.cloud_formation_override_property_configuration.data_sets #=> Array
     #   resp.cloud_formation_override_property_configuration.data_sets[0].arn #=> String
     #   resp.cloud_formation_override_property_configuration.data_sets[0].properties #=> Array
@@ -4541,6 +4569,7 @@ module Aws::QuickSight
     #   * {Types::DescribeAssetBundleImportJobResponse#override_permissions #override_permissions} => Types::AssetBundleImportJobOverridePermissions
     #   * {Types::DescribeAssetBundleImportJobResponse#override_tags #override_tags} => Types::AssetBundleImportJobOverrideTags
     #   * {Types::DescribeAssetBundleImportJobResponse#override_validation_strategy #override_validation_strategy} => Types::AssetBundleImportJobOverrideValidationStrategy
+    #   * {Types::DescribeAssetBundleImportJobResponse#warnings #warnings} => Array&lt;Types::AssetBundleImportJobWarning&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4750,6 +4779,9 @@ module Aws::QuickSight
     #   resp.override_tags.dashboards[0].tags[0].key #=> String
     #   resp.override_tags.dashboards[0].tags[0].value #=> String
     #   resp.override_validation_strategy.strict_mode_for_all_resources #=> Boolean
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].arn #=> String
+    #   resp.warnings[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleImportJob AWS API Documentation
     #
@@ -5960,6 +5992,8 @@ module Aws::QuickSight
     #
     #   * {Types::DescribeIpRestrictionResponse#aws_account_id #aws_account_id} => String
     #   * {Types::DescribeIpRestrictionResponse#ip_restriction_rule_map #ip_restriction_rule_map} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeIpRestrictionResponse#vpc_id_restriction_rule_map #vpc_id_restriction_rule_map} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeIpRestrictionResponse#vpc_endpoint_id_restriction_rule_map #vpc_endpoint_id_restriction_rule_map} => Hash&lt;String,String&gt;
     #   * {Types::DescribeIpRestrictionResponse#enabled #enabled} => Boolean
     #   * {Types::DescribeIpRestrictionResponse#request_id #request_id} => String
     #   * {Types::DescribeIpRestrictionResponse#status #status} => Integer
@@ -5975,6 +6009,10 @@ module Aws::QuickSight
     #   resp.aws_account_id #=> String
     #   resp.ip_restriction_rule_map #=> Hash
     #   resp.ip_restriction_rule_map["CIDR"] #=> String
+    #   resp.vpc_id_restriction_rule_map #=> Hash
+    #   resp.vpc_id_restriction_rule_map["VpcId"] #=> String
+    #   resp.vpc_endpoint_id_restriction_rule_map #=> Hash
+    #   resp.vpc_endpoint_id_restriction_rule_map["VpcEndpointId"] #=> String
     #   resp.enabled #=> Boolean
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -7041,10 +7079,16 @@ module Aws::QuickSight
     # @option params [required, Array<String>] :authorized_resource_arns
     #   The Amazon Resource Names (ARNs) for the Amazon QuickSight resources
     #   that the user is authorized to access during the lifetime of the
-    #   session. If you choose `Dashboard` embedding experience, pass the list
-    #   of dashboard ARNs in the account that you want the user to be able to
-    #   view. Currently, you can pass up to 25 dashboard ARNs in each API
-    #   call.
+    #   session.
+    #
+    #   If you choose `Dashboard` embedding experience, pass the list of
+    #   dashboard ARNs in the account that you want the user to be able to
+    #   view.
+    #
+    #   If you want to make changes to the theme of your embedded content,
+    #   pass a list of theme ARNs that the anonymous users need access to.
+    #
+    #   Currently, you can pass up to 25 theme ARNs in each API call.
     #
     # @option params [required, Types::AnonymousUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The configuration of the experience that you are embedding.
@@ -10048,7 +10092,7 @@ module Aws::QuickSight
     #       data_sources: [
     #         {
     #           arn: "Arn", # required
-    #           properties: ["Name"], # required, accepts Name, DisableSsl, SecretArn, Username, Password, Domain, WorkGroup, Host, Port, Database, DataSetName, Catalog, InstanceId, ClusterId, ManifestFileLocation, Warehouse, RoleArn
+    #           properties: ["Name"], # required, accepts Name, DisableSsl, SecretArn, Username, Password, Domain, WorkGroup, Host, Port, Database, DataSetName, Catalog, InstanceId, ClusterId, ManifestFileLocation, Warehouse, RoleArn, ProductType
     #         },
     #       ],
     #       data_sets: [
@@ -10505,18 +10549,94 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Starts an asynchronous job that generates a dashboard snapshot. You
-    # can request one of the following format configurations per API call.
+    # Starts an asynchronous job that generates a snapshot of a dashboard's
+    # output. You can request one or several of the following format
+    # configurations in each API call.
     #
-    # * 1 paginated PDF
+    # * 1 Paginated PDF
     #
-    # * 1 Excel workbook
+    # * 1 Excel workbook that includes up to 5 table or pivot table visuals
     #
-    # * 5 CSVs
+    # * 5 CSVs from table or pivot table visuals
     #
-    # Poll job descriptions with a `DescribeDashboardSnapshotJob` API call.
-    # Once the job succeeds, use the `DescribeDashboardSnapshotJobResult`
-    # API to obtain the download URIs that the job generates.
+    # The status of a submitted job can be polled with the
+    # `DescribeDashboardSnapshotJob` API. When you call the
+    # `DescribeDashboardSnapshotJob` API, check the `JobStatus` field in the
+    # response. Once the job reaches a `COMPLETED` or `FAILED` status, use
+    # the `DescribeDashboardSnapshotJobResult` API to obtain the URLs for
+    # the generated files. If the job fails, the
+    # `DescribeDashboardSnapshotJobResult` API returns detailed information
+    # about the error that occurred.
+    #
+    # **StartDashboardSnapshotJob API throttling**
+    #
+    # Amazon QuickSight utilizes API throttling to create a more consistent
+    # user experience within a time span for customers when they call the
+    # `StartDashboardSnapshotJob`. By default, 12 jobs can run
+    # simlutaneously in one Amazon Web Services account and users can submit
+    # up 10 API requests per second before an account is throttled. If an
+    # overwhelming number of API requests are made by the same user in a
+    # short period of time, Amazon QuickSight throttles the API calls to
+    # maintin an optimal experience and reliability for all Amazon
+    # QuickSight users.
+    #
+    # **Common throttling scenarios**
+    #
+    # The following list provides information about the most commin
+    # throttling scenarios that can occur.
+    #
+    # * **A large number of `SnapshotExport` API jobs are running
+    #   simultaneously on an Amazon Web Services account.** When a new
+    #   `StartDashboardSnapshotJob` is created and there are already 12 jobs
+    #   with the `RUNNING` status, the new job request fails and returns a
+    #   `LimitExceededException` error. Wait for a current job to comlpete
+    #   before you resubmit the new job.
+    #
+    # * **A large number of API requests are submitted on an Amazon Web
+    #   Services account.** When a user makes more than 10 API calls to the
+    #   Amazon QuickSight API in one second, a `ThrottlingException` is
+    #   returned.
+    #
+    # If your use case requires a higher throttling limit, contact your
+    # account admin or [Amazon Web ServicesSupport][1] to explore options to
+    # tailor a more optimal expereince for your account.
+    #
+    # **Best practices to handle throttling**
+    #
+    # If your use case projects high levels of API traffic, try to reduce
+    # the degree of frequency and parallelism of API calls as much as you
+    # can to avoid throttling. You can also perform a timing test to
+    # calculate an estimate for the total processing time of your projected
+    # load that stays within the throttling limits of the Amazon QuickSight
+    # APIs. For example, if your projected traffic is 100 snapshot jobs
+    # before 12:00 PM per day, start 12 jobs in parallel and measure the
+    # amount of time it takes to proccess all 12 jobs. Once you obtain the
+    # result, multiply the duration by 9, for example `(12 minutes * 9 = 108
+    # minutes)`. Use the new result to determine the latest time at which
+    # the jobs need to be started to meet your target deadline.
+    #
+    # The time that it takes to process a job can be impacted by the
+    # following factors:
+    #
+    # * The dataset type (Direct Query or SPICE).
+    #
+    # * The size of the dataset.
+    #
+    # * The complexity of the calculated fields that are used in the
+    #   dashboard.
+    #
+    # * The number of visuals that are on a sheet.
+    #
+    # * The types of visuals that are on the sheet.
+    #
+    # * The number of formats and snapshots that are requested in the job
+    #   configuration.
+    #
+    # * The size of the generated snapshots.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/contact-us/
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that the dashboard snapshot
@@ -12290,8 +12410,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates the content and status of IP rules. To use this operation, you
-    # must provide the entire map of rules. You can use the
+    # Updates the content and status of IP rules. Traffic from a source is
+    # allowed when the source satisfies either the `IpRestrictionRule`,
+    # `VpcIdRestrictionRule`, or `VpcEndpointIdRestrictionRule`. To use this
+    # operation, you must provide the entire map of rules. You can use the
     # `DescribeIpRestriction` operation to get the current rule map.
     #
     # @option params [required, String] :aws_account_id
@@ -12299,6 +12421,15 @@ module Aws::QuickSight
     #
     # @option params [Hash<String,String>] :ip_restriction_rule_map
     #   A map that describes the updated IP rules with CIDR ranges and
+    #   descriptions.
+    #
+    # @option params [Hash<String,String>] :vpc_id_restriction_rule_map
+    #   A map of VPC IDs and their corresponding rules. When you configure
+    #   this parameter, traffic from all VPC endpoints that are present in the
+    #   specified VPC is allowed.
+    #
+    # @option params [Hash<String,String>] :vpc_endpoint_id_restriction_rule_map
+    #   A map of allowed VPC endpoint IDs and their corresponding rule
     #   descriptions.
     #
     # @option params [Boolean] :enabled
@@ -12316,6 +12447,12 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     ip_restriction_rule_map: {
     #       "CIDR" => "IpRestrictionRuleDescription",
+    #     },
+    #     vpc_id_restriction_rule_map: {
+    #       "VpcId" => "VpcIdRestrictionRuleDescription",
+    #     },
+    #     vpc_endpoint_id_restriction_rule_map: {
+    #       "VpcEndpointId" => "VpcEndpointIdRestrictionRuleDescription",
     #     },
     #     enabled: false,
     #   })
@@ -13536,7 +13673,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

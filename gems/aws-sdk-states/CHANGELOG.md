@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2024-04-25)
+------------------
+
+* Feature - Add new ValidateStateMachineDefinition operation, which performs syntax checking on the definition of a Amazon States Language (ASL) state machine.
+
 1.64.0 (2024-01-26)
 ------------------
 

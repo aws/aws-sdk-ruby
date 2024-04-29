@@ -136,6 +136,11 @@ module Aws::Drs
     #   snapshot ids
     #   @return [Hash<String,Hash<String,String>>]
     #
+    # @!attribute [rw] volume_to_product_codes
+    #   A mapping between the volumes being converted and the product codes
+    #   associated with them
+    #   @return [Hash<String,Array<Types::ProductCode>>]
+    #
     # @!attribute [rw] volume_to_volume_size
     #   A mapping between the volumes and their sizes
     #   @return [Hash<String,Integer>]
@@ -147,6 +152,7 @@ module Aws::Drs
       :force_uefi,
       :root_volume_name,
       :volume_to_conversion_map,
+      :volume_to_product_codes,
       :volume_to_volume_size)
       SENSITIVE = []
       include Aws::Structure
@@ -427,6 +433,10 @@ module Aws::Drs
     #   AWS Availability zone into which data is being replicated.
     #   @return [String]
     #
+    # @!attribute [rw] staging_outpost_arn
+    #   The ARN of the staging Outpost
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DataReplicationInfo AWS API Documentation
     #
     class DataReplicationInfo < Struct.new(
@@ -436,7 +446,8 @@ module Aws::Drs
       :eta_date_time,
       :lag_duration,
       :replicated_disks,
-      :staging_availability_zone)
+      :staging_availability_zone,
+      :staging_outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -463,6 +474,10 @@ module Aws::Drs
     #   The total amount of data to be replicated in bytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_status
+    #   The status of the volume.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DataReplicationInfoReplicatedDisk AWS API Documentation
     #
     class DataReplicationInfoReplicatedDisk < Struct.new(
@@ -470,7 +485,8 @@ module Aws::Drs
       :device_name,
       :replicated_storage_bytes,
       :rescanned_storage_bytes,
-      :total_storage_bytes)
+      :total_storage_bytes,
+      :volume_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2089,6 +2105,25 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # Properties of a product code associated with a volume.
+    #
+    # @!attribute [rw] product_code_id
+    #   Id of a product code associated with a volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_code_mode
+    #   Mode of a product code associated with a volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ProductCode AWS API Documentation
+    #
+    class ProductCode < Struct.new(
+      :product_code_id,
+      :product_code_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] action_code
     #   Launch action code.
     #   @return [String]
@@ -2278,6 +2313,10 @@ module Aws::Drs
     #   Properties of the Recovery Instance machine.
     #   @return [Types::RecoveryInstanceProperties]
     #
+    # @!attribute [rw] source_outpost_arn
+    #   The ARN of the source Outpost
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   The Source Server ID that this Recovery Instance is associated with.
     #   @return [String]
@@ -2302,6 +2341,7 @@ module Aws::Drs
       :point_in_time_snapshot_date_time,
       :recovery_instance_id,
       :recovery_instance_properties,
+      :source_outpost_arn,
       :source_server_id,
       :tags)
       SENSITIVE = [:tags]
@@ -2357,6 +2397,10 @@ module Aws::Drs
     #   AWS Availability zone into which data is being replicated.
     #   @return [String]
     #
+    # @!attribute [rw] staging_outpost_arn
+    #   The ARN of the staging Outpost
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstanceDataReplicationInfo AWS API Documentation
     #
     class RecoveryInstanceDataReplicationInfo < Struct.new(
@@ -2366,7 +2410,8 @@ module Aws::Drs
       :eta_date_time,
       :lag_duration,
       :replicated_disks,
-      :staging_availability_zone)
+      :staging_availability_zone,
+      :staging_outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2999,12 +3044,17 @@ module Aws::Drs
     #   AWS Region for an EC2-originated Source Server.
     #   @return [String]
     #
+    # @!attribute [rw] source_outpost_arn
+    #   The ARN of the source Outpost
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceCloudProperties AWS API Documentation
     #
     class SourceCloudProperties < Struct.new(
       :origin_account_id,
       :origin_availability_zone,
-      :origin_region)
+      :origin_region,
+      :source_outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end

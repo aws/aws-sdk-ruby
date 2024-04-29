@@ -151,7 +151,7 @@ module Aws::GuardDuty
     class AccountDetail < Struct.new(
       :account_id,
       :email)
-      SENSITIVE = []
+      SENSITIVE = [:email]
       include Aws::Structure
     end
 
@@ -808,19 +808,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
-    # your Amazon EC2 instances (currently in preview release) and is
-    # subject to change. The use of this API is subject to Section 2 of the
-    # [Amazon Web Services Service Terms][1] ("Betas and Previews").
-    #
-    #  </note>
-    #
     # Contains information about the Amazon EC2 instance runtime coverage
     # details.
-    #
-    #
-    #
-    # [1]: http://aws.amazon.com/service-terms/
     #
     # @!attribute [rw] instance_id
     #   The Amazon EC2 instance ID.
@@ -1062,19 +1051,8 @@ module Aws::GuardDuty
     #   @return [Types::CoverageEcsClusterDetails]
     #
     # @!attribute [rw] ec2_instance_details
-    #   <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
-    #   your Amazon EC2 instances (currently in preview release) and is
-    #   subject to change. The use of this API is subject to Section 2 of
-    #   the [Amazon Web Services Service Terms][1] ("Betas and Previews").
-    #
-    #    </note>
-    #
     #   Information about the Amazon EC2 instance assessed for runtime
     #   coverage.
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/service-terms/
     #   @return [Types::CoverageEc2InstanceDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageResourceDetails AWS API Documentation
@@ -1328,6 +1306,8 @@ module Aws::GuardDuty
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.awsApiCallAction.remoteIpDetails.organization.asn
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
@@ -1352,6 +1332,8 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.networkConnectionAction.remoteIpDetails.organization.asn
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
@@ -1362,6 +1344,8 @@ module Aws::GuardDuty
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6
+    #
     #   * service.action.kubernetesApiCallAction.namespace
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
@@ -1371,6 +1355,8 @@ module Aws::GuardDuty
     #   * service.action.kubernetesApiCallAction.statusCode
     #
     #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV6
     #
     #   * service.action.networkConnectionAction.protocol
     #
@@ -2172,20 +2158,31 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] auto_enable_organization_members
-    #   Indicates the auto-enablement configuration of GuardDuty for the
-    #   member accounts in the organization.
+    #   Indicates the auto-enablement configuration of GuardDuty or any of
+    #   the corresponding protection plans for the member accounts in the
+    #   organization.
     #
     #   * `NEW`: Indicates that when a new account joins the organization,
-    #     they will have GuardDuty enabled automatically.
+    #     they will have GuardDuty or any of the corresponding protection
+    #     plans enabled automatically.
     #
     #   * `ALL`: Indicates that all accounts in the organization have
-    #     GuardDuty enabled automatically. This includes `NEW` accounts that
-    #     join the organization and accounts that may have been suspended or
-    #     removed from the organization in GuardDuty.
+    #     GuardDuty and any of the corresponding protection plans enabled
+    #     automatically. This includes `NEW` accounts that join the
+    #     organization and accounts that may have been suspended or removed
+    #     from the organization in GuardDuty.
     #
-    #   * `NONE`: Indicates that GuardDuty will not be automatically enabled
-    #     for any account in the organization. The administrator must manage
-    #     GuardDuty for each account in the organization individually.
+    #   * `NONE`: Indicates that GuardDuty or any of the corresponding
+    #     protection plans will not be automatically enabled for any account
+    #     in the organization. The administrator must manage GuardDuty for
+    #     each account in the organization individually.
+    #
+    #     When you update the auto-enable setting from `ALL` or `NEW` to
+    #     `NONE`, this action doesn't disable the corresponding option for
+    #     your existing accounts. This configuration will apply to the new
+    #     accounts that join the organization. After you update the
+    #     auto-enable settings, no new account will have the corresponding
+    #     option as enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationResponse AWS API Documentation
@@ -2366,6 +2363,16 @@ module Aws::GuardDuty
 
     # Contains information about a GuardDuty feature.
     #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
+    #
     # @!attribute [rw] name
     #   The name of the feature.
     #   @return [String]
@@ -2389,6 +2396,16 @@ module Aws::GuardDuty
     end
 
     # Contains information about a GuardDuty feature.
+    #
+    # Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    # Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can
+    # add only one of these two features because Runtime Monitoring already
+    # includes the threat detection for Amazon EKS resources. For more
+    # information, see [Runtime Monitoring][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
     #
     # @!attribute [rw] name
     #   Indicates the name of the feature that can be enabled for the
@@ -2518,7 +2535,12 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] domain_with_suffix
     #   The second and top level domain involved in the activity that
-    #   prompted GuardDuty to generate this finding.
+    #   potentially prompted GuardDuty to generate this finding. For a list
+    #   of top-level and second-level domains, see [public suffix list][1].
+    #
+    #
+    #
+    #   [1]: https://publicsuffix.org/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction AWS API Documentation
@@ -5025,11 +5047,16 @@ module Aws::GuardDuty
     #   The IPv4 local address of the connection.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_v6
+    #   The IPv6 local address of the connection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalIpDetails AWS API Documentation
     #
     class LocalIpDetails < Struct.new(
-      :ip_address_v4)
-      SENSITIVE = []
+      :ip_address_v4,
+      :ip_address_v6)
+      SENSITIVE = [:ip_address_v4, :ip_address_v6]
       include Aws::Structure
     end
 
@@ -5212,7 +5239,7 @@ module Aws::GuardDuty
       :invited_at,
       :updated_at,
       :administrator_id)
-      SENSITIVE = []
+      SENSITIVE = [:email]
       include Aws::Structure
     end
 
@@ -5445,7 +5472,7 @@ module Aws::GuardDuty
       :security_groups,
       :subnet_id,
       :vpc_id)
-      SENSITIVE = []
+      SENSITIVE = [:private_ip_address]
       include Aws::Structure
     end
 
@@ -6108,7 +6135,7 @@ module Aws::GuardDuty
     class PrivateIpAddressDetails < Struct.new(
       :private_dns_name,
       :private_ip_address)
-      SENSITIVE = []
+      SENSITIVE = [:private_ip_address]
       include Aws::Structure
     end
 
@@ -6369,6 +6396,10 @@ module Aws::GuardDuty
     #   The IPv4 remote address of the connection.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_v6
+    #   The IPv6 remote address of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] organization
     #   The ISP organization information of the remote IP address.
     #   @return [Types::Organization]
@@ -6380,8 +6411,9 @@ module Aws::GuardDuty
       :country,
       :geo_location,
       :ip_address_v4,
+      :ip_address_v6,
       :organization)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address_v4, :ip_address_v6]
       include Aws::Structure
     end
 
@@ -6586,6 +6618,28 @@ module Aws::GuardDuty
     #   heap.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tool_name
+    #   Name of the potentially suspicious tool.
+    #   @return [String]
+    #
+    # @!attribute [rw] tool_category
+    #   Category that the tool belongs to. Some of the examples are Backdoor
+    #   Tool, Pentest Tool, Network Scanner, and Network Sniffer.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   Name of the security service that has been potentially disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] command_line_example
+    #   Example of the command line involved in the suspicious activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] threat_file_path
+    #   The suspicious file path for which the threat intelligence details
+    #   were found.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RuntimeContext AWS API Documentation
     #
     class RuntimeContext < Struct.new(
@@ -6608,7 +6662,12 @@ module Aws::GuardDuty
       :target_process,
       :address_family,
       :iana_protocol_number,
-      :memory_regions)
+      :memory_regions,
+      :tool_name,
+      :tool_category,
+      :service_name,
+      :command_line_example,
+      :threat_file_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7357,11 +7416,16 @@ module Aws::GuardDuty
     #   triggered the finding.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] threat_file_sha_256
+    #   SHA256 of the file that generated the finding.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ThreatIntelligenceDetail AWS API Documentation
     #
     class ThreatIntelligenceDetail < Struct.new(
       :threat_list_name,
-      :threat_names)
+      :threat_names,
+      :threat_file_sha_256)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7783,6 +7847,13 @@ module Aws::GuardDuty
     #   * `NONE`: Indicates that GuardDuty will not be automatically enabled
     #     for any account in the organization. The administrator must manage
     #     GuardDuty for each account in the organization individually.
+    #
+    #     When you update the auto-enable setting from `ALL` or `NEW` to
+    #     `NONE`, this action doesn't disable the corresponding option for
+    #     your existing accounts. This configuration will apply to the new
+    #     accounts that join the organization. After you update the
+    #     auto-enable settings, no new account will have the corresponding
+    #     option as enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationRequest AWS API Documentation

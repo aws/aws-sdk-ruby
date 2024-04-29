@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Amplify
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Amplify
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::Amplify
     #   @option options [Aws::Amplify::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Amplify::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -611,6 +635,13 @@ module Aws::Amplify
     end
 
     # Creates a new backend environment for an Amplify app.
+    #
+    # This API is available only to Amplify Gen 1 applications where the
+    # backend is created using Amplify Studio or the Amplify command line
+    # interface (CLI). This API isn’t available to applications created
+    # using the Amplify Gen 2 public preview. When you deploy an application
+    # with Amplify Gen 2, you provision the app's backend infrastructure
+    # using Typescript code.
     #
     # @option params [required, String] :app_id
     #   The unique ID for an Amplify app.
@@ -876,6 +907,11 @@ module Aws::Amplify
     #   The required AWS Identity and Access Management (IAM) service role for
     #   the Amazon Resource Name (ARN) for automatically creating subdomains.
     #
+    # @option params [Types::CertificateSettings] :certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain. If you
+    #   don't specify a certificate type, Amplify uses the default
+    #   certificate that it provisions and manages for you.
+    #
     # @return [Types::CreateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainAssociationResult#domain_association #domain_association} => Types::DomainAssociation
@@ -894,6 +930,10 @@ module Aws::Amplify
     #     ],
     #     auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
     #     auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
+    #     certificate_settings: {
+    #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, CUSTOM
+    #       custom_certificate_arn: "CertificateArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -904,7 +944,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -912,6 +953,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDomainAssociation AWS API Documentation
     #
@@ -1036,6 +1080,13 @@ module Aws::Amplify
     end
 
     # Deletes a backend environment for an Amplify app.
+    #
+    # This API is available only to Amplify Gen 1 applications where the
+    # backend was created using Amplify Studio or the Amplify command line
+    # interface (CLI). This API isn’t available to applications created
+    # using the Amplify Gen 2 public preview. When you deploy an application
+    # with Amplify Gen 2, you provision the app's backend infrastructure
+    # using Typescript code.
     #
     # @option params [required, String] :app_id
     #   The unique ID of an Amplify app.
@@ -1162,7 +1213,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -1170,6 +1222,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteDomainAssociation AWS API Documentation
     #
@@ -1404,6 +1459,13 @@ module Aws::Amplify
 
     # Returns a backend environment for an Amplify app.
     #
+    # This API is available only to Amplify Gen 1 applications where the
+    # backend was created using Amplify Studio or the Amplify command line
+    # interface (CLI). This API isn’t available to applications created
+    # using the Amplify Gen 2 public preview. When you deploy an application
+    # with Amplify Gen 2, you provision the app's backend infrastructure
+    # using Typescript code.
+    #
     # @option params [required, String] :app_id
     #   The unique id for an Amplify app.
     #
@@ -1529,7 +1591,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -1537,6 +1600,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetDomainAssociation AWS API Documentation
     #
@@ -1772,6 +1838,13 @@ module Aws::Amplify
 
     # Lists the backend environments for an Amplify app.
     #
+    # This API is available only to Amplify Gen 1 applications where the
+    # backend was created using Amplify Studio or the Amplify command line
+    # interface (CLI). This API isn’t available to applications created
+    # using the Amplify Gen 2 public preview. When you deploy an application
+    # with Amplify Gen 2, you provision the app's backend infrastructure
+    # using Typescript code.
+    #
     # @option params [required, String] :app_id
     #   The unique ID for an Amplify app.
     #
@@ -1931,7 +2004,8 @@ module Aws::Amplify
     #   resp.domain_associations[0].auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_associations[0].auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_associations[0].auto_sub_domain_iam_role #=> String
-    #   resp.domain_associations[0].domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_associations[0].domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_associations[0].update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_associations[0].status_reason #=> String
     #   resp.domain_associations[0].certificate_verification_dns_record #=> String
     #   resp.domain_associations[0].sub_domains #=> Array
@@ -1939,6 +2013,9 @@ module Aws::Amplify
     #   resp.domain_associations[0].sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_associations[0].sub_domains[0].verified #=> Boolean
     #   resp.domain_associations[0].sub_domains[0].dns_record #=> String
+    #   resp.domain_associations[0].certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_associations[0].certificate.custom_certificate_arn #=> String
+    #   resp.domain_associations[0].certificate.certificate_verification_dns_record #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListDomainAssociations AWS API Documentation
@@ -2682,6 +2759,9 @@ module Aws::Amplify
     #   The required AWS Identity and Access Management (IAM) service role for
     #   the Amazon Resource Name (ARN) for automatically creating subdomains.
     #
+    # @option params [Types::CertificateSettings] :certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain.
+    #
     # @return [Types::UpdateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainAssociationResult#domain_association #domain_association} => Types::DomainAssociation
@@ -2700,6 +2780,10 @@ module Aws::Amplify
     #     ],
     #     auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
     #     auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
+    #     certificate_settings: {
+    #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, CUSTOM
+    #       custom_certificate_arn: "CertificateArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2710,7 +2794,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -2718,6 +2803,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateDomainAssociation AWS API Documentation
     #
@@ -2783,7 +2871,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

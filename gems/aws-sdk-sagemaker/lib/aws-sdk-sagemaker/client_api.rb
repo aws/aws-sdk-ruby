@@ -273,6 +273,7 @@ module Aws::SageMaker
     ClusterSummaries = Shapes::ListShape.new(name: 'ClusterSummaries')
     ClusterSummary = Shapes::StructureShape.new(name: 'ClusterSummary')
     ClusterThreadsPerCore = Shapes::IntegerShape.new(name: 'ClusterThreadsPerCore')
+    CodeEditorAppImageConfig = Shapes::StructureShape.new(name: 'CodeEditorAppImageConfig')
     CodeEditorAppSettings = Shapes::StructureShape.new(name: 'CodeEditorAppSettings')
     CodeRepositories = Shapes::ListShape.new(name: 'CodeRepositories')
     CodeRepository = Shapes::StructureShape.new(name: 'CodeRepository')
@@ -1433,6 +1434,7 @@ module Aws::SageMaker
     ModelPackageGroupSummary = Shapes::StructureShape.new(name: 'ModelPackageGroupSummary')
     ModelPackageGroupSummaryList = Shapes::ListShape.new(name: 'ModelPackageGroupSummaryList')
     ModelPackageSortBy = Shapes::StringShape.new(name: 'ModelPackageSortBy')
+    ModelPackageSourceUri = Shapes::StringShape.new(name: 'ModelPackageSourceUri')
     ModelPackageStatus = Shapes::StringShape.new(name: 'ModelPackageStatus')
     ModelPackageStatusDetails = Shapes::StructureShape.new(name: 'ModelPackageStatusDetails')
     ModelPackageStatusItem = Shapes::StructureShape.new(name: 'ModelPackageStatusItem')
@@ -2132,6 +2134,8 @@ module Aws::SageMaker
     UpdateArtifactResponse = Shapes::StructureShape.new(name: 'UpdateArtifactResponse')
     UpdateClusterRequest = Shapes::StructureShape.new(name: 'UpdateClusterRequest')
     UpdateClusterResponse = Shapes::StructureShape.new(name: 'UpdateClusterResponse')
+    UpdateClusterSoftwareRequest = Shapes::StructureShape.new(name: 'UpdateClusterSoftwareRequest')
+    UpdateClusterSoftwareResponse = Shapes::StructureShape.new(name: 'UpdateClusterSoftwareResponse')
     UpdateCodeRepositoryInput = Shapes::StructureShape.new(name: 'UpdateCodeRepositoryInput')
     UpdateCodeRepositoryOutput = Shapes::StructureShape.new(name: 'UpdateCodeRepositoryOutput')
     UpdateContextRequest = Shapes::StructureShape.new(name: 'UpdateContextRequest')
@@ -2375,6 +2379,7 @@ module Aws::SageMaker
     AppImageConfigDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     AppImageConfigDetails.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
     AppImageConfigDetails.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
+    AppImageConfigDetails.add_member(:code_editor_app_image_config, Shapes::ShapeRef.new(shape: CodeEditorAppImageConfig, location_name: "CodeEditorAppImageConfig"))
     AppImageConfigDetails.struct_class = Types::AppImageConfigDetails
 
     AppImageConfigList.member = Shapes::ShapeRef.new(shape: AppImageConfigDetails)
@@ -2867,7 +2872,12 @@ module Aws::SageMaker
     ClusterSummary.add_member(:cluster_status, Shapes::ShapeRef.new(shape: ClusterStatus, required: true, location_name: "ClusterStatus"))
     ClusterSummary.struct_class = Types::ClusterSummary
 
+    CodeEditorAppImageConfig.add_member(:file_system_config, Shapes::ShapeRef.new(shape: FileSystemConfig, location_name: "FileSystemConfig"))
+    CodeEditorAppImageConfig.add_member(:container_config, Shapes::ShapeRef.new(shape: ContainerConfig, location_name: "ContainerConfig"))
+    CodeEditorAppImageConfig.struct_class = Types::CodeEditorAppImageConfig
+
     CodeEditorAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    CodeEditorAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
     CodeEditorAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
     CodeEditorAppSettings.struct_class = Types::CodeEditorAppSettings
 
@@ -3018,6 +3028,7 @@ module Aws::SageMaker
     CreateAppImageConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAppImageConfigRequest.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
     CreateAppImageConfigRequest.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
+    CreateAppImageConfigRequest.add_member(:code_editor_app_image_config, Shapes::ShapeRef.new(shape: CodeEditorAppImageConfig, location_name: "CodeEditorAppImageConfig"))
     CreateAppImageConfigRequest.struct_class = Types::CreateAppImageConfigRequest
 
     CreateAppImageConfigResponse.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
@@ -3444,6 +3455,7 @@ module Aws::SageMaker
     CreateModelPackageInput.add_member(:drift_check_baselines, Shapes::ShapeRef.new(shape: DriftCheckBaselines, location_name: "DriftCheckBaselines"))
     CreateModelPackageInput.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
     CreateModelPackageInput.add_member(:skip_model_validation, Shapes::ShapeRef.new(shape: SkipModelValidation, location_name: "SkipModelValidation"))
+    CreateModelPackageInput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     CreateModelPackageInput.struct_class = Types::CreateModelPackageInput
 
     CreateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -3819,6 +3831,10 @@ module Aws::SageMaker
     DefaultSpaceSettings.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroups"))
     DefaultSpaceSettings.add_member(:jupyter_server_app_settings, Shapes::ShapeRef.new(shape: JupyterServerAppSettings, location_name: "JupyterServerAppSettings"))
     DefaultSpaceSettings.add_member(:kernel_gateway_app_settings, Shapes::ShapeRef.new(shape: KernelGatewayAppSettings, location_name: "KernelGatewayAppSettings"))
+    DefaultSpaceSettings.add_member(:jupyter_lab_app_settings, Shapes::ShapeRef.new(shape: JupyterLabAppSettings, location_name: "JupyterLabAppSettings"))
+    DefaultSpaceSettings.add_member(:space_storage_settings, Shapes::ShapeRef.new(shape: DefaultSpaceStorageSettings, location_name: "SpaceStorageSettings"))
+    DefaultSpaceSettings.add_member(:custom_posix_user_config, Shapes::ShapeRef.new(shape: CustomPosixUserConfig, location_name: "CustomPosixUserConfig"))
+    DefaultSpaceSettings.add_member(:custom_file_system_configs, Shapes::ShapeRef.new(shape: CustomFileSystemConfigs, location_name: "CustomFileSystemConfigs"))
     DefaultSpaceSettings.struct_class = Types::DefaultSpaceSettings
 
     DefaultSpaceStorageSettings.add_member(:default_ebs_storage_settings, Shapes::ShapeRef.new(shape: DefaultEbsStorageSettings, location_name: "DefaultEbsStorageSettings"))
@@ -4115,6 +4131,7 @@ module Aws::SageMaker
     DescribeAppImageConfigResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeAppImageConfigResponse.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
     DescribeAppImageConfigResponse.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
+    DescribeAppImageConfigResponse.add_member(:code_editor_app_image_config, Shapes::ShapeRef.new(shape: CodeEditorAppImageConfig, location_name: "CodeEditorAppImageConfig"))
     DescribeAppImageConfigResponse.struct_class = Types::DescribeAppImageConfigResponse
 
     DescribeAppRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
@@ -4810,6 +4827,7 @@ module Aws::SageMaker
     DescribeModelPackageOutput.add_member(:drift_check_baselines, Shapes::ShapeRef.new(shape: DriftCheckBaselines, location_name: "DriftCheckBaselines"))
     DescribeModelPackageOutput.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
     DescribeModelPackageOutput.add_member(:skip_model_validation, Shapes::ShapeRef.new(shape: SkipModelValidation, location_name: "SkipModelValidation"))
+    DescribeModelPackageOutput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     DescribeModelPackageOutput.struct_class = Types::DescribeModelPackageOutput
 
     DescribeModelQualityJobDefinitionRequest.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: MonitoringJobDefinitionName, required: true, location_name: "JobDefinitionName"))
@@ -7613,6 +7631,7 @@ module Aws::SageMaker
     ModelPackage.add_member(:task, Shapes::ShapeRef.new(shape: String, location_name: "Task"))
     ModelPackage.add_member(:sample_payload_url, Shapes::ShapeRef.new(shape: String, location_name: "SamplePayloadUrl"))
     ModelPackage.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
+    ModelPackage.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     ModelPackage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ModelPackage.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     ModelPackage.add_member(:drift_check_baselines, Shapes::ShapeRef.new(shape: DriftCheckBaselines, location_name: "DriftCheckBaselines"))
@@ -7625,6 +7644,7 @@ module Aws::SageMaker
     ModelPackageContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "Image"))
     ModelPackageContainerDefinition.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "ImageDigest"))
     ModelPackageContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
+    ModelPackageContainerDefinition.add_member(:model_data_source, Shapes::ShapeRef.new(shape: ModelDataSource, location_name: "ModelDataSource"))
     ModelPackageContainerDefinition.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, location_name: "ProductId"))
     ModelPackageContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     ModelPackageContainerDefinition.add_member(:model_input, Shapes::ShapeRef.new(shape: ModelInput, location_name: "ModelInput"))
@@ -8853,6 +8873,7 @@ module Aws::SageMaker
     ShuffleConfig.struct_class = Types::ShuffleConfig
 
     SourceAlgorithm.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
+    SourceAlgorithm.add_member(:model_data_source, Shapes::ShapeRef.new(shape: ModelDataSource, location_name: "ModelDataSource"))
     SourceAlgorithm.add_member(:algorithm_name, Shapes::ShapeRef.new(shape: ArnOrName, required: true, location_name: "AlgorithmName"))
     SourceAlgorithm.struct_class = Types::SourceAlgorithm
 
@@ -9458,6 +9479,7 @@ module Aws::SageMaker
     UpdateAppImageConfigRequest.add_member(:app_image_config_name, Shapes::ShapeRef.new(shape: AppImageConfigName, required: true, location_name: "AppImageConfigName"))
     UpdateAppImageConfigRequest.add_member(:kernel_gateway_image_config, Shapes::ShapeRef.new(shape: KernelGatewayImageConfig, location_name: "KernelGatewayImageConfig"))
     UpdateAppImageConfigRequest.add_member(:jupyter_lab_app_image_config, Shapes::ShapeRef.new(shape: JupyterLabAppImageConfig, location_name: "JupyterLabAppImageConfig"))
+    UpdateAppImageConfigRequest.add_member(:code_editor_app_image_config, Shapes::ShapeRef.new(shape: CodeEditorAppImageConfig, location_name: "CodeEditorAppImageConfig"))
     UpdateAppImageConfigRequest.struct_class = Types::UpdateAppImageConfigRequest
 
     UpdateAppImageConfigResponse.add_member(:app_image_config_arn, Shapes::ShapeRef.new(shape: AppImageConfigArn, location_name: "AppImageConfigArn"))
@@ -9478,6 +9500,12 @@ module Aws::SageMaker
 
     UpdateClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
     UpdateClusterResponse.struct_class = Types::UpdateClusterResponse
+
+    UpdateClusterSoftwareRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
+    UpdateClusterSoftwareRequest.struct_class = Types::UpdateClusterSoftwareRequest
+
+    UpdateClusterSoftwareResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    UpdateClusterSoftwareResponse.struct_class = Types::UpdateClusterSoftwareResponse
 
     UpdateCodeRepositoryInput.add_member(:code_repository_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CodeRepositoryName"))
     UpdateCodeRepositoryInput.add_member(:git_config, Shapes::ShapeRef.new(shape: GitConfigForUpdate, location_name: "GitConfig"))
@@ -9636,6 +9664,8 @@ module Aws::SageMaker
     UpdateModelPackageInput.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     UpdateModelPackageInput.add_member(:customer_metadata_properties_to_remove, Shapes::ShapeRef.new(shape: CustomerMetadataKeyList, location_name: "CustomerMetadataPropertiesToRemove"))
     UpdateModelPackageInput.add_member(:additional_inference_specifications_to_add, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecificationsToAdd"))
+    UpdateModelPackageInput.add_member(:inference_specification, Shapes::ShapeRef.new(shape: InferenceSpecification, location_name: "InferenceSpecification"))
+    UpdateModelPackageInput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     UpdateModelPackageInput.struct_class = Types::UpdateModelPackageInput
 
     UpdateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -12916,6 +12946,16 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: UpdateClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateClusterResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_cluster_software, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClusterSoftware"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClusterSoftwareRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClusterSoftwareResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)

@@ -270,7 +270,13 @@ module Aws
                                                        data: ::String,
                                                        charset: ::String?
                                                      }?
-                                                   }
+                                                   },
+                                                   headers: Array[
+                                                     {
+                                                       name: ::String,
+                                                       value: ::String
+                                                     },
+                                                   ]?
                                                  }?,
                                                  raw: {
                                                    data: ::String
@@ -278,7 +284,13 @@ module Aws
                                                  template: {
                                                    template_name: ::String?,
                                                    template_arn: ::String?,
-                                                   template_data: ::String?
+                                                   template_data: ::String?,
+                                                   headers: Array[
+                                                     {
+                                                       name: ::String,
+                                                       value: ::String
+                                                     },
+                                                   ]?
                                                  }?
                                                },
                                                ?tags: Array[
@@ -1234,7 +1246,13 @@ module Aws
                                template: {
                                  template_name: ::String?,
                                  template_arn: ::String?,
-                                 template_data: ::String?
+                                 template_data: ::String?,
+                                 headers: Array[
+                                   {
+                                     name: ::String,
+                                     value: ::String
+                                   },
+                                 ]?
                                }?
                              },
                              bulk_email_entries: Array[
@@ -1304,7 +1322,13 @@ module Aws
                                 data: ::String,
                                 charset: ::String?
                               }?
-                            }
+                            },
+                            headers: Array[
+                              {
+                                name: ::String,
+                                value: ::String
+                              },
+                            ]?
                           }?,
                           raw: {
                             data: ::String
@@ -1312,7 +1336,13 @@ module Aws
                           template: {
                             template_name: ::String?,
                             template_arn: ::String?,
-                            template_data: ::String?
+                            template_data: ::String?,
+                            headers: Array[
+                              {
+                                name: ::String,
+                                value: ::String
+                              },
+                            ]?
                           }?
                         },
                         ?email_tags: Array[

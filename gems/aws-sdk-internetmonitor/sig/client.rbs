@@ -135,9 +135,26 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#get_health_event-instance_method
       def get_health_event: (
                               monitor_name: ::String,
-                              event_id: ::String
+                              event_id: ::String,
+                              ?linked_account_id: ::String
                             ) -> _GetHealthEventResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHealthEventResponseSuccess
+
+      interface _GetInternetEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInternetEventOutput]
+        def event_id: () -> ::String
+        def event_arn: () -> ::String
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def client_location: () -> Types::ClientLocation
+        def event_type: () -> ("AVAILABILITY" | "PERFORMANCE")
+        def event_status: () -> ("ACTIVE" | "RESOLVED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#get_internet_event-instance_method
+      def get_internet_event: (
+                                event_id: ::String
+                              ) -> _GetInternetEventResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInternetEventResponseSuccess
 
       interface _GetMonitorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMonitorOutput]
@@ -157,7 +174,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#get_monitor-instance_method
       def get_monitor: (
-                         monitor_name: ::String
+                         monitor_name: ::String,
+                         ?linked_account_id: ::String
                        ) -> _GetMonitorResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMonitorResponseSuccess
 
@@ -198,9 +216,26 @@ module Aws
                                 ?end_time: ::Time,
                                 ?next_token: ::String,
                                 ?max_results: ::Integer,
-                                ?event_status: ("ACTIVE" | "RESOLVED")
+                                ?event_status: ("ACTIVE" | "RESOLVED"),
+                                ?linked_account_id: ::String
                               ) -> _ListHealthEventsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHealthEventsResponseSuccess
+
+      interface _ListInternetEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInternetEventsOutput]
+        def internet_events: () -> ::Array[Types::InternetEventSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#list_internet_events-instance_method
+      def list_internet_events: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?start_time: ::Time,
+                                  ?end_time: ::Time,
+                                  ?event_status: ::String,
+                                  ?event_type: ::String
+                                ) -> _ListInternetEventsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInternetEventsResponseSuccess
 
       interface _ListMonitorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMonitorsOutput]
@@ -211,7 +246,8 @@ module Aws
       def list_monitors: (
                            ?next_token: ::String,
                            ?max_results: ::Integer,
-                           ?monitor_status: ::String
+                           ?monitor_status: ::String,
+                           ?include_linked_accounts: bool
                          ) -> _ListMonitorsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMonitorsResponseSuccess
 
@@ -241,7 +277,8 @@ module Aws
                              operator: ("EQUALS" | "NOT_EQUALS")?,
                              values: Array[::String]?
                            },
-                         ]
+                         ],
+                         ?linked_account_id: ::String
                        ) -> _StartQueryResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryResponseSuccess
 

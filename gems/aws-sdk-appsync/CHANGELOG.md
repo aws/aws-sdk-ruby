@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2024-04-25)
+------------------
+
+* Feature - UpdateGraphQLAPI documentation update and datasource introspection secret arn update
+
+1.74.0 (2024-02-23)
+------------------
+
+* Feature - Documentation only updates for AppSync
+
 1.73.0 (2024-02-12)
 ------------------
 

@@ -720,12 +720,19 @@ module Aws::Rekognition
     #   from StartTimestampMillis to EndTimestampMillis.
     #   @return [Integer]
     #
+    # @!attribute [rw] content_types
+    #   A list of predicted results for the type of content an image
+    #   contains. For example, the image content might be from animation,
+    #   sports, or a video game.
+    #   @return [Array<Types::ContentType>]
+    #
     class ContentModerationDetection < Struct.new(
       :timestamp,
       :moderation_label,
       :start_timestamp_millis,
       :end_timestamp_millis,
-      :duration_millis)
+      :duration_millis,
+      :content_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -969,7 +976,12 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] session_id
-    #   A unique 128-bit UUID identifying a Face Liveness session.
+    #   A unique 128-bit UUID identifying a Face Liveness session. A new
+    #   sessionID must be used for every Face Liveness check. If a given
+    #   sessionID is used for subsequent Face Liveness checks, the checks
+    #   will fail. Additionally, a SessionId expires 3 minutes after it's
+    #   sent, making all Liveness data associated with the session (e.g.,
+    #   sessionID, reference image, audit images, etc.) unavailable.
     #   @return [String]
     #
     class CreateFaceLivenessSessionResponse < Struct.new(

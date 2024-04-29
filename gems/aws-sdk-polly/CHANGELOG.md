@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2024-02-15)
+------------------
+
+* Feature - Amazon Polly adds 1 new voice - Burcu (tr-TR)
+
 1.81.0 (2024-01-26)
 ------------------
 

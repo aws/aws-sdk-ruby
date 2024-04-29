@@ -47,6 +47,14 @@ module Aws
           end
         end
 
+        it 'respects the thread_count option' do
+          custom_thread_count = 20
+          expect(Thread).to receive(:new).exactly(custom_thread_count).times.and_return(double(value: nil))
+          client.stub_responses(:create_multipart_upload, upload_id: 'id')
+          client.stub_responses(:complete_multipart_upload)
+          object.upload_stream(thread_count: custom_thread_count) { |_write_stream| }
+        end
+
         it 'uses multipart APIs' do
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:upload_part, etag: 'etag')
@@ -276,7 +284,7 @@ module Aws
             end
           end.to raise_error(
             S3::MultipartUploadError,
-            'failed to abort multipart upload: network-error'
+            /failed to abort multipart upload: network-error/
           )
         end
 
@@ -460,7 +468,8 @@ module Aws
               end
             end.to raise_error(
               S3::MultipartUploadError,
-              'failed to abort multipart upload: network-error'
+              'failed to abort multipart upload: network-error. '\
+                'Multipart upload failed: part failed'
             )
           end
         end

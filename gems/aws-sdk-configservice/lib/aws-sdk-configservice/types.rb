@@ -520,6 +520,20 @@ module Aws::ConfigService
     #
     # @!attribute [rw] configuration_item_delivery_time
     #   The time when configuration changes for the resource were delivered.
+    #
+    #   <note markdown="1"> This field is optional and is not guaranteed to be present in a
+    #   configuration item (CI). If you are using daily recording, this
+    #   field will be populated. However, if you are using continuous
+    #   recording, this field will be omitted since the delivery time is
+    #   instantaneous as the CI is available right away. For more
+    #   information on daily recording and continuous recording, see
+    #   [Recording Frequency][1] in the *Config Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BaseConfigurationItem AWS API Documentation
@@ -1380,6 +1394,20 @@ module Aws::ConfigService
     #
     # @!attribute [rw] configuration_item_delivery_time
     #   The time when configuration changes for the resource were delivered.
+    #
+    #   <note markdown="1"> This field is optional and is not guaranteed to be present in a
+    #   configuration item (CI). If you are using daily recording, this
+    #   field will be populated. However, if you are using continuous
+    #   recording, this field will be omitted since the delivery time is
+    #   instantaneous as the CI is available right away. For more
+    #   information on daily recording and continuous recording, see
+    #   [Recording Frequency][1] in the *Config Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationItem AWS API Documentation
@@ -2604,7 +2632,7 @@ module Aws::ConfigService
     #   The number of rule evaluation results that you want returned.
     #
     #   This parameter is required if the rule limit for your account is
-    #   more than the default of 150 rules.
+    #   more than the default of 1000 rules.
     #
     #   For information about requesting a rule limit increase, see [Config
     #   Limits][1] in the *Amazon Web Services General Reference Guide*.
@@ -3697,6 +3725,8 @@ module Aws::ConfigService
     #  * Asia Pacific (Hyderabad)
     #
     # * Asia Pacific (Melbourne)
+    #
+    # * Canada West (Calgary)
     #
     # * Europe (Spain)
     #
@@ -5311,7 +5341,7 @@ module Aws::ConfigService
     class MaxActiveResourcesExceededException < Aws::EmptyStructure; end
 
     # Failed to add the Config rule because the account already contains the
-    # maximum number of 150 rules. Consider deleting any deactivated rules
+    # maximum number of 1000 rules. Consider deleting any deactivated rules
     # before you add new rules.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/MaxNumberOfConfigRulesExceededException AWS API Documentation
@@ -7096,6 +7126,8 @@ module Aws::ConfigService
     #
     #   * Asia Pacific (Melbourne)
     #
+    #   * Canada West (Calgary)
+    #
     #   * Europe (Spain)
     #
     #   * Europe (Zurich)
@@ -7108,9 +7140,9 @@ module Aws::ConfigService
     #
     #    The `AWS::RDS::GlobalCluster` resource type will be recorded in all
     #   supported Config Regions where the configuration recorder is
-    #   enabled, even if `includeGlobalResourceTypes` is not set to `true`.
-    #   The `includeGlobalResourceTypes` option is a bundle which only
-    #   applies to IAM users, groups, roles, and customer managed policies.
+    #   enabled, even if `includeGlobalResourceTypes` is set`false`. The
+    #   `includeGlobalResourceTypes` option is a bundle which only applies
+    #   to IAM users, groups, roles, and customer managed policies.
     #
     #    If you do not want to record `AWS::RDS::GlobalCluster` in all
     #   enabled Regions, use one of the following recording strategies:
@@ -7125,7 +7157,31 @@ module Aws::ConfigService
     #    For more information, see [Selecting Which Resources are
     #   Recorded][1] in the *Config developer guide*.
     #
-    #   <note markdown="1"> Before you set this field to `true`, set the `allSupported` field of
+    #   **includeGlobalResourceTypes and the exclusion recording strategy**
+    #
+    #    The `includeGlobalResourceTypes` field has no impact on the
+    #   `EXCLUSION_BY_RESOURCE_TYPES` recording strategy. This means that
+    #   the global IAM resource types (IAM users, groups, roles, and
+    #   customer managed policies) will not be automatically added as
+    #   exclusions for `exclusionByResourceTypes` when
+    #   `includeGlobalResourceTypes` is set to `false`.
+    #
+    #    The `includeGlobalResourceTypes` field should only be used to
+    #   modify
+    #   the `AllSupported` field, as the default for the `AllSupported`
+    #   field is to record configuration changes for all supported resource
+    #   types excluding the global IAM resource types. To include the global
+    #   IAM resource types when `AllSupported` is set to `true`, make sure
+    #   to set `includeGlobalResourceTypes` to `true`.
+    #
+    #    To exclude the global IAM resource types for the
+    #   `EXCLUSION_BY_RESOURCE_TYPES` recording strategy, you need to
+    #   manually add them to the `resourceTypes` field of
+    #   `exclusionByResourceTypes`.
+    #
+    #   <note markdown="1"> **Required and optional fields**
+    #
+    #    Before you set this field to `true`, set the `allSupported` field of
     #   [RecordingGroup][2] to `true`. Optionally, you can set the `useOnly`
     #   field of [RecordingStrategy][3] to `ALL_SUPPORTED_RESOURCE_TYPES`.
     #
@@ -7288,6 +7344,8 @@ module Aws::ConfigService
     #    * Asia Pacific (Hyderabad)
     #
     #   * Asia Pacific (Melbourne)
+    #
+    #   * Canada West (Calgary)
     #
     #   * Europe (Spain)
     #
@@ -7494,6 +7552,8 @@ module Aws::ConfigService
     #    * Asia Pacific (Hyderabad)
     #
     #   * Asia Pacific (Melbourne)
+    #
+    #   * Canada West (Calgary)
     #
     #   * Europe (Spain)
     #
@@ -7932,7 +7992,10 @@ module Aws::ConfigService
     #
     # @!attribute [rw] evaluation_mode
     #   Filters all resource evaluations results based on an evaluation
-    #   mode. the valid value for this API is `Proactive`.
+    #   mode.
+    #
+    #   Currently, `DECTECTIVE` is not supported as a valid value. Ignore
+    #   other documentation stating otherwise.
     #   @return [String]
     #
     # @!attribute [rw] time_window
@@ -8775,8 +8838,7 @@ module Aws::ConfigService
     #   The name or Amazon Resource Name (ARN) of the SSM document to use to
     #   create a conformance pack. If you use the document name, Config
     #   checks only your account and Amazon Web Services Region for the SSM
-    #   document. If you want to use an SSM document from another Region or
-    #   account, you must provide the ARN.
+    #   document.
     #   @return [String]
     #
     # @!attribute [rw] document_version

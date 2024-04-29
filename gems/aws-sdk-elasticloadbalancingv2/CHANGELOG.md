@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.99.0 (2024-03-14)
+------------------
+
+* Feature - This release allows you to configure HTTP client keep-alive duration for communication between clients and Application Load Balancers.
+
 1.98.0 (2024-01-31)
 ------------------
 

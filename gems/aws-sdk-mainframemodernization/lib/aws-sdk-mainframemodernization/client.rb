@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::MainframeModernization
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::MainframeModernization
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::MainframeModernization
     #   @option options [Aws::MainframeModernization::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::MainframeModernization::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -969,6 +993,7 @@ module Aws::MainframeModernization
     #   * {Types::GetBatchJobExecutionResponse#execution_id #execution_id} => String
     #   * {Types::GetBatchJobExecutionResponse#job_id #job_id} => String
     #   * {Types::GetBatchJobExecutionResponse#job_name #job_name} => String
+    #   * {Types::GetBatchJobExecutionResponse#job_step_restart_marker #job_step_restart_marker} => Types::JobStepRestartMarker
     #   * {Types::GetBatchJobExecutionResponse#job_type #job_type} => String
     #   * {Types::GetBatchJobExecutionResponse#job_user #job_user} => String
     #   * {Types::GetBatchJobExecutionResponse#return_code #return_code} => String
@@ -988,6 +1013,11 @@ module Aws::MainframeModernization
     #   resp.application_id #=> String
     #   resp.batch_job_identifier.file_batch_job_identifier.file_name #=> String
     #   resp.batch_job_identifier.file_batch_job_identifier.folder_path #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.execution_id #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.from_proc_step #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.from_step #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.to_proc_step #=> String
+    #   resp.batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.to_step #=> String
     #   resp.batch_job_identifier.s3_batch_job_identifier.bucket #=> String
     #   resp.batch_job_identifier.s3_batch_job_identifier.identifier.file_name #=> String
     #   resp.batch_job_identifier.s3_batch_job_identifier.identifier.script_name #=> String
@@ -997,11 +1027,15 @@ module Aws::MainframeModernization
     #   resp.execution_id #=> String
     #   resp.job_id #=> String
     #   resp.job_name #=> String
+    #   resp.job_step_restart_marker.from_proc_step #=> String
+    #   resp.job_step_restart_marker.from_step #=> String
+    #   resp.job_step_restart_marker.to_proc_step #=> String
+    #   resp.job_step_restart_marker.to_step #=> String
     #   resp.job_type #=> String, one of "VSE", "JES2", "JES3"
     #   resp.job_user #=> String
     #   resp.return_code #=> String
     #   resp.start_time #=> Time
-    #   resp.status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Succeeded With Warning"
+    #   resp.status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Purged", "Succeeded With Warning"
     #   resp.status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/GetBatchJobExecution AWS API Documentation
@@ -1469,7 +1503,7 @@ module Aws::MainframeModernization
     #     next_token: "NextToken",
     #     started_after: Time.now,
     #     started_before: Time.now,
-    #     status: "Submitting", # accepts Submitting, Holding, Dispatching, Running, Cancelling, Cancelled, Succeeded, Failed, Succeeded With Warning
+    #     status: "Submitting", # accepts Submitting, Holding, Dispatching, Running, Cancelling, Cancelled, Succeeded, Failed, Purged, Succeeded With Warning
     #   })
     #
     # @example Response structure
@@ -1478,6 +1512,11 @@ module Aws::MainframeModernization
     #   resp.batch_job_executions[0].application_id #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.file_batch_job_identifier.file_name #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.file_batch_job_identifier.folder_path #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.execution_id #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.from_proc_step #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.from_step #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.to_proc_step #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.restart_batch_job_identifier.job_step_restart_marker.to_step #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.bucket #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.identifier.file_name #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.identifier.script_name #=> String
@@ -1490,7 +1529,7 @@ module Aws::MainframeModernization
     #   resp.batch_job_executions[0].job_type #=> String, one of "VSE", "JES2", "JES3"
     #   resp.batch_job_executions[0].return_code #=> String
     #   resp.batch_job_executions[0].start_time #=> Time
-    #   resp.batch_job_executions[0].status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Succeeded With Warning"
+    #   resp.batch_job_executions[0].status #=> String, one of "Submitting", "Holding", "Dispatching", "Running", "Cancelling", "Cancelled", "Succeeded", "Failed", "Purged", "Succeeded With Warning"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListBatchJobExecutions AWS API Documentation
@@ -1499,6 +1538,45 @@ module Aws::MainframeModernization
     # @param [Hash] params ({})
     def list_batch_job_executions(params = {}, options = {})
       req = build_request(:list_batch_job_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists all the job steps for JCL files to restart a batch job. This is
+    # only applicable for Micro Focus engine with versions 8.0.6 and above.
+    #
+    # @option params [required, String] :application_id
+    #   The unique identifier of the application.
+    #
+    # @option params [required, String] :execution_id
+    #   The unique identifier of each batch job execution.
+    #
+    # @return [Types::ListBatchJobRestartPointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBatchJobRestartPointsResponse#batch_job_steps #batch_job_steps} => Array&lt;Types::JobStep&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_batch_job_restart_points({
+    #     application_id: "Identifier", # required
+    #     execution_id: "Identifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_job_steps #=> Array
+    #   resp.batch_job_steps[0].proc_step_name #=> String
+    #   resp.batch_job_steps[0].proc_step_number #=> Integer
+    #   resp.batch_job_steps[0].step_cond_code #=> String
+    #   resp.batch_job_steps[0].step_name #=> String
+    #   resp.batch_job_steps[0].step_number #=> Integer
+    #   resp.batch_job_steps[0].step_restartable #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListBatchJobRestartPoints AWS API Documentation
+    #
+    # @overload list_batch_job_restart_points(params = {})
+    # @param [Hash] params ({})
+    def list_batch_job_restart_points(params = {}, options = {})
+      req = build_request(:list_batch_job_restart_points, params)
       req.send_request(options)
     end
 
@@ -1853,6 +1931,15 @@ module Aws::MainframeModernization
     #         file_name: "String", # required
     #         folder_path: "String",
     #       },
+    #       restart_batch_job_identifier: {
+    #         execution_id: "Identifier", # required
+    #         job_step_restart_marker: { # required
+    #           from_proc_step: "String",
+    #           from_step: "String", # required
+    #           to_proc_step: "String",
+    #           to_step: "String",
+    #         },
+    #       },
     #       s3_batch_job_identifier: {
     #         bucket: "String", # required
     #         identifier: { # required
@@ -2098,7 +2185,7 @@ module Aws::MainframeModernization
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mainframemodernization'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

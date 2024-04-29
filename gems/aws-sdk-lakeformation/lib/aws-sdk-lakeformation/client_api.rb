@@ -422,6 +422,7 @@ module Aws::LakeFormation
     CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "InstanceArn"))
     CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:external_filtering, Shapes::ShapeRef.new(shape: ExternalFilteringConfiguration, location_name: "ExternalFiltering"))
+    CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:share_recipients, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ShareRecipients"))
     CreateLakeFormationIdentityCenterConfigurationRequest.struct_class = Types::CreateLakeFormationIdentityCenterConfigurationRequest
 
     CreateLakeFormationIdentityCenterConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
@@ -529,6 +530,8 @@ module Aws::LakeFormation
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "InstanceArn"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:external_filtering, Shapes::ShapeRef.new(shape: ExternalFilteringConfiguration, location_name: "ExternalFiltering"))
+    DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:share_recipients, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ShareRecipients"))
+    DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:resource_share, Shapes::ShapeRef.new(shape: RAMResourceShareArn, location_name: "ResourceShare"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.struct_class = Types::DescribeLakeFormationIdentityCenterConfigurationResponse
 
     DescribeResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
@@ -1084,6 +1087,7 @@ module Aws::LakeFormation
     UpdateLFTagResponse.struct_class = Types::UpdateLFTagResponse
 
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:share_recipients, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ShareRecipients"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:application_status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "ApplicationStatus"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:external_filtering, Shapes::ShapeRef.new(shape: ExternalFilteringConfiguration, location_name: "ExternalFiltering"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.struct_class = Types::UpdateLakeFormationIdentityCenterConfigurationRequest

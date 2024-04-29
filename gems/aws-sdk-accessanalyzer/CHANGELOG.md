@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2024-03-20)
+------------------
+
+* Feature - This release adds support for policy validation and external access findings for DynamoDB tables and streams. IAM Access Analyzer helps you author functional and secure resource-based policies and identify cross-account access. Updated service API, documentation, and paginators.
+
+1.46.0 (2024-03-01)
+------------------
+
+* Feature - Fixed a typo in description field.
+
 1.45.0 (2024-01-26)
 ------------------
 

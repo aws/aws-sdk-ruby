@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2024-04-16)
+------------------
+
+* Feature - This release adds new APIs to allow customers to configure their Outpost capacity at order-time.
+
+1.54.0 (2024-04-12)
+------------------
+
+* Feature - This release adds EXPEDITORS as a valid shipment carrier.
+
 1.53.0 (2024-01-26)
 ------------------
 

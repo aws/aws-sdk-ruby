@@ -13,6 +13,11 @@ module Aws::ManagedBlockchainQuery
       SENSITIVE: []
     end
 
+    class AddressIdentifierFilter
+      attr_accessor transaction_event_to_address: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AssetContract
       attr_accessor contract_identifier: Types::ContractIdentifier
       attr_accessor token_standard: ("ERC20" | "ERC721" | "ERC1155")
@@ -118,6 +123,7 @@ module Aws::ManagedBlockchainQuery
 
     class GetTransactionInput
       attr_accessor transaction_hash: ::String
+      attr_accessor transaction_id: ::String
       attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
       SENSITIVE: []
     end
@@ -146,6 +152,30 @@ module Aws::ManagedBlockchainQuery
       SENSITIVE: []
     end
 
+    class ListFilteredTransactionEventsInput
+      attr_accessor network: ::String
+      attr_accessor address_identifier_filter: Types::AddressIdentifierFilter
+      attr_accessor time_filter: Types::TimeFilter
+      attr_accessor vout_filter: Types::VoutFilter
+      attr_accessor confirmation_status_filter: Types::ConfirmationStatusFilter
+      attr_accessor sort: Types::ListFilteredTransactionEventsSort
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFilteredTransactionEventsOutput
+      attr_accessor events: ::Array[Types::TransactionEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFilteredTransactionEventsSort
+      attr_accessor sort_by: ("blockchainInstant")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
     class ListTokenBalancesInput
       attr_accessor owner_filter: Types::OwnerFilter
       attr_accessor token_filter: Types::TokenFilter
@@ -162,6 +192,7 @@ module Aws::ManagedBlockchainQuery
 
     class ListTransactionEventsInput
       attr_accessor transaction_hash: ::String
+      attr_accessor transaction_id: ::String
       attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -232,6 +263,12 @@ module Aws::ManagedBlockchainQuery
       SENSITIVE: []
     end
 
+    class TimeFilter
+      attr_accessor from: Types::BlockchainInstant
+      attr_accessor to: Types::BlockchainInstant
+      SENSITIVE: []
+    end
+
     class TokenBalance
       attr_accessor owner_identifier: Types::OwnerIdentifier
       attr_accessor token_identifier: Types::TokenIdentifier
@@ -290,11 +327,18 @@ module Aws::ManagedBlockchainQuery
       attr_accessor token_id: ::String
       attr_accessor transaction_id: ::String
       attr_accessor vout_index: ::Integer
+      attr_accessor vout_spent: bool
+      attr_accessor spent_vout_transaction_id: ::String
+      attr_accessor spent_vout_transaction_hash: ::String
+      attr_accessor spent_vout_index: ::Integer
+      attr_accessor blockchain_instant: Types::BlockchainInstant
+      attr_accessor confirmation_status: ("FINAL" | "NONFINAL")
       SENSITIVE: []
     end
 
     class TransactionOutputItem
       attr_accessor transaction_hash: ::String
+      attr_accessor transaction_id: ::String
       attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
       attr_accessor transaction_timestamp: ::Time
       attr_accessor confirmation_status: ("FINAL" | "NONFINAL")
@@ -311,6 +355,11 @@ module Aws::ManagedBlockchainQuery
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VoutFilter
+      attr_accessor vout_spent: bool
       SENSITIVE: []
     end
   end

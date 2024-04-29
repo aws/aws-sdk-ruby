@@ -383,12 +383,31 @@
         "container":{"shape":"AttemptContainerDetail"},
         "startedAt":{"shape":"Long"},
         "stoppedAt":{"shape":"Long"},
-        "statusReason":{"shape":"String"}
+        "statusReason":{"shape":"String"},
+        "taskProperties":{"shape":"ListAttemptEcsTaskDetails"}
       }
     },
     "AttemptDetails":{
       "type":"list",
       "member":{"shape":"AttemptDetail"}
+    },
+    "AttemptEcsTaskDetails":{
+      "type":"structure",
+      "members":{
+        "containerInstanceArn":{"shape":"String"},
+        "taskArn":{"shape":"String"},
+        "containers":{"shape":"ListAttemptTaskContainerDetails"}
+      }
+    },
+    "AttemptTaskContainerDetails":{
+      "type":"structure",
+      "members":{
+        "exitCode":{"shape":"Integer"},
+        "name":{"shape":"String"},
+        "reason":{"shape":"String"},
+        "logStreamName":{"shape":"String"},
+        "networkInterfaces":{"shape":"NetworkInterfaceList"}
+      }
     },
     "Boolean":{"type":"boolean"},
     "CEState":{
@@ -695,7 +714,8 @@
         "schedulingPolicyArn":{"shape":"String"},
         "priority":{"shape":"Integer"},
         "computeEnvironmentOrder":{"shape":"ComputeEnvironmentOrders"},
-        "tags":{"shape":"TagrisTagsMap"}
+        "tags":{"shape":"TagrisTagsMap"},
+        "jobStateTimeLimitActions":{"shape":"JobStateTimeLimitActions"}
       }
     },
     "CreateJobQueueResponse":{
@@ -920,9 +940,62 @@
       "type":"list",
       "member":{"shape":"Ec2Configuration"}
     },
+    "EcsProperties":{
+      "type":"structure",
+      "required":["taskProperties"],
+      "members":{
+        "taskProperties":{"shape":"ListEcsTaskProperties"}
+      }
+    },
+    "EcsPropertiesDetail":{
+      "type":"structure",
+      "members":{
+        "taskProperties":{"shape":"ListEcsTaskDetails"}
+      }
+    },
+    "EcsPropertiesOverride":{
+      "type":"structure",
+      "members":{
+        "taskProperties":{"shape":"ListTaskPropertiesOverride"}
+      }
+    },
+    "EcsTaskDetails":{
+      "type":"structure",
+      "members":{
+        "containers":{"shape":"ListTaskContainerDetails"},
+        "containerInstanceArn":{"shape":"String"},
+        "taskArn":{"shape":"String"},
+        "ephemeralStorage":{"shape":"EphemeralStorage"},
+        "executionRoleArn":{"shape":"String"},
+        "platformVersion":{"shape":"String"},
+        "ipcMode":{"shape":"String"},
+        "taskRoleArn":{"shape":"String"},
+        "pidMode":{"shape":"String"},
+        "networkConfiguration":{"shape":"NetworkConfiguration"},
+        "runtimePlatform":{"shape":"RuntimePlatform"},
+        "volumes":{"shape":"Volumes"}
+      }
+    },
+    "EcsTaskProperties":{
+      "type":"structure",
+      "required":["containers"],
+      "members":{
+        "containers":{"shape":"ListTaskContainerProperties"},
+        "ephemeralStorage":{"shape":"EphemeralStorage"},
+        "executionRoleArn":{"shape":"String"},
+        "platformVersion":{"shape":"String"},
+        "ipcMode":{"shape":"String"},
+        "taskRoleArn":{"shape":"String"},
+        "pidMode":{"shape":"String"},
+        "networkConfiguration":{"shape":"NetworkConfiguration"},
+        "runtimePlatform":{"shape":"RuntimePlatform"},
+        "volumes":{"shape":"Volumes"}
+      }
+    },
     "EksAttemptContainerDetail":{
       "type":"structure",
       "members":{
+        "name":{"shape":"String"},
         "exitCode":{"shape":"Integer"},
         "reason":{"shape":"String"}
       }
@@ -935,6 +1008,7 @@
       "type":"structure",
       "members":{
         "containers":{"shape":"EksAttemptContainerDetails"},
+        "initContainers":{"shape":"EksAttemptContainerDetails"},
         "podName":{"shape":"String"},
         "nodeName":{"shape":"String"},
         "startedAt":{"shape":"Long"},
@@ -1007,6 +1081,7 @@
     "EksContainerOverride":{
       "type":"structure",
       "members":{
+        "name":{"shape":"String"},
         "image":{"shape":"String"},
         "command":{"shape":"StringList"},
         "args":{"shape":"StringList"},
@@ -1031,6 +1106,7 @@
         "runAsUser":{"shape":"Long"},
         "runAsGroup":{"shape":"Long"},
         "privileged":{"shape":"Boolean"},
+        "allowPrivilegeEscalation":{"shape":"Boolean"},
         "readOnlyRootFilesystem":{"shape":"Boolean"},
         "runAsNonRoot":{"shape":"Boolean"}
       }
@@ -1086,9 +1162,12 @@
         "serviceAccountName":{"shape":"String"},
         "hostNetwork":{"shape":"Boolean"},
         "dnsPolicy":{"shape":"String"},
+        "imagePullSecrets":{"shape":"ImagePullSecrets"},
         "containers":{"shape":"EksContainers"},
+        "initContainers":{"shape":"EksContainers"},
         "volumes":{"shape":"EksVolumes"},
-        "metadata":{"shape":"EksMetadata"}
+        "metadata":{"shape":"EksMetadata"},
+        "shareProcessNamespace":{"shape":"Boolean"}
       }
     },
     "EksPodPropertiesDetail":{
@@ -1097,17 +1176,21 @@
         "serviceAccountName":{"shape":"String"},
         "hostNetwork":{"shape":"Boolean"},
         "dnsPolicy":{"shape":"String"},
+        "imagePullSecrets":{"shape":"ImagePullSecrets"},
         "containers":{"shape":"EksContainerDetails"},
+        "initContainers":{"shape":"EksContainerDetails"},
         "volumes":{"shape":"EksVolumes"},
         "podName":{"shape":"String"},
         "nodeName":{"shape":"String"},
-        "metadata":{"shape":"EksMetadata"}
+        "metadata":{"shape":"EksMetadata"},
+        "shareProcessNamespace":{"shape":"Boolean"}
       }
     },
     "EksPodPropertiesOverride":{
       "type":"structure",
       "members":{
         "containers":{"shape":"EksContainerOverrideList"},
+        "initContainers":{"shape":"EksContainerOverrideList"},
         "metadata":{"shape":"EksMetadata"}
       }
     },
@@ -1207,6 +1290,17 @@
       "max":256,
       "min":1
     },
+    "ImagePullSecret":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{"shape":"String"}
+      }
+    },
+    "ImagePullSecrets":{
+      "type":"list",
+      "member":{"shape":"ImagePullSecret"}
+    },
     "ImageType":{
       "type":"string",
       "max":256,
@@ -1254,6 +1348,7 @@
         "tags":{"shape":"TagrisTagsMap"},
         "propagateTags":{"shape":"Boolean"},
         "platformCapabilities":{"shape":"PlatformCapabilityList"},
+        "ecsProperties":{"shape":"EcsProperties"},
         "eksProperties":{"shape":"EksProperties"},
         "containerOrchestrationType":{"shape":"OrchestrationType"}
       }
@@ -1317,6 +1412,7 @@
         "platformCapabilities":{"shape":"PlatformCapabilityList"},
         "eksProperties":{"shape":"EksPropertiesDetail"},
         "eksAttempts":{"shape":"EksAttemptDetails"},
+        "ecsProperties":{"shape":"EcsPropertiesDetail"},
         "isCancelled":{"shape":"Boolean"},
         "isTerminated":{"shape":"Boolean"}
       }
@@ -1348,12 +1444,40 @@
         "statusReason":{"shape":"String"},
         "priority":{"shape":"Integer"},
         "computeEnvironmentOrder":{"shape":"ComputeEnvironmentOrders"},
-        "tags":{"shape":"TagrisTagsMap"}
+        "tags":{"shape":"TagrisTagsMap"},
+        "jobStateTimeLimitActions":{"shape":"JobStateTimeLimitActions"}
       }
     },
     "JobQueueDetailList":{
       "type":"list",
       "member":{"shape":"JobQueueDetail"}
+    },
+    "JobStateTimeLimitAction":{
+      "type":"structure",
+      "required":[
+        "reason",
+        "state",
+        "maxTimeSeconds",
+        "action"
+      ],
+      "members":{
+        "reason":{"shape":"String"},
+        "state":{"shape":"JobStateTimeLimitActionsState"},
+        "maxTimeSeconds":{"shape":"Integer"},
+        "action":{"shape":"JobStateTimeLimitActionsAction"}
+      }
+    },
+    "JobStateTimeLimitActions":{
+      "type":"list",
+      "member":{"shape":"JobStateTimeLimitAction"}
+    },
+    "JobStateTimeLimitActionsAction":{
+      "type":"string",
+      "enum":["CANCEL"]
+    },
+    "JobStateTimeLimitActionsState":{
+      "type":"string",
+      "enum":["RUNNABLE"]
     },
     "JobStatus":{
       "type":"string",
@@ -1436,6 +1560,22 @@
         "swappiness":{"shape":"Integer"}
       }
     },
+    "ListAttemptEcsTaskDetails":{
+      "type":"list",
+      "member":{"shape":"AttemptEcsTaskDetails"}
+    },
+    "ListAttemptTaskContainerDetails":{
+      "type":"list",
+      "member":{"shape":"AttemptTaskContainerDetails"}
+    },
+    "ListEcsTaskDetails":{
+      "type":"list",
+      "member":{"shape":"EcsTaskDetails"}
+    },
+    "ListEcsTaskProperties":{
+      "type":"list",
+      "member":{"shape":"EcsTaskProperties"}
+    },
     "ListJobsFilterList":{
       "type":"list",
       "member":{"shape":"KeyValuesPair"}
@@ -1490,6 +1630,22 @@
       "members":{
         "tags":{"shape":"TagrisTagsMap"}
       }
+    },
+    "ListTaskContainerDetails":{
+      "type":"list",
+      "member":{"shape":"TaskContainerDetails"}
+    },
+    "ListTaskContainerOverrides":{
+      "type":"list",
+      "member":{"shape":"TaskContainerOverrides"}
+    },
+    "ListTaskContainerProperties":{
+      "type":"list",
+      "member":{"shape":"TaskContainerProperties"}
+    },
+    "ListTaskPropertiesOverride":{
+      "type":"list",
+      "member":{"shape":"TaskPropertiesOverride"}
     },
     "LogConfiguration":{
       "type":"structure",
@@ -1588,7 +1744,9 @@
       "required":["targetNodes"],
       "members":{
         "targetNodes":{"shape":"String"},
-        "containerOverrides":{"shape":"ContainerOverrides"}
+        "containerOverrides":{"shape":"ContainerOverrides"},
+        "ecsPropertiesOverride":{"shape":"EcsPropertiesOverride"},
+        "instanceTypes":{"shape":"StringList"}
       }
     },
     "NodePropertyOverrides":{
@@ -1604,7 +1762,9 @@
       "required":["targetNodes"],
       "members":{
         "targetNodes":{"shape":"String"},
-        "container":{"shape":"ContainerProperties"}
+        "container":{"shape":"ContainerProperties"},
+        "instanceTypes":{"shape":"StringList"},
+        "ecsProperties":{"shape":"EcsProperties"}
       }
     },
     "OrchestrationType":{
@@ -1653,7 +1813,8 @@
         "timeout":{"shape":"JobTimeout"},
         "tags":{"shape":"TagrisTagsMap"},
         "platformCapabilities":{"shape":"PlatformCapabilityList"},
-        "eksProperties":{"shape":"EksProperties"}
+        "eksProperties":{"shape":"EksProperties"},
+        "ecsProperties":{"shape":"EcsProperties"}
       }
     },
     "RegisterJobDefinitionResponse":{
@@ -1811,7 +1972,8 @@
         "propagateTags":{"shape":"Boolean"},
         "timeout":{"shape":"JobTimeout"},
         "tags":{"shape":"TagrisTagsMap"},
-        "eksPropertiesOverride":{"shape":"EksPropertiesOverride"}
+        "eksPropertiesOverride":{"shape":"EksPropertiesOverride"},
+        "ecsPropertiesOverride":{"shape":"EcsPropertiesOverride"}
       }
     },
     "SubmitJobResponse":{
@@ -1872,6 +2034,79 @@
       "type":"map",
       "key":{"shape":"String"},
       "value":{"shape":"String"}
+    },
+    "TaskContainerDependency":{
+      "type":"structure",
+      "members":{
+        "containerName":{"shape":"String"},
+        "condition":{"shape":"String"}
+      }
+    },
+    "TaskContainerDependencyList":{
+      "type":"list",
+      "member":{"shape":"TaskContainerDependency"}
+    },
+    "TaskContainerDetails":{
+      "type":"structure",
+      "members":{
+        "command":{"shape":"StringList"},
+        "dependsOn":{"shape":"TaskContainerDependencyList"},
+        "environment":{"shape":"EnvironmentVariables"},
+        "essential":{"shape":"Boolean"},
+        "image":{"shape":"String"},
+        "linuxParameters":{"shape":"LinuxParameters"},
+        "logConfiguration":{"shape":"LogConfiguration"},
+        "mountPoints":{"shape":"MountPoints"},
+        "name":{"shape":"String"},
+        "privileged":{"shape":"Boolean"},
+        "readonlyRootFilesystem":{"shape":"Boolean"},
+        "repositoryCredentials":{"shape":"RepositoryCredentials"},
+        "resourceRequirements":{"shape":"ResourceRequirements"},
+        "secrets":{"shape":"SecretList"},
+        "ulimits":{"shape":"Ulimits"},
+        "user":{"shape":"String"},
+        "exitCode":{"shape":"Integer"},
+        "reason":{"shape":"String"},
+        "logStreamName":{"shape":"String"},
+        "networkInterfaces":{"shape":"NetworkInterfaceList"}
+      }
+    },
+    "TaskContainerOverrides":{
+      "type":"structure",
+      "members":{
+        "command":{"shape":"StringList"},
+        "environment":{"shape":"EnvironmentVariables"},
+        "name":{"shape":"String"},
+        "resourceRequirements":{"shape":"ResourceRequirements"}
+      }
+    },
+    "TaskContainerProperties":{
+      "type":"structure",
+      "required":["image"],
+      "members":{
+        "command":{"shape":"StringList"},
+        "dependsOn":{"shape":"TaskContainerDependencyList"},
+        "environment":{"shape":"EnvironmentVariables"},
+        "essential":{"shape":"Boolean"},
+        "image":{"shape":"String"},
+        "linuxParameters":{"shape":"LinuxParameters"},
+        "logConfiguration":{"shape":"LogConfiguration"},
+        "mountPoints":{"shape":"MountPoints"},
+        "name":{"shape":"String"},
+        "privileged":{"shape":"Boolean"},
+        "readonlyRootFilesystem":{"shape":"Boolean"},
+        "repositoryCredentials":{"shape":"RepositoryCredentials"},
+        "resourceRequirements":{"shape":"ResourceRequirements"},
+        "secrets":{"shape":"SecretList"},
+        "ulimits":{"shape":"Ulimits"},
+        "user":{"shape":"String"}
+      }
+    },
+    "TaskPropertiesOverride":{
+      "type":"structure",
+      "members":{
+        "containers":{"shape":"ListTaskContainerOverrides"}
+      }
     },
     "TerminateJobRequest":{
       "type":"structure",
@@ -1973,7 +2208,8 @@
         "state":{"shape":"JQState"},
         "schedulingPolicyArn":{"shape":"String"},
         "priority":{"shape":"Integer"},
-        "computeEnvironmentOrder":{"shape":"ComputeEnvironmentOrders"}
+        "computeEnvironmentOrder":{"shape":"ComputeEnvironmentOrders"},
+        "jobStateTimeLimitActions":{"shape":"JobStateTimeLimitActions"}
       }
     },
     "UpdateJobQueueResponse":{

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2024-04-18)
+------------------
+
+* Feature - This release introduces the PutAttributeMapping and DeleteAttributeMapping APIs. IAM Roles Anywhere now provides the capability to define a set of mapping rules, allowing customers to specify which data is extracted from their X.509 end-entity certificates.
+
+1.14.0 (2024-04-02)
+------------------
+
+* Feature - This release increases the limit on the roleArns request parameter for the *Profile APIs that support it. This parameter can now take up to 250 role ARNs.
+
+1.13.0 (2024-03-22)
+------------------
+
+* Feature - This release relaxes constraints on the durationSeconds request parameter for the *Profile APIs that support it. This parameter can now take on values that go up to 43200.
+
 1.12.0 (2024-01-26)
 ------------------
 

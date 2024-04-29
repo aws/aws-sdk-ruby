@@ -10,6 +10,28 @@
 module Aws::EMRContainers
   module Types
 
+    # Authorization-related configuration inputs for the security
+    # configuration.
+    #
+    # @!attribute [rw] lake_formation_configuration
+    #   Lake Formation related configuration inputs for the security
+    #   configuration.
+    #   @return [Types::LakeFormationConfiguration]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Encryption-related configuration input for the security
+    #   configuration.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/AuthorizationConfiguration AWS API Documentation
+    #
+    class AuthorizationConfiguration < Struct.new(
+      :lake_formation_configuration,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The ID of the job run to cancel.
     #   @return [String]
@@ -354,6 +376,59 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   The client idempotency token to use when creating the security
+    #   configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the security configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_configuration_data
+    #   Security configuration input for the request.
+    #   @return [Types::SecurityConfigurationData]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the security configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateSecurityConfigurationRequest AWS API Documentation
+    #
+    class CreateSecurityConfigurationRequest < Struct.new(
+      :client_token,
+      :name,
+      :security_configuration_data,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the security configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the security configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the security configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateSecurityConfigurationResponse AWS API Documentation
+    #
+    class CreateSecurityConfigurationResponse < Struct.new(
+      :id,
+      :name,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The specified name of the virtual cluster.
     #   @return [String]
@@ -373,13 +448,18 @@ module Aws::EMRContainers
     #   The tags assigned to the virtual cluster.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] security_configuration_id
+    #   The ID of the security configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateVirtualClusterRequest AWS API Documentation
     #
     class CreateVirtualClusterRequest < Struct.new(
       :name,
       :container_provider,
       :client_token,
-      :tags)
+      :tags,
+      :security_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -593,6 +673,30 @@ module Aws::EMRContainers
     end
 
     # @!attribute [rw] id
+    #   The ID of the security configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeSecurityConfigurationRequest AWS API Documentation
+    #
+    class DescribeSecurityConfigurationRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_configuration
+    #   Details of the security configuration.
+    #   @return [Types::SecurityConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeSecurityConfigurationResponse AWS API Documentation
+    #
+    class DescribeSecurityConfigurationResponse < Struct.new(
+      :security_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
     #   The ID of the virtual cluster that will be described.
     #   @return [String]
     #
@@ -617,6 +721,19 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # The request exceeded the Amazon EKS API operation limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/EKSRequestThrottledException AWS API Documentation
+    #
+    class EKSRequestThrottledException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The information about the Amazon EKS cluster.
     #
     # @!attribute [rw] namespace
@@ -627,6 +744,20 @@ module Aws::EMRContainers
     #
     class EksInfo < Struct.new(
       :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configurations related to encryption for the security configuration.
+    #
+    # @!attribute [rw] in_transit_encryption_configuration
+    #   In-transit encryption-related input for the security configuration.
+    #   @return [Types::InTransitEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :in_transit_encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -801,6 +932,22 @@ module Aws::EMRContainers
       :id,
       :credentials,
       :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configurations related to in-transit encryption for the security
+    # configuration.
+    #
+    # @!attribute [rw] tls_certificate_configuration
+    #   TLS certificate-related configuration input for the security
+    #   configuration.
+    #   @return [Types::TLSCertificateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/InTransitEncryptionConfiguration AWS API Documentation
+    #
+    class InTransitEncryptionConfiguration < Struct.new(
+      :tls_certificate_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1042,6 +1189,34 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # Lake Formation related configuration inputs for the security
+    # configuration.
+    #
+    # @!attribute [rw] authorized_session_tag_value
+    #   The session tag to authorize Amazon EMR on EKS for API calls to Lake
+    #   Formation.
+    #   @return [String]
+    #
+    # @!attribute [rw] secure_namespace_info
+    #   The namespace input of the system job.
+    #   @return [Types::SecureNamespaceInfo]
+    #
+    # @!attribute [rw] query_engine_role_arn
+    #   The query engine IAM role ARN that is tied to the secure Spark job.
+    #   The `QueryEngine` role assumes the `JobExecutionRole` to execute all
+    #   the Lake Formation calls.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/LakeFormationConfiguration AWS API Documentation
+    #
+    class LakeFormationConfiguration < Struct.new(
+      :authorized_session_tag_value,
+      :secure_namespace_info,
+      :query_engine_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_cluster_id
     #   The ID of the virtual cluster for which to list the job run.
     #   @return [String]
@@ -1204,6 +1379,53 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # @!attribute [rw] created_after
+    #   The date and time after which the security configuration was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_before
+    #   The date and time before which the security configuration was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of security configurations the operation can
+    #   list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of security configurations to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListSecurityConfigurationsRequest AWS API Documentation
+    #
+    class ListSecurityConfigurationsRequest < Struct.new(
+      :created_after,
+      :created_before,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_configurations
+    #   The list of returned security configurations.
+    #   @return [Array<Types::SecurityConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of security configurations to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListSecurityConfigurationsResponse AWS API Documentation
+    #
+    class ListSecurityConfigurationsResponse < Struct.new(
+      :security_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of tagged resources.
     #   @return [String]
@@ -1257,6 +1479,13 @@ module Aws::EMRContainers
     #   The token for the next set of virtual clusters to return.
     #   @return [String]
     #
+    # @!attribute [rw] eks_access_entry_integrated
+    #   Optional Boolean that specifies whether the operation should return
+    #   the virtual clusters that have the access entry integration enabled
+    #   or disabled. If not specified, the operation returns all applicable
+    #   virtual clusters.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListVirtualClustersRequest AWS API Documentation
     #
     class ListVirtualClustersRequest < Struct.new(
@@ -1266,7 +1495,8 @@ module Aws::EMRContainers
       :created_before,
       :states,
       :max_results,
-      :next_token)
+      :next_token,
+      :eks_access_entry_integrated)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1469,6 +1699,88 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # Namespace inputs for the system job.
+    #
+    # @!attribute [rw] cluster_id
+    #   The ID of the Amazon EKS cluster where Amazon EMR on EKS jobs run.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the Amazon EKS cluster where the system jobs run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/SecureNamespaceInfo AWS API Documentation
+    #
+    class SecureNamespaceInfo < Struct.new(
+      :cluster_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Inputs related to the security configuration. Security configurations
+    # in Amazon EMR on EKS are templates for different security setups. You
+    # can use security configurations to configure the Lake Formation
+    # integration setup. You can also create a security configuration to
+    # re-use a security setup each time you create a virtual cluster.
+    #
+    # @!attribute [rw] id
+    #   The ID of the security configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the security configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the security configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the job run was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_configuration_data
+    #   Security configuration inputs for the request.
+    #   @return [Types::SecurityConfigurationData]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the security configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/SecurityConfiguration AWS API Documentation
+    #
+    class SecurityConfiguration < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :created_at,
+      :created_by,
+      :security_configuration_data,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configurations related to the security configuration for the request.
+    #
+    # @!attribute [rw] authorization_configuration
+    #   Authorization-related configuration input for the security
+    #   configuration.
+    #   @return [Types::AuthorizationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/SecurityConfigurationData AWS API Documentation
+    #
+    class SecurityConfigurationData < Struct.new(
+      :authorization_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The job driver for job type.
     #
     # @!attribute [rw] entry_point
@@ -1605,6 +1917,35 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # Configurations related to the TLS certificate for the security
+    # configuration.
+    #
+    # @!attribute [rw] certificate_provider_type
+    #   The TLS certificate type. Acceptable values: `PEM` or `Custom`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_certificate_secret_arn
+    #   Secrets Manager ARN that contains the public TLS certificate
+    #   contents, used for communication between the user job and the system
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_certificate_secret_arn
+    #   Secrets Manager ARN that contains the private TLS certificate
+    #   contents, used for communication between the user job and the system
+    #   job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/TLSCertificateConfiguration AWS API Documentation
+    #
+    class TLSCertificateConfiguration < Struct.new(
+      :certificate_provider_type,
+      :public_certificate_secret_arn,
+      :private_certificate_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of resources.
     #   @return [String]
@@ -1716,6 +2057,10 @@ module Aws::EMRContainers
     #   The assigned tags of the virtual cluster.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] security_configuration_id
+    #   The ID of the security configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/VirtualCluster AWS API Documentation
     #
     class VirtualCluster < Struct.new(
@@ -1725,7 +2070,8 @@ module Aws::EMRContainers
       :state,
       :container_provider,
       :created_at,
-      :tags)
+      :tags,
+      :security_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end

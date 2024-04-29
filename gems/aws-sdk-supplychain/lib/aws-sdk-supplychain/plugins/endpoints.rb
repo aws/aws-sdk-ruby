@@ -62,6 +62,8 @@ module Aws::SupplyChain
             Aws::SupplyChain::Endpoints::CreateBillOfMaterialsImportJob.build(context)
           when :get_bill_of_materials_import_job
             Aws::SupplyChain::Endpoints::GetBillOfMaterialsImportJob.build(context)
+          when :send_data_integration_event
+            Aws::SupplyChain::Endpoints::SendDataIntegrationEvent.build(context)
           end
         end
       end

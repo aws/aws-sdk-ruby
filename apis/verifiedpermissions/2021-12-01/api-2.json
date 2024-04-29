@@ -29,6 +29,22 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "BatchIsAuthorizedWithToken":{
+      "name":"BatchIsAuthorizedWithToken",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchIsAuthorizedWithTokenInput"},
+      "output":{"shape":"BatchIsAuthorizedWithTokenOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "CreateIdentitySource":{
       "name":"CreateIdentitySource",
       "http":{
@@ -540,6 +556,60 @@
       "type":"list",
       "member":{"shape":"BatchIsAuthorizedOutputItem"}
     },
+    "BatchIsAuthorizedWithTokenInput":{
+      "type":"structure",
+      "required":[
+        "policyStoreId",
+        "requests"
+      ],
+      "members":{
+        "policyStoreId":{"shape":"PolicyStoreId"},
+        "identityToken":{"shape":"Token"},
+        "accessToken":{"shape":"Token"},
+        "entities":{"shape":"EntitiesDefinition"},
+        "requests":{"shape":"BatchIsAuthorizedWithTokenInputList"}
+      }
+    },
+    "BatchIsAuthorizedWithTokenInputItem":{
+      "type":"structure",
+      "members":{
+        "action":{"shape":"ActionIdentifier"},
+        "resource":{"shape":"EntityIdentifier"},
+        "context":{"shape":"ContextDefinition"}
+      }
+    },
+    "BatchIsAuthorizedWithTokenInputList":{
+      "type":"list",
+      "member":{"shape":"BatchIsAuthorizedWithTokenInputItem"},
+      "min":1
+    },
+    "BatchIsAuthorizedWithTokenOutput":{
+      "type":"structure",
+      "required":["results"],
+      "members":{
+        "principal":{"shape":"EntityIdentifier"},
+        "results":{"shape":"BatchIsAuthorizedWithTokenOutputList"}
+      }
+    },
+    "BatchIsAuthorizedWithTokenOutputItem":{
+      "type":"structure",
+      "required":[
+        "request",
+        "decision",
+        "determiningPolicies",
+        "errors"
+      ],
+      "members":{
+        "request":{"shape":"BatchIsAuthorizedWithTokenInputItem"},
+        "decision":{"shape":"Decision"},
+        "determiningPolicies":{"shape":"DeterminingPolicyList"},
+        "errors":{"shape":"EvaluationErrorList"}
+      }
+    },
+    "BatchIsAuthorizedWithTokenOutputList":{
+      "type":"list",
+      "member":{"shape":"BatchIsAuthorizedWithTokenOutputItem"}
+    },
     "Boolean":{
       "type":"boolean",
       "box":true
@@ -562,18 +632,80 @@
       "max":1000,
       "min":0
     },
+    "CognitoGroupConfiguration":{
+      "type":"structure",
+      "required":["groupEntityType"],
+      "members":{
+        "groupEntityType":{"shape":"GroupEntityType"}
+      }
+    },
+    "CognitoGroupConfigurationDetail":{
+      "type":"structure",
+      "members":{
+        "groupEntityType":{"shape":"GroupEntityType"}
+      }
+    },
+    "CognitoGroupConfigurationItem":{
+      "type":"structure",
+      "members":{
+        "groupEntityType":{"shape":"GroupEntityType"}
+      }
+    },
     "CognitoUserPoolConfiguration":{
       "type":"structure",
       "required":["userPoolArn"],
       "members":{
         "userPoolArn":{"shape":"UserPoolArn"},
-        "clientIds":{"shape":"ClientIds"}
+        "clientIds":{"shape":"ClientIds"},
+        "groupConfiguration":{"shape":"CognitoGroupConfiguration"}
+      }
+    },
+    "CognitoUserPoolConfigurationDetail":{
+      "type":"structure",
+      "required":[
+        "userPoolArn",
+        "clientIds",
+        "issuer"
+      ],
+      "members":{
+        "userPoolArn":{"shape":"UserPoolArn"},
+        "clientIds":{"shape":"ClientIds"},
+        "issuer":{"shape":"Issuer"},
+        "groupConfiguration":{"shape":"CognitoGroupConfigurationDetail"}
+      }
+    },
+    "CognitoUserPoolConfigurationItem":{
+      "type":"structure",
+      "required":[
+        "userPoolArn",
+        "clientIds",
+        "issuer"
+      ],
+      "members":{
+        "userPoolArn":{"shape":"UserPoolArn"},
+        "clientIds":{"shape":"ClientIds"},
+        "issuer":{"shape":"Issuer"},
+        "groupConfiguration":{"shape":"CognitoGroupConfigurationItem"}
       }
     },
     "Configuration":{
       "type":"structure",
       "members":{
         "cognitoUserPoolConfiguration":{"shape":"CognitoUserPoolConfiguration"}
+      },
+      "union":true
+    },
+    "ConfigurationDetail":{
+      "type":"structure",
+      "members":{
+        "cognitoUserPoolConfiguration":{"shape":"CognitoUserPoolConfigurationDetail"}
+      },
+      "union":true
+    },
+    "ConfigurationItem":{
+      "type":"structure",
+      "members":{
+        "cognitoUserPoolConfiguration":{"shape":"CognitoUserPoolConfigurationItem"}
       },
       "union":true
     },
@@ -893,7 +1025,6 @@
       "type":"structure",
       "required":[
         "createdDate",
-        "details",
         "identitySourceId",
         "lastUpdatedDate",
         "policyStoreId",
@@ -901,11 +1032,16 @@
       ],
       "members":{
         "createdDate":{"shape":"TimestampFormat"},
-        "details":{"shape":"IdentitySourceDetails"},
+        "details":{
+          "shape":"IdentitySourceDetails",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration.cognitoUserPoolConfiguration"
+        },
         "identitySourceId":{"shape":"IdentitySourceId"},
         "lastUpdatedDate":{"shape":"TimestampFormat"},
         "policyStoreId":{"shape":"PolicyStoreId"},
-        "principalEntityType":{"shape":"PrincipalEntityType"}
+        "principalEntityType":{"shape":"PrincipalEntityType"},
+        "configuration":{"shape":"ConfigurationDetail"}
       }
     },
     "GetPolicyInput":{
@@ -1017,6 +1153,13 @@
         "namespaces":{"shape":"NamespaceList"}
       }
     },
+    "GroupEntityType":{
+      "type":"string",
+      "max":200,
+      "min":1,
+      "pattern":"([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*",
+      "sensitive":true
+    },
     "IdempotencyToken":{
       "type":"string",
       "max":64,
@@ -1026,11 +1169,29 @@
     "IdentitySourceDetails":{
       "type":"structure",
       "members":{
-        "clientIds":{"shape":"ClientIds"},
-        "userPoolArn":{"shape":"UserPoolArn"},
-        "discoveryUrl":{"shape":"DiscoveryUrl"},
-        "openIdIssuer":{"shape":"OpenIdIssuer"}
-      }
+        "clientIds":{
+          "shape":"ClientIds",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"
+        },
+        "userPoolArn":{
+          "shape":"UserPoolArn",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"
+        },
+        "discoveryUrl":{
+          "shape":"DiscoveryUrl",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"
+        },
+        "openIdIssuer":{
+          "shape":"OpenIdIssuer",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration"
+        }
+      },
+      "deprecated":true,
+      "deprecatedMessage":"This shape has been replaced by ConfigurationDetail"
     },
     "IdentitySourceFilter":{
       "type":"structure",
@@ -1054,7 +1215,6 @@
       "type":"structure",
       "required":[
         "createdDate",
-        "details",
         "identitySourceId",
         "lastUpdatedDate",
         "policyStoreId",
@@ -1062,21 +1222,44 @@
       ],
       "members":{
         "createdDate":{"shape":"TimestampFormat"},
-        "details":{"shape":"IdentitySourceItemDetails"},
+        "details":{
+          "shape":"IdentitySourceItemDetails",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration.cognitoUserPoolConfiguration"
+        },
         "identitySourceId":{"shape":"IdentitySourceId"},
         "lastUpdatedDate":{"shape":"TimestampFormat"},
         "policyStoreId":{"shape":"PolicyStoreId"},
-        "principalEntityType":{"shape":"PrincipalEntityType"}
+        "principalEntityType":{"shape":"PrincipalEntityType"},
+        "configuration":{"shape":"ConfigurationItem"}
       }
     },
     "IdentitySourceItemDetails":{
       "type":"structure",
       "members":{
-        "clientIds":{"shape":"ClientIds"},
-        "userPoolArn":{"shape":"UserPoolArn"},
-        "discoveryUrl":{"shape":"DiscoveryUrl"},
-        "openIdIssuer":{"shape":"OpenIdIssuer"}
-      }
+        "clientIds":{
+          "shape":"ClientIds",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"
+        },
+        "userPoolArn":{
+          "shape":"UserPoolArn",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"
+        },
+        "discoveryUrl":{
+          "shape":"DiscoveryUrl",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"
+        },
+        "openIdIssuer":{
+          "shape":"OpenIdIssuer",
+          "deprecated":true,
+          "deprecatedMessage":"This attribute has been replaced by configuration"
+        }
+      },
+      "deprecated":true,
+      "deprecatedMessage":"This shape has been replaced by ConfigurationItem"
     },
     "IdentitySources":{
       "type":"list",
@@ -1140,8 +1323,15 @@
       "members":{
         "decision":{"shape":"Decision"},
         "determiningPolicies":{"shape":"DeterminingPolicyList"},
-        "errors":{"shape":"EvaluationErrorList"}
+        "errors":{"shape":"EvaluationErrorList"},
+        "principal":{"shape":"EntityIdentifier"}
       }
+    },
+    "Issuer":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"https://.*"
     },
     "ListIdentitySourcesInput":{
       "type":"structure",
@@ -1156,7 +1346,6 @@
     "ListIdentitySourcesMaxResults":{
       "type":"integer",
       "box":true,
-      "max":200,
       "min":1
     },
     "ListIdentitySourcesOutput":{
@@ -1225,7 +1414,6 @@
     "MaxResults":{
       "type":"integer",
       "box":true,
-      "max":50,
       "min":1
     },
     "Namespace":{
@@ -1592,12 +1780,20 @@
       "pattern":"[A-Za-z0-9-_=]+.[A-Za-z0-9-_=]+.[A-Za-z0-9-_=]+",
       "sensitive":true
     },
+    "UpdateCognitoGroupConfiguration":{
+      "type":"structure",
+      "required":["groupEntityType"],
+      "members":{
+        "groupEntityType":{"shape":"GroupEntityType"}
+      }
+    },
     "UpdateCognitoUserPoolConfiguration":{
       "type":"structure",
       "required":["userPoolArn"],
       "members":{
         "userPoolArn":{"shape":"UserPoolArn"},
-        "clientIds":{"shape":"ClientIds"}
+        "clientIds":{"shape":"ClientIds"},
+        "groupConfiguration":{"shape":"UpdateCognitoGroupConfiguration"}
       }
     },
     "UpdateConfiguration":{

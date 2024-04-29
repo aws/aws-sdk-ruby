@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::EMR
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::EMR
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::EMR
     #   @option options [Aws::EMR::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::EMR::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -1187,6 +1211,7 @@ module Aws::EMR
     #   resp.cluster.release_label #=> String
     #   resp.cluster.auto_terminate #=> Boolean
     #   resp.cluster.termination_protected #=> Boolean
+    #   resp.cluster.unhealthy_node_replacement #=> Boolean
     #   resp.cluster.visible_to_all_users #=> Boolean
     #   resp.cluster.applications #=> Array
     #   resp.cluster.applications[0].name #=> String
@@ -1332,6 +1357,7 @@ module Aws::EMR
     #   resp.job_flows[0].instances.placement.availability_zones[0] #=> String
     #   resp.job_flows[0].instances.keep_job_flow_alive_when_no_steps #=> Boolean
     #   resp.job_flows[0].instances.termination_protected #=> Boolean
+    #   resp.job_flows[0].instances.unhealthy_node_replacement #=> Boolean
     #   resp.job_flows[0].instances.hadoop_version #=> String
     #   resp.job_flows[0].steps #=> Array
     #   resp.job_flows[0].steps[0].step_config.name #=> String
@@ -3542,6 +3568,7 @@ module Aws::EMR
     #       },
     #       keep_job_flow_alive_when_no_steps: false,
     #       termination_protected: false,
+    #       unhealthy_node_replacement: false,
     #       hadoop_version: "XmlStringMaxLen256",
     #       ec2_subnet_id: "XmlStringMaxLen256",
     #       ec2_subnet_ids: ["XmlStringMaxLen256"],
@@ -3730,7 +3757,7 @@ module Aws::EMR
     # flow by a subsequent call to `SetTerminationProtection` in which you
     # set the value to `false`.
     #
-    # For more information, see[Managing Cluster Termination][1] in the
+    # For more information, see [Managing Cluster Termination][1] in the
     # *Amazon EMR Management Guide*.
     #
     #
@@ -3762,6 +3789,54 @@ module Aws::EMR
     # @param [Hash] params ({})
     def set_termination_protection(params = {}, options = {})
       req = build_request(:set_termination_protection, params)
+      req.send_request(options)
+    end
+
+    # Specify whether to enable unhealthy node replacement, which lets
+    # Amazon EMR gracefully replace core nodes on a cluster if any nodes
+    # become unhealthy. For example, a node becomes unhealthy if disk usage
+    # is above 90%. If unhealthy node replacement is on and
+    # `TerminationProtected` are off, Amazon EMR immediately terminates the
+    # unhealthy core nodes. To use unhealthy node replacement and retain
+    # unhealthy core nodes, use to turn on termination protection. In such
+    # cases, Amazon EMR adds the unhealthy nodes to a denylist, reducing job
+    # interruptions and failures.
+    #
+    # If unhealthy node replacement is on, Amazon EMR notifies YARN and
+    # other applications on the cluster to stop scheduling tasks with these
+    # nodes, moves the data, and then terminates the nodes.
+    #
+    # For more information, see [graceful node replacement][1] in the
+    # *Amazon EMR Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html
+    #
+    # @option params [required, Array<String>] :job_flow_ids
+    #   The list of strings that uniquely identify the clusters for which to
+    #   turn on unhealthy node replacement. You can get these identifiers by
+    #   running the RunJobFlow or the DescribeJobFlows operations.
+    #
+    # @option params [required, Boolean] :unhealthy_node_replacement
+    #   Indicates whether to turn on or turn off graceful unhealthy node
+    #   replacement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_unhealthy_node_replacement({
+    #     job_flow_ids: ["XmlString"], # required
+    #     unhealthy_node_replacement: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetUnhealthyNodeReplacement AWS API Documentation
+    #
+    # @overload set_unhealthy_node_replacement(params = {})
+    # @param [Hash] params ({})
+    def set_unhealthy_node_replacement(params = {}, options = {})
+      req = build_request(:set_unhealthy_node_replacement, params)
       req.send_request(options)
     end
 
@@ -4096,7 +4171,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

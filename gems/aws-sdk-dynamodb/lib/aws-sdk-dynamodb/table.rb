@@ -1298,7 +1298,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.FilterExpression.html
     # @option options [String] :key_condition_expression
     #   The condition that specifies the key values for items to be retrieved
     #   by the `Query` action.

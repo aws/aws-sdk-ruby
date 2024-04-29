@@ -1074,7 +1074,8 @@ module Aws
       def list_recovery_points_by_resource: (
                                               resource_arn: ::String,
                                               ?next_token: ::String,
-                                              ?max_results: ::Integer
+                                              ?max_results: ::Integer,
+                                              ?managed_by_aws_backup_only: bool
                                             ) -> _ListRecoveryPointsByResourceResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryPointsByResourceResponseSuccess
 

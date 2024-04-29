@@ -25,6 +25,18 @@ module Aws::InternetMonitor
       SENSITIVE: []
     end
 
+    class ClientLocation
+      attr_accessor as_name: ::String
+      attr_accessor as_number: ::Integer
+      attr_accessor country: ::String
+      attr_accessor subdivision: ::String
+      attr_accessor metro: ::String
+      attr_accessor city: ::String
+      attr_accessor latitude: ::Float
+      attr_accessor longitude: ::Float
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -66,6 +78,7 @@ module Aws::InternetMonitor
     class GetHealthEventInput
       attr_accessor monitor_name: ::String
       attr_accessor event_id: ::String
+      attr_accessor linked_account_id: ::String
       SENSITIVE: []
     end
 
@@ -84,8 +97,25 @@ module Aws::InternetMonitor
       SENSITIVE: []
     end
 
+    class GetInternetEventInput
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInternetEventOutput
+      attr_accessor event_id: ::String
+      attr_accessor event_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor client_location: Types::ClientLocation
+      attr_accessor event_type: ("AVAILABILITY" | "PERFORMANCE")
+      attr_accessor event_status: ("ACTIVE" | "RESOLVED")
+      SENSITIVE: []
+    end
+
     class GetMonitorInput
       attr_accessor monitor_name: ::String
+      attr_accessor linked_account_id: ::String
       SENSITIVE: []
     end
 
@@ -170,6 +200,7 @@ module Aws::InternetMonitor
       attr_accessor status: ("ACTIVE" | "RESOLVED")
       attr_accessor caused_by: Types::NetworkImpairment
       attr_accessor internet_health: Types::InternetHealth
+      attr_accessor ipv_4_prefixes: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -180,6 +211,17 @@ module Aws::InternetMonitor
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternetEventSummary
+      attr_accessor event_id: ::String
+      attr_accessor event_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor client_location: Types::ClientLocation
+      attr_accessor event_type: ("AVAILABILITY" | "PERFORMANCE")
+      attr_accessor event_status: ("ACTIVE" | "RESOLVED")
       SENSITIVE: []
     end
 
@@ -206,6 +248,7 @@ module Aws::InternetMonitor
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor event_status: ("ACTIVE" | "RESOLVED")
+      attr_accessor linked_account_id: ::String
       SENSITIVE: []
     end
 
@@ -215,10 +258,27 @@ module Aws::InternetMonitor
       SENSITIVE: []
     end
 
+    class ListInternetEventsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor event_status: ::String
+      attr_accessor event_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListInternetEventsOutput
+      attr_accessor internet_events: ::Array[Types::InternetEventSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListMonitorsInput
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor monitor_status: ::String
+      attr_accessor include_linked_accounts: bool
       SENSITIVE: []
     end
 
@@ -310,6 +370,7 @@ module Aws::InternetMonitor
       attr_accessor end_time: ::Time
       attr_accessor query_type: ("MEASUREMENTS" | "TOP_LOCATIONS" | "TOP_LOCATION_DETAILS")
       attr_accessor filter_parameters: ::Array[Types::FilterParameter]
+      attr_accessor linked_account_id: ::String
       SENSITIVE: []
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2024-03-06)
+------------------
+
+* Feature - Amazon MWAA adds support for Apache Airflow v2.8.1.
+
 1.34.0 (2024-01-29)
 ------------------
 

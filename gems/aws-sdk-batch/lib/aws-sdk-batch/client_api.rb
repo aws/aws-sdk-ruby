@@ -22,6 +22,8 @@ module Aws::Batch
     AttemptContainerDetail = Shapes::StructureShape.new(name: 'AttemptContainerDetail')
     AttemptDetail = Shapes::StructureShape.new(name: 'AttemptDetail')
     AttemptDetails = Shapes::ListShape.new(name: 'AttemptDetails')
+    AttemptEcsTaskDetails = Shapes::StructureShape.new(name: 'AttemptEcsTaskDetails')
+    AttemptTaskContainerDetails = Shapes::StructureShape.new(name: 'AttemptTaskContainerDetails')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CEState = Shapes::StringShape.new(name: 'CEState')
     CEStatus = Shapes::StringShape.new(name: 'CEStatus')
@@ -76,6 +78,11 @@ module Aws::Batch
     EFSVolumeConfiguration = Shapes::StructureShape.new(name: 'EFSVolumeConfiguration')
     Ec2Configuration = Shapes::StructureShape.new(name: 'Ec2Configuration')
     Ec2ConfigurationList = Shapes::ListShape.new(name: 'Ec2ConfigurationList')
+    EcsProperties = Shapes::StructureShape.new(name: 'EcsProperties')
+    EcsPropertiesDetail = Shapes::StructureShape.new(name: 'EcsPropertiesDetail')
+    EcsPropertiesOverride = Shapes::StructureShape.new(name: 'EcsPropertiesOverride')
+    EcsTaskDetails = Shapes::StructureShape.new(name: 'EcsTaskDetails')
+    EcsTaskProperties = Shapes::StructureShape.new(name: 'EcsTaskProperties')
     EksAttemptContainerDetail = Shapes::StructureShape.new(name: 'EksAttemptContainerDetail')
     EksAttemptContainerDetails = Shapes::ListShape.new(name: 'EksAttemptContainerDetails')
     EksAttemptDetail = Shapes::StructureShape.new(name: 'EksAttemptDetail')
@@ -117,6 +124,8 @@ module Aws::Batch
     Float = Shapes::FloatShape.new(name: 'Float')
     Host = Shapes::StructureShape.new(name: 'Host')
     ImageIdOverride = Shapes::StringShape.new(name: 'ImageIdOverride')
+    ImagePullSecret = Shapes::StructureShape.new(name: 'ImagePullSecret')
+    ImagePullSecrets = Shapes::ListShape.new(name: 'ImagePullSecrets')
     ImageType = Shapes::StringShape.new(name: 'ImageType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     JQState = Shapes::StringShape.new(name: 'JQState')
@@ -131,6 +140,10 @@ module Aws::Batch
     JobExecutionTimeoutMinutes = Shapes::IntegerShape.new(name: 'JobExecutionTimeoutMinutes')
     JobQueueDetail = Shapes::StructureShape.new(name: 'JobQueueDetail')
     JobQueueDetailList = Shapes::ListShape.new(name: 'JobQueueDetailList')
+    JobStateTimeLimitAction = Shapes::StructureShape.new(name: 'JobStateTimeLimitAction')
+    JobStateTimeLimitActions = Shapes::ListShape.new(name: 'JobStateTimeLimitActions')
+    JobStateTimeLimitActionsAction = Shapes::StringShape.new(name: 'JobStateTimeLimitActionsAction')
+    JobStateTimeLimitActionsState = Shapes::StringShape.new(name: 'JobStateTimeLimitActionsState')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     JobSummary = Shapes::StructureShape.new(name: 'JobSummary')
     JobSummaryList = Shapes::ListShape.new(name: 'JobSummaryList')
@@ -140,6 +153,10 @@ module Aws::Batch
     KubernetesVersion = Shapes::StringShape.new(name: 'KubernetesVersion')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
     LinuxParameters = Shapes::StructureShape.new(name: 'LinuxParameters')
+    ListAttemptEcsTaskDetails = Shapes::ListShape.new(name: 'ListAttemptEcsTaskDetails')
+    ListAttemptTaskContainerDetails = Shapes::ListShape.new(name: 'ListAttemptTaskContainerDetails')
+    ListEcsTaskDetails = Shapes::ListShape.new(name: 'ListEcsTaskDetails')
+    ListEcsTaskProperties = Shapes::ListShape.new(name: 'ListEcsTaskProperties')
     ListJobsFilterList = Shapes::ListShape.new(name: 'ListJobsFilterList')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
@@ -147,6 +164,10 @@ module Aws::Batch
     ListSchedulingPoliciesResponse = Shapes::StructureShape.new(name: 'ListSchedulingPoliciesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTaskContainerDetails = Shapes::ListShape.new(name: 'ListTaskContainerDetails')
+    ListTaskContainerOverrides = Shapes::ListShape.new(name: 'ListTaskContainerOverrides')
+    ListTaskContainerProperties = Shapes::ListShape.new(name: 'ListTaskContainerProperties')
+    ListTaskPropertiesOverride = Shapes::ListShape.new(name: 'ListTaskPropertiesOverride')
     LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
     LogConfigurationOptionsMap = Shapes::MapShape.new(name: 'LogConfigurationOptionsMap')
     LogDriver = Shapes::StringShape.new(name: 'LogDriver')
@@ -198,6 +219,12 @@ module Aws::Batch
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagrisTagsMap = Shapes::MapShape.new(name: 'TagrisTagsMap')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
+    TaskContainerDependency = Shapes::StructureShape.new(name: 'TaskContainerDependency')
+    TaskContainerDependencyList = Shapes::ListShape.new(name: 'TaskContainerDependencyList')
+    TaskContainerDetails = Shapes::StructureShape.new(name: 'TaskContainerDetails')
+    TaskContainerOverrides = Shapes::StructureShape.new(name: 'TaskContainerOverrides')
+    TaskContainerProperties = Shapes::StructureShape.new(name: 'TaskContainerProperties')
+    TaskPropertiesOverride = Shapes::StructureShape.new(name: 'TaskPropertiesOverride')
     TerminateJobRequest = Shapes::StructureShape.new(name: 'TerminateJobRequest')
     TerminateJobResponse = Shapes::StructureShape.new(name: 'TerminateJobResponse')
     Tmpfs = Shapes::StructureShape.new(name: 'Tmpfs')
@@ -243,9 +270,22 @@ module Aws::Batch
     AttemptDetail.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
     AttemptDetail.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
     AttemptDetail.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    AttemptDetail.add_member(:task_properties, Shapes::ShapeRef.new(shape: ListAttemptEcsTaskDetails, location_name: "taskProperties"))
     AttemptDetail.struct_class = Types::AttemptDetail
 
     AttemptDetails.member = Shapes::ShapeRef.new(shape: AttemptDetail)
+
+    AttemptEcsTaskDetails.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
+    AttemptEcsTaskDetails.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
+    AttemptEcsTaskDetails.add_member(:containers, Shapes::ShapeRef.new(shape: ListAttemptTaskContainerDetails, location_name: "containers"))
+    AttemptEcsTaskDetails.struct_class = Types::AttemptEcsTaskDetails
+
+    AttemptTaskContainerDetails.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
+    AttemptTaskContainerDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    AttemptTaskContainerDetails.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    AttemptTaskContainerDetails.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "logStreamName"))
+    AttemptTaskContainerDetails.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaceList, location_name: "networkInterfaces"))
+    AttemptTaskContainerDetails.struct_class = Types::AttemptTaskContainerDetails
 
     CancelJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     CancelJobRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
@@ -407,6 +447,7 @@ module Aws::Batch
     CreateJobQueueRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "priority"))
     CreateJobQueueRequest.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, required: true, location_name: "computeEnvironmentOrder"))
     CreateJobQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    CreateJobQueueRequest.add_member(:job_state_time_limit_actions, Shapes::ShapeRef.new(shape: JobStateTimeLimitActions, location_name: "jobStateTimeLimitActions"))
     CreateJobQueueRequest.struct_class = Types::CreateJobQueueRequest
 
     CreateJobQueueResponse.add_member(:job_queue_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobQueueName"))
@@ -510,6 +551,42 @@ module Aws::Batch
 
     Ec2ConfigurationList.member = Shapes::ShapeRef.new(shape: Ec2Configuration)
 
+    EcsProperties.add_member(:task_properties, Shapes::ShapeRef.new(shape: ListEcsTaskProperties, required: true, location_name: "taskProperties"))
+    EcsProperties.struct_class = Types::EcsProperties
+
+    EcsPropertiesDetail.add_member(:task_properties, Shapes::ShapeRef.new(shape: ListEcsTaskDetails, location_name: "taskProperties"))
+    EcsPropertiesDetail.struct_class = Types::EcsPropertiesDetail
+
+    EcsPropertiesOverride.add_member(:task_properties, Shapes::ShapeRef.new(shape: ListTaskPropertiesOverride, location_name: "taskProperties"))
+    EcsPropertiesOverride.struct_class = Types::EcsPropertiesOverride
+
+    EcsTaskDetails.add_member(:containers, Shapes::ShapeRef.new(shape: ListTaskContainerDetails, location_name: "containers"))
+    EcsTaskDetails.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
+    EcsTaskDetails.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
+    EcsTaskDetails.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
+    EcsTaskDetails.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "executionRoleArn"))
+    EcsTaskDetails.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    EcsTaskDetails.add_member(:ipc_mode, Shapes::ShapeRef.new(shape: String, location_name: "ipcMode"))
+    EcsTaskDetails.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskRoleArn"))
+    EcsTaskDetails.add_member(:pid_mode, Shapes::ShapeRef.new(shape: String, location_name: "pidMode"))
+    EcsTaskDetails.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    EcsTaskDetails.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
+    EcsTaskDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
+    EcsTaskDetails.struct_class = Types::EcsTaskDetails
+
+    EcsTaskProperties.add_member(:containers, Shapes::ShapeRef.new(shape: ListTaskContainerProperties, required: true, location_name: "containers"))
+    EcsTaskProperties.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
+    EcsTaskProperties.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "executionRoleArn"))
+    EcsTaskProperties.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    EcsTaskProperties.add_member(:ipc_mode, Shapes::ShapeRef.new(shape: String, location_name: "ipcMode"))
+    EcsTaskProperties.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskRoleArn"))
+    EcsTaskProperties.add_member(:pid_mode, Shapes::ShapeRef.new(shape: String, location_name: "pidMode"))
+    EcsTaskProperties.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    EcsTaskProperties.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
+    EcsTaskProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
+    EcsTaskProperties.struct_class = Types::EcsTaskProperties
+
+    EksAttemptContainerDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EksAttemptContainerDetail.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
     EksAttemptContainerDetail.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     EksAttemptContainerDetail.struct_class = Types::EksAttemptContainerDetail
@@ -517,6 +594,7 @@ module Aws::Batch
     EksAttemptContainerDetails.member = Shapes::ShapeRef.new(shape: EksAttemptContainerDetail)
 
     EksAttemptDetail.add_member(:containers, Shapes::ShapeRef.new(shape: EksAttemptContainerDetails, location_name: "containers"))
+    EksAttemptDetail.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksAttemptContainerDetails, location_name: "initContainers"))
     EksAttemptDetail.add_member(:pod_name, Shapes::ShapeRef.new(shape: String, location_name: "podName"))
     EksAttemptDetail.add_member(:node_name, Shapes::ShapeRef.new(shape: String, location_name: "nodeName"))
     EksAttemptDetail.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
@@ -562,6 +640,7 @@ module Aws::Batch
 
     EksContainerEnvironmentVariables.member = Shapes::ShapeRef.new(shape: EksContainerEnvironmentVariable)
 
+    EksContainerOverride.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EksContainerOverride.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
     EksContainerOverride.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     EksContainerOverride.add_member(:args, Shapes::ShapeRef.new(shape: StringList, location_name: "args"))
@@ -578,6 +657,7 @@ module Aws::Batch
     EksContainerSecurityContext.add_member(:run_as_user, Shapes::ShapeRef.new(shape: Long, location_name: "runAsUser"))
     EksContainerSecurityContext.add_member(:run_as_group, Shapes::ShapeRef.new(shape: Long, location_name: "runAsGroup"))
     EksContainerSecurityContext.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "privileged"))
+    EksContainerSecurityContext.add_member(:allow_privilege_escalation, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowPrivilegeEscalation"))
     EksContainerSecurityContext.add_member(:read_only_root_filesystem, Shapes::ShapeRef.new(shape: Boolean, location_name: "readOnlyRootFilesystem"))
     EksContainerSecurityContext.add_member(:run_as_non_root, Shapes::ShapeRef.new(shape: Boolean, location_name: "runAsNonRoot"))
     EksContainerSecurityContext.struct_class = Types::EksContainerSecurityContext
@@ -610,22 +690,29 @@ module Aws::Batch
     EksPodProperties.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
     EksPodProperties.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
     EksPodProperties.add_member(:dns_policy, Shapes::ShapeRef.new(shape: String, location_name: "dnsPolicy"))
+    EksPodProperties.add_member(:image_pull_secrets, Shapes::ShapeRef.new(shape: ImagePullSecrets, location_name: "imagePullSecrets"))
     EksPodProperties.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainers, location_name: "containers"))
+    EksPodProperties.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksContainers, location_name: "initContainers"))
     EksPodProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
     EksPodProperties.add_member(:metadata, Shapes::ShapeRef.new(shape: EksMetadata, location_name: "metadata"))
+    EksPodProperties.add_member(:share_process_namespace, Shapes::ShapeRef.new(shape: Boolean, location_name: "shareProcessNamespace"))
     EksPodProperties.struct_class = Types::EksPodProperties
 
     EksPodPropertiesDetail.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
     EksPodPropertiesDetail.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
     EksPodPropertiesDetail.add_member(:dns_policy, Shapes::ShapeRef.new(shape: String, location_name: "dnsPolicy"))
+    EksPodPropertiesDetail.add_member(:image_pull_secrets, Shapes::ShapeRef.new(shape: ImagePullSecrets, location_name: "imagePullSecrets"))
     EksPodPropertiesDetail.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainerDetails, location_name: "containers"))
+    EksPodPropertiesDetail.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksContainerDetails, location_name: "initContainers"))
     EksPodPropertiesDetail.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
     EksPodPropertiesDetail.add_member(:pod_name, Shapes::ShapeRef.new(shape: String, location_name: "podName"))
     EksPodPropertiesDetail.add_member(:node_name, Shapes::ShapeRef.new(shape: String, location_name: "nodeName"))
     EksPodPropertiesDetail.add_member(:metadata, Shapes::ShapeRef.new(shape: EksMetadata, location_name: "metadata"))
+    EksPodPropertiesDetail.add_member(:share_process_namespace, Shapes::ShapeRef.new(shape: Boolean, location_name: "shareProcessNamespace"))
     EksPodPropertiesDetail.struct_class = Types::EksPodPropertiesDetail
 
     EksPodPropertiesOverride.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainerOverrideList, location_name: "containers"))
+    EksPodPropertiesOverride.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksContainerOverrideList, location_name: "initContainers"))
     EksPodPropertiesOverride.add_member(:metadata, Shapes::ShapeRef.new(shape: EksMetadata, location_name: "metadata"))
     EksPodPropertiesOverride.struct_class = Types::EksPodPropertiesOverride
 
@@ -677,6 +764,11 @@ module Aws::Batch
     Host.add_member(:source_path, Shapes::ShapeRef.new(shape: String, location_name: "sourcePath"))
     Host.struct_class = Types::Host
 
+    ImagePullSecret.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ImagePullSecret.struct_class = Types::ImagePullSecret
+
+    ImagePullSecrets.member = Shapes::ShapeRef.new(shape: ImagePullSecret)
+
     JobDefinition.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
     JobDefinition.add_member(:job_definition_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionArn"))
     JobDefinition.add_member(:revision, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "revision"))
@@ -691,6 +783,7 @@ module Aws::Batch
     JobDefinition.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     JobDefinition.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "propagateTags"))
     JobDefinition.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
+    JobDefinition.add_member(:ecs_properties, Shapes::ShapeRef.new(shape: EcsProperties, location_name: "ecsProperties"))
     JobDefinition.add_member(:eks_properties, Shapes::ShapeRef.new(shape: EksProperties, location_name: "eksProperties"))
     JobDefinition.add_member(:container_orchestration_type, Shapes::ShapeRef.new(shape: OrchestrationType, location_name: "containerOrchestrationType"))
     JobDefinition.struct_class = Types::JobDefinition
@@ -729,6 +822,7 @@ module Aws::Batch
     JobDetail.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
     JobDetail.add_member(:eks_properties, Shapes::ShapeRef.new(shape: EksPropertiesDetail, location_name: "eksProperties"))
     JobDetail.add_member(:eks_attempts, Shapes::ShapeRef.new(shape: EksAttemptDetails, location_name: "eksAttempts"))
+    JobDetail.add_member(:ecs_properties, Shapes::ShapeRef.new(shape: EcsPropertiesDetail, location_name: "ecsProperties"))
     JobDetail.add_member(:is_cancelled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCancelled"))
     JobDetail.add_member(:is_terminated, Shapes::ShapeRef.new(shape: Boolean, location_name: "isTerminated"))
     JobDetail.struct_class = Types::JobDetail
@@ -744,9 +838,18 @@ module Aws::Batch
     JobQueueDetail.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "priority"))
     JobQueueDetail.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, required: true, location_name: "computeEnvironmentOrder"))
     JobQueueDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
+    JobQueueDetail.add_member(:job_state_time_limit_actions, Shapes::ShapeRef.new(shape: JobStateTimeLimitActions, location_name: "jobStateTimeLimitActions"))
     JobQueueDetail.struct_class = Types::JobQueueDetail
 
     JobQueueDetailList.member = Shapes::ShapeRef.new(shape: JobQueueDetail)
+
+    JobStateTimeLimitAction.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
+    JobStateTimeLimitAction.add_member(:state, Shapes::ShapeRef.new(shape: JobStateTimeLimitActionsState, required: true, location_name: "state"))
+    JobStateTimeLimitAction.add_member(:max_time_seconds, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxTimeSeconds"))
+    JobStateTimeLimitAction.add_member(:action, Shapes::ShapeRef.new(shape: JobStateTimeLimitActionsAction, required: true, location_name: "action"))
+    JobStateTimeLimitAction.struct_class = Types::JobStateTimeLimitAction
+
+    JobStateTimeLimitActions.member = Shapes::ShapeRef.new(shape: JobStateTimeLimitAction)
 
     JobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
     JobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
@@ -788,6 +891,14 @@ module Aws::Batch
     LinuxParameters.add_member(:swappiness, Shapes::ShapeRef.new(shape: Integer, location_name: "swappiness"))
     LinuxParameters.struct_class = Types::LinuxParameters
 
+    ListAttemptEcsTaskDetails.member = Shapes::ShapeRef.new(shape: AttemptEcsTaskDetails)
+
+    ListAttemptTaskContainerDetails.member = Shapes::ShapeRef.new(shape: AttemptTaskContainerDetails)
+
+    ListEcsTaskDetails.member = Shapes::ShapeRef.new(shape: EcsTaskDetails)
+
+    ListEcsTaskProperties.member = Shapes::ShapeRef.new(shape: EcsTaskProperties)
+
     ListJobsFilterList.member = Shapes::ShapeRef.new(shape: KeyValuesPair)
 
     ListJobsRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, location_name: "jobQueue"))
@@ -816,6 +927,14 @@ module Aws::Batch
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListTaskContainerDetails.member = Shapes::ShapeRef.new(shape: TaskContainerDetails)
+
+    ListTaskContainerOverrides.member = Shapes::ShapeRef.new(shape: TaskContainerOverrides)
+
+    ListTaskContainerProperties.member = Shapes::ShapeRef.new(shape: TaskContainerProperties)
+
+    ListTaskPropertiesOverride.member = Shapes::ShapeRef.new(shape: TaskPropertiesOverride)
 
     LogConfiguration.add_member(:log_driver, Shapes::ShapeRef.new(shape: LogDriver, required: true, location_name: "logDriver"))
     LogConfiguration.add_member(:options, Shapes::ShapeRef.new(shape: LogConfigurationOptionsMap, location_name: "options"))
@@ -862,6 +981,8 @@ module Aws::Batch
 
     NodePropertyOverride.add_member(:target_nodes, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetNodes"))
     NodePropertyOverride.add_member(:container_overrides, Shapes::ShapeRef.new(shape: ContainerOverrides, location_name: "containerOverrides"))
+    NodePropertyOverride.add_member(:ecs_properties_override, Shapes::ShapeRef.new(shape: EcsPropertiesOverride, location_name: "ecsPropertiesOverride"))
+    NodePropertyOverride.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "instanceTypes"))
     NodePropertyOverride.struct_class = Types::NodePropertyOverride
 
     NodePropertyOverrides.member = Shapes::ShapeRef.new(shape: NodePropertyOverride)
@@ -870,6 +991,8 @@ module Aws::Batch
 
     NodeRangeProperty.add_member(:target_nodes, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetNodes"))
     NodeRangeProperty.add_member(:container, Shapes::ShapeRef.new(shape: ContainerProperties, location_name: "container"))
+    NodeRangeProperty.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "instanceTypes"))
+    NodeRangeProperty.add_member(:ecs_properties, Shapes::ShapeRef.new(shape: EcsProperties, location_name: "ecsProperties"))
     NodeRangeProperty.struct_class = Types::NodeRangeProperty
 
     ParametersMap.key = Shapes::ShapeRef.new(shape: String)
@@ -889,6 +1012,7 @@ module Aws::Batch
     RegisterJobDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     RegisterJobDefinitionRequest.add_member(:platform_capabilities, Shapes::ShapeRef.new(shape: PlatformCapabilityList, location_name: "platformCapabilities"))
     RegisterJobDefinitionRequest.add_member(:eks_properties, Shapes::ShapeRef.new(shape: EksProperties, location_name: "eksProperties"))
+    RegisterJobDefinitionRequest.add_member(:ecs_properties, Shapes::ShapeRef.new(shape: EcsProperties, location_name: "ecsProperties"))
     RegisterJobDefinitionRequest.struct_class = Types::RegisterJobDefinitionRequest
 
     RegisterJobDefinitionResponse.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
@@ -958,6 +1082,7 @@ module Aws::Batch
     SubmitJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     SubmitJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagrisTagsMap, location_name: "tags"))
     SubmitJobRequest.add_member(:eks_properties_override, Shapes::ShapeRef.new(shape: EksPropertiesOverride, location_name: "eksPropertiesOverride"))
+    SubmitJobRequest.add_member(:ecs_properties_override, Shapes::ShapeRef.new(shape: EcsPropertiesOverride, location_name: "ecsPropertiesOverride"))
     SubmitJobRequest.struct_class = Types::SubmitJobRequest
 
     SubmitJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
@@ -978,6 +1103,61 @@ module Aws::Batch
 
     TagsMap.key = Shapes::ShapeRef.new(shape: String)
     TagsMap.value = Shapes::ShapeRef.new(shape: String)
+
+    TaskContainerDependency.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
+    TaskContainerDependency.add_member(:condition, Shapes::ShapeRef.new(shape: String, location_name: "condition"))
+    TaskContainerDependency.struct_class = Types::TaskContainerDependency
+
+    TaskContainerDependencyList.member = Shapes::ShapeRef.new(shape: TaskContainerDependency)
+
+    TaskContainerDetails.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
+    TaskContainerDetails.add_member(:depends_on, Shapes::ShapeRef.new(shape: TaskContainerDependencyList, location_name: "dependsOn"))
+    TaskContainerDetails.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    TaskContainerDetails.add_member(:essential, Shapes::ShapeRef.new(shape: Boolean, location_name: "essential"))
+    TaskContainerDetails.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
+    TaskContainerDetails.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
+    TaskContainerDetails.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
+    TaskContainerDetails.add_member(:mount_points, Shapes::ShapeRef.new(shape: MountPoints, location_name: "mountPoints"))
+    TaskContainerDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    TaskContainerDetails.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "privileged"))
+    TaskContainerDetails.add_member(:readonly_root_filesystem, Shapes::ShapeRef.new(shape: Boolean, location_name: "readonlyRootFilesystem"))
+    TaskContainerDetails.add_member(:repository_credentials, Shapes::ShapeRef.new(shape: RepositoryCredentials, location_name: "repositoryCredentials"))
+    TaskContainerDetails.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
+    TaskContainerDetails.add_member(:secrets, Shapes::ShapeRef.new(shape: SecretList, location_name: "secrets"))
+    TaskContainerDetails.add_member(:ulimits, Shapes::ShapeRef.new(shape: Ulimits, location_name: "ulimits"))
+    TaskContainerDetails.add_member(:user, Shapes::ShapeRef.new(shape: String, location_name: "user"))
+    TaskContainerDetails.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
+    TaskContainerDetails.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    TaskContainerDetails.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "logStreamName"))
+    TaskContainerDetails.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaceList, location_name: "networkInterfaces"))
+    TaskContainerDetails.struct_class = Types::TaskContainerDetails
+
+    TaskContainerOverrides.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
+    TaskContainerOverrides.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    TaskContainerOverrides.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    TaskContainerOverrides.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
+    TaskContainerOverrides.struct_class = Types::TaskContainerOverrides
+
+    TaskContainerProperties.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
+    TaskContainerProperties.add_member(:depends_on, Shapes::ShapeRef.new(shape: TaskContainerDependencyList, location_name: "dependsOn"))
+    TaskContainerProperties.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    TaskContainerProperties.add_member(:essential, Shapes::ShapeRef.new(shape: Boolean, location_name: "essential"))
+    TaskContainerProperties.add_member(:image, Shapes::ShapeRef.new(shape: String, required: true, location_name: "image"))
+    TaskContainerProperties.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
+    TaskContainerProperties.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
+    TaskContainerProperties.add_member(:mount_points, Shapes::ShapeRef.new(shape: MountPoints, location_name: "mountPoints"))
+    TaskContainerProperties.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    TaskContainerProperties.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "privileged"))
+    TaskContainerProperties.add_member(:readonly_root_filesystem, Shapes::ShapeRef.new(shape: Boolean, location_name: "readonlyRootFilesystem"))
+    TaskContainerProperties.add_member(:repository_credentials, Shapes::ShapeRef.new(shape: RepositoryCredentials, location_name: "repositoryCredentials"))
+    TaskContainerProperties.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
+    TaskContainerProperties.add_member(:secrets, Shapes::ShapeRef.new(shape: SecretList, location_name: "secrets"))
+    TaskContainerProperties.add_member(:ulimits, Shapes::ShapeRef.new(shape: Ulimits, location_name: "ulimits"))
+    TaskContainerProperties.add_member(:user, Shapes::ShapeRef.new(shape: String, location_name: "user"))
+    TaskContainerProperties.struct_class = Types::TaskContainerProperties
+
+    TaskPropertiesOverride.add_member(:containers, Shapes::ShapeRef.new(shape: ListTaskContainerOverrides, location_name: "containers"))
+    TaskPropertiesOverride.struct_class = Types::TaskPropertiesOverride
 
     TerminateJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     TerminateJobRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
@@ -1022,6 +1202,7 @@ module Aws::Batch
     UpdateJobQueueRequest.add_member(:scheduling_policy_arn, Shapes::ShapeRef.new(shape: String, location_name: "schedulingPolicyArn"))
     UpdateJobQueueRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, location_name: "priority"))
     UpdateJobQueueRequest.add_member(:compute_environment_order, Shapes::ShapeRef.new(shape: ComputeEnvironmentOrders, location_name: "computeEnvironmentOrder"))
+    UpdateJobQueueRequest.add_member(:job_state_time_limit_actions, Shapes::ShapeRef.new(shape: JobStateTimeLimitActions, location_name: "jobStateTimeLimitActions"))
     UpdateJobQueueRequest.struct_class = Types::UpdateJobQueueRequest
 
     UpdateJobQueueResponse.add_member(:job_queue_name, Shapes::ShapeRef.new(shape: String, location_name: "jobQueueName"))

@@ -81,6 +81,9 @@
   "ApplicationInsights": {
     "models": "application-insights/2018-11-25"
   },
+  "Artifact": {
+    "models": "artifact/2018-05-10"
+  },
   "Athena": {
     "models": "athena/2017-05-18"
   },
@@ -134,6 +137,9 @@
   },
   "Budgets": {
     "models": "budgets/2016-10-20"
+  },
+  "Chatbot": {
+    "models": "chatbot/2017-10-11"
   },
   "Chime": {
     "models": "chime/2018-05-01"
@@ -233,6 +239,9 @@
   "CodeCommit": {
     "models": "codecommit/2015-04-13"
   },
+  "CodeConnections": {
+    "models": "codeconnections/2023-12-01"
+  },
   "CodeDeploy": {
     "models": "codedeploy/2014-10-06"
   },
@@ -296,6 +305,9 @@
   "ConnectWisdomService": {
     "models": "wisdom/2020-10-19"
   },
+  "ControlCatalog": {
+    "models": "controlcatalog/2018-05-10"
+  },
   "ControlTower": {
     "models": "controltower/2018-05-10"
   },
@@ -332,6 +344,9 @@
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01"
   },
+  "Deadline": {
+    "models": "deadline/2023-10-12"
+  },
   "Detective": {
     "models": "detective/2018-10-26"
   },
@@ -365,19 +380,13 @@
       "Aws::DynamoDB::Plugins::ExtendedRetries",
       "Aws::DynamoDB::Plugins::SimpleAttributes",
       "Aws::DynamoDB::Plugins::CRC32Validation"
-    ],
-    "dependencies": {
-      "bigdecimal": null
-    }
+    ]
   },
   "DynamoDBStreams": {
     "models": "streams.dynamodb/2012-08-10",
     "addPlugins": [
       "Aws::DynamoDBStreams::Plugins::SimpleAttributes"
-    ],
-    "dependencies": {
-      "bigdecimal": null
-    }
+    ]
   },
   "EBS": {
     "models": "ebs/2019-11-02"
@@ -586,9 +595,6 @@
   },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
-  },
-  "IoTRoboRunner": {
-    "models": "iot-roborunner/2018-05-10"
   },
   "IoTSecureTunneling": {
     "models": "iotsecuretunneling/2018-10-05"
@@ -977,6 +983,9 @@
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
   },
+  "Route53Profiles": {
+    "models": "route53profiles/2018-05-10"
+  },
   "Route53RecoveryCluster": {
     "models": "route53-recovery-cluster/2019-12-02"
   },
@@ -1172,6 +1181,9 @@
   },
   "Textract": {
     "models": "textract/2018-06-27"
+  },
+  "TimestreamInfluxDB": {
+    "models": "timestream-influxdb/2023-01-27"
   },
   "TimestreamQuery": {
     "models": "timestream-query/2018-11-01"

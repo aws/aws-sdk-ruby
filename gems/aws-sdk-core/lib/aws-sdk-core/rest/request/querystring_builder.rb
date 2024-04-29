@@ -30,20 +30,30 @@ module Aws
         #
         # @return [String] Returns a built querystring
         def build(params)
+          # keys in query maps must NOT override other keys
+          query_keys = query_keys(params)
           params.map do |(shape_ref, param_value)|
-            build_part(shape_ref, param_value)
-          end.join('&')
+            build_part(shape_ref, param_value, query_keys)
+          end.reject { |p| p.nil? || p.empty? }.join('&')
         end
 
         private
 
-        def build_part(shape_ref, param_value)
+        def query_keys(params)
+          keys = Set.new
+          params.each do |(shape_ref, _)|
+            keys << shape_ref.location_name unless shape_ref.shape.is_a?(MapShape)
+          end
+          keys
+        end
+
+        def build_part(shape_ref, param_value, query_keys)
           case shape_ref.shape
           # supported scalar types
           when *SUPPORTED_TYPES
             "#{shape_ref.location_name}=#{query_value(shape_ref, param_value)}"
           when MapShape
-            generate_query_map(shape_ref, param_value)
+            generate_query_map(shape_ref, param_value, query_keys)
           when ListShape
             generate_query_list(shape_ref, param_value)
           else
@@ -80,31 +90,33 @@ module Aws
           end
         end
 
-        def generate_query_map(ref, value)
+        def generate_query_map(ref, value, query_keys)
           case ref.shape.value.shape
           when StringShape
-            query_map_of_string(value)
+            query_map_of_string(value, query_keys)
           when ListShape
-            query_map_of_string_list(value)
+            query_map_of_string_list(value, query_keys)
           else
             msg = 'Only map of string and string list supported'
             raise NotImplementedError, msg
           end
         end
 
-        def query_map_of_string(hash)
+        def query_map_of_string(hash, query_keys)
           list = []
           hash.each_pair do |key, value|
-            list << "#{escape(key)}=#{escape(value)}"
+            key = escape(key)
+            list << "#{key}=#{escape(value)}" unless query_keys.include?(key)
           end
           list
         end
 
-        def query_map_of_string_list(hash)
+        def query_map_of_string_list(hash, query_keys)
           list = []
           hash.each_pair do |key, values|
+            key = escape(key)
             values.each do |value|
-              list << "#{escape(key)}=#{escape(value)}"
+              list << "#{key}=#{escape(value)}" unless query_keys.include?(key)
             end
           end
           list

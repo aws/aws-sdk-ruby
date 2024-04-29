@@ -11,7 +11,7 @@ module Aws::FIS
   module Types
 
     # Describes an action. For more information, see [FIS actions][1] in the
-    # *Fault Injection Simulator User Guide*.
+    # *Fault Injection Service User Guide*.
     #
     #
     #
@@ -19,6 +19,10 @@ module Aws::FIS
     #
     # @!attribute [rw] id
     #   The ID of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the action.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -41,6 +45,7 @@ module Aws::FIS
     #
     class Action < Struct.new(
       :id,
+      :arn,
       :description,
       :parameters,
       :targets,
@@ -74,6 +79,10 @@ module Aws::FIS
     #   The ID of the action.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the action.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description for the action.
     #   @return [String]
@@ -90,6 +99,7 @@ module Aws::FIS
     #
     class ActionSummary < Struct.new(
       :id,
+      :arn,
       :description,
       :targets,
       :tags)
@@ -126,8 +136,8 @@ module Aws::FIS
 
     # Specifies an action for an experiment template.
     #
-    # For more information, see [Actions][1] in the *Fault Injection
-    # Simulator User Guide*.
+    # For more information, see [Actions][1] in the *Fault Injection Service
+    # User Guide*.
     #
     #
     #
@@ -306,8 +316,8 @@ module Aws::FIS
     # Amazon Resource Name (ARN) or at least one resource tag. You cannot
     # specify both ARNs and tags.
     #
-    # For more information, see [Targets][1] in the *Fault Injection
-    # Simulator User Guide*.
+    # For more information, see [Targets][1] in the *Fault Injection Service
+    # User Guide*.
     #
     #
     #
@@ -378,7 +388,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -443,7 +453,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/DeleteTargetAccountConfigurationRequest AWS API Documentation
@@ -471,6 +481,10 @@ module Aws::FIS
     #
     # @!attribute [rw] id
     #   The ID of the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the experiment.
     #   @return [String]
     #
     # @!attribute [rw] experiment_template_id
@@ -530,6 +544,7 @@ module Aws::FIS
     #
     class Experiment < Struct.new(
       :id,
+      :arn,
       :experiment_template_id,
       :role_arn,
       :state,
@@ -666,11 +681,17 @@ module Aws::FIS
     #   The empty target resolution mode for an experiment.
     #   @return [String]
     #
+    # @!attribute [rw] actions_mode
+    #   The actions mode of the experiment that is set from the
+    #   StartExperiment API command.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentOptions AWS API Documentation
     #
     class ExperimentOptions < Struct.new(
       :account_targeting,
-      :empty_target_resolution_mode)
+      :empty_target_resolution_mode,
+      :actions_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -739,6 +760,10 @@ module Aws::FIS
     #   The ID of the experiment.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the experiment.
+    #   @return [String]
+    #
     # @!attribute [rw] experiment_template_id
     #   The ID of the experiment template.
     #   @return [String]
@@ -755,14 +780,20 @@ module Aws::FIS
     #   The tags for the experiment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] experiment_options
+    #   The experiment options for the experiment.
+    #   @return [Types::ExperimentOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentSummary AWS API Documentation
     #
     class ExperimentSummary < Struct.new(
       :id,
+      :arn,
       :experiment_template_id,
       :state,
       :creation_time,
-      :tags)
+      :tags,
+      :experiment_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -815,7 +846,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -840,7 +871,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -880,6 +911,10 @@ module Aws::FIS
     #
     # @!attribute [rw] id
     #   The ID of the experiment template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the experiment template.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -931,6 +966,7 @@ module Aws::FIS
     #
     class ExperimentTemplate < Struct.new(
       :id,
+      :arn,
       :description,
       :targets,
       :actions,
@@ -1120,6 +1156,10 @@ module Aws::FIS
     #   The ID of the experiment template.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the experiment template.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the experiment template.
     #   @return [String]
@@ -1140,6 +1180,7 @@ module Aws::FIS
     #
     class ExperimentTemplateSummary < Struct.new(
       :id,
+      :arn,
       :description,
       :creation_time,
       :last_update_time,
@@ -1212,7 +1253,7 @@ module Aws::FIS
     # template.
     #
     # For more information, see [Resource filters][1] in the *Fault
-    # Injection Simulator User Guide*.
+    # Injection Service User Guide*.
     #
     #
     #
@@ -1288,7 +1329,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperimentTargetAccountConfigurationRequest AWS API Documentation
@@ -1341,7 +1382,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetTargetAccountConfigurationRequest AWS API Documentation
@@ -1555,11 +1596,16 @@ module Aws::FIS
     #   The token for the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] experiment_template_id
+    #   The ID of the experiment template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListExperimentsRequest AWS API Documentation
     #
     class ListExperimentsRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :experiment_template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1735,6 +1781,20 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Specifies experiment options for running an experiment.
+    #
+    # @!attribute [rw] actions_mode
+    #   Specifies the actions mode for experiment options.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/StartExperimentExperimentOptionsInput AWS API Documentation
+    #
+    class StartExperimentExperimentOptionsInput < Struct.new(
+      :actions_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -1747,6 +1807,10 @@ module Aws::FIS
     #   The ID of the experiment template.
     #   @return [String]
     #
+    # @!attribute [rw] experiment_options
+    #   The experiment options for running the experiment.
+    #   @return [Types::StartExperimentExperimentOptionsInput]
+    #
     # @!attribute [rw] tags
     #   The tags to apply to the experiment.
     #   @return [Hash<String,String>]
@@ -1756,6 +1820,7 @@ module Aws::FIS
     class StartExperimentRequest < Struct.new(
       :client_token,
       :experiment_template_id,
+      :experiment_options,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1826,7 +1891,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1851,7 +1916,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2156,7 +2221,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the target account.
+    #   The Amazon Web Services account ID of the target account.
     #   @return [String]
     #
     # @!attribute [rw] role_arn

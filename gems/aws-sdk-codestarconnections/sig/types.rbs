@@ -88,6 +88,8 @@ module Aws::CodeStarconnections
       attr_accessor resource_name: ::String
       attr_accessor role_arn: ::String
       attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor publish_deployment_status: ("ENABLED" | "DISABLED")
+      attr_accessor trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
       SENSITIVE: []
     end
 
@@ -432,6 +434,8 @@ module Aws::CodeStarconnections
       attr_accessor resource_name: ::String
       attr_accessor role_arn: ::String
       attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor publish_deployment_status: ("ENABLED" | "DISABLED")
+      attr_accessor trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
       SENSITIVE: []
     end
 
@@ -528,6 +532,8 @@ module Aws::CodeStarconnections
       attr_accessor resource_name: ::String
       attr_accessor role_arn: ::String
       attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor publish_deployment_status: ("ENABLED" | "DISABLED")
+      attr_accessor trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
       SENSITIVE: []
     end
 

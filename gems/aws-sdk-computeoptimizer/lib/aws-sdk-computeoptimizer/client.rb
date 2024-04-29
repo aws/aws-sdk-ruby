@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ComputeOptimizer
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ComputeOptimizer
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::ComputeOptimizer
     #   @option options [Aws::ComputeOptimizer::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ComputeOptimizer::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -1442,9 +1466,9 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.look_back_period #=> String, one of "DAYS_14", "DAYS_32", "DAYS_93"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences #=> Array
-    #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization"
+    #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization", "MemoryUtilization"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.threshold #=> String, one of "P90", "P95", "P99_5"
-    #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_0"
+    #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_10", "PERCENT_0"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.preferred_resources #=> Array
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.preferred_resources[0].name #=> String, one of "Ec2InstanceTypes"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.preferred_resources[0].include_list #=> Array
@@ -1704,9 +1728,9 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.look_back_period #=> String, one of "DAYS_14", "DAYS_32", "DAYS_93"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences #=> Array
-    #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization"
+    #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization", "MemoryUtilization"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.threshold #=> String, one of "P90", "P95", "P99_5"
-    #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_0"
+    #   resp.instance_recommendations[0].effective_recommendation_preferences.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_10", "PERCENT_0"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.preferred_resources #=> Array
     #   resp.instance_recommendations[0].effective_recommendation_preferences.preferred_resources[0].name #=> String, one of "Ec2InstanceTypes"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.preferred_resources[0].include_list #=> Array
@@ -2034,9 +2058,9 @@ module Aws::ComputeOptimizer
     #   resp.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.look_back_period #=> String, one of "DAYS_14", "DAYS_32", "DAYS_93"
     #   resp.utilization_preferences #=> Array
-    #   resp.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization"
+    #   resp.utilization_preferences[0].metric_name #=> String, one of "CpuUtilization", "MemoryUtilization"
     #   resp.utilization_preferences[0].metric_parameters.threshold #=> String, one of "P90", "P95", "P99_5"
-    #   resp.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_0"
+    #   resp.utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_10", "PERCENT_0"
     #   resp.preferred_resources #=> Array
     #   resp.preferred_resources[0].name #=> String, one of "Ec2InstanceTypes"
     #   resp.preferred_resources[0].include_list #=> Array
@@ -2460,9 +2484,9 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_preferences_details[0].external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.recommendation_preferences_details[0].look_back_period #=> String, one of "DAYS_14", "DAYS_32", "DAYS_93"
     #   resp.recommendation_preferences_details[0].utilization_preferences #=> Array
-    #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_name #=> String, one of "CpuUtilization"
+    #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_name #=> String, one of "CpuUtilization", "MemoryUtilization"
     #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_parameters.threshold #=> String, one of "P90", "P95", "P99_5"
-    #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_0"
+    #   resp.recommendation_preferences_details[0].utilization_preferences[0].metric_parameters.headroom #=> String, one of "PERCENT_30", "PERCENT_20", "PERCENT_10", "PERCENT_0"
     #   resp.recommendation_preferences_details[0].preferred_resources #=> Array
     #   resp.recommendation_preferences_details[0].preferred_resources[0].name #=> String, one of "Ec2InstanceTypes"
     #   resp.recommendation_preferences_details[0].preferred_resources[0].include_list #=> Array
@@ -2680,16 +2704,26 @@ module Aws::ComputeOptimizer
     #    </note>
     #
     # @option params [Array<Types::UtilizationPreference>] :utilization_preferences
-    #   The preference to control the resource’s CPU utilization thresholds -
-    #   threshold and headroom. When this preference isn't specified, we use
-    #   the following default values:
+    #   The preference to control the resource’s CPU utilization threshold,
+    #   CPU utilization headroom, and memory utilization headroom. When this
+    #   preference isn't specified, we use the following default values.
+    #
+    #   CPU utilization:
     #
     #   * `P99_5` for threshold
     #
-    #   * `PERCENT_17` for headroom
+    #   * `PERCENT_20` for headroom
     #
-    #   <note markdown="1"> You can only set this preference for the Amazon EC2 instance resource
-    #   type.
+    #   Memory utilization:
+    #
+    #   * `PERCENT_20` for headroom
+    #
+    #   ^
+    #
+    #   <note markdown="1"> * You can only set CPU and memory utilization preferences for the
+    #     Amazon EC2 instance resource type.
+    #
+    #   * The threshold setting isn’t available for memory utilization.
     #
     #    </note>
     #
@@ -2740,10 +2774,10 @@ module Aws::ComputeOptimizer
     #     look_back_period: "DAYS_14", # accepts DAYS_14, DAYS_32, DAYS_93
     #     utilization_preferences: [
     #       {
-    #         metric_name: "CpuUtilization", # accepts CpuUtilization
+    #         metric_name: "CpuUtilization", # accepts CpuUtilization, MemoryUtilization
     #         metric_parameters: {
     #           threshold: "P90", # accepts P90, P95, P99_5
-    #           headroom: "PERCENT_30", # accepts PERCENT_30, PERCENT_20, PERCENT_0
+    #           headroom: "PERCENT_30", # accepts PERCENT_30, PERCENT_20, PERCENT_10, PERCENT_0
     #         },
     #       },
     #     ],
@@ -2855,7 +2889,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

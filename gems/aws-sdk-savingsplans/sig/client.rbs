@@ -127,7 +127,7 @@ module Aws
                                     ?savings_plan_ids: Array[::String],
                                     ?next_token: ::String,
                                     ?max_results: ::Integer,
-                                    ?states: Array[("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted")],
+                                    ?states: Array[("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted" | "pending-return" | "returned")],
                                     ?filters: Array[
                                       {
                                         name: ("region" | "ec2-instance-family" | "commitment" | "upfront" | "term" | "savings-plan-type" | "payment-option" | "start" | "end")?,
@@ -199,6 +199,17 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ReturnSavingsPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReturnSavingsPlanResponse]
+        def savings_plan_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SavingsPlans/Client.html#return_savings_plan-instance_method
+      def return_savings_plan: (
+                                 savings_plan_id: ::String,
+                                 ?client_token: ::String
+                               ) -> _ReturnSavingsPlanResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReturnSavingsPlanResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

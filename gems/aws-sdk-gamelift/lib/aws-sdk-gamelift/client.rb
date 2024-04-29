@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::GameLift
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::GameLift
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::GameLift
     #   @option options [Aws::GameLift::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::GameLift::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -827,55 +851,337 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances
-    # to host your custom game server or Realtime Servers. Use this
-    # operation to configure the computing resources for your fleet and
-    # provide instructions for running game servers on each instance.
+    # <b>This operation is used with the Amazon GameLift containers feature,
+    # which is currently in public preview. </b>
     #
-    # Most Amazon GameLift fleets can deploy instances to multiple
-    # locations, including the home Region (where the fleet is created) and
-    # an optional set of remote locations. Fleets that are created in the
-    # following Amazon Web Services Regions support multiple locations:
-    # us-east-1 (N. Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt),
-    # eu-west-1 (Ireland), ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo),
-    # and ap-northeast-2 (Seoul). Fleets that are created in other Amazon
-    # GameLift Regions can deploy instances in the fleet's home Region
-    # only. All fleet instances use the same configuration regardless of
-    # location; however, you can adjust capacity settings and turn
-    # auto-scaling on/off for each location.
+    # Creates a `ContainerGroupDefinition` resource that describes a set of
+    # containers for hosting your game server with Amazon GameLift managed
+    # EC2 hosting. An Amazon GameLift container group is similar to a
+    # container "task" and "pod". Each container group can have one or
+    # more containers.
     #
-    # To create a fleet, choose the hardware for your instances, specify a
-    # game server build or Realtime script to deploy, and provide a runtime
-    # configuration to direct Amazon GameLift how to start and run game
-    # servers on each instance in the fleet. Set permissions for inbound
-    # traffic to your game servers, and enable optional features as needed.
-    # When creating a multi-location fleet, provide a list of additional
-    # remote locations.
+    # Use container group definitions when you create a container fleet.
+    # Container group definitions determine how Amazon GameLift deploys your
+    # containers to each instance in a container fleet.
     #
-    # If you need to debug your fleet, fetch logs, view performance metrics
-    # or other actions on the fleet, create the development fleet with port
-    # 22/3389 open. As a best practice, we recommend opening ports for
+    # You can create two types of container groups, based on scheduling
+    # strategy:
+    #
+    # * A **replica container group** manages the containers that run your
+    #   game server application and supporting software. Replica container
+    #   groups might be replicated multiple times on each fleet instance,
+    #   depending on instance resources.
+    #
+    # * A **daemon container group** manages containers that run other
+    #   software, such as background services, logging, or test processes.
+    #   You might use a daemon container group for processes that need to
+    #   run only once per fleet instance, or processes that need to persist
+    #   independently of the replica container group.
+    #
+    # To create a container group definition, specify a group name, a list
+    # of container definitions, and maximum total CPU and memory
+    # requirements for the container group. Specify an operating system and
+    # scheduling strategy or use the default values. When using the Amazon
+    # Web Services CLI tool, you can pass in your container definitions as a
+    # JSON file.
+    #
+    # <note markdown="1"> This operation requires Identity and Access Management (IAM)
+    # permissions to access container images in Amazon ECR repositories. See
+    # [ IAM permissions for Amazon GameLift][1] for help setting the
+    # appropriate permissions.
+    #
+    #  </note>
+    #
+    # If successful, this operation creates a new `ContainerGroupDefinition`
+    # resource with an ARN value assigned. You can't change the properties
+    # of a container group definition. Instead, create a new one.
+    #
+    # **Learn more**
+    #
+    # * [Create a container group definition][2]
+    #
+    # * [Container fleet design guide][3]
+    #
+    # * [Create a container definition as a JSON file][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-design-fleet.html
+    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-definitions.html#containers-definitions-create
+    #
+    # @option params [required, String] :name
+    #   A descriptive identifier for the container group definition. The name
+    #   value must be unique in an Amazon Web Services Region.
+    #
+    # @option params [String] :scheduling_strategy
+    #   The method for deploying the container group across fleet instances. A
+    #   replica container group might have multiple copies on each fleet
+    #   instance. A daemon container group has one copy per fleet instance.
+    #   Default value is `REPLICA`.
+    #
+    # @option params [required, Integer] :total_memory_limit
+    #   The maximum amount of memory (in MiB) to allocate to the container
+    #   group. All containers in the group share this memory. If you specify
+    #   memory limits for individual containers, set this parameter based on
+    #   the following guidelines. The value must be (1) greater than the sum
+    #   of the soft memory limits for all containers in the group, and (2)
+    #   greater than any individual container's hard memory limit.
+    #
+    # @option params [required, Integer] :total_cpu_limit
+    #   The maximum amount of CPU units to allocate to the container group.
+    #   Set this parameter to an integer value in CPU units (1 vCPU is equal
+    #   to 1024 CPU units). All containers in the group share this memory. If
+    #   you specify CPU limits for individual containers, set this parameter
+    #   based on the following guidelines. The value must be equal to or
+    #   greater than the sum of the CPU limits for all containers in the
+    #   group.
+    #
+    # @option params [required, Array<Types::ContainerDefinitionInput>] :container_definitions
+    #   Definitions for all containers in this group. Each container
+    #   definition identifies the container image and specifies configuration
+    #   settings for the container. See the [ Container fleet design guide][1]
+    #   for container guidelines.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-design-fleet.html
+    #
+    # @option params [required, String] :operating_system
+    #   The platform that is used by containers in the container group
+    #   definition. All containers in a group must run on the same operating
+    #   system.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of labels to assign to the container group definition resource.
+    #   Tags are developer-defined key-value pairs. Tagging Amazon Web
+    #   Services resources are useful for resource management, access
+    #   management and cost allocation. For more information, see [ Tagging
+    #   Amazon Web Services Resources][1] in the *Amazon Web Services General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreateContainerGroupDefinitionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContainerGroupDefinitionOutput#container_group_definition #container_group_definition} => Types::ContainerGroupDefinition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_container_group_definition({
+    #     name: "ContainerGroupDefinitionName", # required
+    #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
+    #     total_memory_limit: 1, # required
+    #     total_cpu_limit: 1, # required
+    #     container_definitions: [ # required
+    #       {
+    #         container_name: "NonZeroAnd128MaxAsciiString", # required
+    #         image_uri: "ImageUriString", # required
+    #         memory_limits: {
+    #           soft_limit: 1,
+    #           hard_limit: 1,
+    #         },
+    #         port_configuration: {
+    #           container_port_ranges: [ # required
+    #             {
+    #               from_port: 1, # required
+    #               to_port: 1, # required
+    #               protocol: "TCP", # required, accepts TCP, UDP
+    #             },
+    #           ],
+    #         },
+    #         cpu: 1,
+    #         health_check: {
+    #           command: ["NonZeroAnd255MaxString"], # required
+    #           interval: 1,
+    #           timeout: 1,
+    #           retries: 1,
+    #           start_period: 1,
+    #         },
+    #         command: ["NonZeroAnd255MaxString"],
+    #         essential: false,
+    #         entry_point: ["NonZeroAndMaxString"],
+    #         working_directory: "NonZeroAnd255MaxString",
+    #         environment: [
+    #           {
+    #             name: "NonZeroAnd255MaxString", # required
+    #             value: "NonZeroAnd255MaxString", # required
+    #           },
+    #         ],
+    #         depends_on: [
+    #           {
+    #             container_name: "NonZeroAnd128MaxAsciiString", # required
+    #             condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     operating_system: "AMAZON_LINUX_2023", # required, accepts AMAZON_LINUX_2023
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.container_group_definition.container_group_definition_arn #=> String
+    #   resp.container_group_definition.creation_time #=> Time
+    #   resp.container_group_definition.operating_system #=> String, one of "AMAZON_LINUX_2023"
+    #   resp.container_group_definition.name #=> String
+    #   resp.container_group_definition.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.container_group_definition.total_memory_limit #=> Integer
+    #   resp.container_group_definition.total_cpu_limit #=> Integer
+    #   resp.container_group_definition.container_definitions #=> Array
+    #   resp.container_group_definition.container_definitions[0].container_name #=> String
+    #   resp.container_group_definition.container_definitions[0].image_uri #=> String
+    #   resp.container_group_definition.container_definitions[0].resolved_image_digest #=> String
+    #   resp.container_group_definition.container_definitions[0].memory_limits.soft_limit #=> Integer
+    #   resp.container_group_definition.container_definitions[0].memory_limits.hard_limit #=> Integer
+    #   resp.container_group_definition.container_definitions[0].port_configuration.container_port_ranges #=> Array
+    #   resp.container_group_definition.container_definitions[0].port_configuration.container_port_ranges[0].from_port #=> Integer
+    #   resp.container_group_definition.container_definitions[0].port_configuration.container_port_ranges[0].to_port #=> Integer
+    #   resp.container_group_definition.container_definitions[0].port_configuration.container_port_ranges[0].protocol #=> String, one of "TCP", "UDP"
+    #   resp.container_group_definition.container_definitions[0].cpu #=> Integer
+    #   resp.container_group_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.container_group_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.container_group_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.container_group_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.container_group_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.container_group_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.container_group_definition.container_definitions[0].command #=> Array
+    #   resp.container_group_definition.container_definitions[0].command[0] #=> String
+    #   resp.container_group_definition.container_definitions[0].essential #=> Boolean
+    #   resp.container_group_definition.container_definitions[0].entry_point #=> Array
+    #   resp.container_group_definition.container_definitions[0].entry_point[0] #=> String
+    #   resp.container_group_definition.container_definitions[0].working_directory #=> String
+    #   resp.container_group_definition.container_definitions[0].environment #=> Array
+    #   resp.container_group_definition.container_definitions[0].environment[0].name #=> String
+    #   resp.container_group_definition.container_definitions[0].environment[0].value #=> String
+    #   resp.container_group_definition.container_definitions[0].depends_on #=> Array
+    #   resp.container_group_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.container_group_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.container_group_definition.status #=> String, one of "READY", "COPYING", "FAILED"
+    #   resp.container_group_definition.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateContainerGroupDefinition AWS API Documentation
+    #
+    # @overload create_container_group_definition(params = {})
+    # @param [Hash] params ({})
+    def create_container_group_definition(params = {}, options = {})
+      req = build_request(:create_container_group_definition, params)
+      req.send_request(options)
+    end
+
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
+    #
+    # Creates a fleet of compute resources to host your game servers. Use
+    # this operation to set up the following types of fleets based on
+    # compute type:
+    #
+    # **Managed EC2 fleet**
+    #
+    # An EC2 fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2)
+    # instances. Your game server build is deployed to each fleet instance.
+    # Amazon GameLift manages the fleet's instances and controls the
+    # lifecycle of game server processes, which host game sessions for
+    # players. EC2 fleets can have instances in multiple locations. Each
+    # instance in the fleet is designated a `Compute`.
+    #
+    # To create an EC2 fleet, provide these required parameters:
+    #
+    # * Either `BuildId` or `ScriptId`
+    #
+    # * `ComputeType` set to `EC2` (the default value)
+    #
+    # * `EC2InboundPermissions`
+    #
+    # * `EC2InstanceType`
+    #
+    # * `FleetType`
+    #
+    # * `Name`
+    #
+    # * `RuntimeConfiguration` with at least one `ServerProcesses`
+    #   configuration
+    #
+    # If successful, this operation creates a new fleet resource and places
+    # it in `NEW` status while Amazon GameLift initiates the [fleet creation
+    # workflow][1]. To debug your fleet, fetch logs, view performance
+    # metrics or other actions on the fleet, create a development fleet with
+    # port 22/3389 open. As a best practice, we recommend opening ports for
     # remote access only when you need them and closing them when you're
     # finished.
     #
-    # If successful, this operation creates a new Fleet resource and places
-    # it in `NEW` status, which prompts Amazon GameLift to initiate the
-    # [fleet creation workflow][1]. You can track fleet creation by checking
-    # fleet status using DescribeFleetAttributes and
-    # DescribeFleetLocationAttributes/, or by monitoring fleet creation
-    # events using DescribeFleetEvents.
+    # When the fleet status is ACTIVE, you can adjust capacity settings and
+    # turn autoscaling on/off for each location.
     #
-    # When the fleet status changes to `ACTIVE`, you can enable automatic
-    # scaling with PutScalingPolicy and set capacity for the home Region
-    # with UpdateFleetCapacity. When the status of each remote location
-    # reaches `ACTIVE`, you can set capacity by location using
-    # UpdateFleetCapacity.
+    # **Managed container fleet**
+    #
+    # A container fleet is a set of Amazon Elastic Compute Cloud (Amazon
+    # EC2) instances. Your container architecture is deployed to each fleet
+    # instance based on the fleet configuration. Amazon GameLift manages the
+    # containers on each fleet instance and controls the lifecycle of game
+    # server processes, which host game sessions for players. Container
+    # fleets can have instances in multiple locations. Each container on an
+    # instance that runs game server processes is registered as a `Compute`.
+    #
+    # To create a container fleet, provide these required parameters:
+    #
+    # * `ComputeType` set to `CONTAINER`
+    #
+    # * `ContainerGroupsConfiguration`
+    #
+    # * `EC2InboundPermissions`
+    #
+    # * `EC2InstanceType`
+    #
+    # * `FleetType` set to `ON_DEMAND`
+    #
+    # * `Name`
+    #
+    # * `RuntimeConfiguration` with at least one `ServerProcesses`
+    #   configuration
+    #
+    # If successful, this operation creates a new fleet resource and places
+    # it in `NEW` status while Amazon GameLift initiates the [fleet creation
+    # workflow][1].
+    #
+    # When the fleet status is ACTIVE, you can adjust capacity settings and
+    # turn autoscaling on/off for each location.
+    #
+    # **Anywhere fleet**
+    #
+    # An Anywhere fleet represents compute resources that are not owned or
+    # managed by Amazon GameLift. You might create an Anywhere fleet with
+    # your local machine for testing, or use one to host game servers with
+    # on-premises hardware or other game hosting solutions.
+    #
+    # To create an Anywhere fleet, provide these required parameters:
+    #
+    # * `ComputeType` set to `ANYWHERE`
+    #
+    # * `Locations` specifying a custom location
+    #
+    # * `Name`
+    #
+    # If successful, this operation creates a new fleet resource and places
+    # it in `ACTIVE` status. You can register computes with a fleet in
+    # `ACTIVE` status.
     #
     # **Learn more**
     #
     # [Setting up fleets][2]
     #
-    # [Debug fleet creation issues][3]
+    # [Setting up a container fleet][3]
+    #
+    # [Debug fleet creation issues][4]
     #
     # [Multi-location fleets][2]
     #
@@ -883,7 +1189,8 @@ module Aws::GameLift
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-all.html#fleets-creation-workflow
     # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
-    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-build-fleet.html
+    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation
     #
     # @option params [required, String] :name
     #   A descriptive label that is associated with a fleet. Fleet names do
@@ -893,17 +1200,18 @@ module Aws::GameLift
     #   A description for the fleet.
     #
     # @option params [String] :build_id
-    #   The unique identifier for a custom game server build to be deployed on
-    #   fleet instances. You can use either the build ID or ARN. The build
-    #   must be uploaded to Amazon GameLift and in `READY` status. This fleet
-    #   property can't be changed after the fleet is created.
+    #   The unique identifier for a custom game server build to be deployed to
+    #   a fleet with compute type `EC2`. You can use either the build ID or
+    #   ARN. The build must be uploaded to Amazon GameLift and in `READY`
+    #   status. This fleet property can't be changed after the fleet is
+    #   created.
     #
     # @option params [String] :script_id
     #   The unique identifier for a Realtime configuration script to be
-    #   deployed on fleet instances. You can use either the script ID or ARN.
-    #   Scripts must be uploaded to Amazon GameLift prior to creating the
-    #   fleet. This fleet property can't be changed after the fleet is
-    #   created.
+    #   deployed to a fleet with compute type `EC2`. You can use either the
+    #   script ID or ARN. Scripts must be uploaded to Amazon GameLift prior to
+    #   creating the fleet. This fleet property can't be changed after the
+    #   fleet is created.
     #
     # @option params [String] :server_launch_path
     #   **This parameter is no longer used.** Specify a server launch path
@@ -928,9 +1236,9 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-initialize
     #
     # @option params [String] :ec2_instance_type
-    #   The Amazon GameLift-supported Amazon EC2 instance type to use for all
-    #   fleet instances. Instance type determines the computing resources that
-    #   will be used to host your game servers, including CPU, memory,
+    #   The Amazon GameLift-supported Amazon EC2 instance type to use with EC2
+    #   and container fleets. Instance type determines the computing resources
+    #   that will be used to host your game servers, including CPU, memory,
     #   storage, and networking capacity. See [Amazon Elastic Compute Cloud
     #   Instance Types][1] for detailed descriptions of Amazon EC2 instance
     #   types.
@@ -940,11 +1248,20 @@ module Aws::GameLift
     #   [1]: http://aws.amazon.com/ec2/instance-types/
     #
     # @option params [Array<Types::IpPermission>] :ec2_inbound_permissions
-    #   The allowed IP address ranges and port settings that allow inbound
-    #   traffic to access game sessions on this fleet. If the fleet is hosting
-    #   a custom game build, this property must be set before players can
-    #   connect to game sessions. For Realtime Servers fleets, Amazon GameLift
-    #   automatically sets TCP and UDP ranges.
+    #   The IP address ranges and port settings that allow inbound traffic to
+    #   access game server processes and other processes on this fleet. Set
+    #   this parameter for EC2 and container fleets. You can leave this
+    #   parameter empty when creating the fleet, but you must call
+    #   UpdateFleetPortSettings to set it before players can connect to game
+    #   sessions. As a best practice, we recommend opening ports for remote
+    #   access only when you need them and closing them when you're finished.
+    #   For Realtime Servers fleets, Amazon GameLift automatically sets TCP
+    #   and UDP ranges.
+    #
+    #   To manage inbound access for a container fleet, set this parameter to
+    #   the same port numbers that you set for the fleet's connection port
+    #   range. During the life of the fleet, update this parameter to control
+    #   which connection ports are open to inbound traffic.
     #
     # @option params [String] :new_game_session_protection_policy
     #   The status of termination protection for active game sessions on the
@@ -960,14 +1277,15 @@ module Aws::GameLift
     #     terminated during a scale-down event.
     #
     # @option params [Types::RuntimeConfiguration] :runtime_configuration
-    #   Instructions for how to launch and maintain server processes on
-    #   instances in the fleet. The runtime configuration defines one or more
-    #   server process configurations, each identifying a build executable or
-    #   Realtime script file and the number of processes of that type to run
+    #   Instructions for how to launch and run server processes on the fleet.
+    #   Set runtime configuration for EC2 fleets and container fleets. For an
+    #   Anywhere fleets, set this parameter only if the fleet is running the
+    #   Amazon GameLift Agent. The runtime configuration defines one or more
+    #   server process configurations. Each server process identifies a game
+    #   executable or Realtime script file and the number of processes to run
     #   concurrently.
     #
-    #   <note markdown="1"> The `RuntimeConfiguration` parameter is required unless the fleet is
-    #   being configured using the older parameters `ServerLaunchPath` and
+    #   <note markdown="1"> This parameter replaces the parameters `ServerLaunchPath` and
     #   `ServerLaunchParameters`, which are still supported for backward
     #   compatibility.
     #
@@ -1059,11 +1377,11 @@ module Aws::GameLift
     #   fleets in Amazon Web Services Regions that support multiple locations.
     #   You can add any Amazon GameLift-supported Amazon Web Services Region
     #   as a remote location, in the form of an Amazon Web Services Region
-    #   code such as `us-west-2`. To create a fleet with instances in the home
-    #   Region only, don't use this parameter.
+    #   code, such as `us-west-2` or Local Zone code. To create a fleet with
+    #   instances in the home Region only, don't set this parameter.
     #
-    #   To use this parameter, Amazon GameLift requires you to use your home
-    #   location in the request.
+    #   When using this parameter, Amazon GameLift requires you to include
+    #   your home location in the request.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new fleet resource. Tags are
@@ -1077,27 +1395,45 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [String] :compute_type
-    #   The type of compute resource used to host your game servers. You can
-    #   use your own compute resources with Amazon GameLift Anywhere or use
-    #   Amazon EC2 instances with managed Amazon GameLift. By default, this
-    #   property is set to `EC2`.
+    #   The type of compute resource used to host your game servers.
+    #
+    #   * `EC2` – The game server build is deployed to Amazon EC2 instances
+    #     for cloud hosting. This is the default setting.
+    #
+    #   * `CONTAINER` – Container images with your game server build and
+    #     supporting software are deployed to Amazon EC2 instances for cloud
+    #     hosting. With this compute type, you must specify the
+    #     `ContainerGroupsConfiguration` parameter.
+    #
+    #   * `ANYWHERE` – Game servers or container images with your game server
+    #     and supporting software are deployed to compute resources that are
+    #     provided and managed by you. With this compute type, you can also
+    #     set the `AnywhereConfiguration` parameter.
     #
     # @option params [Types::AnywhereConfiguration] :anywhere_configuration
     #   Amazon GameLift Anywhere configuration options.
     #
     # @option params [String] :instance_role_credentials_provider
     #   Prompts Amazon GameLift to generate a shared credentials file for the
-    #   IAM role defined in `InstanceRoleArn`. The shared credentials file is
-    #   stored on each fleet instance and refreshed as needed. Use shared
-    #   credentials for applications that are deployed along with the game
-    #   server executable, if the game server is integrated with server SDK
-    #   version 5.x. For more information about using shared credentials, see
-    #   [ Communicate with other Amazon Web Services resources from your
+    #   IAM role that's defined in `InstanceRoleArn`. The shared credentials
+    #   file is stored on each fleet instance and refreshed as needed. Use
+    #   shared credentials for applications that are deployed along with the
+    #   game server executable, if the game server is integrated with server
+    #   SDK version 5.x. For more information about using shared credentials,
+    #   see [ Communicate with other Amazon Web Services resources from your
     #   fleets][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #
+    # @option params [Types::ContainerGroupsConfiguration] :container_groups_configuration
+    #   The container groups to deploy to instances in the container fleet and
+    #   other fleet-level configuration settings. Use the
+    #   CreateContainerGroupDefinition action to create container groups. A
+    #   container fleet must have exactly one replica container group, and can
+    #   optionally have one daemon container group. You can't change this
+    #   property after you create the fleet.
     #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1158,11 +1494,19 @@ module Aws::GameLift
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     compute_type: "EC2", # accepts EC2, ANYWHERE
+    #     compute_type: "EC2", # accepts EC2, ANYWHERE, CONTAINER
     #     anywhere_configuration: {
     #       cost: "NonNegativeLimitedLengthDouble", # required
     #     },
     #     instance_role_credentials_provider: "SHARED_CREDENTIAL_FILE", # accepts SHARED_CREDENTIAL_FILE
+    #     container_groups_configuration: {
+    #       container_group_definition_names: ["ContainerGroupDefinitionNameOrArn"], # required
+    #       connection_port_range: { # required
+    #         from_port: 1, # required
+    #         to_port: 1, # required
+    #       },
+    #       desired_replica_container_groups_per_instance: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1194,9 +1538,16 @@ module Aws::GameLift
     #   resp.fleet_attributes.stopped_actions[0] #=> String, one of "AUTO_SCALING"
     #   resp.fleet_attributes.instance_role_arn #=> String
     #   resp.fleet_attributes.certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
-    #   resp.fleet_attributes.compute_type #=> String, one of "EC2", "ANYWHERE"
+    #   resp.fleet_attributes.compute_type #=> String, one of "EC2", "ANYWHERE", "CONTAINER"
     #   resp.fleet_attributes.anywhere_configuration.cost #=> String
     #   resp.fleet_attributes.instance_role_credentials_provider #=> String, one of "SHARED_CREDENTIAL_FILE"
+    #   resp.fleet_attributes.container_groups_attributes.container_group_definition_properties #=> Array
+    #   resp.fleet_attributes.container_groups_attributes.container_group_definition_properties[0].scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.fleet_attributes.container_groups_attributes.container_group_definition_properties[0].container_group_definition_name #=> String
+    #   resp.fleet_attributes.container_groups_attributes.connection_port_range.from_port #=> Integer
+    #   resp.fleet_attributes.container_groups_attributes.connection_port_range.to_port #=> Integer
+    #   resp.fleet_attributes.container_groups_attributes.container_groups_per_instance.desired_replica_container_groups_per_instance #=> Integer
+    #   resp.fleet_attributes.container_groups_attributes.container_groups_per_instance.max_replica_container_groups_per_instance #=> Integer
     #   resp.location_states #=> Array
     #   resp.location_states[0].location #=> String
     #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
@@ -1210,15 +1561,17 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Adds remote locations to a fleet and begins populating the new
-    # locations with EC2 instances. The new instances conform to the
-    # fleet's instance type, auto-scaling, and other configuration
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
+    #
+    # Adds remote locations to an EC2 or container fleet and begins
+    # populating the new locations with instances. The new instances conform
+    # to the fleet's instance type, auto-scaling, and other configuration
     # settings.
     #
-    # <note markdown="1"> This operation cannot be used with fleets that don't support remote
-    # locations. Fleets can have multiple locations only if they reside in
-    # Amazon Web Services Regions that support this feature and were created
-    # after the feature was released in March 2021.
+    # <note markdown="1"> You can't add remote locations to a fleet that resides in an Amazon
+    # Web Services Region that doesn't support multiple locations. Fleets
+    # created prior to March 2021 can't support multiple locations.
     #
     #  </note>
     #
@@ -2803,21 +3156,62 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Deletes all resources and information related a fleet. Any current
-    # fleet instances, including those in remote locations, are shut down.
-    # You don't need to call `DeleteFleetLocations` separately.
+    # <b>This operation is used with the Amazon GameLift containers feature,
+    # which is currently in public preview. </b>
+    #
+    # Deletes a container group definition resource. You can delete a
+    # container group definition if there are no fleets using the
+    # definition.
+    #
+    # To delete a container group definition, identify the resource to
+    # delete.
+    #
+    # **Learn more**
+    #
+    # * [Manage a container group definition][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html
+    #
+    # @option params [required, String] :name
+    #   The unique identifier for the container group definition to delete.
+    #   You can use either the `Name` or `ARN` value.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_container_group_definition({
+    #     name: "ContainerGroupDefinitionNameOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteContainerGroupDefinition AWS API Documentation
+    #
+    # @overload delete_container_group_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_container_group_definition(params = {}, options = {})
+      req = build_request(:delete_container_group_definition, params)
+      req.send_request(options)
+    end
+
+    # Deletes all resources and information related to a fleet and shuts
+    # down any currently running fleet instances, including those in remote
+    # locations.
     #
     # <note markdown="1"> If the fleet being deleted has a VPC peering connection, you first
     # need to get a valid authorization (good for 24 hours) by calling
-    # [CreateVpcPeeringAuthorization][1]. You do not need to explicitly
+    # [CreateVpcPeeringAuthorization][1]. You don't need to explicitly
     # delete the VPC peering connection.
     #
     #  </note>
     #
     # To delete a fleet, specify the fleet ID to be terminated. During the
-    # deletion process the fleet status is changed to `DELETING`. When
+    # deletion process, the fleet status is changed to `DELETING`. When
     # completed, the status switches to `TERMINATED` and the fleet event
-    # `FLEET_DELETED` is sent.
+    # `FLEET_DELETED` is emitted.
     #
     # **Learn more**
     #
@@ -3295,17 +3689,31 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Removes a compute resource from an Amazon GameLift Anywhere fleet.
-    # Deregistered computes can no longer host game sessions through Amazon
-    # GameLift.
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
+    #
+    # Removes a compute resource from an Amazon GameLift Anywhere fleet or
+    # container fleet. Deregistered computes can no longer host game
+    # sessions through Amazon GameLift.
+    #
+    # For an Anywhere fleet or a container fleet that's running the Amazon
+    # GameLift Agent, the Agent handles all compute registry tasks for you.
+    # For an Anywhere fleet that doesn't use the Agent, call this operation
+    # to deregister fleet computes.
+    #
+    # To deregister a compute, call this operation from the compute that's
+    # being deregistered and specify the compute name and the fleet ID.
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet the compute resource is currently
     #   registered to.
     #
     # @option params [required, String] :compute_name
-    #   The name of the compute resource to remove from the specified Anywhere
-    #   fleet.
+    #   The unique identifier of the compute resource to deregister. For an
+    #   Anywhere fleet compute, use the registered compute name. For a
+    #   container fleet, use the compute name (for example,
+    #   `a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9`)
+    #   or the compute ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3470,26 +3878,40 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves properties for a compute resource in an Amazon GameLift
-    # fleet. Call ListCompute to get a list of compute resources in a fleet.
-    # You can request information for computes in either managed EC2 fleets
-    # or Anywhere fleets.
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
     #
-    # To request compute properties, specify the compute name and fleet ID.
+    # Retrieves properties for a compute resource in an Amazon GameLift
+    # fleet. To get a list of all computes in a fleet, call ListCompute.
+    #
+    # To request information on a specific compute, provide the fleet ID and
+    # compute name.
     #
     # If successful, this operation returns details for the requested
-    # compute resource. For managed EC2 fleets, this operation returns the
-    # fleet's EC2 instances. For Anywhere fleets, this operation returns
-    # the fleet's registered computes.
+    # compute resource. Depending on the fleet's compute type, the result
+    # includes the following information:
+    #
+    # * For `EC2` fleets, this operation returns information about the EC2
+    #   instance.
+    #
+    # * For `ANYWHERE` fleets, this operation returns information about the
+    #   registered compute.
+    #
+    # * For `CONTAINER` fleets, this operation returns information about the
+    #   container that's registered as a compute, and the instance it's
+    #   running on. The compute name is the container name.
     #
     # @option params [required, String] :fleet_id
-    #   A unique identifier for the fleet that the compute is registered to.
-    #   You can use either the fleet ID or ARN value.
+    #   A unique identifier for the fleet that the compute belongs to. You can
+    #   use either the fleet ID or ARN value.
     #
     # @option params [required, String] :compute_name
     #   The unique identifier of the compute resource to retrieve properties
     #   for. For an Anywhere fleet compute, use the registered compute name.
-    #   For a managed EC2 fleet instance, use the instance ID.
+    #   For an EC2 fleet instance, use the instance ID. For a container fleet,
+    #   use the compute name (for example,
+    #   `a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9`)
+    #   or the compute ARN.
     #
     # @return [Types::DescribeComputeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3516,6 +3938,12 @@ module Aws::GameLift
     #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
     #   resp.compute.type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge"
     #   resp.compute.game_lift_service_sdk_endpoint #=> String
+    #   resp.compute.game_lift_agent_endpoint #=> String
+    #   resp.compute.instance_id #=> String
+    #   resp.compute.container_attributes.container_port_mappings #=> Array
+    #   resp.compute.container_attributes.container_port_mappings[0].container_port #=> Integer
+    #   resp.compute.container_attributes.container_port_mappings[0].connection_port #=> Integer
+    #   resp.compute.container_attributes.container_port_mappings[0].protocol #=> String, one of "TCP", "UDP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeCompute AWS API Documentation
     #
@@ -3523,6 +3951,90 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def describe_compute(params = {}, options = {})
       req = build_request(:describe_compute, params)
+      req.send_request(options)
+    end
+
+    # <b>This operation is used with the Amazon GameLift containers feature,
+    # which is currently in public preview. </b>
+    #
+    # Retrieves the properties of a container group definition, including
+    # all container definitions in the group.
+    #
+    # To retrieve a container group definition, provide a resource
+    # identifier. If successful, this operation returns the complete
+    # properties of the container group definition.
+    #
+    # **Learn more**
+    #
+    # * [Manage a container group definition][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html
+    #
+    # @option params [required, String] :name
+    #   The unique identifier for the container group definition to retrieve
+    #   properties for. You can use either the `Name` or `ARN` value.
+    #
+    # @return [Types::DescribeContainerGroupDefinitionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContainerGroupDefinitionOutput#container_group_definition #container_group_definition} => Types::ContainerGroupDefinition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_container_group_definition({
+    #     name: "ContainerGroupDefinitionNameOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.container_group_definition.container_group_definition_arn #=> String
+    #   resp.container_group_definition.creation_time #=> Time
+    #   resp.container_group_definition.operating_system #=> String, one of "AMAZON_LINUX_2023"
+    #   resp.container_group_definition.name #=> String
+    #   resp.container_group_definition.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.container_group_definition.total_memory_limit #=> Integer
+    #   resp.container_group_definition.total_cpu_limit #=> Integer
+    #   resp.container_group_definition.container_definitions #=> Array
+    #   resp.container_group_definition.container_definitions[0].container_name #=> String
+    #   resp.container_group_definition.container_definitions[0].image_uri #=> String
+    #   resp.container_group_definition.container_definitions[0].resolved_image_digest #=> String
+    #   resp.container_group_definition.container_definitions[0].memory_limits.soft_limit #=> Integer
+    #   resp.container_group_definition.container_definitions[0].memory_limits.hard_limit #=> Integer
+    #   resp.container_group_definition.container_definitions[0].port_configuration.container_port_ranges #=> Array
+    #   resp.container_group_definition.container_definitions[0].port_configuration.container_port_ranges[0].from_port #=> Integer
+    #   resp.container_group_definition.container_definitions[0].port_configuration.container_port_ranges[0].to_port #=> Integer
+    #   resp.container_group_definition.container_definitions[0].port_configuration.container_port_ranges[0].protocol #=> String, one of "TCP", "UDP"
+    #   resp.container_group_definition.container_definitions[0].cpu #=> Integer
+    #   resp.container_group_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.container_group_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.container_group_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.container_group_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.container_group_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.container_group_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.container_group_definition.container_definitions[0].command #=> Array
+    #   resp.container_group_definition.container_definitions[0].command[0] #=> String
+    #   resp.container_group_definition.container_definitions[0].essential #=> Boolean
+    #   resp.container_group_definition.container_definitions[0].entry_point #=> Array
+    #   resp.container_group_definition.container_definitions[0].entry_point[0] #=> String
+    #   resp.container_group_definition.container_definitions[0].working_directory #=> String
+    #   resp.container_group_definition.container_definitions[0].environment #=> Array
+    #   resp.container_group_definition.container_definitions[0].environment[0].name #=> String
+    #   resp.container_group_definition.container_definitions[0].environment[0].value #=> String
+    #   resp.container_group_definition.container_definitions[0].depends_on #=> Array
+    #   resp.container_group_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.container_group_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.container_group_definition.status #=> String, one of "READY", "COPYING", "FAILED"
+    #   resp.container_group_definition.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeContainerGroupDefinition AWS API Documentation
+    #
+    # @overload describe_container_group_definition(params = {})
+    # @param [Hash] params ({})
+    def describe_container_group_definition(params = {}, options = {})
+      req = build_request(:describe_container_group_definition, params)
       req.send_request(options)
     end
 
@@ -3624,13 +4136,17 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves core fleet-wide properties, including the computing hardware
-    # and deployment configuration for all instances in the fleet.
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
     #
-    # This operation can be used in the following ways:
+    # Retrieves core fleet-wide properties for fleets in an Amazon Web
+    # Services Region. Properties include the computing hardware and
+    # deployment configuration for instances in the fleet.
     #
-    # * To get attributes for one or more specific fleets, provide a list of
-    #   fleet IDs or fleet ARNs.
+    # You can use this operation in the following ways:
+    #
+    # * To get attributes for specific fleets, provide a list of fleet IDs
+    #   or fleet ARNs.
     #
     # * To get attributes for all fleets, do not provide a fleet identifier.
     #
@@ -3717,9 +4233,16 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].stopped_actions[0] #=> String, one of "AUTO_SCALING"
     #   resp.fleet_attributes[0].instance_role_arn #=> String
     #   resp.fleet_attributes[0].certificate_configuration.certificate_type #=> String, one of "DISABLED", "GENERATED"
-    #   resp.fleet_attributes[0].compute_type #=> String, one of "EC2", "ANYWHERE"
+    #   resp.fleet_attributes[0].compute_type #=> String, one of "EC2", "ANYWHERE", "CONTAINER"
     #   resp.fleet_attributes[0].anywhere_configuration.cost #=> String
     #   resp.fleet_attributes[0].instance_role_credentials_provider #=> String, one of "SHARED_CREDENTIAL_FILE"
+    #   resp.fleet_attributes[0].container_groups_attributes.container_group_definition_properties #=> Array
+    #   resp.fleet_attributes[0].container_groups_attributes.container_group_definition_properties[0].scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.fleet_attributes[0].container_groups_attributes.container_group_definition_properties[0].container_group_definition_name #=> String
+    #   resp.fleet_attributes[0].container_groups_attributes.connection_port_range.from_port #=> Integer
+    #   resp.fleet_attributes[0].container_groups_attributes.connection_port_range.to_port #=> Integer
+    #   resp.fleet_attributes[0].container_groups_attributes.container_groups_per_instance.desired_replica_container_groups_per_instance #=> Integer
+    #   resp.fleet_attributes[0].container_groups_attributes.container_groups_per_instance.max_replica_container_groups_per_instance #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes AWS API Documentation
@@ -3731,11 +4254,16 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves the resource capacity settings for one or more fleets. The
-    # data returned includes the current fleet capacity (number of EC2
-    # instances), and settings that can control how capacity scaling. For
-    # fleets with remote locations, this operation retrieves data for the
-    # fleet's home Region only.
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
+    #
+    # Retrieves the resource capacity settings for one or more fleets. For a
+    # container fleet, this operation also returns counts for replica
+    # container groups.
+    #
+    # With multi-location fleets, this operation retrieves data for the
+    # fleet's home Region only. To retrieve capacity for remote locations,
+    # see DescribeFleetLocationCapacity.
     #
     # This operation can be used in the following ways:
     #
@@ -3749,10 +4277,9 @@ module Aws::GameLift
     # retrieve results as a set of sequential pages.
     #
     # If successful, a `FleetCapacity` object is returned for each requested
-    # fleet ID. Each FleetCapacity object includes a `Location` property,
-    # which is set to the fleet's home Region. When a list of fleet IDs is
-    # provided, attribute objects are returned only for fleets that
-    # currently exist.
+    # fleet ID. Each `FleetCapacity` object includes a `Location` property,
+    # which is set to the fleet's home Region. Capacity values are returned
+    # only for fleets that currently exist.
     #
     # <note markdown="1"> Some API operations may limit the number of fleet IDs that are allowed
     # in one request. If a request exceeds this limit, the request fails and
@@ -3818,6 +4345,10 @@ module Aws::GameLift
     #   resp.fleet_capacity[0].instance_counts.idle #=> Integer
     #   resp.fleet_capacity[0].instance_counts.terminating #=> Integer
     #   resp.fleet_capacity[0].location #=> String
+    #   resp.fleet_capacity[0].replica_container_group_counts.pending #=> Integer
+    #   resp.fleet_capacity[0].replica_container_group_counts.active #=> Integer
+    #   resp.fleet_capacity[0].replica_container_group_counts.idle #=> Integer
+    #   resp.fleet_capacity[0].replica_container_group_counts.terminating #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacity AWS API Documentation
@@ -3902,6 +4433,7 @@ module Aws::GameLift
     #   resp.events[0].message #=> String
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].pre_signed_log_url #=> String
+    #   resp.events[0].count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEvents AWS API Documentation
@@ -4003,10 +4535,13 @@ module Aws::GameLift
 
     # Retrieves the resource capacity settings for a fleet location. The
     # data returned includes the current capacity (number of EC2 instances)
-    # and some scaling settings for the requested fleet location. Use this
-    # operation to retrieve capacity information for a fleet's remote
-    # location or home Region (you can also retrieve home Region capacity by
-    # calling `DescribeFleetCapacity`).
+    # and some scaling settings for the requested fleet location. For a
+    # container fleet, this operation also returns counts for replica
+    # container groups.
+    #
+    # Use this operation to retrieve capacity information for a fleet's
+    # remote location or home Region (you can also retrieve home Region
+    # capacity by calling `DescribeFleetCapacity`).
     #
     # To retrieve capacity data, identify a fleet and location.
     #
@@ -4057,6 +4592,10 @@ module Aws::GameLift
     #   resp.fleet_capacity.instance_counts.idle #=> Integer
     #   resp.fleet_capacity.instance_counts.terminating #=> Integer
     #   resp.fleet_capacity.location #=> String
+    #   resp.fleet_capacity.replica_container_group_counts.pending #=> Integer
+    #   resp.fleet_capacity.replica_container_group_counts.active #=> Integer
+    #   resp.fleet_capacity.replica_container_group_counts.idle #=> Integer
+    #   resp.fleet_capacity.replica_container_group_counts.terminating #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetLocationCapacity AWS API Documentation
     #
@@ -4129,24 +4668,26 @@ module Aws::GameLift
     end
 
     # Retrieves a fleet's inbound connection permissions. Connection
-    # permissions specify the range of IP addresses and port settings that
-    # incoming traffic can use to access server processes in the fleet. Game
-    # sessions that are running on instances in the fleet must use
-    # connections that fall in this range.
+    # permissions specify IP addresses and port settings that incoming
+    # traffic can use to access server processes in the fleet. Game server
+    # processes that are running in the fleet must use a port that falls
+    # within this range. To connect to game server processes on a container
+    # fleet, the port settings should include one or more of the fleet's
+    # connection ports.
     #
-    # This operation can be used in the following ways:
+    # Use this operation in the following ways:
     #
-    # * To retrieve the inbound connection permissions for a fleet, identify
-    #   the fleet's unique identifier.
+    # * To retrieve the port settings for a fleet, identify the fleet's
+    #   unique identifier.
     #
     # * To check the status of recent updates to a fleet remote location,
     #   specify the fleet ID and a location. Port setting updates can take
     #   time to propagate across all locations.
     #
     # If successful, a set of `IpPermission` objects is returned for the
-    # requested fleet ID. When a location is specified, a pending status is
-    # included. If the requested fleet has been deleted, the result set is
-    # empty.
+    # requested fleet ID. When specifying a location, this operation returns
+    # a pending status. If the requested fleet has been deleted, the result
+    # set is empty.
     #
     # **Learn more**
     #
@@ -5354,11 +5895,16 @@ module Aws::GameLift
     end
 
     # Retrieves a fleet's runtime configuration settings. The runtime
-    # configuration tells Amazon GameLift which server processes to run (and
-    # how) on each instance in the fleet.
+    # configuration determines which server processes run, and how, on
+    # computes in the fleet. For managed EC2 fleets, the runtime
+    # configuration describes server processes that run on each fleet
+    # instance. For container fleets, the runtime configuration describes
+    # server processes that run in each replica container group. You can
+    # update a fleet's runtime configuration at any time using
+    # UpdateRuntimeConfiguration.
     #
-    # To get the runtime configuration that is currently in forces for a
-    # fleet, provide the fleet ID.
+    # To get the current runtime configuration for a fleet, provide the
+    # fleet ID.
     #
     # If successful, a `RuntimeConfiguration` object is returned for the
     # requested fleet. If the requested fleet has been deleted, the result
@@ -5646,41 +6192,57 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Requests authorization to remotely connect to a compute resource in an
-    # Amazon GameLift fleet. Call this action to connect to an instance in a
-    # managed EC2 fleet if the fleet's game build uses Amazon GameLift
-    # server SDK 5.x or later. To connect to instances with game builds that
-    # use server SDK 4.x or earlier, call GetInstanceAccess.
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
     #
-    # To request access to a compute, identify the specific EC2 instance and
-    # the fleet it belongs to. You can retrieve instances for a managed EC2
-    # fleet by calling ListCompute.
+    # Requests authorization to remotely connect to a hosting resource in a
+    # Amazon GameLift managed fleet. This operation is not used with Amazon
+    # GameLift Anywhere fleets
     #
-    # If successful, this operation returns a set of temporary Amazon Web
+    # To request access, specify the compute name and the fleet ID. If
+    # successful, this operation returns a set of temporary Amazon Web
     # Services credentials, including a two-part access key and a session
-    # token. Use these credentials with Amazon EC2 Systems Manager (SSM) to
-    # start a session with the compute. For more details, see [ Starting a
-    # session (CLI)][1] in the *Amazon EC2 Systems Manager User Guide*.
+    # token.
+    #
+    # **EC2 fleets**
+    #
+    # With an EC2 fleet (where compute type is `EC2`), use these credentials
+    # with Amazon EC2 Systems Manager (SSM) to start a session with the
+    # compute. For more details, see [ Starting a session (CLI)][1] in the
+    # *Amazon EC2 Systems Manager User Guide*.
+    #
+    # **Container fleets**
+    #
+    # With a container fleet (where compute type is `CONTAINER`), use these
+    # credentials and the target value with SSM to connect to the fleet
+    # instance where the container is running. After you're connected to
+    # the instance, use Docker commands to interact with the container.
     #
     # **Learn more**
     #
-    # [Remotely connect to fleet instances][2]
+    # * [Remotely connect to fleet instances][2]
     #
-    # [Debug fleet issues][3]
+    # * [Debug fleet issues][3]
+    #
+    # * [ Remotely connect to a container fleet][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#sessions-start-cli
     # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html
+    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-remote-access.html
     #
     # @option params [required, String] :fleet_id
-    #   A unique identifier for the fleet that contains the compute resource
+    #   A unique identifier for the fleet that holds the compute resource that
     #   you want to connect to. You can use either the fleet ID or ARN value.
     #
     # @option params [required, String] :compute_name
     #   A unique identifier for the compute resource that you want to connect
-    #   to. You can use either a registered compute name or an instance ID.
+    #   to. For an EC2 fleet compute, use the instance ID. For a container
+    #   fleet, use the compute name (for example,
+    #   `a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9`)
+    #   or the compute ARN.
     #
     # @return [Types::GetComputeAccessOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5689,6 +6251,7 @@ module Aws::GameLift
     #   * {Types::GetComputeAccessOutput#compute_name #compute_name} => String
     #   * {Types::GetComputeAccessOutput#compute_arn #compute_arn} => String
     #   * {Types::GetComputeAccessOutput#credentials #credentials} => Types::AwsCredentials
+    #   * {Types::GetComputeAccessOutput#target #target} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5706,6 +6269,7 @@ module Aws::GameLift
     #   resp.credentials.access_key_id #=> String
     #   resp.credentials.secret_access_key #=> String
     #   resp.credentials.session_token #=> String
+    #   resp.target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetComputeAccess AWS API Documentation
     #
@@ -5716,15 +6280,26 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Requests an authentication token from Amazon GameLift for a registered
-    # compute in an Anywhere fleet. The game servers that are running on the
-    # compute use this token to authenticate with the Amazon GameLift
-    # service. Each server process must provide a valid authentication token
-    # in its call to the Amazon GameLift server SDK action `InitSDK()`.
+    # Requests an authentication token from Amazon GameLift for a compute
+    # resource in an Amazon GameLift Anywhere fleet or container fleet. Game
+    # servers that are running on the compute use this token to communicate
+    # with the Amazon GameLift service, such as when calling the Amazon
+    # GameLift server SDK action `InitSDK()`. Authentication tokens are
+    # valid for a limited time span, so you need to request a fresh token
+    # before the current token expires.
     #
-    # Authentication tokens are valid for a limited time span. Use a
-    # mechanism to regularly request a fresh authentication token before the
-    # current token expires.
+    # Use this operation based on the fleet compute type:
+    #
+    # * For `EC2` fleets, auth token retrieval and refresh is handled
+    #   automatically. All game servers that are running on all fleet
+    #   instances have access to a valid auth token.
+    #
+    # * For `ANYWHERE` and `CONTAINER` fleets, if you're using the Amazon
+    #   GameLift Agent, auth token retrieval and refresh is handled
+    #   automatically for any container or Anywhere compute where the Agent
+    #   is running. If you're not using the Agent, create a mechanism to
+    #   retrieve and refresh auth tokens for computes that are running game
+    #   server processes.
     #
     # **Learn more**
     #
@@ -5745,7 +6320,11 @@ module Aws::GameLift
     #
     # @option params [required, String] :compute_name
     #   The name of the compute resource you are requesting the authentication
-    #   token for.
+    #   token for. For an Anywhere fleet compute, use the registered compute
+    #   name. For an EC2 fleet instance, use the instance ID. For a container
+    #   fleet, use the compute name (for example,
+    #   `a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9`)
+    #   or the compute ARN.
     #
     # @return [Types::GetComputeAuthTokenOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6083,23 +6662,43 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves the compute resources in an Amazon GameLift fleet. You can
-    # request information for either managed EC2 fleets or Anywhere fleets.
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
     #
-    # To request a list of computes, specify the fleet ID. You can filter
-    # the result set by location. Use the pagination parameters to retrieve
-    # results in a set of sequential pages.
+    # Retrieves information on the compute resources in an Amazon GameLift
+    # fleet.
     #
-    # If successful, this operation returns the compute resource for the
-    # requested fleet. For managed EC2 fleets, it returns a list of EC2
-    # instances. For Anywhere fleets, it returns a list of registered
-    # compute names.
+    # To request a list of computes, specify the fleet ID. Use the
+    # pagination parameters to retrieve results in a set of sequential
+    # pages.
+    #
+    # You can filter the result set by location.
+    #
+    # If successful, this operation returns information on all computes in
+    # the requested fleet. Depending on the fleet's compute type, the
+    # result includes the following information:
+    #
+    # * For `EC2` fleets, this operation returns information about the EC2
+    #   instance. Compute names are instance IDs.
+    #
+    # * For `ANYWHERE` fleets, this operation returns the compute names and
+    #   details provided when the compute was registered with
+    #   `RegisterCompute`. The `GameLiftServiceSdkEndpoint` or
+    #   `GameLiftAgentEndpoint` is included.
+    #
+    # * For `CONTAINER` fleets, this operation returns information about
+    #   containers that are registered as computes, and the instances
+    #   they're running on. Compute names are container names.
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet to retrieve compute resources for.
     #
     # @option params [String] :location
-    #   The name of a location to retrieve compute resources for.
+    #   The name of a location to retrieve compute resources for. For an
+    #   Amazon GameLift Anywhere fleet, use a custom location. For a
+    #   multi-location EC2 or container fleet, provide a Amazon Web Services
+    #   Region or Local Zone code (for example: `us-west-2` or
+    #   `us-west-2-lax-1`).
     #
     # @option params [Integer] :limit
     #   The maximum number of results to return. Use this parameter with
@@ -6142,6 +6741,12 @@ module Aws::GameLift
     #   resp.compute_list[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
     #   resp.compute_list[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge"
     #   resp.compute_list[0].game_lift_service_sdk_endpoint #=> String
+    #   resp.compute_list[0].game_lift_agent_endpoint #=> String
+    #   resp.compute_list[0].instance_id #=> String
+    #   resp.compute_list[0].container_attributes.container_port_mappings #=> Array
+    #   resp.compute_list[0].container_attributes.container_port_mappings[0].container_port #=> Integer
+    #   resp.compute_list[0].container_attributes.container_port_mappings[0].connection_port #=> Integer
+    #   resp.compute_list[0].container_attributes.container_port_mappings[0].protocol #=> String, one of "TCP", "UDP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListCompute AWS API Documentation
@@ -6153,45 +6758,150 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves a collection of fleet resources in an Amazon Web Services
-    # Region. You can call this operation to get fleets in a previously
-    # selected default Region (see
-    # [https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html][1]or
-    # specify a Region in your request. You can filter the result set to
-    # find only those fleets that are deployed with a specific build or
-    # script. For fleets that have multiple locations, this operation
-    # retrieves fleets based on their home Region only.
+    # <b>This operation is used with the Amazon GameLift containers feature,
+    # which is currently in public preview. </b>
     #
-    # This operation can be used in the following ways:
+    # Retrieves all container group definitions for the Amazon Web Services
+    # account and Amazon Web Services Region that are currently in use. You
+    # can filter the result set by the container groups' scheduling
+    # strategy. Use the pagination parameters to retrieve results in a set
+    # of sequential pages.
     #
-    # * To get a list of all fleets in a Region, don't provide a build or
-    #   script identifier.
-    #
-    # * To get a list of all fleets where a specific custom game build is
-    #   deployed, provide the build ID.
-    #
-    # * To get a list of all Realtime Servers fleets with a specific
-    #   configuration script, provide the script ID.
-    #
-    # Use the pagination parameters to retrieve results as a set of
-    # sequential pages.
-    #
-    # If successful, a list of fleet IDs that match the request parameters
-    # is returned. A NextToken value is also returned if there are more
-    # result pages to retrieve.
-    #
-    # <note markdown="1"> Fleet resources are not listed in a particular order.
+    # <note markdown="1"> This operation returns the list of container group definitions in no
+    # particular order.
     #
     #  </note>
     #
     # **Learn more**
     #
-    # [Setting up Amazon GameLift fleets][2]
+    # * [Manage a container group definition][1]
+    #
+    # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html
+    #
+    # @option params [String] :scheduling_strategy
+    #   The type of container group definitions to retrieve.
+    #
+    #   * `DAEMON` -- Daemon container groups run background processes and are
+    #     deployed once per fleet instance.
+    #
+    #   * `REPLICA` -- Replica container groups run your game server
+    #     application and supporting software. Replica groups might be
+    #     deployed multiple times per fleet instance.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates the start of the next sequential page of
+    #   results. Use the token that is returned with a previous call to this
+    #   operation. To start at the beginning of the result set, do not specify
+    #   a value.
+    #
+    # @return [Types::ListContainerGroupDefinitionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContainerGroupDefinitionsOutput#container_group_definitions #container_group_definitions} => Array&lt;Types::ContainerGroupDefinition&gt;
+    #   * {Types::ListContainerGroupDefinitionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_container_group_definitions({
+    #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
+    #     limit: 1,
+    #     next_token: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.container_group_definitions #=> Array
+    #   resp.container_group_definitions[0].container_group_definition_arn #=> String
+    #   resp.container_group_definitions[0].creation_time #=> Time
+    #   resp.container_group_definitions[0].operating_system #=> String, one of "AMAZON_LINUX_2023"
+    #   resp.container_group_definitions[0].name #=> String
+    #   resp.container_group_definitions[0].scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
+    #   resp.container_group_definitions[0].total_memory_limit #=> Integer
+    #   resp.container_group_definitions[0].total_cpu_limit #=> Integer
+    #   resp.container_group_definitions[0].container_definitions #=> Array
+    #   resp.container_group_definitions[0].container_definitions[0].container_name #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].image_uri #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].resolved_image_digest #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].memory_limits.soft_limit #=> Integer
+    #   resp.container_group_definitions[0].container_definitions[0].memory_limits.hard_limit #=> Integer
+    #   resp.container_group_definitions[0].container_definitions[0].port_configuration.container_port_ranges #=> Array
+    #   resp.container_group_definitions[0].container_definitions[0].port_configuration.container_port_ranges[0].from_port #=> Integer
+    #   resp.container_group_definitions[0].container_definitions[0].port_configuration.container_port_ranges[0].to_port #=> Integer
+    #   resp.container_group_definitions[0].container_definitions[0].port_configuration.container_port_ranges[0].protocol #=> String, one of "TCP", "UDP"
+    #   resp.container_group_definitions[0].container_definitions[0].cpu #=> Integer
+    #   resp.container_group_definitions[0].container_definitions[0].health_check.command #=> Array
+    #   resp.container_group_definitions[0].container_definitions[0].health_check.command[0] #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].health_check.interval #=> Integer
+    #   resp.container_group_definitions[0].container_definitions[0].health_check.timeout #=> Integer
+    #   resp.container_group_definitions[0].container_definitions[0].health_check.retries #=> Integer
+    #   resp.container_group_definitions[0].container_definitions[0].health_check.start_period #=> Integer
+    #   resp.container_group_definitions[0].container_definitions[0].command #=> Array
+    #   resp.container_group_definitions[0].container_definitions[0].command[0] #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].essential #=> Boolean
+    #   resp.container_group_definitions[0].container_definitions[0].entry_point #=> Array
+    #   resp.container_group_definitions[0].container_definitions[0].entry_point[0] #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].working_directory #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].environment #=> Array
+    #   resp.container_group_definitions[0].container_definitions[0].environment[0].name #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].environment[0].value #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].depends_on #=> Array
+    #   resp.container_group_definitions[0].container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.container_group_definitions[0].container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.container_group_definitions[0].status #=> String, one of "READY", "COPYING", "FAILED"
+    #   resp.container_group_definitions[0].status_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListContainerGroupDefinitions AWS API Documentation
+    #
+    # @overload list_container_group_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_container_group_definitions(params = {}, options = {})
+      req = build_request(:list_container_group_definitions, params)
+      req.send_request(options)
+    end
+
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
+    #
+    # Retrieves a collection of fleet resources in an Amazon Web Services
+    # Region. You can filter the result set to find only those fleets that
+    # are deployed with a specific build or script. For fleets that have
+    # multiple locations, this operation retrieves fleets based on their
+    # home Region only.
+    #
+    # You can use operation in the following ways:
+    #
+    # * To get a list of all fleets in a Region, don't provide a build or
+    #   script identifier.
+    #
+    # * To get a list of all fleets where a specific game build is deployed,
+    #   provide the build ID.
+    #
+    # * To get a list of all Realtime Servers fleets with a specific
+    #   configuration script, provide the script ID.
+    #
+    # * To get a list of all fleets with a specific container group
+    #   definition, provide the `ContainerGroupDefinition` ID.
+    #
+    # Use the pagination parameters to retrieve results as a set of
+    # sequential pages.
+    #
+    # If successful, this operation returns a list of fleet IDs that match
+    # the request parameters. A NextToken value is also returned if there
+    # are more result pages to retrieve.
+    #
+    # <note markdown="1"> Fleet IDs are returned in no particular order.
+    #
+    #  </note>
     #
     # @option params [String] :build_id
     #   A unique identifier for the build to request fleets for. Use this
@@ -6202,6 +6912,11 @@ module Aws::GameLift
     #   A unique identifier for the Realtime script to request fleets for. Use
     #   this parameter to return only fleets using a specified script. Use
     #   either the script ID or ARN value.
+    #
+    # @option params [String] :container_group_definition_name
+    #   The container group definition name to request fleets for. Use this
+    #   parameter to return only fleets that are deployed with the specified
+    #   container group definition.
     #
     # @option params [Integer] :limit
     #   The maximum number of results to return. Use this parameter with
@@ -6225,6 +6940,7 @@ module Aws::GameLift
     #   resp = client.list_fleets({
     #     build_id: "BuildIdOrArn",
     #     script_id: "ScriptIdOrArn",
+    #     container_group_definition_name: "ContainerGroupDefinitionNameOrArn",
     #     limit: 1,
     #     next_token: "NonZeroAndMaxString",
     #   })
@@ -6755,35 +7471,46 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Registers a compute resource to an Amazon GameLift Anywhere fleet.
-    # With Anywhere fleets you can incorporate your own computing hardware
-    # into an Amazon GameLift game hosting solution.
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
     #
-    # To register a compute to a fleet, give the compute a name (must be
-    # unique within the fleet) and specify the compute resource's DNS name
-    # or IP address. Provide the Anywhere fleet ID and a fleet location to
-    # associate with the compute being registered. You can optionally
-    # include the path to a TLS certificate on the compute resource.
+    # Registers a compute resource in an Amazon GameLift fleet. Register
+    # computes with an Amazon GameLift Anywhere fleet or a container fleet.
     #
-    # If successful, this operation returns the compute details, including
-    # an Amazon GameLift SDK endpoint. Game server processes that run on the
-    # compute use this endpoint to communicate with the Amazon GameLift
-    # service. Each server process includes the SDK endpoint in its call to
-    # the Amazon GameLift server SDK action `InitSDK()`.
+    # For an Anywhere fleet or a container fleet that's running the Amazon
+    # GameLift Agent, the Agent handles all compute registry tasks for you.
+    # For an Anywhere fleet that doesn't use the Agent, call this operation
+    # to register fleet computes.
+    #
+    # To register a compute, give the compute a name (must be unique within
+    # the fleet) and specify the compute resource's DNS name or IP address.
+    # Provide a fleet ID and a fleet location to associate with the compute
+    # being registered. You can optionally include the path to a TLS
+    # certificate on the compute resource.
+    #
+    # If successful, this operation returns compute details, including an
+    # Amazon GameLift SDK endpoint or Agent endpoint. Game server processes
+    # running on the compute can use this endpoint to communicate with the
+    # Amazon GameLift service. Each server process includes the SDK endpoint
+    # in its call to the Amazon GameLift server SDK action `InitSDK()`.
+    #
+    # To view compute details, call [DescribeCompute][1] with the compute
+    # name.
     #
     # **Learn more**
     #
-    # * [Create an Anywhere fleet][1]
+    # * [Create an Anywhere fleet][2]
     #
-    # * [Test your integration][2]
+    # * [Test your integration][3]
     #
-    # * [Server SDK reference guides][3] (for version 5.x)
+    # * [Server SDK reference guides][4] (for version 5.x)
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html
-    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeCompute.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html
+    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet to register the compute to. You can
@@ -6837,6 +7564,12 @@ module Aws::GameLift
     #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
     #   resp.compute.type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge"
     #   resp.compute.game_lift_service_sdk_endpoint #=> String
+    #   resp.compute.game_lift_agent_endpoint #=> String
+    #   resp.compute.instance_id #=> String
+    #   resp.compute.container_attributes.container_port_mappings #=> Array
+    #   resp.compute.container_attributes.container_port_mappings[0].container_port #=> Integer
+    #   resp.compute.container_attributes.container_port_mappings[0].connection_port #=> Integer
+    #   resp.compute.container_attributes.container_port_mappings[0].protocol #=> String, one of "TCP", "UDP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RegisterCompute AWS API Documentation
     #
@@ -6938,7 +7671,7 @@ module Aws::GameLift
 
     # Retrieves a fresh set of credentials for use when uploading a new set
     # of game build files to Amazon GameLift's Amazon S3. This is done as
-    # part of the build creation process; see [GameSession][1].
+    # part of the build creation process; see [CreateBuild][1].
     #
     # To request new credentials, specify the build ID as returned with an
     # initial `CreateBuild` request. If successful, a new set of credentials
@@ -6991,7 +7724,12 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves the fleet ID that an alias is currently pointing to.
+    # Attempts to retrieve a fleet ID that is associated with an alias.
+    # Specify a unique alias identifier.
+    #
+    # If the alias has a `SIMPLE` routing strategy, Amazon GameLift returns
+    # a fleet ID. If the alias has a `TERMINAL` routing strategy, the result
+    # is a `TerminalRoutingStrategyException`.
     #
     # **Related actions**
     #
@@ -7107,7 +7845,7 @@ module Aws::GameLift
     # status because that practice can cause you to exceed your API limit
     # and generate errors. Instead, configure an Amazon Simple Notification
     # Service (Amazon SNS) topic to receive notifications from a matchmaker
-    # or game session placement queue.
+    # or a game session placement queue.
     #
     # When searching for game sessions, you specify exactly where you want
     # to search and provide a search filter expression, a sort expression,
@@ -7845,15 +8583,17 @@ module Aws::GameLift
     #
     # If successful, Amazon GameLift no longer initiates scaling events
     # except in response to manual changes using [UpdateFleetCapacity][1].
+    # To restart fleet actions again, call [StartFleetActions][2].
     #
     # **Learn more**
     #
-    # [Setting up Amazon GameLift Fleets][2]
+    # [Setting up Amazon GameLift Fleets][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartFleetActions.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet to stop actions on. You can use
@@ -8201,10 +8941,10 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Updates properties for an alias. To update properties, specify the
-    # alias ID to be updated and provide the information to be changed. To
-    # reassign an alias to another fleet, provide an updated routing
-    # strategy. If successful, the updated alias record is returned.
+    # Updates properties for an alias. Specify the unique identifier of the
+    # alias to be updated and the new property values. When reassigning an
+    # alias to a new fleet, provide an updated routing strategy. If
+    # successful, the updated alias record is returned.
     #
     # **Related actions**
     #
@@ -8328,13 +9068,12 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Updates a fleet's mutable attributes, including game session
-    # protection and resource creation limits.
+    # Updates a fleet's mutable attributes, such as game session protection
+    # and resource creation limits.
     #
     # To update fleet attributes, specify the fleet ID and the property
-    # values that you want to change.
-    #
-    # If successful, an updated `FleetAttributes` object is returned.
+    # values that you want to change. If successful, Amazon GameLift returns
+    # the identifiers for the updated fleet.
     #
     # **Learn more**
     #
@@ -8421,44 +9160,48 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Updates capacity settings for a fleet. For fleets with multiple
-    # locations, use this operation to manage capacity settings in each
-    # location individually. Fleet capacity determines the number of game
-    # sessions and players that can be hosted based on the fleet
-    # configuration. Use this operation to set the following fleet capacity
-    # properties:
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
     #
-    # * Minimum/maximum size: Set hard limits on fleet capacity. Amazon
-    #   GameLift cannot set the fleet's capacity to a value outside of this
-    #   range, whether the capacity is changed manually or through automatic
-    #   scaling.
+    # Updates capacity settings for a managed EC2 fleet or container fleet.
+    # For these fleets, you adjust capacity by changing the number of
+    # instances in the fleet. Fleet capacity determines the number of game
+    # sessions and players that the fleet can host based on its
+    # configuration. For fleets with multiple locations, use this operation
+    # to manage capacity settings in each location individually.
     #
-    # * Desired capacity: Manually set the number of Amazon EC2 instances to
-    #   be maintained in a fleet location. Before changing a fleet's
-    #   desired capacity, you may want to call
-    #   [DescribeEC2InstanceLimits][1] to get the maximum capacity of the
-    #   fleet's Amazon EC2 instance type. Alternatively, consider using
-    #   automatic scaling to adjust capacity based on player demand.
+    # Use this operation to set these fleet capacity properties:
     #
-    # This operation can be used in the following ways:
+    # * Minimum/maximum size: Set hard limits on the number of Amazon EC2
+    #   instances allowed. If Amazon GameLift receives a request--either
+    #   through manual update or automatic scaling--it won't change the
+    #   capacity to a value outside of this range.
     #
-    # * To update capacity for a fleet's home Region, or if the fleet has
-    #   no remote locations, omit the `Location` parameter. The fleet must
-    #   be in `ACTIVE` status.
+    # * Desired capacity: As an alternative to automatic scaling, manually
+    #   set the number of Amazon EC2 instances to be maintained. Before
+    #   changing a fleet's desired capacity, check the maximum capacity of
+    #   the fleet's Amazon EC2 instance type by calling
+    #   [DescribeEC2InstanceLimits][1].
     #
-    # * To update capacity for a fleet's remote location, include the
-    #   `Location` parameter set to the location to be updated. The location
-    #   must be in `ACTIVE` status.
+    # To update capacity for a fleet's home Region, or if the fleet has no
+    # remote locations, omit the `Location` parameter. The fleet must be in
+    # `ACTIVE` status.
     #
-    # If successful, capacity settings are updated immediately. In response
-    # a change in desired capacity, Amazon GameLift initiates steps to start
-    # new instances or terminate existing instances in the requested fleet
-    # location. This continues until the location's active instance count
-    # matches the new desired instance count. You can track a fleet's
-    # current capacity by calling [DescribeFleetCapacity][2] or
-    # [DescribeFleetLocationCapacity][3]. If the requested desired instance
-    # count is higher than the instance type's limit, the `LimitExceeded`
-    # exception occurs.
+    # To update capacity for a fleet's remote location, set the `Location`
+    # parameter to the location to update. The location must be in `ACTIVE`
+    # status.
+    #
+    # If successful, Amazon GameLift updates the capacity settings and
+    # returns the identifiers for the updated fleet and/or location. If a
+    # requested change to desired capacity exceeds the instance type's
+    # limit, the `LimitExceeded` exception occurs.
+    #
+    # Updates often prompt an immediate change in fleet capacity, such as
+    # when current capacity is different than the new desired capacity or
+    # outside the new limits. In this scenario, Amazon GameLift
+    # automatically initiates steps to add or remove instances in the fleet
+    # location. You can track a fleet's current capacity by calling
+    # [DescribeFleetCapacity][2] or [DescribeFleetLocationCapacity][3].
     #
     # **Learn more**
     #
@@ -8525,13 +9268,16 @@ module Aws::GameLift
     end
 
     # Updates permissions that allow inbound traffic to connect to game
-    # sessions that are being hosted on instances in the fleet.
+    # sessions in the fleet.
     #
     # To update settings, specify the fleet ID to be updated and specify the
     # changes to be made. List the permissions you want to add in
     # `InboundPermissionAuthorizations`, and permissions you want to remove
     # in `InboundPermissionRevocations`. Permissions to be removed must
     # match existing fleet permissions.
+    #
+    # For a container fleet, inbound permissions must specify port numbers
+    # that are defined in the fleet's connection port settings.
     #
     # If successful, the fleet ID for the updated fleet is returned. For
     # fleets with remote locations, port setting updates can take time to
@@ -9244,22 +9990,25 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Updates the current runtime configuration for the specified fleet,
-    # which tells Amazon GameLift how to launch server processes on all
-    # instances in the fleet. You can update a fleet's runtime
-    # configuration at any time after the fleet is created; it does not need
-    # to be in `ACTIVE` status.
+    # Updates the runtime configuration for the specified fleet. The runtime
+    # configuration tells Amazon GameLift how to launch server processes on
+    # computes in the fleet. For managed EC2 fleets, it determines what
+    # server processes to run on each fleet instance. For container fleets,
+    # it describes what server processes to run in each replica container
+    # group. You can update a fleet's runtime configuration at any time
+    # after the fleet is created; it does not need to be in `ACTIVE` status.
     #
     # To update runtime configuration, specify the fleet ID and provide a
     # `RuntimeConfiguration` with an updated set of server process
     # configurations.
     #
     # If successful, the fleet's runtime configuration settings are
-    # updated. Each instance in the fleet regularly checks for and retrieves
-    # updated runtime configurations. Instances immediately begin complying
-    # with the new configuration by launching new server processes or not
-    # replacing existing processes when they shut down. Updating a fleet's
-    # runtime configuration never affects existing server processes.
+    # updated. Fleet computes that run game server processes regularly check
+    # for and receive updated runtime configurations. The computes
+    # immediately take action to comply with the new configuration by
+    # launching new server processes or by not replacing existing processes
+    # when they shut down. Updating a fleet's runtime configuration never
+    # affects existing server processes.
     #
     # **Learn more**
     #
@@ -9274,11 +10023,11 @@ module Aws::GameLift
     #   You can use either the fleet ID or ARN value.
     #
     # @option params [required, Types::RuntimeConfiguration] :runtime_configuration
-    #   Instructions for launching server processes on each instance in the
-    #   fleet. Server processes run either a custom game build executable or a
-    #   Realtime Servers script. The runtime configuration lists the types of
-    #   server processes to run on an instance, how to launch them, and the
-    #   number of processes to run concurrently.
+    #   Instructions for launching server processes on fleet computes. Server
+    #   processes run either a custom game build executable or a Realtime
+    #   Servers script. The runtime configuration lists the types of server
+    #   processes to run, how to launch them, and the number of processes to
+    #   run concurrently.
     #
     # @return [Types::UpdateRuntimeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9475,7 +10224,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

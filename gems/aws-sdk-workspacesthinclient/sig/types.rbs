@@ -88,7 +88,7 @@ module Aws::WorkSpacesThinClient
       attr_accessor updated_at: ::Time
       attr_accessor arn: ::String
       attr_accessor kms_key_arn: ::String
-      attr_accessor tags: Types::EmbeddedTag
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:name, :tags]
     end
 
@@ -108,14 +108,7 @@ module Aws::WorkSpacesThinClient
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor arn: ::String
-      attr_accessor tags: Types::EmbeddedTag
-      SENSITIVE: [:name, :tags]
-    end
-
-    class EmbeddedTag
-      attr_accessor resource_arn: ::String
-      attr_accessor internal_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:name]
     end
 
     class Environment
@@ -137,7 +130,7 @@ module Aws::WorkSpacesThinClient
       attr_accessor updated_at: ::Time
       attr_accessor arn: ::String
       attr_accessor kms_key_arn: ::String
-      attr_accessor tags: Types::EmbeddedTag
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:name, :desktop_endpoint, :tags]
     end
 
@@ -156,8 +149,7 @@ module Aws::WorkSpacesThinClient
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor arn: ::String
-      attr_accessor tags: Types::EmbeddedTag
-      SENSITIVE: [:name, :desktop_endpoint, :tags]
+      SENSITIVE: [:name, :desktop_endpoint]
     end
 
     class GetDeviceRequest
@@ -191,12 +183,6 @@ module Aws::WorkSpacesThinClient
     end
 
     class InternalServerException
-      attr_accessor message: ::String
-      attr_accessor retry_after_seconds: ::Integer
-      SENSITIVE: []
-    end
-
-    class InternalServiceException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
       SENSITIVE: []
@@ -289,7 +275,8 @@ module Aws::WorkSpacesThinClient
       attr_accessor validation_status: ("VALIDATED" | "NOT_VALIDATED")
       attr_accessor software: ::Array[Types::Software]
       attr_accessor arn: ::String
-      SENSITIVE: []
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
     end
 
     class SoftwareSetSummary
@@ -333,7 +320,6 @@ module Aws::WorkSpacesThinClient
       attr_accessor name: ::String
       attr_accessor desired_software_set_id: ::String
       attr_accessor software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
-      attr_accessor kms_key_arn: ::String
       SENSITIVE: [:name]
     end
 

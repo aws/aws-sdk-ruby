@@ -169,6 +169,7 @@ module Aws::Finspace
       attr_accessor changeset_id: ::String
       attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
       attr_accessor auto_update: bool
+      attr_accessor read_write: bool
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
@@ -185,6 +186,7 @@ module Aws::Finspace
       attr_accessor segment_configurations: ::Array[Types::KxDataviewSegmentConfiguration]
       attr_accessor description: ::String
       attr_accessor auto_update: bool
+      attr_accessor read_write: bool
       attr_accessor created_timestamp: ::Time
       attr_accessor last_modified_timestamp: ::Time
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
@@ -289,6 +291,16 @@ module Aws::Finspace
     end
 
     class DeleteEnvironmentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKxClusterNodeRequest
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor node_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKxClusterNodeResponse < Aws::EmptyStructure
     end
 
     class DeleteKxClusterRequest
@@ -505,6 +517,7 @@ module Aws::Finspace
       attr_accessor active_versions: ::Array[Types::KxDataviewActiveVersion]
       attr_accessor description: ::String
       attr_accessor auto_update: bool
+      attr_accessor read_write: bool
       attr_accessor environment_id: ::String
       attr_accessor created_timestamp: ::Time
       attr_accessor last_modified_timestamp: ::Time
@@ -713,6 +726,7 @@ module Aws::Finspace
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
       attr_accessor description: ::String
       attr_accessor auto_update: bool
+      attr_accessor read_write: bool
       attr_accessor created_timestamp: ::Time
       attr_accessor last_modified_timestamp: ::Time
       attr_accessor status_reason: ::String
@@ -722,6 +736,7 @@ module Aws::Finspace
     class KxDataviewSegmentConfiguration
       attr_accessor db_paths: ::Array[::String]
       attr_accessor volume_name: ::String
+      attr_accessor on_demand: bool
       SENSITIVE: []
     end
 
@@ -761,6 +776,7 @@ module Aws::Finspace
       attr_accessor node_id: ::String
       attr_accessor availability_zone_id: ::String
       attr_accessor launch_time: ::Time
+      attr_accessor status: ("RUNNING" | "PROVISIONING")
       SENSITIVE: []
     end
 
@@ -1113,6 +1129,7 @@ module Aws::Finspace
       attr_accessor active_versions: ::Array[Types::KxDataviewActiveVersion]
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
       attr_accessor auto_update: bool
+      attr_accessor read_write: bool
       attr_accessor description: ::String
       attr_accessor created_timestamp: ::Time
       attr_accessor last_modified_timestamp: ::Time

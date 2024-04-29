@@ -54,36 +54,6 @@ module Aws
       end
     end
 
-    describe 'endpoint configuration' do
-      before do
-        allow_any_instance_of(InstanceProfileCredentials).to receive(:refresh)
-      end
-
-      it 'can be configured without a scheme' do
-        subject = InstanceProfileCredentials.new(
-          endpoint: '123.123.123.123'
-        )
-        expect(subject.instance_variable_get(:@endpoint))
-          .to eq '123.123.123.123'
-      end
-
-      it 'can be configured with a scheme' do
-        subject = InstanceProfileCredentials.new(
-          endpoint: 'http://123.123.123.123'
-        )
-        expect(subject.instance_variable_get(:@endpoint))
-          .to eq 'http://123.123.123.123'
-      end
-
-      it 'still supports ip_address' do
-        subject = InstanceProfileCredentials.new(
-          ip_address: '123.123.123.123'
-        )
-        expect(subject.instance_variable_get(:@endpoint))
-          .to eq '123.123.123.123'
-      end
-    end
-
     describe 'endpoint resolution' do
       let(:endpoint) { 'http://123.123.123.123' }
 
@@ -141,6 +111,55 @@ module Aws
           endpoint_mode: 'IPv4', endpoint: endpoint
         )
         expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+      end
+    end
+
+    describe 'endpoint configuration' do
+      let(:ipv4_endpoint) { 'http://123.123.123.123:9001' }
+
+      before do
+        stub_request(:put, "#{ipv4_endpoint}#{token_path}")
+          .to_return(
+            status: 200,
+            body: "my-token\n",
+            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
+          )
+        stub_request(:get, "#{ipv4_endpoint}#{path}")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: "profile-name\n")
+        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: '{}')
+      end
+
+      it 'uses endpoint with a scheme and custom port' do
+        InstanceProfileCredentials.new(endpoint: ipv4_endpoint, backoff: 0)
+      end
+
+      it 'uses endpoint without a scheme and a configured port' do
+        uri = URI(ipv4_endpoint)
+        InstanceProfileCredentials.new(
+          endpoint: uri.hostname,
+          port: uri.port,
+          backoff: 0
+        )
+      end
+
+      it 'still supports ip_address' do
+        uri = URI(ipv4_endpoint)
+        InstanceProfileCredentials.new(
+          ip_address: uri.hostname,
+          port: uri.port,
+          backoff: 0
+        )
+      end
+
+      it 'endpoint takes precedence over endpoint mode' do
+        InstanceProfileCredentials.new(
+          endpoint: ipv4_endpoint,
+          endpoint_mode: 'IPv6',
+          backoff: 0
+        )
       end
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2024-04-25)
+------------------
+
+* Feature - Bug Fix: IVS Real Time does not support ARNs using the `svs` prefix.
+
+1.16.0 (2024-03-13)
+------------------
+
+* Feature - adds support for multiple new composition layout configuration options (grid, pip)
+
 1.15.0 (2024-01-26)
 ------------------
 

@@ -671,6 +671,7 @@ module Aws::Lightsail
     UpdateRelationalDatabaseParametersResult = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseParametersResult')
     UpdateRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseRequest')
     UpdateRelationalDatabaseResult = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseResult')
+    ViewerMinimumTlsProtocolVersionEnum = Shapes::StringShape.new(name: 'ViewerMinimumTlsProtocolVersionEnum')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     double = Shapes::FloatShape.new(name: 'double')
     float = Shapes::FloatShape.new(name: 'float')
@@ -1235,6 +1236,8 @@ module Aws::Lightsail
     CreateDistributionRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "bundleId"))
     CreateDistributionRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     CreateDistributionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateDistributionRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "certificateName"))
+    CreateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: ViewerMinimumTlsProtocolVersionEnum, location_name: "viewerMinimumTlsProtocolVersion"))
     CreateDistributionRequest.struct_class = Types::CreateDistributionRequest
 
     CreateDistributionResult.add_member(:distribution, Shapes::ShapeRef.new(shape: LightsailDistribution, location_name: "distribution"))
@@ -2240,6 +2243,7 @@ module Aws::Lightsail
     InputOrigin.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     InputOrigin.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "regionName"))
     InputOrigin.add_member(:protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicyEnum, location_name: "protocolPolicy"))
+    InputOrigin.add_member(:response_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "responseTimeout"))
     InputOrigin.struct_class = Types::InputOrigin
 
     Instance.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -2414,6 +2418,7 @@ module Aws::Lightsail
     LightsailDistribution.add_member(:able_to_update_bundle, Shapes::ShapeRef.new(shape: boolean, location_name: "ableToUpdateBundle"))
     LightsailDistribution.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     LightsailDistribution.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    LightsailDistribution.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: string, location_name: "viewerMinimumTlsProtocolVersion"))
     LightsailDistribution.struct_class = Types::LightsailDistribution
 
     LoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -2582,6 +2587,7 @@ module Aws::Lightsail
     Origin.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     Origin.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "regionName"))
     Origin.add_member(:protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicyEnum, location_name: "protocolPolicy"))
+    Origin.add_member(:response_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "responseTimeout"))
     Origin.struct_class = Types::Origin
 
     PartnerIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -3061,6 +3067,9 @@ module Aws::Lightsail
     UpdateDistributionRequest.add_member(:cache_behavior_settings, Shapes::ShapeRef.new(shape: CacheSettings, location_name: "cacheBehaviorSettings"))
     UpdateDistributionRequest.add_member(:cache_behaviors, Shapes::ShapeRef.new(shape: CacheBehaviorList, location_name: "cacheBehaviors"))
     UpdateDistributionRequest.add_member(:is_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "isEnabled"))
+    UpdateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: ViewerMinimumTlsProtocolVersionEnum, location_name: "viewerMinimumTlsProtocolVersion"))
+    UpdateDistributionRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "certificateName"))
+    UpdateDistributionRequest.add_member(:use_default_certificate, Shapes::ShapeRef.new(shape: boolean, location_name: "useDefaultCertificate"))
     UpdateDistributionRequest.struct_class = Types::UpdateDistributionRequest
 
     UpdateDistributionResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))

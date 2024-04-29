@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::IVS
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::IVS
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::IVS
     #   @option options [Aws::IVS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::IVS::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -417,6 +441,8 @@ module Aws::IVS
     #   resp.channels[0].playback_url #=> String
     #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channels[0].recording_configuration_arn #=> String
+    #   resp.channels[0].srt.endpoint #=> String
+    #   resp.channels[0].srt.passphrase #=> String
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
     #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -518,13 +544,13 @@ module Aws::IVS
     #   Default: `false`.
     #
     # @option params [Boolean] :insecure_ingest
-    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
     #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
-    #   (Note: In the Amazon IVS console, `LOW` and `NORMAL` correspond to
-    #   Ultra-low and Standard, respectively.) Default: `LOW`.
+    #   Default: `LOW`.
     #
     # @option params [String] :name
     #   Channel name.
@@ -600,6 +626,8 @@ module Aws::IVS
     #   resp.channel.playback_url #=> String
     #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
+    #   resp.channel.srt.endpoint #=> String
+    #   resp.channel.srt.passphrase #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -1015,6 +1043,8 @@ module Aws::IVS
     #   resp.channel.playback_url #=> String
     #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
+    #   resp.channel.srt.endpoint #=> String
+    #   resp.channel.srt.passphrase #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -1246,6 +1276,8 @@ module Aws::IVS
     #   resp.stream_session.channel.playback_url #=> String
     #   resp.stream_session.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.stream_session.channel.recording_configuration_arn #=> String
+    #   resp.stream_session.channel.srt.endpoint #=> String
+    #   resp.stream_session.channel.srt.passphrase #=> String
     #   resp.stream_session.channel.tags #=> Hash
     #   resp.stream_session.channel.tags["TagKey"] #=> String
     #   resp.stream_session.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -1919,13 +1951,12 @@ module Aws::IVS
     #   Whether the channel is private (enabled for playback authorization).
     #
     # @option params [Boolean] :insecure_ingest
-    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
     #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
-    #   (Note: In the Amazon IVS console, `LOW` and `NORMAL` correspond to
-    #   Ultra-low and Standard, respectively.)
     #
     # @option params [String] :name
     #   Channel name.
@@ -1987,6 +2018,8 @@ module Aws::IVS
     #   resp.channel.playback_url #=> String
     #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
+    #   resp.channel.srt.endpoint #=> String
+    #   resp.channel.srt.passphrase #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
     #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
@@ -2080,7 +2113,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

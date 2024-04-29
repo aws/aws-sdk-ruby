@@ -3537,6 +3537,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: EntitySizeLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:create_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -3781,6 +3782,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
         o.errors << Shapes::ShapeRef.new(shape: CannotDeleteEntityWhileInUse)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:delete_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -3898,6 +3900,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:get_cache_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -4381,6 +4384,7 @@ module Aws::CloudFront
         o.output = Shapes::ShapeRef.new(shape: ListKeyValueStoresResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -4804,6 +4808,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:update_origin_access_control, Seahorse::Model::Operation.new.tap do |o|

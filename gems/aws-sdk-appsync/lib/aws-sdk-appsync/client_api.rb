@@ -1176,7 +1176,7 @@ module Aws::AppSync
     UpdateGraphqlApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateGraphqlApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     UpdateGraphqlApiRequest.add_member(:log_config, Shapes::ShapeRef.new(shape: LogConfig, location_name: "logConfig"))
-    UpdateGraphqlApiRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
+    UpdateGraphqlApiRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "authenticationType"))
     UpdateGraphqlApiRequest.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: UserPoolConfig, location_name: "userPoolConfig"))
     UpdateGraphqlApiRequest.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
     UpdateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
@@ -1247,6 +1247,7 @@ module Aws::AppSync
         "endpointPrefix" => "appsync",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AWSAppSync",
         "serviceFullName" => "AWS AppSync",
         "serviceId" => "AppSync",

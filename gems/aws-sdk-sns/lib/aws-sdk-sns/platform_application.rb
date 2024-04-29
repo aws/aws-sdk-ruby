@@ -45,6 +45,14 @@ module Aws::SNS
     # * `ApplePlatformBundleID` – The app identifier used to configure
     #   token-based authentication.
     #
+    # * `AuthenticationMethod` – Returns the credential type used when
+    #   sending push notifications from application to APNS/APNS\_Sandbox,
+    #   or application to GCM.
+    #
+    #   * APNS – Returns the token or certificate.
+    #
+    #   * GCM – Returns the token or key.
+    #
     # * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #   notifications should be sent.
     #
@@ -122,7 +130,7 @@ module Aws::SNS
     #   Arbitrary user data to associate with the endpoint. Amazon SNS does
     #   not use this data. The data must be in UTF-8 format and less than 2KB.
     # @option options [Hash<String,String>] :attributes
-    #   For a list of attributes, see [SetEndpointAttributes][1].
+    #   For a list of attributes, see [ `SetEndpointAttributes` ][1].
     #
     #
     #
@@ -175,8 +183,16 @@ module Aws::SNS
     #     * For Apple Services using token credentials, `PlatformCredential`
     #       is signing key.
     #
-    #     * For GCM (Firebase Cloud Messaging), `PlatformCredential` is API
-    #       key.
+    #     * For GCM (Firebase Cloud Messaging) using key credentials, there is
+    #       no `PlatformPrincipal`. The `PlatformCredential` is `API key`.
+    #
+    #     * For GCM (Firebase Cloud Messaging) using token credentials, there
+    #       is no `PlatformPrincipal`. The `PlatformCredential` is a JSON
+    #       formatted private key file. When using the Amazon Web Services
+    #       CLI, the file must be in string format and special characters must
+    #       be ignored. To format the file correctly, Amazon SNS recommends
+    #       using the following command: `` SERVICE_JSON=`jq @json <<< cat
+    #       service.json` ``.
     #   ^
     #
     #   * `PlatformPrincipal` – The principal received from the notification

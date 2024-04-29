@@ -42,41 +42,39 @@ module Aws
           end
         end
 
-        # implict payload
-        if !explicit_payload && !implicit_payload_members.empty?
-          if implicit_payload_members.size > 1
-            payload_shape = Shapes::StructureShape.new
-            implicit_payload_members.each do |m_name, m_ref|
-              payload_shape.add_member(m_name, m_ref)
-            end
-            payload_ref = Shapes::ShapeRef.new(shape: payload_shape)
-
-            payload = build_payload_members(payload_ref, params)
-          else
-            m_name, m_ref = implicit_payload_members.first
-            streaming, content_type = _content_type(m_ref.shape)
-
-            es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
-              type: "string", value: content_type)
-            payload = _build_payload(streaming, m_ref, params[m_name])
-          end
-        end
-
-
+        # handle header members for all cases
         event_ref.shape.members.each do |member_name, member_ref|
           if member_ref.eventheader && params[member_name]
             header_value = params[member_name]
             es_headers[member_ref.shape.name] = Aws::EventStream::HeaderValue.new(
-              type: _header_value_type(member_ref.shape, header_value),
+              type: header_value_type(member_ref.shape, header_value),
               value: header_value
             )
-          elsif member_ref.eventpayload && params[member_name]
-            # explicit payload
-            streaming, content_type = _content_type(member_ref.shape)
+          end
+        end
 
-            es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
-              type: "string", value: content_type)
-            payload = _build_payload(streaming, member_ref, params[member_name])
+        # implict payload
+        if !explicit_payload && !implicit_payload_members.empty?
+          payload_shape = StructureShape.new
+          implicit_payload_members.each do |m_name, m_ref|
+            payload_shape.add_member(m_name, m_ref)
+          end
+          payload_ref = ShapeRef.new(shape: payload_shape)
+
+          payload = build_payload_members(payload_ref, params)
+                      .force_encoding(Encoding::BINARY)
+
+
+          es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
+            type: "string", value: content_type(payload_ref.shape))
+        else
+          # explicit payload, serialize just the payload member
+          event_ref.shape.members.each do |member_name, member_ref|
+            if member_ref.eventpayload && params[member_name]
+              es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
+                type: "string", value: content_type(member_ref.shape))
+              payload = params[member_name]
+            end
           end
         end
 
@@ -86,15 +84,15 @@ module Aws
         )
       end
 
-      def _content_type(shape)
+      def content_type(shape)
         case shape
-        when BlobShape then [true, "application/octet-stream"]
-        when StringShape then [true, "text/plain"]
+        when BlobShape then "application/octet-stream"
+        when StringShape then "text/plain"
         when StructureShape then
           if @serializer_class.name.include?('Xml')
-            [false, "text/xml"]
+            "text/xml"
           elsif @serializer_class.name.include?('Json')
-            [false, "application/json"]
+            "application/json"
           end
         else
           raise Aws::Errors::EventStreamBuilderError.new(
@@ -102,7 +100,7 @@ module Aws
         end
       end
 
-      def _header_value_type(shape, value)
+      def header_value_type(shape, value)
         case shape
         when StringShape then "string"
         when IntegerShape then "integer"
@@ -115,10 +113,9 @@ module Aws
         end
       end
 
-      def _build_payload(streaming, ref, value)
-        streaming ? value : @serializer_class.new(ref).serialize(value)
+      def build_payload_members(payload_ref, params)
+        @serializer_class.new(payload_ref).serialize(params)
       end
-
     end
   end
 end

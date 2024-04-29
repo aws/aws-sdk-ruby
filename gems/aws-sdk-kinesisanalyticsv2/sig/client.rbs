@@ -258,7 +258,7 @@ module Aws
       def create_application: (
                                 application_name: ::String,
                                 ?application_description: ::String,
-                                runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0"),
+                                runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18"),
                                 service_execution_role: ::String,
                                 ?application_configuration: {
                                   sql_application_configuration: {
@@ -937,7 +937,8 @@ module Aws
                                     log_stream_arn_update: ::String?
                                   },
                                 ],
-                                ?conditional_token: ::String
+                                ?conditional_token: ::String,
+                                ?runtime_environment_update: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18")
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
 

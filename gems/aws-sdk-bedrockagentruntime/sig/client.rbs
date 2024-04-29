@@ -83,61 +83,223 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#invoke_agent-instance_method
       def invoke_agent: (
-                          ?session_state: {
-                            session_attributes: Hash[::String, ::String]?,
-                            prompt_session_attributes: Hash[::String, ::String]?
-                          },
-                          agent_id: ::String,
                           agent_alias_id: ::String,
-                          session_id: ::String,
-                          ?end_session: bool,
+                          agent_id: ::String,
                           ?enable_trace: bool,
-                          input_text: ::String
+                          ?end_session: bool,
+                          ?input_text: ::String,
+                          session_id: ::String,
+                          ?session_state: {
+                            invocation_id: ::String?,
+                            prompt_session_attributes: Hash[::String, ::String]?,
+                            return_control_invocation_results: Array[
+                              {
+                                api_result: {
+                                  action_group: ::String,
+                                  api_path: ::String?,
+                                  http_method: ::String?,
+                                  http_status_code: ::Integer?,
+                                  response_body: Hash[::String, {
+                                      body: ::String?
+                                    }]?,
+                                  response_state: ("FAILURE" | "REPROMPT")?
+                                }?,
+                                function_result: {
+                                  action_group: ::String,
+                                  function: ::String?,
+                                  response_body: Hash[::String, {
+                                      body: ::String?
+                                    }]?,
+                                  response_state: ("FAILURE" | "REPROMPT")?
+                                }?
+                              },
+                            ]?,
+                            session_attributes: Hash[::String, ::String]?
+                          }
                         ) ?{ (*untyped) -> void } -> _InvokeAgentResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeAgentResponseSuccess
 
       interface _RetrieveResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveResponse]
-        def retrieval_results: () -> ::Array[Types::KnowledgeBaseRetrievalResult]
         def next_token: () -> ::String
+        def retrieval_results: () -> ::Array[Types::KnowledgeBaseRetrievalResult]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#retrieve-instance_method
       def retrieve: (
                       knowledge_base_id: ::String,
-                      retrieval_query: {
-                        text: ::String
-                      },
+                      ?next_token: ::String,
                       ?retrieval_configuration: {
                         vector_search_configuration: {
-                          number_of_results: ::Integer
+                          filter: {
+                            and_all: Array[
+                              untyped,
+                            ]?,
+                            equals: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
+                            greater_than: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
+                            greater_than_or_equals: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
+                            in: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
+                            less_than: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
+                            less_than_or_equals: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
+                            not_equals: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
+                            not_in: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
+                            or_all: Array[
+                              untyped,
+                            ]?,
+                            starts_with: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?
+                          }?,
+                          number_of_results: ::Integer?,
+                          override_search_type: ("HYBRID" | "SEMANTIC")?
                         }
                       },
-                      ?next_token: ::String
+                      retrieval_query: {
+                        text: ::String
+                      }
                     ) -> _RetrieveResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveResponseSuccess
 
       interface _RetrieveAndGenerateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveAndGenerateResponse]
-        def session_id: () -> ::String
-        def output: () -> Types::RetrieveAndGenerateOutput
         def citations: () -> ::Array[Types::Citation]
+        def output: () -> Types::RetrieveAndGenerateOutput
+        def session_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#retrieve_and_generate-instance_method
       def retrieve_and_generate: (
-                                   ?session_id: ::String,
                                    input: {
                                      text: ::String
                                    },
                                    ?retrieve_and_generate_configuration: {
-                                     type: ("KNOWLEDGE_BASE"),
+                                     external_sources_configuration: {
+                                       generation_configuration: {
+                                         prompt_template: {
+                                           text_prompt_template: ::String?
+                                         }?
+                                       }?,
+                                       model_arn: ::String,
+                                       sources: Array[
+                                         {
+                                           byte_content: {
+                                             content_type: ::String,
+                                             data: ::String,
+                                             identifier: ::String
+                                           }?,
+                                           s3_location: {
+                                             uri: ::String
+                                           }?,
+                                           source_type: ("S3" | "BYTE_CONTENT")
+                                         },
+                                       ]
+                                     }?,
                                      knowledge_base_configuration: {
+                                       generation_configuration: {
+                                         prompt_template: {
+                                           text_prompt_template: ::String?
+                                         }?
+                                       }?,
                                        knowledge_base_id: ::String,
-                                       model_arn: ::String
-                                     }?
+                                       model_arn: ::String,
+                                       retrieval_configuration: {
+                                         vector_search_configuration: {
+                                           filter: {
+                                             and_all: Array[
+                                               untyped,
+                                             ]?,
+                                             equals: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
+                                             greater_than: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
+                                             greater_than_or_equals: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
+                                             in: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
+                                             less_than: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
+                                             less_than_or_equals: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
+                                             not_equals: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
+                                             not_in: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
+                                             or_all: Array[
+                                               untyped,
+                                             ]?,
+                                             starts_with: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?
+                                           }?,
+                                           number_of_results: ::Integer?,
+                                           override_search_type: ("HYBRID" | "SEMANTIC")?
+                                         }
+                                       }?
+                                     }?,
+                                     type: ("KNOWLEDGE_BASE" | "EXTERNAL_SOURCES")
                                    },
                                    ?session_configuration: {
                                      kms_key_arn: ::String
-                                   }
+                                   },
+                                   ?session_id: ::String
                                  ) -> _RetrieveAndGenerateResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveAndGenerateResponseSuccess
     end

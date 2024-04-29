@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.95.0 (2024-04-11)
+------------------
+
+* Feature - For CreateOpenIDConnectProvider API, the ThumbprintList parameter is no longer required.
+
 1.94.0 (2024-01-26)
 ------------------
 

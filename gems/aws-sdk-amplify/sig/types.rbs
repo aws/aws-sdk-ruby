@@ -108,6 +108,19 @@ module Aws::Amplify
       SENSITIVE: [:basic_auth_credentials, :build_spec]
     end
 
+    class Certificate
+      attr_accessor type: ("AMPLIFY_MANAGED" | "CUSTOM")
+      attr_accessor custom_certificate_arn: ::String
+      attr_accessor certificate_verification_dns_record: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateSettings
+      attr_accessor type: ("AMPLIFY_MANAGED" | "CUSTOM")
+      attr_accessor custom_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateAppRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -198,6 +211,7 @@ module Aws::Amplify
       attr_accessor sub_domain_settings: ::Array[Types::SubDomainSetting]
       attr_accessor auto_sub_domain_creation_patterns: ::Array[::String]
       attr_accessor auto_sub_domain_iam_role: ::String
+      attr_accessor certificate_settings: Types::CertificateSettings
       SENSITIVE: []
     end
 
@@ -302,10 +316,12 @@ module Aws::Amplify
       attr_accessor enable_auto_sub_domain: bool
       attr_accessor auto_sub_domain_creation_patterns: ::Array[::String]
       attr_accessor auto_sub_domain_iam_role: ::String
-      attr_accessor domain_status: ("PENDING_VERIFICATION" | "IN_PROGRESS" | "AVAILABLE" | "PENDING_DEPLOYMENT" | "FAILED" | "CREATING" | "REQUESTING_CERTIFICATE" | "UPDATING")
+      attr_accessor domain_status: ("PENDING_VERIFICATION" | "IN_PROGRESS" | "AVAILABLE" | "IMPORTING_CUSTOM_CERTIFICATE" | "PENDING_DEPLOYMENT" | "AWAITING_APP_CNAME" | "FAILED" | "CREATING" | "REQUESTING_CERTIFICATE" | "UPDATING")
+      attr_accessor update_status: ("REQUESTING_CERTIFICATE" | "PENDING_VERIFICATION" | "IMPORTING_CUSTOM_CERTIFICATE" | "PENDING_DEPLOYMENT" | "AWAITING_APP_CNAME" | "UPDATE_COMPLETE" | "UPDATE_FAILED")
       attr_accessor status_reason: ::String
       attr_accessor certificate_verification_dns_record: ::String
       attr_accessor sub_domains: ::Array[Types::SubDomain]
+      attr_accessor certificate: Types::Certificate
       SENSITIVE: []
     end
 
@@ -705,6 +721,7 @@ module Aws::Amplify
       attr_accessor sub_domain_settings: ::Array[Types::SubDomainSetting]
       attr_accessor auto_sub_domain_creation_patterns: ::Array[::String]
       attr_accessor auto_sub_domain_iam_role: ::String
+      attr_accessor certificate_settings: Types::CertificateSettings
       SENSITIVE: []
     end
 

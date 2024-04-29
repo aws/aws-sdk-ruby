@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2024-02-15)
+------------------
+
+* Feature - Adds additional supported instance types.
+
 1.37.0 (2024-02-06)
 ------------------
 

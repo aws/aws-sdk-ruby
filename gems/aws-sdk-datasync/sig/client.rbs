@@ -445,7 +445,8 @@ module Aws
                            },
                          ],
                          ?schedule: {
-                           schedule_expression: ::String
+                           schedule_expression: ::String,
+                           status: ("ENABLED" | "DISABLED")?
                          },
                          ?tags: Array[
                            {
@@ -804,6 +805,7 @@ module Aws
         def includes: () -> ::Array[Types::FilterRule]
         def manifest_config: () -> Types::ManifestConfig
         def task_report_config: () -> Types::TaskReportConfig
+        def schedule_details: () -> Types::TaskScheduleDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_task-instance_method
       def describe_task: (
@@ -1261,7 +1263,8 @@ module Aws
                            },
                          ],
                          ?schedule: {
-                           schedule_expression: ::String
+                           schedule_expression: ::String,
+                           status: ("ENABLED" | "DISABLED")?
                          },
                          ?name: ::String,
                          ?cloud_watch_log_group_arn: ::String,

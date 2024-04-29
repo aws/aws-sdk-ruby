@@ -42,12 +42,38 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class CancelCapacityTaskInput
+      attr_accessor capacity_task_id: ::String
+      attr_accessor outpost_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CancelCapacityTaskOutput < Aws::EmptyStructure
+    end
+
     class CancelOrderInput
       attr_accessor order_id: ::String
       SENSITIVE: []
     end
 
     class CancelOrderOutput < Aws::EmptyStructure
+    end
+
+    class CapacityTaskFailure
+      attr_accessor reason: ::String
+      attr_accessor type: ("UNSUPPORTED_CAPACITY_CONFIGURATION")
+      SENSITIVE: []
+    end
+
+    class CapacityTaskSummary
+      attr_accessor capacity_task_id: ::String
+      attr_accessor outpost_id: ::String
+      attr_accessor order_id: ::String
+      attr_accessor capacity_task_status: ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
     end
 
     class CatalogItem
@@ -153,6 +179,26 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class GetCapacityTaskInput
+      attr_accessor capacity_task_id: ::String
+      attr_accessor outpost_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCapacityTaskOutput
+      attr_accessor capacity_task_id: ::String
+      attr_accessor outpost_id: ::String
+      attr_accessor order_id: ::String
+      attr_accessor requested_instance_pools: ::Array[Types::InstanceTypeCapacity]
+      attr_accessor dry_run: bool
+      attr_accessor capacity_task_status: ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")
+      attr_accessor failed: Types::CapacityTaskFailure
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
     class GetCatalogItemInput
       attr_accessor catalog_item_id: ::String
       SENSITIVE: []
@@ -209,6 +255,20 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class GetOutpostSupportedInstanceTypesInput
+      attr_accessor outpost_identifier: ::String
+      attr_accessor order_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOutpostSupportedInstanceTypesOutput
+      attr_accessor instance_types: ::Array[Types::InstanceTypeItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GetSiteAddressInput
       attr_accessor site_id: ::String
       attr_accessor address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
@@ -229,6 +289,12 @@ module Aws::Outposts
 
     class GetSiteOutput
       attr_accessor site: Types::Site
+      SENSITIVE: []
+    end
+
+    class InstanceTypeCapacity
+      attr_accessor instance_type: ::String
+      attr_accessor count: ::Integer
       SENSITIVE: []
     end
 
@@ -277,6 +343,20 @@ module Aws::Outposts
 
     class ListAssetsOutput
       attr_accessor assets: ::Array[Types::AssetInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCapacityTasksInput
+      attr_accessor outpost_identifier_filter: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor capacity_task_status_filter: ::Array[("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")]
+      SENSITIVE: []
+    end
+
+    class ListCapacityTasksOutput
+      attr_accessor capacity_tasks: ::Array[Types::CapacityTaskSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -414,7 +494,7 @@ module Aws::Outposts
 
     class ShipmentInformation
       attr_accessor shipment_tracking_number: ::String
-      attr_accessor shipment_carrier: ("DHL" | "DBS" | "FEDEX" | "UPS")
+      attr_accessor shipment_carrier: ("DHL" | "DBS" | "FEDEX" | "UPS" | "EXPEDITORS")
       SENSITIVE: []
     end
 
@@ -430,6 +510,28 @@ module Aws::Outposts
       attr_accessor operating_address_state_or_region: ::String
       attr_accessor operating_address_city: ::String
       attr_accessor rack_physical_properties: Types::RackPhysicalProperties
+      SENSITIVE: []
+    end
+
+    class StartCapacityTaskInput
+      attr_accessor outpost_identifier: ::String
+      attr_accessor order_id: ::String
+      attr_accessor instance_pools: ::Array[Types::InstanceTypeCapacity]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class StartCapacityTaskOutput
+      attr_accessor capacity_task_id: ::String
+      attr_accessor outpost_id: ::String
+      attr_accessor order_id: ::String
+      attr_accessor requested_instance_pools: ::Array[Types::InstanceTypeCapacity]
+      attr_accessor dry_run: bool
+      attr_accessor capacity_task_status: ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")
+      attr_accessor failed: Types::CapacityTaskFailure
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor last_modified_date: ::Time
       SENSITIVE: []
     end
 

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::QBusiness
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::QBusiness
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::QBusiness
     #   @option options [Aws::QBusiness::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::QBusiness::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -389,24 +413,24 @@ module Aws::QBusiness
     # @!group API Operations
 
     # Asynchronously deletes one or more documents added using the
-    # `BatchPutDocument` API from an Amazon Q index.
+    # `BatchPutDocument` API from an Amazon Q Business index.
     #
     # You can see the progress of the deletion, and any error messages
     # related to the process, by using CloudWatch.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #
     # @option params [String] :data_source_sync_id
     #   The identifier of the data source sync during which the documents were
     #   deleted.
     #
     # @option params [required, Array<Types::DeleteDocument>] :documents
-    #   Documents deleted from the Amazon Q index.
+    #   Documents deleted from the Amazon Q Business index.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the Amazon Q index that contains the documents to
-    #   delete.
+    #   The identifier of the Amazon Q Business index that contains the
+    #   documents to delete.
     #
     # @return [Types::BatchDeleteDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -442,23 +466,23 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Adds one or more documents to an Amazon Q index.
+    # Adds one or more documents to an Amazon Q Business index.
     #
     # You use this API to:
     #
     # * ingest your structured and unstructured documents and documents
-    #   stored in an Amazon S3 bucket into an Amazon Q index.
+    #   stored in an Amazon S3 bucket into an Amazon Q Business index.
     #
-    # * add custom attributes to documents in an Amazon Q index.
+    # * add custom attributes to documents in an Amazon Q Business index.
     #
     # * attach an access control list to the documents added to an Amazon Q
-    #   index.
+    #   Business index.
     #
     # You can see the progress of the deletion, and any error messages
     # related to the process, by using CloudWatch.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #
     # @option params [String] :data_source_sync_id
     #   The identifier of the data source sync during which the documents were
@@ -468,7 +492,7 @@ module Aws::QBusiness
     #   One or more documents to add to the index.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the Amazon Q index to add the documents to.
+    #   The identifier of the Amazon Q Business index to add the documents to.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
@@ -608,22 +632,50 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Starts or continues a non-streaming Amazon Q conversation.
+    # Starts or continues a non-streaming Amazon Q Business conversation.
     #
     # @option params [Types::ActionExecution] :action_execution
-    #   A request from an end user to perform an Amazon Q plugin action.
+    #   A request from an end user to perform an Amazon Q Business plugin
+    #   action.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application linked to the Amazon Q
-    #   conversation.
+    #   The identifier of the Amazon Q Business application linked to the
+    #   Amazon Q Business conversation.
     #
     # @option params [Array<Types::AttachmentInput>] :attachments
     #   A list of files uploaded directly during chat. You can upload a
     #   maximum of 5 files of upto 10 MB each.
     #
     # @option params [Types::AttributeFilter] :attribute_filter
-    #   Enables filtering of Amazon Q web experience responses based on
-    #   document attributes or metadata fields.
+    #   Enables filtering of Amazon Q Business web experience responses based
+    #   on document attributes or metadata fields.
+    #
+    # @option params [String] :chat_mode
+    #   The chat modes available in an Amazon Q Business web experience.
+    #
+    #   * `RETRIEVAL_MODE` - The default chat mode for an Amazon Q Business
+    #     application. When this mode is enabled, Amazon Q Business generates
+    #     responses only from data sources connected to an Amazon Q Business
+    #     application.
+    #
+    #   * `CREATOR_MODE` - By selecting this mode, users can choose to
+    #     generate responses only from the LLM knowledge, without consulting
+    #     connected data sources, for a chat request.
+    #
+    #   * `PLUGIN_MODE` - By selecting this mode, users can choose to use
+    #     plugins in chat.
+    #
+    #   For more information, see [Admin controls and guardrails][1],
+    #   [Plugins][2], and [Conversation settings][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+    #   [2]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html
+    #   [3]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+    #
+    # @option params [Types::ChatModeConfiguration] :chat_mode_configuration
+    #   The chat mode configuration for an Amazon Q Business application.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify a chat request.
@@ -632,7 +684,7 @@ module Aws::QBusiness
     #   not need to pass this option.**
     #
     # @option params [String] :conversation_id
-    #   The identifier of the Amazon Q conversation.
+    #   The identifier of the Amazon Q Business conversation.
     #
     # @option params [String] :parent_message_id
     #   The identifier of the previous end user text input message in a
@@ -641,7 +693,7 @@ module Aws::QBusiness
     # @option params [Array<String>] :user_groups
     #   The groups that a user associated with the chat input belongs to.
     #
-    # @option params [required, String] :user_id
+    # @option params [String] :user_id
     #   The identifier of the user attached to the chat input.
     #
     # @option params [String] :user_message
@@ -755,11 +807,17 @@ module Aws::QBusiness
     #         },
     #       ],
     #     },
+    #     chat_mode: "RETRIEVAL_MODE", # accepts RETRIEVAL_MODE, CREATOR_MODE, PLUGIN_MODE
+    #     chat_mode_configuration: {
+    #       plugin_configuration: {
+    #         plugin_id: "PluginId", # required
+    #       },
+    #     },
     #     client_token: "ClientToken",
     #     conversation_id: "ConversationId",
     #     parent_message_id: "MessageId",
     #     user_groups: ["String"],
-    #     user_id: "UserId", # required
+    #     user_id: "UserId",
     #     user_message: "UserMessage",
     #   })
     #
@@ -802,27 +860,32 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Creates an Amazon Q application.
+    # Creates an Amazon Q Business application.
     #
     # @option params [Types::AttachmentsConfiguration] :attachments_configuration
     #   An option to allow end users to upload files directly during chat.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create your Amazon
-    #   Q application.
+    #   Q Business application.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [String] :description
-    #   A description for the Amazon Q application.
+    #   A description for the Amazon Q Business application.
     #
     # @option params [required, String] :display_name
-    #   A name for the Amazon Q application.
+    #   A name for the Amazon Q Business application.
     #
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   The identifier of the KMS key that is used to encrypt your data.
-    #   Amazon Q doesn't support asymmetric keys.
+    #   Amazon Q Business doesn't support asymmetric keys.
+    #
+    # @option params [String] :identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance you
+    #   are either creating for—or connecting to—your Amazon Q Business
+    #   application.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permissions to
@@ -830,8 +893,8 @@ module Aws::QBusiness
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs that identify or categorize your Amazon Q
-    #   application. You can also use tags to help control access to the
-    #   application. Tag keys and values can consist of Unicode letters,
+    #   Business application. You can also use tags to help control access to
+    #   the application. Tag keys and values can consist of Unicode letters,
     #   digits, white space, and any of the following symbols: \_ . : / = + -
     #   @.
     #
@@ -852,6 +915,7 @@ module Aws::QBusiness
     #     encryption_configuration: {
     #       kms_key_id: "KmsKeyId",
     #     },
+    #     identity_center_instance_arn: "InstanceArn",
     #     role_arn: "RoleArn", # required
     #     tags: [
     #       {
@@ -875,15 +939,15 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Creates a data source connector for an Amazon Q application.
+    # Creates a data source connector for an Amazon Q Business application.
     #
     # `CreateDataSource` is a synchronous operation. The operation returns
     # 200 if the data source was successfully created. Otherwise, an
     # exception is raised.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application the data source will be
-    #   attached to.
+    #   The identifier of the Amazon Q Business application the data source
+    #   will be attached to.
     #
     # @option params [String] :client_token
     #   A token you provide to identify a request to create a data source
@@ -905,7 +969,7 @@ module Aws::QBusiness
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html.html
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html
     #
     # @option params [String] :description
     #   A description for the data source connector.
@@ -932,9 +996,9 @@ module Aws::QBusiness
     #   access the data source and required resources.
     #
     # @option params [String] :sync_schedule
-    #   Sets the frequency for Amazon Q to check the documents in your data
-    #   source repository and update your index. If you don't set a schedule,
-    #   Amazon Q won't periodically update the index.
+    #   Sets the frequency for Amazon Q Business to check the documents in
+    #   your data source repository and update your index. If you don't set a
+    #   schedule, Amazon Q Business won't periodically update the index.
     #
     #   Specify a `cron-` format schedule string or an empty string to
     #   indicate that the index is updated on demand. You can't specify the
@@ -951,7 +1015,7 @@ module Aws::QBusiness
     # @option params [Types::DataSourceVpcConfiguration] :vpc_configuration
     #   Configuration information for an Amazon VPC (Virtual Private Cloud) to
     #   connect to your data source. For more information, see [Using Amazon
-    #   VPC with Amazon Q connectors][1].
+    #   VPC with Amazon Q Business connectors][1].
     #
     #
     #
@@ -1057,7 +1121,7 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Creates an Amazon Q index.
+    # Creates an Amazon Q Business index.
     #
     # To determine if index creation has completed, check the `Status` field
     # returned from a call to `DescribeIndex`. The `Status` field is set to
@@ -1072,7 +1136,7 @@ module Aws::QBusiness
     # [2]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_CreateDataSource.html
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application using the index.
+    #   The identifier of the Amazon Q Business application using the index.
     #
     # @option params [Types::IndexCapacityConfiguration] :capacity_configuration
     #   The capacity units you want to provision for your index. You can add
@@ -1087,10 +1151,10 @@ module Aws::QBusiness
     #   not need to pass this option.**
     #
     # @option params [String] :description
-    #   A description for the Amazon Q index.
+    #   A description for the Amazon Q Business index.
     #
     # @option params [required, String] :display_name
-    #   A name for the Amazon Q index.
+    #   A name for the Amazon Q Business index.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs that identify or categorize the index. You
@@ -1135,17 +1199,18 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Creates an Amazon Q plugin.
+    # Creates an Amazon Q Business plugin.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application that will contain the plugin.
     #
     # @option params [required, Types::PluginAuthConfiguration] :auth_configuration
-    #   Authentication configuration information for an Amazon Q plugin.
+    #   Authentication configuration information for an Amazon Q Business
+    #   plugin.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create your Amazon
-    #   Q plugin.
+    #   Q Business plugin.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1211,27 +1276,27 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Adds a retriever to your Amazon Q application.
+    # Adds a retriever to your Amazon Q Business application.
     #
     # @option params [required, String] :application_id
-    #   The identifier of your Amazon Q application.
+    #   The identifier of your Amazon Q Business application.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create your Amazon
-    #   Q application retriever.
+    #   Q Business application retriever.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, Types::RetrieverConfiguration] :configuration
     #   Provides information on how the retriever used for your Amazon Q
-    #   application is configured.
+    #   Business application is configured.
     #
     # @option params [required, String] :display_name
     #   The name of your retriever.
     #
     # @option params [String] :role_arn
-    #   The ARN of an IAM role used by Amazon Q to access the basic
+    #   The ARN of an IAM role used by Amazon Q Business to access the basic
     #   authentication credentials stored in a Secrets Manager secret.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -1316,7 +1381,7 @@ module Aws::QBusiness
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create your Amazon
-    #   Q user mapping.
+    #   Q Business user mapping.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1353,38 +1418,42 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Creates an Amazon Q web experience.
+    # Creates an Amazon Q Business web experience.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q web experience.
+    #   The identifier of the Amazon Q Business web experience.
     #
     # @option params [String] :client_token
-    #   A token you provide to identify a request to create an Amazon Q web
-    #   experience.
+    #   A token you provide to identify a request to create an Amazon Q
+    #   Business web experience.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the service role attached to your
+    #   web experience.
     #
     # @option params [String] :sample_prompts_control_mode
     #   Determines whether sample prompts are enabled in the web experience
     #   for an end user.
     #
     # @option params [String] :subtitle
-    #   A subtitle to personalize your Amazon Q web experience.
+    #   A subtitle to personalize your Amazon Q Business web experience.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs that identify or categorize your Amazon Q
-    #   web experience. You can also use tags to help control access to the
-    #   web experience. Tag keys and values can consist of Unicode letters,
-    #   digits, white space, and any of the following symbols: \_ . : / = + -
-    #   @.
+    #   Business web experience. You can also use tags to help control access
+    #   to the web experience. Tag keys and values can consist of Unicode
+    #   letters, digits, white space, and any of the following symbols: \_ . :
+    #   / = + - @.
     #
     # @option params [String] :title
-    #   The title for your Amazon Q web experience.
+    #   The title for your Amazon Q Business web experience.
     #
     # @option params [String] :welcome_message
-    #   The customized welcome message for end users of an Amazon Q web
-    #   experience.
+    #   The customized welcome message for end users of an Amazon Q Business
+    #   web experience.
     #
     # @return [Types::CreateWebExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1396,6 +1465,7 @@ module Aws::QBusiness
     #   resp = client.create_web_experience({
     #     application_id: "ApplicationId", # required
     #     client_token: "ClientToken",
+    #     role_arn: "RoleArn",
     #     sample_prompts_control_mode: "ENABLED", # accepts ENABLED, DISABLED
     #     subtitle: "WebExperienceSubtitle",
     #     tags: [
@@ -1422,10 +1492,10 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Deletes an Amazon Q application.
+    # Deletes an Amazon Q Business application.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1444,7 +1514,8 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Deletes chat controls configured for an existing Amazon Q application.
+    # Deletes chat controls configured for an existing Amazon Q Business
+    # application.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application the chat controls have been
@@ -1467,17 +1538,17 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Deletes an Amazon Q web experience conversation.
+    # Deletes an Amazon Q Business web experience conversation.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application associated with the
-    #   conversation.
+    #   The identifier of the Amazon Q Business application associated with
+    #   the conversation.
     #
     # @option params [required, String] :conversation_id
-    #   The identifier of the Amazon Q web experience conversation being
-    #   deleted.
+    #   The identifier of the Amazon Q Business web experience conversation
+    #   being deleted.
     #
-    # @option params [required, String] :user_id
+    # @option params [String] :user_id
     #   The identifier of the user who is deleting the conversation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1487,7 +1558,7 @@ module Aws::QBusiness
     #   resp = client.delete_conversation({
     #     application_id: "ApplicationId", # required
     #     conversation_id: "ConversationId", # required
-    #     user_id: "UserId", # required
+    #     user_id: "UserId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteConversation AWS API Documentation
@@ -1499,13 +1570,13 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Deletes an Amazon Q data source connector. While the data source is
-    # being deleted, the `Status` field returned by a call to the
+    # Deletes an Amazon Q Business data source connector. While the data
+    # source is being deleted, the `Status` field returned by a call to the
     # `DescribeDataSource` API is set to `DELETING`.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application used with the data source
-    #   connector.
+    #   The identifier of the Amazon Q Business application used with the data
+    #   source connector.
     #
     # @option params [required, String] :data_source_id
     #   The identifier of the data source connector that you want to delete.
@@ -1586,14 +1657,14 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Deletes an Amazon Q index.
+    # Deletes an Amazon Q Business index.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application the Amazon Q index is
-    #   linked to.
+    #   The identifier of the Amazon Q Business application the Amazon Q
+    #   Business index is linked to.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the Amazon Q index.
+    #   The identifier of the Amazon Q Business index.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1613,10 +1684,11 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Deletes an Amazon Q plugin.
+    # Deletes an Amazon Q Business plugin.
     #
     # @option params [required, String] :application_id
-    #   The identifier the application attached to the Amazon Q plugin.
+    #   The identifier the application attached to the Amazon Q Business
+    #   plugin.
     #
     # @option params [required, String] :plugin_id
     #   The identifier of the plugin being deleted.
@@ -1639,10 +1711,11 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Deletes the retriever used by an Amazon Q application.
+    # Deletes the retriever used by an Amazon Q Business application.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application using the retriever.
+    #   The identifier of the Amazon Q Business application using the
+    #   retriever.
     #
     # @option params [required, String] :retriever_id
     #   The identifier of the retriever being deleted.
@@ -1692,14 +1765,14 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Deletes an Amazon Q web experience.
+    # Deletes an Amazon Q Business web experience.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application linked to the Amazon Q web
-    #   experience.
+    #   The identifier of the Amazon Q Business application linked to the
+    #   Amazon Q Business web experience.
     #
     # @option params [required, String] :web_experience_id
-    #   The identifier of the Amazon Q web experience being deleted.
+    #   The identifier of the Amazon Q Business web experience being deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1719,10 +1792,10 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Gets information about an existing Amazon Q application.
+    # Gets information about an existing Amazon Q Business application.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #
     # @return [Types::GetApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1734,6 +1807,7 @@ module Aws::QBusiness
     #   * {Types::GetApplicationResponse#display_name #display_name} => String
     #   * {Types::GetApplicationResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #   * {Types::GetApplicationResponse#error #error} => Types::ErrorDetail
+    #   * {Types::GetApplicationResponse#identity_center_application_arn #identity_center_application_arn} => String
     #   * {Types::GetApplicationResponse#role_arn #role_arn} => String
     #   * {Types::GetApplicationResponse#status #status} => String
     #   * {Types::GetApplicationResponse#updated_at #updated_at} => Time
@@ -1755,6 +1829,7 @@ module Aws::QBusiness
     #   resp.encryption_configuration.kms_key_id #=> String
     #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #   resp.error.error_message #=> String
+    #   resp.identity_center_application_arn #=> String
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
     #   resp.updated_at #=> Time
@@ -1769,7 +1844,7 @@ module Aws::QBusiness
     end
 
     # Gets information about an chat controls configured for an existing
-    # Amazon Q application.
+    # Amazon Q Business application.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application for which the chat controls are
@@ -1780,13 +1855,14 @@ module Aws::QBusiness
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
-    #   to retrieve, Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of Amazon Q
-    #   chat controls configured.
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of Amazon Q Business chat controls configured.
     #
     # @return [Types::GetChatControlsConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetChatControlsConfigurationResponse#blocked_phrases #blocked_phrases} => Types::BlockedPhrasesConfiguration
+    #   * {Types::GetChatControlsConfigurationResponse#creator_mode_configuration #creator_mode_configuration} => Types::AppliedCreatorModeConfiguration
     #   * {Types::GetChatControlsConfigurationResponse#next_token #next_token} => String
     #   * {Types::GetChatControlsConfigurationResponse#response_scope #response_scope} => String
     #   * {Types::GetChatControlsConfigurationResponse#topic_configurations #topic_configurations} => Array&lt;Types::TopicConfiguration&gt;
@@ -1806,6 +1882,7 @@ module Aws::QBusiness
     #   resp.blocked_phrases.blocked_phrases #=> Array
     #   resp.blocked_phrases.blocked_phrases[0] #=> String
     #   resp.blocked_phrases.system_message_override #=> String
+    #   resp.creator_mode_configuration.creator_mode_control #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #   resp.response_scope #=> String, one of "ENTERPRISE_CONTENT_ONLY", "EXTENDED_KNOWLEDGE_ENABLED"
     #   resp.topic_configurations #=> Array
@@ -1837,10 +1914,11 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Gets information about an existing Amazon Q data source connector.
+    # Gets information about an existing Amazon Q Business data source
+    # connector.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #
     # @option params [required, String] :data_source_id
     #   The identifier of the data source connector.
@@ -1990,13 +2068,14 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Gets information about an existing Amazon Q index.
+    # Gets information about an existing Amazon Q Business index.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application connected to the index.
+    #   The identifier of the Amazon Q Business application connected to the
+    #   index.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the Amazon Q index you want information on.
+    #   The identifier of the Amazon Q Business index you want information on.
     #
     # @return [Types::GetIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2049,7 +2128,7 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Gets information about an existing Amazon Q plugin.
+    # Gets information about an existing Amazon Q Business plugin.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application which contains the plugin.
@@ -2103,10 +2182,11 @@ module Aws::QBusiness
     end
 
     # Gets information about an existing retriever used by an Amazon Q
-    # application.
+    # Business application.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application using the retriever.
+    #   The identifier of the Amazon Q Business application using the
+    #   retriever.
     #
     # @option params [required, String] :retriever_id
     #   The identifier of the retriever.
@@ -2199,14 +2279,14 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Gets information about an existing Amazon Q web experience.
+    # Gets information about an existing Amazon Q Business web experience.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application linked to the web
+    #   The identifier of the Amazon Q Business application linked to the web
     #   experience.
     #
     # @option params [required, String] :web_experience_id
-    #   The identifier of the Amazon Q web experience.
+    #   The identifier of the Amazon Q Business web experience.
     #
     # @return [Types::GetWebExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2215,6 +2295,7 @@ module Aws::QBusiness
     #   * {Types::GetWebExperienceResponse#created_at #created_at} => Time
     #   * {Types::GetWebExperienceResponse#default_endpoint #default_endpoint} => String
     #   * {Types::GetWebExperienceResponse#error #error} => Types::ErrorDetail
+    #   * {Types::GetWebExperienceResponse#role_arn #role_arn} => String
     #   * {Types::GetWebExperienceResponse#sample_prompts_control_mode #sample_prompts_control_mode} => String
     #   * {Types::GetWebExperienceResponse#status #status} => String
     #   * {Types::GetWebExperienceResponse#subtitle #subtitle} => String
@@ -2242,6 +2323,7 @@ module Aws::QBusiness
     #   resp.default_endpoint #=> String
     #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #   resp.error.error_message #=> String
+    #   resp.role_arn #=> String
     #   resp.sample_prompts_control_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "PENDING_AUTH_CONFIG"
     #   resp.subtitle #=> String
@@ -2260,16 +2342,16 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Lists Amazon Q applications.
+    # Lists Amazon Q Business applications.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Amazon Q applications to return.
+    #   The maximum number of Amazon Q Business applications to return.
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
-    #   to retrieve, Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of Amazon Q
-    #   applications.
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of Amazon Q Business applications.
     #
     # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2304,23 +2386,23 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Lists one or more Amazon Q conversations.
+    # Lists one or more Amazon Q Business conversations.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Amazon Q conversations to return.
+    #   The maximum number of Amazon Q Business conversations to return.
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
-    #   to retrieve, Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of Amazon Q
-    #   conversations.
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of Amazon Q Business conversations.
     #
-    # @option params [required, String] :user_id
-    #   The identifier of the user involved in the Amazon Q web experience
-    #   conversation.
+    # @option params [String] :user_id
+    #   The identifier of the user involved in the Amazon Q Business web
+    #   experience conversation.
     #
     # @return [Types::ListConversationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2335,7 +2417,7 @@ module Aws::QBusiness
     #     application_id: "ApplicationId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     user_id: "UserId", # required
+    #     user_id: "UserId",
     #   })
     #
     # @example Response structure
@@ -2355,12 +2437,12 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Get information about an Amazon Q data source connector
+    # Get information about an Amazon Q Business data source connector
     # synchronization.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application connected to the data
-    #   source.
+    #   The identifier of the Amazon Q Business application connected to the
+    #   data source.
     #
     # @option params [required, String] :data_source_id
     #   The identifier of the data source connector.
@@ -2369,16 +2451,17 @@ module Aws::QBusiness
     #   The end time of the data source connector sync.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with the Amazon Q data source
-    #   connector.
+    #   The identifier of the index used with the Amazon Q Business data
+    #   source connector.
     #
     # @option params [Integer] :max_results
     #   The maximum number of synchronization jobs to return in the response.
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incpmplete because there is more data
-    #   to retriever, Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of responses.
+    #   to retriever, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of responses.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The start time of the data source connector sync.
@@ -2433,11 +2516,12 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Lists the Amazon Q data source connectors that you have created.
+    # Lists the Amazon Q Business data source connectors that you have
+    # created.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application linked to the data source
-    #   connectors.
+    #   The identifier of the Amazon Q Business application linked to the data
+    #   source connectors.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index used with one or more data source
@@ -2448,9 +2532,9 @@ module Aws::QBusiness
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
-    #   to retrieve, Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of Amazon Q
-    #   data source connectors.
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of Amazon Q Business data source connectors.
     #
     # @return [Types::ListDataSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2504,8 +2588,9 @@ module Aws::QBusiness
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
-    #   to retrieve, Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of documents.
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of documents.
     #
     # @return [Types::ListDocumentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2563,9 +2648,9 @@ module Aws::QBusiness
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
-    #   retrieve), Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of groups that
-    #   are mapped to users.
+    #   retrieve), Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of groups that are mapped to users.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :updated_earlier_than
     #   The timestamp identifier used for the latest `PUT` or `DELETE` action
@@ -2604,19 +2689,20 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Lists the Amazon Q indices you have created.
+    # Lists the Amazon Q Business indices you have created.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application connected to the index.
+    #   The identifier of the Amazon Q Business application connected to the
+    #   index.
     #
     # @option params [Integer] :max_results
     #   The maximum number of indices to return.
     #
     # @option params [String] :next_token
     #   If the maxResults response was incomplete because there is more data
-    #   to retrieve, Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of Amazon Q
-    #   indices.
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of Amazon Q Business indices.
     #
     # @return [Types::ListIndicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2652,25 +2738,26 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Gets a list of messages associated with an Amazon Q web experience.
+    # Gets a list of messages associated with an Amazon Q Business web
+    # experience.
     #
     # @option params [required, String] :application_id
-    #   The identifier for the Amazon Q application.
+    #   The identifier for the Amazon Q Business application.
     #
     # @option params [required, String] :conversation_id
-    #   The identifier of the Amazon Q web experience conversation.
+    #   The identifier of the Amazon Q Business web experience conversation.
     #
     # @option params [Integer] :max_results
     #   The maximum number of messages to return.
     #
     # @option params [String] :next_token
     #   If the number of retrievers returned exceeds `maxResults`, Amazon Q
-    #   returns a next token as a pagination token to retrieve the next set of
-    #   messages.
+    #   Business returns a next token as a pagination token to retrieve the
+    #   next set of messages.
     #
-    # @option params [required, String] :user_id
-    #   The identifier of the user involved in the Amazon Q web experience
-    #   conversation.
+    # @option params [String] :user_id
+    #   The identifier of the user involved in the Amazon Q Business web
+    #   experience conversation.
     #
     # @return [Types::ListMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2686,7 +2773,7 @@ module Aws::QBusiness
     #     conversation_id: "ConversationId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     user_id: "UserId", # required
+    #     user_id: "UserId",
     #   })
     #
     # @example Response structure
@@ -2733,7 +2820,7 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Lists configured Amazon Q plugins.
+    # Lists configured Amazon Q Business plugins.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application the plugin is attached to.
@@ -2743,8 +2830,9 @@ module Aws::QBusiness
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
-    #   to retrieve, Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of plugins.
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of plugins.
     #
     # @return [Types::ListPluginsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2782,18 +2870,19 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Lists the retriever used by an Amazon Q application.
+    # Lists the retriever used by an Amazon Q Business application.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application using the retriever.
+    #   The identifier of the Amazon Q Business application using the
+    #   retriever.
     #
     # @option params [Integer] :max_results
     #   The maximum number of retrievers returned.
     #
     # @option params [String] :next_token
     #   If the number of retrievers returned exceeds `maxResults`, Amazon Q
-    #   returns a next token as a pagination token to retrieve the next set of
-    #   retrievers.
+    #   Business returns a next token as a pagination token to retrieve the
+    #   next set of retrievers.
     #
     # @return [Types::ListRetrieversResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2830,11 +2919,12 @@ module Aws::QBusiness
     end
 
     # Gets a list of tags associated with a specified resource. Amazon Q
-    # applications and data sources can have tags associated with them.
+    # Business applications and data sources can have tags associated with
+    # them.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Q application or data
-    #   source to get a list of tags for.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Business application or
+    #   data source to get a list of tags for.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2861,20 +2951,20 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Lists one or more Amazon Q Web Experiences.
+    # Lists one or more Amazon Q Business Web Experiences.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application linked to the listed web
-    #   experiences.
+    #   The identifier of the Amazon Q Business application linked to the
+    #   listed web experiences.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Amazon Q Web Experiences to return.
+    #   The maximum number of Amazon Q Business Web Experiences to return.
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
-    #   to retrieve, Amazon Q returns a pagination token in the response. You
-    #   can use this pagination token to retrieve the next set of Amazon Q
-    #   conversations.
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of Amazon Q Business conversations.
     #
     # @return [Types::ListWebExperiencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2910,7 +3000,7 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Enables your end user to to provide feedback on their Amazon Q
+    # Enables your end user to provide feedback on their Amazon Q Business
     # generated chat responses.
     #
     # @option params [required, String] :application_id
@@ -2928,7 +3018,7 @@ module Aws::QBusiness
     # @option params [Types::MessageUsefulnessFeedback] :message_usefulness
     #   The feedback usefulness value given by the user to the chat message.
     #
-    # @option params [required, String] :user_id
+    # @option params [String] :user_id
     #   The identifier of the user giving the feedback.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2946,7 +3036,7 @@ module Aws::QBusiness
     #       submitted_at: Time.now, # required
     #       usefulness: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
     #     },
-    #     user_id: "UserId", # required
+    #     user_id: "UserId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/PutFeedback AWS API Documentation
@@ -2967,7 +3057,7 @@ module Aws::QBusiness
     # list of users or people who work in these teams. Only users who work
     # in research and engineering, and therefore belong in the intellectual
     # property group, can see top-secret company documents in their Amazon Q
-    # chat results.
+    # Business chat results.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application in which the user and group mapping
@@ -2985,8 +3075,8 @@ module Aws::QBusiness
     #
     # @option params [required, Types::GroupMembers] :group_members
     #   A list of users or sub groups that belong to a group. This is for
-    #   generating Amazon Q chat results only from document a user has access
-    #   to.
+    #   generating Amazon Q Business chat results only from document a user
+    #   has access to.
     #
     # @option params [required, String] :group_name
     #   The list that contains your users or sub groups that belong the same
@@ -3043,12 +3133,12 @@ module Aws::QBusiness
     end
 
     # Starts a data source connector synchronization job. If a
-    # synchronization job is already in progress, Amazon Q returns a
-    # `ConflictException`.
+    # synchronization job is already in progress, Amazon Q Business returns
+    # a `ConflictException`.
     #
     # @option params [required, String] :application_id
-    #   The identifier of Amazon Q application the data source is connected
-    #   to.
+    #   The identifier of Amazon Q Business application the data source is
+    #   connected to.
     #
     # @option params [required, String] :data_source_id
     #   The identifier of the data source connector.
@@ -3081,19 +3171,19 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Stops an Amazon Q data source connector synchronization job already in
-    # progress.
+    # Stops an Amazon Q Business data source connector synchronization job
+    # already in progress.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application that the data source is
-    #   connected to.
+    #   The identifier of the Amazon Q Business application that the data
+    #   source is connected to.
     #
     # @option params [required, String] :data_source_id
     #   The identifier of the data source connector.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index used with the Amazon Q data source
-    #   connector.
+    #   The identifier of the index used with the Amazon Q Business data
+    #   source connector.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3114,18 +3204,18 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Adds the specified tag to the specified Amazon Q application or data
-    # source resource. If the tag already exists, the existing value is
-    # replaced with the new value.
+    # Adds the specified tag to the specified Amazon Q Business application
+    # or data source resource. If the tag already exists, the existing value
+    # is replaced with the new value.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Q application or data
-    #   source to tag.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Business application or
+    #   data source to tag.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   A list of tag keys to add to the Amazon Q application or data source.
-    #   If a tag already exists, the existing value is replaced with the new
-    #   value.
+    #   A list of tag keys to add to the Amazon Q Business application or data
+    #   source. If a tag already exists, the existing value is replaced with
+    #   the new value.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3150,15 +3240,16 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Removes a tag from an Amazon Q application or a data source.
+    # Removes a tag from an Amazon Q Business application or a data source.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Q application, or data
-    #   source to remove the tag from.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Business application,
+    #   or data source to remove the tag from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   A list of tag keys to remove from the Amazon Q application or data
-    #   source. If a tag key does not exist on the resource, it is ignored.
+    #   A list of tag keys to remove from the Amazon Q Business application or
+    #   data source. If a tag key does not exist on the resource, it is
+    #   ignored.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3178,24 +3269,24 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Q application.
+    # Updates an existing Amazon Q Business application.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application.
+    #   The identifier of the Amazon Q Business application.
     #
     # @option params [Types::AttachmentsConfiguration] :attachments_configuration
     #   An option to allow end users to upload files directly during chat.
     #
     # @option params [String] :description
-    #   A description for the Amazon Q application.
+    #   A description for the Amazon Q Business application.
     #
     # @option params [String] :display_name
-    #   A name for the Amazon Q application.
+    #   A name for the Amazon Q Business application.
     #
     # @option params [String] :role_arn
     #   An Amazon Web Services Identity and Access Management (IAM) role that
-    #   gives Amazon Q permission to access Amazon CloudWatch logs and
-    #   metrics.
+    #   gives Amazon Q Business permission to access Amazon CloudWatch logs
+    #   and metrics.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3221,7 +3312,7 @@ module Aws::QBusiness
     end
 
     # Updates an set of chat controls configured for an existing Amazon Q
-    # application.
+    # Business application.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application for which the chat controls are
@@ -3232,10 +3323,13 @@ module Aws::QBusiness
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to update a Amazon Q
-    #   application chat configuration.
+    #   Business application chat configuration.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Types::CreatorModeConfiguration] :creator_mode_configuration
+    #   The configuration details for `CREATOR_MODE`.
     #
     # @option params [String] :response_scope
     #   The response scope configured for your application. This determines
@@ -3262,6 +3356,9 @@ module Aws::QBusiness
     #       system_message_override: "SystemMessageOverride",
     #     },
     #     client_token: "ClientToken",
+    #     creator_mode_configuration: {
+    #       creator_mode_control: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
     #     response_scope: "ENTERPRISE_CONTENT_ONLY", # accepts ENTERPRISE_CONTENT_ONLY, EXTENDED_KNOWLEDGE_ENABLED
     #     topic_configurations_to_create_or_update: [
     #       {
@@ -3340,14 +3437,15 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Q data source connector.
+    # Updates an existing Amazon Q Business data source connector.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application the data source is attached
-    #   to.
+    #   The identifier of the Amazon Q Business application the data source is
+    #   attached to.
     #
     # @option params [Hash,Array,String,Numeric,Boolean] :configuration
-    #   Provides the configuration information for an Amazon Q data source.
+    #   Provides the configuration information for an Amazon Q Business data
+    #   source.
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -3473,20 +3571,22 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Updates an Amazon Q index.
+    # Updates an Amazon Q Business index.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application connected to the index.
+    #   The identifier of the Amazon Q Business application connected to the
+    #   index.
     #
     # @option params [Types::IndexCapacityConfiguration] :capacity_configuration
     #   The storage capacity units you want to provision for your Amazon Q
-    #   index. You can add and remove capacity to fit your usage needs.
+    #   Business index. You can add and remove capacity to fit your usage
+    #   needs.
     #
     # @option params [String] :description
-    #   The description of the Amazon Q index.
+    #   The description of the Amazon Q Business index.
     #
     # @option params [String] :display_name
-    #   The name of the Amazon Q index.
+    #   The name of the Amazon Q Business index.
     #
     # @option params [Array<Types::DocumentAttributeConfiguration>] :document_attribute_configurations
     #   Configuration information for document metadata or fields. Document
@@ -3499,7 +3599,7 @@ module Aws::QBusiness
     #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes
     #
     # @option params [required, String] :index_id
-    #   The identifier of the Amazon Q index.
+    #   The identifier of the Amazon Q Business index.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3531,7 +3631,7 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Updates an Amazon Q plugin.
+    # Updates an Amazon Q Business plugin.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application the plugin is attached to.
@@ -3582,14 +3682,14 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Updates the retriever used for your Amazon Q application.
+    # Updates the retriever used for your Amazon Q Business application.
     #
     # @option params [required, String] :application_id
-    #   The identifier of your Amazon Q application.
+    #   The identifier of your Amazon Q Business application.
     #
     # @option params [Types::RetrieverConfiguration] :configuration
     #   Provides information on how the retriever used for your Amazon Q
-    #   application is configured.
+    #   Business application is configured.
     #
     # @option params [String] :display_name
     #   The name of your retriever.
@@ -3715,31 +3815,32 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Updates an Amazon Q web experience.
+    # Updates an Amazon Q Business web experience.
     #
     # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q application attached to the web
-    #   experience.
+    #   The identifier of the Amazon Q Business application attached to the
+    #   web experience.
     #
     # @option params [Types::WebExperienceAuthConfiguration] :authentication_configuration
-    #   The authentication configuration of the Amazon Q web experience.
+    #   The authentication configuration of the Amazon Q Business web
+    #   experience.
     #
     # @option params [String] :sample_prompts_control_mode
     #   Determines whether sample prompts are enabled in the web experience
     #   for an end user.
     #
     # @option params [String] :subtitle
-    #   The subtitle of the Amazon Q web experience.
+    #   The subtitle of the Amazon Q Business web experience.
     #
     # @option params [String] :title
-    #   The title of the Amazon Q web experience.
+    #   The title of the Amazon Q Business web experience.
     #
     # @option params [required, String] :web_experience_id
-    #   The identifier of the Amazon Q web experience.
+    #   The identifier of the Amazon Q Business web experience.
     #
     # @option params [String] :welcome_message
-    #   A customized welcome message for an end user in an Amazon Q web
-    #   experience.
+    #   A customized welcome message for an end user in an Amazon Q Business
+    #   web experience.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3784,7 +3885,7 @@ module Aws::QBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

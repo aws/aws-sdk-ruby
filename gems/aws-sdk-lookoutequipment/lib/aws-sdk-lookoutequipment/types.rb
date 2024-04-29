@@ -242,12 +242,36 @@ module Aws::LookoutEquipment
     #   Indicates the status of the `CreateInferenceScheduler` operation.
     #   @return [String]
     #
+    # @!attribute [rw] model_quality
+    #   Provides a quality assessment for a model that uses labels. If
+    #   Lookout for Equipment determines that the model quality is poor
+    #   based on training metrics, the value is `POOR_QUALITY_DETECTED`.
+    #   Otherwise, the value is `QUALITY_THRESHOLD_MET`.
+    #
+    #   If the model is unlabeled, the model quality can't be assessed and
+    #   the value of `ModelQuality` is `CANNOT_DETERMINE_QUALITY`. In this
+    #   situation, you can get a model quality assessment by adding labels
+    #   to the input dataset and retraining the model.
+    #
+    #   For information about using labels with your models, see
+    #   [Understanding labeling][1].
+    #
+    #   For information about improving the quality of a model, see [Best
+    #   practices with Amazon Lookout for Equipment][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html
+    #   [2]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateInferenceSchedulerResponse AWS API Documentation
     #
     class CreateInferenceSchedulerResponse < Struct.new(
       :inference_scheduler_arn,
       :inference_scheduler_name,
-      :status)
+      :status,
+      :model_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1525,6 +1549,29 @@ module Aws::LookoutEquipment
     #   diagnostics.
     #   @return [Types::ModelDiagnosticsOutputConfiguration]
     #
+    # @!attribute [rw] model_quality
+    #   Provides a quality assessment for a model that uses labels. If
+    #   Lookout for Equipment determines that the model quality is poor
+    #   based on training metrics, the value is `POOR_QUALITY_DETECTED`.
+    #   Otherwise, the value is `QUALITY_THRESHOLD_MET`.
+    #
+    #   If the model is unlabeled, the model quality can't be assessed and
+    #   the value of `ModelQuality` is `CANNOT_DETERMINE_QUALITY`. In this
+    #   situation, you can get a model quality assessment by adding labels
+    #   to the input dataset and retraining the model.
+    #
+    #   For information about using labels with your models, see
+    #   [Understanding labeling][1].
+    #
+    #   For information about improving the quality of a model, see [Best
+    #   practices with Amazon Lookout for Equipment][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html
+    #   [2]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelResponse AWS API Documentation
     #
     class DescribeModelResponse < Struct.new(
@@ -1568,7 +1615,8 @@ module Aws::LookoutEquipment
       :accumulated_inference_data_start_time,
       :accumulated_inference_data_end_time,
       :retraining_scheduler_status,
-      :model_diagnostics_output_configuration)
+      :model_diagnostics_output_configuration,
+      :model_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1773,6 +1821,29 @@ module Aws::LookoutEquipment
     #   the pointwise model diagnostics for the model version.
     #   @return [Types::S3Object]
     #
+    # @!attribute [rw] model_quality
+    #   Provides a quality assessment for a model that uses labels. If
+    #   Lookout for Equipment determines that the model quality is poor
+    #   based on training metrics, the value is `POOR_QUALITY_DETECTED`.
+    #   Otherwise, the value is `QUALITY_THRESHOLD_MET`.
+    #
+    #   If the model is unlabeled, the model quality can't be assessed and
+    #   the value of `ModelQuality` is `CANNOT_DETERMINE_QUALITY`. In this
+    #   situation, you can get a model quality assessment by adding labels
+    #   to the input dataset and retraining the model.
+    #
+    #   For information about using labels with your models, see
+    #   [Understanding labeling][1].
+    #
+    #   For information about improving the quality of a model, see [Best
+    #   practices with Amazon Lookout for Equipment][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html
+    #   [2]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelVersionResponse AWS API Documentation
     #
     class DescribeModelVersionResponse < Struct.new(
@@ -1809,7 +1880,8 @@ module Aws::LookoutEquipment
       :auto_promotion_result,
       :auto_promotion_result_reason,
       :model_diagnostics_output_configuration,
-      :model_diagnostics_results_object)
+      :model_diagnostics_results_object,
+      :model_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3536,6 +3608,29 @@ module Aws::LookoutEquipment
     #   for an Amazon Lookout for Equipment model.
     #   @return [Types::ModelDiagnosticsOutputConfiguration]
     #
+    # @!attribute [rw] model_quality
+    #   Provides a quality assessment for a model that uses labels. If
+    #   Lookout for Equipment determines that the model quality is poor
+    #   based on training metrics, the value is `POOR_QUALITY_DETECTED`.
+    #   Otherwise, the value is `QUALITY_THRESHOLD_MET`.
+    #
+    #   If the model is unlabeled, the model quality can't be assessed and
+    #   the value of `ModelQuality` is `CANNOT_DETERMINE_QUALITY`. In this
+    #   situation, you can get a model quality assessment by adding labels
+    #   to the input dataset and retraining the model.
+    #
+    #   For information about using labels with your models, see
+    #   [Understanding labeling][1].
+    #
+    #   For information about improving the quality of a model, see [Best
+    #   practices with Amazon Lookout for Equipment][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html
+    #   [2]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ModelSummary AWS API Documentation
     #
     class ModelSummary < Struct.new(
@@ -3552,7 +3647,8 @@ module Aws::LookoutEquipment
       :latest_scheduled_retraining_start_time,
       :next_scheduled_retraining_start_date,
       :retraining_scheduler_status,
-      :model_diagnostics_output_configuration)
+      :model_diagnostics_output_configuration,
+      :model_quality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3588,6 +3684,25 @@ module Aws::LookoutEquipment
     #   Indicates how this model version was generated.
     #   @return [String]
     #
+    # @!attribute [rw] model_quality
+    #   Provides a quality assessment for a model that uses labels. If
+    #   Lookout for Equipment determines that the model quality is poor
+    #   based on training metrics, the value is `POOR_QUALITY_DETECTED`.
+    #   Otherwise, the value is `QUALITY_THRESHOLD_MET`.
+    #
+    #   If the model is unlabeled, the model quality can't be assessed and
+    #   the value of `ModelQuality` is `CANNOT_DETERMINE_QUALITY`. In this
+    #   situation, you can get a model quality assessment by adding labels
+    #   to the input dataset and retraining the model.
+    #
+    #   For information about improving the quality of a model, see [Best
+    #   practices with Amazon Lookout for Equipment][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ModelVersionSummary AWS API Documentation
     #
     class ModelVersionSummary < Struct.new(
@@ -3597,7 +3712,8 @@ module Aws::LookoutEquipment
       :model_version_arn,
       :created_at,
       :status,
-      :source_type)
+      :source_type,
+      :model_quality)
       SENSITIVE = []
       include Aws::Structure
     end

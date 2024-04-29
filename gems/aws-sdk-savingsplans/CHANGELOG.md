@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2024-03-20)
+------------------
+
+* Feature - Introducing the Savings Plans Return feature enabling customers to return their Savings Plans within 7 days of purchase.
+
 1.38.0 (2024-01-26)
 ------------------
 

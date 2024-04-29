@@ -414,6 +414,7 @@ module Aws
                                  ?source_db_cluster_identifier: ::String,
                                  ?dedicated_log_volume: bool,
                                  ?upgrade_storage_config: bool,
+                                 ?ca_certificate_identifier: ::String,
                                  ?source_region: ::String
                                ) -> DBInstance
                              | (?Hash[Symbol, untyped]) -> DBInstance
@@ -577,7 +578,8 @@ module Aws
                      ?network_type: ::String,
                      ?storage_throughput: ::Integer,
                      ?allocated_storage: ::Integer,
-                     ?dedicated_log_volume: bool
+                     ?dedicated_log_volume: bool,
+                     ?ca_certificate_identifier: ::String
                    ) -> DBInstance
                  | (?Hash[Symbol, untyped]) -> DBInstance
 

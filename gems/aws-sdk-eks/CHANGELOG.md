@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-03-28)
+------------------
+
+* Feature - Add multiple customer error code to handle customer caused failure when managing EKS node groups
+
+1.99.0 (2024-02-29)
+------------------
+
+* Feature - Added support for new AL2023 AMIs to the supported AMITypes.
+
 1.98.0 (2024-01-26)
 ------------------
 

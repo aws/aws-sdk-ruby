@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.121.0 (2024-02-28)
+------------------
+
+* Feature - This release reduces the maximum results returned per query invocation from 500 to 100 for the SearchIndex API. This change has no implications as long as the API is invoked until the nextToken is NULL.
+
 1.120.0 (2024-02-09)
 ------------------
 

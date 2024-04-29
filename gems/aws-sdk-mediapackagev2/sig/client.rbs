@@ -81,6 +81,7 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#create_channel-instance_method
@@ -100,6 +101,7 @@ module Aws
         def egress_domain: () -> ::String
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
+        def etag: () -> ::String
         def description: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -126,6 +128,8 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#create_origin_endpoint-instance_method
@@ -199,6 +203,31 @@ module Aws
                                         }?
                                       },
                                     ],
+                                    ?dash_manifests: Array[
+                                      {
+                                        manifest_name: ::String,
+                                        manifest_window_seconds: ::Integer?,
+                                        filter_configuration: {
+                                          manifest_filter: ::String?,
+                                          start: ::Time?,
+                                          end: ::Time?,
+                                          time_delay_seconds: ::Integer?
+                                        }?,
+                                        min_update_period_seconds: ::Integer?,
+                                        min_buffer_time_seconds: ::Integer?,
+                                        suggested_presentation_delay_seconds: ::Integer?,
+                                        segment_template_format: ("NUMBER_WITH_TIMELINE")?,
+                                        period_triggers: Array[("AVAILS" | "DRM_KEY_ROTATION" | "SOURCE_CHANGES" | "SOURCE_DISRUPTIONS" | "NONE")]?,
+                                        scte_dash: {
+                                          ad_marker_dash: ("BINARY" | "XML")?
+                                        }?,
+                                        drm_signaling: ("INDIVIDUAL" | "REFERENCED")?,
+                                        utc_timing: {
+                                          timing_mode: ("HTTP_HEAD" | "HTTP_ISO" | "HTTP_XSDATE" | "UTC_DIRECT")?,
+                                          timing_source: ::String?
+                                        }?
+                                      },
+                                    ],
                                     ?tags: Hash[::String, ::String]
                                   ) -> _CreateOriginEndpointResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOriginEndpointResponseSuccess
@@ -263,6 +292,7 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_channel-instance_method
@@ -280,6 +310,7 @@ module Aws
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
         def description: () -> ::String
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_channel_group-instance_method
@@ -315,7 +346,9 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
+        def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_origin_endpoint-instance_method
       def get_origin_endpoint: (
@@ -435,12 +468,14 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#update_channel-instance_method
       def update_channel: (
                             channel_group_name: ::String,
                             channel_name: ::String,
+                            ?etag: ::String,
                             ?description: ::String
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
@@ -453,11 +488,13 @@ module Aws
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
         def description: () -> ::String
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#update_channel_group-instance_method
       def update_channel_group: (
                                   channel_group_name: ::String,
+                                  ?etag: ::String,
                                   ?description: ::String
                                 ) -> _UpdateChannelGroupResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelGroupResponseSuccess
@@ -476,7 +513,9 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
+        def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#update_origin_endpoint-instance_method
       def update_origin_endpoint: (
@@ -547,7 +586,33 @@ module Aws
                                           time_delay_seconds: ::Integer?
                                         }?
                                       },
-                                    ]
+                                    ],
+                                    ?dash_manifests: Array[
+                                      {
+                                        manifest_name: ::String,
+                                        manifest_window_seconds: ::Integer?,
+                                        filter_configuration: {
+                                          manifest_filter: ::String?,
+                                          start: ::Time?,
+                                          end: ::Time?,
+                                          time_delay_seconds: ::Integer?
+                                        }?,
+                                        min_update_period_seconds: ::Integer?,
+                                        min_buffer_time_seconds: ::Integer?,
+                                        suggested_presentation_delay_seconds: ::Integer?,
+                                        segment_template_format: ("NUMBER_WITH_TIMELINE")?,
+                                        period_triggers: Array[("AVAILS" | "DRM_KEY_ROTATION" | "SOURCE_CHANGES" | "SOURCE_DISRUPTIONS" | "NONE")]?,
+                                        scte_dash: {
+                                          ad_marker_dash: ("BINARY" | "XML")?
+                                        }?,
+                                        drm_signaling: ("INDIVIDUAL" | "REFERENCED")?,
+                                        utc_timing: {
+                                          timing_mode: ("HTTP_HEAD" | "HTTP_ISO" | "HTTP_XSDATE" | "UTC_DIRECT")?,
+                                          timing_source: ::String?
+                                        }?
+                                      },
+                                    ],
+                                    ?etag: ::String
                                   ) -> _UpdateOriginEndpointResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOriginEndpointResponseSuccess
     end

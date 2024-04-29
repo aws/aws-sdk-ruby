@@ -150,6 +150,8 @@ module Aws::QuickSight
     AssetBundleImportJobVPCConnectionOverrideParametersList = Shapes::ListShape.new(name: 'AssetBundleImportJobVPCConnectionOverrideParametersList')
     AssetBundleImportJobVPCConnectionOverrideTags = Shapes::StructureShape.new(name: 'AssetBundleImportJobVPCConnectionOverrideTags')
     AssetBundleImportJobVPCConnectionOverrideTagsList = Shapes::ListShape.new(name: 'AssetBundleImportJobVPCConnectionOverrideTagsList')
+    AssetBundleImportJobWarning = Shapes::StructureShape.new(name: 'AssetBundleImportJobWarning')
+    AssetBundleImportJobWarningList = Shapes::ListShape.new(name: 'AssetBundleImportJobWarningList')
     AssetBundleImportSource = Shapes::StructureShape.new(name: 'AssetBundleImportSource')
     AssetBundleImportSourceDescription = Shapes::StructureShape.new(name: 'AssetBundleImportSourceDescription')
     AssetBundlePrincipalList = Shapes::ListShape.new(name: 'AssetBundlePrincipalList')
@@ -507,13 +509,22 @@ module Aws::QuickSight
     DecimalPlacesConfiguration = Shapes::StructureShape.new(name: 'DecimalPlacesConfiguration')
     DecimalValueWhenUnsetConfiguration = Shapes::StructureShape.new(name: 'DecimalValueWhenUnsetConfiguration')
     DefaultAggregation = Shapes::StringShape.new(name: 'DefaultAggregation')
+    DefaultDateTimePickerControlOptions = Shapes::StructureShape.new(name: 'DefaultDateTimePickerControlOptions')
+    DefaultFilterControlConfiguration = Shapes::StructureShape.new(name: 'DefaultFilterControlConfiguration')
+    DefaultFilterControlOptions = Shapes::StructureShape.new(name: 'DefaultFilterControlOptions')
+    DefaultFilterDropDownControlOptions = Shapes::StructureShape.new(name: 'DefaultFilterDropDownControlOptions')
+    DefaultFilterListControlOptions = Shapes::StructureShape.new(name: 'DefaultFilterListControlOptions')
     DefaultFormatting = Shapes::StructureShape.new(name: 'DefaultFormatting')
     DefaultFreeFormLayoutConfiguration = Shapes::StructureShape.new(name: 'DefaultFreeFormLayoutConfiguration')
     DefaultGridLayoutConfiguration = Shapes::StructureShape.new(name: 'DefaultGridLayoutConfiguration')
     DefaultInteractiveLayoutConfiguration = Shapes::StructureShape.new(name: 'DefaultInteractiveLayoutConfiguration')
     DefaultNewSheetConfiguration = Shapes::StructureShape.new(name: 'DefaultNewSheetConfiguration')
     DefaultPaginatedLayoutConfiguration = Shapes::StructureShape.new(name: 'DefaultPaginatedLayoutConfiguration')
+    DefaultRelativeDateTimeControlOptions = Shapes::StructureShape.new(name: 'DefaultRelativeDateTimeControlOptions')
     DefaultSectionBasedLayoutConfiguration = Shapes::StructureShape.new(name: 'DefaultSectionBasedLayoutConfiguration')
+    DefaultSliderControlOptions = Shapes::StructureShape.new(name: 'DefaultSliderControlOptions')
+    DefaultTextAreaControlOptions = Shapes::StructureShape.new(name: 'DefaultTextAreaControlOptions')
+    DefaultTextFieldControlOptions = Shapes::StructureShape.new(name: 'DefaultTextFieldControlOptions')
     DeleteAccountCustomizationRequest = Shapes::StructureShape.new(name: 'DeleteAccountCustomizationRequest')
     DeleteAccountCustomizationResponse = Shapes::StructureShape.new(name: 'DeleteAccountCustomizationResponse')
     DeleteAccountSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteAccountSubscriptionRequest')
@@ -714,6 +725,7 @@ module Aws::QuickSight
     FilterClass = Shapes::StringShape.new(name: 'FilterClass')
     FilterControl = Shapes::StructureShape.new(name: 'FilterControl')
     FilterControlList = Shapes::ListShape.new(name: 'FilterControlList')
+    FilterCrossSheetControl = Shapes::StructureShape.new(name: 'FilterCrossSheetControl')
     FilterDateTimePickerControl = Shapes::StructureShape.new(name: 'FilterDateTimePickerControl')
     FilterDropDownControl = Shapes::StructureShape.new(name: 'FilterDropDownControl')
     FilterGroup = Shapes::StructureShape.new(name: 'FilterGroup')
@@ -1586,6 +1598,7 @@ module Aws::QuickSight
     TooltipItem = Shapes::StructureShape.new(name: 'TooltipItem')
     TooltipItemList = Shapes::ListShape.new(name: 'TooltipItemList')
     TooltipOptions = Shapes::StructureShape.new(name: 'TooltipOptions')
+    TooltipTarget = Shapes::StringShape.new(name: 'TooltipTarget')
     TooltipTitleType = Shapes::StringShape.new(name: 'TooltipTitleType')
     TopBottomComputationType = Shapes::StringShape.new(name: 'TopBottomComputationType')
     TopBottomFilter = Shapes::StructureShape.new(name: 'TopBottomFilter')
@@ -1761,6 +1774,12 @@ module Aws::QuickSight
     VisualSubtitleLabelOptions = Shapes::StructureShape.new(name: 'VisualSubtitleLabelOptions')
     VisualTitleLabelOptions = Shapes::StructureShape.new(name: 'VisualTitleLabelOptions')
     VpcConnectionProperties = Shapes::StructureShape.new(name: 'VpcConnectionProperties')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
+    VpcEndpointIdRestrictionRuleDescription = Shapes::StringShape.new(name: 'VpcEndpointIdRestrictionRuleDescription')
+    VpcEndpointIdRestrictionRuleMap = Shapes::MapShape.new(name: 'VpcEndpointIdRestrictionRuleMap')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
+    VpcIdRestrictionRuleDescription = Shapes::StringShape.new(name: 'VpcIdRestrictionRuleDescription')
+    VpcIdRestrictionRuleMap = Shapes::MapShape.new(name: 'VpcIdRestrictionRuleMap')
     Warehouse = Shapes::StringShape.new(name: 'Warehouse')
     WaterfallChartAggregatedFieldWells = Shapes::StructureShape.new(name: 'WaterfallChartAggregatedFieldWells')
     WaterfallChartColorConfiguration = Shapes::StructureShape.new(name: 'WaterfallChartColorConfiguration')
@@ -2218,6 +2237,12 @@ module Aws::QuickSight
 
     AssetBundleImportJobVPCConnectionOverrideTagsList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobVPCConnectionOverrideTags)
 
+    AssetBundleImportJobWarning.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleImportJobWarning.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    AssetBundleImportJobWarning.struct_class = Types::AssetBundleImportJobWarning
+
+    AssetBundleImportJobWarningList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobWarning)
+
     AssetBundleImportSource.add_member(:body, Shapes::ShapeRef.new(shape: AssetBundleImportBodyBlob, location_name: "Body"))
     AssetBundleImportSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
     AssetBundleImportSource.struct_class = Types::AssetBundleImportSource
@@ -2502,6 +2527,7 @@ module Aws::QuickSight
     CategoryFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
     CategoryFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
     CategoryFilter.add_member(:configuration, Shapes::ShapeRef.new(shape: CategoryFilterConfiguration, required: true, location_name: "Configuration"))
+    CategoryFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
     CategoryFilter.struct_class = Types::CategoryFilter
 
     CategoryFilterConfiguration.add_member(:filter_list_configuration, Shapes::ShapeRef.new(shape: FilterListConfiguration, location_name: "FilterListConfiguration"))
@@ -2615,6 +2641,7 @@ module Aws::QuickSight
     ColumnTooltipItem.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
     ColumnTooltipItem.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     ColumnTooltipItem.add_member(:aggregation, Shapes::ShapeRef.new(shape: AggregationFunction, location_name: "Aggregation"))
+    ColumnTooltipItem.add_member(:tooltip_target, Shapes::ShapeRef.new(shape: TooltipTarget, location_name: "TooltipTarget"))
     ColumnTooltipItem.struct_class = Types::ColumnTooltipItem
 
     ComboChartAggregatedFieldWells.add_member(:category, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "Category"))
@@ -2768,6 +2795,7 @@ module Aws::QuickSight
     CreateAccountSubscriptionRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: String, location_name: "LastName"))
     CreateAccountSubscriptionRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: String, location_name: "EmailAddress"))
     CreateAccountSubscriptionRequest.add_member(:contact_number, Shapes::ShapeRef.new(shape: String, location_name: "ContactNumber"))
+    CreateAccountSubscriptionRequest.add_member(:iam_identity_center_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "IAMIdentityCenterInstanceArn"))
     CreateAccountSubscriptionRequest.struct_class = Types::CreateAccountSubscriptionRequest
 
     CreateAccountSubscriptionResponse.add_member(:signup_response, Shapes::ShapeRef.new(shape: SignupResponse, location_name: "SignupResponse"))
@@ -3620,6 +3648,33 @@ module Aws::QuickSight
     DecimalValueWhenUnsetConfiguration.add_member(:custom_value, Shapes::ShapeRef.new(shape: SensitiveDouble, location_name: "CustomValue", metadata: {"box"=>true}))
     DecimalValueWhenUnsetConfiguration.struct_class = Types::DecimalValueWhenUnsetConfiguration
 
+    DefaultDateTimePickerControlOptions.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlDateTimePickerType, location_name: "Type"))
+    DefaultDateTimePickerControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: DateTimePickerControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultDateTimePickerControlOptions.struct_class = Types::DefaultDateTimePickerControlOptions
+
+    DefaultFilterControlConfiguration.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    DefaultFilterControlConfiguration.add_member(:control_options, Shapes::ShapeRef.new(shape: DefaultFilterControlOptions, required: true, location_name: "ControlOptions"))
+    DefaultFilterControlConfiguration.struct_class = Types::DefaultFilterControlConfiguration
+
+    DefaultFilterControlOptions.add_member(:default_date_time_picker_options, Shapes::ShapeRef.new(shape: DefaultDateTimePickerControlOptions, location_name: "DefaultDateTimePickerOptions"))
+    DefaultFilterControlOptions.add_member(:default_list_options, Shapes::ShapeRef.new(shape: DefaultFilterListControlOptions, location_name: "DefaultListOptions"))
+    DefaultFilterControlOptions.add_member(:default_dropdown_options, Shapes::ShapeRef.new(shape: DefaultFilterDropDownControlOptions, location_name: "DefaultDropdownOptions"))
+    DefaultFilterControlOptions.add_member(:default_text_field_options, Shapes::ShapeRef.new(shape: DefaultTextFieldControlOptions, location_name: "DefaultTextFieldOptions"))
+    DefaultFilterControlOptions.add_member(:default_text_area_options, Shapes::ShapeRef.new(shape: DefaultTextAreaControlOptions, location_name: "DefaultTextAreaOptions"))
+    DefaultFilterControlOptions.add_member(:default_slider_options, Shapes::ShapeRef.new(shape: DefaultSliderControlOptions, location_name: "DefaultSliderOptions"))
+    DefaultFilterControlOptions.add_member(:default_relative_date_time_options, Shapes::ShapeRef.new(shape: DefaultRelativeDateTimeControlOptions, location_name: "DefaultRelativeDateTimeOptions"))
+    DefaultFilterControlOptions.struct_class = Types::DefaultFilterControlOptions
+
+    DefaultFilterDropDownControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: DropDownControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultFilterDropDownControlOptions.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
+    DefaultFilterDropDownControlOptions.add_member(:selectable_values, Shapes::ShapeRef.new(shape: FilterSelectableValues, location_name: "SelectableValues"))
+    DefaultFilterDropDownControlOptions.struct_class = Types::DefaultFilterDropDownControlOptions
+
+    DefaultFilterListControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: ListControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultFilterListControlOptions.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
+    DefaultFilterListControlOptions.add_member(:selectable_values, Shapes::ShapeRef.new(shape: FilterSelectableValues, location_name: "SelectableValues"))
+    DefaultFilterListControlOptions.struct_class = Types::DefaultFilterListControlOptions
+
     DefaultFormatting.add_member(:display_format, Shapes::ShapeRef.new(shape: DisplayFormat, location_name: "DisplayFormat"))
     DefaultFormatting.add_member(:display_format_options, Shapes::ShapeRef.new(shape: DisplayFormatOptions, location_name: "DisplayFormatOptions"))
     DefaultFormatting.struct_class = Types::DefaultFormatting
@@ -3642,8 +3697,25 @@ module Aws::QuickSight
     DefaultPaginatedLayoutConfiguration.add_member(:section_based, Shapes::ShapeRef.new(shape: DefaultSectionBasedLayoutConfiguration, location_name: "SectionBased"))
     DefaultPaginatedLayoutConfiguration.struct_class = Types::DefaultPaginatedLayoutConfiguration
 
+    DefaultRelativeDateTimeControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: RelativeDateTimeControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultRelativeDateTimeControlOptions.struct_class = Types::DefaultRelativeDateTimeControlOptions
+
     DefaultSectionBasedLayoutConfiguration.add_member(:canvas_size_options, Shapes::ShapeRef.new(shape: SectionBasedLayoutCanvasSizeOptions, required: true, location_name: "CanvasSizeOptions"))
     DefaultSectionBasedLayoutConfiguration.struct_class = Types::DefaultSectionBasedLayoutConfiguration
+
+    DefaultSliderControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: SliderControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultSliderControlOptions.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlSliderType, location_name: "Type"))
+    DefaultSliderControlOptions.add_member(:maximum_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "MaximumValue"))
+    DefaultSliderControlOptions.add_member(:minimum_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "MinimumValue"))
+    DefaultSliderControlOptions.add_member(:step_size, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "StepSize"))
+    DefaultSliderControlOptions.struct_class = Types::DefaultSliderControlOptions
+
+    DefaultTextAreaControlOptions.add_member(:delimiter, Shapes::ShapeRef.new(shape: TextAreaControlDelimiter, location_name: "Delimiter"))
+    DefaultTextAreaControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: TextAreaControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultTextAreaControlOptions.struct_class = Types::DefaultTextAreaControlOptions
+
+    DefaultTextFieldControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: TextFieldControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultTextFieldControlOptions.struct_class = Types::DefaultTextFieldControlOptions
 
     DeleteAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
@@ -4010,6 +4082,7 @@ module Aws::QuickSight
     DescribeAssetBundleImportJobResponse.add_member(:override_permissions, Shapes::ShapeRef.new(shape: AssetBundleImportJobOverridePermissions, location_name: "OverridePermissions"))
     DescribeAssetBundleImportJobResponse.add_member(:override_tags, Shapes::ShapeRef.new(shape: AssetBundleImportJobOverrideTags, location_name: "OverrideTags"))
     DescribeAssetBundleImportJobResponse.add_member(:override_validation_strategy, Shapes::ShapeRef.new(shape: AssetBundleImportJobOverrideValidationStrategy, location_name: "OverrideValidationStrategy"))
+    DescribeAssetBundleImportJobResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: AssetBundleImportJobWarningList, location_name: "Warnings"))
     DescribeAssetBundleImportJobResponse.struct_class = Types::DescribeAssetBundleImportJobResponse
 
     DescribeDashboardDefinitionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -4219,6 +4292,8 @@ module Aws::QuickSight
 
     DescribeIpRestrictionResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
     DescribeIpRestrictionResponse.add_member(:ip_restriction_rule_map, Shapes::ShapeRef.new(shape: IpRestrictionRuleMap, location_name: "IpRestrictionRuleMap"))
+    DescribeIpRestrictionResponse.add_member(:vpc_id_restriction_rule_map, Shapes::ShapeRef.new(shape: VpcIdRestrictionRuleMap, location_name: "VpcIdRestrictionRuleMap"))
+    DescribeIpRestrictionResponse.add_member(:vpc_endpoint_id_restriction_rule_map, Shapes::ShapeRef.new(shape: VpcEndpointIdRestrictionRuleMap, location_name: "VpcEndpointIdRestrictionRuleMap"))
     DescribeIpRestrictionResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Enabled"))
     DescribeIpRestrictionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeIpRestrictionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -4531,6 +4606,7 @@ module Aws::QuickSight
     FieldTooltipItem.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
     FieldTooltipItem.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
     FieldTooltipItem.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    FieldTooltipItem.add_member(:tooltip_target, Shapes::ShapeRef.new(shape: TooltipTarget, location_name: "TooltipTarget"))
     FieldTooltipItem.struct_class = Types::FieldTooltipItem
 
     FilledMapAggregatedFieldWells.add_member(:geospatial, Shapes::ShapeRef.new(shape: FilledMapDimensionFieldList, location_name: "Geospatial"))
@@ -4593,9 +4669,15 @@ module Aws::QuickSight
     FilterControl.add_member(:text_area, Shapes::ShapeRef.new(shape: FilterTextAreaControl, location_name: "TextArea"))
     FilterControl.add_member(:slider, Shapes::ShapeRef.new(shape: FilterSliderControl, location_name: "Slider"))
     FilterControl.add_member(:relative_date_time, Shapes::ShapeRef.new(shape: FilterRelativeDateTimeControl, location_name: "RelativeDateTime"))
+    FilterControl.add_member(:cross_sheet, Shapes::ShapeRef.new(shape: FilterCrossSheetControl, location_name: "CrossSheet"))
     FilterControl.struct_class = Types::FilterControl
 
     FilterControlList.member = Shapes::ShapeRef.new(shape: FilterControl)
+
+    FilterCrossSheetControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
+    FilterCrossSheetControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
+    FilterCrossSheetControl.add_member(:cascading_control_configuration, Shapes::ShapeRef.new(shape: CascadingControlConfiguration, location_name: "CascadingControlConfiguration"))
+    FilterCrossSheetControl.struct_class = Types::FilterCrossSheetControl
 
     FilterDateTimePickerControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
     FilterDateTimePickerControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
@@ -5989,6 +6071,7 @@ module Aws::QuickSight
     NumericEqualityFilter.add_member(:aggregation_function, Shapes::ShapeRef.new(shape: AggregationFunction, location_name: "AggregationFunction"))
     NumericEqualityFilter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
     NumericEqualityFilter.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
+    NumericEqualityFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
     NumericEqualityFilter.struct_class = Types::NumericEqualityFilter
 
     NumericFormatConfiguration.add_member(:number_display_format_configuration, Shapes::ShapeRef.new(shape: NumberDisplayFormatConfiguration, location_name: "NumberDisplayFormatConfiguration"))
@@ -6005,6 +6088,7 @@ module Aws::QuickSight
     NumericRangeFilter.add_member(:select_all_options, Shapes::ShapeRef.new(shape: NumericFilterSelectAllOptions, location_name: "SelectAllOptions"))
     NumericRangeFilter.add_member(:aggregation_function, Shapes::ShapeRef.new(shape: AggregationFunction, location_name: "AggregationFunction"))
     NumericRangeFilter.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
+    NumericRangeFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
     NumericRangeFilter.struct_class = Types::NumericRangeFilter
 
     NumericRangeFilterValue.add_member(:static_value, Shapes::ShapeRef.new(shape: Double, location_name: "StaticValue", metadata: {"box"=>true}))
@@ -6607,6 +6691,7 @@ module Aws::QuickSight
     RelativeDatesFilter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
     RelativeDatesFilter.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
     RelativeDatesFilter.add_member(:exclude_period_configuration, Shapes::ShapeRef.new(shape: ExcludePeriodConfiguration, location_name: "ExcludePeriodConfiguration"))
+    RelativeDatesFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
     RelativeDatesFilter.struct_class = Types::RelativeDatesFilter
 
     RenameColumnOperation.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "ColumnName"))
@@ -7588,6 +7673,7 @@ module Aws::QuickSight
     TimeEqualityFilter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
     TimeEqualityFilter.add_member(:time_granularity, Shapes::ShapeRef.new(shape: TimeGranularity, location_name: "TimeGranularity"))
     TimeEqualityFilter.add_member(:rolling_date, Shapes::ShapeRef.new(shape: RollingDateConfiguration, location_name: "RollingDate"))
+    TimeEqualityFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
     TimeEqualityFilter.struct_class = Types::TimeEqualityFilter
 
     TimeRangeDrillDownFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
@@ -7605,6 +7691,7 @@ module Aws::QuickSight
     TimeRangeFilter.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
     TimeRangeFilter.add_member(:exclude_period_configuration, Shapes::ShapeRef.new(shape: ExcludePeriodConfiguration, location_name: "ExcludePeriodConfiguration"))
     TimeRangeFilter.add_member(:time_granularity, Shapes::ShapeRef.new(shape: TimeGranularity, location_name: "TimeGranularity"))
+    TimeRangeFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
     TimeRangeFilter.struct_class = Types::TimeRangeFilter
 
     TimeRangeFilterValue.add_member(:static_value, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StaticValue"))
@@ -7629,6 +7716,7 @@ module Aws::QuickSight
     TopBottomFilter.add_member(:aggregation_sort_configurations, Shapes::ShapeRef.new(shape: AggregationSortConfigurationList, required: true, location_name: "AggregationSortConfigurations"))
     TopBottomFilter.add_member(:time_granularity, Shapes::ShapeRef.new(shape: TimeGranularity, location_name: "TimeGranularity"))
     TopBottomFilter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
+    TopBottomFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
     TopBottomFilter.struct_class = Types::TopBottomFilter
 
     TopBottomMoversComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
@@ -8161,6 +8249,8 @@ module Aws::QuickSight
 
     UpdateIpRestrictionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateIpRestrictionRequest.add_member(:ip_restriction_rule_map, Shapes::ShapeRef.new(shape: IpRestrictionRuleMap, location_name: "IpRestrictionRuleMap"))
+    UpdateIpRestrictionRequest.add_member(:vpc_id_restriction_rule_map, Shapes::ShapeRef.new(shape: VpcIdRestrictionRuleMap, location_name: "VpcIdRestrictionRuleMap"))
+    UpdateIpRestrictionRequest.add_member(:vpc_endpoint_id_restriction_rule_map, Shapes::ShapeRef.new(shape: VpcEndpointIdRestrictionRuleMap, location_name: "VpcEndpointIdRestrictionRuleMap"))
     UpdateIpRestrictionRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Enabled"))
     UpdateIpRestrictionRequest.struct_class = Types::UpdateIpRestrictionRequest
 
@@ -8481,6 +8571,12 @@ module Aws::QuickSight
 
     VpcConnectionProperties.add_member(:vpc_connection_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "VpcConnectionArn"))
     VpcConnectionProperties.struct_class = Types::VpcConnectionProperties
+
+    VpcEndpointIdRestrictionRuleMap.key = Shapes::ShapeRef.new(shape: VpcEndpointId)
+    VpcEndpointIdRestrictionRuleMap.value = Shapes::ShapeRef.new(shape: VpcEndpointIdRestrictionRuleDescription)
+
+    VpcIdRestrictionRuleMap.key = Shapes::ShapeRef.new(shape: VpcId)
+    VpcIdRestrictionRuleMap.value = Shapes::ShapeRef.new(shape: VpcIdRestrictionRuleDescription)
 
     WaterfallChartAggregatedFieldWells.add_member(:categories, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "Categories"))
     WaterfallChartAggregatedFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: MeasureFieldList, location_name: "Values"))

@@ -100,7 +100,8 @@ module Aws
                                connect_source_phone_number: ::String?,
                                connect_queue_id: ::String?,
                                answer_machine_detection_config: {
-                                 enable_answer_machine_detection: bool
+                                 enable_answer_machine_detection: bool,
+                                 await_answer_machine_prompt: bool?
                                }?
                              },
                              ?tags: Hash[::String, ::String]
@@ -308,7 +309,8 @@ module Aws
                                                   ?connect_contact_flow_id: ::String,
                                                   ?connect_source_phone_number: ::String,
                                                   ?answer_machine_detection_config: {
-                                                    enable_answer_machine_detection: bool
+                                                    enable_answer_machine_detection: bool,
+                                                    await_answer_machine_prompt: bool?
                                                   }
                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

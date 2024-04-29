@@ -50,9 +50,9 @@ module Aws::Keyspaces
     # To turn on auto scaling for a table in `throughputMode:PROVISIONED`,
     # you must specify the following parameters.
     #
-    # Configure the minimum and maximum units for write and read capacity.
-    # The auto scaling policy ensures that capacity never goes below the
-    # minimum or above the maximum range.
+    # Configure the minimum and maximum capacity units. The auto scaling
+    # policy ensures that capacity never goes below the minimum or above the
+    # maximum range.
     #
     # * `minimumUnits`: The minimum level of throughput the table should
     #   always be ready to support. The value must be between 1 and the max
@@ -63,8 +63,8 @@ module Aws::Keyspaces
     #   throughput per second quota for your account (40,000 by default).
     #
     # * `scalingPolicy`: Amazon Keyspaces supports the `target tracking`
-    #   scaling policy. The auto scaling target is the provisioned read and
-    #   write capacity of the table.
+    #   scaling policy. The auto scaling target is the provisioned capacity
+    #   of the table.
     #
     #   * `targetTrackingScalingPolicyConfiguration`: To define the target
     #     tracking policy, you must define the target value.
@@ -135,8 +135,8 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # The optional auto scaling settings for read and write capacity of a
-    # table in provisioned capacity mode.
+    # The optional auto scaling capacity settings for a table in provisioned
+    # capacity mode.
     #
     # @!attribute [rw] write_capacity_auto_scaling
     #   The auto scaling settings for the table's write capacity.

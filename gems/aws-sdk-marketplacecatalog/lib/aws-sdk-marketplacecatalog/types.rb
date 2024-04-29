@@ -1518,6 +1518,15 @@ module Aws::MarketplaceCatalog
     #   Allows filtering on the `ProductId` of an offer.
     #   @return [Types::OfferProductIdFilter]
     #
+    # @!attribute [rw] resale_authorization_id
+    #   Allows filtering on the `ResaleAuthorizationId` of an offer.
+    #
+    #   <note markdown="1"> Not all offers have a `ResaleAuthorizationId`. The response will
+    #   only include offers for which you have permissions.
+    #
+    #    </note>
+    #   @return [Types::OfferResaleAuthorizationIdFilter]
+    #
     # @!attribute [rw] release_date
     #   Allows filtering on the `ReleaseDate` of an offer.
     #   @return [Types::OfferReleaseDateFilter]
@@ -1548,6 +1557,7 @@ module Aws::MarketplaceCatalog
       :entity_id,
       :name,
       :product_id,
+      :resale_authorization_id,
       :release_date,
       :availability_end_date,
       :buyer_accounts,
@@ -1662,6 +1672,26 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # Allows filtering on the `ResaleAuthorizationId` of an offer.
+    #
+    # <note markdown="1"> Not all offers have a `ResaleAuthorizationId`. The response will only
+    # include offers for which you have permissions.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `ResaleAuthorizationId` of an offer with
+    #   list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferResaleAuthorizationIdFilter AWS API Documentation
+    #
+    class OfferResaleAuthorizationIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Allows to sort offers.
     #
     # @!attribute [rw] sort_by
@@ -1705,6 +1735,10 @@ module Aws::MarketplaceCatalog
     #   The product ID of the offer.
     #   @return [String]
     #
+    # @!attribute [rw] resale_authorization_id
+    #   The ResaleAuthorizationId of the offer.
+    #   @return [String]
+    #
     # @!attribute [rw] release_date
     #   The release date of the offer.
     #   @return [String]
@@ -1730,6 +1764,7 @@ module Aws::MarketplaceCatalog
     class OfferSummary < Struct.new(
       :name,
       :product_id,
+      :resale_authorization_id,
       :release_date,
       :availability_end_date,
       :buyer_accounts,

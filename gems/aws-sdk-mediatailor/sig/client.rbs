@@ -99,6 +99,7 @@ module Aws
       interface _CreateChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
         def arn: () -> ::String
+        def audiences: () -> ::Array[::String]
         def channel_name: () -> ::String
         def channel_state: () -> ("RUNNING" | "STOPPED")
         def creation_time: () -> ::Time
@@ -112,6 +113,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#create_channel-instance_method
       def create_channel: (
+                            ?audiences: Array[::String],
                             channel_name: ::String,
                             ?filler_slate: {
                               source_location_name: ::String?,
@@ -203,6 +205,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateProgramResponse]
         def ad_breaks: () -> ::Array[Types::AdBreak]
         def arn: () -> ::String
+        def audience_media: () -> ::Array[Types::AudienceMedia]
         def channel_name: () -> ::String
         def clip_range: () -> Types::ClipRange
         def creation_time: () -> ::Time
@@ -224,7 +227,7 @@ module Aws
                                   },
                                 ]?,
                                 message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
-                                offset_millis: ::Integer?,
+                                offset_millis: ::Integer,
                                 slate: {
                                   source_location_name: ::String?,
                                   vod_source_name: ::String?
@@ -251,12 +254,67 @@ module Aws
                                 }?
                               },
                             ],
+                            ?audience_media: Array[
+                              {
+                                alternate_media: Array[
+                                  {
+                                    ad_breaks: Array[
+                                      {
+                                        ad_break_metadata: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
+                                        offset_millis: ::Integer,
+                                        slate: {
+                                          source_location_name: ::String?,
+                                          vod_source_name: ::String?
+                                        }?,
+                                        splice_insert_message: {
+                                          avail_num: ::Integer?,
+                                          avails_expected: ::Integer?,
+                                          splice_event_id: ::Integer?,
+                                          unique_program_id: ::Integer?
+                                        }?,
+                                        time_signal_message: {
+                                          segmentation_descriptors: Array[
+                                            {
+                                              segment_num: ::Integer?,
+                                              segmentation_event_id: ::Integer?,
+                                              segmentation_type_id: ::Integer?,
+                                              segmentation_upid: ::String?,
+                                              segmentation_upid_type: ::Integer?,
+                                              segments_expected: ::Integer?,
+                                              sub_segment_num: ::Integer?,
+                                              sub_segments_expected: ::Integer?
+                                            },
+                                          ]?
+                                        }?
+                                      },
+                                    ]?,
+                                    clip_range: {
+                                      end_offset_millis: ::Integer?,
+                                      start_offset_millis: ::Integer?
+                                    }?,
+                                    duration_millis: ::Integer?,
+                                    live_source_name: ::String?,
+                                    scheduled_start_time_millis: ::Integer?,
+                                    source_location_name: ::String?,
+                                    vod_source_name: ::String?
+                                  },
+                                ]?,
+                                audience: ::String?
+                              },
+                            ],
                             channel_name: ::String,
                             ?live_source_name: ::String,
                             program_name: ::String,
                             schedule_configuration: {
                               clip_range: {
-                                end_offset_millis: ::Integer
+                                end_offset_millis: ::Integer?,
+                                start_offset_millis: ::Integer?
                               }?,
                               transition: {
                                 duration_millis: ::Integer?,
@@ -414,6 +472,7 @@ module Aws
       interface _DescribeChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelResponse]
         def arn: () -> ::String
+        def audiences: () -> ::Array[::String]
         def channel_name: () -> ::String
         def channel_state: () -> ("RUNNING" | "STOPPED")
         def creation_time: () -> ::Time
@@ -453,6 +512,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProgramResponse]
         def ad_breaks: () -> ::Array[Types::AdBreak]
         def arn: () -> ::String
+        def audience_media: () -> ::Array[Types::AudienceMedia]
         def channel_name: () -> ::String
         def clip_range: () -> Types::ClipRange
         def creation_time: () -> ::Time
@@ -523,6 +583,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#get_channel_schedule-instance_method
       def get_channel_schedule: (
+                                  ?audience: ::String,
                                   channel_name: ::String,
                                   ?duration_minutes: ::String,
                                   ?max_results: ::Integer,
@@ -539,6 +600,7 @@ module Aws
         def configuration_aliases: () -> ::Hash[::String, ::Hash[::String, ::String]]
         def dash_configuration: () -> Types::DashConfiguration
         def hls_configuration: () -> Types::HlsConfiguration
+        def insertion_mode: () -> ("STITCHED_ONLY" | "PLAYER_SELECT")
         def live_pre_roll_configuration: () -> Types::LivePreRollConfiguration
         def log_configuration: () -> Types::LogConfiguration
         def manifest_processing_rules: () -> Types::ManifestProcessingRules
@@ -692,6 +754,7 @@ module Aws
         def configuration_aliases: () -> ::Hash[::String, ::Hash[::String, ::String]]
         def dash_configuration: () -> Types::DashConfiguration
         def hls_configuration: () -> Types::HlsConfiguration
+        def insertion_mode: () -> ("STITCHED_ONLY" | "PLAYER_SELECT")
         def live_pre_roll_configuration: () -> Types::LivePreRollConfiguration
         def log_configuration: () -> Types::LogConfiguration
         def manifest_processing_rules: () -> Types::ManifestProcessingRules
@@ -726,6 +789,7 @@ module Aws
                                           mpd_location: ::String?,
                                           origin_manifest_type: ("SINGLE_PERIOD" | "MULTI_PERIOD")?
                                         },
+                                        ?insertion_mode: ("STITCHED_ONLY" | "PLAYER_SELECT"),
                                         ?live_pre_roll_configuration: {
                                           ad_decision_server_url: ::String?,
                                           max_duration_seconds: ::Integer?
@@ -779,6 +843,7 @@ module Aws
       interface _UpdateChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelResponse]
         def arn: () -> ::String
+        def audiences: () -> ::Array[::String]
         def channel_name: () -> ::String
         def channel_state: () -> ("RUNNING" | "STOPPED")
         def creation_time: () -> ::Time
@@ -792,6 +857,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#update_channel-instance_method
       def update_channel: (
+                            ?audiences: Array[::String],
                             channel_name: ::String,
                             ?filler_slate: {
                               source_location_name: ::String?,
@@ -847,6 +913,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProgramResponse]
         def ad_breaks: () -> ::Array[Types::AdBreak]
         def arn: () -> ::String
+        def audience_media: () -> ::Array[Types::AudienceMedia]
         def channel_name: () -> ::String
         def clip_range: () -> Types::ClipRange
         def creation_time: () -> ::Time
@@ -868,7 +935,7 @@ module Aws
                                   },
                                 ]?,
                                 message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
-                                offset_millis: ::Integer?,
+                                offset_millis: ::Integer,
                                 slate: {
                                   source_location_name: ::String?,
                                   vod_source_name: ::String?
@@ -895,11 +962,66 @@ module Aws
                                 }?
                               },
                             ],
+                            ?audience_media: Array[
+                              {
+                                alternate_media: Array[
+                                  {
+                                    ad_breaks: Array[
+                                      {
+                                        ad_break_metadata: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
+                                        offset_millis: ::Integer,
+                                        slate: {
+                                          source_location_name: ::String?,
+                                          vod_source_name: ::String?
+                                        }?,
+                                        splice_insert_message: {
+                                          avail_num: ::Integer?,
+                                          avails_expected: ::Integer?,
+                                          splice_event_id: ::Integer?,
+                                          unique_program_id: ::Integer?
+                                        }?,
+                                        time_signal_message: {
+                                          segmentation_descriptors: Array[
+                                            {
+                                              segment_num: ::Integer?,
+                                              segmentation_event_id: ::Integer?,
+                                              segmentation_type_id: ::Integer?,
+                                              segmentation_upid: ::String?,
+                                              segmentation_upid_type: ::Integer?,
+                                              segments_expected: ::Integer?,
+                                              sub_segment_num: ::Integer?,
+                                              sub_segments_expected: ::Integer?
+                                            },
+                                          ]?
+                                        }?
+                                      },
+                                    ]?,
+                                    clip_range: {
+                                      end_offset_millis: ::Integer?,
+                                      start_offset_millis: ::Integer?
+                                    }?,
+                                    duration_millis: ::Integer?,
+                                    live_source_name: ::String?,
+                                    scheduled_start_time_millis: ::Integer?,
+                                    source_location_name: ::String?,
+                                    vod_source_name: ::String?
+                                  },
+                                ]?,
+                                audience: ::String?
+                              },
+                            ],
                             channel_name: ::String,
                             program_name: ::String,
                             schedule_configuration: {
                               clip_range: {
-                                end_offset_millis: ::Integer
+                                end_offset_millis: ::Integer?,
+                                start_offset_millis: ::Integer?
                               }?,
                               transition: {
                                 duration_millis: ::Integer?,

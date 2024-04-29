@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CloudWatchRUM
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CloudWatchRUM
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::CloudWatchRUM
     #   @option options [Aws::CloudWatchRUM::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CloudWatchRUM::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -397,21 +421,21 @@ module Aws::CloudWatchRUM
     # with CloudWatch RUM][1].
     #
     # In addition to these default metrics, you can choose to send extended
-    # metrics or custom metrics or both.
+    # metrics, custom metrics, or both.
     #
-    # * Extended metrics enable you to send metrics with additional
-    #   dimensions not included in the default metrics. You can also send
-    #   extended metrics to Evidently as well as CloudWatch. The valid
+    # * Extended metrics let you send metrics with additional dimensions
+    #   that aren't included in the default metrics. You can also send
+    #   extended metrics to both Evidently and CloudWatch. The valid
     #   dimension names for the additional dimensions for extended metrics
     #   are `BrowserName`, `CountryCode`, `DeviceType`, `FileType`,
     #   `OSName`, and `PageId`. For more information, see [ Extended metrics
     #   that you can send to CloudWatch and CloudWatch Evidently][2].
     #
     # * Custom metrics are metrics that you define. You can send custom
-    #   metrics to CloudWatch or to CloudWatch Evidently or to both. With
-    #   custom metrics, you can use any metric name and namespace, and to
-    #   derive the metrics you can use any custom events, built-in events,
-    #   custom attributes, or default attributes.
+    #   metrics to CloudWatch. CloudWatch Evidently, or both. With custom
+    #   metrics, you can use any metric name and namespace. To derive the
+    #   metrics, you can use any custom events, built-in events, custom
+    #   attributes, or default attributes.
     #
     #   You can't send custom metrics to the `AWS/RUM` namespace. You must
     #   send custom metrics to a custom namespace that you define. The
@@ -453,9 +477,9 @@ module Aws::CloudWatchRUM
     # @option params [required, String] :destination
     #   The destination to send the metrics to. Valid values are `CloudWatch`
     #   and `Evidently`. If you specify `Evidently`, you must also specify the
-    #   ARN of the CloudWatchEvidently experiment that will receive the
-    #   metrics and an IAM role that has permission to write to the
-    #   experiment.
+    #   Amazon Resource Name (ARN) of the CloudWatchEvidently experiment that
+    #   will receive the metrics and an IAM role that has permission to write
+    #   to the experiment.
     #
     # @option params [String] :destination_arn
     #   This parameter is required if `Destination` is `Evidently`. If
@@ -694,7 +718,7 @@ module Aws::CloudWatchRUM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html
     #
     # @option params [Types::CustomEvents] :custom_events
     #   Specifies whether this app monitor allows the web client to define and
@@ -1177,11 +1201,21 @@ module Aws::CloudWatchRUM
     #
     # @option params [String] :iam_role_arn
     #   This parameter is required if `Destination` is `Evidently`. If
-    #   `Destination` is `CloudWatch`, do not use this parameter.
+    #   `Destination` is `CloudWatch`, don't use this parameter.
     #
     #   This parameter specifies the ARN of an IAM role that RUM will assume
     #   to write to the Evidently experiment that you are sending metrics to.
     #   This role must have permission to write to that experiment.
+    #
+    #   If you specify this parameter, you must be signed on to a role that
+    #   has [PassRole][1] permissions attached to it, to allow the role to be
+    #   passed. The [ CloudWatchAmazonCloudWatchRUMFullAccess][2] policy
+    #   doesn't include `PassRole` permissions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html#managed-policies-cloudwatch-RUM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1314,7 +1348,7 @@ module Aws::CloudWatchRUM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html
     #
     # @option params [Types::CustomEvents] :custom_events
     #   Specifies whether this app monitor allows the web client to define and
@@ -1454,7 +1488,7 @@ module Aws::CloudWatchRUM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchrum'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

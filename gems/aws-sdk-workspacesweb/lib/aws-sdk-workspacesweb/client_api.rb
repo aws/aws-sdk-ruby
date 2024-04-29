@@ -128,6 +128,7 @@ module Aws::WorkSpacesWeb
     IdentityProviderSummary = Shapes::StructureShape.new(name: 'IdentityProviderSummary')
     IdentityProviderType = Shapes::StringShape.new(name: 'IdentityProviderType')
     IdleDisconnectTimeoutInMinutes = Shapes::IntegerShape.new(name: 'IdleDisconnectTimeoutInMinutes')
+    InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IpAccessSettings = Shapes::StructureShape.new(name: 'IpAccessSettings')
     IpAccessSettingsList = Shapes::ListShape.new(name: 'IpAccessSettingsList')
@@ -156,6 +157,7 @@ module Aws::WorkSpacesWeb
     ListUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'ListUserAccessLoggingSettingsResponse')
     ListUserSettingsRequest = Shapes::StructureShape.new(name: 'ListUserSettingsRequest')
     ListUserSettingsResponse = Shapes::StructureShape.new(name: 'ListUserSettingsResponse')
+    MaxConcurrentSessions = Shapes::IntegerShape.new(name: 'MaxConcurrentSessions')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NetworkSettings = Shapes::StructureShape.new(name: 'NetworkSettings')
     NetworkSettingsList = Shapes::ListShape.new(name: 'NetworkSettingsList')
@@ -280,9 +282,11 @@ module Aws::WorkSpacesWeb
     AssociateUserSettingsResponse.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userSettingsArn"))
     AssociateUserSettingsResponse.struct_class = Types::AssociateUserSettingsResponse
 
+    BrowserSettings.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     BrowserSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
     BrowserSettings.add_member(:browser_policy, Shapes::ShapeRef.new(shape: BrowserPolicy, location_name: "browserPolicy"))
     BrowserSettings.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "browserSettingsArn"))
+    BrowserSettings.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     BrowserSettings.struct_class = Types::BrowserSettings
 
     BrowserSettingsList.member = Shapes::ShapeRef.new(shape: BrowserSettingsSummary)
@@ -374,6 +378,8 @@ module Aws::WorkSpacesWeb
     CreatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreatePortalRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     CreatePortalRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    CreatePortalRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+    CreatePortalRequest.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: MaxConcurrentSessions, location_name: "maxConcurrentSessions"))
     CreatePortalRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreatePortalRequest.struct_class = Types::CreatePortalRequest
 
@@ -570,8 +576,10 @@ module Aws::WorkSpacesWeb
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    IpAccessSettings.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     IpAccessSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
     IpAccessSettings.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
+    IpAccessSettings.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     IpAccessSettings.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     IpAccessSettings.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     IpAccessSettings.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ipAccessSettingsArn"))
@@ -686,12 +694,16 @@ module Aws::WorkSpacesWeb
     NetworkSettingsSummary.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     NetworkSettingsSummary.struct_class = Types::NetworkSettingsSummary
 
+    Portal.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     Portal.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     Portal.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "browserSettingsArn"))
     Portal.add_member(:browser_type, Shapes::ShapeRef.new(shape: BrowserType, location_name: "browserType"))
     Portal.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
+    Portal.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     Portal.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    Portal.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     Portal.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ipAccessSettingsArn"))
+    Portal.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: MaxConcurrentSessions, location_name: "maxConcurrentSessions"))
     Portal.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "networkSettingsArn"))
     Portal.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
     Portal.add_member(:portal_endpoint, Shapes::ShapeRef.new(shape: PortalEndpoint, location_name: "portalEndpoint"))
@@ -710,7 +722,9 @@ module Aws::WorkSpacesWeb
     PortalSummary.add_member(:browser_type, Shapes::ShapeRef.new(shape: BrowserType, location_name: "browserType"))
     PortalSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
     PortalSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    PortalSummary.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     PortalSummary.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ipAccessSettingsArn"))
+    PortalSummary.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: MaxConcurrentSessions, location_name: "maxConcurrentSessions"))
     PortalSummary.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "networkSettingsArn"))
     PortalSummary.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
     PortalSummary.add_member(:portal_endpoint, Shapes::ShapeRef.new(shape: PortalEndpoint, location_name: "portalEndpoint"))
@@ -817,6 +831,8 @@ module Aws::WorkSpacesWeb
 
     UpdatePortalRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     UpdatePortalRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    UpdatePortalRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+    UpdatePortalRequest.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: MaxConcurrentSessions, location_name: "maxConcurrentSessions"))
     UpdatePortalRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
     UpdatePortalRequest.struct_class = Types::UpdatePortalRequest
 
@@ -866,9 +882,11 @@ module Aws::WorkSpacesWeb
     UserAccessLoggingSettingsSummary.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userAccessLoggingSettingsArn"))
     UserAccessLoggingSettingsSummary.struct_class = Types::UserAccessLoggingSettingsSummary
 
+    UserSettings.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     UserSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
     UserSettings.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UserSettings.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
+    UserSettings.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     UserSettings.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
     UserSettings.add_member(:download_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "downloadAllowed"))
     UserSettings.add_member(:idle_disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleDisconnectTimeoutInMinutes, location_name: "idleDisconnectTimeoutInMinutes"))
@@ -1695,6 +1713,7 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)

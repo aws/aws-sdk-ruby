@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.145.0 (2024-04-02)
+------------------
+
+* Feature - Documentation only update for Amazon ECS.
+
+1.144.0 (2024-03-26)
+------------------
+
+* Feature - This is a documentation update for Amazon ECS.
+
+1.143.0 (2024-03-25)
+------------------
+
+* Feature - Documentation only update for Amazon ECS.
+
 1.142.0 (2024-02-09)
 ------------------
 

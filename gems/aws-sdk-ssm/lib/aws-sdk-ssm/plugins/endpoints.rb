@@ -148,6 +148,8 @@ module Aws::SSM
             Aws::SSM::Endpoints::DescribeInstancePatchStatesForPatchGroup.build(context)
           when :describe_instance_patches
             Aws::SSM::Endpoints::DescribeInstancePatches.build(context)
+          when :describe_instance_properties
+            Aws::SSM::Endpoints::DescribeInstanceProperties.build(context)
           when :describe_inventory_deletions
             Aws::SSM::Endpoints::DescribeInventoryDeletions.build(context)
           when :describe_maintenance_window_execution_task_invocations

@@ -136,10 +136,10 @@ module Aws
                                         enabled: bool?,
                                         processors: Array[
                                           {
-                                            type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                             parameters: Array[
                                               {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                                 parameter_value: ::String
                                               },
                                             ]?
@@ -221,7 +221,9 @@ module Aws
                                           duration_in_seconds: ::Integer?
                                         }?,
                                         enabled: bool?
-                                      }?
+                                      }?,
+                                      file_extension: ::String?,
+                                      custom_time_zone: ::String?
                                     },
                                     ?redshift_destination_configuration: {
                                       role_arn: ::String,
@@ -262,10 +264,10 @@ module Aws
                                         enabled: bool?,
                                         processors: Array[
                                           {
-                                            type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                             parameters: Array[
                                               {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                                 parameter_value: ::String
                                               },
                                             ]?
@@ -342,10 +344,10 @@ module Aws
                                         enabled: bool?,
                                         processors: Array[
                                           {
-                                            type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                             parameters: Array[
                                               {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                                 parameter_value: ::String
                                               },
                                             ]?
@@ -407,10 +409,10 @@ module Aws
                                         enabled: bool?,
                                         processors: Array[
                                           {
-                                            type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                             parameters: Array[
                                               {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                                 parameter_value: ::String
                                               },
                                             ]?
@@ -466,10 +468,10 @@ module Aws
                                         enabled: bool?,
                                         processors: Array[
                                           {
-                                            type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                             parameters: Array[
                                               {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                                 parameter_value: ::String
                                               },
                                             ]?
@@ -514,10 +516,10 @@ module Aws
                                         enabled: bool?,
                                         processors: Array[
                                           {
-                                            type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                             parameters: Array[
                                               {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                                 parameter_value: ::String
                                               },
                                             ]?
@@ -596,10 +598,10 @@ module Aws
                                         enabled: bool?,
                                         processors: Array[
                                           {
-                                            type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                             parameters: Array[
                                               {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                                 parameter_value: ::String
                                               },
                                             ]?
@@ -652,10 +654,10 @@ module Aws
                                         enabled: bool?,
                                         processors: Array[
                                           {
-                                            type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                             parameters: Array[
                                               {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                                 parameter_value: ::String
                                               },
                                             ]?
@@ -874,10 +876,10 @@ module Aws
                                     enabled: bool?,
                                     processors: Array[
                                       {
-                                        type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                         parameters: Array[
                                           {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                             parameter_value: ::String
                                           },
                                         ]?
@@ -959,7 +961,9 @@ module Aws
                                       duration_in_seconds: ::Integer?
                                     }?,
                                     enabled: bool?
-                                  }?
+                                  }?,
+                                  file_extension: ::String?,
+                                  custom_time_zone: ::String?
                                 },
                                 ?redshift_destination_update: {
                                   role_arn: ::String?,
@@ -1000,10 +1004,10 @@ module Aws
                                     enabled: bool?,
                                     processors: Array[
                                       {
-                                        type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                         parameters: Array[
                                           {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                             parameter_value: ::String
                                           },
                                         ]?
@@ -1079,10 +1083,10 @@ module Aws
                                     enabled: bool?,
                                     processors: Array[
                                       {
-                                        type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                         parameters: Array[
                                           {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                             parameter_value: ::String
                                           },
                                         ]?
@@ -1138,10 +1142,10 @@ module Aws
                                     enabled: bool?,
                                     processors: Array[
                                       {
-                                        type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                         parameters: Array[
                                           {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                             parameter_value: ::String
                                           },
                                         ]?
@@ -1192,10 +1196,10 @@ module Aws
                                     enabled: bool?,
                                     processors: Array[
                                       {
-                                        type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                         parameters: Array[
                                           {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                             parameter_value: ::String
                                           },
                                         ]?
@@ -1240,10 +1244,10 @@ module Aws
                                     enabled: bool?,
                                     processors: Array[
                                       {
-                                        type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                         parameters: Array[
                                           {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                             parameter_value: ::String
                                           },
                                         ]?
@@ -1315,10 +1319,10 @@ module Aws
                                     enabled: bool?,
                                     processors: Array[
                                       {
-                                        type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                         parameters: Array[
                                           {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                             parameter_value: ::String
                                           },
                                         ]?
@@ -1355,10 +1359,10 @@ module Aws
                                     enabled: bool?,
                                     processors: Array[
                                       {
-                                        type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
                                         parameters: Array[
                                           {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat"),
+                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
                                             parameter_value: ::String
                                           },
                                         ]?

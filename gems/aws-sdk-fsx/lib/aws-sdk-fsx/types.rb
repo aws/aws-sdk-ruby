@@ -1041,8 +1041,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Used to specify the configuration options for a volume's storage
-    # aggregate or aggregates.
+    # Used to specify the configuration options for an FSx for ONTAP
+    # volume's storage aggregate or aggregates.
     #
     # @!attribute [rw] aggregates
     #   Used to specify the names of aggregates on which the volume will be
@@ -2028,6 +2028,15 @@ module Aws::FSx
     #   You should specify all virtual private cloud (VPC) route tables
     #   associated with the subnets in which your clients are located. By
     #   default, Amazon FSx selects your VPC's default route table.
+    #
+    #   <note markdown="1"> Amazon FSx manages these route tables for Multi-AZ file systems
+    #   using tag-based authentication. These route tables are tagged with
+    #   `Key: AmazonFSx; Value: ManagedByAmazonFSx`. When creating FSx for
+    #   ONTAP Multi-AZ file systems using CloudFormation we recommend that
+    #   you add the `Key: AmazonFSx; Value: ManagedByAmazonFSx` tag
+    #   manually.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] throughput_capacity
@@ -2067,16 +2076,18 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] ha_pairs
-    #   Specifies how many high-availability (HA) pairs the file system will
-    #   have. The default value is 1. The value of this property affects the
-    #   values of `StorageCapacity`, `Iops`, and `ThroughputCapacity`. For
-    #   more information, see [High-availability (HA) pairs][1] in the FSx
-    #   for ONTAP user guide.
+    #   Specifies how many high-availability (HA) pairs of file servers will
+    #   power your file system. Scale-up file systems are powered by 1 HA
+    #   pair. The default value is 1. FSx for ONTAP scale-out file systems
+    #   are powered by up to 12 HA pairs. The value of this property affects
+    #   the values of `StorageCapacity`, `Iops`, and `ThroughputCapacity`.
+    #   For more information, see [High-availability (HA) pairs][1] in the
+    #   FSx for ONTAP user guide.
     #
     #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
     #   the following conditions:
     #
-    #   * The value of `HAPairs` is less than 1 or greater than 6.
+    #   * The value of `HAPairs` is less than 1 or greater than 12.
     #
     #   * The value of `HAPairs` is greater than 1 and the value of
     #     `DeploymentType` is `SINGLE_AZ_1` or `MULTI_AZ_1`.
@@ -2090,16 +2101,17 @@ module Aws::FSx
     #   Use to choose the throughput capacity per HA pair, rather than the
     #   total throughput for the file system.
     #
-    #   This field and `ThroughputCapacity` cannot be defined in the same
-    #   API call, but one is required.
+    #   You can define either the `ThroughputCapacityPerHAPair` or the
+    #   `ThroughputCapacity` when creating a file system, but not both.
     #
-    #   This field and `ThroughputCapacity` are the same for file systems
-    #   with one HA pair.
+    #   This field and `ThroughputCapacity` are the same for scale-up file
+    #   systems powered by one HA pair.
     #
-    #   * For `SINGLE_AZ_1` and `MULTI_AZ_1`, valid values are 128, 256,
-    #     512, 1024, 2048, or 4096 MBps.
+    #   * For `SINGLE_AZ_1` and `MULTI_AZ_1` file systems, valid values are
+    #     128, 256, 512, 1024, 2048, or 4096 MBps.
     #
-    #   * For `SINGLE_AZ_2`, valid values are 3072 or 6144 MBps.
+    #   * For `SINGLE_AZ_2` file systems, valid values are 3072 or 6144
+    #     MBps.
     #
     #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
     #   the following conditions:
@@ -2110,7 +2122,7 @@ module Aws::FSx
     #
     #   * The value of deployment type is `SINGLE_AZ_2` and
     #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is a valid HA
-    #     pair (a value between 2 and 6).
+    #     pair (a value between 2 and 12).
     #
     #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
     #   @return [Integer]
@@ -2330,8 +2342,8 @@ module Aws::FSx
     #
     #   **FSx for ONTAP file systems** - The amount of storage capacity that
     #   you can configure depends on the value of the `HAPairs` property.
-    #   The minimum value is calculated as 1,024 * `HAPairs` and the maxium
-    #   is calculated as 524,288 * `HAPairs`..
+    #   The minimum value is calculated as 1,024 * `HAPairs` and the
+    #   maximum is calculated as 524,288 * `HAPairs`.
     #
     #   **FSx for OpenZFS file systems** - The amount of storage capacity
     #   that you can configure is from 64 GiB up to 524,288 GiB (512 TiB).
@@ -2393,6 +2405,9 @@ module Aws::FSx
     #   A list of IDs specifying the security groups to apply to all network
     #   interfaces created for file system access. This list isn't returned
     #   in later requests to describe the file system.
+    #
+    #   You must specify a security group if you are creating a Multi-AZ FSx
+    #   for ONTAP file system in a VPC subnet that has been shared with you.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -2700,23 +2715,32 @@ module Aws::FSx
     #     the majority of users are SMB clients, and an application
     #     accessing the data uses a Windows user as the service account.
     #
-    #   * `MIXED` if the file system is managed by both UNIX and Windows
-    #     administrators and users consist of both NFS and SMB clients.
+    #   * `MIXED` This is an advanced setting. For more information, see the
+    #     topic [What the security styles and their effects are][2] in the
+    #     NetApp Documentation Center.
+    #
+    #   For more information, see [Volume security style][3] in the FSx for
+    #   ONTAP User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-security-style
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style
+    #   [2]: https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html
+    #   [3]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html
     #   @return [String]
     #
     # @!attribute [rw] size_in_megabytes
-    #   Specifies the size of the volume, in megabytes (MB), that you are
-    #   creating.
+    #   Use `SizeInBytes` instead. Specifies the size of the volume, in
+    #   megabytes (MB), that you are creating.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_efficiency_enabled
     #   Set to true to enable deduplication, compression, and compaction
     #   storage efficiency features on the volume, or set to false to
-    #   disable them. This parameter is required.
+    #   disable them.
+    #
+    #   `StorageEfficiencyEnabled` is required when creating a `RW` volume
+    #   (`OntapVolumeType` set to `RW`).
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_virtual_machine_id
@@ -2765,8 +2789,8 @@ module Aws::FSx
     #     read-only and can be used as the destination of a NetApp
     #     SnapMirror relationship.
     #
-    #   For more information, see [Volume types][1] in the *Amazon FSx for
-    #   NetApp ONTAP User Guide*.
+    #   For more information, see [Volume types][1] in the Amazon FSx for
+    #   NetApp ONTAP User Guide.
     #
     #
     #
@@ -2793,8 +2817,8 @@ module Aws::FSx
     #   You can also provide the name of a custom policy that you created
     #   with the ONTAP CLI or REST API.
     #
-    #   For more information, see [Snapshot policies][1] in the *Amazon FSx
-    #   for NetApp ONTAP User Guide*.
+    #   For more information, see [Snapshot policies][1] in the Amazon FSx
+    #   for NetApp ONTAP User Guide.
     #
     #
     #
@@ -2817,13 +2841,14 @@ module Aws::FSx
     #   @return [Types::CreateSnaplockConfiguration]
     #
     # @!attribute [rw] volume_style
-    #   Use to specify the style of an ONTAP volume. For more information
-    #   about FlexVols and FlexGroups, see [Volume types][1] in Amazon FSx
-    #   for NetApp ONTAP User Guide.
+    #   Use to specify the style of an ONTAP volume. FSx for ONTAP offers
+    #   two styles of volumes that you can use for different purposes,
+    #   FlexVol and FlexGroup volumes. For more information, see [Volume
+    #   styles][1] in the Amazon FSx for NetApp ONTAP User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-styles.html
     #   @return [String]
     #
     # @!attribute [rw] aggregate_configuration
@@ -2832,7 +2857,7 @@ module Aws::FSx
     #   @return [Types::CreateAggregateConfiguration]
     #
     # @!attribute [rw] size_in_bytes
-    #   The configured size of the volume, in bytes.
+    #   Specifies the configured size of the volume, in bytes.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOntapVolumeConfiguration AWS API Documentation
@@ -3013,8 +3038,7 @@ module Aws::FSx
     #   @return [Array<Types::OpenZFSNfsExport>]
     #
     # @!attribute [rw] user_and_group_quotas
-    #   An object specifying how much storage users or groups can use on the
-    #   volume.
+    #   Configures how much storage users and groups can use on the volume.
     #   @return [Array<Types::OpenZFSUserOrGroupQuota>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOpenZFSVolumeConfiguration AWS API Documentation
@@ -3174,7 +3198,7 @@ module Aws::FSx
     #   Describes the self-managed Microsoft Active Directory to which you
     #   want to join the SVM. Joining an Active Directory provides user
     #   authentication and access control for SMB clients, including
-    #   Microsoft Windows and macOS client accessing the file system.
+    #   Microsoft Windows and macOS clients accessing the file system.
     #   @return [Types::CreateSvmActiveDirectoryConfiguration]
     #
     # @!attribute [rw] client_request_token
@@ -3213,12 +3237,15 @@ module Aws::FSx
     #     majority of users are NFS clients, and an application accessing
     #     the data uses a UNIX user as the service account.
     #
-    #   * `NTFS` if the file system is managed by a Windows administrator,
-    #     the majority of users are SMB clients, and an application
-    #     accessing the data uses a Windows user as the service account.
+    #   * `NTFS` if the file system is managed by a Microsoft Windows
+    #     administrator, the majority of users are SMB clients, and an
+    #     application accessing the data uses a Microsoft Windows user as
+    #     the service account.
     #
-    #   * `MIXED` if the file system is managed by both UNIX and Windows
-    #     administrators and users consist of both NFS and SMB clients.
+    #   * `MIXED` This is an advanced setting. For more information, see
+    #     [Volume security
+    #     style](fsx/latest/ONTAPGuide/volume-security-style.html) in the
+    #     Amazon FSx for NetApp ONTAP User Guide.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachineRequest AWS API Documentation
@@ -3250,7 +3277,7 @@ module Aws::FSx
 
     # The configuration that Amazon FSx uses to join the ONTAP storage
     # virtual machine (SVM) to your self-managed (including on-premises)
-    # Microsoft Active Directory (AD) directory.
+    # Microsoft Active Directory directory.
     #
     # @!attribute [rw] net_bios_name
     #   The NetBIOS name of the Active Directory computer object that will
@@ -5010,9 +5037,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] include_shared
-    #   Set to `false` (default) if you want to only see the snapshots in
-    #   your Amazon Web Services account. Set to `true` if you want to see
-    #   the snapshots in your account and the ones shared with you from
+    #   Set to `false` (default) if you want to only see the snapshots owned
+    #   by your Amazon Web Services account. Set to `true` if you want to
+    #   see the snapshots in your account and the ones shared with you from
     #   another account.
     #   @return [Boolean]
     #
@@ -5214,7 +5241,7 @@ module Aws::FSx
     #
     # @!attribute [rw] mode
     #   Specifies whether the file system is using the `AUTOMATIC` setting
-    #   of SSD IOPS of 3 IOPS per GB of storage capacity, , or if it using a
+    #   of SSD IOPS of 3 IOPS per GB of storage capacity, or if it using a
     #   `USER_PROVISIONED` value.
     #   @return [String]
     #
@@ -5885,12 +5912,12 @@ module Aws::FSx
     #
     # @!attribute [rw] tags
     #   The tags to associate with the file system. For more information,
-    #   see [Tagging your Amazon EC2 resources][1] in the *Amazon EC2 User
-    #   Guide*.
+    #   see [Tagging your Amazon FSx resources][1] in the *Amazon FSx for
+    #   Lustre User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/tag-resources.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] windows_configuration
@@ -6792,7 +6819,7 @@ module Aws::FSx
     #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
     #   the following conditions:
     #
-    #   * The value of `HAPairs` is less than 1 or greater than 6.
+    #   * The value of `HAPairs` is less than 1 or greater than 12.
     #
     #   * The value of `HAPairs` is greater than 1 and the value of
     #     `DeploymentType` is `SINGLE_AZ_1` or `MULTI_AZ_1`.
@@ -6826,7 +6853,7 @@ module Aws::FSx
     #
     #   * The value of deployment type is `SINGLE_AZ_2` and
     #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is a valid HA
-    #     pair (a value between 2 and 6).
+    #     pair (a value between 2 and 12).
     #
     #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
     #   @return [Integer]
@@ -7310,20 +7337,24 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration for how much storage a user or group can use on the
-    # volume.
+    # Used to configure quotas that define how much storage a user or group
+    # can use on an FSx for OpenZFS volume. For more information, see
+    # [Volume properties][1] in the FSx for OpenZFS User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties
     #
     # @!attribute [rw] type
-    #   A value that specifies whether the quota applies to a user or group.
+    #   Specifies whether the quota applies to a user or group.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID of the user or group.
+    #   The ID of the user or group that the quota applies to.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_capacity_quota_gi_b
-    #   The amount of storage that the user or group can use in gibibytes
-    #   (GiB).
+    #   The user or group's storage quota, in gibibytes (GiB).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSUserOrGroupQuota AWS API Documentation
@@ -8981,7 +9012,7 @@ module Aws::FSx
     #
     #   * The value of deployment type is `SINGLE_AZ_2` and
     #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is a valid HA
-    #     pair (a value between 2 and 6).
+    #     pair (a value between 2 and 12).
     #
     #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
     #   @return [Integer]

@@ -310,6 +310,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::ModifyEventSubscription.build(context)
           when :modify_global_cluster
             Aws::RDS::Endpoints::ModifyGlobalCluster.build(context)
+          when :modify_integration
+            Aws::RDS::Endpoints::ModifyIntegration.build(context)
           when :modify_option_group
             Aws::RDS::Endpoints::ModifyOptionGroup.build(context)
           when :modify_tenant_database

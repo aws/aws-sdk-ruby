@@ -16,7 +16,8 @@ module Aws
         def wait: (
                     change_set_name: ::String,
                     ?stack_name: ::String,
-                    ?next_token: ::String
+                    ?next_token: ::String,
+                    ?include_property_values: bool
                   ) -> Client::_DescribeChangeSetResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeChangeSetResponseSuccess
       end

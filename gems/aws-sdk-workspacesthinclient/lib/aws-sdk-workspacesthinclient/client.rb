@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::WorkSpacesThinClient
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::WorkSpacesThinClient
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::WorkSpacesThinClient
     #   @option options [Aws::WorkSpacesThinClient::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::WorkSpacesThinClient::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -496,8 +520,6 @@ module Aws::WorkSpacesThinClient
     #   resp.environment.created_at #=> Time
     #   resp.environment.updated_at #=> Time
     #   resp.environment.arn #=> String
-    #   resp.environment.tags.resource_arn #=> String
-    #   resp.environment.tags.internal_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/CreateEnvironment AWS API Documentation
     #
@@ -684,8 +706,8 @@ module Aws::WorkSpacesThinClient
     #   resp.device.updated_at #=> Time
     #   resp.device.arn #=> String
     #   resp.device.kms_key_arn #=> String
-    #   resp.device.tags.resource_arn #=> String
-    #   resp.device.tags.internal_id #=> String
+    #   resp.device.tags #=> Hash
+    #   resp.device.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/GetDevice AWS API Documentation
     #
@@ -738,8 +760,8 @@ module Aws::WorkSpacesThinClient
     #   resp.environment.updated_at #=> Time
     #   resp.environment.arn #=> String
     #   resp.environment.kms_key_arn #=> String
-    #   resp.environment.tags.resource_arn #=> String
-    #   resp.environment.tags.internal_id #=> String
+    #   resp.environment.tags #=> Hash
+    #   resp.environment.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/GetEnvironment AWS API Documentation
     #
@@ -776,6 +798,8 @@ module Aws::WorkSpacesThinClient
     #   resp.software_set.software[0].name #=> String
     #   resp.software_set.software[0].version #=> String
     #   resp.software_set.arn #=> String
+    #   resp.software_set.tags #=> Hash
+    #   resp.software_set.tags["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/GetSoftwareSet AWS API Documentation
     #
@@ -835,8 +859,6 @@ module Aws::WorkSpacesThinClient
     #   resp.devices[0].created_at #=> Time
     #   resp.devices[0].updated_at #=> Time
     #   resp.devices[0].arn #=> String
-    #   resp.devices[0].tags.resource_arn #=> String
-    #   resp.devices[0].tags.internal_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/ListDevices AWS API Documentation
@@ -903,8 +925,6 @@ module Aws::WorkSpacesThinClient
     #   resp.environments[0].created_at #=> Time
     #   resp.environments[0].updated_at #=> Time
     #   resp.environments[0].arn #=> String
-    #   resp.environments[0].tags.resource_arn #=> String
-    #   resp.environments[0].tags.internal_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/ListEnvironments AWS API Documentation
@@ -1068,10 +1088,6 @@ module Aws::WorkSpacesThinClient
     #   An option to define if software updates should be applied within a
     #   maintenance window.
     #
-    # @option params [String] :kms_key_arn
-    #   The Amazon Resource Name (ARN) of the Key Management Service key to
-    #   use for the update.
-    #
     # @return [Types::UpdateDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDeviceResponse#device #device} => Types::DeviceSummary
@@ -1083,7 +1099,6 @@ module Aws::WorkSpacesThinClient
     #     name: "DeviceName",
     #     desired_software_set_id: "SoftwareSetId",
     #     software_set_update_schedule: "USE_MAINTENANCE_WINDOW", # accepts USE_MAINTENANCE_WINDOW, APPLY_IMMEDIATELY
-    #     kms_key_arn: "KmsKeyArn",
     #   })
     #
     # @example Response structure
@@ -1103,8 +1118,6 @@ module Aws::WorkSpacesThinClient
     #   resp.device.created_at #=> Time
     #   resp.device.updated_at #=> Time
     #   resp.device.arn #=> String
-    #   resp.device.tags.resource_arn #=> String
-    #   resp.device.tags.internal_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/UpdateDevice AWS API Documentation
     #
@@ -1192,8 +1205,6 @@ module Aws::WorkSpacesThinClient
     #   resp.environment.created_at #=> Time
     #   resp.environment.updated_at #=> Time
     #   resp.environment.arn #=> String
-    #   resp.environment.tags.resource_arn #=> String
-    #   resp.environment.tags.internal_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/UpdateEnvironment AWS API Documentation
     #
@@ -1243,7 +1254,7 @@ module Aws::WorkSpacesThinClient
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesthinclient'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

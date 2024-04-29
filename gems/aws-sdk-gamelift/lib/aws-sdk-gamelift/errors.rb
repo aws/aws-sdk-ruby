@@ -37,6 +37,7 @@ module Aws::GameLift
   # * {InvalidRequestException}
   # * {LimitExceededException}
   # * {NotFoundException}
+  # * {NotReadyException}
   # * {OutOfCapacityException}
   # * {TaggingFailedException}
   # * {TerminalRoutingStrategyException}
@@ -189,6 +190,21 @@ module Aws::GameLift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::GameLift::Types::NotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NotReadyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GameLift::Types::NotReadyException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

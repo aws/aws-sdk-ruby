@@ -96,16 +96,6 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
-    # @!attribute [rw] enabled
-    #   Specifies whether to enable the key. If the key is enabled, it is
-    #   activated for use within the service. If the key is not enabled,
-    #   then it is created but not activated. The default value is enabled.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] exportable
-    #   Specifies whether the key is exportable from the service.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] key_attributes
     #   The role of the key, the algorithm it supports, and the
     #   cryptographic operations allowed with the key. This data is
@@ -125,11 +115,21 @@ module Aws::PaymentCryptography
     #   result.
     #   @return [String]
     #
+    # @!attribute [rw] exportable
+    #   Specifies whether the key is exportable from the service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether to enable the key. If the key is enabled, it is
+    #   activated for use within the service. If the key is not enabled,
+    #   then it is created but not activated. The default value is enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Assigns one or more tags to the Amazon Web Services Payment
     #   Cryptography key. Use this parameter to tag a key when it is
     #   created. To tag an existing Amazon Web Services Payment Cryptography
-    #   key, use the TagResource operation.
+    #   key, use the [TagResource][1] operation.
     #
     #   Each tag consists of a tag key and a tag value. Both the tag key and
     #   the tag value are required, but the tag value can be an empty (null)
@@ -144,15 +144,19 @@ module Aws::PaymentCryptography
     #   can allow or deny permission to the key.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/CreateKeyInput AWS API Documentation
     #
     class CreateKeyInput < Struct.new(
-      :enabled,
-      :exportable,
       :key_attributes,
       :key_check_value_algorithm,
+      :exportable,
+      :enabled,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -188,20 +192,20 @@ module Aws::PaymentCryptography
     #
     class DeleteAliasOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] key_identifier
+    #   The `KeyARN` of the key that is scheduled for deletion.
+    #   @return [String]
+    #
     # @!attribute [rw] delete_key_in_days
     #   The waiting period for key deletion. The default value is seven
     #   days.
     #   @return [Integer]
     #
-    # @!attribute [rw] key_identifier
-    #   The `KeyARN` of the key that is scheduled for deletion.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/DeleteKeyInput AWS API Documentation
     #
     class DeleteKeyInput < Struct.new(
-      :delete_key_in_days,
-      :key_identifier)
+      :key_identifier,
+      :delete_key_in_days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -292,26 +296,26 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
-    # @!attribute [rw] export_attributes
-    #   The attributes for IPEK generation during export.
-    #   @return [Types::ExportAttributes]
+    # @!attribute [rw] key_material
+    #   The key block format type, for example, TR-34 or TR-31, to use
+    #   during key material export.
+    #   @return [Types::ExportKeyMaterial]
     #
     # @!attribute [rw] export_key_identifier
     #   The `KeyARN` of the key under export from Amazon Web Services
     #   Payment Cryptography.
     #   @return [String]
     #
-    # @!attribute [rw] key_material
-    #   The key block format type, for example, TR-34 or TR-31, to use
-    #   during key material export.
-    #   @return [Types::ExportKeyMaterial]
+    # @!attribute [rw] export_attributes
+    #   The attributes for IPEK generation during export.
+    #   @return [Types::ExportAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportKeyInput AWS API Documentation
     #
     class ExportKeyInput < Struct.new(
-      :export_attributes,
+      :key_material,
       :export_key_identifier,
-      :key_material)
+      :export_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -321,11 +325,6 @@ module Aws::PaymentCryptography
     # exchange method.
     #
     # @note ExportKeyMaterial is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @!attribute [rw] key_cryptogram
-    #   Parameter information for key material export using asymmetric RSA
-    #   wrap and unwrap key exchange method
-    #   @return [Types::ExportKeyCryptogram]
     #
     # @!attribute [rw] tr_31_key_block
     #   Parameter information for key material export using symmetric TR-31
@@ -337,20 +336,25 @@ module Aws::PaymentCryptography
     #   TR-34 key exchange method.
     #   @return [Types::ExportTr34KeyBlock]
     #
+    # @!attribute [rw] key_cryptogram
+    #   Parameter information for key material export using asymmetric RSA
+    #   wrap and unwrap key exchange method
+    #   @return [Types::ExportKeyCryptogram]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportKeyMaterial AWS API Documentation
     #
     class ExportKeyMaterial < Struct.new(
-      :key_cryptogram,
       :tr_31_key_block,
       :tr_34_key_block,
+      :key_cryptogram,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class KeyCryptogram < ExportKeyMaterial; end
       class Tr31KeyBlock < ExportKeyMaterial; end
       class Tr34KeyBlock < ExportKeyMaterial; end
+      class KeyCryptogram < ExportKeyMaterial; end
       class Unknown < ExportKeyMaterial; end
     end
 
@@ -375,10 +379,16 @@ module Aws::PaymentCryptography
     #   key under export for TR-31 key block generation.
     #   @return [String]
     #
+    # @!attribute [rw] key_block_headers
+    #   Optional metadata for export associated with the key material. This
+    #   data is signed but transmitted in clear text.
+    #   @return [Types::KeyBlockHeaders]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportTr31KeyBlock AWS API Documentation
     #
     class ExportTr31KeyBlock < Struct.new(
-      :wrapping_key_identifier)
+      :wrapping_key_identifier,
+      :key_block_headers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -391,13 +401,23 @@ module Aws::PaymentCryptography
     #   certificate during TR-34 key export.
     #   @return [String]
     #
+    # @!attribute [rw] wrapping_key_certificate
+    #   The `KeyARN` of the wrapping key certificate. Amazon Web Services
+    #   Payment Cryptography uses this certificate to wrap the key under
+    #   export.
+    #   @return [String]
+    #
     # @!attribute [rw] export_token
     #   The export token to initiate key export from Amazon Web Services
     #   Payment Cryptography. It also contains the signing key certificate
     #   that will sign the wrapped key during TR-34 key block generation.
-    #   Call GetParametersForExport to receive an export token. It expires
-    #   after 7 days. You can use the same export token to export multiple
-    #   keys from the same service account.
+    #   Call [GetParametersForExport][1] to receive an export token. It
+    #   expires after 7 days. You can use the same export token to export
+    #   multiple keys from the same service account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html
     #   @return [String]
     #
     # @!attribute [rw] key_block_format
@@ -411,20 +431,20 @@ module Aws::PaymentCryptography
     #   value is not provided for a TR-34 key block generated using 2 pass.
     #   @return [String]
     #
-    # @!attribute [rw] wrapping_key_certificate
-    #   The `KeyARN` of the wrapping key certificate. Amazon Web Services
-    #   Payment Cryptography uses this certificate to wrap the key under
-    #   export.
-    #   @return [String]
+    # @!attribute [rw] key_block_headers
+    #   Optional metadata for export associated with the key material. This
+    #   data is signed but transmitted in clear text.
+    #   @return [Types::KeyBlockHeaders]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportTr34KeyBlock AWS API Documentation
     #
     class ExportTr34KeyBlock < Struct.new(
       :certificate_authority_public_key_identifier,
+      :wrapping_key_certificate,
       :export_token,
       :key_block_format,
       :random_nonce,
-      :wrapping_key_certificate)
+      :key_block_headers)
       SENSITIVE = [:wrapping_key_certificate]
       include Aws::Structure
     end
@@ -500,23 +520,6 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
-    # @!attribute [rw] export_token
-    #   The export token to initiate key export from Amazon Web Services
-    #   Payment Cryptography. The export token expires after 7 days. You can
-    #   use the same export token to export multiple keys from the same
-    #   service account.
-    #   @return [String]
-    #
-    # @!attribute [rw] parameters_valid_until_timestamp
-    #   The validity period of the export token.
-    #   @return [Time]
-    #
-    # @!attribute [rw] signing_key_algorithm
-    #   The algorithm of the signing key certificate for use in TR-34 key
-    #   block generation. `RSA_2048` is the only signing key algorithm
-    #   allowed.
-    #   @return [String]
-    #
     # @!attribute [rw] signing_key_certificate
     #   The signing key certificate in PEM format (base64 encoded) of the
     #   public key for signature within the TR-34 key block. The certificate
@@ -528,14 +531,31 @@ module Aws::PaymentCryptography
     #   certificate in PEM format (base64 encoded).
     #   @return [String]
     #
+    # @!attribute [rw] signing_key_algorithm
+    #   The algorithm of the signing key certificate for use in TR-34 key
+    #   block generation. `RSA_2048` is the only signing key algorithm
+    #   allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_token
+    #   The export token to initiate key export from Amazon Web Services
+    #   Payment Cryptography. The export token expires after 7 days. You can
+    #   use the same export token to export multiple keys from the same
+    #   service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters_valid_until_timestamp
+    #   The validity period of the export token.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetParametersForExportOutput AWS API Documentation
     #
     class GetParametersForExportOutput < Struct.new(
-      :export_token,
-      :parameters_valid_until_timestamp,
-      :signing_key_algorithm,
       :signing_key_certificate,
-      :signing_key_certificate_chain)
+      :signing_key_certificate_chain,
+      :signing_key_algorithm,
+      :export_token,
+      :parameters_valid_until_timestamp)
       SENSITIVE = [:signing_key_certificate, :signing_key_certificate_chain]
       include Aws::Structure
     end
@@ -568,22 +588,6 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
-    # @!attribute [rw] import_token
-    #   The import token to initiate key import into Amazon Web Services
-    #   Payment Cryptography. The import token expires after 7 days. You can
-    #   use the same import token to import multiple keys to the same
-    #   service account.
-    #   @return [String]
-    #
-    # @!attribute [rw] parameters_valid_until_timestamp
-    #   The validity period of the import token.
-    #   @return [Time]
-    #
-    # @!attribute [rw] wrapping_key_algorithm
-    #   The algorithm of the wrapping key for use within TR-34
-    #   WrappedKeyBlock or RSA WrappedKeyCryptogram.
-    #   @return [String]
-    #
     # @!attribute [rw] wrapping_key_certificate
     #   The wrapping key certificate in PEM format (base64 encoded) of the
     #   wrapping key for use within the TR-34 key block. The certificate
@@ -596,14 +600,30 @@ module Aws::PaymentCryptography
     #   format (base64 encoded).
     #   @return [String]
     #
+    # @!attribute [rw] wrapping_key_algorithm
+    #   The algorithm of the wrapping key for use within TR-34
+    #   WrappedKeyBlock or RSA WrappedKeyCryptogram.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_token
+    #   The import token to initiate key import into Amazon Web Services
+    #   Payment Cryptography. The import token expires after 7 days. You can
+    #   use the same import token to import multiple keys to the same
+    #   service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters_valid_until_timestamp
+    #   The validity period of the import token.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetParametersForImportOutput AWS API Documentation
     #
     class GetParametersForImportOutput < Struct.new(
-      :import_token,
-      :parameters_valid_until_timestamp,
-      :wrapping_key_algorithm,
       :wrapping_key_certificate,
-      :wrapping_key_certificate_chain)
+      :wrapping_key_certificate_chain,
+      :wrapping_key_algorithm,
+      :import_token,
+      :parameters_valid_until_timestamp)
       SENSITIVE = [:wrapping_key_certificate, :wrapping_key_certificate_chain]
       include Aws::Structure
     end
@@ -644,25 +664,25 @@ module Aws::PaymentCryptography
     # Parameter information for key material import using asymmetric RSA
     # wrap and unwrap key exchange method.
     #
-    # @!attribute [rw] exportable
-    #   Specifies whether the key is exportable from the service.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] import_token
-    #   The import token that initiates key import using the asymmetric RSA
-    #   wrap and unwrap key exchange method into AWS Payment Cryptography.
-    #   It expires after 7 days. You can use the same import token to import
-    #   multiple keys to the same service account.
-    #   @return [String]
-    #
     # @!attribute [rw] key_attributes
     #   The role of the key, the algorithm it supports, and the
     #   cryptographic operations allowed with the key. This data is
     #   immutable after the key is created.
     #   @return [Types::KeyAttributes]
     #
+    # @!attribute [rw] exportable
+    #   Specifies whether the key is exportable from the service.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] wrapped_key_cryptogram
     #   The RSA wrapped key cryptogram under import.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_token
+    #   The import token that initiates key import using the asymmetric RSA
+    #   wrap and unwrap key exchange method into AWS Payment Cryptography.
+    #   It expires after 7 days. You can use the same import token to import
+    #   multiple keys to the same service account.
     #   @return [String]
     #
     # @!attribute [rw] wrapping_spec
@@ -672,18 +692,19 @@ module Aws::PaymentCryptography
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKeyCryptogram AWS API Documentation
     #
     class ImportKeyCryptogram < Struct.new(
-      :exportable,
-      :import_token,
       :key_attributes,
+      :exportable,
       :wrapped_key_cryptogram,
+      :import_token,
       :wrapping_spec)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] enabled
-    #   Specifies whether import key is enabled.
-    #   @return [Boolean]
+    # @!attribute [rw] key_material
+    #   The key or public key certificate type to use during key material
+    #   import, for example TR-34 or RootCertificatePublicKey.
+    #   @return [Types::ImportKeyMaterial]
     #
     # @!attribute [rw] key_check_value_algorithm
     #   The algorithm that Amazon Web Services Payment Cryptography uses to
@@ -698,16 +719,15 @@ module Aws::PaymentCryptography
     #   result.
     #   @return [String]
     #
-    # @!attribute [rw] key_material
-    #   The key or public key certificate type to use during key material
-    #   import, for example TR-34 or RootCertificatePublicKey.
-    #   @return [Types::ImportKeyMaterial]
+    # @!attribute [rw] enabled
+    #   Specifies whether import key is enabled.
+    #   @return [Boolean]
     #
     # @!attribute [rw] tags
     #   Assigns one or more tags to the Amazon Web Services Payment
     #   Cryptography key. Use this parameter to tag a key when it is
     #   imported. To tag an existing Amazon Web Services Payment
-    #   Cryptography key, use the TagResource operation.
+    #   Cryptography key, use the [TagResource][1] operation.
     #
     #   Each tag consists of a tag key and a tag value. Both the tag key and
     #   the tag value are required, but the tag value can be an empty (null)
@@ -725,14 +745,18 @@ module Aws::PaymentCryptography
     #   can allow or deny permission to the key.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKeyInput AWS API Documentation
     #
     class ImportKeyInput < Struct.new(
-      :enabled,
-      :key_check_value_algorithm,
       :key_material,
+      :key_check_value_algorithm,
+      :enabled,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -744,14 +768,13 @@ module Aws::PaymentCryptography
     #
     # @note ImportKeyMaterial is a union - when making an API calls you must set exactly one of the members.
     #
-    # @!attribute [rw] key_cryptogram
-    #   Parameter information for key material import using asymmetric RSA
-    #   wrap and unwrap key exchange method.
-    #   @return [Types::ImportKeyCryptogram]
-    #
     # @!attribute [rw] root_certificate_public_key
     #   Parameter information for root public key certificate import.
     #   @return [Types::RootCertificatePublicKey]
+    #
+    # @!attribute [rw] trusted_certificate_public_key
+    #   Parameter information for trusted public key certificate import.
+    #   @return [Types::TrustedCertificatePublicKey]
     #
     # @!attribute [rw] tr_31_key_block
     #   Parameter information for key material import using symmetric TR-31
@@ -763,28 +786,29 @@ module Aws::PaymentCryptography
     #   TR-34 key exchange method.
     #   @return [Types::ImportTr34KeyBlock]
     #
-    # @!attribute [rw] trusted_certificate_public_key
-    #   Parameter information for trusted public key certificate import.
-    #   @return [Types::TrustedCertificatePublicKey]
+    # @!attribute [rw] key_cryptogram
+    #   Parameter information for key material import using asymmetric RSA
+    #   wrap and unwrap key exchange method.
+    #   @return [Types::ImportKeyCryptogram]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKeyMaterial AWS API Documentation
     #
     class ImportKeyMaterial < Struct.new(
-      :key_cryptogram,
       :root_certificate_public_key,
+      :trusted_certificate_public_key,
       :tr_31_key_block,
       :tr_34_key_block,
-      :trusted_certificate_public_key,
+      :key_cryptogram,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class KeyCryptogram < ImportKeyMaterial; end
       class RootCertificatePublicKey < ImportKeyMaterial; end
+      class TrustedCertificatePublicKey < ImportKeyMaterial; end
       class Tr31KeyBlock < ImportKeyMaterial; end
       class Tr34KeyBlock < ImportKeyMaterial; end
-      class TrustedCertificatePublicKey < ImportKeyMaterial; end
+      class KeyCryptogram < ImportKeyMaterial; end
       class Unknown < ImportKeyMaterial; end
     end
 
@@ -804,20 +828,20 @@ module Aws::PaymentCryptography
     # Parameter information for key material import using symmetric TR-31
     # key exchange method.
     #
-    # @!attribute [rw] wrapped_key_block
-    #   The TR-31 wrapped key block to import.
-    #   @return [String]
-    #
     # @!attribute [rw] wrapping_key_identifier
     #   The `KeyARN` of the key that will decrypt or unwrap a TR-31 key
     #   block during import.
     #   @return [String]
     #
+    # @!attribute [rw] wrapped_key_block
+    #   The TR-31 wrapped key block to import.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportTr31KeyBlock AWS API Documentation
     #
     class ImportTr31KeyBlock < Struct.new(
-      :wrapped_key_block,
-      :wrapping_key_identifier)
+      :wrapping_key_identifier,
+      :wrapped_key_block)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -830,11 +854,20 @@ module Aws::PaymentCryptography
     #   certificate during TR-34 key import.
     #   @return [String]
     #
+    # @!attribute [rw] signing_key_certificate
+    #   The public key component in PEM certificate format of the private
+    #   key that signs the KDH TR-34 WrappedKeyBlock.
+    #   @return [String]
+    #
     # @!attribute [rw] import_token
     #   The import token that initiates key import using the asymmetric
     #   TR-34 key exchange method into Amazon Web Services Payment
     #   Cryptography. It expires after 7 days. You can use the same import
     #   token to import multiple keys to the same service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] wrapped_key_block
+    #   The TR-34 wrapped key block to import.
     #   @return [String]
     #
     # @!attribute [rw] key_block_format
@@ -848,24 +881,15 @@ module Aws::PaymentCryptography
     #   value is not provided for a TR-34 key block generated using 2 pass.
     #   @return [String]
     #
-    # @!attribute [rw] signing_key_certificate
-    #   The public key component in PEM certificate format of the private
-    #   key that signs the KDH TR-34 WrappedKeyBlock.
-    #   @return [String]
-    #
-    # @!attribute [rw] wrapped_key_block
-    #   The TR-34 wrapped key block to import.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportTr34KeyBlock AWS API Documentation
     #
     class ImportTr34KeyBlock < Struct.new(
       :certificate_authority_public_key_identifier,
-      :import_token,
-      :key_block_format,
-      :random_nonce,
       :signing_key_certificate,
-      :wrapped_key_block)
+      :import_token,
+      :wrapped_key_block,
+      :key_block_format,
+      :random_nonce)
       SENSITIVE = [:signing_key_certificate]
       include Aws::Structure
     end
@@ -886,33 +910,6 @@ module Aws::PaymentCryptography
 
     # Metadata about an Amazon Web Services Payment Cryptography key.
     #
-    # @!attribute [rw] create_timestamp
-    #   The date and time when the key was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] delete_pending_timestamp
-    #   The date and time after which Amazon Web Services Payment
-    #   Cryptography will delete the key. This value is present only when
-    #   `KeyState` is `DELETE_PENDING` and the key is scheduled for
-    #   deletion.
-    #   @return [Time]
-    #
-    # @!attribute [rw] delete_timestamp
-    #   The date and time after which Amazon Web Services Payment
-    #   Cryptography will delete the key. This value is present only when
-    #   when the `KeyState` is `DELETE_COMPLETE` and the Amazon Web Services
-    #   Payment Cryptography key is deleted.
-    #   @return [Time]
-    #
-    # @!attribute [rw] enabled
-    #   Specifies whether the key is enabled.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] exportable
-    #   Specifies whether the key is exportable. This data is immutable
-    #   after the key is created.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] key_arn
     #   The Amazon Resource Name (ARN) of the key.
     #   @return [String]
@@ -941,6 +938,19 @@ module Aws::PaymentCryptography
     #   result.
     #   @return [String]
     #
+    # @!attribute [rw] enabled
+    #   Specifies whether the key is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exportable
+    #   Specifies whether the key is exportable. This data is immutable
+    #   after the key is created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] key_state
+    #   The state of key that is being created or deleted.
+    #   @return [String]
+    #
     # @!attribute [rw] key_origin
     #   The source of the key material. For keys created within Amazon Web
     #   Services Payment Cryptography, the value is
@@ -948,9 +958,9 @@ module Aws::PaymentCryptography
     #   Services Payment Cryptography, the value is `EXTERNAL`.
     #   @return [String]
     #
-    # @!attribute [rw] key_state
-    #   The state of key that is being created or deleted.
-    #   @return [String]
+    # @!attribute [rw] create_timestamp
+    #   The date and time when the key was created.
+    #   @return [Time]
     #
     # @!attribute [rw] usage_start_timestamp
     #   The date and time after which Amazon Web Services Payment
@@ -964,22 +974,36 @@ module Aws::PaymentCryptography
     #   operations.
     #   @return [Time]
     #
+    # @!attribute [rw] delete_pending_timestamp
+    #   The date and time after which Amazon Web Services Payment
+    #   Cryptography will delete the key. This value is present only when
+    #   `KeyState` is `DELETE_PENDING` and the key is scheduled for
+    #   deletion.
+    #   @return [Time]
+    #
+    # @!attribute [rw] delete_timestamp
+    #   The date and time after which Amazon Web Services Payment
+    #   Cryptography will delete the key. This value is present only when
+    #   when the `KeyState` is `DELETE_COMPLETE` and the Amazon Web Services
+    #   Payment Cryptography key is deleted.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/Key AWS API Documentation
     #
     class Key < Struct.new(
-      :create_timestamp,
-      :delete_pending_timestamp,
-      :delete_timestamp,
-      :enabled,
-      :exportable,
       :key_arn,
       :key_attributes,
       :key_check_value,
       :key_check_value_algorithm,
-      :key_origin,
+      :enabled,
+      :exportable,
       :key_state,
+      :key_origin,
+      :create_timestamp,
       :usage_start_timestamp,
-      :usage_stop_timestamp)
+      :usage_stop_timestamp,
+      :delete_pending_timestamp,
+      :delete_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -987,6 +1011,18 @@ module Aws::PaymentCryptography
     # The role of the key, the algorithm it supports, and the cryptographic
     # operations allowed with the key. This data is immutable after the key
     # is created.
+    #
+    # @!attribute [rw] key_usage
+    #   The cryptographic usage of an Amazon Web Services Payment
+    #   Cryptography key as deﬁned in section A.5.2 of the TR-31 spec.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_class
+    #   The type of Amazon Web Services Payment Cryptography key to create,
+    #   which determines the classiﬁcation of the cryptographic method and
+    #   whether Amazon Web Services Payment Cryptography key contains a
+    #   symmetric key or an asymmetric key pair.
+    #   @return [String]
     #
     # @!attribute [rw] key_algorithm
     #   The key algorithm to be use during creation of an Amazon Web
@@ -998,30 +1034,78 @@ module Aws::PaymentCryptography
     #   algorithms.
     #   @return [String]
     #
-    # @!attribute [rw] key_class
-    #   The type of Amazon Web Services Payment Cryptography key to create,
-    #   which determines the classiﬁcation of the cryptographic method and
-    #   whether Amazon Web Services Payment Cryptography key contains a
-    #   symmetric key or an asymmetric key pair.
-    #   @return [String]
-    #
     # @!attribute [rw] key_modes_of_use
     #   The list of cryptographic operations that you can perform using the
     #   key.
     #   @return [Types::KeyModesOfUse]
     #
-    # @!attribute [rw] key_usage
-    #   The cryptographic usage of an Amazon Web Services Payment
-    #   Cryptography key as deﬁned in section A.5.2 of the TR-31 spec.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/KeyAttributes AWS API Documentation
     #
     class KeyAttributes < Struct.new(
-      :key_algorithm,
+      :key_usage,
       :key_class,
+      :key_algorithm,
+      :key_modes_of_use)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Optional metadata for export associated with the key material. This
+    # data is signed but transmitted in clear text.
+    #
+    # @!attribute [rw] key_modes_of_use
+    #   The list of cryptographic operations that you can perform using the
+    #   key. The modes of use are deﬁned in section A.5.3 of the TR-31 spec.
+    #   @return [Types::KeyModesOfUse]
+    #
+    # @!attribute [rw] key_exportability
+    #   Specifies subsequent exportability of the key within the key block
+    #   after it is received by the receiving party. It can be used to
+    #   further restrict exportability of the key after export from Amazon
+    #   Web Services Payment Cryptography.
+    #
+    #   When set to `EXPORTABLE`, the key can be subsequently exported by
+    #   the receiver under a KEK using TR-31 or TR-34 key block export only.
+    #   When set to `NON_EXPORTABLE`, the key cannot be subsequently
+    #   exported by the receiver. When set to `SENSITIVE`, the key can be
+    #   exported by the receiver under a KEK using TR-31, TR-34, RSA wrap
+    #   and unwrap cryptogram or using a symmetric cryptogram key export
+    #   method. For further information refer to [ANSI X9.143-2022][1].
+    #
+    #
+    #
+    #   [1]: https://webstore.ansi.org/standards/ascx9/ansix91432022
+    #   @return [String]
+    #
+    # @!attribute [rw] key_version
+    #   Parameter used to indicate the version of the key carried in the key
+    #   block or indicate the value carried in the key block is a component
+    #   of a key.
+    #   @return [String]
+    #
+    # @!attribute [rw] optional_blocks
+    #   Parameter used to indicate the type of optional data in key block
+    #   headers. Refer to [ANSI X9.143-2022][1] for information on allowed
+    #   data type for optional blocks.
+    #
+    #   Optional block character limit is 112 characters. For each optional
+    #   block, 2 characters are reserved for optional block ID and 2
+    #   characters reserved for optional block length. More than one
+    #   optional blocks can be included as long as the combined length does
+    #   not increase 112 characters.
+    #
+    #
+    #
+    #   [1]: https://webstore.ansi.org/standards/ascx9/ansix91432022
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/KeyBlockHeaders AWS API Documentation
+    #
+    class KeyBlockHeaders < Struct.new(
       :key_modes_of_use,
-      :key_usage)
+      :key_exportability,
+      :key_version,
+      :optional_blocks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1029,24 +1113,44 @@ module Aws::PaymentCryptography
     # The list of cryptographic operations that you can perform using the
     # key. The modes of use are deﬁned in section A.5.3 of the TR-31 spec.
     #
-    # @!attribute [rw] decrypt
-    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
-    #   be used to decrypt data.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] derive_key
-    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
-    #   be used to derive new keys.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] encrypt
     #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
     #   be used to encrypt data.
     #   @return [Boolean]
     #
+    # @!attribute [rw] decrypt
+    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
+    #   be used to decrypt data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] wrap
+    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
+    #   be used to wrap other keys.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] unwrap
+    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
+    #   be used to unwrap other keys.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] generate
     #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
     #   be used to generate and verify other card and PIN verification keys.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] sign
+    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
+    #   be used for signing.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] verify
+    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
+    #   be used to verify signatures.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] derive_key
+    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
+    #   be used to derive new keys.
     #   @return [Boolean]
     #
     # @!attribute [rw] no_restrictions
@@ -1055,55 +1159,31 @@ module Aws::PaymentCryptography
     #   `KeyUsage`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] sign
-    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
-    #   be used for signing.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] unwrap
-    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
-    #   be used to unwrap other keys.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] verify
-    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
-    #   be used to verify signatures.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] wrap
-    #   Speciﬁes whether an Amazon Web Services Payment Cryptography key can
-    #   be used to wrap other keys.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/KeyModesOfUse AWS API Documentation
     #
     class KeyModesOfUse < Struct.new(
-      :decrypt,
-      :derive_key,
       :encrypt,
-      :generate,
-      :no_restrictions,
-      :sign,
+      :decrypt,
+      :wrap,
       :unwrap,
+      :generate,
+      :sign,
       :verify,
-      :wrap)
+      :derive_key,
+      :no_restrictions)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Metadata about an Amazon Web Services Payment Cryptography key.
     #
-    # @!attribute [rw] enabled
-    #   Specifies whether the key is enabled.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] exportable
-    #   Specifies whether the key is exportable. This data is immutable
-    #   after the key is created.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] key_arn
     #   The Amazon Resource Name (ARN) of the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_state
+    #   The state of an Amazon Web Services Payment Cryptography that is
+    #   being created or deleted.
     #   @return [String]
     #
     # @!attribute [rw] key_attributes
@@ -1117,24 +1197,34 @@ module Aws::PaymentCryptography
     #   given key have the same key or to detect that a key has changed.
     #   @return [String]
     #
-    # @!attribute [rw] key_state
-    #   The state of an Amazon Web Services Payment Cryptography that is
-    #   being created or deleted.
-    #   @return [String]
+    # @!attribute [rw] exportable
+    #   Specifies whether the key is exportable. This data is immutable
+    #   after the key is created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether the key is enabled.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/KeySummary AWS API Documentation
     #
     class KeySummary < Struct.new(
-      :enabled,
-      :exportable,
       :key_arn,
+      :key_state,
       :key_attributes,
       :key_check_value,
-      :key_state)
+      :exportable,
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextToken`
+    #   from the truncated response you just received.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   Use this parameter to specify the maximum number of items to return.
     #   When this value is present, Amazon Web Services Payment Cryptography
@@ -1146,17 +1236,11 @@ module Aws::PaymentCryptography
     #   50.
     #   @return [Integer]
     #
-    # @!attribute [rw] next_token
-    #   Use this parameter in a subsequent request after you receive a
-    #   response with truncated results. Set it to the value of `NextToken`
-    #   from the truncated response you just received.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ListAliasesInput AWS API Documentation
     #
     class ListAliasesInput < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1184,6 +1268,12 @@ module Aws::PaymentCryptography
     #   The key state of the keys you want to list.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextToken`
+    #   from the truncated response you just received.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   Use this parameter to specify the maximum number of items to return.
     #   When this value is present, Amazon Web Services Payment Cryptography
@@ -1195,18 +1285,12 @@ module Aws::PaymentCryptography
     #   50.
     #   @return [Integer]
     #
-    # @!attribute [rw] next_token
-    #   Use this parameter in a subsequent request after you receive a
-    #   response with truncated results. Set it to the value of `NextToken`
-    #   from the truncated response you just received.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ListKeysInput AWS API Documentation
     #
     class ListKeysInput < Struct.new(
       :key_state,
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1230,6 +1314,16 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The `KeyARN` of the key whose tags you are getting.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextToken`
+    #   from the truncated response you just received.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   Use this parameter to specify the maximum number of items to return.
     #   When this value is present, Amazon Web Services Payment Cryptography
@@ -1241,41 +1335,31 @@ module Aws::PaymentCryptography
     #   50.
     #   @return [Integer]
     #
-    # @!attribute [rw] next_token
-    #   Use this parameter in a subsequent request after you receive a
-    #   response with truncated results. Set it to the value of `NextToken`
-    #   from the truncated response you just received.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_arn
-    #   The `KeyARN` of the key whose tags you are getting.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ListTagsForResourceInput AWS API Documentation
     #
     class ListTagsForResourceInput < Struct.new(
-      :max_results,
+      :resource_arn,
       :next_token,
-      :resource_arn)
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   The token for the next set of results, or an empty or null value if
-    #   there are no more results.
-    #   @return [String]
-    #
     # @!attribute [rw] tags
     #   The list of tags associated with a `ResourceArn`. Each tag will list
     #   the key-value pair contained within that tag.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or an empty or null value if
+    #   there are no more results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ListTagsForResourceOutput AWS API Documentation
     #
     class ListTagsForResourceOutput < Struct.new(
-      :next_token,
-      :tags)
+      :tags,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1452,12 +1536,16 @@ module Aws::PaymentCryptography
     #   this field. This field may be displayed in plaintext in CloudTrail
     #   logs and other output.
     #
-    #   To use this parameter, you must have TagResource permission in an
-    #   IAM policy.
+    #   To use this parameter, you must have [TagResource][1] permission in
+    #   an IAM policy.
     #
     #   Don't include personal, confidential or sensitive information in
     #   this field. This field may be displayed in plaintext in CloudTrail
     #   logs and other output.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/TagResourceInput AWS API Documentation
@@ -1488,11 +1576,6 @@ module Aws::PaymentCryptography
 
     # Parameter information for trusted public key certificate import.
     #
-    # @!attribute [rw] certificate_authority_public_key_identifier
-    #   The `KeyARN` of the root public key certificate or certificate chain
-    #   that signs the trusted public key certificate import.
-    #   @return [String]
-    #
     # @!attribute [rw] key_attributes
     #   The role of the key, the algorithm it supports, and the
     #   cryptographic operations allowed with the key. This data is
@@ -1503,12 +1586,17 @@ module Aws::PaymentCryptography
     #   Parameter information for trusted public key certificate import.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_authority_public_key_identifier
+    #   The `KeyARN` of the root public key certificate or certificate chain
+    #   that signs the trusted public key certificate import.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/TrustedCertificatePublicKey AWS API Documentation
     #
     class TrustedCertificatePublicKey < Struct.new(
-      :certificate_authority_public_key_identifier,
       :key_attributes,
-      :public_key_certificate)
+      :public_key_certificate,
+      :certificate_authority_public_key_identifier)
       SENSITIVE = [:public_key_certificate]
       include Aws::Structure
     end
@@ -1523,7 +1611,11 @@ module Aws::PaymentCryptography
     #   If the Amazon Web Services Payment Cryptography key doesn't have
     #   the specified tag key, Amazon Web Services Payment Cryptography
     #   doesn't throw an exception or return a response. To confirm that
-    #   the operation succeeded, use the ListTagsForResource operation.
+    #   the operation succeeded, use the [ListTagsForResource][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/UntagResourceInput AWS API Documentation
@@ -1585,6 +1677,19 @@ module Aws::PaymentCryptography
     # Parameter information for generating a WrappedKeyBlock for key
     # exchange.
     #
+    # @!attribute [rw] wrapping_key_arn
+    #   The `KeyARN` of the wrapped key.
+    #   @return [String]
+    #
+    # @!attribute [rw] wrapped_key_material_format
+    #   The key block format of a wrapped key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_material
+    #   Parameter information for generating a wrapped key using TR-31 or
+    #   TR-34 skey exchange method.
+    #   @return [String]
+    #
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) is used to check if all parties holding a
     #   given key have the same key or to detect that a key has changed.
@@ -1603,27 +1708,14 @@ module Aws::PaymentCryptography
     #   result.
     #   @return [String]
     #
-    # @!attribute [rw] key_material
-    #   Parameter information for generating a wrapped key using TR-31 or
-    #   TR-34 skey exchange method.
-    #   @return [String]
-    #
-    # @!attribute [rw] wrapped_key_material_format
-    #   The key block format of a wrapped key.
-    #   @return [String]
-    #
-    # @!attribute [rw] wrapping_key_arn
-    #   The `KeyARN` of the wrapped key.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/WrappedKey AWS API Documentation
     #
     class WrappedKey < Struct.new(
-      :key_check_value,
-      :key_check_value_algorithm,
-      :key_material,
+      :wrapping_key_arn,
       :wrapped_key_material_format,
-      :wrapping_key_arn)
+      :key_material,
+      :key_check_value,
+      :key_check_value_algorithm)
       SENSITIVE = [:key_material]
       include Aws::Structure
     end

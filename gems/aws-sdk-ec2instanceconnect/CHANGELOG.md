@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2024-03-14)
+------------------
+
+* Feature - This release includes a new exception type "SerialConsoleSessionUnsupportedException" for SendSerialConsoleSSHPublicKey API.
+
 1.37.0 (2024-01-26)
 ------------------
 

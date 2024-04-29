@@ -1,0 +1,301 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Route53Profiles
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateProfileRequest
+      attr_accessor name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AssociateProfileResponse
+      attr_accessor profile_association: Types::ProfileAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateResourceToProfileRequest
+      attr_accessor name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_properties: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResourceToProfileResponse
+      attr_accessor profile_resource_association: Types::ProfileResourceAssociation
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProfileRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProfileResponse
+      attr_accessor profile: Types::Profile
+      SENSITIVE: []
+    end
+
+    class DeleteProfileRequest
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileResponse
+      attr_accessor profile: Types::Profile
+      SENSITIVE: []
+    end
+
+    class DisassociateProfileRequest
+      attr_accessor profile_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateProfileResponse
+      attr_accessor profile_association: Types::ProfileAssociation
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceFromProfileRequest
+      attr_accessor profile_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceFromProfileResponse
+      attr_accessor profile_resource_association: Types::ProfileResourceAssociation
+      SENSITIVE: []
+    end
+
+    class GetProfileAssociationRequest
+      attr_accessor profile_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileAssociationResponse
+      attr_accessor profile_association: Types::ProfileAssociation
+      SENSITIVE: []
+    end
+
+    class GetProfileRequest
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileResourceAssociationRequest
+      attr_accessor profile_resource_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileResourceAssociationResponse
+      attr_accessor profile_resource_association: Types::ProfileResourceAssociation
+      SENSITIVE: []
+    end
+
+    class GetProfileResponse
+      attr_accessor profile: Types::Profile
+      SENSITIVE: []
+    end
+
+    class InternalServiceErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor field_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileAssociationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileAssociationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor profile_associations: ::Array[Types::ProfileAssociation]
+      SENSITIVE: []
+    end
+
+    class ListProfileResourceAssociationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileResourceAssociationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor profile_resource_associations: ::Array[Types::ProfileResourceAssociation]
+      SENSITIVE: []
+    end
+
+    class ListProfilesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfilesResponse
+      attr_accessor next_token: ::String
+      attr_accessor profile_summaries: ::Array[Types::ProfileSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Profile
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor modification_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
+      attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING" | "CREATING" | "DELETED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ProfileAssociation
+      attr_accessor creation_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor modification_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING" | "CREATING" | "DELETED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ProfileResourceAssociation
+      attr_accessor creation_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor modification_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_properties: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING" | "CREATING" | "DELETED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ProfileSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
+      SENSITIVE: []
+    end
+
+    class ResourceExistsException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateProfileResourceAssociationRequest
+      attr_accessor name: ::String
+      attr_accessor profile_resource_association_id: ::String
+      attr_accessor resource_properties: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProfileResourceAssociationResponse
+      attr_accessor profile_resource_association: Types::ProfileResourceAssociation
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

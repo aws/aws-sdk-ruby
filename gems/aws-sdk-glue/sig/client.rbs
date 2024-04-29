@@ -3709,8 +3709,11 @@ module Aws
         def is_registered_with_lake_formation: () -> bool
         def cell_filters: () -> ::Array[Types::ColumnRowFilter]
         def query_authorization_id: () -> ::String
+        def is_multi_dialect_view: () -> bool
         def resource_arn: () -> ::String
+        def is_protected: () -> bool
         def permissions: () -> ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
+        def row_filter: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_unfiltered_table_metadata-instance_method
       def get_unfiltered_table_metadata: (
@@ -3724,6 +3727,8 @@ module Aws
                                              all_columns_requested: bool?
                                            },
                                            supported_permission_types: Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")],
+                                           ?parent_resource_arn: ::String,
+                                           ?root_resource_arn: ::String,
                                            ?supported_dialect: {
                                              dialect: ("REDSHIFT" | "ATHENA" | "SPARK")?,
                                              dialect_version: ::String?

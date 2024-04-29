@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2024-02-21)
+------------------
+
+* Feature - Increase the maximum length of descriptions for Inputs, Detector Models, and Alarm Models
+
 1.45.0 (2024-01-26)
 ------------------
 

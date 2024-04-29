@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.99.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2024-03-27)
+------------------
+
+* Feature - Added minimum capacity to  Amazon ElastiCache Serverless. This feature allows customer to ensure minimum capacity even without current load
+
+1.97.0 (2024-03-11)
+------------------
+
+* Feature - Revisions to API text that are now to be carried over to SDK text, changing usages of "SFO" in code examples to "us-west-1", and some other typos.
+
 1.96.0 (2024-01-26)
 ------------------
 

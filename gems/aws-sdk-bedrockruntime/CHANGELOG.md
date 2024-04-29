@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2024-04-23)
+------------------
+
+* Feature - This release introduces Guardrails for Amazon Bedrock.
+
 1.5.0 (2024-01-26)
 ------------------
 

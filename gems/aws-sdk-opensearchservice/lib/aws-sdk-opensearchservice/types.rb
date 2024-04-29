@@ -1180,7 +1180,8 @@ module Aws::OpenSearchService
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cold-storage.html
     #
     # @!attribute [rw] enabled
-    #   Whether to enable or disable cold storage on the domain.
+    #   Whether to enable or disable cold storage on the domain. You must
+    #   enable UltraWarm storage to enable cold storage.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ColdStorageOptions AWS API Documentation
@@ -1870,7 +1871,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -2245,7 +2246,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -2341,7 +2342,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -2413,7 +2414,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -2463,7 +2464,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -2516,7 +2517,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -3605,7 +3606,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -3659,7 +3660,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -4031,7 +4032,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -4114,7 +4115,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -4180,7 +4181,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -4233,7 +4234,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -4279,7 +4280,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -4353,7 +4354,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -4398,7 +4399,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -4438,7 +4439,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #
@@ -4473,7 +4474,7 @@ module Aws::OpenSearchService
     # @!attribute [rw] next_token
     #   When `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
+    #   Send the request again using the returned token to retrieve the next
     #   page.
     #   @return [String]
     #

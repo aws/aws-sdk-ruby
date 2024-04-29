@@ -28,6 +28,7 @@ module Aws::MigrationHubOrchestrator
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ThrottlingException}
@@ -44,6 +45,25 @@ module Aws::MigrationHubOrchestrator
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MigrationHubOrchestrator::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MigrationHubOrchestrator::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

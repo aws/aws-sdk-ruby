@@ -1006,6 +1006,7 @@
         "forceUefi":{"shape":"Boolean"},
         "rootVolumeName":{"shape":"LargeBoundedString"},
         "volumeToConversionMap":{"shape":"VolumeToConversionMap"},
+        "volumeToProductCodes":{"shape":"VolumeToProductCodes"},
         "volumeToVolumeSize":{"shape":"VolumeToSizeMap"}
       }
     },
@@ -1138,7 +1139,8 @@
         "etaDateTime":{"shape":"ISO8601DatetimeString"},
         "lagDuration":{"shape":"ISO8601DurationString"},
         "replicatedDisks":{"shape":"DataReplicationInfoReplicatedDisks"},
-        "stagingAvailabilityZone":{"shape":"AwsAvailabilityZone"}
+        "stagingAvailabilityZone":{"shape":"AwsAvailabilityZone"},
+        "stagingOutpostArn":{"shape":"OutpostARN"}
       }
     },
     "DataReplicationInfoReplicatedDisk":{
@@ -1148,7 +1150,8 @@
         "deviceName":{"shape":"BoundedString"},
         "replicatedStorageBytes":{"shape":"PositiveInteger"},
         "rescannedStorageBytes":{"shape":"PositiveInteger"},
-        "totalStorageBytes":{"shape":"PositiveInteger"}
+        "totalStorageBytes":{"shape":"PositiveInteger"},
+        "volumeStatus":{"shape":"VolumeStatus"}
       }
     },
     "DataReplicationInfoReplicatedDisks":{
@@ -2211,6 +2214,12 @@
         "AWS"
       ]
     },
+    "OutpostARN":{
+      "type":"string",
+      "max":255,
+      "min":20,
+      "pattern":"^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/op-[a-f0-9]{17}$"
+    },
     "PITPolicy":{
       "type":"list",
       "member":{"shape":"PITPolicyRule"},
@@ -2280,6 +2289,30 @@
       "type":"long",
       "min":0
     },
+    "ProductCode":{
+      "type":"structure",
+      "members":{
+        "productCodeId":{"shape":"ProductCodeId"},
+        "productCodeMode":{"shape":"ProductCodeMode"}
+      }
+    },
+    "ProductCodeId":{
+      "type":"string",
+      "max":25,
+      "min":25,
+      "pattern":"^([A-Za-z0-9])+$"
+    },
+    "ProductCodeMode":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "ProductCodes":{
+      "type":"list",
+      "member":{"shape":"ProductCode"}
+    },
     "PutLaunchActionRequest":{
       "type":"structure",
       "required":[
@@ -2341,6 +2374,7 @@
         "pointInTimeSnapshotDateTime":{"shape":"ISO8601DatetimeString"},
         "recoveryInstanceID":{"shape":"RecoveryInstanceID"},
         "recoveryInstanceProperties":{"shape":"RecoveryInstanceProperties"},
+        "sourceOutpostArn":{"shape":"OutpostARN"},
         "sourceServerID":{"shape":"SourceServerID"},
         "tags":{"shape":"TagsMap"}
       }
@@ -2361,7 +2395,8 @@
         "etaDateTime":{"shape":"ISO8601DatetimeString"},
         "lagDuration":{"shape":"ISO8601DatetimeString"},
         "replicatedDisks":{"shape":"RecoveryInstanceDataReplicationInfoReplicatedDisks"},
-        "stagingAvailabilityZone":{"shape":"AwsAvailabilityZone"}
+        "stagingAvailabilityZone":{"shape":"AwsAvailabilityZone"},
+        "stagingOutpostArn":{"shape":"OutpostARN"}
       }
     },
     "RecoveryInstanceDataReplicationInfoReplicatedDisk":{
@@ -2769,7 +2804,8 @@
       "members":{
         "originAccountID":{"shape":"AccountID"},
         "originAvailabilityZone":{"shape":"AwsAvailabilityZone"},
-        "originRegion":{"shape":"AwsRegion"}
+        "originRegion":{"shape":"AwsRegion"},
+        "sourceOutpostArn":{"shape":"OutpostARN"}
       }
     },
     "SourceNetwork":{
@@ -3271,10 +3307,25 @@
         "other"
       ]
     },
+    "VolumeStatus":{
+      "type":"string",
+      "enum":[
+        "REGULAR",
+        "CONTAINS_MARKETPLACE_PRODUCT_CODES",
+        "MISSING_VOLUME_ATTRIBUTES",
+        "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE",
+        "PENDING"
+      ]
+    },
     "VolumeToConversionMap":{
       "type":"map",
       "key":{"shape":"LargeBoundedString"},
       "value":{"shape":"ConversionMap"}
+    },
+    "VolumeToProductCodes":{
+      "type":"map",
+      "key":{"shape":"LargeBoundedString"},
+      "value":{"shape":"ProductCodes"}
     },
     "VolumeToSizeMap":{
       "type":"map",

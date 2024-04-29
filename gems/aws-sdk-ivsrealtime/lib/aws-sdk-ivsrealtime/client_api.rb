@@ -75,6 +75,7 @@ module Aws::IVSRealTime
     GetStorageConfigurationRequest = Shapes::StructureShape.new(name: 'GetStorageConfigurationRequest')
     GetStorageConfigurationResponse = Shapes::StructureShape.new(name: 'GetStorageConfigurationResponse')
     GridConfiguration = Shapes::StructureShape.new(name: 'GridConfiguration')
+    GridGap = Shapes::IntegerShape.new(name: 'GridGap')
     Height = Shapes::IntegerShape.new(name: 'Height')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LayoutConfiguration = Shapes::StructureShape.new(name: 'LayoutConfiguration')
@@ -101,6 +102,7 @@ module Aws::IVSRealTime
     MaxStageResults = Shapes::IntegerShape.new(name: 'MaxStageResults')
     MaxStageSessionResults = Shapes::IntegerShape.new(name: 'MaxStageSessionResults')
     MaxStorageConfigurationResults = Shapes::IntegerShape.new(name: 'MaxStorageConfigurationResults')
+    OmitStoppedVideo = Shapes::BooleanShape.new(name: 'OmitStoppedVideo')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Participant = Shapes::StructureShape.new(name: 'Participant')
     ParticipantAttributes = Shapes::MapShape.new(name: 'ParticipantAttributes')
@@ -122,6 +124,12 @@ module Aws::IVSRealTime
     ParticipantTokenString = Shapes::StringShape.new(name: 'ParticipantTokenString')
     ParticipantTokenUserId = Shapes::StringShape.new(name: 'ParticipantTokenUserId')
     PendingVerification = Shapes::StructureShape.new(name: 'PendingVerification')
+    PipBehavior = Shapes::StringShape.new(name: 'PipBehavior')
+    PipConfiguration = Shapes::StructureShape.new(name: 'PipConfiguration')
+    PipHeight = Shapes::IntegerShape.new(name: 'PipHeight')
+    PipOffset = Shapes::IntegerShape.new(name: 'PipOffset')
+    PipPosition = Shapes::StringShape.new(name: 'PipPosition')
+    PipWidth = Shapes::IntegerShape.new(name: 'PipWidth')
     Published = Shapes::BooleanShape.new(name: 'Published')
     RecordingConfiguration = Shapes::StructureShape.new(name: 'RecordingConfiguration')
     RecordingConfigurationFormat = Shapes::StringShape.new(name: 'RecordingConfigurationFormat')
@@ -165,6 +173,8 @@ module Aws::IVSRealTime
     UserId = Shapes::StringShape.new(name: 'UserId')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Video = Shapes::StructureShape.new(name: 'Video')
+    VideoAspectRatio = Shapes::StringShape.new(name: 'VideoAspectRatio')
+    VideoFillMode = Shapes::StringShape.new(name: 'VideoFillMode')
     Width = Shapes::IntegerShape.new(name: 'Width')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
@@ -348,12 +358,17 @@ module Aws::IVSRealTime
     GetStorageConfigurationResponse.struct_class = Types::GetStorageConfigurationResponse
 
     GridConfiguration.add_member(:featured_participant_attribute, Shapes::ShapeRef.new(shape: AttributeKey, location_name: "featuredParticipantAttribute"))
+    GridConfiguration.add_member(:grid_gap, Shapes::ShapeRef.new(shape: GridGap, location_name: "gridGap"))
+    GridConfiguration.add_member(:omit_stopped_video, Shapes::ShapeRef.new(shape: OmitStoppedVideo, location_name: "omitStoppedVideo"))
+    GridConfiguration.add_member(:video_aspect_ratio, Shapes::ShapeRef.new(shape: VideoAspectRatio, location_name: "videoAspectRatio"))
+    GridConfiguration.add_member(:video_fill_mode, Shapes::ShapeRef.new(shape: VideoFillMode, location_name: "videoFillMode"))
     GridConfiguration.struct_class = Types::GridConfiguration
 
     InternalServerException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     InternalServerException.struct_class = Types::InternalServerException
 
     LayoutConfiguration.add_member(:grid, Shapes::ShapeRef.new(shape: GridConfiguration, location_name: "grid"))
+    LayoutConfiguration.add_member(:pip, Shapes::ShapeRef.new(shape: PipConfiguration, location_name: "pip"))
     LayoutConfiguration.struct_class = Types::LayoutConfiguration
 
     ListCompositionsRequest.add_member(:filter_by_encoder_configuration_arn, Shapes::ShapeRef.new(shape: EncoderConfigurationArn, location_name: "filterByEncoderConfigurationArn"))
@@ -481,6 +496,18 @@ module Aws::IVSRealTime
 
     PendingVerification.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     PendingVerification.struct_class = Types::PendingVerification
+
+    PipConfiguration.add_member(:featured_participant_attribute, Shapes::ShapeRef.new(shape: AttributeKey, location_name: "featuredParticipantAttribute"))
+    PipConfiguration.add_member(:grid_gap, Shapes::ShapeRef.new(shape: GridGap, location_name: "gridGap"))
+    PipConfiguration.add_member(:omit_stopped_video, Shapes::ShapeRef.new(shape: OmitStoppedVideo, location_name: "omitStoppedVideo"))
+    PipConfiguration.add_member(:pip_behavior, Shapes::ShapeRef.new(shape: PipBehavior, location_name: "pipBehavior"))
+    PipConfiguration.add_member(:pip_height, Shapes::ShapeRef.new(shape: PipHeight, location_name: "pipHeight"))
+    PipConfiguration.add_member(:pip_offset, Shapes::ShapeRef.new(shape: PipOffset, location_name: "pipOffset"))
+    PipConfiguration.add_member(:pip_participant_attribute, Shapes::ShapeRef.new(shape: AttributeKey, location_name: "pipParticipantAttribute"))
+    PipConfiguration.add_member(:pip_position, Shapes::ShapeRef.new(shape: PipPosition, location_name: "pipPosition"))
+    PipConfiguration.add_member(:pip_width, Shapes::ShapeRef.new(shape: PipWidth, location_name: "pipWidth"))
+    PipConfiguration.add_member(:video_fill_mode, Shapes::ShapeRef.new(shape: VideoFillMode, location_name: "videoFillMode"))
+    PipConfiguration.struct_class = Types::PipConfiguration
 
     RecordingConfiguration.add_member(:format, Shapes::ShapeRef.new(shape: RecordingConfigurationFormat, location_name: "format"))
     RecordingConfiguration.struct_class = Types::RecordingConfiguration
@@ -986,6 +1013,7 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
     end

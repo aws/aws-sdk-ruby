@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CloudFront
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CloudFront
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::CloudFront
     #   @option options [Aws::CloudFront::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CloudFront::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -2151,7 +2175,12 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Create a new invalidation.
+    # Create a new invalidation. For more information, see [Invalidating
+    # files][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html
     #
     # @option params [required, String] :distribution_id
     #   The distribution's id.
@@ -2254,17 +2283,17 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Specifies the Key Value Store resource to add to your account. In your
-    # account, the Key Value Store names must be unique. You can also import
-    # Key Value Store data in JSON format from an S3 bucket by providing a
+    # Specifies the key value store resource to add to your account. In your
+    # account, the key value store names must be unique. You can also import
+    # key value store data in JSON format from an S3 bucket by providing a
     # valid `ImportSource` that you own.
     #
     # @option params [required, String] :name
-    #   The name of the Key Value Store. The maximum length of the name is 32
-    #   characters.
+    #   The name of the key value store. The minimum length is 1 character and
+    #   the maximum length is 64 characters.
     #
     # @option params [String] :comment
-    #   The comment of the Key Value Store.
+    #   The comment of the key value store.
     #
     # @option params [Types::ImportSource] :import_source
     #   The S3 bucket that provides the source for the import. The source must
@@ -2415,7 +2444,7 @@ module Aws::CloudFront
     #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4
     #       signing_behavior: "never", # required, accepts never, always, no-override
-    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore
+    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore, mediapackagev2, lambda
     #     },
     #   })
     #
@@ -2426,7 +2455,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.location #=> String
     #   resp.etag #=> String
     #
@@ -2617,10 +2646,10 @@ module Aws::CloudFront
     #   A unique name to identify this real-time log configuration.
     #
     # @option params [required, Integer] :sampling_rate
-    #   The sampling rate for this real-time log configuration. The sampling
-    #   rate determines the percentage of viewer requests that are represented
-    #   in the real-time log data. You must provide an integer between 1 and
-    #   100, inclusive.
+    #   The sampling rate for this real-time log configuration. You can
+    #   specify a whole number between 1 and 100 (inclusive) to determine the
+    #   percentage of viewer requests that are represented in the real-time
+    #   log data.
     #
     # @return [Types::CreateRealtimeLogConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3272,13 +3301,13 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Specifies the Key Value Store to delete.
+    # Specifies the key value store to delete.
     #
     # @option params [required, String] :name
-    #   The name of the Key Value Store.
+    #   The name of the key value store.
     #
     # @option params [required, String] :if_match
-    #   The Key Value Store to delete, if a match occurs.
+    #   The key value store to delete, if a match occurs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3628,10 +3657,10 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Specifies the Key Value Store and its configuration.
+    # Specifies the key value store and its configuration.
     #
     # @option params [required, String] :name
-    #   The name of the Key Value Store.
+    #   The name of the key value store.
     #
     # @return [Types::DescribeKeyValueStoreResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4756,7 +4785,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControl AWS API Documentation
@@ -4790,7 +4819,7 @@ module Aws::CloudFront
     #   resp.origin_access_control_config.description #=> String
     #   resp.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControlConfig AWS API Documentation
@@ -6260,6 +6289,12 @@ module Aws::CloudFront
     #   distributions. If you specify "null" for the ID, the request returns
     #   a list of the distributions that aren't associated with a web ACL.
     #
+    #   For WAFV2, this is the ARN of the web ACL, such as
+    #   `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    #
+    #   For WAF Classic, this is the ID of the web ACL, such as
+    #   `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    #
     # @return [Types::ListDistributionsByWebACLIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDistributionsByWebACLIdResult#distribution_list #distribution_list} => Types::DistributionList
@@ -6732,16 +6767,16 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Specifies the Key Value Stores to list.
+    # Specifies the key value stores to list.
     #
     # @option params [String] :marker
-    #   The marker associated with the Key Value Stores list.
+    #   The marker associated with the key value stores list.
     #
     # @option params [Integer] :max_items
-    #   The maximum number of items in the Key Value Stores list.
+    #   The maximum number of items in the key value stores list.
     #
     # @option params [String] :status
-    #   The status of the request for the Key Value Stores list.
+    #   The status of the request for the key value stores list.
     #
     # @return [Types::ListKeyValueStoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6854,7 +6889,7 @@ module Aws::CloudFront
     #   resp.origin_access_control_list.items[0].name #=> String
     #   resp.origin_access_control_list.items[0].signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control_list.items[0].signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control_list.items[0].origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control_list.items[0].origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginAccessControls AWS API Documentation
     #
@@ -8763,16 +8798,16 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Specifies the Key Value Store to update.
+    # Specifies the key value store to update.
     #
     # @option params [required, String] :name
-    #   The name of the Key Value Store to update.
+    #   The name of the key value store to update.
     #
     # @option params [required, String] :comment
-    #   The comment of the Key Value Store to update.
+    #   The comment of the key value store to update.
     #
     # @option params [required, String] :if_match
-    #   The Key Value Store to update, if a match occurs.
+    #   The key value store to update, if a match occurs.
     #
     # @return [Types::UpdateKeyValueStoreResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8856,7 +8891,7 @@ module Aws::CloudFront
     #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4
     #       signing_behavior: "never", # required, accepts never, always, no-override
-    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore
+    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore, mediapackagev2, lambda
     #     },
     #     id: "string", # required
     #     if_match: "string",
@@ -8869,7 +8904,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginAccessControl AWS API Documentation
@@ -9392,7 +9427,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

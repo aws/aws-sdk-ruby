@@ -64,6 +64,8 @@ module Aws::CodeArtifact
             Aws::CodeArtifact::Endpoints::CopyPackageVersions.build(context)
           when :create_domain
             Aws::CodeArtifact::Endpoints::CreateDomain.build(context)
+          when :create_package_group
+            Aws::CodeArtifact::Endpoints::CreatePackageGroup.build(context)
           when :create_repository
             Aws::CodeArtifact::Endpoints::CreateRepository.build(context)
           when :delete_domain
@@ -72,6 +74,8 @@ module Aws::CodeArtifact
             Aws::CodeArtifact::Endpoints::DeleteDomainPermissionsPolicy.build(context)
           when :delete_package
             Aws::CodeArtifact::Endpoints::DeletePackage.build(context)
+          when :delete_package_group
+            Aws::CodeArtifact::Endpoints::DeletePackageGroup.build(context)
           when :delete_package_versions
             Aws::CodeArtifact::Endpoints::DeletePackageVersions.build(context)
           when :delete_repository
@@ -82,6 +86,8 @@ module Aws::CodeArtifact
             Aws::CodeArtifact::Endpoints::DescribeDomain.build(context)
           when :describe_package
             Aws::CodeArtifact::Endpoints::DescribePackage.build(context)
+          when :describe_package_group
+            Aws::CodeArtifact::Endpoints::DescribePackageGroup.build(context)
           when :describe_package_version
             Aws::CodeArtifact::Endpoints::DescribePackageVersion.build(context)
           when :describe_repository
@@ -90,6 +96,8 @@ module Aws::CodeArtifact
             Aws::CodeArtifact::Endpoints::DisassociateExternalConnection.build(context)
           when :dispose_package_versions
             Aws::CodeArtifact::Endpoints::DisposePackageVersions.build(context)
+          when :get_associated_package_group
+            Aws::CodeArtifact::Endpoints::GetAssociatedPackageGroup.build(context)
           when :get_authorization_token
             Aws::CodeArtifact::Endpoints::GetAuthorizationToken.build(context)
           when :get_domain_permissions_policy
@@ -102,8 +110,14 @@ module Aws::CodeArtifact
             Aws::CodeArtifact::Endpoints::GetRepositoryEndpoint.build(context)
           when :get_repository_permissions_policy
             Aws::CodeArtifact::Endpoints::GetRepositoryPermissionsPolicy.build(context)
+          when :list_allowed_repositories_for_group
+            Aws::CodeArtifact::Endpoints::ListAllowedRepositoriesForGroup.build(context)
+          when :list_associated_packages
+            Aws::CodeArtifact::Endpoints::ListAssociatedPackages.build(context)
           when :list_domains
             Aws::CodeArtifact::Endpoints::ListDomains.build(context)
+          when :list_package_groups
+            Aws::CodeArtifact::Endpoints::ListPackageGroups.build(context)
           when :list_package_version_assets
             Aws::CodeArtifact::Endpoints::ListPackageVersionAssets.build(context)
           when :list_package_version_dependencies
@@ -116,6 +130,8 @@ module Aws::CodeArtifact
             Aws::CodeArtifact::Endpoints::ListRepositories.build(context)
           when :list_repositories_in_domain
             Aws::CodeArtifact::Endpoints::ListRepositoriesInDomain.build(context)
+          when :list_sub_package_groups
+            Aws::CodeArtifact::Endpoints::ListSubPackageGroups.build(context)
           when :list_tags_for_resource
             Aws::CodeArtifact::Endpoints::ListTagsForResource.build(context)
           when :publish_package_version
@@ -130,6 +146,10 @@ module Aws::CodeArtifact
             Aws::CodeArtifact::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::CodeArtifact::Endpoints::UntagResource.build(context)
+          when :update_package_group
+            Aws::CodeArtifact::Endpoints::UpdatePackageGroup.build(context)
+          when :update_package_group_origin_configuration
+            Aws::CodeArtifact::Endpoints::UpdatePackageGroupOriginConfiguration.build(context)
           when :update_package_versions_status
             Aws::CodeArtifact::Endpoints::UpdatePackageVersionsStatus.build(context)
           when :update_repository

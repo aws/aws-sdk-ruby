@@ -242,6 +242,21 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because an automatic rotation of this key is
+    # currently in progress or scheduled to begin within the next 20
+    # minutes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] custom_key_store_id
     #   Enter the key store ID of the custom key store that you want to
     #   connect. To find the ID of a custom key store, use the
@@ -1801,8 +1816,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeCustomKeyStoresResponse AWS API Documentation
@@ -2036,10 +2051,31 @@ module Aws::KMS
     #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
     #   @return [String]
     #
+    # @!attribute [rw] rotation_period_in_days
+    #   Use this parameter to specify a custom period of time between each
+    #   rotation date. If no value is specified, the default value is 365
+    #   days.
+    #
+    #   The rotation period defines the number of days after you enable
+    #   automatic key rotation that KMS will rotate your key material, and
+    #   the number of days between each automatic rotation thereafter.
+    #
+    #   You can use the [ `kms:RotationPeriodInDays` ][1] condition key to
+    #   further constrain the values that principals can specify in the
+    #   `RotationPeriodInDays` parameter.
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-rotation-period-in-days
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotationRequest AWS API Documentation
     #
     class EnableKeyRotationRequest < Struct.new(
-      :key_id)
+      :key_id,
+      :rotation_period_in_days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3048,7 +3084,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   Specifies the name of the key policy. The only valid name is
+    #   Specifies the name of the key policy. If no policy name is
+    #   specified, the default value is `default`. The only valid name is
     #   `default`. To get the names of key policies, use ListKeyPolicies.
     #   @return [String]
     #
@@ -3065,10 +3102,15 @@ module Aws::KMS
     #   A key policy document in JSON format.
     #   @return [String]
     #
+    # @!attribute [rw] policy_name
+    #   The name of the key policy. The only valid value is `default`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyResponse AWS API Documentation
     #
     class GetKeyPolicyResponse < Struct.new(
-      :policy)
+      :policy,
+      :policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3103,10 +3145,42 @@ module Aws::KMS
     #   A Boolean value that specifies whether key rotation is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] key_id
+    #   Identifies the specified symmetric encryption KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] rotation_period_in_days
+    #   The number of days between each automatic rotation. The default
+    #   value is 365 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_rotation_date
+    #   The next date that KMS will automatically rotate the key material.
+    #   @return [Time]
+    #
+    # @!attribute [rw] on_demand_rotation_start_date
+    #   Identifies the date and time that an in progress on-demand rotation
+    #   was initiated.
+    #
+    #   The KMS API follows an [eventual consistency][1] model due to the
+    #   distributed nature of the system. As a result, there might be a
+    #   slight delay between initiating on-demand key rotation and the
+    #   rotation's completion. Once the on-demand rotation is complete, use
+    #   ListKeyRotations to view the details of the on-demand rotation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatusResponse AWS API Documentation
     #
     class GetKeyRotationStatusResponse < Struct.new(
-      :key_rotation_enabled)
+      :key_rotation_enabled,
+      :key_id,
+      :rotation_period_in_days,
+      :next_rotation_date,
+      :on_demand_rotation_start_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4210,8 +4284,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesResponse AWS API Documentation
@@ -4293,8 +4367,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsResponse AWS API Documentation
@@ -4363,14 +4437,82 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesResponse AWS API Documentation
     #
     class ListKeyPoliciesResponse < Struct.new(
       :policy_names,
+      :next_marker,
+      :truncated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   Gets the key rotations for the specified KMS key.
+    #
+    #   Specify the key ID or key ARN of the KMS key.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, KMS does not return more than the
+    #   specified number of items, but it might return fewer.
+    #
+    #   This value is optional. If you include a value, it must be between 1
+    #   and 1000, inclusive. If you do not include a value, it defaults to
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyRotationsRequest AWS API Documentation
+    #
+    class ListKeyRotationsRequest < Struct.new(
+      :key_id,
+      :limit,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rotations
+    #   A list of completed key material rotations.
+    #   @return [Array<Types::RotationsListEntry>]
+    #
+    # @!attribute [rw] next_marker
+    #   When `Truncated` is true, this element is present and contains the
+    #   value to use for the `Marker` parameter in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] truncated
+    #   A flag that indicates whether there are more items in the list. When
+    #   this value is true, the list in this response is truncated. To get
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyRotationsResponse AWS API Documentation
+    #
+    class ListKeyRotationsResponse < Struct.new(
+      :rotations,
       :next_marker,
       :truncated)
       SENSITIVE = []
@@ -4414,8 +4556,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysResponse AWS API Documentation
@@ -4496,8 +4638,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTagsResponse AWS API Documentation
@@ -4650,7 +4792,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   The name of the key policy. The only valid value is `default`.
+    #   The name of the key policy. If no policy name is specified, the
+    #   default value is `default`. The only valid value is `default`.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -5316,6 +5459,87 @@ module Aws::KMS
       :key_id,
       :grant_id,
       :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   Identifies a symmetric encryption KMS key. You cannot perform
+    #   on-demand rotation of [asymmetric KMS keys][1], [HMAC KMS keys][2],
+    #   KMS keys with [imported key material][3], or KMS keys in a [custom
+    #   key store][4]. To perform on-demand rotation of a set of related
+    #   [multi-Region keys][5], invoke the on-demand rotation on the primary
+    #   key.
+    #
+    #   Specify the key ID or key ARN of the KMS key.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RotateKeyOnDemandRequest AWS API Documentation
+    #
+    class RotateKeyOnDemandRequest < Struct.new(
+      :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   Identifies the symmetric encryption KMS key that you initiated
+    #   on-demand rotation on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RotateKeyOnDemandResponse AWS API Documentation
+    #
+    class RotateKeyOnDemandResponse < Struct.new(
+      :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about completed key material rotations.
+    #
+    # @!attribute [rw] key_id
+    #   Unique identifier of the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] rotation_date
+    #   Date and time that the key material rotation completed. Formatted as
+    #   Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] rotation_type
+    #   Identifies whether the key material rotation was a scheduled
+    #   [automatic rotation][1] or an [on-demand rotation][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-enable-disable
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-on-demand
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RotationsListEntry AWS API Documentation
+    #
+    class RotationsListEntry < Struct.new(
+      :key_id,
+      :rotation_date,
+      :rotation_type)
       SENSITIVE = []
       include Aws::Structure
     end

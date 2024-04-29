@@ -189,6 +189,12 @@ module Aws::MediaPackageV2
     #   The date and time the channel group was modified.
     #   @return [Time]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description for your channel group.
     #   @return [String]
@@ -206,6 +212,7 @@ module Aws::MediaPackageV2
       :egress_domain,
       :created_at,
       :modified_at,
+      :etag,
       :description,
       :tags)
       SENSITIVE = []
@@ -290,6 +297,12 @@ module Aws::MediaPackageV2
     #   The list of ingest endpoints.
     #   @return [Array<Types::IngestEndpoint>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel.
@@ -305,7 +318,102 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :ingest_endpoints,
+      :etag,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Create a DASH manifest configuration.
+    #
+    # @!attribute [rw] manifest_name
+    #   A short string that's appended to the endpoint URL. The child
+    #   manifest name creates a unique path to this endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_window_seconds
+    #   The total duration (in seconds) of the manifest's content.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter_configuration
+    #   Filter configuration includes settings for manifest filtering, start
+    #   and end times, and time delay that apply to all of your egress
+    #   requests for this manifest.
+    #   @return [Types::FilterConfiguration]
+    #
+    # @!attribute [rw] min_update_period_seconds
+    #   Minimum amount of time (in seconds) that the player should wait
+    #   before requesting updates to the manifest.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_buffer_time_seconds
+    #   Minimum amount of content (in seconds) that a player must keep
+    #   available in the buffer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] suggested_presentation_delay_seconds
+    #   The amount of time (in seconds) that the player should be from the
+    #   end of the manifest.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment_template_format
+    #   Determines the type of variable used in the `media` URL of the
+    #   `SegmentTemplate` tag in the manifest. Also specifies if segment
+    #   timeline information is included in `SegmentTimeline` or
+    #   `SegmentTemplate`.
+    #
+    #   Value description:
+    #
+    #   * `NUMBER_WITH_TIMELINE` - The `$Number$` variable is used in the
+    #     `media` URL. The value of this variable is the sequential number
+    #     of the segment. A full `SegmentTimeline` object is presented in
+    #     each `SegmentTemplate`.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] period_triggers
+    #   A list of triggers that controls when AWS Elemental MediaPackage
+    #   separates the MPEG-DASH manifest into multiple periods. Type `ADS`
+    #   to indicate that AWS Elemental MediaPackage must create periods in
+    #   the output manifest that correspond to SCTE-35 ad markers in the
+    #   input source. Leave this value empty to indicate that the manifest
+    #   is contained all in one period. For more information about periods
+    #   in the DASH manifest, see [Multi-period DASH in AWS Elemental
+    #   MediaPackage][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scte_dash
+    #   The SCTE configuration.
+    #   @return [Types::ScteDash]
+    #
+    # @!attribute [rw] drm_signaling
+    #   Determines how the DASH manifest signals the DRM content.
+    #   @return [String]
+    #
+    # @!attribute [rw] utc_timing
+    #   Determines the type of UTC timing included in the DASH Media
+    #   Presentation Description (MPD).
+    #   @return [Types::DashUtcTiming]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateDashManifestConfiguration AWS API Documentation
+    #
+    class CreateDashManifestConfiguration < Struct.new(
+      :manifest_name,
+      :manifest_window_seconds,
+      :filter_configuration,
+      :min_update_period_seconds,
+      :min_buffer_time_seconds,
+      :suggested_presentation_delay_seconds,
+      :segment_template_format,
+      :period_triggers,
+      :scte_dash,
+      :drm_signaling,
+      :utc_timing)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -493,6 +601,10 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::CreateLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] dash_manifests
+    #   A DASH manifest configuration.
+    #   @return [Array<Types::CreateDashManifestConfiguration>]
+    #
     # @!attribute [rw] tags
     #   A comma-separated list of tag key:value pairs that you define. For
     #   example:
@@ -515,6 +627,7 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
+      :dash_manifests,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -577,6 +690,16 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::GetLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] dash_manifests
+    #   A DASH manifest configuration.
+    #   @return [Array<Types::GetDashManifestConfiguration>]
+    #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   origin endpoint.
@@ -597,7 +720,30 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
+      :dash_manifests,
+      :etag,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Determines the type of UTC timing included in the DASH Media
+    # Presentation Description (MPD).
+    #
+    # @!attribute [rw] timing_mode
+    #   The UTC timing mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] timing_source
+    #   The the method that the player uses to synchronize to coordinated
+    #   universal time (UTC) wall clock time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DashUtcTiming AWS API Documentation
+    #
+    class DashUtcTiming < Struct.new(
+      :timing_mode,
+      :timing_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -963,6 +1109,12 @@ module Aws::MediaPackageV2
     #   The description for your channel group.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel group.
@@ -977,6 +1129,7 @@ module Aws::MediaPackageV2
       :created_at,
       :modified_at,
       :description,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1082,6 +1235,12 @@ module Aws::MediaPackageV2
     #   The list of ingest endpoints.
     #   @return [Array<Types::IngestEndpoint>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel.
@@ -1097,7 +1256,105 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :ingest_endpoints,
+      :etag,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Retrieve the DASH manifest configuration.
+    #
+    # @!attribute [rw] manifest_name
+    #   A short string that's appended to the endpoint URL. The manifest
+    #   name creates a unique path to this endpoint. If you don't enter a
+    #   value, MediaPackage uses the default manifest name, index.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The egress domain URL for stream delivery from MediaPackage.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_window_seconds
+    #   The total duration (in seconds) of the manifest's content.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter_configuration
+    #   Filter configuration includes settings for manifest filtering, start
+    #   and end times, and time delay that apply to all of your egress
+    #   requests for this manifest.
+    #   @return [Types::FilterConfiguration]
+    #
+    # @!attribute [rw] min_update_period_seconds
+    #   Minimum amount of time (in seconds) that the player should wait
+    #   before requesting updates to the manifest.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_buffer_time_seconds
+    #   Minimum amount of content (in seconds) that a player must keep
+    #   available in the buffer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] suggested_presentation_delay_seconds
+    #   The amount of time (in seconds) that the player should be from the
+    #   end of the manifest.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment_template_format
+    #   Determines the type of variable used in the `media` URL of the
+    #   `SegmentTemplate` tag in the manifest. Also specifies if segment
+    #   timeline information is included in `SegmentTimeline` or
+    #   `SegmentTemplate`.
+    #
+    #   Value description:
+    #
+    #   * `NUMBER_WITH_TIMELINE` - The `$Number$` variable is used in the
+    #     `media` URL. The value of this variable is the sequential number
+    #     of the segment. A full `SegmentTimeline` object is presented in
+    #     each `SegmentTemplate`.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] period_triggers
+    #   A list of triggers that controls when AWS Elemental MediaPackage
+    #   separates the MPEG-DASH manifest into multiple periods. Leave this
+    #   value empty to indicate that the manifest is contained all in one
+    #   period. For more information about periods in the DASH manifest, see
+    #   [Multi-period DASH in AWS Elemental MediaPackage][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scte_dash
+    #   The SCTE configuration.
+    #   @return [Types::ScteDash]
+    #
+    # @!attribute [rw] drm_signaling
+    #   Determines how the DASH manifest signals the DRM content.
+    #   @return [String]
+    #
+    # @!attribute [rw] utc_timing
+    #   Determines the type of UTC timing included in the DASH Media
+    #   Presentation Description (MPD).
+    #   @return [Types::DashUtcTiming]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetDashManifestConfiguration AWS API Documentation
+    #
+    class GetDashManifestConfiguration < Struct.new(
+      :manifest_name,
+      :url,
+      :manifest_window_seconds,
+      :filter_configuration,
+      :min_update_period_seconds,
+      :min_buffer_time_seconds,
+      :suggested_presentation_delay_seconds,
+      :segment_template_format,
+      :period_triggers,
+      :scte_dash,
+      :drm_signaling,
+      :utc_timing)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1381,10 +1638,20 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::GetLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   origin endpoint.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] dash_manifests
+    #   A DASH manifest configuration.
+    #   @return [Array<Types::GetDashManifestConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetOriginEndpointResponse AWS API Documentation
     #
@@ -1401,7 +1668,9 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
-      :tags)
+      :etag,
+      :tags,
+      :dash_manifests)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1513,6 +1782,27 @@ module Aws::MediaPackageV2
     class ListChannelsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List the DASH manifest configuration.
+    #
+    # @!attribute [rw] manifest_name
+    #   A short string that's appended to the endpoint URL. The manifest
+    #   name creates a unique path to this endpoint. If you don't enter a
+    #   value, MediaPackage uses the default manifest name, index.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The egress domain URL for stream delivery from MediaPackage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListDashManifestConfiguration AWS API Documentation
+    #
+    class ListDashManifestConfiguration < Struct.new(
+      :manifest_name,
+      :url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1713,6 +2003,10 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::ListLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] dash_manifests
+    #   A DASH manifest configuration.
+    #   @return [Array<Types::ListDashManifestConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/OriginEndpointListConfiguration AWS API Documentation
     #
     class OriginEndpointListConfiguration < Struct.new(
@@ -1725,7 +2019,8 @@ module Aws::MediaPackageV2
       :created_at,
       :modified_at,
       :hls_manifests,
-      :low_latency_hls_manifests)
+      :low_latency_hls_manifests,
+      :dash_manifests)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1826,6 +2121,30 @@ module Aws::MediaPackageV2
     #
     class Scte < Struct.new(
       :scte_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The SCTE configuration.
+    #
+    # @!attribute [rw] ad_marker_dash
+    #   Choose how ad markers are included in the packaged content. If you
+    #   include ad markers in the content stream in your upstream encoders,
+    #   then you need to inform MediaPackage what to do with the ad markers
+    #   in the output.
+    #
+    #   Value description:
+    #
+    #   * `Binary` - The SCTE-35 marker is expressed as a hex-string (Base64
+    #     string) rather than full XML.
+    #
+    #   * `XML` - The SCTE marker is expressed fully in XML.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ScteDash AWS API Documentation
+    #
+    class ScteDash < Struct.new(
+      :ad_marker_dash)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2051,6 +2370,12 @@ module Aws::MediaPackageV2
     #   account in the AWS Region.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag,
+    #   the update request will be rejected.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Any descriptive information that you want to add to the channel
     #   group for future identification purposes.
@@ -2060,6 +2385,7 @@ module Aws::MediaPackageV2
     #
     class UpdateChannelGroupRequest < Struct.new(
       :channel_group_name,
+      :etag,
       :description)
       SENSITIVE = []
       include Aws::Structure
@@ -2093,6 +2419,12 @@ module Aws::MediaPackageV2
     #   The description for your channel group.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel group.
@@ -2107,6 +2439,7 @@ module Aws::MediaPackageV2
       :created_at,
       :modified_at,
       :description,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2124,6 +2457,12 @@ module Aws::MediaPackageV2
     #   the AWS Region and channel group.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag,
+    #   the update request will be rejected.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Any descriptive information that you want to add to the channel for
     #   future identification purposes.
@@ -2134,6 +2473,7 @@ module Aws::MediaPackageV2
     class UpdateChannelRequest < Struct.new(
       :channel_group_name,
       :channel_name,
+      :etag,
       :description)
       SENSITIVE = []
       include Aws::Structure
@@ -2171,6 +2511,12 @@ module Aws::MediaPackageV2
     #   The list of ingest endpoints.
     #   @return [Array<Types::IngestEndpoint>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel.
@@ -2186,6 +2532,7 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :ingest_endpoints,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2240,6 +2587,16 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::CreateLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] dash_manifests
+    #   A DASH manifest configuration.
+    #   @return [Array<Types::CreateDashManifestConfiguration>]
+    #
+    # @!attribute [rw] etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag,
+    #   the update request will be rejected.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateOriginEndpointRequest AWS API Documentation
     #
     class UpdateOriginEndpointRequest < Struct.new(
@@ -2251,7 +2608,9 @@ module Aws::MediaPackageV2
       :description,
       :startover_window_seconds,
       :hls_manifests,
-      :low_latency_hls_manifests)
+      :low_latency_hls_manifests,
+      :dash_manifests,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2313,10 +2672,20 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::GetLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   origin endpoint.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] dash_manifests
+    #   A DASH manifest configuration.
+    #   @return [Array<Types::GetDashManifestConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateOriginEndpointResponse AWS API Documentation
     #
@@ -2333,7 +2702,9 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
-      :tags)
+      :etag,
+      :tags,
+      :dash_manifests)
       SENSITIVE = []
       include Aws::Structure
     end

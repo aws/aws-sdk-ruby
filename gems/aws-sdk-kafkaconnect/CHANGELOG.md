@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2024-02-26)
+------------------
+
+* Feature - Adds support for tagging, with new TagResource, UntagResource and ListTagsForResource APIs to manage tags and updates to existing APIs to allow tag on create. This release also adds support for the new DeleteWorkerConfiguration API.
+
 1.19.0 (2024-01-26)
 ------------------
 

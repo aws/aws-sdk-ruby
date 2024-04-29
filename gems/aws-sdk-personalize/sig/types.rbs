@@ -39,6 +39,11 @@ module Aws::Personalize
       SENSITIVE: []
     end
 
+    class AutoTrainingConfig
+      attr_accessor scheduling_expression: ::String
+      SENSITIVE: []
+    end
+
     class BatchInferenceJob
       attr_accessor job_name: ::String
       attr_accessor batch_inference_job_arn: ::String
@@ -139,6 +144,7 @@ module Aws::Personalize
     class CampaignConfig
       attr_accessor item_exploration_config: ::Hash[::String, ::String]
       attr_accessor enable_metadata_with_recommendations: bool
+      attr_accessor sync_with_latest_solution_version: bool
       SENSITIVE: []
     end
 
@@ -356,6 +362,7 @@ module Aws::Personalize
       attr_accessor name: ::String
       attr_accessor perform_hpo: bool
       attr_accessor perform_auto_ml: bool
+      attr_accessor perform_auto_training: bool
       attr_accessor recipe_arn: ::String
       attr_accessor dataset_group_arn: ::String
       attr_accessor event_type: ::String
@@ -372,7 +379,7 @@ module Aws::Personalize
     class CreateSolutionVersionRequest
       attr_accessor name: ::String
       attr_accessor solution_arn: ::String
-      attr_accessor training_mode: ("FULL" | "UPDATE")
+      attr_accessor training_mode: ("FULL" | "UPDATE" | "AUTOTRAIN")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -1233,6 +1240,7 @@ module Aws::Personalize
       attr_accessor solution_arn: ::String
       attr_accessor perform_hpo: bool
       attr_accessor perform_auto_ml: bool
+      attr_accessor perform_auto_training: bool
       attr_accessor recipe_arn: ::String
       attr_accessor dataset_group_arn: ::String
       attr_accessor event_type: ::String
@@ -1253,6 +1261,7 @@ module Aws::Personalize
       attr_accessor auto_ml_config: Types::AutoMLConfig
       attr_accessor optimization_objective: Types::OptimizationObjective
       attr_accessor training_data_config: Types::TrainingDataConfig
+      attr_accessor auto_training_config: Types::AutoTrainingConfig
       SENSITIVE: []
     end
 
@@ -1277,18 +1286,21 @@ module Aws::Personalize
       attr_accessor dataset_group_arn: ::String
       attr_accessor solution_config: Types::SolutionConfig
       attr_accessor training_hours: ::Float
-      attr_accessor training_mode: ("FULL" | "UPDATE")
+      attr_accessor training_mode: ("FULL" | "UPDATE" | "AUTOTRAIN")
       attr_accessor tuned_hpo_params: Types::TunedHPOParams
       attr_accessor status: ::String
       attr_accessor failure_reason: ::String
       attr_accessor creation_date_time: ::Time
       attr_accessor last_updated_date_time: ::Time
+      attr_accessor training_type: ("AUTOMATIC" | "MANUAL")
       SENSITIVE: []
     end
 
     class SolutionVersionSummary
       attr_accessor solution_version_arn: ::String
       attr_accessor status: ::String
+      attr_accessor training_mode: ("FULL" | "UPDATE" | "AUTOTRAIN")
+      attr_accessor training_type: ("AUTOMATIC" | "MANUAL")
       attr_accessor creation_date_time: ::Time
       attr_accessor last_updated_date_time: ::Time
       attr_accessor failure_reason: ::String

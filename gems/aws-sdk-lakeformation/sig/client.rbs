@@ -357,7 +357,12 @@ module Aws
                                                                  ?external_filtering: {
                                                                    status: ("ENABLED" | "DISABLED"),
                                                                    authorized_targets: Array[::String]
-                                                                 }
+                                                                 },
+                                                                 ?share_recipients: Array[
+                                                                   {
+                                                                     data_lake_principal_identifier: ::String?
+                                                                   },
+                                                                 ]
                                                                ) -> _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
                                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
 
@@ -545,6 +550,8 @@ module Aws
         def instance_arn: () -> ::String
         def application_arn: () -> ::String
         def external_filtering: () -> Types::ExternalFilteringConfiguration
+        def share_recipients: () -> ::Array[Types::DataLakePrincipal]
+        def resource_share: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#describe_lake_formation_identity_center_configuration-instance_method
       def describe_lake_formation_identity_center_configuration: (
@@ -1381,6 +1388,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_lake_formation_identity_center_configuration-instance_method
       def update_lake_formation_identity_center_configuration: (
                                                                  ?catalog_id: ::String,
+                                                                 ?share_recipients: Array[
+                                                                   {
+                                                                     data_lake_principal_identifier: ::String?
+                                                                   },
+                                                                 ],
                                                                  ?application_status: ("ENABLED" | "DISABLED"),
                                                                  ?external_filtering: {
                                                                    status: ("ENABLED" | "DISABLED"),

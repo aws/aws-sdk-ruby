@@ -77,7 +77,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFHIRDatastoreResponse]
         def datastore_id: () -> ::String
         def datastore_arn: () -> ::String
-        def datastore_status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+        def datastore_status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED")
         def datastore_endpoint: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#create_fhir_datastore-instance_method
@@ -113,7 +113,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFHIRDatastoreResponse]
         def datastore_id: () -> ::String
         def datastore_arn: () -> ::String
-        def datastore_status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+        def datastore_status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED")
         def datastore_endpoint: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#delete_fhir_datastore-instance_method
@@ -163,7 +163,7 @@ module Aws
       def list_fhir_datastores: (
                                   ?filter: {
                                     datastore_name: ::String?,
-                                    datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")?,
+                                    datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED")?,
                                     created_before: ::Time?,
                                     created_after: ::Time?
                                   },

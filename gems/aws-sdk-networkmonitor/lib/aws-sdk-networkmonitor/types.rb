@@ -38,7 +38,7 @@ module Aws::NetworkMonitor
 
     # @!attribute [rw] monitor_name
     #   The name identifying the monitor. It can contain only letters,
-    #   underscores (\_), or dashes (-), and can be up to 255 characters.
+    #   underscores (\_), or dashes (-), and can be up to 200 characters.
     #   @return [String]
     #
     # @!attribute [rw] probes
@@ -47,7 +47,8 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] aggregation_period
     #   The time, in seconds, that metrics are aggregated and sent to Amazon
-    #   CloudWatch. Valid values are either `30` or `60`.
+    #   CloudWatch. Valid values are either `30` or `60`. `60` is the
+    #   default if no period is chosen.
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
@@ -115,7 +116,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination IP address. This will be either `IPV4` or `IPV6`.
+    #   The destination IP address. This must be either `IPV4` or `IPV6`.
     #   @return [String]
     #
     # @!attribute [rw] destination_port
@@ -126,12 +127,12 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] protocol
     #   The protocol used for the network traffic between the `source` and
-    #   `destination`. This will be either `TCP` or `ICMP`.
+    #   `destination`. This must be either `TCP` or `ICMP`.
     #   @return [String]
     #
     # @!attribute [rw] packet_size
     #   The size of the packets sent between the source and destination.
-    #   This will be a number between `56` and `8500`.
+    #   This must be a number between `56` and `8500`.
     #   @return [Integer]
     #
     # @!attribute [rw] probe_tags
@@ -152,8 +153,7 @@ module Aws::NetworkMonitor
     end
 
     # @!attribute [rw] monitor_name
-    #   The name of the monitor to associated with the probe. To get a list
-    #   of available monitors, use `ListMonitors`.
+    #   The name of the monitor to associated with the probe.
     #   @return [String]
     #
     # @!attribute [rw] probe
@@ -197,7 +197,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination IP address for the monitor. This will be either an
+    #   The destination IP address for the monitor. This must be either an
     #   IPv4 or IPv6 address.
     #   @return [String]
     #
@@ -209,12 +209,12 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] protocol
     #   The protocol used for the network traffic between the `source` and
-    #   `destination`. This will be either `TCP` or `ICMP`.
+    #   `destination`. This must be either `TCP` or `ICMP`.
     #   @return [String]
     #
     # @!attribute [rw] packet_size
     #   The size of the packets sent between the source and destination.
-    #   This will be a number between `56` and `8500`.
+    #   This must be a number between `56` and `8500`.
     #   @return [Integer]
     #
     # @!attribute [rw] address_family
@@ -262,8 +262,7 @@ module Aws::NetworkMonitor
     end
 
     # @!attribute [rw] monitor_name
-    #   The name of the monitor to delete. Use the `ListMonitors` action to
-    #   get a list of your current monitors.
+    #   The name of the monitor to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmonitor-2023-08-01/DeleteMonitorInput AWS API Documentation
@@ -279,13 +278,11 @@ module Aws::NetworkMonitor
     class DeleteMonitorOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] monitor_name
-    #   The name of the monitor to delete. For a list of the available
-    #   monitors, use the `ListMonitors` action.
+    #   The name of the monitor to delete.
     #   @return [String]
     #
     # @!attribute [rw] probe_id
-    #   The ID of the probe to delete. Run `GetMonitor` to get a lst of all
-    #   probes and probe IDs associated with the monitor.
+    #   The ID of the probe to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmonitor-2023-08-01/DeleteProbeInput AWS API Documentation
@@ -318,12 +315,11 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] monitor_name
-    #   The name of the monitor. To get a list of the current monitors and
-    #   their names, use the `ListMonitors` action.
+    #   The name of the monitor.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   Returns a list of the state of each monitor.
+    #   Lists the status of the `state` of each monitor.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_period
@@ -393,7 +389,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination IP address for the monitor. This will be either an
+    #   The destination IP address for the monitor. This must be either an
     #   IPv4 or IPv6 address.
     #   @return [String]
     #
@@ -405,12 +401,12 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] protocol
     #   The protocol used for the network traffic between the `source` and
-    #   `destination`. This will be either `TCP` or `ICMP`.
+    #   `destination`. This must be either `TCP` or `ICMP`.
     #   @return [String]
     #
     # @!attribute [rw] packet_size
     #   The size of the packets sent between the source and destination.
-    #   This will be a number between `56` and `8500`.
+    #   This must be a number between `56` and `8500`.
     #   @return [Integer]
     #
     # @!attribute [rw] address_family
@@ -574,7 +570,7 @@ module Aws::NetworkMonitor
       include Aws::Structure
     end
 
-    # Describes information about a monitor probe.
+    # Describes information about a network monitor probe.
     #
     # @!attribute [rw] probe_id
     #   The ID of the probe.
@@ -659,7 +655,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination IP address. This will be either `IPV4` or `IPV6`.
+    #   The destination IP address. This must be either `IPV4` or `IPV6`.
     #   @return [String]
     #
     # @!attribute [rw] destination_port
@@ -670,12 +666,12 @@ module Aws::NetworkMonitor
     #
     # @!attribute [rw] protocol
     #   The protocol used for the network traffic between the `source` and
-    #   `destination`. This will be either `TCP` or `ICMP`.
+    #   `destination`. This must be either `TCP` or `ICMP`.
     #   @return [String]
     #
     # @!attribute [rw] packet_size
     #   The size of the packets sent between the source and destination.
-    #   This will be a number between `56` and `8500`.
+    #   This must be a number between `56` and `8500`.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -777,8 +773,7 @@ module Aws::NetworkMonitor
     class UntagResourceOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] monitor_name
-    #   The name of the monitor to update. Run `ListMonitors` to get a list
-    #   of monitor names.
+    #   The name of the monitor to update.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_period
@@ -832,7 +827,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] probe_id
-    #   Run `GetMonitor` to get a list of probes and probe IDs.
+    #   The ID of the probe to update.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -892,7 +887,7 @@ module Aws::NetworkMonitor
     #   @return [String]
     #
     # @!attribute [rw] destination_port
-    #   The updated destination port. This will be a number between `1` and
+    #   The updated destination port. This must be a number between `1` and
     #   `65536`.
     #   @return [Integer]
     #
@@ -905,7 +900,7 @@ module Aws::NetworkMonitor
     #   @return [Integer]
     #
     # @!attribute [rw] address_family
-    #   The updated IP address family. This will be either `IPV4` or `IPV6`.
+    #   The updated IP address family. This must be either `IPV4` or `IPV6`.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-drs/customizations'
 # @!group service
 module Aws::Drs
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.31.0'
 
 end

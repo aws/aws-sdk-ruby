@@ -131,7 +131,7 @@ module Aws::Mgn
 
     class CreateLaunchConfigurationTemplateRequest
       attr_accessor associate_public_ip_address: bool
-      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE")
       attr_accessor copy_private_ip: bool
       attr_accessor copy_tags: bool
       attr_accessor enable_map_auto_tagging: bool
@@ -572,7 +572,7 @@ module Aws::Mgn
     end
 
     class LaunchConfiguration
-      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE")
       attr_accessor copy_private_ip: bool
       attr_accessor copy_tags: bool
       attr_accessor ec2_launch_template_id: ::String
@@ -590,7 +590,7 @@ module Aws::Mgn
     class LaunchConfigurationTemplate
       attr_accessor arn: ::String
       attr_accessor associate_public_ip_address: bool
-      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE")
       attr_accessor copy_private_ip: bool
       attr_accessor copy_tags: bool
       attr_accessor ec2_launch_template_id: ::String
@@ -913,7 +913,7 @@ module Aws::Mgn
       attr_accessor action_id: ::String
       attr_accessor action_name: ::String
       attr_accessor active: bool
-      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "REFACTORING" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
       attr_accessor description: ::String
       attr_accessor document_identifier: ::String
       attr_accessor document_version: ::String
@@ -930,7 +930,7 @@ module Aws::Mgn
       attr_accessor action_id: ::String
       attr_accessor action_name: ::String
       attr_accessor active: bool
-      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "REFACTORING" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
       attr_accessor description: ::String
       attr_accessor document_identifier: ::String
       attr_accessor document_version: ::String
@@ -1084,7 +1084,7 @@ module Aws::Mgn
       attr_accessor action_id: ::String
       attr_accessor action_name: ::String
       attr_accessor active: bool
-      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "REFACTORING" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
       attr_accessor description: ::String
       attr_accessor document_identifier: ::String
       attr_accessor document_version: ::String
@@ -1203,7 +1203,7 @@ module Aws::Mgn
       attr_accessor action_id: ::String
       attr_accessor action_name: ::String
       attr_accessor active: bool
-      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "REFACTORING" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
       attr_accessor description: ::String
       attr_accessor document_identifier: ::String
       attr_accessor document_version: ::String
@@ -1282,7 +1282,7 @@ module Aws::Mgn
 
     class UpdateLaunchConfigurationRequest
       attr_accessor account_id: ::String
-      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE")
       attr_accessor copy_private_ip: bool
       attr_accessor copy_tags: bool
       attr_accessor enable_map_auto_tagging: bool
@@ -1298,7 +1298,7 @@ module Aws::Mgn
 
     class UpdateLaunchConfigurationTemplateRequest
       attr_accessor associate_public_ip_address: bool
-      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE")
       attr_accessor copy_private_ip: bool
       attr_accessor copy_tags: bool
       attr_accessor enable_map_auto_tagging: bool

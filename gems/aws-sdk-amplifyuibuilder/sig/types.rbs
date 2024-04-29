@@ -702,6 +702,16 @@ module Aws::AmplifyUIBuilder
       SENSITIVE: []
     end
 
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ListThemesRequest
       attr_accessor app_id: ::String
       attr_accessor environment_name: ::String
@@ -831,6 +841,15 @@ module Aws::AmplifyUIBuilder
       SENSITIVE: []
     end
 
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
     class Theme
       attr_accessor app_id: ::String
       attr_accessor environment_name: ::String
@@ -872,6 +891,15 @@ module Aws::AmplifyUIBuilder
     class UnauthorizedException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
     end
 
     class UpdateComponentData

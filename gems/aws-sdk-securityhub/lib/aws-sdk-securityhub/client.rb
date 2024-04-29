@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::SecurityHub
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::SecurityHub
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::SecurityHub
     #   @option options [Aws::SecurityHub::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SecurityHub::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -844,15 +868,15 @@ module Aws::SecurityHub
     #   resp.rules[0].criteria.confidence #=> Array
     #   resp.rules[0].criteria.confidence[0].gte #=> Float
     #   resp.rules[0].criteria.confidence[0].lte #=> Float
-    #   resp.rules[0].criteria.confidence[0].eq #=> Float
     #   resp.rules[0].criteria.confidence[0].gt #=> Float
     #   resp.rules[0].criteria.confidence[0].lt #=> Float
+    #   resp.rules[0].criteria.confidence[0].eq #=> Float
     #   resp.rules[0].criteria.criticality #=> Array
     #   resp.rules[0].criteria.criticality[0].gte #=> Float
     #   resp.rules[0].criteria.criticality[0].lte #=> Float
-    #   resp.rules[0].criteria.criticality[0].eq #=> Float
     #   resp.rules[0].criteria.criticality[0].gt #=> Float
     #   resp.rules[0].criteria.criticality[0].lt #=> Float
+    #   resp.rules[0].criteria.criticality[0].eq #=> Float
     #   resp.rules[0].criteria.title #=> Array
     #   resp.rules[0].criteria.title[0].value #=> String
     #   resp.rules[0].criteria.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -1552,18 +1576,18 @@ module Aws::SecurityHub
     #             {
     #               gte: 1.0,
     #               lte: 1.0,
-    #               eq: 1.0,
     #               gt: 1.0,
     #               lt: 1.0,
+    #               eq: 1.0,
     #             },
     #           ],
     #           criticality: [
     #             {
     #               gte: 1.0,
     #               lte: 1.0,
-    #               eq: 1.0,
     #               gt: 1.0,
     #               lt: 1.0,
+    #               eq: 1.0,
     #             },
     #           ],
     #           title: [
@@ -2363,18 +2387,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -3029,18 +3053,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -3053,18 +3077,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -3167,9 +3191,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -3198,9 +3222,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -3225,18 +3249,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -3540,18 +3564,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -5311,52 +5335,80 @@ module Aws::SecurityHub
     #   Identifies which finding to get the finding history for.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
-    #   An ISO 8601-formatted timestamp that indicates the start time of the
-    #   requested finding history. A correctly formatted example is
-    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and date
-    #   and time should be separated by `T`. For more information, see [RFC
-    #   3339 section 5.6, Internet Date/Time Format][1].
+    #   A timestamp that indicates the start time of the requested finding
+    #   history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security Hub
     #   returns finding history for the specified time period. If you provide
     #   a value for `StartTime` but not for `EndTime`, Security Hub returns
     #   finding history from the `StartTime` to the time at which the API is
     #   called. If you provide a value for `EndTime` but not for `StartTime`,
-    #   Security Hub returns finding history from the [CreatedAt][2] timestamp
+    #   Security Hub returns finding history from the [CreatedAt][1] timestamp
     #   of the finding to the `EndTime`. If you provide neither `StartTime`
     #   nor `EndTime`, Security Hub returns finding history from the CreatedAt
     #   timestamp of the finding to the time at which the API is called. In
     #   all of these scenarios, the response is limited to 100 results, and
     #   the maximum time period is limited to 90 days.
     #
+    #   This field accepts only the specified formats. Timestamps can end with
+    #   `Z` or `("+" / "-") time-hour [":" time-minute]`. The time-secfrac
+    #   after seconds is limited to a maximum of 9 digits. The offset is
+    #   bounded by +/-18:00. Here are valid timestamp formats with examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example, `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
-    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
     #   An ISO 8601-formatted timestamp that indicates the end time of the
-    #   requested finding history. A correctly formatted example is
-    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and date
-    #   and time should be separated by `T`. For more information, see [RFC
-    #   3339 section 5.6, Internet Date/Time Format][1].
+    #   requested finding history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security Hub
     #   returns finding history for the specified time period. If you provide
     #   a value for `StartTime` but not for `EndTime`, Security Hub returns
     #   finding history from the `StartTime` to the time at which the API is
     #   called. If you provide a value for `EndTime` but not for `StartTime`,
-    #   Security Hub returns finding history from the [CreatedAt][2] timestamp
+    #   Security Hub returns finding history from the [CreatedAt][1] timestamp
     #   of the finding to the `EndTime`. If you provide neither `StartTime`
     #   nor `EndTime`, Security Hub returns finding history from the CreatedAt
     #   timestamp of the finding to the time at which the API is called. In
     #   all of these scenarios, the response is limited to 100 results, and
     #   the maximum time period is limited to 90 days.
     #
+    #   This field accepts only the specified formats. Timestamps can end with
+    #   `Z` or `("+" / "-") time-hour [":" time-minute]`. The time-secfrac
+    #   after seconds is limited to a maximum of 9 digits. The offset is
+    #   bounded by +/-18:00. Here are valid timestamp formats with examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example, `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
-    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
     #
     # @option params [String] :next_token
     #   A token for pagination purposes. Provide `NULL` as the initial value.
@@ -5686,18 +5738,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -5710,18 +5762,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -5824,9 +5876,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -5855,9 +5907,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -5882,18 +5934,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -6197,18 +6249,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -6495,30 +6547,30 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.severity_product #=> Array
     #   resp.insights[0].filters.severity_product[0].gte #=> Float
     #   resp.insights[0].filters.severity_product[0].lte #=> Float
-    #   resp.insights[0].filters.severity_product[0].eq #=> Float
     #   resp.insights[0].filters.severity_product[0].gt #=> Float
     #   resp.insights[0].filters.severity_product[0].lt #=> Float
+    #   resp.insights[0].filters.severity_product[0].eq #=> Float
     #   resp.insights[0].filters.severity_normalized #=> Array
     #   resp.insights[0].filters.severity_normalized[0].gte #=> Float
     #   resp.insights[0].filters.severity_normalized[0].lte #=> Float
-    #   resp.insights[0].filters.severity_normalized[0].eq #=> Float
     #   resp.insights[0].filters.severity_normalized[0].gt #=> Float
     #   resp.insights[0].filters.severity_normalized[0].lt #=> Float
+    #   resp.insights[0].filters.severity_normalized[0].eq #=> Float
     #   resp.insights[0].filters.severity_label #=> Array
     #   resp.insights[0].filters.severity_label[0].value #=> String
     #   resp.insights[0].filters.severity_label[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
     #   resp.insights[0].filters.confidence #=> Array
     #   resp.insights[0].filters.confidence[0].gte #=> Float
     #   resp.insights[0].filters.confidence[0].lte #=> Float
-    #   resp.insights[0].filters.confidence[0].eq #=> Float
     #   resp.insights[0].filters.confidence[0].gt #=> Float
     #   resp.insights[0].filters.confidence[0].lt #=> Float
+    #   resp.insights[0].filters.confidence[0].eq #=> Float
     #   resp.insights[0].filters.criticality #=> Array
     #   resp.insights[0].filters.criticality[0].gte #=> Float
     #   resp.insights[0].filters.criticality[0].lte #=> Float
-    #   resp.insights[0].filters.criticality[0].eq #=> Float
     #   resp.insights[0].filters.criticality[0].gt #=> Float
     #   resp.insights[0].filters.criticality[0].lt #=> Float
+    #   resp.insights[0].filters.criticality[0].eq #=> Float
     #   resp.insights[0].filters.title #=> Array
     #   resp.insights[0].filters.title[0].value #=> String
     #   resp.insights[0].filters.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6570,9 +6622,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_source_port #=> Array
     #   resp.insights[0].filters.network_source_port[0].gte #=> Float
     #   resp.insights[0].filters.network_source_port[0].lte #=> Float
-    #   resp.insights[0].filters.network_source_port[0].eq #=> Float
     #   resp.insights[0].filters.network_source_port[0].gt #=> Float
     #   resp.insights[0].filters.network_source_port[0].lt #=> Float
+    #   resp.insights[0].filters.network_source_port[0].eq #=> Float
     #   resp.insights[0].filters.network_source_domain #=> Array
     #   resp.insights[0].filters.network_source_domain[0].value #=> String
     #   resp.insights[0].filters.network_source_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6586,9 +6638,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_destination_port #=> Array
     #   resp.insights[0].filters.network_destination_port[0].gte #=> Float
     #   resp.insights[0].filters.network_destination_port[0].lte #=> Float
-    #   resp.insights[0].filters.network_destination_port[0].eq #=> Float
     #   resp.insights[0].filters.network_destination_port[0].gt #=> Float
     #   resp.insights[0].filters.network_destination_port[0].lt #=> Float
+    #   resp.insights[0].filters.network_destination_port[0].eq #=> Float
     #   resp.insights[0].filters.network_destination_domain #=> Array
     #   resp.insights[0].filters.network_destination_domain[0].value #=> String
     #   resp.insights[0].filters.network_destination_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6601,15 +6653,15 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.process_pid #=> Array
     #   resp.insights[0].filters.process_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_pid[0].lte #=> Float
-    #   resp.insights[0].filters.process_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_pid[0].gt #=> Float
     #   resp.insights[0].filters.process_pid[0].lt #=> Float
+    #   resp.insights[0].filters.process_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_parent_pid #=> Array
     #   resp.insights[0].filters.process_parent_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].lte #=> Float
-    #   resp.insights[0].filters.process_parent_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].gt #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].lt #=> Float
+    #   resp.insights[0].filters.process_parent_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_launched_at #=> Array
     #   resp.insights[0].filters.process_launched_at[0].start #=> String
     #   resp.insights[0].filters.process_launched_at[0].end #=> String
@@ -6761,15 +6813,15 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.finding_provider_fields_confidence #=> Array
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].lte #=> Float
-    #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].gt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].lt #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality #=> Array
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].lte #=> Float
-    #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].gt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].lt #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id #=> Array
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].value #=> String
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -8707,18 +8759,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -8731,18 +8783,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -8845,9 +8897,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -8876,9 +8928,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -8903,18 +8955,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -9218,18 +9270,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -9465,18 +9517,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -9489,18 +9541,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -9603,9 +9655,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -9634,9 +9686,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -9661,18 +9713,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -9976,18 +10028,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -10348,7 +10400,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

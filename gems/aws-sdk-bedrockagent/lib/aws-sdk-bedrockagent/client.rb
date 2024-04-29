@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::BedrockAgent
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::BedrockAgent
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::BedrockAgent
     #   @option options [Aws::BedrockAgent::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::BedrockAgent::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -388,22 +412,33 @@ module Aws::BedrockAgent
 
     # @!group API Operations
 
-    # Associate a Knowledge Base to an existing Amazon Bedrock Agent
+    # Associates a knowledge base with an agent. If a knowledge base is
+    # associated and its `indexState` is set to `Enabled`, the agent queries
+    # the knowledge base for information to augment its response to the
+    # user.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent with which you want to associate
+    #   the knowledge base.
     #
     # @option params [required, String] :agent_version
-    #   Draft Version of the Agent.
-    #
-    # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    #   The version of the agent with which you want to associate the
+    #   knowledge base.
     #
     # @option params [required, String] :description
-    #   Description of the Resource.
+    #   A description of what the agent should use the knowledge base for.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base to associate with the
+    #   agent.
     #
     # @option params [String] :knowledge_base_state
-    #   State of the knowledge base; whether it is enabled or disabled
+    #   Specifies whether to use the knowledge base or not when sending an
+    #   [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
     #
     # @return [Types::AssociateAgentKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -414,8 +449,8 @@ module Aws::BedrockAgent
     #   resp = client.associate_agent_knowledge_base({
     #     agent_id: "Id", # required
     #     agent_version: "DraftVersion", # required
-    #     knowledge_base_id: "Id", # required
     #     description: "Description", # required
+    #     knowledge_base_id: "Id", # required
     #     knowledge_base_state: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
@@ -423,11 +458,11 @@ module Aws::BedrockAgent
     #
     #   resp.agent_knowledge_base.agent_id #=> String
     #   resp.agent_knowledge_base.agent_version #=> String
-    #   resp.agent_knowledge_base.knowledge_base_id #=> String
-    #   resp.agent_knowledge_base.description #=> String
     #   resp.agent_knowledge_base.created_at #=> Time
-    #   resp.agent_knowledge_base.updated_at #=> Time
+    #   resp.agent_knowledge_base.description #=> String
+    #   resp.agent_knowledge_base.knowledge_base_id #=> String
     #   resp.agent_knowledge_base.knowledge_base_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AssociateAgentKnowledgeBase AWS API Documentation
     #
@@ -438,40 +473,88 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Creates an Amazon Bedrock Agent
+    # Creates an agent that orchestrates interactions between foundation
+    # models, data sources, software applications, user conversations, and
+    # APIs to carry out tasks to help customers.
+    #
+    # * Specify the following fields for security purposes.
+    #
+    #   * `agentResourceRoleArn` – The Amazon Resource Name (ARN) of the
+    #     role with permissions to invoke API operations on an agent.
+    #
+    #   * (Optional) `customerEncryptionKeyArn` – The Amazon Resource Name
+    #     (ARN) of a KMS key to encrypt the creation of the agent.
+    #
+    #   * (Optional) `idleSessionTTLinSeconds` – Specify the number of
+    #     seconds for which the agent should maintain session information.
+    #     After this time expires, the subsequent `InvokeAgent` request
+    #     begins a new session.
+    #
+    # * To override the default prompt behavior for agent orchestration and
+    #   to use advanced prompts, include a `promptOverrideConfiguration`
+    #   object. For more information, see [Advanced prompts][1].
+    #
+    # * If you agent fails to be created, the response returns a list of
+    #   `failureReasons` alongside a list of `recommendedActions` for you to
+    #   troubleshoot.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #
     # @option params [required, String] :agent_name
-    #   Name for a resource.
+    #   A name for the agent that you create.
+    #
+    # @option params [String] :agent_resource_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #
     # @option params [String] :client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :instruction
-    #   Instruction for the agent.
     #
-    # @option params [String] :foundation_model
-    #   ARN or name of a Bedrock model.
     #
-    # @option params [String] :description
-    #   Description of the Resource.
-    #
-    # @option params [Integer] :idle_session_ttl_in_seconds
-    #   Max Session Time.
-    #
-    # @option params [required, String] :agent_resource_role_arn
-    #   ARN of a IAM role.
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :customer_encryption_key_arn
-    #   A KMS key ARN
+    #   The Amazon Resource Name (ARN) of the KMS key with which to encrypt
+    #   the agent.
     #
-    # @option params [Hash<String,String>] :tags
-    #   A map of tag keys and values
+    # @option params [String] :description
+    #   A description of the agent.
+    #
+    # @option params [String] :foundation_model
+    #   The foundation model to be used for orchestration by the agent you
+    #   create.
+    #
+    # @option params [Integer] :idle_session_ttl_in_seconds
+    #   The number of seconds for which Amazon Bedrock keeps information about
+    #   a user's conversation with the agent.
+    #
+    #   A user interaction remains active for the amount of time specified. If
+    #   no conversation occurs during this time, the session expires and
+    #   Amazon Bedrock deletes any data provided before the timeout.
+    #
+    # @option params [String] :instruction
+    #   Instructions that tell the agent what it should do and how it should
+    #   interact with users.
     #
     # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
-    #   Configuration for prompt override.
+    #   Contains configurations to override prompts in different parts of an
+    #   agent sequence. For more information, see [Advanced prompts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Any tags that you want to attach to the agent.
     #
     # @return [Types::CreateAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -481,71 +564,71 @@ module Aws::BedrockAgent
     #
     #   resp = client.create_agent({
     #     agent_name: "Name", # required
+    #     agent_resource_role_arn: "AgentRoleArn",
     #     client_token: "ClientToken",
-    #     instruction: "Instruction",
-    #     foundation_model: "ModelIdentifier",
-    #     description: "Description",
-    #     idle_session_ttl_in_seconds: 1,
-    #     agent_resource_role_arn: "AgentRoleArn", # required
     #     customer_encryption_key_arn: "KmsKeyArn",
-    #     tags: {
-    #       "TagKey" => "TagValue",
-    #     },
+    #     description: "Description",
+    #     foundation_model: "ModelIdentifier",
+    #     idle_session_ttl_in_seconds: 1,
+    #     instruction: "Instruction",
     #     prompt_override_configuration: {
+    #       override_lambda: "LambdaArn",
     #       prompt_configurations: [ # required
     #         {
-    #           prompt_type: "PRE_PROCESSING", # accepts PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION
-    #           prompt_creation_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
-    #           prompt_state: "ENABLED", # accepts ENABLED, DISABLED
     #           base_prompt_template: "BasePromptTemplate",
     #           inference_configuration: {
-    #             temperature: 1.0,
-    #             top_p: 1.0,
-    #             top_k: 1,
     #             maximum_length: 1,
     #             stop_sequences: ["String"],
+    #             temperature: 1.0,
+    #             top_k: 1,
+    #             top_p: 1.0,
     #           },
     #           parser_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
+    #           prompt_creation_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
+    #           prompt_state: "ENABLED", # accepts ENABLED, DISABLED
+    #           prompt_type: "PRE_PROCESSING", # accepts PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION
     #         },
     #       ],
-    #       override_lambda: "LambdaArn",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.agent.agent_arn #=> String
     #   resp.agent.agent_id #=> String
     #   resp.agent.agent_name #=> String
-    #   resp.agent.agent_arn #=> String
+    #   resp.agent.agent_resource_role_arn #=> String
+    #   resp.agent.agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
     #   resp.agent.agent_version #=> String
     #   resp.agent.client_token #=> String
-    #   resp.agent.instruction #=> String
-    #   resp.agent.agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
-    #   resp.agent.foundation_model #=> String
-    #   resp.agent.description #=> String
-    #   resp.agent.idle_session_ttl_in_seconds #=> Integer
-    #   resp.agent.agent_resource_role_arn #=> String
-    #   resp.agent.customer_encryption_key_arn #=> String
     #   resp.agent.created_at #=> Time
-    #   resp.agent.updated_at #=> Time
-    #   resp.agent.prepared_at #=> Time
+    #   resp.agent.customer_encryption_key_arn #=> String
+    #   resp.agent.description #=> String
     #   resp.agent.failure_reasons #=> Array
     #   resp.agent.failure_reasons[0] #=> String
-    #   resp.agent.recommended_actions #=> Array
-    #   resp.agent.recommended_actions[0] #=> String
+    #   resp.agent.foundation_model #=> String
+    #   resp.agent.idle_session_ttl_in_seconds #=> Integer
+    #   resp.agent.instruction #=> String
+    #   resp.agent.prepared_at #=> Time
+    #   resp.agent.prompt_override_configuration.override_lambda #=> String
     #   resp.agent.prompt_override_configuration.prompt_configurations #=> Array
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "POST_PROCESSING", "KNOWLEDGE_BASE_RESPONSE_GENERATION"
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].base_prompt_template #=> String
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.temperature #=> Float
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_p #=> Float
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_k #=> Integer
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.maximum_length #=> Integer
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.stop_sequences #=> Array
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.stop_sequences[0] #=> String
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.temperature #=> Float
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_k #=> Integer
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_p #=> Float
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.agent.prompt_override_configuration.override_lambda #=> String
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "POST_PROCESSING", "KNOWLEDGE_BASE_RESPONSE_GENERATION"
+    #   resp.agent.recommended_actions #=> Array
+    #   resp.agent.recommended_actions[0] #=> String
+    #   resp.agent.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgent AWS API Documentation
     #
@@ -556,37 +639,90 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Creates an Action Group for existing Amazon Bedrock Agent
+    # Creates an action group for an agent. An action group represents the
+    # actions that an agent can carry out for the customer by defining the
+    # APIs that an agent can call and the logic for calling them.
     #
-    # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    # To allow your agent to request the user for additional information
+    # when trying to complete a task, add an action group with the
+    # `parentActionGroupSignature` field set to `AMAZON.UserInput`. You must
+    # leave the `description`, `apiSchema`, and `actionGroupExecutor` fields
+    # blank for this action group. During orchestration, if your agent
+    # determines that it needs to invoke an API in an action group, but
+    # doesn't have enough information to complete the API request, it will
+    # invoke this action group instead and return an [Observation][1]
+    # reprompting the user for more information.
     #
-    # @option params [required, String] :agent_version
-    #   Draft Version of the Agent.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
+    #
+    # @option params [Types::ActionGroupExecutor] :action_group_executor
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
     #
     # @option params [required, String] :action_group_name
-    #   Name for a resource.
+    #   The name to give the action group.
+    #
+    # @option params [String] :action_group_state
+    #   Specifies whether the action group is available for the agent to
+    #   invoke or not when sending an [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent for which to create the action
+    #   group.
+    #
+    # @option params [required, String] :agent_version
+    #   The version of the agent for which to create the action group.
+    #
+    # @option params [Types::APISchema] :api_schema
+    #   Contains either details about the S3 object containing the OpenAPI
+    #   schema for the action group or the JSON or YAML-formatted payload
+    #   defining the schema. For more information, see [Action group OpenAPI
+    #   schemas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
     #
     # @option params [String] :client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
     # @option params [String] :description
-    #   Description of the Resource.
+    #   A description of the action group.
+    #
+    # @option params [Types::FunctionSchema] :function_schema
+    #   Contains details about the function schema for the action group or the
+    #   JSON or YAML-formatted payload defining the schema.
     #
     # @option params [String] :parent_action_group_signature
-    #   Action Group Signature for a BuiltIn Action
+    #   To allow your agent to request the user for additional information
+    #   when trying to complete a task, set this field to `AMAZON.UserInput`.
+    #   You must leave the `description`, `apiSchema`, and
+    #   `actionGroupExecutor` fields blank for this action group.
     #
-    # @option params [Types::ActionGroupExecutor] :action_group_executor
-    #   Type of Executors for an Action Group
+    #   During orchestration, if your agent determines that it needs to invoke
+    #   an API in an action group, but doesn't have enough information to
+    #   complete the API request, it will invoke this action group instead and
+    #   return an [Observation][1] reprompting the user for more information.
     #
-    # @option params [Types::APISchema] :api_schema
-    #   Contains information about the API Schema for the Action Group
     #
-    # @option params [String] :action_group_state
-    #   State of the action group
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #
     # @return [Types::CreateAgentActionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -595,41 +731,65 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_agent_action_group({
-    #     agent_id: "Id", # required
-    #     agent_version: "DraftVersion", # required
-    #     action_group_name: "Name", # required
-    #     client_token: "ClientToken",
-    #     description: "Description",
-    #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
     #     action_group_executor: {
+    #       custom_control: "RETURN_CONTROL", # accepts RETURN_CONTROL
     #       lambda: "LambdaArn",
     #     },
+    #     action_group_name: "Name", # required
+    #     action_group_state: "ENABLED", # accepts ENABLED, DISABLED
+    #     agent_id: "Id", # required
+    #     agent_version: "DraftVersion", # required
     #     api_schema: {
+    #       payload: "Payload",
     #       s3: {
     #         s3_bucket_name: "S3BucketName",
     #         s3_object_key: "S3ObjectKey",
     #       },
-    #       payload: "Payload",
     #     },
-    #     action_group_state: "ENABLED", # accepts ENABLED, DISABLED
+    #     client_token: "ClientToken",
+    #     description: "Description",
+    #     function_schema: {
+    #       functions: [
+    #         {
+    #           description: "FunctionDescription",
+    #           name: "Name", # required
+    #           parameters: {
+    #             "Name" => {
+    #               description: "ParameterDescription",
+    #               required: false,
+    #               type: "string", # required, accepts string, number, integer, boolean, array
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
     #   })
     #
     # @example Response structure
     #
-    #   resp.agent_action_group.agent_id #=> String
-    #   resp.agent_action_group.agent_version #=> String
+    #   resp.agent_action_group.action_group_executor.custom_control #=> String, one of "RETURN_CONTROL"
+    #   resp.agent_action_group.action_group_executor.lambda #=> String
     #   resp.agent_action_group.action_group_id #=> String
     #   resp.agent_action_group.action_group_name #=> String
-    #   resp.agent_action_group.client_token #=> String
-    #   resp.agent_action_group.description #=> String
-    #   resp.agent_action_group.created_at #=> Time
-    #   resp.agent_action_group.updated_at #=> Time
-    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
-    #   resp.agent_action_group.action_group_executor.lambda #=> String
+    #   resp.agent_action_group.action_group_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_action_group.agent_id #=> String
+    #   resp.agent_action_group.agent_version #=> String
+    #   resp.agent_action_group.api_schema.payload #=> String
     #   resp.agent_action_group.api_schema.s3.s3_bucket_name #=> String
     #   resp.agent_action_group.api_schema.s3.s3_object_key #=> String
-    #   resp.agent_action_group.api_schema.payload #=> String
-    #   resp.agent_action_group.action_group_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_action_group.client_token #=> String
+    #   resp.agent_action_group.created_at #=> Time
+    #   resp.agent_action_group.description #=> String
+    #   resp.agent_action_group.function_schema.functions #=> Array
+    #   resp.agent_action_group.function_schema.functions[0].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].name #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters #=> Hash
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
+    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
+    #   resp.agent_action_group.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentActionGroup AWS API Documentation
     #
@@ -640,28 +800,35 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Creates an Alias for an existing Amazon Bedrock Agent
-    #
-    # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    # Creates an alias of an agent that can be used to deploy the agent.
     #
     # @option params [required, String] :agent_alias_name
-    #   Name for a resource.
+    #   The name of the alias.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent.
     #
     # @option params [String] :client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
     # @option params [String] :description
-    #   Description of the Resource.
+    #   A description of the alias of the agent.
     #
     # @option params [Array<Types::AgentAliasRoutingConfigurationListItem>] :routing_configuration
-    #   Routing configuration for an Agent alias.
+    #   Contains details about the routing configuration of the alias.
     #
     # @option params [Hash<String,String>] :tags
-    #   A map of tag keys and values
+    #   Any tags that you want to attach to the alias of the agent.
     #
     # @return [Types::CreateAgentAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -670,8 +837,8 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_agent_alias({
-    #     agent_id: "Id", # required
     #     agent_alias_name: "Name", # required
+    #     agent_id: "Id", # required
     #     client_token: "ClientToken",
     #     description: "Description",
     #     routing_configuration: [
@@ -686,22 +853,22 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
-    #   resp.agent_alias.agent_id #=> String
+    #   resp.agent_alias.agent_alias_arn #=> String
+    #   resp.agent_alias.agent_alias_history_events #=> Array
+    #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
-    #   resp.agent_alias.agent_alias_arn #=> String
+    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_alias.agent_id #=> String
     #   resp.agent_alias.client_token #=> String
+    #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
     #   resp.agent_alias.routing_configuration #=> Array
     #   resp.agent_alias.routing_configuration[0].agent_version #=> String
-    #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.updated_at #=> Time
-    #   resp.agent_alias.agent_alias_history_events #=> Array
-    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
-    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
-    #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
-    #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
-    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentAlias AWS API Documentation
     #
@@ -712,31 +879,45 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Create a new data source
+    # Sets up a data source to be added to a knowledge base.
     #
-    # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    # You can't change the `chunkingConfiguration` after you create the
+    # data source.
     #
     # @option params [String] :client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :name
-    #   Name for a resource.
     #
-    # @option params [String] :description
-    #   Description of the Resource.
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :data_deletion_policy
+    #   The deletion policy for the requested data source
     #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
-    #   Specifies a raw data source location to ingest.
+    #   Contains metadata about where the data source is stored.
+    #
+    # @option params [String] :description
+    #   A description of the data source.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base to which to add the data
+    #   source.
+    #
+    # @option params [required, String] :name
+    #   The name of the data source.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   Server-side encryption configuration.
+    #   Contains details about the server-side encryption for the data source.
     #
     # @option params [Types::VectorIngestionConfiguration] :vector_ingestion_configuration
-    #   Configures ingestion for a vector knowledge base
+    #   Contains details about how to ingest the documents in the data source.
     #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -745,17 +926,19 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_source({
-    #     knowledge_base_id: "Id", # required
     #     client_token: "ClientToken",
-    #     name: "Name", # required
-    #     description: "Description",
+    #     data_deletion_policy: "RETAIN", # accepts RETAIN, DELETE
     #     data_source_configuration: { # required
-    #       type: "S3", # required, accepts S3
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
+    #         bucket_owner_account_id: "BucketOwnerAccountId",
     #         inclusion_prefixes: ["S3Prefix"],
     #       },
+    #       type: "S3", # required, accepts S3
     #     },
+    #     description: "Description",
+    #     knowledge_base_id: "Id", # required
+    #     name: "Name", # required
     #     server_side_encryption_configuration: {
     #       kms_key_arn: "KmsKeyArn",
     #     },
@@ -772,21 +955,25 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
-    #   resp.data_source.knowledge_base_id #=> String
-    #   resp.data_source.data_source_id #=> String
-    #   resp.data_source.name #=> String
-    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING"
-    #   resp.data_source.description #=> String
-    #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
+    #   resp.data_source.created_at #=> Time
+    #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
+    #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
+    #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
+    #   resp.data_source.data_source_id #=> String
+    #   resp.data_source.description #=> String
+    #   resp.data_source.failure_reasons #=> Array
+    #   resp.data_source.failure_reasons[0] #=> String
+    #   resp.data_source.knowledge_base_id #=> String
+    #   resp.data_source.name #=> String
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
+    #   resp.data_source.updated_at #=> Time
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
-    #   resp.data_source.created_at #=> Time
-    #   resp.data_source.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateDataSource AWS API Documentation
     #
@@ -797,31 +984,87 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Create a new knowledge base
+    # Creates a knowledge base that contains data sources from which
+    # information can be queried and used by LLMs. To create a knowledge
+    # base, you must first set up your data sources and configure a
+    # supported vector store. For more information, see [Set up your data
+    # for ingestion][1].
+    #
+    # <note markdown="1"> If you prefer to let Amazon Bedrock create and manage a vector store
+    # for you in Amazon OpenSearch Service, use the console. For more
+    # information, see [Create a knowledge base][2].
+    #
+    #  </note>
+    #
+    # * Provide the `name` and an optional `description`.
+    #
+    # * Provide the Amazon Resource Name (ARN) with permissions to create a
+    #   knowledge base in the `roleArn` field.
+    #
+    # * Provide the embedding model to use in the `embeddingModelArn` field
+    #   in the `knowledgeBaseConfiguration` object.
+    #
+    # * Provide the configuration for your vector store in the
+    #   `storageConfiguration` object.
+    #
+    #   * For an Amazon OpenSearch Service database, use the
+    #     `opensearchServerlessConfiguration` object. For more information,
+    #     see [Create a vector store in Amazon OpenSearch Service][3].
+    #
+    #   * For an Amazon Aurora database, use the `RdsConfiguration` object.
+    #     For more information, see [Create a vector store in Amazon
+    #     Aurora][4].
+    #
+    #   * For a Pinecone database, use the `pineconeConfiguration` object.
+    #     For more information, see [Create a vector store in Pinecone][5].
+    #
+    #   * For a Redis Enterprise Cloud database, use the
+    #     `redisEnterpriseCloudConfiguration` object. For more information,
+    #     see [Create a vector store in Redis Enterprise Cloud][6].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
+    # [5]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html
+    # [6]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html
     #
     # @option params [String] :client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :name
-    #   Name for a resource.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :description
-    #   Description of the Resource.
-    #
-    # @option params [required, String] :role_arn
-    #   ARN of a IAM role.
+    #   A description of the knowledge base.
     #
     # @option params [required, Types::KnowledgeBaseConfiguration] :knowledge_base_configuration
-    #   Configures a bedrock knowledge base.
+    #   Contains details about the embeddings model used for the knowledge
+    #   base.
+    #
+    # @option params [required, String] :name
+    #   A name for the knowledge base.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the knowledge base.
     #
     # @option params [required, Types::StorageConfiguration] :storage_configuration
-    #   Configures the physical storage of ingested data in a knowledge base.
+    #   Contains details about the configuration of the vector database used
+    #   for the knowledge base.
     #
     # @option params [Hash<String,String>] :tags
-    #   A map of tag keys and values
+    #   Specify the key-value pairs for the tags that you want to attach to
+    #   your knowledge base in this object.
     #
     # @return [Types::CreateKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -831,57 +1074,57 @@ module Aws::BedrockAgent
     #
     #   resp = client.create_knowledge_base({
     #     client_token: "ClientToken",
-    #     name: "Name", # required
     #     description: "Description",
-    #     role_arn: "KnowledgeBaseRoleArn", # required
     #     knowledge_base_configuration: { # required
     #       type: "VECTOR", # required, accepts VECTOR
     #       vector_knowledge_base_configuration: {
     #         embedding_model_arn: "BedrockEmbeddingModelArn", # required
     #       },
     #     },
+    #     name: "Name", # required
+    #     role_arn: "KnowledgeBaseRoleArn", # required
     #     storage_configuration: { # required
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS
     #       opensearch_serverless_configuration: {
     #         collection_arn: "OpenSearchServerlessCollectionArn", # required
-    #         vector_index_name: "OpenSearchServerlessIndexName", # required
     #         field_mapping: { # required
-    #           vector_field: "FieldName", # required
-    #           text_field: "FieldName", # required
     #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #           vector_field: "FieldName", # required
     #         },
+    #         vector_index_name: "OpenSearchServerlessIndexName", # required
     #       },
     #       pinecone_configuration: {
     #         connection_string: "PineconeConnectionString", # required
     #         credentials_secret_arn: "SecretArn", # required
+    #         field_mapping: { # required
+    #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #         },
     #         namespace: "PineconeNamespace",
-    #         field_mapping: { # required
-    #           text_field: "FieldName", # required
-    #           metadata_field: "FieldName", # required
-    #         },
-    #       },
-    #       redis_enterprise_cloud_configuration: {
-    #         endpoint: "RedisEnterpriseCloudEndpoint", # required
-    #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
-    #         credentials_secret_arn: "SecretArn", # required
-    #         field_mapping: { # required
-    #           vector_field: "FieldName", # required
-    #           text_field: "FieldName", # required
-    #           metadata_field: "FieldName", # required
-    #         },
     #       },
     #       rds_configuration: {
-    #         resource_arn: "RdsArn", # required
     #         credentials_secret_arn: "SecretArn", # required
     #         database_name: "RdsDatabaseName", # required
-    #         table_name: "RdsTableName", # required
     #         field_mapping: { # required
-    #           primary_key_field: "ColumnName", # required
-    #           vector_field: "ColumnName", # required
-    #           text_field: "ColumnName", # required
     #           metadata_field: "ColumnName", # required
+    #           primary_key_field: "ColumnName", # required
+    #           text_field: "ColumnName", # required
+    #           vector_field: "ColumnName", # required
     #         },
+    #         resource_arn: "RdsArn", # required
+    #         table_name: "RdsTableName", # required
     #       },
+    #       redis_enterprise_cloud_configuration: {
+    #         credentials_secret_arn: "SecretArn", # required
+    #         endpoint: "RedisEnterpriseCloudEndpoint", # required
+    #         field_mapping: { # required
+    #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #           vector_field: "FieldName", # required
+    #         },
+    #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
+    #       },
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -890,43 +1133,43 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
-    #   resp.knowledge_base.knowledge_base_id #=> String
-    #   resp.knowledge_base.name #=> String
-    #   resp.knowledge_base.knowledge_base_arn #=> String
-    #   resp.knowledge_base.description #=> String
-    #   resp.knowledge_base.role_arn #=> String
-    #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
-    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.vector_field #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.connection_string #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.credentials_secret_arn #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.namespace #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.endpoint #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.credentials_secret_arn #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.resource_arn #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.credentials_secret_arn #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.database_name #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.table_name #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.primary_key_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.vector_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
     #   resp.knowledge_base.created_at #=> Time
-    #   resp.knowledge_base.updated_at #=> Time
+    #   resp.knowledge_base.description #=> String
     #   resp.knowledge_base.failure_reasons #=> Array
     #   resp.knowledge_base.failure_reasons[0] #=> String
+    #   resp.knowledge_base.knowledge_base_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
+    #   resp.knowledge_base.knowledge_base_id #=> String
+    #   resp.knowledge_base.name #=> String
+    #   resp.knowledge_base.role_arn #=> String
+    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.vector_index_name #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.connection_string #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.namespace #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.database_name #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.primary_key_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.resource_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.table_name #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.endpoint #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
+    #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateKnowledgeBase AWS API Documentation
     #
@@ -937,14 +1180,15 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Deletes an Agent for existing Amazon Bedrock Agent
+    # Deletes an agent.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent to delete.
     #
     # @option params [Boolean] :skip_resource_in_use_check
-    #   Skips checking if resource is in use when set to true. Defaults to
-    #   false
+    #   By default, this value is `false` and deletion is stopped if the
+    #   resource is in use. If you set it to `true`, the resource will be
+    #   deleted even if the resource is in use.
     #
     # @return [Types::DeleteAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -972,29 +1216,30 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Deletes an Action Group for existing Amazon Bedrock Agent.
-    #
-    # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
-    #
-    # @option params [required, String] :agent_version
-    #   Draft Version of the Agent.
+    # Deletes an action group in an agent.
     #
     # @option params [required, String] :action_group_id
-    #   Id generated at the server side when an Agent ActionGroup is created
+    #   The unique identifier of the action group to delete.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent that the action group belongs to.
+    #
+    # @option params [required, String] :agent_version
+    #   The version of the agent that the action group belongs to.
     #
     # @option params [Boolean] :skip_resource_in_use_check
-    #   Skips checking if resource is in use when set to true. Defaults to
-    #   false
+    #   By default, this value is `false` and deletion is stopped if the
+    #   resource is in use. If you set it to `true`, the resource will be
+    #   deleted even if the resource is in use.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_agent_action_group({
+    #     action_group_id: "Id", # required
     #     agent_id: "Id", # required
     #     agent_version: "DraftVersion", # required
-    #     action_group_id: "Id", # required
     #     skip_resource_in_use_check: false,
     #   })
     #
@@ -1007,32 +1252,32 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Deletes an Alias for a Amazon Bedrock Agent
-    #
-    # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    # Deletes an alias of an agent.
     #
     # @option params [required, String] :agent_alias_id
-    #   Id generated at the server side when an Agent Alias is created
+    #   The unique identifier of the alias to delete.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent that the alias belongs to.
     #
     # @return [Types::DeleteAgentAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteAgentAliasResponse#agent_id #agent_id} => String
     #   * {Types::DeleteAgentAliasResponse#agent_alias_id #agent_alias_id} => String
     #   * {Types::DeleteAgentAliasResponse#agent_alias_status #agent_alias_status} => String
+    #   * {Types::DeleteAgentAliasResponse#agent_id #agent_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_agent_alias({
-    #     agent_id: "Id", # required
     #     agent_alias_id: "AgentAliasId", # required
+    #     agent_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.agent_id #=> String
     #   resp.agent_alias_id #=> String
     #   resp.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentAlias AWS API Documentation
     #
@@ -1043,23 +1288,24 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Deletes an Agent version for existing Amazon Bedrock Agent
+    # Deletes a version of an agent.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent that the version belongs to.
     #
     # @option params [required, String] :agent_version
-    #   Numerical Agent Version.
+    #   The version of the agent to delete.
     #
     # @option params [Boolean] :skip_resource_in_use_check
-    #   Skips checking if resource is in use when set to true. Defaults to
-    #   false
+    #   By default, this value is `false` and deletion is stopped if the
+    #   resource is in use. If you set it to `true`, the resource will be
+    #   deleted even if the resource is in use.
     #
     # @return [Types::DeleteAgentVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteAgentVersionResponse#agent_id #agent_id} => String
-    #   * {Types::DeleteAgentVersionResponse#agent_version #agent_version} => String
     #   * {Types::DeleteAgentVersionResponse#agent_status #agent_status} => String
+    #   * {Types::DeleteAgentVersionResponse#agent_version #agent_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1072,8 +1318,8 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.agent_id #=> String
-    #   resp.agent_version #=> String
     #   resp.agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
+    #   resp.agent_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentVersion AWS API Documentation
     #
@@ -1084,32 +1330,33 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Delete an existing data source
-    #
-    # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    # Deletes a data source from a knowledge base.
     #
     # @option params [required, String] :data_source_id
-    #   Identifier for a resource.
+    #   The unique identifier of the data source to delete.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base from which to delete the
+    #   data source.
     #
     # @return [Types::DeleteDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteDataSourceResponse#knowledge_base_id #knowledge_base_id} => String
     #   * {Types::DeleteDataSourceResponse#data_source_id #data_source_id} => String
+    #   * {Types::DeleteDataSourceResponse#knowledge_base_id #knowledge_base_id} => String
     #   * {Types::DeleteDataSourceResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_data_source({
-    #     knowledge_base_id: "Id", # required
     #     data_source_id: "Id", # required
+    #     knowledge_base_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.knowledge_base_id #=> String
     #   resp.data_source_id #=> String
-    #   resp.status #=> String, one of "AVAILABLE", "DELETING"
+    #   resp.knowledge_base_id #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteDataSource AWS API Documentation
     #
@@ -1120,10 +1367,16 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Delete an existing knowledge base
+    # Deletes a knowledge base. Before deleting a knowledge base, you should
+    # disassociate the knowledge base from any agents that it is associated
+    # with by making a [DisassociateAgentKnowledgeBase][1] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_DisassociateAgentKnowledgeBase.html
     #
     # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    #   The unique identifier of the knowledge base to delete.
     #
     # @return [Types::DeleteKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1139,7 +1392,7 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.knowledge_base_id #=> String
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteKnowledgeBase AWS API Documentation
     #
@@ -1150,17 +1403,18 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Disassociate an existing Knowledge Base from an Amazon Bedrock Agent
+    # Disassociates a knowledge base from an agent.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent from which to disassociate the
+    #   knowledge base.
     #
     # @option params [required, String] :agent_version
-    #   Draft Version of the Agent.
+    #   The version of the agent from which to disassociate the knowledge
+    #   base.
     #
     # @option params [required, String] :knowledge_base_id
-    #   Id generated at the server side when a Knowledge Base is associated to
-    #   an Agent
+    #   The unique identifier of the knowledge base to disassociate.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1181,10 +1435,10 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Gets an Agent for existing Amazon Bedrock Agent
+    # Gets information about an agent.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #
     # @return [Types::GetAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1198,38 +1452,38 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
+    #   resp.agent.agent_arn #=> String
     #   resp.agent.agent_id #=> String
     #   resp.agent.agent_name #=> String
-    #   resp.agent.agent_arn #=> String
+    #   resp.agent.agent_resource_role_arn #=> String
+    #   resp.agent.agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
     #   resp.agent.agent_version #=> String
     #   resp.agent.client_token #=> String
-    #   resp.agent.instruction #=> String
-    #   resp.agent.agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
-    #   resp.agent.foundation_model #=> String
-    #   resp.agent.description #=> String
-    #   resp.agent.idle_session_ttl_in_seconds #=> Integer
-    #   resp.agent.agent_resource_role_arn #=> String
-    #   resp.agent.customer_encryption_key_arn #=> String
     #   resp.agent.created_at #=> Time
-    #   resp.agent.updated_at #=> Time
-    #   resp.agent.prepared_at #=> Time
+    #   resp.agent.customer_encryption_key_arn #=> String
+    #   resp.agent.description #=> String
     #   resp.agent.failure_reasons #=> Array
     #   resp.agent.failure_reasons[0] #=> String
-    #   resp.agent.recommended_actions #=> Array
-    #   resp.agent.recommended_actions[0] #=> String
+    #   resp.agent.foundation_model #=> String
+    #   resp.agent.idle_session_ttl_in_seconds #=> Integer
+    #   resp.agent.instruction #=> String
+    #   resp.agent.prepared_at #=> Time
+    #   resp.agent.prompt_override_configuration.override_lambda #=> String
     #   resp.agent.prompt_override_configuration.prompt_configurations #=> Array
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "POST_PROCESSING", "KNOWLEDGE_BASE_RESPONSE_GENERATION"
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].base_prompt_template #=> String
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.temperature #=> Float
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_p #=> Float
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_k #=> Integer
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.maximum_length #=> Integer
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.stop_sequences #=> Array
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.stop_sequences[0] #=> String
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.temperature #=> Float
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_k #=> Integer
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_p #=> Float
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.agent.prompt_override_configuration.override_lambda #=> String
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "POST_PROCESSING", "KNOWLEDGE_BASE_RESPONSE_GENERATION"
+    #   resp.agent.recommended_actions #=> Array
+    #   resp.agent.recommended_actions[0] #=> String
+    #   resp.agent.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgent AWS API Documentation
     #
@@ -1240,16 +1494,17 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Gets an Action Group for existing Amazon Bedrock Agent Version
-    #
-    # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
-    #
-    # @option params [required, String] :agent_version
-    #   Version number generated when a version is created
+    # Gets information about an action group for an agent.
     #
     # @option params [required, String] :action_group_id
-    #   Id generated at the server side when an Agent Action Group is created
+    #   The unique identifier of the action group for which to get
+    #   information.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent that the action group belongs to.
+    #
+    # @option params [required, String] :agent_version
+    #   The version of the agent that the action group belongs to.
     #
     # @return [Types::GetAgentActionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1258,27 +1513,35 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_agent_action_group({
+    #     action_group_id: "Id", # required
     #     agent_id: "Id", # required
     #     agent_version: "Version", # required
-    #     action_group_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.agent_action_group.agent_id #=> String
-    #   resp.agent_action_group.agent_version #=> String
+    #   resp.agent_action_group.action_group_executor.custom_control #=> String, one of "RETURN_CONTROL"
+    #   resp.agent_action_group.action_group_executor.lambda #=> String
     #   resp.agent_action_group.action_group_id #=> String
     #   resp.agent_action_group.action_group_name #=> String
-    #   resp.agent_action_group.client_token #=> String
-    #   resp.agent_action_group.description #=> String
-    #   resp.agent_action_group.created_at #=> Time
-    #   resp.agent_action_group.updated_at #=> Time
-    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
-    #   resp.agent_action_group.action_group_executor.lambda #=> String
+    #   resp.agent_action_group.action_group_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_action_group.agent_id #=> String
+    #   resp.agent_action_group.agent_version #=> String
+    #   resp.agent_action_group.api_schema.payload #=> String
     #   resp.agent_action_group.api_schema.s3.s3_bucket_name #=> String
     #   resp.agent_action_group.api_schema.s3.s3_object_key #=> String
-    #   resp.agent_action_group.api_schema.payload #=> String
-    #   resp.agent_action_group.action_group_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_action_group.client_token #=> String
+    #   resp.agent_action_group.created_at #=> Time
+    #   resp.agent_action_group.description #=> String
+    #   resp.agent_action_group.function_schema.functions #=> Array
+    #   resp.agent_action_group.function_schema.functions[0].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].name #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters #=> Hash
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
+    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
+    #   resp.agent_action_group.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentActionGroup AWS API Documentation
     #
@@ -1289,13 +1552,14 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Describes an Alias for a Amazon Bedrock Agent
-    #
-    # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    # Gets information about an alias of an agent.
     #
     # @option params [required, String] :agent_alias_id
-    #   Id generated at the server side when an Agent Alias is created
+    #   The unique identifier of the alias for which to get information.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent to which the alias to get
+    #   information belongs.
     #
     # @return [Types::GetAgentAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1304,28 +1568,28 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_agent_alias({
-    #     agent_id: "Id", # required
     #     agent_alias_id: "AgentAliasId", # required
+    #     agent_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.agent_alias.agent_id #=> String
+    #   resp.agent_alias.agent_alias_arn #=> String
+    #   resp.agent_alias.agent_alias_history_events #=> Array
+    #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
-    #   resp.agent_alias.agent_alias_arn #=> String
+    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_alias.agent_id #=> String
     #   resp.agent_alias.client_token #=> String
+    #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
     #   resp.agent_alias.routing_configuration #=> Array
     #   resp.agent_alias.routing_configuration[0].agent_version #=> String
-    #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.updated_at #=> Time
-    #   resp.agent_alias.agent_alias_history_events #=> Array
-    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
-    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
-    #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
-    #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
-    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentAlias AWS API Documentation
     #
@@ -1336,17 +1600,17 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Gets a knowledge base associated to an existing Amazon Bedrock Agent
-    # Version
+    # Gets information about a knowledge base associated with an agent.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent with which the knowledge base is
+    #   associated.
     #
     # @option params [required, String] :agent_version
-    #   Version number generated when a version is created
+    #   The version of the agent with which the knowledge base is associated.
     #
     # @option params [required, String] :knowledge_base_id
-    #   Id generated at the server side when a Knowledge Base is associated
+    #   The unique identifier of the knowledge base associated with the agent.
     #
     # @return [Types::GetAgentKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1364,11 +1628,11 @@ module Aws::BedrockAgent
     #
     #   resp.agent_knowledge_base.agent_id #=> String
     #   resp.agent_knowledge_base.agent_version #=> String
-    #   resp.agent_knowledge_base.knowledge_base_id #=> String
-    #   resp.agent_knowledge_base.description #=> String
     #   resp.agent_knowledge_base.created_at #=> Time
-    #   resp.agent_knowledge_base.updated_at #=> Time
+    #   resp.agent_knowledge_base.description #=> String
+    #   resp.agent_knowledge_base.knowledge_base_id #=> String
     #   resp.agent_knowledge_base.knowledge_base_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentKnowledgeBase AWS API Documentation
     #
@@ -1379,13 +1643,13 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Gets an Agent version for existing Amazon Bedrock Agent
+    # Gets details about a version of an agent.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #
     # @option params [required, String] :agent_version
-    #   Numerical Agent Version.
+    #   The version of the agent.
     #
     # @return [Types::GetAgentVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1400,36 +1664,36 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
+    #   resp.agent_version.agent_arn #=> String
     #   resp.agent_version.agent_id #=> String
     #   resp.agent_version.agent_name #=> String
-    #   resp.agent_version.agent_arn #=> String
-    #   resp.agent_version.version #=> String
-    #   resp.agent_version.instruction #=> String
-    #   resp.agent_version.agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
-    #   resp.agent_version.foundation_model #=> String
-    #   resp.agent_version.description #=> String
-    #   resp.agent_version.idle_session_ttl_in_seconds #=> Integer
     #   resp.agent_version.agent_resource_role_arn #=> String
-    #   resp.agent_version.customer_encryption_key_arn #=> String
+    #   resp.agent_version.agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
     #   resp.agent_version.created_at #=> Time
-    #   resp.agent_version.updated_at #=> Time
+    #   resp.agent_version.customer_encryption_key_arn #=> String
+    #   resp.agent_version.description #=> String
     #   resp.agent_version.failure_reasons #=> Array
     #   resp.agent_version.failure_reasons[0] #=> String
-    #   resp.agent_version.recommended_actions #=> Array
-    #   resp.agent_version.recommended_actions[0] #=> String
+    #   resp.agent_version.foundation_model #=> String
+    #   resp.agent_version.idle_session_ttl_in_seconds #=> Integer
+    #   resp.agent_version.instruction #=> String
+    #   resp.agent_version.prompt_override_configuration.override_lambda #=> String
     #   resp.agent_version.prompt_override_configuration.prompt_configurations #=> Array
-    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].prompt_type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "POST_PROCESSING", "KNOWLEDGE_BASE_RESPONSE_GENERATION"
-    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].prompt_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].base_prompt_template #=> String
-    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].inference_configuration.temperature #=> Float
-    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_p #=> Float
-    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_k #=> Integer
     #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].inference_configuration.maximum_length #=> Integer
     #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].inference_configuration.stop_sequences #=> Array
     #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].inference_configuration.stop_sequences[0] #=> String
+    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].inference_configuration.temperature #=> Float
+    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_k #=> Integer
+    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_p #=> Float
     #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.agent_version.prompt_override_configuration.override_lambda #=> String
+    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].prompt_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].prompt_type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "POST_PROCESSING", "KNOWLEDGE_BASE_RESPONSE_GENERATION"
+    #   resp.agent_version.recommended_actions #=> Array
+    #   resp.agent_version.recommended_actions[0] #=> String
+    #   resp.agent_version.updated_at #=> Time
+    #   resp.agent_version.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentVersion AWS API Documentation
     #
@@ -1440,13 +1704,14 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Get an existing data source
-    #
-    # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    # Gets information about a data source.
     #
     # @option params [required, String] :data_source_id
-    #   Identifier for a resource.
+    #   The unique identifier of the data source.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base that the data source was
+    #   added to.
     #
     # @return [Types::GetDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1455,27 +1720,31 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_data_source({
-    #     knowledge_base_id: "Id", # required
     #     data_source_id: "Id", # required
+    #     knowledge_base_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.data_source.knowledge_base_id #=> String
-    #   resp.data_source.data_source_id #=> String
-    #   resp.data_source.name #=> String
-    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING"
-    #   resp.data_source.description #=> String
-    #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
+    #   resp.data_source.created_at #=> Time
+    #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
+    #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
+    #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
+    #   resp.data_source.data_source_id #=> String
+    #   resp.data_source.description #=> String
+    #   resp.data_source.failure_reasons #=> Array
+    #   resp.data_source.failure_reasons[0] #=> String
+    #   resp.data_source.knowledge_base_id #=> String
+    #   resp.data_source.name #=> String
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
+    #   resp.data_source.updated_at #=> Time
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
-    #   resp.data_source.created_at #=> Time
-    #   resp.data_source.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetDataSource AWS API Documentation
     #
@@ -1486,16 +1755,18 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Get an ingestion job
-    #
-    # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    # Gets information about a ingestion job, in which a data source is
+    # added to a knowledge base.
     #
     # @option params [required, String] :data_source_id
-    #   Identifier for a resource.
+    #   The unique identifier of the data source in the ingestion job.
     #
     # @option params [required, String] :ingestion_job_id
-    #   Identifier for a resource.
+    #   The unique identifier of the ingestion job.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base for which the ingestion
+    #   job applies.
     #
     # @return [Types::GetIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1504,26 +1775,28 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_ingestion_job({
-    #     knowledge_base_id: "Id", # required
     #     data_source_id: "Id", # required
     #     ingestion_job_id: "Id", # required
+    #     knowledge_base_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.ingestion_job.knowledge_base_id #=> String
     #   resp.ingestion_job.data_source_id #=> String
-    #   resp.ingestion_job.ingestion_job_id #=> String
     #   resp.ingestion_job.description #=> String
-    #   resp.ingestion_job.status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED"
-    #   resp.ingestion_job.statistics.number_of_documents_scanned #=> Integer
-    #   resp.ingestion_job.statistics.number_of_new_documents_indexed #=> Integer
-    #   resp.ingestion_job.statistics.number_of_modified_documents_indexed #=> Integer
-    #   resp.ingestion_job.statistics.number_of_documents_deleted #=> Integer
-    #   resp.ingestion_job.statistics.number_of_documents_failed #=> Integer
     #   resp.ingestion_job.failure_reasons #=> Array
     #   resp.ingestion_job.failure_reasons[0] #=> String
+    #   resp.ingestion_job.ingestion_job_id #=> String
+    #   resp.ingestion_job.knowledge_base_id #=> String
     #   resp.ingestion_job.started_at #=> Time
+    #   resp.ingestion_job.statistics.number_of_documents_deleted #=> Integer
+    #   resp.ingestion_job.statistics.number_of_documents_failed #=> Integer
+    #   resp.ingestion_job.statistics.number_of_documents_scanned #=> Integer
+    #   resp.ingestion_job.statistics.number_of_metadata_documents_modified #=> Integer
+    #   resp.ingestion_job.statistics.number_of_metadata_documents_scanned #=> Integer
+    #   resp.ingestion_job.statistics.number_of_modified_documents_indexed #=> Integer
+    #   resp.ingestion_job.statistics.number_of_new_documents_indexed #=> Integer
+    #   resp.ingestion_job.status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED"
     #   resp.ingestion_job.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetIngestionJob AWS API Documentation
@@ -1535,10 +1808,11 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Get an existing knowledge base
+    # Gets information about a knoweldge base.
     #
     # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    #   The unique identifier of the knowledge base for which to get
+    #   information.
     #
     # @return [Types::GetKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1552,43 +1826,43 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
-    #   resp.knowledge_base.knowledge_base_id #=> String
-    #   resp.knowledge_base.name #=> String
-    #   resp.knowledge_base.knowledge_base_arn #=> String
-    #   resp.knowledge_base.description #=> String
-    #   resp.knowledge_base.role_arn #=> String
-    #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
-    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.vector_field #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.connection_string #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.credentials_secret_arn #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.namespace #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.endpoint #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.credentials_secret_arn #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.resource_arn #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.credentials_secret_arn #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.database_name #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.table_name #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.primary_key_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.vector_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
     #   resp.knowledge_base.created_at #=> Time
-    #   resp.knowledge_base.updated_at #=> Time
+    #   resp.knowledge_base.description #=> String
     #   resp.knowledge_base.failure_reasons #=> Array
     #   resp.knowledge_base.failure_reasons[0] #=> String
+    #   resp.knowledge_base.knowledge_base_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
+    #   resp.knowledge_base.knowledge_base_id #=> String
+    #   resp.knowledge_base.name #=> String
+    #   resp.knowledge_base.role_arn #=> String
+    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.vector_index_name #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.connection_string #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.namespace #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.database_name #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.primary_key_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.resource_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.table_name #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.endpoint #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
+    #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetKnowledgeBase AWS API Documentation
     #
@@ -1599,19 +1873,25 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Lists an Action Group for existing Amazon Bedrock Agent Version
+    # Lists the action groups for an agent and information about each one.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is Listed
+    #   The unique identifier of the agent.
     #
     # @option params [required, String] :agent_version
-    #   Id generated at the server side when an Agent is Listed
+    #   The version of the agent.
     #
     # @option params [Integer] :max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @return [Types::ListAgentActionGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1648,16 +1928,22 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Lists all the Aliases for an Amazon Bedrock Agent
+    # Lists the aliases of an agent and information about each one.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #
     # @option params [Integer] :max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @return [Types::ListAgentAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1679,11 +1965,11 @@ module Aws::BedrockAgent
     #   resp.agent_alias_summaries #=> Array
     #   resp.agent_alias_summaries[0].agent_alias_id #=> String
     #   resp.agent_alias_summaries[0].agent_alias_name #=> String
+    #   resp.agent_alias_summaries[0].agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_alias_summaries[0].created_at #=> Time
     #   resp.agent_alias_summaries[0].description #=> String
     #   resp.agent_alias_summaries[0].routing_configuration #=> Array
     #   resp.agent_alias_summaries[0].routing_configuration[0].agent_version #=> String
-    #   resp.agent_alias_summaries[0].agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
-    #   resp.agent_alias_summaries[0].created_at #=> Time
     #   resp.agent_alias_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1696,20 +1982,28 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # List of Knowledge Bases associated to an existing Amazon Bedrock Agent
-    # Version
+    # Lists knowledge bases associated with an agent and information about
+    # each one.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent for which to return information
+    #   about knowledge bases associated with it.
     #
     # @option params [required, String] :agent_version
-    #   Version number generated when a version is created
+    #   The version of the agent for which to return information about
+    #   knowledge bases associated with it.
     #
     # @option params [Integer] :max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @return [Types::ListAgentKnowledgeBasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1730,8 +2024,8 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.agent_knowledge_base_summaries #=> Array
-    #   resp.agent_knowledge_base_summaries[0].knowledge_base_id #=> String
     #   resp.agent_knowledge_base_summaries[0].description #=> String
+    #   resp.agent_knowledge_base_summaries[0].knowledge_base_id #=> String
     #   resp.agent_knowledge_base_summaries[0].knowledge_base_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent_knowledge_base_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -1745,16 +2039,22 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Lists Agent Versions
+    # Lists the versions of an agent and information about each version.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #
     # @option params [Integer] :max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @return [Types::ListAgentVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1778,8 +2078,8 @@ module Aws::BedrockAgent
     #   resp.agent_version_summaries[0].agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
     #   resp.agent_version_summaries[0].agent_version #=> String
     #   resp.agent_version_summaries[0].created_at #=> Time
-    #   resp.agent_version_summaries[0].updated_at #=> Time
     #   resp.agent_version_summaries[0].description #=> String
+    #   resp.agent_version_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgentVersions AWS API Documentation
@@ -1791,13 +2091,20 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Lists Agents
+    # Lists the agents belonging to an account and information about each
+    # agent.
     #
     # @option params [Integer] :max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @return [Types::ListAgentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1820,8 +2127,8 @@ module Aws::BedrockAgent
     #   resp.agent_summaries[0].agent_name #=> String
     #   resp.agent_summaries[0].agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
     #   resp.agent_summaries[0].description #=> String
-    #   resp.agent_summaries[0].updated_at #=> Time
     #   resp.agent_summaries[0].latest_agent_version #=> String
+    #   resp.agent_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListAgents AWS API Documentation
@@ -1833,16 +2140,24 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # List data sources
+    # Lists the data sources in a knowledge base and information about each
+    # one.
     #
     # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    #   The unique identifier of the knowledge base for which to return a list
+    #   of information.
     #
     # @option params [Integer] :max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @return [Types::ListDataSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1862,11 +2177,11 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.data_source_summaries #=> Array
-    #   resp.data_source_summaries[0].knowledge_base_id #=> String
     #   resp.data_source_summaries[0].data_source_id #=> String
-    #   resp.data_source_summaries[0].name #=> String
-    #   resp.data_source_summaries[0].status #=> String, one of "AVAILABLE", "DELETING"
     #   resp.data_source_summaries[0].description #=> String
+    #   resp.data_source_summaries[0].knowledge_base_id #=> String
+    #   resp.data_source_summaries[0].name #=> String
+    #   resp.data_source_summaries[0].status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1879,25 +2194,34 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # List ingestion jobs
-    #
-    # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    # Lists the ingestion jobs for a data source and information about each
+    # of them.
     #
     # @option params [required, String] :data_source_id
-    #   Identifier for a resource.
+    #   The unique identifier of the data source for which to return ingestion
+    #   jobs.
     #
     # @option params [Array<Types::IngestionJobFilter>] :filters
-    #   List of IngestionJobFilters
+    #   Contains a definition of a filter for which to filter the results.
     #
-    # @option params [Types::IngestionJobSortBy] :sort_by
-    #   Sorts the response returned by ListIngestionJobs operation.
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base for which to return
+    #   ingestion jobs.
     #
     # @option params [Integer] :max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [Types::IngestionJobSortBy] :sort_by
+    #   Contains details about how to sort the results.
     #
     # @return [Types::ListIngestionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1909,7 +2233,6 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ingestion_jobs({
-    #     knowledge_base_id: "Id", # required
     #     data_source_id: "Id", # required
     #     filters: [
     #       {
@@ -1918,29 +2241,32 @@ module Aws::BedrockAgent
     #         values: ["IngestionJobFilterValue"], # required
     #       },
     #     ],
+    #     knowledge_base_id: "Id", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #     sort_by: {
     #       attribute: "STATUS", # required, accepts STATUS, STARTED_AT
     #       order: "ASCENDING", # required, accepts ASCENDING, DESCENDING
     #     },
-    #     max_results: 1,
-    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.ingestion_job_summaries #=> Array
-    #   resp.ingestion_job_summaries[0].knowledge_base_id #=> String
     #   resp.ingestion_job_summaries[0].data_source_id #=> String
-    #   resp.ingestion_job_summaries[0].ingestion_job_id #=> String
     #   resp.ingestion_job_summaries[0].description #=> String
-    #   resp.ingestion_job_summaries[0].status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.ingestion_job_summaries[0].ingestion_job_id #=> String
+    #   resp.ingestion_job_summaries[0].knowledge_base_id #=> String
     #   resp.ingestion_job_summaries[0].started_at #=> Time
-    #   resp.ingestion_job_summaries[0].updated_at #=> Time
-    #   resp.ingestion_job_summaries[0].statistics.number_of_documents_scanned #=> Integer
-    #   resp.ingestion_job_summaries[0].statistics.number_of_new_documents_indexed #=> Integer
-    #   resp.ingestion_job_summaries[0].statistics.number_of_modified_documents_indexed #=> Integer
     #   resp.ingestion_job_summaries[0].statistics.number_of_documents_deleted #=> Integer
     #   resp.ingestion_job_summaries[0].statistics.number_of_documents_failed #=> Integer
+    #   resp.ingestion_job_summaries[0].statistics.number_of_documents_scanned #=> Integer
+    #   resp.ingestion_job_summaries[0].statistics.number_of_metadata_documents_modified #=> Integer
+    #   resp.ingestion_job_summaries[0].statistics.number_of_metadata_documents_scanned #=> Integer
+    #   resp.ingestion_job_summaries[0].statistics.number_of_modified_documents_indexed #=> Integer
+    #   resp.ingestion_job_summaries[0].statistics.number_of_new_documents_indexed #=> Integer
+    #   resp.ingestion_job_summaries[0].status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.ingestion_job_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListIngestionJobs AWS API Documentation
@@ -1952,13 +2278,20 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # List Knowledge Bases
+    # Lists the knowledge bases in an account and information about each of
+    # them.
     #
     # @option params [Integer] :max_results
-    #   Max Results.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Opaque continuation token of previous paginated response.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @return [Types::ListKnowledgeBasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1977,10 +2310,10 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.knowledge_base_summaries #=> Array
+    #   resp.knowledge_base_summaries[0].description #=> String
     #   resp.knowledge_base_summaries[0].knowledge_base_id #=> String
     #   resp.knowledge_base_summaries[0].name #=> String
-    #   resp.knowledge_base_summaries[0].description #=> String
-    #   resp.knowledge_base_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
+    #   resp.knowledge_base_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
     #   resp.knowledge_base_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1993,10 +2326,10 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # List tags for a resource
+    # List all the tags for the resource you specify.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of Taggable resources: \[Agent, AgentAlias, Knowledge-Base\]
+    #   The Amazon Resource Name (ARN) of the resource for which to list tags.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2022,10 +2355,12 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Prepares an existing Amazon Bedrock Agent to receive runtime requests
+    # Creates a `DRAFT` version of the agent that can be used for internal
+    # testing.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent for which to create a `DRAFT`
+    #   version.
     #
     # @return [Types::PrepareAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2056,22 +2391,31 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Start a new ingestion job
-    #
-    # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
-    #
-    # @option params [required, String] :data_source_id
-    #   Identifier for a resource.
+    # Begins an ingestion job, in which a data source is added to a
+    # knowledge base.
     #
     # @option params [String] :client_token
-    #   Client specified token used for idempotency checks
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :data_source_id
+    #   The unique identifier of the data source to ingest.
+    #
     # @option params [String] :description
-    #   Description of the Resource.
+    #   A description of the ingestion job.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base to which to add the data
+    #   source.
     #
     # @return [Types::StartIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2080,27 +2424,29 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_ingestion_job({
-    #     knowledge_base_id: "Id", # required
-    #     data_source_id: "Id", # required
     #     client_token: "ClientToken",
+    #     data_source_id: "Id", # required
     #     description: "Description",
+    #     knowledge_base_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.ingestion_job.knowledge_base_id #=> String
     #   resp.ingestion_job.data_source_id #=> String
-    #   resp.ingestion_job.ingestion_job_id #=> String
     #   resp.ingestion_job.description #=> String
-    #   resp.ingestion_job.status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED"
-    #   resp.ingestion_job.statistics.number_of_documents_scanned #=> Integer
-    #   resp.ingestion_job.statistics.number_of_new_documents_indexed #=> Integer
-    #   resp.ingestion_job.statistics.number_of_modified_documents_indexed #=> Integer
-    #   resp.ingestion_job.statistics.number_of_documents_deleted #=> Integer
-    #   resp.ingestion_job.statistics.number_of_documents_failed #=> Integer
     #   resp.ingestion_job.failure_reasons #=> Array
     #   resp.ingestion_job.failure_reasons[0] #=> String
+    #   resp.ingestion_job.ingestion_job_id #=> String
+    #   resp.ingestion_job.knowledge_base_id #=> String
     #   resp.ingestion_job.started_at #=> Time
+    #   resp.ingestion_job.statistics.number_of_documents_deleted #=> Integer
+    #   resp.ingestion_job.statistics.number_of_documents_failed #=> Integer
+    #   resp.ingestion_job.statistics.number_of_documents_scanned #=> Integer
+    #   resp.ingestion_job.statistics.number_of_metadata_documents_modified #=> Integer
+    #   resp.ingestion_job.statistics.number_of_metadata_documents_scanned #=> Integer
+    #   resp.ingestion_job.statistics.number_of_modified_documents_indexed #=> Integer
+    #   resp.ingestion_job.statistics.number_of_new_documents_indexed #=> Integer
+    #   resp.ingestion_job.status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED"
     #   resp.ingestion_job.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StartIngestionJob AWS API Documentation
@@ -2112,13 +2458,19 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Tag a resource
+    # Associate tags with a resource. For more information, see [Tagging
+    # resources][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :resource_arn
-    #   ARN of Taggable resources: \[Agent, AgentAlias, Knowledge-Base\]
+    #   The Amazon Resource Name (ARN) of the resource to tag.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   A map of tag keys and values
+    #   An object containing key-value pairs that define the tags to attach to
+    #   the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2140,13 +2492,14 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Untag a resource
+    # Remove tags from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of Taggable resources: \[Agent, AgentAlias, Knowledge-Base\]
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   List of Tag Keys
+    #   A list of keys of the tags to remove from the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2166,34 +2519,48 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Bedrock Agent
+    # Updates the configuration of an agent.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent.
     #
     # @option params [required, String] :agent_name
-    #   Name for a resource.
-    #
-    # @option params [String] :instruction
-    #   Instruction for the agent.
-    #
-    # @option params [String] :foundation_model
-    #   ARN or name of a Bedrock model.
-    #
-    # @option params [String] :description
-    #   Description of the Resource.
-    #
-    # @option params [Integer] :idle_session_ttl_in_seconds
-    #   Max Session Time.
+    #   Specifies a new name for the agent.
     #
     # @option params [required, String] :agent_resource_role_arn
-    #   ARN of a IAM role.
+    #   The Amazon Resource Name (ARN) of the IAM role with permissions to
+    #   invoke API operations on the agent.
     #
     # @option params [String] :customer_encryption_key_arn
-    #   A KMS key ARN
+    #   The Amazon Resource Name (ARN) of the KMS key with which to encrypt
+    #   the agent.
+    #
+    # @option params [String] :description
+    #   Specifies a new description of the agent.
+    #
+    # @option params [required, String] :foundation_model
+    #   Specifies a new foundation model to be used for orchestration by the
+    #   agent.
+    #
+    # @option params [Integer] :idle_session_ttl_in_seconds
+    #   The number of seconds for which Amazon Bedrock keeps information about
+    #   a user's conversation with the agent.
+    #
+    #   A user interaction remains active for the amount of time specified. If
+    #   no conversation occurs during this time, the session expires and
+    #   Amazon Bedrock deletes any data provided before the timeout.
+    #
+    # @option params [String] :instruction
+    #   Specifies new instructions that tell the agent what it should do and
+    #   how it should interact with users.
     #
     # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
-    #   Configuration for prompt override.
+    #   Contains configurations to override prompts in different parts of an
+    #   agent sequence. For more information, see [Advanced prompts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #
     # @return [Types::UpdateAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2204,67 +2571,67 @@ module Aws::BedrockAgent
     #   resp = client.update_agent({
     #     agent_id: "Id", # required
     #     agent_name: "Name", # required
-    #     instruction: "Instruction",
-    #     foundation_model: "ModelIdentifier",
-    #     description: "Description",
-    #     idle_session_ttl_in_seconds: 1,
     #     agent_resource_role_arn: "AgentRoleArn", # required
     #     customer_encryption_key_arn: "KmsKeyArn",
+    #     description: "Description",
+    #     foundation_model: "ModelIdentifier", # required
+    #     idle_session_ttl_in_seconds: 1,
+    #     instruction: "Instruction",
     #     prompt_override_configuration: {
+    #       override_lambda: "LambdaArn",
     #       prompt_configurations: [ # required
     #         {
-    #           prompt_type: "PRE_PROCESSING", # accepts PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION
-    #           prompt_creation_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
-    #           prompt_state: "ENABLED", # accepts ENABLED, DISABLED
     #           base_prompt_template: "BasePromptTemplate",
     #           inference_configuration: {
-    #             temperature: 1.0,
-    #             top_p: 1.0,
-    #             top_k: 1,
     #             maximum_length: 1,
     #             stop_sequences: ["String"],
+    #             temperature: 1.0,
+    #             top_k: 1,
+    #             top_p: 1.0,
     #           },
     #           parser_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
+    #           prompt_creation_mode: "DEFAULT", # accepts DEFAULT, OVERRIDDEN
+    #           prompt_state: "ENABLED", # accepts ENABLED, DISABLED
+    #           prompt_type: "PRE_PROCESSING", # accepts PRE_PROCESSING, ORCHESTRATION, POST_PROCESSING, KNOWLEDGE_BASE_RESPONSE_GENERATION
     #         },
     #       ],
-    #       override_lambda: "LambdaArn",
     #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.agent.agent_arn #=> String
     #   resp.agent.agent_id #=> String
     #   resp.agent.agent_name #=> String
-    #   resp.agent.agent_arn #=> String
+    #   resp.agent.agent_resource_role_arn #=> String
+    #   resp.agent.agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
     #   resp.agent.agent_version #=> String
     #   resp.agent.client_token #=> String
-    #   resp.agent.instruction #=> String
-    #   resp.agent.agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
-    #   resp.agent.foundation_model #=> String
-    #   resp.agent.description #=> String
-    #   resp.agent.idle_session_ttl_in_seconds #=> Integer
-    #   resp.agent.agent_resource_role_arn #=> String
-    #   resp.agent.customer_encryption_key_arn #=> String
     #   resp.agent.created_at #=> Time
-    #   resp.agent.updated_at #=> Time
-    #   resp.agent.prepared_at #=> Time
+    #   resp.agent.customer_encryption_key_arn #=> String
+    #   resp.agent.description #=> String
     #   resp.agent.failure_reasons #=> Array
     #   resp.agent.failure_reasons[0] #=> String
-    #   resp.agent.recommended_actions #=> Array
-    #   resp.agent.recommended_actions[0] #=> String
+    #   resp.agent.foundation_model #=> String
+    #   resp.agent.idle_session_ttl_in_seconds #=> Integer
+    #   resp.agent.instruction #=> String
+    #   resp.agent.prepared_at #=> Time
+    #   resp.agent.prompt_override_configuration.override_lambda #=> String
     #   resp.agent.prompt_override_configuration.prompt_configurations #=> Array
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "POST_PROCESSING", "KNOWLEDGE_BASE_RESPONSE_GENERATION"
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].base_prompt_template #=> String
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.temperature #=> Float
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_p #=> Float
-    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_k #=> Integer
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.maximum_length #=> Integer
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.stop_sequences #=> Array
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.stop_sequences[0] #=> String
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.temperature #=> Float
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_k #=> Integer
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].inference_configuration.top_p #=> Float
     #   resp.agent.prompt_override_configuration.prompt_configurations[0].parser_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
-    #   resp.agent.prompt_override_configuration.override_lambda #=> String
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_creation_mode #=> String, one of "DEFAULT", "OVERRIDDEN"
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent.prompt_override_configuration.prompt_configurations[0].prompt_type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "POST_PROCESSING", "KNOWLEDGE_BASE_RESPONSE_GENERATION"
+    #   resp.agent.recommended_actions #=> Array
+    #   resp.agent.recommended_actions[0] #=> String
+    #   resp.agent.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgent AWS API Documentation
     #
@@ -2275,35 +2642,65 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Updates an existing Action Group for Amazon Bedrock Agent
-    #
-    # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
-    #
-    # @option params [required, String] :agent_version
-    #   Draft Version of the Agent.
-    #
-    # @option params [required, String] :action_group_id
-    #   Id generated at the server side when an Action Group is created under
-    #   Agent
-    #
-    # @option params [required, String] :action_group_name
-    #   Name for a resource.
-    #
-    # @option params [String] :description
-    #   Description of the Resource.
-    #
-    # @option params [String] :parent_action_group_signature
-    #   Action Group Signature for a BuiltIn Action
+    # Updates the configuration for an action group for an agent.
     #
     # @option params [Types::ActionGroupExecutor] :action_group_executor
-    #   Type of Executors for an Action Group
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
+    #
+    # @option params [required, String] :action_group_id
+    #   The unique identifier of the action group.
+    #
+    # @option params [required, String] :action_group_name
+    #   Specifies a new name for the action group.
     #
     # @option params [String] :action_group_state
-    #   State of the action group
+    #   Specifies whether the action group is available for the agent to
+    #   invoke or not when sending an [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent for which to update the action
+    #   group.
+    #
+    # @option params [required, String] :agent_version
+    #   The unique identifier of the agent version for which to update the
+    #   action group.
     #
     # @option params [Types::APISchema] :api_schema
-    #   Contains information about the API Schema for the Action Group
+    #   Contains either details about the S3 object containing the OpenAPI
+    #   schema for the action group or the JSON or YAML-formatted payload
+    #   defining the schema. For more information, see [Action group OpenAPI
+    #   schemas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
+    #
+    # @option params [String] :description
+    #   Specifies a new name for the action group.
+    #
+    # @option params [Types::FunctionSchema] :function_schema
+    #   Contains details about the function schema for the action group or the
+    #   JSON or YAML-formatted payload defining the schema.
+    #
+    # @option params [String] :parent_action_group_signature
+    #   To allow your agent to request the user for additional information
+    #   when trying to complete a task, set this field to `AMAZON.UserInput`.
+    #   You must leave the `description`, `apiSchema`, and
+    #   `actionGroupExecutor` fields blank for this action group.
+    #
+    #   During orchestration, if your agent determines that it needs to invoke
+    #   an API in an action group, but doesn't have enough information to
+    #   complete the API request, it will invoke this action group instead and
+    #   return an [Observation][1] reprompting the user for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #
     # @return [Types::UpdateAgentActionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2312,41 +2709,65 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_agent_action_group({
-    #     agent_id: "Id", # required
-    #     agent_version: "DraftVersion", # required
-    #     action_group_id: "Id", # required
-    #     action_group_name: "Name", # required
-    #     description: "Description",
-    #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
     #     action_group_executor: {
+    #       custom_control: "RETURN_CONTROL", # accepts RETURN_CONTROL
     #       lambda: "LambdaArn",
     #     },
+    #     action_group_id: "Id", # required
+    #     action_group_name: "Name", # required
     #     action_group_state: "ENABLED", # accepts ENABLED, DISABLED
+    #     agent_id: "Id", # required
+    #     agent_version: "DraftVersion", # required
     #     api_schema: {
+    #       payload: "Payload",
     #       s3: {
     #         s3_bucket_name: "S3BucketName",
     #         s3_object_key: "S3ObjectKey",
     #       },
-    #       payload: "Payload",
     #     },
+    #     description: "Description",
+    #     function_schema: {
+    #       functions: [
+    #         {
+    #           description: "FunctionDescription",
+    #           name: "Name", # required
+    #           parameters: {
+    #             "Name" => {
+    #               description: "ParameterDescription",
+    #               required: false,
+    #               type: "string", # required, accepts string, number, integer, boolean, array
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
     #   })
     #
     # @example Response structure
     #
-    #   resp.agent_action_group.agent_id #=> String
-    #   resp.agent_action_group.agent_version #=> String
+    #   resp.agent_action_group.action_group_executor.custom_control #=> String, one of "RETURN_CONTROL"
+    #   resp.agent_action_group.action_group_executor.lambda #=> String
     #   resp.agent_action_group.action_group_id #=> String
     #   resp.agent_action_group.action_group_name #=> String
-    #   resp.agent_action_group.client_token #=> String
-    #   resp.agent_action_group.description #=> String
-    #   resp.agent_action_group.created_at #=> Time
-    #   resp.agent_action_group.updated_at #=> Time
-    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
-    #   resp.agent_action_group.action_group_executor.lambda #=> String
+    #   resp.agent_action_group.action_group_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_action_group.agent_id #=> String
+    #   resp.agent_action_group.agent_version #=> String
+    #   resp.agent_action_group.api_schema.payload #=> String
     #   resp.agent_action_group.api_schema.s3.s3_bucket_name #=> String
     #   resp.agent_action_group.api_schema.s3.s3_object_key #=> String
-    #   resp.agent_action_group.api_schema.payload #=> String
-    #   resp.agent_action_group.action_group_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_action_group.client_token #=> String
+    #   resp.agent_action_group.created_at #=> Time
+    #   resp.agent_action_group.description #=> String
+    #   resp.agent_action_group.function_schema.functions #=> Array
+    #   resp.agent_action_group.function_schema.functions[0].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].name #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters #=> Hash
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
+    #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
+    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
+    #   resp.agent_action_group.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentActionGroup AWS API Documentation
     #
@@ -2357,22 +2778,22 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Updates an existing Alias for an Amazon Bedrock Agent
-    #
-    # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    # Updates configurations for an alias of an agent.
     #
     # @option params [required, String] :agent_alias_id
-    #   Id generated at the server side when an Agent Alias is created
+    #   The unique identifier of the alias.
     #
     # @option params [required, String] :agent_alias_name
-    #   Name for a resource.
+    #   Specifies a new name for the alias.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent.
     #
     # @option params [String] :description
-    #   Description of the Resource.
+    #   Specifies a new description for the alias.
     #
     # @option params [Array<Types::AgentAliasRoutingConfigurationListItem>] :routing_configuration
-    #   Routing configuration for an Agent alias.
+    #   Contains details about the routing configuration of the alias.
     #
     # @return [Types::UpdateAgentAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2381,9 +2802,9 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_agent_alias({
-    #     agent_id: "Id", # required
     #     agent_alias_id: "AgentAliasId", # required
     #     agent_alias_name: "Name", # required
+    #     agent_id: "Id", # required
     #     description: "Description",
     #     routing_configuration: [
     #       {
@@ -2394,22 +2815,22 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
-    #   resp.agent_alias.agent_id #=> String
+    #   resp.agent_alias.agent_alias_arn #=> String
+    #   resp.agent_alias.agent_alias_history_events #=> Array
+    #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
-    #   resp.agent_alias.agent_alias_arn #=> String
+    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_alias.agent_id #=> String
     #   resp.agent_alias.client_token #=> String
+    #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
     #   resp.agent_alias.routing_configuration #=> Array
     #   resp.agent_alias.routing_configuration[0].agent_version #=> String
-    #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.updated_at #=> Time
-    #   resp.agent_alias.agent_alias_history_events #=> Array
-    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
-    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
-    #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
-    #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
-    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentAlias AWS API Documentation
     #
@@ -2420,24 +2841,32 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Updates an existing Knowledge Base associated to an Amazon Bedrock
-    # Agent
+    # Updates the configuration for a knowledge base that has been
+    # associated with an agent.
     #
     # @option params [required, String] :agent_id
-    #   Id generated at the server side when an Agent is created
+    #   The unique identifier of the agent associated with the knowledge base
+    #   that you want to update.
     #
     # @option params [required, String] :agent_version
-    #   Draft Version of the Agent.
-    #
-    # @option params [required, String] :knowledge_base_id
-    #   Id generated at the server side when a Knowledge Base is associated to
-    #   an Agent
+    #   The version of the agent associated with the knowledge base that you
+    #   want to update.
     #
     # @option params [String] :description
-    #   Description of the Resource.
+    #   Specifies a new description for the knowledge base associated with an
+    #   agent.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base that has been associated
+    #   with an agent.
     #
     # @option params [String] :knowledge_base_state
-    #   State of the knowledge base; whether it is enabled or disabled
+    #   Specifies whether the agent uses the knowledge base or not when
+    #   sending an [InvokeAgent][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
     #
     # @return [Types::UpdateAgentKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2448,8 +2877,8 @@ module Aws::BedrockAgent
     #   resp = client.update_agent_knowledge_base({
     #     agent_id: "Id", # required
     #     agent_version: "DraftVersion", # required
-    #     knowledge_base_id: "Id", # required
     #     description: "Description",
+    #     knowledge_base_id: "Id", # required
     #     knowledge_base_state: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
@@ -2457,11 +2886,11 @@ module Aws::BedrockAgent
     #
     #   resp.agent_knowledge_base.agent_id #=> String
     #   resp.agent_knowledge_base.agent_version #=> String
-    #   resp.agent_knowledge_base.knowledge_base_id #=> String
-    #   resp.agent_knowledge_base.description #=> String
     #   resp.agent_knowledge_base.created_at #=> Time
-    #   resp.agent_knowledge_base.updated_at #=> Time
+    #   resp.agent_knowledge_base.description #=> String
+    #   resp.agent_knowledge_base.knowledge_base_id #=> String
     #   resp.agent_knowledge_base.knowledge_base_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentKnowledgeBase AWS API Documentation
     #
@@ -2472,28 +2901,35 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Update an existing data source
+    # Updates configurations for a data source.
     #
-    # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    # You can't change the `chunkingConfiguration` after you create the
+    # data source. Specify the existing `chunkingConfiguration`.
     #
-    # @option params [required, String] :data_source_id
-    #   Identifier for a resource.
-    #
-    # @option params [required, String] :name
-    #   Name for a resource.
-    #
-    # @option params [String] :description
-    #   Description of the Resource.
+    # @option params [String] :data_deletion_policy
+    #   The data deletion policy of the updated data source.
     #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
-    #   Specifies a raw data source location to ingest.
+    #   Contains details about the storage configuration of the data source.
+    #
+    # @option params [required, String] :data_source_id
+    #   The unique identifier of the data source.
+    #
+    # @option params [String] :description
+    #   Specifies a new description for the data source.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base to which the data source
+    #   belongs.
+    #
+    # @option params [required, String] :name
+    #   Specifies a new name for the data source.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   Server-side encryption configuration.
+    #   Contains details about server-side encryption of the data source.
     #
     # @option params [Types::VectorIngestionConfiguration] :vector_ingestion_configuration
-    #   Configures ingestion for a vector knowledge base
+    #   Contains details about how to ingest the documents in the data source.
     #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2502,17 +2938,19 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_data_source({
-    #     knowledge_base_id: "Id", # required
-    #     data_source_id: "Id", # required
-    #     name: "Name", # required
-    #     description: "Description",
+    #     data_deletion_policy: "RETAIN", # accepts RETAIN, DELETE
     #     data_source_configuration: { # required
-    #       type: "S3", # required, accepts S3
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
+    #         bucket_owner_account_id: "BucketOwnerAccountId",
     #         inclusion_prefixes: ["S3Prefix"],
     #       },
+    #       type: "S3", # required, accepts S3
     #     },
+    #     data_source_id: "Id", # required
+    #     description: "Description",
+    #     knowledge_base_id: "Id", # required
+    #     name: "Name", # required
     #     server_side_encryption_configuration: {
     #       kms_key_arn: "KmsKeyArn",
     #     },
@@ -2529,21 +2967,25 @@ module Aws::BedrockAgent
     #
     # @example Response structure
     #
-    #   resp.data_source.knowledge_base_id #=> String
-    #   resp.data_source.data_source_id #=> String
-    #   resp.data_source.name #=> String
-    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING"
-    #   resp.data_source.description #=> String
-    #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
+    #   resp.data_source.created_at #=> Time
+    #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
+    #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
+    #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
+    #   resp.data_source.data_source_id #=> String
+    #   resp.data_source.description #=> String
+    #   resp.data_source.failure_reasons #=> Array
+    #   resp.data_source.failure_reasons[0] #=> String
+    #   resp.data_source.knowledge_base_id #=> String
+    #   resp.data_source.name #=> String
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
+    #   resp.data_source.updated_at #=> Time
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
-    #   resp.data_source.created_at #=> Time
-    #   resp.data_source.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateDataSource AWS API Documentation
     #
@@ -2554,25 +2996,49 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Update an existing knowledge base
+    # Updates the configuration of a knowledge base with the fields that you
+    # specify. Because all fields will be overwritten, you must include the
+    # same values for fields that you want to keep the same.
     #
-    # @option params [required, String] :knowledge_base_id
-    #   Identifier for a resource.
+    # You can change the following fields:
     #
-    # @option params [required, String] :name
-    #   Name for a resource.
+    # * `name`
+    #
+    # * `description`
+    #
+    # * `roleArn`
+    #
+    # You can't change the `knowledgeBaseConfiguration` or
+    # `storageConfiguration` fields, so you must specify the same
+    # configurations as when you created the knowledge base. You can send a
+    # [GetKnowledgeBase][1] request and copy the same configurations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetKnowledgeBase.html
     #
     # @option params [String] :description
-    #   Description of the Resource.
-    #
-    # @option params [required, String] :role_arn
-    #   ARN of a IAM role.
+    #   Specifies a new description for the knowledge base.
     #
     # @option params [required, Types::KnowledgeBaseConfiguration] :knowledge_base_configuration
-    #   Configures a bedrock knowledge base.
+    #   Specifies the configuration for the embeddings model used for the
+    #   knowledge base. You must use the same configuration as when the
+    #   knowledge base was created.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base to update.
+    #
+    # @option params [required, String] :name
+    #   Specifies a new name for the knowledge base.
+    #
+    # @option params [required, String] :role_arn
+    #   Specifies a different Amazon Resource Name (ARN) of the IAM role with
+    #   permissions to invoke API operations on the knowledge base.
     #
     # @option params [required, Types::StorageConfiguration] :storage_configuration
-    #   Configures the physical storage of ingested data in a knowledge base.
+    #   Specifies the configuration for the vector store used for the
+    #   knowledge base. You must use the same configuration as when the
+    #   knowledge base was created.
     #
     # @return [Types::UpdateKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2581,100 +3047,100 @@ module Aws::BedrockAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_knowledge_base({
-    #     knowledge_base_id: "Id", # required
-    #     name: "Name", # required
     #     description: "Description",
-    #     role_arn: "KnowledgeBaseRoleArn", # required
     #     knowledge_base_configuration: { # required
     #       type: "VECTOR", # required, accepts VECTOR
     #       vector_knowledge_base_configuration: {
     #         embedding_model_arn: "BedrockEmbeddingModelArn", # required
     #       },
     #     },
+    #     knowledge_base_id: "Id", # required
+    #     name: "Name", # required
+    #     role_arn: "KnowledgeBaseRoleArn", # required
     #     storage_configuration: { # required
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS
     #       opensearch_serverless_configuration: {
     #         collection_arn: "OpenSearchServerlessCollectionArn", # required
-    #         vector_index_name: "OpenSearchServerlessIndexName", # required
     #         field_mapping: { # required
-    #           vector_field: "FieldName", # required
-    #           text_field: "FieldName", # required
     #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #           vector_field: "FieldName", # required
     #         },
+    #         vector_index_name: "OpenSearchServerlessIndexName", # required
     #       },
     #       pinecone_configuration: {
     #         connection_string: "PineconeConnectionString", # required
     #         credentials_secret_arn: "SecretArn", # required
+    #         field_mapping: { # required
+    #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #         },
     #         namespace: "PineconeNamespace",
-    #         field_mapping: { # required
-    #           text_field: "FieldName", # required
-    #           metadata_field: "FieldName", # required
-    #         },
-    #       },
-    #       redis_enterprise_cloud_configuration: {
-    #         endpoint: "RedisEnterpriseCloudEndpoint", # required
-    #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
-    #         credentials_secret_arn: "SecretArn", # required
-    #         field_mapping: { # required
-    #           vector_field: "FieldName", # required
-    #           text_field: "FieldName", # required
-    #           metadata_field: "FieldName", # required
-    #         },
     #       },
     #       rds_configuration: {
-    #         resource_arn: "RdsArn", # required
     #         credentials_secret_arn: "SecretArn", # required
     #         database_name: "RdsDatabaseName", # required
-    #         table_name: "RdsTableName", # required
     #         field_mapping: { # required
-    #           primary_key_field: "ColumnName", # required
-    #           vector_field: "ColumnName", # required
-    #           text_field: "ColumnName", # required
     #           metadata_field: "ColumnName", # required
+    #           primary_key_field: "ColumnName", # required
+    #           text_field: "ColumnName", # required
+    #           vector_field: "ColumnName", # required
     #         },
+    #         resource_arn: "RdsArn", # required
+    #         table_name: "RdsTableName", # required
     #       },
+    #       redis_enterprise_cloud_configuration: {
+    #         credentials_secret_arn: "SecretArn", # required
+    #         endpoint: "RedisEnterpriseCloudEndpoint", # required
+    #         field_mapping: { # required
+    #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #           vector_field: "FieldName", # required
+    #         },
+    #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
+    #       },
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.knowledge_base.knowledge_base_id #=> String
-    #   resp.knowledge_base.name #=> String
-    #   resp.knowledge_base.knowledge_base_arn #=> String
-    #   resp.knowledge_base.description #=> String
-    #   resp.knowledge_base.role_arn #=> String
-    #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
-    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.vector_field #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.connection_string #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.credentials_secret_arn #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.namespace #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.endpoint #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.credentials_secret_arn #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.resource_arn #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.credentials_secret_arn #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.database_name #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.table_name #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.primary_key_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.vector_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.text_field #=> String
-    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.metadata_field #=> String
-    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED"
     #   resp.knowledge_base.created_at #=> Time
-    #   resp.knowledge_base.updated_at #=> Time
+    #   resp.knowledge_base.description #=> String
     #   resp.knowledge_base.failure_reasons #=> Array
     #   resp.knowledge_base.failure_reasons[0] #=> String
+    #   resp.knowledge_base.knowledge_base_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
+    #   resp.knowledge_base.knowledge_base_id #=> String
+    #   resp.knowledge_base.name #=> String
+    #   resp.knowledge_base.role_arn #=> String
+    #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.vector_index_name #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.connection_string #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.pinecone_configuration.namespace #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.database_name #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.primary_key_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.resource_arn #=> String
+    #   resp.knowledge_base.storage_configuration.rds_configuration.table_name #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.endpoint #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
+    #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateKnowledgeBase AWS API Documentation
     #
@@ -2698,7 +3164,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

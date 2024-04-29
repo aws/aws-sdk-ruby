@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2024-03-06)
+------------------
+
+* Feature - Add PENDING status to Lifecycle Execution resource status. Add StartTime and EndTime to ListLifecycleExecutionResource API response.
+
 1.57.0 (2024-01-26)
 ------------------
 

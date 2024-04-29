@@ -1289,6 +1289,7 @@ module Aws::Backup
     ListRecoveryPointsByResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     ListRecoveryPointsByResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListRecoveryPointsByResourceInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListRecoveryPointsByResourceInput.add_member(:managed_by_aws_backup_only, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "managedByAWSBackupOnly"))
     ListRecoveryPointsByResourceInput.struct_class = Types::ListRecoveryPointsByResourceInput
 
     ListRecoveryPointsByResourceOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
@@ -1462,6 +1463,7 @@ module Aws::Backup
     RecoveryPointByResource.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     RecoveryPointByResource.add_member(:parent_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ParentRecoveryPointArn"))
     RecoveryPointByResource.add_member(:resource_name, Shapes::ShapeRef.new(shape: string, location_name: "ResourceName"))
+    RecoveryPointByResource.add_member(:vault_type, Shapes::ShapeRef.new(shape: VaultType, location_name: "VaultType"))
     RecoveryPointByResource.struct_class = Types::RecoveryPointByResource
 
     RecoveryPointByResourceList.member = Shapes::ShapeRef.new(shape: RecoveryPointByResource)

@@ -38,6 +38,9 @@ module Aws
       class SerialConsoleSessionUnavailableException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class SerialConsoleSessionUnsupportedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ServiceException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

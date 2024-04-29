@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.5.0 (2024-04-03)
+------------------
+
+* Feature - This release supports the feature of dataQuality to enrich asset with dataQualityResult in Amazon DataZone.
+
 1.4.0 (2024-01-30)
 ------------------
 

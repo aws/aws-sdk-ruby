@@ -14,9 +14,12 @@ module Aws::InternetMonitor
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AvailabilityMeasurement = Shapes::StructureShape.new(name: 'AvailabilityMeasurement')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ClientLocation = Shapes::StructureShape.new(name: 'ClientLocation')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateMonitorInput = Shapes::StructureShape.new(name: 'CreateMonitorInput')
     CreateMonitorOutput = Shapes::StructureShape.new(name: 'CreateMonitorOutput')
@@ -28,6 +31,8 @@ module Aws::InternetMonitor
     FilterParameters = Shapes::ListShape.new(name: 'FilterParameters')
     GetHealthEventInput = Shapes::StructureShape.new(name: 'GetHealthEventInput')
     GetHealthEventOutput = Shapes::StructureShape.new(name: 'GetHealthEventOutput')
+    GetInternetEventInput = Shapes::StructureShape.new(name: 'GetInternetEventInput')
+    GetInternetEventOutput = Shapes::StructureShape.new(name: 'GetInternetEventOutput')
     GetMonitorInput = Shapes::StructureShape.new(name: 'GetMonitorInput')
     GetMonitorOutput = Shapes::StructureShape.new(name: 'GetMonitorOutput')
     GetQueryResultsInput = Shapes::StructureShape.new(name: 'GetQueryResultsInput')
@@ -44,11 +49,20 @@ module Aws::InternetMonitor
     ImpactedLocationsList = Shapes::ListShape.new(name: 'ImpactedLocationsList')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InternetEventId = Shapes::StringShape.new(name: 'InternetEventId')
+    InternetEventMaxResults = Shapes::IntegerShape.new(name: 'InternetEventMaxResults')
+    InternetEventStatus = Shapes::StringShape.new(name: 'InternetEventStatus')
+    InternetEventSummary = Shapes::StructureShape.new(name: 'InternetEventSummary')
+    InternetEventType = Shapes::StringShape.new(name: 'InternetEventType')
+    InternetEventsList = Shapes::ListShape.new(name: 'InternetEventsList')
     InternetHealth = Shapes::StructureShape.new(name: 'InternetHealth')
     InternetMeasurementsLogDelivery = Shapes::StructureShape.new(name: 'InternetMeasurementsLogDelivery')
+    Ipv4PrefixList = Shapes::ListShape.new(name: 'Ipv4PrefixList')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListHealthEventsInput = Shapes::StructureShape.new(name: 'ListHealthEventsInput')
     ListHealthEventsOutput = Shapes::StructureShape.new(name: 'ListHealthEventsOutput')
+    ListInternetEventsInput = Shapes::StructureShape.new(name: 'ListInternetEventsInput')
+    ListInternetEventsOutput = Shapes::StructureShape.new(name: 'ListInternetEventsOutput')
     ListMonitorsInput = Shapes::StructureShape.new(name: 'ListMonitorsInput')
     ListMonitorsOutput = Shapes::StructureShape.new(name: 'ListMonitorsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
@@ -117,6 +131,16 @@ module Aws::InternetMonitor
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
 
+    ClientLocation.add_member(:as_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ASName"))
+    ClientLocation.add_member(:as_number, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ASNumber"))
+    ClientLocation.add_member(:country, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Country"))
+    ClientLocation.add_member(:subdivision, Shapes::ShapeRef.new(shape: String, location_name: "Subdivision"))
+    ClientLocation.add_member(:metro, Shapes::ShapeRef.new(shape: String, location_name: "Metro"))
+    ClientLocation.add_member(:city, Shapes::ShapeRef.new(shape: String, required: true, location_name: "City"))
+    ClientLocation.add_member(:latitude, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Latitude"))
+    ClientLocation.add_member(:longitude, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Longitude"))
+    ClientLocation.struct_class = Types::ClientLocation
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -150,6 +174,7 @@ module Aws::InternetMonitor
 
     GetHealthEventInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
     GetHealthEventInput.add_member(:event_id, Shapes::ShapeRef.new(shape: HealthEventName, required: true, location: "uri", location_name: "EventId"))
+    GetHealthEventInput.add_member(:linked_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "LinkedAccountId"))
     GetHealthEventInput.struct_class = Types::GetHealthEventInput
 
     GetHealthEventOutput.add_member(:event_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventArn"))
@@ -165,7 +190,20 @@ module Aws::InternetMonitor
     GetHealthEventOutput.add_member(:health_score_threshold, Shapes::ShapeRef.new(shape: Percentage, location_name: "HealthScoreThreshold"))
     GetHealthEventOutput.struct_class = Types::GetHealthEventOutput
 
+    GetInternetEventInput.add_member(:event_id, Shapes::ShapeRef.new(shape: InternetEventId, required: true, location: "uri", location_name: "EventId"))
+    GetInternetEventInput.struct_class = Types::GetInternetEventInput
+
+    GetInternetEventOutput.add_member(:event_id, Shapes::ShapeRef.new(shape: InternetEventId, required: true, location_name: "EventId"))
+    GetInternetEventOutput.add_member(:event_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventArn"))
+    GetInternetEventOutput.add_member(:started_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "StartedAt"))
+    GetInternetEventOutput.add_member(:ended_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "EndedAt"))
+    GetInternetEventOutput.add_member(:client_location, Shapes::ShapeRef.new(shape: ClientLocation, required: true, location_name: "ClientLocation"))
+    GetInternetEventOutput.add_member(:event_type, Shapes::ShapeRef.new(shape: InternetEventType, required: true, location_name: "EventType"))
+    GetInternetEventOutput.add_member(:event_status, Shapes::ShapeRef.new(shape: InternetEventStatus, required: true, location_name: "EventStatus"))
+    GetInternetEventOutput.struct_class = Types::GetInternetEventOutput
+
     GetMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
+    GetMonitorInput.add_member(:linked_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "LinkedAccountId"))
     GetMonitorInput.struct_class = Types::GetMonitorInput
 
     GetMonitorOutput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MonitorName"))
@@ -236,6 +274,7 @@ module Aws::InternetMonitor
     ImpactedLocation.add_member(:status, Shapes::ShapeRef.new(shape: HealthEventStatus, required: true, location_name: "Status"))
     ImpactedLocation.add_member(:caused_by, Shapes::ShapeRef.new(shape: NetworkImpairment, location_name: "CausedBy"))
     ImpactedLocation.add_member(:internet_health, Shapes::ShapeRef.new(shape: InternetHealth, location_name: "InternetHealth"))
+    ImpactedLocation.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: Ipv4PrefixList, location_name: "Ipv4Prefixes"))
     ImpactedLocation.struct_class = Types::ImpactedLocation
 
     ImpactedLocationsList.member = Shapes::ShapeRef.new(shape: ImpactedLocation)
@@ -246,12 +285,25 @@ module Aws::InternetMonitor
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    InternetEventSummary.add_member(:event_id, Shapes::ShapeRef.new(shape: InternetEventId, required: true, location_name: "EventId"))
+    InternetEventSummary.add_member(:event_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventArn"))
+    InternetEventSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "StartedAt"))
+    InternetEventSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "EndedAt"))
+    InternetEventSummary.add_member(:client_location, Shapes::ShapeRef.new(shape: ClientLocation, required: true, location_name: "ClientLocation"))
+    InternetEventSummary.add_member(:event_type, Shapes::ShapeRef.new(shape: InternetEventType, required: true, location_name: "EventType"))
+    InternetEventSummary.add_member(:event_status, Shapes::ShapeRef.new(shape: InternetEventStatus, required: true, location_name: "EventStatus"))
+    InternetEventSummary.struct_class = Types::InternetEventSummary
+
+    InternetEventsList.member = Shapes::ShapeRef.new(shape: InternetEventSummary)
+
     InternetHealth.add_member(:availability, Shapes::ShapeRef.new(shape: AvailabilityMeasurement, location_name: "Availability"))
     InternetHealth.add_member(:performance, Shapes::ShapeRef.new(shape: PerformanceMeasurement, location_name: "Performance"))
     InternetHealth.struct_class = Types::InternetHealth
 
     InternetMeasurementsLogDelivery.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config"))
     InternetMeasurementsLogDelivery.struct_class = Types::InternetMeasurementsLogDelivery
+
+    Ipv4PrefixList.member = Shapes::ShapeRef.new(shape: String)
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
@@ -262,15 +314,29 @@ module Aws::InternetMonitor
     ListHealthEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
     ListHealthEventsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListHealthEventsInput.add_member(:event_status, Shapes::ShapeRef.new(shape: HealthEventStatus, location: "querystring", location_name: "EventStatus"))
+    ListHealthEventsInput.add_member(:linked_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "LinkedAccountId"))
     ListHealthEventsInput.struct_class = Types::ListHealthEventsInput
 
     ListHealthEventsOutput.add_member(:health_events, Shapes::ShapeRef.new(shape: HealthEventList, required: true, location_name: "HealthEvents"))
     ListHealthEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListHealthEventsOutput.struct_class = Types::ListHealthEventsOutput
 
+    ListInternetEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
+    ListInternetEventsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: InternetEventMaxResults, location: "querystring", location_name: "InternetEventMaxResults"))
+    ListInternetEventsInput.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location: "querystring", location_name: "StartTime"))
+    ListInternetEventsInput.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location: "querystring", location_name: "EndTime"))
+    ListInternetEventsInput.add_member(:event_status, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "EventStatus"))
+    ListInternetEventsInput.add_member(:event_type, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "EventType"))
+    ListInternetEventsInput.struct_class = Types::ListInternetEventsInput
+
+    ListInternetEventsOutput.add_member(:internet_events, Shapes::ShapeRef.new(shape: InternetEventsList, required: true, location_name: "InternetEvents"))
+    ListInternetEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListInternetEventsOutput.struct_class = Types::ListInternetEventsOutput
+
     ListMonitorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
     ListMonitorsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListMonitorsInput.add_member(:monitor_status, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "MonitorStatus"))
+    ListMonitorsInput.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "IncludeLinkedAccounts"))
     ListMonitorsInput.struct_class = Types::ListMonitorsInput
 
     ListMonitorsOutput.add_member(:monitors, Shapes::ShapeRef.new(shape: MonitorList, required: true, location_name: "Monitors"))
@@ -346,6 +412,7 @@ module Aws::InternetMonitor
     StartQueryInput.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "EndTime"))
     StartQueryInput.add_member(:query_type, Shapes::ShapeRef.new(shape: QueryType, required: true, location_name: "QueryType"))
     StartQueryInput.add_member(:filter_parameters, Shapes::ShapeRef.new(shape: FilterParameters, location_name: "FilterParameters"))
+    StartQueryInput.add_member(:linked_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "LinkedAccountId"))
     StartQueryInput.struct_class = Types::StartQueryInput
 
     StartQueryOutput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueryId"))
@@ -454,6 +521,18 @@ module Aws::InternetMonitor
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_internet_event, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInternetEvent"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20210603/InternetEvents/{EventId}"
+        o.input = Shapes::ShapeRef.new(shape: GetInternetEventInput)
+        o.output = Shapes::ShapeRef.new(shape: GetInternetEventOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_monitor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMonitor"
         o.http_method = "GET"
@@ -504,6 +583,24 @@ module Aws::InternetMonitor
         o.http_request_uri = "/v20210603/Monitors/{MonitorName}/HealthEvents"
         o.input = Shapes::ShapeRef.new(shape: ListHealthEventsInput)
         o.output = Shapes::ShapeRef.new(shape: ListHealthEventsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_internet_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInternetEvents"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20210603/InternetEvents"
+        o.input = Shapes::ShapeRef.new(shape: ListInternetEventsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListInternetEventsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

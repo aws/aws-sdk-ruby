@@ -839,6 +839,21 @@
         "resultWrapper":"ListStackResourcesResult"
       }
     },
+    "ListStackSetAutoDeploymentTargets":{
+      "name":"ListStackSetAutoDeploymentTargets",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListStackSetAutoDeploymentTargetsInput"},
+      "output":{
+        "shape":"ListStackSetAutoDeploymentTargetsOutput",
+        "resultWrapper":"ListStackSetAutoDeploymentTargetsResult"
+      },
+      "errors":[
+        {"shape":"StackSetNotFoundException"}
+      ]
+    },
     "ListStackSetOperationResults":{
       "name":"ListStackSetOperationResults",
       "http":{
@@ -1303,6 +1318,8 @@
         "Arn":{"shape":"PrivateTypeArn"}
       }
     },
+    "AfterContext":{"type":"string"},
+    "AfterValue":{"type":"string"},
     "AllowedValue":{"type":"string"},
     "AllowedValues":{
       "type":"list",
@@ -1320,6 +1337,14 @@
       "exception":true
     },
     "Arn":{"type":"string"},
+    "AttributeChangeType":{
+      "type":"string",
+      "enum":[
+        "Add",
+        "Remove",
+        "Modify"
+      ]
+    },
     "AutoDeployment":{
       "type":"structure",
       "members":{
@@ -1356,6 +1381,8 @@
         "TypeConfigurations":{"shape":"TypeConfigurationDetailsList"}
       }
     },
+    "BeforeContext":{"type":"string"},
+    "BeforeValue":{"type":"string"},
     "BoxedInteger":{
       "type":"integer",
       "box":true
@@ -1932,7 +1959,8 @@
       "members":{
         "ChangeSetName":{"shape":"ChangeSetNameOrId"},
         "StackName":{"shape":"StackNameOrId"},
-        "NextToken":{"shape":"NextToken"}
+        "NextToken":{"shape":"NextToken"},
+        "IncludePropertyValues":{"shape":"IncludePropertyValues"}
       }
     },
     "DescribeChangeSetOutput":{
@@ -2249,6 +2277,13 @@
       "type":"string",
       "max":1024,
       "min":1
+    },
+    "DetailedStatus":{
+      "type":"string",
+      "enum":[
+        "CONFIGURATION_COMPLETE",
+        "VALIDATION_FAILED"
+      ]
     },
     "DetectStackDriftInput":{
       "type":"structure",
@@ -2664,6 +2699,7 @@
       "min":0
     },
     "IncludeNestedStacks":{"type":"boolean"},
+    "IncludePropertyValues":{"type":"boolean"},
     "InsufficientCapabilitiesException":{
       "type":"structure",
       "members":{
@@ -2908,6 +2944,23 @@
       "type":"structure",
       "members":{
         "StackResourceSummaries":{"shape":"StackResourceSummaries"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListStackSetAutoDeploymentTargetsInput":{
+      "type":"structure",
+      "required":["StackSetName"],
+      "members":{
+        "StackSetName":{"shape":"StackSetNameOrId"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"},
+        "CallAs":{"shape":"CallAs"}
+      }
+    },
+    "ListStackSetAutoDeploymentTargetsOutput":{
+      "type":"structure",
+      "members":{
+        "Summaries":{"shape":"StackSetAutoDeploymentTargetSummaries"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -3316,6 +3369,17 @@
         "Value":{"shape":"Value"}
       }
     },
+    "PolicyAction":{
+      "type":"string",
+      "enum":[
+        "Delete",
+        "Retain",
+        "Snapshot",
+        "ReplaceAndDelete",
+        "ReplaceAndRetain",
+        "ReplaceAndSnapshot"
+      ]
+    },
     "PrivateTypeArn":{
       "type":"string",
       "max":1024,
@@ -3550,6 +3614,7 @@
     "ResourceChange":{
       "type":"structure",
       "members":{
+        "PolicyAction":{"shape":"PolicyAction"},
         "Action":{"shape":"ChangeAction"},
         "LogicalResourceId":{"shape":"LogicalResourceId"},
         "PhysicalResourceId":{"shape":"PhysicalResourceId"},
@@ -3558,7 +3623,9 @@
         "Scope":{"shape":"Scope"},
         "Details":{"shape":"ResourceChangeDetails"},
         "ChangeSetId":{"shape":"ChangeSetId"},
-        "ModuleInfo":{"shape":"ModuleInfo"}
+        "ModuleInfo":{"shape":"ModuleInfo"},
+        "BeforeContext":{"shape":"BeforeContext"},
+        "AfterContext":{"shape":"AfterContext"}
       }
     },
     "ResourceChangeDetail":{
@@ -3649,6 +3716,7 @@
       "min":1
     },
     "ResourceProperties":{"type":"string"},
+    "ResourcePropertyPath":{"type":"string"},
     "ResourceScanId":{"type":"string"},
     "ResourceScanInProgressException":{
       "type":"structure",
@@ -3757,7 +3825,11 @@
       "members":{
         "Attribute":{"shape":"ResourceAttribute"},
         "Name":{"shape":"PropertyName"},
-        "RequiresRecreation":{"shape":"RequiresRecreation"}
+        "RequiresRecreation":{"shape":"RequiresRecreation"},
+        "Path":{"shape":"ResourcePropertyPath"},
+        "BeforeValue":{"shape":"BeforeValue"},
+        "AfterValue":{"shape":"AfterValue"},
+        "AttributeChangeType":{"shape":"AttributeChangeType"}
       }
     },
     "ResourceToImport":{
@@ -3999,7 +4071,8 @@
         "ParentId":{"shape":"StackId"},
         "RootId":{"shape":"StackId"},
         "DriftInformation":{"shape":"StackDriftInformation"},
-        "RetainExceptOnCreate":{"shape":"RetainExceptOnCreate"}
+        "RetainExceptOnCreate":{"shape":"RetainExceptOnCreate"},
+        "DetailedStatus":{"shape":"DetailedStatus"}
       }
     },
     "StackDriftDetectionId":{
@@ -4065,7 +4138,8 @@
         "HookStatus":{"shape":"HookStatus"},
         "HookStatusReason":{"shape":"HookStatusReason"},
         "HookInvocationPoint":{"shape":"HookInvocationPoint"},
-        "HookFailureMode":{"shape":"HookFailureMode"}
+        "HookFailureMode":{"shape":"HookFailureMode"},
+        "DetailedStatus":{"shape":"DetailedStatus"}
       }
     },
     "StackEvents":{
@@ -4115,7 +4189,8 @@
         "FAILED",
         "CANCELLED",
         "INOPERABLE",
-        "SKIPPED_SUSPENDED_ACCOUNT"
+        "SKIPPED_SUSPENDED_ACCOUNT",
+        "FAILED_IMPORT"
       ]
     },
     "StackInstanceFilter":{
@@ -4397,6 +4472,17 @@
       }
     },
     "StackSetARN":{"type":"string"},
+    "StackSetAutoDeploymentTargetSummaries":{
+      "type":"list",
+      "member":{"shape":"StackSetAutoDeploymentTargetSummary"}
+    },
+    "StackSetAutoDeploymentTargetSummary":{
+      "type":"structure",
+      "members":{
+        "OrganizationalUnitId":{"shape":"OrganizationalUnitId"},
+        "Regions":{"shape":"RegionList"}
+      }
+    },
     "StackSetDriftDetectionDetails":{
       "type":"structure",
       "members":{

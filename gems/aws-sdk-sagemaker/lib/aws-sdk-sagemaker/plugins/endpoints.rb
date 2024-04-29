@@ -632,6 +632,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::UpdateArtifact.build(context)
           when :update_cluster
             Aws::SageMaker::Endpoints::UpdateCluster.build(context)
+          when :update_cluster_software
+            Aws::SageMaker::Endpoints::UpdateClusterSoftware.build(context)
           when :update_code_repository
             Aws::SageMaker::Endpoints::UpdateCodeRepository.build(context)
           when :update_context

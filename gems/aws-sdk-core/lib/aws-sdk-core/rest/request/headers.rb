@@ -20,7 +20,8 @@ module Aws
         def apply(http_req, params)
           @rules.shape.members.each do |name, ref|
             value = params[name]
-            next if value.nil?
+            next if value.nil? || ((ref.shape).is_a?(StringShape) && value.empty?)
+
             case ref.location
             when 'header' then apply_header_value(http_req.headers, ref, value)
             when 'headers' then apply_header_map(http_req.headers, ref, value)
@@ -49,12 +50,19 @@ module Aws
           end
         end
 
-        def list(headers, ref, value)
-          return if !value || value.empty?
-          headers[ref.location_name] = value
-            .compact
-            .map { |s| Seahorse::Util.escape_header_list_string(s.to_s) }
-            .join(',')
+        def list(headers, ref, values)
+          return if !values || values.empty?
+
+          member_ref = ref.shape.member
+          values = values.collect do |value|
+            case member_ref.shape
+            when TimestampShape
+              timestamp(member_ref, value).to_s
+            else
+              Seahorse::Util.escape_header_list_string(value.to_s)
+            end
+          end
+          headers[ref.location_name] = values.compact.join(', ')
         end
 
         def apply_header_map(headers, ref, values)

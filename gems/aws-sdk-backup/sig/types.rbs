@@ -1180,6 +1180,7 @@ module Aws::Backup
       attr_accessor resource_arn: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor managed_by_aws_backup_only: bool
       SENSITIVE: []
     end
 
@@ -1398,6 +1399,7 @@ module Aws::Backup
       attr_accessor is_parent: bool
       attr_accessor parent_recovery_point_arn: ::String
       attr_accessor resource_name: ::String
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
       SENSITIVE: []
     end
 

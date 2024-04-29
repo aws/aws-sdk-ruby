@@ -347,6 +347,8 @@ module Aws::CodeCatalyst
     class GetSubscriptionResponse
       attr_accessor subscription_type: ::String
       attr_accessor aws_account_name: ::String
+      attr_accessor pending_subscription_type: ::String
+      attr_accessor pending_subscription_start_time: ::Time
       SENSITIVE: []
     end
 

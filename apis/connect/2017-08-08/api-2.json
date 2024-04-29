@@ -3985,7 +3985,8 @@
         "SEND_NOTIFICATION",
         "CREATE_CASE",
         "UPDATE_CASE",
-        "END_ASSOCIATED_TASKS"
+        "END_ASSOCIATED_TASKS",
+        "SUBMIT_AUTO_EVALUATION"
       ]
     },
     "ActivateEvaluationFormRequest":{
@@ -4577,10 +4578,21 @@
         "Value":{"shape":"InstanceAttributeValue"}
       }
     },
+    "AttributeAndCondition":{
+      "type":"structure",
+      "members":{
+        "TagConditions":{"shape":"TagAndConditionList"},
+        "HierarchyGroupCondition":{"shape":"HierarchyGroupCondition"}
+      }
+    },
     "AttributeName":{
       "type":"string",
       "max":32767,
       "min":1
+    },
+    "AttributeOrConditionList":{
+      "type":"list",
+      "member":{"shape":"AttributeAndCondition"}
     },
     "AttributeValue":{
       "type":"string",
@@ -5215,6 +5227,15 @@
         "TagCondition":{"shape":"TagCondition"}
       }
     },
+    "ControlPlaneUserAttributeFilter":{
+      "type":"structure",
+      "members":{
+        "OrConditions":{"shape":"AttributeOrConditionList"},
+        "AndCondition":{"shape":"AttributeAndCondition"},
+        "TagCondition":{"shape":"TagCondition"},
+        "HierarchyGroupCondition":{"shape":"HierarchyGroupCondition"}
+      }
+    },
     "CreateAgentStatusRequest":{
       "type":"structure",
       "required":[
@@ -5676,7 +5697,9 @@
         "Tags":{"shape":"TagMap"},
         "AllowedAccessControlTags":{"shape":"AllowedAccessControlTags"},
         "TagRestrictedResources":{"shape":"TagRestrictedResourceList"},
-        "Applications":{"shape":"Applications"}
+        "Applications":{"shape":"Applications"},
+        "HierarchyRestrictedResources":{"shape":"HierarchyRestrictedResourceList"},
+        "AllowedAccessControlHierarchyGroupId":{"shape":"HierarchyGroupId"}
       }
     },
     "CreateSecurityProfileResponse":{
@@ -7725,6 +7748,11 @@
       "max":1024,
       "min":0
     },
+    "EvaluationFormId":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "EvaluationFormItem":{
       "type":"structure",
       "members":{
@@ -8652,6 +8680,15 @@
         "LevelFive":{"shape":"HierarchyGroupSummaryReference"}
       }
     },
+    "HierarchyRestrictedResourceList":{
+      "type":"list",
+      "member":{"shape":"HierarchyRestrictedResourceName"}
+    },
+    "HierarchyRestrictedResourceName":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "HierarchyStructure":{
       "type":"structure",
       "members":{
@@ -8991,7 +9028,9 @@
         "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
         "ATTACHMENTS",
         "CONTACT_EVALUATIONS",
-        "SCREEN_RECORDINGS"
+        "SCREEN_RECORDINGS",
+        "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS",
+        "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS"
       ]
     },
     "InstanceSummary":{
@@ -10695,6 +10734,12 @@
     "MaxResult25":{
       "type":"integer",
       "max":25,
+      "min":1
+    },
+    "MaxResult500":{
+      "type":"integer",
+      "box":true,
+      "max":500,
       "min":1
     },
     "MaxResult7":{
@@ -12608,7 +12653,8 @@
         "SendNotificationAction":{"shape":"SendNotificationActionDefinition"},
         "CreateCaseAction":{"shape":"CreateCaseActionDefinition"},
         "UpdateCaseAction":{"shape":"UpdateCaseActionDefinition"},
-        "EndAssociatedTasksAction":{"shape":"EndAssociatedTasksActionDefinition"}
+        "EndAssociatedTasksAction":{"shape":"EndAssociatedTasksActionDefinition"},
+        "SubmitAutoEvaluationAction":{"shape":"SubmitAutoEvaluationActionDefinition"}
       }
     },
     "RuleActions":{
@@ -12853,7 +12899,7 @@
         "InstanceId":{"shape":"InstanceId"},
         "NextToken":{"shape":"NextToken2500"},
         "MaxResults":{
-          "shape":"MaxResult100",
+          "shape":"MaxResult500",
           "box":true
         },
         "SearchFilter":{"shape":"QueueSearchFilter"},
@@ -12918,7 +12964,7 @@
         "InstanceId":{"shape":"InstanceId"},
         "NextToken":{"shape":"NextToken2500"},
         "MaxResults":{
-          "shape":"MaxResult100",
+          "shape":"MaxResult500",
           "box":true
         },
         "SearchFilter":{"shape":"RoutingProfileSearchFilter"},
@@ -12973,7 +13019,7 @@
         "InstanceId":{"shape":"InstanceId"},
         "NextToken":{"shape":"NextToken2500"},
         "MaxResults":{
-          "shape":"MaxResult100",
+          "shape":"MaxResult500",
           "box":true
         },
         "SearchFilter":{"shape":"UserSearchFilter"},
@@ -13082,7 +13128,9 @@
         "AllowedAccessControlTags":{"shape":"AllowedAccessControlTags"},
         "TagRestrictedResources":{"shape":"TagRestrictedResourceList"},
         "LastModifiedTime":{"shape":"Timestamp"},
-        "LastModifiedRegion":{"shape":"RegionName"}
+        "LastModifiedRegion":{"shape":"RegionName"},
+        "HierarchyRestrictedResources":{"shape":"HierarchyRestrictedResourceList"},
+        "AllowedAccessControlHierarchyGroupId":{"shape":"HierarchyGroupId"}
       }
     },
     "SecurityProfileDescription":{
@@ -13636,6 +13684,13 @@
       "type":"string",
       "max":200,
       "min":1
+    },
+    "SubmitAutoEvaluationActionDefinition":{
+      "type":"structure",
+      "required":["EvaluationFormId"],
+      "members":{
+        "EvaluationFormId":{"shape":"EvaluationFormId"}
+      }
     },
     "SubmitContactEvaluationRequest":{
       "type":"structure",
@@ -15074,7 +15129,9 @@
         },
         "AllowedAccessControlTags":{"shape":"AllowedAccessControlTags"},
         "TagRestrictedResources":{"shape":"TagRestrictedResourceList"},
-        "Applications":{"shape":"Applications"}
+        "Applications":{"shape":"Applications"},
+        "HierarchyRestrictedResources":{"shape":"HierarchyRestrictedResourceList"},
+        "AllowedAccessControlHierarchyGroupId":{"shape":"HierarchyGroupId"}
       }
     },
     "UpdateTaskTemplateRequest":{
@@ -15544,7 +15601,8 @@
     "UserSearchFilter":{
       "type":"structure",
       "members":{
-        "TagFilter":{"shape":"ControlPlaneTagFilter"}
+        "TagFilter":{"shape":"ControlPlaneTagFilter"},
+        "UserAttributeFilter":{"shape":"ControlPlaneUserAttributeFilter"}
       }
     },
     "UserSearchSummary":{

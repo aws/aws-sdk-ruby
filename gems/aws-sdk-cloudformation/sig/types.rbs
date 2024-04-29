@@ -378,6 +378,7 @@ module Aws::CloudFormation
       attr_accessor change_set_name: ::String
       attr_accessor stack_name: ::String
       attr_accessor next_token: ::String
+      attr_accessor include_property_values: bool
       SENSITIVE: []
     end
 
@@ -930,6 +931,20 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class ListStackSetAutoDeploymentTargetsInput
+      attr_accessor stack_set_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
+      SENSITIVE: []
+    end
+
+    class ListStackSetAutoDeploymentTargetsOutput
+      attr_accessor summaries: ::Array[Types::StackSetAutoDeploymentTargetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListStackSetOperationResultsInput
       attr_accessor stack_set_name: ::String
       attr_accessor operation_id: ::String
@@ -1181,6 +1196,7 @@ module Aws::CloudFormation
     end
 
     class ResourceChange
+      attr_accessor policy_action: ("Delete" | "Retain" | "Snapshot" | "ReplaceAndDelete" | "ReplaceAndRetain" | "ReplaceAndSnapshot")
       attr_accessor action: ("Add" | "Modify" | "Remove" | "Import" | "Dynamic")
       attr_accessor logical_resource_id: ::String
       attr_accessor physical_resource_id: ::String
@@ -1190,6 +1206,8 @@ module Aws::CloudFormation
       attr_accessor details: ::Array[Types::ResourceChangeDetail]
       attr_accessor change_set_id: ::String
       attr_accessor module_info: Types::ModuleInfo
+      attr_accessor before_context: ::String
+      attr_accessor after_context: ::String
       SENSITIVE: []
     end
 
@@ -1248,6 +1266,10 @@ module Aws::CloudFormation
       attr_accessor attribute: ("Properties" | "Metadata" | "CreationPolicy" | "UpdatePolicy" | "DeletionPolicy" | "UpdateReplacePolicy" | "Tags")
       attr_accessor name: ::String
       attr_accessor requires_recreation: ("Never" | "Conditionally" | "Always")
+      attr_accessor path: ::String
+      attr_accessor before_value: ::String
+      attr_accessor after_value: ::String
+      attr_accessor attribute_change_type: ("Add" | "Remove" | "Modify")
       SENSITIVE: []
     end
 
@@ -1360,6 +1382,7 @@ module Aws::CloudFormation
       attr_accessor root_id: ::String
       attr_accessor drift_information: Types::StackDriftInformation
       attr_accessor retain_except_on_create: bool
+      attr_accessor detailed_status: ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
       SENSITIVE: []
     end
 
@@ -1392,6 +1415,7 @@ module Aws::CloudFormation
       attr_accessor hook_status_reason: ::String
       attr_accessor hook_invocation_point: ("PRE_PROVISION")
       attr_accessor hook_failure_mode: ("FAIL" | "WARN")
+      attr_accessor detailed_status: ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
       SENSITIVE: []
     end
 
@@ -1412,7 +1436,7 @@ module Aws::CloudFormation
     end
 
     class StackInstanceComprehensiveStatus
-      attr_accessor detailed_status: ("PENDING" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLED" | "INOPERABLE" | "SKIPPED_SUSPENDED_ACCOUNT")
+      attr_accessor detailed_status: ("PENDING" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLED" | "INOPERABLE" | "SKIPPED_SUSPENDED_ACCOUNT" | "FAILED_IMPORT")
       SENSITIVE: []
     end
 
@@ -1542,6 +1566,12 @@ module Aws::CloudFormation
       attr_accessor permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED")
       attr_accessor organizational_unit_ids: ::Array[::String]
       attr_accessor managed_execution: Types::ManagedExecution
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StackSetAutoDeploymentTargetSummary
+      attr_accessor organizational_unit_id: ::String
       attr_accessor regions: ::Array[::String]
       SENSITIVE: []
     end

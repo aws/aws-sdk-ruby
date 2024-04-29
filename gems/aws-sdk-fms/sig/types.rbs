@@ -123,14 +123,37 @@ module Aws::FMS
 
     class ComplianceViolator
       attr_accessor resource_id: ::String
-      attr_accessor violation_reason: ("WEB_ACL_MISSING_RULE_GROUP" | "RESOURCE_MISSING_WEB_ACL" | "RESOURCE_INCORRECT_WEB_ACL" | "RESOURCE_MISSING_SHIELD_PROTECTION" | "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION" | "RESOURCE_MISSING_SECURITY_GROUP" | "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP" | "SECURITY_GROUP_UNUSED" | "SECURITY_GROUP_REDUNDANT" | "FMS_CREATED_SECURITY_GROUP_EDITED" | "MISSING_FIREWALL" | "MISSING_FIREWALL_SUBNET_IN_AZ" | "MISSING_EXPECTED_ROUTE_TABLE" | "NETWORK_FIREWALL_POLICY_MODIFIED" | "FIREWALL_SUBNET_IS_OUT_OF_SCOPE" | "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE" | "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE" | "UNEXPECTED_FIREWALL_ROUTES" | "UNEXPECTED_TARGET_GATEWAY_ROUTES" | "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY" | "INVALID_ROUTE_CONFIGURATION" | "MISSING_TARGET_GATEWAY" | "INTERNET_TRAFFIC_NOT_INSPECTED" | "BLACK_HOLE_ROUTE_DETECTED" | "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET" | "RESOURCE_MISSING_DNS_FIREWALL" | "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT" | "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT")
+      attr_accessor violation_reason: ("WEB_ACL_MISSING_RULE_GROUP" | "RESOURCE_MISSING_WEB_ACL" | "RESOURCE_INCORRECT_WEB_ACL" | "RESOURCE_MISSING_SHIELD_PROTECTION" | "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION" | "RESOURCE_MISSING_SECURITY_GROUP" | "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP" | "SECURITY_GROUP_UNUSED" | "SECURITY_GROUP_REDUNDANT" | "FMS_CREATED_SECURITY_GROUP_EDITED" | "MISSING_FIREWALL" | "MISSING_FIREWALL_SUBNET_IN_AZ" | "MISSING_EXPECTED_ROUTE_TABLE" | "NETWORK_FIREWALL_POLICY_MODIFIED" | "FIREWALL_SUBNET_IS_OUT_OF_SCOPE" | "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE" | "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE" | "UNEXPECTED_FIREWALL_ROUTES" | "UNEXPECTED_TARGET_GATEWAY_ROUTES" | "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY" | "INVALID_ROUTE_CONFIGURATION" | "MISSING_TARGET_GATEWAY" | "INTERNET_TRAFFIC_NOT_INSPECTED" | "BLACK_HOLE_ROUTE_DETECTED" | "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET" | "RESOURCE_MISSING_DNS_FIREWALL" | "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT" | "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT" | "INVALID_NETWORK_ACL_ENTRY")
       attr_accessor resource_type: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
+    class CreateNetworkAclAction
+      attr_accessor description: ::String
+      attr_accessor vpc: Types::ActionTarget
+      attr_accessor fms_can_remediate: bool
+      SENSITIVE: []
+    end
+
+    class CreateNetworkAclEntriesAction
+      attr_accessor description: ::String
+      attr_accessor network_acl_id: Types::ActionTarget
+      attr_accessor network_acl_entries_to_be_created: ::Array[Types::EntryDescription]
+      attr_accessor fms_can_remediate: bool
+      SENSITIVE: []
+    end
+
     class DeleteAppsListRequest
       attr_accessor list_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkAclEntriesAction
+      attr_accessor description: ::String
+      attr_accessor network_acl_id: Types::ActionTarget
+      attr_accessor network_acl_entries_to_be_deleted: ::Array[Types::EntryDescription]
+      attr_accessor fms_can_remediate: bool
       SENSITIVE: []
     end
 
@@ -251,6 +274,23 @@ module Aws::FMS
       attr_accessor description: ::String
       attr_accessor association_id: Types::ActionTarget
       attr_accessor route_table_id: Types::ActionTarget
+      SENSITIVE: []
+    end
+
+    class EntryDescription
+      attr_accessor entry_detail: Types::NetworkAclEntry
+      attr_accessor entry_rule_number: ::Integer
+      attr_accessor entry_type: ("FMS_MANAGED_FIRST_ENTRY" | "FMS_MANAGED_LAST_ENTRY" | "CUSTOM_ENTRY")
+      SENSITIVE: []
+    end
+
+    class EntryViolation
+      attr_accessor expected_entry: Types::EntryDescription
+      attr_accessor expected_evaluation_order: ::String
+      attr_accessor actual_evaluation_order: ::String
+      attr_accessor entry_at_expected_evaluation_order: Types::EntryDescription
+      attr_accessor entries_with_conflicts: ::Array[Types::EntryDescription]
+      attr_accessor entry_violation_reasons: ::Array[("MISSING_EXPECTED_ENTRY" | "INCORRECT_ENTRY_ORDER" | "ENTRY_CONFLICT")]
       SENSITIVE: []
     end
 
@@ -375,7 +415,7 @@ module Aws::FMS
 
     class GetProtectionStatusResponse
       attr_accessor admin_account_id: ::String
-      attr_accessor service_type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")
+      attr_accessor service_type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL" | "NETWORK_ACL_COMMON")
       attr_accessor data: ::String
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -435,6 +475,15 @@ module Aws::FMS
 
     class InvalidInputException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNetworkAclEntriesViolation
+      attr_accessor vpc: ::String
+      attr_accessor subnet: ::String
+      attr_accessor subnet_availability_zone: ::String
+      attr_accessor current_associated_network_acl: ::String
+      attr_accessor entry_violations: ::Array[Types::EntryViolation]
       SENSITIVE: []
     end
 
@@ -599,6 +648,42 @@ module Aws::FMS
     class ListThirdPartyFirewallFirewallPoliciesResponse
       attr_accessor third_party_firewall_firewall_policies: ::Array[Types::ThirdPartyFirewallFirewallPolicy]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkAclCommonPolicy
+      attr_accessor network_acl_entry_set: Types::NetworkAclEntrySet
+      SENSITIVE: []
+    end
+
+    class NetworkAclEntry
+      attr_accessor icmp_type_code: Types::NetworkAclIcmpTypeCode
+      attr_accessor protocol: ::String
+      attr_accessor port_range: Types::NetworkAclPortRange
+      attr_accessor cidr_block: ::String
+      attr_accessor ipv_6_cidr_block: ::String
+      attr_accessor rule_action: ("allow" | "deny")
+      attr_accessor egress: bool
+      SENSITIVE: []
+    end
+
+    class NetworkAclEntrySet
+      attr_accessor first_entries: ::Array[Types::NetworkAclEntry]
+      attr_accessor force_remediate_for_first_entries: bool
+      attr_accessor last_entries: ::Array[Types::NetworkAclEntry]
+      attr_accessor force_remediate_for_last_entries: bool
+      SENSITIVE: []
+    end
+
+    class NetworkAclIcmpTypeCode
+      attr_accessor code: ::Integer
+      attr_accessor type: ::Integer
+      SENSITIVE: []
+    end
+
+    class NetworkAclPortRange
+      attr_accessor from: ::Integer
+      attr_accessor to: ::Integer
       SENSITIVE: []
     end
 
@@ -783,6 +868,7 @@ module Aws::FMS
     class PolicyOption
       attr_accessor network_firewall_policy: Types::NetworkFirewallPolicy
       attr_accessor third_party_firewall_policy: Types::ThirdPartyFirewallPolicy
+      attr_accessor network_acl_common_policy: Types::NetworkAclCommonPolicy
       SENSITIVE: []
     end
 
@@ -791,7 +877,7 @@ module Aws::FMS
       attr_accessor policy_id: ::String
       attr_accessor policy_name: ::String
       attr_accessor resource_type: ::String
-      attr_accessor security_service_type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")
+      attr_accessor security_service_type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL" | "NETWORK_ACL_COMMON")
       attr_accessor remediation_enabled: bool
       attr_accessor delete_unused_fm_managed_resources: bool
       attr_accessor policy_status: ("ACTIVE" | "OUT_OF_ADMIN_SCOPE")
@@ -799,7 +885,7 @@ module Aws::FMS
     end
 
     class PolicyTypeScope
-      attr_accessor policy_types: ::Array[("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")]
+      attr_accessor policy_types: ::Array[("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL" | "NETWORK_ACL_COMMON")]
       attr_accessor all_policy_types_enabled: bool
       SENSITIVE: []
     end
@@ -912,12 +998,24 @@ module Aws::FMS
       attr_accessor ec2_associate_route_table_action: Types::EC2AssociateRouteTableAction
       attr_accessor ec2_create_route_table_action: Types::EC2CreateRouteTableAction
       attr_accessor fms_policy_update_firewall_creation_config_action: Types::FMSPolicyUpdateFirewallCreationConfigAction
+      attr_accessor create_network_acl_action: Types::CreateNetworkAclAction
+      attr_accessor replace_network_acl_association_action: Types::ReplaceNetworkAclAssociationAction
+      attr_accessor create_network_acl_entries_action: Types::CreateNetworkAclEntriesAction
+      attr_accessor delete_network_acl_entries_action: Types::DeleteNetworkAclEntriesAction
       SENSITIVE: []
     end
 
     class RemediationActionWithOrder
       attr_accessor remediation_action: Types::RemediationAction
       attr_accessor order: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReplaceNetworkAclAssociationAction
+      attr_accessor description: ::String
+      attr_accessor association_id: Types::ActionTarget
+      attr_accessor network_acl_id: Types::ActionTarget
+      attr_accessor fms_can_remediate: bool
       SENSITIVE: []
     end
 
@@ -975,13 +1073,14 @@ module Aws::FMS
       attr_accessor dns_rule_group_priority_conflict_violation: Types::DnsRuleGroupPriorityConflictViolation
       attr_accessor dns_duplicate_rule_group_violation: Types::DnsDuplicateRuleGroupViolation
       attr_accessor dns_rule_group_limit_exceeded_violation: Types::DnsRuleGroupLimitExceededViolation
-      attr_accessor possible_remediation_actions: Types::PossibleRemediationActions
       attr_accessor firewall_subnet_is_out_of_scope_violation: Types::FirewallSubnetIsOutOfScopeViolation
       attr_accessor route_has_out_of_scope_endpoint_violation: Types::RouteHasOutOfScopeEndpointViolation
       attr_accessor third_party_firewall_missing_firewall_violation: Types::ThirdPartyFirewallMissingFirewallViolation
       attr_accessor third_party_firewall_missing_subnet_violation: Types::ThirdPartyFirewallMissingSubnetViolation
       attr_accessor third_party_firewall_missing_expected_route_table_violation: Types::ThirdPartyFirewallMissingExpectedRouteTableViolation
       attr_accessor firewall_subnet_missing_vpc_endpoint_violation: Types::FirewallSubnetMissingVPCEndpointViolation
+      attr_accessor invalid_network_acl_entries_violation: Types::InvalidNetworkAclEntriesViolation
+      attr_accessor possible_remediation_actions: Types::PossibleRemediationActions
       SENSITIVE: []
     end
 
@@ -1028,7 +1127,7 @@ module Aws::FMS
     end
 
     class SecurityServicePolicyData
-      attr_accessor type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")
+      attr_accessor type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL" | "NETWORK_ACL_COMMON")
       attr_accessor managed_service_data: ::String
       attr_accessor policy_option: Types::PolicyOption
       SENSITIVE: []

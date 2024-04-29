@@ -101,7 +101,8 @@ module Aws
                                     worker_configuration: {
                                       cpu: ::String,
                                       memory: ::String,
-                                      disk: ::String?
+                                      disk: ::String?,
+                                      disk_type: ::String?
                                     }?
                                   }],
                                 ?maximum_capacity: {
@@ -152,6 +153,9 @@ module Aws
                                     log_stream_name_prefix: ::String?,
                                     encryption_key_arn: ::String?,
                                     log_types: Hash[::String, Array[::String]]?
+                                  }?,
+                                  prometheus_monitoring_configuration: {
+                                    remote_write_url: ::String?
                                   }?
                                 }
                               ) -> _CreateApplicationResponseSuccess
@@ -292,6 +296,9 @@ module Aws
                                  log_stream_name_prefix: ::String?,
                                  encryption_key_arn: ::String?,
                                  log_types: Hash[::String, Array[::String]]?
+                               }?,
+                               prometheus_monitoring_configuration: {
+                                 remote_write_url: ::String?
                                }?
                              }?
                            },
@@ -343,7 +350,8 @@ module Aws
                                     worker_configuration: {
                                       cpu: ::String,
                                       memory: ::String,
-                                      disk: ::String?
+                                      disk: ::String?,
+                                      disk_type: ::String?
                                     }?
                                   }],
                                 ?maximum_capacity: {
@@ -394,6 +402,9 @@ module Aws
                                     log_stream_name_prefix: ::String?,
                                     encryption_key_arn: ::String?,
                                     log_types: Hash[::String, Array[::String]]?
+                                  }?,
+                                  prometheus_monitoring_configuration: {
+                                    remote_write_url: ::String?
                                   }?
                                 }
                               ) -> _UpdateApplicationResponseSuccess

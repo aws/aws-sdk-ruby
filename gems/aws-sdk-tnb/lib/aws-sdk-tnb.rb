@@ -52,6 +52,6 @@ require_relative 'aws-sdk-tnb/customizations'
 # @!group service
 module Aws::Tnb
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ConfigService
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ConfigService
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::ConfigService
     #   @option options [Aws::ConfigService::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ConfigService::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -1365,7 +1389,7 @@ module Aws::ConfigService
     #   The number of rule evaluation results that you want returned.
     #
     #   This parameter is required if the rule limit for your account is more
-    #   than the default of 150 rules.
+    #   than the default of 1000 rules.
     #
     #   For information about requesting a rule limit increase, see [Config
     #   Limits][1] in the *Amazon Web Services General Reference Guide*.
@@ -2045,7 +2069,7 @@ module Aws::ConfigService
     # Config rule names. It is only applicable, when you request all the
     # organization Config rules.
     #
-    #  *For accounts within an organzation*
+    #  *For accounts within an organization*
     #
     #  If you deploy an organizational rule or conformance pack in an
     # organization administrator account, and then establish a delegated
@@ -2214,7 +2238,7 @@ module Aws::ConfigService
     # conformance packs names. They are only applicable, when you request
     # all the organization conformance packs.
     #
-    #  *For accounts within an organzation*
+    #  *For accounts within an organization*
     #
     #  If you deploy an organizational rule or conformance pack in an
     # organization administrator account, and then establish a delegated
@@ -4991,7 +5015,9 @@ module Aws::ConfigService
     # target (SSM document) must exist and have permissions to use the
     # target.
     #
-    # <note markdown="1"> If you make backward incompatible changes to the SSM document, you
+    # <note markdown="1"> **Be aware of backward incompatible changes**
+    #
+    #  If you make backward incompatible changes to the SSM document, you
     # must call this again to ensure the remediations can run.
     #
     #  This API does not support adding remediation configurations for
@@ -5001,7 +5027,9 @@ module Aws::ConfigService
     #
     #  </note>
     #
-    # <note markdown="1"> For manual remediation configuration, you need to provide a value for
+    # <note markdown="1"> **Required fields**
+    #
+    #  For manual remediation configuration, you need to provide a value for
     # `automationAssumeRole` or use a value in the `assumeRole`field to
     # remediate your resources. The SSM automation document can use either
     # as long as it maps to a valid parameter.
@@ -5012,6 +5040,28 @@ module Aws::ConfigService
     # resources.
     #
     #  </note>
+    #
+    # <note markdown="1"> **Auto remediation can be initiated even for compliant resources**
+    #
+    #  If you enable auto remediation for a specific Config rule using the
+    # [PutRemediationConfigurations][1] API or the Config console, it
+    # initiates the remediation process for all non-compliant resources for
+    # that specific rule. The auto remediation process relies on the
+    # compliance data snapshot which is captured on a periodic basis. Any
+    # non-compliant resource that is updated between the snapshot schedule
+    # will continue to be remediated based on the last known compliance data
+    # snapshot.
+    #
+    #  This means that in some cases auto remediation can be initiated even
+    # for compliant resources, since the bootstrap processor uses a database
+    # that can have stale evaluation results based on the last known
+    # compliance data snapshot.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/config/latest/APIReference/emAPI_PutRemediationConfigurations.html
     #
     # @option params [required, Array<Types::RemediationConfiguration>] :remediation_configurations
     #   A list of remediation configuration objects.
@@ -5091,13 +5141,17 @@ module Aws::ConfigService
     # updates an existing exception for a specified resource with a
     # specified Config rule.
     #
-    # <note markdown="1"> Config generates a remediation exception when a problem occurs running
+    # <note markdown="1"> **Exceptions block auto remediation**
+    #
+    #  Config generates a remediation exception when a problem occurs running
     # a remediation action for a specified resource. Remediation exceptions
     # blocks auto-remediation until the exception is cleared.
     #
     #  </note>
     #
-    # <note markdown="1"> When placing an exception on an Amazon Web Services resource, it is
+    # <note markdown="1"> **Manual remediation is recommended when placing an exception**
+    #
+    #  When placing an exception on an Amazon Web Services resource, it is
     # recommended that remediation is set as manual remediation until the
     # given Config rule for the specified resource evaluates the resource as
     # `NON_COMPLIANT`. Once the resource has been evaluated as
@@ -5109,7 +5163,9 @@ module Aws::ConfigService
     #
     #  </note>
     #
-    # <note markdown="1"> Placing an exception can only be performed on resources that are
+    # <note markdown="1"> **Exceptions can only be performed on non-compliant resources**
+    #
+    #  Placing an exception can only be performed on resources that are
     # `NON_COMPLIANT`. If you use this API for `COMPLIANT` resources or
     # resources that are `NOT_APPLICABLE`, a remediation exception will not
     # be generated. For more information on the conditions that initiate the
@@ -5118,9 +5174,28 @@ module Aws::ConfigService
     #
     #  </note>
     #
+    # <note markdown="1"> **Auto remediation can be initiated even for compliant resources**
+    #
+    #  If you enable auto remediation for a specific Config rule using the
+    # [PutRemediationConfigurations][2] API or the Config console, it
+    # initiates the remediation process for all non-compliant resources for
+    # that specific rule. The auto remediation process relies on the
+    # compliance data snapshot which is captured on a periodic basis. Any
+    # non-compliant resource that is updated between the snapshot schedule
+    # will continue to be remediated based on the last known compliance data
+    # snapshot.
+    #
+    #  This means that in some cases auto remediation can be initiated even
+    # for compliant resources, since the bootstrap processor uses a database
+    # that can have stale evaluation results based on the last known
+    # compliance data snapshot.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/config/latest/developerguide/config-concepts.html#aws-config-rules
+    # [2]: https://docs.aws.amazon.com/config/latest/APIReference/emAPI_PutRemediationConfigurations.html
     #
     # @option params [required, String] :config_rule_name
     #   The name of the Config rule for which you want to create remediation
@@ -5822,7 +5897,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

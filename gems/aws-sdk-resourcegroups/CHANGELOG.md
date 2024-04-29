@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2024-04-05)
+------------------
+
+* Feature - Added a new QueryErrorCode RESOURCE_TYPE_NOT_SUPPORTED that is returned by the ListGroupResources operation if the group query contains unsupported resource types.
+
 1.58.0 (2024-01-26)
 ------------------
 

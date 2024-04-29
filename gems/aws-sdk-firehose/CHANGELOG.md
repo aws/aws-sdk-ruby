@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2024-03-22)
+------------------
+
+* Feature - Updates Amazon Firehose documentation for message regarding Enforcing Tags IAM Policy.
+
+1.65.0 (2024-02-20)
+------------------
+
+* Feature - This release updates a few Firehose related APIs.
+
+1.64.0 (2024-02-16)
+------------------
+
+* Feature - This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations.
+
 1.63.0 (2024-01-26)
 ------------------
 

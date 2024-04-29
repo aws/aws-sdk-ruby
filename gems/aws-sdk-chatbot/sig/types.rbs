@@ -1,0 +1,454 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Chatbot
+  module Types
+
+    class AccountPreferences
+      attr_accessor user_authorization_required: bool
+      attr_accessor training_data_collection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ChimeWebhookConfiguration
+      attr_accessor webhook_description: ::String
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor sns_topic_arns: ::Array[::String]
+      attr_accessor configuration_name: ::String
+      attr_accessor logging_level: ::String
+      SENSITIVE: []
+    end
+
+    class ConfiguredTeam
+      attr_accessor tenant_id: ::String
+      attr_accessor team_id: ::String
+      attr_accessor team_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException < Aws::EmptyStructure
+    end
+
+    class CreateChimeWebhookConfigurationException < Aws::EmptyStructure
+    end
+
+    class CreateChimeWebhookConfigurationRequest
+      attr_accessor webhook_description: ::String
+      attr_accessor webhook_url: ::String
+      attr_accessor sns_topic_arns: ::Array[::String]
+      attr_accessor iam_role_arn: ::String
+      attr_accessor configuration_name: ::String
+      attr_accessor logging_level: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChimeWebhookConfigurationResult
+      attr_accessor webhook_configuration: Types::ChimeWebhookConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateSlackChannelConfigurationException < Aws::EmptyStructure
+    end
+
+    class CreateSlackChannelConfigurationRequest
+      attr_accessor slack_team_id: ::String
+      attr_accessor slack_channel_id: ::String
+      attr_accessor slack_channel_name: ::String
+      attr_accessor sns_topic_arns: ::Array[::String]
+      attr_accessor iam_role_arn: ::String
+      attr_accessor configuration_name: ::String
+      attr_accessor logging_level: ::String
+      attr_accessor guardrail_policy_arns: ::Array[::String]
+      attr_accessor user_authorization_required: bool
+      SENSITIVE: []
+    end
+
+    class CreateSlackChannelConfigurationResult
+      attr_accessor channel_configuration: Types::SlackChannelConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateTeamsChannelConfigurationException < Aws::EmptyStructure
+    end
+
+    class CreateTeamsChannelConfigurationRequest
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor team_id: ::String
+      attr_accessor team_name: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor sns_topic_arns: ::Array[::String]
+      attr_accessor iam_role_arn: ::String
+      attr_accessor configuration_name: ::String
+      attr_accessor logging_level: ::String
+      attr_accessor guardrail_policy_arns: ::Array[::String]
+      attr_accessor user_authorization_required: bool
+      SENSITIVE: []
+    end
+
+    class CreateTeamsChannelConfigurationResult
+      attr_accessor channel_configuration: Types::TeamsChannelConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteChimeWebhookConfigurationException < Aws::EmptyStructure
+    end
+
+    class DeleteChimeWebhookConfigurationRequest
+      attr_accessor chat_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChimeWebhookConfigurationResult < Aws::EmptyStructure
+    end
+
+    class DeleteMicrosoftTeamsUserIdentityException < Aws::EmptyStructure
+    end
+
+    class DeleteMicrosoftTeamsUserIdentityRequest
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMicrosoftTeamsUserIdentityResult < Aws::EmptyStructure
+    end
+
+    class DeleteSlackChannelConfigurationException < Aws::EmptyStructure
+    end
+
+    class DeleteSlackChannelConfigurationRequest
+      attr_accessor chat_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSlackChannelConfigurationResult < Aws::EmptyStructure
+    end
+
+    class DeleteSlackUserIdentityException < Aws::EmptyStructure
+    end
+
+    class DeleteSlackUserIdentityRequest
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor slack_team_id: ::String
+      attr_accessor slack_user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSlackUserIdentityResult < Aws::EmptyStructure
+    end
+
+    class DeleteSlackWorkspaceAuthorizationFault < Aws::EmptyStructure
+    end
+
+    class DeleteSlackWorkspaceAuthorizationRequest
+      attr_accessor slack_team_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSlackWorkspaceAuthorizationResult < Aws::EmptyStructure
+    end
+
+    class DeleteTeamsChannelConfigurationException < Aws::EmptyStructure
+    end
+
+    class DeleteTeamsChannelConfigurationRequest
+      attr_accessor chat_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTeamsChannelConfigurationResult < Aws::EmptyStructure
+    end
+
+    class DeleteTeamsConfiguredTeamException < Aws::EmptyStructure
+    end
+
+    class DeleteTeamsConfiguredTeamRequest
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTeamsConfiguredTeamResult < Aws::EmptyStructure
+    end
+
+    class DescribeChimeWebhookConfigurationsException < Aws::EmptyStructure
+    end
+
+    class DescribeChimeWebhookConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chat_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChimeWebhookConfigurationsResult
+      attr_accessor next_token: ::String
+      attr_accessor webhook_configurations: ::Array[Types::ChimeWebhookConfiguration]
+      SENSITIVE: []
+    end
+
+    class DescribeSlackChannelConfigurationsException < Aws::EmptyStructure
+    end
+
+    class DescribeSlackChannelConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chat_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSlackChannelConfigurationsResult
+      attr_accessor next_token: ::String
+      attr_accessor slack_channel_configurations: ::Array[Types::SlackChannelConfiguration]
+      SENSITIVE: []
+    end
+
+    class DescribeSlackUserIdentitiesException < Aws::EmptyStructure
+    end
+
+    class DescribeSlackUserIdentitiesRequest
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSlackUserIdentitiesResult
+      attr_accessor slack_user_identities: ::Array[Types::SlackUserIdentity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSlackWorkspacesException < Aws::EmptyStructure
+    end
+
+    class DescribeSlackWorkspacesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSlackWorkspacesResult
+      attr_accessor slack_workspaces: ::Array[Types::SlackWorkspace]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountPreferencesException < Aws::EmptyStructure
+    end
+
+    class GetAccountPreferencesRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountPreferencesResult
+      attr_accessor account_preferences: Types::AccountPreferences
+      SENSITIVE: []
+    end
+
+    class GetTeamsChannelConfigurationException < Aws::EmptyStructure
+    end
+
+    class GetTeamsChannelConfigurationRequest
+      attr_accessor chat_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTeamsChannelConfigurationResult
+      attr_accessor channel_configuration: Types::TeamsChannelConfiguration
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException < Aws::EmptyStructure
+    end
+
+    class InvalidRequestException < Aws::EmptyStructure
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListMicrosoftTeamsConfiguredTeamsException < Aws::EmptyStructure
+    end
+
+    class ListMicrosoftTeamsConfiguredTeamsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMicrosoftTeamsConfiguredTeamsResult
+      attr_accessor configured_teams: ::Array[Types::ConfiguredTeam]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMicrosoftTeamsUserIdentitiesException < Aws::EmptyStructure
+    end
+
+    class ListMicrosoftTeamsUserIdentitiesRequest
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMicrosoftTeamsUserIdentitiesResult
+      attr_accessor teams_user_identities: ::Array[Types::TeamsUserIdentity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTeamsChannelConfigurationsException < Aws::EmptyStructure
+    end
+
+    class ListTeamsChannelConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTeamsChannelConfigurationsResult
+      attr_accessor next_token: ::String
+      attr_accessor team_channel_configurations: ::Array[Types::TeamsChannelConfiguration]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class SlackChannelConfiguration
+      attr_accessor slack_team_name: ::String
+      attr_accessor slack_team_id: ::String
+      attr_accessor slack_channel_id: ::String
+      attr_accessor slack_channel_name: ::String
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor sns_topic_arns: ::Array[::String]
+      attr_accessor configuration_name: ::String
+      attr_accessor logging_level: ::String
+      attr_accessor guardrail_policy_arns: ::Array[::String]
+      attr_accessor user_authorization_required: bool
+      SENSITIVE: []
+    end
+
+    class SlackUserIdentity
+      attr_accessor iam_role_arn: ::String
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor slack_team_id: ::String
+      attr_accessor slack_user_id: ::String
+      attr_accessor aws_user_identity: ::String
+      SENSITIVE: []
+    end
+
+    class SlackWorkspace
+      attr_accessor slack_team_id: ::String
+      attr_accessor slack_team_name: ::String
+      SENSITIVE: []
+    end
+
+    class TeamsChannelConfiguration
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor team_id: ::String
+      attr_accessor team_name: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor sns_topic_arns: ::Array[::String]
+      attr_accessor configuration_name: ::String
+      attr_accessor logging_level: ::String
+      attr_accessor guardrail_policy_arns: ::Array[::String]
+      attr_accessor user_authorization_required: bool
+      SENSITIVE: []
+    end
+
+    class TeamsUserIdentity
+      attr_accessor iam_role_arn: ::String
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor team_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor aws_user_identity: ::String
+      attr_accessor teams_channel_id: ::String
+      attr_accessor teams_tenant_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccountPreferencesException < Aws::EmptyStructure
+    end
+
+    class UpdateAccountPreferencesRequest
+      attr_accessor user_authorization_required: bool
+      attr_accessor training_data_collection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateAccountPreferencesResult
+      attr_accessor account_preferences: Types::AccountPreferences
+      SENSITIVE: []
+    end
+
+    class UpdateChimeWebhookConfigurationException < Aws::EmptyStructure
+    end
+
+    class UpdateChimeWebhookConfigurationRequest
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor webhook_description: ::String
+      attr_accessor webhook_url: ::String
+      attr_accessor sns_topic_arns: ::Array[::String]
+      attr_accessor iam_role_arn: ::String
+      attr_accessor logging_level: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChimeWebhookConfigurationResult
+      attr_accessor webhook_configuration: Types::ChimeWebhookConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateSlackChannelConfigurationException < Aws::EmptyStructure
+    end
+
+    class UpdateSlackChannelConfigurationRequest
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor slack_channel_id: ::String
+      attr_accessor slack_channel_name: ::String
+      attr_accessor sns_topic_arns: ::Array[::String]
+      attr_accessor iam_role_arn: ::String
+      attr_accessor logging_level: ::String
+      attr_accessor guardrail_policy_arns: ::Array[::String]
+      attr_accessor user_authorization_required: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSlackChannelConfigurationResult
+      attr_accessor channel_configuration: Types::SlackChannelConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateTeamsChannelConfigurationException < Aws::EmptyStructure
+    end
+
+    class UpdateTeamsChannelConfigurationRequest
+      attr_accessor chat_configuration_arn: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor sns_topic_arns: ::Array[::String]
+      attr_accessor iam_role_arn: ::String
+      attr_accessor logging_level: ::String
+      attr_accessor guardrail_policy_arns: ::Array[::String]
+      attr_accessor user_authorization_required: bool
+      SENSITIVE: []
+    end
+
+    class UpdateTeamsChannelConfigurationResult
+      attr_accessor channel_configuration: Types::TeamsChannelConfiguration
+      SENSITIVE: []
+    end
+  end
+end

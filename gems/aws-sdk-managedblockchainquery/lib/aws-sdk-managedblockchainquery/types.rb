@@ -24,6 +24,20 @@ module Aws::ManagedBlockchainQuery
       include Aws::Structure
     end
 
+    # This is the container for the unique public address on the blockchain.
+    #
+    # @!attribute [rw] transaction_event_to_address
+    #   The container for the recipient address of the transaction.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/AddressIdentifierFilter AWS API Documentation
+    #
+    class AddressIdentifierFilter < Struct.new(
+      :transaction_event_to_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This container contains information about an contract.
     #
     # @!attribute [rw] contract_identifier
@@ -62,7 +76,7 @@ module Aws::ManagedBlockchainQuery
     #   @return [Types::TokenIdentifier]
     #
     # @!attribute [rw] owner_identifier
-    #   The container for the identifier of the owner.
+    #   The container for the owner identifier.
     #   @return [Types::OwnerIdentifier]
     #
     # @!attribute [rw] at_blockchain_instant
@@ -120,7 +134,7 @@ module Aws::ManagedBlockchainQuery
     #   @return [Types::TokenIdentifier]
     #
     # @!attribute [rw] owner_identifier
-    #   The container for the identifier of the owner.
+    #   The container for the owner identifier.
     #   @return [Types::OwnerIdentifier]
     #
     # @!attribute [rw] at_blockchain_instant
@@ -159,7 +173,7 @@ module Aws::ManagedBlockchainQuery
     # The container for the properties of a token balance output.
     #
     # @!attribute [rw] owner_identifier
-    #   The container for the identifier of the owner.
+    #   The container for the owner identifier.
     #   @return [Types::OwnerIdentifier]
     #
     # @!attribute [rw] token_identifier
@@ -377,7 +391,7 @@ module Aws::ManagedBlockchainQuery
     end
 
     # @!attribute [rw] owner_identifier
-    #   The container for the identifier of the owner.
+    #   The container for the owner identifier.
     #   @return [Types::OwnerIdentifier]
     #
     # @!attribute [rw] token_identifier
@@ -415,8 +429,17 @@ module Aws::ManagedBlockchainQuery
     end
 
     # @!attribute [rw] transaction_hash
-    #   The hash of the transaction. It is generated whenever a transaction
-    #   is verified and added to the blockchain.
+    #   The hash of a transaction. It is generated when a transaction is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
+    #
+    #   <note markdown="1"> `transactionId` is only supported on the Bitcoin networks.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] network
@@ -427,6 +450,7 @@ module Aws::ManagedBlockchainQuery
     #
     class GetTransactionInput < Struct.new(
       :transaction_hash,
+      :transaction_id,
       :network)
       SENSITIVE = []
       include Aws::Structure
@@ -452,7 +476,7 @@ module Aws::ManagedBlockchainQuery
     #   @return [String]
     #
     # @!attribute [rw] retry_after_seconds
-    #   The container of the `retryAfterSeconds` value.
+    #   Specifies the `retryAfterSeconds` value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/InternalServerException AWS API Documentation
@@ -476,7 +500,7 @@ module Aws::ManagedBlockchainQuery
     # @!attribute [rw] max_results
     #   The maximum number of contracts to list.
     #
-    #   Default:`100`
+    #   Default: `100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -517,6 +541,119 @@ module Aws::ManagedBlockchainQuery
       include Aws::Structure
     end
 
+    # @!attribute [rw] network
+    #   The blockchain network where the transaction occurred.
+    #
+    #   Valid Values: `BITCOIN_MAINNET` \| `BITCOIN_TESTNET`
+    #   @return [String]
+    #
+    # @!attribute [rw] address_identifier_filter
+    #   This is the unique public address on the blockchain for which the
+    #   transaction events are being requested.
+    #   @return [Types::AddressIdentifierFilter]
+    #
+    # @!attribute [rw] time_filter
+    #   This container specifies the time frame for the transaction events
+    #   returned in the response.
+    #   @return [Types::TimeFilter]
+    #
+    # @!attribute [rw] vout_filter
+    #   This container specifies filtering attributes related to
+    #   BITCOIN\_VOUT event types
+    #   @return [Types::VoutFilter]
+    #
+    # @!attribute [rw] confirmation_status_filter
+    #   The container for the `ConfirmationStatusFilter` that filters for
+    #   the [ *finality* ][1] of the results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
+    #   @return [Types::ConfirmationStatusFilter]
+    #
+    # @!attribute [rw] sort
+    #   The order by which the results will be sorted.
+    #   @return [Types::ListFilteredTransactionEventsSort]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of transaction events to list.
+    #
+    #   Default: `100`
+    #
+    #   <note markdown="1"> Even if additional results can be retrieved, the request can return
+    #   less results than `maxResults` or an empty array of results.
+    #
+    #    To retrieve the next set of results, make another request with the
+    #   returned `nextToken` value. The value of `nextToken` is `null` when
+    #   there are no more results to return
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListFilteredTransactionEventsInput AWS API Documentation
+    #
+    class ListFilteredTransactionEventsInput < Struct.new(
+      :network,
+      :address_identifier_filter,
+      :time_filter,
+      :vout_filter,
+      :confirmation_status_filter,
+      :sort,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events
+    #   The transaction events returned by the request.
+    #   @return [Array<Types::TransactionEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListFilteredTransactionEventsOutput AWS API Documentation
+    #
+    class ListFilteredTransactionEventsOutput < Struct.new(
+      :events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists all the transaction events for an address on the blockchain.
+    #
+    # <note markdown="1"> This operation is only supported on the Bitcoin blockchain networks.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] sort_by
+    #   Container on how the results will be sorted by?
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The container for the *sort order* for
+    #   `ListFilteredTransactionEvents`. The `SortOrder` field only accepts
+    #   the values `ASCENDING` and `DESCENDING`. Not providing `SortOrder`
+    #   will default to `ASCENDING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListFilteredTransactionEventsSort AWS API Documentation
+    #
+    class ListFilteredTransactionEventsSort < Struct.new(
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] owner_filter
     #   The contract or wallet address on the blockchain network by which to
     #   filter the request. You must specify the `address` property of the
@@ -543,7 +680,7 @@ module Aws::ManagedBlockchainQuery
     # @!attribute [rw] max_results
     #   The maximum number of token balances to return.
     #
-    #   Default:`100`
+    #   Default: `100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -586,8 +723,17 @@ module Aws::ManagedBlockchainQuery
     end
 
     # @!attribute [rw] transaction_hash
-    #   The hash of the transaction. It is generated whenever a transaction
-    #   is verified and added to the blockchain.
+    #   The hash of a transaction. It is generated when a transaction is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
+    #
+    #   <note markdown="1"> `transactionId` is only supported on the Bitcoin networks.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] network
@@ -602,7 +748,7 @@ module Aws::ManagedBlockchainQuery
     # @!attribute [rw] max_results
     #   The maximum number of transaction events to list.
     #
-    #   Default:`100`
+    #   Default: `100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -618,6 +764,7 @@ module Aws::ManagedBlockchainQuery
     #
     class ListTransactionEventsInput < Struct.new(
       :transaction_hash,
+      :transaction_id,
       :network,
       :next_token,
       :max_results)
@@ -662,8 +809,7 @@ module Aws::ManagedBlockchainQuery
     #   @return [Types::BlockchainInstant]
     #
     # @!attribute [rw] sort
-    #   The order by which the results will be sorted. If `ASCENNDING` is
-    #   selected, the results will be ordered by `fromTime`.
+    #   The order by which the results will be sorted.
     #   @return [Types::ListTransactionsSort]
     #
     # @!attribute [rw] next_token
@@ -674,7 +820,7 @@ module Aws::ManagedBlockchainQuery
     # @!attribute [rw] max_results
     #   The maximum number of transactions to list.
     #
-    #   Default:`100`
+    #   Default: `100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -689,7 +835,7 @@ module Aws::ManagedBlockchainQuery
     # @!attribute [rw] confirmation_status_filter
     #   This filter is used to include transactions in the response that
     #   haven't reached [ *finality* ][1]. Transactions that have reached
-    #   finiality are always part of the response.
+    #   finality are always part of the response.
     #
     #
     #
@@ -765,7 +911,7 @@ module Aws::ManagedBlockchainQuery
       include Aws::Structure
     end
 
-    # The container for the identifier of the owner.
+    # The container for the owner identifier.
     #
     # @!attribute [rw] address
     #   The contract or wallet address for the owner.
@@ -866,6 +1012,25 @@ module Aws::ManagedBlockchainQuery
       :service_code,
       :quota_code,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This container is used to specify a time frame.
+    #
+    # @!attribute [rw] from
+    #   The container for time.
+    #   @return [Types::BlockchainInstant]
+    #
+    # @!attribute [rw] to
+    #   The container for time.
+    #   @return [Types::BlockchainInstant]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/TimeFilter AWS API Documentation
+    #
+    class TimeFilter < Struct.new(
+      :from,
+      :to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1002,8 +1167,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [String]
     #
     # @!attribute [rw] transaction_hash
-    #   The hash of the transaction. It is generated whenever a transaction
-    #   is verified and added to the blockchain.
+    #   The hash of a transaction. It is generated when a transaction is
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] block_number
@@ -1065,8 +1230,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [String]
     #
     # @!attribute [rw] transaction_id
-    #   The unique identifier of the transaction. It is generated whenever a
-    #   transaction is verified and added to the blockchain.
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
     #   @return [String]
     #
     # @!attribute [rw] confirmation_status
@@ -1111,8 +1276,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [String]
     #
     # @!attribute [rw] transaction_hash
-    #   The hash of the transaction. It is generated whenever a transaction
-    #   is verified and added to the blockchain.
+    #   The hash of a transaction. It is generated when a transaction is
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] event_type
@@ -1134,7 +1299,7 @@ module Aws::ManagedBlockchainQuery
     #   @return [String]
     #
     # @!attribute [rw] contract_address
-    #   The blockchain address. for the contract
+    #   The blockchain address for the contract
     #   @return [String]
     #
     # @!attribute [rw] token_id
@@ -1142,13 +1307,57 @@ module Aws::ManagedBlockchainQuery
     #   @return [String]
     #
     # @!attribute [rw] transaction_id
-    #   The unique identifier of the transaction. It is generated whenever a
-    #   transaction is verified and added to the blockchain.
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
     #   @return [String]
     #
     # @!attribute [rw] vout_index
-    #   The position of the vout in the transaction output list.
+    #   The position of the transaction output in the transaction output
+    #   list.
     #   @return [Integer]
+    #
+    # @!attribute [rw] vout_spent
+    #   Specifies if the transaction output is spent or unspent. This is
+    #   only returned for BITCOIN\_VOUT event types.
+    #
+    #   <note markdown="1"> This is only returned for `BITCOIN_VOUT` event types.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] spent_vout_transaction_id
+    #   The transactionId that *created* the spent transaction output.
+    #
+    #   <note markdown="1"> This is only returned for `BITCOIN_VIN` event types.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] spent_vout_transaction_hash
+    #   The transactionHash that *created* the spent transaction output.
+    #
+    #   <note markdown="1"> This is only returned for `BITCOIN_VIN` event types.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] spent_vout_index
+    #   The position of the spent transaction output in the output list of
+    #   the *creating transaction*.
+    #
+    #   <note markdown="1"> This is only returned for `BITCOIN_VIN` event types.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] blockchain_instant
+    #   The container for time.
+    #   @return [Types::BlockchainInstant]
+    #
+    # @!attribute [rw] confirmation_status
+    #   This container specifies whether the transaction has reached
+    #   Finality.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/TransactionEvent AWS API Documentation
     #
@@ -1162,7 +1371,13 @@ module Aws::ManagedBlockchainQuery
       :contract_address,
       :token_id,
       :transaction_id,
-      :vout_index)
+      :vout_index,
+      :vout_spent,
+      :spent_vout_transaction_id,
+      :spent_vout_transaction_hash,
+      :spent_vout_index,
+      :blockchain_instant,
+      :confirmation_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1170,8 +1385,13 @@ module Aws::ManagedBlockchainQuery
     # The container of the transaction output.
     #
     # @!attribute [rw] transaction_hash
-    #   The hash of the transaction. It is generated whenever a transaction
-    #   is verified and added to the blockchain.
+    #   The hash of a transaction. It is generated when a transaction is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
     #   @return [String]
     #
     # @!attribute [rw] network
@@ -1191,6 +1411,7 @@ module Aws::ManagedBlockchainQuery
     #
     class TransactionOutputItem < Struct.new(
       :transaction_hash,
+      :transaction_id,
       :network,
       :transaction_timestamp,
       :confirmation_status)
@@ -1237,6 +1458,21 @@ module Aws::ManagedBlockchainQuery
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This container specifies filtering attributes related to
+    # `BITCOIN_VOUT` event types
+    #
+    # @!attribute [rw] vout_spent
+    #   Specifies if the transaction output is spent or unspent.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/VoutFilter AWS API Documentation
+    #
+    class VoutFilter < Struct.new(
+      :vout_spent)
       SENSITIVE = []
       include Aws::Structure
     end

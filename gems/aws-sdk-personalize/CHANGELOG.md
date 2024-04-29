@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2024-04-19)
+------------------
+
+* Feature - This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign
+
 1.59.0 (2024-01-26)
 ------------------
 

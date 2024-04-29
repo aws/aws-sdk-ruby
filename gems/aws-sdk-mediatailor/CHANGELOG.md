@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2024-04-12)
+------------------
+
+* Feature - Added InsertionMode to PlaybackConfigurations. This setting controls whether players can use stitched or guided ad insertion. The default for players that do not specify an insertion mode is stitched.
+
+1.77.0 (2024-03-18)
+------------------
+
+* Feature - This release adds support to allow customers to show different content within a channel depending on metadata associated with the viewer.
+
 1.76.0 (2024-01-26)
 ------------------
 

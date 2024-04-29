@@ -186,6 +186,62 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::UpdateMultiplexProgram.build(context)
           when :update_reservation
             Aws::MediaLive::Endpoints::UpdateReservation.build(context)
+          when :restart_channel_pipelines
+            Aws::MediaLive::Endpoints::RestartChannelPipelines.build(context)
+          when :create_cloud_watch_alarm_template
+            Aws::MediaLive::Endpoints::CreateCloudWatchAlarmTemplate.build(context)
+          when :create_cloud_watch_alarm_template_group
+            Aws::MediaLive::Endpoints::CreateCloudWatchAlarmTemplateGroup.build(context)
+          when :create_event_bridge_rule_template
+            Aws::MediaLive::Endpoints::CreateEventBridgeRuleTemplate.build(context)
+          when :create_event_bridge_rule_template_group
+            Aws::MediaLive::Endpoints::CreateEventBridgeRuleTemplateGroup.build(context)
+          when :create_signal_map
+            Aws::MediaLive::Endpoints::CreateSignalMap.build(context)
+          when :delete_cloud_watch_alarm_template
+            Aws::MediaLive::Endpoints::DeleteCloudWatchAlarmTemplate.build(context)
+          when :delete_cloud_watch_alarm_template_group
+            Aws::MediaLive::Endpoints::DeleteCloudWatchAlarmTemplateGroup.build(context)
+          when :delete_event_bridge_rule_template
+            Aws::MediaLive::Endpoints::DeleteEventBridgeRuleTemplate.build(context)
+          when :delete_event_bridge_rule_template_group
+            Aws::MediaLive::Endpoints::DeleteEventBridgeRuleTemplateGroup.build(context)
+          when :delete_signal_map
+            Aws::MediaLive::Endpoints::DeleteSignalMap.build(context)
+          when :get_cloud_watch_alarm_template
+            Aws::MediaLive::Endpoints::GetCloudWatchAlarmTemplate.build(context)
+          when :get_cloud_watch_alarm_template_group
+            Aws::MediaLive::Endpoints::GetCloudWatchAlarmTemplateGroup.build(context)
+          when :get_event_bridge_rule_template
+            Aws::MediaLive::Endpoints::GetEventBridgeRuleTemplate.build(context)
+          when :get_event_bridge_rule_template_group
+            Aws::MediaLive::Endpoints::GetEventBridgeRuleTemplateGroup.build(context)
+          when :get_signal_map
+            Aws::MediaLive::Endpoints::GetSignalMap.build(context)
+          when :list_cloud_watch_alarm_template_groups
+            Aws::MediaLive::Endpoints::ListCloudWatchAlarmTemplateGroups.build(context)
+          when :list_cloud_watch_alarm_templates
+            Aws::MediaLive::Endpoints::ListCloudWatchAlarmTemplates.build(context)
+          when :list_event_bridge_rule_template_groups
+            Aws::MediaLive::Endpoints::ListEventBridgeRuleTemplateGroups.build(context)
+          when :list_event_bridge_rule_templates
+            Aws::MediaLive::Endpoints::ListEventBridgeRuleTemplates.build(context)
+          when :list_signal_maps
+            Aws::MediaLive::Endpoints::ListSignalMaps.build(context)
+          when :start_delete_monitor_deployment
+            Aws::MediaLive::Endpoints::StartDeleteMonitorDeployment.build(context)
+          when :start_monitor_deployment
+            Aws::MediaLive::Endpoints::StartMonitorDeployment.build(context)
+          when :start_update_signal_map
+            Aws::MediaLive::Endpoints::StartUpdateSignalMap.build(context)
+          when :update_cloud_watch_alarm_template
+            Aws::MediaLive::Endpoints::UpdateCloudWatchAlarmTemplate.build(context)
+          when :update_cloud_watch_alarm_template_group
+            Aws::MediaLive::Endpoints::UpdateCloudWatchAlarmTemplateGroup.build(context)
+          when :update_event_bridge_rule_template
+            Aws::MediaLive::Endpoints::UpdateEventBridgeRuleTemplate.build(context)
+          when :update_event_bridge_rule_template_group
+            Aws::MediaLive::Endpoints::UpdateEventBridgeRuleTemplateGroup.build(context)
           end
         end
       end

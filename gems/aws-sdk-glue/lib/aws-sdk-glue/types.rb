@@ -12103,8 +12103,50 @@ module Aws::Glue
     #   @return [Types::AuditContext]
     #
     # @!attribute [rw] supported_permission_types
-    #   (Required) A list of supported permission types.
+    #   Indicates the level of filtering a third-party analytical engine is
+    #   capable of enforcing when calling the `GetUnfilteredTableMetadata`
+    #   API operation. Accepted values are:
+    #
+    #   * `COLUMN_PERMISSION` - Column permissions ensure that users can
+    #     access only specific columns in the table. If there are particular
+    #     columns contain sensitive data, data lake administrators can
+    #     define column filters that exclude access to specific columns.
+    #
+    #   * `CELL_FILTER_PERMISSION` - Cell-level filtering combines column
+    #     filtering (include or exclude columns) and row filter expressions
+    #     to restrict access to individual elements in the table.
+    #
+    #   * `NESTED_PERMISSION` - Nested permissions combines cell-level
+    #     filtering and nested column filtering to restrict access to
+    #     columns and/or nested columns in specific rows based on row filter
+    #     expressions.
+    #
+    #   * `NESTED_CELL_PERMISSION` - Nested cell permissions combines nested
+    #     permission with nested cell-level filtering. This allows different
+    #     subsets of nested columns to be restricted based on an array of
+    #     row filter expressions.
+    #
+    #   Note: Each of these permission types follows a hierarchical order
+    #   where each subsequent permission type includes all permission of the
+    #   previous type.
+    #
+    #   Important: If you provide a supported permission type that doesn't
+    #   match the user's level of permissions on the table, then Lake
+    #   Formation raises an exception. For example, if the third-party
+    #   engine calling the `GetUnfilteredTableMetadata` operation can
+    #   enforce only column-level filtering, and the user has nested cell
+    #   filtering applied on the table, Lake Formation throws an exception,
+    #   and will not return unfiltered table metadata and data access
+    #   credentials.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] parent_resource_arn
+    #   The resource ARN of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_resource_arn
+    #   The resource ARN of the root view in a chain of nested views.
+    #   @return [String]
     #
     # @!attribute [rw] supported_dialect
     #   A structure specifying the dialect and dialect version used by the
@@ -12132,6 +12174,8 @@ module Aws::Glue
       :name,
       :audit_context,
       :supported_permission_types,
+      :parent_resource_arn,
+      :root_resource_arn,
       :supported_dialect,
       :permissions,
       :query_session_context)
@@ -12161,14 +12205,34 @@ module Aws::Glue
     #   Lake Formation.
     #   @return [String]
     #
+    # @!attribute [rw] is_multi_dialect_view
+    #   Specifies whether the view supports the SQL dialects of one or more
+    #   different query engines and can therefore be read by those engines.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] resource_arn
     #   The resource ARN of the parent resource extracted from the request.
     #   @return [String]
+    #
+    # @!attribute [rw] is_protected
+    #   A flag that instructs the engine not to push user-provided
+    #   operations into the logical plan of the view during query planning.
+    #   However, if set this flag does not guarantee that the engine will
+    #   comply. Refer to the engine's documentation to understand the
+    #   guarantees provided, if any.
+    #   @return [Boolean]
     #
     # @!attribute [rw] permissions
     #   The Lake Formation data permissions of the caller on the table. Used
     #   to authorize the call when no view context is found.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] row_filter
+    #   The filter that applies to the table. For example when applying the
+    #   filter in SQL, it would go in the `WHERE` clause and can be
+    #   evaluated by using an `AND` operator with any other predicates
+    #   applied by the user querying the table.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadataResponse AWS API Documentation
     #
@@ -12178,8 +12242,11 @@ module Aws::Glue
       :is_registered_with_lake_formation,
       :cell_filters,
       :query_authorization_id,
+      :is_multi_dialect_view,
       :resource_arn,
-      :permissions)
+      :is_protected,
+      :permissions,
+      :row_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14351,14 +14418,19 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] max_fetch_time_in_ms
-    #   The maximum time spent in the job executor to fetch a record from
-    #   the Kinesis data stream per shard, specified in milliseconds (ms).
-    #   The default value is `1000`.
+    #   The maximum time spent for the job executor to read records for the
+    #   current batch from the Kinesis data stream, specified in
+    #   milliseconds (ms). Multiple `GetRecords` API calls may be made
+    #   within this time. The default value is `1000`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_fetch_records_per_shard
     #   The maximum number of records to fetch per shard in the Kinesis data
-    #   stream. The default value is `100000`.
+    #   stream per microbatch. Note: The client can exceed this limit if the
+    #   streaming job has already read extra records from Kinesis (in the
+    #   same get-records call). If `MaxFetchRecordsPerShard` needs to be
+    #   strict then it needs to be a multiple of `MaxRecordPerRead`. The
+    #   default value is `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_record_per_read
@@ -20850,6 +20922,16 @@ module Aws::Glue
     #   Glue Data Catalog.
     #   @return [Types::FederatedTable]
     #
+    # @!attribute [rw] view_definition
+    #   A structure that contains all the information that defines the view,
+    #   including the dialect or dialects for the view, and the query.
+    #   @return [Types::ViewDefinition]
+    #
+    # @!attribute [rw] is_multi_dialect_view
+    #   Specifies whether the view supports the SQL dialects of one or more
+    #   different query engines and can therefore be read by those engines.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -20873,7 +20955,9 @@ module Aws::Glue
       :target_table,
       :catalog_id,
       :version_id,
-      :federated_table)
+      :federated_table,
+      :view_definition,
+      :is_multi_dialect_view)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23078,6 +23162,87 @@ module Aws::Glue
     #
     class VersionMismatchException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing details for representations.
+    #
+    # @!attribute [rw] is_protected
+    #   You can set this flag as true to instruct the engine not to push
+    #   user-provided operations into the logical plan of the view during
+    #   query planning. However, setting this flag does not guarantee that
+    #   the engine will comply. Refer to the engine's documentation to
+    #   understand the guarantees provided, if any.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] definer
+    #   The definer of a view in SQL.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_objects
+    #   A list of table Amazon Resource Names (ARNs).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] representations
+    #   A list of representations.
+    #   @return [Array<Types::ViewRepresentation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinition AWS API Documentation
+    #
+    class ViewDefinition < Struct.new(
+      :is_protected,
+      :definer,
+      :sub_objects,
+      :representations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the dialect of the view, and the query that
+    # defines the view.
+    #
+    # @!attribute [rw] dialect
+    #   The dialect of the query engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialect_version
+    #   The version of the dialect of the query engine. For example, 3.0.0.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_original_text
+    #   The `SELECT` query provided by the customer during `CREATE VIEW
+    #   DDL`. This SQL is not used during a query on a view
+    #   (`ViewExpandedText` is used instead). `ViewOriginalText` is used for
+    #   cases like `SHOW CREATE VIEW` where users want to see the original
+    #   DDL command that created the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_expanded_text
+    #   The expanded SQL for the view. This SQL is used by engines while
+    #   processing a query on a view. Engines may perform operations during
+    #   view creation to transform `ViewOriginalText` to `ViewExpandedText`.
+    #   For example:
+    #
+    #   * Fully qualify identifiers: `SELECT * from table1 → SELECT * from
+    #     db1.table1`
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] is_stale
+    #   Dialects marked as stale are no longer valid and must be updated
+    #   before they can be queried in their respective query engines.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewRepresentation AWS API Documentation
+    #
+    class ViewRepresentation < Struct.new(
+      :dialect,
+      :dialect_version,
+      :view_original_text,
+      :view_expanded_text,
+      :is_stale)
       SENSITIVE = []
       include Aws::Structure
     end

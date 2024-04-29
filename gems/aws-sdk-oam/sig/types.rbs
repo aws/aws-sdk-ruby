@@ -16,7 +16,8 @@ module Aws::OAM
 
     class CreateLinkInput
       attr_accessor label_template: ::String
-      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application")]
+      attr_accessor link_configuration: Types::LinkConfiguration
+      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application" | "AWS::InternetMonitor::Monitor")]
       attr_accessor sink_identifier: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -27,6 +28,7 @@ module Aws::OAM
       attr_accessor id: ::String
       attr_accessor label: ::String
       attr_accessor label_template: ::String
+      attr_accessor link_configuration: Types::LinkConfiguration
       attr_accessor resource_types: ::Array[::String]
       attr_accessor sink_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -73,6 +75,7 @@ module Aws::OAM
       attr_accessor id: ::String
       attr_accessor label: ::String
       attr_accessor label_template: ::String
+      attr_accessor link_configuration: Types::LinkConfiguration
       attr_accessor resource_types: ::Array[::String]
       attr_accessor sink_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -98,9 +101,9 @@ module Aws::OAM
     end
 
     class GetSinkPolicyOutput
+      attr_accessor policy: ::String
       attr_accessor sink_arn: ::String
       attr_accessor sink_id: ::String
-      attr_accessor policy: ::String
       SENSITIVE: []
     end
 
@@ -111,8 +114,14 @@ module Aws::OAM
     end
 
     class InvalidParameterException
-      attr_accessor message: ::String
       attr_accessor amzn_error_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LinkConfiguration
+      attr_accessor log_group_configuration: Types::LogGroupConfiguration
+      attr_accessor metric_configuration: Types::MetricConfiguration
       SENSITIVE: []
     end
 
@@ -186,22 +195,32 @@ module Aws::OAM
       SENSITIVE: []
     end
 
+    class LogGroupConfiguration
+      attr_accessor filter: ::String
+      SENSITIVE: []
+    end
+
+    class MetricConfiguration
+      attr_accessor filter: ::String
+      SENSITIVE: []
+    end
+
     class MissingRequiredParameterException
-      attr_accessor message: ::String
       attr_accessor amzn_error_type: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class PutSinkPolicyInput
-      attr_accessor sink_identifier: ::String
       attr_accessor policy: ::String
+      attr_accessor sink_identifier: ::String
       SENSITIVE: []
     end
 
     class PutSinkPolicyOutput
+      attr_accessor policy: ::String
       attr_accessor sink_arn: ::String
       attr_accessor sink_id: ::String
-      attr_accessor policy: ::String
       SENSITIVE: []
     end
 
@@ -242,7 +261,8 @@ module Aws::OAM
 
     class UpdateLinkInput
       attr_accessor identifier: ::String
-      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application")]
+      attr_accessor link_configuration: Types::LinkConfiguration
+      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application" | "AWS::InternetMonitor::Monitor")]
       SENSITIVE: []
     end
 
@@ -251,6 +271,7 @@ module Aws::OAM
       attr_accessor id: ::String
       attr_accessor label: ::String
       attr_accessor label_template: ::String
+      attr_accessor link_configuration: Types::LinkConfiguration
       attr_accessor resource_types: ::Array[::String]
       attr_accessor sink_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]

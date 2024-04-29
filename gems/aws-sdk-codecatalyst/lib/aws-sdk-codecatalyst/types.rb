@@ -186,7 +186,8 @@ module Aws::CodeCatalyst
     #   @return [Types::PersistentStorageConfiguration]
     #
     # @!attribute [rw] vpc_connection_name
-    #   The name of the connection to use connect to a Amazon VPC.
+    #   The name of the connection that will be used to connect to Amazon
+    #   VPC, if any.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateDevEnvironmentRequest AWS API Documentation
@@ -1275,11 +1276,35 @@ module Aws::CodeCatalyst
     #   for the space.
     #   @return [String]
     #
+    # @!attribute [rw] pending_subscription_type
+    #   The type of the billing plan that the space will be changed to at
+    #   the start of the next billing cycle. This applies only to changes
+    #   that reduce the functionality available for the space. Billing plan
+    #   changes that increase functionality are applied immediately. For
+    #   more information, see [Pricing][1].
+    #
+    #
+    #
+    #   [1]: https://codecatalyst.aws/explore/pricing
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_subscription_start_time
+    #   The day and time the pending change will be applied to the space, in
+    #   coordinated universal time (UTC) timestamp format as specified in
+    #   [RFC 3339][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetSubscriptionResponse AWS API Documentation
     #
     class GetSubscriptionResponse < Struct.new(
       :subscription_type,
-      :aws_account_name)
+      :aws_account_name,
+      :pending_subscription_type,
+      :pending_subscription_start_time)
       SENSITIVE = []
       include Aws::Structure
     end

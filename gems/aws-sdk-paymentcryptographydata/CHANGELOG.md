@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2024-03-07)
+------------------
+
+* Feature - AWS Payment Cryptography EMV Decrypt Feature  Release
+
 1.9.0 (2024-01-26)
 ------------------
 

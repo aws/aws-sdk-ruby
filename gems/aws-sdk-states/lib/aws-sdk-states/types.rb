@@ -4373,6 +4373,85 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Describes an error found during validation. Validation errors found in
+    # the definition return in the response as **diagnostic elements**,
+    # rather than raise an exception.
+    #
+    # @!attribute [rw] severity
+    #   A value of `ERROR` means that you cannot create or update a state
+    #   machine with this definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   Identifying code for the diagnostic.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Message describing the diagnostic condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Location of the issue in the state machine, if available.
+    #
+    #   For errors specific to a field, the location could be in the format:
+    #   `/States/<StateName>/<FieldName>`, for example:
+    #   `/States/FailState/ErrorPath`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidateStateMachineDefinitionDiagnostic AWS API Documentation
+    #
+    class ValidateStateMachineDefinitionDiagnostic < Struct.new(
+      :severity,
+      :code,
+      :message,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] definition
+    #   The Amazon States Language definition of the state machine. For more
+    #   information, see [Amazon States Language][1] (ASL).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The target type of state machine for this definition. The default is
+    #   `STANDARD`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidateStateMachineDefinitionInput AWS API Documentation
+    #
+    class ValidateStateMachineDefinitionInput < Struct.new(
+      :definition,
+      :type)
+      SENSITIVE = [:definition]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   The result value will be `OK` when no syntax errors are found, or
+    #   `FAIL` if the workflow definition does not pass verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] diagnostics
+    #   If the result is `OK`, this field will be empty. When there are
+    #   errors, this field will contain an array of **Diagnostic** objects
+    #   to help you troubleshoot.
+    #   @return [Array<Types::ValidateStateMachineDefinitionDiagnostic>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidateStateMachineDefinitionOutput AWS API Documentation
+    #
+    class ValidateStateMachineDefinitionOutput < Struct.new(
+      :result,
+      :diagnostics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input does not satisfy the constraints specified by an Amazon Web
     # Services service.
     #

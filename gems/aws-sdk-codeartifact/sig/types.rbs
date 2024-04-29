@@ -33,6 +33,14 @@ module Aws::CodeArtifact
       SENSITIVE: []
     end
 
+    class AssociatedPackage
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor association_type: ("STRONG" | "WEAK")
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -73,6 +81,21 @@ module Aws::CodeArtifact
       SENSITIVE: []
     end
 
+    class CreatePackageGroupRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor package_group: ::String
+      attr_accessor contact_info: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePackageGroupResult
+      attr_accessor package_group: Types::PackageGroupDescription
+      SENSITIVE: []
+    end
+
     class CreateRepositoryRequest
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
@@ -108,6 +131,18 @@ module Aws::CodeArtifact
 
     class DeleteDomainResult
       attr_accessor domain: Types::DomainDescription
+      SENSITIVE: []
+    end
+
+    class DeletePackageGroupRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor package_group: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePackageGroupResult
+      attr_accessor package_group: Types::PackageGroupDescription
       SENSITIVE: []
     end
 
@@ -177,6 +212,18 @@ module Aws::CodeArtifact
 
     class DescribeDomainResult
       attr_accessor domain: Types::DomainDescription
+      SENSITIVE: []
+    end
+
+    class DescribePackageGroupRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor package_group: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackageGroupResult
+      attr_accessor package_group: Types::PackageGroupDescription
       SENSITIVE: []
     end
 
@@ -284,6 +331,21 @@ module Aws::CodeArtifact
       SENSITIVE: []
     end
 
+    class GetAssociatedPackageGroupRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssociatedPackageGroupResult
+      attr_accessor package_group: Types::PackageGroupDescription
+      attr_accessor association_type: ("STRONG" | "WEAK")
+      SENSITIVE: []
+    end
+
     class GetAuthorizationTokenRequest
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
@@ -386,6 +448,38 @@ module Aws::CodeArtifact
       SENSITIVE: []
     end
 
+    class ListAllowedRepositoriesForGroupRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor package_group: ::String
+      attr_accessor origin_restriction_type: ("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAllowedRepositoriesForGroupResult
+      attr_accessor allowed_repositories: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedPackagesRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor package_group: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor preview: bool
+      SENSITIVE: []
+    end
+
+    class ListAssociatedPackagesResult
+      attr_accessor packages: ::Array[Types::AssociatedPackage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDomainsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -394,6 +488,21 @@ module Aws::CodeArtifact
 
     class ListDomainsResult
       attr_accessor domains: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackageGroupsRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackageGroupsResult
+      attr_accessor package_groups: ::Array[Types::PackageGroupSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -519,6 +628,21 @@ module Aws::CodeArtifact
       SENSITIVE: []
     end
 
+    class ListSubPackageGroupsRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor package_group: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubPackageGroupsResult
+      attr_accessor package_groups: ::Array[Types::PackageGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -542,6 +666,57 @@ module Aws::CodeArtifact
       attr_accessor namespace: ::String
       attr_accessor name: ::String
       attr_accessor origin_configuration: Types::PackageOriginConfiguration
+      SENSITIVE: []
+    end
+
+    class PackageGroupAllowedRepository
+      attr_accessor repository_name: ::String
+      attr_accessor origin_restriction_type: ("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH")
+      SENSITIVE: []
+    end
+
+    class PackageGroupDescription
+      attr_accessor arn: ::String
+      attr_accessor pattern: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor contact_info: ::String
+      attr_accessor description: ::String
+      attr_accessor origin_configuration: Types::PackageGroupOriginConfiguration
+      attr_accessor parent: Types::PackageGroupReference
+      SENSITIVE: []
+    end
+
+    class PackageGroupOriginConfiguration
+      attr_accessor restrictions: ::Hash[("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH"), Types::PackageGroupOriginRestriction]
+      SENSITIVE: []
+    end
+
+    class PackageGroupOriginRestriction
+      attr_accessor mode: ("ALLOW" | "ALLOW_SPECIFIC_REPOSITORIES" | "BLOCK" | "INHERIT")
+      attr_accessor effective_mode: ("ALLOW" | "ALLOW_SPECIFIC_REPOSITORIES" | "BLOCK" | "INHERIT")
+      attr_accessor inherited_from: Types::PackageGroupReference
+      attr_accessor repositories_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class PackageGroupReference
+      attr_accessor arn: ::String
+      attr_accessor pattern: ::String
+      SENSITIVE: []
+    end
+
+    class PackageGroupSummary
+      attr_accessor arn: ::String
+      attr_accessor pattern: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor contact_info: ::String
+      attr_accessor description: ::String
+      attr_accessor origin_configuration: Types::PackageGroupOriginConfiguration
+      attr_accessor parent: Types::PackageGroupReference
       SENSITIVE: []
     end
 
@@ -756,6 +931,36 @@ module Aws::CodeArtifact
     end
 
     class UntagResourceResult < Aws::EmptyStructure
+    end
+
+    class UpdatePackageGroupOriginConfigurationRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor package_group: ::String
+      attr_accessor restrictions: ::Hash[("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH"), ("ALLOW" | "ALLOW_SPECIFIC_REPOSITORIES" | "BLOCK" | "INHERIT")]
+      attr_accessor add_allowed_repositories: ::Array[Types::PackageGroupAllowedRepository]
+      attr_accessor remove_allowed_repositories: ::Array[Types::PackageGroupAllowedRepository]
+      SENSITIVE: []
+    end
+
+    class UpdatePackageGroupOriginConfigurationResult
+      attr_accessor package_group: Types::PackageGroupDescription
+      attr_accessor allowed_repository_updates: ::Hash[("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH"), ::Hash[("ADDED" | "REMOVED"), ::Array[::String]]]
+      SENSITIVE: []
+    end
+
+    class UpdatePackageGroupRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor package_group: ::String
+      attr_accessor contact_info: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePackageGroupResult
+      attr_accessor package_group: Types::PackageGroupDescription
+      SENSITIVE: []
     end
 
     class UpdatePackageVersionsStatusRequest

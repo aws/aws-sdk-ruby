@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CodeStarconnections
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CodeStarconnections
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::CodeStarconnections
     #   @option options [Aws::CodeStarconnections::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CodeStarconnections::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -617,6 +641,13 @@ module Aws::CodeStarconnections
     # @option params [required, String] :sync_type
     #   The type of sync configuration.
     #
+    # @option params [String] :publish_deployment_status
+    #   Whether to enable or disable publishing of deployment status to source
+    #   providers.
+    #
+    # @option params [String] :trigger_resource_update_on
+    #   When to trigger Git sync to begin the stack update.
+    #
     # @return [Types::CreateSyncConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSyncConfigurationOutput#sync_configuration #sync_configuration} => Types::SyncConfiguration
@@ -630,6 +661,8 @@ module Aws::CodeStarconnections
     #     resource_name: "ResourceName", # required
     #     role_arn: "IamRoleArn", # required
     #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     publish_deployment_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     trigger_resource_update_on: "ANY_CHANGE", # accepts ANY_CHANGE, FILE_CHANGE
     #   })
     #
     # @example Response structure
@@ -643,6 +676,8 @@ module Aws::CodeStarconnections
     #   resp.sync_configuration.resource_name #=> String
     #   resp.sync_configuration.role_arn #=> String
     #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateSyncConfiguration AWS API Documentation
     #
@@ -1076,6 +1111,8 @@ module Aws::CodeStarconnections
     #   resp.sync_configuration.resource_name #=> String
     #   resp.sync_configuration.role_arn #=> String
     #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetSyncConfiguration AWS API Documentation
     #
@@ -1323,6 +1360,8 @@ module Aws::CodeStarconnections
     #   resp.sync_configurations[0].resource_name #=> String
     #   resp.sync_configurations[0].role_arn #=> String
     #   resp.sync_configurations[0].sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configurations[0].publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configurations[0].trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListSyncConfigurations AWS API Documentation
@@ -1587,6 +1626,13 @@ module Aws::CodeStarconnections
     # @option params [required, String] :sync_type
     #   The sync type for the sync configuration to be updated.
     #
+    # @option params [String] :publish_deployment_status
+    #   Whether to enable or disable publishing of deployment status to source
+    #   providers.
+    #
+    # @option params [String] :trigger_resource_update_on
+    #   When to trigger Git sync to begin the stack update.
+    #
     # @return [Types::UpdateSyncConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSyncConfigurationOutput#sync_configuration #sync_configuration} => Types::SyncConfiguration
@@ -1600,6 +1646,8 @@ module Aws::CodeStarconnections
     #     resource_name: "ResourceName", # required
     #     role_arn: "IamRoleArn",
     #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     publish_deployment_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     trigger_resource_update_on: "ANY_CHANGE", # accepts ANY_CHANGE, FILE_CHANGE
     #   })
     #
     # @example Response structure
@@ -1613,6 +1661,8 @@ module Aws::CodeStarconnections
     #   resp.sync_configuration.resource_name #=> String
     #   resp.sync_configuration.role_arn #=> String
     #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateSyncConfiguration AWS API Documentation
     #
@@ -1636,7 +1686,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

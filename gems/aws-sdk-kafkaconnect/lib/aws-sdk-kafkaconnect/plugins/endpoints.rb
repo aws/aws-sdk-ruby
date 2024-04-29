@@ -68,6 +68,8 @@ module Aws::KafkaConnect
             Aws::KafkaConnect::Endpoints::DeleteConnector.build(context)
           when :delete_custom_plugin
             Aws::KafkaConnect::Endpoints::DeleteCustomPlugin.build(context)
+          when :delete_worker_configuration
+            Aws::KafkaConnect::Endpoints::DeleteWorkerConfiguration.build(context)
           when :describe_connector
             Aws::KafkaConnect::Endpoints::DescribeConnector.build(context)
           when :describe_custom_plugin
@@ -78,8 +80,14 @@ module Aws::KafkaConnect
             Aws::KafkaConnect::Endpoints::ListConnectors.build(context)
           when :list_custom_plugins
             Aws::KafkaConnect::Endpoints::ListCustomPlugins.build(context)
+          when :list_tags_for_resource
+            Aws::KafkaConnect::Endpoints::ListTagsForResource.build(context)
           when :list_worker_configurations
             Aws::KafkaConnect::Endpoints::ListWorkerConfigurations.build(context)
+          when :tag_resource
+            Aws::KafkaConnect::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::KafkaConnect::Endpoints::UntagResource.build(context)
           when :update_connector
             Aws::KafkaConnect::Endpoints::UpdateConnector.build(context)
           end

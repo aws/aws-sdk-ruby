@@ -946,6 +946,31 @@ module Aws
                                      ) -> _DescribeInstancePatchesResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstancePatchesResponseSuccess
 
+      interface _DescribeInstancePropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstancePropertiesResult]
+        def instance_properties: () -> ::Array[Types::InstanceProperty]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_instance_properties-instance_method
+      def describe_instance_properties: (
+                                          ?instance_property_filter_list: Array[
+                                            {
+                                              key: ("InstanceIds" | "AgentVersion" | "PingStatus" | "PlatformTypes" | "DocumentName" | "ActivationIds" | "IamRole" | "ResourceType" | "AssociationStatus"),
+                                              value_set: Array[::String]
+                                            },
+                                          ],
+                                          ?filters_with_operator: Array[
+                                            {
+                                              key: ::String,
+                                              values: Array[::String],
+                                              operator: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan")?
+                                            },
+                                          ],
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _DescribeInstancePropertiesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstancePropertiesResponseSuccess
+
       interface _DescribeInventoryDeletionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInventoryDeletionsResult]
         def inventory_deletions: () -> ::Array[Types::InventoryDeletionStatusItem]
@@ -1158,7 +1183,8 @@ module Aws
                                    },
                                  ],
                                  ?max_results: ::Integer,
-                                 ?next_token: ::String
+                                 ?next_token: ::String,
+                                 ?shared: bool
                                ) -> _DescribeParametersResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeParametersResponseSuccess
 

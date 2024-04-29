@@ -425,7 +425,8 @@ module Aws
                                  origin: {
                                    name: ::String?,
                                    region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")?,
-                                   protocol_policy: ("http-only" | "https-only")?
+                                   protocol_policy: ("http-only" | "https-only")?,
+                                   response_timeout: ::Integer?
                                  },
                                  default_cache_behavior: {
                                    behavior: ("dont-cache" | "cache")?
@@ -462,7 +463,9 @@ module Aws
                                      key: ::String?,
                                      value: ::String?
                                    },
-                                 ]
+                                 ],
+                                 ?certificate_name: ::String,
+                                 ?viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
                                ) -> _CreateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionResponseSuccess
 
@@ -2174,7 +2177,8 @@ module Aws
                                  ?origin: {
                                    name: ::String?,
                                    region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")?,
-                                   protocol_policy: ("http-only" | "https-only")?
+                                   protocol_policy: ("http-only" | "https-only")?,
+                                   response_timeout: ::Integer?
                                  },
                                  ?default_cache_behavior: {
                                    behavior: ("dont-cache" | "cache")?
@@ -2204,7 +2208,10 @@ module Aws
                                      behavior: ("dont-cache" | "cache")?
                                    },
                                  ],
-                                 ?is_enabled: bool
+                                 ?is_enabled: bool,
+                                 ?viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021"),
+                                 ?certificate_name: ::String,
+                                 ?use_default_certificate: bool
                                ) -> _UpdateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionResponseSuccess
 

@@ -30,7 +30,9 @@ module Aws::WorkSpaces
   # * {AccessDeniedException}
   # * {ApplicationNotSupportedException}
   # * {ComputeNotCompatibleException}
+  # * {ConflictException}
   # * {IncompatibleApplicationsException}
+  # * {InternalServerException}
   # * {InvalidParameterValuesException}
   # * {InvalidResourceStateException}
   # * {OperatingSystemNotCompatibleException}
@@ -45,6 +47,7 @@ module Aws::WorkSpaces
   # * {ResourceUnavailableException}
   # * {UnsupportedNetworkConfigurationException}
   # * {UnsupportedWorkspaceConfigurationException}
+  # * {ValidationException}
   # * {WorkspacesDefaultRoleNotFoundException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -88,6 +91,21 @@ module Aws::WorkSpaces
       end
     end
 
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkSpaces::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class IncompatibleApplicationsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -95,6 +113,21 @@ module Aws::WorkSpaces
       # @param [Aws::WorkSpaces::Types::IncompatibleApplicationsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class InternalServerException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkSpaces::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -313,6 +346,21 @@ module Aws::WorkSpaces
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::WorkSpaces::Types::UnsupportedWorkspaceConfigurationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkSpaces::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

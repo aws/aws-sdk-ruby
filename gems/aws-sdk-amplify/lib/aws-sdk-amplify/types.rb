@@ -486,6 +486,90 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Describes the current SSL/TLS certificate that is in use for the
+    # domain. If you are using `CreateDomainAssociation` to create a new
+    # domain association, `Certificate` describes the new certificate that
+    # you are creating.
+    #
+    # @!attribute [rw] type
+    #   The type of SSL/TLS certificate that you want to use.
+    #
+    #   Specify `AMPLIFY_MANAGED` to use the default certificate that
+    #   Amplify provisions for you.
+    #
+    #   Specify `CUSTOM` to use your own certificate that you have already
+    #   added to Certificate Manager in your Amazon Web Services account.
+    #   Make sure you request (or import) the certificate in the US East (N.
+    #   Virginia) Region (us-east-1). For more information about using ACM,
+    #   see [Importing certificates into Certificate Manager][1] in the *ACM
+    #   User guide* .
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_certificate_arn
+    #   The Amazon resource name (ARN) for a custom certificate that you
+    #   have already added to Certificate Manager in your Amazon Web
+    #   Services account.
+    #
+    #   This field is required only when the certificate type is `CUSTOM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_verification_dns_record
+    #   The DNS record for certificate verification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Certificate AWS API Documentation
+    #
+    class Certificate < Struct.new(
+      :type,
+      :custom_certificate_arn,
+      :certificate_verification_dns_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type of SSL/TLS certificate to use for your custom domain. If a
+    # certificate type isn't specified, Amplify uses the default
+    # `AMPLIFY_MANAGED` certificate.
+    #
+    # @!attribute [rw] type
+    #   The certificate type.
+    #
+    #   Specify `AMPLIFY_MANAGED` to use the default certificate that
+    #   Amplify provisions for you.
+    #
+    #   Specify `CUSTOM` to use your own certificate that you have already
+    #   added to Certificate Manager in your Amazon Web Services account.
+    #   Make sure you request (or import) the certificate in the US East (N.
+    #   Virginia) Region (us-east-1). For more information about using ACM,
+    #   see [Importing certificates into Certificate Manager][1] in the *ACM
+    #   User guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_certificate_arn
+    #   The Amazon resource name (ARN) for the custom certificate that you
+    #   have already added to Certificate Manager in your Amazon Web
+    #   Services account.
+    #
+    #   This field is required only when the certificate type is `CUSTOM`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CertificateSettings AWS API Documentation
+    #
+    class CertificateSettings < Struct.new(
+      :type,
+      :custom_certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request structure used to create apps in Amplify.
     #
     # @!attribute [rw] name
@@ -914,6 +998,12 @@ module Aws::Amplify
     #   subdomains.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain. If
+    #   you don't specify a certificate type, Amplify uses the default
+    #   certificate that it provisions and manages for you.
+    #   @return [Types::CertificateSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDomainAssociationRequest AWS API Documentation
     #
     class CreateDomainAssociationRequest < Struct.new(
@@ -922,7 +1012,8 @@ module Aws::Amplify
       :enable_auto_sub_domain,
       :sub_domain_settings,
       :auto_sub_domain_creation_patterns,
-      :auto_sub_domain_iam_role)
+      :auto_sub_domain_iam_role,
+      :certificate_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1000,7 +1091,7 @@ module Aws::Amplify
     #
     #   301
     #
-    #   : Represents a 301 (moved pemanently) redirect rule. This and all
+    #   : Represents a 301 (moved permanently) redirect rule. This and all
     #     future requests should be directed to the target URL.
     #
     #   302
@@ -1148,8 +1239,8 @@ module Aws::Amplify
     end
 
     # @!attribute [rw] domain_association
-    #   Describes a domain association that associates a custom domain with
-    #   an Amplify app.
+    #   Describes the association between a custom domain and an Amplify
+    #   app.
     #   @return [Types::DomainAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteDomainAssociationResult AWS API Documentation
@@ -1240,8 +1331,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Describes a domain association that associates a custom domain with an
-    # Amplify app.
+    # Describes the association between a custom domain and an Amplify app.
     #
     # @!attribute [rw] domain_association_arn
     #   The Amazon Resource Name (ARN) for the domain association.
@@ -1269,8 +1359,56 @@ module Aws::Amplify
     #   The current status of the domain association.
     #   @return [String]
     #
+    # @!attribute [rw] update_status
+    #   The status of the domain update operation that is currently in
+    #   progress. The following list describes the valid update states.
+    #
+    #   REQUESTING\_CERTIFICATE
+    #
+    #   : The certificate is in the process of being updated.
+    #
+    #   PENDING\_VERIFICATION
+    #
+    #   : Indicates that an Amplify managed certificate is in the process of
+    #     being verified. This occurs during the creation of a custom domain
+    #     or when a custom domain is updated to use a managed certificate.
+    #
+    #   IMPORTING\_CUSTOM\_CERTIFICATE
+    #
+    #   : Indicates that an Amplify custom certificate is in the process of
+    #     being imported. This occurs during the creation of a custom domain
+    #     or when a custom domain is updated to use a custom certificate.
+    #
+    #   PENDING\_DEPLOYMENT
+    #
+    #   : Indicates that the subdomain or certificate changes are being
+    #     propagated.
+    #
+    #   AWAITING\_APP\_CNAME
+    #
+    #   : Amplify is waiting for CNAME records corresponding to subdomains
+    #     to be propagated. If your custom domain is on Route 53, Amplify
+    #     handles this for you automatically. For more information about
+    #     custom domains, see [Setting up custom domains][1] in the *Amplify
+    #     Hosting User Guide*.
+    #
+    #   UPDATE\_COMPLETE
+    #
+    #   : The certificate has been associated with a domain.
+    #
+    #   UPDATE\_FAILED
+    #
+    #   : The certificate has failed to be provisioned or associated, and
+    #     there is no existing active certificate to roll back to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html
+    #   @return [String]
+    #
     # @!attribute [rw] status_reason
-    #   The reason for the current status of the domain association.
+    #   Additional information that describes why the domain association is
+    #   in the current state.
     #   @return [String]
     #
     # @!attribute [rw] certificate_verification_dns_record
@@ -1281,6 +1419,17 @@ module Aws::Amplify
     #   The subdomains for the domain association.
     #   @return [Array<Types::SubDomain>]
     #
+    # @!attribute [rw] certificate
+    #   Describes the SSL/TLS certificate for the domain association. This
+    #   can be your own custom certificate or the default certificate that
+    #   Amplify provisions for you.
+    #
+    #   If you are updating your domain to use a different certificate,
+    #   `certificate` points to the new certificate that is being created
+    #   instead of the current active certificate. Otherwise, `certificate`
+    #   points to the current active certificate.
+    #   @return [Types::Certificate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DomainAssociation AWS API Documentation
     #
     class DomainAssociation < Struct.new(
@@ -1290,9 +1439,11 @@ module Aws::Amplify
       :auto_sub_domain_creation_patterns,
       :auto_sub_domain_iam_role,
       :domain_status,
+      :update_status,
       :status_reason,
       :certificate_verification_dns_record,
-      :sub_domains)
+      :sub_domains,
+      :certificate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2745,6 +2896,10 @@ module Aws::Amplify
     #   subdomains.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain.
+    #   @return [Types::CertificateSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateDomainAssociationRequest AWS API Documentation
     #
     class UpdateDomainAssociationRequest < Struct.new(
@@ -2753,7 +2908,8 @@ module Aws::Amplify
       :enable_auto_sub_domain,
       :sub_domain_settings,
       :auto_sub_domain_creation_patterns,
-      :auto_sub_domain_iam_role)
+      :auto_sub_domain_iam_role,
+      :certificate_settings)
       SENSITIVE = []
       include Aws::Structure
     end

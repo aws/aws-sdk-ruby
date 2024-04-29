@@ -191,7 +191,11 @@ module Aws
                                          },
                                        ],
                                        ?auto_sub_domain_creation_patterns: Array[::String],
-                                       ?auto_sub_domain_iam_role: ::String
+                                       ?auto_sub_domain_iam_role: ::String,
+                                       ?certificate_settings: {
+                                         type: ("AMPLIFY_MANAGED" | "CUSTOM"),
+                                         custom_certificate_arn: ::String?
+                                       }
                                      ) -> _CreateDomainAssociationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainAssociationResponseSuccess
 
@@ -618,7 +622,11 @@ module Aws
                                          },
                                        ],
                                        ?auto_sub_domain_creation_patterns: Array[::String],
-                                       ?auto_sub_domain_iam_role: ::String
+                                       ?auto_sub_domain_iam_role: ::String,
+                                       ?certificate_settings: {
+                                         type: ("AMPLIFY_MANAGED" | "CUSTOM"),
+                                         custom_certificate_arn: ::String?
+                                       }
                                      ) -> _UpdateDomainAssociationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainAssociationResponseSuccess
 

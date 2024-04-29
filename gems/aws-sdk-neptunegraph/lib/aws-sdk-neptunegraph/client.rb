@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::NeptuneGraph
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::NeptuneGraph
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::NeptuneGraph
     #   @option options [Aws::NeptuneGraph::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::NeptuneGraph::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -482,6 +506,9 @@ module Aws::NeptuneGraph
     # @option params [Integer] :replica_count
     #   The number of replicas in other AZs. Min =0, Max = 2, Default = 1.
     #
+    #   Additional charges equivalent to the m-NCUs selected for the graph
+    #   apply for each replica.
+    #
     # @option params [Boolean] :deletion_protection
     #   Indicates whether or not to enable deletion protection on the graph.
     #   The graph can’t be deleted when deletion protection is enabled.
@@ -531,7 +558,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -651,6 +678,9 @@ module Aws::NeptuneGraph
     #   The number of replicas in other AZs to provision on the new graph
     #   after import. Default = 0, Min = 0, Max = 2.
     #
+    #   Additional charges equivalent to the m-NCUs selected for the graph
+    #   apply for each replica.
+    #
     # @option params [Boolean] :deletion_protection
     #   Indicates whether or not to enable deletion protection on the graph.
     #   The graph can’t be deleted when deletion protection is enabled.
@@ -764,7 +794,11 @@ module Aws::NeptuneGraph
 
     # Create a private graph endpoint to allow private access from to the
     # graph from within a VPC. You can attach security groups to the private
-    # graph endpoint. VPC endpoint charges apply.
+    # graph endpoint.
+    #
+    # <note markdown="1"> VPC endpoint charges apply.
+    #
+    #  </note>
     #
     # @option params [required, String] :graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
@@ -853,7 +887,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -954,9 +988,7 @@ module Aws::NeptuneGraph
       req.send_request(options)
     end
 
-    # Execute an openCypher query. Currently, the SDK does not support
-    # parameterized queries. If you want to make a parameterized query call,
-    # you can use an HTTP request.
+    # Execute an openCypher query.
     #
     # When invoking this operation in a Neptune Analytics cluster, the IAM
     # user or role making the request must have a policy attached that
@@ -968,13 +1000,6 @@ module Aws::NeptuneGraph
     # * neptune-graph:WriteDataViaQuery
     #
     # * neptune-graph:DeleteDataViaQuery
-    #
-    # <note markdown="1"> Non-parametrized queries are not considered for plan caching. You can
-    # force plan caching with `planCache=enabled`. The plan cache will be
-    # reused only for the same exact query. Slight variations in the query
-    # will not be able to reuse the query plan cache.
-    #
-    #  </note>
     #
     # @option params [required, String] :graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
@@ -1071,7 +1096,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1457,7 +1482,7 @@ module Aws::NeptuneGraph
     #   resp.graphs[0].id #=> String
     #   resp.graphs[0].name #=> String
     #   resp.graphs[0].arn #=> String
-    #   resp.graphs[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.graphs[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.graphs[0].provisioned_memory #=> Integer
     #   resp.graphs[0].public_connectivity #=> Boolean
     #   resp.graphs[0].endpoint #=> String
@@ -1693,7 +1718,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1730,7 +1755,9 @@ module Aws::NeptuneGraph
     #
     # @option params [Integer] :provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
-    #   use for the graph. Min = 128
+    #   use for the graph.
+    #
+    #   Min = 128
     #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the graph has deletion protection
@@ -1744,6 +1771,9 @@ module Aws::NeptuneGraph
     #
     # @option params [Integer] :replica_count
     #   The number of replicas in other AZs. Min =0, Max = 2, Default =1
+    #
+    #   Additional charges equivalent to the m-NCUs selected for the graph
+    #   apply for each replica.
     #
     # @option params [Boolean] :public_connectivity
     #   Specifies whether or not the graph can be reachable over the internet.
@@ -1787,7 +1817,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1806,6 +1836,85 @@ module Aws::NeptuneGraph
     # @param [Hash] params ({})
     def restore_graph_from_snapshot(params = {}, options = {})
       req = build_request(:restore_graph_from_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Import data into existing Neptune Analytics graph from Amazon Simple
+    # Storage Service (S3). The graph needs to be empty and in the AVAILABLE
+    # state.
+    #
+    # @option params [Types::ImportOptions] :import_options
+    #   Options for how to perform an import.
+    #
+    # @option params [Boolean] :fail_on_error
+    #   If set to true, the task halts when an import error is encountered. If
+    #   set to false, the task skips the data that caused the error and
+    #   continues if possible.
+    #
+    # @option params [required, String] :source
+    #   A URL identifying the location of the data to be imported. This can be
+    #   an Amazon S3 path, or can point to a Neptune database endpoint or
+    #   snapshot.
+    #
+    # @option params [String] :format
+    #   Specifies the format of Amazon S3 data to be imported. Valid values
+    #   are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which
+    #   identies the openCypher load format.
+    #
+    # @option params [required, String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the IAM role that will allow access to the data that is to
+    #   be imported.
+    #
+    # @return [Types::StartImportTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportTaskOutput#graph_id #graph_id} => String
+    #   * {Types::StartImportTaskOutput#task_id #task_id} => String
+    #   * {Types::StartImportTaskOutput#source #source} => String
+    #   * {Types::StartImportTaskOutput#format #format} => String
+    #   * {Types::StartImportTaskOutput#role_arn #role_arn} => String
+    #   * {Types::StartImportTaskOutput#status #status} => String
+    #   * {Types::StartImportTaskOutput#import_options #import_options} => Types::ImportOptions
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import_task({
+    #     import_options: {
+    #       neptune: {
+    #         s3_export_path: "NeptuneImportOptionsS3ExportPathString", # required
+    #         s3_export_kms_key_id: "NeptuneImportOptionsS3ExportKmsKeyIdString", # required
+    #         preserve_default_vertex_labels: false,
+    #         preserve_edge_ids: false,
+    #       },
+    #     },
+    #     fail_on_error: false,
+    #     source: "String", # required
+    #     format: "CSV", # accepts CSV, OPEN_CYPHER
+    #     graph_identifier: "GraphIdentifier", # required
+    #     role_arn: "RoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.graph_id #=> String
+    #   resp.task_id #=> String
+    #   resp.source #=> String
+    #   resp.format #=> String, one of "CSV", "OPEN_CYPHER"
+    #   resp.role_arn #=> String
+    #   resp.status #=> String, one of "INITIALIZING", "EXPORTING", "ANALYZING_DATA", "IMPORTING", "REPROVISIONING", "ROLLING_BACK", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.import_options.neptune.s3_export_path #=> String
+    #   resp.import_options.neptune.s3_export_kms_key_id #=> String
+    #   resp.import_options.neptune.preserve_default_vertex_labels #=> Boolean
+    #   resp.import_options.neptune.preserve_edge_ids #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/StartImportTask AWS API Documentation
+    #
+    # @overload start_import_task(params = {})
+    # @param [Hash] params ({})
+    def start_import_task(params = {}, options = {})
+      req = build_request(:start_import_task, params)
       req.send_request(options)
     end
 
@@ -1889,7 +1998,9 @@ module Aws::NeptuneGraph
     #
     # @option params [Integer] :provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
-    #   use for the graph. Min = 128
+    #   use for the graph.
+    #
+    #   Min = 128
     #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the graph has deletion protection
@@ -1928,7 +2039,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1963,7 +2074,7 @@ module Aws::NeptuneGraph
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

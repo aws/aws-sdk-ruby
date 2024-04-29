@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.237.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.236.0 (2024-04-22)
+------------------
+
+* Feature - This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.
+
+1.235.0 (2024-04-18)
+------------------
+
+* Feature - Removed deprecated enum values and updated API documentation.
+
+1.234.0 (2024-03-25)
+------------------
+
+* Feature - Introduced support for the following new instance types on SageMaker Studio for JupyterLab and CodeEditor applications: m6i, m6id, m7i, c6i, c6id, c7i, r6i, r6id, r7i, and p5
+
+1.233.0 (2024-03-15)
+------------------
+
+* Feature - Adds m6i, m6id, m7i, c6i, c6id, c7i, r6i r6id, r7i, p5 instance type support to Sagemaker Notebook Instances and miscellaneous wording fixes for previous Sagemaker documentation.
+
+1.232.0 (2024-02-29)
+------------------
+
+* Feature - Adds support for ModelDataSource in Model Packages to support unzipped models. Adds support to specify SourceUri for models which allows registration of models without mandating a container for hosting. Using SourceUri, customers can decouple the model from hosting information during registration.
+
 1.231.0 (2024-02-02)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2024-03-07)
+------------------
+
+* Feature - AWS AppConfig now supports dynamic parameters, which enhance the functionality of AppConfig Extensions by allowing you to provide parameter values to your Extensions at the time you deploy your configuration.
+
 1.43.0 (2024-01-26)
 ------------------
 

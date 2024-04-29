@@ -94,7 +94,7 @@ module Aws::SavingsPlans
       attr_accessor savings_plan_ids: ::Array[::String]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor states: ::Array[("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted")]
+      attr_accessor states: ::Array[("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted" | "pending-return" | "returned")]
       attr_accessor filters: ::Array[Types::SavingsPlanFilter]
       SENSITIVE: []
     end
@@ -135,6 +135,17 @@ module Aws::SavingsPlans
       SENSITIVE: []
     end
 
+    class ReturnSavingsPlanRequest
+      attr_accessor savings_plan_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ReturnSavingsPlanResponse
+      attr_accessor savings_plan_id: ::String
+      SENSITIVE: []
+    end
+
     class SavingsPlan
       attr_accessor offering_id: ::String
       attr_accessor savings_plan_id: ::String
@@ -142,7 +153,7 @@ module Aws::SavingsPlans
       attr_accessor description: ::String
       attr_accessor start: ::String
       attr_accessor end: ::String
-      attr_accessor state: ("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted")
+      attr_accessor state: ("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted" | "pending-return" | "returned")
       attr_accessor region: ::String
       attr_accessor ec2_instance_family: ::String
       attr_accessor savings_plan_type: ("Compute" | "EC2Instance" | "SageMaker")
@@ -154,6 +165,7 @@ module Aws::SavingsPlans
       attr_accessor recurring_payment_amount: ::String
       attr_accessor term_duration_in_seconds: ::Integer
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor returnable_until: ::String
       SENSITIVE: []
     end
 

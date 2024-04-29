@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2024-04-12)
+------------------
+
+* Feature - This change releases support for importing self signed certificates to the Transfer Family for sending outbound file transfers over TLS/HTTPS.
+
+1.90.0 (2024-04-03)
+------------------
+
+* Feature - Add ability to specify Security Policies for SFTP Connectors
+
+1.89.0 (2024-03-08)
+------------------
+
+* Feature - Added DES_EDE3_CBC to the list of supported encryption algorithms for messages sent with an AS2 connector.
+
 1.88.0 (2024-01-26)
 ------------------
 

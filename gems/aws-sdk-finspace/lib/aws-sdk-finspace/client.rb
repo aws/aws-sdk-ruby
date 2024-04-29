@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -73,6 +74,7 @@ module Aws::Finspace
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -198,10 +200,17 @@ module Aws::Finspace
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -339,50 +348,65 @@ module Aws::Finspace
     #   @option options [Aws::Finspace::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Finspace::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -491,7 +515,7 @@ module Aws::Finspace
     # @option params [required, Array<Types::ChangeRequest>] :change_requests
     #   A list of change request objects that are run in order. A change
     #   request object consists of `changeType` , `s3Path`, and `dbPath`. A
-    #   changeType can has the following values:
+    #   changeType can have the following values:
     #
     #   * PUT – Adds or updates files in a database.
     #
@@ -774,6 +798,7 @@ module Aws::Finspace
     #             {
     #               db_paths: ["DbPath"], # required
     #               volume_name: "KxVolumeName", # required
+    #               on_demand: false,
     #             },
     #           ],
     #         },
@@ -865,6 +890,7 @@ module Aws::Finspace
     #   resp.databases[0].dataview_configuration.segment_configurations[0].db_paths #=> Array
     #   resp.databases[0].dataview_configuration.segment_configurations[0].db_paths[0] #=> String
     #   resp.databases[0].dataview_configuration.segment_configurations[0].volume_name #=> String
+    #   resp.databases[0].dataview_configuration.segment_configurations[0].on_demand #=> Boolean
     #   resp.cache_storage_configurations #=> Array
     #   resp.cache_storage_configurations[0].type #=> String
     #   resp.cache_storage_configurations[0].size #=> Integer
@@ -990,12 +1016,9 @@ module Aws::Finspace
     #   A unique identifier for the dataview.
     #
     # @option params [required, String] :az_mode
-    #   The number of availability zones you want to assign per cluster. This
-    #   can be one of the following
-    #
-    #   * `SINGLE` – Assigns one availability zone per cluster.
-    #
-    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #
     # @option params [String] :availability_zone_id
     #   The identifier of the availability zones.
@@ -1015,6 +1038,25 @@ module Aws::Finspace
     #   The option to specify whether you want to apply all the future
     #   additions and corrections automatically to the dataview, when you
     #   ingest new changesets. The default value is false.
+    #
+    # @option params [Boolean] :read_write
+    #   The option to specify whether you want to make the dataview writable
+    #   to perform database maintenance. The following are some considerations
+    #   related to writable dataviews.  
+    #
+    #   * You cannot create partial writable dataviews. When you create
+    #     writeable dataviews you must provide the entire database path.
+    #
+    #   * You cannot perform updates on a writeable dataview. Hence,
+    #     `autoUpdate` must be set as **False** if `readWrite` is **True** for
+    #     a dataview.
+    #
+    #   * You must also use a unique volume for creating a writeable dataview.
+    #     So, if you choose a volume that is already in use by another
+    #     dataview, the dataview creation fails.
+    #
+    #   * Once you create a dataview as writeable, you cannot change it to
+    #     read-only. So, you cannot update the `readWrite` parameter later.
     #
     # @option params [String] :description
     #   A description of the dataview.
@@ -1040,6 +1082,7 @@ module Aws::Finspace
     #   * {Types::CreateKxDataviewResponse#segment_configurations #segment_configurations} => Array&lt;Types::KxDataviewSegmentConfiguration&gt;
     #   * {Types::CreateKxDataviewResponse#description #description} => String
     #   * {Types::CreateKxDataviewResponse#auto_update #auto_update} => Boolean
+    #   * {Types::CreateKxDataviewResponse#read_write #read_write} => Boolean
     #   * {Types::CreateKxDataviewResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::CreateKxDataviewResponse#last_modified_timestamp #last_modified_timestamp} => Time
     #   * {Types::CreateKxDataviewResponse#status #status} => String
@@ -1057,9 +1100,11 @@ module Aws::Finspace
     #       {
     #         db_paths: ["DbPath"], # required
     #         volume_name: "KxVolumeName", # required
+    #         on_demand: false,
     #       },
     #     ],
     #     auto_update: false,
+    #     read_write: false,
     #     description: "Description",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1079,8 +1124,10 @@ module Aws::Finspace
     #   resp.segment_configurations[0].db_paths #=> Array
     #   resp.segment_configurations[0].db_paths[0] #=> String
     #   resp.segment_configurations[0].volume_name #=> String
+    #   resp.segment_configurations[0].on_demand #=> Boolean
     #   resp.description #=> String
     #   resp.auto_update #=> Boolean
+    #   resp.read_write #=> Boolean
     #   resp.created_timestamp #=> Time
     #   resp.last_modified_timestamp #=> Time
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "FAILED", "DELETING"
@@ -1174,6 +1221,26 @@ module Aws::Finspace
     # @option params [required, String] :host_type
     #   The memory and CPU capabilities of the scaling group host on which
     #   FinSpace Managed kdb clusters will be placed.
+    #
+    #   You can add one of the following values:
+    #
+    #   * `kx.sg.4xlarge` – The host type with a configuration of 108 GiB
+    #     memory and 16 vCPUs.
+    #
+    #   * `kx.sg.8xlarge` – The host type with a configuration of 216 GiB
+    #     memory and 32 vCPUs.
+    #
+    #   * `kx.sg.16xlarge` – The host type with a configuration of 432 GiB
+    #     memory and 64 vCPUs.
+    #
+    #   * `kx.sg.32xlarge` – The host type with a configuration of 864 GiB
+    #     memory and 128 vCPUs.
+    #
+    #   * `kx.sg1.16xlarge` – The host type with a configuration of 1949 GiB
+    #     memory and 64 vCPUs.
+    #
+    #   * `kx.sg1.24xlarge` – The host type with a configuration of 2948 GiB
+    #     memory and 96 vCPUs.
     #
     # @option params [required, String] :availability_zone_id
     #   The identifier of the availability zones.
@@ -1312,8 +1379,9 @@ module Aws::Finspace
     #   `volumeType` as *NAS\_1*.
     #
     # @option params [required, String] :az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #
     # @option params [required, Array<String>] :availability_zone_ids
     #   The identifier of the availability zones.
@@ -1432,6 +1500,36 @@ module Aws::Finspace
     # @param [Hash] params ({})
     def delete_kx_cluster(params = {}, options = {})
       req = build_request(:delete_kx_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified nodes from a cluster.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster, for which you want to delete the nodes.
+    #
+    # @option params [required, String] :node_id
+    #   A unique identifier for the node that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_kx_cluster_node({
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_name: "KxClusterName", # required
+    #     node_id: "KxClusterNodeIdString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxClusterNode AWS API Documentation
+    #
+    # @overload delete_kx_cluster_node(params = {})
+    # @param [Hash] params ({})
+    def delete_kx_cluster_node(params = {}, options = {})
+      req = build_request(:delete_kx_cluster_node, params)
       req.send_request(options)
     end
 
@@ -1815,6 +1913,7 @@ module Aws::Finspace
     #   resp.databases[0].dataview_configuration.segment_configurations[0].db_paths #=> Array
     #   resp.databases[0].dataview_configuration.segment_configurations[0].db_paths[0] #=> String
     #   resp.databases[0].dataview_configuration.segment_configurations[0].volume_name #=> String
+    #   resp.databases[0].dataview_configuration.segment_configurations[0].on_demand #=> Boolean
     #   resp.cache_storage_configurations #=> Array
     #   resp.cache_storage_configurations[0].type #=> String
     #   resp.cache_storage_configurations[0].size #=> Integer
@@ -1981,6 +2080,7 @@ module Aws::Finspace
     #   * {Types::GetKxDataviewResponse#active_versions #active_versions} => Array&lt;Types::KxDataviewActiveVersion&gt;
     #   * {Types::GetKxDataviewResponse#description #description} => String
     #   * {Types::GetKxDataviewResponse#auto_update #auto_update} => Boolean
+    #   * {Types::GetKxDataviewResponse#read_write #read_write} => Boolean
     #   * {Types::GetKxDataviewResponse#environment_id #environment_id} => String
     #   * {Types::GetKxDataviewResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::GetKxDataviewResponse#last_modified_timestamp #last_modified_timestamp} => Time
@@ -2006,18 +2106,21 @@ module Aws::Finspace
     #   resp.segment_configurations[0].db_paths #=> Array
     #   resp.segment_configurations[0].db_paths[0] #=> String
     #   resp.segment_configurations[0].volume_name #=> String
+    #   resp.segment_configurations[0].on_demand #=> Boolean
     #   resp.active_versions #=> Array
     #   resp.active_versions[0].changeset_id #=> String
     #   resp.active_versions[0].segment_configurations #=> Array
     #   resp.active_versions[0].segment_configurations[0].db_paths #=> Array
     #   resp.active_versions[0].segment_configurations[0].db_paths[0] #=> String
     #   resp.active_versions[0].segment_configurations[0].volume_name #=> String
+    #   resp.active_versions[0].segment_configurations[0].on_demand #=> Boolean
     #   resp.active_versions[0].attached_clusters #=> Array
     #   resp.active_versions[0].attached_clusters[0] #=> String
     #   resp.active_versions[0].created_timestamp #=> Time
     #   resp.active_versions[0].version_id #=> String
     #   resp.description #=> String
     #   resp.auto_update #=> Boolean
+    #   resp.read_write #=> Boolean
     #   resp.environment_id #=> String
     #   resp.created_timestamp #=> Time
     #   resp.last_modified_timestamp #=> Time
@@ -2395,6 +2498,7 @@ module Aws::Finspace
     #   resp.nodes[0].node_id #=> String
     #   resp.nodes[0].availability_zone_id #=> String
     #   resp.nodes[0].launch_time #=> Time
+    #   resp.nodes[0].status #=> String, one of "RUNNING", "PROVISIONING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxClusterNodes AWS API Documentation
@@ -2581,12 +2685,14 @@ module Aws::Finspace
     #   resp.kx_dataviews[0].segment_configurations[0].db_paths #=> Array
     #   resp.kx_dataviews[0].segment_configurations[0].db_paths[0] #=> String
     #   resp.kx_dataviews[0].segment_configurations[0].volume_name #=> String
+    #   resp.kx_dataviews[0].segment_configurations[0].on_demand #=> Boolean
     #   resp.kx_dataviews[0].active_versions #=> Array
     #   resp.kx_dataviews[0].active_versions[0].changeset_id #=> String
     #   resp.kx_dataviews[0].active_versions[0].segment_configurations #=> Array
     #   resp.kx_dataviews[0].active_versions[0].segment_configurations[0].db_paths #=> Array
     #   resp.kx_dataviews[0].active_versions[0].segment_configurations[0].db_paths[0] #=> String
     #   resp.kx_dataviews[0].active_versions[0].segment_configurations[0].volume_name #=> String
+    #   resp.kx_dataviews[0].active_versions[0].segment_configurations[0].on_demand #=> Boolean
     #   resp.kx_dataviews[0].active_versions[0].attached_clusters #=> Array
     #   resp.kx_dataviews[0].active_versions[0].attached_clusters[0] #=> String
     #   resp.kx_dataviews[0].active_versions[0].created_timestamp #=> Time
@@ -2594,6 +2700,7 @@ module Aws::Finspace
     #   resp.kx_dataviews[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "FAILED", "DELETING"
     #   resp.kx_dataviews[0].description #=> String
     #   resp.kx_dataviews[0].auto_update #=> Boolean
+    #   resp.kx_dataviews[0].read_write #=> Boolean
     #   resp.kx_dataviews[0].created_timestamp #=> Time
     #   resp.kx_dataviews[0].last_modified_timestamp #=> Time
     #   resp.kx_dataviews[0].status_reason #=> String
@@ -3110,6 +3217,7 @@ module Aws::Finspace
     #             {
     #               db_paths: ["DbPath"], # required
     #               volume_name: "KxVolumeName", # required
+    #               on_demand: false,
     #             },
     #           ],
     #         },
@@ -3224,6 +3332,7 @@ module Aws::Finspace
     #   * {Types::UpdateKxDataviewResponse#active_versions #active_versions} => Array&lt;Types::KxDataviewActiveVersion&gt;
     #   * {Types::UpdateKxDataviewResponse#status #status} => String
     #   * {Types::UpdateKxDataviewResponse#auto_update #auto_update} => Boolean
+    #   * {Types::UpdateKxDataviewResponse#read_write #read_write} => Boolean
     #   * {Types::UpdateKxDataviewResponse#description #description} => String
     #   * {Types::UpdateKxDataviewResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::UpdateKxDataviewResponse#last_modified_timestamp #last_modified_timestamp} => Time
@@ -3240,6 +3349,7 @@ module Aws::Finspace
     #       {
     #         db_paths: ["DbPath"], # required
     #         volume_name: "KxVolumeName", # required
+    #         on_demand: false,
     #       },
     #     ],
     #     client_token: "ClientTokenString", # required
@@ -3257,18 +3367,21 @@ module Aws::Finspace
     #   resp.segment_configurations[0].db_paths #=> Array
     #   resp.segment_configurations[0].db_paths[0] #=> String
     #   resp.segment_configurations[0].volume_name #=> String
+    #   resp.segment_configurations[0].on_demand #=> Boolean
     #   resp.active_versions #=> Array
     #   resp.active_versions[0].changeset_id #=> String
     #   resp.active_versions[0].segment_configurations #=> Array
     #   resp.active_versions[0].segment_configurations[0].db_paths #=> Array
     #   resp.active_versions[0].segment_configurations[0].db_paths[0] #=> String
     #   resp.active_versions[0].segment_configurations[0].volume_name #=> String
+    #   resp.active_versions[0].segment_configurations[0].on_demand #=> Boolean
     #   resp.active_versions[0].attached_clusters #=> Array
     #   resp.active_versions[0].attached_clusters[0] #=> String
     #   resp.active_versions[0].created_timestamp #=> Time
     #   resp.active_versions[0].version_id #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "FAILED", "DELETING"
     #   resp.auto_update #=> Boolean
+    #   resp.read_write #=> Boolean
     #   resp.description #=> String
     #   resp.created_timestamp #=> Time
     #   resp.last_modified_timestamp #=> Time
@@ -3633,7 +3746,7 @@ module Aws::Finspace
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

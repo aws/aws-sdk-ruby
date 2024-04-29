@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Firehose
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Firehose
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::Firehose
     #   @option options [Aws::Firehose::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Firehose::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -398,7 +422,7 @@ module Aws::Firehose
 
     # @!group API Operations
 
-    # Creates a Kinesis Data Firehose delivery stream.
+    # Creates a Firehose delivery stream.
     #
     # By default, you can create up to 50 delivery streams per Amazon Web
     # Services Region.
@@ -416,12 +440,12 @@ module Aws::Firehose
     # it. However, you can invoke the DeleteDeliveryStream operation to
     # delete it.
     #
-    # A Kinesis Data Firehose delivery stream can be configured to receive
-    # records directly from providers using PutRecord or PutRecordBatch, or
-    # it can be configured to use an existing Kinesis stream as its source.
-    # To specify a Kinesis data stream as input, set the
-    # `DeliveryStreamType` parameter to `KinesisStreamAsSource`, and provide
-    # the Kinesis stream Amazon Resource Name (ARN) and role ARN in the
+    # A Firehose delivery stream can be configured to receive records
+    # directly from providers using PutRecord or PutRecordBatch, or it can
+    # be configured to use an existing Kinesis stream as its source. To
+    # specify a Kinesis data stream as input, set the `DeliveryStreamType`
+    # parameter to `KinesisStreamAsSource`, and provide the Kinesis stream
+    # Amazon Resource Name (ARN) and role ARN in the
     # `KinesisStreamSourceConfiguration` parameter.
     #
     # To create a delivery stream with server-side encryption (SSE) enabled,
@@ -445,8 +469,8 @@ module Aws::Firehose
     # When you specify `S3DestinationConfiguration`, you can also provide
     # the following optional values: BufferingHints,
     # `EncryptionConfiguration`, and `CompressionFormat`. By default, if no
-    # `BufferingHints` value is provided, Kinesis Data Firehose buffers data
-    # up to 5 MB or for 5 minutes, whichever condition is satisfied first.
+    # `BufferingHints` value is provided, Firehose buffers data up to 5 MB
+    # or for 5 minutes, whichever condition is satisfied first.
     # `BufferingHints` is a hint, so there are some cases where the service
     # cannot adhere to these conditions strictly. For example, record
     # boundaries might be such that the size is a little over or under the
@@ -457,10 +481,10 @@ module Aws::Firehose
     # A few notes about Amazon Redshift as a destination:
     #
     # * An Amazon Redshift destination requires an S3 bucket as intermediate
-    #   location. Kinesis Data Firehose first delivers data to Amazon S3 and
-    #   then uses `COPY` syntax to load data into an Amazon Redshift table.
-    #   This is specified in the
-    #   `RedshiftDestinationConfiguration.S3Configuration` parameter.
+    #   location. Firehose first delivers data to Amazon S3 and then uses
+    #   `COPY` syntax to load data into an Amazon Redshift table. This is
+    #   specified in the `RedshiftDestinationConfiguration.S3Configuration`
+    #   parameter.
     #
     # * The compression formats `SNAPPY` or `ZIP` cannot be specified in
     #   `RedshiftDestinationConfiguration.S3Configuration` because the
@@ -468,16 +492,15 @@ module Aws::Firehose
     #   doesn't support these compression formats.
     #
     # * We strongly recommend that you use the user name and password you
-    #   provide exclusively with Kinesis Data Firehose, and that the
-    #   permissions for the account are restricted for Amazon Redshift
-    #   `INSERT` permissions.
+    #   provide exclusively with Firehose, and that the permissions for the
+    #   account are restricted for Amazon Redshift `INSERT` permissions.
     #
-    # Kinesis Data Firehose assumes the IAM role that is configured as part
-    # of the destination. The role should allow the Kinesis Data Firehose
-    # principal to assume the role, and the role should have permissions
-    # that allow the service to deliver the data. For more information, see
-    # [Grant Kinesis Data Firehose Access to an Amazon S3 Destination][1] in
-    # the *Amazon Kinesis Data Firehose Developer Guide*.
+    # Firehose assumes the IAM role that is configured as part of the
+    # destination. The role should allow the Firehose principal to assume
+    # the role, and the role should have permissions that allow the service
+    # to deliver the data. For more information, see [Grant Firehose Access
+    # to an Amazon S3 Destination][1] in the *Amazon Firehose Developer
+    # Guide*.
     #
     #
     #
@@ -545,9 +568,26 @@ module Aws::Firehose
     #
     #   You can specify up to 50 tags when creating a delivery stream.
     #
+    #   If you specify tags in the `CreateDeliveryStream` action, Amazon Data
+    #   Firehose performs an additional authorization on the
+    #   `firehose:TagDeliveryStream` action to verify if users have
+    #   permissions to create tags. If you do not provide this permission,
+    #   requests to create new Firehose delivery streams with IAM resource
+    #   tags will fail with an `AccessDeniedException` such as following.
+    #
+    #   **AccessDeniedException**
+    #
+    #   User: arn:aws:sts::x:assumed-role/x/x is not authorized to perform:
+    #   firehose:TagDeliveryStream on resource:
+    #   arn:aws:firehose:us-east-1:x:deliverystream/x with an explicit deny in
+    #   an identity-based policy.
+    #
+    #   For an example IAM policy, see [Tag example.][2]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [2]: https://docs.aws.amazon.com/firehose/latest/APIReference/API_CreateDeliveryStream.html#API_CreateDeliveryStream_Examples
     #
     # @option params [Types::AmazonOpenSearchServerlessDestinationConfiguration] :amazon_open_search_serverless_destination_configuration
     #   The destination in the Serverless offering for Amazon OpenSearch
@@ -624,10 +664,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -712,6 +752,8 @@ module Aws::Firehose
     #         },
     #         enabled: false,
     #       },
+    #       file_extension: "FileExtension",
+    #       custom_time_zone: "CustomTimeZone",
     #     },
     #     redshift_destination_configuration: {
     #       role_arn: "RoleARN", # required
@@ -752,10 +794,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -832,10 +874,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -897,10 +939,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -956,10 +998,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1004,10 +1046,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1086,10 +1128,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1142,10 +1184,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1197,31 +1239,38 @@ module Aws::Firehose
 
     # Deletes a delivery stream and its data.
     #
-    # To check the state of a delivery stream, use DescribeDeliveryStream.
     # You can delete a delivery stream only if it is in one of the following
     # states: `ACTIVE`, `DELETING`, `CREATING_FAILED`, or `DELETING_FAILED`.
     # You can't delete a delivery stream that is in the `CREATING` state.
-    # While the deletion request is in process, the delivery stream is in
-    # the `DELETING` state.
+    # To check the state of a delivery stream, use DescribeDeliveryStream.
     #
-    # While the delivery stream is in the `DELETING` state, the service
-    # might continue to accept records, but it doesn't make any guarantees
-    # with respect to delivering the data. Therefore, as a best practice,
-    # first stop any applications that are sending records before you delete
-    # a delivery stream.
+    # DeleteDeliveryStream is an asynchronous API. When an API request to
+    # DeleteDeliveryStream succeeds, the delivery stream is marked for
+    # deletion, and it goes into the `DELETING` state.While the delivery
+    # stream is in the `DELETING` state, the service might continue to
+    # accept records, but it doesn't make any guarantees with respect to
+    # delivering the data. Therefore, as a best practice, first stop any
+    # applications that are sending records before you delete a delivery
+    # stream.
+    #
+    # Removal of a delivery stream that is in the `DELETING` state is a low
+    # priority operation for the service. A stream may remain in the
+    # `DELETING` state for several minutes. Therefore, as a best practice,
+    # applications should not wait for streams in the `DELETING` state to be
+    # removed.
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
     #
     # @option params [Boolean] :allow_force_delete
     #   Set this to true if you want to delete the delivery stream even if
-    #   Kinesis Data Firehose is unable to retire the grant for the CMK.
-    #   Kinesis Data Firehose might be unable to retire the grant due to a
-    #   customer error, such as when the CMK or the grant are in an invalid
-    #   state. If you force deletion, you can then use the [RevokeGrant][1]
-    #   operation to revoke the grant you gave to Kinesis Data Firehose. If a
-    #   failure to retire the grant happens due to an Amazon Web Services KMS
-    #   issue, Kinesis Data Firehose keeps retrying the delete operation.
+    #   Firehose is unable to retire the grant for the CMK. Firehose might be
+    #   unable to retire the grant due to a customer error, such as when the
+    #   CMK or the grant are in an invalid state. If you force deletion, you
+    #   can then use the [RevokeGrant][1] operation to revoke the grant you
+    #   gave to Firehose. If a failure to retire the grant happens due to an
+    #   Amazon Web Services KMS issue, Firehose keeps retrying the delete
+    #   operation.
     #
     #   The default value is false.
     #
@@ -1268,8 +1317,7 @@ module Aws::Firehose
     #
     # @option params [String] :exclusive_start_destination_id
     #   The ID of the destination to start returning the destination
-    #   information. Kinesis Data Firehose supports one destination per
-    #   delivery stream.
+    #   information. Firehose supports one destination per delivery stream.
     #
     # @return [Types::DescribeDeliveryStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1335,9 +1383,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "CloudWatchLogProcessing", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat", "DataMessageExtraction"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_mode #=> String, one of "Disabled", "Enabled"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.role_arn #=> String
@@ -1384,6 +1432,8 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.dynamic_partitioning_configuration.retry_options.duration_in_seconds #=> Integer
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.dynamic_partitioning_configuration.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.file_extension #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.custom_time_zone #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cluster_jdbc_url #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.copy_command.data_table_name #=> String
@@ -1405,9 +1455,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "CloudWatchLogProcessing", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat"
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat", "DataMessageExtraction"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_mode #=> String, one of "Disabled", "Enabled"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.role_arn #=> String
@@ -1449,9 +1499,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "CloudWatchLogProcessing", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat"
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat", "DataMessageExtraction"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_group_name #=> String
@@ -1487,9 +1537,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "CloudWatchLogProcessing", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat"
+    #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat", "DataMessageExtraction"
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.cloud_watch_logging_options.log_group_name #=> String
@@ -1521,9 +1571,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "CloudWatchLogProcessing", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat", "DataMessageExtraction"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.log_group_name #=> String
@@ -1543,9 +1593,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.request_configuration.common_attributes[0].attribute_value #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "CloudWatchLogProcessing", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat", "DataMessageExtraction"
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.retry_options.duration_in_seconds #=> Integer
@@ -1578,9 +1628,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "CloudWatchLogProcessing", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat"
+    #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat", "DataMessageExtraction"
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.retry_options.duration_in_seconds #=> Integer
@@ -1618,9 +1668,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "CloudWatchLogProcessing", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat"
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat", "DataMessageExtraction"
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.cloud_watch_logging_options.log_group_name #=> String
@@ -1749,24 +1799,23 @@ module Aws::Firehose
       req.send_request(options)
     end
 
-    # Writes a single data record into an Amazon Kinesis Data Firehose
-    # delivery stream. To write multiple data records into a delivery
-    # stream, use PutRecordBatch. Applications using these operations are
-    # referred to as producers.
+    # Writes a single data record into an Amazon Firehose delivery stream.
+    # To write multiple data records into a delivery stream, use
+    # PutRecordBatch. Applications using these operations are referred to as
+    # producers.
     #
     # By default, each delivery stream can take in up to 2,000 transactions
     # per second, 5,000 records per second, or 5 MB per second. If you use
     # PutRecord and PutRecordBatch, the limits are an aggregate across these
     # two operations for each delivery stream. For more information about
-    # limits and how to request an increase, see [Amazon Kinesis Data
-    # Firehose Limits][1].
+    # limits and how to request an increase, see [Amazon Firehose
+    # Limits][1].
     #
-    # Kinesis Data Firehose accumulates and publishes a particular metric
-    # for a customer account in one minute intervals. It is possible that
-    # the bursts of incoming bytes/records ingested to a delivery stream
-    # last only for a few seconds. Due to this, the actual spikes in the
-    # traffic might not be fully visible in the customer's 1 minute
-    # CloudWatch metrics.
+    # Firehose accumulates and publishes a particular metric for a customer
+    # account in one minute intervals. It is possible that the bursts of
+    # incoming bytes/records ingested to a delivery stream last only for a
+    # few seconds. Due to this, the actual spikes in the traffic might not
+    # be fully visible in the customer's 1 minute CloudWatch metrics.
     #
     # You must specify the name of the delivery stream and the data record
     # when using PutRecord. The data record consists of a data blob that can
@@ -1774,12 +1823,12 @@ module Aws::Firehose
     # be a segment from a log file, geographic location data, website
     # clickstream data, and so on.
     #
-    # Kinesis Data Firehose buffers records before delivering them to the
-    # destination. To disambiguate the data blobs at the destination, a
-    # common solution is to use delimiters in the data, such as a newline
-    # (`\n`) or some other character unique within the data. This allows the
-    # consumer application to parse individual data items when reading the
-    # data from the destination.
+    # Firehose buffers records before delivering them to the destination. To
+    # disambiguate the data blobs at the destination, a common solution is
+    # to use delimiters in the data, such as a newline (`\n`) or some other
+    # character unique within the data. This allows the consumer application
+    # to parse individual data items when reading the data from the
+    # destination.
     #
     # The `PutRecord` operation returns a `RecordId`, which is a unique
     # string assigned to each record. Producer applications can use this ID
@@ -1794,10 +1843,10 @@ module Aws::Firehose
     # PutRecordBatch) can result in data duplicates. For larger data assets,
     # allow for a longer time out before retrying Put API operations.
     #
-    # Data records sent to Kinesis Data Firehose are stored for 24 hours
-    # from the time they are added to a delivery stream as it tries to send
-    # the records to the destination. If the destination is unreachable for
-    # more than 24 hours, the data is no longer available.
+    # Data records sent to Firehose are stored for 24 hours from the time
+    # they are added to a delivery stream as it tries to send the records to
+    # the destination. If the destination is unreachable for more than 24
+    # hours, the data is no longer available.
     #
     # Don't concatenate two or more base64 strings to form the data fields
     # of your records. Instead, concatenate the raw data, then perform
@@ -1847,15 +1896,13 @@ module Aws::Firehose
     # use PutRecord. Applications using these operations are referred to as
     # producers.
     #
-    # Kinesis Data Firehose accumulates and publishes a particular metric
-    # for a customer account in one minute intervals. It is possible that
-    # the bursts of incoming bytes/records ingested to a delivery stream
-    # last only for a few seconds. Due to this, the actual spikes in the
-    # traffic might not be fully visible in the customer's 1 minute
-    # CloudWatch metrics.
+    # Firehose accumulates and publishes a particular metric for a customer
+    # account in one minute intervals. It is possible that the bursts of
+    # incoming bytes/records ingested to a delivery stream last only for a
+    # few seconds. Due to this, the actual spikes in the traffic might not
+    # be fully visible in the customer's 1 minute CloudWatch metrics.
     #
-    # For information about service quota, see [Amazon Kinesis Data Firehose
-    # Quota][1].
+    # For information about service quota, see [Amazon Firehose Quota][1].
     #
     # Each PutRecordBatch request supports up to 500 records. Each record in
     # the request can be as large as 1,000 KB (before base64 encoding), up
@@ -1868,12 +1915,12 @@ module Aws::Firehose
     # be a segment from a log file, geographic location data, website
     # clickstream data, and so on.
     #
-    # Kinesis Data Firehose buffers records before delivering them to the
-    # destination. To disambiguate the data blobs at the destination, a
-    # common solution is to use delimiters in the data, such as a newline
-    # (`\n`) or some other character unique within the data. This allows the
-    # consumer application to parse individual data items when reading the
-    # data from the destination.
+    # Firehose buffers records before delivering them to the destination. To
+    # disambiguate the data blobs at the destination, a common solution is
+    # to use delimiters in the data, such as a newline (`\n`) or some other
+    # character unique within the data. This allows the consumer application
+    # to parse individual data items when reading the data from the
+    # destination.
     #
     # The PutRecordBatch response includes a count of failed records,
     # `FailedPutCount`, and an array of responses, `RequestResponses`. Even
@@ -1885,9 +1932,9 @@ module Aws::Firehose
     # ordering, from the top to the bottom. The response array always
     # includes the same number of records as the request array.
     # `RequestResponses` includes both successfully and unsuccessfully
-    # processed records. Kinesis Data Firehose tries to process all records
-    # in each PutRecordBatch request. A single record failure does not stop
-    # the processing of subsequent records.
+    # processed records. Firehose tries to process all records in each
+    # PutRecordBatch request. A single record failure does not stop the
+    # processing of subsequent records.
     #
     # A successfully processed record includes a `RecordId` value, which is
     # unique for the record. An unsuccessfully processed record includes
@@ -1912,10 +1959,10 @@ module Aws::Firehose
     # PutRecordBatch) can result in data duplicates. For larger data assets,
     # allow for a longer time out before retrying Put API operations.
     #
-    # Data records sent to Kinesis Data Firehose are stored for 24 hours
-    # from the time they are added to a delivery stream as it attempts to
-    # send the records to the destination. If the destination is unreachable
-    # for more than 24 hours, the data is no longer available.
+    # Data records sent to Firehose are stored for 24 hours from the time
+    # they are added to a delivery stream as it attempts to send the records
+    # to the destination. If the destination is unreachable for more than 24
+    # hours, the data is no longer available.
     #
     # Don't concatenate two or more base64 strings to form the data fields
     # of your records. Instead, concatenate the raw data, then perform
@@ -1969,9 +2016,9 @@ module Aws::Firehose
     # Enables server-side encryption (SSE) for the delivery stream.
     #
     # This operation is asynchronous. It returns immediately. When you
-    # invoke it, Kinesis Data Firehose first sets the encryption status of
-    # the stream to `ENABLING`, and then to `ENABLED`. The encryption status
-    # of a delivery stream is the `Status` property in
+    # invoke it, Firehose first sets the encryption status of the stream to
+    # `ENABLING`, and then to `ENABLED`. The encryption status of a delivery
+    # stream is the `Status` property in
     # DeliveryStreamEncryptionConfiguration. If the operation fails, the
     # encryption status changes to `ENABLING_FAILED`. You can continue to
     # read and write data to your delivery stream while the encryption
@@ -1988,15 +2035,14 @@ module Aws::Firehose
     # Even if encryption is currently enabled for a delivery stream, you can
     # still invoke this operation on it to change the ARN of the CMK or both
     # its type and ARN. If you invoke this method to change the CMK, and the
-    # old CMK is of type `CUSTOMER_MANAGED_CMK`, Kinesis Data Firehose
-    # schedules the grant it had on the old CMK for retirement. If the new
-    # CMK is of type `CUSTOMER_MANAGED_CMK`, Kinesis Data Firehose creates a
-    # grant that enables it to use the new CMK to encrypt and decrypt data
-    # and to manage the grant.
+    # old CMK is of type `CUSTOMER_MANAGED_CMK`, Firehose schedules the
+    # grant it had on the old CMK for retirement. If the new CMK is of type
+    # `CUSTOMER_MANAGED_CMK`, Firehose creates a grant that enables it to
+    # use the new CMK to encrypt and decrypt data and to manage the grant.
     #
-    # For the KMS grant creation to be successful, Kinesis Data Firehose
-    # APIs `StartDeliveryStreamEncryption` and `CreateDeliveryStream` should
-    # not be called with session credentials that are more than 6 hours old.
+    # For the KMS grant creation to be successful, Firehose APIs
+    # `StartDeliveryStreamEncryption` and `CreateDeliveryStream` should not
+    # be called with session credentials that are more than 6 hours old.
     #
     # If a delivery stream already has encryption enabled and then you
     # invoke this operation to change the ARN of the CMK or both its type
@@ -2007,7 +2053,7 @@ module Aws::Firehose
     # If the encryption status of your delivery stream is `ENABLING_FAILED`,
     # you can invoke this operation again with a valid CMK. The CMK must be
     # enabled and the key policy mustn't explicitly deny the permission for
-    # Kinesis Data Firehose to invoke KMS encrypt and decrypt operations.
+    # Firehose to invoke KMS encrypt and decrypt operations.
     #
     # You can enable SSE for a delivery stream only if it's a delivery
     # stream that uses `DirectPut` as its source.
@@ -2051,13 +2097,13 @@ module Aws::Firehose
     # Disables server-side encryption (SSE) for the delivery stream.
     #
     # This operation is asynchronous. It returns immediately. When you
-    # invoke it, Kinesis Data Firehose first sets the encryption status of
-    # the stream to `DISABLING`, and then to `DISABLED`. You can continue to
-    # read and write data to your stream while its status is `DISABLING`. It
-    # can take up to 5 seconds after the encryption status changes to
-    # `DISABLED` before all records written to the delivery stream are no
-    # longer subject to encryption. To find out whether a record or a batch
-    # of records was encrypted, check the response elements
+    # invoke it, Firehose first sets the encryption status of the stream to
+    # `DISABLING`, and then to `DISABLED`. You can continue to read and
+    # write data to your stream while its status is `DISABLING`. It can take
+    # up to 5 seconds after the encryption status changes to `DISABLED`
+    # before all records written to the delivery stream are no longer
+    # subject to encryption. To find out whether a record or a batch of
+    # records was encrypted, check the response elements
     # PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted,
     # respectively.
     #
@@ -2065,9 +2111,9 @@ module Aws::Firehose
     # DescribeDeliveryStream.
     #
     # If SSE is enabled using a customer managed CMK and then you invoke
-    # `StopDeliveryStreamEncryption`, Kinesis Data Firehose schedules the
-    # related KMS grant for retirement and then retires it after it ensures
-    # that it is finished delivering records to the destination.
+    # `StopDeliveryStreamEncryption`, Firehose schedules the related KMS
+    # grant for retirement and then retires it after it ensures that it is
+    # finished delivering records to the destination.
     #
     # The `StartDeliveryStreamEncryption` and `StopDeliveryStreamEncryption`
     # operations have a combined limit of 25 calls per delivery stream per
@@ -2194,25 +2240,24 @@ module Aws::Firehose
     # supported. For an Amazon OpenSearch Service destination, you can only
     # update to another Amazon OpenSearch Service destination.
     #
-    # If the destination type is the same, Kinesis Data Firehose merges the
-    # configuration parameters specified with the destination configuration
-    # that already exists on the delivery stream. If any of the parameters
-    # are not specified in the call, the existing values are retained. For
-    # example, in the Amazon S3 destination, if EncryptionConfiguration is
-    # not specified, then the existing `EncryptionConfiguration` is
-    # maintained on the destination.
+    # If the destination type is the same, Firehose merges the configuration
+    # parameters specified with the destination configuration that already
+    # exists on the delivery stream. If any of the parameters are not
+    # specified in the call, the existing values are retained. For example,
+    # in the Amazon S3 destination, if EncryptionConfiguration is not
+    # specified, then the existing `EncryptionConfiguration` is maintained
+    # on the destination.
     #
     # If the destination type is not the same, for example, changing the
-    # destination from Amazon S3 to Amazon Redshift, Kinesis Data Firehose
-    # does not merge any parameters. In this case, all parameters must be
-    # specified.
+    # destination from Amazon S3 to Amazon Redshift, Firehose does not merge
+    # any parameters. In this case, all parameters must be specified.
     #
-    # Kinesis Data Firehose uses `CurrentDeliveryStreamVersionId` to avoid
-    # race conditions and conflicting merges. This is a required field, and
-    # the service updates the configuration only if the existing
-    # configuration has a version ID that matches. After the update is
-    # applied successfully, the version ID is updated, and can be retrieved
-    # using DescribeDeliveryStream. Use the new version ID to set
+    # Firehose uses `CurrentDeliveryStreamVersionId` to avoid race
+    # conditions and conflicting merges. This is a required field, and the
+    # service updates the configuration only if the existing configuration
+    # has a version ID that matches. After the update is applied
+    # successfully, the version ID is updated, and can be retrieved using
+    # DescribeDeliveryStream. Use the new version ID to set
     # `CurrentDeliveryStreamVersionId` in the next call.
     #
     # @option params [required, String] :delivery_stream_name
@@ -2313,10 +2358,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2401,6 +2446,8 @@ module Aws::Firehose
     #         },
     #         enabled: false,
     #       },
+    #       file_extension: "FileExtension",
+    #       custom_time_zone: "CustomTimeZone",
     #     },
     #     redshift_destination_update: {
     #       role_arn: "RoleARN",
@@ -2441,10 +2488,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2520,10 +2567,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2579,10 +2626,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2633,10 +2680,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2681,10 +2728,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2756,10 +2803,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2796,10 +2843,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2858,7 +2905,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

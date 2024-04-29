@@ -39,7 +39,7 @@ module Aws::DynamoDB
     #
     #   dynamo_db.batch_get_item({
     #     request_items: { # required
-    #       "TableName" => {
+    #       "TableArn" => {
     #         keys: [ # required
     #           {
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -57,9 +57,9 @@ module Aws::DynamoDB
     #   })
     # @param [Hash] options ({})
     # @option options [required, Hash<String,Types::KeysAndAttributes>] :request_items
-    #   A map of one or more table names and, for each table, a map that
-    #   describes one or more items to retrieve from that table. Each table
-    #   name can be used only once per `BatchGetItem` request.
+    #   A map of one or more table names or table ARNs and, for each table, a
+    #   map that describes one or more items to retrieve from that table. Each
+    #   table name or ARN can be used only once per `BatchGetItem` request.
     #
     #   Each element in the map of items to retrieve consists of the
     #   following:
@@ -170,7 +170,7 @@ module Aws::DynamoDB
     #
     #   dynamo_db.batch_write_item({
     #     request_items: { # required
-    #       "TableName" => [
+    #       "TableArn" => [
     #         {
     #           put_request: {
     #             item: { # required
@@ -190,9 +190,9 @@ module Aws::DynamoDB
     #   })
     # @param [Hash] options ({})
     # @option options [required, Hash<String,Array>] :request_items
-    #   A map of one or more table names and, for each table, a list of
-    #   operations to be performed (`DeleteRequest` or `PutRequest`). Each
-    #   element in the map consists of the following:
+    #   A map of one or more table names or table ARNs and, for each table, a
+    #   list of operations to be performed (`DeleteRequest` or `PutRequest`).
+    #   Each element in the map consists of the following:
     #
     #   * `DeleteRequest` - Perform a `DeleteItem` operation on the specified
     #     item. The item to be deleted is identified by a `Key` subelement:
@@ -258,7 +258,7 @@ module Aws::DynamoDB
     #         attribute_type: "S", # required, accepts S, N, B
     #       },
     #     ],
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key_schema: [ # required
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
@@ -321,13 +321,15 @@ module Aws::DynamoDB
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
+    #     resource_policy: "ResourcePolicy",
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::AttributeDefinition>] :attribute_definitions
     #   An array of attributes that describe the key schema for the table and
     #   indexes.
     # @option options [required, String] :table_name
-    #   The name of the table to create.
+    #   The name of the table to create. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     # @option options [required, Array<Types::KeySchemaElement>] :key_schema
     #   Specifies the attributes that make up the primary key for a table or
     #   an index. The attributes in `KeySchema` must also be defined in the
@@ -520,6 +522,23 @@ module Aws::DynamoDB
     # @option options [Boolean] :deletion_protection_enabled
     #   Indicates whether deletion protection is to be enabled (true) or
     #   disabled (false) on the table.
+    # @option options [String] :resource_policy
+    #   An Amazon Web Services resource-based policy document in JSON format
+    #   that will be attached to the table.
+    #
+    #   When you attach a resource-based policy while creating a table, the
+    #   policy creation is *strongly consistent*.
+    #
+    #   The maximum size supported for a resource-based policy document is 20
+    #   KB. DynamoDB counts whitespaces when calculating the size of a policy
+    #   against this limit. You can’t request an increase for this limit. For
+    #   a full list of all considerations that you should keep in mind while
+    #   attaching a resource-based policy, see [Resource-based policy
+    #   considerations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
     # @return [Table]
     def create_table(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do

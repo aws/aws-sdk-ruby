@@ -27,6 +27,7 @@ module Aws::FIS
     ActionTarget = Shapes::StructureShape.new(name: 'ActionTarget')
     ActionTargetMap = Shapes::MapShape.new(name: 'ActionTargetMap')
     ActionTargetName = Shapes::StringShape.new(name: 'ActionTargetName')
+    ActionsMode = Shapes::StringShape.new(name: 'ActionsMode')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogGroupArn')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -179,6 +180,7 @@ module Aws::FIS
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    StartExperimentExperimentOptionsInput = Shapes::StructureShape.new(name: 'StartExperimentExperimentOptionsInput')
     StartExperimentRequest = Shapes::StructureShape.new(name: 'StartExperimentRequest')
     StartExperimentResponse = Shapes::StructureShape.new(name: 'StartExperimentResponse')
     StopConditionSource = Shapes::StringShape.new(name: 'StopConditionSource')
@@ -228,6 +230,7 @@ module Aws::FIS
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     Action.add_member(:id, Shapes::ShapeRef.new(shape: ActionId, location_name: "id"))
+    Action.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
     Action.add_member(:description, Shapes::ShapeRef.new(shape: ActionDescription, location_name: "description"))
     Action.add_member(:parameters, Shapes::ShapeRef.new(shape: ActionParameterMap, location_name: "parameters"))
     Action.add_member(:targets, Shapes::ShapeRef.new(shape: ActionTargetMap, location_name: "targets"))
@@ -242,6 +245,7 @@ module Aws::FIS
     ActionParameterMap.value = Shapes::ShapeRef.new(shape: ActionParameter)
 
     ActionSummary.add_member(:id, Shapes::ShapeRef.new(shape: ActionId, location_name: "id"))
+    ActionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
     ActionSummary.add_member(:description, Shapes::ShapeRef.new(shape: ActionDescription, location_name: "description"))
     ActionSummary.add_member(:targets, Shapes::ShapeRef.new(shape: ActionTargetMap, location_name: "targets"))
     ActionSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -332,6 +336,7 @@ module Aws::FIS
     DeleteTargetAccountConfigurationResponse.struct_class = Types::DeleteTargetAccountConfigurationResponse
 
     Experiment.add_member(:id, Shapes::ShapeRef.new(shape: ExperimentId, location_name: "id"))
+    Experiment.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
     Experiment.add_member(:experiment_template_id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId"))
     Experiment.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     Experiment.add_member(:state, Shapes::ShapeRef.new(shape: ExperimentState, location_name: "state"))
@@ -382,6 +387,7 @@ module Aws::FIS
 
     ExperimentOptions.add_member(:account_targeting, Shapes::ShapeRef.new(shape: AccountTargeting, location_name: "accountTargeting"))
     ExperimentOptions.add_member(:empty_target_resolution_mode, Shapes::ShapeRef.new(shape: EmptyTargetResolutionMode, location_name: "emptyTargetResolutionMode"))
+    ExperimentOptions.add_member(:actions_mode, Shapes::ShapeRef.new(shape: ActionsMode, location_name: "actionsMode"))
     ExperimentOptions.struct_class = Types::ExperimentOptions
 
     ExperimentS3LogConfiguration.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "bucketName"))
@@ -399,10 +405,12 @@ module Aws::FIS
     ExperimentStopConditionList.member = Shapes::ShapeRef.new(shape: ExperimentStopCondition)
 
     ExperimentSummary.add_member(:id, Shapes::ShapeRef.new(shape: ExperimentId, location_name: "id"))
+    ExperimentSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
     ExperimentSummary.add_member(:experiment_template_id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "experimentTemplateId"))
     ExperimentSummary.add_member(:state, Shapes::ShapeRef.new(shape: ExperimentState, location_name: "state"))
     ExperimentSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime"))
     ExperimentSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ExperimentSummary.add_member(:experiment_options, Shapes::ShapeRef.new(shape: ExperimentOptions, location_name: "experimentOptions"))
     ExperimentSummary.struct_class = Types::ExperimentSummary
 
     ExperimentSummaryList.member = Shapes::ShapeRef.new(shape: ExperimentSummary)
@@ -442,6 +450,7 @@ module Aws::FIS
     ExperimentTargetParameterMap.value = Shapes::ShapeRef.new(shape: ExperimentTargetParameterValue)
 
     ExperimentTemplate.add_member(:id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "id"))
+    ExperimentTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
     ExperimentTemplate.add_member(:description, Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, location_name: "description"))
     ExperimentTemplate.add_member(:targets, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetMap, location_name: "targets"))
     ExperimentTemplate.add_member(:actions, Shapes::ShapeRef.new(shape: ExperimentTemplateActionMap, location_name: "actions"))
@@ -503,6 +512,7 @@ module Aws::FIS
     ExperimentTemplateStopConditionList.member = Shapes::ShapeRef.new(shape: ExperimentTemplateStopCondition)
 
     ExperimentTemplateSummary.add_member(:id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "id"))
+    ExperimentTemplateSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
     ExperimentTemplateSummary.add_member(:description, Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, location_name: "description"))
     ExperimentTemplateSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime"))
     ExperimentTemplateSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: LastUpdateTime, location_name: "lastUpdateTime"))
@@ -613,6 +623,7 @@ module Aws::FIS
 
     ListExperimentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListExperimentsMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
     ListExperimentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListExperimentsRequest.add_member(:experiment_template_id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, location: "querystring", location_name: "experimentTemplateId"))
     ListExperimentsRequest.struct_class = Types::ListExperimentsRequest
 
     ListExperimentsResponse.add_member(:experiments, Shapes::ShapeRef.new(shape: ExperimentSummaryList, location_name: "experiments"))
@@ -657,8 +668,12 @@ module Aws::FIS
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    StartExperimentExperimentOptionsInput.add_member(:actions_mode, Shapes::ShapeRef.new(shape: ActionsMode, location_name: "actionsMode"))
+    StartExperimentExperimentOptionsInput.struct_class = Types::StartExperimentExperimentOptionsInput
+
     StartExperimentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     StartExperimentRequest.add_member(:experiment_template_id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, required: true, location_name: "experimentTemplateId"))
+    StartExperimentRequest.add_member(:experiment_options, Shapes::ShapeRef.new(shape: StartExperimentExperimentOptionsInput, location_name: "experimentOptions"))
     StartExperimentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartExperimentRequest.struct_class = Types::StartExperimentRequest
 

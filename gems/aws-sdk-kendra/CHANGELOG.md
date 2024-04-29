@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2024-03-22)
+------------------
+
+* Feature - Documentation update, March 2024. Corrects some docs for Amazon Kendra.
+
 1.77.0 (2024-01-26)
 ------------------
 

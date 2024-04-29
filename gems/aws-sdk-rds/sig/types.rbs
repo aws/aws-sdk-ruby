@@ -192,6 +192,7 @@ module Aws::RDS
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration
       attr_accessor iops: ::Integer
       attr_accessor storage_type: ::String
+      attr_accessor certificate_details: Types::CertificateDetails
       SENSITIVE: []
     end
 
@@ -391,6 +392,7 @@ module Aws::RDS
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor enable_local_write_forwarding: bool
+      attr_accessor ca_certificate_identifier: ::String
       attr_accessor source_region: ::String
       SENSITIVE: []
     end
@@ -536,6 +538,7 @@ module Aws::RDS
       attr_accessor source_db_cluster_identifier: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor upgrade_storage_config: bool
+      attr_accessor ca_certificate_identifier: ::String
       attr_accessor source_region: ::String
       SENSITIVE: []
     end
@@ -682,6 +685,8 @@ module Aws::RDS
       attr_accessor kms_key_id: ::String
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor data_filter: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -811,6 +816,8 @@ module Aws::RDS
       attr_accessor local_write_forwarding_status: ("enabled" | "disabled" | "enabling" | "disabling" | "requested")
       attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor limitless_database: Types::LimitlessDatabase
+      attr_accessor storage_throughput: ::Integer
+      attr_accessor certificate_details: Types::CertificateDetails
       SENSITIVE: []
     end
 
@@ -842,6 +849,7 @@ module Aws::RDS
       attr_accessor storage_type: ::String
       attr_accessor iops: ::Integer
       attr_accessor aws_backup_recovery_point_arn: ::String
+      attr_accessor storage_throughput: ::Integer
       SENSITIVE: []
     end
 
@@ -1010,6 +1018,7 @@ module Aws::RDS
       attr_accessor db_system_id: ::String
       attr_accessor storage_type: ::String
       attr_accessor db_cluster_resource_id: ::String
+      attr_accessor storage_throughput: ::Integer
       SENSITIVE: []
     end
 
@@ -1075,6 +1084,7 @@ module Aws::RDS
       attr_accessor tag_list: ::Array[Types::Tag]
       attr_accessor supports_babelfish: bool
       attr_accessor custom_db_engine_version_manifest: ::String
+      attr_accessor supports_limitless_database: bool
       attr_accessor supports_certificate_rotation_without_restart: bool
       attr_accessor supported_ca_certificate_identifiers: ::Array[::String]
       attr_accessor supports_local_write_forwarding: bool
@@ -2569,6 +2579,8 @@ module Aws::RDS
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor create_time: ::Time
       attr_accessor errors: ::Array[Types::IntegrationError]
+      attr_accessor data_filter: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -2834,6 +2846,7 @@ module Aws::RDS
       attr_accessor enable_local_write_forwarding: bool
       attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor enable_limitless_database: bool
+      attr_accessor ca_certificate_identifier: ::String
       SENSITIVE: []
     end
 
@@ -3054,6 +3067,14 @@ module Aws::RDS
 
     class ModifyGlobalClusterResult
       attr_accessor global_cluster: Types::GlobalCluster
+      SENSITIVE: []
+    end
+
+    class ModifyIntegrationMessage
+      attr_accessor integration_identifier: ::String
+      attr_accessor integration_name: ::String
+      attr_accessor data_filter: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -3759,6 +3780,7 @@ module Aws::RDS
       attr_accessor db_cluster_snapshot_identifier: ::String
       attr_accessor allocated_storage: ::Integer
       attr_accessor dedicated_log_volume: bool
+      attr_accessor ca_certificate_identifier: ::String
       SENSITIVE: []
     end
 
@@ -3817,6 +3839,7 @@ module Aws::RDS
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor dedicated_log_volume: bool
+      attr_accessor ca_certificate_identifier: ::String
       SENSITIVE: []
     end
 
@@ -3870,6 +3893,7 @@ module Aws::RDS
       attr_accessor storage_throughput: ::Integer
       attr_accessor allocated_storage: ::Integer
       attr_accessor dedicated_log_volume: bool
+      attr_accessor ca_certificate_identifier: ::String
       SENSITIVE: []
     end
 
@@ -4223,6 +4247,7 @@ module Aws::RDS
       attr_accessor supports_parallel_query: bool
       attr_accessor supports_global_databases: bool
       attr_accessor supports_babelfish: bool
+      attr_accessor supports_limitless_database: bool
       attr_accessor supports_local_write_forwarding: bool
       attr_accessor supports_integrations: bool
       SENSITIVE: []

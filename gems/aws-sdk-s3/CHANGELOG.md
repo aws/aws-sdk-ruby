@@ -5,6 +5,43 @@ Unreleased Changes
 
 * Feature - S3 now depends on `aws-sdk-s3control` for Access Grants credential fetching.
 
+1.148.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Omit `ContentType` plugin when generating presigned url.
+
+1.146.1 (2024-03-28)
+------------------
+
+* Issue - Fix bug where thread_count option was not being respected for multipart uploads.
+
+1.146.0 (2024-03-18)
+------------------
+
+* Feature - Fix two issues with response root node names.
+
+1.145.0 (2024-03-15)
+------------------
+
+* Feature - Documentation updates for Amazon S3.
+
+1.144.0 (2024-03-13)
+------------------
+
+* Feature - This release makes the default option for S3 on Outposts request signing to use the SigV4A algorithm when using AWS Common Runtime (CRT).
+
+1.143.1 (2024-03-12)
+------------------
+
+* Issue - Include original part errors in message when aborting multipart upload fails (#2990).
+
 1.143.0 (2024-01-26)
 ------------------
 

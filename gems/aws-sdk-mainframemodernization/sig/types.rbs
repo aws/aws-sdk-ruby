@@ -70,18 +70,21 @@ module Aws::MainframeModernization
       attr_accessor job_type: ("VSE" | "JES2" | "JES3")
       attr_accessor return_code: ::String
       attr_accessor start_time: ::Time
-      attr_accessor status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+      attr_accessor status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Purged" | "Succeeded With Warning")
       SENSITIVE: []
     end
 
     class BatchJobIdentifier
       attr_accessor file_batch_job_identifier: Types::FileBatchJobIdentifier
+      attr_accessor restart_batch_job_identifier: Types::RestartBatchJobIdentifier
       attr_accessor s3_batch_job_identifier: Types::S3BatchJobIdentifier
       attr_accessor script_batch_job_identifier: Types::ScriptBatchJobIdentifier
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class FileBatchJobIdentifier < BatchJobIdentifier
+      end
+      class RestartBatchJobIdentifier < BatchJobIdentifier
       end
       class S3BatchJobIdentifier < BatchJobIdentifier
       end
@@ -456,11 +459,12 @@ module Aws::MainframeModernization
       attr_accessor execution_id: ::String
       attr_accessor job_id: ::String
       attr_accessor job_name: ::String
+      attr_accessor job_step_restart_marker: Types::JobStepRestartMarker
       attr_accessor job_type: ("VSE" | "JES2" | "JES3")
       attr_accessor job_user: ::String
       attr_accessor return_code: ::String
       attr_accessor start_time: ::Time
-      attr_accessor status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+      attr_accessor status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Purged" | "Succeeded With Warning")
       attr_accessor status_reason: ::String
       SENSITIVE: []
     end
@@ -575,6 +579,24 @@ module Aws::MainframeModernization
       end
     end
 
+    class JobStep
+      attr_accessor proc_step_name: ::String
+      attr_accessor proc_step_number: ::Integer
+      attr_accessor step_cond_code: ::String
+      attr_accessor step_name: ::String
+      attr_accessor step_number: ::Integer
+      attr_accessor step_restartable: bool
+      SENSITIVE: []
+    end
+
+    class JobStepRestartMarker
+      attr_accessor from_proc_step: ::String
+      attr_accessor from_step: ::String
+      attr_accessor to_proc_step: ::String
+      attr_accessor to_step: ::String
+      SENSITIVE: []
+    end
+
     class ListApplicationVersionsRequest
       attr_accessor application_id: ::String
       attr_accessor max_results: ::Integer
@@ -624,13 +646,24 @@ module Aws::MainframeModernization
       attr_accessor next_token: ::String
       attr_accessor started_after: ::Time
       attr_accessor started_before: ::Time
-      attr_accessor status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Succeeded With Warning")
+      attr_accessor status: ("Submitting" | "Holding" | "Dispatching" | "Running" | "Cancelling" | "Cancelled" | "Succeeded" | "Failed" | "Purged" | "Succeeded With Warning")
       SENSITIVE: []
     end
 
     class ListBatchJobExecutionsResponse
       attr_accessor batch_job_executions: ::Array[Types::BatchJobExecutionSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchJobRestartPointsRequest
+      attr_accessor application_id: ::String
+      attr_accessor execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchJobRestartPointsResponse
+      attr_accessor batch_job_steps: ::Array[Types::JobStep]
       SENSITIVE: []
     end
 
@@ -775,6 +808,12 @@ module Aws::MainframeModernization
       SENSITIVE: []
     end
 
+    class RestartBatchJobIdentifier
+      attr_accessor execution_id: ::String
+      attr_accessor job_step_restart_marker: Types::JobStepRestartMarker
+      SENSITIVE: []
+    end
+
     class S3BatchJobIdentifier
       attr_accessor bucket: ::String
       attr_accessor identifier: Types::JobIdentifier
@@ -907,7 +946,7 @@ module Aws::MainframeModernization
     class ValidationException
       attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
-      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "featureNotAvailable" | "unsupportedEngineVersion" | "fieldValidationFailed" | "other")
       SENSITIVE: []
     end
 

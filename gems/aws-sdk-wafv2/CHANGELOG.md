@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2024-04-11)
+------------------
+
+* Feature - Adds an updated version of smoke tests, including smithy trait, for SDK testing.
+
+1.78.0 (2024-03-07)
+------------------
+
+* Feature - You can increase the max request body inspection size for some regional resources. The size setting is in the web ACL association config. Also, the AWSManagedRulesBotControlRuleSet EnableMachineLearning setting now takes a Boolean instead of a primitive boolean type, for languages like Java.
+
+1.77.0 (2024-02-28)
+------------------
+
+* Feature - AWS WAF now supports configurable time windows for request aggregation with rate-based rules. Customers can now select time windows of 1 minute, 2 minutes or 10 minutes, in addition to the previously supported 5 minutes.
+
 1.76.0 (2024-02-06)
 ------------------
 

@@ -2222,7 +2222,7 @@ module Aws::S3
 
     context 'ARN with aws-global region and  UseArnRegion uses the regional endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2240,7 +2240,7 @@ module Aws::S3
           s3_us_east_1_regional_endpoint: 'regional',
           stub_responses: true
         )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
+        expect_auth({"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/reports',
           key: 'key',
@@ -5228,7 +5228,7 @@ module Aws::S3
 
     context 'S3 outposts vanilla test' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5245,7 +5245,7 @@ module Aws::S3
           s3_us_east_1_regional_endpoint: 'regional',
           stub_responses: true
         )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
+        expect_auth({"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports',
           key: 'key',
@@ -5259,7 +5259,7 @@ module Aws::S3
 
     context 'S3 outposts custom endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.example.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.example.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5277,7 +5277,7 @@ module Aws::S3
           s3_us_east_1_regional_endpoint: 'regional',
           stub_responses: true
         )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
+        expect_auth({"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/reports',
           key: 'key',
@@ -5348,7 +5348,7 @@ module Aws::S3
 
     context 'outposts arn with region mismatch and UseArnRegion=true' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5366,7 +5366,7 @@ module Aws::S3
           s3_us_east_1_regional_endpoint: 'regional',
           stub_responses: true
         )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
+        expect_auth({"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
           key: 'key',
@@ -5380,7 +5380,7 @@ module Aws::S3
 
     context 'outposts arn with region mismatch and UseArnRegion unset' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5397,7 +5397,7 @@ module Aws::S3
           s3_us_east_1_regional_endpoint: 'regional',
           stub_responses: true
         )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
+        expect_auth({"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
           key: 'key',
@@ -5439,7 +5439,7 @@ module Aws::S3
 
     context 'ARN with UseGlobalEndpoint and use-east-1 region uses the regional endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://reports-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5456,7 +5456,7 @@ module Aws::S3
           s3_us_east_1_regional_endpoint: 'legacy',
           stub_responses: true
         )
-        expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
+        expect_auth({"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-01234567890123456/accesspoint/reports',
           key: 'key',
@@ -6312,7 +6312,7 @@ module Aws::S3
 
     context 'S3 Outposts bucketAlias Real Outpost Prod us-west-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.us-west-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.us-west-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -6326,7 +6326,7 @@ module Aws::S3
 
     context 'S3 Outposts bucketAlias Real Outpost Prod ap-east-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"ap-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.ap-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"ap-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.ap-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -6340,7 +6340,7 @@ module Aws::S3
 
     context 'S3 Outposts bucketAlias Ec2 Outpost Prod us-east-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -6354,7 +6354,7 @@ module Aws::S3
 
     context 'S3 Outposts bucketAlias Ec2 Outpost Prod me-south-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"me-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.me-south-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"me-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.me-south-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -6368,7 +6368,7 @@ module Aws::S3
 
     context 'S3 Outposts bucketAlias Real Outpost Beta' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3.op-0b1d075431d83bebd.example.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3.op-0b1d075431d83bebd.example.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -6382,7 +6382,7 @@ module Aws::S3
 
     context 'S3 Outposts bucketAlias Ec2 Outpost Beta' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3.ec2.example.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"], "disableDoubleEncoding"=>true}, {"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3.ec2.example.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

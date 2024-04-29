@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Omics
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Omics
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -337,50 +346,65 @@ module Aws::Omics
     #   @option options [Aws::Omics::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Omics::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -568,7 +592,7 @@ module Aws::Omics
     #       {
     #         part_number: 1, # required
     #         part_source: "SOURCE1", # required, accepts SOURCE1, SOURCE2
-    #         checksum: "String", # required
+    #         checksum: "CompleteReadSetUploadPartListItemChecksumString", # required
     #       },
     #     ],
     #   })
@@ -993,6 +1017,9 @@ module Aws::Omics
     #   An S3 location that is used to store files that have failed a direct
     #   upload.
     #
+    # @option params [String] :e_tag_algorithm_family
+    #   The ETag algorithm family to use for ingested read sets.
+    #
     # @return [Types::CreateSequenceStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSequenceStoreResponse#id #id} => String
@@ -1002,6 +1029,7 @@ module Aws::Omics
     #   * {Types::CreateSequenceStoreResponse#sse_config #sse_config} => Types::SseConfig
     #   * {Types::CreateSequenceStoreResponse#creation_time #creation_time} => Time
     #   * {Types::CreateSequenceStoreResponse#fallback_location #fallback_location} => String
+    #   * {Types::CreateSequenceStoreResponse#e_tag_algorithm_family #e_tag_algorithm_family} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1017,6 +1045,7 @@ module Aws::Omics
     #     },
     #     client_token: "ClientToken",
     #     fallback_location: "S3Destination",
+    #     e_tag_algorithm_family: "MD5up", # accepts MD5up, SHA256up, SHA512up
     #   })
     #
     # @example Response structure
@@ -1029,6 +1058,7 @@ module Aws::Omics
     #   resp.sse_config.key_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.fallback_location #=> String
+    #   resp.e_tag_algorithm_family #=> String, one of "MD5up", "SHA256up", "SHA512up"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateSequenceStore AWS API Documentation
     #
@@ -1968,15 +1998,18 @@ module Aws::Omics
     #   resp.files.source1.total_parts #=> Integer
     #   resp.files.source1.part_size #=> Integer
     #   resp.files.source1.content_length #=> Integer
+    #   resp.files.source1.s3_access.s3_uri #=> String
     #   resp.files.source2.total_parts #=> Integer
     #   resp.files.source2.part_size #=> Integer
     #   resp.files.source2.content_length #=> Integer
+    #   resp.files.source2.s3_access.s3_uri #=> String
     #   resp.files.index.total_parts #=> Integer
     #   resp.files.index.part_size #=> Integer
     #   resp.files.index.content_length #=> Integer
+    #   resp.files.index.s3_access.s3_uri #=> String
     #   resp.status_message #=> String
     #   resp.creation_type #=> String, one of "IMPORT", "UPLOAD"
-    #   resp.etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up", "FASTQ_SHA256up", "BAM_SHA256up", "CRAM_SHA256up", "FASTQ_SHA512up", "BAM_SHA512up", "CRAM_SHA512up"
     #   resp.etag.source1 #=> String
     #   resp.etag.source2 #=> String
     #
@@ -2133,9 +2166,11 @@ module Aws::Omics
     #   resp.files.source.total_parts #=> Integer
     #   resp.files.source.part_size #=> Integer
     #   resp.files.source.content_length #=> Integer
+    #   resp.files.source.s3_access.s3_uri #=> String
     #   resp.files.index.total_parts #=> Integer
     #   resp.files.index.part_size #=> Integer
     #   resp.files.index.content_length #=> Integer
+    #   resp.files.index.s3_access.s3_uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReferenceMetadata AWS API Documentation
     #
@@ -2402,6 +2437,8 @@ module Aws::Omics
     #   * {Types::GetSequenceStoreResponse#sse_config #sse_config} => Types::SseConfig
     #   * {Types::GetSequenceStoreResponse#creation_time #creation_time} => Time
     #   * {Types::GetSequenceStoreResponse#fallback_location #fallback_location} => String
+    #   * {Types::GetSequenceStoreResponse#s3_access #s3_access} => Types::SequenceStoreS3Access
+    #   * {Types::GetSequenceStoreResponse#e_tag_algorithm_family #e_tag_algorithm_family} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2419,6 +2456,9 @@ module Aws::Omics
     #   resp.sse_config.key_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.fallback_location #=> String
+    #   resp.s3_access.s3_uri #=> String
+    #   resp.s3_access.s3_access_point_arn #=> String
+    #   resp.e_tag_algorithm_family #=> String, one of "MD5up", "SHA256up", "SHA512up"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetSequenceStore AWS API Documentation
     #
@@ -2837,7 +2877,7 @@ module Aws::Omics
 
     # Lists multipart read set uploads and for in progress uploads. Once the
     # upload is completed, a read set is created and the upload will no
-    # longer be returned in the respone.
+    # longer be returned in the response.
     #
     # @option params [required, String] :sequence_store_id
     #   The Sequence Store ID used for the multipart uploads.
@@ -3183,7 +3223,7 @@ module Aws::Omics
     #   resp.read_sets[0].creation_time #=> Time
     #   resp.read_sets[0].status_message #=> String
     #   resp.read_sets[0].creation_type #=> String, one of "IMPORT", "UPLOAD"
-    #   resp.read_sets[0].etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.read_sets[0].etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up", "FASTQ_SHA256up", "BAM_SHA256up", "CRAM_SHA256up", "FASTQ_SHA512up", "BAM_SHA512up", "CRAM_SHA512up"
     #   resp.read_sets[0].etag.source1 #=> String
     #   resp.read_sets[0].etag.source2 #=> String
     #
@@ -3568,6 +3608,7 @@ module Aws::Omics
     #   resp.sequence_stores[0].sse_config.key_arn #=> String
     #   resp.sequence_stores[0].creation_time #=> Time
     #   resp.sequence_stores[0].fallback_location #=> String
+    #   resp.sequence_stores[0].e_tag_algorithm_family #=> String, one of "MD5up", "SHA256up", "SHA512up"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListSequenceStores AWS API Documentation
     #
@@ -4179,7 +4220,7 @@ module Aws::Omics
     #   additional encoding or escaping.
     #
     # @option params [Integer] :storage_capacity
-    #   A storage capacity for the run in gigabytes.
+    #   A storage capacity for the run in gibibytes.
     #
     # @option params [String] :output_uri
     #   An output URI for the run.
@@ -4632,7 +4673,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

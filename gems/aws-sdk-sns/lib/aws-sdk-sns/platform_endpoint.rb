@@ -114,7 +114,7 @@ module Aws::SNS
     #
     #   platform_endpoint.publish({
     #     topic_arn: "topicARN",
-    #     phone_number: "String",
+    #     phone_number: "PhoneNumber",
     #     message: "message", # required
     #     subject: "subject",
     #     message_structure: "messageStructure",

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2024-02-23)
+------------------
+
+* Feature - Doc-only update for new RUM metrics that were added
+
 1.19.0 (2024-01-26)
 ------------------
 

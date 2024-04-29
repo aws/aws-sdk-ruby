@@ -1,0 +1,450 @@
+[
+  {
+    "description": "Test cases for EmptyOperation operation",
+    "metadata": {
+       "protocol": "api-gateway",
+       "apiVersion": "2016-12-14T20:41:37Z"
+    },
+    "shapes": {},
+    "cases": [
+      {
+        "id": "ApiGatewayMarshalEmptyBody",
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/test/noauth/scalars"
+          },
+          "name": "OperationName"
+        },
+        "description": "No parameters set marshals as empty body",
+        "serialized": {
+          "body": "",
+          "uri": "/test/noauth/scalars",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Scalar Payload Members",
+    "metadata": {
+       "protocol": "api-gateway",
+       "apiVersion": "2016-12-14T20:41:37Z"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "StringMember": {
+            "shape": "__string"
+          },
+          "IntegerMember": {
+            "shape": "__integer"
+          },
+          "NumberMember": {
+            "shape": "__double"
+          },
+          "BooleanMember": {
+            "shape": "__boolean"
+          },
+          "DateMember": {
+            "shape": "__timestamp"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      },
+      "__double": {
+        "type": "double"
+      },
+      "__boolean": {
+        "type": "boolean"
+      },
+      "__integer": {
+        "type": "integer"
+      },
+      "__timestamp": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayMarshalsScalarPayloadMembers",
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/test/noauth/scalars"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "description": "Scalar members in payload member",
+        "params": {
+          "StringMember": "foo",
+          "IntegerMember": 42,
+          "NumberMember": 9000.1,
+          "BooleanMember": true,
+          "DateMember": 1422172801
+        },
+        "serialized": {
+          "body": "{\"StringMember\": \"foo\", \"IntegerMember\": 42, \"NumberMember\": 9000.1, \"BooleanMember\": true,               \"DateMember\":\"2015-01-25T08:00:01Z\"}",
+          "uri": "/test/noauth/scalars",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Struct Payload Member",
+    "metadata": {
+       "protocol": "api-gateway",
+       "apiVersion": "2016-12-14T20:41:37Z"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "NestedStructure": {
+            "shape": "NestedStructure"
+          }
+        }
+      },
+      "NestedStructure": {
+        "type": "structure",
+        "members": {
+          "StringMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayNestedStructPayloadMember",
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/test/noauth/scalars"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "description": "Nested structure in payload member",
+        "params": {
+          "PayloadMember": {
+            "NestedStructure": {
+              "StringMember": "foo"
+            }
+          }
+        },
+        "serialized": {
+          "body": "{\"NestedStructure\": {\"StringMember\": \"foo\"}}",
+          "uri": "/test/noauth/scalars",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Recursive structure with no recursion member",
+    "metadata": {
+       "protocol": "api-gateway",
+       "apiVersion": "2016-12-14T20:41:37Z"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "RecursiveStructure": {
+            "shape": "RecursiveStructure"
+          }
+        }
+      },
+      "RecursiveStructure": {
+        "type": "structure",
+        "members": {
+          "NoRecursiveMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayRecursiveStructWithNoRecursionMember",
+        "given": {
+          "http": {
+            "method": "PUT",
+            "requestUri": "/test/noauth/enums/simple"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "description": "Recursive structure with no recursion used",
+        "params": {
+          "RecursiveStructure": {
+            "NoRecursiveMember": "foo"
+          }
+        },
+        "serialized": {
+          "body": "{\"RecursiveStructure\": {\"NoRecursiveMember\": \"foo\"}}",
+          "uri": "/test/noauth/enums/simple",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Recursive structure with recursion member",
+    "metadata": {
+       "protocol": "api-gateway",
+       "apiVersion": "2016-12-14T20:41:37Z"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "RecursiveStructure": {
+            "shape": "RecursiveStructure"
+          }
+        }
+      },
+      "RecursiveStructure": {
+        "type": "structure",
+        "members": {
+          "RecursiveMember": {
+            "shape": "RecursiveMember"
+          }
+        }
+      },
+      "RecursiveMember": {
+        "type": "structure",
+        "members": {
+          "RecursiveMember": {
+            "shape": "AnotherRecursiveMember"
+          }
+        }
+      },
+      "AnotherRecursiveMember": {
+        "type": "structure",
+        "members": {
+          "NoRecursiveMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayRecrusiveStructwithRecursionMember",
+        "given": {
+          "http": {
+            "method": "PUT",
+            "requestUri": "/test/noauth/enums/simple"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "description": "Recursive structure with multiple levels of recursion\"",
+        "params": {
+          "RecursiveStructure": {
+            "RecursiveMember": {
+              "RecursiveMember": {
+                "NoRecursiveMember": "foo"
+              }
+            }
+          }
+        },
+        "serialized": {
+          "body": "{\"RecursiveStructure\": {\"RecursiveMember\": {\"RecursiveMember\": {\"NoRecursiveMember\": \"foo\"}}}}",
+          "uri": "/test/noauth/enums/simple",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for String Header with location name",
+    "metadata": {
+       "protocol": "api-gateway",
+       "apiVersion": "2016-12-14T20:41:37Z"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "QueryStrMemberA": {
+            "shape": "__string",
+            "location": "querystring",
+            "locationName": "Qsa"
+          },
+          "QueryStrMemberB": {
+            "shape": "__string",
+            "location": "querystring",
+            "locationName": "Qsb"
+          },
+          "HeaderMember": {
+            "shape": "__string",
+            "location": "header",
+            "locationName": "x-amz-header-member"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayStringHeaderQueryString",
+        "given": {
+          "http": {
+            "method": "POST",
+            "requestUri": "/test/noauth/scalars"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "description": "Modeled string header with location name, Query Strings",
+        "params": {
+          "QueryStrMemberA": "querya",
+          "QueryStrMemberB": "queryb",
+          "HeaderMember": "headerVal"
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/test/noauth/scalars?Qsa=querya&Qsb=queryb",
+          "headers": {
+            "x-amz-header-member": "headerVal"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Operation with single path parameter",
+    "metadata": {
+       "protocol": "api-gateway",
+       "apiVersion": "2016-12-14T20:41:37Z"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "PathMember": {
+            "shape": "__string",
+            "location": "uri"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewaySinglePathParameter",
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/test/noauth/{PathMember}"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "description": "Operation with single path parameter replaces placeholder",
+        "params": {
+          "PathMember": "foo"
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/test/noauth/foo",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Test cases for Operation with multiple path parameters",
+    "metadata": {
+       "protocol": "api-gateway",
+       "apiVersion": "2016-12-14T20:41:37Z"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "PathMember": {
+            "shape": "__string",
+            "location": "uri",
+            "locationName": "path"
+          },
+          "MultiLocation" : {
+            "shape": "__string",
+            "location" : "uri",
+            "locationName" : "multi-location"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "id": "ApiGatewayMultiplePathParameters",
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/test/noauth/{path}/{multi-location}"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "description": "Operation with multiple path parameters replaces correct placeholders",
+        "params": {
+          "PathMember": "foo",
+          "MultiLocation": "bar"
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/test/noauth/foo/bar",
+          "headers": {}
+        }
+      }
+    ]
+  }
+]

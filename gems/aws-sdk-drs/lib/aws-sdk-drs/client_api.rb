@@ -179,6 +179,7 @@ module Aws::Drs
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     OS = Shapes::StructureShape.new(name: 'OS')
     OriginEnvironment = Shapes::StringShape.new(name: 'OriginEnvironment')
+    OutpostARN = Shapes::StringShape.new(name: 'OutpostARN')
     PITPolicy = Shapes::ListShape.new(name: 'PITPolicy')
     PITPolicyRule = Shapes::StructureShape.new(name: 'PITPolicyRule')
     PITPolicyRuleUnits = Shapes::StringShape.new(name: 'PITPolicyRuleUnits')
@@ -189,6 +190,10 @@ module Aws::Drs
     ParticipatingServer = Shapes::StructureShape.new(name: 'ParticipatingServer')
     ParticipatingServers = Shapes::ListShape.new(name: 'ParticipatingServers')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
+    ProductCode = Shapes::StructureShape.new(name: 'ProductCode')
+    ProductCodeId = Shapes::StringShape.new(name: 'ProductCodeId')
+    ProductCodeMode = Shapes::StringShape.new(name: 'ProductCodeMode')
+    ProductCodes = Shapes::ListShape.new(name: 'ProductCodes')
     PutLaunchActionRequest = Shapes::StructureShape.new(name: 'PutLaunchActionRequest')
     PutLaunchActionResponse = Shapes::StructureShape.new(name: 'PutLaunchActionResponse')
     RecoveryInstance = Shapes::StructureShape.new(name: 'RecoveryInstance')
@@ -296,7 +301,9 @@ module Aws::Drs
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VolumeStatus = Shapes::StringShape.new(name: 'VolumeStatus')
     VolumeToConversionMap = Shapes::MapShape.new(name: 'VolumeToConversionMap')
+    VolumeToProductCodes = Shapes::MapShape.new(name: 'VolumeToProductCodes')
     VolumeToSizeMap = Shapes::MapShape.new(name: 'VolumeToSizeMap')
     VpcID = Shapes::StringShape.new(name: 'VpcID')
 
@@ -335,6 +342,7 @@ module Aws::Drs
     ConversionProperties.add_member(:force_uefi, Shapes::ShapeRef.new(shape: Boolean, location_name: "forceUefi"))
     ConversionProperties.add_member(:root_volume_name, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "rootVolumeName"))
     ConversionProperties.add_member(:volume_to_conversion_map, Shapes::ShapeRef.new(shape: VolumeToConversionMap, location_name: "volumeToConversionMap"))
+    ConversionProperties.add_member(:volume_to_product_codes, Shapes::ShapeRef.new(shape: VolumeToProductCodes, location_name: "volumeToProductCodes"))
     ConversionProperties.add_member(:volume_to_volume_size, Shapes::ShapeRef.new(shape: VolumeToSizeMap, location_name: "volumeToVolumeSize"))
     ConversionProperties.struct_class = Types::ConversionProperties
 
@@ -398,6 +406,7 @@ module Aws::Drs
     DataReplicationInfo.add_member(:lag_duration, Shapes::ShapeRef.new(shape: ISO8601DurationString, location_name: "lagDuration"))
     DataReplicationInfo.add_member(:replicated_disks, Shapes::ShapeRef.new(shape: DataReplicationInfoReplicatedDisks, location_name: "replicatedDisks"))
     DataReplicationInfo.add_member(:staging_availability_zone, Shapes::ShapeRef.new(shape: AwsAvailabilityZone, location_name: "stagingAvailabilityZone"))
+    DataReplicationInfo.add_member(:staging_outpost_arn, Shapes::ShapeRef.new(shape: OutpostARN, location_name: "stagingOutpostArn"))
     DataReplicationInfo.struct_class = Types::DataReplicationInfo
 
     DataReplicationInfoReplicatedDisk.add_member(:backlogged_storage_bytes, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "backloggedStorageBytes"))
@@ -405,6 +414,7 @@ module Aws::Drs
     DataReplicationInfoReplicatedDisk.add_member(:replicated_storage_bytes, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "replicatedStorageBytes"))
     DataReplicationInfoReplicatedDisk.add_member(:rescanned_storage_bytes, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "rescannedStorageBytes"))
     DataReplicationInfoReplicatedDisk.add_member(:total_storage_bytes, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "totalStorageBytes"))
+    DataReplicationInfoReplicatedDisk.add_member(:volume_status, Shapes::ShapeRef.new(shape: VolumeStatus, location_name: "volumeStatus"))
     DataReplicationInfoReplicatedDisk.struct_class = Types::DataReplicationInfoReplicatedDisk
 
     DataReplicationInfoReplicatedDisks.member = Shapes::ShapeRef.new(shape: DataReplicationInfoReplicatedDisk)
@@ -807,6 +817,12 @@ module Aws::Drs
 
     ParticipatingServers.member = Shapes::ShapeRef.new(shape: ParticipatingServer)
 
+    ProductCode.add_member(:product_code_id, Shapes::ShapeRef.new(shape: ProductCodeId, location_name: "productCodeId"))
+    ProductCode.add_member(:product_code_mode, Shapes::ShapeRef.new(shape: ProductCodeMode, location_name: "productCodeMode"))
+    ProductCode.struct_class = Types::ProductCode
+
+    ProductCodes.member = Shapes::ShapeRef.new(shape: ProductCode)
+
     PutLaunchActionRequest.add_member(:action_code, Shapes::ShapeRef.new(shape: SsmDocumentName, required: true, location_name: "actionCode"))
     PutLaunchActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: LaunchActionId, required: true, location_name: "actionId"))
     PutLaunchActionRequest.add_member(:action_version, Shapes::ShapeRef.new(shape: LaunchActionVersion, required: true, location_name: "actionVersion"))
@@ -847,6 +863,7 @@ module Aws::Drs
     RecoveryInstance.add_member(:point_in_time_snapshot_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "pointInTimeSnapshotDateTime"))
     RecoveryInstance.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, location_name: "recoveryInstanceID"))
     RecoveryInstance.add_member(:recovery_instance_properties, Shapes::ShapeRef.new(shape: RecoveryInstanceProperties, location_name: "recoveryInstanceProperties"))
+    RecoveryInstance.add_member(:source_outpost_arn, Shapes::ShapeRef.new(shape: OutpostARN, location_name: "sourceOutpostArn"))
     RecoveryInstance.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
     RecoveryInstance.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     RecoveryInstance.struct_class = Types::RecoveryInstance
@@ -862,6 +879,7 @@ module Aws::Drs
     RecoveryInstanceDataReplicationInfo.add_member(:lag_duration, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lagDuration"))
     RecoveryInstanceDataReplicationInfo.add_member(:replicated_disks, Shapes::ShapeRef.new(shape: RecoveryInstanceDataReplicationInfoReplicatedDisks, location_name: "replicatedDisks"))
     RecoveryInstanceDataReplicationInfo.add_member(:staging_availability_zone, Shapes::ShapeRef.new(shape: AwsAvailabilityZone, location_name: "stagingAvailabilityZone"))
+    RecoveryInstanceDataReplicationInfo.add_member(:staging_outpost_arn, Shapes::ShapeRef.new(shape: OutpostARN, location_name: "stagingOutpostArn"))
     RecoveryInstanceDataReplicationInfo.struct_class = Types::RecoveryInstanceDataReplicationInfo
 
     RecoveryInstanceDataReplicationInfoReplicatedDisk.add_member(:backlogged_storage_bytes, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "backloggedStorageBytes"))
@@ -1009,6 +1027,7 @@ module Aws::Drs
     SourceCloudProperties.add_member(:origin_account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "originAccountID"))
     SourceCloudProperties.add_member(:origin_availability_zone, Shapes::ShapeRef.new(shape: AwsAvailabilityZone, location_name: "originAvailabilityZone"))
     SourceCloudProperties.add_member(:origin_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "originRegion"))
+    SourceCloudProperties.add_member(:source_outpost_arn, Shapes::ShapeRef.new(shape: OutpostARN, location_name: "sourceOutpostArn"))
     SourceCloudProperties.struct_class = Types::SourceCloudProperties
 
     SourceNetwork.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
@@ -1251,6 +1270,9 @@ module Aws::Drs
 
     VolumeToConversionMap.key = Shapes::ShapeRef.new(shape: LargeBoundedString)
     VolumeToConversionMap.value = Shapes::ShapeRef.new(shape: ConversionMap)
+
+    VolumeToProductCodes.key = Shapes::ShapeRef.new(shape: LargeBoundedString)
+    VolumeToProductCodes.value = Shapes::ShapeRef.new(shape: ProductCodes)
 
     VolumeToSizeMap.key = Shapes::ShapeRef.new(shape: LargeBoundedString)
     VolumeToSizeMap.value = Shapes::ShapeRef.new(shape: PositiveInteger)

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CognitoIdentityProvider
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CognitoIdentityProvider
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -347,50 +356,65 @@ module Aws::CognitoIdentityProvider
     #   @option options [Aws::CognitoIdentityProvider::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CognitoIdentityProvider::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -488,7 +512,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :group_name
     #   The name of the group that you want to add your user to.
@@ -550,7 +575,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [Hash<String,String>] :client_metadata
     #   A map of custom key-value pairs that you can provide as input for any
@@ -960,7 +986,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1009,7 +1036,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, Array<String>] :user_attribute_names
     #   An array of strings representing the user attribute names you want to
@@ -1146,7 +1174,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1193,7 +1222,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1240,7 +1270,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :device_key
     #   The device key.
@@ -1294,7 +1325,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @return [Types::AdminGetDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1356,7 +1388,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @return [Types::AdminGetUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1796,7 +1829,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [Integer] :limit
     #   The limit of the devices request.
@@ -1868,7 +1902,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool.
@@ -1946,7 +1981,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [Integer] :max_results
     #   The maximum number of authentication events to return. Returns 60
@@ -2031,7 +2067,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :group_name
     #   The group name.
@@ -2058,11 +2095,15 @@ module Aws::CognitoIdentityProvider
     # Resets the specified user's password in a user pool as an
     # administrator. Works on any user.
     #
+    # To use this API operation, your user pool must have self-service
+    # account recovery configured. Use [AdminSetUserPassword][1] if you
+    # manage passwords as an administrator.
+    #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
     # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number with [Amazon Pinpoint][2]. Amazon Cognito uses the registered
     # number automatically. Otherwise, Amazon Cognito users who must receive
     # SMS messages might not be able to sign up, activate their accounts, or
     # sign in.
@@ -2074,7 +2115,7 @@ module Aws::CognitoIdentityProvider
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
     # out of the sandbox and into production. For more information, see [
-    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # SMS message settings for Amazon Cognito user pools][3] in the *Amazon
     # Cognito Developer Guide*.
     #
     #  </note>
@@ -2096,18 +2137,19 @@ module Aws::CognitoIdentityProvider
     #
     #  **Learn more**
     #
-    #  * [Signing Amazon Web Services API Requests][3]
+    #  * [Signing Amazon Web Services API Requests][4]
     #
-    # * [Using the Amazon Cognito user pools API and user pool endpoints][4]
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][5]
     #
     #  </note>
     #
     #
     #
-    # [1]: https://console.aws.amazon.com/pinpoint/home/
-    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
-    # [4]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    # [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html
+    # [2]: https://console.aws.amazon.com/pinpoint/home/
+    # [3]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [5]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to reset the user's
@@ -2117,7 +2159,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [Hash<String,String>] :client_metadata
     #   A map of custom key-value pairs that you can provide as input for any
@@ -2500,7 +2543,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
@@ -2584,7 +2628,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :password
     #   The password for the user.
@@ -2644,7 +2689,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, Array<Types::MFAOptionType>] :mfa_options
     #   You can use this parameter only to set an SMS configuration that uses
@@ -2704,7 +2750,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :event_id
     #   The authentication event ID.
@@ -2764,7 +2811,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :device_key
     #   The device key.
@@ -2852,7 +2900,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, Array<Types::AttributeType>] :user_attributes
     #   An array of name-value pairs representing user attributes.
@@ -2991,7 +3040,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3225,7 +3275,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :confirmation_code
     #   The confirmation code from your user's request to reset their
@@ -3361,7 +3412,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :confirmation_code
     #   The confirmation code sent by a user's request to confirm
@@ -3762,9 +3814,14 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool.
     #
     # @option params [required, String] :identifier
-    #   A unique resource server identifier for the resource server. This
-    #   could be an HTTPS endpoint where the resource server is located, such
-    #   as `https://my-weather-api.example.com`.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier strings
+    #   increase the size of your access tokens.
     #
     # @option params [required, String] :name
     #   A friendly name for the resource server.
@@ -4993,7 +5050,9 @@ module Aws::CognitoIdentityProvider
     #   A list of allowed logout URLs for the IdPs.
     #
     # @option params [String] :default_redirect_uri
-    #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #   The default redirect URI. In app clients with one assigned IdP,
+    #   replaces `redirect_uri` in authentication requests. Must be in the
+    #   `CallbackURLs` list.
     #
     #   A redirect URI must:
     #
@@ -5003,7 +5062,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * Not include a fragment component.
     #
-    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #   For more information, see [Default redirect URI][1].
     #
     #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
     #   for testing purposes only.
@@ -5012,7 +5071,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html#cognito-user-pools-app-idp-settings-about
     #
     # @option params [Array<String>] :allowed_o_auth_flows
     #   The OAuth grant types that you want your app client to generate. To
@@ -5705,7 +5764,14 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool that hosts the resource server.
     #
     # @option params [required, String] :identifier
-    #   The identifier for the resource server
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier strings
+    #   increase the size of your access tokens.
     #
     # @return [Types::DescribeResourceServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6157,12 +6223,16 @@ module Aws::CognitoIdentityProvider
     # client secret and you don't provide a `SECRET_HASH` parameter, this
     # API returns `NotAuthorizedException`.
     #
+    # To use this API operation, your user pool must have self-service
+    # account recovery configured. Use [AdminSetUserPassword][3] if you
+    # manage passwords as an administrator.
+    #
     # <note markdown="1"> Amazon Cognito doesn't evaluate Identity and Access Management (IAM)
     # policies in requests for this API operation. For this operation, you
     # can't use IAM credentials to authorize requests, and you can't grant
     # IAM permissions in policies. For more information about authorization
     # models in Amazon Cognito, see [Using the Amazon Cognito user pools API
-    # and user pool endpoints][3].
+    # and user pool endpoints][4].
     #
     #  </note>
     #
@@ -6170,7 +6240,7 @@ module Aws::CognitoIdentityProvider
     # US telecom carriers require you to register an origination phone
     # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][4]. Amazon Cognito uses the registered
+    # number with [Amazon Pinpoint][5]. Amazon Cognito uses the registered
     # number automatically. Otherwise, Amazon Cognito users who must receive
     # SMS messages might not be able to sign up, activate their accounts, or
     # sign in.
@@ -6182,7 +6252,7 @@ module Aws::CognitoIdentityProvider
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
     # out of the sandbox and into production. For more information, see [
-    # SMS message settings for Amazon Cognito user pools][5] in the *Amazon
+    # SMS message settings for Amazon Cognito user pools][6] in the *Amazon
     # Cognito Developer Guide*.
     #
     #  </note>
@@ -6191,9 +6261,10 @@ module Aws::CognitoIdentityProvider
     #
     # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html
     # [2]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html
-    # [3]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
-    # [4]: https://console.aws.amazon.com/pinpoint/home/
-    # [5]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
+    # [3]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html
+    # [4]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    # [5]: https://console.aws.amazon.com/pinpoint/home/
+    # [6]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
     #
     # @option params [required, String] :client_id
     #   The ID of the client associated with the user pool.
@@ -6214,7 +6285,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [Types::AnalyticsMetadataType] :analytics_metadata
     #   The Amazon Pinpoint analytics metadata that contributes to your
@@ -7682,15 +7754,15 @@ module Aws::CognitoIdentityProvider
     # @option params [String] :filter
     #   A filter string of the form "*AttributeName* *Filter-Type*
     #   "*AttributeValue*"". Quotation marks within the filter string must
-    #   be escaped using the backslash (\\) character. For example,
-    #   "`family_name` = \\"Reddy\\"".
+    #   be escaped using the backslash (``) character. For example,
+    #   `"family_name = "Reddy""`.
     #
     #   * *AttributeName*: The name of the attribute to search for. You can
     #     only search for one attribute at a time.
     #
-    #   * *Filter-Type*: For an exact match, use =, for example,
-    #     "`given_name` = \\"Jon\\"". For a prefix ("starts with")
-    #     match, use ^=, for example, "`given_name` ^= \\"Jon\\"".
+    #   * *Filter-Type*: For an exact match, use `=`, for example,
+    #     "`given_name = "Jon"`". For a prefix ("starts with") match,
+    #     use `^=`, for example, "`given_name ^= "Jon"`".
     #
     #   * *AttributeValue*: The attribute value that must be matched for each
     #     user.
@@ -7999,7 +8071,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [Types::AnalyticsMetadataType] :analytics_metadata
     #   The Amazon Pinpoint analytics metadata that contributes to your
@@ -9199,7 +9272,8 @@ module Aws::CognitoIdentityProvider
     #   The username of the user that you want to query or modify. The value
     #   of this parameter is typically your user's username, but it can be
     #   any of their alias attributes. If `username` isn't an alias attribute
-    #   in your user pool, you can also use their `sub` in this request.
+    #   in your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :event_id
     #   The event ID.
@@ -9580,7 +9654,14 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool.
     #
     # @option params [required, String] :identifier
-    #   The identifier for the resource server.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier strings
+    #   increase the size of your access tokens.
     #
     # @option params [required, String] :name
     #   The name of the resource server.
@@ -10717,7 +10798,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.167.0 (2024-04-24)
+------------------
+
+* Feature - Add SSM DescribeInstanceProperties API to public AWS SDK.
+
+1.166.0 (2024-03-12)
+------------------
+
+* Feature - March 2024 doc-only updates for Systems Manager.
+
+1.165.0 (2024-02-21)
+------------------
+
+* Feature - This release adds support for sharing Systems Manager parameters with other AWS accounts.
+
 1.164.0 (2024-01-31)
 ------------------
 

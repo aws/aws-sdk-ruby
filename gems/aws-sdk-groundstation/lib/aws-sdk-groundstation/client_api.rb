@@ -337,6 +337,8 @@ module Aws::GroundStation
     ContactData.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     ContactData.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     ContactData.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ContactData.add_member(:visibility_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityEndTime"))
+    ContactData.add_member(:visibility_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityStartTime"))
     ContactData.struct_class = Types::ContactData
 
     ContactIdResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "contactId"))
@@ -446,6 +448,8 @@ module Aws::GroundStation
     DescribeContactResponse.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     DescribeContactResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     DescribeContactResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    DescribeContactResponse.add_member(:visibility_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityEndTime"))
+    DescribeContactResponse.add_member(:visibility_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityStartTime"))
     DescribeContactResponse.struct_class = Types::DescribeContactResponse
 
     DescribeEphemerisRequest.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "ephemerisId"))

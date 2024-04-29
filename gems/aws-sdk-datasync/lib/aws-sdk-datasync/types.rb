@@ -1252,41 +1252,32 @@ module Aws::DataSync
     # CreateTaskRequest
     #
     # @!attribute [rw] source_location_arn
-    #   The Amazon Resource Name (ARN) of the source location for the task.
+    #   Specifies the ARN of your transfer's source location.
     #   @return [String]
     #
     # @!attribute [rw] destination_location_arn
-    #   The Amazon Resource Name (ARN) of an Amazon Web Services storage
-    #   resource's location.
+    #   Specifies the ARN of your transfer's destination location.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
-    #   that is used to monitor and log events in the task.
+    #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
+    #   group for monitoring your task.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of a task. This value is a text reference that is used to
-    #   identify the task in the console.
+    #   Specifies the name of your task.
     #   @return [String]
     #
     # @!attribute [rw] options
-    #   Specifies the configuration options for a task. Some options include
-    #   preserving file or object metadata and verifying data integrity.
-    #
-    #   You can also override these options before starting an individual
-    #   run of a task (also known as a *task execution*). For more
-    #   information, see [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   Specifies your task's settings, such as preserving file metadata,
+    #   verifying data integrity, among other options.
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
-    #   Specifies a list of filter rules that exclude specific data during
-    #   your transfer. For more information and examples, see [Filtering
-    #   data transferred by DataSync][1].
+    #   Specifies exclude filters that define the files, objects, and
+    #   folders in your source location that you don't want DataSync to
+    #   transfer. For more information and examples, see [Specifying what
+    #   DataSync transfers by using filters][1].
     #
     #
     #
@@ -1294,9 +1285,8 @@ module Aws::DataSync
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
-    #   Specifies a schedule used to periodically transfer files from a
-    #   source to a destination location. The schedule should be specified
-    #   in UTC time. For more information, see [Scheduling your task][1].
+    #   Specifies a schedule for when you want your task to run. For more
+    #   information, see [Scheduling your task][1].
     #
     #
     #
@@ -1304,17 +1294,17 @@ module Aws::DataSync
     #   @return [Types::TaskSchedule]
     #
     # @!attribute [rw] tags
-    #   Specifies the tags that you want to apply to the Amazon Resource
-    #   Name (ARN) representing the task.
+    #   Specifies the tags that you want to apply to your task.
     #
     #   *Tags* are key-value pairs that help you manage, filter, and search
     #   for your DataSync resources.
     #   @return [Array<Types::TagListEntry>]
     #
     # @!attribute [rw] includes
-    #   Specifies a list of filter rules that include specific data during
-    #   your transfer. For more information and examples, see [Filtering
-    #   data transferred by DataSync][1].
+    #   Specifies include filters define the files, objects, and folders in
+    #   your source location that you want DataSync to transfer. For more
+    #   information and examples, see [Specifying what DataSync transfers by
+    #   using filters][1].
     #
     #
     #
@@ -2580,7 +2570,15 @@ module Aws::DataSync
     #   options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
@@ -2755,7 +2753,8 @@ module Aws::DataSync
     # DescribeTaskRequest
     #
     # @!attribute [rw] task_arn
-    #   Specifies the Amazon Resource Name (ARN) of the transfer task.
+    #   Specifies the Amazon Resource Name (ARN) of the transfer task that
+    #   you want information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskRequest AWS API Documentation
@@ -2769,47 +2768,49 @@ module Aws::DataSync
     # DescribeTaskResponse
     #
     # @!attribute [rw] task_arn
-    #   The Amazon Resource Name (ARN) of the task that was described.
+    #   The ARN of your task.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the task that was described.
+    #   The status of your task. For information about what each status
+    #   means, see [Task statuses][1].
     #
-    #   For detailed information about task execution statuses, see
-    #   Understanding Task Statuses in the *DataSync User Guide*.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-creation-statuses
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the task that was described.
+    #   The name of your task.
     #   @return [String]
     #
     # @!attribute [rw] current_task_execution_arn
-    #   The Amazon Resource Name (ARN) of the task execution that is
-    #   transferring files.
+    #   The ARN of the most recent task execution.
     #   @return [String]
     #
     # @!attribute [rw] source_location_arn
-    #   The Amazon Resource Name (ARN) of the source file system's
-    #   location.
+    #   The ARN of your transfer's source location.
     #   @return [String]
     #
     # @!attribute [rw] destination_location_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services storage
-    #   resource's location.
+    #   The ARN of your transfer's destination location.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group
-    #   that was used to monitor and log events in the task.
+    #   The Amazon Resource Name (ARN) of an Amazon CloudWatch log group for
+    #   monitoring your task.
     #
-    #   For more information on these groups, see Working with Log Groups
-    #   and Log Streams in the *Amazon CloudWatch User Guide*.
+    #   For more information, see [Monitoring DataSync with Amazon
+    #   CloudWatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html
     #   @return [String]
     #
     # @!attribute [rw] source_network_interface_arns
-    #   The Amazon Resource Names (ARNs) of the network interfaces created
-    #   for your source location. For more information, see [Network
-    #   interface requirements][1].
+    #   The ARNs of the [network interfaces][1] that DataSync created for
+    #   your source location.
     #
     #
     #
@@ -2817,9 +2818,8 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] destination_network_interface_arns
-    #   The Amazon Resource Names (ARNs) of the network interfaces created
-    #   for your destination location. For more information, see [Network
-    #   interface requirements][1].
+    #   The ARNs of the [network interfaces][1] that DataSync created for
+    #   your destination location.
     #
     #
     #
@@ -2827,22 +2827,16 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] options
-    #   The configuration options that control the behavior of the
-    #   `StartTaskExecution` operation. Some options include preserving file
-    #   or object metadata and verifying data integrity.
-    #
-    #   You can override these options for each task execution. For more
-    #   information, see [StartTaskExecution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
+    #   The task's settings. For example, what file metadata gets
+    #   preserved, how data integrity gets verified at the end of your
+    #   transfer, bandwidth limits, among other options.
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
-    #   A list of filter rules that exclude specific data during your
-    #   transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   The exclude filters that define the files, objects, and folders in
+    #   your source location that you don't want DataSync to transfer. For
+    #   more information and examples, see [Specifying what DataSync
+    #   transfers by using filters][1].
     #
     #
     #
@@ -2850,19 +2844,32 @@ module Aws::DataSync
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
-    #   The schedule used to periodically transfer files from a source to a
-    #   destination location.
+    #   The schedule for when you want your task to run. For more
+    #   information, see [Scheduling your task][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #   @return [Types::TaskSchedule]
     #
     # @!attribute [rw] error_code
-    #   Errors that DataSync encountered during execution of the task. You
-    #   can use this error code to help troubleshoot issues.
+    #   If there's an issue with your task, you can use the error code to
+    #   help you troubleshoot the problem. For more information, see
+    #   [Troubleshooting issues with DataSync transfers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] error_detail
-    #   Detailed description of an error that was encountered during the
-    #   task execution. You can use this information to help troubleshoot
-    #   issues.
+    #   If there's an issue with your task, you can use the error details
+    #   to help you troubleshoot the problem. For more information, see
+    #   [Troubleshooting issues with DataSync transfers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2870,9 +2877,10 @@ module Aws::DataSync
     #   @return [Time]
     #
     # @!attribute [rw] includes
-    #   A list of filter rules that include specific data during your
-    #   transfer. For more information and examples, see [Filtering data
-    #   transferred by DataSync][1].
+    #   The include filters that define the files, objects, and folders in
+    #   your source location that you want DataSync to transfer. For more
+    #   information and examples, see [Specifying what DataSync transfers by
+    #   using filters][1].
     #
     #
     #
@@ -2880,9 +2888,9 @@ module Aws::DataSync
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] manifest_config
-    #   The configuration of the manifest that lists the files or objects to
-    #   transfer. For more information, see [Specifying what DataSync
-    #   transfers by using a manifest][1].
+    #   The configuration of the manifest that lists the files or objects
+    #   that you want DataSync to transfer. For more information, see
+    #   [Specifying what DataSync transfers by using a manifest][1].
     #
     #
     #
@@ -2891,13 +2899,21 @@ module Aws::DataSync
     #
     # @!attribute [rw] task_report_config
     #   The configuration of your task report, which provides detailed
-    #   information about for your DataSync transfer. For more information,
-    #   see [Creating a task report][1].
+    #   information about your DataSync transfer. For more information, see
+    #   [Monitoring your DataSync transfers with task reports][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #   @return [Types::TaskReportConfig]
+    #
+    # @!attribute [rw] schedule_details
+    #   The details about your [task schedule][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
+    #   @return [Types::TaskScheduleDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskResponse AWS API Documentation
     #
@@ -2919,7 +2935,8 @@ module Aws::DataSync
       :creation_time,
       :includes,
       :manifest_config,
-      :task_report_config)
+      :task_report_config,
+      :schedule_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4126,7 +4143,15 @@ module Aws::DataSync
     # integrity, set bandwidth limits for your task, among other options.
     #
     # Each option has a default value. Unless you need to, you don't have
-    # to configure any of these options before starting your task.
+    # to configure any option before calling [StartTaskExecution][1].
+    #
+    # You also can override your task options for each task execution. For
+    # example, you might want to adjust the `LogLevel` for an individual
+    # execution.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @!attribute [rw] verify_mode
     #   Specifies how and when DataSync checks the integrity of your data
@@ -4146,6 +4171,9 @@ module Aws::DataSync
     #     DataSync scans the entire source and destination to verify that
     #     both locations are fully synchronized.
     #
+    #     If you use a [manifest][2], DataSync only scans and verifies
+    #     what's listed in the manifest.
+    #
     #     You can't use this option when transferring to S3 Glacier
     #     Flexible Retrieval or S3 Glacier Deep Archive storage classes. For
     #     more information, see [Storage class considerations with Amazon S3
@@ -4158,6 +4186,7 @@ module Aws::DataSync
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
     #   @return [String]
     #
     # @!attribute [rw] overwrite_mode
@@ -4481,18 +4510,6 @@ module Aws::DataSync
     #
     # @!attribute [rw] version
     #   The version of the DataSync agent.
-    #
-    #   On December 7, 2023, we discontinued version 1 DataSync agents.
-    #   Check the DataSync console to see if you have affected agents. If
-    #   you do, [replace][1] those agents or [delete][2] them if they
-    #   aren't in use. If you need more help, contact [Amazon Web Services
-    #   Support][3].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/replacing-agent.html
-    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/deleting-agent.html
-    #   [3]: https://aws.amazon.com/contact-us/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Platform AWS API Documentation
@@ -5060,7 +5077,15 @@ module Aws::DataSync
     #   options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #   @return [Types::Options]
     #
     # @!attribute [rw] includes
@@ -5470,23 +5495,97 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Specifies the schedule you want your task to use for repeated
-    # executions. For more information, see [Schedule Expressions for
-    # Rules][1].
+    # Configures your DataSync task to run on a [schedule][1] (at a minimum
+    # interval of 1 hour).
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #
     # @!attribute [rw] schedule_expression
-    #   A cron expression that specifies when DataSync initiates a scheduled
-    #   transfer from a source to a destination location.
+    #   Specifies your task schedule by using a cron expression in UTC time.
+    #   For information about cron expression syntax, see the [ *Amazon
+    #   EventBridge User Guide* ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cron-expressions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies whether to enable or disable your task schedule. Your
+    #   schedule is enabled by default, but there can be situations where
+    #   you need to disable it. For example, you might need to pause a
+    #   recurring transfer or fix an issue with your task or perform
+    #   maintenance on your storage system.
+    #
+    #   DataSync might disable your schedule automatically if your task
+    #   fails repeatedly with the same error. For more information, see
+    #   [TaskScheduleDetails][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_TaskScheduleDetails.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskSchedule AWS API Documentation
     #
     class TaskSchedule < Struct.new(
-      :schedule_expression)
+      :schedule_expression,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about your DataSync [task schedule][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
+    #
+    # @!attribute [rw] status_update_time
+    #   Indicates the last time the status of your task schedule changed.
+    #   For example, if DataSync automatically disables your schedule
+    #   because of a repeated error, you can see when the schedule was
+    #   disabled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disabled_reason
+    #   Provides a reason if the task schedule is disabled.
+    #
+    #   If your schedule is disabled by `USER`, you see a `Manually disabled
+    #   by user.` message.
+    #
+    #   If your schedule is disabled by `SERVICE`, you see an error message
+    #   to help you understand why the task keeps failing. For information
+    #   on resolving DataSync errors, see [Troubleshooting issues with
+    #   DataSync transfers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled_by
+    #   Indicates how your task schedule was disabled.
+    #
+    #   * `USER` - Your schedule was manually disabled by using the
+    #     [UpdateTask][1] operation or DataSync console.
+    #
+    #   * `SERVICE` - Your schedule was automatically disabled by DataSync
+    #     because the task failed repeatedly with the same error.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_UpdateTask.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskScheduleDetails AWS API Documentation
+    #
+    class TaskScheduleDetails < Struct.new(
+      :status_update_time,
+      :disabled_reason,
+      :disabled_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6021,7 +6120,15 @@ module Aws::DataSync
     #   options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #   @return [Types::Options]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskExecutionRequest AWS API Documentation
@@ -6040,8 +6147,7 @@ module Aws::DataSync
     # UpdateTaskResponse
     #
     # @!attribute [rw] task_arn
-    #   The Amazon Resource Name (ARN) of the resource name of the task to
-    #   update.
+    #   Specifies the ARN of the task that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -6052,13 +6158,22 @@ module Aws::DataSync
     #   options.
     #
     #   Each option has a default value. Unless you need to, you don't have
-    #   to configure any of these options before starting your task.
+    #   to configure any option before calling [StartTaskExecution][1].
+    #
+    #   You also can override your task options for each task execution. For
+    #   example, you might want to adjust the `LogLevel` for an individual
+    #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #   @return [Types::Options]
     #
     # @!attribute [rw] excludes
-    #   Specifies a list of filter rules that exclude specific data during
-    #   your transfer. For more information and examples, see [Filtering
-    #   data transferred by DataSync][1].
+    #   Specifies exclude filters that define the files, objects, and
+    #   folders in your source location that you don't want DataSync to
+    #   transfer. For more information and examples, see [Specifying what
+    #   DataSync transfers by using filters][1].
     #
     #
     #
@@ -6066,12 +6181,8 @@ module Aws::DataSync
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
-    #   Specifies a schedule used to periodically transfer files from a
-    #   source to a destination location. You can configure your task to
-    #   execute hourly, daily, weekly or on specific days of the week. You
-    #   control when in the day or hour you want the task to execute. The
-    #   time you specify is UTC time. For more information, see [Scheduling
-    #   your task][1].
+    #   Specifies a schedule for when you want your task to run. For more
+    #   information, see [Scheduling your task][1].
     #
     #
     #
@@ -6079,18 +6190,19 @@ module Aws::DataSync
     #   @return [Types::TaskSchedule]
     #
     # @!attribute [rw] name
-    #   The name of the task to update.
+    #   Specifies the name of your task.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the resource name of the Amazon
-    #   CloudWatch log group.
+    #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
+    #   group for monitoring your task.
     #   @return [String]
     #
     # @!attribute [rw] includes
-    #   Specifies a list of filter rules that include specific data during
-    #   your transfer. For more information and examples, see [Filtering
-    #   data transferred by DataSync][1].
+    #   Specifies include filters define the files, objects, and folders in
+    #   your source location that you want DataSync to transfer. For more
+    #   information and examples, see [Specifying what DataSync transfers by
+    #   using filters][1].
     #
     #
     #
