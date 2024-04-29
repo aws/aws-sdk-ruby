@@ -90,7 +90,10 @@ module Aws
           session_token: 's3-session',
           expiration: Time.now + 60 * 5
         })
-        EXPRESS_CREDENTIALS_CACHE.clear
+      end
+
+      after do
+        Aws::S3.express_credentials_cache.clear
       end
 
       describe 's3 express auth' do

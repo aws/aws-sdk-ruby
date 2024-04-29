@@ -3,7 +3,9 @@
 module Aws
   module S3
     # @api private
-    EXPRESS_CREDENTIALS_CACHE = LRUCache.new(max_entries: 100)
+    def self.express_credentials_cache
+      @express_credentials_cache ||= LRUCache.new(max_entries: 100)
+    end
 
     # Returns Credentials class for S3 Express. Accepts CreateSession
     # params as options. See {Client#create_session} for details.
@@ -20,7 +22,9 @@ module Aws
         @client = options.delete(:client)
         @caching = options.delete(:caching) != false
         @options = options
-        @cache = EXPRESS_CREDENTIALS_CACHE
+        return unless @caching
+
+        @cache = Aws::S3.express_credentials_cache
       end
 
       def express_credentials_for(bucket)

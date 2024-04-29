@@ -3,12 +3,17 @@
 module Aws
   module S3
     # @api private
-    ACCESS_GRANTS_CREDENTIALS_CACHE = LRUCache.new(max_entries: 100)
+    def self.access_grants_credentials_cache
+      @access_grants_credentials_cache ||= LRUCache.new(max_entries: 100)
+    end
+
     # @api private
-    ACCESS_GRANTS_ACCOUNT_ID_CACHE = LRUCache.new(
-      max_entries: 100,
-      expiration: 60 * 10
-    )
+    def self.access_grants_account_id_cache
+      @access_grants_account_id_cache ||= LRUCache.new(
+        max_entries: 100,
+        expiration: 60 * 10
+      )
+    end
 
     # Returns Credentials class for S3 Access Grants. Accepts GetDataAccess
     # params and other configuration as options. See
@@ -44,8 +49,8 @@ module Aws
         @bucket_region_cache = BUCKET_REGIONS # shared cache with s3_signer
         return unless @caching
 
-        @credentials_cache = ACCESS_GRANTS_CREDENTIALS_CACHE
-        @account_id_cache = ACCESS_GRANTS_ACCOUNT_ID_CACHE
+        @credentials_cache = Aws::S3.access_grants_credentials_cache
+        @account_id_cache = Aws::S3.access_grants_account_id_cache
       end
 
       def access_grants_credentials_for(options = {})

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+$:.unshift(File.expand_path('../../../aws-sdk-s3control/lib', __FILE__))
 require_relative 'spec_helper'
 
 module Aws
@@ -43,8 +44,8 @@ module Aws
       end
 
       after do
-        ACCESS_GRANTS_CREDENTIALS_CACHE.clear
-        ACCESS_GRANTS_ACCOUNT_ID_CACHE.clear
+        Aws::S3.access_grants_credentials_cache.clear
+        Aws::S3.access_grants_account_id_cache.clear
         BUCKET_REGIONS.clear
       end
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+$:.unshift(File.expand_path('../../../aws-sdk-s3control/lib', __FILE__))
 require_relative 'spec_helper'
 
 module Aws

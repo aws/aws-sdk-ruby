@@ -17,7 +17,7 @@ module Aws
 
       describe '#express_credentials_for' do
         after do
-          EXPRESS_CREDENTIALS_CACHE.clear
+          Aws::S3.express_credentials_cache.clear
         end
 
         it 'returns a new set of credentials for the bucket' do
