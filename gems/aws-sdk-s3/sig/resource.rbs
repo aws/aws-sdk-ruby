@@ -14,6 +14,8 @@ module Aws
                         ?client: Client,
                         ?credentials: untyped,
                         ?region: String,
+                        ?access_grants: bool,
+                        ?access_grants_credentials_provider: untyped,
                         ?access_key_id: String,
                         ?active_endpoint_cache: bool,
                         ?adaptive_retry_wait_to_fill: bool,

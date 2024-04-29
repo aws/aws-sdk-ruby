@@ -1002,7 +1002,6 @@
     "models": "s3/2006-03-01",
     "dependencies": {
       "aws-sdk-kms": "~> 1",
-      "aws-sdk-s3control": "~> 1.73",
       "aws-sigv4": "~> 1.8"
     },
     "addPlugins": [

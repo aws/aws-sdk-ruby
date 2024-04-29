@@ -77,10 +77,15 @@ setting, caching, and fallback behavior.
         end
 
         def add_handlers(handlers,config)
+          require 'aws-sdk-s3control'
           handlers.add(Handler) if config.access_grants
+        rescue LoadError
+          false
         end
 
         def after_initialize(client)
+          return unless client.config.access_grants
+
           provider = client.config.access_grants_credentials_provider
           provider.s3_client = client unless provider.s3_client
         end
