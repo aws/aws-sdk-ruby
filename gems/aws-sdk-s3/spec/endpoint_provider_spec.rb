@@ -6607,7 +6607,7 @@ module Aws::S3
           expiration: Time.now + 60 * 5
         })
         expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
-        n cachAws::S3.express_credentials_cache.clear
+        Aws::S3.express_credentials_cache.clear
         expect_auth({"name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"ap-northeast-1", "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'mybucket--apne1-az1--x-s3',

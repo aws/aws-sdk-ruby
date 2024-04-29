@@ -13,13 +13,9 @@ namespace :rbs do
     # Just test s3 for most type coverage
     %w[core s3].each do |identifier|
       sdk_gem = "aws-sdk-#{identifier}"
-      ruby_opt = '-r bundler/setup -r rbs/test/setup'
-      if identifier == 's3'
-        ruby_opt += ' -I gems/aws-sdk-s3control/lib -I gems/aws-sdk-kms/lib'
-      end
       puts "Run rspec with RBS::Test on `#{sdk_gem}`"
       env = {
-        'RUBYOPT' => ruby_opt,
+        'RUBYOPT' => '-r bundler/setup -r rbs/test/setup',
         'RBS_TEST_RAISE' => 'true',
         'RBS_TEST_LOGLEVEL' => 'error',
         'RBS_TEST_OPT' => "-I gems/aws-sdk-core/sig -I gems/#{sdk_gem}/sig",
