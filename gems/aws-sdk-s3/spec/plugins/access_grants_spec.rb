@@ -3,6 +3,11 @@ require_relative '../spec_helper'
 module Aws
   module S3
     describe Client do
+      before do
+        allow(Aws::S3::Plugins::AccessGrants)
+          .to receive(:s3control?).and_return(true)
+      end
+
       describe 'access_grants' do
         it 'is disabled by default' do
           client = Aws::S3::Client.new(
@@ -62,36 +67,29 @@ module Aws
         )
       end
 
-      context 's3control loaded' do
-        before do
-          allow(Aws::S3::Plugins::AccessGrants)
-            .to receive(:s3control?).and_return(true)
-        end
+      it 'is skipped for s3 express endpoints' do
+        expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+          .not_to receive(:access_grants_credentials_for)
+        client.head_object(bucket: 'bucket--use1-az2--x-s3', key: 'key')
+      end
 
-        it 'is skipped for s3 express endpoints' do
-          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
-            .not_to receive(:access_grants_credentials_for)
-          client.head_object(bucket: 'bucket--use1-az2--x-s3', key: 'key')
-        end
+      it 'is skipped for non-bucket operations' do
+        expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+          .not_to receive(:access_grants_credentials_for)
+        client.list_buckets
+      end
 
-        it 'is skipped for non-bucket operations' do
-          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
-            .not_to receive(:access_grants_credentials_for)
-          client.list_buckets
-        end
+      it 'is skipped for non-permissioned operations' do
+        expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+          .not_to receive(:access_grants_credentials_for)
+        client.list_objects(bucket: 'bucket')
+      end
 
-        it 'is skipped for non-permissioned operations' do
-          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
-            .not_to receive(:access_grants_credentials_for)
-          client.list_objects(bucket: 'bucket')
-        end
-
-        it 'is called for permissioned bucket operations' do
-          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
-            .to receive(:access_grants_credentials_for)
-            .with(bucket: 'bucket', key: 'key', permission: 'READ', prefix: nil)
-          client.head_object(bucket: 'bucket', key: 'key')
-        end
+      it 'is called for permissioned bucket operations' do
+        expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+          .to receive(:access_grants_credentials_for)
+          .with(bucket: 'bucket', key: 'key', permission: 'READ', prefix: nil)
+        client.head_object(bucket: 'bucket', key: 'key')
       end
 
       context 's3control not loaded' do
@@ -103,6 +101,11 @@ module Aws
         it 'does not add the handler' do
           expect(client.handlers)
             .not_to include(Aws::S3::Plugins::AccessGrants::Handler)
+        end
+
+        it 'does not set the s3 client' do
+          provider = client.config.access_grants_credentials_provider
+          expect(provider.s3_client).to be_nil
         end
       end
     end
