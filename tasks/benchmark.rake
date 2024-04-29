@@ -9,7 +9,6 @@ end
 desc 'Upload/archive the benchmark report'
 task 'benchmark:archive' do
   $:.unshift("#{$GEMS_DIR}/aws-sdk-s3/lib")
-  $:.unshift("#{$GEMS_DIR}/aws-sdk-s3control/lib")
   $:.unshift("#{$GEMS_DIR}/aws-sdk-kms/lib")
   require 'aws-sdk-s3'
   require 'securerandom'
