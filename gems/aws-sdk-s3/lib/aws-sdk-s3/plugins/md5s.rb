@@ -60,26 +60,15 @@ module Aws
         end
 
         option(:compute_checksums,
+          default: true,
           doc_type: 'Boolean',
-          docstring: <<-DOCS
+          docstring: <<-DOCS)
 When `true` a MD5 checksum will be computed and sent in the Content Md5
 header for :put_object and :upload_part. When `false`, MD5 checksums
 will not be computed for these operations. Checksums are still computed
 for operations requiring them. Checksum errors returned by Amazon S3 are
 automatically retried up to `:retry_limit` times.
           DOCS
-        ) do |config|
-          # By default, we will disable checksum verification when response
-          # stubbing is enable. If a user decides to enable both features,
-          # then they will need to stub the MD5s in the response.
-          # See the spec/aws/sqs/client/verify_checksums_spec.rb for
-          # examples of how to do this.
-          if config.respond_to?(:stub_responses)
-            !config.stub_responses
-          else
-            config.verify_checksums
-          end
-        end
 
         def add_handlers(handlers, config)
           if config.compute_checksums
