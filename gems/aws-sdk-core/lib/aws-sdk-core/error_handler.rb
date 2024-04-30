@@ -8,14 +8,20 @@ module Aws
     def error(context)
       body = context.http_response.body_contents
       if body.empty?
-        code = http_status_error_code(context)
-        message = ''
-        data = EmptyStructure.new
+        code, message, data = http_status_error(context)
       else
         code, message, data = extract_error(body, context)
       end
+      build_error(context, code, message, data)
+    end
+
+    def build_error(context, code, message, data)
       errors_module = context.client.class.errors_module
       errors_module.error_class(code).new(context, message, data)
+    end
+
+    def http_status_error(context)
+      [http_status_error_code(context), '', EmptyStructure.new]
     end
 
     def http_status_error_code(context)

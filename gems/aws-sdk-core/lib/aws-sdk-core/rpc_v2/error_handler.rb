@@ -5,13 +5,26 @@ module Aws
     class ErrorHandler < Aws::ErrorHandler
 
       def call(context)
-        @handler.call(context).on(300..599) do |response|
-          response.error = error(context)
+        # Malformed responses should throw an http based error, so we check
+        # 200 range for error handling only for this case.
+        @handler.call(context).on(200..599) do |response|
+          if !valid_response?(context)
+            code, message, data = http_status_error(context)
+            response.error = build_error(context, code, message, data)
+          elsif (300..599).cover?(context.http_response.status_code)
+            response.error = error(context)
+          end
           response.data = nil
         end
       end
 
       private
+
+      def valid_response?(context)
+        req_header = context.http_request.headers['smithy-protocol']
+        resp_header = context.http_response.headers['smithy-protocol']
+        req_header == resp_header
+      end
 
       def extract_error(body, context)
         data = Cbor.decode(body)

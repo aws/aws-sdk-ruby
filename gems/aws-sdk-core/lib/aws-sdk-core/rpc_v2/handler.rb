@@ -16,12 +16,10 @@ module Aws
       private
 
       def build_request(context)
-        context.http_request.http_method = 'POST'
-        build_url(context)
         context.http_request.headers['smithy-protocol'] = 'rpc-v2-cbor'
-        context.http_request.headers['Accept'] = 'application/cbor' # remove?
+        context.http_request.http_method = 'POST'
         context.http_request.body = build_body(context)
-        apply_content_type_header(context)
+        build_url(context)
       end
 
       def build_url(context)
@@ -32,14 +30,6 @@ module Aws
 
       def build_body(context)
         Builder.new(context.operation.input).serialize(context.params)
-      end
-
-      def apply_content_type_header(context)
-        # If the input shape is empty, do not set the content type. This is
-        # different than if the input shape is a structure with no members.
-        return if context.operation.input.shape.struct_class == EmptyStructure
-
-        context.http_request.headers['Content-Type'] = 'application/cbor'
       end
 
       def parse_body(context)
