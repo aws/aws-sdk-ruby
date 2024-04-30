@@ -1020,6 +1020,7 @@ module Aws
 
       interface _GetConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationResponse]
+        def ec2_configuration: () -> Types::Ec2ConfigurationState
         def ecr_configuration: () -> Types::EcrConfigurationState
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_configuration-instance_method
@@ -1427,6 +1428,12 @@ module Aws
                                  value: ::String
                                },
                              ]?,
+                             scan_mode: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
                              scan_status_code: Array[
                                {
                                  comparison: ("EQUALS" | "NOT_EQUALS"),
@@ -1523,6 +1530,12 @@ module Aws
                                           },
                                         ]?,
                                         resource_type: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        scan_mode: Array[
                                           {
                                             comparison: ("EQUALS" | "NOT_EQUALS"),
                                             value: ::String
@@ -2288,12 +2301,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_configuration-instance_method
       def update_configuration: (
-                                  ecr_configuration: {
+                                  ?ec2_configuration: {
+                                    scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_HYBRID")
+                                  },
+                                  ?ecr_configuration: {
                                     pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")?,
                                     rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
                                   }
                                 ) -> _UpdateConfigurationResponseSuccess
-                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationResponseSuccess
 
       interface _UpdateEc2DeepInspectionConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEc2DeepInspectionConfigurationResponse]

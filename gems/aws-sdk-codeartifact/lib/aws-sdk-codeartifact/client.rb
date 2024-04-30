@@ -475,7 +475,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #   resp.repository.created_time #=> Time
     #
@@ -536,9 +536,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the versions to be copied.
@@ -591,7 +591,7 @@ module Aws::CodeArtifact
     #     domain_owner: "AccountId",
     #     source_repository: "RepositoryName", # required
     #     destination_repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"],
@@ -841,7 +841,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #   resp.repository.created_time #=> Time
     #
@@ -981,9 +981,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package to delete.
@@ -998,14 +998,14 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.deleted_package.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.deleted_package.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.deleted_package.namespace #=> String
     #   resp.deleted_package.package #=> String
     #   resp.deleted_package.origin_configuration.restrictions.publish #=> String, one of "ALLOW", "BLOCK"
@@ -1125,9 +1125,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package with the versions to delete.
@@ -1150,7 +1150,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"], # required
@@ -1211,7 +1211,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #   resp.repository.created_time #=> Time
     #
@@ -1368,9 +1368,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the requested package.
@@ -1385,14 +1385,14 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.package.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.package.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.package.namespace #=> String
     #   resp.package.name #=> String
     #   resp.package.origin_configuration.restrictions.publish #=> String, one of "ALLOW", "BLOCK"
@@ -1505,9 +1505,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the requested package version.
@@ -1525,7 +1525,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1533,7 +1533,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.package_version.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.package_version.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.package_version.namespace #=> String
     #   resp.package_version.package_name #=> String
     #   resp.package_version.display_name #=> String
@@ -1597,7 +1597,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #   resp.repository.created_time #=> Time
     #
@@ -1652,7 +1652,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #   resp.repository.created_time #=> Time
     #
@@ -1720,9 +1720,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package with the versions you want to dispose.
@@ -1747,7 +1747,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"], # required
@@ -1824,9 +1824,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The package from which to get the associated package group.
@@ -1841,7 +1841,7 @@ module Aws::CodeArtifact
     #   resp = client.get_associated_package_group({
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #   })
@@ -2035,9 +2035,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the requested asset.
@@ -2065,7 +2065,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -2132,9 +2132,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package version that contains the requested readme
@@ -2158,7 +2158,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -2166,7 +2166,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -2195,6 +2195,8 @@ module Aws::CodeArtifact
     #
     # * `pypi`
     #
+    # * `ruby`
+    #
     # * `swift`
     #
     # @option params [required, String] :domain
@@ -2222,7 +2224,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #   })
     #
     # @example Response structure
@@ -2400,7 +2402,7 @@ module Aws::CodeArtifact
     # @example Response structure
     #
     #   resp.packages #=> Array
-    #   resp.packages[0].format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.packages[0].format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.packages[0].namespace #=> String
     #   resp.packages[0].package #=> String
     #   resp.packages[0].association_type #=> String, one of "STRONG", "WEAK"
@@ -2578,9 +2580,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the requested package version
@@ -2615,7 +2617,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -2625,7 +2627,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -2695,9 +2697,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package versions' package.
@@ -2726,7 +2728,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -2735,7 +2737,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -2802,9 +2804,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package for which you want to request package
@@ -2845,7 +2847,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     status: "Published", # accepts Published, Unfinished, Unlisted, Archived, Disposed, Deleted
@@ -2858,7 +2860,7 @@ module Aws::CodeArtifact
     # @example Response structure
     #
     #   resp.default_display_version #=> String
-    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.versions #=> Array
@@ -2915,9 +2917,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [String] :package_prefix
     #   A prefix used to filter requested packages. Only packages with names
@@ -2964,7 +2966,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package_prefix: "PackageName",
     #     max_results: 1,
@@ -2976,7 +2978,7 @@ module Aws::CodeArtifact
     # @example Response structure
     #
     #   resp.packages #=> Array
-    #   resp.packages[0].format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.packages[0].format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.packages[0].namespace #=> String
     #   resp.packages[0].package #=> String
     #   resp.packages[0].origin_configuration.restrictions.publish #=> String, one of "ALLOW", "BLOCK"
@@ -3324,7 +3326,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -3336,7 +3338,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -3454,9 +3456,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package to be updated.
@@ -3486,7 +3488,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     restrictions: { # required
@@ -3826,9 +3828,9 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python and NuGet package versions do not contain a corresponding
-    #     component, package versions of those formats do not have a
-    #     namespace.
+    #   * Python, NuGet, and Ruby package versions do not contain a
+    #     corresponding component, package versions of those formats do not
+    #     have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package with the version statuses to update.
@@ -3862,7 +3864,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, swift
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"], # required
@@ -3947,7 +3949,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "swift"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic", "ruby", "swift"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #   resp.repository.created_time #=> Time
     #
@@ -3973,7 +3975,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

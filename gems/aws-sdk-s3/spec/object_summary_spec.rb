@@ -52,31 +52,31 @@ module Aws
 
       it 'delegates #presigned_url to #object' do
         expect(object).to receive(:presigned_url)
-          .with('method', { opt_name: 'opt-value' })
+          .with('method', { opt_name: 'opt-value' }).and_return('return-value')
         object_summary.presigned_url('method', opt_name: 'opt-value')
       end
 
       it 'delegates #public_url to #object' do
-        expect(object).to receive(:public_url).with({ opt_name: 'opt-value' })
+        expect(object).to receive(:public_url).with({ opt_name: 'opt-value' }).and_return('return-value')
         object_summary.public_url(opt_name: 'opt-value')
       end
 
       it 'delegates #upload_file to #object' do
         expect(object).to receive(:upload_file)
-          .with('source', { opt_name: 'opt-value'})
+          .with('source', { opt_name: 'opt-value'}).and_return(true)
         object_summary.upload_file('source', opt_name: 'opt-value')
       end
 
       it 'delegates #upload_stream to #object' do
         block = proc { :foo }
         expect(object).to receive(:upload_stream)
-          .with({ opt_name: 'opt-value' }, &block)
+          .with({ opt_name: 'opt-value' }, &block).and_return(true)
         object_summary.upload_stream(opt_name: 'opt-value', &block)
       end
 
       it 'delegates #download_file to #object' do
         expect(object).to receive(:download_file)
-          .with('destination', { opt_name: 'opt-value' })
+          .with('destination', { opt_name: 'opt-value' }).and_return(true)
         object_summary.download_file('destination', opt_name: 'opt-value')
       end
     end

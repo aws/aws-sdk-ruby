@@ -283,6 +283,7 @@ module Aws::FMS
     StatelessRuleGroup = Shapes::StructureShape.new(name: 'StatelessRuleGroup')
     StatelessRuleGroupList = Shapes::ListShape.new(name: 'StatelessRuleGroupList')
     StatelessRuleGroupPriority = Shapes::IntegerShape.new(name: 'StatelessRuleGroupPriority')
+    StreamExceptionPolicy = Shapes::StringShape.new(name: 'StreamExceptionPolicy')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -1226,6 +1227,7 @@ module Aws::FMS
     SecurityServiceTypeList.member = Shapes::ShapeRef.new(shape: SecurityServiceType)
 
     StatefulEngineOptions.add_member(:rule_order, Shapes::ShapeRef.new(shape: RuleOrder, location_name: "RuleOrder"))
+    StatefulEngineOptions.add_member(:stream_exception_policy, Shapes::ShapeRef.new(shape: StreamExceptionPolicy, location_name: "StreamExceptionPolicy"))
     StatefulEngineOptions.struct_class = Types::StatefulEngineOptions
 
     StatefulRuleGroup.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: NetworkFirewallResourceName, location_name: "RuleGroupName"))

@@ -489,6 +489,48 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Associate a protect configuration with a configuration set. This
+    # replaces the configuration sets current protect configuration. A
+    # configuration set can only be associated with one protect
+    # configuration at a time. A protect configuration can be associated
+    # with multiple configuration sets.
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @option params [required, String] :configuration_set_name
+    #   The name of the ConfigurationSet.
+    #
+    # @return [Types::AssociateProtectConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateProtectConfigurationResult#configuration_set_arn #configuration_set_arn} => String
+    #   * {Types::AssociateProtectConfigurationResult#configuration_set_name #configuration_set_name} => String
+    #   * {Types::AssociateProtectConfigurationResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::AssociateProtectConfigurationResult#protect_configuration_id #protect_configuration_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_protect_configuration({
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #     configuration_set_name: "ConfigurationSetNameOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_set_arn #=> String
+    #   resp.configuration_set_name #=> String
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/AssociateProtectConfiguration AWS API Documentation
+    #
+    # @overload associate_protect_configuration(params = {})
+    # @param [Hash] params ({})
+    def associate_protect_configuration(params = {}, options = {})
+      req = build_request(:associate_protect_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a new configuration set. After you create the configuration
     # set, you can add one or more event destinations to it.
     #
@@ -584,7 +626,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [Types::CloudWatchLogsDestination] :cloud_watch_logs_destination
     #   An object that contains information about an event destination for
-    #   logging to Amazon CloudWatch logs.
+    #   logging to Amazon CloudWatch Logs.
     #
     # @option params [Types::KinesisFirehoseDestination] :kinesis_firehose_destination
     #   An object that contains information about an event destination for
@@ -614,7 +656,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp = client.create_event_destination({
     #     configuration_set_name: "ConfigurationSetNameOrArn", # required
     #     event_destination_name: "EventDestinationName", # required
-    #     matching_event_types: ["ALL"], # required, accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED
+    #     matching_event_types: ["ALL"], # required, accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED
     #     cloud_watch_logs_destination: {
     #       iam_role_arn: "IamRoleArn", # required
     #       log_group_arn: "LogGroupArn", # required
@@ -636,7 +678,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destination.event_destination_name #=> String
     #   resp.event_destination.enabled #=> Boolean
     #   resp.event_destination.matching_event_types #=> Array
-    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED"
+    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.event_destination.cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destination.cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destination.kinesis_firehose_destination.iam_role_arn #=> String
@@ -824,6 +866,71 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def create_pool(params = {}, options = {})
       req = build_request(:create_pool, params)
+      req.send_request(options)
+    end
+
+    # Create a new protect configuration. By default all country rule sets
+    # for each capability are set to `ALLOW`. Update the country rule sets
+    # using `UpdateProtectConfigurationCountryRuleSet`. A protect
+    # configurations name is stored as a Tag with the key set to `Name` and
+    # value as the name of the protect configuration.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key and value pair tags that are associated with the
+    #   resource.
+    #
+    # @return [Types::CreateProtectConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProtectConfigurationResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::CreateProtectConfigurationResult#protect_configuration_id #protect_configuration_id} => String
+    #   * {Types::CreateProtectConfigurationResult#created_timestamp #created_timestamp} => Time
+    #   * {Types::CreateProtectConfigurationResult#account_default #account_default} => Boolean
+    #   * {Types::CreateProtectConfigurationResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::CreateProtectConfigurationResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_protect_configuration({
+    #     client_token: "ClientToken",
+    #     deletion_protection_enabled: false,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.account_default #=> Boolean
+    #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateProtectConfiguration AWS API Documentation
+    #
+    # @overload create_protect_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_protect_configuration(params = {}, options = {})
+      req = build_request(:create_protect_configuration, params)
       req.send_request(options)
     end
 
@@ -1116,6 +1223,27 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Removes the current account default protect configuration.
+    #
+    # @return [Types::DeleteAccountDefaultProtectConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccountDefaultProtectConfigurationResult#default_protect_configuration_arn #default_protect_configuration_arn} => String
+    #   * {Types::DeleteAccountDefaultProtectConfigurationResult#default_protect_configuration_id #default_protect_configuration_id} => String
+    #
+    # @example Response structure
+    #
+    #   resp.default_protect_configuration_arn #=> String
+    #   resp.default_protect_configuration_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteAccountDefaultProtectConfiguration AWS API Documentation
+    #
+    # @overload delete_account_default_protect_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_account_default_protect_configuration(params = {}, options = {})
+      req = build_request(:delete_account_default_protect_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing configuration set.
     #
     # A configuration set is a set of rules that you apply to voice and SMS
@@ -1151,7 +1279,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destinations[0].event_destination_name #=> String
     #   resp.event_destinations[0].enabled #=> Boolean
     #   resp.event_destinations[0].matching_event_types #=> Array
-    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED"
+    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.event_destinations[0].cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destinations[0].cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
@@ -1288,7 +1416,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destination.event_destination_name #=> String
     #   resp.event_destination.enabled #=> Boolean
     #   resp.event_destination.matching_event_types #=> Array
-    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED"
+    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.event_destination.cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destination.cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destination.kinesis_firehose_destination.iam_role_arn #=> String
@@ -1353,6 +1481,34 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def delete_keyword(params = {}, options = {})
       req = build_request(:delete_keyword, params)
+      req.send_request(options)
+    end
+
+    # Deletes an account-level monthly spending limit override for sending
+    # multimedia messages (MMS). Deleting a spend limit override will set
+    # the `EnforcedLimit` to equal the `MaxLimit`, which is controlled by
+    # Amazon Web Services. For more information on spend limits (quotas) see
+    # [Quotas for Server Migration Service][1] in the *Server Migration
+    # Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html
+    #
+    # @return [Types::DeleteMediaMessageSpendLimitOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteMediaMessageSpendLimitOverrideResult#monthly_limit #monthly_limit} => Integer
+    #
+    # @example Response structure
+    #
+    #   resp.monthly_limit #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteMediaMessageSpendLimitOverride AWS API Documentation
+    #
+    # @overload delete_media_message_spend_limit_override(params = {})
+    # @param [Hash] params ({})
+    def delete_media_message_spend_limit_override(params = {}, options = {})
+      req = build_request(:delete_media_message_spend_limit_override, params)
       req.send_request(options)
     end
 
@@ -1494,6 +1650,45 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def delete_pool(params = {}, options = {})
       req = build_request(:delete_pool, params)
+      req.send_request(options)
+    end
+
+    # Permanently delete the protect configuration. The protect
+    # configuration must have deletion protection disabled and must not be
+    # associated as the account default protect configuration or associated
+    # with a configuration set.
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @return [Types::DeleteProtectConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProtectConfigurationResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::DeleteProtectConfigurationResult#protect_configuration_id #protect_configuration_id} => String
+    #   * {Types::DeleteProtectConfigurationResult#created_timestamp #created_timestamp} => Time
+    #   * {Types::DeleteProtectConfigurationResult#account_default #account_default} => Boolean
+    #   * {Types::DeleteProtectConfigurationResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_protect_configuration({
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.account_default #=> Boolean
+    #   resp.deletion_protection_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteProtectConfiguration AWS API Documentation
+    #
+    # @overload delete_protect_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_protect_configuration(params = {}, options = {})
+      req = build_request(:delete_protect_configuration, params)
       req.send_request(options)
     end
 
@@ -1746,7 +1941,7 @@ module Aws::PinpointSMSVoiceV2
     # @example Response structure
     #
     #   resp.account_attributes #=> Array
-    #   resp.account_attributes[0].name #=> String, one of "ACCOUNT_TIER"
+    #   resp.account_attributes[0].name #=> String, one of "ACCOUNT_TIER", "DEFAULT_PROTECT_CONFIGURATION_ID"
     #   resp.account_attributes[0].value #=> String
     #   resp.next_token #=> String
     #
@@ -1850,7 +2045,7 @@ module Aws::PinpointSMSVoiceV2
     #     configuration_set_names: ["ConfigurationSetNameOrArn"],
     #     filters: [
     #       {
-    #         name: "event-destination-name", # required, accepts event-destination-name, matching-event-types, default-message-type, default-sender-id
+    #         name: "event-destination-name", # required, accepts event-destination-name, matching-event-types, default-message-type, default-sender-id, protect-configuration-id
     #         values: ["FilterValue"], # required
     #       },
     #     ],
@@ -1867,7 +2062,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.configuration_sets[0].event_destinations[0].event_destination_name #=> String
     #   resp.configuration_sets[0].event_destinations[0].enabled #=> Boolean
     #   resp.configuration_sets[0].event_destinations[0].matching_event_types #=> Array
-    #   resp.configuration_sets[0].event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED"
+    #   resp.configuration_sets[0].event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.configuration_sets[0].event_destinations[0].cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.configuration_sets[0].event_destinations[0].cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.configuration_sets[0].event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
@@ -1876,6 +2071,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.configuration_sets[0].default_message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.configuration_sets[0].default_sender_id #=> String
     #   resp.configuration_sets[0].created_timestamp #=> Time
+    #   resp.configuration_sets[0].protect_configuration_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeConfigurationSets AWS API Documentation
@@ -2149,7 +2345,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.phone_numbers[0].iso_country_code #=> String
     #   resp.phone_numbers[0].message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.phone_numbers[0].number_capabilities #=> Array
-    #   resp.phone_numbers[0].number_capabilities[0] #=> String, one of "SMS", "VOICE"
+    #   resp.phone_numbers[0].number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
     #   resp.phone_numbers[0].number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.phone_numbers[0].monthly_leasing_price #=> String
     #   resp.phone_numbers[0].two_way_enabled #=> Boolean
@@ -2245,6 +2441,62 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def describe_pools(params = {}, options = {})
       req = build_request(:describe_pools, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the protect configurations that match any of filters. If a
+    # filter isn’t provided then all protect configurations are returned.
+    #
+    # @option params [Array<String>] :protect_configuration_ids
+    #   An array of protect configuration identifiers to search for.
+    #
+    # @option params [Array<Types::ProtectConfigurationFilter>] :filters
+    #   An array of ProtectConfigurationFilter objects to filter the results.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeProtectConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProtectConfigurationsResult#protect_configurations #protect_configurations} => Array&lt;Types::ProtectConfigurationInformation&gt;
+    #   * {Types::DescribeProtectConfigurationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_protect_configurations({
+    #     protect_configuration_ids: ["ProtectConfigurationIdOrArn"],
+    #     filters: [
+    #       {
+    #         name: "account-default", # required, accepts account-default, deletion-protection-enabled
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protect_configurations #=> Array
+    #   resp.protect_configurations[0].protect_configuration_arn #=> String
+    #   resp.protect_configurations[0].protect_configuration_id #=> String
+    #   resp.protect_configurations[0].created_timestamp #=> Time
+    #   resp.protect_configurations[0].account_default #=> Boolean
+    #   resp.protect_configurations[0].deletion_protection_enabled #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeProtectConfigurations AWS API Documentation
+    #
+    # @overload describe_protect_configurations(params = {})
+    # @param [Hash] params ({})
+    def describe_protect_configurations(params = {}, options = {})
+      req = build_request(:describe_protect_configurations, params)
       req.send_request(options)
     end
 
@@ -2811,7 +3063,7 @@ module Aws::PinpointSMSVoiceV2
     # @example Response structure
     #
     #   resp.spend_limits #=> Array
-    #   resp.spend_limits[0].name #=> String, one of "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT", "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"
+    #   resp.spend_limits[0].name #=> String, one of "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT", "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT", "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"
     #   resp.spend_limits[0].enforced_limit #=> Integer
     #   resp.spend_limits[0].max_limit #=> Integer
     #   resp.spend_limits[0].overridden #=> Boolean
@@ -2949,6 +3201,44 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Disassociate a protect configuration from a configuration set.
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @option params [required, String] :configuration_set_name
+    #   The name of the ConfigurationSet.
+    #
+    # @return [Types::DisassociateProtectConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateProtectConfigurationResult#configuration_set_arn #configuration_set_arn} => String
+    #   * {Types::DisassociateProtectConfigurationResult#configuration_set_name #configuration_set_name} => String
+    #   * {Types::DisassociateProtectConfigurationResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::DisassociateProtectConfigurationResult#protect_configuration_id #protect_configuration_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_protect_configuration({
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #     configuration_set_name: "ConfigurationSetNameOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_set_arn #=> String
+    #   resp.configuration_set_name #=> String
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DisassociateProtectConfiguration AWS API Documentation
+    #
+    # @overload disassociate_protect_configuration(params = {})
+    # @param [Hash] params ({})
+    def disassociate_protect_configuration(params = {}, options = {})
+      req = build_request(:disassociate_protect_configuration, params)
+      req.send_request(options)
+    end
+
     # Discard the current version of the registration.
     #
     # @option params [required, String] :registration_id
@@ -2989,6 +3279,47 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def discard_registration_version(params = {}, options = {})
       req = build_request(:discard_registration_version, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the CountryRuleSet for the specified NumberCapability from a
+    # protect configuration.
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @option params [required, String] :number_capability
+    #   The capability type to return the CountryRuleSet for. Valid values are
+    #   `SMS`, `VOICE`, or `MMS`.
+    #
+    # @return [Types::GetProtectConfigurationCountryRuleSetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProtectConfigurationCountryRuleSetResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::GetProtectConfigurationCountryRuleSetResult#protect_configuration_id #protect_configuration_id} => String
+    #   * {Types::GetProtectConfigurationCountryRuleSetResult#number_capability #number_capability} => String
+    #   * {Types::GetProtectConfigurationCountryRuleSetResult#country_rule_set #country_rule_set} => Hash&lt;String,Types::ProtectConfigurationCountryRuleSetInformation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_protect_configuration_country_rule_set({
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #     number_capability: "SMS", # required, accepts SMS, VOICE, MMS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #   resp.number_capability #=> String, one of "SMS", "VOICE", "MMS"
+    #   resp.country_rule_set #=> Hash
+    #   resp.country_rule_set["IsoCountryCode"].protect_status #=> String, one of "ALLOW", "BLOCK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/GetProtectConfigurationCountryRuleSet AWS API Documentation
+    #
+    # @overload get_protect_configuration_country_rule_set(params = {})
+    # @param [Hash] params ({})
+    def get_protect_configuration_country_rule_set(params = {}, options = {})
+      req = build_request(:get_protect_configuration_country_rule_set, params)
       req.send_request(options)
     end
 
@@ -3044,7 +3375,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.origination_identities[0].origination_identity #=> String
     #   resp.origination_identities[0].iso_country_code #=> String
     #   resp.origination_identities[0].number_capabilities #=> Array
-    #   resp.origination_identities[0].number_capabilities[0] #=> String, one of "SMS", "VOICE"
+    #   resp.origination_identities[0].number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
     #   resp.origination_identities[0].phone_number #=> String
     #   resp.next_token #=> String
     #
@@ -3366,7 +3697,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.iso_country_code #=> String
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.number_capabilities #=> Array
-    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE"
+    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
     #   resp.number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.monthly_leasing_price #=> String
     #   resp.two_way_enabled #=> Boolean
@@ -3512,7 +3843,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp = client.request_phone_number({
     #     iso_country_code: "IsoCountryCode", # required
     #     message_type: "TRANSACTIONAL", # required, accepts TRANSACTIONAL, PROMOTIONAL
-    #     number_capabilities: ["SMS"], # required, accepts SMS, VOICE
+    #     number_capabilities: ["SMS"], # required, accepts SMS, VOICE, MMS
     #     number_type: "LONG_CODE", # required, accepts LONG_CODE, TOLL_FREE, TEN_DLC, SIMULATOR
     #     opt_out_list_name: "OptOutListNameOrArn",
     #     pool_id: "PoolIdOrArn",
@@ -3536,7 +3867,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.iso_country_code #=> String
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.number_capabilities #=> Array
-    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE"
+    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
     #   resp.number_type #=> String, one of "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.monthly_leasing_price #=> String
     #   resp.two_way_enabled #=> Boolean
@@ -3715,6 +4046,91 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Creates a new multimedia message (MMS) and sends it to a recipient's
+    # phone number.
+    #
+    # @option params [required, String] :destination_phone_number
+    #   The destination phone number in E.164 format.
+    #
+    # @option params [required, String] :origination_identity
+    #   The origination identity of the message. This can be either the
+    #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
+    #   PoolId, or PoolArn.
+    #
+    # @option params [String] :message_body
+    #   The text body of the message.
+    #
+    # @option params [Array<String>] :media_urls
+    #   An array of URLs to each media file to send.
+    #
+    #   The media files have to be stored in a publicly available S3 bucket.
+    #   Supported media file formats are listed in [MMS file types, size and
+    #   character limits][1]. For more information on creating an S3 bucket
+    #   and managing objects, see [Creating a bucket][2] and [Uploading
+    #   objects][3] in the S3 user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/mms-limitations-character.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+    #
+    # @option params [String] :configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #
+    # @option params [String] :max_price
+    #   The maximum amount that you want to spend, in US dollars, per each MMS
+    #   message.
+    #
+    # @option params [Integer] :time_to_live
+    #   How long the text message is valid for. By default this is 72 hours.
+    #
+    # @option params [Hash<String,String>] :context
+    #   You can specify custom data in this field. If you do, that data is
+    #   logged to the event destination.
+    #
+    # @option params [Boolean] :dry_run
+    #   When set to true, the message is checked and validated, but isn't
+    #   sent to the end recipient.
+    #
+    # @option params [String] :protect_configuration_id
+    #   The unique identifier of the protect configuration to use.
+    #
+    # @return [Types::SendMediaMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendMediaMessageResult#message_id #message_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_media_message({
+    #     destination_phone_number: "PhoneNumber", # required
+    #     origination_identity: "MediaMessageOriginationIdentity", # required
+    #     message_body: "TextMessageBody",
+    #     media_urls: ["MediaUrlValue"],
+    #     configuration_set_name: "ConfigurationSetNameOrArn",
+    #     max_price: "MaxPrice",
+    #     time_to_live: 1,
+    #     context: {
+    #       "ContextKey" => "ContextValue",
+    #     },
+    #     dry_run: false,
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendMediaMessage AWS API Documentation
+    #
+    # @overload send_media_message(params = {})
+    # @param [Hash] params ({})
+    def send_media_message(params = {}, options = {})
+      req = build_request(:send_media_message, params)
+      req.send_request(options)
+    end
+
     # Creates a new text message and sends it to a recipient's phone
     # number.
     #
@@ -3778,6 +4194,9 @@ module Aws::PinpointSMSVoiceV2
     #   When set to true, the message is checked and validated, but isn't
     #   sent to the end recipient.
     #
+    # @option params [String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
     # @return [Types::SendTextMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendTextMessageResult#message_id #message_id} => String
@@ -3800,6 +4219,7 @@ module Aws::PinpointSMSVoiceV2
     #       "IN_TEMPLATE_ID" => "DestinationCountryParameterValue",
     #     },
     #     dry_run: false,
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn",
     #   })
     #
     # @example Response structure
@@ -3873,6 +4293,9 @@ module Aws::PinpointSMSVoiceV2
     #   When set to true, the message is checked and validated, but isn't
     #   sent to the end recipient.
     #
+    # @option params [String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
     # @return [Types::SendVoiceMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendVoiceMessageResult#message_id #message_id} => String
@@ -3892,6 +4315,7 @@ module Aws::PinpointSMSVoiceV2
     #       "ContextKey" => "ContextValue",
     #     },
     #     dry_run: false,
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn",
     #   })
     #
     # @example Response structure
@@ -3904,6 +4328,39 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def send_voice_message(params = {}, options = {})
       req = build_request(:send_voice_message, params)
+      req.send_request(options)
+    end
+
+    # Set a protect configuration as your account default. You can only have
+    # one account default protect configuration at a time. The current
+    # account default protect configuration is replaced with the provided
+    # protect configuration.
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @return [Types::SetAccountDefaultProtectConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetAccountDefaultProtectConfigurationResult#default_protect_configuration_arn #default_protect_configuration_arn} => String
+    #   * {Types::SetAccountDefaultProtectConfigurationResult#default_protect_configuration_id #default_protect_configuration_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_account_default_protect_configuration({
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.default_protect_configuration_arn #=> String
+    #   resp.default_protect_configuration_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetAccountDefaultProtectConfiguration AWS API Documentation
+    #
+    # @overload set_account_default_protect_configuration(params = {})
+    # @param [Hash] params ({})
+    def set_account_default_protect_configuration(params = {}, options = {})
+      req = build_request(:set_account_default_protect_configuration, params)
       req.send_request(options)
     end
 
@@ -3997,6 +4454,36 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def set_default_sender_id(params = {}, options = {})
       req = build_request(:set_default_sender_id, params)
+      req.send_request(options)
+    end
+
+    # Sets an account level monthly spend limit override for sending MMS
+    # messages. The requested spend limit must be less than or equal to the
+    # `MaxLimit`, which is set by Amazon Web Services.
+    #
+    # @option params [required, Integer] :monthly_limit
+    #   The new monthly limit to enforce on text messages.
+    #
+    # @return [Types::SetMediaMessageSpendLimitOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetMediaMessageSpendLimitOverrideResult#monthly_limit #monthly_limit} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_media_message_spend_limit_override({
+    #     monthly_limit: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monthly_limit #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetMediaMessageSpendLimitOverride AWS API Documentation
+    #
+    # @overload set_media_message_spend_limit_override(params = {})
+    # @param [Hash] params ({})
+    def set_media_message_spend_limit_override(params = {}, options = {})
+      req = build_request(:set_media_message_spend_limit_override, params)
       req.send_request(options)
     end
 
@@ -4229,7 +4716,7 @@ module Aws::PinpointSMSVoiceV2
     #     configuration_set_name: "ConfigurationSetNameOrArn", # required
     #     event_destination_name: "EventDestinationName", # required
     #     enabled: false,
-    #     matching_event_types: ["ALL"], # accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED
+    #     matching_event_types: ["ALL"], # accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED
     #     cloud_watch_logs_destination: {
     #       iam_role_arn: "IamRoleArn", # required
     #       log_group_arn: "LogGroupArn", # required
@@ -4250,7 +4737,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destination.event_destination_name #=> String
     #   resp.event_destination.enabled #=> Boolean
     #   resp.event_destination.matching_event_types #=> Array
-    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED"
+    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.event_destination.cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destination.cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destination.kinesis_firehose_destination.iam_role_arn #=> String
@@ -4346,7 +4833,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.iso_country_code #=> String
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.number_capabilities #=> Array
-    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE"
+    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
     #   resp.number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.monthly_leasing_price #=> String
     #   resp.two_way_enabled #=> Boolean
@@ -4454,6 +4941,105 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def update_pool(params = {}, options = {})
       req = build_request(:update_pool, params)
+      req.send_request(options)
+    end
+
+    # Update the setting for an existing protect configuration.
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #
+    # @return [Types::UpdateProtectConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProtectConfigurationResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::UpdateProtectConfigurationResult#protect_configuration_id #protect_configuration_id} => String
+    #   * {Types::UpdateProtectConfigurationResult#created_timestamp #created_timestamp} => Time
+    #   * {Types::UpdateProtectConfigurationResult#account_default #account_default} => Boolean
+    #   * {Types::UpdateProtectConfigurationResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_protect_configuration({
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #     deletion_protection_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.account_default #=> Boolean
+    #   resp.deletion_protection_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfiguration AWS API Documentation
+    #
+    # @overload update_protect_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_protect_configuration(params = {}, options = {})
+      req = build_request(:update_protect_configuration, params)
+      req.send_request(options)
+    end
+
+    # Update a country rule set to `ALLOW` or `BLOCK` messages to be sent to
+    # the specified destination counties. You can update one or multiple
+    # countries at a time. The updates are only applied to the specified
+    # NumberCapability type.
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @option params [required, String] :number_capability
+    #   The number capability to apply the CountryRuleSetUpdates updates to.
+    #
+    # @option params [required, Hash<String,Types::ProtectConfigurationCountryRuleSetInformation>] :country_rule_set_updates
+    #   A map of ProtectConfigurationCountryRuleSetInformation objects that
+    #   contain the details for the requested NumberCapability. The Key is the
+    #   two-letter ISO country code. For a list of supported ISO country
+    #   codes, see [Supported countries and regions (SMS channel)][1] in the
+    #   Amazon Pinpoint SMS user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html
+    #
+    # @return [Types::UpdateProtectConfigurationCountryRuleSetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProtectConfigurationCountryRuleSetResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::UpdateProtectConfigurationCountryRuleSetResult#protect_configuration_id #protect_configuration_id} => String
+    #   * {Types::UpdateProtectConfigurationCountryRuleSetResult#number_capability #number_capability} => String
+    #   * {Types::UpdateProtectConfigurationCountryRuleSetResult#country_rule_set #country_rule_set} => Hash&lt;String,Types::ProtectConfigurationCountryRuleSetInformation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_protect_configuration_country_rule_set({
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #     number_capability: "SMS", # required, accepts SMS, VOICE, MMS
+    #     country_rule_set_updates: { # required
+    #       "IsoCountryCode" => {
+    #         protect_status: "ALLOW", # required, accepts ALLOW, BLOCK
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #   resp.number_capability #=> String, one of "SMS", "VOICE", "MMS"
+    #   resp.country_rule_set #=> Hash
+    #   resp.country_rule_set["IsoCountryCode"].protect_status #=> String, one of "ALLOW", "BLOCK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationCountryRuleSet AWS API Documentation
+    #
+    # @overload update_protect_configuration_country_rule_set(params = {})
+    # @param [Hash] params ({})
+    def update_protect_configuration_country_rule_set(params = {}, options = {})
+      req = build_request(:update_protect_configuration_country_rule_set, params)
       req.send_request(options)
     end
 
@@ -4566,7 +5152,7 @@ module Aws::PinpointSMSVoiceV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

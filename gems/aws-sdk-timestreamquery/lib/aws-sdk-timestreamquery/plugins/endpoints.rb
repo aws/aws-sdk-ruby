@@ -64,6 +64,8 @@ module Aws::TimestreamQuery
             Aws::TimestreamQuery::Endpoints::CreateScheduledQuery.build(context)
           when :delete_scheduled_query
             Aws::TimestreamQuery::Endpoints::DeleteScheduledQuery.build(context)
+          when :describe_account_settings
+            Aws::TimestreamQuery::Endpoints::DescribeAccountSettings.build(context)
           when :describe_endpoints
             Aws::TimestreamQuery::Endpoints::DescribeEndpoints.build(context)
           when :describe_scheduled_query
@@ -82,6 +84,8 @@ module Aws::TimestreamQuery
             Aws::TimestreamQuery::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::TimestreamQuery::Endpoints::UntagResource.build(context)
+          when :update_account_settings
+            Aws::TimestreamQuery::Endpoints::UpdateAccountSettings.build(context)
           when :update_scheduled_query
             Aws::TimestreamQuery::Endpoints::UpdateScheduledQuery.build(context)
           end

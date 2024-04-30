@@ -245,6 +245,33 @@ module Aws::ConnectCases
     class DeleteDomainResponse < Aws::EmptyStructure
     end
 
+    class DeleteFieldRequest
+      attr_accessor domain_id: ::String
+      attr_accessor field_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFieldResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLayoutRequest
+      attr_accessor domain_id: ::String
+      attr_accessor layout_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLayoutResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTemplateRequest
+      attr_accessor domain_id: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTemplateResponse < Aws::EmptyStructure
+    end
+
     class DomainSummary
       attr_accessor domain_arn: ::String
       attr_accessor domain_id: ::String
@@ -424,9 +451,12 @@ module Aws::ConnectCases
     end
 
     class GetFieldResponse
+      attr_accessor created_time: ::Time
+      attr_accessor deleted: bool
       attr_accessor description: ::String
       attr_accessor field_arn: ::String
       attr_accessor field_id: ::String
+      attr_accessor last_modified_time: ::Time
       attr_accessor name: ::String
       attr_accessor namespace: ("System" | "Custom")
       attr_accessor tags: ::Hash[::String, ::String]
@@ -442,6 +472,9 @@ module Aws::ConnectCases
 
     class GetLayoutResponse
       attr_accessor content: Types::LayoutContent
+      attr_accessor created_time: ::Time
+      attr_accessor deleted: bool
+      attr_accessor last_modified_time: ::Time
       attr_accessor layout_arn: ::String
       attr_accessor layout_id: ::String
       attr_accessor name: ::String
@@ -456,7 +489,10 @@ module Aws::ConnectCases
     end
 
     class GetTemplateResponse
+      attr_accessor created_time: ::Time
+      attr_accessor deleted: bool
       attr_accessor description: ::String
+      attr_accessor last_modified_time: ::Time
       attr_accessor layout_configuration: Types::LayoutConfiguration
       attr_accessor name: ::String
       attr_accessor required_fields: ::Array[Types::RequiredField]

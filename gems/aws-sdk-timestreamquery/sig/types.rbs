@@ -67,6 +67,15 @@ module Aws::TimestreamQuery
       SENSITIVE: []
     end
 
+    class DescribeAccountSettingsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeAccountSettingsResponse
+      attr_accessor max_query_tcu: ::Integer
+      attr_accessor query_pricing_model: ("BYTES_SCANNED" | "COMPUTE_UNITS")
+      SENSITIVE: []
+    end
+
     class DescribeEndpointsRequest < Aws::EmptyStructure
     end
 
@@ -118,6 +127,7 @@ module Aws::TimestreamQuery
       attr_accessor execution_time_in_millis: ::Integer
       attr_accessor data_writes: ::Integer
       attr_accessor bytes_metered: ::Integer
+      attr_accessor cumulative_bytes_scanned: ::Integer
       attr_accessor records_ingested: ::Integer
       attr_accessor query_result_rows: ::Integer
       SENSITIVE: []
@@ -391,6 +401,18 @@ module Aws::TimestreamQuery
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAccountSettingsRequest
+      attr_accessor max_query_tcu: ::Integer
+      attr_accessor query_pricing_model: ("BYTES_SCANNED" | "COMPUTE_UNITS")
+      SENSITIVE: []
+    end
+
+    class UpdateAccountSettingsResponse
+      attr_accessor max_query_tcu: ::Integer
+      attr_accessor query_pricing_model: ("BYTES_SCANNED" | "COMPUTE_UNITS")
+      SENSITIVE: []
     end
 
     class UpdateScheduledQueryRequest

@@ -782,6 +782,7 @@ module Aws::SageMaker
     EnableRemoteDebug = Shapes::BooleanShape.new(name: 'EnableRemoteDebug')
     EnableSagemakerServicecatalogPortfolioInput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioInput')
     EnableSagemakerServicecatalogPortfolioOutput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioOutput')
+    EnableSessionTagChaining = Shapes::BooleanShape.new(name: 'EnableSessionTagChaining')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointArn = Shapes::StringShape.new(name: 'EndpointArn')
     EndpointConfigArn = Shapes::StringShape.new(name: 'EndpointConfigArn')
@@ -1879,6 +1880,7 @@ module Aws::SageMaker
     ServiceCatalogProvisionedProductDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisionedProductDetails')
     ServiceCatalogProvisioningDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisioningDetails')
     ServiceCatalogProvisioningUpdateDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisioningUpdateDetails')
+    SessionChainingConfig = Shapes::StructureShape.new(name: 'SessionChainingConfig')
     SessionExpirationDurationInSeconds = Shapes::IntegerShape.new(name: 'SessionExpirationDurationInSeconds')
     ShadowModeConfig = Shapes::StructureShape.new(name: 'ShadowModeConfig')
     ShadowModelVariantConfig = Shapes::StructureShape.new(name: 'ShadowModelVariantConfig')
@@ -3616,6 +3618,7 @@ module Aws::SageMaker
     CreateTrainingJobRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
     CreateTrainingJobRequest.add_member(:remote_debug_config, Shapes::ShapeRef.new(shape: RemoteDebugConfig, location_name: "RemoteDebugConfig"))
     CreateTrainingJobRequest.add_member(:infra_check_config, Shapes::ShapeRef.new(shape: InfraCheckConfig, location_name: "InfraCheckConfig"))
+    CreateTrainingJobRequest.add_member(:session_chaining_config, Shapes::ShapeRef.new(shape: SessionChainingConfig, location_name: "SessionChainingConfig"))
     CreateTrainingJobRequest.struct_class = Types::CreateTrainingJobRequest
 
     CreateTrainingJobResponse.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, required: true, location_name: "TrainingJobArn"))
@@ -8854,6 +8857,9 @@ module Aws::SageMaker
     ServiceCatalogProvisioningUpdateDetails.add_member(:provisioning_parameters, Shapes::ShapeRef.new(shape: ProvisioningParameters, location_name: "ProvisioningParameters"))
     ServiceCatalogProvisioningUpdateDetails.struct_class = Types::ServiceCatalogProvisioningUpdateDetails
 
+    SessionChainingConfig.add_member(:enable_session_tag_chaining, Shapes::ShapeRef.new(shape: EnableSessionTagChaining, location_name: "EnableSessionTagChaining"))
+    SessionChainingConfig.struct_class = Types::SessionChainingConfig
+
     ShadowModeConfig.add_member(:source_model_variant_name, Shapes::ShapeRef.new(shape: ModelVariantName, required: true, location_name: "SourceModelVariantName"))
     ShadowModeConfig.add_member(:shadow_model_variants, Shapes::ShapeRef.new(shape: ShadowModelVariantConfigList, required: true, location_name: "ShadowModelVariants"))
     ShadowModeConfig.struct_class = Types::ShadowModeConfig
@@ -9937,6 +9943,7 @@ module Aws::SageMaker
         "endpointPrefix" => "api.sagemaker",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "SageMaker",
         "serviceFullName" => "Amazon SageMaker Service",
         "serviceId" => "SageMaker",

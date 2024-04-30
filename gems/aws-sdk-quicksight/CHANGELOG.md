@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2024-04-30)
+------------------
+
+* Feature - New Q embedding supporting Generative Q&A
+
 1.109.0 (2024-04-25)
 ------------------
 

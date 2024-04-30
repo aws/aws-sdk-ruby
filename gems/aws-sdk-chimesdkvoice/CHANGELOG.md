@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-04-30)
+------------------
+
+* Feature - Due to changes made by the Amazon Alexa service, GetSipMediaApplicationAlexaSkillConfiguration and PutSipMediaApplicationAlexaSkillConfiguration APIs are no longer available for use. For more information, refer to the Alexa Smart Properties page.
+
 1.18.0 (2024-04-25)
 ------------------
 

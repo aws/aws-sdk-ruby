@@ -16,22 +16,47 @@ module Aws
       end
 
       describe '#express_credentials_for' do
-        before(:each) do
-          EXPRESS_CREDENTIALS_CACHE.clear
-          expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
-            .and_return(express_credentials)
+        after do
+          Aws::S3.express_credentials_cache.clear
         end
 
         it 'returns a new set of credentials for the bucket' do
+          expect(ExpressCredentials).to receive(:new)
+            .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
+            .and_return(express_credentials)
+
           expect(subject.express_credentials_for('bucket'))
             .to eq(express_credentials)
         end
 
         it 'returns the same set of credentials for the bucket' do
+          expect(ExpressCredentials).to receive(:new)
+            .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
+            .and_return(express_credentials)
+
           credentials = subject.express_credentials_for('bucket')
           expect(subject.express_credentials_for('bucket'))
             .to be(credentials)
+        end
+
+        context 'caching disabled' do
+          subject do
+            ExpressCredentialsProvider.new(
+              client: client,
+              session_mode: 'ReadWrite',
+              caching: false
+            )
+          end
+
+          it 'returns a different set of credentials for the bucket' do
+            expect(ExpressCredentials).to receive(:new)
+              .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
+              .and_return(express_credentials).twice
+
+            credentials = subject.express_credentials_for('bucket')
+            expect(subject.express_credentials_for('bucket'))
+              .to be(credentials)
+          end
         end
       end
 

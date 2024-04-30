@@ -982,6 +982,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.endpoint_v2 #=> String
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
+    #   resp.domain_status.domain_endpoint_v2_hosted_zone_id #=> String
     #   resp.domain_status.processing #=> Boolean
     #   resp.domain_status.upgrade_processing #=> Boolean
     #   resp.domain_status.engine_version #=> String
@@ -1342,6 +1343,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.endpoint_v2 #=> String
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
+    #   resp.domain_status.domain_endpoint_v2_hosted_zone_id #=> String
     #   resp.domain_status.processing #=> Boolean
     #   resp.domain_status.upgrade_processing #=> Boolean
     #   resp.domain_status.engine_version #=> String
@@ -1635,6 +1637,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.endpoint_v2 #=> String
     #   resp.domain_status.endpoints #=> Hash
     #   resp.domain_status.endpoints["String"] #=> String
+    #   resp.domain_status.domain_endpoint_v2_hosted_zone_id #=> String
     #   resp.domain_status.processing #=> Boolean
     #   resp.domain_status.upgrade_processing #=> Boolean
     #   resp.domain_status.engine_version #=> String
@@ -2159,6 +2162,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].endpoint_v2 #=> String
     #   resp.domain_status_list[0].endpoints #=> Hash
     #   resp.domain_status_list[0].endpoints["String"] #=> String
+    #   resp.domain_status_list[0].domain_endpoint_v2_hosted_zone_id #=> String
     #   resp.domain_status_list[0].processing #=> Boolean
     #   resp.domain_status_list[0].upgrade_processing #=> Boolean
     #   resp.domain_status_list[0].engine_version #=> String
@@ -2304,6 +2308,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.endpoint_v2 #=> String
     #   resp.dry_run_config.endpoints #=> Hash
     #   resp.dry_run_config.endpoints["String"] #=> String
+    #   resp.dry_run_config.domain_endpoint_v2_hosted_zone_id #=> String
     #   resp.dry_run_config.processing #=> Boolean
     #   resp.dry_run_config.upgrade_processing #=> Boolean
     #   resp.dry_run_config.engine_version #=> String
@@ -4709,7 +4714,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

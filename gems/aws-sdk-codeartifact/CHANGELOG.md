@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2024-04-30)
+------------------
+
+* Feature - Add support for the Ruby package format.
+
 1.40.0 (2024-04-25)
 ------------------
 

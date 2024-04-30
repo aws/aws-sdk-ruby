@@ -1922,6 +1922,7 @@ module Aws::ChimeSDKVoice
         o.name = "GetSipMediaApplicationAlexaSkillConfiguration"
         o.http_method = "GET"
         o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/alexa-skill-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSipMediaApplicationAlexaSkillConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSipMediaApplicationAlexaSkillConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -2410,6 +2411,7 @@ module Aws::ChimeSDKVoice
         o.name = "PutSipMediaApplicationAlexaSkillConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/alexa-skill-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutSipMediaApplicationAlexaSkillConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutSipMediaApplicationAlexaSkillConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)

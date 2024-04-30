@@ -165,6 +165,12 @@ module Aws::QuickSight
       attr_accessor dashboard: Types::AnonymousUserDashboardEmbeddingConfiguration
       attr_accessor dashboard_visual: Types::AnonymousUserDashboardVisualEmbeddingConfiguration
       attr_accessor q_search_bar: Types::AnonymousUserQSearchBarEmbeddingConfiguration
+      attr_accessor generative_qn_a: Types::AnonymousUserGenerativeQnAEmbeddingConfiguration
+      SENSITIVE: []
+    end
+
+    class AnonymousUserGenerativeQnAEmbeddingConfiguration
+      attr_accessor initial_topic_id: ::String
       SENSITIVE: []
     end
 
@@ -1161,6 +1167,9 @@ module Aws::QuickSight
       attr_accessor admin_group: ::Array[::String]
       attr_accessor author_group: ::Array[::String]
       attr_accessor reader_group: ::Array[::String]
+      attr_accessor admin_pro_group: ::Array[::String]
+      attr_accessor author_pro_group: ::Array[::String]
+      attr_accessor reader_pro_group: ::Array[::String]
       attr_accessor first_name: ::String
       attr_accessor last_name: ::String
       attr_accessor email_address: ::String
@@ -1429,7 +1438,7 @@ module Aws::QuickSight
       attr_accessor member_name: ::String
       attr_accessor aws_account_id: ::String
       attr_accessor namespace: ::String
-      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER")
+      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       SENSITIVE: []
     end
 
@@ -2510,7 +2519,7 @@ module Aws::QuickSight
     end
 
     class DeleteRoleCustomPermissionRequest
-      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER")
+      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       attr_accessor aws_account_id: ::String
       attr_accessor namespace: ::String
       SENSITIVE: []
@@ -2524,7 +2533,7 @@ module Aws::QuickSight
 
     class DeleteRoleMembershipRequest
       attr_accessor member_name: ::String
-      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER")
+      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       attr_accessor aws_account_id: ::String
       attr_accessor namespace: ::String
       SENSITIVE: []
@@ -3125,7 +3134,7 @@ module Aws::QuickSight
     end
 
     class DescribeRoleCustomPermissionRequest
-      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER")
+      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       attr_accessor aws_account_id: ::String
       attr_accessor namespace: ::String
       SENSITIVE: []
@@ -3898,6 +3907,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class GaugeChartColorConfiguration
+      attr_accessor foreground_color: ::String
+      attr_accessor background_color: ::String
+      SENSITIVE: []
+    end
+
     class GaugeChartConditionalFormatting
       attr_accessor conditional_formatting_options: ::Array[Types::GaugeChartConditionalFormattingOption]
       SENSITIVE: []
@@ -3915,6 +3930,7 @@ module Aws::QuickSight
       attr_accessor data_labels: Types::DataLabelOptions
       attr_accessor tooltip_options: Types::TooltipOptions
       attr_accessor visual_palette: Types::VisualPalette
+      attr_accessor color_configuration: Types::GaugeChartColorConfiguration
       attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
@@ -4946,7 +4962,7 @@ module Aws::QuickSight
     end
 
     class ListRoleMembershipsRequest
-      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER")
+      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor aws_account_id: ::String
@@ -6048,7 +6064,7 @@ module Aws::QuickSight
     class RegisterUserRequest
       attr_accessor identity_type: ("IAM" | "QUICKSIGHT" | "IAM_IDENTITY_CENTER")
       attr_accessor email: ::String
-      attr_accessor user_role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER")
+      attr_accessor user_role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       attr_accessor iam_arn: ::String
       attr_accessor session_name: ::String
       attr_accessor aws_account_id: ::String
@@ -6097,6 +6113,12 @@ module Aws::QuickSight
       attr_accessor quick_sight_console: Types::RegisteredUserQuickSightConsoleEmbeddingConfiguration
       attr_accessor q_search_bar: Types::RegisteredUserQSearchBarEmbeddingConfiguration
       attr_accessor dashboard_visual: Types::RegisteredUserDashboardVisualEmbeddingConfiguration
+      attr_accessor generative_qn_a: Types::RegisteredUserGenerativeQnAEmbeddingConfiguration
+      SENSITIVE: []
+    end
+
+    class RegisteredUserGenerativeQnAEmbeddingConfiguration
+      attr_accessor initial_topic_id: ::String
       SENSITIVE: []
     end
 
@@ -7591,6 +7613,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor topic_id: ::String
       attr_accessor name: ::String
+      attr_accessor user_experience_version: ("LEGACY" | "NEW_READER_EXPERIENCE")
       SENSITIVE: []
     end
 
@@ -8111,13 +8134,25 @@ module Aws::QuickSight
 
     class UpdateRoleCustomPermissionRequest
       attr_accessor custom_permissions_name: ::String
-      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER")
+      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       attr_accessor aws_account_id: ::String
       attr_accessor namespace: ::String
       SENSITIVE: []
     end
 
     class UpdateRoleCustomPermissionResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateSPICECapacityConfigurationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor purchase_mode: ("MANUAL" | "AUTO_PURCHASE")
+      SENSITIVE: []
+    end
+
+    class UpdateSPICECapacityConfigurationResponse
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -8283,7 +8318,7 @@ module Aws::QuickSight
       attr_accessor aws_account_id: ::String
       attr_accessor namespace: ::String
       attr_accessor email: ::String
-      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER")
+      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       attr_accessor custom_permissions_name: ::String
       attr_accessor unapply_custom_permissions: bool
       attr_accessor external_login_federation_provider_type: ::String
@@ -8333,7 +8368,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor user_name: ::String
       attr_accessor email: ::String
-      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER")
+      attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       attr_accessor identity_type: ("IAM" | "QUICKSIGHT" | "IAM_IDENTITY_CENTER")
       attr_accessor active: bool
       attr_accessor principal_id: ::String

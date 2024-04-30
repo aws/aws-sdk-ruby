@@ -163,6 +163,16 @@ module Aws
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DescribeAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountSettingsResponse]
+        def max_query_tcu: () -> ::Integer
+        def query_pricing_model: () -> ("BYTES_SCANNED" | "COMPUTE_UNITS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamQuery/Client.html#describe_account_settings-instance_method
+      def describe_account_settings: (
+                                     ) -> _DescribeAccountSettingsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountSettingsResponseSuccess
+
       interface _DescribeEndpointsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEndpointsResponse]
         def endpoints: () -> ::Array[Types::Endpoint]
@@ -269,6 +279,18 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountSettingsResponse]
+        def max_query_tcu: () -> ::Integer
+        def query_pricing_model: () -> ("BYTES_SCANNED" | "COMPUTE_UNITS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamQuery/Client.html#update_account_settings-instance_method
+      def update_account_settings: (
+                                     ?max_query_tcu: ::Integer,
+                                     ?query_pricing_model: ("BYTES_SCANNED" | "COMPUTE_UNITS")
+                                   ) -> _UpdateAccountSettingsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountSettingsResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamQuery/Client.html#update_scheduled_query-instance_method
       def update_scheduled_query: (

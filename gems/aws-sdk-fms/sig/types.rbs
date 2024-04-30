@@ -1135,6 +1135,7 @@ module Aws::FMS
 
     class StatefulEngineOptions
       attr_accessor rule_order: ("STRICT_ORDER" | "DEFAULT_ACTION_ORDER")
+      attr_accessor stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT" | "FMS_IGNORE")
       SENSITIVE: []
     end
 

@@ -837,6 +837,18 @@ module Aws::Route53Resolver
     # @option params [required, String] :name
     #   A name that lets you identify the rule in the rule group.
     #
+    # @option params [String] :firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the allow domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the redirection list to the domain alloww list.
+    #
     # @option params [String] :qtype
     #   The DNS query type you want the rule to evaluate. Allowed values are;
     #
@@ -868,6 +880,15 @@ module Aws::Route53Resolver
     #
     #   * TXT: Verifies email senders and application-specific values.
     #
+    #   * A query type you define by using the DNS type ID, for example 28 for
+    #     AAAA. The values must be defined as TYPENUMBER, where the NUMBER can
+    #     be 1-65334, for example, TYPE28. For more information, see [List of
+    #     DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #
     # @return [Types::CreateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -885,6 +906,7 @@ module Aws::Route53Resolver
     #     block_override_dns_type: "CNAME", # accepts CNAME
     #     block_override_ttl: 1,
     #     name: "Name", # required
+    #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN", # accepts INSPECT_REDIRECTION_DOMAIN, TRUST_REDIRECTION_DOMAIN
     #     qtype: "Qtype",
     #   })
     #
@@ -902,6 +924,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.creator_request_id #=> String
     #   resp.firewall_rule.creation_time #=> String
     #   resp.firewall_rule.modification_time #=> String
+    #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rule.qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRule AWS API Documentation
@@ -1071,6 +1094,18 @@ module Aws::Route53Resolver
     #   must allow TCP and UDP access. For inbound access, open port 53. For
     #   outbound access, open the port that you're using for DNS queries on
     #   your network.
+    #
+    #   Some security group rules will cause your connection to be tracked.
+    #   For outbound resolver endpoint, it can potentially impact the maximum
+    #   queries per second from outbound endpoint to your target name server.
+    #   For inbound resolver endpoint, it can bring down the overall maximum
+    #   queries per second per IP address to as low as 1500. To avoid
+    #   connection tracking caused by security group, see [Untracked
+    #   connections][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#untracked-connectionsl
     #
     # @option params [required, String] :direction
     #   Specify the applicable value:
@@ -1484,6 +1519,15 @@ module Aws::Route53Resolver
     #
     #   * TXT: Verifies email senders and application-specific values.
     #
+    #   * A query type you define by using the DNS type ID, for example 28 for
+    #     AAAA. The values must be defined as TYPENUMBER, where the NUMBER can
+    #     be 1-65334, for example, TYPE28. For more information, see [List of
+    #     DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #
     # @return [Types::DeleteFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -1510,6 +1554,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.creator_request_id #=> String
     #   resp.firewall_rule.creation_time #=> String
     #   resp.firewall_rule.modification_time #=> String
+    #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rule.qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRule AWS API Documentation
@@ -2990,6 +3035,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rules[0].creator_request_id #=> String
     #   resp.firewall_rules[0].creation_time #=> String
     #   resp.firewall_rules[0].modification_time #=> String
+    #   resp.firewall_rules[0].firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rules[0].qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRules AWS API Documentation
@@ -4216,6 +4262,18 @@ module Aws::Route53Resolver
     # @option params [String] :name
     #   The name of the rule.
     #
+    # @option params [String] :firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the allow domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the domain in the redirection list to the domain alloww list.
+    #
     # @option params [String] :qtype
     #   The DNS query type you want the rule to evaluate. Allowed values are;
     #
@@ -4247,6 +4305,15 @@ module Aws::Route53Resolver
     #
     #   * TXT: Verifies email senders and application-specific values.
     #
+    #   * A query type you define by using the DNS type ID, for example 28 for
+    #     AAAA. The values must be defined as TYPENUMBER, where the NUMBER can
+    #     be 1-65334, for example, TYPE28. For more information, see [List of
+    #     DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #
     # @return [Types::UpdateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -4263,6 +4330,7 @@ module Aws::Route53Resolver
     #     block_override_dns_type: "CNAME", # accepts CNAME
     #     block_override_ttl: 1,
     #     name: "Name",
+    #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN", # accepts INSPECT_REDIRECTION_DOMAIN, TRUST_REDIRECTION_DOMAIN
     #     qtype: "Qtype",
     #   })
     #
@@ -4280,6 +4348,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.creator_request_id #=> String
     #   resp.firewall_rule.creation_time #=> String
     #   resp.firewall_rule.modification_time #=> String
+    #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rule.qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRule AWS API Documentation
@@ -4683,7 +4752,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

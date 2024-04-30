@@ -8,6 +8,20 @@
 module Aws::QBusiness
   module Types
 
+    class APISchema
+      attr_accessor payload: ::String
+      attr_accessor s3: Types::S3
+      attr_accessor unknown: untyped
+      SENSITIVE: [:payload]
+
+      class Payload < APISchema
+      end
+      class S3 < APISchema
+      end
+      class Unknown < APISchema
+      end
+    end
+
     class AccessConfiguration
       attr_accessor access_controls: ::Array[Types::AccessControl]
       attr_accessor member_relation: ("AND" | "OR")
@@ -15,8 +29,8 @@ module Aws::QBusiness
     end
 
     class AccessControl
-      attr_accessor member_relation: ("AND" | "OR")
       attr_accessor principals: ::Array[Types::Principal]
+      attr_accessor member_relation: ("AND" | "OR")
       SENSITIVE: []
     end
 
@@ -26,9 +40,17 @@ module Aws::QBusiness
     end
 
     class ActionExecution
+      attr_accessor plugin_id: ::String
       attr_accessor payload: ::Hash[::String, Types::ActionExecutionPayloadField]
       attr_accessor payload_field_name_separator: ::String
+      SENSITIVE: []
+    end
+
+    class ActionExecutionEvent
       attr_accessor plugin_id: ::String
+      attr_accessor payload: ::Hash[::String, Types::ActionExecutionPayloadField]
+      attr_accessor payload_field_name_separator: ::String
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -38,35 +60,49 @@ module Aws::QBusiness
     end
 
     class ActionReview
+      attr_accessor plugin_id: ::String
+      attr_accessor plugin_type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK" | "CUSTOM")
       attr_accessor payload: ::Hash[::String, Types::ActionReviewPayloadField]
       attr_accessor payload_field_name_separator: ::String
+      SENSITIVE: []
+    end
+
+    class ActionReviewEvent
+      attr_accessor conversation_id: ::String
+      attr_accessor user_message_id: ::String
+      attr_accessor system_message_id: ::String
       attr_accessor plugin_id: ::String
-      attr_accessor plugin_type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
+      attr_accessor plugin_type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK" | "CUSTOM")
+      attr_accessor payload: ::Hash[::String, Types::ActionReviewPayloadField]
+      attr_accessor payload_field_name_separator: ::String
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
     class ActionReviewPayloadField
-      attr_accessor allowed_values: ::Array[Types::ActionReviewPayloadFieldAllowedValue]
       attr_accessor display_name: ::String
       attr_accessor display_order: ::Integer
-      attr_accessor required: bool
+      attr_accessor display_description: ::String
       attr_accessor type: ("STRING" | "NUMBER" | "ARRAY" | "BOOLEAN")
       attr_accessor value: untyped
+      attr_accessor allowed_values: ::Array[Types::ActionReviewPayloadFieldAllowedValue]
+      attr_accessor allowed_format: ::String
+      attr_accessor required: bool
       SENSITIVE: []
     end
 
     class ActionReviewPayloadFieldAllowedValue
-      attr_accessor display_value: untyped
       attr_accessor value: untyped
+      attr_accessor display_value: untyped
       SENSITIVE: []
     end
 
     class Application
+      attr_accessor display_name: ::String
       attr_accessor application_id: ::String
       attr_accessor created_at: ::Time
-      attr_accessor display_name: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
       attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
       SENSITIVE: []
     end
 
@@ -81,15 +117,21 @@ module Aws::QBusiness
     end
 
     class AttachmentInput
-      attr_accessor data: ::String
       attr_accessor name: ::String
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentInputEvent
+      attr_accessor attachment: Types::AttachmentInput
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
     class AttachmentOutput
-      attr_accessor error: Types::ErrorDetail
       attr_accessor name: ::String
       attr_accessor status: ("FAILED" | "SUCCEEDED")
+      attr_accessor error: Types::ErrorDetail
       SENSITIVE: []
     end
 
@@ -100,29 +142,51 @@ module Aws::QBusiness
 
     class AttributeFilter
       attr_accessor and_all_filters: ::Array[Types::AttributeFilter]
+      attr_accessor or_all_filters: ::Array[Types::AttributeFilter]
+      attr_accessor not_filter: Types::AttributeFilter
+      attr_accessor equals_to: Types::DocumentAttribute
       attr_accessor contains_all: Types::DocumentAttribute
       attr_accessor contains_any: Types::DocumentAttribute
-      attr_accessor equals_to: Types::DocumentAttribute
       attr_accessor greater_than: Types::DocumentAttribute
       attr_accessor greater_than_or_equals: Types::DocumentAttribute
       attr_accessor less_than: Types::DocumentAttribute
       attr_accessor less_than_or_equals: Types::DocumentAttribute
-      attr_accessor not_filter: Types::AttributeFilter
-      attr_accessor or_all_filters: ::Array[Types::AttributeFilter]
+      SENSITIVE: []
+    end
+
+    class AuthChallengeRequest
+      attr_accessor authorization_url: ::String
+      SENSITIVE: []
+    end
+
+    class AuthChallengeRequestEvent
+      attr_accessor authorization_url: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class AuthChallengeResponse
+      attr_accessor response_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AuthChallengeResponseEvent
+      attr_accessor response_map: ::Hash[::String, ::String]
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
     class BasicAuthConfiguration
-      attr_accessor role_arn: ::String
       attr_accessor secret_arn: ::String
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
     class BatchDeleteDocumentRequest
       attr_accessor application_id: ::String
-      attr_accessor data_source_sync_id: ::String
-      attr_accessor documents: ::Array[Types::DeleteDocument]
       attr_accessor index_id: ::String
+      attr_accessor documents: ::Array[Types::DeleteDocument]
+      attr_accessor data_source_sync_id: ::String
       SENSITIVE: []
     end
 
@@ -133,10 +197,10 @@ module Aws::QBusiness
 
     class BatchPutDocumentRequest
       attr_accessor application_id: ::String
-      attr_accessor data_source_sync_id: ::String
-      attr_accessor documents: ::Array[Types::Document]
       attr_accessor index_id: ::String
+      attr_accessor documents: ::Array[Types::Document]
       attr_accessor role_arn: ::String
+      attr_accessor data_source_sync_id: ::String
       SENSITIVE: []
     end
 
@@ -158,6 +222,17 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class ChatInput
+      attr_accessor application_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_groups: ::Array[::String]
+      attr_accessor conversation_id: ::String
+      attr_accessor parent_message_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor input_stream: Types::ChatInputStream
+      SENSITIVE: []
+    end
+
     class ChatModeConfiguration
       attr_accessor plugin_configuration: Types::PluginConfiguration
       attr_accessor unknown: untyped
@@ -169,30 +244,45 @@ module Aws::QBusiness
       end
     end
 
+    class ChatOutput
+      attr_accessor output_stream: Types::ChatOutputStream
+      SENSITIVE: []
+    end
+
     class ChatSyncInput
-      attr_accessor action_execution: Types::ActionExecution
       attr_accessor application_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_groups: ::Array[::String]
+      attr_accessor user_message: ::String
       attr_accessor attachments: ::Array[Types::AttachmentInput]
+      attr_accessor action_execution: Types::ActionExecution
+      attr_accessor auth_challenge_response: Types::AuthChallengeResponse
+      attr_accessor conversation_id: ::String
+      attr_accessor parent_message_id: ::String
       attr_accessor attribute_filter: Types::AttributeFilter
       attr_accessor chat_mode: ("RETRIEVAL_MODE" | "CREATOR_MODE" | "PLUGIN_MODE")
       attr_accessor chat_mode_configuration: Types::ChatModeConfiguration
       attr_accessor client_token: ::String
-      attr_accessor conversation_id: ::String
-      attr_accessor parent_message_id: ::String
-      attr_accessor user_groups: ::Array[::String]
-      attr_accessor user_id: ::String
-      attr_accessor user_message: ::String
       SENSITIVE: []
     end
 
     class ChatSyncOutput
-      attr_accessor action_review: Types::ActionReview
       attr_accessor conversation_id: ::String
-      attr_accessor failed_attachments: ::Array[Types::AttachmentOutput]
-      attr_accessor source_attributions: ::Array[Types::SourceAttribution]
       attr_accessor system_message: ::String
       attr_accessor system_message_id: ::String
       attr_accessor user_message_id: ::String
+      attr_accessor action_review: Types::ActionReview
+      attr_accessor auth_challenge_request: Types::AuthChallengeRequest
+      attr_accessor source_attributions: ::Array[Types::SourceAttribution]
+      attr_accessor failed_attachments: ::Array[Types::AttachmentOutput]
+      SENSITIVE: []
+    end
+
+    class ConfigurationEvent
+      attr_accessor chat_mode: ("RETRIEVAL_MODE" | "CREATOR_MODE" | "PLUGIN_MODE")
+      attr_accessor chat_mode_configuration: Types::ChatModeConfiguration
+      attr_accessor attribute_filter: Types::AttributeFilter
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -215,105 +305,108 @@ module Aws::QBusiness
 
     class Conversation
       attr_accessor conversation_id: ::String
-      attr_accessor start_time: ::Time
       attr_accessor title: ::String
+      attr_accessor start_time: ::Time
       SENSITIVE: []
     end
 
     class CreateApplicationRequest
-      attr_accessor attachments_configuration: Types::AttachmentsConfiguration
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
       attr_accessor display_name: ::String
-      attr_accessor encryption_configuration: Types::EncryptionConfiguration
-      attr_accessor identity_center_instance_arn: ::String
       attr_accessor role_arn: ::String
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      attr_accessor attachments_configuration: Types::AttachmentsConfiguration
       SENSITIVE: []
     end
 
     class CreateApplicationResponse
-      attr_accessor application_arn: ::String
       attr_accessor application_id: ::String
+      attr_accessor application_arn: ::String
       SENSITIVE: []
     end
 
     class CreateDataSourceRequest
       attr_accessor application_id: ::String
-      attr_accessor client_token: ::String
-      attr_accessor configuration: untyped
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
-      attr_accessor document_enrichment_configuration: Types::DocumentEnrichmentConfiguration
       attr_accessor index_id: ::String
-      attr_accessor role_arn: ::String
-      attr_accessor sync_schedule: ::String
-      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor display_name: ::String
+      attr_accessor configuration: untyped
       attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sync_schedule: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor document_enrichment_configuration: Types::DocumentEnrichmentConfiguration
       SENSITIVE: []
     end
 
     class CreateDataSourceResponse
-      attr_accessor data_source_arn: ::String
       attr_accessor data_source_id: ::String
+      attr_accessor data_source_arn: ::String
       SENSITIVE: []
     end
 
     class CreateIndexRequest
       attr_accessor application_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor type: ("ENTERPRISE" | "STARTER")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor capacity_configuration: Types::IndexCapacityConfiguration
       attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
-      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class CreateIndexResponse
-      attr_accessor index_arn: ::String
       attr_accessor index_id: ::String
+      attr_accessor index_arn: ::String
       SENSITIVE: []
     end
 
     class CreatePluginRequest
       attr_accessor application_id: ::String
-      attr_accessor auth_configuration: Types::PluginAuthConfiguration
-      attr_accessor client_token: ::String
       attr_accessor display_name: ::String
+      attr_accessor type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK" | "CUSTOM")
+      attr_accessor auth_configuration: Types::PluginAuthConfiguration
       attr_accessor server_url: ::String
+      attr_accessor custom_plugin_configuration: Types::CustomPluginConfiguration
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class CreatePluginResponse
-      attr_accessor plugin_arn: ::String
       attr_accessor plugin_id: ::String
+      attr_accessor plugin_arn: ::String
+      attr_accessor build_status: ("READY" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
     class CreateRetrieverRequest
       attr_accessor application_id: ::String
-      attr_accessor client_token: ::String
-      attr_accessor configuration: Types::RetrieverConfiguration
-      attr_accessor display_name: ::String
-      attr_accessor role_arn: ::String
-      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor type: ("NATIVE_INDEX" | "KENDRA_INDEX")
+      attr_accessor display_name: ::String
+      attr_accessor configuration: Types::RetrieverConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class CreateRetrieverResponse
-      attr_accessor retriever_arn: ::String
       attr_accessor retriever_id: ::String
+      attr_accessor retriever_arn: ::String
       SENSITIVE: []
     end
 
     class CreateUserRequest
       attr_accessor application_id: ::String
-      attr_accessor client_token: ::String
-      attr_accessor user_aliases: ::Array[Types::UserAlias]
       attr_accessor user_id: ::String
+      attr_accessor user_aliases: ::Array[Types::UserAlias]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -322,19 +415,19 @@ module Aws::QBusiness
 
     class CreateWebExperienceRequest
       attr_accessor application_id: ::String
-      attr_accessor client_token: ::String
-      attr_accessor role_arn: ::String
-      attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
-      attr_accessor subtitle: ::String
-      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor title: ::String
+      attr_accessor subtitle: ::String
       attr_accessor welcome_message: ::String
+      attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class CreateWebExperienceResponse
-      attr_accessor web_experience_arn: ::String
       attr_accessor web_experience_id: ::String
+      attr_accessor web_experience_arn: ::String
       SENSITIVE: []
     end
 
@@ -343,45 +436,52 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class CustomPluginConfiguration
+      attr_accessor description: ::String
+      attr_accessor api_schema_type: ("OPEN_API_V3")
+      attr_accessor api_schema: Types::APISchema
+      SENSITIVE: []
+    end
+
     class DataSource
-      attr_accessor created_at: ::Time
-      attr_accessor data_source_id: ::String
       attr_accessor display_name: ::String
-      attr_accessor status: ("PENDING_CREATION" | "CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      attr_accessor data_source_id: ::String
       attr_accessor type: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor status: ("PENDING_CREATION" | "CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
       SENSITIVE: []
     end
 
     class DataSourceSyncJob
-      attr_accessor data_source_error_code: ::String
-      attr_accessor end_time: ::Time
-      attr_accessor error: Types::ErrorDetail
       attr_accessor execution_id: ::String
-      attr_accessor metrics: Types::DataSourceSyncJobMetrics
       attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       attr_accessor status: ("FAILED" | "SUCCEEDED" | "SYNCING" | "INCOMPLETE" | "STOPPING" | "ABORTED" | "SYNCING_INDEXING")
+      attr_accessor error: Types::ErrorDetail
+      attr_accessor data_source_error_code: ::String
+      attr_accessor metrics: Types::DataSourceSyncJobMetrics
       SENSITIVE: []
     end
 
     class DataSourceSyncJobMetrics
       attr_accessor documents_added: ::String
+      attr_accessor documents_modified: ::String
       attr_accessor documents_deleted: ::String
       attr_accessor documents_failed: ::String
-      attr_accessor documents_modified: ::String
       attr_accessor documents_scanned: ::String
       SENSITIVE: []
     end
 
     class DataSourceVpcConfiguration
-      attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
       SENSITIVE: []
     end
 
     class DateAttributeBoostingConfiguration
-      attr_accessor boosting_duration_in_seconds: ::Integer
       attr_accessor boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+      attr_accessor boosting_duration_in_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -402,8 +502,8 @@ module Aws::QBusiness
     end
 
     class DeleteConversationRequest
-      attr_accessor application_id: ::String
       attr_accessor conversation_id: ::String
+      attr_accessor application_id: ::String
       attr_accessor user_id: ::String
       SENSITIVE: []
     end
@@ -413,8 +513,8 @@ module Aws::QBusiness
 
     class DeleteDataSourceRequest
       attr_accessor application_id: ::String
-      attr_accessor data_source_id: ::String
       attr_accessor index_id: ::String
+      attr_accessor data_source_id: ::String
       SENSITIVE: []
     end
 
@@ -428,9 +528,9 @@ module Aws::QBusiness
 
     class DeleteGroupRequest
       attr_accessor application_id: ::String
-      attr_accessor data_source_id: ::String
-      attr_accessor group_name: ::String
       attr_accessor index_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor data_source_id: ::String
       SENSITIVE: []
     end
 
@@ -483,13 +583,13 @@ module Aws::QBusiness
     end
 
     class Document
-      attr_accessor access_configuration: Types::AccessConfiguration
+      attr_accessor id: ::String
       attr_accessor attributes: ::Array[Types::DocumentAttribute]
       attr_accessor content: Types::DocumentContent
       attr_accessor content_type: ("PDF" | "HTML" | "MS_WORD" | "PLAIN_TEXT" | "PPT" | "RTF" | "XML" | "XSLT" | "MS_EXCEL" | "CSV" | "JSON" | "MD")
-      attr_accessor document_enrichment_configuration: Types::DocumentEnrichmentConfiguration
-      attr_accessor id: ::String
       attr_accessor title: ::String
+      attr_accessor access_configuration: Types::AccessConfiguration
+      attr_accessor document_enrichment_configuration: Types::DocumentEnrichmentConfiguration
       SENSITIVE: []
     end
 
@@ -500,18 +600,18 @@ module Aws::QBusiness
     end
 
     class DocumentAttributeBoostingConfiguration
-      attr_accessor date_configuration: Types::DateAttributeBoostingConfiguration
       attr_accessor number_configuration: Types::NumberAttributeBoostingConfiguration
       attr_accessor string_configuration: Types::StringAttributeBoostingConfiguration
+      attr_accessor date_configuration: Types::DateAttributeBoostingConfiguration
       attr_accessor string_list_configuration: Types::StringListAttributeBoostingConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class DateConfiguration < DocumentAttributeBoostingConfiguration
-      end
       class NumberConfiguration < DocumentAttributeBoostingConfiguration
       end
       class StringConfiguration < DocumentAttributeBoostingConfiguration
+      end
+      class DateConfiguration < DocumentAttributeBoostingConfiguration
       end
       class StringListConfiguration < DocumentAttributeBoostingConfiguration
       end
@@ -528,33 +628,33 @@ module Aws::QBusiness
 
     class DocumentAttributeConfiguration
       attr_accessor name: ::String
-      attr_accessor search: ("ENABLED" | "DISABLED")
       attr_accessor type: ("STRING" | "STRING_LIST" | "NUMBER" | "DATE")
+      attr_accessor search: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class DocumentAttributeTarget
-      attr_accessor attribute_value_operator: ("DELETE")
       attr_accessor key: ::String
       attr_accessor value: Types::DocumentAttributeValue
+      attr_accessor attribute_value_operator: ("DELETE")
       SENSITIVE: []
     end
 
     class DocumentAttributeValue
-      attr_accessor date_value: ::Time
-      attr_accessor long_value: ::Integer
-      attr_accessor string_list_value: ::Array[::String]
       attr_accessor string_value: ::String
+      attr_accessor string_list_value: ::Array[::String]
+      attr_accessor long_value: ::Integer
+      attr_accessor date_value: ::Time
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class DateValue < DocumentAttributeValue
-      end
-      class LongValue < DocumentAttributeValue
+      class StringValue < DocumentAttributeValue
       end
       class StringListValue < DocumentAttributeValue
       end
-      class StringValue < DocumentAttributeValue
+      class LongValue < DocumentAttributeValue
+      end
+      class DateValue < DocumentAttributeValue
       end
       class Unknown < DocumentAttributeValue
       end
@@ -575,24 +675,24 @@ module Aws::QBusiness
     end
 
     class DocumentDetails
-      attr_accessor created_at: ::Time
       attr_accessor document_id: ::String
-      attr_accessor error: Types::ErrorDetail
       attr_accessor status: ("RECEIVED" | "PROCESSING" | "INDEXED" | "UPDATED" | "FAILED" | "DELETING" | "DELETED" | "DOCUMENT_FAILED_TO_INDEX")
+      attr_accessor error: Types::ErrorDetail
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class DocumentEnrichmentConfiguration
       attr_accessor inline_configurations: ::Array[Types::InlineDocumentEnrichmentConfiguration]
-      attr_accessor post_extraction_hook_configuration: Types::HookConfiguration
       attr_accessor pre_extraction_hook_configuration: Types::HookConfiguration
+      attr_accessor post_extraction_hook_configuration: Types::HookConfiguration
       SENSITIVE: []
     end
 
     class EligibleDataSource
-      attr_accessor data_source_id: ::String
       attr_accessor index_id: ::String
+      attr_accessor data_source_id: ::String
       SENSITIVE: []
     end
 
@@ -601,16 +701,30 @@ module Aws::QBusiness
       SENSITIVE: [:kms_key_id]
     end
 
+    class EndOfInputEvent
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
     class ErrorDetail
-      attr_accessor error_code: ("InternalError" | "InvalidRequest" | "ResourceInactive" | "ResourceNotFound")
       attr_accessor error_message: ::String
+      attr_accessor error_code: ("InternalError" | "InvalidRequest" | "ResourceInactive" | "ResourceNotFound")
+      SENSITIVE: []
+    end
+
+    class FailedAttachmentEvent
+      attr_accessor conversation_id: ::String
+      attr_accessor user_message_id: ::String
+      attr_accessor system_message_id: ::String
+      attr_accessor attachment: Types::AttachmentOutput
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
     class FailedDocument
-      attr_accessor data_source_id: ::String
-      attr_accessor error: Types::ErrorDetail
       attr_accessor id: ::String
+      attr_accessor error: Types::ErrorDetail
+      attr_accessor data_source_id: ::String
       SENSITIVE: []
     end
 
@@ -620,18 +734,18 @@ module Aws::QBusiness
     end
 
     class GetApplicationResponse
-      attr_accessor application_arn: ::String
-      attr_accessor application_id: ::String
-      attr_accessor attachments_configuration: Types::AppliedAttachmentsConfiguration
-      attr_accessor created_at: ::Time
-      attr_accessor description: ::String
       attr_accessor display_name: ::String
-      attr_accessor encryption_configuration: Types::EncryptionConfiguration
-      attr_accessor error: Types::ErrorDetail
+      attr_accessor application_id: ::String
+      attr_accessor application_arn: ::String
       attr_accessor identity_center_application_arn: ::String
       attr_accessor role_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      attr_accessor description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor error: Types::ErrorDetail
+      attr_accessor attachments_configuration: Types::AppliedAttachmentsConfiguration
       SENSITIVE: []
     end
 
@@ -643,46 +757,46 @@ module Aws::QBusiness
     end
 
     class GetChatControlsConfigurationResponse
+      attr_accessor response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
       attr_accessor blocked_phrases: Types::BlockedPhrasesConfiguration
+      attr_accessor topic_configurations: ::Array[Types::TopicConfiguration]
       attr_accessor creator_mode_configuration: Types::AppliedCreatorModeConfiguration
       attr_accessor next_token: ::String
-      attr_accessor response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
-      attr_accessor topic_configurations: ::Array[Types::TopicConfiguration]
       SENSITIVE: []
     end
 
     class GetDataSourceRequest
       attr_accessor application_id: ::String
-      attr_accessor data_source_id: ::String
       attr_accessor index_id: ::String
+      attr_accessor data_source_id: ::String
       SENSITIVE: []
     end
 
     class GetDataSourceResponse
       attr_accessor application_id: ::String
-      attr_accessor configuration: untyped
-      attr_accessor created_at: ::Time
-      attr_accessor data_source_arn: ::String
-      attr_accessor data_source_id: ::String
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
-      attr_accessor document_enrichment_configuration: Types::DocumentEnrichmentConfiguration
-      attr_accessor error: Types::ErrorDetail
       attr_accessor index_id: ::String
-      attr_accessor role_arn: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor data_source_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor type: ::String
+      attr_accessor configuration: untyped
+      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor description: ::String
       attr_accessor status: ("PENDING_CREATION" | "CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
       attr_accessor sync_schedule: ::String
-      attr_accessor type: ::String
-      attr_accessor updated_at: ::Time
-      attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor error: Types::ErrorDetail
+      attr_accessor document_enrichment_configuration: Types::DocumentEnrichmentConfiguration
       SENSITIVE: []
     end
 
     class GetGroupRequest
       attr_accessor application_id: ::String
-      attr_accessor data_source_id: ::String
-      attr_accessor group_name: ::String
       attr_accessor index_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor data_source_id: ::String
       SENSITIVE: []
     end
 
@@ -700,17 +814,18 @@ module Aws::QBusiness
 
     class GetIndexResponse
       attr_accessor application_id: ::String
-      attr_accessor capacity_configuration: Types::IndexCapacityConfiguration
-      attr_accessor created_at: ::Time
-      attr_accessor description: ::String
+      attr_accessor index_id: ::String
       attr_accessor display_name: ::String
+      attr_accessor type: ("ENTERPRISE" | "STARTER")
+      attr_accessor index_arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor capacity_configuration: Types::IndexCapacityConfiguration
       attr_accessor document_attribute_configurations: ::Array[Types::DocumentAttributeConfiguration]
       attr_accessor error: Types::ErrorDetail
-      attr_accessor index_arn: ::String
-      attr_accessor index_id: ::String
       attr_accessor index_statistics: Types::IndexStatistics
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
-      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -722,14 +837,16 @@ module Aws::QBusiness
 
     class GetPluginResponse
       attr_accessor application_id: ::String
-      attr_accessor auth_configuration: Types::PluginAuthConfiguration
-      attr_accessor created_at: ::Time
-      attr_accessor display_name: ::String
-      attr_accessor plugin_arn: ::String
       attr_accessor plugin_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK" | "CUSTOM")
       attr_accessor server_url: ::String
+      attr_accessor auth_configuration: Types::PluginAuthConfiguration
+      attr_accessor custom_plugin_configuration: Types::CustomPluginConfiguration
+      attr_accessor build_status: ("READY" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor plugin_arn: ::String
       attr_accessor state: ("ENABLED" | "DISABLED")
-      attr_accessor type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -742,14 +859,14 @@ module Aws::QBusiness
 
     class GetRetrieverResponse
       attr_accessor application_id: ::String
-      attr_accessor configuration: Types::RetrieverConfiguration
-      attr_accessor created_at: ::Time
-      attr_accessor display_name: ::String
-      attr_accessor retriever_arn: ::String
       attr_accessor retriever_id: ::String
-      attr_accessor role_arn: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "FAILED")
+      attr_accessor retriever_arn: ::String
       attr_accessor type: ("NATIVE_INDEX" | "KENDRA_INDEX")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "FAILED")
+      attr_accessor display_name: ::String
+      attr_accessor configuration: Types::RetrieverConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -773,19 +890,19 @@ module Aws::QBusiness
 
     class GetWebExperienceResponse
       attr_accessor application_id: ::String
-      attr_accessor authentication_configuration: Types::WebExperienceAuthConfiguration
-      attr_accessor created_at: ::Time
-      attr_accessor default_endpoint: ::String
-      attr_accessor error: Types::ErrorDetail
-      attr_accessor role_arn: ::String
-      attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "PENDING_AUTH_CONFIG")
-      attr_accessor subtitle: ::String
-      attr_accessor title: ::String
-      attr_accessor updated_at: ::Time
-      attr_accessor web_experience_arn: ::String
       attr_accessor web_experience_id: ::String
+      attr_accessor web_experience_arn: ::String
+      attr_accessor default_endpoint: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "PENDING_AUTH_CONFIG")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor title: ::String
+      attr_accessor subtitle: ::String
       attr_accessor welcome_message: ::String
+      attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
+      attr_accessor role_arn: ::String
+      attr_accessor authentication_configuration: Types::WebExperienceAuthConfiguration
+      attr_accessor error: Types::ErrorDetail
       SENSITIVE: []
     end
 
@@ -796,9 +913,9 @@ module Aws::QBusiness
     end
 
     class GroupStatusDetail
-      attr_accessor error_detail: Types::ErrorDetail
-      attr_accessor last_updated_at: ::Time
       attr_accessor status: ("FAILED" | "SUCCEEDED" | "PROCESSING" | "DELETING" | "DELETED")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor error_detail: Types::ErrorDetail
       SENSITIVE: []
     end
 
@@ -810,17 +927,17 @@ module Aws::QBusiness
     class HookConfiguration
       attr_accessor invocation_condition: Types::DocumentAttributeCondition
       attr_accessor lambda_arn: ::String
-      attr_accessor role_arn: ::String
       attr_accessor s3_bucket_name: ::String
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
     class Index
-      attr_accessor created_at: ::Time
       attr_accessor display_name: ::String
       attr_accessor index_id: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
       SENSITIVE: []
     end
 
@@ -836,8 +953,8 @@ module Aws::QBusiness
 
     class InlineDocumentEnrichmentConfiguration
       attr_accessor condition: Types::DocumentAttributeCondition
-      attr_accessor document_content_operator: ("DELETE")
       attr_accessor target: Types::DocumentAttributeTarget
+      attr_accessor document_content_operator: ("DELETE")
       SENSITIVE: []
     end
 
@@ -857,39 +974,39 @@ module Aws::QBusiness
     end
 
     class ListApplicationsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListApplicationsResponse
-      attr_accessor applications: ::Array[Types::Application]
       attr_accessor next_token: ::String
+      attr_accessor applications: ::Array[Types::Application]
       SENSITIVE: []
     end
 
     class ListConversationsRequest
       attr_accessor application_id: ::String
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor user_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListConversationsResponse
-      attr_accessor conversations: ::Array[Types::Conversation]
       attr_accessor next_token: ::String
+      attr_accessor conversations: ::Array[Types::Conversation]
       SENSITIVE: []
     end
 
     class ListDataSourceSyncJobsRequest
-      attr_accessor application_id: ::String
       attr_accessor data_source_id: ::String
-      attr_accessor end_time: ::Time
+      attr_accessor application_id: ::String
       attr_accessor index_id: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       attr_accessor status_filter: ("FAILED" | "SUCCEEDED" | "SYNCING" | "INCOMPLETE" | "STOPPING" | "ABORTED" | "SYNCING_INDEXING")
       SENSITIVE: []
     end
@@ -903,8 +1020,8 @@ module Aws::QBusiness
     class ListDataSourcesRequest
       attr_accessor application_id: ::String
       attr_accessor index_id: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -916,10 +1033,10 @@ module Aws::QBusiness
 
     class ListDocumentsRequest
       attr_accessor application_id: ::String
-      attr_accessor data_source_ids: ::Array[::String]
       attr_accessor index_id: ::String
-      attr_accessor max_results: ::Integer
+      attr_accessor data_source_ids: ::Array[::String]
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -931,39 +1048,39 @@ module Aws::QBusiness
 
     class ListGroupsRequest
       attr_accessor application_id: ::String
-      attr_accessor data_source_id: ::String
       attr_accessor index_id: ::String
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor updated_earlier_than: ::Time
+      attr_accessor data_source_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListGroupsResponse
-      attr_accessor items: ::Array[Types::GroupSummary]
       attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::GroupSummary]
       SENSITIVE: []
     end
 
     class ListIndicesRequest
       attr_accessor application_id: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListIndicesResponse
-      attr_accessor indices: ::Array[Types::Index]
       attr_accessor next_token: ::String
+      attr_accessor indices: ::Array[Types::Index]
       SENSITIVE: []
     end
 
     class ListMessagesRequest
-      attr_accessor application_id: ::String
       attr_accessor conversation_id: ::String
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
+      attr_accessor application_id: ::String
       attr_accessor user_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -975,8 +1092,8 @@ module Aws::QBusiness
 
     class ListPluginsRequest
       attr_accessor application_id: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -988,14 +1105,14 @@ module Aws::QBusiness
 
     class ListRetrieversRequest
       attr_accessor application_id: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListRetrieversResponse
-      attr_accessor next_token: ::String
       attr_accessor retrievers: ::Array[Types::Retriever]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1011,14 +1128,14 @@ module Aws::QBusiness
 
     class ListWebExperiencesRequest
       attr_accessor application_id: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListWebExperiencesResponse
-      attr_accessor next_token: ::String
       attr_accessor web_experiences: ::Array[Types::WebExperience]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1029,35 +1146,48 @@ module Aws::QBusiness
     end
 
     class MemberUser
-      attr_accessor type: ("INDEX" | "DATASOURCE")
       attr_accessor user_id: ::String
+      attr_accessor type: ("INDEX" | "DATASOURCE")
       SENSITIVE: []
     end
 
     class Message
-      attr_accessor action_execution: Types::ActionExecution
-      attr_accessor action_review: Types::ActionReview
-      attr_accessor attachments: ::Array[Types::AttachmentOutput]
-      attr_accessor body: ::String
       attr_accessor message_id: ::String
-      attr_accessor source_attribution: ::Array[Types::SourceAttribution]
+      attr_accessor body: ::String
       attr_accessor time: ::Time
       attr_accessor type: ("USER" | "SYSTEM")
+      attr_accessor attachments: ::Array[Types::AttachmentOutput]
+      attr_accessor source_attribution: ::Array[Types::SourceAttribution]
+      attr_accessor action_review: Types::ActionReview
+      attr_accessor action_execution: Types::ActionExecution
       SENSITIVE: []
     end
 
     class MessageUsefulnessFeedback
-      attr_accessor comment: ::String
-      attr_accessor reason: ("NOT_FACTUALLY_CORRECT" | "HARMFUL_OR_UNSAFE" | "INCORRECT_OR_MISSING_SOURCES" | "NOT_HELPFUL" | "FACTUALLY_CORRECT" | "COMPLETE" | "RELEVANT_SOURCES" | "HELPFUL" | "NOT_BASED_ON_DOCUMENTS" | "NOT_COMPLETE" | "NOT_CONCISE" | "OTHER")
-      attr_accessor submitted_at: ::Time
       attr_accessor usefulness: ("USEFUL" | "NOT_USEFUL")
+      attr_accessor reason: ("NOT_FACTUALLY_CORRECT" | "HARMFUL_OR_UNSAFE" | "INCORRECT_OR_MISSING_SOURCES" | "NOT_HELPFUL" | "FACTUALLY_CORRECT" | "COMPLETE" | "RELEVANT_SOURCES" | "HELPFUL" | "NOT_BASED_ON_DOCUMENTS" | "NOT_COMPLETE" | "NOT_CONCISE" | "OTHER")
+      attr_accessor comment: ::String
+      attr_accessor submitted_at: ::Time
+      SENSITIVE: []
+    end
+
+    class MetadataEvent
+      attr_accessor conversation_id: ::String
+      attr_accessor user_message_id: ::String
+      attr_accessor system_message_id: ::String
+      attr_accessor source_attributions: ::Array[Types::SourceAttribution]
+      attr_accessor final_text_message: ::String
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
     class NativeIndexConfiguration
-      attr_accessor boosting_override: ::Hash[::String, Types::DocumentAttributeBoostingConfiguration]
       attr_accessor index_id: ::String
+      attr_accessor boosting_override: ::Hash[::String, Types::DocumentAttributeBoostingConfiguration]
       SENSITIVE: []
+    end
+
+    class NoAuthConfiguration < Aws::EmptyStructure
     end
 
     class NumberAttributeBoostingConfiguration
@@ -1067,18 +1197,19 @@ module Aws::QBusiness
     end
 
     class OAuth2ClientCredentialConfiguration
-      attr_accessor role_arn: ::String
       attr_accessor secret_arn: ::String
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
     class Plugin
-      attr_accessor created_at: ::Time
-      attr_accessor display_name: ::String
       attr_accessor plugin_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK" | "CUSTOM")
       attr_accessor server_url: ::String
       attr_accessor state: ("ENABLED" | "DISABLED")
-      attr_accessor type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
+      attr_accessor build_status: ("READY" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -1086,12 +1217,15 @@ module Aws::QBusiness
     class PluginAuthConfiguration
       attr_accessor basic_auth_configuration: Types::BasicAuthConfiguration
       attr_accessor o_auth_2_client_credential_configuration: Types::OAuth2ClientCredentialConfiguration
+      attr_accessor no_auth_configuration: Types::NoAuthConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class BasicAuthConfiguration < PluginAuthConfiguration
       end
       class OAuth2ClientCredentialConfiguration < PluginAuthConfiguration
+      end
+      class NoAuthConfiguration < PluginAuthConfiguration
       end
       class Unknown < PluginAuthConfiguration
       end
@@ -1103,50 +1237,50 @@ module Aws::QBusiness
     end
 
     class Principal
-      attr_accessor group: Types::PrincipalGroup
       attr_accessor user: Types::PrincipalUser
+      attr_accessor group: Types::PrincipalGroup
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Group < Principal
-      end
       class User < Principal
+      end
+      class Group < Principal
       end
       class Unknown < Principal
       end
     end
 
     class PrincipalGroup
+      attr_accessor name: ::String
       attr_accessor access: ("ALLOW" | "DENY")
       attr_accessor membership_type: ("INDEX" | "DATASOURCE")
-      attr_accessor name: ::String
       SENSITIVE: []
     end
 
     class PrincipalUser
-      attr_accessor access: ("ALLOW" | "DENY")
       attr_accessor id: ::String
+      attr_accessor access: ("ALLOW" | "DENY")
       attr_accessor membership_type: ("INDEX" | "DATASOURCE")
       SENSITIVE: []
     end
 
     class PutFeedbackRequest
       attr_accessor application_id: ::String
-      attr_accessor conversation_id: ::String
-      attr_accessor message_copied_at: ::Time
-      attr_accessor message_id: ::String
-      attr_accessor message_usefulness: Types::MessageUsefulnessFeedback
       attr_accessor user_id: ::String
+      attr_accessor conversation_id: ::String
+      attr_accessor message_id: ::String
+      attr_accessor message_copied_at: ::Time
+      attr_accessor message_usefulness: Types::MessageUsefulnessFeedback
       SENSITIVE: []
     end
 
     class PutGroupRequest
       attr_accessor application_id: ::String
-      attr_accessor data_source_id: ::String
-      attr_accessor group_members: Types::GroupMembers
-      attr_accessor group_name: ::String
       attr_accessor index_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor data_source_id: ::String
       attr_accessor type: ("INDEX" | "DATASOURCE")
+      attr_accessor group_members: Types::GroupMembers
       SENSITIVE: []
     end
 
@@ -1162,32 +1296,32 @@ module Aws::QBusiness
 
     class Retriever
       attr_accessor application_id: ::String
-      attr_accessor display_name: ::String
       attr_accessor retriever_id: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "FAILED")
       attr_accessor type: ("NATIVE_INDEX" | "KENDRA_INDEX")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "FAILED")
+      attr_accessor display_name: ::String
       SENSITIVE: []
     end
 
     class RetrieverConfiguration
-      attr_accessor kendra_index_configuration: Types::KendraIndexConfiguration
       attr_accessor native_index_configuration: Types::NativeIndexConfiguration
+      attr_accessor kendra_index_configuration: Types::KendraIndexConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class KendraIndexConfiguration < RetrieverConfiguration
-      end
       class NativeIndexConfiguration < RetrieverConfiguration
+      end
+      class KendraIndexConfiguration < RetrieverConfiguration
       end
       class Unknown < RetrieverConfiguration
       end
     end
 
     class Rule
-      attr_accessor excluded_users_and_groups: Types::UsersAndGroups
       attr_accessor included_users_and_groups: Types::UsersAndGroups
-      attr_accessor rule_configuration: Types::RuleConfiguration
+      attr_accessor excluded_users_and_groups: Types::UsersAndGroups
       attr_accessor rule_type: ("CONTENT_BLOCKER_RULE" | "CONTENT_RETRIEVAL_RULE")
+      attr_accessor rule_configuration: Types::RuleConfiguration
       SENSITIVE: []
     end
 
@@ -1214,8 +1348,8 @@ module Aws::QBusiness
     class SamlConfiguration
       attr_accessor metadata_xml: ::String
       attr_accessor role_arn: ::String
-      attr_accessor user_group_attribute: ::String
       attr_accessor user_id_attribute: ::String
+      attr_accessor user_group_attribute: ::String
       SENSITIVE: []
     end
 
@@ -1226,19 +1360,24 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class SnippetExcerpt
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
     class SourceAttribution
-      attr_accessor citation_number: ::Integer
-      attr_accessor snippet: ::String
-      attr_accessor text_message_segments: ::Array[Types::TextSegment]
       attr_accessor title: ::String
-      attr_accessor updated_at: ::Time
+      attr_accessor snippet: ::String
       attr_accessor url: ::String
+      attr_accessor citation_number: ::Integer
+      attr_accessor updated_at: ::Time
+      attr_accessor text_message_segments: ::Array[Types::TextSegment]
       SENSITIVE: []
     end
 
     class StartDataSourceSyncJobRequest
-      attr_accessor application_id: ::String
       attr_accessor data_source_id: ::String
+      attr_accessor application_id: ::String
       attr_accessor index_id: ::String
       SENSITIVE: []
     end
@@ -1249,8 +1388,8 @@ module Aws::QBusiness
     end
 
     class StopDataSourceSyncJobRequest
-      attr_accessor application_id: ::String
       attr_accessor data_source_id: ::String
+      attr_accessor application_id: ::String
       attr_accessor index_id: ::String
       SENSITIVE: []
     end
@@ -1259,8 +1398,8 @@ module Aws::QBusiness
     end
 
     class StringAttributeBoostingConfiguration
-      attr_accessor attribute_value_boosting: ::Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]
       attr_accessor boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+      attr_accessor attribute_value_boosting: ::Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]
       SENSITIVE: []
     end
 
@@ -1290,9 +1429,25 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class TextInputEvent
+      attr_accessor user_message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class TextOutputEvent
+      attr_accessor conversation_id: ::String
+      attr_accessor user_message_id: ::String
+      attr_accessor system_message_id: ::String
+      attr_accessor system_message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
     class TextSegment
       attr_accessor begin_offset: ::Integer
       attr_accessor end_offset: ::Integer
+      attr_accessor snippet_excerpt: Types::SnippetExcerpt
       SENSITIVE: []
     end
 
@@ -1302,9 +1457,9 @@ module Aws::QBusiness
     end
 
     class TopicConfiguration
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor example_chat_messages: ::Array[::String]
-      attr_accessor name: ::String
       attr_accessor rules: ::Array[Types::Rule]
       SENSITIVE: []
     end
@@ -1320,10 +1475,11 @@ module Aws::QBusiness
 
     class UpdateApplicationRequest
       attr_accessor application_id: ::String
-      attr_accessor attachments_configuration: Types::AttachmentsConfiguration
-      attr_accessor description: ::String
+      attr_accessor identity_center_instance_arn: ::String
       attr_accessor display_name: ::String
+      attr_accessor description: ::String
       attr_accessor role_arn: ::String
+      attr_accessor attachments_configuration: Types::AttachmentsConfiguration
       SENSITIVE: []
     end
 
@@ -1332,12 +1488,12 @@ module Aws::QBusiness
 
     class UpdateChatControlsConfigurationRequest
       attr_accessor application_id: ::String
-      attr_accessor blocked_phrases_configuration_update: Types::BlockedPhrasesConfigurationUpdate
       attr_accessor client_token: ::String
-      attr_accessor creator_mode_configuration: Types::CreatorModeConfiguration
       attr_accessor response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
+      attr_accessor blocked_phrases_configuration_update: Types::BlockedPhrasesConfigurationUpdate
       attr_accessor topic_configurations_to_create_or_update: ::Array[Types::TopicConfiguration]
       attr_accessor topic_configurations_to_delete: ::Array[Types::TopicConfiguration]
+      attr_accessor creator_mode_configuration: Types::CreatorModeConfiguration
       SENSITIVE: []
     end
 
@@ -1346,15 +1502,15 @@ module Aws::QBusiness
 
     class UpdateDataSourceRequest
       attr_accessor application_id: ::String
-      attr_accessor configuration: untyped
-      attr_accessor data_source_id: ::String
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
-      attr_accessor document_enrichment_configuration: Types::DocumentEnrichmentConfiguration
       attr_accessor index_id: ::String
-      attr_accessor role_arn: ::String
-      attr_accessor sync_schedule: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor configuration: untyped
       attr_accessor vpc_configuration: Types::DataSourceVpcConfiguration
+      attr_accessor description: ::String
+      attr_accessor sync_schedule: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor document_enrichment_configuration: Types::DocumentEnrichmentConfiguration
       SENSITIVE: []
     end
 
@@ -1363,11 +1519,11 @@ module Aws::QBusiness
 
     class UpdateIndexRequest
       attr_accessor application_id: ::String
-      attr_accessor capacity_configuration: Types::IndexCapacityConfiguration
-      attr_accessor description: ::String
-      attr_accessor display_name: ::String
-      attr_accessor document_attribute_configurations: ::Array[Types::DocumentAttributeConfiguration]
       attr_accessor index_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor capacity_configuration: Types::IndexCapacityConfiguration
+      attr_accessor document_attribute_configurations: ::Array[Types::DocumentAttributeConfiguration]
       SENSITIVE: []
     end
 
@@ -1376,11 +1532,12 @@ module Aws::QBusiness
 
     class UpdatePluginRequest
       attr_accessor application_id: ::String
-      attr_accessor auth_configuration: Types::PluginAuthConfiguration
-      attr_accessor display_name: ::String
       attr_accessor plugin_id: ::String
-      attr_accessor server_url: ::String
+      attr_accessor display_name: ::String
       attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor server_url: ::String
+      attr_accessor custom_plugin_configuration: Types::CustomPluginConfiguration
+      attr_accessor auth_configuration: Types::PluginAuthConfiguration
       SENSITIVE: []
     end
 
@@ -1389,9 +1546,9 @@ module Aws::QBusiness
 
     class UpdateRetrieverRequest
       attr_accessor application_id: ::String
+      attr_accessor retriever_id: ::String
       attr_accessor configuration: Types::RetrieverConfiguration
       attr_accessor display_name: ::String
-      attr_accessor retriever_id: ::String
       attr_accessor role_arn: ::String
       SENSITIVE: []
     end
@@ -1401,27 +1558,28 @@ module Aws::QBusiness
 
     class UpdateUserRequest
       attr_accessor application_id: ::String
-      attr_accessor user_aliases_to_delete: ::Array[Types::UserAlias]
-      attr_accessor user_aliases_to_update: ::Array[Types::UserAlias]
       attr_accessor user_id: ::String
+      attr_accessor user_aliases_to_update: ::Array[Types::UserAlias]
+      attr_accessor user_aliases_to_delete: ::Array[Types::UserAlias]
       SENSITIVE: []
     end
 
     class UpdateUserResponse
       attr_accessor user_aliases_added: ::Array[Types::UserAlias]
-      attr_accessor user_aliases_deleted: ::Array[Types::UserAlias]
       attr_accessor user_aliases_updated: ::Array[Types::UserAlias]
+      attr_accessor user_aliases_deleted: ::Array[Types::UserAlias]
       SENSITIVE: []
     end
 
     class UpdateWebExperienceRequest
       attr_accessor application_id: ::String
-      attr_accessor authentication_configuration: Types::WebExperienceAuthConfiguration
-      attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
-      attr_accessor subtitle: ::String
-      attr_accessor title: ::String
       attr_accessor web_experience_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor authentication_configuration: Types::WebExperienceAuthConfiguration
+      attr_accessor title: ::String
+      attr_accessor subtitle: ::String
       attr_accessor welcome_message: ::String
+      attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1429,37 +1587,37 @@ module Aws::QBusiness
     end
 
     class UserAlias
-      attr_accessor data_source_id: ::String
       attr_accessor index_id: ::String
+      attr_accessor data_source_id: ::String
       attr_accessor user_id: ::String
       SENSITIVE: []
     end
 
     class UsersAndGroups
-      attr_accessor user_groups: ::Array[::String]
       attr_accessor user_ids: ::Array[::String]
+      attr_accessor user_groups: ::Array[::String]
       SENSITIVE: []
     end
 
     class ValidationException
-      attr_accessor fields: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
       attr_accessor reason: ("CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "UNKNOWN_OPERATION")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class WebExperience
+      attr_accessor web_experience_id: ::String
       attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       attr_accessor default_endpoint: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "PENDING_AUTH_CONFIG")
-      attr_accessor updated_at: ::Time
-      attr_accessor web_experience_id: ::String
       SENSITIVE: []
     end
 
@@ -1472,6 +1630,14 @@ module Aws::QBusiness
       end
       class Unknown < WebExperienceAuthConfiguration
       end
+    end
+
+    class ChatInputStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:configuration_event, :text_event, :attachment_event, :action_execution_event, :end_of_input_event, :auth_challenge_response_event]
+    end
+
+    class ChatOutputStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:text_event, :metadata_event, :action_review_event, :failed_attachment_event, :auth_challenge_request_event]
     end
   end
 end

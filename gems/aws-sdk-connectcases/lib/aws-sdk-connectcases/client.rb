@@ -444,9 +444,12 @@ module Aws::ConnectCases
     #   resp.errors[0].id #=> String
     #   resp.errors[0].message #=> String
     #   resp.fields #=> Array
+    #   resp.fields[0].created_time #=> Time
+    #   resp.fields[0].deleted #=> Boolean
     #   resp.fields[0].description #=> String
     #   resp.fields[0].field_arn #=> String
     #   resp.fields[0].field_id #=> String
+    #   resp.fields[0].last_modified_time #=> Time
     #   resp.fields[0].name #=> String
     #   resp.fields[0].namespace #=> String, one of "System", "Custom"
     #   resp.fields[0].tags #=> Hash
@@ -927,6 +930,130 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
+    # Deletes a field from a cases template. You can delete up to 100 fields
+    # per domain.
+    #
+    # After a field is deleted:
+    #
+    # * You can still retrieve the field by calling `BatchGetField`.
+    #
+    # * You cannot update a deleted field by calling `UpdateField`; it
+    #   throws a `ValidationException`.
+    #
+    # * Deleted fields are not included in the `ListFields` response.
+    #
+    # * Calling `CreateCase` with a deleted field throws a
+    #   `ValidationException` denoting which field IDs in the request have
+    #   been deleted.
+    #
+    # * Calling `GetCase` with a deleted field ID returns the deleted
+    #   field's value if one exists.
+    #
+    # * Calling `UpdateCase` with a deleted field ID throws a
+    #   `ValidationException` if the case does not already contain a value
+    #   for the deleted field. Otherwise it succeeds, allowing you to update
+    #   or remove (using `emptyValue: \{\}`) the field's value from the
+    #   case.
+    #
+    # * `GetTemplate` does not return field IDs for deleted fields.
+    #
+    # * `GetLayout` does not return field IDs for deleted fields.
+    #
+    # * Calling `SearchCases` with the deleted field ID as a filter returns
+    #   any cases that have a value for the deleted field that matches the
+    #   filter criteria.
+    #
+    # * Calling `SearchCases` with a `searchTerm` value that matches a
+    #   deleted field's value on a case returns the case in the response.
+    #
+    # * Calling `BatchPutFieldOptions` with a deleted field ID throw a
+    #   `ValidationException`.
+    #
+    # * Calling `GetCaseEventConfiguration` does not return field IDs for
+    #   deleted fields.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @option params [required, String] :field_id
+    #   The unique identifier of a field.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_field({
+    #     domain_id: "DomainId", # required
+    #     field_id: "FieldId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteField AWS API Documentation
+    #
+    # @overload delete_field(params = {})
+    # @param [Hash] params ({})
+    def delete_field(params = {}, options = {})
+      req = build_request(:delete_field, params)
+      req.send_request(options)
+    end
+
+    # Deletes a layout from a cases template. You can delete up to 100
+    # layouts per domain.
+    #
+    #      <p>After a layout is deleted:</p> <ul> <li> <p>You can still retrieve the layout by calling <code>GetLayout</code>.</p> </li> <li> <p>You cannot update a deleted layout by calling <code>UpdateLayout</code>; it throws a <code>ValidationException</code>.</p> </li> <li> <p>Deleted layouts are not included in the <code>ListLayouts</code> response.</p> </li> </ul>
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @option params [required, String] :layout_id
+    #   The unique identifier of the layout.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_layout({
+    #     domain_id: "DomainId", # required
+    #     layout_id: "LayoutId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteLayout AWS API Documentation
+    #
+    # @overload delete_layout(params = {})
+    # @param [Hash] params ({})
+    def delete_layout(params = {}, options = {})
+      req = build_request(:delete_layout, params)
+      req.send_request(options)
+    end
+
+    # Deletes a cases template. You can delete up to 100 templates per
+    # domain.
+    #
+    #      <p>After a cases template is deleted:</p> <ul> <li> <p>You can still retrieve the template by calling <code>GetTemplate</code>.</p> </li> <li> <p>You cannot update the template. </p> </li> <li> <p>You cannot create a case by using the deleted template.</p> </li> <li> <p>Deleted templates are not included in the <code>ListTemplates</code> response.</p> </li> </ul>
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @option params [required, String] :template_id
+    #   A unique identifier of a template.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_template({
+    #     domain_id: "DomainId", # required
+    #     template_id: "TemplateId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteTemplate AWS API Documentation
+    #
+    # @overload delete_template(params = {})
+    # @param [Hash] params ({})
+    def delete_template(params = {}, options = {})
+      req = build_request(:delete_template, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specific case if it exists.
     #
     # @option params [required, String] :case_id
@@ -1132,6 +1259,9 @@ module Aws::ConnectCases
     # @return [Types::GetLayoutResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLayoutResponse#content #content} => Types::LayoutContent
+    #   * {Types::GetLayoutResponse#created_time #created_time} => Time
+    #   * {Types::GetLayoutResponse#deleted #deleted} => Boolean
+    #   * {Types::GetLayoutResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetLayoutResponse#layout_arn #layout_arn} => String
     #   * {Types::GetLayoutResponse#layout_id #layout_id} => String
     #   * {Types::GetLayoutResponse#name #name} => String
@@ -1154,6 +1284,9 @@ module Aws::ConnectCases
     #   resp.content.basic.top_panel.sections[0].field_group.fields #=> Array
     #   resp.content.basic.top_panel.sections[0].field_group.fields[0].id #=> String
     #   resp.content.basic.top_panel.sections[0].field_group.name #=> String
+    #   resp.created_time #=> Time
+    #   resp.deleted #=> Boolean
+    #   resp.last_modified_time #=> Time
     #   resp.layout_arn #=> String
     #   resp.layout_id #=> String
     #   resp.name #=> String
@@ -1179,7 +1312,10 @@ module Aws::ConnectCases
     #
     # @return [Types::GetTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetTemplateResponse#created_time #created_time} => Time
+    #   * {Types::GetTemplateResponse#deleted #deleted} => Boolean
     #   * {Types::GetTemplateResponse#description #description} => String
+    #   * {Types::GetTemplateResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetTemplateResponse#layout_configuration #layout_configuration} => Types::LayoutConfiguration
     #   * {Types::GetTemplateResponse#name #name} => String
     #   * {Types::GetTemplateResponse#required_fields #required_fields} => Array&lt;Types::RequiredField&gt;
@@ -1197,7 +1333,10 @@ module Aws::ConnectCases
     #
     # @example Response structure
     #
+    #   resp.created_time #=> Time
+    #   resp.deleted #=> Boolean
     #   resp.description #=> String
+    #   resp.last_modified_time #=> Time
     #   resp.layout_configuration.default_layout #=> String
     #   resp.name #=> String
     #   resp.required_fields #=> Array
@@ -2121,7 +2260,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

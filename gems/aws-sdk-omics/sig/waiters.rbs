@@ -186,7 +186,8 @@ module Aws
         def wait: (
                     id: ::String,
                     ?type: ("PRIVATE" | "READY2RUN"),
-                    ?export: Array[("DEFINITION")]
+                    ?export: Array[("DEFINITION")],
+                    ?workflow_owner_id: ::String
                   ) -> Client::_GetWorkflowResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_GetWorkflowResponseSuccess
       end

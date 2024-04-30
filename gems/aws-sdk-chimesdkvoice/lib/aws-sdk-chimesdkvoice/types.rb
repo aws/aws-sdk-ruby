@@ -2918,6 +2918,14 @@ module Aws::ChimeSDKVoice
 
     # The Alexa Skill configuration of a SIP media application.
     #
+    # Due to changes made by the Amazon Alexa service, this data type is no
+    # longer available for use. For more information, refer to the [Alexa
+    # Smart Properties][1] page.
+    #
+    #
+    #
+    # [1]: https://developer.amazon.com/en-US/alexa/alexasmartproperties
+    #
     # @!attribute [rw] alexa_skill_status
     #   The status of the Alexa Skill configuration.
     #   @return [String]
@@ -3470,7 +3478,7 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Specifies the name assigned to one or more phone numbers.
+    #   Specifies the updated name assigned to one or more phone numbers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdatePhoneNumberRequest AWS API Documentation

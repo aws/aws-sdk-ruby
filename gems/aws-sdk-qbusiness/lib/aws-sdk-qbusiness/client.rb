@@ -34,6 +34,7 @@ require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
+require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:qbusiness)
 
@@ -85,6 +86,7 @@ module Aws::QBusiness
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::QBusiness::Plugins::Endpoints)
 
     # @overload initialize(options)
@@ -225,9 +227,15 @@ module Aws::QBusiness
     #   @option options [Boolean] :endpoint_discovery (false)
     #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
+    #   @option options [Proc] :event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #
     #   @option options [Boolean] :ignore_configured_endpoint_urls
     #     Setting to true disables use of endpoint URLs provided via environment
     #     variables and the shared configuration file.
+    #
+    #   @option options [Proc] :input_event_stream_handler
+    #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -244,6 +252,9 @@ module Aws::QBusiness
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
+    #   @option options [Proc] :output_event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
@@ -421,16 +432,16 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application.
     #
-    # @option params [String] :data_source_sync_id
-    #   The identifier of the data source sync during which the documents were
-    #   deleted.
+    # @option params [required, String] :index_id
+    #   The identifier of the Amazon Q Business index that contains the
+    #   documents to delete.
     #
     # @option params [required, Array<Types::DeleteDocument>] :documents
     #   Documents deleted from the Amazon Q Business index.
     #
-    # @option params [required, String] :index_id
-    #   The identifier of the Amazon Q Business index that contains the
-    #   documents to delete.
+    # @option params [String] :data_source_sync_id
+    #   The identifier of the data source sync during which the documents were
+    #   deleted.
     #
     # @return [Types::BatchDeleteDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -440,22 +451,22 @@ module Aws::QBusiness
     #
     #   resp = client.batch_delete_document({
     #     application_id: "ApplicationId", # required
-    #     data_source_sync_id: "ExecutionId",
+    #     index_id: "IndexId", # required
     #     documents: [ # required
     #       {
     #         document_id: "DocumentId", # required
     #       },
     #     ],
-    #     index_id: "IndexId", # required
+    #     data_source_sync_id: "ExecutionId",
     #   })
     #
     # @example Response structure
     #
     #   resp.failed_documents #=> Array
-    #   resp.failed_documents[0].data_source_id #=> String
-    #   resp.failed_documents[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.failed_documents[0].error.error_message #=> String
     #   resp.failed_documents[0].id #=> String
+    #   resp.failed_documents[0].error.error_message #=> String
+    #   resp.failed_documents[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
+    #   resp.failed_documents[0].data_source_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/BatchDeleteDocument AWS API Documentation
     #
@@ -484,19 +495,19 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application.
     #
-    # @option params [String] :data_source_sync_id
-    #   The identifier of the data source sync during which the documents were
-    #   added.
+    # @option params [required, String] :index_id
+    #   The identifier of the Amazon Q Business index to add the documents to.
     #
     # @option params [required, Array<Types::Document>] :documents
     #   One or more documents to add to the index.
     #
-    # @option params [required, String] :index_id
-    #   The identifier of the Amazon Q Business index to add the documents to.
-    #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
     #   access your S3 bucket.
+    #
+    # @option params [String] :data_source_sync_id
+    #   The identifier of the data source sync during which the documents were
+    #   added.
     #
     # @return [Types::BatchPutDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -506,39 +517,18 @@ module Aws::QBusiness
     #
     #   resp = client.batch_put_document({
     #     application_id: "ApplicationId", # required
-    #     data_source_sync_id: "ExecutionId",
+    #     index_id: "IndexId", # required
     #     documents: [ # required
     #       {
-    #         access_configuration: {
-    #           access_controls: [ # required
-    #             {
-    #               member_relation: "AND", # accepts AND, OR
-    #               principals: [ # required
-    #                 {
-    #                   group: {
-    #                     access: "ALLOW", # required, accepts ALLOW, DENY
-    #                     membership_type: "INDEX", # accepts INDEX, DATASOURCE
-    #                     name: "GroupName",
-    #                   },
-    #                   user: {
-    #                     access: "ALLOW", # required, accepts ALLOW, DENY
-    #                     id: "UserId",
-    #                     membership_type: "INDEX", # accepts INDEX, DATASOURCE
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #           member_relation: "AND", # accepts AND, OR
-    #         },
+    #         id: "DocumentId", # required
     #         attributes: [
     #           {
     #             name: "DocumentAttributeKey", # required
     #             value: { # required
-    #               date_value: Time.now,
-    #               long_value: 1,
-    #               string_list_value: ["String"],
     #               string_value: "DocumentAttributeValueStringValueString",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
     #             },
     #           },
     #         ],
@@ -550,6 +540,29 @@ module Aws::QBusiness
     #           },
     #         },
     #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT, RTF, XML, XSLT, MS_EXCEL, CSV, JSON, MD
+    #         title: "Title",
+    #         access_configuration: {
+    #           access_controls: [ # required
+    #             {
+    #               principals: [ # required
+    #                 {
+    #                   user: {
+    #                     id: "UserId",
+    #                     access: "ALLOW", # required, accepts ALLOW, DENY
+    #                     membership_type: "INDEX", # accepts INDEX, DATASOURCE
+    #                   },
+    #                   group: {
+    #                     name: "GroupName",
+    #                     access: "ALLOW", # required, accepts ALLOW, DENY
+    #                     membership_type: "INDEX", # accepts INDEX, DATASOURCE
+    #                   },
+    #                 },
+    #               ],
+    #               member_relation: "AND", # accepts AND, OR
+    #             },
+    #           ],
+    #           member_relation: "AND", # accepts AND, OR
+    #         },
     #         document_enrichment_configuration: {
     #           inline_configurations: [
     #             {
@@ -557,71 +570,69 @@ module Aws::QBusiness
     #                 key: "DocumentAttributeKey", # required
     #                 operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
     #                 value: {
-    #                   date_value: Time.now,
-    #                   long_value: 1,
-    #                   string_list_value: ["String"],
     #                   string_value: "DocumentAttributeValueStringValueString",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
     #                 },
     #               },
-    #               document_content_operator: "DELETE", # accepts DELETE
     #               target: {
-    #                 attribute_value_operator: "DELETE", # accepts DELETE
     #                 key: "DocumentAttributeKey", # required
     #                 value: {
-    #                   date_value: Time.now,
-    #                   long_value: 1,
-    #                   string_list_value: ["String"],
     #                   string_value: "DocumentAttributeValueStringValueString",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
     #                 },
+    #                 attribute_value_operator: "DELETE", # accepts DELETE
     #               },
+    #               document_content_operator: "DELETE", # accepts DELETE
     #             },
     #           ],
-    #           post_extraction_hook_configuration: {
-    #             invocation_condition: {
-    #               key: "DocumentAttributeKey", # required
-    #               operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
-    #               value: {
-    #                 date_value: Time.now,
-    #                 long_value: 1,
-    #                 string_list_value: ["String"],
-    #                 string_value: "DocumentAttributeValueStringValueString",
-    #               },
-    #             },
-    #             lambda_arn: "LambdaArn",
-    #             role_arn: "RoleArn",
-    #             s3_bucket_name: "S3BucketName",
-    #           },
     #           pre_extraction_hook_configuration: {
     #             invocation_condition: {
     #               key: "DocumentAttributeKey", # required
     #               operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
     #               value: {
-    #                 date_value: Time.now,
-    #                 long_value: 1,
-    #                 string_list_value: ["String"],
     #                 string_value: "DocumentAttributeValueStringValueString",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
     #               },
     #             },
     #             lambda_arn: "LambdaArn",
-    #             role_arn: "RoleArn",
     #             s3_bucket_name: "S3BucketName",
+    #             role_arn: "RoleArn",
+    #           },
+    #           post_extraction_hook_configuration: {
+    #             invocation_condition: {
+    #               key: "DocumentAttributeKey", # required
+    #               operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
+    #               value: {
+    #                 string_value: "DocumentAttributeValueStringValueString",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
+    #               },
+    #             },
+    #             lambda_arn: "LambdaArn",
+    #             s3_bucket_name: "S3BucketName",
+    #             role_arn: "RoleArn",
     #           },
     #         },
-    #         id: "DocumentId", # required
-    #         title: "Title",
     #       },
     #     ],
-    #     index_id: "IndexId", # required
     #     role_arn: "RoleArn",
+    #     data_source_sync_id: "ExecutionId",
     #   })
     #
     # @example Response structure
     #
     #   resp.failed_documents #=> Array
-    #   resp.failed_documents[0].data_source_id #=> String
-    #   resp.failed_documents[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.failed_documents[0].error.error_message #=> String
     #   resp.failed_documents[0].id #=> String
+    #   resp.failed_documents[0].error.error_message #=> String
+    #   resp.failed_documents[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
+    #   resp.failed_documents[0].data_source_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/BatchPutDocument AWS API Documentation
     #
@@ -634,24 +645,44 @@ module Aws::QBusiness
 
     # Starts or continues a non-streaming Amazon Q Business conversation.
     #
-    # @option params [Types::ActionExecution] :action_execution
-    #   A request from an end user to perform an Amazon Q Business plugin
-    #   action.
-    #
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application linked to the
     #   Amazon Q Business conversation.
     #
+    # @option params [String] :user_id
+    #   The identifier of the user attached to the chat input.
+    #
+    # @option params [Array<String>] :user_groups
+    #   The groups that a user associated with the chat input belongs to.
+    #
+    # @option params [String] :user_message
+    #   A end user message in a conversation.
+    #
     # @option params [Array<Types::AttachmentInput>] :attachments
     #   A list of files uploaded directly during chat. You can upload a
     #   maximum of 5 files of upto 10 MB each.
+    #
+    # @option params [Types::ActionExecution] :action_execution
+    #   A request from an end user to perform an Amazon Q Business plugin
+    #   action.
+    #
+    # @option params [Types::AuthChallengeResponse] :auth_challenge_response
+    #   An authentication verification event response by a third party
+    #   authentication server to Amazon Q Business.
+    #
+    # @option params [String] :conversation_id
+    #   The identifier of the Amazon Q Business conversation.
+    #
+    # @option params [String] :parent_message_id
+    #   The identifier of the previous end user text input message in a
+    #   conversation.
     #
     # @option params [Types::AttributeFilter] :attribute_filter
     #   Enables filtering of Amazon Q Business web experience responses based
     #   on document attributes or metadata fields.
     #
     # @option params [String] :chat_mode
-    #   The chat modes available in an Amazon Q Business web experience.
+    #   The chat modes available to an Amazon Q Business end user.
     #
     #   * `RETRIEVAL_MODE` - The default chat mode for an Amazon Q Business
     #     application. When this mode is enabled, Amazon Q Business generates
@@ -683,36 +714,32 @@ module Aws::QBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :conversation_id
-    #   The identifier of the Amazon Q Business conversation.
-    #
-    # @option params [String] :parent_message_id
-    #   The identifier of the previous end user text input message in a
-    #   conversation.
-    #
-    # @option params [Array<String>] :user_groups
-    #   The groups that a user associated with the chat input belongs to.
-    #
-    # @option params [String] :user_id
-    #   The identifier of the user attached to the chat input.
-    #
-    # @option params [String] :user_message
-    #   A end user message in a conversation.
-    #
     # @return [Types::ChatSyncOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ChatSyncOutput#action_review #action_review} => Types::ActionReview
     #   * {Types::ChatSyncOutput#conversation_id #conversation_id} => String
-    #   * {Types::ChatSyncOutput#failed_attachments #failed_attachments} => Array&lt;Types::AttachmentOutput&gt;
-    #   * {Types::ChatSyncOutput#source_attributions #source_attributions} => Array&lt;Types::SourceAttribution&gt;
     #   * {Types::ChatSyncOutput#system_message #system_message} => String
     #   * {Types::ChatSyncOutput#system_message_id #system_message_id} => String
     #   * {Types::ChatSyncOutput#user_message_id #user_message_id} => String
+    #   * {Types::ChatSyncOutput#action_review #action_review} => Types::ActionReview
+    #   * {Types::ChatSyncOutput#auth_challenge_request #auth_challenge_request} => Types::AuthChallengeRequest
+    #   * {Types::ChatSyncOutput#source_attributions #source_attributions} => Array&lt;Types::SourceAttribution&gt;
+    #   * {Types::ChatSyncOutput#failed_attachments #failed_attachments} => Array&lt;Types::AttachmentOutput&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.chat_sync({
+    #     application_id: "ApplicationId", # required
+    #     user_id: "UserId",
+    #     user_groups: ["String"],
+    #     user_message: "UserMessage",
+    #     attachments: [
+    #       {
+    #         name: "AttachmentName", # required
+    #         data: "data", # required
+    #       },
+    #     ],
     #     action_execution: {
+    #       plugin_id: "PluginId", # required
     #       payload: { # required
     #         "ActionPayloadFieldKey" => {
     #           value: { # required
@@ -720,92 +747,91 @@ module Aws::QBusiness
     #         },
     #       },
     #       payload_field_name_separator: "ActionPayloadFieldNameSeparator", # required
-    #       plugin_id: "PluginId", # required
     #     },
-    #     application_id: "ApplicationId", # required
-    #     attachments: [
-    #       {
-    #         data: "data", # required
-    #         name: "AttachmentName", # required
+    #     auth_challenge_response: {
+    #       response_map: { # required
+    #         "AuthResponseKey" => "AuthResponseValue",
     #       },
-    #     ],
+    #     },
+    #     conversation_id: "ConversationId",
+    #     parent_message_id: "MessageId",
     #     attribute_filter: {
     #       and_all_filters: [
     #         {
     #           # recursive AttributeFilter
     #         },
     #       ],
-    #       contains_all: {
-    #         name: "DocumentAttributeKey", # required
-    #         value: { # required
-    #           date_value: Time.now,
-    #           long_value: 1,
-    #           string_list_value: ["String"],
-    #           string_value: "DocumentAttributeValueStringValueString",
-    #         },
-    #       },
-    #       contains_any: {
-    #         name: "DocumentAttributeKey", # required
-    #         value: { # required
-    #           date_value: Time.now,
-    #           long_value: 1,
-    #           string_list_value: ["String"],
-    #           string_value: "DocumentAttributeValueStringValueString",
-    #         },
-    #       },
-    #       equals_to: {
-    #         name: "DocumentAttributeKey", # required
-    #         value: { # required
-    #           date_value: Time.now,
-    #           long_value: 1,
-    #           string_list_value: ["String"],
-    #           string_value: "DocumentAttributeValueStringValueString",
-    #         },
-    #       },
-    #       greater_than: {
-    #         name: "DocumentAttributeKey", # required
-    #         value: { # required
-    #           date_value: Time.now,
-    #           long_value: 1,
-    #           string_list_value: ["String"],
-    #           string_value: "DocumentAttributeValueStringValueString",
-    #         },
-    #       },
-    #       greater_than_or_equals: {
-    #         name: "DocumentAttributeKey", # required
-    #         value: { # required
-    #           date_value: Time.now,
-    #           long_value: 1,
-    #           string_list_value: ["String"],
-    #           string_value: "DocumentAttributeValueStringValueString",
-    #         },
-    #       },
-    #       less_than: {
-    #         name: "DocumentAttributeKey", # required
-    #         value: { # required
-    #           date_value: Time.now,
-    #           long_value: 1,
-    #           string_list_value: ["String"],
-    #           string_value: "DocumentAttributeValueStringValueString",
-    #         },
-    #       },
-    #       less_than_or_equals: {
-    #         name: "DocumentAttributeKey", # required
-    #         value: { # required
-    #           date_value: Time.now,
-    #           long_value: 1,
-    #           string_list_value: ["String"],
-    #           string_value: "DocumentAttributeValueStringValueString",
-    #         },
-    #       },
-    #       not_filter: {
-    #         # recursive AttributeFilter
-    #       },
     #       or_all_filters: [
     #         {
     #           # recursive AttributeFilter
     #         },
     #       ],
+    #       not_filter: {
+    #         # recursive AttributeFilter
+    #       },
+    #       equals_to: {
+    #         name: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeValueStringValueString",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       contains_all: {
+    #         name: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeValueStringValueString",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       contains_any: {
+    #         name: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeValueStringValueString",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       greater_than: {
+    #         name: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeValueStringValueString",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       greater_than_or_equals: {
+    #         name: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeValueStringValueString",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       less_than: {
+    #         name: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeValueStringValueString",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       less_than_or_equals: {
+    #         name: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeValueStringValueString",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
     #     },
     #     chat_mode: "RETRIEVAL_MODE", # accepts RETRIEVAL_MODE, CREATOR_MODE, PLUGIN_MODE
     #     chat_mode_configuration: {
@@ -814,42 +840,41 @@ module Aws::QBusiness
     #       },
     #     },
     #     client_token: "ClientToken",
-    #     conversation_id: "ConversationId",
-    #     parent_message_id: "MessageId",
-    #     user_groups: ["String"],
-    #     user_id: "UserId",
-    #     user_message: "UserMessage",
     #   })
     #
     # @example Response structure
     #
-    #   resp.action_review.payload #=> Hash
-    #   resp.action_review.payload["ActionPayloadFieldKey"].allowed_values #=> Array
-    #   resp.action_review.payload["ActionPayloadFieldKey"].display_name #=> String
-    #   resp.action_review.payload["ActionPayloadFieldKey"].display_order #=> Integer
-    #   resp.action_review.payload["ActionPayloadFieldKey"].required #=> Boolean
-    #   resp.action_review.payload["ActionPayloadFieldKey"].type #=> String, one of "STRING", "NUMBER", "ARRAY", "BOOLEAN"
-    #   resp.action_review.payload_field_name_separator #=> String
-    #   resp.action_review.plugin_id #=> String
-    #   resp.action_review.plugin_type #=> String, one of "SERVICE_NOW", "SALESFORCE", "JIRA", "ZENDESK"
     #   resp.conversation_id #=> String
-    #   resp.failed_attachments #=> Array
-    #   resp.failed_attachments[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.failed_attachments[0].error.error_message #=> String
-    #   resp.failed_attachments[0].name #=> String
-    #   resp.failed_attachments[0].status #=> String, one of "FAILED", "SUCCEEDED"
-    #   resp.source_attributions #=> Array
-    #   resp.source_attributions[0].citation_number #=> Integer
-    #   resp.source_attributions[0].snippet #=> String
-    #   resp.source_attributions[0].text_message_segments #=> Array
-    #   resp.source_attributions[0].text_message_segments[0].begin_offset #=> Integer
-    #   resp.source_attributions[0].text_message_segments[0].end_offset #=> Integer
-    #   resp.source_attributions[0].title #=> String
-    #   resp.source_attributions[0].updated_at #=> Time
-    #   resp.source_attributions[0].url #=> String
     #   resp.system_message #=> String
     #   resp.system_message_id #=> String
     #   resp.user_message_id #=> String
+    #   resp.action_review.plugin_id #=> String
+    #   resp.action_review.plugin_type #=> String, one of "SERVICE_NOW", "SALESFORCE", "JIRA", "ZENDESK", "CUSTOM"
+    #   resp.action_review.payload #=> Hash
+    #   resp.action_review.payload["ActionPayloadFieldKey"].display_name #=> String
+    #   resp.action_review.payload["ActionPayloadFieldKey"].display_order #=> Integer
+    #   resp.action_review.payload["ActionPayloadFieldKey"].display_description #=> String
+    #   resp.action_review.payload["ActionPayloadFieldKey"].type #=> String, one of "STRING", "NUMBER", "ARRAY", "BOOLEAN"
+    #   resp.action_review.payload["ActionPayloadFieldKey"].allowed_values #=> Array
+    #   resp.action_review.payload["ActionPayloadFieldKey"].allowed_format #=> String
+    #   resp.action_review.payload["ActionPayloadFieldKey"].required #=> Boolean
+    #   resp.action_review.payload_field_name_separator #=> String
+    #   resp.auth_challenge_request.authorization_url #=> String
+    #   resp.source_attributions #=> Array
+    #   resp.source_attributions[0].title #=> String
+    #   resp.source_attributions[0].snippet #=> String
+    #   resp.source_attributions[0].url #=> String
+    #   resp.source_attributions[0].citation_number #=> Integer
+    #   resp.source_attributions[0].updated_at #=> Time
+    #   resp.source_attributions[0].text_message_segments #=> Array
+    #   resp.source_attributions[0].text_message_segments[0].begin_offset #=> Integer
+    #   resp.source_attributions[0].text_message_segments[0].end_offset #=> Integer
+    #   resp.source_attributions[0].text_message_segments[0].snippet_excerpt.text #=> String
+    #   resp.failed_attachments #=> Array
+    #   resp.failed_attachments[0].name #=> String
+    #   resp.failed_attachments[0].status #=> String, one of "FAILED", "SUCCEEDED"
+    #   resp.failed_attachments[0].error.error_message #=> String
+    #   resp.failed_attachments[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ChatSync AWS API Documentation
     #
@@ -862,34 +887,37 @@ module Aws::QBusiness
 
     # Creates an Amazon Q Business application.
     #
-    # @option params [Types::AttachmentsConfiguration] :attachments_configuration
-    #   An option to allow end users to upload files directly during chat.
+    # <note markdown="1"> There are new tiers for Amazon Q Business. Not all features in Amazon
+    # Q Business Pro are also available in Amazon Q Business Lite. For
+    # information on what's included in Amazon Q Business Lite and what's
+    # included in Amazon Q Business Pro, see [Amazon Q Business tiers][1].
+    # You must use the Amazon Q Business console to assign subscription
+    # tiers to users.
     #
-    # @option params [String] :client_token
-    #   A token that you provide to identify the request to create your Amazon
-    #   Q Business application.
+    #  </note>
     #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
     #
-    # @option params [String] :description
-    #   A description for the Amazon Q Business application.
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers
     #
     # @option params [required, String] :display_name
     #   A name for the Amazon Q Business application.
     #
-    # @option params [Types::EncryptionConfiguration] :encryption_configuration
-    #   The identifier of the KMS key that is used to encrypt your data.
-    #   Amazon Q Business doesn't support asymmetric keys.
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role with permissions to
+    #   access your Amazon CloudWatch logs and metrics.
     #
     # @option params [String] :identity_center_instance_arn
     #   The Amazon Resource Name (ARN) of the IAM Identity Center instance you
     #   are either creating for—or connecting to—your Amazon Q Business
     #   application.
     #
-    # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role with permissions to
-    #   access your Amazon CloudWatch logs and metrics.
+    # @option params [String] :description
+    #   A description for the Amazon Q Business application.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The identifier of the KMS key that is used to encrypt your data.
+    #   Amazon Q Business doesn't support asymmetric keys.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs that identify or categorize your Amazon Q
@@ -898,37 +926,47 @@ module Aws::QBusiness
     #   digits, white space, and any of the following symbols: \_ . : / = + -
     #   @.
     #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create your Amazon
+    #   Q Business application.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::AttachmentsConfiguration] :attachments_configuration
+    #   An option to allow end users to upload files directly during chat.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateApplicationResponse#application_arn #application_arn} => String
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
+    #   * {Types::CreateApplicationResponse#application_arn #application_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_application({
-    #     attachments_configuration: {
-    #       attachments_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
-    #     },
-    #     client_token: "ClientToken",
-    #     description: "Description",
     #     display_name: "ApplicationName", # required
+    #     role_arn: "RoleArn",
+    #     identity_center_instance_arn: "InstanceArn",
+    #     description: "Description",
     #     encryption_configuration: {
     #       kms_key_id: "KmsKeyId",
     #     },
-    #     identity_center_instance_arn: "InstanceArn",
-    #     role_arn: "RoleArn", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     client_token: "ClientToken",
+    #     attachments_configuration: {
+    #       attachments_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_arn #=> String
     #   resp.application_id #=> String
+    #   resp.application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateApplication AWS API Documentation
     #
@@ -949,13 +987,12 @@ module Aws::QBusiness
     #   The identifier of the Amazon Q Business application the data source
     #   will be attached to.
     #
-    # @option params [String] :client_token
-    #   A token you provide to identify a request to create a data source
-    #   connector. Multiple calls to the `CreateDataSource` API with the same
-    #   client token will create only one data source connector.
+    # @option params [required, String] :index_id
+    #   The identifier of the index that you want to use with the data source
+    #   connector.
     #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
+    # @option params [required, String] :display_name
+    #   A name for the data source connector.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :configuration
     #   Configuration information to connect to your data source repository.
@@ -971,29 +1008,24 @@ module Aws::QBusiness
     #
     #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html
     #
+    # @option params [Types::DataSourceVpcConfiguration] :vpc_configuration
+    #   Configuration information for an Amazon VPC (Virtual Private Cloud) to
+    #   connect to your data source. For more information, see [Using Amazon
+    #   VPC with Amazon Q Business connectors][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connector-vpc.html
+    #
     # @option params [String] :description
     #   A description for the data source connector.
     #
-    # @option params [required, String] :display_name
-    #   A name for the data source connector.
-    #
-    # @option params [Types::DocumentEnrichmentConfiguration] :document_enrichment_configuration
-    #   Provides the configuration information for altering document metadata
-    #   and content during the document ingestion process.
-    #
-    #   For more information, see [Custom document enrichment][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
-    #
-    # @option params [required, String] :index_id
-    #   The identifier of the index that you want to use with the data source
-    #   connector.
-    #
-    # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role with permission to
-    #   access the data source and required resources.
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs that identify or categorize the data source
+    #   connector. You can also use tags to help control access to the data
+    #   source connector. Tag keys and values can consist of Unicode letters,
+    #   digits, white space, and any of the following symbols: \_ . : / = + -
+    #   @.
     #
     # @option params [String] :sync_schedule
     #   Sets the frequency for Amazon Q Business to check the documents in
@@ -1005,36 +1037,55 @@ module Aws::QBusiness
     #   `Schedule` parameter when the `Type` parameter is set to `CUSTOM`. If
     #   you do, you receive a `ValidationException` exception.
     #
-    # @option params [Array<Types::Tag>] :tags
-    #   A list of key-value pairs that identify or categorize the data source
-    #   connector. You can also use tags to help control access to the data
-    #   source connector. Tag keys and values can consist of Unicode letters,
-    #   digits, white space, and any of the following symbols: \_ . : / = + -
-    #   @.
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   access the data source and required resources.
     #
-    # @option params [Types::DataSourceVpcConfiguration] :vpc_configuration
-    #   Configuration information for an Amazon VPC (Virtual Private Cloud) to
-    #   connect to your data source. For more information, see [Using Amazon
-    #   VPC with Amazon Q Business connectors][1].
+    # @option params [String] :client_token
+    #   A token you provide to identify a request to create a data source
+    #   connector. Multiple calls to the `CreateDataSource` API with the same
+    #   client token will create only one data source connector.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::DocumentEnrichmentConfiguration] :document_enrichment_configuration
+    #   Provides the configuration information for altering document metadata
+    #   and content during the document ingestion process.
+    #
+    #   For more information, see [Custom document enrichment][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connector-vpc.html
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
     #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateDataSourceResponse#data_source_arn #data_source_arn} => String
     #   * {Types::CreateDataSourceResponse#data_source_id #data_source_id} => String
+    #   * {Types::CreateDataSourceResponse#data_source_arn #data_source_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_source({
     #     application_id: "ApplicationId", # required
-    #     client_token: "ClientToken",
+    #     index_id: "IndexId", # required
+    #     display_name: "DataSourceName", # required
     #     configuration: { # required
     #     },
+    #     vpc_configuration: {
+    #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #     },
     #     description: "Description",
-    #     display_name: "DataSourceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     sync_schedule: "SyncSchedule",
+    #     role_arn: "RoleArn",
+    #     client_token: "ClientToken",
     #     document_enrichment_configuration: {
     #       inline_configurations: [
     #         {
@@ -1042,75 +1093,62 @@ module Aws::QBusiness
     #             key: "DocumentAttributeKey", # required
     #             operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
     #             value: {
-    #               date_value: Time.now,
-    #               long_value: 1,
-    #               string_list_value: ["String"],
     #               string_value: "DocumentAttributeValueStringValueString",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
     #             },
     #           },
-    #           document_content_operator: "DELETE", # accepts DELETE
     #           target: {
-    #             attribute_value_operator: "DELETE", # accepts DELETE
     #             key: "DocumentAttributeKey", # required
     #             value: {
-    #               date_value: Time.now,
-    #               long_value: 1,
-    #               string_list_value: ["String"],
     #               string_value: "DocumentAttributeValueStringValueString",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
     #             },
+    #             attribute_value_operator: "DELETE", # accepts DELETE
     #           },
+    #           document_content_operator: "DELETE", # accepts DELETE
     #         },
     #       ],
-    #       post_extraction_hook_configuration: {
-    #         invocation_condition: {
-    #           key: "DocumentAttributeKey", # required
-    #           operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
-    #           value: {
-    #             date_value: Time.now,
-    #             long_value: 1,
-    #             string_list_value: ["String"],
-    #             string_value: "DocumentAttributeValueStringValueString",
-    #           },
-    #         },
-    #         lambda_arn: "LambdaArn",
-    #         role_arn: "RoleArn",
-    #         s3_bucket_name: "S3BucketName",
-    #       },
     #       pre_extraction_hook_configuration: {
     #         invocation_condition: {
     #           key: "DocumentAttributeKey", # required
     #           operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
     #           value: {
-    #             date_value: Time.now,
-    #             long_value: 1,
-    #             string_list_value: ["String"],
     #             string_value: "DocumentAttributeValueStringValueString",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
     #           },
     #         },
     #         lambda_arn: "LambdaArn",
-    #         role_arn: "RoleArn",
     #         s3_bucket_name: "S3BucketName",
+    #         role_arn: "RoleArn",
     #       },
-    #     },
-    #     index_id: "IndexId", # required
-    #     role_arn: "RoleArn",
-    #     sync_schedule: "SyncSchedule",
-    #     tags: [
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
+    #       post_extraction_hook_configuration: {
+    #         invocation_condition: {
+    #           key: "DocumentAttributeKey", # required
+    #           operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
+    #           value: {
+    #             string_value: "DocumentAttributeValueStringValueString",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         lambda_arn: "LambdaArn",
+    #         s3_bucket_name: "S3BucketName",
+    #         role_arn: "RoleArn",
     #       },
-    #     ],
-    #     vpc_configuration: {
-    #       security_group_ids: ["SecurityGroupId"], # required
-    #       subnet_ids: ["SubnetId"], # required
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.data_source_arn #=> String
     #   resp.data_source_id #=> String
+    #   resp.data_source_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateDataSource AWS API Documentation
     #
@@ -1138,6 +1176,27 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application using the index.
     #
+    # @option params [required, String] :display_name
+    #   A name for the Amazon Q Business index.
+    #
+    # @option params [String] :type
+    #   The index type that's suitable for your needs. For more information
+    #   on what's included in each type of index or index tier, see [Amazon Q
+    #   Business tiers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers
+    #
+    # @option params [String] :description
+    #   A description for the Amazon Q Business index.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs that identify or categorize the index. You
+    #   can also use tags to help control access to the index. Tag keys and
+    #   values can consist of Unicode letters, digits, white space, and any of
+    #   the following symbols: \_ . : / = + - @.
+    #
     # @option params [Types::IndexCapacityConfiguration] :capacity_configuration
     #   The capacity units you want to provision for your index. You can add
     #   and remove capacity to fit your usage needs.
@@ -1150,45 +1209,34 @@ module Aws::QBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :description
-    #   A description for the Amazon Q Business index.
-    #
-    # @option params [required, String] :display_name
-    #   A name for the Amazon Q Business index.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   A list of key-value pairs that identify or categorize the index. You
-    #   can also use tags to help control access to the index. Tag keys and
-    #   values can consist of Unicode letters, digits, white space, and any of
-    #   the following symbols: \_ . : / = + - @.
-    #
     # @return [Types::CreateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateIndexResponse#index_arn #index_arn} => String
     #   * {Types::CreateIndexResponse#index_id #index_id} => String
+    #   * {Types::CreateIndexResponse#index_arn #index_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_index({
     #     application_id: "ApplicationId", # required
-    #     capacity_configuration: {
-    #       units: 1,
-    #     },
-    #     client_token: "ClientToken",
-    #     description: "Description",
     #     display_name: "IndexName", # required
+    #     type: "ENTERPRISE", # accepts ENTERPRISE, STARTER
+    #     description: "Description",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     capacity_configuration: {
+    #       units: 1,
+    #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.index_arn #=> String
     #   resp.index_id #=> String
+    #   resp.index_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateIndex AWS API Documentation
     #
@@ -1204,22 +1252,21 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the application that will contain the plugin.
     #
+    # @option params [required, String] :display_name
+    #   A the name for your plugin.
+    #
+    # @option params [required, String] :type
+    #   The type of plugin you want to create.
+    #
     # @option params [required, Types::PluginAuthConfiguration] :auth_configuration
     #   Authentication configuration information for an Amazon Q Business
     #   plugin.
     #
-    # @option params [String] :client_token
-    #   A token that you provide to identify the request to create your Amazon
-    #   Q Business plugin.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    # @option params [required, String] :display_name
-    #   A the name for your plugin.
-    #
-    # @option params [required, String] :server_url
+    # @option params [String] :server_url
     #   The source URL used for plugin configuration.
+    #
+    # @option params [Types::CustomPluginConfiguration] :custom_plugin_configuration
+    #   Contains configuration for a custom plugin.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs that identify or categorize the data source
@@ -1228,44 +1275,63 @@ module Aws::QBusiness
     #   digits, white space, and any of the following symbols: \_ . : / = + -
     #   @.
     #
-    # @option params [required, String] :type
-    #   The type of plugin you want to create.
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create your Amazon
+    #   Q Business plugin.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreatePluginResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreatePluginResponse#plugin_arn #plugin_arn} => String
     #   * {Types::CreatePluginResponse#plugin_id #plugin_id} => String
+    #   * {Types::CreatePluginResponse#plugin_arn #plugin_arn} => String
+    #   * {Types::CreatePluginResponse#build_status #build_status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_plugin({
     #     application_id: "ApplicationId", # required
+    #     display_name: "PluginName", # required
+    #     type: "SERVICE_NOW", # required, accepts SERVICE_NOW, SALESFORCE, JIRA, ZENDESK, CUSTOM
     #     auth_configuration: { # required
     #       basic_auth_configuration: {
-    #         role_arn: "RoleArn", # required
     #         secret_arn: "SecretArn", # required
+    #         role_arn: "RoleArn", # required
     #       },
     #       o_auth_2_client_credential_configuration: {
-    #         role_arn: "RoleArn", # required
     #         secret_arn: "SecretArn", # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #       no_auth_configuration: {
     #       },
     #     },
-    #     client_token: "ClientToken",
-    #     display_name: "PluginName", # required
-    #     server_url: "Url", # required
+    #     server_url: "Url",
+    #     custom_plugin_configuration: {
+    #       description: "PluginDescription", # required
+    #       api_schema_type: "OPEN_API_V3", # required, accepts OPEN_API_V3
+    #       api_schema: { # required
+    #         payload: "Payload",
+    #         s3: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #       },
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     type: "SERVICE_NOW", # required, accepts SERVICE_NOW, SALESFORCE, JIRA, ZENDESK
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.plugin_arn #=> String
     #   resp.plugin_id #=> String
+    #   resp.plugin_arn #=> String
+    #   resp.build_status #=> String, one of "READY", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreatePlugin AWS API Documentation
     #
@@ -1281,6 +1347,20 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of your Amazon Q Business application.
     #
+    # @option params [required, String] :type
+    #   The type of retriever you are using.
+    #
+    # @option params [required, String] :display_name
+    #   The name of your retriever.
+    #
+    # @option params [required, Types::RetrieverConfiguration] :configuration
+    #   Provides information on how the retriever used for your Amazon Q
+    #   Business application is configured.
+    #
+    # @option params [String] :role_arn
+    #   The ARN of an IAM role used by Amazon Q Business to access the basic
+    #   authentication credentials stored in a Secrets Manager secret.
+    #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create your Amazon
     #   Q Business application retriever.
@@ -1288,80 +1368,66 @@ module Aws::QBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, Types::RetrieverConfiguration] :configuration
-    #   Provides information on how the retriever used for your Amazon Q
-    #   Business application is configured.
-    #
-    # @option params [required, String] :display_name
-    #   The name of your retriever.
-    #
-    # @option params [String] :role_arn
-    #   The ARN of an IAM role used by Amazon Q Business to access the basic
-    #   authentication credentials stored in a Secrets Manager secret.
-    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs that identify or categorize the retriever.
     #   You can also use tags to help control access to the retriever. Tag
     #   keys and values can consist of Unicode letters, digits, white space,
     #   and any of the following symbols: \_ . : / = + - @.
     #
-    # @option params [required, String] :type
-    #   The type of retriever you are using.
-    #
     # @return [Types::CreateRetrieverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateRetrieverResponse#retriever_arn #retriever_arn} => String
     #   * {Types::CreateRetrieverResponse#retriever_id #retriever_id} => String
+    #   * {Types::CreateRetrieverResponse#retriever_arn #retriever_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_retriever({
     #     application_id: "ApplicationId", # required
-    #     client_token: "ClientToken",
+    #     type: "NATIVE_INDEX", # required, accepts NATIVE_INDEX, KENDRA_INDEX
+    #     display_name: "RetrieverName", # required
     #     configuration: { # required
-    #       kendra_index_configuration: {
-    #         index_id: "KendraIndexId", # required
-    #       },
     #       native_index_configuration: {
+    #         index_id: "IndexId", # required
     #         boosting_override: {
     #           "DocumentAttributeKey" => {
-    #             date_configuration: {
-    #               boosting_duration_in_seconds: 1,
-    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
-    #             },
     #             number_configuration: {
     #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
     #               boosting_type: "PRIORITIZE_LARGER_VALUES", # accepts PRIORITIZE_LARGER_VALUES, PRIORITIZE_SMALLER_VALUES
     #             },
     #             string_configuration: {
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
     #               attribute_value_boosting: {
     #                 "String" => "LOW", # accepts LOW, MEDIUM, HIGH, VERY_HIGH
     #               },
+    #             },
+    #             date_configuration: {
     #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #               boosting_duration_in_seconds: 1,
     #             },
     #             string_list_configuration: {
     #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
     #             },
     #           },
     #         },
-    #         index_id: "IndexId", # required
+    #       },
+    #       kendra_index_configuration: {
+    #         index_id: "KendraIndexId", # required
     #       },
     #     },
-    #     display_name: "RetrieverName", # required
     #     role_arn: "RoleArn",
+    #     client_token: "ClientToken",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     type: "NATIVE_INDEX", # required, accepts NATIVE_INDEX, KENDRA_INDEX
     #   })
     #
     # @example Response structure
     #
-    #   resp.retriever_arn #=> String
     #   resp.retriever_id #=> String
+    #   resp.retriever_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateRetriever AWS API Documentation
     #
@@ -1379,6 +1445,12 @@ module Aws::QBusiness
     #   The identifier of the application for which the user mapping will be
     #   created.
     #
+    # @option params [required, String] :user_id
+    #   The user emails attached to a user mapping.
+    #
+    # @option params [Array<Types::UserAlias>] :user_aliases
+    #   The list of user aliases in the mapping.
+    #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create your Amazon
     #   Q Business user mapping.
@@ -1386,27 +1458,21 @@ module Aws::QBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [Array<Types::UserAlias>] :user_aliases
-    #   The list of user aliases in the mapping.
-    #
-    # @option params [required, String] :user_id
-    #   The user emails attached to a user mapping.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_user({
     #     application_id: "ApplicationId", # required
-    #     client_token: "ClientToken",
+    #     user_id: "String", # required
     #     user_aliases: [
     #       {
-    #         data_source_id: "DataSourceId",
     #         index_id: "IndexId",
+    #         data_source_id: "DataSourceId",
     #         user_id: "String", # required
     #       },
     #     ],
-    #     user_id: "String", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateUser AWS API Documentation
@@ -1423,23 +1489,23 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business web experience.
     #
-    # @option params [String] :client_token
-    #   A token you provide to identify a request to create an Amazon Q
-    #   Business web experience.
+    # @option params [String] :title
+    #   The title for your Amazon Q Business web experience.
     #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
+    # @option params [String] :subtitle
+    #   A subtitle to personalize your Amazon Q Business web experience.
     #
-    # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of the service role attached to your
+    # @option params [String] :welcome_message
+    #   The customized welcome message for end users of an Amazon Q Business
     #   web experience.
     #
     # @option params [String] :sample_prompts_control_mode
     #   Determines whether sample prompts are enabled in the web experience
     #   for an end user.
     #
-    # @option params [String] :subtitle
-    #   A subtitle to personalize your Amazon Q Business web experience.
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the service role attached to your
+    #   web experience.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs that identify or categorize your Amazon Q
@@ -1448,40 +1514,40 @@ module Aws::QBusiness
     #   letters, digits, white space, and any of the following symbols: \_ . :
     #   / = + - @.
     #
-    # @option params [String] :title
-    #   The title for your Amazon Q Business web experience.
+    # @option params [String] :client_token
+    #   A token you provide to identify a request to create an Amazon Q
+    #   Business web experience.
     #
-    # @option params [String] :welcome_message
-    #   The customized welcome message for end users of an Amazon Q Business
-    #   web experience.
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateWebExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateWebExperienceResponse#web_experience_arn #web_experience_arn} => String
     #   * {Types::CreateWebExperienceResponse#web_experience_id #web_experience_id} => String
+    #   * {Types::CreateWebExperienceResponse#web_experience_arn #web_experience_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_web_experience({
     #     application_id: "ApplicationId", # required
-    #     client_token: "ClientToken",
-    #     role_arn: "RoleArn",
-    #     sample_prompts_control_mode: "ENABLED", # accepts ENABLED, DISABLED
+    #     title: "WebExperienceTitle",
     #     subtitle: "WebExperienceSubtitle",
+    #     welcome_message: "WebExperienceWelcomeMessage",
+    #     sample_prompts_control_mode: "ENABLED", # accepts ENABLED, DISABLED
+    #     role_arn: "RoleArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     title: "WebExperienceTitle",
-    #     welcome_message: "WebExperienceWelcomeMessage",
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.web_experience_arn #=> String
     #   resp.web_experience_id #=> String
+    #   resp.web_experience_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateWebExperience AWS API Documentation
     #
@@ -1540,13 +1606,13 @@ module Aws::QBusiness
 
     # Deletes an Amazon Q Business web experience conversation.
     #
-    # @option params [required, String] :application_id
-    #   The identifier of the Amazon Q Business application associated with
-    #   the conversation.
-    #
     # @option params [required, String] :conversation_id
     #   The identifier of the Amazon Q Business web experience conversation
     #   being deleted.
+    #
+    # @option params [required, String] :application_id
+    #   The identifier of the Amazon Q Business application associated with
+    #   the conversation.
     #
     # @option params [String] :user_id
     #   The identifier of the user who is deleting the conversation.
@@ -1556,8 +1622,8 @@ module Aws::QBusiness
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_conversation({
-    #     application_id: "ApplicationId", # required
     #     conversation_id: "ConversationId", # required
+    #     application_id: "ApplicationId", # required
     #     user_id: "UserId",
     #   })
     #
@@ -1578,11 +1644,11 @@ module Aws::QBusiness
     #   The identifier of the Amazon Q Business application used with the data
     #   source connector.
     #
-    # @option params [required, String] :data_source_id
-    #   The identifier of the data source connector that you want to delete.
-    #
     # @option params [required, String] :index_id
     #   The identifier of the index used with the data source connector.
+    #
+    # @option params [required, String] :data_source_id
+    #   The identifier of the data source connector that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1590,8 +1656,8 @@ module Aws::QBusiness
     #
     #   resp = client.delete_data_source({
     #     application_id: "ApplicationId", # required
-    #     data_source_id: "DataSourceId", # required
     #     index_id: "IndexId", # required
+    #     data_source_id: "DataSourceId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteDataSource AWS API Documentation
@@ -1619,6 +1685,12 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the application in which the group mapping belongs.
     #
+    # @option params [required, String] :index_id
+    #   The identifier of the index you want to delete the group from.
+    #
+    # @option params [required, String] :group_name
+    #   The name of the group you want to delete.
+    #
     # @option params [String] :data_source_id
     #   The identifier of the data source linked to the group
     #
@@ -1631,21 +1703,15 @@ module Aws::QBusiness
     #   access customer-related documents stored in Salesforce. Only "Sales
     #   and Marketing" should access documents in the Salesforce data source.
     #
-    # @option params [required, String] :group_name
-    #   The name of the group you want to delete.
-    #
-    # @option params [required, String] :index_id
-    #   The identifier of the index you want to delete the group from.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_group({
     #     application_id: "ApplicationId", # required
-    #     data_source_id: "DataSourceId",
-    #     group_name: "GroupName", # required
     #     index_id: "IndexId", # required
+    #     group_name: "GroupName", # required
+    #     data_source_id: "DataSourceId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteGroup AWS API Documentation
@@ -1799,18 +1865,18 @@ module Aws::QBusiness
     #
     # @return [Types::GetApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetApplicationResponse#application_arn #application_arn} => String
-    #   * {Types::GetApplicationResponse#application_id #application_id} => String
-    #   * {Types::GetApplicationResponse#attachments_configuration #attachments_configuration} => Types::AppliedAttachmentsConfiguration
-    #   * {Types::GetApplicationResponse#created_at #created_at} => Time
-    #   * {Types::GetApplicationResponse#description #description} => String
     #   * {Types::GetApplicationResponse#display_name #display_name} => String
-    #   * {Types::GetApplicationResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
-    #   * {Types::GetApplicationResponse#error #error} => Types::ErrorDetail
+    #   * {Types::GetApplicationResponse#application_id #application_id} => String
+    #   * {Types::GetApplicationResponse#application_arn #application_arn} => String
     #   * {Types::GetApplicationResponse#identity_center_application_arn #identity_center_application_arn} => String
     #   * {Types::GetApplicationResponse#role_arn #role_arn} => String
     #   * {Types::GetApplicationResponse#status #status} => String
+    #   * {Types::GetApplicationResponse#description #description} => String
+    #   * {Types::GetApplicationResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
+    #   * {Types::GetApplicationResponse#created_at #created_at} => Time
     #   * {Types::GetApplicationResponse#updated_at #updated_at} => Time
+    #   * {Types::GetApplicationResponse#error #error} => Types::ErrorDetail
+    #   * {Types::GetApplicationResponse#attachments_configuration #attachments_configuration} => Types::AppliedAttachmentsConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1820,19 +1886,19 @@ module Aws::QBusiness
     #
     # @example Response structure
     #
-    #   resp.application_arn #=> String
-    #   resp.application_id #=> String
-    #   resp.attachments_configuration.attachments_control_mode #=> String, one of "ENABLED", "DISABLED"
-    #   resp.created_at #=> Time
-    #   resp.description #=> String
     #   resp.display_name #=> String
-    #   resp.encryption_configuration.kms_key_id #=> String
-    #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.error.error_message #=> String
+    #   resp.application_id #=> String
+    #   resp.application_arn #=> String
     #   resp.identity_center_application_arn #=> String
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
+    #   resp.description #=> String
+    #   resp.encryption_configuration.kms_key_id #=> String
+    #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.error.error_message #=> String
+    #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
+    #   resp.attachments_configuration.attachments_control_mode #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetApplication AWS API Documentation
     #
@@ -1861,11 +1927,11 @@ module Aws::QBusiness
     #
     # @return [Types::GetChatControlsConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetChatControlsConfigurationResponse#response_scope #response_scope} => String
     #   * {Types::GetChatControlsConfigurationResponse#blocked_phrases #blocked_phrases} => Types::BlockedPhrasesConfiguration
+    #   * {Types::GetChatControlsConfigurationResponse#topic_configurations #topic_configurations} => Array&lt;Types::TopicConfiguration&gt;
     #   * {Types::GetChatControlsConfigurationResponse#creator_mode_configuration #creator_mode_configuration} => Types::AppliedCreatorModeConfiguration
     #   * {Types::GetChatControlsConfigurationResponse#next_token #next_token} => String
-    #   * {Types::GetChatControlsConfigurationResponse#response_scope #response_scope} => String
-    #   * {Types::GetChatControlsConfigurationResponse#topic_configurations #topic_configurations} => Array&lt;Types::TopicConfiguration&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1879,31 +1945,31 @@ module Aws::QBusiness
     #
     # @example Response structure
     #
+    #   resp.response_scope #=> String, one of "ENTERPRISE_CONTENT_ONLY", "EXTENDED_KNOWLEDGE_ENABLED"
     #   resp.blocked_phrases.blocked_phrases #=> Array
     #   resp.blocked_phrases.blocked_phrases[0] #=> String
     #   resp.blocked_phrases.system_message_override #=> String
-    #   resp.creator_mode_configuration.creator_mode_control #=> String, one of "ENABLED", "DISABLED"
-    #   resp.next_token #=> String
-    #   resp.response_scope #=> String, one of "ENTERPRISE_CONTENT_ONLY", "EXTENDED_KNOWLEDGE_ENABLED"
     #   resp.topic_configurations #=> Array
+    #   resp.topic_configurations[0].name #=> String
     #   resp.topic_configurations[0].description #=> String
     #   resp.topic_configurations[0].example_chat_messages #=> Array
     #   resp.topic_configurations[0].example_chat_messages[0] #=> String
-    #   resp.topic_configurations[0].name #=> String
     #   resp.topic_configurations[0].rules #=> Array
-    #   resp.topic_configurations[0].rules[0].excluded_users_and_groups.user_groups #=> Array
-    #   resp.topic_configurations[0].rules[0].excluded_users_and_groups.user_groups[0] #=> String
-    #   resp.topic_configurations[0].rules[0].excluded_users_and_groups.user_ids #=> Array
-    #   resp.topic_configurations[0].rules[0].excluded_users_and_groups.user_ids[0] #=> String
-    #   resp.topic_configurations[0].rules[0].included_users_and_groups.user_groups #=> Array
-    #   resp.topic_configurations[0].rules[0].included_users_and_groups.user_groups[0] #=> String
     #   resp.topic_configurations[0].rules[0].included_users_and_groups.user_ids #=> Array
     #   resp.topic_configurations[0].rules[0].included_users_and_groups.user_ids[0] #=> String
+    #   resp.topic_configurations[0].rules[0].included_users_and_groups.user_groups #=> Array
+    #   resp.topic_configurations[0].rules[0].included_users_and_groups.user_groups[0] #=> String
+    #   resp.topic_configurations[0].rules[0].excluded_users_and_groups.user_ids #=> Array
+    #   resp.topic_configurations[0].rules[0].excluded_users_and_groups.user_ids[0] #=> String
+    #   resp.topic_configurations[0].rules[0].excluded_users_and_groups.user_groups #=> Array
+    #   resp.topic_configurations[0].rules[0].excluded_users_and_groups.user_groups[0] #=> String
+    #   resp.topic_configurations[0].rules[0].rule_type #=> String, one of "CONTENT_BLOCKER_RULE", "CONTENT_RETRIEVAL_RULE"
     #   resp.topic_configurations[0].rules[0].rule_configuration.content_blocker_rule.system_message_override #=> String
     #   resp.topic_configurations[0].rules[0].rule_configuration.content_retrieval_rule.eligible_data_sources #=> Array
-    #   resp.topic_configurations[0].rules[0].rule_configuration.content_retrieval_rule.eligible_data_sources[0].data_source_id #=> String
     #   resp.topic_configurations[0].rules[0].rule_configuration.content_retrieval_rule.eligible_data_sources[0].index_id #=> String
-    #   resp.topic_configurations[0].rules[0].rule_type #=> String, one of "CONTENT_BLOCKER_RULE", "CONTENT_RETRIEVAL_RULE"
+    #   resp.topic_configurations[0].rules[0].rule_configuration.content_retrieval_rule.eligible_data_sources[0].data_source_id #=> String
+    #   resp.creator_mode_configuration.creator_mode_control #=> String, one of "ENABLED", "DISABLED"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetChatControlsConfiguration AWS API Documentation
     #
@@ -1920,95 +1986,95 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application.
     #
-    # @option params [required, String] :data_source_id
-    #   The identifier of the data source connector.
-    #
     # @option params [required, String] :index_id
     #   The identfier of the index used with the data source connector.
+    #
+    # @option params [required, String] :data_source_id
+    #   The identifier of the data source connector.
     #
     # @return [Types::GetDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataSourceResponse#application_id #application_id} => String
-    #   * {Types::GetDataSourceResponse#configuration #configuration} => Hash,Array,String,Numeric,Boolean
-    #   * {Types::GetDataSourceResponse#created_at #created_at} => Time
-    #   * {Types::GetDataSourceResponse#data_source_arn #data_source_arn} => String
-    #   * {Types::GetDataSourceResponse#data_source_id #data_source_id} => String
-    #   * {Types::GetDataSourceResponse#description #description} => String
-    #   * {Types::GetDataSourceResponse#display_name #display_name} => String
-    #   * {Types::GetDataSourceResponse#document_enrichment_configuration #document_enrichment_configuration} => Types::DocumentEnrichmentConfiguration
-    #   * {Types::GetDataSourceResponse#error #error} => Types::ErrorDetail
     #   * {Types::GetDataSourceResponse#index_id #index_id} => String
-    #   * {Types::GetDataSourceResponse#role_arn #role_arn} => String
+    #   * {Types::GetDataSourceResponse#data_source_id #data_source_id} => String
+    #   * {Types::GetDataSourceResponse#data_source_arn #data_source_arn} => String
+    #   * {Types::GetDataSourceResponse#display_name #display_name} => String
+    #   * {Types::GetDataSourceResponse#type #type} => String
+    #   * {Types::GetDataSourceResponse#configuration #configuration} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetDataSourceResponse#vpc_configuration #vpc_configuration} => Types::DataSourceVpcConfiguration
+    #   * {Types::GetDataSourceResponse#created_at #created_at} => Time
+    #   * {Types::GetDataSourceResponse#updated_at #updated_at} => Time
+    #   * {Types::GetDataSourceResponse#description #description} => String
     #   * {Types::GetDataSourceResponse#status #status} => String
     #   * {Types::GetDataSourceResponse#sync_schedule #sync_schedule} => String
-    #   * {Types::GetDataSourceResponse#type #type} => String
-    #   * {Types::GetDataSourceResponse#updated_at #updated_at} => Time
-    #   * {Types::GetDataSourceResponse#vpc_configuration #vpc_configuration} => Types::DataSourceVpcConfiguration
+    #   * {Types::GetDataSourceResponse#role_arn #role_arn} => String
+    #   * {Types::GetDataSourceResponse#error #error} => Types::ErrorDetail
+    #   * {Types::GetDataSourceResponse#document_enrichment_configuration #document_enrichment_configuration} => Types::DocumentEnrichmentConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_data_source({
     #     application_id: "ApplicationId", # required
-    #     data_source_id: "DataSourceId", # required
     #     index_id: "IndexId", # required
+    #     data_source_id: "DataSourceId", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.application_id #=> String
-    #   resp.created_at #=> Time
-    #   resp.data_source_arn #=> String
+    #   resp.index_id #=> String
     #   resp.data_source_id #=> String
-    #   resp.description #=> String
+    #   resp.data_source_arn #=> String
     #   resp.display_name #=> String
+    #   resp.type #=> String
+    #   resp.vpc_configuration.subnet_ids #=> Array
+    #   resp.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.vpc_configuration.security_group_ids #=> Array
+    #   resp.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "PENDING_CREATION", "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
+    #   resp.sync_schedule #=> String
+    #   resp.role_arn #=> String
+    #   resp.error.error_message #=> String
+    #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #   resp.document_enrichment_configuration.inline_configurations #=> Array
     #   resp.document_enrichment_configuration.inline_configurations[0].condition.key #=> String
     #   resp.document_enrichment_configuration.inline_configurations[0].condition.operator #=> String, one of "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "EXISTS", "NOT_EXISTS", "BEGINS_WITH"
-    #   resp.document_enrichment_configuration.inline_configurations[0].condition.value.date_value #=> Time
-    #   resp.document_enrichment_configuration.inline_configurations[0].condition.value.long_value #=> Integer
+    #   resp.document_enrichment_configuration.inline_configurations[0].condition.value.string_value #=> String
     #   resp.document_enrichment_configuration.inline_configurations[0].condition.value.string_list_value #=> Array
     #   resp.document_enrichment_configuration.inline_configurations[0].condition.value.string_list_value[0] #=> String
-    #   resp.document_enrichment_configuration.inline_configurations[0].condition.value.string_value #=> String
-    #   resp.document_enrichment_configuration.inline_configurations[0].document_content_operator #=> String, one of "DELETE"
-    #   resp.document_enrichment_configuration.inline_configurations[0].target.attribute_value_operator #=> String, one of "DELETE"
+    #   resp.document_enrichment_configuration.inline_configurations[0].condition.value.long_value #=> Integer
+    #   resp.document_enrichment_configuration.inline_configurations[0].condition.value.date_value #=> Time
     #   resp.document_enrichment_configuration.inline_configurations[0].target.key #=> String
-    #   resp.document_enrichment_configuration.inline_configurations[0].target.value.date_value #=> Time
-    #   resp.document_enrichment_configuration.inline_configurations[0].target.value.long_value #=> Integer
+    #   resp.document_enrichment_configuration.inline_configurations[0].target.value.string_value #=> String
     #   resp.document_enrichment_configuration.inline_configurations[0].target.value.string_list_value #=> Array
     #   resp.document_enrichment_configuration.inline_configurations[0].target.value.string_list_value[0] #=> String
-    #   resp.document_enrichment_configuration.inline_configurations[0].target.value.string_value #=> String
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.key #=> String
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.operator #=> String, one of "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "EXISTS", "NOT_EXISTS", "BEGINS_WITH"
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.date_value #=> Time
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.long_value #=> Integer
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.string_list_value #=> Array
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.string_list_value[0] #=> String
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.string_value #=> String
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.lambda_arn #=> String
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.role_arn #=> String
-    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.s3_bucket_name #=> String
+    #   resp.document_enrichment_configuration.inline_configurations[0].target.value.long_value #=> Integer
+    #   resp.document_enrichment_configuration.inline_configurations[0].target.value.date_value #=> Time
+    #   resp.document_enrichment_configuration.inline_configurations[0].target.attribute_value_operator #=> String, one of "DELETE"
+    #   resp.document_enrichment_configuration.inline_configurations[0].document_content_operator #=> String, one of "DELETE"
     #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.key #=> String
     #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.operator #=> String, one of "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "EXISTS", "NOT_EXISTS", "BEGINS_WITH"
-    #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.value.date_value #=> Time
-    #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.value.long_value #=> Integer
+    #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.value.string_value #=> String
     #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.value.string_list_value #=> Array
     #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.value.string_list_value[0] #=> String
-    #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.value.string_value #=> String
+    #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.value.long_value #=> Integer
+    #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.value.date_value #=> Time
     #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.lambda_arn #=> String
-    #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.role_arn #=> String
     #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.s3_bucket_name #=> String
-    #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.error.error_message #=> String
-    #   resp.index_id #=> String
-    #   resp.role_arn #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
-    #   resp.sync_schedule #=> String
-    #   resp.type #=> String
-    #   resp.updated_at #=> Time
-    #   resp.vpc_configuration.security_group_ids #=> Array
-    #   resp.vpc_configuration.security_group_ids[0] #=> String
-    #   resp.vpc_configuration.subnet_ids #=> Array
-    #   resp.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.document_enrichment_configuration.pre_extraction_hook_configuration.role_arn #=> String
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.key #=> String
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.operator #=> String, one of "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "EXISTS", "NOT_EXISTS", "BEGINS_WITH"
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.string_value #=> String
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.string_list_value #=> Array
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.string_list_value[0] #=> String
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.long_value #=> Integer
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.value.date_value #=> Time
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.lambda_arn #=> String
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.s3_bucket_name #=> String
+    #   resp.document_enrichment_configuration.post_extraction_hook_configuration.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetDataSource AWS API Documentation
     #
@@ -2024,14 +2090,14 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the application id the group is attached to.
     #
-    # @option params [String] :data_source_id
-    #   The identifier of the data source the group is attached to.
+    # @option params [required, String] :index_id
+    #   The identifier of the index the group is attached to.
     #
     # @option params [required, String] :group_name
     #   The name of the group.
     #
-    # @option params [required, String] :index_id
-    #   The identifier of the index the group is attached to.
+    # @option params [String] :data_source_id
+    #   The identifier of the data source the group is attached to.
     #
     # @return [Types::GetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2042,22 +2108,22 @@ module Aws::QBusiness
     #
     #   resp = client.get_group({
     #     application_id: "ApplicationId", # required
-    #     data_source_id: "DataSourceId",
-    #     group_name: "GroupName", # required
     #     index_id: "IndexId", # required
+    #     group_name: "GroupName", # required
+    #     data_source_id: "DataSourceId",
     #   })
     #
     # @example Response structure
     #
-    #   resp.status.error_detail.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.status.error_detail.error_message #=> String
-    #   resp.status.last_updated_at #=> Time
     #   resp.status.status #=> String, one of "FAILED", "SUCCEEDED", "PROCESSING", "DELETING", "DELETED"
+    #   resp.status.last_updated_at #=> Time
+    #   resp.status.error_detail.error_message #=> String
+    #   resp.status.error_detail.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #   resp.status_history #=> Array
-    #   resp.status_history[0].error_detail.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.status_history[0].error_detail.error_message #=> String
-    #   resp.status_history[0].last_updated_at #=> Time
     #   resp.status_history[0].status #=> String, one of "FAILED", "SUCCEEDED", "PROCESSING", "DELETING", "DELETED"
+    #   resp.status_history[0].last_updated_at #=> Time
+    #   resp.status_history[0].error_detail.error_message #=> String
+    #   resp.status_history[0].error_detail.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetGroup AWS API Documentation
     #
@@ -2080,17 +2146,18 @@ module Aws::QBusiness
     # @return [Types::GetIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIndexResponse#application_id #application_id} => String
-    #   * {Types::GetIndexResponse#capacity_configuration #capacity_configuration} => Types::IndexCapacityConfiguration
-    #   * {Types::GetIndexResponse#created_at #created_at} => Time
-    #   * {Types::GetIndexResponse#description #description} => String
+    #   * {Types::GetIndexResponse#index_id #index_id} => String
     #   * {Types::GetIndexResponse#display_name #display_name} => String
+    #   * {Types::GetIndexResponse#type #type} => String
+    #   * {Types::GetIndexResponse#index_arn #index_arn} => String
+    #   * {Types::GetIndexResponse#status #status} => String
+    #   * {Types::GetIndexResponse#description #description} => String
+    #   * {Types::GetIndexResponse#created_at #created_at} => Time
+    #   * {Types::GetIndexResponse#updated_at #updated_at} => Time
+    #   * {Types::GetIndexResponse#capacity_configuration #capacity_configuration} => Types::IndexCapacityConfiguration
     #   * {Types::GetIndexResponse#document_attribute_configurations #document_attribute_configurations} => Array&lt;Types::DocumentAttributeConfiguration&gt;
     #   * {Types::GetIndexResponse#error #error} => Types::ErrorDetail
-    #   * {Types::GetIndexResponse#index_arn #index_arn} => String
-    #   * {Types::GetIndexResponse#index_id #index_id} => String
     #   * {Types::GetIndexResponse#index_statistics #index_statistics} => Types::IndexStatistics
-    #   * {Types::GetIndexResponse#status #status} => String
-    #   * {Types::GetIndexResponse#updated_at #updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2102,22 +2169,23 @@ module Aws::QBusiness
     # @example Response structure
     #
     #   resp.application_id #=> String
-    #   resp.capacity_configuration.units #=> Integer
-    #   resp.created_at #=> Time
-    #   resp.description #=> String
+    #   resp.index_id #=> String
     #   resp.display_name #=> String
+    #   resp.type #=> String, one of "ENTERPRISE", "STARTER"
+    #   resp.index_arn #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.capacity_configuration.units #=> Integer
     #   resp.document_attribute_configurations #=> Array
     #   resp.document_attribute_configurations[0].name #=> String
-    #   resp.document_attribute_configurations[0].search #=> String, one of "ENABLED", "DISABLED"
     #   resp.document_attribute_configurations[0].type #=> String, one of "STRING", "STRING_LIST", "NUMBER", "DATE"
-    #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
+    #   resp.document_attribute_configurations[0].search #=> String, one of "ENABLED", "DISABLED"
     #   resp.error.error_message #=> String
-    #   resp.index_arn #=> String
-    #   resp.index_id #=> String
+    #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #   resp.index_statistics.text_document_statistics.indexed_text_bytes #=> Integer
     #   resp.index_statistics.text_document_statistics.indexed_text_document_count #=> Integer
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
-    #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetIndex AWS API Documentation
     #
@@ -2139,14 +2207,16 @@ module Aws::QBusiness
     # @return [Types::GetPluginResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPluginResponse#application_id #application_id} => String
-    #   * {Types::GetPluginResponse#auth_configuration #auth_configuration} => Types::PluginAuthConfiguration
-    #   * {Types::GetPluginResponse#created_at #created_at} => Time
-    #   * {Types::GetPluginResponse#display_name #display_name} => String
-    #   * {Types::GetPluginResponse#plugin_arn #plugin_arn} => String
     #   * {Types::GetPluginResponse#plugin_id #plugin_id} => String
-    #   * {Types::GetPluginResponse#server_url #server_url} => String
-    #   * {Types::GetPluginResponse#state #state} => String
+    #   * {Types::GetPluginResponse#display_name #display_name} => String
     #   * {Types::GetPluginResponse#type #type} => String
+    #   * {Types::GetPluginResponse#server_url #server_url} => String
+    #   * {Types::GetPluginResponse#auth_configuration #auth_configuration} => Types::PluginAuthConfiguration
+    #   * {Types::GetPluginResponse#custom_plugin_configuration #custom_plugin_configuration} => Types::CustomPluginConfiguration
+    #   * {Types::GetPluginResponse#build_status #build_status} => String
+    #   * {Types::GetPluginResponse#plugin_arn #plugin_arn} => String
+    #   * {Types::GetPluginResponse#state #state} => String
+    #   * {Types::GetPluginResponse#created_at #created_at} => Time
     #   * {Types::GetPluginResponse#updated_at #updated_at} => Time
     #
     # @example Request syntax with placeholder values
@@ -2159,17 +2229,23 @@ module Aws::QBusiness
     # @example Response structure
     #
     #   resp.application_id #=> String
-    #   resp.auth_configuration.basic_auth_configuration.role_arn #=> String
-    #   resp.auth_configuration.basic_auth_configuration.secret_arn #=> String
-    #   resp.auth_configuration.o_auth_2_client_credential_configuration.role_arn #=> String
-    #   resp.auth_configuration.o_auth_2_client_credential_configuration.secret_arn #=> String
-    #   resp.created_at #=> Time
-    #   resp.display_name #=> String
-    #   resp.plugin_arn #=> String
     #   resp.plugin_id #=> String
+    #   resp.display_name #=> String
+    #   resp.type #=> String, one of "SERVICE_NOW", "SALESFORCE", "JIRA", "ZENDESK", "CUSTOM"
     #   resp.server_url #=> String
+    #   resp.auth_configuration.basic_auth_configuration.secret_arn #=> String
+    #   resp.auth_configuration.basic_auth_configuration.role_arn #=> String
+    #   resp.auth_configuration.o_auth_2_client_credential_configuration.secret_arn #=> String
+    #   resp.auth_configuration.o_auth_2_client_credential_configuration.role_arn #=> String
+    #   resp.custom_plugin_configuration.description #=> String
+    #   resp.custom_plugin_configuration.api_schema_type #=> String, one of "OPEN_API_V3"
+    #   resp.custom_plugin_configuration.api_schema.payload #=> String
+    #   resp.custom_plugin_configuration.api_schema.s3.bucket #=> String
+    #   resp.custom_plugin_configuration.api_schema.s3.key #=> String
+    #   resp.build_status #=> String, one of "READY", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.plugin_arn #=> String
     #   resp.state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.type #=> String, one of "SERVICE_NOW", "SALESFORCE", "JIRA", "ZENDESK"
+    #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetPlugin AWS API Documentation
@@ -2194,14 +2270,14 @@ module Aws::QBusiness
     # @return [Types::GetRetrieverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRetrieverResponse#application_id #application_id} => String
-    #   * {Types::GetRetrieverResponse#configuration #configuration} => Types::RetrieverConfiguration
-    #   * {Types::GetRetrieverResponse#created_at #created_at} => Time
-    #   * {Types::GetRetrieverResponse#display_name #display_name} => String
-    #   * {Types::GetRetrieverResponse#retriever_arn #retriever_arn} => String
     #   * {Types::GetRetrieverResponse#retriever_id #retriever_id} => String
-    #   * {Types::GetRetrieverResponse#role_arn #role_arn} => String
-    #   * {Types::GetRetrieverResponse#status #status} => String
+    #   * {Types::GetRetrieverResponse#retriever_arn #retriever_arn} => String
     #   * {Types::GetRetrieverResponse#type #type} => String
+    #   * {Types::GetRetrieverResponse#status #status} => String
+    #   * {Types::GetRetrieverResponse#display_name #display_name} => String
+    #   * {Types::GetRetrieverResponse#configuration #configuration} => Types::RetrieverConfiguration
+    #   * {Types::GetRetrieverResponse#role_arn #role_arn} => String
+    #   * {Types::GetRetrieverResponse#created_at #created_at} => Time
     #   * {Types::GetRetrieverResponse#updated_at #updated_at} => Time
     #
     # @example Request syntax with placeholder values
@@ -2214,24 +2290,24 @@ module Aws::QBusiness
     # @example Response structure
     #
     #   resp.application_id #=> String
-    #   resp.configuration.kendra_index_configuration.index_id #=> String
+    #   resp.retriever_id #=> String
+    #   resp.retriever_arn #=> String
+    #   resp.type #=> String, one of "NATIVE_INDEX", "KENDRA_INDEX"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "FAILED"
+    #   resp.display_name #=> String
+    #   resp.configuration.native_index_configuration.index_id #=> String
     #   resp.configuration.native_index_configuration.boosting_override #=> Hash
-    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].date_configuration.boosting_duration_in_seconds #=> Integer
-    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].date_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
     #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].number_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
     #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].number_configuration.boosting_type #=> String, one of "PRIORITIZE_LARGER_VALUES", "PRIORITIZE_SMALLER_VALUES"
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].string_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
     #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].string_configuration.attribute_value_boosting #=> Hash
     #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].string_configuration.attribute_value_boosting["String"] #=> String, one of "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
-    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].string_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].date_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].date_configuration.boosting_duration_in_seconds #=> Integer
     #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].string_list_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
-    #   resp.configuration.native_index_configuration.index_id #=> String
-    #   resp.created_at #=> Time
-    #   resp.display_name #=> String
-    #   resp.retriever_arn #=> String
-    #   resp.retriever_id #=> String
+    #   resp.configuration.kendra_index_configuration.index_id #=> String
     #   resp.role_arn #=> String
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "FAILED"
-    #   resp.type #=> String, one of "NATIVE_INDEX", "KENDRA_INDEX"
+    #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetRetriever AWS API Documentation
@@ -2266,8 +2342,8 @@ module Aws::QBusiness
     # @example Response structure
     #
     #   resp.user_aliases #=> Array
-    #   resp.user_aliases[0].data_source_id #=> String
     #   resp.user_aliases[0].index_id #=> String
+    #   resp.user_aliases[0].data_source_id #=> String
     #   resp.user_aliases[0].user_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetUser AWS API Documentation
@@ -2291,19 +2367,19 @@ module Aws::QBusiness
     # @return [Types::GetWebExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWebExperienceResponse#application_id #application_id} => String
-    #   * {Types::GetWebExperienceResponse#authentication_configuration #authentication_configuration} => Types::WebExperienceAuthConfiguration
-    #   * {Types::GetWebExperienceResponse#created_at #created_at} => Time
-    #   * {Types::GetWebExperienceResponse#default_endpoint #default_endpoint} => String
-    #   * {Types::GetWebExperienceResponse#error #error} => Types::ErrorDetail
-    #   * {Types::GetWebExperienceResponse#role_arn #role_arn} => String
-    #   * {Types::GetWebExperienceResponse#sample_prompts_control_mode #sample_prompts_control_mode} => String
-    #   * {Types::GetWebExperienceResponse#status #status} => String
-    #   * {Types::GetWebExperienceResponse#subtitle #subtitle} => String
-    #   * {Types::GetWebExperienceResponse#title #title} => String
-    #   * {Types::GetWebExperienceResponse#updated_at #updated_at} => Time
-    #   * {Types::GetWebExperienceResponse#web_experience_arn #web_experience_arn} => String
     #   * {Types::GetWebExperienceResponse#web_experience_id #web_experience_id} => String
+    #   * {Types::GetWebExperienceResponse#web_experience_arn #web_experience_arn} => String
+    #   * {Types::GetWebExperienceResponse#default_endpoint #default_endpoint} => String
+    #   * {Types::GetWebExperienceResponse#status #status} => String
+    #   * {Types::GetWebExperienceResponse#created_at #created_at} => Time
+    #   * {Types::GetWebExperienceResponse#updated_at #updated_at} => Time
+    #   * {Types::GetWebExperienceResponse#title #title} => String
+    #   * {Types::GetWebExperienceResponse#subtitle #subtitle} => String
     #   * {Types::GetWebExperienceResponse#welcome_message #welcome_message} => String
+    #   * {Types::GetWebExperienceResponse#sample_prompts_control_mode #sample_prompts_control_mode} => String
+    #   * {Types::GetWebExperienceResponse#role_arn #role_arn} => String
+    #   * {Types::GetWebExperienceResponse#authentication_configuration #authentication_configuration} => Types::WebExperienceAuthConfiguration
+    #   * {Types::GetWebExperienceResponse#error #error} => Types::ErrorDetail
     #
     # @example Request syntax with placeholder values
     #
@@ -2315,23 +2391,23 @@ module Aws::QBusiness
     # @example Response structure
     #
     #   resp.application_id #=> String
+    #   resp.web_experience_id #=> String
+    #   resp.web_experience_arn #=> String
+    #   resp.default_endpoint #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "PENDING_AUTH_CONFIG"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.title #=> String
+    #   resp.subtitle #=> String
+    #   resp.welcome_message #=> String
+    #   resp.sample_prompts_control_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.role_arn #=> String
     #   resp.authentication_configuration.saml_configuration.metadata_xml #=> String
     #   resp.authentication_configuration.saml_configuration.role_arn #=> String
-    #   resp.authentication_configuration.saml_configuration.user_group_attribute #=> String
     #   resp.authentication_configuration.saml_configuration.user_id_attribute #=> String
-    #   resp.created_at #=> Time
-    #   resp.default_endpoint #=> String
-    #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
+    #   resp.authentication_configuration.saml_configuration.user_group_attribute #=> String
     #   resp.error.error_message #=> String
-    #   resp.role_arn #=> String
-    #   resp.sample_prompts_control_mode #=> String, one of "ENABLED", "DISABLED"
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "PENDING_AUTH_CONFIG"
-    #   resp.subtitle #=> String
-    #   resp.title #=> String
-    #   resp.updated_at #=> Time
-    #   resp.web_experience_arn #=> String
-    #   resp.web_experience_id #=> String
-    #   resp.welcome_message #=> String
+    #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetWebExperience AWS API Documentation
     #
@@ -2344,38 +2420,38 @@ module Aws::QBusiness
 
     # Lists Amazon Q Business applications.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of Amazon Q Business applications to return.
-    #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
     #   to retrieve, Amazon Q Business returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
     #   of Amazon Q Business applications.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of Amazon Q Business applications to return.
+    #
     # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListApplicationsResponse#applications #applications} => Array&lt;Types::Application&gt;
     #   * {Types::ListApplicationsResponse#next_token #next_token} => String
+    #   * {Types::ListApplicationsResponse#applications #applications} => Array&lt;Types::Application&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.applications #=> Array
+    #   resp.applications[0].display_name #=> String
     #   resp.applications[0].application_id #=> String
     #   resp.applications[0].created_at #=> Time
-    #   resp.applications[0].display_name #=> String
-    #   resp.applications[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
     #   resp.applications[0].updated_at #=> Time
-    #   resp.next_token #=> String
+    #   resp.applications[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListApplications AWS API Documentation
     #
@@ -2391,8 +2467,9 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of Amazon Q Business conversations to return.
+    # @option params [String] :user_id
+    #   The identifier of the user involved in the Amazon Q Business web
+    #   experience conversation.
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
@@ -2400,14 +2477,13 @@ module Aws::QBusiness
     #   response. You can use this pagination token to retrieve the next set
     #   of Amazon Q Business conversations.
     #
-    # @option params [String] :user_id
-    #   The identifier of the user involved in the Amazon Q Business web
-    #   experience conversation.
+    # @option params [Integer] :max_results
+    #   The maximum number of Amazon Q Business conversations to return.
     #
     # @return [Types::ListConversationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListConversationsResponse#conversations #conversations} => Array&lt;Types::Conversation&gt;
     #   * {Types::ListConversationsResponse#next_token #next_token} => String
+    #   * {Types::ListConversationsResponse#conversations #conversations} => Array&lt;Types::Conversation&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2415,18 +2491,18 @@ module Aws::QBusiness
     #
     #   resp = client.list_conversations({
     #     application_id: "ApplicationId", # required
-    #     max_results: 1,
-    #     next_token: "NextToken",
     #     user_id: "UserId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.conversations #=> Array
     #   resp.conversations[0].conversation_id #=> String
-    #   resp.conversations[0].start_time #=> Time
     #   resp.conversations[0].title #=> String
-    #   resp.next_token #=> String
+    #   resp.conversations[0].start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListConversations AWS API Documentation
     #
@@ -2440,22 +2516,16 @@ module Aws::QBusiness
     # Get information about an Amazon Q Business data source connector
     # synchronization.
     #
+    # @option params [required, String] :data_source_id
+    #   The identifier of the data source connector.
+    #
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application connected to the
     #   data source.
     #
-    # @option params [required, String] :data_source_id
-    #   The identifier of the data source connector.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The end time of the data source connector sync.
-    #
     # @option params [required, String] :index_id
     #   The identifier of the index used with the Amazon Q Business data
     #   source connector.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of synchronization jobs to return in the response.
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incpmplete because there is more data
@@ -2463,8 +2533,14 @@ module Aws::QBusiness
     #   response. You can use this pagination token to retrieve the next set
     #   of responses.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of synchronization jobs to return in the response.
+    #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The start time of the data source connector sync.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end time of the data source connector sync.
     #
     # @option params [String] :status_filter
     #   Only returns synchronization jobs with the `Status` field equal to the
@@ -2480,31 +2556,31 @@ module Aws::QBusiness
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_data_source_sync_jobs({
-    #     application_id: "ApplicationId", # required
     #     data_source_id: "DataSourceId", # required
-    #     end_time: Time.now,
+    #     application_id: "ApplicationId", # required
     #     index_id: "IndexId", # required
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #     start_time: Time.now,
+    #     end_time: Time.now,
     #     status_filter: "FAILED", # accepts FAILED, SUCCEEDED, SYNCING, INCOMPLETE, STOPPING, ABORTED, SYNCING_INDEXING
     #   })
     #
     # @example Response structure
     #
     #   resp.history #=> Array
-    #   resp.history[0].data_source_error_code #=> String
-    #   resp.history[0].end_time #=> Time
-    #   resp.history[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.history[0].error.error_message #=> String
     #   resp.history[0].execution_id #=> String
+    #   resp.history[0].start_time #=> Time
+    #   resp.history[0].end_time #=> Time
+    #   resp.history[0].status #=> String, one of "FAILED", "SUCCEEDED", "SYNCING", "INCOMPLETE", "STOPPING", "ABORTED", "SYNCING_INDEXING"
+    #   resp.history[0].error.error_message #=> String
+    #   resp.history[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
+    #   resp.history[0].data_source_error_code #=> String
     #   resp.history[0].metrics.documents_added #=> String
+    #   resp.history[0].metrics.documents_modified #=> String
     #   resp.history[0].metrics.documents_deleted #=> String
     #   resp.history[0].metrics.documents_failed #=> String
-    #   resp.history[0].metrics.documents_modified #=> String
     #   resp.history[0].metrics.documents_scanned #=> String
-    #   resp.history[0].start_time #=> Time
-    #   resp.history[0].status #=> String, one of "FAILED", "SUCCEEDED", "SYNCING", "INCOMPLETE", "STOPPING", "ABORTED", "SYNCING_INDEXING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListDataSourceSyncJobs AWS API Documentation
@@ -2527,14 +2603,14 @@ module Aws::QBusiness
     #   The identifier of the index used with one or more data source
     #   connectors.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of data source connectors to return.
-    #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
     #   to retrieve, Amazon Q Business returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
     #   of Amazon Q Business data source connectors.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data source connectors to return.
     #
     # @return [Types::ListDataSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2548,19 +2624,19 @@ module Aws::QBusiness
     #   resp = client.list_data_sources({
     #     application_id: "ApplicationId", # required
     #     index_id: "IndexId", # required
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.data_sources #=> Array
-    #   resp.data_sources[0].created_at #=> Time
-    #   resp.data_sources[0].data_source_id #=> String
     #   resp.data_sources[0].display_name #=> String
-    #   resp.data_sources[0].status #=> String, one of "PENDING_CREATION", "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
+    #   resp.data_sources[0].data_source_id #=> String
     #   resp.data_sources[0].type #=> String
+    #   resp.data_sources[0].created_at #=> Time
     #   resp.data_sources[0].updated_at #=> Time
+    #   resp.data_sources[0].status #=> String, one of "PENDING_CREATION", "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListDataSources AWS API Documentation
@@ -2577,20 +2653,20 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the application id the documents are attached to.
     #
-    # @option params [Array<String>] :data_source_ids
-    #   The identifier of the data sources the documents are attached to.
-    #
     # @option params [required, String] :index_id
     #   The identifier of the index the documents are attached to.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of documents to return.
+    # @option params [Array<String>] :data_source_ids
+    #   The identifier of the data sources the documents are attached to.
     #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
     #   to retrieve, Amazon Q Business returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
     #   of documents.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of documents to return.
     #
     # @return [Types::ListDocumentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2603,20 +2679,20 @@ module Aws::QBusiness
     #
     #   resp = client.list_documents({
     #     application_id: "ApplicationId", # required
-    #     data_source_ids: ["DataSourceId"],
     #     index_id: "IndexId", # required
-    #     max_results: 1,
+    #     data_source_ids: ["DataSourceId"],
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.document_detail_list #=> Array
-    #   resp.document_detail_list[0].created_at #=> Time
     #   resp.document_detail_list[0].document_id #=> String
-    #   resp.document_detail_list[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.document_detail_list[0].error.error_message #=> String
     #   resp.document_detail_list[0].status #=> String, one of "RECEIVED", "PROCESSING", "INDEXED", "UPDATED", "FAILED", "DELETING", "DELETED", "DOCUMENT_FAILED_TO_INDEX"
+    #   resp.document_detail_list[0].error.error_message #=> String
+    #   resp.document_detail_list[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
+    #   resp.document_detail_list[0].created_at #=> Time
     #   resp.document_detail_list[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2635,16 +2711,17 @@ module Aws::QBusiness
     #   The identifier of the application for getting a list of groups mapped
     #   to users.
     #
-    # @option params [String] :data_source_id
-    #   The identifier of the data source for getting a list of groups mapped
-    #   to users.
-    #
     # @option params [required, String] :index_id
     #   The identifier of the index for getting a list of groups mapped to
     #   users.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of returned groups that are mapped to users.
+    # @option params [required, Time,DateTime,Date,Integer,String] :updated_earlier_than
+    #   The timestamp identifier used for the latest `PUT` or `DELETE` action
+    #   for mapping users to their groups.
+    #
+    # @option params [String] :data_source_id
+    #   The identifier of the data source for getting a list of groups mapped
+    #   to users.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -2652,14 +2729,13 @@ module Aws::QBusiness
     #   response. You can use this pagination token to retrieve the next set
     #   of groups that are mapped to users.
     #
-    # @option params [required, Time,DateTime,Date,Integer,String] :updated_earlier_than
-    #   The timestamp identifier used for the latest `PUT` or `DELETE` action
-    #   for mapping users to their groups.
+    # @option params [Integer] :max_results
+    #   The maximum number of returned groups that are mapped to users.
     #
     # @return [Types::ListGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListGroupsResponse#items #items} => Array&lt;Types::GroupSummary&gt;
     #   * {Types::ListGroupsResponse#next_token #next_token} => String
+    #   * {Types::ListGroupsResponse#items #items} => Array&lt;Types::GroupSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2667,18 +2743,18 @@ module Aws::QBusiness
     #
     #   resp = client.list_groups({
     #     application_id: "ApplicationId", # required
-    #     data_source_id: "DataSourceId",
     #     index_id: "IndexId", # required
-    #     max_results: 1,
-    #     next_token: "NextToken",
     #     updated_earlier_than: Time.now, # required
+    #     data_source_id: "DataSourceId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.items #=> Array
     #   resp.items[0].group_name #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListGroups AWS API Documentation
     #
@@ -2695,19 +2771,19 @@ module Aws::QBusiness
     #   The identifier of the Amazon Q Business application connected to the
     #   index.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of indices to return.
-    #
     # @option params [String] :next_token
     #   If the maxResults response was incomplete because there is more data
     #   to retrieve, Amazon Q Business returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
     #   of Amazon Q Business indices.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of indices to return.
+    #
     # @return [Types::ListIndicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListIndicesResponse#indices #indices} => Array&lt;Types::Index&gt;
     #   * {Types::ListIndicesResponse#next_token #next_token} => String
+    #   * {Types::ListIndicesResponse#indices #indices} => Array&lt;Types::Index&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2715,19 +2791,19 @@ module Aws::QBusiness
     #
     #   resp = client.list_indices({
     #     application_id: "ApplicationId", # required
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.indices #=> Array
-    #   resp.indices[0].created_at #=> Time
     #   resp.indices[0].display_name #=> String
     #   resp.indices[0].index_id #=> String
-    #   resp.indices[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
+    #   resp.indices[0].created_at #=> Time
     #   resp.indices[0].updated_at #=> Time
-    #   resp.next_token #=> String
+    #   resp.indices[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListIndices AWS API Documentation
     #
@@ -2741,23 +2817,23 @@ module Aws::QBusiness
     # Gets a list of messages associated with an Amazon Q Business web
     # experience.
     #
-    # @option params [required, String] :application_id
-    #   The identifier for the Amazon Q Business application.
-    #
     # @option params [required, String] :conversation_id
     #   The identifier of the Amazon Q Business web experience conversation.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of messages to return.
+    # @option params [required, String] :application_id
+    #   The identifier for the Amazon Q Business application.
+    #
+    # @option params [String] :user_id
+    #   The identifier of the user involved in the Amazon Q Business web
+    #   experience conversation.
     #
     # @option params [String] :next_token
     #   If the number of retrievers returned exceeds `maxResults`, Amazon Q
     #   Business returns a next token as a pagination token to retrieve the
     #   next set of messages.
     #
-    # @option params [String] :user_id
-    #   The identifier of the user involved in the Amazon Q Business web
-    #   experience conversation.
+    # @option params [Integer] :max_results
+    #   The maximum number of messages to return.
     #
     # @return [Types::ListMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2769,46 +2845,49 @@ module Aws::QBusiness
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_messages({
-    #     application_id: "ApplicationId", # required
     #     conversation_id: "ConversationId", # required
-    #     max_results: 1,
-    #     next_token: "NextToken",
+    #     application_id: "ApplicationId", # required
     #     user_id: "UserId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.messages #=> Array
-    #   resp.messages[0].action_execution.payload #=> Hash
-    #   resp.messages[0].action_execution.payload_field_name_separator #=> String
-    #   resp.messages[0].action_execution.plugin_id #=> String
-    #   resp.messages[0].action_review.payload #=> Hash
-    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].allowed_values #=> Array
-    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].display_name #=> String
-    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].display_order #=> Integer
-    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].required #=> Boolean
-    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].type #=> String, one of "STRING", "NUMBER", "ARRAY", "BOOLEAN"
-    #   resp.messages[0].action_review.payload_field_name_separator #=> String
-    #   resp.messages[0].action_review.plugin_id #=> String
-    #   resp.messages[0].action_review.plugin_type #=> String, one of "SERVICE_NOW", "SALESFORCE", "JIRA", "ZENDESK"
+    #   resp.messages[0].message_id #=> String
+    #   resp.messages[0].body #=> String
+    #   resp.messages[0].time #=> Time
+    #   resp.messages[0].type #=> String, one of "USER", "SYSTEM"
     #   resp.messages[0].attachments #=> Array
-    #   resp.messages[0].attachments[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
-    #   resp.messages[0].attachments[0].error.error_message #=> String
     #   resp.messages[0].attachments[0].name #=> String
     #   resp.messages[0].attachments[0].status #=> String, one of "FAILED", "SUCCEEDED"
-    #   resp.messages[0].body #=> String
-    #   resp.messages[0].message_id #=> String
+    #   resp.messages[0].attachments[0].error.error_message #=> String
+    #   resp.messages[0].attachments[0].error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #   resp.messages[0].source_attribution #=> Array
-    #   resp.messages[0].source_attribution[0].citation_number #=> Integer
+    #   resp.messages[0].source_attribution[0].title #=> String
     #   resp.messages[0].source_attribution[0].snippet #=> String
+    #   resp.messages[0].source_attribution[0].url #=> String
+    #   resp.messages[0].source_attribution[0].citation_number #=> Integer
+    #   resp.messages[0].source_attribution[0].updated_at #=> Time
     #   resp.messages[0].source_attribution[0].text_message_segments #=> Array
     #   resp.messages[0].source_attribution[0].text_message_segments[0].begin_offset #=> Integer
     #   resp.messages[0].source_attribution[0].text_message_segments[0].end_offset #=> Integer
-    #   resp.messages[0].source_attribution[0].title #=> String
-    #   resp.messages[0].source_attribution[0].updated_at #=> Time
-    #   resp.messages[0].source_attribution[0].url #=> String
-    #   resp.messages[0].time #=> Time
-    #   resp.messages[0].type #=> String, one of "USER", "SYSTEM"
+    #   resp.messages[0].source_attribution[0].text_message_segments[0].snippet_excerpt.text #=> String
+    #   resp.messages[0].action_review.plugin_id #=> String
+    #   resp.messages[0].action_review.plugin_type #=> String, one of "SERVICE_NOW", "SALESFORCE", "JIRA", "ZENDESK", "CUSTOM"
+    #   resp.messages[0].action_review.payload #=> Hash
+    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].display_name #=> String
+    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].display_order #=> Integer
+    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].display_description #=> String
+    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].type #=> String, one of "STRING", "NUMBER", "ARRAY", "BOOLEAN"
+    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].allowed_values #=> Array
+    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].allowed_format #=> String
+    #   resp.messages[0].action_review.payload["ActionPayloadFieldKey"].required #=> Boolean
+    #   resp.messages[0].action_review.payload_field_name_separator #=> String
+    #   resp.messages[0].action_execution.plugin_id #=> String
+    #   resp.messages[0].action_execution.payload #=> Hash
+    #   resp.messages[0].action_execution.payload_field_name_separator #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListMessages AWS API Documentation
@@ -2825,14 +2904,14 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the application the plugin is attached to.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of documents to return.
-    #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
     #   to retrieve, Amazon Q Business returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
     #   of plugins.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of documents to return.
     #
     # @return [Types::ListPluginsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2845,20 +2924,21 @@ module Aws::QBusiness
     #
     #   resp = client.list_plugins({
     #     application_id: "ApplicationId", # required
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.next_token #=> String
     #   resp.plugins #=> Array
-    #   resp.plugins[0].created_at #=> Time
-    #   resp.plugins[0].display_name #=> String
     #   resp.plugins[0].plugin_id #=> String
+    #   resp.plugins[0].display_name #=> String
+    #   resp.plugins[0].type #=> String, one of "SERVICE_NOW", "SALESFORCE", "JIRA", "ZENDESK", "CUSTOM"
     #   resp.plugins[0].server_url #=> String
     #   resp.plugins[0].state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.plugins[0].type #=> String, one of "SERVICE_NOW", "SALESFORCE", "JIRA", "ZENDESK"
+    #   resp.plugins[0].build_status #=> String, one of "READY", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.plugins[0].created_at #=> Time
     #   resp.plugins[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListPlugins AWS API Documentation
@@ -2876,18 +2956,18 @@ module Aws::QBusiness
     #   The identifier of the Amazon Q Business application using the
     #   retriever.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of retrievers returned.
-    #
     # @option params [String] :next_token
     #   If the number of retrievers returned exceeds `maxResults`, Amazon Q
     #   Business returns a next token as a pagination token to retrieve the
     #   next set of retrievers.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of retrievers returned.
+    #
     # @return [Types::ListRetrieversResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListRetrieversResponse#next_token #next_token} => String
     #   * {Types::ListRetrieversResponse#retrievers #retrievers} => Array&lt;Types::Retriever&gt;
+    #   * {Types::ListRetrieversResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2895,19 +2975,19 @@ module Aws::QBusiness
     #
     #   resp = client.list_retrievers({
     #     application_id: "ApplicationId", # required
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.retrievers #=> Array
     #   resp.retrievers[0].application_id #=> String
-    #   resp.retrievers[0].display_name #=> String
     #   resp.retrievers[0].retriever_id #=> String
-    #   resp.retrievers[0].status #=> String, one of "CREATING", "ACTIVE", "FAILED"
     #   resp.retrievers[0].type #=> String, one of "NATIVE_INDEX", "KENDRA_INDEX"
+    #   resp.retrievers[0].status #=> String, one of "CREATING", "ACTIVE", "FAILED"
+    #   resp.retrievers[0].display_name #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListRetrievers AWS API Documentation
     #
@@ -2957,19 +3037,19 @@ module Aws::QBusiness
     #   The identifier of the Amazon Q Business application linked to the
     #   listed web experiences.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of Amazon Q Business Web Experiences to return.
-    #
     # @option params [String] :next_token
     #   If the `maxResults` response was incomplete because there is more data
     #   to retrieve, Amazon Q Business returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
     #   of Amazon Q Business conversations.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of Amazon Q Business Web Experiences to return.
+    #
     # @return [Types::ListWebExperiencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListWebExperiencesResponse#next_token #next_token} => String
     #   * {Types::ListWebExperiencesResponse#web_experiences #web_experiences} => Array&lt;Types::WebExperience&gt;
+    #   * {Types::ListWebExperiencesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2977,19 +3057,19 @@ module Aws::QBusiness
     #
     #   resp = client.list_web_experiences({
     #     application_id: "ApplicationId", # required
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.web_experiences #=> Array
+    #   resp.web_experiences[0].web_experience_id #=> String
     #   resp.web_experiences[0].created_at #=> Time
+    #   resp.web_experiences[0].updated_at #=> Time
     #   resp.web_experiences[0].default_endpoint #=> String
     #   resp.web_experiences[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "PENDING_AUTH_CONFIG"
-    #   resp.web_experiences[0].updated_at #=> Time
-    #   resp.web_experiences[0].web_experience_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListWebExperiences AWS API Documentation
     #
@@ -3006,20 +3086,20 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the application associated with the feedback.
     #
+    # @option params [String] :user_id
+    #   The identifier of the user giving the feedback.
+    #
     # @option params [required, String] :conversation_id
     #   The identifier of the conversation the feedback is attached to.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :message_copied_at
-    #   The timestamp for when the feedback was recorded.
     #
     # @option params [required, String] :message_id
     #   The identifier of the chat message that the feedback was given for.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :message_copied_at
+    #   The timestamp for when the feedback was recorded.
+    #
     # @option params [Types::MessageUsefulnessFeedback] :message_usefulness
     #   The feedback usefulness value given by the user to the chat message.
-    #
-    # @option params [String] :user_id
-    #   The identifier of the user giving the feedback.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3027,16 +3107,16 @@ module Aws::QBusiness
     #
     #   resp = client.put_feedback({
     #     application_id: "ApplicationId", # required
-    #     conversation_id: "ConversationId", # required
-    #     message_copied_at: Time.now,
-    #     message_id: "SystemMessageId", # required
-    #     message_usefulness: {
-    #       comment: "MessageUsefulnessComment",
-    #       reason: "NOT_FACTUALLY_CORRECT", # accepts NOT_FACTUALLY_CORRECT, HARMFUL_OR_UNSAFE, INCORRECT_OR_MISSING_SOURCES, NOT_HELPFUL, FACTUALLY_CORRECT, COMPLETE, RELEVANT_SOURCES, HELPFUL, NOT_BASED_ON_DOCUMENTS, NOT_COMPLETE, NOT_CONCISE, OTHER
-    #       submitted_at: Time.now, # required
-    #       usefulness: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
-    #     },
     #     user_id: "UserId",
+    #     conversation_id: "ConversationId", # required
+    #     message_id: "SystemMessageId", # required
+    #     message_copied_at: Time.now,
+    #     message_usefulness: {
+    #       usefulness: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
+    #       reason: "NOT_FACTUALLY_CORRECT", # accepts NOT_FACTUALLY_CORRECT, HARMFUL_OR_UNSAFE, INCORRECT_OR_MISSING_SOURCES, NOT_HELPFUL, FACTUALLY_CORRECT, COMPLETE, RELEVANT_SOURCES, HELPFUL, NOT_BASED_ON_DOCUMENTS, NOT_COMPLETE, NOT_CONCISE, OTHER
+    #       comment: "MessageUsefulnessComment",
+    #       submitted_at: Time.now, # required
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/PutFeedback AWS API Documentation
@@ -3063,20 +3143,9 @@ module Aws::QBusiness
     #   The identifier of the application in which the user and group mapping
     #   belongs.
     #
-    # @option params [String] :data_source_id
-    #   The identifier of the data source for which you want to map users to
-    #   their groups. This is useful if a group is tied to multiple data
-    #   sources, but you only want the group to access documents of a certain
-    #   data source. For example, the groups "Research", "Engineering",
-    #   and "Sales and Marketing" are all tied to the company's documents
-    #   stored in the data sources Confluence and Salesforce. However, "Sales
-    #   and Marketing" team only needs access to customer-related documents
-    #   stored in Salesforce.
-    #
-    # @option params [required, Types::GroupMembers] :group_members
-    #   A list of users or sub groups that belong to a group. This is for
-    #   generating Amazon Q Business chat results only from document a user
-    #   has access to.
+    # @option params [required, String] :index_id
+    #   The identifier of the index in which you want to map users to their
+    #   groups.
     #
     # @option params [required, String] :group_name
     #   The list that contains your users or sub groups that belong the same
@@ -3090,12 +3159,23 @@ module Aws::QBusiness
     #   users, but the list of sub groups that belong to a group (and/or
     #   users) must be no more than 1000.
     #
-    # @option params [required, String] :index_id
-    #   The identifier of the index in which you want to map users to their
-    #   groups.
+    # @option params [String] :data_source_id
+    #   The identifier of the data source for which you want to map users to
+    #   their groups. This is useful if a group is tied to multiple data
+    #   sources, but you only want the group to access documents of a certain
+    #   data source. For example, the groups "Research", "Engineering",
+    #   and "Sales and Marketing" are all tied to the company's documents
+    #   stored in the data sources Confluence and Salesforce. However, "Sales
+    #   and Marketing" team only needs access to customer-related documents
+    #   stored in Salesforce.
     #
     # @option params [required, String] :type
     #   The type of the group.
+    #
+    # @option params [required, Types::GroupMembers] :group_members
+    #   A list of users or sub groups that belong to a group. This is for
+    #   generating Amazon Q Business chat results only from document a user
+    #   has access to.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3103,7 +3183,10 @@ module Aws::QBusiness
     #
     #   resp = client.put_group({
     #     application_id: "ApplicationId", # required
+    #     index_id: "IndexId", # required
+    #     group_name: "GroupName", # required
     #     data_source_id: "DataSourceId",
+    #     type: "INDEX", # required, accepts INDEX, DATASOURCE
     #     group_members: { # required
     #       member_groups: [
     #         {
@@ -3113,14 +3196,11 @@ module Aws::QBusiness
     #       ],
     #       member_users: [
     #         {
-    #           type: "INDEX", # accepts INDEX, DATASOURCE
     #           user_id: "DataSourceUserId", # required
+    #           type: "INDEX", # accepts INDEX, DATASOURCE
     #         },
     #       ],
     #     },
-    #     group_name: "GroupName", # required
-    #     index_id: "IndexId", # required
-    #     type: "INDEX", # required, accepts INDEX, DATASOURCE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/PutGroup AWS API Documentation
@@ -3136,12 +3216,12 @@ module Aws::QBusiness
     # synchronization job is already in progress, Amazon Q Business returns
     # a `ConflictException`.
     #
+    # @option params [required, String] :data_source_id
+    #   The identifier of the data source connector.
+    #
     # @option params [required, String] :application_id
     #   The identifier of Amazon Q Business application the data source is
     #   connected to.
-    #
-    # @option params [required, String] :data_source_id
-    #   The identifier of the data source connector.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index used with the data source connector.
@@ -3153,8 +3233,8 @@ module Aws::QBusiness
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_data_source_sync_job({
-    #     application_id: "ApplicationId", # required
     #     data_source_id: "DataSourceId", # required
+    #     application_id: "ApplicationId", # required
     #     index_id: "IndexId", # required
     #   })
     #
@@ -3174,12 +3254,12 @@ module Aws::QBusiness
     # Stops an Amazon Q Business data source connector synchronization job
     # already in progress.
     #
+    # @option params [required, String] :data_source_id
+    #   The identifier of the data source connector.
+    #
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application that the data
     #   source is connected to.
-    #
-    # @option params [required, String] :data_source_id
-    #   The identifier of the data source connector.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index used with the Amazon Q Business data
@@ -3190,8 +3270,8 @@ module Aws::QBusiness
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_data_source_sync_job({
-    #     application_id: "ApplicationId", # required
     #     data_source_id: "DataSourceId", # required
+    #     application_id: "ApplicationId", # required
     #     index_id: "IndexId", # required
     #   })
     #
@@ -3274,19 +3354,24 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application.
     #
-    # @option params [Types::AttachmentsConfiguration] :attachments_configuration
-    #   An option to allow end users to upload files directly during chat.
-    #
-    # @option params [String] :description
-    #   A description for the Amazon Q Business application.
+    # @option params [String] :identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance you
+    #   are either creating for—or connecting to—your Amazon Q Business
+    #   application.
     #
     # @option params [String] :display_name
     #   A name for the Amazon Q Business application.
+    #
+    # @option params [String] :description
+    #   A description for the Amazon Q Business application.
     #
     # @option params [String] :role_arn
     #   An Amazon Web Services Identity and Access Management (IAM) role that
     #   gives Amazon Q Business permission to access Amazon CloudWatch logs
     #   and metrics.
+    #
+    # @option params [Types::AttachmentsConfiguration] :attachments_configuration
+    #   An option to allow end users to upload files directly during chat.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3294,12 +3379,13 @@ module Aws::QBusiness
     #
     #   resp = client.update_application({
     #     application_id: "ApplicationId", # required
+    #     identity_center_instance_arn: "InstanceArn",
+    #     display_name: "ApplicationName",
+    #     description: "Description",
+    #     role_arn: "RoleArn",
     #     attachments_configuration: {
     #       attachments_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
     #     },
-    #     description: "Description",
-    #     display_name: "ApplicationName",
-    #     role_arn: "RoleArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateApplication AWS API Documentation
@@ -3318,18 +3404,12 @@ module Aws::QBusiness
     #   The identifier of the application for which the chat controls are
     #   configured.
     #
-    # @option params [Types::BlockedPhrasesConfigurationUpdate] :blocked_phrases_configuration_update
-    #   The phrases blocked from chat by your chat control configuration.
-    #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to update a Amazon Q
     #   Business application chat configuration.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [Types::CreatorModeConfiguration] :creator_mode_configuration
-    #   The configuration details for `CREATOR_MODE`.
     #
     # @option params [String] :response_scope
     #   The response scope configured for your application. This determines
@@ -3338,11 +3418,17 @@ module Aws::QBusiness
     #   uses the large language models (LLM) knowledge to respons to end user
     #   questions in chat.
     #
+    # @option params [Types::BlockedPhrasesConfigurationUpdate] :blocked_phrases_configuration_update
+    #   The phrases blocked from chat by your chat control configuration.
+    #
     # @option params [Array<Types::TopicConfiguration>] :topic_configurations_to_create_or_update
     #   The configured topic specific chat controls you want to update.
     #
     # @option params [Array<Types::TopicConfiguration>] :topic_configurations_to_delete
     #   The configured topic specific chat controls you want to delete.
+    #
+    # @option params [Types::CreatorModeConfiguration] :creator_mode_configuration
+    #   The configuration details for `CREATOR_MODE`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3350,31 +3436,29 @@ module Aws::QBusiness
     #
     #   resp = client.update_chat_controls_configuration({
     #     application_id: "ApplicationId", # required
+    #     client_token: "ClientToken",
+    #     response_scope: "ENTERPRISE_CONTENT_ONLY", # accepts ENTERPRISE_CONTENT_ONLY, EXTENDED_KNOWLEDGE_ENABLED
     #     blocked_phrases_configuration_update: {
     #       blocked_phrases_to_create_or_update: ["BlockedPhrase"],
     #       blocked_phrases_to_delete: ["BlockedPhrase"],
     #       system_message_override: "SystemMessageOverride",
     #     },
-    #     client_token: "ClientToken",
-    #     creator_mode_configuration: {
-    #       creator_mode_control: "ENABLED", # required, accepts ENABLED, DISABLED
-    #     },
-    #     response_scope: "ENTERPRISE_CONTENT_ONLY", # accepts ENTERPRISE_CONTENT_ONLY, EXTENDED_KNOWLEDGE_ENABLED
     #     topic_configurations_to_create_or_update: [
     #       {
+    #         name: "TopicConfigurationName", # required
     #         description: "TopicDescription",
     #         example_chat_messages: ["ExampleChatMessage"],
-    #         name: "TopicConfigurationName", # required
     #         rules: [ # required
     #           {
-    #             excluded_users_and_groups: {
-    #               user_groups: ["String"],
-    #               user_ids: ["String"],
-    #             },
     #             included_users_and_groups: {
-    #               user_groups: ["String"],
     #               user_ids: ["String"],
+    #               user_groups: ["String"],
     #             },
+    #             excluded_users_and_groups: {
+    #               user_ids: ["String"],
+    #               user_groups: ["String"],
+    #             },
+    #             rule_type: "CONTENT_BLOCKER_RULE", # required, accepts CONTENT_BLOCKER_RULE, CONTENT_RETRIEVAL_RULE
     #             rule_configuration: {
     #               content_blocker_rule: {
     #                 system_message_override: "SystemMessageOverride",
@@ -3382,32 +3466,32 @@ module Aws::QBusiness
     #               content_retrieval_rule: {
     #                 eligible_data_sources: [
     #                   {
-    #                     data_source_id: "DataSourceId",
     #                     index_id: "IndexId",
+    #                     data_source_id: "DataSourceId",
     #                   },
     #                 ],
     #               },
     #             },
-    #             rule_type: "CONTENT_BLOCKER_RULE", # required, accepts CONTENT_BLOCKER_RULE, CONTENT_RETRIEVAL_RULE
     #           },
     #         ],
     #       },
     #     ],
     #     topic_configurations_to_delete: [
     #       {
+    #         name: "TopicConfigurationName", # required
     #         description: "TopicDescription",
     #         example_chat_messages: ["ExampleChatMessage"],
-    #         name: "TopicConfigurationName", # required
     #         rules: [ # required
     #           {
-    #             excluded_users_and_groups: {
-    #               user_groups: ["String"],
-    #               user_ids: ["String"],
-    #             },
     #             included_users_and_groups: {
-    #               user_groups: ["String"],
     #               user_ids: ["String"],
+    #               user_groups: ["String"],
     #             },
+    #             excluded_users_and_groups: {
+    #               user_ids: ["String"],
+    #               user_groups: ["String"],
+    #             },
+    #             rule_type: "CONTENT_BLOCKER_RULE", # required, accepts CONTENT_BLOCKER_RULE, CONTENT_RETRIEVAL_RULE
     #             rule_configuration: {
     #               content_blocker_rule: {
     #                 system_message_override: "SystemMessageOverride",
@@ -3415,17 +3499,19 @@ module Aws::QBusiness
     #               content_retrieval_rule: {
     #                 eligible_data_sources: [
     #                   {
-    #                     data_source_id: "DataSourceId",
     #                     index_id: "IndexId",
+    #                     data_source_id: "DataSourceId",
     #                   },
     #                 ],
     #               },
     #             },
-    #             rule_type: "CONTENT_BLOCKER_RULE", # required, accepts CONTENT_BLOCKER_RULE, CONTENT_RETRIEVAL_RULE
     #           },
     #         ],
     #       },
     #     ],
+    #     creator_mode_configuration: {
+    #       creator_mode_control: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateChatControlsConfiguration AWS API Documentation
@@ -3443,6 +3529,15 @@ module Aws::QBusiness
     #   The identifier of the Amazon Q Business application the data source is
     #   attached to.
     #
+    # @option params [required, String] :index_id
+    #   The identifier of the index attached to the data source connector.
+    #
+    # @option params [required, String] :data_source_id
+    #   The identifier of the data source connector.
+    #
+    # @option params [String] :display_name
+    #   A name of the data source connector.
+    #
     # @option params [Hash,Array,String,Numeric,Boolean] :configuration
     #   Provides the configuration information for an Amazon Q Business data
     #   source.
@@ -3452,14 +3547,19 @@ module Aws::QBusiness
     #   serialized using the same format as its surroundings and requires no
     #   additional encoding or escaping.
     #
-    # @option params [required, String] :data_source_id
-    #   The identifier of the data source connector.
+    # @option params [Types::DataSourceVpcConfiguration] :vpc_configuration
+    #   Provides configuration information needed to connect to an Amazon VPC
+    #   (Virtual Private Cloud).
     #
     # @option params [String] :description
     #   The description of the data source connector.
     #
-    # @option params [String] :display_name
-    #   A name of the data source connector.
+    # @option params [String] :sync_schedule
+    #   The chosen update frequency for your data source.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   access the data source and required resources.
     #
     # @option params [Types::DocumentEnrichmentConfiguration] :document_enrichment_configuration
     #   Provides the configuration information for altering document metadata
@@ -3471,31 +3571,24 @@ module Aws::QBusiness
     #
     #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
     #
-    # @option params [required, String] :index_id
-    #   The identifier of the index attached to the data source connector.
-    #
-    # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role with permission to
-    #   access the data source and required resources.
-    #
-    # @option params [String] :sync_schedule
-    #   The chosen update frequency for your data source.
-    #
-    # @option params [Types::DataSourceVpcConfiguration] :vpc_configuration
-    #   Provides configuration information needed to connect to an Amazon VPC
-    #   (Virtual Private Cloud).
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_data_source({
     #     application_id: "ApplicationId", # required
+    #     index_id: "IndexId", # required
+    #     data_source_id: "DataSourceId", # required
+    #     display_name: "DataSourceName",
     #     configuration: {
     #     },
-    #     data_source_id: "DataSourceId", # required
+    #     vpc_configuration: {
+    #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #     },
     #     description: "Description",
-    #     display_name: "DataSourceName",
+    #     sync_schedule: "SyncSchedule",
+    #     role_arn: "RoleArn",
     #     document_enrichment_configuration: {
     #       inline_configurations: [
     #         {
@@ -3503,62 +3596,55 @@ module Aws::QBusiness
     #             key: "DocumentAttributeKey", # required
     #             operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
     #             value: {
-    #               date_value: Time.now,
-    #               long_value: 1,
-    #               string_list_value: ["String"],
     #               string_value: "DocumentAttributeValueStringValueString",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
     #             },
     #           },
-    #           document_content_operator: "DELETE", # accepts DELETE
     #           target: {
-    #             attribute_value_operator: "DELETE", # accepts DELETE
     #             key: "DocumentAttributeKey", # required
     #             value: {
-    #               date_value: Time.now,
-    #               long_value: 1,
-    #               string_list_value: ["String"],
     #               string_value: "DocumentAttributeValueStringValueString",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
     #             },
+    #             attribute_value_operator: "DELETE", # accepts DELETE
     #           },
+    #           document_content_operator: "DELETE", # accepts DELETE
     #         },
     #       ],
-    #       post_extraction_hook_configuration: {
-    #         invocation_condition: {
-    #           key: "DocumentAttributeKey", # required
-    #           operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
-    #           value: {
-    #             date_value: Time.now,
-    #             long_value: 1,
-    #             string_list_value: ["String"],
-    #             string_value: "DocumentAttributeValueStringValueString",
-    #           },
-    #         },
-    #         lambda_arn: "LambdaArn",
-    #         role_arn: "RoleArn",
-    #         s3_bucket_name: "S3BucketName",
-    #       },
     #       pre_extraction_hook_configuration: {
     #         invocation_condition: {
     #           key: "DocumentAttributeKey", # required
     #           operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
     #           value: {
-    #             date_value: Time.now,
-    #             long_value: 1,
-    #             string_list_value: ["String"],
     #             string_value: "DocumentAttributeValueStringValueString",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
     #           },
     #         },
     #         lambda_arn: "LambdaArn",
-    #         role_arn: "RoleArn",
     #         s3_bucket_name: "S3BucketName",
+    #         role_arn: "RoleArn",
     #       },
-    #     },
-    #     index_id: "IndexId", # required
-    #     role_arn: "RoleArn",
-    #     sync_schedule: "SyncSchedule",
-    #     vpc_configuration: {
-    #       security_group_ids: ["SecurityGroupId"], # required
-    #       subnet_ids: ["SubnetId"], # required
+    #       post_extraction_hook_configuration: {
+    #         invocation_condition: {
+    #           key: "DocumentAttributeKey", # required
+    #           operator: "GREATER_THAN", # required, accepts GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS, EXISTS, NOT_EXISTS, BEGINS_WITH
+    #           value: {
+    #             string_value: "DocumentAttributeValueStringValueString",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         lambda_arn: "LambdaArn",
+    #         s3_bucket_name: "S3BucketName",
+    #         role_arn: "RoleArn",
+    #       },
     #     },
     #   })
     #
@@ -3577,16 +3663,19 @@ module Aws::QBusiness
     #   The identifier of the Amazon Q Business application connected to the
     #   index.
     #
-    # @option params [Types::IndexCapacityConfiguration] :capacity_configuration
-    #   The storage capacity units you want to provision for your Amazon Q
-    #   Business index. You can add and remove capacity to fit your usage
-    #   needs.
+    # @option params [required, String] :index_id
+    #   The identifier of the Amazon Q Business index.
+    #
+    # @option params [String] :display_name
+    #   The name of the Amazon Q Business index.
     #
     # @option params [String] :description
     #   The description of the Amazon Q Business index.
     #
-    # @option params [String] :display_name
-    #   The name of the Amazon Q Business index.
+    # @option params [Types::IndexCapacityConfiguration] :capacity_configuration
+    #   The storage capacity units you want to provision for your Amazon Q
+    #   Business index. You can add and remove capacity to fit your usage
+    #   needs.
     #
     # @option params [Array<Types::DocumentAttributeConfiguration>] :document_attribute_configurations
     #   Configuration information for document metadata or fields. Document
@@ -3598,28 +3687,25 @@ module Aws::QBusiness
     #
     #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes
     #
-    # @option params [required, String] :index_id
-    #   The identifier of the Amazon Q Business index.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_index({
     #     application_id: "ApplicationId", # required
+    #     index_id: "IndexId", # required
+    #     display_name: "ApplicationName",
+    #     description: "Description",
     #     capacity_configuration: {
     #       units: 1,
     #     },
-    #     description: "Description",
-    #     display_name: "ApplicationName",
     #     document_attribute_configurations: [
     #       {
-    #         name: "String",
-    #         search: "ENABLED", # accepts ENABLED, DISABLED
+    #         name: "DocumentMetadataConfigurationName",
     #         type: "STRING", # accepts STRING, STRING_LIST, NUMBER, DATE
+    #         search: "ENABLED", # accepts ENABLED, DISABLED
     #       },
     #     ],
-    #     index_id: "IndexId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateIndex AWS API Documentation
@@ -3636,20 +3722,23 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the application the plugin is attached to.
     #
-    # @option params [Types::PluginAuthConfiguration] :auth_configuration
-    #   The authentication configuration the plugin is using.
+    # @option params [required, String] :plugin_id
+    #   The identifier of the plugin.
     #
     # @option params [String] :display_name
     #   The name of the plugin.
     #
-    # @option params [required, String] :plugin_id
-    #   The identifier of the plugin.
+    # @option params [String] :state
+    #   The status of the plugin.
     #
     # @option params [String] :server_url
     #   The source URL used for plugin configuration.
     #
-    # @option params [String] :state
-    #   The status of the plugin.
+    # @option params [Types::CustomPluginConfiguration] :custom_plugin_configuration
+    #   The configuration for a custom plugin.
+    #
+    # @option params [Types::PluginAuthConfiguration] :auth_configuration
+    #   The authentication configuration the plugin is using.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3657,20 +3746,33 @@ module Aws::QBusiness
     #
     #   resp = client.update_plugin({
     #     application_id: "ApplicationId", # required
-    #     auth_configuration: {
-    #       basic_auth_configuration: {
-    #         role_arn: "RoleArn", # required
-    #         secret_arn: "SecretArn", # required
-    #       },
-    #       o_auth_2_client_credential_configuration: {
-    #         role_arn: "RoleArn", # required
-    #         secret_arn: "SecretArn", # required
+    #     plugin_id: "PluginId", # required
+    #     display_name: "PluginName",
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     server_url: "Url",
+    #     custom_plugin_configuration: {
+    #       description: "PluginDescription", # required
+    #       api_schema_type: "OPEN_API_V3", # required, accepts OPEN_API_V3
+    #       api_schema: { # required
+    #         payload: "Payload",
+    #         s3: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
     #       },
     #     },
-    #     display_name: "PluginName",
-    #     plugin_id: "PluginId", # required
-    #     server_url: "Url",
-    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     auth_configuration: {
+    #       basic_auth_configuration: {
+    #         secret_arn: "SecretArn", # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #       o_auth_2_client_credential_configuration: {
+    #         secret_arn: "SecretArn", # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #       no_auth_configuration: {
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdatePlugin AWS API Documentation
@@ -3687,15 +3789,15 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of your Amazon Q Business application.
     #
+    # @option params [required, String] :retriever_id
+    #   The identifier of your retriever.
+    #
     # @option params [Types::RetrieverConfiguration] :configuration
     #   Provides information on how the retriever used for your Amazon Q
     #   Business application is configured.
     #
     # @option params [String] :display_name
     #   The name of your retriever.
-    #
-    # @option params [required, String] :retriever_id
-    #   The identifier of your retriever.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
@@ -3707,37 +3809,37 @@ module Aws::QBusiness
     #
     #   resp = client.update_retriever({
     #     application_id: "ApplicationId", # required
+    #     retriever_id: "RetrieverId", # required
     #     configuration: {
-    #       kendra_index_configuration: {
-    #         index_id: "KendraIndexId", # required
-    #       },
     #       native_index_configuration: {
+    #         index_id: "IndexId", # required
     #         boosting_override: {
     #           "DocumentAttributeKey" => {
-    #             date_configuration: {
-    #               boosting_duration_in_seconds: 1,
-    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
-    #             },
     #             number_configuration: {
     #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
     #               boosting_type: "PRIORITIZE_LARGER_VALUES", # accepts PRIORITIZE_LARGER_VALUES, PRIORITIZE_SMALLER_VALUES
     #             },
     #             string_configuration: {
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
     #               attribute_value_boosting: {
     #                 "String" => "LOW", # accepts LOW, MEDIUM, HIGH, VERY_HIGH
     #               },
+    #             },
+    #             date_configuration: {
     #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #               boosting_duration_in_seconds: 1,
     #             },
     #             string_list_configuration: {
     #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
     #             },
     #           },
     #         },
-    #         index_id: "IndexId", # required
+    #       },
+    #       kendra_index_configuration: {
+    #         index_id: "KendraIndexId", # required
     #       },
     #     },
     #     display_name: "RetrieverName",
-    #     retriever_id: "RetrieverId", # required
     #     role_arn: "RoleArn",
     #   })
     #
@@ -3755,56 +3857,56 @@ module Aws::QBusiness
     # @option params [required, String] :application_id
     #   The identifier of the application the user is attached to.
     #
-    # @option params [Array<Types::UserAlias>] :user_aliases_to_delete
-    #   The user aliases attached to the user id that are to be deleted.
+    # @option params [required, String] :user_id
+    #   The email id attached to the user.
     #
     # @option params [Array<Types::UserAlias>] :user_aliases_to_update
     #   The user aliases attached to the user id that are to be updated.
     #
-    # @option params [required, String] :user_id
-    #   The email id attached to the user.
+    # @option params [Array<Types::UserAlias>] :user_aliases_to_delete
+    #   The user aliases attached to the user id that are to be deleted.
     #
     # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserResponse#user_aliases_added #user_aliases_added} => Array&lt;Types::UserAlias&gt;
-    #   * {Types::UpdateUserResponse#user_aliases_deleted #user_aliases_deleted} => Array&lt;Types::UserAlias&gt;
     #   * {Types::UpdateUserResponse#user_aliases_updated #user_aliases_updated} => Array&lt;Types::UserAlias&gt;
+    #   * {Types::UpdateUserResponse#user_aliases_deleted #user_aliases_deleted} => Array&lt;Types::UserAlias&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_user({
     #     application_id: "ApplicationId", # required
-    #     user_aliases_to_delete: [
-    #       {
-    #         data_source_id: "DataSourceId",
-    #         index_id: "IndexId",
-    #         user_id: "String", # required
-    #       },
-    #     ],
+    #     user_id: "String", # required
     #     user_aliases_to_update: [
     #       {
-    #         data_source_id: "DataSourceId",
     #         index_id: "IndexId",
+    #         data_source_id: "DataSourceId",
     #         user_id: "String", # required
     #       },
     #     ],
-    #     user_id: "String", # required
+    #     user_aliases_to_delete: [
+    #       {
+    #         index_id: "IndexId",
+    #         data_source_id: "DataSourceId",
+    #         user_id: "String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.user_aliases_added #=> Array
-    #   resp.user_aliases_added[0].data_source_id #=> String
     #   resp.user_aliases_added[0].index_id #=> String
+    #   resp.user_aliases_added[0].data_source_id #=> String
     #   resp.user_aliases_added[0].user_id #=> String
-    #   resp.user_aliases_deleted #=> Array
-    #   resp.user_aliases_deleted[0].data_source_id #=> String
-    #   resp.user_aliases_deleted[0].index_id #=> String
-    #   resp.user_aliases_deleted[0].user_id #=> String
     #   resp.user_aliases_updated #=> Array
-    #   resp.user_aliases_updated[0].data_source_id #=> String
     #   resp.user_aliases_updated[0].index_id #=> String
+    #   resp.user_aliases_updated[0].data_source_id #=> String
     #   resp.user_aliases_updated[0].user_id #=> String
+    #   resp.user_aliases_deleted #=> Array
+    #   resp.user_aliases_deleted[0].index_id #=> String
+    #   resp.user_aliases_deleted[0].data_source_id #=> String
+    #   resp.user_aliases_deleted[0].user_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateUser AWS API Documentation
     #
@@ -3821,26 +3923,30 @@ module Aws::QBusiness
     #   The identifier of the Amazon Q Business application attached to the
     #   web experience.
     #
+    # @option params [required, String] :web_experience_id
+    #   The identifier of the Amazon Q Business web experience.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the role with permission to access
+    #   the Amazon Q Business web experience and required resources.
+    #
     # @option params [Types::WebExperienceAuthConfiguration] :authentication_configuration
     #   The authentication configuration of the Amazon Q Business web
     #   experience.
     #
-    # @option params [String] :sample_prompts_control_mode
-    #   Determines whether sample prompts are enabled in the web experience
-    #   for an end user.
+    # @option params [String] :title
+    #   The title of the Amazon Q Business web experience.
     #
     # @option params [String] :subtitle
     #   The subtitle of the Amazon Q Business web experience.
     #
-    # @option params [String] :title
-    #   The title of the Amazon Q Business web experience.
-    #
-    # @option params [required, String] :web_experience_id
-    #   The identifier of the Amazon Q Business web experience.
-    #
     # @option params [String] :welcome_message
     #   A customized welcome message for an end user in an Amazon Q Business
     #   web experience.
+    #
+    # @option params [String] :sample_prompts_control_mode
+    #   Determines whether sample prompts are enabled in the web experience
+    #   for an end user.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3848,19 +3954,20 @@ module Aws::QBusiness
     #
     #   resp = client.update_web_experience({
     #     application_id: "ApplicationId", # required
+    #     web_experience_id: "WebExperienceId", # required
+    #     role_arn: "RoleArn",
     #     authentication_configuration: {
     #       saml_configuration: {
     #         metadata_xml: "SamlMetadataXML", # required
     #         role_arn: "RoleArn", # required
-    #         user_group_attribute: "SamlAttribute",
     #         user_id_attribute: "SamlAttribute", # required
+    #         user_group_attribute: "SamlAttribute",
     #       },
     #     },
-    #     sample_prompts_control_mode: "ENABLED", # accepts ENABLED, DISABLED
-    #     subtitle: "WebExperienceSubtitle",
     #     title: "WebExperienceTitle",
-    #     web_experience_id: "WebExperienceId", # required
+    #     subtitle: "WebExperienceSubtitle",
     #     welcome_message: "WebExperienceWelcomeMessage",
+    #     sample_prompts_control_mode: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateWebExperience AWS API Documentation
@@ -3885,7 +3992,7 @@ module Aws::QBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

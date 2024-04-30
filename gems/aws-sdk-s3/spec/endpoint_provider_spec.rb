@@ -6528,7 +6528,7 @@ module Aws::S3
           expiration: Time.now + 60 * 5
         })
         expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
-        EXPRESS_CREDENTIALS_CACHE.clear
+        Aws::S3.express_credentials_cache.clear
         expect_auth({"name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'mybucket--use1-az1--x-s3',
@@ -6568,7 +6568,7 @@ module Aws::S3
           expiration: Time.now + 60 * 5
         })
         expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
-        EXPRESS_CREDENTIALS_CACHE.clear
+        Aws::S3.express_credentials_cache.clear
         expect_auth({"name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'mybucket--use1-az1--x-s3',
@@ -6607,7 +6607,7 @@ module Aws::S3
           expiration: Time.now + 60 * 5
         })
         expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
-        EXPRESS_CREDENTIALS_CACHE.clear
+        Aws::S3.express_credentials_cache.clear
         expect_auth({"name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"ap-northeast-1", "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'mybucket--apne1-az1--x-s3',
@@ -6647,7 +6647,7 @@ module Aws::S3
           expiration: Time.now + 60 * 5
         })
         expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
-        EXPRESS_CREDENTIALS_CACHE.clear
+        Aws::S3.express_credentials_cache.clear
         expect_auth({"name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"ap-northeast-1", "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'mybucket--apne1-az1--x-s3',
@@ -6891,7 +6891,7 @@ module Aws::S3
           expiration: Time.now + 60 * 5
         })
         expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
-        EXPRESS_CREDENTIALS_CACHE.clear
+        Aws::S3.express_credentials_cache.clear
         expect_auth({"name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'mybucket--usw2-az1--x-s3',
@@ -6945,7 +6945,7 @@ module Aws::S3
           expiration: Time.now + 60 * 5
         })
         expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
-        EXPRESS_CREDENTIALS_CACHE.clear
+        Aws::S3.express_credentials_cache.clear
         expect_auth({"name"=>"sigv4-s3express", "signingName"=>"s3express", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
         resp = client.get_object(
           bucket: 'mybucket--usw2-az1--x-s3',

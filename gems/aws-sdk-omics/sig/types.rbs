@@ -486,6 +486,7 @@ module Aws::Omics
     class Filter
       attr_accessor resource_arns: ::Array[::String]
       attr_accessor status: ::Array[("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")]
+      attr_accessor type: ::Array[("VARIANT_STORE" | "ANNOTATION_STORE" | "WORKFLOW")]
       SENSITIVE: []
     end
 
@@ -785,6 +786,8 @@ module Aws::Omics
       attr_accessor log_location: Types::RunLogLocation
       attr_accessor uuid: ::String
       attr_accessor run_output_uri: ::String
+      attr_accessor storage_type: ("STATIC" | "DYNAMIC")
+      attr_accessor workflow_owner_id: ::String
       SENSITIVE: []
     end
 
@@ -884,6 +887,7 @@ module Aws::Omics
       attr_accessor id: ::String
       attr_accessor type: ("PRIVATE" | "READY2RUN")
       attr_accessor export: ::Array[("DEFINITION")]
+      attr_accessor workflow_owner_id: ::String
       SENSITIVE: []
     end
 
@@ -1481,6 +1485,7 @@ module Aws::Omics
       attr_accessor creation_time: ::Time
       attr_accessor start_time: ::Time
       attr_accessor stop_time: ::Time
+      attr_accessor storage_type: ("STATIC" | "DYNAMIC")
       SENSITIVE: []
     end
 
@@ -1531,6 +1536,7 @@ module Aws::Omics
     class ShareDetails
       attr_accessor share_id: ::String
       attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
       attr_accessor principal_subscriber: ::String
       attr_accessor owner_id: ::String
       attr_accessor status: ("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")
@@ -1677,6 +1683,8 @@ module Aws::Omics
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor request_id: ::String
       attr_accessor retention_mode: ("RETAIN" | "REMOVE")
+      attr_accessor storage_type: ("STATIC" | "DYNAMIC")
+      attr_accessor workflow_owner_id: ::String
       SENSITIVE: []
     end
 

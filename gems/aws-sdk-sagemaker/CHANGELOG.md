@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.238.0 (2024-04-30)
+------------------
+
+* Feature - Amazon SageMaker Training now supports the use of attribute-based access control (ABAC) roles for training job execution roles. Amazon SageMaker Inference now supports G6 instance types.
+
 1.237.0 (2024-04-25)
 ------------------
 

@@ -58,6 +58,8 @@ module Aws::TrustedAdvisor
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_update_recommendation_resource_exclusion
+            Aws::TrustedAdvisor::Endpoints::BatchUpdateRecommendationResourceExclusion.build(context)
           when :get_organization_recommendation
             Aws::TrustedAdvisor::Endpoints::GetOrganizationRecommendation.build(context)
           when :get_recommendation

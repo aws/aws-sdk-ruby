@@ -74,6 +74,13 @@ module Aws::ConnectCases
     CreatedTime = Shapes::TimestampShape.new(name: 'CreatedTime', timestampFormat: "iso8601")
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
+    DeleteFieldRequest = Shapes::StructureShape.new(name: 'DeleteFieldRequest')
+    DeleteFieldResponse = Shapes::StructureShape.new(name: 'DeleteFieldResponse')
+    DeleteLayoutRequest = Shapes::StructureShape.new(name: 'DeleteLayoutRequest')
+    DeleteLayoutResponse = Shapes::StructureShape.new(name: 'DeleteLayoutResponse')
+    DeleteTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTemplateRequest')
+    DeleteTemplateResponse = Shapes::StructureShape.new(name: 'DeleteTemplateResponse')
+    Deleted = Shapes::BooleanShape.new(name: 'Deleted')
     DomainArn = Shapes::StringShape.new(name: 'DomainArn')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
@@ -126,6 +133,7 @@ module Aws::ConnectCases
     IamPrincipalArn = Shapes::StringShape.new(name: 'IamPrincipalArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    LastModifiedTime = Shapes::TimestampShape.new(name: 'LastModifiedTime', timestampFormat: "iso8601")
     LayoutArn = Shapes::StringShape.new(name: 'LayoutArn')
     LayoutConfiguration = Shapes::StructureShape.new(name: 'LayoutConfiguration')
     LayoutContent = Shapes::UnionShape.new(name: 'LayoutContent')
@@ -398,6 +406,24 @@ module Aws::ConnectCases
 
     DeleteDomainResponse.struct_class = Types::DeleteDomainResponse
 
+    DeleteFieldRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    DeleteFieldRequest.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location: "uri", location_name: "fieldId"))
+    DeleteFieldRequest.struct_class = Types::DeleteFieldRequest
+
+    DeleteFieldResponse.struct_class = Types::DeleteFieldResponse
+
+    DeleteLayoutRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    DeleteLayoutRequest.add_member(:layout_id, Shapes::ShapeRef.new(shape: LayoutId, required: true, location: "uri", location_name: "layoutId"))
+    DeleteLayoutRequest.struct_class = Types::DeleteLayoutRequest
+
+    DeleteLayoutResponse.struct_class = Types::DeleteLayoutResponse
+
+    DeleteTemplateRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    DeleteTemplateRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "templateId"))
+    DeleteTemplateRequest.struct_class = Types::DeleteTemplateRequest
+
+    DeleteTemplateResponse.struct_class = Types::DeleteTemplateResponse
+
     DomainSummary.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, required: true, location_name: "domainArn"))
     DomainSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
     DomainSummary.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "name"))
@@ -530,9 +556,12 @@ module Aws::ConnectCases
     GetDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetDomainResponse.struct_class = Types::GetDomainResponse
 
+    GetFieldResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "createdTime"))
+    GetFieldResponse.add_member(:deleted, Shapes::ShapeRef.new(shape: Deleted, location_name: "deleted"))
     GetFieldResponse.add_member(:description, Shapes::ShapeRef.new(shape: FieldDescription, location_name: "description"))
     GetFieldResponse.add_member(:field_arn, Shapes::ShapeRef.new(shape: FieldArn, required: true, location_name: "fieldArn"))
     GetFieldResponse.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "fieldId"))
+    GetFieldResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "lastModifiedTime"))
     GetFieldResponse.add_member(:name, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "name"))
     GetFieldResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: FieldNamespace, required: true, location_name: "namespace"))
     GetFieldResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -544,6 +573,9 @@ module Aws::ConnectCases
     GetLayoutRequest.struct_class = Types::GetLayoutRequest
 
     GetLayoutResponse.add_member(:content, Shapes::ShapeRef.new(shape: LayoutContent, required: true, location_name: "content"))
+    GetLayoutResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "createdTime"))
+    GetLayoutResponse.add_member(:deleted, Shapes::ShapeRef.new(shape: Deleted, location_name: "deleted"))
+    GetLayoutResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "lastModifiedTime"))
     GetLayoutResponse.add_member(:layout_arn, Shapes::ShapeRef.new(shape: LayoutArn, required: true, location_name: "layoutArn"))
     GetLayoutResponse.add_member(:layout_id, Shapes::ShapeRef.new(shape: LayoutId, required: true, location_name: "layoutId"))
     GetLayoutResponse.add_member(:name, Shapes::ShapeRef.new(shape: LayoutName, required: true, location_name: "name"))
@@ -554,7 +586,10 @@ module Aws::ConnectCases
     GetTemplateRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "templateId"))
     GetTemplateRequest.struct_class = Types::GetTemplateRequest
 
+    GetTemplateResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "createdTime"))
+    GetTemplateResponse.add_member(:deleted, Shapes::ShapeRef.new(shape: Deleted, location_name: "deleted"))
     GetTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: TemplateDescription, location_name: "description"))
+    GetTemplateResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "lastModifiedTime"))
     GetTemplateResponse.add_member(:layout_configuration, Shapes::ShapeRef.new(shape: LayoutConfiguration, location_name: "layoutConfiguration"))
     GetTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "name"))
     GetTemplateResponse.add_member(:required_fields, Shapes::ShapeRef.new(shape: RequiredFieldList, location_name: "requiredFields"))
@@ -975,6 +1010,49 @@ module Aws::ConnectCases
         o.http_request_uri = "/domains/{domainId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_field, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteField"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{domainId}/fields/{fieldId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFieldRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFieldResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:delete_layout, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLayout"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{domainId}/layouts/{layoutId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLayoutRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLayoutResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{domainId}/templates/{templateId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

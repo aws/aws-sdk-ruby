@@ -26,6 +26,20 @@ module Aws::PinpointSMSVoiceV2
       end
     end
 
+    class AssociateProtectConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateConfigurationSet
       def self.build(context)
         unless context.config.regional_endpoint
@@ -69,6 +83,20 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class CreatePool
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreateProtectConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -152,6 +180,20 @@ module Aws::PinpointSMSVoiceV2
       end
     end
 
+    class DeleteAccountDefaultProtectConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteConfigurationSet
       def self.build(context)
         unless context.config.regional_endpoint
@@ -222,6 +264,20 @@ module Aws::PinpointSMSVoiceV2
       end
     end
 
+    class DeleteMediaMessageSpendLimitOverride
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteOptOutList
       def self.build(context)
         unless context.config.regional_endpoint
@@ -251,6 +307,20 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class DeletePool
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteProtectConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -460,6 +530,20 @@ module Aws::PinpointSMSVoiceV2
       end
     end
 
+    class DescribeProtectConfigurations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeRegistrationAttachments
       def self.build(context)
         unless context.config.regional_endpoint
@@ -614,7 +698,35 @@ module Aws::PinpointSMSVoiceV2
       end
     end
 
+    class DisassociateProtectConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DiscardRegistrationVersion
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetProtectConfigurationCountryRuleSet
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -782,6 +894,20 @@ module Aws::PinpointSMSVoiceV2
       end
     end
 
+    class SendMediaMessage
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class SendTextMessage
       def self.build(context)
         unless context.config.regional_endpoint
@@ -810,6 +936,20 @@ module Aws::PinpointSMSVoiceV2
       end
     end
 
+    class SetAccountDefaultProtectConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class SetDefaultMessageType
       def self.build(context)
         unless context.config.regional_endpoint
@@ -825,6 +965,20 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class SetDefaultSenderId
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class SetMediaMessageSpendLimitOverride
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -937,6 +1091,34 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class UpdatePool
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateProtectConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateProtectConfigurationCountryRuleSet
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

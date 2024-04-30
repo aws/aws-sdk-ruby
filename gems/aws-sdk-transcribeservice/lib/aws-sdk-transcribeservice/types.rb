@@ -110,6 +110,11 @@ module Aws::TranscribeService
     #   your transcription job failed.
     #   @return [String]
     #
+    # @!attribute [rw] call_analytics_job_details
+    #   Provides detailed information about a call analytics job, including
+    #   information about skipped analytics features.
+    #   @return [Types::CallAnalyticsJobDetails]
+    #
     # @!attribute [rw] language_code
     #   The language code used to create your Call Analytics job. For a list
     #   of supported languages and their associated language codes, refer to
@@ -247,6 +252,7 @@ module Aws::TranscribeService
     class CallAnalyticsJob < Struct.new(
       :call_analytics_job_name,
       :call_analytics_job_status,
+      :call_analytics_job_details,
       :language_code,
       :media_sample_rate_hertz,
       :media_format,
@@ -260,6 +266,25 @@ module Aws::TranscribeService
       :identified_language_score,
       :settings,
       :channel_definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a call analytics job, including information
+    # about skipped analytics features.
+    #
+    # @!attribute [rw] skipped
+    #   Contains information about any skipped analytics features during the
+    #   analysis of a call analytics job.
+    #
+    #   This array lists all the analytics features that were skipped, along
+    #   with their corresponding reason code and message.
+    #   @return [Array<Types::CallAnalyticsSkippedFeature>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CallAnalyticsJobDetails AWS API Documentation
+    #
+    class CallAnalyticsJobDetails < Struct.new(
+      :skipped)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -437,6 +462,11 @@ module Aws::TranscribeService
     #   your transcription job failed.
     #   @return [String]
     #
+    # @!attribute [rw] call_analytics_job_details
+    #   Provides detailed information about a call analytics job, including
+    #   information about skipped analytics features.
+    #   @return [Types::CallAnalyticsJobDetails]
+    #
     # @!attribute [rw] failure_reason
     #   If `CallAnalyticsJobStatus` is `FAILED`, `FailureReason` contains
     #   information about why the Call Analytics job failed. See also:
@@ -456,7 +486,46 @@ module Aws::TranscribeService
       :completion_time,
       :language_code,
       :call_analytics_job_status,
+      :call_analytics_job_details,
       :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a skipped analytics feature during the analysis of a call
+    # analytics job.
+    #
+    # The `Feature` field indicates the type of analytics feature that was
+    # skipped.
+    #
+    # The `Message` field contains additional information or a message
+    # explaining why the analytics feature was skipped.
+    #
+    # The `ReasonCode` field provides a code indicating the reason why the
+    # analytics feature was skipped.
+    #
+    # @!attribute [rw] feature
+    #   Indicates the type of analytics feature that was skipped during the
+    #   analysis of a call analytics job.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   Provides a code indicating the reason why a specific analytics
+    #   feature was skipped during the analysis of a call analytics job.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Contains additional information or a message explaining why a
+    #   specific analytics feature was skipped during the analysis of a call
+    #   analytics job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CallAnalyticsSkippedFeature AWS API Documentation
+    #
+    class CallAnalyticsSkippedFeature < Struct.new(
+      :feature,
+      :reason_code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

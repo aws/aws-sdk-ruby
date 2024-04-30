@@ -35,6 +35,7 @@ require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
+require 'aws-sdk-s3/plugins/access_grants.rb'
 require 'aws-sdk-s3/plugins/arn.rb'
 require 'aws-sdk-s3/plugins/bucket_dns.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
@@ -106,6 +107,7 @@ module Aws::S3
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::S3::Plugins::Accelerate)
+    add_plugin(Aws::S3::Plugins::AccessGrants)
     add_plugin(Aws::S3::Plugins::ARN)
     add_plugin(Aws::S3::Plugins::BucketDns)
     add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
@@ -185,6 +187,16 @@ module Aws::S3
     #     * `ENV['AWS_DEFAULT_REGION']`
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
+    #
+    #   @option options [Boolean] :access_grants (false)
+    #     When `true`, the S3 client will use the S3 Access Grants feature to
+    #     authenticate requests. Bucket credentials will be fetched from S3
+    #     Control using the `get_data_access` API.
+    #
+    #   @option options [Aws::S3::AccessGrantsCredentialsProvider] :access_grants_credentials_provider
+    #     When `access_grants` is `true`, this option can be used to provide
+    #     additional options to the credentials provider, including a privilege
+    #     setting, caching, and fallback behavior.
     #
     #   @option options [String] :access_key_id
     #
@@ -18815,7 +18827,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

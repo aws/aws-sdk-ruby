@@ -187,11 +187,6 @@ module Aws::QBusiness
       end
 
       # @return [String]
-      def fields
-        @data[:fields]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -199,6 +194,11 @@ module Aws::QBusiness
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def fields
+        @data[:fields]
       end
     end
 
