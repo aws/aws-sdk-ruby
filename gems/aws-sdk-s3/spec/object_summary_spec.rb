@@ -52,8 +52,8 @@ module Aws
 
       it 'delegates #presigned_url to #object' do
         expect(object).to receive(:presigned_url)
-          .with(:get, { opt_name: 'opt-value' }).and_return('return-value')
-        object_summary.presigned_url(:get, opt_name: 'opt-value')
+          .with('method', { opt_name: 'opt-value' }).and_return('return-value')
+        object_summary.presigned_url('method', opt_name: 'opt-value')
       end
 
       it 'delegates #public_url to #object' do
