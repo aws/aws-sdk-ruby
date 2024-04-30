@@ -3,6 +3,9 @@
         "description": "Test cases for EmptyInputOutput operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
@@ -65,6 +68,9 @@
         "description": "Test cases for FractionalSeconds operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
@@ -114,6 +120,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
@@ -170,6 +179,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
@@ -266,6 +278,9 @@
         "description": "Test cases for NoInputOutput operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
@@ -336,6 +351,9 @@
         "description": "Test cases for OptionalInputOutput operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
@@ -382,6 +400,9 @@
         "description": "Test cases for RecursiveShapes operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
@@ -499,6 +520,9 @@
         "description": "Test cases for RpcV2CborDenseMaps operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
@@ -730,6 +754,9 @@
         "description": "Test cases for RpcV2CborLists operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
@@ -1047,6 +1074,9 @@
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
             "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
             "apiVersion": "2020-07-14",
             "targetPrefix": "RpcV2Protocol"
         },
