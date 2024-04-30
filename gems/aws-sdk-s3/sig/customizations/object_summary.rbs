@@ -17,7 +17,7 @@ module Aws
       def presigned_post: (Hash[Symbol, untyped]) -> untyped
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/ObjectSummary.html#presigned_url-instance_method
-      def presigned_url: ((:get | :put | :head | :delete | :create_multipart_upload | :list_multipart_uploads | :complete_multipart_upload | :abort_multipart_upload | :list_parts | :upload_part) method, ?Hash[Symbol, untyped] params) -> String
+      def presigned_url: (Symbol | String method, ?Hash[Symbol, untyped] params) -> String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/ObjectSummary.html#public_url-instance_method
       def public_url: (?Hash[Symbol, untyped] options) -> String
