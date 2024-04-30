@@ -589,7 +589,7 @@ module Aws::QuickSight
     # [3]: https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html#security-create-iam-role
     # [4]: https://docs.aws.amazon.com/quicksight/latest/user/scoping-policies-defaults.html
     #
-    # @option params [required, String] :edition
+    # @option params [String] :edition
     #   The edition of Amazon QuickSight that you want your account to have.
     #   Currently, you can choose from `ENTERPRISE` or `ENTERPRISE_AND_Q`.
     #
@@ -646,9 +646,9 @@ module Aws::QuickSight
     #
     # @option params [Array<String>] :admin_group
     #   The admin group associated with your Active Directory or IAM Identity
-    #   Center account. This field is required if `ACTIVE_DIRECTORY` or
-    #   `IAM_IDENTITY_CENTER` is the selected authentication method of the new
-    #   Amazon QuickSight account.
+    #   Center account. Either this field or the `AdminProGroup` field is
+    #   required if `ACTIVE_DIRECTORY` or `IAM_IDENTITY_CENTER` is the
+    #   selected authentication method of the new Amazon QuickSight account.
     #
     #   For more information about using IAM Identity Center in Amazon
     #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
@@ -681,6 +681,56 @@ module Aws::QuickSight
     # @option params [Array<String>] :reader_group
     #   The reader group associated with your Active Directory or IAM Identity
     #   Center account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise Edition][2]
+    #   in the Amazon QuickSight User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #
+    # @option params [Array<String>] :admin_pro_group
+    #   The admin pro group associated with your Active Directory or IAM
+    #   Identity Center account. Either this field or the `AdminGroup` field
+    #   is required if `ACTIVE_DIRECTORY` or `IAM_IDENTITY_CENTER` is the
+    #   selected authentication method of the new Amazon QuickSight account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise Edition][2]
+    #   in the Amazon QuickSight User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #
+    # @option params [Array<String>] :author_pro_group
+    #   The author pro group associated with your Active Directory or IAM
+    #   Identity Center account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise Edition][2]
+    #   in the Amazon QuickSight User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #
+    # @option params [Array<String>] :reader_pro_group
+    #   The reader pro group associated with your Active Directory or IAM
+    #   Identity Center account.
     #
     #   For more information about using IAM Identity Center in Amazon
     #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
@@ -730,7 +780,7 @@ module Aws::QuickSight
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_account_subscription({
-    #     edition: "STANDARD", # required, accepts STANDARD, ENTERPRISE, ENTERPRISE_AND_Q
+    #     edition: "STANDARD", # accepts STANDARD, ENTERPRISE, ENTERPRISE_AND_Q
     #     authentication_method: "IAM_AND_QUICKSIGHT", # required, accepts IAM_AND_QUICKSIGHT, IAM_ONLY, ACTIVE_DIRECTORY, IAM_IDENTITY_CENTER
     #     aws_account_id: "AwsAccountId", # required
     #     account_name: "AccountName", # required
@@ -741,6 +791,9 @@ module Aws::QuickSight
     #     admin_group: ["String"],
     #     author_group: ["String"],
     #     reader_group: ["String"],
+    #     admin_pro_group: ["String"],
+    #     author_pro_group: ["String"],
+    #     reader_pro_group: ["String"],
     #     first_name: "String",
     #     last_name: "String",
     #     email_address: "String",
@@ -2203,7 +2256,7 @@ module Aws::QuickSight
     #     member_name: "GroupName", # required
     #     aws_account_id: "AwsAccountId", # required
     #     namespace: "Namespace", # required
-    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, ADMIN_PRO, AUTHOR_PRO, READER_PRO
     #   })
     #
     # @example Response structure
@@ -3623,7 +3676,7 @@ module Aws::QuickSight
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_role_custom_permission({
-    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, ADMIN_PRO, AUTHOR_PRO, READER_PRO
     #     aws_account_id: "AwsAccountId", # required
     #     namespace: "Namespace", # required
     #   })
@@ -3668,7 +3721,7 @@ module Aws::QuickSight
     #
     #   resp = client.delete_role_membership({
     #     member_name: "GroupName", # required
-    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, ADMIN_PRO, AUTHOR_PRO, READER_PRO
     #     aws_account_id: "AwsAccountId", # required
     #     namespace: "Namespace", # required
     #   })
@@ -6142,7 +6195,7 @@ module Aws::QuickSight
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_role_custom_permission({
-    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, ADMIN_PRO, AUTHOR_PRO, READER_PRO
     #     aws_account_id: "AwsAccountId", # required
     #     namespace: "Namespace", # required
     #   })
@@ -6940,7 +6993,7 @@ module Aws::QuickSight
     #   resp.user.arn #=> String
     #   resp.user.user_name #=> String
     #   resp.user.email #=> String
-    #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
+    #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
@@ -7139,6 +7192,9 @@ module Aws::QuickSight
     #       q_search_bar: {
     #         initial_topic_id: "RestrictiveResourceId", # required
     #       },
+    #       generative_qn_a: {
+    #         initial_topic_id: "RestrictiveResourceId", # required
+    #       },
     #     },
     #     allowed_domains: ["String"],
     #   })
@@ -7205,9 +7261,10 @@ module Aws::QuickSight
     #   The Amazon Resource Name for the registered user.
     #
     # @option params [required, Types::RegisteredUserEmbeddingExperienceConfiguration] :experience_configuration
-    #   The experience you are embedding. For registered users, you can embed
-    #   Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon
-    #   QuickSight Q search bar, or the entire Amazon QuickSight console.
+    #   The experience that you want to embed. For registered users, you can
+    #   embed Amazon QuickSight dashboards, Amazon QuickSight visuals, the
+    #   Amazon QuickSight Q search bar, the Amazon QuickSight Generative
+    #   Q&amp;A experience, or the entire Amazon QuickSight console.
     #
     # @option params [Array<String>] :allowed_domains
     #   The domains that you want to add to the allow list for access to the
@@ -7262,6 +7319,9 @@ module Aws::QuickSight
     #           sheet_id: "ShortRestrictiveResourceId", # required
     #           visual_id: "ShortRestrictiveResourceId", # required
     #         },
+    #       },
+    #       generative_qn_a: {
+    #         initial_topic_id: "RestrictiveResourceId",
     #       },
     #     },
     #     allowed_domains: ["String"],
@@ -8626,7 +8686,7 @@ module Aws::QuickSight
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_role_memberships({
-    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, ADMIN_PRO, AUTHOR_PRO, READER_PRO
     #     next_token: "String",
     #     max_results: 1,
     #     aws_account_id: "AwsAccountId", # required
@@ -9105,6 +9165,7 @@ module Aws::QuickSight
     #   resp.topics_summaries[0].arn #=> String
     #   resp.topics_summaries[0].topic_id #=> String
     #   resp.topics_summaries[0].name #=> String
+    #   resp.topics_summaries[0].user_experience_version #=> String, one of "LEGACY", "NEW_READER_EXPERIENCE"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -9219,7 +9280,7 @@ module Aws::QuickSight
     #   resp.user_list[0].arn #=> String
     #   resp.user_list[0].user_name #=> String
     #   resp.user_list[0].email #=> String
-    #   resp.user_list[0].role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
+    #   resp.user_list[0].role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
     #   resp.user_list[0].identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user_list[0].active #=> Boolean
     #   resp.user_list[0].principal_id #=> String
@@ -9371,13 +9432,8 @@ module Aws::QuickSight
     # [1]: https://docs.aws.amazon.com/quicksight/latest/user/managing-users.html#inviting-users
     #
     # @option params [required, String] :identity_type
-    #   Amazon QuickSight supports several ways of managing the identity of
-    #   users. This parameter accepts two values:
-    #
-    #   * `IAM`: A user whose identity maps to an existing IAM user or role.
-    #
-    #   * `QUICKSIGHT`: A user whose identity is owned and managed internally
-    #     by Amazon QuickSight.
+    #   The identity type that your Amazon QuickSight account uses to manage
+    #   the identity of users.
     #
     # @option params [required, String] :email
     #   The email address of the user that you want to register.
@@ -9453,7 +9509,8 @@ module Aws::QuickSight
     #   Amazon QuickSight custom permissions are applied through IAM policies.
     #   Therefore, they override the permissions typically granted by
     #   assigning Amazon QuickSight users to one of the default security
-    #   cohorts in Amazon QuickSight (admin, author, reader).
+    #   cohorts in Amazon QuickSight (admin, author, reader, admin pro, author
+    #   pro, reader pro).
     #
     #   This feature is available only to Amazon QuickSight Enterprise edition
     #   subscriptions.
@@ -9498,7 +9555,7 @@ module Aws::QuickSight
     #   resp = client.register_user({
     #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT, IAM_IDENTITY_CENTER
     #     email: "String", # required
-    #     user_role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
+    #     user_role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER, ADMIN_PRO, AUTHOR_PRO, READER_PRO
     #     iam_arn: "String",
     #     session_name: "RoleSessionName",
     #     aws_account_id: "AwsAccountId", # required
@@ -9521,7 +9578,7 @@ module Aws::QuickSight
     #   resp.user.arn #=> String
     #   resp.user.user_name #=> String
     #   resp.user.email #=> String
-    #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
+    #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
@@ -12605,7 +12662,7 @@ module Aws::QuickSight
     #
     #   resp = client.update_role_custom_permission({
     #     custom_permissions_name: "RoleName", # required
-    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, ADMIN_PRO, AUTHOR_PRO, READER_PRO
     #     aws_account_id: "AwsAccountId", # required
     #     namespace: "Namespace", # required
     #   })
@@ -12621,6 +12678,49 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def update_role_custom_permission(params = {}, options = {})
       req = build_request(:update_role_custom_permission, params)
+      req.send_request(options)
+    end
+
+    # Updates the SPICE capacity configuration for a Amazon QuickSight
+    # account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the SPICE
+    #   configuration that you want to update.
+    #
+    # @option params [required, String] :purchase_mode
+    #   Determines how SPICE capacity can be purchased. The following options
+    #   are available.
+    #
+    #   * `MANUAL`: SPICE capacity can only be purchased manually.
+    #
+    #   * `AUTO_PURCHASE`: Extra SPICE capacity is automatically purchased on
+    #     your behalf as needed. SPICE capacity can also be purchased manually
+    #     with this option.
+    #
+    # @return [Types::UpdateSPICECapacityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSPICECapacityConfigurationResponse#request_id #request_id} => String
+    #   * {Types::UpdateSPICECapacityConfigurationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_spice_capacity_configuration({
+    #     aws_account_id: "AwsAccountId", # required
+    #     purchase_mode: "MANUAL", # required, accepts MANUAL, AUTO_PURCHASE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSPICECapacityConfiguration AWS API Documentation
+    #
+    # @overload update_spice_capacity_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_spice_capacity_configuration(params = {}, options = {})
+      req = build_request(:update_spice_capacity_configuration, params)
       req.send_request(options)
     end
 
@@ -13481,6 +13581,20 @@ module Aws::QuickSight
     #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
+    #   * `READER_PRO`: Reader Pro adds Generative BI capabilities to the
+    #     Reader role. Reader Pros have access to Amazon Q Business, can build
+    #     stories with Amazon Q, and can generate executive summaries from
+    #     dashboards.
+    #
+    #   * `AUTHOR_PRO`: Author Pro adds Generative BI capabilities to the
+    #     Author role. Author Pros can author dashboards with natural language
+    #     with Amazon Q, build stories with Amazon Q, create Topics for
+    #     Q&amp;A, and generate executive summaries from dashboards.
+    #
+    #   * `ADMIN_PRO`: Admin Pros are Author Pros who can also manage Amazon
+    #     QuickSight administrative settings. Admin Pro users are billed at
+    #     Author Pro pricing.
+    #
     #   The name of the Amazon QuickSight role is invisible to the user except
     #   for the console screens dealing with permissions.
     #
@@ -13561,7 +13675,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     namespace: "Namespace", # required
     #     email: "String", # required
-    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
+    #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER, ADMIN_PRO, AUTHOR_PRO, READER_PRO
     #     custom_permissions_name: "RoleName",
     #     unapply_custom_permissions: false,
     #     external_login_federation_provider_type: "String",
@@ -13574,7 +13688,7 @@ module Aws::QuickSight
     #   resp.user.arn #=> String
     #   resp.user.user_name #=> String
     #   resp.user.email #=> String
-    #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
+    #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
     #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
@@ -13673,7 +13787,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

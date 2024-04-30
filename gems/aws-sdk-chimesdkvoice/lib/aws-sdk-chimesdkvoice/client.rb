@@ -534,7 +534,14 @@ module Aws::ChimeSDKVoice
       req.send_request(options)
     end
 
-    # Updates one or more phone numbers.
+    # Updates phone number product types, calling names, or phone number
+    # names. You can update one attribute at a time for each
+    # `UpdatePhoneNumberRequestItem`. For example, you can update the
+    # product type, the calling name, or phone name.
+    #
+    # <note markdown="1"> You cannot have a duplicate `phoneNumberId` in a request.
+    #
+    #  </note>
     #
     # @option params [required, Array<Types::UpdatePhoneNumberRequestItem>] :update_phone_number_request_items
     #   Lists the phone numbers in the update request.
@@ -1753,6 +1760,14 @@ module Aws::ChimeSDKVoice
 
     # Gets the Alexa Skill configuration for the SIP media application.
     #
+    # Due to changes made by the Amazon Alexa service, this API is no longer
+    # available for use. For more information, refer to the [Alexa Smart
+    # Properties][1] page.
+    #
+    #
+    #
+    # [1]: https://developer.amazon.com/en-US/alexa/alexasmartproperties
+    #
     # @option params [required, String] :sip_media_application_id
     #   The SIP media application ID.
     #
@@ -2885,6 +2900,14 @@ module Aws::ChimeSDKVoice
 
     # Updates the Alexa Skill configuration for the SIP media application.
     #
+    # Due to changes made by the Amazon Alexa service, this API is no longer
+    # available for use. For more information, refer to the [Alexa Smart
+    # Properties][1] page.
+    #
+    #
+    #
+    # [1]: https://developer.amazon.com/en-US/alexa/alexasmartproperties
+    #
     # @option params [required, String] :sip_media_application_id
     #   The SIP media application ID.
     #
@@ -3635,10 +3658,10 @@ module Aws::ChimeSDKVoice
       req.send_request(options)
     end
 
-    # Updates phone number details, such as product type or calling name,
-    # for the specified phone number ID. You can update one phone number
-    # detail at a time. For example, you can update either the product type
-    # or the calling name in one action.
+    # Updates phone number details, such as product type, calling name, or
+    # phone number name for the specified phone number ID. You can update
+    # one phone number detail at a time. For example, you can update either
+    # the product type, calling name, or phone number name in one action.
     #
     # For numbers outside the U.S., you must use the Amazon Chime SDK SIP
     # Media Application Dial-In product type.
@@ -3657,7 +3680,7 @@ module Aws::ChimeSDKVoice
     #   The outbound calling name associated with the phone number.
     #
     # @option params [String] :name
-    #   Specifies the name assigned to one or more phone numbers.
+    #   Specifies the updated name assigned to one or more phone numbers.
     #
     # @return [Types::UpdatePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4210,7 +4233,7 @@ module Aws::ChimeSDKVoice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkvoice'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

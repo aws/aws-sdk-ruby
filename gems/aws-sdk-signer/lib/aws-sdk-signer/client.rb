@@ -421,7 +421,27 @@ module Aws::Signer
     #   The version of the signing profile.
     #
     # @option params [required, String] :action
-    #   The AWS Signer action permitted as part of cross-account permissions.
+    #   For cross-account signing. Grant a designated account permission to
+    #   perform one or more of the following actions. Each action is
+    #   associated with a specific API's operations. For more information
+    #   about cross-account signing, see [Using cross-account signing with
+    #   signing profiles][1] in the *AWS Signer Developer Guide*.
+    #
+    #   You can designate the following actions to an account.
+    #
+    #   * `signer:StartSigningJob`. This action isn't supported for container
+    #     image workflows. For details, see StartSigningJob.
+    #
+    #   * `signer:SignPayload`. This action isn't supported for AWS Lambda
+    #     workflows. For details, see SignPayload
+    #
+    #   * `signer:GetSigningProfile`. For details, see GetSigningProfile.
+    #
+    #   * `signer:RevokeSignature`. For details, see RevokeSignature.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/signer/latest/developerguide/signing-profile-cross-account.html
     #
     # @option params [required, String] :principal
     #   The AWS principal receiving cross-account permissions. This may be an
@@ -1310,6 +1330,9 @@ module Aws::Signer
     # * You specify the name of the source and destination buckets when
     #   calling the `StartSigningJob` operation.
     #
+    # * You must ensure the S3 buckets are from the same Region as the
+    #   signing profile. Cross-Region signing isn't supported.
+    #
     # * You must also specify a request token that identifies your request
     #   to Signer.
     #
@@ -1457,7 +1480,7 @@ module Aws::Signer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-signer'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

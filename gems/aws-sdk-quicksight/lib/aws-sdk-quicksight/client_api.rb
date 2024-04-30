@@ -50,6 +50,7 @@ module Aws::QuickSight
     AnonymousUserDashboardEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardEmbeddingConfiguration')
     AnonymousUserDashboardVisualEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardVisualEmbeddingConfiguration')
     AnonymousUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserEmbeddingExperienceConfiguration')
+    AnonymousUserGenerativeQnAEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserGenerativeQnAEmbeddingConfiguration')
     AnonymousUserQSearchBarEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserQSearchBarEmbeddingConfiguration')
     AnonymousUserSnapshotJobResult = Shapes::StructureShape.new(name: 'AnonymousUserSnapshotJobResult')
     AnonymousUserSnapshotJobResultList = Shapes::ListShape.new(name: 'AnonymousUserSnapshotJobResultList')
@@ -791,6 +792,7 @@ module Aws::QuickSight
     FunnelChartSortConfiguration = Shapes::StructureShape.new(name: 'FunnelChartSortConfiguration')
     FunnelChartVisual = Shapes::StructureShape.new(name: 'FunnelChartVisual')
     GaugeChartArcConditionalFormatting = Shapes::StructureShape.new(name: 'GaugeChartArcConditionalFormatting')
+    GaugeChartColorConfiguration = Shapes::StructureShape.new(name: 'GaugeChartColorConfiguration')
     GaugeChartConditionalFormatting = Shapes::StructureShape.new(name: 'GaugeChartConditionalFormatting')
     GaugeChartConditionalFormattingOption = Shapes::StructureShape.new(name: 'GaugeChartConditionalFormattingOption')
     GaugeChartConditionalFormattingOptionList = Shapes::ListShape.new(name: 'GaugeChartConditionalFormattingOptionList')
@@ -1213,6 +1215,7 @@ module Aws::QuickSight
     ProjectedColumnList = Shapes::ListShape.new(name: 'ProjectedColumnList')
     PropertyRole = Shapes::StringShape.new(name: 'PropertyRole')
     PropertyUsage = Shapes::StringShape.new(name: 'PropertyUsage')
+    PurchaseMode = Shapes::StringShape.new(name: 'PurchaseMode')
     PutDataSetRefreshPropertiesRequest = Shapes::StructureShape.new(name: 'PutDataSetRefreshPropertiesRequest')
     PutDataSetRefreshPropertiesResponse = Shapes::StructureShape.new(name: 'PutDataSetRefreshPropertiesResponse')
     Query = Shapes::StringShape.new(name: 'Query')
@@ -1263,6 +1266,7 @@ module Aws::QuickSight
     RegisteredUserDashboardFeatureConfigurations = Shapes::StructureShape.new(name: 'RegisteredUserDashboardFeatureConfigurations')
     RegisteredUserDashboardVisualEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserDashboardVisualEmbeddingConfiguration')
     RegisteredUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserEmbeddingExperienceConfiguration')
+    RegisteredUserGenerativeQnAEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserGenerativeQnAEmbeddingConfiguration')
     RegisteredUserQSearchBarEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQSearchBarEmbeddingConfiguration')
     RegisteredUserQuickSightConsoleEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQuickSightConsoleEmbeddingConfiguration')
     RelationalTable = Shapes::StructureShape.new(name: 'RelationalTable')
@@ -1715,6 +1719,8 @@ module Aws::QuickSight
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
     UpdateRoleCustomPermissionRequest = Shapes::StructureShape.new(name: 'UpdateRoleCustomPermissionRequest')
     UpdateRoleCustomPermissionResponse = Shapes::StructureShape.new(name: 'UpdateRoleCustomPermissionResponse')
+    UpdateSPICECapacityConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSPICECapacityConfigurationRequest')
+    UpdateSPICECapacityConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateSPICECapacityConfigurationResponse')
     UpdateTemplateAliasRequest = Shapes::StructureShape.new(name: 'UpdateTemplateAliasRequest')
     UpdateTemplateAliasResponse = Shapes::StructureShape.new(name: 'UpdateTemplateAliasResponse')
     UpdateTemplatePermissionsRequest = Shapes::StructureShape.new(name: 'UpdateTemplatePermissionsRequest')
@@ -1940,7 +1946,11 @@ module Aws::QuickSight
     AnonymousUserEmbeddingExperienceConfiguration.add_member(:dashboard, Shapes::ShapeRef.new(shape: AnonymousUserDashboardEmbeddingConfiguration, location_name: "Dashboard"))
     AnonymousUserEmbeddingExperienceConfiguration.add_member(:dashboard_visual, Shapes::ShapeRef.new(shape: AnonymousUserDashboardVisualEmbeddingConfiguration, location_name: "DashboardVisual"))
     AnonymousUserEmbeddingExperienceConfiguration.add_member(:q_search_bar, Shapes::ShapeRef.new(shape: AnonymousUserQSearchBarEmbeddingConfiguration, location_name: "QSearchBar"))
+    AnonymousUserEmbeddingExperienceConfiguration.add_member(:generative_qn_a, Shapes::ShapeRef.new(shape: AnonymousUserGenerativeQnAEmbeddingConfiguration, location_name: "GenerativeQnA"))
     AnonymousUserEmbeddingExperienceConfiguration.struct_class = Types::AnonymousUserEmbeddingExperienceConfiguration
+
+    AnonymousUserGenerativeQnAEmbeddingConfiguration.add_member(:initial_topic_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "InitialTopicId"))
+    AnonymousUserGenerativeQnAEmbeddingConfiguration.struct_class = Types::AnonymousUserGenerativeQnAEmbeddingConfiguration
 
     AnonymousUserQSearchBarEmbeddingConfiguration.add_member(:initial_topic_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "InitialTopicId"))
     AnonymousUserQSearchBarEmbeddingConfiguration.struct_class = Types::AnonymousUserQSearchBarEmbeddingConfiguration
@@ -2780,7 +2790,7 @@ module Aws::QuickSight
     CreateAccountCustomizationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateAccountCustomizationResponse.struct_class = Types::CreateAccountCustomizationResponse
 
-    CreateAccountSubscriptionRequest.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, required: true, location_name: "Edition"))
+    CreateAccountSubscriptionRequest.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, location_name: "Edition"))
     CreateAccountSubscriptionRequest.add_member(:authentication_method, Shapes::ShapeRef.new(shape: AuthenticationMethodOption, required: true, location_name: "AuthenticationMethod"))
     CreateAccountSubscriptionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     CreateAccountSubscriptionRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
@@ -2791,6 +2801,9 @@ module Aws::QuickSight
     CreateAccountSubscriptionRequest.add_member(:admin_group, Shapes::ShapeRef.new(shape: GroupsList, location_name: "AdminGroup"))
     CreateAccountSubscriptionRequest.add_member(:author_group, Shapes::ShapeRef.new(shape: GroupsList, location_name: "AuthorGroup"))
     CreateAccountSubscriptionRequest.add_member(:reader_group, Shapes::ShapeRef.new(shape: GroupsList, location_name: "ReaderGroup"))
+    CreateAccountSubscriptionRequest.add_member(:admin_pro_group, Shapes::ShapeRef.new(shape: GroupsList, location_name: "AdminProGroup"))
+    CreateAccountSubscriptionRequest.add_member(:author_pro_group, Shapes::ShapeRef.new(shape: GroupsList, location_name: "AuthorProGroup"))
+    CreateAccountSubscriptionRequest.add_member(:reader_pro_group, Shapes::ShapeRef.new(shape: GroupsList, location_name: "ReaderProGroup"))
     CreateAccountSubscriptionRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: String, location_name: "FirstName"))
     CreateAccountSubscriptionRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: String, location_name: "LastName"))
     CreateAccountSubscriptionRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: String, location_name: "EmailAddress"))
@@ -4936,6 +4949,10 @@ module Aws::QuickSight
     GaugeChartArcConditionalFormatting.add_member(:foreground_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "ForegroundColor"))
     GaugeChartArcConditionalFormatting.struct_class = Types::GaugeChartArcConditionalFormatting
 
+    GaugeChartColorConfiguration.add_member(:foreground_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "ForegroundColor"))
+    GaugeChartColorConfiguration.add_member(:background_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "BackgroundColor"))
+    GaugeChartColorConfiguration.struct_class = Types::GaugeChartColorConfiguration
+
     GaugeChartConditionalFormatting.add_member(:conditional_formatting_options, Shapes::ShapeRef.new(shape: GaugeChartConditionalFormattingOptionList, location_name: "ConditionalFormattingOptions"))
     GaugeChartConditionalFormatting.struct_class = Types::GaugeChartConditionalFormatting
 
@@ -4950,6 +4967,7 @@ module Aws::QuickSight
     GaugeChartConfiguration.add_member(:data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "DataLabels"))
     GaugeChartConfiguration.add_member(:tooltip_options, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "TooltipOptions"))
     GaugeChartConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    GaugeChartConfiguration.add_member(:color_configuration, Shapes::ShapeRef.new(shape: GaugeChartColorConfiguration, location_name: "ColorConfiguration"))
     GaugeChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     GaugeChartConfiguration.struct_class = Types::GaugeChartConfiguration
 
@@ -6660,7 +6678,11 @@ module Aws::QuickSight
     RegisteredUserEmbeddingExperienceConfiguration.add_member(:quick_sight_console, Shapes::ShapeRef.new(shape: RegisteredUserQuickSightConsoleEmbeddingConfiguration, location_name: "QuickSightConsole"))
     RegisteredUserEmbeddingExperienceConfiguration.add_member(:q_search_bar, Shapes::ShapeRef.new(shape: RegisteredUserQSearchBarEmbeddingConfiguration, location_name: "QSearchBar"))
     RegisteredUserEmbeddingExperienceConfiguration.add_member(:dashboard_visual, Shapes::ShapeRef.new(shape: RegisteredUserDashboardVisualEmbeddingConfiguration, location_name: "DashboardVisual"))
+    RegisteredUserEmbeddingExperienceConfiguration.add_member(:generative_qn_a, Shapes::ShapeRef.new(shape: RegisteredUserGenerativeQnAEmbeddingConfiguration, location_name: "GenerativeQnA"))
     RegisteredUserEmbeddingExperienceConfiguration.struct_class = Types::RegisteredUserEmbeddingExperienceConfiguration
+
+    RegisteredUserGenerativeQnAEmbeddingConfiguration.add_member(:initial_topic_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "InitialTopicId"))
+    RegisteredUserGenerativeQnAEmbeddingConfiguration.struct_class = Types::RegisteredUserGenerativeQnAEmbeddingConfiguration
 
     RegisteredUserQSearchBarEmbeddingConfiguration.add_member(:initial_topic_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "InitialTopicId"))
     RegisteredUserQSearchBarEmbeddingConfiguration.struct_class = Types::RegisteredUserQSearchBarEmbeddingConfiguration
@@ -7872,6 +7894,7 @@ module Aws::QuickSight
     TopicSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     TopicSummary.add_member(:topic_id, Shapes::ShapeRef.new(shape: TopicId, location_name: "TopicId"))
     TopicSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    TopicSummary.add_member(:user_experience_version, Shapes::ShapeRef.new(shape: TopicUserExperienceVersion, location_name: "UserExperienceVersion"))
     TopicSummary.struct_class = Types::TopicSummary
 
     TotalAggregationComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
@@ -8292,6 +8315,14 @@ module Aws::QuickSight
     UpdateRoleCustomPermissionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
     UpdateRoleCustomPermissionResponse.struct_class = Types::UpdateRoleCustomPermissionResponse
 
+    UpdateSPICECapacityConfigurationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateSPICECapacityConfigurationRequest.add_member(:purchase_mode, Shapes::ShapeRef.new(shape: PurchaseMode, required: true, location_name: "PurchaseMode"))
+    UpdateSPICECapacityConfigurationRequest.struct_class = Types::UpdateSPICECapacityConfigurationRequest
+
+    UpdateSPICECapacityConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateSPICECapacityConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateSPICECapacityConfigurationResponse.struct_class = Types::UpdateSPICECapacityConfigurationResponse
+
     UpdateTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateTemplateAliasRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
     UpdateTemplateAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "AliasName"))
@@ -8684,6 +8715,7 @@ module Aws::QuickSight
         "endpointPrefix" => "quicksight",
         "jsonVersion" => "1.0",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon QuickSight",
         "serviceId" => "QuickSight",
         "signatureVersion" => "v4",
@@ -11239,6 +11271,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:update_spice_capacity_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSPICECapacityConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/spice-capacity-configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSPICECapacityConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSPICECapacityConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:update_template, Seahorse::Model::Operation.new.tap do |o|

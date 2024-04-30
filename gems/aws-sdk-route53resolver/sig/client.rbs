@@ -166,6 +166,7 @@ module Aws
                                   ?block_override_dns_type: ("CNAME"),
                                   ?block_override_ttl: ::Integer,
                                   name: ::String,
+                                  ?firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN"),
                                   ?qtype: ::String
                                 ) -> _CreateFirewallRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallRuleResponseSuccess
@@ -918,6 +919,7 @@ module Aws
                                   ?block_override_dns_type: ("CNAME"),
                                   ?block_override_ttl: ::Integer,
                                   ?name: ::String,
+                                  ?firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN"),
                                   ?qtype: ::String
                                 ) -> _UpdateFirewallRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallRuleResponseSuccess

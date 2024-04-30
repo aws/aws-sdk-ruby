@@ -150,13 +150,57 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the ConfigurationSet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/AssociateProtectConfigurationRequest AWS API Documentation
+    #
+    class AssociateProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id,
+      :configuration_set_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_set_arn
+    #   The Amazon Resource Name (ARN) of the configuration set.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the ConfigurationSet.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/AssociateProtectConfigurationResult AWS API Documentation
+    #
+    class AssociateProtectConfigurationResult < Struct.new(
+      :configuration_set_arn,
+      :configuration_set_name,
+      :protect_configuration_arn,
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the destination configuration to use when publishing message
     # sending events.
     #
     # @!attribute [rw] iam_role_arn
-    #   The Amazon Resource Name (ARN) of an Amazon Identity and Access
-    #   Management (IAM) role that is able to write event data to an Amazon
-    #   CloudWatch destination.
+    #   The Amazon Resource Name (ARN) of an Identity and Access Management
+    #   role that is able to write event data to an Amazon CloudWatch
+    #   destination.
     #   @return [String]
     #
     # @!attribute [rw] log_group_arn
@@ -227,6 +271,10 @@ module Aws::PinpointSMSVoiceV2
     #   [1]: https://www.epochconverter.com/
     #   @return [Time]
     #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ConfigurationSetInformation AWS API Documentation
     #
     class ConfigurationSetInformation < Struct.new(
@@ -235,7 +283,8 @@ module Aws::PinpointSMSVoiceV2
       :event_destinations,
       :default_message_type,
       :default_sender_id,
-      :created_timestamp)
+      :created_timestamp,
+      :protect_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -356,7 +405,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] cloud_watch_logs_destination
     #   An object that contains information about an event destination for
-    #   logging to Amazon CloudWatch logs.
+    #   logging to Amazon CloudWatch Logs.
     #   @return [Types::CloudWatchLogsDestination]
     #
     # @!attribute [rw] kinesis_firehose_destination
@@ -614,6 +663,81 @@ module Aws::PinpointSMSVoiceV2
       :deletion_protection_enabled,
       :tags,
       :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   An array of key and value pair tags that are associated with the
+    #   resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateProtectConfigurationRequest AWS API Documentation
+    #
+    class CreateProtectConfigurationRequest < Struct.new(
+      :client_token,
+      :deletion_protection_enabled,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the protect configuration was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_default
+    #   This is true if the protect configuration is set as your account
+    #   default protect configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   An array of key and value pair tags that are associated with the
+    #   resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateProtectConfigurationResult AWS API Documentation
+    #
+    class CreateProtectConfigurationResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :created_timestamp,
+      :account_default,
+      :deletion_protection_enabled,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1021,6 +1145,30 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteAccountDefaultProtectConfigurationRequest AWS API Documentation
+    #
+    class DeleteAccountDefaultProtectConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] default_protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the account default protect
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_protect_configuration_id
+    #   The unique identifier of the account default protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteAccountDefaultProtectConfigurationResult AWS API Documentation
+    #
+    class DeleteAccountDefaultProtectConfigurationResult < Struct.new(
+      :default_protect_configuration_arn,
+      :default_protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set or the configuration set ARN that
     #   you want to delete. The ConfigurationSetName and ConfigurationSetArn
@@ -1247,6 +1395,24 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteMediaMessageSpendLimitOverrideRequest AWS API Documentation
+    #
+    class DeleteMediaMessageSpendLimitOverrideRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] monthly_limit
+    #   The current monthly limit, in US dollars.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteMediaMessageSpendLimitOverrideResult AWS API Documentation
+    #
+    class DeleteMediaMessageSpendLimitOverrideResult < Struct.new(
+      :monthly_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] opt_out_list_name
     #   The OptOutListName or OptOutListArn of the OptOutList to delete. You
     #   can use DescribeOptOutLists to find the values for OptOutListName
@@ -1433,6 +1599,58 @@ module Aws::PinpointSMSVoiceV2
       :opt_out_list_name,
       :shared_routes_enabled,
       :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteProtectConfigurationRequest AWS API Documentation
+    #
+    class DeleteProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the protect configuration was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_default
+    #   This is true if the protect configuration is set as your account
+    #   default protect configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   The status of deletion protection for the protect configuration.
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteProtectConfigurationResult AWS API Documentation
+    #
+    class DeleteProtectConfigurationResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :created_timestamp,
+      :account_default,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2118,6 +2336,54 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] protect_configuration_ids
+    #   An array of protect configuration identifiers to search for.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of ProtectConfigurationFilter objects to filter the
+    #   results.
+    #   @return [Array<Types::ProtectConfigurationFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeProtectConfigurationsRequest AWS API Documentation
+    #
+    class DescribeProtectConfigurationsRequest < Struct.new(
+      :protect_configuration_ids,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configurations
+    #   An array of ProtectConfigurationInformation objects that contain the
+    #   details for the request.
+    #   @return [Array<Types::ProtectConfigurationInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeProtectConfigurationsResult AWS API Documentation
+    #
+    class DescribeProtectConfigurationsResult < Struct.new(
+      :protect_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] registration_attachment_ids
     #   The unique identifier of registration attachments to find. This is
     #   an array of **RegistrationAttachmentId**.
@@ -2716,6 +2982,50 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the ConfigurationSet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DisassociateProtectConfigurationRequest AWS API Documentation
+    #
+    class DisassociateProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id,
+      :configuration_set_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_set_arn
+    #   The Amazon Resource Name (ARN) of the configuration set.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the ConfigurationSet.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DisassociateProtectConfigurationResult AWS API Documentation
+    #
+    class DisassociateProtectConfigurationResult < Struct.new(
+      :configuration_set_arn,
+      :configuration_set_name,
+      :protect_configuration_arn,
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] registration_id
     #   The unique identifier for the registration.
     #   @return [String]
@@ -2786,7 +3096,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # Event destinations are associated with configuration sets, which
     # enable you to publish message sending events to CloudWatch, Kinesis
-    # Data Firehose,or Amazon SNS.
+    # Data Firehose, or Amazon SNS.
     #
     # @!attribute [rw] event_destination_name
     #   The name of the EventDestination.
@@ -2828,6 +3138,60 @@ module Aws::PinpointSMSVoiceV2
       :cloud_watch_logs_destination,
       :kinesis_firehose_destination,
       :sns_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capability
+    #   The capability type to return the CountryRuleSet for. Valid values
+    #   are `SMS`, `VOICE`, or `MMS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/GetProtectConfigurationCountryRuleSetRequest AWS API Documentation
+    #
+    class GetProtectConfigurationCountryRuleSetRequest < Struct.new(
+      :protect_configuration_id,
+      :number_capability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capability
+    #   The capability type associated with the returned
+    #   ProtectConfigurationCountryRuleSetInformation objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_rule_set
+    #   A map of ProtectConfigurationCountryRuleSetInformation objects that
+    #   contain the details for the requested NumberCapability. The Key is
+    #   the two-letter ISO country code. For a list of supported ISO country
+    #   codes, see [Supported countries and regions (SMS channel)][1] in the
+    #   Amazon Pinpoint SMS user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html
+    #   @return [Hash<String,Types::ProtectConfigurationCountryRuleSetInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/GetProtectConfigurationCountryRuleSetResult AWS API Documentation
+    #
+    class GetProtectConfigurationCountryRuleSetResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :number_capability,
+      :country_rule_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2896,7 +3260,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # Contains the delivery stream Amazon Resource Name (ARN), and the ARN
-    # of the Identity and Access Management (IAM) role associated with an
+    # of the Identity and Access Management (IAM) role associated with a
     # Kinesis Data Firehose event destination.
     #
     # Event destinations, such as Kinesis Data Firehose, are associated with
@@ -2904,8 +3268,8 @@ module Aws::PinpointSMSVoiceV2
     # events.
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of an Amazon Identity and Access Management (IAM) role that
-    #   is able to write event data to an Amazon Firehose destination.
+    #   The ARN of an Identity and Access Management role that is able to
+    #   write event data to an Amazon Kinesis Data Firehose destination.
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_arn
@@ -3456,6 +3820,82 @@ module Aws::PinpointSMSVoiceV2
     class PoolOriginationIdentitiesFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The types of statuses that can be used.
+    #
+    # @!attribute [rw] protect_status
+    #   The types of protection that can be used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ProtectConfigurationCountryRuleSetInformation AWS API Documentation
+    #
+    class ProtectConfigurationCountryRuleSetInformation < Struct.new(
+      :protect_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter definition for filtering protect configurations that meet a
+    # specified criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to filter for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ProtectConfigurationFilter AWS API Documentation
+    #
+    class ProtectConfigurationFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information on the specified protect configuration.
+    #
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the protect configuration was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_default
+    #   This is true if the protect configuration is set as your account
+    #   default protect configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   The status of deletion protection for the protect configuration.
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ProtectConfigurationInformation AWS API Documentation
+    #
+    class ProtectConfigurationInformation < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :created_timestamp,
+      :account_default,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4965,6 +5405,93 @@ module Aws::PinpointSMSVoiceV2
     #   @return [String]
     #
     # @!attribute [rw] message_body
+    #   The text body of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_urls
+    #   An array of URLs to each media file to send.
+    #
+    #   The media files have to be stored in a publicly available S3 bucket.
+    #   Supported media file formats are listed in [MMS file types, size and
+    #   character limits][1]. For more information on creating an S3 bucket
+    #   and managing objects, see [Creating a bucket][2] and [Uploading
+    #   objects][3] in the S3 user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/mms-limitations-character.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_price
+    #   The maximum amount that you want to spend, in US dollars, per each
+    #   MMS message.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_to_live
+    #   How long the text message is valid for. By default this is 72 hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] context
+    #   You can specify custom data in this field. If you do, that data is
+    #   logged to the event destination.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] dry_run
+    #   When set to true, the message is checked and validated, but isn't
+    #   sent to the end recipient.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier of the protect configuration to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendMediaMessageRequest AWS API Documentation
+    #
+    class SendMediaMessageRequest < Struct.new(
+      :destination_phone_number,
+      :origination_identity,
+      :message_body,
+      :media_urls,
+      :configuration_set_name,
+      :max_price,
+      :time_to_live,
+      :context,
+      :dry_run,
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_id
+    #   The unique identifier for the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendMediaMessageResult AWS API Documentation
+    #
+    class SendMediaMessageResult < Struct.new(
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_phone_number
+    #   The destination phone number in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] origination_identity
+    #   The origination identity of the message. This can be either the
+    #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
+    #   PoolId, or PoolArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_body
     #   The body of the text message.
     #   @return [String]
     #
@@ -5015,6 +5542,10 @@ module Aws::PinpointSMSVoiceV2
     #   sent to the end recipient.
     #   @return [Boolean]
     #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendTextMessageRequest AWS API Documentation
     #
     class SendTextMessageRequest < Struct.new(
@@ -5028,7 +5559,8 @@ module Aws::PinpointSMSVoiceV2
       :time_to_live,
       :context,
       :destination_country_parameters,
-      :dry_run)
+      :dry_run,
+      :protect_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5106,6 +5638,10 @@ module Aws::PinpointSMSVoiceV2
     #   sent to the end recipient.
     #   @return [Boolean]
     #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendVoiceMessageRequest AWS API Documentation
     #
     class SendVoiceMessageRequest < Struct.new(
@@ -5118,7 +5654,8 @@ module Aws::PinpointSMSVoiceV2
       :max_price_per_minute,
       :time_to_live,
       :context,
-      :dry_run)
+      :dry_run,
+      :protect_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5253,6 +5790,36 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetAccountDefaultProtectConfigurationRequest AWS API Documentation
+    #
+    class SetAccountDefaultProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] default_protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the account default protect
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_protect_configuration_id
+    #   The unique identifier of the account default protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetAccountDefaultProtectConfigurationResult AWS API Documentation
+    #
+    class SetAccountDefaultProtectConfigurationResult < Struct.new(
+      :default_protect_configuration_arn,
+      :default_protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] configuration_set_name
     #   The configuration set to update with a new default message type.
     #   This field can be the ConsigurationSetName or ConfigurationSetArn.
@@ -5336,6 +5903,30 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_arn,
       :configuration_set_name,
       :sender_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monthly_limit
+    #   The new monthly limit to enforce on text messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetMediaMessageSpendLimitOverrideRequest AWS API Documentation
+    #
+    class SetMediaMessageSpendLimitOverrideRequest < Struct.new(
+      :monthly_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monthly_limit
+    #   The current monthly limit to enforce on sending text messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetMediaMessageSpendLimitOverrideResult AWS API Documentation
+    #
+    class SetMediaMessageSpendLimitOverrideResult < Struct.new(
+      :monthly_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6029,6 +6620,122 @@ module Aws::PinpointSMSVoiceV2
       :shared_routes_enabled,
       :deletion_protection_enabled,
       :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capability
+    #   The number capability to apply the CountryRuleSetUpdates updates to.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_rule_set_updates
+    #   A map of ProtectConfigurationCountryRuleSetInformation objects that
+    #   contain the details for the requested NumberCapability. The Key is
+    #   the two-letter ISO country code. For a list of supported ISO country
+    #   codes, see [Supported countries and regions (SMS channel)][1] in the
+    #   Amazon Pinpoint SMS user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html
+    #   @return [Hash<String,Types::ProtectConfigurationCountryRuleSetInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationCountryRuleSetRequest AWS API Documentation
+    #
+    class UpdateProtectConfigurationCountryRuleSetRequest < Struct.new(
+      :protect_configuration_id,
+      :number_capability,
+      :country_rule_set_updates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capability
+    #   The number capability that was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] country_rule_set
+    #   An array of ProtectConfigurationCountryRuleSetInformation containing
+    #   the rules for the NumberCapability.
+    #   @return [Hash<String,Types::ProtectConfigurationCountryRuleSetInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationCountryRuleSetResult AWS API Documentation
+    #
+    class UpdateProtectConfigurationCountryRuleSetResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :number_capability,
+      :country_rule_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationRequest AWS API Documentation
+    #
+    class UpdateProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id,
+      :deletion_protection_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the protect configuration was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_default
+    #   This is true if the protect configuration is set as your account
+    #   default protect configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   The status of deletion protection for the protect configuration.
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationResult AWS API Documentation
+    #
+    class UpdateProtectConfigurationResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :created_timestamp,
+      :account_default,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

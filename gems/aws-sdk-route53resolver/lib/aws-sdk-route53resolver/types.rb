@@ -13,6 +13,9 @@ module Aws::Route53Resolver
     # The current account doesn't have the IAM permissions required to
     # perform the specified Resolver operation.
     #
+    # This error can also be thrown when a customer has reached the 5120
+    # character limit for a resource policy for CloudWatch Logs.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -401,6 +404,19 @@ module Aws::Route53Resolver
     #   A name that lets you identify the rule in the rule group.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the allow domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the redirection list to the domain alloww list.
+    #   @return [String]
+    #
     # @!attribute [rw] qtype
     #   The DNS query type you want the rule to evaluate. Allowed values
     #   are;
@@ -432,6 +448,15 @@ module Aws::Route53Resolver
     #   * SRV: Application specific values that identify servers.
     #
     #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28
+    #     for AAAA. The values must be defined as TYPENUMBER, where the
+    #     NUMBER can be 1-65334, for example, TYPE28. For more information,
+    #     see [List of DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleRequest AWS API Documentation
@@ -447,6 +472,7 @@ module Aws::Route53Resolver
       :block_override_dns_type,
       :block_override_ttl,
       :name,
+      :firewall_domain_redirection_action,
       :qtype)
       SENSITIVE = []
       include Aws::Structure
@@ -543,6 +569,18 @@ module Aws::Route53Resolver
     #   outbound rules must allow TCP and UDP access. For inbound access,
     #   open port 53. For outbound access, open the port that you're using
     #   for DNS queries on your network.
+    #
+    #   Some security group rules will cause your connection to be tracked.
+    #   For outbound resolver endpoint, it can potentially impact the
+    #   maximum queries per second from outbound endpoint to your target
+    #   name server. For inbound resolver endpoint, it can bring down the
+    #   overall maximum queries per second per IP address to as low as 1500.
+    #   To avoid connection tracking caused by security group, see
+    #   [Untracked connections][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#untracked-connectionsl
     #   @return [Array<String>]
     #
     # @!attribute [rw] direction
@@ -887,6 +925,15 @@ module Aws::Route53Resolver
     #   * SRV: Application specific values that identify servers.
     #
     #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28
+    #     for AAAA. The values must be defined as TYPENUMBER, where the
+    #     NUMBER can be 1-65334, for example, TYPE28. For more information,
+    #     see [List of DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRuleRequest AWS API Documentation
@@ -1595,6 +1642,19 @@ module Aws::Route53Resolver
     #   format and Coordinated Universal Time (UTC).
     #   @return [String]
     #
+    # @!attribute [rw] firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the allow domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the domain in the redirection list to the domain alloww list.
+    #   @return [String]
+    #
     # @!attribute [rw] qtype
     #   The DNS query type you want the rule to evaluate. Allowed values
     #   are;
@@ -1626,6 +1686,15 @@ module Aws::Route53Resolver
     #   * SRV: Application specific values that identify servers.
     #
     #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28
+    #     for AAAA. The values must be defined as TYPENUMBER, where the
+    #     NUMBER can be 1-65334, for example, TYPE28. For more information,
+    #     see [List of DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRule AWS API Documentation
@@ -1643,6 +1712,7 @@ module Aws::Route53Resolver
       :creator_request_id,
       :creation_time,
       :modification_time,
+      :firewall_domain_redirection_action,
       :qtype)
       SENSITIVE = []
       include Aws::Structure
@@ -5074,6 +5144,19 @@ module Aws::Route53Resolver
     #   The name of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the allow domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the domain in the redirection list to the domain alloww list.
+    #   @return [String]
+    #
     # @!attribute [rw] qtype
     #   The DNS query type you want the rule to evaluate. Allowed values
     #   are;
@@ -5105,6 +5188,15 @@ module Aws::Route53Resolver
     #   * SRV: Application specific values that identify servers.
     #
     #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28
+    #     for AAAA. The values must be defined as TYPENUMBER, where the
+    #     NUMBER can be 1-65334, for example, TYPE28. For more information,
+    #     see [List of DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleRequest AWS API Documentation
@@ -5119,6 +5211,7 @@ module Aws::Route53Resolver
       :block_override_dns_type,
       :block_override_ttl,
       :name,
+      :firewall_domain_redirection_action,
       :qtype)
       SENSITIVE = []
       include Aws::Structure

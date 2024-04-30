@@ -404,6 +404,7 @@ module Aws::Omics
     ShareDetails = Shapes::StructureShape.new(name: 'ShareDetails')
     ShareDetailsList = Shapes::ListShape.new(name: 'ShareDetailsList')
     ShareName = Shapes::StringShape.new(name: 'ShareName')
+    ShareResourceType = Shapes::StringShape.new(name: 'ShareResourceType')
     ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
     SourceFiles = Shapes::StructureShape.new(name: 'SourceFiles')
     SseConfig = Shapes::StructureShape.new(name: 'SseConfig')
@@ -433,6 +434,7 @@ module Aws::Omics
     StartVariantImportResponse = Shapes::StructureShape.new(name: 'StartVariantImportResponse')
     StatusList = Shapes::ListShape.new(name: 'StatusList')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
+    StorageType = Shapes::StringShape.new(name: 'StorageType')
     StoreFormat = Shapes::StringShape.new(name: 'StoreFormat')
     StoreName = Shapes::StringShape.new(name: 'StoreName')
     StoreOptions = Shapes::UnionShape.new(name: 'StoreOptions')
@@ -468,6 +470,7 @@ module Aws::Omics
     TsvStoreOptionsSchemaList = Shapes::ListShape.new(name: 'TsvStoreOptionsSchemaList')
     TsvVersionOptions = Shapes::StructureShape.new(name: 'TsvVersionOptions')
     TsvVersionOptionsSchemaList = Shapes::ListShape.new(name: 'TsvVersionOptionsSchemaList')
+    TypeList = Shapes::ListShape.new(name: 'TypeList')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAnnotationStoreRequest = Shapes::StructureShape.new(name: 'UpdateAnnotationStoreRequest')
@@ -519,6 +522,7 @@ module Aws::Omics
     WorkflowMetadataKey = Shapes::StringShape.new(name: 'WorkflowMetadataKey')
     WorkflowMetadataValue = Shapes::StringShape.new(name: 'WorkflowMetadataValue')
     WorkflowName = Shapes::StringShape.new(name: 'WorkflowName')
+    WorkflowOwnerId = Shapes::StringShape.new(name: 'WorkflowOwnerId')
     WorkflowParameter = Shapes::StructureShape.new(name: 'WorkflowParameter')
     WorkflowParameterDescription = Shapes::StringShape.new(name: 'WorkflowParameterDescription')
     WorkflowParameterName = Shapes::StringShape.new(name: 'WorkflowParameterName')
@@ -907,6 +911,7 @@ module Aws::Omics
 
     Filter.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "resourceArns"))
     Filter.add_member(:status, Shapes::ShapeRef.new(shape: StatusList, location_name: "status"))
+    Filter.add_member(:type, Shapes::ShapeRef.new(shape: TypeList, location_name: "type"))
     Filter.struct_class = Types::Filter
 
     FormatOptions.add_member(:tsv_options, Shapes::ShapeRef.new(shape: TsvOptions, location_name: "tsvOptions"))
@@ -1151,6 +1156,8 @@ module Aws::Omics
     GetRunResponse.add_member(:log_location, Shapes::ShapeRef.new(shape: RunLogLocation, location_name: "logLocation"))
     GetRunResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: RunUuid, location_name: "uuid"))
     GetRunResponse.add_member(:run_output_uri, Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "runOutputUri"))
+    GetRunResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
+    GetRunResponse.add_member(:workflow_owner_id, Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId"))
     GetRunResponse.struct_class = Types::GetRunResponse
 
     GetRunTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunId, required: true, location: "uri", location_name: "id"))
@@ -1228,6 +1235,7 @@ module Aws::Omics
     GetWorkflowRequest.add_member(:id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location: "uri", location_name: "id"))
     GetWorkflowRequest.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowType, location: "querystring", location_name: "type"))
     GetWorkflowRequest.add_member(:export, Shapes::ShapeRef.new(shape: WorkflowExportList, location: "querystring", location_name: "export"))
+    GetWorkflowRequest.add_member(:workflow_owner_id, Shapes::ShapeRef.new(shape: WorkflowOwnerId, location: "querystring", location_name: "workflowOwnerId"))
     GetWorkflowRequest.struct_class = Types::GetWorkflowRequest
 
     GetWorkflowResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowArn, location_name: "arn"))
@@ -1706,6 +1714,7 @@ module Aws::Omics
     RunListItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "creationTime"))
     RunListItem.add_member(:start_time, Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "startTime"))
     RunListItem.add_member(:stop_time, Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "stopTime"))
+    RunListItem.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
     RunListItem.struct_class = Types::RunListItem
 
     RunLogLocation.add_member(:engine_log_stream, Shapes::ShapeRef.new(shape: EngineLogStream, location_name: "engineLogStream"))
@@ -1750,6 +1759,7 @@ module Aws::Omics
 
     ShareDetails.add_member(:share_id, Shapes::ShapeRef.new(shape: String, location_name: "shareId"))
     ShareDetails.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
+    ShareDetails.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     ShareDetails.add_member(:principal_subscriber, Shapes::ShapeRef.new(shape: String, location_name: "principalSubscriber"))
     ShareDetails.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     ShareDetails.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
@@ -1874,6 +1884,8 @@ module Aws::Omics
     StartRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartRunRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     StartRunRequest.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
+    StartRunRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
+    StartRunRequest.add_member(:workflow_owner_id, Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId"))
     StartRunRequest.struct_class = Types::StartRunRequest
 
     StartRunResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RunArn, location_name: "arn"))
@@ -1949,6 +1961,8 @@ module Aws::Omics
     TsvVersionOptions.struct_class = Types::TsvVersionOptions
 
     TsvVersionOptionsSchemaList.member = Shapes::ShapeRef.new(shape: SchemaItem)
+
+    TypeList.member = Shapes::ShapeRef.new(shape: ShareResourceType)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))

@@ -378,6 +378,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::UpdateRefreshSchedule.build(context)
           when :update_role_custom_permission
             Aws::QuickSight::Endpoints::UpdateRoleCustomPermission.build(context)
+          when :update_spice_capacity_configuration
+            Aws::QuickSight::Endpoints::UpdateSPICECapacityConfiguration.build(context)
           when :update_template
             Aws::QuickSight::Endpoints::UpdateTemplate.build(context)
           when :update_template_alias

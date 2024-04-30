@@ -9043,6 +9043,11 @@ module Aws::SageMaker
     #   configuration for the training job.
     #   @return [Types::InfraCheckConfig]
     #
+    # @!attribute [rw] session_chaining_config
+    #   Contains information about attribute-based access control (ABAC) for
+    #   the training job.
+    #   @return [Types::SessionChainingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
     #
     class CreateTrainingJobRequest < Struct.new(
@@ -9069,7 +9074,8 @@ module Aws::SageMaker
       :environment,
       :retry_strategy,
       :remote_debug_config,
-      :infra_check_config)
+      :infra_check_config,
+      :session_chaining_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38913,6 +38919,23 @@ module Aws::SageMaker
     class ServiceCatalogProvisioningUpdateDetails < Struct.new(
       :provisioning_artifact_id,
       :provisioning_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about attribute-based access control (ABAC) for a
+    # training job.
+    #
+    # @!attribute [rw] enable_session_tag_chaining
+    #   Set to `True` to allow SageMaker to extract session tags from a
+    #   training job creation role and reuse these tags when assuming the
+    #   training job execution role.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SessionChainingConfig AWS API Documentation
+    #
+    class SessionChainingConfig < Struct.new(
+      :enable_session_tag_chaining)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -527,6 +527,7 @@ module Aws::Signer
         "endpointPrefix" => "signer",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "signer",
         "serviceFullName" => "AWS Signer",
         "serviceId" => "signer",

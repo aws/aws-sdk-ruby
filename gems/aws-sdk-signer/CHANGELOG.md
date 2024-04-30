@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-04-30)
+------------------
+
+* Feature - Documentation updates for AWS Signer. Adds cross-account signing constraint and definitions for cross-account actions.
+
 1.52.0 (2024-04-25)
 ------------------
 

@@ -714,12 +714,42 @@ module Aws::QuickSight
     #   The Q search bar that you want to use for anonymous user embedding.
     #   @return [Types::AnonymousUserQSearchBarEmbeddingConfiguration]
     #
+    # @!attribute [rw] generative_qn_a
+    #   The Generative Q&amp;A experience that you want to use for anonymous
+    #   user embedding.
+    #   @return [Types::AnonymousUserGenerativeQnAEmbeddingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserEmbeddingExperienceConfiguration AWS API Documentation
     #
     class AnonymousUserEmbeddingExperienceConfiguration < Struct.new(
       :dashboard,
       :dashboard_visual,
-      :q_search_bar)
+      :q_search_bar,
+      :generative_qn_a)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings that you want to use for the Generative Q&amp;A
+    # experience.
+    #
+    # @!attribute [rw] initial_topic_id
+    #   The Amazon QuickSight Q topic ID of the new reader experience topic
+    #   that you want the anonymous user to see first. This ID is included
+    #   in the output URL. When the URL in response is accessed, Amazon
+    #   QuickSight renders the Generative Q&amp;A experience with this new
+    #   reader experience topic pre selected.
+    #
+    #   The Amazon Resource Name (ARN) of this Q new reader experience topic
+    #   must be included in the `AuthorizedResourceArns` parameter.
+    #   Otherwise, the request fails with an
+    #   `InvalidParameterValueException` error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserGenerativeQnAEmbeddingConfiguration AWS API Documentation
+    #
+    class AnonymousUserGenerativeQnAEmbeddingConfiguration < Struct.new(
+      :initial_topic_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -727,14 +757,14 @@ module Aws::QuickSight
     # The settings that you want to use with the Q search bar.
     #
     # @!attribute [rw] initial_topic_id
-    #   The QuickSight Q topic ID of the topic that you want the anonymous
-    #   user to see first. This ID is included in the output URL. When the
-    #   URL in response is accessed, Amazon QuickSight renders the Q search
-    #   bar with this topic pre-selected.
+    #   The Amazon QuickSight Q topic ID of the legacy topic that you want
+    #   the anonymous user to see first. This ID is included in the output
+    #   URL. When the URL in response is accessed, Amazon QuickSight renders
+    #   the Q search bar with this legacy topic pre-selected.
     #
-    #   The Amazon Resource Name (ARN) of this Q topic must be included in
-    #   the `AuthorizedResourceArns` parameter. Otherwise, the request will
-    #   fail with `InvalidParameterValueException`.
+    #   The Amazon Resource Name (ARN) of this Q legacy topic must be
+    #   included in the `AuthorizedResourceArns` parameter. Otherwise, the
+    #   request fails with an `InvalidParameterValueException` error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserQSearchBarEmbeddingConfiguration AWS API Documentation
@@ -4500,9 +4530,10 @@ module Aws::QuickSight
     #
     # @!attribute [rw] admin_group
     #   The admin group associated with your Active Directory or IAM
-    #   Identity Center account. This field is required if
-    #   `ACTIVE_DIRECTORY` or `IAM_IDENTITY_CENTER` is the selected
-    #   authentication method of the new Amazon QuickSight account.
+    #   Identity Center account. Either this field or the `AdminProGroup`
+    #   field is required if `ACTIVE_DIRECTORY` or `IAM_IDENTITY_CENTER` is
+    #   the selected authentication method of the new Amazon QuickSight
+    #   account.
     #
     #   For more information about using IAM Identity Center in Amazon
     #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
@@ -4536,6 +4567,59 @@ module Aws::QuickSight
     #
     # @!attribute [rw] reader_group
     #   The reader group associated with your Active Directory or IAM
+    #   Identity Center account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise
+    #   Edition][2] in the Amazon QuickSight User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] admin_pro_group
+    #   The admin pro group associated with your Active Directory or IAM
+    #   Identity Center account. Either this field or the `AdminGroup` field
+    #   is required if `ACTIVE_DIRECTORY` or `IAM_IDENTITY_CENTER` is the
+    #   selected authentication method of the new Amazon QuickSight account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise
+    #   Edition][2] in the Amazon QuickSight User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] author_pro_group
+    #   The author pro group associated with your Active Directory or IAM
+    #   Identity Center account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise
+    #   Edition][2] in the Amazon QuickSight User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reader_pro_group
+    #   The reader pro group associated with your Active Directory or IAM
     #   Identity Center account.
     #
     #   For more information about using IAM Identity Center in Amazon
@@ -4597,6 +4681,9 @@ module Aws::QuickSight
       :admin_group,
       :author_group,
       :reader_group,
+      :admin_pro_group,
+      :author_pro_group,
+      :reader_pro_group,
       :first_name,
       :last_name,
       :email_address,
@@ -15345,6 +15432,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The color configuration of a `GaugeChartVisual`.
+    #
+    # @!attribute [rw] foreground_color
+    #   The foreground color configuration of a `GaugeChartVisual`.
+    #   @return [String]
+    #
+    # @!attribute [rw] background_color
+    #   The background color configuration of a `GaugeChartVisual`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GaugeChartColorConfiguration AWS API Documentation
+    #
+    class GaugeChartColorConfiguration < Struct.new(
+      :foreground_color,
+      :background_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The conditional formatting of a `GaugeChartVisual`.
     #
     # @!attribute [rw] conditional_formatting_options
@@ -15403,6 +15509,10 @@ module Aws::QuickSight
     #   The visual palette configuration of a `GaugeChartVisual`.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] color_configuration
+    #   The color configuration of a `GaugeChartVisual`.
+    #   @return [Types::GaugeChartColorConfiguration]
+    #
     # @!attribute [rw] interactions
     #   The general visual interactions setup for a visual.
     #   @return [Types::VisualInteractionOptions]
@@ -15415,6 +15525,7 @@ module Aws::QuickSight
       :data_labels,
       :tooltip_options,
       :visual_palette,
+      :color_configuration,
       :interactions)
       SENSITIVE = []
       include Aws::Structure
@@ -15662,10 +15773,10 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] experience_configuration
-    #   The experience you are embedding. For registered users, you can
+    #   The experience that you want to embed. For registered users, you can
     #   embed Amazon QuickSight dashboards, Amazon QuickSight visuals, the
-    #   Amazon QuickSight Q search bar, or the entire Amazon QuickSight
-    #   console.
+    #   Amazon QuickSight Q search bar, the Amazon QuickSight Generative
+    #   Q&amp;A experience, or the entire Amazon QuickSight console.
     #   @return [Types::RegisteredUserEmbeddingExperienceConfiguration]
     #
     # @!attribute [rw] allowed_domains
@@ -15695,7 +15806,7 @@ module Aws::QuickSight
 
     # @!attribute [rw] embed_url
     #   The embed URL for the Amazon QuickSight dashboard, visual, Q search
-    #   bar, or console.
+    #   bar, Generative Q&amp;A experience, or console.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -23570,13 +23681,8 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] identity_type
-    #   Amazon QuickSight supports several ways of managing the identity of
-    #   users. This parameter accepts two values:
-    #
-    #   * `IAM`: A user whose identity maps to an existing IAM user or role.
-    #
-    #   * `QUICKSIGHT`: A user whose identity is owned and managed
-    #     internally by Amazon QuickSight.
+    #   The identity type that your Amazon QuickSight account uses to manage
+    #   the identity of users.
     #   @return [String]
     #
     # @!attribute [rw] email
@@ -23660,7 +23766,8 @@ module Aws::QuickSight
     #   Amazon QuickSight custom permissions are applied through IAM
     #   policies. Therefore, they override the permissions typically granted
     #   by assigning Amazon QuickSight users to one of the default security
-    #   cohorts in Amazon QuickSight (admin, author, reader).
+    #   cohorts in Amazon QuickSight (admin, author, reader, admin pro,
+    #   author pro, reader pro).
     #
     #   This feature is available only to Amazon QuickSight Enterprise
     #   edition subscriptions.
@@ -23896,13 +24003,53 @@ module Aws::QuickSight
     #   visuals.
     #   @return [Types::RegisteredUserDashboardVisualEmbeddingConfiguration]
     #
+    # @!attribute [rw] generative_qn_a
+    #   The configuration details for embedding the Generative Q&amp;A
+    #   experience.
+    #
+    #   For more information about embedding the Generative Q&amp;A
+    #   experience, see [Embedding Overview][1] in the *Amazon QuickSight
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html
+    #   @return [Types::RegisteredUserGenerativeQnAEmbeddingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserEmbeddingExperienceConfiguration AWS API Documentation
     #
     class RegisteredUserEmbeddingExperienceConfiguration < Struct.new(
       :dashboard,
       :quick_sight_console,
       :q_search_bar,
-      :dashboard_visual)
+      :dashboard_visual,
+      :generative_qn_a)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that provides information about the configuration of a
+    # Generative Q&amp;A experience.
+    #
+    # @!attribute [rw] initial_topic_id
+    #   The ID of the new Q reader experience topic that you want to make
+    #   the starting topic in the Generative Q&amp;A experience. You can
+    #   find a topic ID by navigating to the Topics pane in the Amazon
+    #   QuickSight application and opening a topic. The ID is in the URL for
+    #   the topic that you open.
+    #
+    #   If you don't specify an initial topic or you specify a legacy
+    #   topic, a list of all shared new reader experience topics is shown in
+    #   the Generative Q&amp;A experience for your readers. When you select
+    #   an initial new reader experience topic, you can specify whether or
+    #   not readers are allowed to select other new reader experience topics
+    #   from the available ones in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserGenerativeQnAEmbeddingConfiguration AWS API Documentation
+    #
+    class RegisteredUserGenerativeQnAEmbeddingConfiguration < Struct.new(
+      :initial_topic_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23910,15 +24057,22 @@ module Aws::QuickSight
     # Information about the Q search bar embedding experience.
     #
     # @!attribute [rw] initial_topic_id
-    #   The ID of the Q topic that you want to make the starting topic in
-    #   the Q search bar. You can find a topic ID by navigating to the
-    #   Topics pane in the Amazon QuickSight application and opening a
-    #   topic. The ID is in the URL for the topic that you open.
+    #   The ID of the legacy Q topic that you want to use as the starting
+    #   topic in the Q search bar. To locate the topic ID of the topic that
+    #   you want to use, open the [Amazon QuickSight console][1], navigate
+    #   to the **Topics** pane, and choose thre topic that you want to use.
+    #   The `TopicID` is located in the URL of the topic that opens. When
+    #   you select an initial topic, you can specify whether or not readers
+    #   are allowed to select other topics from the list of available
+    #   topics.
     #
-    #   If you don't specify an initial topic, a list of all shared topics
-    #   is shown in the Q bar for your readers. When you select an initial
-    #   topic, you can specify whether or not readers are allowed to select
-    #   other topics from the available ones in the list.
+    #   If you don't specify an initial topic or if you specify a new
+    #   reader experience topic, a list of all shared legacy topics is shown
+    #   in the Q bar.
+    #
+    #
+    #
+    #   [1]: https://quicksight.aws.amazon.com/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserQSearchBarEmbeddingConfiguration AWS API Documentation
@@ -29741,12 +29895,17 @@ module Aws::QuickSight
     #   The name of the topic.
     #   @return [String]
     #
+    # @!attribute [rw] user_experience_version
+    #   The user experience version of the topic.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicSummary AWS API Documentation
     #
     class TopicSummary < Struct.new(
       :arn,
       :topic_id,
-      :name)
+      :name,
+      :user_experience_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31820,6 +31979,48 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the SPICE
+    #   configuration that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_mode
+    #   Determines how SPICE capacity can be purchased. The following
+    #   options are available.
+    #
+    #   * `MANUAL`: SPICE capacity can only be purchased manually.
+    #
+    #   * `AUTO_PURCHASE`: Extra SPICE capacity is automatically purchased
+    #     on your behalf as needed. SPICE capacity can also be purchased
+    #     manually with this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSPICECapacityConfigurationRequest AWS API Documentation
+    #
+    class UpdateSPICECapacityConfigurationRequest < Struct.new(
+      :aws_account_id,
+      :purchase_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSPICECapacityConfigurationResponse AWS API Documentation
+    #
+    class UpdateSPICECapacityConfigurationResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the template
     #   alias that you're updating.
     #   @return [String]
@@ -32435,6 +32636,20 @@ module Aws::QuickSight
     #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
+    #   * `READER_PRO`: Reader Pro adds Generative BI capabilities to the
+    #     Reader role. Reader Pros have access to Amazon Q Business, can
+    #     build stories with Amazon Q, and can generate executive summaries
+    #     from dashboards.
+    #
+    #   * `AUTHOR_PRO`: Author Pro adds Generative BI capabilities to the
+    #     Author role. Author Pros can author dashboards with natural
+    #     language with Amazon Q, build stories with Amazon Q, create Topics
+    #     for Q&amp;A, and generate executive summaries from dashboards.
+    #
+    #   * `ADMIN_PRO`: Admin Pros are Author Pros who can also manage Amazon
+    #     QuickSight administrative settings. Admin Pro users are billed at
+    #     Author Pro pricing.
+    #
     #   The name of the Amazon QuickSight role is invisible to the user
     #   except for the console screens dealing with permissions.
     #   @return [String]
@@ -32696,6 +32911,20 @@ module Aws::QuickSight
     #
     #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     Amazon QuickSight settings.
+    #
+    #   * `READER_PRO`: Reader Pro adds Generative BI capabilities to the
+    #     Reader role. Reader Pros have access to Amazon Q Business, can
+    #     build stories with Amazon Q, and can generate executive summaries
+    #     from dashboards.
+    #
+    #   * `AUTHOR_PRO`: Author Pro adds Generative BI capabilities to the
+    #     Author role. Author Pros can author dashboards with natural
+    #     language with Amazon Q, build stories with Amazon Q, create Topics
+    #     for Q&amp;A, and generate executive summaries from dashboards.
+    #
+    #   * `ADMIN_PRO`: Admin Pros are Author Pros who can also manage Amazon
+    #     QuickSight administrative settings. Admin Pro users are billed at
+    #     Author Pro pricing.
     #
     #   * `RESTRICTED_READER`: This role isn't currently available for use.
     #

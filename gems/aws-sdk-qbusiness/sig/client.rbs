@@ -32,11 +32,14 @@ module Aws
                       ?endpoint_cache_max_threads: Integer,
                       ?endpoint_cache_poll_interval: Integer,
                       ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
                       ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
                       ?log_formatter: untyped,
                       ?log_level: Symbol,
                       ?logger: untyped,
                       ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
                       ?profile: String,
                       ?request_min_compression_size_bytes: Integer,
                       ?retry_backoff: Proc,
@@ -79,13 +82,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#batch_delete_document-instance_method
       def batch_delete_document: (
                                    application_id: ::String,
-                                   ?data_source_sync_id: ::String,
+                                   index_id: ::String,
                                    documents: Array[
                                      {
                                        document_id: ::String
                                      },
                                    ],
-                                   index_id: ::String
+                                   ?data_source_sync_id: ::String
                                  ) -> _BatchDeleteDocumentResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDocumentResponseSuccess
 
@@ -96,39 +99,18 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#batch_put_document-instance_method
       def batch_put_document: (
                                 application_id: ::String,
-                                ?data_source_sync_id: ::String,
+                                index_id: ::String,
                                 documents: Array[
                                   {
-                                    access_configuration: {
-                                      access_controls: Array[
-                                        {
-                                          member_relation: ("AND" | "OR")?,
-                                          principals: Array[
-                                            {
-                                              group: {
-                                                access: ("ALLOW" | "DENY"),
-                                                membership_type: ("INDEX" | "DATASOURCE")?,
-                                                name: ::String?
-                                              }?,
-                                              user: {
-                                                access: ("ALLOW" | "DENY"),
-                                                id: ::String?,
-                                                membership_type: ("INDEX" | "DATASOURCE")?
-                                              }?
-                                            },
-                                          ]
-                                        },
-                                      ],
-                                      member_relation: ("AND" | "OR")?
-                                    }?,
+                                    id: ::String,
                                     attributes: Array[
                                       {
                                         name: ::String,
                                         value: {
-                                          date_value: ::Time?,
-                                          long_value: ::Integer?,
+                                          string_value: ::String?,
                                           string_list_value: Array[::String]?,
-                                          string_value: ::String?
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
                                         }
                                       },
                                     ]?,
@@ -140,6 +122,29 @@ module Aws
                                       }?
                                     }?,
                                     content_type: ("PDF" | "HTML" | "MS_WORD" | "PLAIN_TEXT" | "PPT" | "RTF" | "XML" | "XSLT" | "MS_EXCEL" | "CSV" | "JSON" | "MD")?,
+                                    title: ::String?,
+                                    access_configuration: {
+                                      access_controls: Array[
+                                        {
+                                          principals: Array[
+                                            {
+                                              user: {
+                                                id: ::String?,
+                                                access: ("ALLOW" | "DENY"),
+                                                membership_type: ("INDEX" | "DATASOURCE")?
+                                              }?,
+                                              group: {
+                                                name: ::String?,
+                                                access: ("ALLOW" | "DENY"),
+                                                membership_type: ("INDEX" | "DATASOURCE")?
+                                              }?
+                                            },
+                                          ],
+                                          member_relation: ("AND" | "OR")?
+                                        },
+                                      ],
+                                      member_relation: ("AND" | "OR")?
+                                    }?,
                                     document_enrichment_configuration: {
                                       inline_configurations: Array[
                                         {
@@ -147,163 +152,186 @@ module Aws
                                             key: ::String,
                                             operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
                                             value: {
-                                              date_value: ::Time?,
-                                              long_value: ::Integer?,
+                                              string_value: ::String?,
                                               string_list_value: Array[::String]?,
-                                              string_value: ::String?
+                                              long_value: ::Integer?,
+                                              date_value: ::Time?
                                             }?
                                           }?,
-                                          document_content_operator: ("DELETE")?,
                                           target: {
-                                            attribute_value_operator: ("DELETE")?,
                                             key: ::String,
                                             value: {
-                                              date_value: ::Time?,
-                                              long_value: ::Integer?,
+                                              string_value: ::String?,
                                               string_list_value: Array[::String]?,
-                                              string_value: ::String?
-                                            }?
-                                          }?
+                                              long_value: ::Integer?,
+                                              date_value: ::Time?
+                                            }?,
+                                            attribute_value_operator: ("DELETE")?
+                                          }?,
+                                          document_content_operator: ("DELETE")?
                                         },
                                       ]?,
-                                      post_extraction_hook_configuration: {
-                                        invocation_condition: {
-                                          key: ::String,
-                                          operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
-                                          value: {
-                                            date_value: ::Time?,
-                                            long_value: ::Integer?,
-                                            string_list_value: Array[::String]?,
-                                            string_value: ::String?
-                                          }?
-                                        }?,
-                                        lambda_arn: ::String?,
-                                        role_arn: ::String?,
-                                        s3_bucket_name: ::String?
-                                      }?,
                                       pre_extraction_hook_configuration: {
                                         invocation_condition: {
                                           key: ::String,
                                           operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
                                           value: {
-                                            date_value: ::Time?,
-                                            long_value: ::Integer?,
+                                            string_value: ::String?,
                                             string_list_value: Array[::String]?,
-                                            string_value: ::String?
+                                            long_value: ::Integer?,
+                                            date_value: ::Time?
                                           }?
                                         }?,
                                         lambda_arn: ::String?,
-                                        role_arn: ::String?,
-                                        s3_bucket_name: ::String?
+                                        s3_bucket_name: ::String?,
+                                        role_arn: ::String?
+                                      }?,
+                                      post_extraction_hook_configuration: {
+                                        invocation_condition: {
+                                          key: ::String,
+                                          operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                          value: {
+                                            string_value: ::String?,
+                                            string_list_value: Array[::String]?,
+                                            long_value: ::Integer?,
+                                            date_value: ::Time?
+                                          }?
+                                        }?,
+                                        lambda_arn: ::String?,
+                                        s3_bucket_name: ::String?,
+                                        role_arn: ::String?
                                       }?
-                                    }?,
-                                    id: ::String,
-                                    title: ::String?
+                                    }?
                                   },
                                 ],
-                                index_id: ::String,
-                                ?role_arn: ::String
+                                ?role_arn: ::String,
+                                ?data_source_sync_id: ::String
                               ) -> _BatchPutDocumentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutDocumentResponseSuccess
 
+      interface _ChatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ChatOutput]
+        def output_stream: () -> Types::ChatOutputStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#chat-instance_method
+      def chat: (
+                  application_id: ::String,
+                  ?user_id: ::String,
+                  ?user_groups: Array[::String],
+                  ?conversation_id: ::String,
+                  ?parent_message_id: ::String,
+                  ?client_token: ::String,
+                  input_event_stream_hander: untyped
+                ) ?{ (*untyped) -> void } -> _ChatResponseSuccess
+              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _ChatResponseSuccess
+
       interface _ChatSyncResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ChatSyncOutput]
-        def action_review: () -> Types::ActionReview
         def conversation_id: () -> ::String
-        def failed_attachments: () -> ::Array[Types::AttachmentOutput]
-        def source_attributions: () -> ::Array[Types::SourceAttribution]
         def system_message: () -> ::String
         def system_message_id: () -> ::String
         def user_message_id: () -> ::String
+        def action_review: () -> Types::ActionReview
+        def auth_challenge_request: () -> Types::AuthChallengeRequest
+        def source_attributions: () -> ::Array[Types::SourceAttribution]
+        def failed_attachments: () -> ::Array[Types::AttachmentOutput]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#chat_sync-instance_method
       def chat_sync: (
+                       application_id: ::String,
+                       ?user_id: ::String,
+                       ?user_groups: Array[::String],
+                       ?user_message: ::String,
+                       ?attachments: Array[
+                         {
+                           name: ::String,
+                           data: ::String
+                         },
+                       ],
                        ?action_execution: {
+                         plugin_id: ::String,
                          payload: Hash[::String, {
                              value: {
                              }
                            }],
-                         payload_field_name_separator: ::String,
-                         plugin_id: ::String
+                         payload_field_name_separator: ::String
                        },
-                       application_id: ::String,
-                       ?attachments: Array[
-                         {
-                           data: ::String,
-                           name: ::String
-                         },
-                       ],
+                       ?auth_challenge_response: {
+                         response_map: Hash[::String, ::String]
+                       },
+                       ?conversation_id: ::String,
+                       ?parent_message_id: ::String,
                        ?attribute_filter: {
                          and_all_filters: Array[
                            untyped,
                          ]?,
+                         or_all_filters: Array[
+                           untyped,
+                         ]?,
+                         not_filter: untyped?,
+                         equals_to: {
+                           name: ::String,
+                           value: {
+                             string_value: ::String?,
+                             string_list_value: Array[::String]?,
+                             long_value: ::Integer?,
+                             date_value: ::Time?
+                           }
+                         }?,
                          contains_all: {
                            name: ::String,
                            value: {
-                             date_value: ::Time?,
-                             long_value: ::Integer?,
+                             string_value: ::String?,
                              string_list_value: Array[::String]?,
-                             string_value: ::String?
+                             long_value: ::Integer?,
+                             date_value: ::Time?
                            }
                          }?,
                          contains_any: {
                            name: ::String,
                            value: {
-                             date_value: ::Time?,
-                             long_value: ::Integer?,
+                             string_value: ::String?,
                              string_list_value: Array[::String]?,
-                             string_value: ::String?
-                           }
-                         }?,
-                         equals_to: {
-                           name: ::String,
-                           value: {
-                             date_value: ::Time?,
                              long_value: ::Integer?,
-                             string_list_value: Array[::String]?,
-                             string_value: ::String?
+                             date_value: ::Time?
                            }
                          }?,
                          greater_than: {
                            name: ::String,
                            value: {
-                             date_value: ::Time?,
-                             long_value: ::Integer?,
+                             string_value: ::String?,
                              string_list_value: Array[::String]?,
-                             string_value: ::String?
+                             long_value: ::Integer?,
+                             date_value: ::Time?
                            }
                          }?,
                          greater_than_or_equals: {
                            name: ::String,
                            value: {
-                             date_value: ::Time?,
-                             long_value: ::Integer?,
+                             string_value: ::String?,
                              string_list_value: Array[::String]?,
-                             string_value: ::String?
+                             long_value: ::Integer?,
+                             date_value: ::Time?
                            }
                          }?,
                          less_than: {
                            name: ::String,
                            value: {
-                             date_value: ::Time?,
-                             long_value: ::Integer?,
+                             string_value: ::String?,
                              string_list_value: Array[::String]?,
-                             string_value: ::String?
+                             long_value: ::Integer?,
+                             date_value: ::Time?
                            }
                          }?,
                          less_than_or_equals: {
                            name: ::String,
                            value: {
-                             date_value: ::Time?,
-                             long_value: ::Integer?,
+                             string_value: ::String?,
                              string_list_value: Array[::String]?,
-                             string_value: ::String?
+                             long_value: ::Integer?,
+                             date_value: ::Time?
                            }
-                         }?,
-                         not_filter: untyped?,
-                         or_all_filters: Array[
-                           untyped,
-                         ]?
+                         }?
                        },
                        ?chat_mode: ("RETRIEVAL_MODE" | "CREATOR_MODE" | "PLUGIN_MODE"),
                        ?chat_mode_configuration: {
@@ -311,55 +339,63 @@ module Aws
                            plugin_id: ::String
                          }?
                        },
-                       ?client_token: ::String,
-                       ?conversation_id: ::String,
-                       ?parent_message_id: ::String,
-                       ?user_groups: Array[::String],
-                       ?user_id: ::String,
-                       ?user_message: ::String
+                       ?client_token: ::String
                      ) -> _ChatSyncResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ChatSyncResponseSuccess
 
       interface _CreateApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
-        def application_arn: () -> ::String
         def application_id: () -> ::String
+        def application_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_application-instance_method
       def create_application: (
-                                ?attachments_configuration: {
-                                  attachments_control_mode: ("ENABLED" | "DISABLED")
-                                },
-                                ?client_token: ::String,
-                                ?description: ::String,
                                 display_name: ::String,
+                                ?role_arn: ::String,
+                                ?identity_center_instance_arn: ::String,
+                                ?description: ::String,
                                 ?encryption_configuration: {
                                   kms_key_id: ::String?
                                 },
-                                ?identity_center_instance_arn: ::String,
-                                role_arn: ::String,
                                 ?tags: Array[
                                   {
                                     key: ::String,
                                     value: ::String
                                   },
-                                ]
+                                ],
+                                ?client_token: ::String,
+                                ?attachments_configuration: {
+                                  attachments_control_mode: ("ENABLED" | "DISABLED")
+                                }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
 
       interface _CreateDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceResponse]
-        def data_source_arn: () -> ::String
         def data_source_id: () -> ::String
+        def data_source_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_data_source-instance_method
       def create_data_source: (
                                 application_id: ::String,
-                                ?client_token: ::String,
+                                index_id: ::String,
+                                display_name: ::String,
                                 configuration: {
                                 },
+                                ?vpc_configuration: {
+                                  subnet_ids: Array[::String],
+                                  security_group_ids: Array[::String]
+                                },
                                 ?description: ::String,
-                                display_name: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                ?sync_schedule: ::String,
+                                ?role_arn: ::String,
+                                ?client_token: ::String,
                                 ?document_enrichment_configuration: {
                                   inline_configurations: Array[
                                     {
@@ -367,169 +403,171 @@ module Aws
                                         key: ::String,
                                         operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
                                         value: {
-                                          date_value: ::Time?,
-                                          long_value: ::Integer?,
+                                          string_value: ::String?,
                                           string_list_value: Array[::String]?,
-                                          string_value: ::String?
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
                                         }?
                                       }?,
-                                      document_content_operator: ("DELETE")?,
                                       target: {
-                                        attribute_value_operator: ("DELETE")?,
                                         key: ::String,
                                         value: {
-                                          date_value: ::Time?,
-                                          long_value: ::Integer?,
+                                          string_value: ::String?,
                                           string_list_value: Array[::String]?,
-                                          string_value: ::String?
-                                        }?
-                                      }?
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
+                                        }?,
+                                        attribute_value_operator: ("DELETE")?
+                                      }?,
+                                      document_content_operator: ("DELETE")?
                                     },
                                   ]?,
-                                  post_extraction_hook_configuration: {
-                                    invocation_condition: {
-                                      key: ::String,
-                                      operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
-                                      value: {
-                                        date_value: ::Time?,
-                                        long_value: ::Integer?,
-                                        string_list_value: Array[::String]?,
-                                        string_value: ::String?
-                                      }?
-                                    }?,
-                                    lambda_arn: ::String?,
-                                    role_arn: ::String?,
-                                    s3_bucket_name: ::String?
-                                  }?,
                                   pre_extraction_hook_configuration: {
                                     invocation_condition: {
                                       key: ::String,
                                       operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
                                       value: {
-                                        date_value: ::Time?,
-                                        long_value: ::Integer?,
+                                        string_value: ::String?,
                                         string_list_value: Array[::String]?,
-                                        string_value: ::String?
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
                                       }?
                                     }?,
                                     lambda_arn: ::String?,
-                                    role_arn: ::String?,
-                                    s3_bucket_name: ::String?
+                                    s3_bucket_name: ::String?,
+                                    role_arn: ::String?
+                                  }?,
+                                  post_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      key: ::String,
+                                      operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String?,
+                                    s3_bucket_name: ::String?,
+                                    role_arn: ::String?
                                   }?
-                                },
-                                index_id: ::String,
-                                ?role_arn: ::String,
-                                ?sync_schedule: ::String,
-                                ?tags: Array[
-                                  {
-                                    key: ::String,
-                                    value: ::String
-                                  },
-                                ],
-                                ?vpc_configuration: {
-                                  security_group_ids: Array[::String],
-                                  subnet_ids: Array[::String]
                                 }
                               ) -> _CreateDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
 
       interface _CreateIndexResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIndexResponse]
-        def index_arn: () -> ::String
         def index_id: () -> ::String
+        def index_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_index-instance_method
       def create_index: (
                           application_id: ::String,
-                          ?capacity_configuration: {
-                            units: ::Integer?
-                          },
-                          ?client_token: ::String,
-                          ?description: ::String,
                           display_name: ::String,
+                          ?type: ("ENTERPRISE" | "STARTER"),
+                          ?description: ::String,
                           ?tags: Array[
                             {
                               key: ::String,
                               value: ::String
                             },
-                          ]
+                          ],
+                          ?capacity_configuration: {
+                            units: ::Integer?
+                          },
+                          ?client_token: ::String
                         ) -> _CreateIndexResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIndexResponseSuccess
 
       interface _CreatePluginResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePluginResponse]
-        def plugin_arn: () -> ::String
         def plugin_id: () -> ::String
+        def plugin_arn: () -> ::String
+        def build_status: () -> ("READY" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_plugin-instance_method
       def create_plugin: (
                            application_id: ::String,
+                           display_name: ::String,
+                           type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK" | "CUSTOM"),
                            auth_configuration: {
                              basic_auth_configuration: {
-                               role_arn: ::String,
-                               secret_arn: ::String
+                               secret_arn: ::String,
+                               role_arn: ::String
                              }?,
                              o_auth_2_client_credential_configuration: {
-                               role_arn: ::String,
-                               secret_arn: ::String
+                               secret_arn: ::String,
+                               role_arn: ::String
+                             }?,
+                             no_auth_configuration: {
                              }?
                            },
-                           ?client_token: ::String,
-                           display_name: ::String,
-                           server_url: ::String,
+                           ?server_url: ::String,
+                           ?custom_plugin_configuration: {
+                             description: ::String,
+                             api_schema_type: ("OPEN_API_V3"),
+                             api_schema: {
+                               payload: ::String?,
+                               s3: {
+                                 bucket: ::String,
+                                 key: ::String
+                               }?
+                             }
+                           },
                            ?tags: Array[
                              {
                                key: ::String,
                                value: ::String
                              },
                            ],
-                           type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
+                           ?client_token: ::String
                          ) -> _CreatePluginResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePluginResponseSuccess
 
       interface _CreateRetrieverResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRetrieverResponse]
-        def retriever_arn: () -> ::String
         def retriever_id: () -> ::String
+        def retriever_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_retriever-instance_method
       def create_retriever: (
                               application_id: ::String,
-                              ?client_token: ::String,
+                              type: ("NATIVE_INDEX" | "KENDRA_INDEX"),
+                              display_name: ::String,
                               configuration: {
-                                kendra_index_configuration: {
-                                  index_id: ::String
-                                }?,
                                 native_index_configuration: {
+                                  index_id: ::String,
                                   boosting_override: Hash[::String, {
-                                      date_configuration: {
-                                        boosting_duration_in_seconds: ::Integer?,
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
-                                      }?,
                                       number_configuration: {
                                         boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
                                         boosting_type: ("PRIORITIZE_LARGER_VALUES" | "PRIORITIZE_SMALLER_VALUES")?
                                       }?,
                                       string_configuration: {
-                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]?,
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]?
+                                      }?,
+                                      date_configuration: {
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        boosting_duration_in_seconds: ::Integer?
                                       }?,
                                       string_list_configuration: {
                                         boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
                                       }?
-                                    }]?,
+                                    }]?
+                                }?,
+                                kendra_index_configuration: {
                                   index_id: ::String
                                 }?
                               },
-                              display_name: ::String,
                               ?role_arn: ::String,
+                              ?client_token: ::String,
                               ?tags: Array[
                                 {
                                   key: ::String,
                                   value: ::String
                                 },
-                              ],
-                              type: ("NATIVE_INDEX" | "KENDRA_INDEX")
+                              ]
                             ) -> _CreateRetrieverResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRetrieverResponseSuccess
 
@@ -539,38 +577,38 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_user-instance_method
       def create_user: (
                          application_id: ::String,
-                         ?client_token: ::String,
+                         user_id: ::String,
                          ?user_aliases: Array[
                            {
-                             data_source_id: ::String?,
                              index_id: ::String?,
+                             data_source_id: ::String?,
                              user_id: ::String
                            },
                          ],
-                         user_id: ::String
+                         ?client_token: ::String
                        ) -> _CreateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
 
       interface _CreateWebExperienceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebExperienceResponse]
-        def web_experience_arn: () -> ::String
         def web_experience_id: () -> ::String
+        def web_experience_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_web_experience-instance_method
       def create_web_experience: (
                                    application_id: ::String,
-                                   ?client_token: ::String,
-                                   ?role_arn: ::String,
-                                   ?sample_prompts_control_mode: ("ENABLED" | "DISABLED"),
+                                   ?title: ::String,
                                    ?subtitle: ::String,
+                                   ?welcome_message: ::String,
+                                   ?sample_prompts_control_mode: ("ENABLED" | "DISABLED"),
+                                   ?role_arn: ::String,
                                    ?tags: Array[
                                      {
                                        key: ::String,
                                        value: ::String
                                      },
                                    ],
-                                   ?title: ::String,
-                                   ?welcome_message: ::String
+                                   ?client_token: ::String
                                  ) -> _CreateWebExperienceResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebExperienceResponseSuccess
 
@@ -597,8 +635,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_conversation-instance_method
       def delete_conversation: (
-                                 application_id: ::String,
                                  conversation_id: ::String,
+                                 application_id: ::String,
                                  ?user_id: ::String
                                ) -> _DeleteConversationResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConversationResponseSuccess
@@ -609,8 +647,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_data_source-instance_method
       def delete_data_source: (
                                 application_id: ::String,
-                                data_source_id: ::String,
-                                index_id: ::String
+                                index_id: ::String,
+                                data_source_id: ::String
                               ) -> _DeleteDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
 
@@ -620,9 +658,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_group-instance_method
       def delete_group: (
                           application_id: ::String,
-                          ?data_source_id: ::String,
+                          index_id: ::String,
                           group_name: ::String,
-                          index_id: ::String
+                          ?data_source_id: ::String
                         ) -> _DeleteGroupResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
 
@@ -678,17 +716,17 @@ module Aws
 
       interface _GetApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationResponse]
-        def application_arn: () -> ::String
-        def application_id: () -> ::String
-        def attachments_configuration: () -> Types::AppliedAttachmentsConfiguration
-        def created_at: () -> ::Time
-        def description: () -> ::String
         def display_name: () -> ::String
-        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def application_id: () -> ::String
+        def application_arn: () -> ::String
         def identity_center_application_arn: () -> ::String
         def role_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+        def description: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def attachments_configuration: () -> Types::AppliedAttachmentsConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_application-instance_method
       def get_application: (
@@ -698,11 +736,11 @@ module Aws
 
       interface _GetChatControlsConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetChatControlsConfigurationResponse]
+        def response_scope: () -> ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
         def blocked_phrases: () -> Types::BlockedPhrasesConfiguration
+        def topic_configurations: () -> ::Array[Types::TopicConfiguration]
         def creator_mode_configuration: () -> Types::AppliedCreatorModeConfiguration
         def next_token: () -> ::String
-        def response_scope: () -> ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
-        def topic_configurations: () -> ::Array[Types::TopicConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_chat_controls_configuration-instance_method
       def get_chat_controls_configuration: (
@@ -715,26 +753,26 @@ module Aws
       interface _GetDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceResponse]
         def application_id: () -> ::String
-        def configuration: () -> untyped
-        def created_at: () -> ::Time
-        def data_source_arn: () -> ::String
-        def data_source_id: () -> ::String
-        def description: () -> ::String
-        def display_name: () -> ::String
-        def document_enrichment_configuration: () -> Types::DocumentEnrichmentConfiguration
         def index_id: () -> ::String
-        def role_arn: () -> ::String
+        def data_source_id: () -> ::String
+        def data_source_arn: () -> ::String
+        def display_name: () -> ::String
+        def type: () -> ::String
+        def configuration: () -> untyped
+        def vpc_configuration: () -> Types::DataSourceVpcConfiguration
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def description: () -> ::String
         def status: () -> ("PENDING_CREATION" | "CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
         def sync_schedule: () -> ::String
-        def type: () -> ::String
-        def updated_at: () -> ::Time
-        def vpc_configuration: () -> Types::DataSourceVpcConfiguration
+        def role_arn: () -> ::String
+        def document_enrichment_configuration: () -> Types::DocumentEnrichmentConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_data_source-instance_method
       def get_data_source: (
                              application_id: ::String,
-                             data_source_id: ::String,
-                             index_id: ::String
+                             index_id: ::String,
+                             data_source_id: ::String
                            ) -> _GetDataSourceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceResponseSuccess
 
@@ -746,25 +784,26 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_group-instance_method
       def get_group: (
                        application_id: ::String,
-                       ?data_source_id: ::String,
+                       index_id: ::String,
                        group_name: ::String,
-                       index_id: ::String
+                       ?data_source_id: ::String
                      ) -> _GetGroupResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupResponseSuccess
 
       interface _GetIndexResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIndexResponse]
         def application_id: () -> ::String
-        def capacity_configuration: () -> Types::IndexCapacityConfiguration
-        def created_at: () -> ::Time
-        def description: () -> ::String
-        def display_name: () -> ::String
-        def document_attribute_configurations: () -> ::Array[Types::DocumentAttributeConfiguration]
-        def index_arn: () -> ::String
         def index_id: () -> ::String
-        def index_statistics: () -> Types::IndexStatistics
+        def display_name: () -> ::String
+        def type: () -> ("ENTERPRISE" | "STARTER")
+        def index_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+        def description: () -> ::String
+        def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def capacity_configuration: () -> Types::IndexCapacityConfiguration
+        def document_attribute_configurations: () -> ::Array[Types::DocumentAttributeConfiguration]
+        def index_statistics: () -> Types::IndexStatistics
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_index-instance_method
       def get_index: (
@@ -776,14 +815,16 @@ module Aws
       interface _GetPluginResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPluginResponse]
         def application_id: () -> ::String
-        def auth_configuration: () -> Types::PluginAuthConfiguration
-        def created_at: () -> ::Time
-        def display_name: () -> ::String
-        def plugin_arn: () -> ::String
         def plugin_id: () -> ::String
+        def display_name: () -> ::String
+        def type: () -> ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK" | "CUSTOM")
         def server_url: () -> ::String
+        def auth_configuration: () -> Types::PluginAuthConfiguration
+        def custom_plugin_configuration: () -> Types::CustomPluginConfiguration
+        def build_status: () -> ("READY" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+        def plugin_arn: () -> ::String
         def state: () -> ("ENABLED" | "DISABLED")
-        def type: () -> ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
+        def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_plugin-instance_method
@@ -796,14 +837,14 @@ module Aws
       interface _GetRetrieverResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRetrieverResponse]
         def application_id: () -> ::String
-        def configuration: () -> Types::RetrieverConfiguration
-        def created_at: () -> ::Time
-        def display_name: () -> ::String
-        def retriever_arn: () -> ::String
         def retriever_id: () -> ::String
-        def role_arn: () -> ::String
-        def status: () -> ("CREATING" | "ACTIVE" | "FAILED")
+        def retriever_arn: () -> ::String
         def type: () -> ("NATIVE_INDEX" | "KENDRA_INDEX")
+        def status: () -> ("CREATING" | "ACTIVE" | "FAILED")
+        def display_name: () -> ::String
+        def configuration: () -> Types::RetrieverConfiguration
+        def role_arn: () -> ::String
+        def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_retriever-instance_method
@@ -827,18 +868,18 @@ module Aws
       interface _GetWebExperienceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWebExperienceResponse]
         def application_id: () -> ::String
-        def authentication_configuration: () -> Types::WebExperienceAuthConfiguration
-        def created_at: () -> ::Time
-        def default_endpoint: () -> ::String
-        def role_arn: () -> ::String
-        def sample_prompts_control_mode: () -> ("ENABLED" | "DISABLED")
-        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "PENDING_AUTH_CONFIG")
-        def subtitle: () -> ::String
-        def title: () -> ::String
-        def updated_at: () -> ::Time
-        def web_experience_arn: () -> ::String
         def web_experience_id: () -> ::String
+        def web_experience_arn: () -> ::String
+        def default_endpoint: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "PENDING_AUTH_CONFIG")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def title: () -> ::String
+        def subtitle: () -> ::String
         def welcome_message: () -> ::String
+        def sample_prompts_control_mode: () -> ("ENABLED" | "DISABLED")
+        def role_arn: () -> ::String
+        def authentication_configuration: () -> Types::WebExperienceAuthConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_web_experience-instance_method
       def get_web_experience: (
@@ -849,27 +890,27 @@ module Aws
 
       interface _ListApplicationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
-        def applications: () -> ::Array[Types::Application]
         def next_token: () -> ::String
+        def applications: () -> ::Array[Types::Application]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_applications-instance_method
       def list_applications: (
-                               ?max_results: ::Integer,
-                               ?next_token: ::String
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
                              ) -> _ListApplicationsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
 
       interface _ListConversationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListConversationsResponse]
-        def conversations: () -> ::Array[Types::Conversation]
         def next_token: () -> ::String
+        def conversations: () -> ::Array[Types::Conversation]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_conversations-instance_method
       def list_conversations: (
                                 application_id: ::String,
-                                ?max_results: ::Integer,
+                                ?user_id: ::String,
                                 ?next_token: ::String,
-                                ?user_id: ::String
+                                ?max_results: ::Integer
                               ) -> _ListConversationsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConversationsResponseSuccess
 
@@ -880,13 +921,13 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_data_source_sync_jobs-instance_method
       def list_data_source_sync_jobs: (
-                                        application_id: ::String,
                                         data_source_id: ::String,
-                                        ?end_time: ::Time,
+                                        application_id: ::String,
                                         index_id: ::String,
-                                        ?max_results: ::Integer,
                                         ?next_token: ::String,
+                                        ?max_results: ::Integer,
                                         ?start_time: ::Time,
+                                        ?end_time: ::Time,
                                         ?status_filter: ("FAILED" | "SUCCEEDED" | "SYNCING" | "INCOMPLETE" | "STOPPING" | "ABORTED" | "SYNCING_INDEXING")
                                       ) -> _ListDataSourceSyncJobsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourceSyncJobsResponseSuccess
@@ -900,8 +941,8 @@ module Aws
       def list_data_sources: (
                                application_id: ::String,
                                index_id: ::String,
-                               ?max_results: ::Integer,
-                               ?next_token: ::String
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
                              ) -> _ListDataSourcesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
 
@@ -913,39 +954,39 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_documents-instance_method
       def list_documents: (
                             application_id: ::String,
-                            ?data_source_ids: Array[::String],
                             index_id: ::String,
-                            ?max_results: ::Integer,
-                            ?next_token: ::String
+                            ?data_source_ids: Array[::String],
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
                           ) -> _ListDocumentsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDocumentsResponseSuccess
 
       interface _ListGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsResponse]
-        def items: () -> ::Array[Types::GroupSummary]
         def next_token: () -> ::String
+        def items: () -> ::Array[Types::GroupSummary]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_groups-instance_method
       def list_groups: (
                          application_id: ::String,
-                         ?data_source_id: ::String,
                          index_id: ::String,
-                         ?max_results: ::Integer,
+                         updated_earlier_than: ::Time,
+                         ?data_source_id: ::String,
                          ?next_token: ::String,
-                         updated_earlier_than: ::Time
+                         ?max_results: ::Integer
                        ) -> _ListGroupsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
 
       interface _ListIndicesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListIndicesResponse]
-        def indices: () -> ::Array[Types::Index]
         def next_token: () -> ::String
+        def indices: () -> ::Array[Types::Index]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_indices-instance_method
       def list_indices: (
                           application_id: ::String,
-                          ?max_results: ::Integer,
-                          ?next_token: ::String
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
                         ) -> _ListIndicesResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndicesResponseSuccess
 
@@ -956,11 +997,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_messages-instance_method
       def list_messages: (
-                           application_id: ::String,
                            conversation_id: ::String,
-                           ?max_results: ::Integer,
+                           application_id: ::String,
+                           ?user_id: ::String,
                            ?next_token: ::String,
-                           ?user_id: ::String
+                           ?max_results: ::Integer
                          ) -> _ListMessagesResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMessagesResponseSuccess
 
@@ -972,21 +1013,21 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_plugins-instance_method
       def list_plugins: (
                           application_id: ::String,
-                          ?max_results: ::Integer,
-                          ?next_token: ::String
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
                         ) -> _ListPluginsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPluginsResponseSuccess
 
       interface _ListRetrieversResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRetrieversResponse]
-        def next_token: () -> ::String
         def retrievers: () -> ::Array[Types::Retriever]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_retrievers-instance_method
       def list_retrievers: (
                              application_id: ::String,
-                             ?max_results: ::Integer,
-                             ?next_token: ::String
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
                            ) -> _ListRetrieversResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRetrieversResponseSuccess
 
@@ -1002,30 +1043,30 @@ module Aws
 
       interface _ListWebExperiencesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWebExperiencesResponse]
-        def next_token: () -> ::String
         def web_experiences: () -> ::Array[Types::WebExperience]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_web_experiences-instance_method
       def list_web_experiences: (
                                   application_id: ::String,
-                                  ?max_results: ::Integer,
-                                  ?next_token: ::String
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
                                 ) -> _ListWebExperiencesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebExperiencesResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#put_feedback-instance_method
       def put_feedback: (
                           application_id: ::String,
+                          ?user_id: ::String,
                           conversation_id: ::String,
-                          ?message_copied_at: ::Time,
                           message_id: ::String,
+                          ?message_copied_at: ::Time,
                           ?message_usefulness: {
-                            comment: ::String?,
+                            usefulness: ("USEFUL" | "NOT_USEFUL"),
                             reason: ("NOT_FACTUALLY_CORRECT" | "HARMFUL_OR_UNSAFE" | "INCORRECT_OR_MISSING_SOURCES" | "NOT_HELPFUL" | "FACTUALLY_CORRECT" | "COMPLETE" | "RELEVANT_SOURCES" | "HELPFUL" | "NOT_BASED_ON_DOCUMENTS" | "NOT_COMPLETE" | "NOT_CONCISE" | "OTHER")?,
-                            submitted_at: ::Time,
-                            usefulness: ("USEFUL" | "NOT_USEFUL")
-                          },
-                          ?user_id: ::String
+                            comment: ::String?,
+                            submitted_at: ::Time
+                          }
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1035,7 +1076,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#put_group-instance_method
       def put_group: (
                        application_id: ::String,
+                       index_id: ::String,
+                       group_name: ::String,
                        ?data_source_id: ::String,
+                       type: ("INDEX" | "DATASOURCE"),
                        group_members: {
                          member_groups: Array[
                            {
@@ -1045,14 +1089,11 @@ module Aws
                          ]?,
                          member_users: Array[
                            {
-                             type: ("INDEX" | "DATASOURCE")?,
-                             user_id: ::String
+                             user_id: ::String,
+                             type: ("INDEX" | "DATASOURCE")?
                            },
                          ]?
-                       },
-                       group_name: ::String,
-                       index_id: ::String,
-                       type: ("INDEX" | "DATASOURCE")
+                       }
                      ) -> _PutGroupResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGroupResponseSuccess
 
@@ -1062,8 +1103,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#start_data_source_sync_job-instance_method
       def start_data_source_sync_job: (
-                                        application_id: ::String,
                                         data_source_id: ::String,
+                                        application_id: ::String,
                                         index_id: ::String
                                       ) -> _StartDataSourceSyncJobResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataSourceSyncJobResponseSuccess
@@ -1073,8 +1114,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#stop_data_source_sync_job-instance_method
       def stop_data_source_sync_job: (
-                                       application_id: ::String,
                                        data_source_id: ::String,
+                                       application_id: ::String,
                                        index_id: ::String
                                      ) -> _StopDataSourceSyncJobResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDataSourceSyncJobResponseSuccess
@@ -1110,12 +1151,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_application-instance_method
       def update_application: (
                                 application_id: ::String,
+                                ?identity_center_instance_arn: ::String,
+                                ?display_name: ::String,
+                                ?description: ::String,
+                                ?role_arn: ::String,
                                 ?attachments_configuration: {
                                   attachments_control_mode: ("ENABLED" | "DISABLED")
-                                },
-                                ?description: ::String,
-                                ?display_name: ::String,
-                                ?role_arn: ::String
+                                }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
 
@@ -1125,31 +1167,29 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_chat_controls_configuration-instance_method
       def update_chat_controls_configuration: (
                                                 application_id: ::String,
+                                                ?client_token: ::String,
+                                                ?response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED"),
                                                 ?blocked_phrases_configuration_update: {
                                                   blocked_phrases_to_create_or_update: Array[::String]?,
                                                   blocked_phrases_to_delete: Array[::String]?,
                                                   system_message_override: ::String?
                                                 },
-                                                ?client_token: ::String,
-                                                ?creator_mode_configuration: {
-                                                  creator_mode_control: ("ENABLED" | "DISABLED")
-                                                },
-                                                ?response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED"),
                                                 ?topic_configurations_to_create_or_update: Array[
                                                   {
+                                                    name: ::String,
                                                     description: ::String?,
                                                     example_chat_messages: Array[::String]?,
-                                                    name: ::String,
                                                     rules: Array[
                                                       {
-                                                        excluded_users_and_groups: {
-                                                          user_groups: Array[::String]?,
-                                                          user_ids: Array[::String]?
-                                                        }?,
                                                         included_users_and_groups: {
-                                                          user_groups: Array[::String]?,
-                                                          user_ids: Array[::String]?
+                                                          user_ids: Array[::String]?,
+                                                          user_groups: Array[::String]?
                                                         }?,
+                                                        excluded_users_and_groups: {
+                                                          user_ids: Array[::String]?,
+                                                          user_groups: Array[::String]?
+                                                        }?,
+                                                        rule_type: ("CONTENT_BLOCKER_RULE" | "CONTENT_RETRIEVAL_RULE"),
                                                         rule_configuration: {
                                                           content_blocker_rule: {
                                                             system_message_override: ::String?
@@ -1157,32 +1197,32 @@ module Aws
                                                           content_retrieval_rule: {
                                                             eligible_data_sources: Array[
                                                               {
-                                                                data_source_id: ::String?,
-                                                                index_id: ::String?
+                                                                index_id: ::String?,
+                                                                data_source_id: ::String?
                                                               },
                                                             ]?
                                                           }?
-                                                        }?,
-                                                        rule_type: ("CONTENT_BLOCKER_RULE" | "CONTENT_RETRIEVAL_RULE")
+                                                        }?
                                                       },
                                                     ]
                                                   },
                                                 ],
                                                 ?topic_configurations_to_delete: Array[
                                                   {
+                                                    name: ::String,
                                                     description: ::String?,
                                                     example_chat_messages: Array[::String]?,
-                                                    name: ::String,
                                                     rules: Array[
                                                       {
-                                                        excluded_users_and_groups: {
-                                                          user_groups: Array[::String]?,
-                                                          user_ids: Array[::String]?
-                                                        }?,
                                                         included_users_and_groups: {
-                                                          user_groups: Array[::String]?,
-                                                          user_ids: Array[::String]?
+                                                          user_ids: Array[::String]?,
+                                                          user_groups: Array[::String]?
                                                         }?,
+                                                        excluded_users_and_groups: {
+                                                          user_ids: Array[::String]?,
+                                                          user_groups: Array[::String]?
+                                                        }?,
+                                                        rule_type: ("CONTENT_BLOCKER_RULE" | "CONTENT_RETRIEVAL_RULE"),
                                                         rule_configuration: {
                                                           content_blocker_rule: {
                                                             system_message_override: ::String?
@@ -1190,17 +1230,19 @@ module Aws
                                                           content_retrieval_rule: {
                                                             eligible_data_sources: Array[
                                                               {
-                                                                data_source_id: ::String?,
-                                                                index_id: ::String?
+                                                                index_id: ::String?,
+                                                                data_source_id: ::String?
                                                               },
                                                             ]?
                                                           }?
-                                                        }?,
-                                                        rule_type: ("CONTENT_BLOCKER_RULE" | "CONTENT_RETRIEVAL_RULE")
+                                                        }?
                                                       },
                                                     ]
                                                   },
-                                                ]
+                                                ],
+                                                ?creator_mode_configuration: {
+                                                  creator_mode_control: ("ENABLED" | "DISABLED")
+                                                }
                                               ) -> _UpdateChatControlsConfigurationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChatControlsConfigurationResponseSuccess
 
@@ -1210,11 +1252,18 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_data_source-instance_method
       def update_data_source: (
                                 application_id: ::String,
+                                index_id: ::String,
+                                data_source_id: ::String,
+                                ?display_name: ::String,
                                 ?configuration: {
                                 },
-                                data_source_id: ::String,
+                                ?vpc_configuration: {
+                                  subnet_ids: Array[::String],
+                                  security_group_ids: Array[::String]
+                                },
                                 ?description: ::String,
-                                ?display_name: ::String,
+                                ?sync_schedule: ::String,
+                                ?role_arn: ::String,
                                 ?document_enrichment_configuration: {
                                   inline_configurations: Array[
                                     {
@@ -1222,62 +1271,55 @@ module Aws
                                         key: ::String,
                                         operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
                                         value: {
-                                          date_value: ::Time?,
-                                          long_value: ::Integer?,
+                                          string_value: ::String?,
                                           string_list_value: Array[::String]?,
-                                          string_value: ::String?
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
                                         }?
                                       }?,
-                                      document_content_operator: ("DELETE")?,
                                       target: {
-                                        attribute_value_operator: ("DELETE")?,
                                         key: ::String,
                                         value: {
-                                          date_value: ::Time?,
-                                          long_value: ::Integer?,
+                                          string_value: ::String?,
                                           string_list_value: Array[::String]?,
-                                          string_value: ::String?
-                                        }?
-                                      }?
+                                          long_value: ::Integer?,
+                                          date_value: ::Time?
+                                        }?,
+                                        attribute_value_operator: ("DELETE")?
+                                      }?,
+                                      document_content_operator: ("DELETE")?
                                     },
                                   ]?,
-                                  post_extraction_hook_configuration: {
-                                    invocation_condition: {
-                                      key: ::String,
-                                      operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
-                                      value: {
-                                        date_value: ::Time?,
-                                        long_value: ::Integer?,
-                                        string_list_value: Array[::String]?,
-                                        string_value: ::String?
-                                      }?
-                                    }?,
-                                    lambda_arn: ::String?,
-                                    role_arn: ::String?,
-                                    s3_bucket_name: ::String?
-                                  }?,
                                   pre_extraction_hook_configuration: {
                                     invocation_condition: {
                                       key: ::String,
                                       operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
                                       value: {
-                                        date_value: ::Time?,
-                                        long_value: ::Integer?,
+                                        string_value: ::String?,
                                         string_list_value: Array[::String]?,
-                                        string_value: ::String?
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
                                       }?
                                     }?,
                                     lambda_arn: ::String?,
-                                    role_arn: ::String?,
-                                    s3_bucket_name: ::String?
+                                    s3_bucket_name: ::String?,
+                                    role_arn: ::String?
+                                  }?,
+                                  post_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      key: ::String,
+                                      operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String?,
+                                    s3_bucket_name: ::String?,
+                                    role_arn: ::String?
                                   }?
-                                },
-                                index_id: ::String,
-                                ?role_arn: ::String,
-                                ?sync_schedule: ::String,
-                                ?vpc_configuration: {
-                                  security_group_ids: Array[::String],
-                                  subnet_ids: Array[::String]
                                 }
                               ) -> _UpdateDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
@@ -1288,19 +1330,19 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_index-instance_method
       def update_index: (
                           application_id: ::String,
+                          index_id: ::String,
+                          ?display_name: ::String,
+                          ?description: ::String,
                           ?capacity_configuration: {
                             units: ::Integer?
                           },
-                          ?description: ::String,
-                          ?display_name: ::String,
                           ?document_attribute_configurations: Array[
                             {
                               name: ::String?,
-                              search: ("ENABLED" | "DISABLED")?,
-                              type: ("STRING" | "STRING_LIST" | "NUMBER" | "DATE")?
+                              type: ("STRING" | "STRING_LIST" | "NUMBER" | "DATE")?,
+                              search: ("ENABLED" | "DISABLED")?
                             },
-                          ],
-                          index_id: ::String
+                          ]
                         ) -> _UpdateIndexResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIndexResponseSuccess
 
@@ -1310,20 +1352,33 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_plugin-instance_method
       def update_plugin: (
                            application_id: ::String,
+                           plugin_id: ::String,
+                           ?display_name: ::String,
+                           ?state: ("ENABLED" | "DISABLED"),
+                           ?server_url: ::String,
+                           ?custom_plugin_configuration: {
+                             description: ::String,
+                             api_schema_type: ("OPEN_API_V3"),
+                             api_schema: {
+                               payload: ::String?,
+                               s3: {
+                                 bucket: ::String,
+                                 key: ::String
+                               }?
+                             }
+                           },
                            ?auth_configuration: {
                              basic_auth_configuration: {
-                               role_arn: ::String,
-                               secret_arn: ::String
+                               secret_arn: ::String,
+                               role_arn: ::String
                              }?,
                              o_auth_2_client_credential_configuration: {
-                               role_arn: ::String,
-                               secret_arn: ::String
+                               secret_arn: ::String,
+                               role_arn: ::String
+                             }?,
+                             no_auth_configuration: {
                              }?
-                           },
-                           ?display_name: ::String,
-                           plugin_id: ::String,
-                           ?server_url: ::String,
-                           ?state: ("ENABLED" | "DISABLED")
+                           }
                          ) -> _UpdatePluginResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePluginResponseSuccess
 
@@ -1333,33 +1388,33 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_retriever-instance_method
       def update_retriever: (
                               application_id: ::String,
+                              retriever_id: ::String,
                               ?configuration: {
-                                kendra_index_configuration: {
-                                  index_id: ::String
-                                }?,
                                 native_index_configuration: {
+                                  index_id: ::String,
                                   boosting_override: Hash[::String, {
-                                      date_configuration: {
-                                        boosting_duration_in_seconds: ::Integer?,
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
-                                      }?,
                                       number_configuration: {
                                         boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
                                         boosting_type: ("PRIORITIZE_LARGER_VALUES" | "PRIORITIZE_SMALLER_VALUES")?
                                       }?,
                                       string_configuration: {
-                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]?,
-                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]?
+                                      }?,
+                                      date_configuration: {
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        boosting_duration_in_seconds: ::Integer?
                                       }?,
                                       string_list_configuration: {
                                         boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
                                       }?
-                                    }]?,
+                                    }]?
+                                }?,
+                                kendra_index_configuration: {
                                   index_id: ::String
                                 }?
                               },
                               ?display_name: ::String,
-                              retriever_id: ::String,
                               ?role_arn: ::String
                             ) -> _UpdateRetrieverResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRetrieverResponseSuccess
@@ -1367,27 +1422,27 @@ module Aws
       interface _UpdateUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
         def user_aliases_added: () -> ::Array[Types::UserAlias]
-        def user_aliases_deleted: () -> ::Array[Types::UserAlias]
         def user_aliases_updated: () -> ::Array[Types::UserAlias]
+        def user_aliases_deleted: () -> ::Array[Types::UserAlias]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_user-instance_method
       def update_user: (
                          application_id: ::String,
-                         ?user_aliases_to_delete: Array[
-                           {
-                             data_source_id: ::String?,
-                             index_id: ::String?,
-                             user_id: ::String
-                           },
-                         ],
+                         user_id: ::String,
                          ?user_aliases_to_update: Array[
                            {
-                             data_source_id: ::String?,
                              index_id: ::String?,
+                             data_source_id: ::String?,
                              user_id: ::String
                            },
                          ],
-                         user_id: ::String
+                         ?user_aliases_to_delete: Array[
+                           {
+                             index_id: ::String?,
+                             data_source_id: ::String?,
+                             user_id: ::String
+                           },
+                         ]
                        ) -> _UpdateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
 
@@ -1397,19 +1452,20 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_web_experience-instance_method
       def update_web_experience: (
                                    application_id: ::String,
+                                   web_experience_id: ::String,
+                                   ?role_arn: ::String,
                                    ?authentication_configuration: {
                                      saml_configuration: {
                                        metadata_xml: ::String,
                                        role_arn: ::String,
-                                       user_group_attribute: ::String?,
-                                       user_id_attribute: ::String
+                                       user_id_attribute: ::String,
+                                       user_group_attribute: ::String?
                                      }?
                                    },
-                                   ?sample_prompts_control_mode: ("ENABLED" | "DISABLED"),
-                                   ?subtitle: ::String,
                                    ?title: ::String,
-                                   web_experience_id: ::String,
-                                   ?welcome_message: ::String
+                                   ?subtitle: ::String,
+                                   ?welcome_message: ::String,
+                                   ?sample_prompts_control_mode: ("ENABLED" | "DISABLED")
                                  ) -> _UpdateWebExperienceResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebExperienceResponseSuccess
     end

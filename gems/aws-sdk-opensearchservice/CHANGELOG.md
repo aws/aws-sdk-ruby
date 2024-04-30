@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2024-04-30)
+------------------
+
+* Feature - This release enables customers to create Route53 A and AAAA alias record types to point custom endpoint domain to OpenSearch domain's dualstack search endpoint.
+
 1.39.0 (2024-04-25)
 ------------------
 

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2024-04-30)
+------------------
+
 * Feature - Handle System Message Attributes MD5 verification.
 
 1.71.0 (2024-04-25)

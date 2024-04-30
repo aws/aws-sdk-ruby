@@ -438,10 +438,10 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Accepts a share for an analytics store.
+    # Accept a resource share request.
     #
     # @option params [required, String] :share_id
-    #   The ID for a share offer for analytics store data.
+    #   The ID of the resource share.
     #
     # @return [Types::AcceptShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1069,19 +1069,27 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Creates a share offer that can be accepted outside the account by a
-    # subscriber. The share is created by the owner and accepted by the
-    # principal subscriber.
+    # Creates a cross-account shared resource. The resource owner makes an
+    # offer to share the resource with the principal subscriber (an AWS user
+    # with a different account than the resource owner).
+    #
+    # The following resources support cross-account sharing:
+    #
+    # * Healthomics variant stores
+    #
+    # * Healthomics annotation stores
+    #
+    # * Private workflows
     #
     # @option params [required, String] :resource_arn
-    #   The resource ARN for the analytics store to be shared.
+    #   The ARN of the resource to be shared.
     #
     # @option params [required, String] :principal_subscriber
-    #   The principal subscriber is the account being given access to the
-    #   analytics store data through the share offer.
+    #   The principal subscriber is the account being offered shared access to
+    #   the resource.
     #
     # @option params [String] :share_name
-    #   A name given to the share.
+    #   A name that the owner defines for the share.
     #
     # @return [Types::CreateShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1195,7 +1203,7 @@ module Aws::Omics
     #   A parameter template for the workflow.
     #
     # @option params [Integer] :storage_capacity
-    #   A storage capacity for the workflow in gibibytes.
+    #   The storage capacity for the workflow in gibibytes.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags for the workflow.
@@ -1443,10 +1451,12 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Deletes a share of an analytics store.
+    # Deletes a resource share. If you are the resource owner, the
+    # subscriber will no longer have access to the shared resource. If you
+    # are the subscriber, this operation deletes your access to the share.
     #
     # @option params [required, String] :share_id
-    #   The ID for the share request to be deleted.
+    #   The ID for the resource share to be deleted.
     #
     # @return [Types::DeleteShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2222,6 +2232,9 @@ module Aws::Omics
 
     # Gets information about a workflow run.
     #
+    # If a workflow is shared with you, you cannot export information about
+    # the run.
+    #
     # @option params [required, String] :id
     #   The run's ID.
     #
@@ -2259,6 +2272,8 @@ module Aws::Omics
     #   * {Types::GetRunResponse#log_location #log_location} => Types::RunLogLocation
     #   * {Types::GetRunResponse#uuid #uuid} => String
     #   * {Types::GetRunResponse#run_output_uri #run_output_uri} => String
+    #   * {Types::GetRunResponse#storage_type #storage_type} => String
+    #   * {Types::GetRunResponse#workflow_owner_id #workflow_owner_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2300,6 +2315,8 @@ module Aws::Omics
     #   resp.log_location.run_log_stream #=> String
     #   resp.uuid #=> String
     #   resp.run_output_uri #=> String
+    #   resp.storage_type #=> String, one of "STATIC", "DYNAMIC"
+    #   resp.workflow_owner_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2469,10 +2486,10 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves the metadata for a share.
+    # Retrieves the metadata for the specified resource share.
     #
     # @option params [required, String] :share_id
-    #   The generated ID for a share.
+    #   The ID of the share.
     #
     # @return [Types::GetShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2488,6 +2505,7 @@ module Aws::Omics
     #
     #   resp.share.share_id #=> String
     #   resp.share.resource_arn #=> String
+    #   resp.share.resource_id #=> String
     #   resp.share.principal_subscriber #=> String
     #   resp.share.owner_id #=> String
     #   resp.share.status #=> String, one of "PENDING", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "FAILED"
@@ -2622,6 +2640,8 @@ module Aws::Omics
 
     # Gets information about a workflow.
     #
+    # If a workflow is shared with you, you cannot export the workflow.
+    #
     # @option params [required, String] :id
     #   The workflow's ID.
     #
@@ -2630,6 +2650,9 @@ module Aws::Omics
     #
     # @option params [Array<String>] :export
     #   The export format for the workflow.
+    #
+    # @option params [String] :workflow_owner_id
+    #   The ID of the workflow owner.
     #
     # @return [Types::GetWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2657,6 +2680,7 @@ module Aws::Omics
     #     id: "WorkflowId", # required
     #     type: "PRIVATE", # accepts PRIVATE, READY2RUN
     #     export: ["DEFINITION"], # accepts DEFINITION
+    #     workflow_owner_id: "WorkflowOwnerId",
     #   })
     #
     # @example Response structure
@@ -3554,6 +3578,7 @@ module Aws::Omics
     #   resp.items[0].creation_time #=> Time
     #   resp.items[0].start_time #=> Time
     #   resp.items[0].stop_time #=> Time
+    #   resp.items[0].storage_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListRuns AWS API Documentation
@@ -3619,13 +3644,15 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Lists all shares associated with an account.
+    # Retrieves the resource shares associated with an account. Use the
+    # filter parameter to retrieve a specific subset of the shares.
     #
     # @option params [required, String] :resource_owner
-    #   The account that owns the analytics store shared.
+    #   The account that owns the resource shares.
     #
     # @option params [Types::Filter] :filter
-    #   Attributes used to filter for a specific subset of shares.
+    #   Attributes that you use to filter for a specific subset of resource
+    #   shares.
     #
     # @option params [String] :next_token
     #   Next token returned in the response of a previous
@@ -3649,6 +3676,7 @@ module Aws::Omics
     #     filter: {
     #       resource_arns: ["String"],
     #       status: ["PENDING"], # accepts PENDING, ACTIVATING, ACTIVE, DELETING, DELETED, FAILED
+    #       type: ["VARIANT_STORE"], # accepts VARIANT_STORE, ANNOTATION_STORE, WORKFLOW
     #     },
     #     next_token: "String",
     #     max_results: 1,
@@ -3659,6 +3687,7 @@ module Aws::Omics
     #   resp.shares #=> Array
     #   resp.shares[0].share_id #=> String
     #   resp.shares[0].resource_arn #=> String
+    #   resp.shares[0].resource_id #=> String
     #   resp.shares[0].principal_subscriber #=> String
     #   resp.shares[0].owner_id #=> String
     #   resp.shares[0].status #=> String, one of "PENDING", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "FAILED"
@@ -3826,10 +3855,10 @@ module Aws::Omics
     # Retrieves a list of workflows.
     #
     # @option params [String] :type
-    #   The workflows' type.
+    #   Filter the list by workflow type.
     #
     # @option params [String] :name
-    #   The workflows' name.
+    #   Filter the list by workflow name.
     #
     # @option params [String] :starting_token
     #   Specify the pagination token from a previous request to retrieve the
@@ -4185,10 +4214,24 @@ module Aws::Omics
     # Starts a workflow run. To duplicate a run, specify the run's ID and a
     # role ARN. The remaining parameters are copied from the previous run.
     #
+    # StartRun will not support re-run for a workflow that is shared with
+    # you.
+    #
     # The total number of runs in your account is subject to a quota per
     # Region. To avoid needing to delete runs manually, you can set the
     # retention mode to `REMOVE`. Runs with this setting are deleted
     # automatically when the run quoata is exceeded.
+    #
+    # By default, the run uses STATIC storage. For STATIC storage, set the
+    # `storageCapacity` field. You can set the storage type to DYNAMIC. You
+    # do not set `storageCapacity`, because HealthOmics dynamically scales
+    # the storage up or down as required. For more information about static
+    # and dynamic storage, see [Running workflows][1] in the *AWS
+    # HealthOmics User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
     #
     # @option params [String] :workflow_id
     #   The run's workflow ID.
@@ -4220,7 +4263,9 @@ module Aws::Omics
     #   additional encoding or escaping.
     #
     # @option params [Integer] :storage_capacity
-    #   A storage capacity for the run in gibibytes.
+    #   A storage capacity for the run in gibibytes. This field is not
+    #   required if the storage type is dynamic (the system ignores any value
+    #   that you enter).
     #
     # @option params [String] :output_uri
     #   An output URI for the run.
@@ -4240,6 +4285,15 @@ module Aws::Omics
     #
     # @option params [String] :retention_mode
     #   The retention mode for the run.
+    #
+    # @option params [String] :storage_type
+    #   The run's storage type. By default, the run uses STATIC storage type,
+    #   which allocates a fixed amount of storage. If you set the storage type
+    #   to DYNAMIC, HealthOmics dynamically scales the storage up or down,
+    #   based on file system utilization.
+    #
+    # @option params [String] :workflow_owner_id
+    #   The ID of the workflow owner.
     #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4270,6 +4324,8 @@ module Aws::Omics
     #     },
     #     request_id: "RunRequestId", # required
     #     retention_mode: "RETAIN", # accepts RETAIN, REMOVE
+    #     storage_type: "STATIC", # accepts STATIC, DYNAMIC
+    #     workflow_owner_id: "WorkflowOwnerId",
     #   })
     #
     # @example Response structure
@@ -4673,7 +4729,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

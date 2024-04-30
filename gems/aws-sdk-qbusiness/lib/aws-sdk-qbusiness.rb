@@ -16,11 +16,14 @@ require_relative 'aws-sdk-qbusiness/client_api'
 require_relative 'aws-sdk-qbusiness/plugins/endpoints.rb'
 require_relative 'aws-sdk-qbusiness/client'
 require_relative 'aws-sdk-qbusiness/errors'
+require_relative 'aws-sdk-qbusiness/waiters'
 require_relative 'aws-sdk-qbusiness/resource'
 require_relative 'aws-sdk-qbusiness/endpoint_parameters'
 require_relative 'aws-sdk-qbusiness/endpoint_provider'
 require_relative 'aws-sdk-qbusiness/endpoints'
 require_relative 'aws-sdk-qbusiness/customizations'
+require_relative 'aws-sdk-qbusiness/async_client'
+require_relative 'aws-sdk-qbusiness/event_streams'
 
 # This module provides support for QBusiness. This module is available in the
 # `aws-sdk-qbusiness` gem.
@@ -52,6 +55,6 @@ require_relative 'aws-sdk-qbusiness/customizations'
 # @!group service
 module Aws::QBusiness
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

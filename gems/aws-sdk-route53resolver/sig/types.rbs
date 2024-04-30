@@ -103,6 +103,7 @@ module Aws::Route53Resolver
       attr_accessor block_override_dns_type: ("CNAME")
       attr_accessor block_override_ttl: ::Integer
       attr_accessor name: ::String
+      attr_accessor firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN")
       attr_accessor qtype: ::String
       SENSITIVE: []
     end
@@ -340,6 +341,7 @@ module Aws::Route53Resolver
       attr_accessor creator_request_id: ::String
       attr_accessor creation_time: ::String
       attr_accessor modification_time: ::String
+      attr_accessor firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN")
       attr_accessor qtype: ::String
       SENSITIVE: []
     end
@@ -1100,6 +1102,7 @@ module Aws::Route53Resolver
       attr_accessor block_override_dns_type: ("CNAME")
       attr_accessor block_override_ttl: ::Integer
       attr_accessor name: ::String
+      attr_accessor firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN")
       attr_accessor qtype: ::String
       SENSITIVE: []
     end

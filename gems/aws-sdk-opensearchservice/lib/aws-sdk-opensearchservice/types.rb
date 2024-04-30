@@ -3033,9 +3033,18 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] endpoints
     #   The key-value pair that exists if the OpenSearch Service domain uses
-    #   VPC endpoints. Example `key, value`:
-    #   `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`.
+    #   VPC endpoints. For example:
+    #
+    #   * **IPv4 IP addresses** -
+    #     `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`
+    #
+    #   * **Dual stack IP addresses** -
+    #     `'vpcv2':'vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.aos.us-east-1.on.aws'`
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] domain_endpoint_v2_hosted_zone_id
+    #   The DualStack Hosted Zone Id for the domain.
+    #   @return [String]
     #
     # @!attribute [rw] processing
     #   The status of the domain configuration. True if OpenSearch Service
@@ -3152,6 +3161,7 @@ module Aws::OpenSearchService
       :endpoint,
       :endpoint_v2,
       :endpoints,
+      :domain_endpoint_v2_hosted_zone_id,
       :processing,
       :upgrade_processing,
       :engine_version,

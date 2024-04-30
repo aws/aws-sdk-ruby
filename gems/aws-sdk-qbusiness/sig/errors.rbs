@@ -39,9 +39,9 @@ module Aws
         def message: () -> ::String
       end
       class ValidationException < ::Aws::Errors::ServiceError
-        def fields: () -> ::String
         def message: () -> ::String
         def reason: () -> ::String
+        def fields: () -> ::String
       end
     end
   end

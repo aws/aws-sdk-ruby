@@ -90,6 +90,20 @@ module Aws
                                           ) -> _AssociateOriginationIdentityResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateOriginationIdentityResponseSuccess
 
+      interface _AssociateProtectConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateProtectConfigurationResult]
+        def configuration_set_arn: () -> ::String
+        def configuration_set_name: () -> ::String
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#associate_protect_configuration-instance_method
+      def associate_protect_configuration: (
+                                             protect_configuration_id: ::String,
+                                             configuration_set_name: ::String
+                                           ) -> _AssociateProtectConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateProtectConfigurationResponseSuccess
+
       interface _CreateConfigurationSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetResult]
         def configuration_set_arn: () -> ::String
@@ -120,7 +134,7 @@ module Aws
       def create_event_destination: (
                                       configuration_set_name: ::String,
                                       event_destination_name: ::String,
-                                      matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED")],
+                                      matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")],
                                       ?cloud_watch_logs_destination: {
                                         iam_role_arn: ::String,
                                         log_group_arn: ::String
@@ -187,6 +201,28 @@ module Aws
                          ?client_token: ::String
                        ) -> _CreatePoolResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePoolResponseSuccess
+
+      interface _CreateProtectConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProtectConfigurationResult]
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+        def created_timestamp: () -> ::Time
+        def account_default: () -> bool
+        def deletion_protection_enabled: () -> bool
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#create_protect_configuration-instance_method
+      def create_protect_configuration: (
+                                          ?client_token: ::String,
+                                          ?deletion_protection_enabled: bool,
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ]
+                                        ) -> _CreateProtectConfigurationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProtectConfigurationResponseSuccess
 
       interface _CreateRegistrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRegistrationResult]
@@ -288,6 +324,16 @@ module Aws
                                               ) -> _CreateVerifiedDestinationNumberResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVerifiedDestinationNumberResponseSuccess
 
+      interface _DeleteAccountDefaultProtectConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountDefaultProtectConfigurationResult]
+        def default_protect_configuration_arn: () -> ::String
+        def default_protect_configuration_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#delete_account_default_protect_configuration-instance_method
+      def delete_account_default_protect_configuration: (
+                                                        ) -> _DeleteAccountDefaultProtectConfigurationResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountDefaultProtectConfigurationResponseSuccess
+
       interface _DeleteConfigurationSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetResult]
         def configuration_set_arn: () -> ::String
@@ -355,6 +401,15 @@ module Aws
                           ) -> _DeleteKeywordResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKeywordResponseSuccess
 
+      interface _DeleteMediaMessageSpendLimitOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMediaMessageSpendLimitOverrideResult]
+        def monthly_limit: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#delete_media_message_spend_limit_override-instance_method
+      def delete_media_message_spend_limit_override: (
+                                                     ) -> _DeleteMediaMessageSpendLimitOverrideResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMediaMessageSpendLimitOverrideResponseSuccess
+
       interface _DeleteOptOutListResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOptOutListResult]
         def opt_out_list_arn: () -> ::String
@@ -401,6 +456,20 @@ module Aws
                          pool_id: ::String
                        ) -> _DeletePoolResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePoolResponseSuccess
+
+      interface _DeleteProtectConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProtectConfigurationResult]
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+        def created_timestamp: () -> ::Time
+        def account_default: () -> bool
+        def deletion_protection_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#delete_protect_configuration-instance_method
+      def delete_protect_configuration: (
+                                          protect_configuration_id: ::String
+                                        ) -> _DeleteProtectConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProtectConfigurationResponseSuccess
 
       interface _DeleteRegistrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRegistrationResult]
@@ -516,7 +585,7 @@ module Aws
                                          ?configuration_set_names: Array[::String],
                                          ?filters: Array[
                                            {
-                                             name: ("event-destination-name" | "matching-event-types" | "default-message-type" | "default-sender-id"),
+                                             name: ("event-destination-name" | "matching-event-types" | "default-message-type" | "default-sender-id" | "protect-configuration-id"),
                                              values: Array[::String]
                                            },
                                          ],
@@ -619,6 +688,25 @@ module Aws
                             ?max_results: ::Integer
                           ) -> _DescribePoolsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePoolsResponseSuccess
+
+      interface _DescribeProtectConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProtectConfigurationsResult]
+        def protect_configurations: () -> ::Array[Types::ProtectConfigurationInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#describe_protect_configurations-instance_method
+      def describe_protect_configurations: (
+                                             ?protect_configuration_ids: Array[::String],
+                                             ?filters: Array[
+                                               {
+                                                 name: ("account-default" | "deletion-protection-enabled"),
+                                                 values: Array[::String]
+                                               },
+                                             ],
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _DescribeProtectConfigurationsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProtectConfigurationsResponseSuccess
 
       interface _DescribeRegistrationAttachmentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRegistrationAttachmentsResult]
@@ -822,6 +910,20 @@ module Aws
                                              ) -> _DisassociateOriginationIdentityResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateOriginationIdentityResponseSuccess
 
+      interface _DisassociateProtectConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateProtectConfigurationResult]
+        def configuration_set_arn: () -> ::String
+        def configuration_set_name: () -> ::String
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#disassociate_protect_configuration-instance_method
+      def disassociate_protect_configuration: (
+                                                protect_configuration_id: ::String,
+                                                configuration_set_name: ::String
+                                              ) -> _DisassociateProtectConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateProtectConfigurationResponseSuccess
+
       interface _DiscardRegistrationVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DiscardRegistrationVersionResult]
         def registration_arn: () -> ::String
@@ -835,6 +937,20 @@ module Aws
                                           registration_id: ::String
                                         ) -> _DiscardRegistrationVersionResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DiscardRegistrationVersionResponseSuccess
+
+      interface _GetProtectConfigurationCountryRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProtectConfigurationCountryRuleSetResult]
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+        def number_capability: () -> ("SMS" | "VOICE" | "MMS")
+        def country_rule_set: () -> ::Hash[::String, Types::ProtectConfigurationCountryRuleSetInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#get_protect_configuration_country_rule_set-instance_method
+      def get_protect_configuration_country_rule_set: (
+                                                        protect_configuration_id: ::String,
+                                                        number_capability: ("SMS" | "VOICE" | "MMS")
+                                                      ) -> _GetProtectConfigurationCountryRuleSetResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProtectConfigurationCountryRuleSetResponseSuccess
 
       interface _ListPoolOriginationIdentitiesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPoolOriginationIdentitiesResult]
@@ -950,7 +1066,7 @@ module Aws
         def status: () -> ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
         def iso_country_code: () -> ::String
         def message_type: () -> ("TRANSACTIONAL" | "PROMOTIONAL")
-        def number_capabilities: () -> ::Array[("SMS" | "VOICE")]
+        def number_capabilities: () -> ::Array[("SMS" | "VOICE" | "MMS")]
         def number_type: () -> ("SHORT_CODE" | "LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
         def monthly_leasing_price: () -> ::String
         def two_way_enabled: () -> bool
@@ -992,7 +1108,7 @@ module Aws
         def status: () -> ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
         def iso_country_code: () -> ::String
         def message_type: () -> ("TRANSACTIONAL" | "PROMOTIONAL")
-        def number_capabilities: () -> ::Array[("SMS" | "VOICE")]
+        def number_capabilities: () -> ::Array[("SMS" | "VOICE" | "MMS")]
         def number_type: () -> ("LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
         def monthly_leasing_price: () -> ::String
         def two_way_enabled: () -> bool
@@ -1010,7 +1126,7 @@ module Aws
       def request_phone_number: (
                                   iso_country_code: ::String,
                                   message_type: ("TRANSACTIONAL" | "PROMOTIONAL"),
-                                  number_capabilities: Array[("SMS" | "VOICE")],
+                                  number_capabilities: Array[("SMS" | "VOICE" | "MMS")],
                                   number_type: ("LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR"),
                                   ?opt_out_list_name: ::String,
                                   ?pool_id: ::String,
@@ -1069,6 +1185,25 @@ module Aws
                                                      ) -> _SendDestinationNumberVerificationCodeResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDestinationNumberVerificationCodeResponseSuccess
 
+      interface _SendMediaMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendMediaMessageResult]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#send_media_message-instance_method
+      def send_media_message: (
+                                destination_phone_number: ::String,
+                                origination_identity: ::String,
+                                ?message_body: ::String,
+                                ?media_urls: Array[::String],
+                                ?configuration_set_name: ::String,
+                                ?max_price: ::String,
+                                ?time_to_live: ::Integer,
+                                ?context: Hash[::String, ::String],
+                                ?dry_run: bool,
+                                ?protect_configuration_id: ::String
+                              ) -> _SendMediaMessageResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendMediaMessageResponseSuccess
+
       interface _SendTextMessageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendTextMessageResult]
         def message_id: () -> ::String
@@ -1085,7 +1220,8 @@ module Aws
                                ?time_to_live: ::Integer,
                                ?context: Hash[::String, ::String],
                                ?destination_country_parameters: Hash[("IN_TEMPLATE_ID" | "IN_ENTITY_ID"), ::String],
-                               ?dry_run: bool
+                               ?dry_run: bool,
+                               ?protect_configuration_id: ::String
                              ) -> _SendTextMessageResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendTextMessageResponseSuccess
 
@@ -1104,9 +1240,21 @@ module Aws
                                 ?max_price_per_minute: ::String,
                                 ?time_to_live: ::Integer,
                                 ?context: Hash[::String, ::String],
-                                ?dry_run: bool
+                                ?dry_run: bool,
+                                ?protect_configuration_id: ::String
                               ) -> _SendVoiceMessageResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendVoiceMessageResponseSuccess
+
+      interface _SetAccountDefaultProtectConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetAccountDefaultProtectConfigurationResult]
+        def default_protect_configuration_arn: () -> ::String
+        def default_protect_configuration_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#set_account_default_protect_configuration-instance_method
+      def set_account_default_protect_configuration: (
+                                                       protect_configuration_id: ::String
+                                                     ) -> _SetAccountDefaultProtectConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetAccountDefaultProtectConfigurationResponseSuccess
 
       interface _SetDefaultMessageTypeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetDefaultMessageTypeResult]
@@ -1133,6 +1281,16 @@ module Aws
                                    sender_id: ::String
                                  ) -> _SetDefaultSenderIdResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetDefaultSenderIdResponseSuccess
+
+      interface _SetMediaMessageSpendLimitOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetMediaMessageSpendLimitOverrideResult]
+        def monthly_limit: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#set_media_message_spend_limit_override-instance_method
+      def set_media_message_spend_limit_override: (
+                                                    monthly_limit: ::Integer
+                                                  ) -> _SetMediaMessageSpendLimitOverrideResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetMediaMessageSpendLimitOverrideResponseSuccess
 
       interface _SetTextMessageSpendLimitOverrideResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetTextMessageSpendLimitOverrideResult]
@@ -1204,7 +1362,7 @@ module Aws
                                       configuration_set_name: ::String,
                                       event_destination_name: ::String,
                                       ?enabled: bool,
-                                      ?matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED")],
+                                      ?matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")],
                                       ?cloud_watch_logs_destination: {
                                         iam_role_arn: ::String,
                                         log_group_arn: ::String
@@ -1227,7 +1385,7 @@ module Aws
         def status: () -> ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
         def iso_country_code: () -> ::String
         def message_type: () -> ("TRANSACTIONAL" | "PROMOTIONAL")
-        def number_capabilities: () -> ::Array[("SMS" | "VOICE")]
+        def number_capabilities: () -> ::Array[("SMS" | "VOICE" | "MMS")]
         def number_type: () -> ("SHORT_CODE" | "LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
         def monthly_leasing_price: () -> ::String
         def two_way_enabled: () -> bool
@@ -1278,6 +1436,38 @@ module Aws
                          ?deletion_protection_enabled: bool
                        ) -> _UpdatePoolResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePoolResponseSuccess
+
+      interface _UpdateProtectConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProtectConfigurationResult]
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+        def created_timestamp: () -> ::Time
+        def account_default: () -> bool
+        def deletion_protection_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#update_protect_configuration-instance_method
+      def update_protect_configuration: (
+                                          protect_configuration_id: ::String,
+                                          ?deletion_protection_enabled: bool
+                                        ) -> _UpdateProtectConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProtectConfigurationResponseSuccess
+
+      interface _UpdateProtectConfigurationCountryRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProtectConfigurationCountryRuleSetResult]
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+        def number_capability: () -> ("SMS" | "VOICE" | "MMS")
+        def country_rule_set: () -> ::Hash[::String, Types::ProtectConfigurationCountryRuleSetInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#update_protect_configuration_country_rule_set-instance_method
+      def update_protect_configuration_country_rule_set: (
+                                                           protect_configuration_id: ::String,
+                                                           number_capability: ("SMS" | "VOICE" | "MMS"),
+                                                           country_rule_set_updates: Hash[::String, {
+                                                               protect_status: ("ALLOW" | "BLOCK")
+                                                             }]
+                                                         ) -> _UpdateProtectConfigurationCountryRuleSetResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProtectConfigurationCountryRuleSetResponseSuccess
 
       interface _UpdateSenderIdResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSenderIdResult]

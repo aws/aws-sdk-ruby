@@ -87,6 +87,7 @@ module Aws::Route53Resolver
     FirewallDomainListMetadataList = Shapes::ListShape.new(name: 'FirewallDomainListMetadataList')
     FirewallDomainListStatus = Shapes::StringShape.new(name: 'FirewallDomainListStatus')
     FirewallDomainName = Shapes::StringShape.new(name: 'FirewallDomainName')
+    FirewallDomainRedirectionAction = Shapes::StringShape.new(name: 'FirewallDomainRedirectionAction')
     FirewallDomainUpdateOperation = Shapes::StringShape.new(name: 'FirewallDomainUpdateOperation')
     FirewallDomains = Shapes::ListShape.new(name: 'FirewallDomains')
     FirewallFailOpenStatus = Shapes::StringShape.new(name: 'FirewallFailOpenStatus')
@@ -354,6 +355,7 @@ module Aws::Route53Resolver
     CreateFirewallRuleRequest.add_member(:block_override_dns_type, Shapes::ShapeRef.new(shape: BlockOverrideDnsType, location_name: "BlockOverrideDnsType", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.add_member(:block_override_ttl, Shapes::ShapeRef.new(shape: BlockOverrideTtl, location_name: "BlockOverrideTtl", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    CreateFirewallRuleRequest.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.struct_class = Types::CreateFirewallRuleRequest
 
@@ -529,6 +531,7 @@ module Aws::Route53Resolver
     FirewallRule.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, location_name: "CreatorRequestId"))
     FirewallRule.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "CreationTime"))
     FirewallRule.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "ModificationTime"))
+    FirewallRule.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction"))
     FirewallRule.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
     FirewallRule.struct_class = Types::FirewallRule
 
@@ -1103,6 +1106,7 @@ module Aws::Route53Resolver
     UpdateFirewallRuleRequest.add_member(:block_override_dns_type, Shapes::ShapeRef.new(shape: BlockOverrideDnsType, location_name: "BlockOverrideDnsType", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:block_override_ttl, Shapes::ShapeRef.new(shape: BlockOverrideTtl, location_name: "BlockOverrideTtl", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name", metadata: {"box"=>true}))
+    UpdateFirewallRuleRequest.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
     UpdateFirewallRuleRequest.struct_class = Types::UpdateFirewallRuleRequest
 
@@ -1169,6 +1173,7 @@ module Aws::Route53Resolver
         "endpointPrefix" => "route53resolver",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Route53Resolver",
         "serviceFullName" => "Amazon Route 53 Resolver",
         "serviceId" => "Route53Resolver",

@@ -717,6 +717,8 @@ module Aws
         def log_location: () -> Types::RunLogLocation
         def uuid: () -> ::String
         def run_output_uri: () -> ::String
+        def storage_type: () -> ("STATIC" | "DYNAMIC")
+        def workflow_owner_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_run-instance_method
       def get_run: (
@@ -859,7 +861,8 @@ module Aws
       def get_workflow: (
                           id: ::String,
                           ?type: ("PRIVATE" | "READY2RUN"),
-                          ?export: Array[("DEFINITION")]
+                          ?export: Array[("DEFINITION")],
+                          ?workflow_owner_id: ::String
                         ) -> _GetWorkflowResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowResponseSuccess
 
@@ -1145,7 +1148,8 @@ module Aws
                          resource_owner: ("SELF" | "OTHER"),
                          ?filter: {
                            resource_arns: Array[::String]?,
-                           status: Array[("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")]?
+                           status: Array[("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")]?,
+                           type: Array[("VARIANT_STORE" | "ANNOTATION_STORE" | "WORKFLOW")]?
                          },
                          ?next_token: ::String,
                          ?max_results: ::Integer
@@ -1369,7 +1373,9 @@ module Aws
                        ?log_level: ("OFF" | "FATAL" | "ERROR" | "ALL"),
                        ?tags: Hash[::String, ::String],
                        request_id: ::String,
-                       ?retention_mode: ("RETAIN" | "REMOVE")
+                       ?retention_mode: ("RETAIN" | "REMOVE"),
+                       ?storage_type: ("STATIC" | "DYNAMIC"),
+                       ?workflow_owner_id: ::String
                      ) -> _StartRunResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRunResponseSuccess
 
@@ -1577,7 +1583,8 @@ module Aws
                     | (:workflow_active waiter_name, 
                     id: ::String,
                     ?type: ("PRIVATE" | "READY2RUN"),
-                    ?export: Array[("DEFINITION")]
+                    ?export: Array[("DEFINITION")],
+                    ?workflow_owner_id: ::String
                   ) -> Client::_GetWorkflowResponseSuccess
                     | (:workflow_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWorkflowResponseSuccess
     end

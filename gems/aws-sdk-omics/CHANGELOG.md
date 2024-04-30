@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2024-04-30)
+------------------
+
+* Feature - Add support for workflow sharing and dynamic run storage
+
 1.25.0 (2024-04-25)
 ------------------
 
