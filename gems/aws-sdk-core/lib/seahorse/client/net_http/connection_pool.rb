@@ -119,11 +119,7 @@ module Seahorse
         #   pool, not counting those currently in use.
         def size
           @pool_mutex.synchronize do
-            size = 0
-            @pool.each_pair do |endpoint,sessions|
-              size += sessions.size
-            end
-            size
+            @pool.values.flatten.size
           end
         end
 

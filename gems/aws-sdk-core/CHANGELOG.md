@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix issue where `ConnectionPool` size iteration would prevent a new key from being added to the pool.
+
 3.194.0 (2024-04-30)
 ------------------
 
