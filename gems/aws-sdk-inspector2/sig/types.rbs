@@ -568,6 +568,7 @@ module Aws::Inspector2
       attr_accessor last_scanned_at: ::Array[Types::CoverageDateFilter]
       attr_accessor resource_id: ::Array[Types::CoverageStringFilter]
       attr_accessor resource_type: ::Array[Types::CoverageStringFilter]
+      attr_accessor scan_mode: ::Array[Types::CoverageStringFilter]
       attr_accessor scan_status_code: ::Array[Types::CoverageStringFilter]
       attr_accessor scan_status_reason: ::Array[Types::CoverageStringFilter]
       attr_accessor scan_type: ::Array[Types::CoverageStringFilter]
@@ -593,6 +594,7 @@ module Aws::Inspector2
       attr_accessor resource_id: ::String
       attr_accessor resource_metadata: Types::ResourceScanMetadata
       attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION")
+      attr_accessor scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_AGENTLESS")
       attr_accessor scan_status: Types::ScanStatus
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
       SENSITIVE: []
@@ -784,6 +786,16 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class Ec2Configuration
+      attr_accessor scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_HYBRID")
+      SENSITIVE: []
+    end
+
+    class Ec2ConfigurationState
+      attr_accessor scan_mode_state: Types::Ec2ScanModeState
+      SENSITIVE: []
+    end
+
     class Ec2InstanceAggregation
       attr_accessor amis: ::Array[Types::StringFilter]
       attr_accessor instance_ids: ::Array[Types::StringFilter]
@@ -809,6 +821,12 @@ module Aws::Inspector2
       attr_accessor ami_id: ::String
       attr_accessor platform: ("WINDOWS" | "LINUX" | "UNKNOWN" | "MACOS")
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Ec2ScanModeState
+      attr_accessor scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_HYBRID")
+      attr_accessor scan_mode_status: ("SUCCESS" | "PENDING")
       SENSITIVE: []
     end
 
@@ -1086,6 +1104,7 @@ module Aws::Inspector2
     end
 
     class GetConfigurationResponse
+      attr_accessor ec2_configuration: Types::Ec2ConfigurationState
       attr_accessor ecr_configuration: Types::EcrConfigurationState
       SENSITIVE: []
     end
@@ -1914,6 +1933,7 @@ module Aws::Inspector2
     end
 
     class UpdateConfigurationRequest
+      attr_accessor ec2_configuration: Types::Ec2Configuration
       attr_accessor ecr_configuration: Types::EcrConfiguration
       SENSITIVE: []
     end

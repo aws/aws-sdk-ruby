@@ -78,6 +78,7 @@ module Aws
         def id: () -> ::String
         def label: () -> ::String
         def label_template: () -> ::String
+        def link_configuration: () -> Types::LinkConfiguration
         def resource_types: () -> ::Array[::String]
         def sink_arn: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
@@ -85,6 +86,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OAM/Client.html#create_link-instance_method
       def create_link: (
                          label_template: ::String,
+                         ?link_configuration: {
+                           log_group_configuration: {
+                             filter: ::String
+                           }?,
+                           metric_configuration: {
+                             filter: ::String
+                           }?
+                         },
                          resource_types: Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application" | "AWS::InternetMonitor::Monitor")],
                          sink_identifier: ::String,
                          ?tags: Hash[::String, ::String]
@@ -129,6 +138,7 @@ module Aws
         def id: () -> ::String
         def label: () -> ::String
         def label_template: () -> ::String
+        def link_configuration: () -> Types::LinkConfiguration
         def resource_types: () -> ::Array[::String]
         def sink_arn: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
@@ -154,9 +164,9 @@ module Aws
 
       interface _GetSinkPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSinkPolicyOutput]
+        def policy: () -> ::String
         def sink_arn: () -> ::String
         def sink_id: () -> ::String
-        def policy: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OAM/Client.html#get_sink_policy-instance_method
       def get_sink_policy: (
@@ -213,14 +223,14 @@ module Aws
 
       interface _PutSinkPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutSinkPolicyOutput]
+        def policy: () -> ::String
         def sink_arn: () -> ::String
         def sink_id: () -> ::String
-        def policy: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OAM/Client.html#put_sink_policy-instance_method
       def put_sink_policy: (
-                             sink_identifier: ::String,
-                             policy: ::String
+                             policy: ::String,
+                             sink_identifier: ::String
                            ) -> _PutSinkPolicyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSinkPolicyResponseSuccess
 
@@ -250,6 +260,7 @@ module Aws
         def id: () -> ::String
         def label: () -> ::String
         def label_template: () -> ::String
+        def link_configuration: () -> Types::LinkConfiguration
         def resource_types: () -> ::Array[::String]
         def sink_arn: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
@@ -257,6 +268,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OAM/Client.html#update_link-instance_method
       def update_link: (
                          identifier: ::String,
+                         ?link_configuration: {
+                           log_group_configuration: {
+                             filter: ::String
+                           }?,
+                           metric_configuration: {
+                             filter: ::String
+                           }?
+                         },
                          resource_types: Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application" | "AWS::InternetMonitor::Monitor")]
                        ) -> _UpdateLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkResponseSuccess

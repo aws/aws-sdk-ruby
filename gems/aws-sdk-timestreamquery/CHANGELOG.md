@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-04-29)
+------------------
+
+* Feature - This change allows users to update and describe account settings associated with their accounts.
+
 1.30.0 (2024-04-25)
 ------------------
 

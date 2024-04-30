@@ -11,10 +11,7 @@ namespace :rbs do
   task :spytest do
     failures = []
     # Just test s3 for most type coverage
-    %w[
-      core
-      s3
-    ].each do |identifier|
+    %w[core s3].each do |identifier|
       sdk_gem = "aws-sdk-#{identifier}"
       puts "Run rspec with RBS::Test on `#{sdk_gem}`"
       env = {

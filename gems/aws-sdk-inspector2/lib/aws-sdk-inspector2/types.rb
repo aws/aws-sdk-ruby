@@ -1958,6 +1958,11 @@ module Aws::Inspector2
     #   `AWS_ECR_REPOSITORY` or `AWS_ACCOUNT`.
     #   @return [Array<Types::CoverageStringFilter>]
     #
+    # @!attribute [rw] scan_mode
+    #   The filter to search for Amazon EC2 instance coverage by scan mode.
+    #   Valid values are `EC2_SSM_AGENT_BASED` and `EC2_HYBRID`.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
     # @!attribute [rw] scan_status_code
     #   The scan status code to filter on. Valid values are:
     #   `ValidationException`, `InternalServerException`,
@@ -1988,6 +1993,7 @@ module Aws::Inspector2
       :last_scanned_at,
       :resource_id,
       :resource_type,
+      :scan_mode,
       :scan_status_code,
       :scan_status_reason,
       :scan_type)
@@ -2061,6 +2067,10 @@ module Aws::Inspector2
     #   The type of the covered resource.
     #   @return [String]
     #
+    # @!attribute [rw] scan_mode
+    #   The scan method that is applied to the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] scan_status
     #   The status of the scan covering the resource.
     #   @return [Types::ScanStatus]
@@ -2077,6 +2087,7 @@ module Aws::Inspector2
       :resource_id,
       :resource_metadata,
       :resource_type,
+      :scan_mode,
       :scan_status,
       :scan_type)
       SENSITIVE = []
@@ -2661,6 +2672,37 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Enables agent-based scanning, which scans instances that are not
+    # managed by SSM.
+    #
+    # @!attribute [rw] scan_mode
+    #   The scan method that is applied to the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Ec2Configuration AWS API Documentation
+    #
+    class Ec2Configuration < Struct.new(
+      :scan_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the state of the EC2 scan configuration for your
+    # environment.
+    #
+    # @!attribute [rw] scan_mode_state
+    #   An object that contains details about the state of the Amazon EC2
+    #   scan mode.
+    #   @return [Types::Ec2ScanModeState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Ec2ConfigurationState AWS API Documentation
+    #
+    class Ec2ConfigurationState < Struct.new(
+      :scan_mode_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details that define an aggregation based on Amazon EC2 instances.
     #
     # @!attribute [rw] amis
@@ -2769,6 +2811,25 @@ module Aws::Inspector2
       :ami_id,
       :platform,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The state of your Amazon EC2 scan mode configuration.
+    #
+    # @!attribute [rw] scan_mode
+    #   The scan method that is applied to the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_mode_status
+    #   The status of the Amazon EC2 scan mode setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Ec2ScanModeState AWS API Documentation
+    #
+    class Ec2ScanModeState < Struct.new(
+      :scan_mode,
+      :scan_mode_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3488,7 +3549,8 @@ module Aws::Inspector2
     #   @return [Types::InspectorScoreDetails]
     #
     # @!attribute [rw] last_observed_at
-    #   The date and time that the finding was last observed.
+    #   The date and time the finding was last observed. This timestamp for
+    #   this field remains unchanged until a finding is updated.
     #   @return [Time]
     #
     # @!attribute [rw] network_reachability_details
@@ -3816,7 +3878,7 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] url
-    #   The URL where the CIS scan report PDF can be downloaded.
+    #   The URL where a PDF of the CIS scan report can be downloaded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCisScanReportResponse AWS API Documentation
@@ -3901,6 +3963,11 @@ module Aws::Inspector2
     #
     class GetConfigurationRequest < Aws::EmptyStructure; end
 
+    # @!attribute [rw] ec2_configuration
+    #   Specifies how the Amazon EC2 automated scan mode is currently
+    #   configured for your environment.
+    #   @return [Types::Ec2ConfigurationState]
+    #
     # @!attribute [rw] ecr_configuration
     #   Specifies how the ECR automated re-scan duration is currently
     #   configured for your environment.
@@ -3909,6 +3976,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfigurationResponse AWS API Documentation
     #
     class GetConfigurationResponse < Struct.new(
+      :ec2_configuration,
       :ecr_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -6903,6 +6971,11 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] ec2_configuration
+    #   Specifies how the Amazon EC2 automated scan will be updated for your
+    #   environment.
+    #   @return [Types::Ec2Configuration]
+    #
     # @!attribute [rw] ecr_configuration
     #   Specifies how the ECR automated re-scan will be updated for your
     #   environment.
@@ -6911,6 +6984,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConfigurationRequest AWS API Documentation
     #
     class UpdateConfigurationRequest < Struct.new(
+      :ec2_configuration,
       :ecr_configuration)
       SENSITIVE = []
       include Aws::Structure

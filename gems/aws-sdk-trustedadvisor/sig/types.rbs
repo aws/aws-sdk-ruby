@@ -25,6 +25,16 @@ module Aws::TrustedAdvisor
       SENSITIVE: [:update_reason]
     end
 
+    class BatchUpdateRecommendationResourceExclusionRequest
+      attr_accessor recommendation_resource_exclusions: ::Array[Types::RecommendationResourceExclusion]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateRecommendationResourceExclusionResponse
+      attr_accessor batch_update_recommendation_resource_exclusion_errors: ::Array[Types::UpdateRecommendationResourceExclusionError]
+      SENSITIVE: []
+    end
+
     class CheckSummary
       attr_accessor arn: ::String
       attr_accessor aws_services: ::Array[::String]
@@ -99,6 +109,7 @@ module Aws::TrustedAdvisor
 
     class ListOrganizationRecommendationResourcesRequest
       attr_accessor affected_account_id: ::String
+      attr_accessor exclusion_status: ("excluded" | "included")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor organization_recommendation_identifier: ::String
@@ -134,6 +145,7 @@ module Aws::TrustedAdvisor
     end
 
     class ListRecommendationResourcesRequest
+      attr_accessor exclusion_status: ("excluded" | "included")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor recommendation_identifier: ::String
@@ -197,6 +209,7 @@ module Aws::TrustedAdvisor
       attr_accessor account_id: ::String
       attr_accessor arn: ::String
       attr_accessor aws_resource_id: ::String
+      attr_accessor exclusion_status: ("excluded" | "included")
       attr_accessor id: ::String
       attr_accessor last_updated_at: ::Time
       attr_accessor metadata: ::Hash[::String, ::String]
@@ -260,9 +273,16 @@ module Aws::TrustedAdvisor
       SENSITIVE: []
     end
 
+    class RecommendationResourceExclusion
+      attr_accessor arn: ::String
+      attr_accessor is_excluded: bool
+      SENSITIVE: []
+    end
+
     class RecommendationResourceSummary
       attr_accessor arn: ::String
       attr_accessor aws_resource_id: ::String
+      attr_accessor exclusion_status: ("excluded" | "included")
       attr_accessor id: ::String
       attr_accessor last_updated_at: ::Time
       attr_accessor metadata: ::Hash[::String, ::String]
@@ -321,6 +341,13 @@ module Aws::TrustedAdvisor
       attr_accessor update_reason: ::String
       attr_accessor update_reason_code: ("non_critical_account" | "temporary_account" | "valid_business_case" | "other_methods_available" | "low_priority" | "not_applicable" | "other")
       SENSITIVE: [:update_reason]
+    end
+
+    class UpdateRecommendationResourceExclusionError
+      attr_accessor arn: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
     end
 
     class ValidationException

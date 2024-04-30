@@ -9,7 +9,7 @@ module Aws
     describe Client do
       let(:client) { Client.new }
 
-      before(:each) do
+      before do
         Aws.config[:s3] = {
           region: 'us-east-1',
           credentials: Credentials.new('akid', 'secret'),
@@ -17,9 +17,9 @@ module Aws
         }
       end
 
-      after(:each) do
+      after do
         Aws.config = {}
-        S3::BUCKET_REGIONS.clear
+        Aws::S3.bucket_region_cache.clear
       end
 
       it 'raises an error when region is missing' do
@@ -106,7 +106,7 @@ module Aws
       end
 
       describe 'permanent redirect error' do
-        it 'includes endpoint and bucket in PermanentRedirect' do
+        it 'includes endpoint, bucket, and region in PermanentRedirect' do
           client = Client.new(stub_responses: true)
           client.handle(step: :send) do |context|
             context.http_response.signal_done(
@@ -129,6 +129,23 @@ BODY
             expect(error.message).to eq('Error message.')
             expect(error.data.endpoint).to eq('http://foo.com')
             expect(error.data.bucket).to eq('bucket')
+            expect(error.data.region).to eq('us-peccy-1')
+          end
+        end
+
+        it 'handles PermanentRedirect with no body' do
+          client = Client.new(stub_responses: true)
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 301,
+              headers: { 'x-amz-bucket-region' => 'us-peccy-1' },
+              body: ''
+            )
+            Seahorse::Client::Response.new(context: context)
+          end
+          expect do
+            client.head_bucket(bucket: 'bucket')
+          end.to raise_error(Errors::Http301Error) do |error|
             expect(error.data.region).to eq('us-peccy-1')
           end
         end

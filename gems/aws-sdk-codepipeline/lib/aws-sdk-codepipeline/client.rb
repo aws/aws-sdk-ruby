@@ -705,6 +705,9 @@ module Aws::CodePipeline
     #               timeout_in_minutes: 1,
     #             },
     #           ],
+    #           on_failure: {
+    #             result: "ROLLBACK", # accepts ROLLBACK
+    #           },
     #         },
     #       ],
     #       version: 1,
@@ -798,6 +801,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK"
     #   resp.pipeline.version #=> Integer
     #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
@@ -1249,6 +1253,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK"
     #   resp.pipeline.version #=> Integer
     #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
@@ -1337,9 +1342,11 @@ module Aws::CodePipeline
     #   resp.pipeline_execution.variables #=> Array
     #   resp.pipeline_execution.variables[0].name #=> String
     #   resp.pipeline_execution.variables[0].resolved_value #=> String
-    #   resp.pipeline_execution.trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2"
+    #   resp.pipeline_execution.trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2", "ManualRollback", "AutomatedRollback"
     #   resp.pipeline_execution.trigger.trigger_detail #=> String
     #   resp.pipeline_execution.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
+    #   resp.pipeline_execution.execution_type #=> String, one of "STANDARD", "ROLLBACK"
+    #   resp.pipeline_execution.rollback_metadata.rollback_target_pipeline_execution_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecution AWS API Documentation
     #
@@ -1384,9 +1391,11 @@ module Aws::CodePipeline
     #   resp.stage_states[0].stage_name #=> String
     #   resp.stage_states[0].inbound_execution.pipeline_execution_id #=> String
     #   resp.stage_states[0].inbound_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].inbound_execution.type #=> String, one of "STANDARD", "ROLLBACK"
     #   resp.stage_states[0].inbound_executions #=> Array
     #   resp.stage_states[0].inbound_executions[0].pipeline_execution_id #=> String
     #   resp.stage_states[0].inbound_executions[0].status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].inbound_executions[0].type #=> String, one of "STANDARD", "ROLLBACK"
     #   resp.stage_states[0].inbound_transition_state.enabled #=> Boolean
     #   resp.stage_states[0].inbound_transition_state.last_changed_by #=> String
     #   resp.stage_states[0].inbound_transition_state.last_changed_at #=> Time
@@ -1411,6 +1420,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].revision_url #=> String
     #   resp.stage_states[0].latest_execution.pipeline_execution_id #=> String
     #   resp.stage_states[0].latest_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].latest_execution.type #=> String, one of "STANDARD", "ROLLBACK"
     #   resp.created #=> Time
     #   resp.updated #=> Time
     #
@@ -1667,6 +1677,9 @@ module Aws::CodePipeline
     #   value. Pipeline history is limited to the most recent 12 months, based
     #   on pipeline execution start times. Default value is 100.
     #
+    # @option params [Types::PipelineExecutionFilter] :filter
+    #   The pipeline execution to filter on.
+    #
     # @option params [String] :next_token
     #   The token that was returned from the previous `ListPipelineExecutions`
     #   call, which can be used to return the next set of pipeline executions
@@ -1684,6 +1697,11 @@ module Aws::CodePipeline
     #   resp = client.list_pipeline_executions({
     #     pipeline_name: "PipelineName", # required
     #     max_results: 1,
+    #     filter: {
+    #       succeeded_in_stage: {
+    #         stage_name: "StageName",
+    #       },
+    #     },
     #     next_token: "NextToken",
     #   })
     #
@@ -1692,6 +1710,7 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries #=> Array
     #   resp.pipeline_execution_summaries[0].pipeline_execution_id #=> String
     #   resp.pipeline_execution_summaries[0].status #=> String, one of "Cancelled", "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution_summaries[0].status_summary #=> String
     #   resp.pipeline_execution_summaries[0].start_time #=> Time
     #   resp.pipeline_execution_summaries[0].last_update_time #=> Time
     #   resp.pipeline_execution_summaries[0].source_revisions #=> Array
@@ -1699,10 +1718,12 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_id #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_summary #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_url #=> String
-    #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2"
+    #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2", "ManualRollback", "AutomatedRollback"
     #   resp.pipeline_execution_summaries[0].trigger.trigger_detail #=> String
     #   resp.pipeline_execution_summaries[0].stop_trigger.reason #=> String
     #   resp.pipeline_execution_summaries[0].execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
+    #   resp.pipeline_execution_summaries[0].execution_type #=> String, one of "STANDARD", "ROLLBACK"
+    #   resp.pipeline_execution_summaries[0].rollback_metadata.rollback_target_pipeline_execution_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions AWS API Documentation
@@ -2437,6 +2458,42 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Rolls back a stage execution.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The name of the pipeline for which the stage will be rolled back.
+    #
+    # @option params [required, String] :stage_name
+    #   The name of the stage in the pipeline to be rolled back.
+    #
+    # @option params [required, String] :target_pipeline_execution_id
+    #   The pipeline execution ID for the stage to be rolled back to.
+    #
+    # @return [Types::RollbackStageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RollbackStageOutput#pipeline_execution_id #pipeline_execution_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rollback_stage({
+    #     pipeline_name: "PipelineName", # required
+    #     stage_name: "StageName", # required
+    #     target_pipeline_execution_id: "PipelineExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RollbackStage AWS API Documentation
+    #
+    # @overload rollback_stage(params = {})
+    # @param [Hash] params ({})
+    def rollback_stage(params = {}, options = {})
+      req = build_request(:rollback_stage, params)
+      req.send_request(options)
+    end
+
     # Starts the specified pipeline. Specifically, it begins processing the
     # latest commit to the source location specified as part of the
     # pipeline.
@@ -2759,6 +2816,9 @@ module Aws::CodePipeline
     #               timeout_in_minutes: 1,
     #             },
     #           ],
+    #           on_failure: {
+    #             result: "ROLLBACK", # accepts ROLLBACK
+    #           },
     #         },
     #       ],
     #       version: 1,
@@ -2846,6 +2906,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK"
     #   resp.pipeline.version #=> Integer
     #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
@@ -2903,7 +2964,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

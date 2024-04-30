@@ -79,6 +79,32 @@ module Aws::TrustedAdvisor
       include Aws::Structure
     end
 
+    # @!attribute [rw] recommendation_resource_exclusions
+    #   A list of recommendation resource ARNs and exclusion status to
+    #   update
+    #   @return [Array<Types::RecommendationResourceExclusion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/BatchUpdateRecommendationResourceExclusionRequest AWS API Documentation
+    #
+    class BatchUpdateRecommendationResourceExclusionRequest < Struct.new(
+      :recommendation_resource_exclusions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] batch_update_recommendation_resource_exclusion_errors
+    #   A list of recommendation resource ARNs whose exclusion status failed
+    #   to update, if any
+    #   @return [Array<Types::UpdateRecommendationResourceExclusionError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/BatchUpdateRecommendationResourceExclusionResponse AWS API Documentation
+    #
+    class BatchUpdateRecommendationResourceExclusionResponse < Struct.new(
+      :batch_update_recommendation_resource_exclusion_errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A summary of an AWS Trusted Advisor Check
     #
     # @!attribute [rw] arn
@@ -316,6 +342,10 @@ module Aws::TrustedAdvisor
     #   An account affected by this organization recommendation
     #   @return [String]
     #
+    # @!attribute [rw] exclusion_status
+    #   The exclusion status of the resource
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
@@ -342,6 +372,7 @@ module Aws::TrustedAdvisor
     #
     class ListOrganizationRecommendationResourcesRequest < Struct.new(
       :affected_account_id,
+      :exclusion_status,
       :max_results,
       :next_token,
       :organization_recommendation_identifier,
@@ -448,6 +479,10 @@ module Aws::TrustedAdvisor
       include Aws::Structure
     end
 
+    # @!attribute [rw] exclusion_status
+    #   The exclusion status of the resource
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
@@ -473,6 +508,7 @@ module Aws::TrustedAdvisor
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListRecommendationResourcesRequest AWS API Documentation
     #
     class ListRecommendationResourcesRequest < Struct.new(
+      :exclusion_status,
       :max_results,
       :next_token,
       :recommendation_identifier,
@@ -715,6 +751,10 @@ module Aws::TrustedAdvisor
     #   The AWS resource identifier
     #   @return [String]
     #
+    # @!attribute [rw] exclusion_status
+    #   The exclusion status of the Recommendation Resource
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The ID of the Recommendation Resource
     #   @return [String]
@@ -745,6 +785,7 @@ module Aws::TrustedAdvisor
       :account_id,
       :arn,
       :aws_resource_id,
+      :exclusion_status,
       :id,
       :last_updated_at,
       :metadata,
@@ -991,6 +1032,27 @@ module Aws::TrustedAdvisor
       include Aws::Structure
     end
 
+    # The request entry for Recommendation Resource exclusion. Each entry is
+    # a combination of Recommendation Resource ARN and corresponding
+    # exclusion status
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Recommendation Resource
+    #   @return [String]
+    #
+    # @!attribute [rw] is_excluded
+    #   The exclusion status
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/RecommendationResourceExclusion AWS API Documentation
+    #
+    class RecommendationResourceExclusion < Struct.new(
+      :arn,
+      :is_excluded)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary of a Recommendation Resource
     #
     # @!attribute [rw] arn
@@ -999,6 +1061,10 @@ module Aws::TrustedAdvisor
     #
     # @!attribute [rw] aws_resource_id
     #   The AWS resource identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusion_status
+    #   The exclusion status of the Recommendation Resource
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1030,6 +1096,7 @@ module Aws::TrustedAdvisor
     class RecommendationResourceSummary < Struct.new(
       :arn,
       :aws_resource_id,
+      :exclusion_status,
       :id,
       :last_updated_at,
       :metadata,
@@ -1227,6 +1294,32 @@ module Aws::TrustedAdvisor
       :update_reason,
       :update_reason_code)
       SENSITIVE = [:update_reason]
+      include Aws::Structure
+    end
+
+    # The error entry for Recommendation Resource exclusion. Each entry is a
+    # combination of Recommendation Resource ARN, error code and error
+    # message
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Recommendation Resource
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/UpdateRecommendationResourceExclusionError AWS API Documentation
+    #
+    class UpdateRecommendationResourceExclusionError < Struct.new(
+      :arn,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
       include Aws::Structure
     end
 

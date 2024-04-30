@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support S3 Access Grants authentication. Access Grants can be enabled with the `access_grants` option, and custom options can be passed into the `access_grants_credentials_provider` option. This feature requires `aws-sdk-s3control` to be installed.
+
 * Feature - Add RBS signatures for customizations of S3.
 
 1.148.0 (2024-04-25)
@@ -39,7 +41,6 @@ Unreleased Changes
 ------------------
 
 * Issue - Include original part errors in message when aborting multipart upload fails (#2990).
-
 
 1.143.0 (2024-01-26)
 ------------------

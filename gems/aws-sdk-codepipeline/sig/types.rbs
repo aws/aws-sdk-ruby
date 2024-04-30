@@ -420,7 +420,7 @@ module Aws::CodePipeline
     end
 
     class ExecutionTrigger
-      attr_accessor trigger_type: ("CreatePipeline" | "StartPipelineExecution" | "PollForSourceChanges" | "Webhook" | "CloudWatchEvent" | "PutActionRevision" | "WebhookV2")
+      attr_accessor trigger_type: ("CreatePipeline" | "StartPipelineExecution" | "PollForSourceChanges" | "Webhook" | "CloudWatchEvent" | "PutActionRevision" | "WebhookV2" | "ManualRollback" | "AutomatedRollback")
       attr_accessor trigger_detail: ::String
       SENSITIVE: []
     end
@@ -428,6 +428,11 @@ module Aws::CodePipeline
     class ExecutorConfiguration
       attr_accessor lambda_executor_configuration: Types::LambdaExecutorConfiguration
       attr_accessor job_worker_executor_configuration: Types::JobWorkerExecutorConfiguration
+      SENSITIVE: []
+    end
+
+    class FailureConditions
+      attr_accessor result: ("ROLLBACK")
       SENSITIVE: []
     end
 
@@ -679,6 +684,7 @@ module Aws::CodePipeline
     class ListPipelineExecutionsInput
       attr_accessor pipeline_name: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::PipelineExecutionFilter
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -783,6 +789,13 @@ module Aws::CodePipeline
       attr_accessor variables: ::Array[Types::ResolvedPipelineVariable]
       attr_accessor trigger: Types::ExecutionTrigger
       attr_accessor execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")
+      attr_accessor execution_type: ("STANDARD" | "ROLLBACK")
+      attr_accessor rollback_metadata: Types::PipelineRollbackMetadata
+      SENSITIVE: []
+    end
+
+    class PipelineExecutionFilter
+      attr_accessor succeeded_in_stage: Types::SucceededInStageFilter
       SENSITIVE: []
     end
 
@@ -794,15 +807,23 @@ module Aws::CodePipeline
       SENSITIVE: []
     end
 
+    class PipelineExecutionOutdatedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class PipelineExecutionSummary
       attr_accessor pipeline_execution_id: ::String
       attr_accessor status: ("Cancelled" | "InProgress" | "Stopped" | "Stopping" | "Succeeded" | "Superseded" | "Failed")
+      attr_accessor status_summary: ::String
       attr_accessor start_time: ::Time
       attr_accessor last_update_time: ::Time
       attr_accessor source_revisions: ::Array[Types::SourceRevision]
       attr_accessor trigger: Types::ExecutionTrigger
       attr_accessor stop_trigger: Types::StopExecutionTrigger
       attr_accessor execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")
+      attr_accessor execution_type: ("STANDARD" | "ROLLBACK")
+      attr_accessor rollback_metadata: Types::PipelineRollbackMetadata
       SENSITIVE: []
     end
 
@@ -818,6 +839,11 @@ module Aws::CodePipeline
     end
 
     class PipelineNotFoundException < Aws::EmptyStructure
+    end
+
+    class PipelineRollbackMetadata
+      attr_accessor rollback_target_pipeline_execution_id: ::String
+      SENSITIVE: []
     end
 
     class PipelineSummary
@@ -980,6 +1006,18 @@ module Aws::CodePipeline
       SENSITIVE: []
     end
 
+    class RollbackStageInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor target_pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class RollbackStageOutput
+      attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
     class S3ArtifactLocation
       attr_accessor bucket_name: ::String
       attr_accessor object_key: ::String
@@ -1016,12 +1054,14 @@ module Aws::CodePipeline
       attr_accessor name: ::String
       attr_accessor blockers: ::Array[Types::BlockerDeclaration]
       attr_accessor actions: ::Array[Types::ActionDeclaration]
+      attr_accessor on_failure: Types::FailureConditions
       SENSITIVE: []
     end
 
     class StageExecution
       attr_accessor pipeline_execution_id: ::String
       attr_accessor status: ("Cancelled" | "InProgress" | "Failed" | "Stopped" | "Stopping" | "Succeeded")
+      attr_accessor type: ("STANDARD" | "ROLLBACK")
       SENSITIVE: []
     end
 
@@ -1069,6 +1109,11 @@ module Aws::CodePipeline
 
     class StopPipelineExecutionOutput
       attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class SucceededInStageFilter
+      attr_accessor stage_name: ::String
       SENSITIVE: []
     end
 
@@ -1122,6 +1167,11 @@ module Aws::CodePipeline
       attr_accessor last_changed_by: ::String
       attr_accessor last_changed_at: ::Time
       attr_accessor disabled_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UnableToRollbackStageException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

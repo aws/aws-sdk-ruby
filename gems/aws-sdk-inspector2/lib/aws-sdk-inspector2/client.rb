@@ -2038,10 +2038,13 @@ module Aws::Inspector2
     #
     # @return [Types::GetConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetConfigurationResponse#ec2_configuration #ec2_configuration} => Types::Ec2ConfigurationState
     #   * {Types::GetConfigurationResponse#ecr_configuration #ecr_configuration} => Types::EcrConfigurationState
     #
     # @example Response structure
     #
+    #   resp.ec2_configuration.scan_mode_state.scan_mode #=> String, one of "EC2_SSM_AGENT_BASED", "EC2_HYBRID"
+    #   resp.ec2_configuration.scan_mode_state.scan_mode_status #=> String, one of "SUCCESS", "PENDING"
     #   resp.ecr_configuration.rescan_duration_state.pull_date_rescan_duration #=> String, one of "DAYS_14", "DAYS_30", "DAYS_60", "DAYS_90", "DAYS_180"
     #   resp.ecr_configuration.rescan_duration_state.rescan_duration #=> String, one of "LIFETIME", "DAYS_30", "DAYS_180", "DAYS_14", "DAYS_60", "DAYS_90"
     #   resp.ecr_configuration.rescan_duration_state.status #=> String, one of "SUCCESS", "PENDING", "FAILED"
@@ -3005,6 +3008,12 @@ module Aws::Inspector2
     #           value: "CoverageStringInput", # required
     #         },
     #       ],
+    #       scan_mode: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
     #       scan_status_code: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
@@ -3050,6 +3059,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers[0] #=> String
     #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10"
     #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
+    #   resp.covered_resources[0].scan_mode #=> String, one of "EC2_SSM_AGENT_BASED", "EC2_AGENTLESS"
     #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE", "CODE"
@@ -3155,6 +3165,12 @@ module Aws::Inspector2
     #         },
     #       ],
     #       resource_type: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       scan_mode: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #           value: "CoverageStringInput", # required
@@ -4769,7 +4785,11 @@ module Aws::Inspector2
     # updates the setting for all accounts you manage. Member accounts in an
     # organization cannot update this setting.
     #
-    # @option params [required, Types::EcrConfiguration] :ecr_configuration
+    # @option params [Types::Ec2Configuration] :ec2_configuration
+    #   Specifies how the Amazon EC2 automated scan will be updated for your
+    #   environment.
+    #
+    # @option params [Types::EcrConfiguration] :ecr_configuration
     #   Specifies how the ECR automated re-scan will be updated for your
     #   environment.
     #
@@ -4778,7 +4798,10 @@ module Aws::Inspector2
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_configuration({
-    #     ecr_configuration: { # required
+    #     ec2_configuration: {
+    #       scan_mode: "EC2_SSM_AGENT_BASED", # required, accepts EC2_SSM_AGENT_BASED, EC2_HYBRID
+    #     },
+    #     ecr_configuration: {
     #       pull_date_rescan_duration: "DAYS_14", # accepts DAYS_14, DAYS_30, DAYS_60, DAYS_90, DAYS_180
     #       rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180, DAYS_14, DAYS_60, DAYS_90
     #     },
@@ -5279,7 +5302,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

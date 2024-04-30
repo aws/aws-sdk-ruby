@@ -638,6 +638,32 @@ module Aws::TimestreamQuery
       req.send_request(options)
     end
 
+    # Describes the settings for your account that include the query pricing
+    # model and the configured maximum TCUs the service can use for your
+    # query workload.
+    #
+    # You're charged only for the duration of compute units used for your
+    # workloads.
+    #
+    # @return [Types::DescribeAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountSettingsResponse#max_query_tcu #max_query_tcu} => Integer
+    #   * {Types::DescribeAccountSettingsResponse#query_pricing_model #query_pricing_model} => String
+    #
+    # @example Response structure
+    #
+    #   resp.max_query_tcu #=> Integer
+    #   resp.query_pricing_model #=> String, one of "BYTES_SCANNED", "COMPUTE_UNITS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/DescribeAccountSettings AWS API Documentation
+    #
+    # @overload describe_account_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_account_settings(params = {}, options = {})
+      req = build_request(:describe_account_settings, params)
+      req.send_request(options)
+    end
+
     # DescribeEndpoints returns a list of available endpoints to make
     # Timestream API calls against. This API is available through both Write
     # and Query.
@@ -740,6 +766,7 @@ module Aws::TimestreamQuery
     #   resp.scheduled_query.last_run_summary.execution_stats.execution_time_in_millis #=> Integer
     #   resp.scheduled_query.last_run_summary.execution_stats.data_writes #=> Integer
     #   resp.scheduled_query.last_run_summary.execution_stats.bytes_metered #=> Integer
+    #   resp.scheduled_query.last_run_summary.execution_stats.cumulative_bytes_scanned #=> Integer
     #   resp.scheduled_query.last_run_summary.execution_stats.records_ingested #=> Integer
     #   resp.scheduled_query.last_run_summary.execution_stats.query_result_rows #=> Integer
     #   resp.scheduled_query.last_run_summary.error_report_location.s3_report_location.bucket_name #=> String
@@ -752,6 +779,7 @@ module Aws::TimestreamQuery
     #   resp.scheduled_query.recently_failed_runs[0].execution_stats.execution_time_in_millis #=> Integer
     #   resp.scheduled_query.recently_failed_runs[0].execution_stats.data_writes #=> Integer
     #   resp.scheduled_query.recently_failed_runs[0].execution_stats.bytes_metered #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].execution_stats.cumulative_bytes_scanned #=> Integer
     #   resp.scheduled_query.recently_failed_runs[0].execution_stats.records_ingested #=> Integer
     #   resp.scheduled_query.recently_failed_runs[0].execution_stats.query_result_rows #=> Integer
     #   resp.scheduled_query.recently_failed_runs[0].error_report_location.s3_report_location.bucket_name #=> String
@@ -1182,6 +1210,60 @@ module Aws::TimestreamQuery
       req.send_request(options)
     end
 
+    # Transitions your account to use TCUs for query pricing and modifies
+    # the maximum query compute units that you've configured. If you reduce
+    # the value of `MaxQueryTCU` to a desired configuration, the new value
+    # can take up to 24 hours to be effective.
+    #
+    # <note markdown="1"> After you've transitioned your account to use TCUs for query pricing,
+    # you can't transition to using bytes scanned for query pricing.
+    #
+    #  </note>
+    #
+    # @option params [Integer] :max_query_tcu
+    #   The maximum number of compute units the service will use at any point
+    #   in time to serve your queries. To run queries, you must set a minimum
+    #   capacity of 4 TCU. You can set the maximum number of TCU in multiples
+    #   of 4, for example, 4, 8, 16, 32, and so on.
+    #
+    #   The maximum value supported for `MaxQueryTCU` is 1000. To request an
+    #   increase to this soft limit, contact Amazon Web Services Support. For
+    #   information about the default quota for maxQueryTCU, see [Default
+    #   quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default
+    #
+    # @option params [String] :query_pricing_model
+    #   The pricing model for queries in an account.
+    #
+    # @return [Types::UpdateAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccountSettingsResponse#max_query_tcu #max_query_tcu} => Integer
+    #   * {Types::UpdateAccountSettingsResponse#query_pricing_model #query_pricing_model} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_settings({
+    #     max_query_tcu: 1,
+    #     query_pricing_model: "BYTES_SCANNED", # accepts BYTES_SCANNED, COMPUTE_UNITS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.max_query_tcu #=> Integer
+    #   resp.query_pricing_model #=> String, one of "BYTES_SCANNED", "COMPUTE_UNITS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/UpdateAccountSettings AWS API Documentation
+    #
+    # @overload update_account_settings(params = {})
+    # @param [Hash] params ({})
+    def update_account_settings(params = {}, options = {})
+      req = build_request(:update_account_settings, params)
+      req.send_request(options)
+    end
+
     # Update a scheduled query.
     #
     # @option params [required, String] :scheduled_query_arn
@@ -1221,7 +1303,7 @@ module Aws::TimestreamQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamquery'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

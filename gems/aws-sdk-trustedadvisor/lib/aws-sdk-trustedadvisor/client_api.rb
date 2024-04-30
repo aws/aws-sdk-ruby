@@ -19,12 +19,16 @@ module Aws::TrustedAdvisor
     AccountRecommendationIdentifier = Shapes::StringShape.new(name: 'AccountRecommendationIdentifier')
     AccountRecommendationLifecycleSummary = Shapes::StructureShape.new(name: 'AccountRecommendationLifecycleSummary')
     AccountRecommendationLifecycleSummaryList = Shapes::ListShape.new(name: 'AccountRecommendationLifecycleSummaryList')
+    BatchUpdateRecommendationResourceExclusionRequest = Shapes::StructureShape.new(name: 'BatchUpdateRecommendationResourceExclusionRequest')
+    BatchUpdateRecommendationResourceExclusionResponse = Shapes::StructureShape.new(name: 'BatchUpdateRecommendationResourceExclusionResponse')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CheckArn = Shapes::StringShape.new(name: 'CheckArn')
     CheckIdentifier = Shapes::StringShape.new(name: 'CheckIdentifier')
     CheckSummary = Shapes::StructureShape.new(name: 'CheckSummary')
     CheckSummaryList = Shapes::ListShape.new(name: 'CheckSummaryList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Double = Shapes::FloatShape.new(name: 'Double')
+    ExclusionStatus = Shapes::StringShape.new(name: 'ExclusionStatus')
     GetOrganizationRecommendationRequest = Shapes::StructureShape.new(name: 'GetOrganizationRecommendationRequest')
     GetOrganizationRecommendationResponse = Shapes::StructureShape.new(name: 'GetOrganizationRecommendationResponse')
     GetRecommendationRequest = Shapes::StructureShape.new(name: 'GetRecommendationRequest')
@@ -79,6 +83,8 @@ module Aws::TrustedAdvisor
     RecommendationPillarSpecificAggregates = Shapes::StructureShape.new(name: 'RecommendationPillarSpecificAggregates')
     RecommendationRegionCode = Shapes::StringShape.new(name: 'RecommendationRegionCode')
     RecommendationResourceArn = Shapes::StringShape.new(name: 'RecommendationResourceArn')
+    RecommendationResourceExclusion = Shapes::StructureShape.new(name: 'RecommendationResourceExclusion')
+    RecommendationResourceExclusionList = Shapes::ListShape.new(name: 'RecommendationResourceExclusionList')
     RecommendationResourceSummary = Shapes::StructureShape.new(name: 'RecommendationResourceSummary')
     RecommendationResourceSummaryList = Shapes::ListShape.new(name: 'RecommendationResourceSummaryList')
     RecommendationResourcesAggregates = Shapes::StructureShape.new(name: 'RecommendationResourcesAggregates')
@@ -99,6 +105,8 @@ module Aws::TrustedAdvisor
     UpdateRecommendationLifecycleRequest = Shapes::StructureShape.new(name: 'UpdateRecommendationLifecycleRequest')
     UpdateRecommendationLifecycleStage = Shapes::StringShape.new(name: 'UpdateRecommendationLifecycleStage')
     UpdateRecommendationLifecycleStageReasonCode = Shapes::StringShape.new(name: 'UpdateRecommendationLifecycleStageReasonCode')
+    UpdateRecommendationResourceExclusionError = Shapes::StructureShape.new(name: 'UpdateRecommendationResourceExclusionError')
+    UpdateRecommendationResourceExclusionErrorList = Shapes::ListShape.new(name: 'UpdateRecommendationResourceExclusionErrorList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -115,6 +123,12 @@ module Aws::TrustedAdvisor
     AccountRecommendationLifecycleSummary.struct_class = Types::AccountRecommendationLifecycleSummary
 
     AccountRecommendationLifecycleSummaryList.member = Shapes::ShapeRef.new(shape: AccountRecommendationLifecycleSummary)
+
+    BatchUpdateRecommendationResourceExclusionRequest.add_member(:recommendation_resource_exclusions, Shapes::ShapeRef.new(shape: RecommendationResourceExclusionList, required: true, location_name: "recommendationResourceExclusions"))
+    BatchUpdateRecommendationResourceExclusionRequest.struct_class = Types::BatchUpdateRecommendationResourceExclusionRequest
+
+    BatchUpdateRecommendationResourceExclusionResponse.add_member(:batch_update_recommendation_resource_exclusion_errors, Shapes::ShapeRef.new(shape: UpdateRecommendationResourceExclusionErrorList, required: true, location_name: "batchUpdateRecommendationResourceExclusionErrors"))
+    BatchUpdateRecommendationResourceExclusionResponse.struct_class = Types::BatchUpdateRecommendationResourceExclusionResponse
 
     CheckSummary.add_member(:arn, Shapes::ShapeRef.new(shape: CheckArn, required: true, location_name: "arn"))
     CheckSummary.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, required: true, location_name: "awsServices"))
@@ -169,6 +183,7 @@ module Aws::TrustedAdvisor
     ListOrganizationRecommendationAccountsResponse.struct_class = Types::ListOrganizationRecommendationAccountsResponse
 
     ListOrganizationRecommendationResourcesRequest.add_member(:affected_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "affectedAccountId"))
+    ListOrganizationRecommendationResourcesRequest.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location: "querystring", location_name: "exclusionStatus"))
     ListOrganizationRecommendationResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationResourcesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListOrganizationRecommendationResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationResourcesRequestNextTokenString, location: "querystring", location_name: "nextToken"))
     ListOrganizationRecommendationResourcesRequest.add_member(:organization_recommendation_identifier, Shapes::ShapeRef.new(shape: OrganizationRecommendationIdentifier, required: true, location: "uri", location_name: "organizationRecommendationIdentifier"))
@@ -196,6 +211,7 @@ module Aws::TrustedAdvisor
     ListOrganizationRecommendationsResponse.add_member(:organization_recommendation_summaries, Shapes::ShapeRef.new(shape: OrganizationRecommendationSummaryList, required: true, location_name: "organizationRecommendationSummaries"))
     ListOrganizationRecommendationsResponse.struct_class = Types::ListOrganizationRecommendationsResponse
 
+    ListRecommendationResourcesRequest.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location: "querystring", location_name: "exclusionStatus"))
     ListRecommendationResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationResourcesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListRecommendationResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecommendationResourcesRequestNextTokenString, location: "querystring", location_name: "nextToken"))
     ListRecommendationResourcesRequest.add_member(:recommendation_identifier, Shapes::ShapeRef.new(shape: AccountRecommendationIdentifier, required: true, location: "uri", location_name: "recommendationIdentifier"))
@@ -249,6 +265,7 @@ module Aws::TrustedAdvisor
     OrganizationRecommendationResourceSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     OrganizationRecommendationResourceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: RecommendationResourceArn, required: true, location_name: "arn"))
     OrganizationRecommendationResourceSummary.add_member(:aws_resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsResourceId"))
+    OrganizationRecommendationResourceSummary.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location_name: "exclusionStatus"))
     OrganizationRecommendationResourceSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     OrganizationRecommendationResourceSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedAt"))
     OrganizationRecommendationResourceSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
@@ -311,8 +328,15 @@ module Aws::TrustedAdvisor
     RecommendationPillarSpecificAggregates.add_member(:cost_optimizing, Shapes::ShapeRef.new(shape: RecommendationCostOptimizingAggregates, location_name: "costOptimizing"))
     RecommendationPillarSpecificAggregates.struct_class = Types::RecommendationPillarSpecificAggregates
 
+    RecommendationResourceExclusion.add_member(:arn, Shapes::ShapeRef.new(shape: RecommendationResourceArn, required: true, location_name: "arn"))
+    RecommendationResourceExclusion.add_member(:is_excluded, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isExcluded"))
+    RecommendationResourceExclusion.struct_class = Types::RecommendationResourceExclusion
+
+    RecommendationResourceExclusionList.member = Shapes::ShapeRef.new(shape: RecommendationResourceExclusion)
+
     RecommendationResourceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: RecommendationResourceArn, required: true, location_name: "arn"))
     RecommendationResourceSummary.add_member(:aws_resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsResourceId"))
+    RecommendationResourceSummary.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location_name: "exclusionStatus"))
     RecommendationResourceSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     RecommendationResourceSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedAt"))
     RecommendationResourceSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
@@ -367,6 +391,13 @@ module Aws::TrustedAdvisor
     UpdateRecommendationLifecycleRequest.add_member(:update_reason_code, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStageReasonCode, location_name: "updateReasonCode"))
     UpdateRecommendationLifecycleRequest.struct_class = Types::UpdateRecommendationLifecycleRequest
 
+    UpdateRecommendationResourceExclusionError.add_member(:arn, Shapes::ShapeRef.new(shape: RecommendationResourceArn, location_name: "arn"))
+    UpdateRecommendationResourceExclusionError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
+    UpdateRecommendationResourceExclusionError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    UpdateRecommendationResourceExclusionError.struct_class = Types::UpdateRecommendationResourceExclusionError
+
+    UpdateRecommendationResourceExclusionErrorList.member = Shapes::ShapeRef.new(shape: UpdateRecommendationResourceExclusionError)
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
@@ -387,6 +418,19 @@ module Aws::TrustedAdvisor
         "signingName" => "trustedadvisor",
         "uid" => "trustedadvisor-2022-09-15",
       }
+
+      api.add_operation(:batch_update_recommendation_resource_exclusion, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateRecommendationResourceExclusion"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/batch-update-recommendation-resource-exclusion"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateRecommendationResourceExclusionRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdateRecommendationResourceExclusionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
 
       api.add_operation(:get_organization_recommendation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetOrganizationRecommendation"

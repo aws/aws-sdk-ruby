@@ -124,6 +124,7 @@ module Aws::ConnectCampaignService
     AgentlessDialerConfig.struct_class = Types::AgentlessDialerConfig
 
     AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enableAnswerMachineDetection"))
+    AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, Shapes::ShapeRef.new(shape: Boolean, location_name: "awaitAnswerMachinePrompt"))
     AnswerMachineDetectionConfig.struct_class = Types::AnswerMachineDetectionConfig
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeName)
@@ -392,6 +393,7 @@ module Aws::ConnectCampaignService
         "endpointPrefix" => "connect-campaigns",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AmazonConnectCampaignService",
         "serviceId" => "ConnectCampaigns",
         "signatureVersion" => "v4",

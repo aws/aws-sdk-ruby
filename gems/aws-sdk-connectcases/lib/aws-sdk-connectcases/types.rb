@@ -88,9 +88,6 @@ module Aws::ConnectCases
 
     # Object to store union of Field values.
     #
-    # This data type is a UNION, so only one of the following members can be
-    # specified when used or returned.
-    #
     # @note AuditEventFieldValueUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AuditEventFieldValueUnion corresponding to the set member.
     #
     # @!attribute [rw] boolean_value
@@ -723,6 +720,69 @@ module Aws::ConnectCases
     #
     class DeleteDomainResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_id
+    #   The unique identifier of a field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteFieldRequest AWS API Documentation
+    #
+    class DeleteFieldRequest < Struct.new(
+      :domain_id,
+      :field_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteFieldResponse AWS API Documentation
+    #
+    class DeleteFieldResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout_id
+    #   The unique identifier of the layout.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteLayoutRequest AWS API Documentation
+    #
+    class DeleteLayoutRequest < Struct.new(
+      :domain_id,
+      :layout_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteLayoutResponse AWS API Documentation
+    #
+    class DeleteLayoutResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   A unique identifier of a template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteTemplateRequest AWS API Documentation
+    #
+    class DeleteTemplateRequest < Struct.new(
+      :domain_id,
+      :template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteTemplateResponse AWS API Documentation
+    #
+    class DeleteTemplateResponse < Aws::EmptyStructure; end
+
     # Object for the summarized details of the domain.
     #
     # @!attribute [rw] domain_arn
@@ -1266,6 +1326,14 @@ module Aws::ConnectCases
 
     # Object to store detailed field information.
     #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deleted
+    #   Indicates whether the resource has been deleted.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   Description of the field.
     #   @return [String]
@@ -1277,6 +1345,10 @@ module Aws::ConnectCases
     # @!attribute [rw] field_id
     #   Unique identifier of the field.
     #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the resource was created or last modified.
+    #   @return [Time]
     #
     # @!attribute [rw] name
     #   Name of the field.
@@ -1298,9 +1370,12 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetFieldResponse AWS API Documentation
     #
     class GetFieldResponse < Struct.new(
+      :created_time,
+      :deleted,
       :description,
       :field_arn,
       :field_id,
+      :last_modified_time,
       :name,
       :namespace,
       :tags,
@@ -1331,6 +1406,18 @@ module Aws::ConnectCases
     #   order of the fields, and read-only attribute of the field.
     #   @return [Types::LayoutContent]
     #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deleted
+    #   Indicates whether the resource has been deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the resource was created or last modified.
+    #   @return [Time]
+    #
     # @!attribute [rw] layout_arn
     #   The Amazon Resource Name (ARN) of the newly created layout.
     #   @return [String]
@@ -1352,6 +1439,9 @@ module Aws::ConnectCases
     #
     class GetLayoutResponse < Struct.new(
       :content,
+      :created_time,
+      :deleted,
+      :last_modified_time,
       :layout_arn,
       :layout_id,
       :name,
@@ -1377,9 +1467,21 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # @!attribute [rw] created_time
+    #   The timestamp for when the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deleted
+    #   Indicates whether the resource has been deleted.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   A brief description of the template.
     #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the resource was created or last modified.
+    #   @return [Time]
     #
     # @!attribute [rw] layout_configuration
     #   Configuration of layouts associated to the template.
@@ -1414,7 +1516,10 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetTemplateResponse AWS API Documentation
     #
     class GetTemplateResponse < Struct.new(
+      :created_time,
+      :deleted,
       :description,
+      :last_modified_time,
       :layout_configuration,
       :name,
       :required_fields,

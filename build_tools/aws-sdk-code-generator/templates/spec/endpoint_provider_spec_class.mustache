@@ -58,7 +58,7 @@ module {{module_name}}
           expiration: Time.now + 60 * 5
         })
         expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
-        EXPRESS_CREDENTIALS_CACHE.clear
+        Aws::S3.express_credentials_cache.clear
         {{/s3_express_auth?}}
         expect_auth({{{expected_auth}}})
         {{/expect_auth?}}

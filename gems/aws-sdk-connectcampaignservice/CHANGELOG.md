@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-04-26)
+------------------
+
+* Feature - This release adds support for specifying if Answering Machine should wait for prompt sound.
+
 1.15.0 (2024-04-25)
 ------------------
 

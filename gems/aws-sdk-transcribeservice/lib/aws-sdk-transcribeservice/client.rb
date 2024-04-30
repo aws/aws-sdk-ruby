@@ -1520,6 +1520,10 @@ module Aws::TranscribeService
     #
     #   resp.call_analytics_job.call_analytics_job_name #=> String
     #   resp.call_analytics_job.call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.call_analytics_job.call_analytics_job_details.skipped #=> Array
+    #   resp.call_analytics_job.call_analytics_job_details.skipped[0].feature #=> String, one of "GENERATIVE_SUMMARIZATION"
+    #   resp.call_analytics_job.call_analytics_job_details.skipped[0].reason_code #=> String, one of "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES"
+    #   resp.call_analytics_job.call_analytics_job_details.skipped[0].message #=> String
     #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.call_analytics_job.media_sample_rate_hertz #=> Integer
     #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"
@@ -2055,6 +2059,10 @@ module Aws::TranscribeService
     #   resp.call_analytics_job_summaries[0].completion_time #=> Time
     #   resp.call_analytics_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.call_analytics_job_summaries[0].call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.call_analytics_job_summaries[0].call_analytics_job_details.skipped #=> Array
+    #   resp.call_analytics_job_summaries[0].call_analytics_job_details.skipped[0].feature #=> String, one of "GENERATIVE_SUMMARIZATION"
+    #   resp.call_analytics_job_summaries[0].call_analytics_job_details.skipped[0].reason_code #=> String, one of "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES"
+    #   resp.call_analytics_job_summaries[0].call_analytics_job_details.skipped[0].message #=> String
     #   resp.call_analytics_job_summaries[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsJobs AWS API Documentation
@@ -2806,6 +2814,10 @@ module Aws::TranscribeService
     #
     #   resp.call_analytics_job.call_analytics_job_name #=> String
     #   resp.call_analytics_job.call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.call_analytics_job.call_analytics_job_details.skipped #=> Array
+    #   resp.call_analytics_job.call_analytics_job_details.skipped[0].feature #=> String, one of "GENERATIVE_SUMMARIZATION"
+    #   resp.call_analytics_job.call_analytics_job_details.skipped[0].reason_code #=> String, one of "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES"
+    #   resp.call_analytics_job.call_analytics_job_details.skipped[0].message #=> String
     #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zu-ZA"
     #   resp.call_analytics_job.media_sample_rate_hertz #=> Integer
     #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"
@@ -4432,7 +4444,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

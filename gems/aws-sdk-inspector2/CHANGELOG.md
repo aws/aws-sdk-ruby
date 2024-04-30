@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-04-29)
+------------------
+
+* Feature - Update Inspector2 to include new Agentless API parameters.
+
 1.27.0 (2024-04-25)
 ------------------
 
