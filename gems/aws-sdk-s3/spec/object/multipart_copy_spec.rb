@@ -257,8 +257,7 @@ module Aws
             allow(client).to receive(:head_object).with({
               bucket: 'source-bucket',
               key: 'source key'
-            }).and_return(Types::HeadObjectOutput.new(
-              content_length: size, content_type: 'ContentType'))
+            }).and_return(Types::HeadObjectOutput.new(content_length: size, content_type: 'ContentType'))
           end
 
           it 'performs multipart uploads when :multipart_copy is true' do
@@ -267,6 +266,54 @@ module Aws
                       bucket: 'bucket',
                       key: 'unescaped/key path',
                       content_type: 'ContentType'})
+              .and_return(
+                client.stub_data(:create_multipart_upload, upload_id: 'id')
+              )
+
+            (1..6).each do |n|
+              range = "bytes=#{(n - 1) * 52_428_800}-#{n * 52_428_800 - 1}"
+
+              expect(client).to receive(:upload_part_copy).with({
+                bucket: 'bucket',
+                key: 'unescaped/key path',
+                part_number: n,
+                copy_source: 'source-bucket/source%20key',
+                copy_source_range: range,
+                upload_id: 'id'
+              }).and_return(
+                client.stub_data(
+                  :upload_part_copy,
+                  copy_part_result: { etag: "etag#{n}" }
+                )
+              )
+            end
+
+            expect(client).to receive(:complete_multipart_upload).with({
+              bucket: 'bucket',
+              key: 'unescaped/key path',
+              upload_id: 'id',
+              multipart_upload: {
+                parts: (1..6).map { |n| { etag: "etag#{n}", part_number: n } }
+              }
+            })
+            object.copy_from('source-bucket/source%20key', multipart_copy: true)
+          end
+
+          it 'performs multipart uploads when :multipart_copy is true without copying source kms encryption' do
+            allow(client).to(
+              receive(:head_object).with(
+                { bucket: 'source-bucket', key: 'source key'}
+              ).and_return(
+                Types::HeadObjectOutput.new(
+                  server_side_encryption: "aws:kms",
+                  ssekms_key_id: "arn:aws:kms:us-east-1:1234567890:key/00000000-0000-0000-0000-000000000000",
+                  content_length: size = 300 * 1024 * 1024,
+                  content_type: 'ContentType'
+                )
+              )
+            )
+            expect(client).to receive(:create_multipart_upload)
+              .with({ bucket: 'bucket', key: 'unescaped/key path', content_type: 'ContentType' })
               .and_return(
                 client.stub_data(:create_multipart_upload, upload_id: 'id')
               )
