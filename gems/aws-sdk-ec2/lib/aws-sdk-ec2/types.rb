@@ -26399,6 +26399,12 @@ module Aws::EC2
     #     `deleted` \| `deleting` \| `modifying` \| `pending`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `tag-key `- The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -44928,7 +44934,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] device_index
-    #   The device index for the network interface attachment.
+    #   The device index for the network interface attachment. Each network
+    #   interface requires a device index. If you create a launch template
+    #   that includes secondary network interfaces but not a primary network
+    #   interface, then you must add a primary network interface as a launch
+    #   parameter when you launch an instance from the template.
     #   @return [Integer]
     #
     # @!attribute [rw] groups
@@ -67418,6 +67428,10 @@ module Aws::EC2
     # Describes a volume.
     #
     # @!attribute [rw] attachments
+    #   <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #    </note>
+    #
     #   Information about the volume attachments.
     #   @return [Array<Types::VolumeAttachment>]
     #
@@ -67476,6 +67490,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] fast_restored
+    #   <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #    </note>
+    #
     #   Indicates whether the volume was created using fast snapshot
     #   restore.
     #   @return [Boolean]
@@ -67489,6 +67507,10 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] sse_type
+    #   <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #    </note>
+    #
     #   Reserved for future use.
     #   @return [String]
     #

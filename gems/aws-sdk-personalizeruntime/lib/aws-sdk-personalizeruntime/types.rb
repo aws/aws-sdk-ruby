@@ -385,14 +385,41 @@ module Aws::PersonalizeRuntime
     #   Metadata about the item from your Items dataset.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] reason
+    #   If you use User-Personalization-v2, a list of reasons for why the
+    #   item was included in recommendations. Possible reasons include the
+    #   following:
+    #
+    #   * Promoted item - Indicates the item was included as part of a
+    #     promotion that you applied in your recommendation request.
+    #
+    #   * Exploration - Indicates the item was included with exploration.
+    #     With exploration, recommendations include items with less
+    #     interactions data or relevance for the user. For more information
+    #     about exploration, see [Exploration][1].
+    #
+    #   * Popular item - Indicates the item was included as a placeholder
+    #     popular item. If you use a filter, depending on how many
+    #     recommendations the filter removes, Amazon Personalize might add
+    #     placeholder items to meet the `numResults` for your recommendation
+    #     request. These items are popular items, based on interactions
+    #     data, that satisfy your filter criteria. They don't have a
+    #     relevance score for the user.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/use-case-recipe-features.html#about-exploration
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/PredictedItem AWS API Documentation
     #
     class PredictedItem < Struct.new(
       :item_id,
       :score,
       :promotion_name,
-      :metadata)
-      SENSITIVE = []
+      :metadata,
+      :reason)
+      SENSITIVE = [:metadata]
       include Aws::Structure
     end
 

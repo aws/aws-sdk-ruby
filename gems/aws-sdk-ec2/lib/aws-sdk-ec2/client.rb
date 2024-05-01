@@ -18229,9 +18229,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes the specified transit gateway route table. You must
-    # disassociate the route table from any transit gateway route tables
-    # before you can delete it.
+    # Deletes the specified transit gateway route table. If there are any
+    # route tables associated with the transit gateway route table, you must
+    # first run DisassociateRouteTable before you can delete the transit
+    # gateway route table. This removes any route tables associated with the
+    # transit gateway route table.
     #
     # @option params [required, String] :transit_gateway_route_table_id
     #   The ID of the transit gateway route table.
@@ -35216,6 +35218,12 @@ module Aws::EC2
     #     \| `deleting` \| `modifying` \| `pending`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `tag-key `- The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a tag
+    #     with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+    #     the filter name and `TeamA` for the filter value.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -59294,7 +59302,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.453.0'
+      context[:gem_version] = '1.454.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

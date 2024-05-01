@@ -166,6 +166,13 @@ module Aws::BedrockAgent
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
     ModelIdentifier = Shapes::StringShape.new(name: 'ModelIdentifier')
+    MongoDbAtlasCollectionName = Shapes::StringShape.new(name: 'MongoDbAtlasCollectionName')
+    MongoDbAtlasConfiguration = Shapes::StructureShape.new(name: 'MongoDbAtlasConfiguration')
+    MongoDbAtlasDatabaseName = Shapes::StringShape.new(name: 'MongoDbAtlasDatabaseName')
+    MongoDbAtlasEndpoint = Shapes::StringShape.new(name: 'MongoDbAtlasEndpoint')
+    MongoDbAtlasEndpointServiceName = Shapes::StringShape.new(name: 'MongoDbAtlasEndpointServiceName')
+    MongoDbAtlasFieldMapping = Shapes::StructureShape.new(name: 'MongoDbAtlasFieldMapping')
+    MongoDbAtlasIndexName = Shapes::StringShape.new(name: 'MongoDbAtlasIndexName')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
@@ -813,6 +820,20 @@ module Aws::BedrockAgent
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MongoDbAtlasConfiguration.add_member(:collection_name, Shapes::ShapeRef.new(shape: MongoDbAtlasCollectionName, required: true, location_name: "collectionName"))
+    MongoDbAtlasConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
+    MongoDbAtlasConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: MongoDbAtlasDatabaseName, required: true, location_name: "databaseName"))
+    MongoDbAtlasConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: MongoDbAtlasEndpoint, required: true, location_name: "endpoint"))
+    MongoDbAtlasConfiguration.add_member(:endpoint_service_name, Shapes::ShapeRef.new(shape: MongoDbAtlasEndpointServiceName, location_name: "endpointServiceName"))
+    MongoDbAtlasConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: MongoDbAtlasFieldMapping, required: true, location_name: "fieldMapping"))
+    MongoDbAtlasConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: MongoDbAtlasIndexName, required: true, location_name: "vectorIndexName"))
+    MongoDbAtlasConfiguration.struct_class = Types::MongoDbAtlasConfiguration
+
+    MongoDbAtlasFieldMapping.add_member(:metadata_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "metadataField"))
+    MongoDbAtlasFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
+    MongoDbAtlasFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
+    MongoDbAtlasFieldMapping.struct_class = Types::MongoDbAtlasFieldMapping
+
     OpenSearchServerlessConfiguration.add_member(:collection_arn, Shapes::ShapeRef.new(shape: OpenSearchServerlessCollectionArn, required: true, location_name: "collectionArn"))
     OpenSearchServerlessConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: OpenSearchServerlessFieldMapping, required: true, location_name: "fieldMapping"))
     OpenSearchServerlessConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: OpenSearchServerlessIndexName, required: true, location_name: "vectorIndexName"))
@@ -921,6 +942,7 @@ module Aws::BedrockAgent
 
     StopSequences.member = Shapes::ShapeRef.new(shape: String)
 
+    StorageConfiguration.add_member(:mongo_db_atlas_configuration, Shapes::ShapeRef.new(shape: MongoDbAtlasConfiguration, location_name: "mongoDbAtlasConfiguration"))
     StorageConfiguration.add_member(:opensearch_serverless_configuration, Shapes::ShapeRef.new(shape: OpenSearchServerlessConfiguration, location_name: "opensearchServerlessConfiguration"))
     StorageConfiguration.add_member(:pinecone_configuration, Shapes::ShapeRef.new(shape: PineconeConfiguration, location_name: "pineconeConfiguration"))
     StorageConfiguration.add_member(:rds_configuration, Shapes::ShapeRef.new(shape: RdsConfiguration, location_name: "rdsConfiguration"))

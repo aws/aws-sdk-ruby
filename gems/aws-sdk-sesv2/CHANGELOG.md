@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2024-05-01)
+------------------
+
+* Feature - Fixes ListContacts and ListImportJobs APIs to use POST instead of GET.
+
 1.46.0 (2024-04-25)
 ------------------
 

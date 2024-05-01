@@ -52,6 +52,6 @@ require_relative 'aws-sdk-sesv2/customizations'
 # @!group service
 module Aws::SESV2
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end

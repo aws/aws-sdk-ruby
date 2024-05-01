@@ -1207,7 +1207,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] data_deletion_policy
-    #   The deletion policy for the requested data source
+    #   The data deletion policy assigned to the data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
@@ -1339,7 +1339,7 @@ module Aws::BedrockAgent
     #   @return [Time]
     #
     # @!attribute [rw] data_deletion_policy
-    #   The deletion policy for the data source.
+    #   The data deletion policy for a data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
@@ -1355,7 +1355,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] failure_reasons
-    #   The details of the failure reasons related to the data source.
+    #   The detailed reasons on the failure to delete a data source.
     #   @return [Array<String>]
     #
     # @!attribute [rw] knowledge_base_id
@@ -2930,6 +2930,86 @@ module Aws::BedrockAgent
     end
 
     # Contains details about the storage configuration of the knowledge base
+    # in MongoDB Atlas.
+    #
+    # @!attribute [rw] collection_name
+    #   The collection name of the knowledge base in MongoDB Atlas.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials_secret_arn
+    #   The Amazon Resource Name (ARN) of the secret that you created in
+    #   Secrets Manager that contains user credentials for your MongoDB
+    #   Atlas cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database name in your MongoDB Atlas cluster for your knowledge
+    #   base.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint URL of your MongoDB Atlas cluster for your knowledge
+    #   base.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_service_name
+    #   The name of the VPC endpoint service in your account that is
+    #   connected to your MongoDB Atlas cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_mapping
+    #   Contains the names of the fields to which to map information about
+    #   the vector store.
+    #   @return [Types::MongoDbAtlasFieldMapping]
+    #
+    # @!attribute [rw] vector_index_name
+    #   The name of the MongoDB Atlas vector search index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MongoDbAtlasConfiguration AWS API Documentation
+    #
+    class MongoDbAtlasConfiguration < Struct.new(
+      :collection_name,
+      :credentials_secret_arn,
+      :database_name,
+      :endpoint,
+      :endpoint_service_name,
+      :field_mapping,
+      :vector_index_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the names of the fields to which to map information about the
+    # vector store.
+    #
+    # @!attribute [rw] metadata_field
+    #   The name of the field in which Amazon Bedrock stores metadata about
+    #   the vector store.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_field
+    #   The name of the field in which Amazon Bedrock stores the raw text
+    #   from your data. The text is split according to the chunking strategy
+    #   you choose.
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_field
+    #   The name of the field in which Amazon Bedrock stores the vector
+    #   embeddings for your data sources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MongoDbAtlasFieldMapping AWS API Documentation
+    #
+    class MongoDbAtlasFieldMapping < Struct.new(
+      :metadata_field,
+      :text_field,
+      :vector_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the storage configuration of the knowledge base
     # in Amazon OpenSearch Service. For more information, see [Create a
     # vector index in Amazon OpenSearch Service][1].
     #
@@ -3418,7 +3498,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] bucket_owner_account_id
-    #   The account ID for the owner of the S3 bucket.
+    #   The bucket account owner ID for the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] inclusion_prefixes
@@ -3541,6 +3621,11 @@ module Aws::BedrockAgent
 
     # Contains the storage configuration of the knowledge base.
     #
+    # @!attribute [rw] mongo_db_atlas_configuration
+    #   Contains the storage configuration of the knowledge base in MongoDB
+    #   Atlas.
+    #   @return [Types::MongoDbAtlasConfiguration]
+    #
     # @!attribute [rw] opensearch_serverless_configuration
     #   Contains the storage configuration of the knowledge base in Amazon
     #   OpenSearch Service.
@@ -3573,6 +3658,7 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StorageConfiguration AWS API Documentation
     #
     class StorageConfiguration < Struct.new(
+      :mongo_db_atlas_configuration,
       :opensearch_serverless_configuration,
       :pinecone_configuration,
       :rds_configuration,
@@ -3914,7 +4000,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] data_deletion_policy
-    #   The data deletion policy of the updated data source.
+    #   The data deletion policy assigned to the data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration

@@ -233,6 +233,19 @@ module Aws
                                    name: ::String,
                                    role_arn: ::String,
                                    storage_configuration: {
+                                     mongo_db_atlas_configuration: {
+                                       collection_name: ::String,
+                                       credentials_secret_arn: ::String,
+                                       database_name: ::String,
+                                       endpoint: ::String,
+                                       endpoint_service_name: ::String?,
+                                       field_mapping: {
+                                         metadata_field: ::String,
+                                         text_field: ::String,
+                                         vector_field: ::String
+                                       },
+                                       vector_index_name: ::String
+                                     }?,
                                      opensearch_serverless_configuration: {
                                        collection_arn: ::String,
                                        field_mapping: {
@@ -273,7 +286,7 @@ module Aws
                                        },
                                        vector_index_name: ::String
                                      }?,
-                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS")
+                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS")
                                    },
                                    ?tags: Hash[::String, ::String]
                                  ) -> _CreateKnowledgeBaseResponseSuccess
@@ -785,6 +798,19 @@ module Aws
                                    name: ::String,
                                    role_arn: ::String,
                                    storage_configuration: {
+                                     mongo_db_atlas_configuration: {
+                                       collection_name: ::String,
+                                       credentials_secret_arn: ::String,
+                                       database_name: ::String,
+                                       endpoint: ::String,
+                                       endpoint_service_name: ::String?,
+                                       field_mapping: {
+                                         metadata_field: ::String,
+                                         text_field: ::String,
+                                         vector_field: ::String
+                                       },
+                                       vector_index_name: ::String
+                                     }?,
                                      opensearch_serverless_configuration: {
                                        collection_arn: ::String,
                                        field_mapping: {
@@ -825,7 +851,7 @@ module Aws
                                        },
                                        vector_index_name: ::String
                                      }?,
-                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS")
+                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS")
                                    }
                                  ) -> _UpdateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseResponseSuccess
