@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update EC2 protocol to not serialize empty lists.
+
 3.194.0 (2024-04-30)
 ------------------
 
