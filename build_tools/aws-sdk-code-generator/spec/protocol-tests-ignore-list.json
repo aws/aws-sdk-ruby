@@ -1,7 +1,11 @@
 {
   "ec2" :
     {
-      "input" : [],
+      "input" : [
+        {
+          "Ec2EmptyQueryLists": "Empty lists should be omitted from serialization. Smithy to update"
+        }
+      ],
       "output" : []
     },
   "json" : {
