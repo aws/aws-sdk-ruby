@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.455.0 (2024-05-02)
+------------------
+
+* Feature - This release includes a new API for retrieving the public endorsement key of the EC2 instance's Nitro Trusted Platform Module (NitroTPM).
+
 1.454.0 (2024-05-01)
 ------------------
 

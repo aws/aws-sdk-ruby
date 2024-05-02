@@ -277,6 +277,7 @@ module Aws::DynamoDB
       attr_accessor key_schema: ::Array[Types::KeySchemaElement]
       attr_accessor projection: Types::Projection
       attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       SENSITIVE: []
     end
 
@@ -300,6 +301,7 @@ module Aws::DynamoDB
       attr_accessor region_name: ::String
       attr_accessor kms_master_key_id: ::String
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride
       attr_accessor global_secondary_indexes: ::Array[Types::ReplicaGlobalSecondaryIndex]
       attr_accessor table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
       SENSITIVE: []
@@ -319,6 +321,7 @@ module Aws::DynamoDB
       attr_accessor table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
       attr_accessor deletion_protection_enabled: bool
       attr_accessor resource_policy: ::String
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       SENSITIVE: []
     end
 
@@ -718,6 +721,7 @@ module Aws::DynamoDB
       attr_accessor key_schema: ::Array[Types::KeySchemaElement]
       attr_accessor projection: Types::Projection
       attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       SENSITIVE: []
     end
 
@@ -737,6 +741,7 @@ module Aws::DynamoDB
       attr_accessor index_size_bytes: ::Integer
       attr_accessor item_count: ::Integer
       attr_accessor index_arn: ::String
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       SENSITIVE: []
     end
 
@@ -745,6 +750,7 @@ module Aws::DynamoDB
       attr_accessor key_schema: ::Array[Types::KeySchemaElement]
       attr_accessor projection: Types::Projection
       attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       SENSITIVE: []
     end
 
@@ -1059,6 +1065,17 @@ module Aws::DynamoDB
       SENSITIVE: []
     end
 
+    class OnDemandThroughput
+      attr_accessor max_read_request_units: ::Integer
+      attr_accessor max_write_request_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class OnDemandThroughputOverride
+      attr_accessor max_read_request_units: ::Integer
+      SENSITIVE: []
+    end
+
     class ParameterizedStatement
       attr_accessor statement: ::String
       attr_accessor parameters: ::Array[Types::AttributeValue]
@@ -1232,6 +1249,7 @@ module Aws::DynamoDB
       attr_accessor replica_status_percent_progress: ::String
       attr_accessor kms_master_key_id: ::String
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride
       attr_accessor global_secondary_indexes: ::Array[Types::ReplicaGlobalSecondaryIndexDescription]
       attr_accessor replica_inaccessible_date_time: ::Time
       attr_accessor replica_table_class_summary: Types::TableClassSummary
@@ -1241,6 +1259,7 @@ module Aws::DynamoDB
     class ReplicaGlobalSecondaryIndex
       attr_accessor index_name: ::String
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride
       SENSITIVE: []
     end
 
@@ -1261,6 +1280,7 @@ module Aws::DynamoDB
     class ReplicaGlobalSecondaryIndexDescription
       attr_accessor index_name: ::String
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride
       SENSITIVE: []
     end
 
@@ -1351,6 +1371,7 @@ module Aws::DynamoDB
       attr_accessor global_secondary_index_override: ::Array[Types::GlobalSecondaryIndex]
       attr_accessor local_secondary_index_override: ::Array[Types::LocalSecondaryIndex]
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughput
       attr_accessor sse_specification_override: Types::SSESpecification
       SENSITIVE: []
     end
@@ -1370,6 +1391,7 @@ module Aws::DynamoDB
       attr_accessor global_secondary_index_override: ::Array[Types::GlobalSecondaryIndex]
       attr_accessor local_secondary_index_override: ::Array[Types::LocalSecondaryIndex]
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughput
       attr_accessor sse_specification_override: Types::SSESpecification
       SENSITIVE: []
     end
@@ -1438,6 +1460,7 @@ module Aws::DynamoDB
       attr_accessor key_schema: ::Array[Types::KeySchemaElement]
       attr_accessor table_creation_date_time: ::Time
       attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor item_count: ::Integer
       attr_accessor billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST")
       SENSITIVE: []
@@ -1482,6 +1505,7 @@ module Aws::DynamoDB
       attr_accessor key_schema: ::Array[Types::KeySchemaElement]
       attr_accessor billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST")
       attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor sse_specification: Types::SSESpecification
       attr_accessor global_secondary_indexes: ::Array[Types::GlobalSecondaryIndex]
       SENSITIVE: []
@@ -1511,6 +1535,7 @@ module Aws::DynamoDB
       attr_accessor archival_summary: Types::ArchivalSummary
       attr_accessor table_class_summary: Types::TableClassSummary
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       SENSITIVE: []
     end
 
@@ -1648,6 +1673,7 @@ module Aws::DynamoDB
     class UpdateGlobalSecondaryIndexAction
       attr_accessor index_name: ::String
       attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       SENSITIVE: []
     end
 
@@ -1726,6 +1752,7 @@ module Aws::DynamoDB
       attr_accessor region_name: ::String
       attr_accessor kms_master_key_id: ::String
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      attr_accessor on_demand_throughput_override: Types::OnDemandThroughputOverride
       attr_accessor global_secondary_indexes: ::Array[Types::ReplicaGlobalSecondaryIndex]
       attr_accessor table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
       SENSITIVE: []
@@ -1742,6 +1769,7 @@ module Aws::DynamoDB
       attr_accessor replica_updates: ::Array[Types::ReplicationGroupUpdate]
       attr_accessor table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor on_demand_throughput: Types::OnDemandThroughput
       SENSITIVE: []
     end
 

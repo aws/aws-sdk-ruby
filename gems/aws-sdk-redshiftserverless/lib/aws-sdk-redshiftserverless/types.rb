@@ -62,10 +62,11 @@ module Aws::RedshiftServerless
     # @!attribute [rw] parameter_key
     #   The key of the parameter. The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, `require_ssl`, and query monitoring
-    #   metrics that let you define performance boundaries. For more
-    #   information about query monitoring rules and available metrics, see
-    #   [Query monitoring metrics for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
+    #   query monitoring metrics that let you define performance boundaries.
+    #   For more information about query monitoring rules and available
+    #   metrics, see [Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
     #
     #
     #
@@ -627,10 +628,11 @@ module Aws::RedshiftServerless
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, `require_ssl`, and query monitoring
-    #   metrics that let you define performance boundaries. For more
-    #   information about query monitoring rules and available metrics, see
-    #   [ Query monitoring metrics for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
+    #   query monitoring metrics that let you define performance boundaries.
+    #   For more information about query monitoring rules and available
+    #   metrics, see [ Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
     #
     #
     #
@@ -1656,8 +1658,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     #
     # @!attribute [rw] scheduled_actions
-    #   All of the returned scheduled action objects.
-    #   @return [Array<String>]
+    #   All of the returned scheduled action association objects.
+    #   @return [Array<Types::ScheduledActionAssociation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListScheduledActionsResponse AWS API Documentation
     #
@@ -2497,6 +2499,25 @@ module Aws::RedshiftServerless
       class At < Schedule; end
       class Cron < Schedule; end
       class Unknown < Schedule; end
+    end
+
+    # Contains names of objects associated with a scheduled action.
+    #
+    # @!attribute [rw] namespace_name
+    #   Name of associated Amazon Redshift Serverless namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_action_name
+    #   Name of associated scheduled action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ScheduledActionAssociation AWS API Documentation
+    #
+    class ScheduledActionAssociation < Struct.new(
+      :namespace_name,
+      :scheduled_action_name)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The returned scheduled action object.
@@ -3365,10 +3386,11 @@ module Aws::RedshiftServerless
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, `require_ssl`, and query monitoring
-    #   metrics that let you define performance boundaries. For more
-    #   information about query monitoring rules and available metrics, see
-    #   [ Query monitoring metrics for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
+    #   query monitoring metrics that let you define performance boundaries.
+    #   For more information about query monitoring rules and available
+    #   metrics, see [ Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
     #
     #
     #
@@ -3559,10 +3581,11 @@ module Aws::RedshiftServerless
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, `require_ssl`, and query monitoring
-    #   metrics that let you define performance boundaries. For more
-    #   information about query monitoring rules and available metrics, see
-    #   [ Query monitoring metrics for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
+    #   query monitoring metrics that let you define performance boundaries.
+    #   For more information about query monitoring rules and available
+    #   metrics, see [ Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
     #
     #
     #
@@ -3627,7 +3650,7 @@ module Aws::RedshiftServerless
     #
     # @!attribute [rw] publicly_accessible
     #   A value that specifies whether the workgroup can be accessible from
-    #   a public network
+    #   a public network.
     #   @return [Boolean]
     #
     # @!attribute [rw] security_group_ids

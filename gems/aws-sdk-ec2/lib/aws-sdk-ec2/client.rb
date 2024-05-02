@@ -41777,6 +41777,59 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Gets the public endorsement key associated with the Nitro Trusted
+    # Platform Module (NitroTPM) for the specified instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance for which to get the public endorsement key.
+    #
+    # @option params [required, String] :key_type
+    #   The required public endorsement key type.
+    #
+    # @option params [required, String] :key_format
+    #   The required public endorsement key format. Specify `der` for a
+    #   DER-encoded public key that is compatible with OpenSSL. Specify `tpmt`
+    #   for a TPM 2.0 format that is compatible with tpm2-tools. The returned
+    #   key is base64 encoded.
+    #
+    # @option params [Boolean] :dry_run
+    #   Specify this parameter to verify whether the request will succeed,
+    #   without actually making the request. If the request will succeed, the
+    #   response is `DryRunOperation`. Otherwise, the response is
+    #   `UnauthorizedOperation`.
+    #
+    # @return [Types::GetInstanceTpmEkPubResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInstanceTpmEkPubResult#instance_id #instance_id} => String
+    #   * {Types::GetInstanceTpmEkPubResult#key_type #key_type} => String
+    #   * {Types::GetInstanceTpmEkPubResult#key_format #key_format} => String
+    #   * {Types::GetInstanceTpmEkPubResult#key_value #key_value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_instance_tpm_ek_pub({
+    #     instance_id: "InstanceId", # required
+    #     key_type: "rsa-2048", # required, accepts rsa-2048, ecc-sec-p384
+    #     key_format: "der", # required, accepts der, tpmt
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.key_type #=> String, one of "rsa-2048", "ecc-sec-p384"
+    #   resp.key_format #=> String, one of "der", "tpmt"
+    #   resp.key_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTpmEkPub AWS API Documentation
+    #
+    # @overload get_instance_tpm_ek_pub(params = {})
+    # @param [Hash] params ({})
+    def get_instance_tpm_ek_pub(params = {}, options = {})
+      req = build_request(:get_instance_tpm_ek_pub, params)
+      req.send_request(options)
+    end
+
     # Returns a list of instance types with the specified instance
     # attributes. You can use the response to preview the instance types
     # without launching instances. Note that the response does not consider
@@ -59302,7 +59355,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.454.0'
+      context[:gem_version] = '1.455.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

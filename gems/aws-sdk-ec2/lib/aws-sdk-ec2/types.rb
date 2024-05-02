@@ -34609,6 +34609,66 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The ID of the instance for which to get the public endorsement key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   The required public endorsement key type.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_format
+    #   The required public endorsement key format. Specify `der` for a
+    #   DER-encoded public key that is compatible with OpenSSL. Specify
+    #   `tpmt` for a TPM 2.0 format that is compatible with tpm2-tools. The
+    #   returned key is base64 encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specify this parameter to verify whether the request will succeed,
+    #   without actually making the request. If the request will succeed,
+    #   the response is `DryRunOperation`. Otherwise, the response is
+    #   `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTpmEkPubRequest AWS API Documentation
+    #
+    class GetInstanceTpmEkPubRequest < Struct.new(
+      :instance_id,
+      :key_type,
+      :key_format,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   The public endorsement key type.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_format
+    #   The public endorsement key format.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The public endorsement key material.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTpmEkPubResult AWS API Documentation
+    #
+    class GetInstanceTpmEkPubResult < Struct.new(
+      :instance_id,
+      :key_type,
+      :key_format,
+      :key_value)
+      SENSITIVE = [:key_value]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

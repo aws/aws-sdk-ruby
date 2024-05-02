@@ -815,6 +815,116 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Creates a batch job that deletes all references to specific users from
+    # an Amazon Personalize dataset group in batches. You specify the users
+    # to delete in a CSV file of userIds in an Amazon S3 bucket. After a job
+    # completes, Amazon Personalize no longer trains on the users’ data and
+    # no longer considers the users when generating user segments. For more
+    # information about creating a data deletion job, see [Deleting
+    # users][1].
+    #
+    # * Your input file must be a CSV file with a single USER\_ID column
+    #   that lists the users IDs. For more information about preparing the
+    #   CSV file, see [Preparing your data deletion file and uploading it to
+    #   Amazon S3][2].
+    #
+    # * To give Amazon Personalize permission to access your input CSV file
+    #   of userIds, you must specify an IAM service role that has permission
+    #   to read from the data source. This role needs `GetObject` and
+    #   `ListBucket` permissions for the bucket and its content. These
+    #   permissions are the same as importing data. For information on
+    #   granting access to your Amazon S3 bucket, see [Giving Amazon
+    #   Personalize Access to Amazon S3 Resources][3].
+    #
+    # After you create a job, it can take up to a day to delete all
+    # references to the users from datasets and models. Until the job
+    # completes, Amazon Personalize continues to use the data when training.
+    # And if you use a User Segmentation recipe, the users might appear in
+    # user segments.
+    #
+    # **Status**
+    #
+    # A data deletion job can have one of the following statuses:
+    #
+    # * PENDING &gt; IN\_PROGRESS &gt; COMPLETED -or- FAILED
+    #
+    # ^
+    #
+    # To get the status of the data deletion job, call
+    # [DescribeDataDeletionJob][4] API operation and specify the Amazon
+    # Resource Name (ARN) of the job. If the status is FAILED, the response
+    # includes a `failureReason` key, which describes why the job failed.
+    #
+    # **Related APIs**
+    #
+    # * [ListDataDeletionJobs][5]
+    #
+    # * [DescribeDataDeletionJob][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/prepare-deletion-input-file.html
+    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html
+    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html
+    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListDataDeletionJobs.html
+    #
+    # @option params [required, String] :job_name
+    #   The name for the data deletion job.
+    #
+    # @option params [required, String] :dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the dataset group that has the
+    #   datasets you want to delete records from.
+    #
+    # @option params [required, Types::DataSource] :data_source
+    #   The Amazon S3 bucket that contains the list of userIds of the users to
+    #   delete.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that has permissions to
+    #   read from the Amazon S3 data source.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of [tags][1] to apply to the data deletion job.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
+    #
+    # @return [Types::CreateDataDeletionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataDeletionJobResponse#data_deletion_job_arn #data_deletion_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_deletion_job({
+    #     job_name: "Name", # required
+    #     dataset_group_arn: "Arn", # required
+    #     data_source: { # required
+    #       data_location: "S3Location",
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         tag_key: "TagKey", # required
+    #         tag_value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_deletion_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDataDeletionJob AWS API Documentation
+    #
+    # @overload create_data_deletion_job(params = {})
+    # @param [Hash] params ({})
+    def create_data_deletion_job(params = {}, options = {})
+      req = build_request(:create_data_deletion_job, params)
+      req.send_request(options)
+    end
+
     # Creates an empty dataset and adds it to the specified dataset group.
     # Use [CreateDatasetImportJob][1] to import your training data to a
     # dataset.
@@ -2544,6 +2654,48 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Describes the data deletion job created by [CreateDataDeletionJob][1],
+    # including the job status.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataDeletionJob.html
+    #
+    # @option params [required, String] :data_deletion_job_arn
+    #   The Amazon Resource Name (ARN) of the data deletion job.
+    #
+    # @return [Types::DescribeDataDeletionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataDeletionJobResponse#data_deletion_job #data_deletion_job} => Types::DataDeletionJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_deletion_job({
+    #     data_deletion_job_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_deletion_job.job_name #=> String
+    #   resp.data_deletion_job.data_deletion_job_arn #=> String
+    #   resp.data_deletion_job.dataset_group_arn #=> String
+    #   resp.data_deletion_job.data_source.data_location #=> String
+    #   resp.data_deletion_job.role_arn #=> String
+    #   resp.data_deletion_job.status #=> String
+    #   resp.data_deletion_job.num_deleted #=> Integer
+    #   resp.data_deletion_job.creation_date_time #=> Time
+    #   resp.data_deletion_job.last_updated_date_time #=> Time
+    #   resp.data_deletion_job.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDataDeletionJob AWS API Documentation
+    #
+    # @overload describe_data_deletion_job(params = {})
+    # @param [Hash] params ({})
+    def describe_data_deletion_job(params = {}, options = {})
+      req = build_request(:describe_data_deletion_job, params)
+      req.send_request(options)
+    end
+
     # Describes the given dataset. For more information on datasets, see
     # [CreateDataset][1].
     #
@@ -3390,6 +3542,62 @@ module Aws::Personalize
     # @param [Hash] params ({})
     def list_campaigns(params = {}, options = {})
       req = build_request(:list_campaigns, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of data deletion jobs for a dataset group ordered by
+    # creation time, with the most recent first. When a dataset group is not
+    # specified, all the data deletion jobs associated with the account are
+    # listed. The response provides the properties for each job, including
+    # the Amazon Resource Name (ARN). For more information on data deletion
+    # jobs, see [Deleting users][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html
+    #
+    # @option params [String] :dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the dataset group to list data
+    #   deletion jobs for.
+    #
+    # @option params [String] :next_token
+    #   A token returned from the previous call to `ListDataDeletionJobs` for
+    #   getting the next set of jobs (if they exist).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data deletion jobs to return.
+    #
+    # @return [Types::ListDataDeletionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataDeletionJobsResponse#data_deletion_jobs #data_deletion_jobs} => Array&lt;Types::DataDeletionJobSummary&gt;
+    #   * {Types::ListDataDeletionJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_deletion_jobs({
+    #     dataset_group_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_deletion_jobs #=> Array
+    #   resp.data_deletion_jobs[0].data_deletion_job_arn #=> String
+    #   resp.data_deletion_jobs[0].dataset_group_arn #=> String
+    #   resp.data_deletion_jobs[0].job_name #=> String
+    #   resp.data_deletion_jobs[0].status #=> String
+    #   resp.data_deletion_jobs[0].creation_date_time #=> Time
+    #   resp.data_deletion_jobs[0].last_updated_date_time #=> Time
+    #   resp.data_deletion_jobs[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDataDeletionJobs AWS API Documentation
+    #
+    # @overload list_data_deletion_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_data_deletion_jobs(params = {}, options = {})
+      req = build_request(:list_data_deletion_jobs, params)
       req.send_request(options)
     end
 
@@ -4538,7 +4746,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

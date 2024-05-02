@@ -527,7 +527,7 @@ module Aws
       interface _ListScheduledActionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListScheduledActionsResponse]
         def next_token: () -> ::String
-        def scheduled_actions: () -> ::Array[::String]
+        def scheduled_actions: () -> ::Array[Types::ScheduledActionAssociation]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_scheduled_actions-instance_method
       def list_scheduled_actions: (

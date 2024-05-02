@@ -233,6 +233,20 @@ module Aws::Personalize
       SENSITIVE: []
     end
 
+    class CreateDataDeletionJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDataDeletionJobResponse
+      attr_accessor data_deletion_job_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateDatasetExportJobRequest
       attr_accessor job_name: ::String
       attr_accessor dataset_arn: ::String
@@ -386,6 +400,31 @@ module Aws::Personalize
 
     class CreateSolutionVersionResponse
       attr_accessor solution_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataDeletionJob
+      attr_accessor job_name: ::String
+      attr_accessor data_deletion_job_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor role_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor num_deleted: ::Integer
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DataDeletionJobSummary
+      attr_accessor data_deletion_job_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
       SENSITIVE: []
     end
 
@@ -637,6 +676,16 @@ module Aws::Personalize
 
     class DescribeCampaignResponse
       attr_accessor campaign: Types::Campaign
+      SENSITIVE: []
+    end
+
+    class DescribeDataDeletionJobRequest
+      attr_accessor data_deletion_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataDeletionJobResponse
+      attr_accessor data_deletion_job: Types::DataDeletionJob
       SENSITIVE: []
     end
 
@@ -924,6 +973,19 @@ module Aws::Personalize
 
     class ListCampaignsResponse
       attr_accessor campaigns: ::Array[Types::CampaignSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataDeletionJobsRequest
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataDeletionJobsResponse
+      attr_accessor data_deletion_jobs: ::Array[Types::DataDeletionJobSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end

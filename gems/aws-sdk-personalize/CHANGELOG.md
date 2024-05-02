@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2024-05-02)
+------------------
+
+* Feature - This releases ability to delete users and their data, including their metadata and interactions data, from a dataset group.
+
 1.61.0 (2024-04-25)
 ------------------
 

@@ -7740,6 +7740,22 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class GetInstanceTpmEkPubRequest
+      attr_accessor instance_id: ::String
+      attr_accessor key_type: ("rsa-2048" | "ecc-sec-p384")
+      attr_accessor key_format: ("der" | "tpmt")
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetInstanceTpmEkPubResult
+      attr_accessor instance_id: ::String
+      attr_accessor key_type: ("rsa-2048" | "ecc-sec-p384")
+      attr_accessor key_format: ("der" | "tpmt")
+      attr_accessor key_value: ::String
+      SENSITIVE: [:key_value]
+    end
+
     class GetInstanceTypesFromInstanceRequirementsRequest
       attr_accessor dry_run: bool
       attr_accessor architecture_types: ::Array[("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac")]

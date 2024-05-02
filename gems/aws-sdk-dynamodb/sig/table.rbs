@@ -84,6 +84,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#deletion_protection_enabled-instance_method
       def deletion_protection_enabled: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#on_demand_throughput-instance_method
+      def on_demand_throughput: () -> Types::OnDemandThroughput
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#load-instance_method
@@ -223,7 +226,11 @@ module Aws
                           provisioned_throughput: {
                             read_capacity_units: ::Integer,
                             write_capacity_units: ::Integer
-                          }
+                          }?,
+                          on_demand_throughput: {
+                            max_read_request_units: ::Integer?,
+                            max_write_request_units: ::Integer?
+                          }?
                         }?,
                         create: {
                           index_name: ::String,
@@ -240,6 +247,10 @@ module Aws
                           provisioned_throughput: {
                             read_capacity_units: ::Integer,
                             write_capacity_units: ::Integer
+                          }?,
+                          on_demand_throughput: {
+                            max_read_request_units: ::Integer?,
+                            max_write_request_units: ::Integer?
                           }?
                         }?,
                         delete: {
@@ -264,11 +275,17 @@ module Aws
                           provisioned_throughput_override: {
                             read_capacity_units: ::Integer?
                           }?,
+                          on_demand_throughput_override: {
+                            max_read_request_units: ::Integer?
+                          }?,
                           global_secondary_indexes: Array[
                             {
                               index_name: ::String,
                               provisioned_throughput_override: {
                                 read_capacity_units: ::Integer?
+                              }?,
+                              on_demand_throughput_override: {
+                                max_read_request_units: ::Integer?
                               }?
                             },
                           ]?,
@@ -280,11 +297,17 @@ module Aws
                           provisioned_throughput_override: {
                             read_capacity_units: ::Integer?
                           }?,
+                          on_demand_throughput_override: {
+                            max_read_request_units: ::Integer?
+                          }?,
                           global_secondary_indexes: Array[
                             {
                               index_name: ::String,
                               provisioned_throughput_override: {
                                 read_capacity_units: ::Integer?
+                              }?,
+                              on_demand_throughput_override: {
+                                max_read_request_units: ::Integer?
                               }?
                             },
                           ]?,
@@ -296,7 +319,11 @@ module Aws
                       },
                     ],
                     ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
-                    ?deletion_protection_enabled: bool
+                    ?deletion_protection_enabled: bool,
+                    ?on_demand_throughput: {
+                      max_read_request_units: ::Integer?,
+                      max_write_request_units: ::Integer?
+                    }
                   ) -> Table
                 | (?Hash[Symbol, untyped]) -> Table
 
