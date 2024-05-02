@@ -31,13 +31,11 @@ module Aws
       end
 
       def list(ref, values, prefix)
-        if values.empty?
-          set(prefix, '')
-        else
-          member_ref = ref.shape.member
-          values.each.with_index do |value, n|
-            format(member_ref, value, "#{prefix}.#{n+1}")
-          end
+        return if values.empty?
+
+        member_ref = ref.shape.member
+        values.each.with_index do |value, n|
+          format(member_ref, value, "#{prefix}.#{n + 1}")
         end
       end
 
