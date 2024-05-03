@@ -175,7 +175,8 @@ module Aws
                                 ?description: ::String,
                                 ?routing_configuration: Array[
                                   {
-                                    agent_version: ::String
+                                    agent_version: ::String?,
+                                    provisioned_throughput: ::String?
                                   },
                                 ],
                                 ?tags: Hash[::String, ::String]
@@ -727,7 +728,8 @@ module Aws
                                 ?description: ::String,
                                 ?routing_configuration: Array[
                                   {
-                                    agent_version: ::String
+                                    agent_version: ::String?,
+                                    provisioned_throughput: ::String?
                                   },
                                 ]
                               ) -> _UpdateAgentAliasResponseSuccess

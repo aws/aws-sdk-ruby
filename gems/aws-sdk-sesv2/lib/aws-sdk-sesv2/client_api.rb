@@ -558,6 +558,7 @@ module Aws::SESV2
     BulkEmailEntry.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
     BulkEmailEntry.add_member(:replacement_tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "ReplacementTags"))
     BulkEmailEntry.add_member(:replacement_email_content, Shapes::ShapeRef.new(shape: ReplacementEmailContent, location_name: "ReplacementEmailContent"))
+    BulkEmailEntry.add_member(:replacement_headers, Shapes::ShapeRef.new(shape: MessageHeaderList, location_name: "ReplacementHeaders"))
     BulkEmailEntry.struct_class = Types::BulkEmailEntry
 
     BulkEmailEntryList.member = Shapes::ShapeRef.new(shape: BulkEmailEntry)

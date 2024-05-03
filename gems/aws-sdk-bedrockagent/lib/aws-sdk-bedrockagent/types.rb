@@ -73,7 +73,8 @@ module Aws::BedrockAgent
     end
 
     # Contains details about the Lambda function containing the business
-    # logic that is carried out upon invoking the action.
+    # logic that is carried out upon invoking the action or the custom
+    # control method for handling the information elicited from the user.
     #
     # @note ActionGroupExecutor is a union - when making an API calls you must set exactly one of the members.
     #
@@ -283,7 +284,9 @@ module Aws::BedrockAgent
     #
     # @!attribute [rw] action_group_executor
     #   The Amazon Resource Name (ARN) of the Lambda function containing the
-    #   business logic that is carried out upon invoking the action.
+    #   business logic that is carried out upon invoking the action or the
+    #   custom control method for handling the information elicited from the
+    #   user.
     #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_id
@@ -446,6 +449,11 @@ module Aws::BedrockAgent
     #   The description of the alias of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Information on the failure of Provisioned Throughput assigned to an
+    #   agent alias.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] routing_configuration
     #   Contains details about the routing configuration of the alias.
     #   @return [Array<Types::AgentAliasRoutingConfigurationListItem>]
@@ -466,6 +474,7 @@ module Aws::BedrockAgent
       :client_token,
       :created_at,
       :description,
+      :failure_reasons,
       :routing_configuration,
       :updated_at)
       SENSITIVE = []
@@ -505,10 +514,16 @@ module Aws::BedrockAgent
     #   The version of the agent with which the alias is associated.
     #   @return [String]
     #
+    # @!attribute [rw] provisioned_throughput
+    #   Information on the Provisioned Throughput assigned to an agent
+    #   alias.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentAliasRoutingConfigurationListItem AWS API Documentation
     #
     class AgentAliasRoutingConfigurationListItem < Struct.new(
-      :agent_version)
+      :agent_version,
+      :provisioned_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -935,7 +950,9 @@ module Aws::BedrockAgent
 
     # @!attribute [rw] action_group_executor
     #   The Amazon Resource Name (ARN) of the Lambda function containing the
-    #   business logic that is carried out upon invoking the action.
+    #   business logic that is carried out upon invoking the action or the
+    #   custom control method for handling the information elicited from the
+    #   user.
     #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_name
@@ -4000,7 +4017,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] data_deletion_policy
-    #   The data deletion policy assigned to the data source.
+    #   The data deletion policy of the updated data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration

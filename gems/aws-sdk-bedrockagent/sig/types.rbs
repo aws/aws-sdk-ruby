@@ -99,6 +99,7 @@ module Aws::BedrockAgent
       attr_accessor client_token: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
+      attr_accessor failure_reasons: ::Array[::String]
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -113,6 +114,7 @@ module Aws::BedrockAgent
 
     class AgentAliasRoutingConfigurationListItem
       attr_accessor agent_version: ::String
+      attr_accessor provisioned_throughput: ::String
       SENSITIVE: []
     end
 

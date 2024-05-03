@@ -725,7 +725,7 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] field_id
-    #   The unique identifier of a field.
+    #   Unique identifier of the field.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteFieldRequest AWS API Documentation
@@ -1141,6 +1141,34 @@ module Aws::ConnectCases
       class Unknown < FieldValueUnion; end
     end
 
+    # An object that represents a content of an Amazon Connect file object.
+    #
+    # @!attribute [rw] file_arn
+    #   The Amazon Resource Name (ARN) of a File in Amazon Connect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FileContent AWS API Documentation
+    #
+    class FileContent < Struct.new(
+      :file_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for related items of type `File`.
+    #
+    # @!attribute [rw] file_arn
+    #   The Amazon Resource Name (ARN) of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FileFilter AWS API Documentation
+    #
+    class FileFilter < Struct.new(
+      :file_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] case_id
     #   A unique identifier of the case.
     #   @return [String]
@@ -1327,11 +1355,11 @@ module Aws::ConnectCases
     # Object to store detailed field information.
     #
     # @!attribute [rw] created_time
-    #   The timestamp for when the resource was created.
+    #   Timestamp at which the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] deleted
-    #   Indicates whether the resource has been deleted.
+    #   Denotes whether or not the resource has been deleted.
     #   @return [Boolean]
     #
     # @!attribute [rw] description
@@ -1347,7 +1375,7 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The timestamp for when the resource was created or last modified.
+    #   Timestamp at which the resource was created or last modified.
     #   @return [Time]
     #
     # @!attribute [rw] name
@@ -1407,15 +1435,15 @@ module Aws::ConnectCases
     #   @return [Types::LayoutContent]
     #
     # @!attribute [rw] created_time
-    #   The timestamp for when the resource was created.
+    #   Timestamp at which the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] deleted
-    #   Indicates whether the resource has been deleted.
+    #   Denotes whether or not the resource has been deleted.
     #   @return [Boolean]
     #
     # @!attribute [rw] last_modified_time
-    #   The timestamp for when the resource was created or last modified.
+    #   Timestamp at which the resource was created or last modified.
     #   @return [Time]
     #
     # @!attribute [rw] layout_arn
@@ -1468,11 +1496,11 @@ module Aws::ConnectCases
     end
 
     # @!attribute [rw] created_time
-    #   The timestamp for when the resource was created.
+    #   Timestamp at which the resource was created.
     #   @return [Time]
     #
     # @!attribute [rw] deleted
-    #   Indicates whether the resource has been deleted.
+    #   Denotes whether or not the resource has been deleted.
     #   @return [Boolean]
     #
     # @!attribute [rw] description
@@ -1480,7 +1508,7 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The timestamp for when the resource was created or last modified.
+    #   Timestamp at which the resource was created or last modified.
     #   @return [Time]
     #
     # @!attribute [rw] layout_configuration
@@ -1954,11 +1982,16 @@ module Aws::ConnectCases
     #   Represents the content of a contact to be returned to agents.
     #   @return [Types::ContactContent]
     #
+    # @!attribute [rw] file
+    #   Represents the content of a File to be returned to agents.
+    #   @return [Types::FileContent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/RelatedItemContent AWS API Documentation
     #
     class RelatedItemContent < Struct.new(
       :comment,
       :contact,
+      :file,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1966,6 +1999,7 @@ module Aws::ConnectCases
 
       class Comment < RelatedItemContent; end
       class Contact < RelatedItemContent; end
+      class File < RelatedItemContent; end
       class Unknown < RelatedItemContent; end
     end
 
@@ -1998,11 +2032,16 @@ module Aws::ConnectCases
     #   field.
     #   @return [Types::Contact]
     #
+    # @!attribute [rw] file
+    #   A file of related items.
+    #   @return [Types::FileContent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/RelatedItemInputContent AWS API Documentation
     #
     class RelatedItemInputContent < Struct.new(
       :comment,
       :contact,
+      :file,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2010,6 +2049,7 @@ module Aws::ConnectCases
 
       class Comment < RelatedItemInputContent; end
       class Contact < RelatedItemInputContent; end
+      class File < RelatedItemInputContent; end
       class Unknown < RelatedItemInputContent; end
     end
 
@@ -2026,11 +2066,16 @@ module Aws::ConnectCases
     #   A filter for related items of type `Contact`.
     #   @return [Types::ContactFilter]
     #
+    # @!attribute [rw] file
+    #   A filter for related items of this type of `File`.
+    #   @return [Types::FileFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/RelatedItemTypeFilter AWS API Documentation
     #
     class RelatedItemTypeFilter < Struct.new(
       :comment,
       :contact,
+      :file,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2038,6 +2083,7 @@ module Aws::ConnectCases
 
       class Comment < RelatedItemTypeFilter; end
       class Contact < RelatedItemTypeFilter; end
+      class File < RelatedItemTypeFilter; end
       class Unknown < RelatedItemTypeFilter; end
     end
 

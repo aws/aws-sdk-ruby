@@ -197,6 +197,7 @@ module Aws::BedrockAgent
     PromptOverrideConfiguration = Shapes::StructureShape.new(name: 'PromptOverrideConfiguration')
     PromptState = Shapes::StringShape.new(name: 'PromptState')
     PromptType = Shapes::StringShape.new(name: 'PromptType')
+    ProvisionedModelIdentifier = Shapes::StringShape.new(name: 'ProvisionedModelIdentifier')
     RdsArn = Shapes::StringShape.new(name: 'RdsArn')
     RdsConfiguration = Shapes::StructureShape.new(name: 'RdsConfiguration')
     RdsDatabaseName = Shapes::StringShape.new(name: 'RdsDatabaseName')
@@ -331,6 +332,7 @@ module Aws::BedrockAgent
     AgentAlias.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     AgentAlias.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     AgentAlias.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AgentAlias.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     AgentAlias.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, required: true, location_name: "routingConfiguration"))
     AgentAlias.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentAlias.struct_class = Types::AgentAlias
@@ -344,7 +346,8 @@ module Aws::BedrockAgent
 
     AgentAliasRoutingConfiguration.member = Shapes::ShapeRef.new(shape: AgentAliasRoutingConfigurationListItem)
 
-    AgentAliasRoutingConfigurationListItem.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "agentVersion"))
+    AgentAliasRoutingConfigurationListItem.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, location_name: "agentVersion"))
+    AgentAliasRoutingConfigurationListItem.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedModelIdentifier, location_name: "provisionedThroughput"))
     AgentAliasRoutingConfigurationListItem.struct_class = Types::AgentAliasRoutingConfigurationListItem
 
     AgentAliasSummaries.member = Shapes::ShapeRef.new(shape: AgentAliasSummary)

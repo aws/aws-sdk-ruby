@@ -1365,6 +1365,7 @@ module Aws::DataSync
         "endpointPrefix" => "datasync",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "DataSync",
         "serviceFullName" => "AWS DataSync",
         "serviceId" => "DataSync",

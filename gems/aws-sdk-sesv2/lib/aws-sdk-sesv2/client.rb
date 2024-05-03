@@ -4432,6 +4432,12 @@ module Aws::SESV2
     #             replacement_template_data: "EmailTemplateData",
     #           },
     #         },
+    #         replacement_headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #     ],
     #     configuration_set_name: "ConfigurationSetName",
@@ -5117,7 +5123,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

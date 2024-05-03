@@ -659,7 +659,9 @@ module Aws::BedrockAgent
     #
     # @option params [Types::ActionGroupExecutor] :action_group_executor
     #   The Amazon Resource Name (ARN) of the Lambda function containing the
-    #   business logic that is carried out upon invoking the action.
+    #   business logic that is carried out upon invoking the action or the
+    #   custom control method for handling the information elicited from the
+    #   user.
     #
     # @option params [required, String] :action_group_name
     #   The name to give the action group.
@@ -843,7 +845,8 @@ module Aws::BedrockAgent
     #     description: "Description",
     #     routing_configuration: [
     #       {
-    #         agent_version: "Version", # required
+    #         agent_version: "Version",
+    #         provisioned_throughput: "ProvisionedModelIdentifier",
     #       },
     #     ],
     #     tags: {
@@ -858,6 +861,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
@@ -866,8 +870,11 @@ module Aws::BedrockAgent
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
+    #   resp.agent_alias.failure_reasons #=> Array
+    #   resp.agent_alias.failure_reasons[0] #=> String
     #   resp.agent_alias.routing_configuration #=> Array
     #   resp.agent_alias.routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentAlias AWS API Documentation
@@ -1601,6 +1608,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
@@ -1609,8 +1617,11 @@ module Aws::BedrockAgent
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
+    #   resp.agent_alias.failure_reasons #=> Array
+    #   resp.agent_alias.failure_reasons[0] #=> String
     #   resp.agent_alias.routing_configuration #=> Array
     #   resp.agent_alias.routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentAlias AWS API Documentation
@@ -2001,6 +2012,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias_summaries[0].description #=> String
     #   resp.agent_alias_summaries[0].routing_configuration #=> Array
     #   resp.agent_alias_summaries[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias_summaries[0].routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2839,7 +2851,8 @@ module Aws::BedrockAgent
     #     description: "Description",
     #     routing_configuration: [
     #       {
-    #         agent_version: "Version", # required
+    #         agent_version: "Version",
+    #         provisioned_throughput: "ProvisionedModelIdentifier",
     #       },
     #     ],
     #   })
@@ -2851,6 +2864,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
@@ -2859,8 +2873,11 @@ module Aws::BedrockAgent
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
+    #   resp.agent_alias.failure_reasons #=> Array
+    #   resp.agent_alias.failure_reasons[0] #=> String
     #   resp.agent_alias.routing_configuration #=> Array
     #   resp.agent_alias.routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentAlias AWS API Documentation
@@ -2938,7 +2955,7 @@ module Aws::BedrockAgent
     # data source. Specify the existing `chunkingConfiguration`.
     #
     # @option params [String] :data_deletion_policy
-    #   The data deletion policy assigned to the data source.
+    #   The data deletion policy of the updated data source.
     #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
     #   Contains details about the storage configuration of the data source.
@@ -3217,7 +3234,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
