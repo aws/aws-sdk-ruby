@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2024-05-01)
+------------------
+
+* Feature - Updated CreateMembers API request with limits.
+
 1.104.0 (2024-04-25)
 ------------------
 

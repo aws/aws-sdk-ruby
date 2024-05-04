@@ -35,6 +35,10 @@ module Aws::EC2
     end
     alias :volume_id :id
 
+    # <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #  </note>
+    #
     # Information about the volume attachments.
     # @return [Array<Types::VolumeAttachment>]
     def attachments
@@ -112,6 +116,10 @@ module Aws::EC2
       data[:volume_type]
     end
 
+    # <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #  </note>
+    #
     # Indicates whether the volume was created using fast snapshot restore.
     # @return [Boolean]
     def fast_restored
@@ -130,6 +138,10 @@ module Aws::EC2
       data[:throughput]
     end
 
+    # <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #  </note>
+    #
     # Reserved for future use.
     # @return [String]
     def sse_type

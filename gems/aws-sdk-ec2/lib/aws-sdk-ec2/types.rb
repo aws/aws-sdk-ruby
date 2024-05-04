@@ -26399,6 +26399,12 @@ module Aws::EC2
     #     `deleted` \| `deleting` \| `modifying` \| `pending`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `tag-key `- The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -34600,6 +34606,66 @@ module Aws::EC2
     class GetInstanceMetadataDefaultsResult < Struct.new(
       :account_level)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance for which to get the public endorsement key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   The required public endorsement key type.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_format
+    #   The required public endorsement key format. Specify `der` for a
+    #   DER-encoded public key that is compatible with OpenSSL. Specify
+    #   `tpmt` for a TPM 2.0 format that is compatible with tpm2-tools. The
+    #   returned key is base64 encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specify this parameter to verify whether the request will succeed,
+    #   without actually making the request. If the request will succeed,
+    #   the response is `DryRunOperation`. Otherwise, the response is
+    #   `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTpmEkPubRequest AWS API Documentation
+    #
+    class GetInstanceTpmEkPubRequest < Struct.new(
+      :instance_id,
+      :key_type,
+      :key_format,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   The public endorsement key type.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_format
+    #   The public endorsement key format.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The public endorsement key material.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTpmEkPubResult AWS API Documentation
+    #
+    class GetInstanceTpmEkPubResult < Struct.new(
+      :instance_id,
+      :key_type,
+      :key_format,
+      :key_value)
+      SENSITIVE = [:key_value]
       include Aws::Structure
     end
 
@@ -44928,7 +44994,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] device_index
-    #   The device index for the network interface attachment.
+    #   The device index for the network interface attachment. Each network
+    #   interface requires a device index. If you create a launch template
+    #   that includes secondary network interfaces but not a primary network
+    #   interface, then you must add a primary network interface as a launch
+    #   parameter when you launch an instance from the template.
     #   @return [Integer]
     #
     # @!attribute [rw] groups
@@ -67418,6 +67488,10 @@ module Aws::EC2
     # Describes a volume.
     #
     # @!attribute [rw] attachments
+    #   <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #    </note>
+    #
     #   Information about the volume attachments.
     #   @return [Array<Types::VolumeAttachment>]
     #
@@ -67476,6 +67550,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] fast_restored
+    #   <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #    </note>
+    #
     #   Indicates whether the volume was created using fast snapshot
     #   restore.
     #   @return [Boolean]
@@ -67489,6 +67567,10 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] sse_type
+    #   <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #    </note>
+    #
     #   Reserved for future use.
     #   @return [String]
     #

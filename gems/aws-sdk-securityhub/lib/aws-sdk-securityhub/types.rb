@@ -30058,8 +30058,10 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] configuration_policy_identifier
-    #   The Amazon Resource Name (ARN) or universally unique identifier
-    #   (UUID) of the configuration policy.
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed
+    #   configuration.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -30130,8 +30132,10 @@ module Aws::SecurityHub
     #   @return [Types::Target]
     #
     # @!attribute [rw] configuration_policy_identifier
-    #   The Amazon Resource Name (ARN) or universally unique identifier
-    #   (UUID) of the configuration policy.
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed
+    #   configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyDisassociationRequest AWS API Documentation

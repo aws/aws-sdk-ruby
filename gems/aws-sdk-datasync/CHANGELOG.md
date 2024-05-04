@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-05-03)
+------------------
+
+* Feature - Updated guidance on using private or self-signed certificate authorities (CAs) with AWS DataSync object storage locations.
+
 1.75.0 (2024-04-25)
 ------------------
 

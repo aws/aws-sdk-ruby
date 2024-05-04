@@ -18229,9 +18229,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes the specified transit gateway route table. You must
-    # disassociate the route table from any transit gateway route tables
-    # before you can delete it.
+    # Deletes the specified transit gateway route table. If there are any
+    # route tables associated with the transit gateway route table, you must
+    # first run DisassociateRouteTable before you can delete the transit
+    # gateway route table. This removes any route tables associated with the
+    # transit gateway route table.
     #
     # @option params [required, String] :transit_gateway_route_table_id
     #   The ID of the transit gateway route table.
@@ -35217,6 +35219,12 @@ module Aws::EC2
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
+    #   * `tag-key `- The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a tag
+    #     with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+    #     the filter name and `TeamA` for the filter value.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -41766,6 +41774,59 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_instance_metadata_defaults(params = {}, options = {})
       req = build_request(:get_instance_metadata_defaults, params)
+      req.send_request(options)
+    end
+
+    # Gets the public endorsement key associated with the Nitro Trusted
+    # Platform Module (NitroTPM) for the specified instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance for which to get the public endorsement key.
+    #
+    # @option params [required, String] :key_type
+    #   The required public endorsement key type.
+    #
+    # @option params [required, String] :key_format
+    #   The required public endorsement key format. Specify `der` for a
+    #   DER-encoded public key that is compatible with OpenSSL. Specify `tpmt`
+    #   for a TPM 2.0 format that is compatible with tpm2-tools. The returned
+    #   key is base64 encoded.
+    #
+    # @option params [Boolean] :dry_run
+    #   Specify this parameter to verify whether the request will succeed,
+    #   without actually making the request. If the request will succeed, the
+    #   response is `DryRunOperation`. Otherwise, the response is
+    #   `UnauthorizedOperation`.
+    #
+    # @return [Types::GetInstanceTpmEkPubResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInstanceTpmEkPubResult#instance_id #instance_id} => String
+    #   * {Types::GetInstanceTpmEkPubResult#key_type #key_type} => String
+    #   * {Types::GetInstanceTpmEkPubResult#key_format #key_format} => String
+    #   * {Types::GetInstanceTpmEkPubResult#key_value #key_value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_instance_tpm_ek_pub({
+    #     instance_id: "InstanceId", # required
+    #     key_type: "rsa-2048", # required, accepts rsa-2048, ecc-sec-p384
+    #     key_format: "der", # required, accepts der, tpmt
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.key_type #=> String, one of "rsa-2048", "ecc-sec-p384"
+    #   resp.key_format #=> String, one of "der", "tpmt"
+    #   resp.key_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTpmEkPub AWS API Documentation
+    #
+    # @overload get_instance_tpm_ek_pub(params = {})
+    # @param [Hash] params ({})
+    def get_instance_tpm_ek_pub(params = {}, options = {})
+      req = build_request(:get_instance_tpm_ek_pub, params)
       req.send_request(options)
     end
 
@@ -59294,7 +59355,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.453.0'
+      context[:gem_version] = '1.455.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

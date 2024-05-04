@@ -307,6 +307,8 @@ module Aws::DynamoDB
     NullAttributeValue = Shapes::BooleanShape.new(name: 'NullAttributeValue')
     NumberAttributeValue = Shapes::StringShape.new(name: 'NumberAttributeValue')
     NumberSetAttributeValue = Shapes::ListShape.new(name: 'NumberSetAttributeValue')
+    OnDemandThroughput = Shapes::StructureShape.new(name: 'OnDemandThroughput')
+    OnDemandThroughputOverride = Shapes::StructureShape.new(name: 'OnDemandThroughputOverride')
     ParameterizedStatement = Shapes::StructureShape.new(name: 'ParameterizedStatement')
     ParameterizedStatements = Shapes::ListShape.new(name: 'ParameterizedStatements')
     PartiQLBatchRequest = Shapes::ListShape.new(name: 'PartiQLBatchRequest')
@@ -711,6 +713,7 @@ module Aws::DynamoDB
     CreateGlobalSecondaryIndexAction.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, required: true, location_name: "KeySchema"))
     CreateGlobalSecondaryIndexAction.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, required: true, location_name: "Projection"))
     CreateGlobalSecondaryIndexAction.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
+    CreateGlobalSecondaryIndexAction.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     CreateGlobalSecondaryIndexAction.struct_class = Types::CreateGlobalSecondaryIndexAction
 
     CreateGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName"))
@@ -726,6 +729,7 @@ module Aws::DynamoDB
     CreateReplicationGroupMemberAction.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
     CreateReplicationGroupMemberAction.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     CreateReplicationGroupMemberAction.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
+    CreateReplicationGroupMemberAction.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughputOverride, location_name: "OnDemandThroughputOverride"))
     CreateReplicationGroupMemberAction.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
     CreateReplicationGroupMemberAction.add_member(:table_class_override, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClassOverride"))
     CreateReplicationGroupMemberAction.struct_class = Types::CreateReplicationGroupMemberAction
@@ -743,6 +747,7 @@ module Aws::DynamoDB
     CreateTableInput.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
     CreateTableInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
     CreateTableInput.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
+    CreateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     CreateTableInput.struct_class = Types::CreateTableInput
 
     CreateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1038,6 +1043,7 @@ module Aws::DynamoDB
     GlobalSecondaryIndex.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, required: true, location_name: "KeySchema"))
     GlobalSecondaryIndex.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, required: true, location_name: "Projection"))
     GlobalSecondaryIndex.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
+    GlobalSecondaryIndex.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     GlobalSecondaryIndex.struct_class = Types::GlobalSecondaryIndex
 
     GlobalSecondaryIndexAutoScalingUpdate.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
@@ -1055,6 +1061,7 @@ module Aws::DynamoDB
     GlobalSecondaryIndexDescription.add_member(:index_size_bytes, Shapes::ShapeRef.new(shape: LongObject, location_name: "IndexSizeBytes"))
     GlobalSecondaryIndexDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: LongObject, location_name: "ItemCount"))
     GlobalSecondaryIndexDescription.add_member(:index_arn, Shapes::ShapeRef.new(shape: String, location_name: "IndexArn"))
+    GlobalSecondaryIndexDescription.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     GlobalSecondaryIndexDescription.struct_class = Types::GlobalSecondaryIndexDescription
 
     GlobalSecondaryIndexDescriptionList.member = Shapes::ShapeRef.new(shape: GlobalSecondaryIndexDescription)
@@ -1063,6 +1070,7 @@ module Aws::DynamoDB
     GlobalSecondaryIndexInfo.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, location_name: "KeySchema"))
     GlobalSecondaryIndexInfo.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, location_name: "Projection"))
     GlobalSecondaryIndexInfo.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
+    GlobalSecondaryIndexInfo.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     GlobalSecondaryIndexInfo.struct_class = Types::GlobalSecondaryIndexInfo
 
     GlobalSecondaryIndexList.member = Shapes::ShapeRef.new(shape: GlobalSecondaryIndex)
@@ -1339,6 +1347,13 @@ module Aws::DynamoDB
 
     NumberSetAttributeValue.member = Shapes::ShapeRef.new(shape: NumberAttributeValue)
 
+    OnDemandThroughput.add_member(:max_read_request_units, Shapes::ShapeRef.new(shape: LongObject, location_name: "MaxReadRequestUnits"))
+    OnDemandThroughput.add_member(:max_write_request_units, Shapes::ShapeRef.new(shape: LongObject, location_name: "MaxWriteRequestUnits"))
+    OnDemandThroughput.struct_class = Types::OnDemandThroughput
+
+    OnDemandThroughputOverride.add_member(:max_read_request_units, Shapes::ShapeRef.new(shape: LongObject, location_name: "MaxReadRequestUnits"))
+    OnDemandThroughputOverride.struct_class = Types::OnDemandThroughputOverride
+
     ParameterizedStatement.add_member(:statement, Shapes::ShapeRef.new(shape: PartiQLStatement, required: true, location_name: "Statement"))
     ParameterizedStatement.add_member(:parameters, Shapes::ShapeRef.new(shape: PreparedStatementParameters, location_name: "Parameters"))
     ParameterizedStatement.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
@@ -1482,6 +1497,7 @@ module Aws::DynamoDB
     ReplicaDescription.add_member(:replica_status_percent_progress, Shapes::ShapeRef.new(shape: ReplicaStatusPercentProgress, location_name: "ReplicaStatusPercentProgress"))
     ReplicaDescription.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     ReplicaDescription.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
+    ReplicaDescription.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughputOverride, location_name: "OnDemandThroughputOverride"))
     ReplicaDescription.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexDescriptionList, location_name: "GlobalSecondaryIndexes"))
     ReplicaDescription.add_member(:replica_inaccessible_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "ReplicaInaccessibleDateTime"))
     ReplicaDescription.add_member(:replica_table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "ReplicaTableClassSummary"))
@@ -1491,6 +1507,7 @@ module Aws::DynamoDB
 
     ReplicaGlobalSecondaryIndex.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     ReplicaGlobalSecondaryIndex.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
+    ReplicaGlobalSecondaryIndex.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughputOverride, location_name: "OnDemandThroughputOverride"))
     ReplicaGlobalSecondaryIndex.struct_class = Types::ReplicaGlobalSecondaryIndex
 
     ReplicaGlobalSecondaryIndexAutoScalingDescription.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
@@ -1509,6 +1526,7 @@ module Aws::DynamoDB
 
     ReplicaGlobalSecondaryIndexDescription.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     ReplicaGlobalSecondaryIndexDescription.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
+    ReplicaGlobalSecondaryIndexDescription.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughputOverride, location_name: "OnDemandThroughputOverride"))
     ReplicaGlobalSecondaryIndexDescription.struct_class = Types::ReplicaGlobalSecondaryIndexDescription
 
     ReplicaGlobalSecondaryIndexDescriptionList.member = Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexDescription)
@@ -1593,6 +1611,7 @@ module Aws::DynamoDB
     RestoreTableFromBackupInput.add_member(:global_secondary_index_override, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexOverride"))
     RestoreTableFromBackupInput.add_member(:local_secondary_index_override, Shapes::ShapeRef.new(shape: LocalSecondaryIndexList, location_name: "LocalSecondaryIndexOverride"))
     RestoreTableFromBackupInput.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughputOverride"))
+    RestoreTableFromBackupInput.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughputOverride"))
     RestoreTableFromBackupInput.add_member(:sse_specification_override, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecificationOverride"))
     RestoreTableFromBackupInput.struct_class = Types::RestoreTableFromBackupInput
 
@@ -1608,6 +1627,7 @@ module Aws::DynamoDB
     RestoreTableToPointInTimeInput.add_member(:global_secondary_index_override, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexOverride"))
     RestoreTableToPointInTimeInput.add_member(:local_secondary_index_override, Shapes::ShapeRef.new(shape: LocalSecondaryIndexList, location_name: "LocalSecondaryIndexOverride"))
     RestoreTableToPointInTimeInput.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughputOverride"))
+    RestoreTableToPointInTimeInput.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughputOverride"))
     RestoreTableToPointInTimeInput.add_member(:sse_specification_override, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecificationOverride"))
     RestoreTableToPointInTimeInput.struct_class = Types::RestoreTableToPointInTimeInput
 
@@ -1665,6 +1685,7 @@ module Aws::DynamoDB
     SourceTableDetails.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, required: true, location_name: "KeySchema"))
     SourceTableDetails.add_member(:table_creation_date_time, Shapes::ShapeRef.new(shape: TableCreationDateTime, required: true, location_name: "TableCreationDateTime"))
     SourceTableDetails.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, required: true, location_name: "ProvisionedThroughput"))
+    SourceTableDetails.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     SourceTableDetails.add_member(:item_count, Shapes::ShapeRef.new(shape: ItemCount, location_name: "ItemCount"))
     SourceTableDetails.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     SourceTableDetails.struct_class = Types::SourceTableDetails
@@ -1699,6 +1720,7 @@ module Aws::DynamoDB
     TableCreationParameters.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, required: true, location_name: "KeySchema"))
     TableCreationParameters.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     TableCreationParameters.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
+    TableCreationParameters.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     TableCreationParameters.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     TableCreationParameters.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
     TableCreationParameters.struct_class = Types::TableCreationParameters
@@ -1726,6 +1748,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:archival_summary, Shapes::ShapeRef.new(shape: ArchivalSummary, location_name: "ArchivalSummary"))
     TableDescription.add_member(:table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "TableClassSummary"))
     TableDescription.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
+    TableDescription.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     TableDescription.struct_class = Types::TableDescription
 
     TableInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -1828,7 +1851,8 @@ module Aws::DynamoDB
     UpdateContributorInsightsOutput.struct_class = Types::UpdateContributorInsightsOutput
 
     UpdateGlobalSecondaryIndexAction.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
-    UpdateGlobalSecondaryIndexAction.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, required: true, location_name: "ProvisionedThroughput"))
+    UpdateGlobalSecondaryIndexAction.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
+    UpdateGlobalSecondaryIndexAction.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     UpdateGlobalSecondaryIndexAction.struct_class = Types::UpdateGlobalSecondaryIndexAction
 
     UpdateGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName"))
@@ -1887,6 +1911,7 @@ module Aws::DynamoDB
     UpdateReplicationGroupMemberAction.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
     UpdateReplicationGroupMemberAction.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     UpdateReplicationGroupMemberAction.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
+    UpdateReplicationGroupMemberAction.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughputOverride, location_name: "OnDemandThroughputOverride"))
     UpdateReplicationGroupMemberAction.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
     UpdateReplicationGroupMemberAction.add_member(:table_class_override, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClassOverride"))
     UpdateReplicationGroupMemberAction.struct_class = Types::UpdateReplicationGroupMemberAction
@@ -1901,6 +1926,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:replica_updates, Shapes::ShapeRef.new(shape: ReplicationGroupUpdateList, location_name: "ReplicaUpdates"))
     UpdateTableInput.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
     UpdateTableInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
+    UpdateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))

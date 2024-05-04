@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2024-05-03)
+------------------
+
+* Feature - This feature supports the release of Files related items
+
 1.22.0 (2024-04-29)
 ------------------
 

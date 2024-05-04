@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-05-02)
+------------------
+
+* Feature - Update Redshift Serverless List Scheduled Actions Output Response to include Namespace Name.
+
 1.26.0 (2024-04-25)
 ------------------
 

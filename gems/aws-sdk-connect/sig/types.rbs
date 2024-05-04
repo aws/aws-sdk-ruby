@@ -246,6 +246,27 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AttachedFile
+      attr_accessor creation_time: ::String
+      attr_accessor file_arn: ::String
+      attr_accessor file_id: ::String
+      attr_accessor file_name: ::String
+      attr_accessor file_size_in_bytes: ::Integer
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor created_by: Types::CreatedByInfo
+      attr_accessor file_use_case_type: ("ATTACHMENT")
+      attr_accessor associated_resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AttachedFileError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor file_id: ::String
+      SENSITIVE: []
+    end
+
     class AttachmentReference
       attr_accessor name: ::String
       attr_accessor value: ::String
@@ -306,6 +327,19 @@ module Aws::Connect
     class BatchDisassociateAnalyticsDataSetResponse
       attr_accessor deleted: ::Array[::String]
       attr_accessor errors: ::Array[Types::ErrorResult]
+      SENSITIVE: []
+    end
+
+    class BatchGetAttachedFileMetadataRequest
+      attr_accessor file_ids: ::Array[::String]
+      attr_accessor instance_id: ::String
+      attr_accessor associated_resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAttachedFileMetadataResponse
+      attr_accessor files: ::Array[Types::AttachedFile]
+      attr_accessor errors: ::Array[Types::AttachedFileError]
       SENSITIVE: []
     end
 
@@ -391,6 +425,16 @@ module Aws::Connect
       attr_accessor phone_number_status: Types::PhoneNumberStatus
       attr_accessor source_phone_number_arn: ::String
       SENSITIVE: []
+    end
+
+    class CompleteAttachedFileUploadRequest
+      attr_accessor instance_id: ::String
+      attr_accessor file_id: ::String
+      attr_accessor associated_resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CompleteAttachedFileUploadResponse < Aws::EmptyStructure
     end
 
     class ConflictException
@@ -930,6 +974,20 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class CreatedByInfo
+      attr_accessor connect_user_arn: ::String
+      attr_accessor aws_identity_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ConnectUserArn < CreatedByInfo
+      end
+      class AwsIdentityArn < CreatedByInfo
+      end
+      class Unknown < CreatedByInfo
+      end
+    end
+
     class Credentials
       attr_accessor access_token: ::String
       attr_accessor access_token_expiration: ::Time
@@ -993,6 +1051,16 @@ module Aws::Connect
       attr_accessor vocabulary_id: ::String
       attr_accessor vocabulary_name: ::String
       SENSITIVE: []
+    end
+
+    class DeleteAttachedFileRequest
+      attr_accessor instance_id: ::String
+      attr_accessor file_id: ::String
+      attr_accessor associated_resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAttachedFileResponse < Aws::EmptyStructure
     end
 
     class DeleteContactEvaluationRequest
@@ -1543,6 +1611,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DownloadUrlMetadata
+      attr_accessor url: ::String
+      attr_accessor url_expiry: ::String
+      SENSITIVE: []
+    end
+
     class DuplicateResourceException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1867,6 +1941,29 @@ module Aws::Connect
       attr_accessor resource_id: ::String
       attr_accessor flow_id: ::String
       attr_accessor resource_type: ("VOICE_PHONE_NUMBER")
+      SENSITIVE: []
+    end
+
+    class GetAttachedFileRequest
+      attr_accessor instance_id: ::String
+      attr_accessor file_id: ::String
+      attr_accessor url_expiry_in_seconds: ::Integer
+      attr_accessor associated_resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAttachedFileResponse
+      attr_accessor file_arn: ::String
+      attr_accessor file_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_name: ::String
+      attr_accessor file_size_in_bytes: ::Integer
+      attr_accessor associated_resource_arn: ::String
+      attr_accessor file_use_case_type: ("ATTACHMENT")
+      attr_accessor created_by: Types::CreatedByInfo
+      attr_accessor download_url_metadata: Types::DownloadUrlMetadata
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -2285,7 +2382,19 @@ module Aws::Connect
 
     class InvalidRequestException
       attr_accessor message: ::String
+      attr_accessor reason: Types::InvalidRequestExceptionReason
       SENSITIVE: []
+    end
+
+    class InvalidRequestExceptionReason
+      attr_accessor attached_file_invalid_request_exception_reason: ("INVALID_FILE_SIZE" | "INVALID_FILE_TYPE" | "INVALID_FILE_NAME")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AttachedFileInvalidRequestExceptionReason < InvalidRequestExceptionReason
+      end
+      class Unknown < InvalidRequestExceptionReason
+      end
     end
 
     class InvisibleFieldInfo
@@ -4043,6 +4152,29 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class StartAttachedFileUploadRequest
+      attr_accessor client_token: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor file_name: ::String
+      attr_accessor file_size_in_bytes: ::Integer
+      attr_accessor url_expiry_in_seconds: ::Integer
+      attr_accessor file_use_case_type: ("ATTACHMENT")
+      attr_accessor associated_resource_arn: ::String
+      attr_accessor created_by: Types::CreatedByInfo
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartAttachedFileUploadResponse
+      attr_accessor file_arn: ::String
+      attr_accessor file_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor created_by: Types::CreatedByInfo
+      attr_accessor upload_url_metadata: Types::UploadUrlMetadata
+      SENSITIVE: []
+    end
+
     class StartChatContactRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_flow_id: ::String
@@ -4896,6 +5028,13 @@ module Aws::Connect
     end
 
     class UpdateViewMetadataResponse < Aws::EmptyStructure
+    end
+
+    class UploadUrlMetadata
+      attr_accessor url: ::String
+      attr_accessor url_expiry: ::String
+      attr_accessor headers_to_include: ::Hash[::String, ::String]
+      SENSITIVE: []
     end
 
     class UrlReference

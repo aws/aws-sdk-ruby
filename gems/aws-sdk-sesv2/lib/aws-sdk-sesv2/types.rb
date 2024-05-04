@@ -322,12 +322,36 @@ module Aws::SESV2
     #   The `ReplacementEmailContent` associated with a `BulkEmailEntry`.
     #   @return [Types::ReplacementEmailContent]
     #
+    # @!attribute [rw] replacement_headers
+    #   The list of message headers associated with the `BulkEmailEntry`
+    #   data type.
+    #
+    #   * Headers Not Present in `BulkEmailEntry`: If a header is specified
+    #     in [ `Template` ][1] but not in `BulkEmailEntry`, the header from
+    #     `Template` will be added to the outgoing email.
+    #
+    #   * Headers Present in `BulkEmailEntry`: If a header is specified in
+    #     `BulkEmailEntry`, it takes precedence over any header of the same
+    #     name specified in [ `Template` ][1]:
+    #
+    #     * If the header is also defined within `Template`, the value from
+    #       `BulkEmailEntry` will replace the header's value in the email.
+    #
+    #     * If the header is not defined within `Template`, it will simply
+    #       be added to the email as specified in `BulkEmailEntry`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_Template.html
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/BulkEmailEntry AWS API Documentation
     #
     class BulkEmailEntry < Struct.new(
       :destination,
       :replacement_tags,
-      :replacement_email_content)
+      :replacement_email_content,
+      :replacement_headers)
       SENSITIVE = []
       include Aws::Structure
     end

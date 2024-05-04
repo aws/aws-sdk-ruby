@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.239.0 (2024-05-03)
+------------------
+
+* Feature - Amazon SageMaker Inference now supports m6i, c6i, r6i, m7i, c7i, r7i and g5 instance types for Batch Transform Jobs
+
 1.238.0 (2024-04-30)
 ------------------
 

@@ -297,6 +297,10 @@ module Aws::DynamoDB
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
+    #         on_demand_throughput: {
+    #           max_read_request_units: 1,
+    #           max_write_request_units: 1,
+    #         },
     #       },
     #     ],
     #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
@@ -322,6 +326,10 @@ module Aws::DynamoDB
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
     #     resource_policy: "ResourcePolicy",
+    #     on_demand_throughput: {
+    #       max_read_request_units: 1,
+    #       max_write_request_units: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::AttributeDefinition>] :attribute_definitions
@@ -527,18 +535,21 @@ module Aws::DynamoDB
     #   that will be attached to the table.
     #
     #   When you attach a resource-based policy while creating a table, the
-    #   policy creation is *strongly consistent*.
+    #   policy application is *strongly consistent*.
     #
     #   The maximum size supported for a resource-based policy document is 20
     #   KB. DynamoDB counts whitespaces when calculating the size of a policy
-    #   against this limit. You can’t request an increase for this limit. For
-    #   a full list of all considerations that you should keep in mind while
-    #   attaching a resource-based policy, see [Resource-based policy
+    #   against this limit. For a full list of all considerations that apply
+    #   for resource-based policies, see [Resource-based policy
     #   considerations][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
+    # @option options [Types::OnDemandThroughput] :on_demand_throughput
+    #   Sets the maximum number of read and write units for the specified
+    #   table in on-demand capacity mode. If you use this parameter, you must
+    #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     # @return [Table]
     def create_table(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do

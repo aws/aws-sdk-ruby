@@ -85,6 +85,7 @@ module Aws::Inspector2
     CisNumberFilter = Shapes::StructureShape.new(name: 'CisNumberFilter')
     CisNumberFilterList = Shapes::ListShape.new(name: 'CisNumberFilterList')
     CisOwnerId = Shapes::StringShape.new(name: 'CisOwnerId')
+    CisReportFormat = Shapes::StringShape.new(name: 'CisReportFormat')
     CisReportStatus = Shapes::StringShape.new(name: 'CisReportStatus')
     CisResultStatus = Shapes::StringShape.new(name: 'CisResultStatus')
     CisResultStatusComparison = Shapes::StringShape.new(name: 'CisResultStatusComparison')
@@ -1507,6 +1508,7 @@ module Aws::Inspector2
 
     FreeTrialInfoList.member = Shapes::ShapeRef.new(shape: FreeTrialInfo)
 
+    GetCisScanReportRequest.add_member(:report_format, Shapes::ShapeRef.new(shape: CisReportFormat, location_name: "reportFormat"))
     GetCisScanReportRequest.add_member(:scan_arn, Shapes::ShapeRef.new(shape: CisScanArn, required: true, location_name: "scanArn"))
     GetCisScanReportRequest.add_member(:target_accounts, Shapes::ShapeRef.new(shape: ReportTargetAccounts, location_name: "targetAccounts"))
     GetCisScanReportRequest.struct_class = Types::GetCisScanReportRequest
@@ -2626,6 +2628,7 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

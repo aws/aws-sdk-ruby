@@ -370,6 +370,14 @@ module Aws::DynamoDB
       data[:deletion_protection_enabled]
     end
 
+    # The maximum number of read and write units for the specified on-demand
+    # table. If you use this parameter, you must specify
+    # `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    # @return [Types::OnDemandThroughput]
+    def on_demand_throughput
+      data[:on_demand_throughput]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1800,9 +1808,13 @@ module Aws::DynamoDB
     #       {
     #         update: {
     #           index_name: "IndexName", # required
-    #           provisioned_throughput: { # required
+    #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
+    #           },
+    #           on_demand_throughput: {
+    #             max_read_request_units: 1,
+    #             max_write_request_units: 1,
     #           },
     #         },
     #         create: {
@@ -1820,6 +1832,10 @@ module Aws::DynamoDB
     #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
+    #           },
+    #           on_demand_throughput: {
+    #             max_read_request_units: 1,
+    #             max_write_request_units: 1,
     #           },
     #         },
     #         delete: {
@@ -1844,11 +1860,17 @@ module Aws::DynamoDB
     #           provisioned_throughput_override: {
     #             read_capacity_units: 1,
     #           },
+    #           on_demand_throughput_override: {
+    #             max_read_request_units: 1,
+    #           },
     #           global_secondary_indexes: [
     #             {
     #               index_name: "IndexName", # required
     #               provisioned_throughput_override: {
     #                 read_capacity_units: 1,
+    #               },
+    #               on_demand_throughput_override: {
+    #                 max_read_request_units: 1,
     #               },
     #             },
     #           ],
@@ -1860,11 +1882,17 @@ module Aws::DynamoDB
     #           provisioned_throughput_override: {
     #             read_capacity_units: 1,
     #           },
+    #           on_demand_throughput_override: {
+    #             max_read_request_units: 1,
+    #           },
     #           global_secondary_indexes: [
     #             {
     #               index_name: "IndexName", # required
     #               provisioned_throughput_override: {
     #                 read_capacity_units: 1,
+    #               },
+    #               on_demand_throughput_override: {
+    #                 max_read_request_units: 1,
     #               },
     #             },
     #           ],
@@ -1877,6 +1905,10 @@ module Aws::DynamoDB
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
+    #     on_demand_throughput: {
+    #       max_read_request_units: 1,
+    #       max_write_request_units: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
@@ -1955,6 +1987,10 @@ module Aws::DynamoDB
     # @option options [Boolean] :deletion_protection_enabled
     #   Indicates whether deletion protection is to be enabled (true) or
     #   disabled (false) on the table.
+    # @option options [Types::OnDemandThroughput] :on_demand_throughput
+    #   Updates the maximum number of read and write units for the specified
+    #   table in on-demand capacity mode. If you use this parameter, you must
+    #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)

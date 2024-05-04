@@ -1205,6 +1205,70 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Allows you to retrieve metadata about multiple attached files on an
+    # associated resource. Each attached file provided in the input list
+    # must be associated with the input AssociatedResourceArn.
+    #
+    # @option params [required, Array<String>] :file_ids
+    #   The unique identifiers of the attached file resource.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Connect instance.
+    #
+    # @option params [required, String] :associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #
+    # @return [Types::BatchGetAttachedFileMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAttachedFileMetadataResponse#files #files} => Array&lt;Types::AttachedFile&gt;
+    #   * {Types::BatchGetAttachedFileMetadataResponse#errors #errors} => Array&lt;Types::AttachedFileError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_attached_file_metadata({
+    #     file_ids: ["FileId"], # required
+    #     instance_id: "InstanceId", # required
+    #     associated_resource_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.files #=> Array
+    #   resp.files[0].creation_time #=> String
+    #   resp.files[0].file_arn #=> String
+    #   resp.files[0].file_id #=> String
+    #   resp.files[0].file_name #=> String
+    #   resp.files[0].file_size_in_bytes #=> Integer
+    #   resp.files[0].file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.files[0].created_by.connect_user_arn #=> String
+    #   resp.files[0].created_by.aws_identity_arn #=> String
+    #   resp.files[0].file_use_case_type #=> String, one of "ATTACHMENT"
+    #   resp.files[0].associated_resource_arn #=> String
+    #   resp.files[0].tags #=> Hash
+    #   resp.files[0].tags["TagKey"] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].file_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetAttachedFileMetadata AWS API Documentation
+    #
+    # @overload batch_get_attached_file_metadata(params = {})
+    # @param [Hash] params ({})
+    def batch_get_attached_file_metadata(params = {}, options = {})
+      req = build_request(:batch_get_attached_file_metadata, params)
+      req.send_request(options)
+    end
+
     # Retrieve the flow associations for the given resources.
     #
     # @option params [required, String] :instance_id
@@ -1453,6 +1517,46 @@ module Aws::Connect
     # @param [Hash] params ({})
     def claim_phone_number(params = {}, options = {})
       req = build_request(:claim_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Allows you to confirm that the attached file has been uploaded using
+    # the pre-signed URL provided in the StartAttachedFileUpload API.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Connect instance.
+    #
+    # @option params [required, String] :file_id
+    #   The unique identifier of the attached file resource.
+    #
+    # @option params [required, String] :associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.complete_attached_file_upload({
+    #     instance_id: "InstanceId", # required
+    #     file_id: "FileId", # required
+    #     associated_resource_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CompleteAttachedFileUpload AWS API Documentation
+    #
+    # @overload complete_attached_file_upload(params = {})
+    # @param [Hash] params ({})
+    def complete_attached_file_upload(params = {}, options = {})
+      req = build_request(:complete_attached_file_upload, params)
       req.send_request(options)
     end
 
@@ -3543,6 +3647,48 @@ module Aws::Connect
     # @param [Hash] params ({})
     def deactivate_evaluation_form(params = {}, options = {})
       req = build_request(:deactivate_evaluation_form, params)
+      req.send_request(options)
+    end
+
+    # Deletes an attached file along with the underlying S3 Object.
+    #
+    # The attached file is **permanently deleted** if S3 bucket versioning
+    # is not enabled.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Connect instance.
+    #
+    # @option params [required, String] :file_id
+    #   The unique identifier of the attached file resource.
+    #
+    # @option params [required, String] :associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_attached_file({
+    #     instance_id: "InstanceId", # required
+    #     file_id: "FileId", # required
+    #     associated_resource_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteAttachedFile AWS API Documentation
+    #
+    # @overload delete_attached_file(params = {})
+    # @param [Hash] params ({})
+    def delete_attached_file(params = {}, options = {})
+      req = build_request(:delete_attached_file, params)
       req.send_request(options)
     end
 
@@ -6208,6 +6354,80 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Provides a pre-signed URL for download of an approved attached file.
+    # This API also returns metadata about the attached file. It will only
+    # return a downloadURL if the status of the attached file is `APPROVED`.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Connect instance.
+    #
+    # @option params [required, String] :file_id
+    #   The unique identifier of the attached file resource.
+    #
+    # @option params [Integer] :url_expiry_in_seconds
+    #   Optional override for the expiry of the pre-signed S3 URL in seconds.
+    #
+    # @option params [required, String] :associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #
+    # @return [Types::GetAttachedFileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAttachedFileResponse#file_arn #file_arn} => String
+    #   * {Types::GetAttachedFileResponse#file_id #file_id} => String
+    #   * {Types::GetAttachedFileResponse#creation_time #creation_time} => String
+    #   * {Types::GetAttachedFileResponse#file_status #file_status} => String
+    #   * {Types::GetAttachedFileResponse#file_name #file_name} => String
+    #   * {Types::GetAttachedFileResponse#file_size_in_bytes #file_size_in_bytes} => Integer
+    #   * {Types::GetAttachedFileResponse#associated_resource_arn #associated_resource_arn} => String
+    #   * {Types::GetAttachedFileResponse#file_use_case_type #file_use_case_type} => String
+    #   * {Types::GetAttachedFileResponse#created_by #created_by} => Types::CreatedByInfo
+    #   * {Types::GetAttachedFileResponse#download_url_metadata #download_url_metadata} => Types::DownloadUrlMetadata
+    #   * {Types::GetAttachedFileResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_attached_file({
+    #     instance_id: "InstanceId", # required
+    #     file_id: "FileId", # required
+    #     url_expiry_in_seconds: 1,
+    #     associated_resource_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_arn #=> String
+    #   resp.file_id #=> String
+    #   resp.creation_time #=> String
+    #   resp.file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.file_name #=> String
+    #   resp.file_size_in_bytes #=> Integer
+    #   resp.associated_resource_arn #=> String
+    #   resp.file_use_case_type #=> String, one of "ATTACHMENT"
+    #   resp.created_by.connect_user_arn #=> String
+    #   resp.created_by.aws_identity_arn #=> String
+    #   resp.download_url_metadata.url #=> String
+    #   resp.download_url_metadata.url_expiry #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetAttachedFile AWS API Documentation
+    #
+    # @overload get_attached_file(params = {})
+    # @param [Hash] params ({})
+    def get_attached_file(params = {}, options = {})
+      req = build_request(:get_attached_file, params)
+      req.send_request(options)
+    end
+
     # Retrieves the contact attributes for the specified contact.
     #
     # @option params [required, String] :instance_id
@@ -7399,7 +7619,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average greeting time agent ][21]
+    #     UI name: [Average agent greeting time][21]
     #
     #   AVG\_HANDLE\_TIME
     #
@@ -7484,7 +7704,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average interruptions agent ][28]
+    #     UI name: [Average agent interruptions][28]
     #
     #   AVG\_INTERRUPTION\_TIME\_AGENT
     #
@@ -7496,7 +7716,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average interruption time agent][29]
+    #     UI name: [Average agent interruption time][29]
     #
     #   AVG\_NON\_TALK\_TIME
     #
@@ -7554,7 +7774,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average talk time agent][34]
+    #     UI name: [Average agent talk time][34]
     #
     #   AVG\_TALK\_TIME\_CUSTOMER
     #
@@ -7566,7 +7786,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average talk time customer][35]
+    #     UI name: [Average customer talk time][35]
     #
     #   CASES\_CREATED
     #
@@ -7628,7 +7848,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
     #     contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Contacts handled by Connected to agent][40]
+    #     UI name: [Contacts handled (connected to agent timestamp)][40]
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
@@ -7700,7 +7920,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
     #     contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Contacts queued by Enqueue][46]
+    #     UI name: [Contacts queued (enqueue timestamp)][46]
     #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
@@ -7825,7 +8045,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Talk time agent percent][55]
+    #     UI name: [Agent talk time percent][55]
     #
     #   PERCENT\_TALK\_TIME\_CUSTOMER
     #
@@ -7837,7 +8057,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Talk time customer percent][56]
+    #     UI name: [Customer talk time percent][56]
     #
     #   REOPENED\_CASE\_ACTIONS
     #
@@ -12791,6 +13011,113 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Provides a pre-signed Amazon S3 URL in response for uploading your
+    # content.
+    #
+    # You may only use this API to upload attachments to a [Connect
+    # Case][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Connect instance.
+    #
+    # @option params [required, String] :file_name
+    #   A case-sensitive name of the attached file being uploaded.
+    #
+    # @option params [required, Integer] :file_size_in_bytes
+    #   The size of the attached file in bytes.
+    #
+    # @option params [Integer] :url_expiry_in_seconds
+    #   Optional override for the expiry of the pre-signed S3 URL in seconds.
+    #
+    # @option params [required, String] :file_use_case_type
+    #   The use case for the file.
+    #
+    # @option params [required, String] :associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #
+    # @option params [Types::CreatedByInfo] :created_by
+    #   Represents the identity that created the file.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, `\{ "Tags": \{"key1":"value1", "key2":"value2"\} \}`.
+    #
+    # @return [Types::StartAttachedFileUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAttachedFileUploadResponse#file_arn #file_arn} => String
+    #   * {Types::StartAttachedFileUploadResponse#file_id #file_id} => String
+    #   * {Types::StartAttachedFileUploadResponse#creation_time #creation_time} => String
+    #   * {Types::StartAttachedFileUploadResponse#file_status #file_status} => String
+    #   * {Types::StartAttachedFileUploadResponse#created_by #created_by} => Types::CreatedByInfo
+    #   * {Types::StartAttachedFileUploadResponse#upload_url_metadata #upload_url_metadata} => Types::UploadUrlMetadata
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_attached_file_upload({
+    #     client_token: "ClientToken",
+    #     instance_id: "InstanceId", # required
+    #     file_name: "FileName", # required
+    #     file_size_in_bytes: 1, # required
+    #     url_expiry_in_seconds: 1,
+    #     file_use_case_type: "ATTACHMENT", # required, accepts ATTACHMENT
+    #     associated_resource_arn: "ARN", # required
+    #     created_by: {
+    #       connect_user_arn: "ARN",
+    #       aws_identity_arn: "ARN",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_arn #=> String
+    #   resp.file_id #=> String
+    #   resp.creation_time #=> String
+    #   resp.file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.created_by.connect_user_arn #=> String
+    #   resp.created_by.aws_identity_arn #=> String
+    #   resp.upload_url_metadata.url #=> String
+    #   resp.upload_url_metadata.url_expiry #=> String
+    #   resp.upload_url_metadata.headers_to_include #=> Hash
+    #   resp.upload_url_metadata.headers_to_include["UrlMetadataSignedHeadersKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartAttachedFileUpload AWS API Documentation
+    #
+    # @overload start_attached_file_upload(params = {})
+    # @param [Hash] params ({})
+    def start_attached_file_upload(params = {}, options = {})
+      req = build_request(:start_attached_file_upload, params)
+      req.send_request(options)
+    end
+
     # Initiates a flow to start a new chat for the customer. Response of
     # this API provides a token required to obtain credentials from the
     # [CreateParticipantConnection][1] API in the Amazon Connect Participant
@@ -14313,6 +14640,23 @@ module Aws::Connect
     #   You can have up to 32,768 UTF-8 bytes across all attributes for a
     #   contact. Attribute keys can include only alphanumeric, dash, and
     #   underscore characters.
+    #
+    #   When the attributes for a contact exceed 32 KB, the contact is routed
+    #   down the Error branch of the flow. As a mitigation, consider the
+    #   following options:
+    #
+    #   * Remove unnecessary attributes by setting their values to empty.
+    #
+    #   * If the attributes are only used in one flow and don't need to be
+    #     referred to outside of that flow (for example, by a Lambda or
+    #     another flow), then use flow attributes. This way you aren't
+    #     needlessly persisting the 32 KB of information from one flow to
+    #     another. For more information, see [Flow block: Set contact
+    #     attributes][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/set-contact-attributes.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -16706,7 +17050,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

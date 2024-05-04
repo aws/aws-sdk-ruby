@@ -214,6 +214,10 @@ module Aws
                               provisioned_throughput: {
                                 read_capacity_units: ::Integer,
                                 write_capacity_units: ::Integer
+                              }?,
+                              on_demand_throughput: {
+                                max_read_request_units: ::Integer?,
+                                max_write_request_units: ::Integer?
                               }?
                             },
                           ],
@@ -239,7 +243,11 @@ module Aws
                           ],
                           ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
                           ?deletion_protection_enabled: bool,
-                          ?resource_policy: ::String
+                          ?resource_policy: ::String,
+                          ?on_demand_throughput: {
+                            max_read_request_units: ::Integer?,
+                            max_write_request_units: ::Integer?
+                          }
                         ) -> _CreateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableResponseSuccess
 
@@ -603,6 +611,10 @@ module Aws
                               read_capacity_units: ::Integer,
                               write_capacity_units: ::Integer
                             }?,
+                            on_demand_throughput: {
+                              max_read_request_units: ::Integer?,
+                              max_write_request_units: ::Integer?
+                            }?,
                             sse_specification: {
                               enabled: bool?,
                               sse_type: ("AES256" | "KMS")?,
@@ -624,6 +636,10 @@ module Aws
                                 provisioned_throughput: {
                                   read_capacity_units: ::Integer,
                                   write_capacity_units: ::Integer
+                                }?,
+                                on_demand_throughput: {
+                                  max_read_request_units: ::Integer?,
+                                  max_write_request_units: ::Integer?
                                 }?
                               },
                             ]?
@@ -824,6 +840,10 @@ module Aws
                                            provisioned_throughput: {
                                              read_capacity_units: ::Integer,
                                              write_capacity_units: ::Integer
+                                           }?,
+                                           on_demand_throughput: {
+                                             max_read_request_units: ::Integer?,
+                                             max_write_request_units: ::Integer?
                                            }?
                                          },
                                        ],
@@ -845,6 +865,10 @@ module Aws
                                        ?provisioned_throughput_override: {
                                          read_capacity_units: ::Integer,
                                          write_capacity_units: ::Integer
+                                       },
+                                       ?on_demand_throughput_override: {
+                                         max_read_request_units: ::Integer?,
+                                         max_write_request_units: ::Integer?
                                        },
                                        ?sse_specification_override: {
                                          enabled: bool?,
@@ -882,6 +906,10 @@ module Aws
                                                 provisioned_throughput: {
                                                   read_capacity_units: ::Integer,
                                                   write_capacity_units: ::Integer
+                                                }?,
+                                                on_demand_throughput: {
+                                                  max_read_request_units: ::Integer?,
+                                                  max_write_request_units: ::Integer?
                                                 }?
                                               },
                                             ],
@@ -903,6 +931,10 @@ module Aws
                                             ?provisioned_throughput_override: {
                                               read_capacity_units: ::Integer,
                                               write_capacity_units: ::Integer
+                                            },
+                                            ?on_demand_throughput_override: {
+                                              max_read_request_units: ::Integer?,
+                                              max_write_request_units: ::Integer?
                                             },
                                             ?sse_specification_override: {
                                               enabled: bool?,
@@ -1247,7 +1279,11 @@ module Aws
                                 provisioned_throughput: {
                                   read_capacity_units: ::Integer,
                                   write_capacity_units: ::Integer
-                                }
+                                }?,
+                                on_demand_throughput: {
+                                  max_read_request_units: ::Integer?,
+                                  max_write_request_units: ::Integer?
+                                }?
                               }?,
                               create: {
                                 index_name: ::String,
@@ -1264,6 +1300,10 @@ module Aws
                                 provisioned_throughput: {
                                   read_capacity_units: ::Integer,
                                   write_capacity_units: ::Integer
+                                }?,
+                                on_demand_throughput: {
+                                  max_read_request_units: ::Integer?,
+                                  max_write_request_units: ::Integer?
                                 }?
                               }?,
                               delete: {
@@ -1288,11 +1328,17 @@ module Aws
                                 provisioned_throughput_override: {
                                   read_capacity_units: ::Integer?
                                 }?,
+                                on_demand_throughput_override: {
+                                  max_read_request_units: ::Integer?
+                                }?,
                                 global_secondary_indexes: Array[
                                   {
                                     index_name: ::String,
                                     provisioned_throughput_override: {
                                       read_capacity_units: ::Integer?
+                                    }?,
+                                    on_demand_throughput_override: {
+                                      max_read_request_units: ::Integer?
                                     }?
                                   },
                                 ]?,
@@ -1304,11 +1350,17 @@ module Aws
                                 provisioned_throughput_override: {
                                   read_capacity_units: ::Integer?
                                 }?,
+                                on_demand_throughput_override: {
+                                  max_read_request_units: ::Integer?
+                                }?,
                                 global_secondary_indexes: Array[
                                   {
                                     index_name: ::String,
                                     provisioned_throughput_override: {
                                       read_capacity_units: ::Integer?
+                                    }?,
+                                    on_demand_throughput_override: {
+                                      max_read_request_units: ::Integer?
                                     }?
                                   },
                                 ]?,
@@ -1320,7 +1372,11 @@ module Aws
                             },
                           ],
                           ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
-                          ?deletion_protection_enabled: bool
+                          ?deletion_protection_enabled: bool,
+                          ?on_demand_throughput: {
+                            max_read_request_units: ::Integer?,
+                            max_write_request_units: ::Integer?
+                          }
                         ) -> _UpdateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess
 

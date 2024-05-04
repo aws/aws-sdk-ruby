@@ -159,6 +159,7 @@ module Aws::RedshiftServerless
     RestoreTableFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreTableFromSnapshotRequest')
     RestoreTableFromSnapshotResponse = Shapes::StructureShape.new(name: 'RestoreTableFromSnapshotResponse')
     Schedule = Shapes::UnionShape.new(name: 'Schedule')
+    ScheduledActionAssociation = Shapes::StructureShape.new(name: 'ScheduledActionAssociation')
     ScheduledActionName = Shapes::StringShape.new(name: 'ScheduledActionName')
     ScheduledActionResponse = Shapes::StructureShape.new(name: 'ScheduledActionResponse')
     ScheduledActionsList = Shapes::ListShape.new(name: 'ScheduledActionsList')
@@ -744,6 +745,10 @@ module Aws::RedshiftServerless
     Schedule.add_member_subclass(:unknown, Types::Schedule::Unknown)
     Schedule.struct_class = Types::Schedule
 
+    ScheduledActionAssociation.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
+    ScheduledActionAssociation.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ScheduledActionName, location_name: "scheduledActionName"))
+    ScheduledActionAssociation.struct_class = Types::ScheduledActionAssociation
+
     ScheduledActionResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     ScheduledActionResponse.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
     ScheduledActionResponse.add_member(:next_invocations, Shapes::ShapeRef.new(shape: NextInvocationsList, location_name: "nextInvocations"))
@@ -757,7 +762,7 @@ module Aws::RedshiftServerless
     ScheduledActionResponse.add_member(:target_action, Shapes::ShapeRef.new(shape: TargetAction, location_name: "targetAction"))
     ScheduledActionResponse.struct_class = Types::ScheduledActionResponse
 
-    ScheduledActionsList.member = Shapes::ShapeRef.new(shape: ScheduledActionName)
+    ScheduledActionsList.member = Shapes::ShapeRef.new(shape: ScheduledActionAssociation)
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 

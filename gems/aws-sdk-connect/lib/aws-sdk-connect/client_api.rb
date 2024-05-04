@@ -81,6 +81,11 @@ module Aws::Connect
     AssociateTrafficDistributionGroupUserResponse = Shapes::StructureShape.new(name: 'AssociateTrafficDistributionGroupUserResponse')
     AssociateUserProficienciesRequest = Shapes::StructureShape.new(name: 'AssociateUserProficienciesRequest')
     AssociationId = Shapes::StringShape.new(name: 'AssociationId')
+    AttachedFile = Shapes::StructureShape.new(name: 'AttachedFile')
+    AttachedFileError = Shapes::StructureShape.new(name: 'AttachedFileError')
+    AttachedFileErrorsList = Shapes::ListShape.new(name: 'AttachedFileErrorsList')
+    AttachedFileInvalidRequestExceptionReason = Shapes::StringShape.new(name: 'AttachedFileInvalidRequestExceptionReason')
+    AttachedFilesList = Shapes::ListShape.new(name: 'AttachedFilesList')
     AttachmentName = Shapes::StringShape.new(name: 'AttachmentName')
     AttachmentReference = Shapes::StructureShape.new(name: 'AttachmentReference')
     Attendee = Shapes::StructureShape.new(name: 'Attendee')
@@ -101,6 +106,8 @@ module Aws::Connect
     BatchAssociateAnalyticsDataSetResponse = Shapes::StructureShape.new(name: 'BatchAssociateAnalyticsDataSetResponse')
     BatchDisassociateAnalyticsDataSetRequest = Shapes::StructureShape.new(name: 'BatchDisassociateAnalyticsDataSetRequest')
     BatchDisassociateAnalyticsDataSetResponse = Shapes::StructureShape.new(name: 'BatchDisassociateAnalyticsDataSetResponse')
+    BatchGetAttachedFileMetadataRequest = Shapes::StructureShape.new(name: 'BatchGetAttachedFileMetadataRequest')
+    BatchGetAttachedFileMetadataResponse = Shapes::StructureShape.new(name: 'BatchGetAttachedFileMetadataResponse')
     BatchGetFlowAssociationRequest = Shapes::StructureShape.new(name: 'BatchGetFlowAssociationRequest')
     BatchGetFlowAssociationResponse = Shapes::StructureShape.new(name: 'BatchGetFlowAssociationResponse')
     BatchPutContactRequest = Shapes::StructureShape.new(name: 'BatchPutContactRequest')
@@ -131,6 +138,8 @@ module Aws::Connect
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CommonNameLength127 = Shapes::StringShape.new(name: 'CommonNameLength127')
     Comparison = Shapes::StringShape.new(name: 'Comparison')
+    CompleteAttachedFileUploadRequest = Shapes::StructureShape.new(name: 'CompleteAttachedFileUploadRequest')
+    CompleteAttachedFileUploadResponse = Shapes::StructureShape.new(name: 'CompleteAttachedFileUploadResponse')
     Concurrency = Shapes::IntegerShape.new(name: 'Concurrency')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionData = Shapes::StructureShape.new(name: 'ConnectionData')
@@ -226,6 +235,7 @@ module Aws::Connect
     CreateViewVersionResponse = Shapes::StructureShape.new(name: 'CreateViewVersionResponse')
     CreateVocabularyRequest = Shapes::StructureShape.new(name: 'CreateVocabularyRequest')
     CreateVocabularyResponse = Shapes::StructureShape.new(name: 'CreateVocabularyResponse')
+    CreatedByInfo = Shapes::UnionShape.new(name: 'CreatedByInfo')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
     CrossChannelBehavior = Shapes::StructureShape.new(name: 'CrossChannelBehavior')
     CurrentMetric = Shapes::StructureShape.new(name: 'CurrentMetric')
@@ -245,6 +255,8 @@ module Aws::Connect
     DefaultVocabulary = Shapes::StructureShape.new(name: 'DefaultVocabulary')
     DefaultVocabularyList = Shapes::ListShape.new(name: 'DefaultVocabularyList')
     Delay = Shapes::IntegerShape.new(name: 'Delay')
+    DeleteAttachedFileRequest = Shapes::StructureShape.new(name: 'DeleteAttachedFileRequest')
+    DeleteAttachedFileResponse = Shapes::StructureShape.new(name: 'DeleteAttachedFileResponse')
     DeleteContactEvaluationRequest = Shapes::StructureShape.new(name: 'DeleteContactEvaluationRequest')
     DeleteContactFlowModuleRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleRequest')
     DeleteContactFlowModuleResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleResponse')
@@ -357,6 +369,7 @@ module Aws::Connect
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionList = Shapes::ListShape.new(name: 'DistributionList')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DownloadUrlMetadata = Shapes::StructureShape.new(name: 'DownloadUrlMetadata')
     DuplicateResourceException = Shapes::StructureShape.new(name: 'DuplicateResourceException')
     Email = Shapes::StringShape.new(name: 'Email')
     EmailReference = Shapes::StructureShape.new(name: 'EmailReference')
@@ -367,6 +380,8 @@ module Aws::Connect
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointAddress = Shapes::StringShape.new(name: 'EndpointAddress')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorResult = Shapes::StructureShape.new(name: 'ErrorResult')
     ErrorResults = Shapes::ListShape.new(name: 'ErrorResults')
     Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
@@ -435,6 +450,12 @@ module Aws::Connect
     FieldValueId = Shapes::StringShape.new(name: 'FieldValueId')
     FieldValueUnion = Shapes::StructureShape.new(name: 'FieldValueUnion')
     FieldValues = Shapes::ListShape.new(name: 'FieldValues')
+    FileId = Shapes::StringShape.new(name: 'FileId')
+    FileIdList = Shapes::ListShape.new(name: 'FileIdList')
+    FileName = Shapes::StringShape.new(name: 'FileName')
+    FileSizeInBytes = Shapes::IntegerShape.new(name: 'FileSizeInBytes')
+    FileStatusType = Shapes::StringShape.new(name: 'FileStatusType')
+    FileUseCaseType = Shapes::StringShape.new(name: 'FileUseCaseType')
     FilterV2 = Shapes::StructureShape.new(name: 'FilterV2')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     Filters = Shapes::StructureShape.new(name: 'Filters')
@@ -444,6 +465,8 @@ module Aws::Connect
     FlowAssociationSummaryList = Shapes::ListShape.new(name: 'FlowAssociationSummaryList')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     FunctionArnsList = Shapes::ListShape.new(name: 'FunctionArnsList')
+    GetAttachedFileRequest = Shapes::StructureShape.new(name: 'GetAttachedFileRequest')
+    GetAttachedFileResponse = Shapes::StructureShape.new(name: 'GetAttachedFileResponse')
     GetContactAttributesRequest = Shapes::StructureShape.new(name: 'GetContactAttributesRequest')
     GetContactAttributesResponse = Shapes::StructureShape.new(name: 'GetContactAttributesResponse')
     GetCurrentMetricDataRequest = Shapes::StructureShape.new(name: 'GetCurrentMetricDataRequest')
@@ -542,6 +565,7 @@ module Aws::Connect
     InvalidContactFlowModuleException = Shapes::StructureShape.new(name: 'InvalidContactFlowModuleException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    InvalidRequestExceptionReason = Shapes::UnionShape.new(name: 'InvalidRequestExceptionReason')
     InvisibleFieldInfo = Shapes::StructureShape.new(name: 'InvisibleFieldInfo')
     InvisibleTaskTemplateFields = Shapes::ListShape.new(name: 'InvisibleTaskTemplateFields')
     JoinToken = Shapes::StringShape.new(name: 'JoinToken')
@@ -669,6 +693,7 @@ module Aws::Connect
     MeetingFeaturesConfiguration = Shapes::StructureShape.new(name: 'MeetingFeaturesConfiguration')
     MeetingId = Shapes::StringShape.new(name: 'MeetingId')
     Message = Shapes::StringShape.new(name: 'Message')
+    MetadataUrl = Shapes::StringShape.new(name: 'MetadataUrl')
     MetricDataCollectionsV2 = Shapes::ListShape.new(name: 'MetricDataCollectionsV2')
     MetricDataV2 = Shapes::StructureShape.new(name: 'MetricDataV2')
     MetricFilterV2 = Shapes::StructureShape.new(name: 'MetricFilterV2')
@@ -985,6 +1010,8 @@ module Aws::Connect
     SourceApplicationName = Shapes::StringShape.new(name: 'SourceApplicationName')
     SourceId = Shapes::StringShape.new(name: 'SourceId')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StartAttachedFileUploadRequest = Shapes::StructureShape.new(name: 'StartAttachedFileUploadRequest')
+    StartAttachedFileUploadResponse = Shapes::StructureShape.new(name: 'StartAttachedFileUploadResponse')
     StartChatContactRequest = Shapes::StructureShape.new(name: 'StartChatContactRequest')
     StartChatContactResponse = Shapes::StructureShape.new(name: 'StartChatContactResponse')
     StartContactEvaluationRequest = Shapes::StructureShape.new(name: 'StartContactEvaluationRequest')
@@ -1092,6 +1119,7 @@ module Aws::Connect
     TransferContactRequest = Shapes::StructureShape.new(name: 'TransferContactRequest')
     TransferContactResponse = Shapes::StructureShape.new(name: 'TransferContactResponse')
     URI = Shapes::StringShape.new(name: 'URI')
+    URLExpiryInSeconds = Shapes::IntegerShape.new(name: 'URLExpiryInSeconds')
     Unit = Shapes::StringShape.new(name: 'Unit')
     UntagContactRequest = Shapes::StructureShape.new(name: 'UntagContactRequest')
     UntagContactResponse = Shapes::StructureShape.new(name: 'UntagContactResponse')
@@ -1165,7 +1193,11 @@ module Aws::Connect
     UpdateViewContentResponse = Shapes::StructureShape.new(name: 'UpdateViewContentResponse')
     UpdateViewMetadataRequest = Shapes::StructureShape.new(name: 'UpdateViewMetadataRequest')
     UpdateViewMetadataResponse = Shapes::StructureShape.new(name: 'UpdateViewMetadataResponse')
+    UploadUrlMetadata = Shapes::StructureShape.new(name: 'UploadUrlMetadata')
     Url = Shapes::StringShape.new(name: 'Url')
+    UrlMetadataSignedHeaders = Shapes::MapShape.new(name: 'UrlMetadataSignedHeaders')
+    UrlMetadataSignedHeadersKey = Shapes::StringShape.new(name: 'UrlMetadataSignedHeadersKey')
+    UrlMetadataSignedHeadersValue = Shapes::StringShape.new(name: 'UrlMetadataSignedHeadersValue')
     UrlReference = Shapes::StructureShape.new(name: 'UrlReference')
     UseCase = Shapes::StructureShape.new(name: 'UseCase')
     UseCaseId = Shapes::StringShape.new(name: 'UseCaseId')
@@ -1430,6 +1462,27 @@ module Aws::Connect
     AssociateUserProficienciesRequest.add_member(:user_proficiencies, Shapes::ShapeRef.new(shape: UserProficiencyList, required: true, location_name: "UserProficiencies"))
     AssociateUserProficienciesRequest.struct_class = Types::AssociateUserProficienciesRequest
 
+    AttachedFile.add_member(:creation_time, Shapes::ShapeRef.new(shape: ISO8601Datetime, required: true, location_name: "CreationTime"))
+    AttachedFile.add_member(:file_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "FileArn"))
+    AttachedFile.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location_name: "FileId"))
+    AttachedFile.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, required: true, location_name: "FileName"))
+    AttachedFile.add_member(:file_size_in_bytes, Shapes::ShapeRef.new(shape: FileSizeInBytes, required: true, location_name: "FileSizeInBytes", metadata: {"box"=>true}))
+    AttachedFile.add_member(:file_status, Shapes::ShapeRef.new(shape: FileStatusType, required: true, location_name: "FileStatus"))
+    AttachedFile.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedByInfo, location_name: "CreatedBy"))
+    AttachedFile.add_member(:file_use_case_type, Shapes::ShapeRef.new(shape: FileUseCaseType, location_name: "FileUseCaseType"))
+    AttachedFile.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AssociatedResourceArn"))
+    AttachedFile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    AttachedFile.struct_class = Types::AttachedFile
+
+    AttachedFileError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    AttachedFileError.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    AttachedFileError.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, location_name: "FileId"))
+    AttachedFileError.struct_class = Types::AttachedFileError
+
+    AttachedFileErrorsList.member = Shapes::ShapeRef.new(shape: AttachedFileError)
+
+    AttachedFilesList.member = Shapes::ShapeRef.new(shape: AttachedFile)
+
     AttachmentReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
     AttachmentReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
     AttachmentReference.add_member(:status, Shapes::ShapeRef.new(shape: ReferenceStatus, location_name: "Status"))
@@ -1481,6 +1534,15 @@ module Aws::Connect
     BatchDisassociateAnalyticsDataSetResponse.add_member(:deleted, Shapes::ShapeRef.new(shape: DataSetIds, location_name: "Deleted"))
     BatchDisassociateAnalyticsDataSetResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ErrorResults, location_name: "Errors"))
     BatchDisassociateAnalyticsDataSetResponse.struct_class = Types::BatchDisassociateAnalyticsDataSetResponse
+
+    BatchGetAttachedFileMetadataRequest.add_member(:file_ids, Shapes::ShapeRef.new(shape: FileIdList, required: true, location_name: "FileIds"))
+    BatchGetAttachedFileMetadataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    BatchGetAttachedFileMetadataRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    BatchGetAttachedFileMetadataRequest.struct_class = Types::BatchGetAttachedFileMetadataRequest
+
+    BatchGetAttachedFileMetadataResponse.add_member(:files, Shapes::ShapeRef.new(shape: AttachedFilesList, location_name: "Files"))
+    BatchGetAttachedFileMetadataResponse.add_member(:errors, Shapes::ShapeRef.new(shape: AttachedFileErrorsList, location_name: "Errors"))
+    BatchGetAttachedFileMetadataResponse.struct_class = Types::BatchGetAttachedFileMetadataResponse
 
     BatchGetFlowAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     BatchGetFlowAssociationRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: resourceArnListMaxLimit100, required: true, location_name: "ResourceIds"))
@@ -1548,6 +1610,13 @@ module Aws::Connect
     ClaimedPhoneNumberSummary.add_member(:phone_number_status, Shapes::ShapeRef.new(shape: PhoneNumberStatus, location_name: "PhoneNumberStatus"))
     ClaimedPhoneNumberSummary.add_member(:source_phone_number_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourcePhoneNumberArn"))
     ClaimedPhoneNumberSummary.struct_class = Types::ClaimedPhoneNumberSummary
+
+    CompleteAttachedFileUploadRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CompleteAttachedFileUploadRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
+    CompleteAttachedFileUploadRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    CompleteAttachedFileUploadRequest.struct_class = Types::CompleteAttachedFileUploadRequest
+
+    CompleteAttachedFileUploadResponse.struct_class = Types::CompleteAttachedFileUploadResponse
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
@@ -1976,6 +2045,14 @@ module Aws::Connect
     CreateVocabularyResponse.add_member(:state, Shapes::ShapeRef.new(shape: VocabularyState, required: true, location_name: "State"))
     CreateVocabularyResponse.struct_class = Types::CreateVocabularyResponse
 
+    CreatedByInfo.add_member(:connect_user_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ConnectUserArn"))
+    CreatedByInfo.add_member(:aws_identity_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AWSIdentityArn"))
+    CreatedByInfo.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CreatedByInfo.add_member_subclass(:connect_user_arn, Types::CreatedByInfo::ConnectUserArn)
+    CreatedByInfo.add_member_subclass(:aws_identity_arn, Types::CreatedByInfo::AwsIdentityArn)
+    CreatedByInfo.add_member_subclass(:unknown, Types::CreatedByInfo::Unknown)
+    CreatedByInfo.struct_class = Types::CreatedByInfo
+
     Credentials.add_member(:access_token, Shapes::ShapeRef.new(shape: SecurityToken, location_name: "AccessToken"))
     Credentials.add_member(:access_token_expiration, Shapes::ShapeRef.new(shape: timestamp, location_name: "AccessTokenExpiration"))
     Credentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: SecurityToken, location_name: "RefreshToken"))
@@ -2032,6 +2109,13 @@ module Aws::Connect
     DefaultVocabulary.struct_class = Types::DefaultVocabulary
 
     DefaultVocabularyList.member = Shapes::ShapeRef.new(shape: DefaultVocabulary)
+
+    DeleteAttachedFileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteAttachedFileRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
+    DeleteAttachedFileRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    DeleteAttachedFileRequest.struct_class = Types::DeleteAttachedFileRequest
+
+    DeleteAttachedFileResponse.struct_class = Types::DeleteAttachedFileResponse
 
     DeleteContactEvaluationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteContactEvaluationRequest.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationId"))
@@ -2399,6 +2483,10 @@ module Aws::Connect
 
     DistributionList.member = Shapes::ShapeRef.new(shape: Distribution)
 
+    DownloadUrlMetadata.add_member(:url, Shapes::ShapeRef.new(shape: MetadataUrl, location_name: "Url"))
+    DownloadUrlMetadata.add_member(:url_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "UrlExpiry"))
+    DownloadUrlMetadata.struct_class = Types::DownloadUrlMetadata
+
     DuplicateResourceException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     DuplicateResourceException.struct_class = Types::DuplicateResourceException
 
@@ -2650,6 +2738,8 @@ module Aws::Connect
 
     FieldValues.member = Shapes::ShapeRef.new(shape: FieldValue)
 
+    FileIdList.member = Shapes::ShapeRef.new(shape: FileId)
+
     FilterV2.add_member(:filter_key, Shapes::ShapeRef.new(shape: ResourceArnOrId, location_name: "FilterKey"))
     FilterV2.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValueList, location_name: "FilterValues"))
     FilterV2.struct_class = Types::FilterV2
@@ -2672,6 +2762,25 @@ module Aws::Connect
     FlowAssociationSummaryList.member = Shapes::ShapeRef.new(shape: FlowAssociationSummary)
 
     FunctionArnsList.member = Shapes::ShapeRef.new(shape: FunctionArn)
+
+    GetAttachedFileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    GetAttachedFileRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
+    GetAttachedFileRequest.add_member(:url_expiry_in_seconds, Shapes::ShapeRef.new(shape: URLExpiryInSeconds, location: "querystring", location_name: "urlExpiryInSeconds"))
+    GetAttachedFileRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    GetAttachedFileRequest.struct_class = Types::GetAttachedFileRequest
+
+    GetAttachedFileResponse.add_member(:file_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FileArn"))
+    GetAttachedFileResponse.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, location_name: "FileId"))
+    GetAttachedFileResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "CreationTime"))
+    GetAttachedFileResponse.add_member(:file_status, Shapes::ShapeRef.new(shape: FileStatusType, location_name: "FileStatus"))
+    GetAttachedFileResponse.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "FileName"))
+    GetAttachedFileResponse.add_member(:file_size_in_bytes, Shapes::ShapeRef.new(shape: FileSizeInBytes, required: true, location_name: "FileSizeInBytes", metadata: {"box"=>true}))
+    GetAttachedFileResponse.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AssociatedResourceArn"))
+    GetAttachedFileResponse.add_member(:file_use_case_type, Shapes::ShapeRef.new(shape: FileUseCaseType, location_name: "FileUseCaseType"))
+    GetAttachedFileResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedByInfo, location_name: "CreatedBy"))
+    GetAttachedFileResponse.add_member(:download_url_metadata, Shapes::ShapeRef.new(shape: DownloadUrlMetadata, location_name: "DownloadUrlMetadata"))
+    GetAttachedFileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetAttachedFileResponse.struct_class = Types::GetAttachedFileResponse
 
     GetContactAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     GetContactAttributesRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "InitialContactId"))
@@ -3015,7 +3124,14 @@ module Aws::Connect
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InvalidRequestException.add_member(:reason, Shapes::ShapeRef.new(shape: InvalidRequestExceptionReason, location_name: "Reason"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    InvalidRequestExceptionReason.add_member(:attached_file_invalid_request_exception_reason, Shapes::ShapeRef.new(shape: AttachedFileInvalidRequestExceptionReason, location_name: "AttachedFileInvalidRequestExceptionReason"))
+    InvalidRequestExceptionReason.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    InvalidRequestExceptionReason.add_member_subclass(:attached_file_invalid_request_exception_reason, Types::InvalidRequestExceptionReason::AttachedFileInvalidRequestExceptionReason)
+    InvalidRequestExceptionReason.add_member_subclass(:unknown, Types::InvalidRequestExceptionReason::Unknown)
+    InvalidRequestExceptionReason.struct_class = Types::InvalidRequestExceptionReason
 
     InvisibleFieldInfo.add_member(:id, Shapes::ShapeRef.new(shape: TaskTemplateFieldIdentifier, location_name: "Id"))
     InvisibleFieldInfo.struct_class = Types::InvisibleFieldInfo
@@ -4415,6 +4531,25 @@ module Aws::Connect
     Sort.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "Order"))
     Sort.struct_class = Types::Sort
 
+    StartAttachedFileUploadRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartAttachedFileUploadRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    StartAttachedFileUploadRequest.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, required: true, location_name: "FileName"))
+    StartAttachedFileUploadRequest.add_member(:file_size_in_bytes, Shapes::ShapeRef.new(shape: FileSizeInBytes, required: true, location_name: "FileSizeInBytes", metadata: {"box"=>true}))
+    StartAttachedFileUploadRequest.add_member(:url_expiry_in_seconds, Shapes::ShapeRef.new(shape: URLExpiryInSeconds, location_name: "UrlExpiryInSeconds"))
+    StartAttachedFileUploadRequest.add_member(:file_use_case_type, Shapes::ShapeRef.new(shape: FileUseCaseType, required: true, location_name: "FileUseCaseType"))
+    StartAttachedFileUploadRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    StartAttachedFileUploadRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedByInfo, location_name: "CreatedBy"))
+    StartAttachedFileUploadRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    StartAttachedFileUploadRequest.struct_class = Types::StartAttachedFileUploadRequest
+
+    StartAttachedFileUploadResponse.add_member(:file_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FileArn"))
+    StartAttachedFileUploadResponse.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, location_name: "FileId"))
+    StartAttachedFileUploadResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "CreationTime"))
+    StartAttachedFileUploadResponse.add_member(:file_status, Shapes::ShapeRef.new(shape: FileStatusType, location_name: "FileStatus"))
+    StartAttachedFileUploadResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedByInfo, location_name: "CreatedBy"))
+    StartAttachedFileUploadResponse.add_member(:upload_url_metadata, Shapes::ShapeRef.new(shape: UploadUrlMetadata, location_name: "UploadUrlMetadata"))
+    StartAttachedFileUploadResponse.struct_class = Types::StartAttachedFileUploadResponse
+
     StartChatContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     StartChatContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
     StartChatContactRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
@@ -5073,6 +5208,14 @@ module Aws::Connect
 
     UpdateViewMetadataResponse.struct_class = Types::UpdateViewMetadataResponse
 
+    UploadUrlMetadata.add_member(:url, Shapes::ShapeRef.new(shape: MetadataUrl, location_name: "Url"))
+    UploadUrlMetadata.add_member(:url_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "UrlExpiry"))
+    UploadUrlMetadata.add_member(:headers_to_include, Shapes::ShapeRef.new(shape: UrlMetadataSignedHeaders, location_name: "HeadersToInclude"))
+    UploadUrlMetadata.struct_class = Types::UploadUrlMetadata
+
+    UrlMetadataSignedHeaders.key = Shapes::ShapeRef.new(shape: UrlMetadataSignedHeadersKey)
+    UrlMetadataSignedHeaders.value = Shapes::ShapeRef.new(shape: UrlMetadataSignedHeadersValue)
+
     UrlReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
     UrlReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
     UrlReference.struct_class = Types::UrlReference
@@ -5289,6 +5432,7 @@ module Aws::Connect
         "endpointPrefix" => "connect",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon Connect",
         "serviceFullName" => "Amazon Connect Service",
         "serviceId" => "Connect",
@@ -5532,6 +5676,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:batch_get_attached_file_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetAttachedFileMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/attached-files/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetAttachedFileMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetAttachedFileMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:batch_get_flow_association, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetFlowAssociation"
         o.http_method = "POST"
@@ -5572,6 +5729,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:complete_attached_file_upload, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CompleteAttachedFileUpload"
+        o.http_method = "POST"
+        o.http_request_uri = "/attached-files/{InstanceId}/{FileId}"
+        o.input = Shapes::ShapeRef.new(shape: CompleteAttachedFileUploadRequest)
+        o.output = Shapes::ShapeRef.new(shape: CompleteAttachedFileUploadResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_agent_status, Seahorse::Model::Operation.new.tap do |o|
@@ -5941,6 +6111,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+      end)
+
+      api.add_operation(:delete_attached_file, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAttachedFile"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/attached-files/{InstanceId}/{FileId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAttachedFileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAttachedFileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_contact_evaluation, Seahorse::Model::Operation.new.tap do |o|
@@ -6731,6 +6914,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_attached_file, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAttachedFile"
+        o.http_method = "GET"
+        o.http_request_uri = "/attached-files/{InstanceId}/{FileId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAttachedFileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAttachedFileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_contact_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -8057,6 +8253,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_attached_file_upload, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAttachedFileUpload"
+        o.http_method = "PUT"
+        o.http_request_uri = "/attached-files/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: StartAttachedFileUploadRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAttachedFileUploadResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:start_chat_contact, Seahorse::Model::Operation.new.tap do |o|

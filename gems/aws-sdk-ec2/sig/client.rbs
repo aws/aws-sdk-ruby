@@ -8652,6 +8652,22 @@ module Aws
                                           ) -> _GetInstanceMetadataDefaultsResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceMetadataDefaultsResponseSuccess
 
+      interface _GetInstanceTpmEkPubResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceTpmEkPubResult]
+        def instance_id: () -> ::String
+        def key_type: () -> ("rsa-2048" | "ecc-sec-p384")
+        def key_format: () -> ("der" | "tpmt")
+        def key_value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_instance_tpm_ek_pub-instance_method
+      def get_instance_tpm_ek_pub: (
+                                     instance_id: ::String,
+                                     key_type: ("rsa-2048" | "ecc-sec-p384"),
+                                     key_format: ("der" | "tpmt"),
+                                     ?dry_run: bool
+                                   ) -> _GetInstanceTpmEkPubResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceTpmEkPubResponseSuccess
+
       interface _GetInstanceTypesFromInstanceRequirementsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceTypesFromInstanceRequirementsResult]
         def instance_types: () -> ::Array[Types::InstanceTypeInfoFromInstanceRequirements]

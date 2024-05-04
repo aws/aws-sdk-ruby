@@ -558,6 +558,7 @@ module Aws::SESV2
     BulkEmailEntry.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
     BulkEmailEntry.add_member(:replacement_tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "ReplacementTags"))
     BulkEmailEntry.add_member(:replacement_email_content, Shapes::ShapeRef.new(shape: ReplacementEmailContent, location_name: "ReplacementEmailContent"))
+    BulkEmailEntry.add_member(:replacement_headers, Shapes::ShapeRef.new(shape: MessageHeaderList, location_name: "ReplacementHeaders"))
     BulkEmailEntry.struct_class = Types::BulkEmailEntry
 
     BulkEmailEntryList.member = Shapes::ShapeRef.new(shape: BulkEmailEntry)
@@ -1256,8 +1257,8 @@ module Aws::SESV2
 
     ListContactsRequest.add_member(:contact_list_name, Shapes::ShapeRef.new(shape: ContactListName, required: true, location: "uri", location_name: "ContactListName"))
     ListContactsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListContactsFilter, location_name: "Filter"))
-    ListContactsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "PageSize"))
-    ListContactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListContactsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
+    ListContactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListContactsRequest.struct_class = Types::ListContactsRequest
 
     ListContactsResponse.add_member(:contacts, Shapes::ShapeRef.new(shape: ListOfContacts, location_name: "Contacts"))
@@ -1326,8 +1327,8 @@ module Aws::SESV2
     ListExportJobsResponse.struct_class = Types::ListExportJobsResponse
 
     ListImportJobsRequest.add_member(:import_destination_type, Shapes::ShapeRef.new(shape: ImportDestinationType, location_name: "ImportDestinationType"))
-    ListImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
-    ListImportJobsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "PageSize"))
+    ListImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListImportJobsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
     ListImportJobsRequest.struct_class = Types::ListImportJobsRequest
 
     ListImportJobsResponse.add_member(:import_jobs, Shapes::ShapeRef.new(shape: ImportJobSummaryList, location_name: "ImportJobs"))
@@ -1835,6 +1836,7 @@ module Aws::SESV2
         "endpointPrefix" => "email",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon SES V2",
         "serviceFullName" => "Amazon Simple Email Service",
         "serviceId" => "SESv2",
@@ -2406,8 +2408,8 @@ module Aws::SESV2
 
       api.add_operation(:list_contacts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListContacts"
-        o.http_method = "GET"
-        o.http_request_uri = "/v2/email/contact-lists/{ContactListName}/contacts"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/contact-lists/{ContactListName}/contacts/list"
         o.input = Shapes::ShapeRef.new(shape: ListContactsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListContactsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -2537,8 +2539,8 @@ module Aws::SESV2
 
       api.add_operation(:list_import_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListImportJobs"
-        o.http_method = "GET"
-        o.http_request_uri = "/v2/email/import-jobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/import-jobs/list"
         o.input = Shapes::ShapeRef.new(shape: ListImportJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListImportJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)

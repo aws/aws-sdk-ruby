@@ -64,6 +64,8 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::CreateBatchSegmentJob.build(context)
           when :create_campaign
             Aws::Personalize::Endpoints::CreateCampaign.build(context)
+          when :create_data_deletion_job
+            Aws::Personalize::Endpoints::CreateDataDeletionJob.build(context)
           when :create_dataset
             Aws::Personalize::Endpoints::CreateDataset.build(context)
           when :create_dataset_export_job
@@ -112,6 +114,8 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::DescribeBatchSegmentJob.build(context)
           when :describe_campaign
             Aws::Personalize::Endpoints::DescribeCampaign.build(context)
+          when :describe_data_deletion_job
+            Aws::Personalize::Endpoints::DescribeDataDeletionJob.build(context)
           when :describe_dataset
             Aws::Personalize::Endpoints::DescribeDataset.build(context)
           when :describe_dataset_export_job
@@ -146,6 +150,8 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::ListBatchSegmentJobs.build(context)
           when :list_campaigns
             Aws::Personalize::Endpoints::ListCampaigns.build(context)
+          when :list_data_deletion_jobs
+            Aws::Personalize::Endpoints::ListDataDeletionJobs.build(context)
           when :list_dataset_export_jobs
             Aws::Personalize::Endpoints::ListDatasetExportJobs.build(context)
           when :list_dataset_groups

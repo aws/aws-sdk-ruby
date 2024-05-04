@@ -18,7 +18,7 @@ module Aws::ConnectCases
       attr_accessor fields: ::Array[Types::AuditEventField]
       attr_accessor performed_by: Types::AuditEventPerformedBy
       attr_accessor performed_time: ::Time
-      attr_accessor related_item_type: ("Contact" | "Comment")
+      attr_accessor related_item_type: ("Contact" | "Comment" | "File")
       attr_accessor type: ("Case.Created" | "Case.Updated" | "RelatedItem.Created")
       SENSITIVE: []
     end
@@ -211,7 +211,7 @@ module Aws::ConnectCases
       attr_accessor content: Types::RelatedItemInputContent
       attr_accessor domain_id: ::String
       attr_accessor performed_by: Types::UserUnion
-      attr_accessor type: ("Contact" | "Comment")
+      attr_accessor type: ("Contact" | "Comment" | "File")
       SENSITIVE: []
     end
 
@@ -393,6 +393,16 @@ module Aws::ConnectCases
       end
       class Unknown < FieldValueUnion
       end
+    end
+
+    class FileContent
+      attr_accessor file_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FileFilter
+      attr_accessor file_arn: ::String
+      SENSITIVE: []
     end
 
     class GetCaseAuditEventsRequest
@@ -640,12 +650,15 @@ module Aws::ConnectCases
     class RelatedItemContent
       attr_accessor comment: Types::CommentContent
       attr_accessor contact: Types::ContactContent
+      attr_accessor file: Types::FileContent
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Comment < RelatedItemContent
       end
       class Contact < RelatedItemContent
+      end
+      class File < RelatedItemContent
       end
       class Unknown < RelatedItemContent
       end
@@ -659,12 +672,15 @@ module Aws::ConnectCases
     class RelatedItemInputContent
       attr_accessor comment: Types::CommentContent
       attr_accessor contact: Types::Contact
+      attr_accessor file: Types::FileContent
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Comment < RelatedItemInputContent
       end
       class Contact < RelatedItemInputContent
+      end
+      class File < RelatedItemInputContent
       end
       class Unknown < RelatedItemInputContent
       end
@@ -673,12 +689,15 @@ module Aws::ConnectCases
     class RelatedItemTypeFilter
       attr_accessor comment: Types::CommentFilter
       attr_accessor contact: Types::ContactFilter
+      attr_accessor file: Types::FileFilter
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Comment < RelatedItemTypeFilter
       end
       class Contact < RelatedItemTypeFilter
+      end
+      class File < RelatedItemTypeFilter
       end
       class Unknown < RelatedItemTypeFilter
       end
@@ -742,7 +761,7 @@ module Aws::ConnectCases
       attr_accessor performed_by: Types::UserUnion
       attr_accessor related_item_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("Contact" | "Comment")
+      attr_accessor type: ("Contact" | "Comment" | "File")
       SENSITIVE: []
     end
 

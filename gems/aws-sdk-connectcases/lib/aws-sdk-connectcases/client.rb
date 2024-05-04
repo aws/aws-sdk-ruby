@@ -820,12 +820,15 @@ module Aws::ConnectCases
     #       contact: {
     #         contact_arn: "ContactArn", # required
     #       },
+    #       file: {
+    #         file_arn: "FileArn", # required
+    #       },
     #     },
     #     domain_id: "DomainId", # required
     #     performed_by: {
     #       user_arn: "UserArn",
     #     },
-    #     type: "Contact", # required, accepts Contact, Comment
+    #     type: "Contact", # required, accepts Contact, Comment, File
     #   })
     #
     # @example Response structure
@@ -976,7 +979,7 @@ module Aws::ConnectCases
     #   The unique identifier of the Cases domain.
     #
     # @option params [required, String] :field_id
-    #   The unique identifier of a field.
+    #   Unique identifier of the field.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1165,7 +1168,7 @@ module Aws::ConnectCases
     #   resp.audit_events[0].performed_by.iam_principal_arn #=> String
     #   resp.audit_events[0].performed_by.user.user_arn #=> String
     #   resp.audit_events[0].performed_time #=> Time
-    #   resp.audit_events[0].related_item_type #=> String, one of "Contact", "Comment"
+    #   resp.audit_events[0].related_item_type #=> String, one of "Contact", "Comment", "File"
     #   resp.audit_events[0].type #=> String, one of "Case.Created", "Case.Updated", "RelatedItem.Created"
     #   resp.next_token #=> String
     #
@@ -1933,6 +1936,9 @@ module Aws::ConnectCases
     #           channel: ["Channel"],
     #           contact_arn: "ContactArn",
     #         },
+    #         file: {
+    #           file_arn: "FileArn",
+    #         },
     #       },
     #     ],
     #     max_results: 1,
@@ -1949,11 +1955,12 @@ module Aws::ConnectCases
     #   resp.related_items[0].content.contact.channel #=> String
     #   resp.related_items[0].content.contact.connected_to_system_time #=> Time
     #   resp.related_items[0].content.contact.contact_arn #=> String
+    #   resp.related_items[0].content.file.file_arn #=> String
     #   resp.related_items[0].performed_by.user_arn #=> String
     #   resp.related_items[0].related_item_id #=> String
     #   resp.related_items[0].tags #=> Hash
     #   resp.related_items[0].tags["String"] #=> String
-    #   resp.related_items[0].type #=> String, one of "Contact", "Comment"
+    #   resp.related_items[0].type #=> String, one of "Contact", "Comment", "File"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/SearchRelatedItems AWS API Documentation
     #
@@ -2260,7 +2267,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2024-05-03)
+------------------
+
+* Feature - This release adds CSV format to GetCisScanReport for Inspector v2
+
 1.28.0 (2024-04-29)
 ------------------
 

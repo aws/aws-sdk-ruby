@@ -54,6 +54,20 @@ module Aws::Personalize
       end
     end
 
+    class CreateDataDeletionJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Personalize::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateDataset
       def self.build(context)
         unless context.config.regional_endpoint
@@ -390,6 +404,20 @@ module Aws::Personalize
       end
     end
 
+    class DescribeDataDeletionJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Personalize::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeDataset
       def self.build(context)
         unless context.config.regional_endpoint
@@ -615,6 +643,20 @@ module Aws::Personalize
     end
 
     class ListCampaigns
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Personalize::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListDataDeletionJobs
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

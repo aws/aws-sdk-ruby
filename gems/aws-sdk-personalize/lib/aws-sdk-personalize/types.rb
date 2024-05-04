@@ -1096,6 +1096,57 @@ module Aws::Personalize
     end
 
     # @!attribute [rw] job_name
+    #   The name for the data deletion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the dataset group that has the
+    #   datasets you want to delete records from.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The Amazon S3 bucket that contains the list of userIds of the users
+    #   to delete.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that has permissions
+    #   to read from the Amazon S3 data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the data deletion job.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDataDeletionJobRequest AWS API Documentation
+    #
+    class CreateDataDeletionJobRequest < Struct.new(
+      :job_name,
+      :dataset_group_arn,
+      :data_source,
+      :role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_deletion_job_arn
+    #   The Amazon Resource Name (ARN) of the data deletion job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDataDeletionJobResponse AWS API Documentation
+    #
+    class CreateDataDeletionJobResponse < Struct.new(
+      :data_deletion_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_name
     #   The name for the dataset export job.
     #   @return [String]
     #
@@ -1777,12 +1828,156 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # Describes a job that deletes all references to specific users from an
+    # Amazon Personalize dataset group in batches. For information about
+    # creating a data deletion job, see [Deleting users][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html
+    #
+    # @!attribute [rw] job_name
+    #   The name of the data deletion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_deletion_job_arn
+    #   The Amazon Resource Name (ARN) of the data deletion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the dataset group the job deletes
+    #   records from.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   Describes the data source that contains the data to upload to a
+    #   dataset, or the list of records to delete from Amazon Personalize.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that has permissions
+    #   to read from the Amazon S3 data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data deletion job.
+    #
+    #   A data deletion job can have one of the following statuses:
+    #
+    #   * PENDING &gt; IN\_PROGRESS &gt; COMPLETED -or- FAILED
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] num_deleted
+    #   The number of records deleted by a COMPLETED job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time (in Unix time) of the data deletion job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time (in Unix time) the data deletion job was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If a data deletion job fails, provides the reason why.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DataDeletionJob AWS API Documentation
+    #
+    class DataDeletionJob < Struct.new(
+      :job_name,
+      :data_deletion_job_arn,
+      :dataset_group_arn,
+      :data_source,
+      :role_arn,
+      :status,
+      :num_deleted,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the properties of a data deletion job. For a
+    # complete listing, call the [DescribeDataDeletionJob][1] API operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html
+    #
+    # @!attribute [rw] data_deletion_job_arn
+    #   The Amazon Resource Name (ARN) of the data deletion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the dataset group the job deleted
+    #   records from.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the data deletion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data deletion job.
+    #
+    #   A data deletion job can have one of the following statuses:
+    #
+    #   * PENDING &gt; IN\_PROGRESS &gt; COMPLETED -or- FAILED
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time (in Unix time) of the data deletion job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time (in Unix time) the data deletion job was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If a data deletion job fails, provides the reason why.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DataDeletionJobSummary AWS API Documentation
+    #
+    class DataDeletionJobSummary < Struct.new(
+      :data_deletion_job_arn,
+      :dataset_group_arn,
+      :job_name,
+      :status,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the data source that contains the data to upload to a
-    # dataset.
+    # dataset, or the list of records to delete from Amazon Personalize.
     #
     # @!attribute [rw] data_location
-    #   The path to the Amazon S3 bucket where the data that you want to
-    #   upload to your dataset is stored. For example:
+    #   For dataset import jobs, the path to the Amazon S3 bucket where the
+    #   data that you want to upload to your dataset is stored. For data
+    #   deletion jobs, the path to the Amazon S3 bucket that stores the list
+    #   of records to delete.
+    #
+    #   For example:
+    #
+    #   `s3://bucket-name/folder-name/fileName.csv`
+    #
+    #   If your CSV files are in a folder in your Amazon S3 bucket and you
+    #   want your import job or data deletion job to consider multiple
+    #   files, you can specify the path to the folder. With a data deletion
+    #   job, Amazon Personalize uses all files in the folder and any sub
+    #   folder. Use the following syntax with a `/` after the folder name:
     #
     #   `s3://bucket-name/folder-name/`
     #   @return [String]
@@ -2815,6 +3010,40 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # @!attribute [rw] data_deletion_job_arn
+    #   The Amazon Resource Name (ARN) of the data deletion job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDataDeletionJobRequest AWS API Documentation
+    #
+    class DescribeDataDeletionJobRequest < Struct.new(
+      :data_deletion_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_deletion_job
+    #   Information about the data deletion job, including the status.
+    #
+    #   The status is one of the following values:
+    #
+    #   * PENDING
+    #
+    #   * IN\_PROGRESS
+    #
+    #   * COMPLETED
+    #
+    #   * FAILED
+    #   @return [Types::DataDeletionJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDataDeletionJobResponse AWS API Documentation
+    #
+    class DescribeDataDeletionJobResponse < Struct.new(
+      :data_deletion_job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dataset_export_job_arn
     #   The Amazon Resource Name (ARN) of the dataset export job to
     #   describe.
@@ -3758,6 +3987,48 @@ module Aws::Personalize
     #
     class ListCampaignsResponse < Struct.new(
       :campaigns,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the dataset group to list data
+    #   deletion jobs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from the previous call to `ListDataDeletionJobs`
+    #   for getting the next set of jobs (if they exist).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of data deletion jobs to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDataDeletionJobsRequest AWS API Documentation
+    #
+    class ListDataDeletionJobsRequest < Struct.new(
+      :dataset_group_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_deletion_jobs
+    #   The list of data deletion jobs.
+    #   @return [Array<Types::DataDeletionJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of data deletion jobs (if they
+    #   exist).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDataDeletionJobsResponse AWS API Documentation
+    #
+    class ListDataDeletionJobsResponse < Struct.new(
+      :data_deletion_jobs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
