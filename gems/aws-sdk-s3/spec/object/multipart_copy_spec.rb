@@ -48,11 +48,7 @@ module Aws
         end
 
         it 'accept a hash with options merged' do
-          object.copy_to(
-            bucket: 'target-bucket',
-            key: 'target-key',
-            content_type: 'text/plain'
-          )
+          object.copy_to(bucket: 'target-bucket', key: 'target-key', content_type: 'text/plain')
 
           expect(get_requests(client, :copy_object).size).to eq(1)
           expect(get_request_params(client, :copy_object)).to(
@@ -66,11 +62,7 @@ module Aws
         end
 
         it 'accepts an S3::Object source' do
-          target = S3::Object.new(
-            'target-bucket',
-            'target-key',
-            stub_responses: true
-          )
+          target = S3::Object.new('target-bucket', 'target-key', stub_responses: true)
           object.copy_to(target)
 
           expect(get_requests(client, :copy_object).size).to eq(1)
@@ -253,33 +245,27 @@ module Aws
             expect(create_req = get_request_params(client, :create_multipart_upload)).to(
               include({ bucket: 'bucket', key: 'unescaped/key path', content_type: 'application/json' })
             )
-
             expect(create_req).not_to include(server_side_encryption: anything, ssekms_key_id: anything)
-            expect((part_requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(6)
-            (1..6).each do |n|
+
+            expect((requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(6)
+            requests.sort_by { |req| req[:part_number] }.each.with_index do |part, i|
+              n = i + 1
               range = "bytes=#{(n - 1) * 52_428_800}-#{n * 52_428_800 - 1}"
 
-              request = part_requests[n - 1]
-              expect(request).to(
-                eq({
-                     bucket: 'bucket',
-                     key: 'unescaped/key path',
-                     part_number: n,
-                     copy_source: source,
-                     copy_source_range: range,
-                     upload_id: 'MultipartUploadId'
-                   })
-              )
+              expect(part).to eq({ bucket: 'bucket',
+                                   key: 'unescaped/key path',
+                                   part_number: n,
+                                   copy_source: source,
+                                   copy_source_range: range,
+                                   upload_id: 'MultipartUploadId' })
             end
 
             expect(get_requests(client, :complete_multipart_upload).size).to eq(1)
             expect(get_request_params(client, :complete_multipart_upload)).to(
-              include({
-                        bucket: 'bucket',
+              include({ bucket: 'bucket',
                         key: 'unescaped/key path',
                         upload_id: 'MultipartUploadId',
-                        multipart_upload: { parts: (1..6).map { |n| a_hash_including({ part_number: n }) } }
-                      })
+                        multipart_upload: { parts: (1..6).map { |n| a_hash_including({ part_number: n }) } } })
             )
           end
 
@@ -291,20 +277,17 @@ module Aws
               include({ bucket: 'bucket', key: 'unescaped/key path', content_type: 'application/json' })
             )
 
-            requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }
-            parts = requests.sort_by { |r| r[:part_number] }
-            parts.each.with_index do |part, i|
+            expect((requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(60)
+            requests.sort_by { |r| r[:part_number] }.each.with_index do |part, i|
               n = i + 1
               range = "bytes=#{(n - 1) * 5_242_880}-#{n * 5_242_880 - 1}"
 
-              expect(part).to eq(
-                                bucket: 'bucket',
-                                key: 'unescaped/key path',
-                                part_number: n,
-                                copy_source: 'source-bucket/source%20key',
-                                copy_source_range: range,
-                                upload_id: 'MultipartUploadId'
-                              )
+              expect(part).to eq({ bucket: 'bucket',
+                                   key: 'unescaped/key path',
+                                   part_number: n,
+                                   copy_source: 'source-bucket/source%20key',
+                                   copy_source_range: range,
+                                   upload_id: 'MultipartUploadId' })
             end
 
             expect(get_requests(client, :complete_multipart_upload).size).to eq(1)
@@ -448,31 +431,25 @@ module Aws
               include({ bucket: 'bucket', key: 'unescaped/key path', checksum_algorithm: 'SHA256' })
             )
 
-            expect((part_requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(6)
-            (1..6).each do |n|
+            expect((requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(6)
+            requests.sort_by { |req| req[:part_number] }.each.with_index do |part, i|
+              n = i + 1
               range = "bytes=#{(n - 1) * 52_428_800}-#{n * 52_428_800 - 1}"
 
-              request = part_requests[n - 1]
-              expect(request).to(
-                eq({
-                     bucket: 'bucket',
-                     key: 'unescaped/key path',
-                     part_number: n,
-                     copy_source: 'source-bucket/source%20key',
-                     copy_source_range: range,
-                     upload_id: 'MultipartUploadId'
-                   })
-              )
+              expect(part).to eq({ bucket: 'bucket',
+                                   key: 'unescaped/key path',
+                                   part_number: n,
+                                   copy_source: 'source-bucket/source%20key',
+                                   copy_source_range: range,
+                                   upload_id: 'MultipartUploadId' })
             end
 
             expect(get_requests(client, :complete_multipart_upload).size).to eq(1)
             expect(get_request_params(client, :complete_multipart_upload)).to(
-              include({
-                        bucket: 'bucket',
+              include({ bucket: 'bucket',
                         key: 'unescaped/key path',
                         upload_id: 'MultipartUploadId',
-                        multipart_upload: { parts: (1..6).map { |n| a_hash_including({ part_number: n }) } }
-                      })
+                        multipart_upload: { parts: (1..6).map { |n| a_hash_including({ part_number: n }) } } })
             )
           end
         end
@@ -498,33 +475,25 @@ module Aws
               include({ bucket: 'bucket', key: 'unescaped/key path' })
             )
 
-            expect((part_requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(3)
-            (1..3).each do |n|
+            expect((requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(3)
+            requests.sort_by { |req| req[:part_number] }.each.with_index do |part, i|
+              n = i + 1
               range = "bytes=#{(n - 1) * 104_857_600}-#{n * 104_857_600 - 1}"
 
-              request = part_requests[n - 1]
-              expect(request).to(
-                eq({
-                     bucket: 'bucket',
-                     key: 'unescaped/key path',
-                     part_number: n,
-                     copy_source: 'source-bucket/source%20key',
-                     copy_source_range: range,
-                     upload_id: 'MultipartUploadId'
-                   })
-              )
+              expect(part).to eq({ bucket: 'bucket',
+                                   key: 'unescaped/key path',
+                                   part_number: n,
+                                   copy_source: 'source-bucket/source%20key',
+                                   copy_source_range: range,
+                                   upload_id: 'MultipartUploadId' })
             end
 
             expect(get_requests(client, :complete_multipart_upload).size).to eq(1)
             expect(get_request_params(client, :complete_multipart_upload)).to(
-              include({
-                        bucket: 'bucket',
+              include({ bucket: 'bucket',
                         key: 'unescaped/key path',
                         upload_id: 'MultipartUploadId',
-                        multipart_upload: {
-                          parts: (1..3).map { |n| a_hash_including({ part_number: n }) }
-                        }
-                      })
+                        multipart_upload: { parts: (1..3).map { |n| a_hash_including({ part_number: n }) } } })
             )
           end
         end
