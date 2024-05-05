@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix bug where destination bucket default encryption was inadvertently overridden by source object encryption.
+
 1.149.0 (2024-04-30)
 ------------------
 
@@ -167,7 +169,7 @@ Unreleased Changes
 1.123.2 (2023-06-12)
 ------------------
 
-* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866). 
+* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866).
 
 1.123.1 (2023-06-02)
 ------------------
