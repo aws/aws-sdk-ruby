@@ -659,7 +659,9 @@ module Aws::BedrockAgent
     #
     # @option params [Types::ActionGroupExecutor] :action_group_executor
     #   The Amazon Resource Name (ARN) of the Lambda function containing the
-    #   business logic that is carried out upon invoking the action.
+    #   business logic that is carried out upon invoking the action or the
+    #   custom control method for handling the information elicited from the
+    #   user.
     #
     # @option params [required, String] :action_group_name
     #   The name to give the action group.
@@ -843,7 +845,8 @@ module Aws::BedrockAgent
     #     description: "Description",
     #     routing_configuration: [
     #       {
-    #         agent_version: "Version", # required
+    #         agent_version: "Version",
+    #         provisioned_throughput: "ProvisionedModelIdentifier",
     #       },
     #     ],
     #     tags: {
@@ -858,6 +861,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
@@ -866,8 +870,11 @@ module Aws::BedrockAgent
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
+    #   resp.agent_alias.failure_reasons #=> Array
+    #   resp.agent_alias.failure_reasons[0] #=> String
     #   resp.agent_alias.routing_configuration #=> Array
     #   resp.agent_alias.routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentAlias AWS API Documentation
@@ -898,7 +905,7 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :data_deletion_policy
-    #   The deletion policy for the requested data source
+    #   The data deletion policy assigned to the data source.
     #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
     #   Contains metadata about where the data source is stored.
@@ -1084,6 +1091,19 @@ module Aws::BedrockAgent
     #     name: "Name", # required
     #     role_arn: "KnowledgeBaseRoleArn", # required
     #     storage_configuration: { # required
+    #       mongo_db_atlas_configuration: {
+    #         collection_name: "MongoDbAtlasCollectionName", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #         database_name: "MongoDbAtlasDatabaseName", # required
+    #         endpoint: "MongoDbAtlasEndpoint", # required
+    #         endpoint_service_name: "MongoDbAtlasEndpointServiceName",
+    #         field_mapping: { # required
+    #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #           vector_field: "FieldName", # required
+    #         },
+    #         vector_index_name: "MongoDbAtlasIndexName", # required
+    #       },
     #       opensearch_serverless_configuration: {
     #         collection_arn: "OpenSearchServerlessCollectionArn", # required
     #         field_mapping: { # required
@@ -1124,7 +1144,7 @@ module Aws::BedrockAgent
     #         },
     #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
     #       },
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1144,6 +1164,15 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
     #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.collection_name #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.database_name #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.endpoint #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.endpoint_service_name #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.vector_index_name #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -1168,7 +1197,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS"
     #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateKnowledgeBase AWS API Documentation
@@ -1579,6 +1608,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
@@ -1587,8 +1617,11 @@ module Aws::BedrockAgent
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
+    #   resp.agent_alias.failure_reasons #=> Array
+    #   resp.agent_alias.failure_reasons[0] #=> String
     #   resp.agent_alias.routing_configuration #=> Array
     #   resp.agent_alias.routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentAlias AWS API Documentation
@@ -1837,6 +1870,15 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
     #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.collection_name #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.database_name #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.endpoint #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.endpoint_service_name #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.vector_index_name #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -1861,7 +1903,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS"
     #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetKnowledgeBase AWS API Documentation
@@ -1970,6 +2012,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias_summaries[0].description #=> String
     #   resp.agent_alias_summaries[0].routing_configuration #=> Array
     #   resp.agent_alias_summaries[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias_summaries[0].routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2808,7 +2851,8 @@ module Aws::BedrockAgent
     #     description: "Description",
     #     routing_configuration: [
     #       {
-    #         agent_version: "Version", # required
+    #         agent_version: "Version",
+    #         provisioned_throughput: "ProvisionedModelIdentifier",
     #       },
     #     ],
     #   })
@@ -2820,6 +2864,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_history_events[0].end_date #=> Time
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration #=> Array
     #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.agent_alias_history_events[0].routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
@@ -2828,8 +2873,11 @@ module Aws::BedrockAgent
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
+    #   resp.agent_alias.failure_reasons #=> Array
+    #   resp.agent_alias.failure_reasons[0] #=> String
     #   resp.agent_alias.routing_configuration #=> Array
     #   resp.agent_alias.routing_configuration[0].agent_version #=> String
+    #   resp.agent_alias.routing_configuration[0].provisioned_throughput #=> String
     #   resp.agent_alias.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentAlias AWS API Documentation
@@ -3058,6 +3106,19 @@ module Aws::BedrockAgent
     #     name: "Name", # required
     #     role_arn: "KnowledgeBaseRoleArn", # required
     #     storage_configuration: { # required
+    #       mongo_db_atlas_configuration: {
+    #         collection_name: "MongoDbAtlasCollectionName", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #         database_name: "MongoDbAtlasDatabaseName", # required
+    #         endpoint: "MongoDbAtlasEndpoint", # required
+    #         endpoint_service_name: "MongoDbAtlasEndpointServiceName",
+    #         field_mapping: { # required
+    #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #           vector_field: "FieldName", # required
+    #         },
+    #         vector_index_name: "MongoDbAtlasIndexName", # required
+    #       },
     #       opensearch_serverless_configuration: {
     #         collection_arn: "OpenSearchServerlessCollectionArn", # required
     #         field_mapping: { # required
@@ -3098,7 +3159,7 @@ module Aws::BedrockAgent
     #         },
     #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
     #       },
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS
     #     },
     #   })
     #
@@ -3115,6 +3176,15 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
     #   resp.knowledge_base.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.collection_name #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.credentials_secret_arn #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.database_name #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.endpoint #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.endpoint_service_name #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.mongo_db_atlas_configuration.vector_index_name #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -3139,7 +3209,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS"
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS"
     #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateKnowledgeBase AWS API Documentation
@@ -3164,7 +3234,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

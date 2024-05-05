@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2024-05-03)
+------------------
+
+* Feature - This release adds support for using Provisioned Throughput with Bedrock Agents.
+
+1.9.0 (2024-05-01)
+------------------
+
+* Feature - This release adds support for using MongoDB Atlas as a vector store when creating a knowledge base.
+
 1.8.0 (2024-04-25)
 ------------------
 

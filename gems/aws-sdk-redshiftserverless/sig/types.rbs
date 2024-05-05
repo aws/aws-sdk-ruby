@@ -495,7 +495,7 @@ module Aws::RedshiftServerless
 
     class ListScheduledActionsResponse
       attr_accessor next_token: ::String
-      attr_accessor scheduled_actions: ::Array[::String]
+      attr_accessor scheduled_actions: ::Array[Types::ScheduledActionAssociation]
       SENSITIVE: []
     end
 
@@ -719,6 +719,12 @@ module Aws::RedshiftServerless
       end
       class Unknown < Schedule
       end
+    end
+
+    class ScheduledActionAssociation
+      attr_accessor namespace_name: ::String
+      attr_accessor scheduled_action_name: ::String
+      SENSITIVE: []
     end
 
     class ScheduledActionResponse

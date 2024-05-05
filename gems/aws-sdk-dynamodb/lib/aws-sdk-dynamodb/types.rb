@@ -1726,13 +1726,20 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] on_demand_throughput
+    #   The maximum number of read and write units for the global secondary
+    #   index being created. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalSecondaryIndexAction AWS API Documentation
     #
     class CreateGlobalSecondaryIndexAction < Struct.new(
       :index_name,
       :key_schema,
       :projection,
-      :provisioned_throughput)
+      :provisioned_throughput,
+      :on_demand_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1799,6 +1806,13 @@ module Aws::DynamoDB
     #   source table's provisioned throughput settings.
     #   @return [Types::ProvisionedThroughputOverride]
     #
+    # @!attribute [rw] on_demand_throughput_override
+    #   The maximum on-demand throughput settings for the specified replica
+    #   table being created. You can only modify `MaxReadRequestUnits`,
+    #   because you can't modify `MaxWriteRequestUnits` for individual
+    #   replica tables.
+    #   @return [Types::OnDemandThroughputOverride]
+    #
     # @!attribute [rw] global_secondary_indexes
     #   Replica-specific global secondary index settings.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndex>]
@@ -1814,6 +1828,7 @@ module Aws::DynamoDB
       :region_name,
       :kms_master_key_id,
       :provisioned_throughput_override,
+      :on_demand_throughput_override,
       :global_secondary_indexes,
       :table_class_override)
       SENSITIVE = []
@@ -2051,19 +2066,24 @@ module Aws::DynamoDB
     #   that will be attached to the table.
     #
     #   When you attach a resource-based policy while creating a table, the
-    #   policy creation is *strongly consistent*.
+    #   policy application is *strongly consistent*.
     #
     #   The maximum size supported for a resource-based policy document is
     #   20 KB. DynamoDB counts whitespaces when calculating the size of a
-    #   policy against this limit. You can’t request an increase for this
-    #   limit. For a full list of all considerations that you should keep in
-    #   mind while attaching a resource-based policy, see [Resource-based
-    #   policy considerations][1].
+    #   policy against this limit. For a full list of all considerations
+    #   that apply for resource-based policies, see [Resource-based policy
+    #   considerations][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
     #   @return [String]
+    #
+    # @!attribute [rw] on_demand_throughput
+    #   Sets the maximum number of read and write units for the specified
+    #   table in on-demand capacity mode. If you use this parameter, you
+    #   must specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableInput AWS API Documentation
     #
@@ -2080,7 +2100,8 @@ module Aws::DynamoDB
       :tags,
       :table_class,
       :deletion_protection_enabled,
-      :resource_policy)
+      :resource_policy,
+      :on_demand_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2559,7 +2580,7 @@ module Aws::DynamoDB
 
     # @!attribute [rw] revision_id
     #   A unique string that represents the revision ID of the policy. If
-    #   you are comparing revision IDs, make sure to always use string
+    #   you're comparing revision IDs, make sure to always use string
     #   comparison logic.
     #
     #   This value will be empty if you make a request against a resource
@@ -4031,7 +4052,7 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] revision_id
     #   A unique string that represents the revision ID of the policy. If
-    #   you are comparing revision IDs, make sure to always use string
+    #   you're comparing revision IDs, make sure to always use string
     #   comparison logic.
     #   @return [String]
     #
@@ -4092,13 +4113,20 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] on_demand_throughput
+    #   The maximum number of read and write units for the specified global
+    #   secondary index. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndex AWS API Documentation
     #
     class GlobalSecondaryIndex < Struct.new(
       :index_name,
       :key_schema,
       :projection,
-      :provisioned_throughput)
+      :provisioned_throughput,
+      :on_demand_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4221,6 +4249,12 @@ module Aws::DynamoDB
     #   The Amazon Resource Name (ARN) that uniquely identifies the index.
     #   @return [String]
     #
+    # @!attribute [rw] on_demand_throughput
+    #   The maximum number of read and write units for the specified global
+    #   secondary index. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexDescription AWS API Documentation
     #
     class GlobalSecondaryIndexDescription < Struct.new(
@@ -4232,7 +4266,8 @@ module Aws::DynamoDB
       :provisioned_throughput,
       :index_size_bytes,
       :item_count,
-      :index_arn)
+      :index_arn,
+      :on_demand_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4277,13 +4312,20 @@ module Aws::DynamoDB
     #   global secondary index.
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] on_demand_throughput
+    #   Sets the maximum number of read and write units for the specified
+    #   on-demand table. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexInfo AWS API Documentation
     #
     class GlobalSecondaryIndexInfo < Struct.new(
       :index_name,
       :key_schema,
       :projection,
-      :provisioned_throughput)
+      :provisioned_throughput,
+      :on_demand_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5673,6 +5715,54 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Sets the maximum number of read and write units for the specified
+    # on-demand table. If you use this parameter, you must specify
+    # `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #
+    # @!attribute [rw] max_read_request_units
+    #   Maximum number of read request units for the specified table.
+    #
+    #   To specify a maximum `OnDemandThroughput` on your table, set the
+    #   value of `MaxReadRequestUnits` as greater than or equal to 1. To
+    #   remove the maximum `OnDemandThroughput` that is currently set on
+    #   your table, set the value of `MaxReadRequestUnits` to -1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_write_request_units
+    #   Maximum number of write request units for the specified table.
+    #
+    #   To specify a maximum `OnDemandThroughput` on your table, set the
+    #   value of `MaxWriteRequestUnits` as greater than or equal to 1. To
+    #   remove the maximum `OnDemandThroughput` that is currently set on
+    #   your table, set the value of `MaxWriteRequestUnits` to -1.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/OnDemandThroughput AWS API Documentation
+    #
+    class OnDemandThroughput < Struct.new(
+      :max_read_request_units,
+      :max_write_request_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Overrides the on-demand throughput settings for this replica table. If
+    # you don't specify a value for this parameter, it uses the source
+    # table's on-demand throughput settings.
+    #
+    # @!attribute [rw] max_read_request_units
+    #   Maximum number of read request units for the specified replica
+    #   table.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/OnDemandThroughputOverride AWS API Documentation
+    #
+    class OnDemandThroughputOverride < Struct.new(
+      :max_read_request_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a PartiQL statement that uses parameters.
     #
     # @!attribute [rw] statement
@@ -6339,11 +6429,17 @@ module Aws::DynamoDB
     #   An Amazon Web Services resource-based policy document in JSON
     #   format.
     #
-    #   The maximum size supported for a resource-based policy document is
-    #   20 KB. DynamoDB counts whitespaces when calculating the size of a
-    #   policy against this limit. For a full list of all considerations
-    #   that you should keep in mind while attaching a resource-based
-    #   policy, see [Resource-based policy considerations][1].
+    #   * The maximum size supported for a resource-based policy document is
+    #     20 KB. DynamoDB counts whitespaces when calculating the size of a
+    #     policy against this limit.
+    #
+    #   * Within a resource-based policy, if the action for a DynamoDB
+    #     service-linked role (SLR) to replicate data for a global table is
+    #     denied, adding or deleting a replica will fail with an error.
+    #
+    #   For a full list of all considerations that apply while attaching a
+    #   resource-based policy, see [Resource-based policy
+    #   considerations][1].
     #
     #
     #
@@ -6353,13 +6449,16 @@ module Aws::DynamoDB
     # @!attribute [rw] expected_revision_id
     #   A string value that you can use to conditionally update your policy.
     #   You can provide the revision ID of your existing policy to make
-    #   mutating requests against that policy. When you provide an expected
-    #   revision ID, if the revision ID of the existing policy on the
-    #   resource doesn't match or if there's no policy attached to the
-    #   resource, your request will be rejected with a
-    #   `PolicyNotFoundException`.
+    #   mutating requests against that policy.
     #
-    #   To conditionally put a policy when no policy exists for the
+    #   <note markdown="1"> When you provide an expected revision ID, if the revision ID of the
+    #   existing policy on the resource doesn't match or if there's no
+    #   policy attached to the resource, your request will be rejected with
+    #   a `PolicyNotFoundException`.
+    #
+    #    </note>
+    #
+    #   To conditionally attach a policy when no policy exists for the
     #   resource, specify `NO_POLICY` for the revision ID.
     #   @return [String]
     #
@@ -6381,7 +6480,7 @@ module Aws::DynamoDB
 
     # @!attribute [rw] revision_id
     #   A unique string that represents the revision ID of the policy. If
-    #   you are comparing revision IDs, make sure to always use string
+    #   you're comparing revision IDs, make sure to always use string
     #   comparison logic.
     #   @return [String]
     #
@@ -7038,6 +7137,11 @@ module Aws::DynamoDB
     #   source table's provisioned throughput settings.
     #   @return [Types::ProvisionedThroughputOverride]
     #
+    # @!attribute [rw] on_demand_throughput_override
+    #   Overrides the maximum on-demand throughput settings for the
+    #   specified replica table.
+    #   @return [Types::OnDemandThroughputOverride]
+    #
     # @!attribute [rw] global_secondary_indexes
     #   Replica-specific global secondary index settings.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndexDescription>]
@@ -7061,6 +7165,7 @@ module Aws::DynamoDB
       :replica_status_percent_progress,
       :kms_master_key_id,
       :provisioned_throughput_override,
+      :on_demand_throughput_override,
       :global_secondary_indexes,
       :replica_inaccessible_date_time,
       :replica_table_class_summary)
@@ -7079,11 +7184,17 @@ module Aws::DynamoDB
     #   uses the source table GSI's read capacity settings.
     #   @return [Types::ProvisionedThroughputOverride]
     #
+    # @!attribute [rw] on_demand_throughput_override
+    #   Overrides the maximum on-demand throughput settings for the
+    #   specified global secondary index in the specified replica table.
+    #   @return [Types::OnDemandThroughputOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndex AWS API Documentation
     #
     class ReplicaGlobalSecondaryIndex < Struct.new(
       :index_name,
-      :provisioned_throughput_override)
+      :provisioned_throughput_override,
+      :on_demand_throughput_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7161,11 +7272,17 @@ module Aws::DynamoDB
     #   settings.
     #   @return [Types::ProvisionedThroughputOverride]
     #
+    # @!attribute [rw] on_demand_throughput_override
+    #   Overrides the maximum on-demand throughput for the specified global
+    #   secondary index in the specified replica table.
+    #   @return [Types::OnDemandThroughputOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexDescription AWS API Documentation
     #
     class ReplicaGlobalSecondaryIndexDescription < Struct.new(
       :index_name,
-      :provisioned_throughput_override)
+      :provisioned_throughput_override,
+      :on_demand_throughput_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7562,6 +7679,12 @@ module Aws::DynamoDB
     #   Provisioned throughput settings for the restored table.
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] on_demand_throughput_override
+    #   Sets the maximum number of read and write units for the specified
+    #   on-demand table. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @!attribute [rw] sse_specification_override
     #   The new server-side encryption settings for the restored table.
     #   @return [Types::SSESpecification]
@@ -7575,6 +7698,7 @@ module Aws::DynamoDB
       :global_secondary_index_override,
       :local_secondary_index_override,
       :provisioned_throughput_override,
+      :on_demand_throughput_override,
       :sse_specification_override)
       SENSITIVE = []
       include Aws::Structure
@@ -7635,6 +7759,12 @@ module Aws::DynamoDB
     #   Provisioned throughput settings for the restored table.
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] on_demand_throughput_override
+    #   Sets the maximum number of read and write units for the specified
+    #   on-demand table. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @!attribute [rw] sse_specification_override
     #   The new server-side encryption settings for the restored table.
     #   @return [Types::SSESpecification]
@@ -7651,6 +7781,7 @@ module Aws::DynamoDB
       :global_secondary_index_override,
       :local_secondary_index_override,
       :provisioned_throughput_override,
+      :on_demand_throughput_override,
       :sse_specification_override)
       SENSITIVE = []
       include Aws::Structure
@@ -8228,6 +8359,12 @@ module Aws::DynamoDB
     #   Read IOPs and Write IOPS on the table when the backup was created.
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] on_demand_throughput
+    #   Sets the maximum number of read and write units for the specified
+    #   on-demand table. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @!attribute [rw] item_count
     #   Number of items in the table. Note that this is an approximate
     #   value.
@@ -8256,6 +8393,7 @@ module Aws::DynamoDB
       :key_schema,
       :table_creation_date_time,
       :provisioned_throughput,
+      :on_demand_throughput,
       :item_count,
       :billing_mode)
       SENSITIVE = []
@@ -8436,6 +8574,12 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] on_demand_throughput
+    #   Sets the maximum number of read and write units for the specified
+    #   on-demand table. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @!attribute [rw] sse_specification
     #   Represents the settings used to enable server-side encryption.
     #   @return [Types::SSESpecification]
@@ -8453,6 +8597,7 @@ module Aws::DynamoDB
       :key_schema,
       :billing_mode,
       :provisioned_throughput,
+      :on_demand_throughput,
       :sse_specification,
       :global_secondary_indexes)
       SENSITIVE = []
@@ -8758,6 +8903,12 @@ module Aws::DynamoDB
     #   (false) on the table.
     #   @return [Boolean]
     #
+    # @!attribute [rw] on_demand_throughput
+    #   The maximum number of read and write units for the specified
+    #   on-demand table. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
     #
     class TableDescription < Struct.new(
@@ -8783,7 +8934,8 @@ module Aws::DynamoDB
       :sse_description,
       :archival_summary,
       :table_class_summary,
-      :deletion_protection_enabled)
+      :deletion_protection_enabled,
+      :on_demand_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9523,11 +9675,18 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] on_demand_throughput
+    #   Updates the maximum number of read and write units for the specified
+    #   global secondary index. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalSecondaryIndexAction AWS API Documentation
     #
     class UpdateGlobalSecondaryIndexAction < Struct.new(
       :index_name,
-      :provisioned_throughput)
+      :provisioned_throughput,
+      :on_demand_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10113,6 +10272,10 @@ module Aws::DynamoDB
     #   source table's provisioned throughput settings.
     #   @return [Types::ProvisionedThroughputOverride]
     #
+    # @!attribute [rw] on_demand_throughput_override
+    #   Overrides the maximum on-demand throughput for the replica table.
+    #   @return [Types::OnDemandThroughputOverride]
+    #
     # @!attribute [rw] global_secondary_indexes
     #   Replica-specific global secondary index settings.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndex>]
@@ -10128,6 +10291,7 @@ module Aws::DynamoDB
       :region_name,
       :kms_master_key_id,
       :provisioned_throughput_override,
+      :on_demand_throughput_override,
       :global_secondary_indexes,
       :table_class_override)
       SENSITIVE = []
@@ -10235,6 +10399,12 @@ module Aws::DynamoDB
     #   disabled (false) on the table.
     #   @return [Boolean]
     #
+    # @!attribute [rw] on_demand_throughput
+    #   Updates the maximum number of read and write units for the specified
+    #   table in on-demand capacity mode. If you use this parameter, you
+    #   must specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #   @return [Types::OnDemandThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput AWS API Documentation
     #
     class UpdateTableInput < Struct.new(
@@ -10247,7 +10417,8 @@ module Aws::DynamoDB
       :sse_specification,
       :replica_updates,
       :table_class,
-      :deletion_protection_enabled)
+      :deletion_protection_enabled,
+      :on_demand_throughput)
       SENSITIVE = []
       include Aws::Structure
     end

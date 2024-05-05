@@ -155,6 +155,10 @@ module Aws
                               provisioned_throughput: {
                                 read_capacity_units: ::Integer,
                                 write_capacity_units: ::Integer
+                              }?,
+                              on_demand_throughput: {
+                                max_read_request_units: ::Integer?,
+                                max_write_request_units: ::Integer?
                               }?
                             },
                           ],
@@ -180,7 +184,11 @@ module Aws
                           ],
                           ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
                           ?deletion_protection_enabled: bool,
-                          ?resource_policy: ::String
+                          ?resource_policy: ::String,
+                          ?on_demand_throughput: {
+                            max_read_request_units: ::Integer?,
+                            max_write_request_units: ::Integer?
+                          }
                         ) -> Table
                       | (?Hash[Symbol, untyped]) -> Table
 

@@ -56,6 +56,8 @@ module Aws::Personalize
     CreateBatchSegmentJobResponse = Shapes::StructureShape.new(name: 'CreateBatchSegmentJobResponse')
     CreateCampaignRequest = Shapes::StructureShape.new(name: 'CreateCampaignRequest')
     CreateCampaignResponse = Shapes::StructureShape.new(name: 'CreateCampaignResponse')
+    CreateDataDeletionJobRequest = Shapes::StructureShape.new(name: 'CreateDataDeletionJobRequest')
+    CreateDataDeletionJobResponse = Shapes::StructureShape.new(name: 'CreateDataDeletionJobResponse')
     CreateDatasetExportJobRequest = Shapes::StructureShape.new(name: 'CreateDatasetExportJobRequest')
     CreateDatasetExportJobResponse = Shapes::StructureShape.new(name: 'CreateDatasetExportJobResponse')
     CreateDatasetGroupRequest = Shapes::StructureShape.new(name: 'CreateDatasetGroupRequest')
@@ -78,6 +80,9 @@ module Aws::Personalize
     CreateSolutionResponse = Shapes::StructureShape.new(name: 'CreateSolutionResponse')
     CreateSolutionVersionRequest = Shapes::StructureShape.new(name: 'CreateSolutionVersionRequest')
     CreateSolutionVersionResponse = Shapes::StructureShape.new(name: 'CreateSolutionVersionResponse')
+    DataDeletionJob = Shapes::StructureShape.new(name: 'DataDeletionJob')
+    DataDeletionJobSummary = Shapes::StructureShape.new(name: 'DataDeletionJobSummary')
+    DataDeletionJobs = Shapes::ListShape.new(name: 'DataDeletionJobs')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     Dataset = Shapes::StructureShape.new(name: 'Dataset')
     DatasetExportJob = Shapes::StructureShape.new(name: 'DatasetExportJob')
@@ -121,6 +126,8 @@ module Aws::Personalize
     DescribeBatchSegmentJobResponse = Shapes::StructureShape.new(name: 'DescribeBatchSegmentJobResponse')
     DescribeCampaignRequest = Shapes::StructureShape.new(name: 'DescribeCampaignRequest')
     DescribeCampaignResponse = Shapes::StructureShape.new(name: 'DescribeCampaignResponse')
+    DescribeDataDeletionJobRequest = Shapes::StructureShape.new(name: 'DescribeDataDeletionJobRequest')
+    DescribeDataDeletionJobResponse = Shapes::StructureShape.new(name: 'DescribeDataDeletionJobResponse')
     DescribeDatasetExportJobRequest = Shapes::StructureShape.new(name: 'DescribeDatasetExportJobRequest')
     DescribeDatasetExportJobResponse = Shapes::StructureShape.new(name: 'DescribeDatasetExportJobResponse')
     DescribeDatasetGroupRequest = Shapes::StructureShape.new(name: 'DescribeDatasetGroupRequest')
@@ -177,6 +184,7 @@ module Aws::Personalize
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
     ImportMode = Shapes::StringShape.new(name: 'ImportMode')
     IngestionMode = Shapes::StringShape.new(name: 'IngestionMode')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerHyperParameterRange = Shapes::StructureShape.new(name: 'IntegerHyperParameterRange')
     IntegerHyperParameterRanges = Shapes::ListShape.new(name: 'IntegerHyperParameterRanges')
     IntegerMaxValue = Shapes::IntegerShape.new(name: 'IntegerMaxValue')
@@ -192,6 +200,8 @@ module Aws::Personalize
     ListBatchSegmentJobsResponse = Shapes::StructureShape.new(name: 'ListBatchSegmentJobsResponse')
     ListCampaignsRequest = Shapes::StructureShape.new(name: 'ListCampaignsRequest')
     ListCampaignsResponse = Shapes::StructureShape.new(name: 'ListCampaignsResponse')
+    ListDataDeletionJobsRequest = Shapes::StructureShape.new(name: 'ListDataDeletionJobsRequest')
+    ListDataDeletionJobsResponse = Shapes::StructureShape.new(name: 'ListDataDeletionJobsResponse')
     ListDatasetExportJobsRequest = Shapes::StructureShape.new(name: 'ListDatasetExportJobsRequest')
     ListDatasetExportJobsResponse = Shapes::StructureShape.new(name: 'ListDatasetExportJobsResponse')
     ListDatasetGroupsRequest = Shapes::StructureShape.new(name: 'ListDatasetGroupsRequest')
@@ -494,6 +504,16 @@ module Aws::Personalize
     CreateCampaignResponse.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
     CreateCampaignResponse.struct_class = Types::CreateCampaignResponse
 
+    CreateDataDeletionJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    CreateDataDeletionJobRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
+    CreateDataDeletionJobRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
+    CreateDataDeletionJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateDataDeletionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateDataDeletionJobRequest.struct_class = Types::CreateDataDeletionJobRequest
+
+    CreateDataDeletionJobResponse.add_member(:data_deletion_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "dataDeletionJobArn"))
+    CreateDataDeletionJobResponse.struct_class = Types::CreateDataDeletionJobResponse
+
     CreateDatasetExportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
     CreateDatasetExportJobRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetArn"))
     CreateDatasetExportJobRequest.add_member(:ingestion_mode, Shapes::ShapeRef.new(shape: IngestionMode, location_name: "ingestionMode"))
@@ -605,6 +625,29 @@ module Aws::Personalize
 
     CreateSolutionVersionResponse.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
     CreateSolutionVersionResponse.struct_class = Types::CreateSolutionVersionResponse
+
+    DataDeletionJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    DataDeletionJob.add_member(:data_deletion_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "dataDeletionJobArn"))
+    DataDeletionJob.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    DataDeletionJob.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
+    DataDeletionJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    DataDeletionJob.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    DataDeletionJob.add_member(:num_deleted, Shapes::ShapeRef.new(shape: Integer, location_name: "numDeleted"))
+    DataDeletionJob.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    DataDeletionJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    DataDeletionJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DataDeletionJob.struct_class = Types::DataDeletionJob
+
+    DataDeletionJobSummary.add_member(:data_deletion_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "dataDeletionJobArn"))
+    DataDeletionJobSummary.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    DataDeletionJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    DataDeletionJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    DataDeletionJobSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    DataDeletionJobSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    DataDeletionJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DataDeletionJobSummary.struct_class = Types::DataDeletionJobSummary
+
+    DataDeletionJobs.member = Shapes::ShapeRef.new(shape: DataDeletionJobSummary)
 
     DataSource.add_member(:data_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "dataLocation"))
     DataSource.struct_class = Types::DataSource
@@ -802,6 +845,12 @@ module Aws::Personalize
 
     DescribeCampaignResponse.add_member(:campaign, Shapes::ShapeRef.new(shape: Campaign, location_name: "campaign"))
     DescribeCampaignResponse.struct_class = Types::DescribeCampaignResponse
+
+    DescribeDataDeletionJobRequest.add_member(:data_deletion_job_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "dataDeletionJobArn"))
+    DescribeDataDeletionJobRequest.struct_class = Types::DescribeDataDeletionJobRequest
+
+    DescribeDataDeletionJobResponse.add_member(:data_deletion_job, Shapes::ShapeRef.new(shape: DataDeletionJob, location_name: "dataDeletionJob"))
+    DescribeDataDeletionJobResponse.struct_class = Types::DescribeDataDeletionJobResponse
 
     DescribeDatasetExportJobRequest.add_member(:dataset_export_job_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetExportJobArn"))
     DescribeDatasetExportJobRequest.struct_class = Types::DescribeDatasetExportJobRequest
@@ -1012,6 +1061,15 @@ module Aws::Personalize
     ListCampaignsResponse.add_member(:campaigns, Shapes::ShapeRef.new(shape: Campaigns, location_name: "campaigns"))
     ListCampaignsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListCampaignsResponse.struct_class = Types::ListCampaignsResponse
+
+    ListDataDeletionJobsRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    ListDataDeletionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDataDeletionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListDataDeletionJobsRequest.struct_class = Types::ListDataDeletionJobsRequest
+
+    ListDataDeletionJobsResponse.add_member(:data_deletion_jobs, Shapes::ShapeRef.new(shape: DataDeletionJobs, location_name: "dataDeletionJobs"))
+    ListDataDeletionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDataDeletionJobsResponse.struct_class = Types::ListDataDeletionJobsResponse
 
     ListDatasetExportJobsRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetArn"))
     ListDatasetExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -1411,6 +1469,7 @@ module Aws::Personalize
         "endpointPrefix" => "personalize",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Personalize",
         "serviceId" => "Personalize",
         "signatureVersion" => "v4",
@@ -1453,6 +1512,20 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCampaignRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCampaignResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:create_data_deletion_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataDeletionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataDeletionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataDeletionJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
@@ -1747,6 +1820,16 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_data_deletion_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDataDeletionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDataDeletionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDataDeletionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_dataset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDataset"
         o.http_method = "POST"
@@ -1934,6 +2017,16 @@ module Aws::Personalize
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_data_deletion_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataDeletionJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDataDeletionJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataDeletionJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:list_dataset_export_jobs, Seahorse::Model::Operation.new.tap do |o|

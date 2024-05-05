@@ -3856,6 +3856,11 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] report_format
+    #   The format of the report. Valid values are `PDF` and `CSV`. If no
+    #   value is specified, the report format defaults to `PDF`.
+    #   @return [String]
+    #
     # @!attribute [rw] scan_arn
     #   The scan ARN.
     #   @return [String]
@@ -3867,6 +3872,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCisScanReportRequest AWS API Documentation
     #
     class GetCisScanReportRequest < Struct.new(
+      :report_format,
       :scan_arn,
       :target_accounts)
       SENSITIVE = []
@@ -3878,7 +3884,7 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] url
-    #   The URL where a PDF of the CIS scan report can be downloaded.
+    #   The URL where a PDF or CSV of the CIS scan report can be downloaded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCisScanReportResponse AWS API Documentation

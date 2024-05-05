@@ -113,6 +113,9 @@ module Aws::ConnectCases
     FieldValue = Shapes::StructureShape.new(name: 'FieldValue')
     FieldValueUnion = Shapes::UnionShape.new(name: 'FieldValueUnion')
     FieldValueUnionStringValueString = Shapes::StringShape.new(name: 'FieldValueUnionStringValueString')
+    FileArn = Shapes::StringShape.new(name: 'FileArn')
+    FileContent = Shapes::StructureShape.new(name: 'FileContent')
+    FileFilter = Shapes::StructureShape.new(name: 'FileFilter')
     GetCaseAuditEventsRequest = Shapes::StructureShape.new(name: 'GetCaseAuditEventsRequest')
     GetCaseAuditEventsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetCaseAuditEventsRequestMaxResultsInteger')
     GetCaseAuditEventsResponse = Shapes::StructureShape.new(name: 'GetCaseAuditEventsResponse')
@@ -511,6 +514,12 @@ module Aws::ConnectCases
     FieldValueUnion.add_member_subclass(:unknown, Types::FieldValueUnion::Unknown)
     FieldValueUnion.struct_class = Types::FieldValueUnion
 
+    FileContent.add_member(:file_arn, Shapes::ShapeRef.new(shape: FileArn, required: true, location_name: "fileArn"))
+    FileContent.struct_class = Types::FileContent
+
+    FileFilter.add_member(:file_arn, Shapes::ShapeRef.new(shape: FileArn, location_name: "fileArn"))
+    FileFilter.struct_class = Types::FileFilter
+
     GetCaseAuditEventsRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
     GetCaseAuditEventsRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     GetCaseAuditEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetCaseAuditEventsRequestMaxResultsInteger, location_name: "maxResults"))
@@ -699,9 +708,11 @@ module Aws::ConnectCases
 
     RelatedItemContent.add_member(:comment, Shapes::ShapeRef.new(shape: CommentContent, location_name: "comment"))
     RelatedItemContent.add_member(:contact, Shapes::ShapeRef.new(shape: ContactContent, location_name: "contact"))
+    RelatedItemContent.add_member(:file, Shapes::ShapeRef.new(shape: FileContent, location_name: "file"))
     RelatedItemContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RelatedItemContent.add_member_subclass(:comment, Types::RelatedItemContent::Comment)
     RelatedItemContent.add_member_subclass(:contact, Types::RelatedItemContent::Contact)
+    RelatedItemContent.add_member_subclass(:file, Types::RelatedItemContent::File)
     RelatedItemContent.add_member_subclass(:unknown, Types::RelatedItemContent::Unknown)
     RelatedItemContent.struct_class = Types::RelatedItemContent
 
@@ -710,17 +721,21 @@ module Aws::ConnectCases
 
     RelatedItemInputContent.add_member(:comment, Shapes::ShapeRef.new(shape: CommentContent, location_name: "comment"))
     RelatedItemInputContent.add_member(:contact, Shapes::ShapeRef.new(shape: Contact, location_name: "contact"))
+    RelatedItemInputContent.add_member(:file, Shapes::ShapeRef.new(shape: FileContent, location_name: "file"))
     RelatedItemInputContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RelatedItemInputContent.add_member_subclass(:comment, Types::RelatedItemInputContent::Comment)
     RelatedItemInputContent.add_member_subclass(:contact, Types::RelatedItemInputContent::Contact)
+    RelatedItemInputContent.add_member_subclass(:file, Types::RelatedItemInputContent::File)
     RelatedItemInputContent.add_member_subclass(:unknown, Types::RelatedItemInputContent::Unknown)
     RelatedItemInputContent.struct_class = Types::RelatedItemInputContent
 
     RelatedItemTypeFilter.add_member(:comment, Shapes::ShapeRef.new(shape: CommentFilter, location_name: "comment"))
     RelatedItemTypeFilter.add_member(:contact, Shapes::ShapeRef.new(shape: ContactFilter, location_name: "contact"))
+    RelatedItemTypeFilter.add_member(:file, Shapes::ShapeRef.new(shape: FileFilter, location_name: "file"))
     RelatedItemTypeFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RelatedItemTypeFilter.add_member_subclass(:comment, Types::RelatedItemTypeFilter::Comment)
     RelatedItemTypeFilter.add_member_subclass(:contact, Types::RelatedItemTypeFilter::Contact)
+    RelatedItemTypeFilter.add_member_subclass(:file, Types::RelatedItemTypeFilter::File)
     RelatedItemTypeFilter.add_member_subclass(:unknown, Types::RelatedItemTypeFilter::Unknown)
     RelatedItemTypeFilter.struct_class = Types::RelatedItemTypeFilter
 

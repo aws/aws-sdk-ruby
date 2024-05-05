@@ -220,13 +220,16 @@ module Aws
                                    }?,
                                    contact: {
                                      contact_arn: ::String
+                                   }?,
+                                   file: {
+                                     file_arn: ::String
                                    }?
                                  },
                                  domain_id: ::String,
                                  ?performed_by: {
                                    user_arn: ::String?
                                  },
-                                 type: ("Contact" | "Comment")
+                                 type: ("Contact" | "Comment" | "File")
                                ) -> _CreateRelatedItemResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelatedItemResponseSuccess
 
@@ -622,6 +625,9 @@ module Aws
                                       contact: {
                                         channel: Array[::String]?,
                                         contact_arn: ::String?
+                                      }?,
+                                      file: {
+                                        file_arn: ::String?
                                       }?
                                     },
                                   ],

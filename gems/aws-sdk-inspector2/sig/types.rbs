@@ -1071,6 +1071,7 @@ module Aws::Inspector2
     end
 
     class GetCisScanReportRequest
+      attr_accessor report_format: ("PDF" | "CSV")
       attr_accessor scan_arn: ::String
       attr_accessor target_accounts: ::Array[::String]
       SENSITIVE: []

@@ -46,6 +46,8 @@ module Aws::PersonalizeRuntime
     PredictedItem = Shapes::StructureShape.new(name: 'PredictedItem')
     Promotion = Shapes::StructureShape.new(name: 'Promotion')
     PromotionList = Shapes::ListShape.new(name: 'PromotionList')
+    Reason = Shapes::StringShape.new(name: 'Reason')
+    ReasonList = Shapes::ListShape.new(name: 'ReasonList')
     RecommendationID = Shapes::StringShape.new(name: 'RecommendationID')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Score = Shapes::FloatShape.new(name: 'Score')
@@ -122,6 +124,7 @@ module Aws::PersonalizeRuntime
     PredictedItem.add_member(:score, Shapes::ShapeRef.new(shape: Score, location_name: "score"))
     PredictedItem.add_member(:promotion_name, Shapes::ShapeRef.new(shape: Name, location_name: "promotionName"))
     PredictedItem.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
+    PredictedItem.add_member(:reason, Shapes::ShapeRef.new(shape: ReasonList, location_name: "reason"))
     PredictedItem.struct_class = Types::PredictedItem
 
     Promotion.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -131,6 +134,8 @@ module Aws::PersonalizeRuntime
     Promotion.struct_class = Types::Promotion
 
     PromotionList.member = Shapes::ShapeRef.new(shape: Promotion)
+
+    ReasonList.member = Shapes::ShapeRef.new(shape: Reason)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -146,6 +151,7 @@ module Aws::PersonalizeRuntime
         "endpointPrefix" => "personalize-runtime",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Personalize Runtime",
         "serviceId" => "Personalize Runtime",
         "signatureVersion" => "v4",

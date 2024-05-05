@@ -138,9 +138,7 @@ module Aws
       end
 
       def source_metadata(options)
-        if options[:content_length]
-          return { content_length: options.delete(:content_length) }
-        end
+        return options.slice(:content_length) if options[:content_length]
 
         client = options[:copy_source_client] || @client
 
@@ -150,11 +148,15 @@ module Aws
           bucket, key = options[:copy_source].match(/([^\/]+?)\/(.+)/)[1,2]
         end
 
-        key = CGI.unescape(key)
-        opts = { bucket: bucket, key: key }
-        opts[:version_id] = version_id if version_id
-        opts[:part_number] = options[:part_number] if options[:part_number]
-        client.head_object(opts).to_h
+        head_opts = { bucket: bucket, key: CGI.unescape(key) }.tap { |opts|
+          opts[:version_id]  = version_id if version_id
+          opts[:part_number] = options[:part_number] if options[:part_number]
+        }
+
+        client.head_object(head_opts).to_h.tap { |head|
+          head.delete(:server_side_encryption)
+          head.delete(:ssekms_key_id)
+        }
       end
 
       def default_part_size(source_size)

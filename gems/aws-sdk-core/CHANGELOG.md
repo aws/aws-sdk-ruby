@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Fix issue where `ConnectionPool` size iteration would prevent a new key from being added to the pool.
 
+3.194.1 (2024-05-03)
+------------------
+
+* Issue - Update EC2 protocol to not serialize empty lists.
+
 3.194.0 (2024-04-30)
 ------------------
 

@@ -964,6 +964,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_cis_scan_report-instance_method
       def get_cis_scan_report: (
+                                 ?report_format: ("PDF" | "CSV"),
                                  scan_arn: ::String,
                                  ?target_accounts: Array[::String]
                                ) -> _GetCisScanReportResponseSuccess

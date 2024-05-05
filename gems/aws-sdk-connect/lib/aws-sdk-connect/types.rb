@@ -923,6 +923,103 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the attached file.
+    #
+    # @!attribute [rw] creation_time
+    #   The time of Creation of the file resource as an ISO timestamp. It's
+    #   specified in ISO 8601 format: `yyyy-MM-ddThh:mm:ss.SSSZ`. For
+    #   example, `2024-05-03T02:41:28.172Z`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_arn
+    #   The unique identifier of the attached file resource (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] file_id
+    #   The unique identifier of the attached file resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_name
+    #   A case-sensitive name of the attached file being uploaded.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_size_in_bytes
+    #   The size of the attached file in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_status
+    #   The current status of the attached file.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Represents the identity that created the file.
+    #   @return [Types::CreatedByInfo]
+    #
+    # @!attribute [rw] file_use_case_type
+    #   The use case for the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, `\{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"\} \}`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AttachedFile AWS API Documentation
+    #
+    class AttachedFile < Struct.new(
+      :creation_time,
+      :file_arn,
+      :file_id,
+      :file_name,
+      :file_size_in_bytes,
+      :file_status,
+      :created_by,
+      :file_use_case_type,
+      :associated_resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Error describing a failure to retrieve attached file metadata through
+    # BatchGetAttachedFileMetadata action.
+    #
+    # @!attribute [rw] error_code
+    #   Status code describing the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Why the attached file couldn't be retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_id
+    #   The unique identifier of the attached file resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AttachedFileError AWS API Documentation
+    #
+    class AttachedFileError < Struct.new(
+      :error_code,
+      :error_message,
+      :file_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a reference when the `referenceType` is
     # `ATTACHMENT`. Otherwise, null.
     #
@@ -1140,6 +1237,54 @@ module Aws::Connect
     #
     class BatchDisassociateAnalyticsDataSetResponse < Struct.new(
       :deleted,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_ids
+    #   The unique identifiers of the attached file resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetAttachedFileMetadataRequest AWS API Documentation
+    #
+    class BatchGetAttachedFileMetadataRequest < Struct.new(
+      :file_ids,
+      :instance_id,
+      :associated_resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] files
+    #   List of attached files that were successfully retrieved.
+    #   @return [Array<Types::AttachedFile>]
+    #
+    # @!attribute [rw] errors
+    #   List of errors of attached files that could not be retrieved.
+    #   @return [Array<Types::AttachedFileError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetAttachedFileMetadataResponse AWS API Documentation
+    #
+    class BatchGetAttachedFileMetadataResponse < Struct.new(
+      :files,
       :errors)
       SENSITIVE = []
       include Aws::Structure
@@ -1563,6 +1708,45 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Request to CompleteAttachedFileUpload API
+    #
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_id
+    #   The unique identifier of the attached file resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CompleteAttachedFileUploadRequest AWS API Documentation
+    #
+    class CompleteAttachedFileUploadRequest < Struct.new(
+      :instance_id,
+      :file_id,
+      :associated_resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response from CompleteAttachedFileUpload API
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CompleteAttachedFileUploadResponse AWS API Documentation
+    #
+    class CompleteAttachedFileUploadResponse < Aws::EmptyStructure; end
 
     # Operation cannot be performed at this time as there is a conflict with
     # another operation or contact state.
@@ -3953,6 +4137,41 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information on the identity that created the file.
+    #
+    # @note CreatedByInfo is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CreatedByInfo is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CreatedByInfo corresponding to the set member.
+    #
+    # @!attribute [rw] connect_user_arn
+    #   An agent ARN representing a [connect user][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-resources-for-iam-policies
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_identity_arn
+    #   STS or IAM ARN representing the identity of API Caller. SDK users
+    #   cannot populate this and this value is calculated automatically if
+    #   `ConnectUserArn` is not provided.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatedByInfo AWS API Documentation
+    #
+    class CreatedByInfo < Struct.new(
+      :connect_user_arn,
+      :aws_identity_arn,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ConnectUserArn < CreatedByInfo; end
+      class AwsIdentityArn < CreatedByInfo; end
+      class Unknown < CreatedByInfo; end
+    end
+
     # Contains credentials to use for federation.
     #
     # @!attribute [rw] access_token
@@ -4195,6 +4414,45 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Request to DeleteAttachedFile API
+    #
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_id
+    #   The unique identifier of the attached file resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteAttachedFileRequest AWS API Documentation
+    #
+    class DeleteAttachedFileRequest < Struct.new(
+      :instance_id,
+      :file_id,
+      :associated_resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response from DeleteAttachedFile API
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteAttachedFileResponse AWS API Documentation
+    #
+    class DeleteAttachedFileResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -5966,6 +6224,27 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Metadata used to download the attached file.
+    #
+    # @!attribute [rw] url
+    #   A pre-signed URL that should be used to download the attached file.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expiry
+    #   The expiration time of the URL in ISO timestamp. It's specified in
+    #   ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+    #   2019-11-08T02:41:28.172Z.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DownloadUrlMetadata AWS API Documentation
+    #
+    class DownloadUrlMetadata < Struct.new(
+      :url,
+      :url_expiry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource with the specified name already exists.
     #
     # @!attribute [rw] message
@@ -7130,6 +7409,122 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Request to GetAttachedFile API.
+    #
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_id
+    #   The unique identifier of the attached file resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expiry_in_seconds
+    #   Optional override for the expiry of the pre-signed S3 URL in
+    #   seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetAttachedFileRequest AWS API Documentation
+    #
+    class GetAttachedFileRequest < Struct.new(
+      :instance_id,
+      :file_id,
+      :url_expiry_in_seconds,
+      :associated_resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response from GetAttachedFile API.
+    #
+    # @!attribute [rw] file_arn
+    #   The unique identifier of the attached file resource (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] file_id
+    #   The unique identifier of the attached file resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time of Creation of the file resource as an ISO timestamp. It's
+    #   specified in ISO 8601 format: `yyyy-MM-ddThh:mm:ss.SSSZ`. For
+    #   example, `2024-05-03T02:41:28.172Z`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_status
+    #   The current status of the attached file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_name
+    #   A case-sensitive name of the attached file being uploaded.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_size_in_bytes
+    #   The size of the attached file in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #   @return [String]
+    #
+    # @!attribute [rw] file_use_case_type
+    #   The use case for the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Represents the identity that created the file.
+    #   @return [Types::CreatedByInfo]
+    #
+    # @!attribute [rw] download_url_metadata
+    #   URL and expiry to be used when downloading the attached file.
+    #   @return [Types::DownloadUrlMetadata]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, `\{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"\} \}`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetAttachedFileResponse AWS API Documentation
+    #
+    class GetAttachedFileResponse < Struct.new(
+      :file_arn,
+      :file_id,
+      :creation_time,
+      :file_status,
+      :file_name,
+      :file_size_in_bytes,
+      :associated_resource_arn,
+      :file_use_case_type,
+      :created_by,
+      :download_url_metadata,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
@@ -8207,7 +8602,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average greeting time agent ][21]
+    #     UI name: [Average agent greeting time][21]
     #
     #   AVG\_HANDLE\_TIME
     #
@@ -8294,7 +8689,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average interruptions agent ][28]
+    #     UI name: [Average agent interruptions][28]
     #
     #   AVG\_INTERRUPTION\_TIME\_AGENT
     #
@@ -8306,7 +8701,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average interruption time agent][29]
+    #     UI name: [Average agent interruption time][29]
     #
     #   AVG\_NON\_TALK\_TIME
     #
@@ -8364,7 +8759,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average talk time agent][34]
+    #     UI name: [Average agent talk time][34]
     #
     #   AVG\_TALK\_TIME\_CUSTOMER
     #
@@ -8376,7 +8771,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Average talk time customer][35]
+    #     UI name: [Average customer talk time][35]
     #
     #   CASES\_CREATED
     #
@@ -8438,7 +8833,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent
     #     Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Contacts handled by Connected to agent][40]
+    #     UI name: [Contacts handled (connected to agent timestamp)][40]
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
@@ -8510,7 +8905,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent
     #     Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Contacts queued by Enqueue][46]
+    #     UI name: [Contacts queued (enqueue timestamp)][46]
     #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
@@ -8636,7 +9031,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Talk time agent percent][55]
+    #     UI name: [Agent talk time percent][55]
     #
     #   PERCENT\_TALK\_TIME\_CUSTOMER
     #
@@ -8648,7 +9043,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Talk time customer percent][56]
+    #     UI name: [Customer talk time percent][56]
     #
     #   REOPENED\_CASE\_ACTIONS
     #
@@ -10199,12 +10594,36 @@ module Aws::Connect
     #   The message about the request.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   Reason why the request was invalid.
+    #   @return [Types::InvalidRequestExceptionReason]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidRequestException AWS API Documentation
     #
     class InvalidRequestException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Reason why the request was invalid.
+    #
+    # @!attribute [rw] attached_file_invalid_request_exception_reason
+    #   Reason why the StartAttachedFiledUpload request was invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidRequestExceptionReason AWS API Documentation
+    #
+    class InvalidRequestExceptionReason < Struct.new(
+      :attached_file_invalid_request_exception_reason,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AttachedFileInvalidRequestExceptionReason < InvalidRequestExceptionReason; end
+      class Unknown < InvalidRequestExceptionReason; end
     end
 
     # A field that is invisible to an agent.
@@ -17004,6 +17423,121 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_name
+    #   A case-sensitive name of the attached file being uploaded.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_size_in_bytes
+    #   The size of the attached file in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url_expiry_in_seconds
+    #   Optional override for the expiry of the pre-signed S3 URL in
+    #   seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_use_case_type
+    #   The use case for the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The resource to which the attached file is (being) uploaded to.
+    #   [Cases][1] are the only current supported resource.
+    #
+    #   <note markdown="1"> This value must be a valid ARN.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Represents the identity that created the file.
+    #   @return [Types::CreatedByInfo]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, `\{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"\} \}`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartAttachedFileUploadRequest AWS API Documentation
+    #
+    class StartAttachedFileUploadRequest < Struct.new(
+      :client_token,
+      :instance_id,
+      :file_name,
+      :file_size_in_bytes,
+      :url_expiry_in_seconds,
+      :file_use_case_type,
+      :associated_resource_arn,
+      :created_by,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response from StartAttachedFileUpload API.
+    #
+    # @!attribute [rw] file_arn
+    #   The unique identifier of the attached file resource (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] file_id
+    #   The unique identifier of the attached file resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time of Creation of the file resource as an ISO timestamp. It's
+    #   specified in ISO 8601 format: `yyyy-MM-ddThh:mm:ss.SSSZ`. For
+    #   example, `2024-05-03T02:41:28.172Z`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_status
+    #   The current status of the attached file.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Represents the identity that created the file.
+    #   @return [Types::CreatedByInfo]
+    #
+    # @!attribute [rw] upload_url_metadata
+    #   Information to be used while uploading the attached file.
+    #   @return [Types::UploadUrlMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartAttachedFileUploadResponse AWS API Documentation
+    #
+    class StartAttachedFileUploadResponse < Struct.new(
+      :file_arn,
+      :file_id,
+      :creation_time,
+      :file_status,
+      :created_by,
+      :upload_url_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -18829,6 +19363,23 @@ module Aws::Connect
     #   You can have up to 32,768 UTF-8 bytes across all attributes for a
     #   contact. Attribute keys can include only alphanumeric, dash, and
     #   underscore characters.
+    #
+    #   When the attributes for a contact exceed 32 KB, the contact is
+    #   routed down the Error branch of the flow. As a mitigation, consider
+    #   the following options:
+    #
+    #   * Remove unnecessary attributes by setting their values to empty.
+    #
+    #   * If the attributes are only used in one flow and don't need to be
+    #     referred to outside of that flow (for example, by a Lambda or
+    #     another flow), then use flow attributes. This way you aren't
+    #     needlessly persisting the 32 KB of information from one flow to
+    #     another. For more information, see [Flow block: Set contact
+    #     attributes][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/set-contact-attributes.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesRequest AWS API Documentation
@@ -20544,6 +21095,34 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateViewMetadataResponse AWS API Documentation
     #
     class UpdateViewMetadataResponse < Aws::EmptyStructure; end
+
+    # Fields required when uploading an attached file.
+    #
+    # @!attribute [rw] url
+    #   A pre-signed S3 URL that should be used for uploading the attached
+    #   file.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expiry
+    #   The expiration time of the URL in ISO timestamp. It's specified in
+    #   ISO 8601 format: `yyyy-MM-ddThh:mm:ss.SSSZ`. For example,
+    #   `2019-11-08T02:41:28.172Z`.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers_to_include
+    #   A map of headers that should be provided when uploading the attached
+    #   file.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UploadUrlMetadata AWS API Documentation
+    #
+    class UploadUrlMetadata < Struct.new(
+      :url,
+      :url_expiry,
+      :headers_to_include)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The URL reference.
     #

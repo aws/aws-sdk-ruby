@@ -944,6 +944,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetImageBlockPublicAccessState.build(context)
           when :get_instance_metadata_defaults
             Aws::EC2::Endpoints::GetInstanceMetadataDefaults.build(context)
+          when :get_instance_tpm_ek_pub
+            Aws::EC2::Endpoints::GetInstanceTpmEkPub.build(context)
           when :get_instance_types_from_instance_requirements
             Aws::EC2::Endpoints::GetInstanceTypesFromInstanceRequirements.build(context)
           when :get_instance_uefi_data

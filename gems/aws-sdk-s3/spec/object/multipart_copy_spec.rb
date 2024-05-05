@@ -11,70 +11,78 @@ module Aws
 
       let(:client) { object.client }
 
+      def get_requests(cli, operation_name)
+        cli.api_requests.select { |req| req[:operation_name] == operation_name.to_sym }
+      end
+
+      def get_request_params(cli, operation_name)
+        get_requests(cli, operation_name).first[:params]
+      end
+
       describe '#copy_to' do
         it 'accepts a string source' do
-          expect(client).to receive(:copy_object).with({
-            bucket: 'target-bucket',
-            key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path'
-          })
           object.copy_to('target-bucket/target-key')
+
+          expect(get_requests(client, :copy_object).size).to eq(1)
+          expect(get_request_params(client, :copy_object)).to(
+            eq({ bucket: 'target-bucket', key: 'target-key', copy_source: 'bucket/unescaped/key%20path' })
+          )
         end
 
         it 'accepts a hash source' do
-          expect(client).to receive(:copy_object).with({
-            bucket: 'target-bucket',
-            key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path'
-          })
           object.copy_to(bucket: 'target-bucket', key: 'target-key')
+
+          expect(get_requests(client, :copy_object).size).to eq(1)
+          expect(get_request_params(client, :copy_object)).to(
+            eq({ bucket: 'target-bucket', key: 'target-key', copy_source: 'bucket/unescaped/key%20path' })
+          )
         end
 
         it 'accepts a hash source' do
-          expect(client).to receive(:copy_object).with({
-            bucket: 'target-bucket',
-            key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path'
-          })
           object.copy_to(bucket: 'target-bucket', key: 'target-key')
+
+          expect(get_requests(client, :copy_object).size).to eq(1)
+          expect(get_request_params(client, :copy_object)).to(
+            eq({ bucket: 'target-bucket', key: 'target-key', copy_source: 'bucket/unescaped/key%20path' })
+          )
         end
 
         it 'accept a hash with options merged' do
-          expect(client).to receive(:copy_object).with({
-            bucket: 'target-bucket',
-            key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path',
-            content_type: 'text/plain'
-          })
-          object.copy_to(
-            bucket: 'target-bucket',
-            key: 'target-key',
-            content_type: 'text/plain'
+          object.copy_to(bucket: 'target-bucket', key: 'target-key', content_type: 'text/plain')
+
+          expect(get_requests(client, :copy_object).size).to eq(1)
+          expect(get_request_params(client, :copy_object)).to(
+            eq({
+                 bucket: 'target-bucket',
+                 key: 'target-key',
+                 copy_source: 'bucket/unescaped/key%20path',
+                 content_type: 'text/plain'
+               })
           )
         end
 
         it 'accepts an S3::Object source' do
-          expect(client).to receive(:copy_object).with({
-            bucket: 'target-bucket',
-            key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path'
-          })
-          target = S3::Object.new(
-            'target-bucket',
-            'target-key',
-            stub_responses: true
-          )
+          target = S3::Object.new('target-bucket', 'target-key', stub_responses: true)
           object.copy_to(target)
+
+          expect(get_requests(client, :copy_object).size).to eq(1)
+          expect(get_request_params(client, :copy_object)).to(
+            eq({ bucket: 'target-bucket', key: 'target-key', copy_source: 'bucket/unescaped/key%20path' })
+          )
         end
 
         it 'accepts additional options' do
-          expect(client).to receive(:copy_object).with({
-            bucket: 'target-bucket',
-            key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path',
-            acl: 'public-read'
-          })
           object.copy_to('target-bucket/target-key', acl: 'public-read')
+
+          expect(get_requests(client, :copy_object).size).to eq(1)
+          expect(get_request_params(client, :copy_object)).to(
+            eq({
+                 bucket: 'target-bucket',
+                 key: 'target-key',
+                 copy_source: 'bucket/unescaped/key%20path',
+                 acl: 'public-read'
+               })
+          )
         end
 
         it 'raises an error on an invalid targets' do
@@ -85,90 +93,97 @@ module Aws
       describe '#copy_from' do
         context 'with multipart_copy: false' do
           it 'supports the deprecated form' do
-            expect(client).to receive(:copy_object).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              copy_source: 'source-bucket/escaped/source/key%20path'
-            })
-            object.copy_from(
-              copy_source: 'source-bucket/escaped/source/key%20path'
+            object.copy_from(copy_source: 'source-bucket/escaped/source/key%20path')
+
+            expect(get_requests(client, :copy_object).size).to eq(1)
+            expect(get_request_params(client, :copy_object)).to(
+              eq({
+                   bucket: 'bucket',
+                   key: 'unescaped/key path',
+                   copy_source: 'source-bucket/escaped/source/key%20path'
+                 })
             )
           end
 
           it 'accepts a string source' do
-            expect(client).to receive(:copy_object).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              copy_source: 'source-bucket/source/key%20path'
-            })
             object.copy_from('source-bucket/source/key%20path')
+
+            expect(get_requests(client, :copy_object).size).to eq(1)
+            expect(get_request_params(client, :copy_object)).to(
+              eq({
+                   bucket: 'bucket',
+                   key: 'unescaped/key path',
+                   copy_source: 'source-bucket/source/key%20path'
+                 })
+            )
           end
 
           it 'accepts a hash source' do
-            expect(client).to receive(:copy_object).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              copy_source: 'source-bucket/unescaped/source/key%20path'
-            })
-            object.copy_from(
-              bucket: 'source-bucket',
-              key: 'unescaped/source/key path'
+            object.copy_from(bucket: 'source-bucket', key: 'unescaped/source/key path')
+
+            expect(get_requests(client, :copy_object).size).to eq(1)
+            expect(get_request_params(client, :copy_object)).to(
+              eq({
+                   bucket: 'bucket',
+                   key: 'unescaped/key path',
+                   copy_source: 'source-bucket/unescaped/source/key%20path'
+                 })
             )
           end
 
           it 'accepts a hash source with version id' do
-            expect(client).to receive(:copy_object).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              copy_source: 'src-bucket/src%20key?versionId=src-version-id'
-            })
-            object.copy_from(
-              bucket: 'src-bucket',
-              key: 'src key',
-              version_id: 'src-version-id'
+            object.copy_from(bucket: 'src-bucket', key: 'src key', version_id: 'src-version-id')
+
+            expect(get_requests(client, :copy_object).size).to eq(1)
+            expect(get_request_params(client, :copy_object)).to(
+              eq({
+                   bucket: 'bucket',
+                   key: 'unescaped/key path',
+                   copy_source: 'src-bucket/src%20key?versionId=src-version-id'
+                 })
             )
           end
 
           it 'accept a hash with options merged' do
-            expect(client).to receive(:copy_object).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              copy_source: 'source-bucket/source%20key',
-              content_type: 'text/plain'
-            })
-            object.copy_from(
-              bucket: 'source-bucket',
-              key: 'source key',
-              content_type: 'text/plain'
+            object.copy_from(bucket: 'source-bucket', key: 'source key', content_type: 'text/plain')
+
+            expect(get_requests(client, :copy_object).size).to eq(1)
+            expect(get_request_params(client, :copy_object)).to(
+              eq({
+                   bucket: 'bucket',
+                   key: 'unescaped/key path',
+                   copy_source: 'source-bucket/source%20key',
+                   content_type: 'text/plain'
+                 })
             )
           end
 
           it 'accepts an S3::Object source' do
-            src = S3::Object.new(
-              'source-bucket',
-              'unescaped/source/key path',
-              stub_responses: true
-            )
-            expect(client).to receive(:copy_object).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              copy_source: 'source-bucket/unescaped/source/key%20path'
-            })
+            src = S3::Object.new('source-bucket', 'unescaped/source/key path', stub_responses: true)
             object.copy_from(src)
+
+            expect(get_requests(client, :copy_object).size).to eq(1)
+            expect(get_request_params(client, :copy_object)).to(
+              eq({
+                   bucket: 'bucket',
+                   key: 'unescaped/key path',
+                   copy_source: 'source-bucket/unescaped/source/key%20path'
+                 })
+            )
           end
 
           it 'accepts an S3::ObjectSummary source' do
-            src = S3::ObjectSummary.new(
-              'source-bucket',
-              'unescaped/source/key path',
-              stub_responses: true
-            )
-            expect(client).to receive(:copy_object).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              copy_source: 'source-bucket/unescaped/source/key%20path'
-            })
+            src = S3::ObjectSummary.new('source-bucket', 'unescaped/source/key path', stub_responses: true)
             object.copy_from(src)
+
+            expect(get_requests(client, :copy_object).size).to eq(1)
+            expect(get_request_params(client, :copy_object)).to(
+              eq({
+                   bucket: 'bucket',
+                   key: 'unescaped/key path',
+                   copy_source: 'source-bucket/unescaped/source/key%20path'
+                 })
+            )
           end
 
           it 'accepts an S3::ObjectVersion source' do
@@ -177,23 +192,30 @@ module Aws
               'source-version-id',
               stub_responses: true
             )
-            expect(client).to receive(:copy_object).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              copy_source: 'source-bucket/unescaped/source/key%20path'\
-                           '?versionId=source-version-id'
-            })
             object.copy_from(src)
+
+            expect(get_requests(client, :copy_object).size).to eq(1)
+            expect(get_request_params(client, :copy_object)).to(
+              eq({
+                   bucket: 'bucket',
+                   key: 'unescaped/key path',
+                   copy_source: 'source-bucket/unescaped/source/key%20path?versionId=source-version-id'
+                 })
+            )
           end
 
           it 'accepts additional options' do
-            expect(client).to receive(:copy_object).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              copy_source: 'source-bucket/source%20key',
-              acl: 'public-read'
-            })
             object.copy_from('source-bucket/source%20key', acl: 'public-read')
+
+            expect(get_requests(client, :copy_object).size).to eq(1)
+            expect(get_request_params(client, :copy_object)).to(
+              eq({
+                   bucket: 'bucket',
+                   key: 'unescaped/key path',
+                   copy_source: 'source-bucket/source%20key',
+                   acl: 'public-read'
+                 })
+            )
           end
 
           it 'raises an error on an invalid source' do
@@ -203,257 +225,134 @@ module Aws
 
         context 'with version_id and multipart_copy: true' do
           before(:each) do
-            size = 300 * 1024 * 1024 # 300MB
-            allow(client).to receive(:head_object).with({
-              bucket: 'source-bucket',
-              key: 'source key',
-              version_id: 'source-version-id'
-            }).and_return(Types::HeadObjectOutput.new(content_length: size))
+            client.stub_responses(
+              :head_object,
+              client.stub_data(
+                :head_object,
+                content_length: 300 * 1024 * 1024, # 300MB
+                content_type: 'application/json',
+                server_side_encryption: 'aws:kms',
+                ssekms_key_id: 'arn:aws:kms:us-east-1:1234567890:key/00000000-0000-0000-0000-000000000000'
+              )
+            )
           end
 
           it 'performs multipart uploads for a versioned object' do
-            expect(client).to receive(:create_multipart_upload)
-              .with({bucket: 'bucket', key: 'unescaped/key path'})
-              .and_return(
-                client.stub_data(:create_multipart_upload, upload_id: 'id')
-              )
-
             source = 'source-bucket/source%20key?versionId=source-version-id'
-
-            (1..6).each do |n|
-              range = "bytes=#{(n - 1) * 52_428_800}-#{n * 52_428_800 - 1}"
-
-              expect(client).to receive(:upload_part_copy).with({
-                bucket: 'bucket',
-                key: 'unescaped/key path',
-                part_number: n,
-                copy_source: source,
-                copy_source_range: range,
-                upload_id: 'id'
-              }).and_return(
-                client.stub_data(
-                  :upload_part_copy,
-                  copy_part_result: { etag: "etag#{n}" }
-                )
-              )
-            end
-
-            expect(client).to receive(:complete_multipart_upload).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              upload_id: 'id',
-              multipart_upload: {
-                parts: (1..6).map { |n| { etag: "etag#{n}", part_number: n } }
-              }
-            })
-
             object.copy_from(source, multipart_copy: true)
-          end
-        end
 
-        context 'with multipart_copy: true and source metadata' do
-          before(:each) do
-            size = 300 * 1024 * 1024 # 300MB
-            allow(client).to receive(:head_object).with({
-              bucket: 'source-bucket',
-              key: 'source key'
-            }).and_return(Types::HeadObjectOutput.new(
-              content_length: size, content_type: 'ContentType'))
-          end
+            expect(get_requests(client, :create_multipart_upload).size).to eq(1)
+            expect(create_req = get_request_params(client, :create_multipart_upload)).to(
+              include({ bucket: 'bucket', key: 'unescaped/key path', content_type: 'application/json' })
+            )
+            expect(create_req).not_to include(server_side_encryption: anything, ssekms_key_id: anything)
 
-          it 'performs multipart uploads when :multipart_copy is true' do
-            expect(client).to receive(:create_multipart_upload)
-              .with({
-                      bucket: 'bucket',
-                      key: 'unescaped/key path',
-                      content_type: 'ContentType'})
-              .and_return(
-                client.stub_data(:create_multipart_upload, upload_id: 'id')
-              )
-
-            (1..6).each do |n|
+            expect((requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(6)
+            requests.sort_by { |req| req[:part_number] }.each.with_index do |part, i|
+              n = i + 1
               range = "bytes=#{(n - 1) * 52_428_800}-#{n * 52_428_800 - 1}"
 
-              expect(client).to receive(:upload_part_copy).with({
-                bucket: 'bucket',
-                key: 'unescaped/key path',
-                part_number: n,
-                copy_source: 'source-bucket/source%20key',
-                copy_source_range: range,
-                upload_id: 'id'
-              }).and_return(
-                client.stub_data(
-                  :upload_part_copy,
-                  copy_part_result: { etag: "etag#{n}" }
-                )
-              )
+              expect(part).to eq({ bucket: 'bucket',
+                                   key: 'unescaped/key path',
+                                   part_number: n,
+                                   copy_source: source,
+                                   copy_source_range: range,
+                                   upload_id: 'MultipartUploadId' })
             end
 
-            expect(client).to receive(:complete_multipart_upload).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              upload_id: 'id',
-              multipart_upload: {
-                parts: (1..6).map { |n| { etag: "etag#{n}", part_number: n } }
-              }
-            })
-            object.copy_from('source-bucket/source%20key', multipart_copy: true)
+            expect(get_requests(client, :complete_multipart_upload).size).to eq(1)
+            expect(get_request_params(client, :complete_multipart_upload)).to(
+              include({ bucket: 'bucket',
+                        key: 'unescaped/key path',
+                        upload_id: 'MultipartUploadId',
+                        multipart_upload: { parts: (1..6).map { |n| a_hash_including({ part_number: n }) } } })
+            )
           end
 
           it 'supports alternative part sizes' do
-            client.stub_responses(:create_multipart_upload, upload_id: 'id')
-            client.stub_responses(
-              :upload_part_copy,
-              lambda do |context|
-                {
-                  copy_part_result: {
-                    etag: "etag-#{context.params[:part_number]}"
-                  }
-                }
-              end
+            object.copy_from('source-bucket/source%20key', multipart_copy: true, min_part_size: 5 * 1024 * 1024)
+
+            expect(get_requests(client, :create_multipart_upload).size).to eq(1)
+            expect(get_request_params(client, :create_multipart_upload)).to(
+              include({ bucket: 'bucket', key: 'unescaped/key path', content_type: 'application/json' })
             )
 
-            # record all of the client requests
-            q = Queue.new
-            client.handle do |context|
-              q << context
-              @handler.call(context)
-            end
-
-            # initialize the multipart-copy
-            object.copy_from(
-              'source-bucket/source%20key',
-              multipart_copy: true,
-              min_part_size: 5 * 1024 * 1024
-            )
-
-            requests = []
-            requests << q.shift until q.empty?
-
-            # first request
-            first = requests.first
-            expect(first.operation_name).to eq(:create_multipart_upload)
-            expect(first.params).to eq(
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              content_type: 'ContentType'
-            )
-
-            # part requests
-            parts = requests[1..-2].sort_by { |r| r.params[:part_number] }
-            parts.each.with_index do |part, i|
+            expect((requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(60)
+            requests.sort_by { |r| r[:part_number] }.each.with_index do |part, i|
               n = i + 1
               range = "bytes=#{(n - 1) * 5_242_880}-#{n * 5_242_880 - 1}"
 
-              expect(part.params).to eq(
-                bucket: 'bucket',
-                key: 'unescaped/key path',
-                part_number: n,
-                copy_source: 'source-bucket/source%20key',
-                copy_source_range: range,
-                upload_id: 'id'
-              )
+              expect(part).to eq({ bucket: 'bucket',
+                                   key: 'unescaped/key path',
+                                   part_number: n,
+                                   copy_source: 'source-bucket/source%20key',
+                                   copy_source_range: range,
+                                   upload_id: 'MultipartUploadId' })
             end
 
-            # final request
-            final = requests.last
-            expect(final.operation_name).to eq(:complete_multipart_upload)
-            expect(final.params).to eq(
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              upload_id: 'id',
-              multipart_upload: {
-                parts: (1..60).map { |n| { etag: "etag-#{n}", part_number: n } }
-              }
+            expect(get_requests(client, :complete_multipart_upload).size).to eq(1)
+            expect(get_request_params(client, :complete_multipart_upload)).to(
+              include({
+                        bucket: 'bucket',
+                        key: 'unescaped/key path',
+                        upload_id: 'MultipartUploadId',
+                        multipart_upload: { parts: (1..60).map { |n| a_hash_including({ part_number: n }) } }
+                      })
             )
           end
 
           it 'aborts the upload on errors', thread_report_on_exception: false do
             client.stub_responses(:upload_part_copy, Array.new(10, 'NoSuchKey'))
-            allow(client).to receive(:create_multipart_upload)
-              .and_return(
-                client.stub_data(:create_multipart_upload, upload_id: 'id')
-              )
-            expect(client).to receive(:abort_multipart_upload)
-              .with({
-                bucket: 'bucket',
-                key: 'unescaped/key path',
-                upload_id: 'id'
-              })
+
             expect do
-              object.copy_from(
-                'source-bucket/source%20key',
-                multipart_copy: true
-              )
+              object.copy_from('source-bucket/source%20key', multipart_copy: true)
             end.to raise_error(Aws::S3::Errors::NoSuchKey)
+            expect(get_requests(client, :abort_multipart_upload).size).to eq(1)
+            expect(get_request_params(client, :abort_multipart_upload)).to(
+              eq({ bucket: 'bucket', key: 'unescaped/key path', upload_id: 'MultipartUploadId' })
+            )
           end
 
           it 'rejects files smaller than 5MB' do
-            size = 4 * 1024 * 1024
-            allow(client).to receive(:head_object).with({
-              bucket: 'source-bucket',
-              key: 'source key'
-            }).and_return(client.stub_data(:head_object, content_length: size))
+            client.stub_responses(:head_object, client.stub_data(:head_object, content_length: 4 * 1024 * 1024)) # 4MB
+
             expect do
-              object.copy_from(
-                'source-bucket/source%20key',
-                multipart_copy: true
-              )
+              object.copy_from('source-bucket/source%20key', multipart_copy: true)
             end.to raise_error(ArgumentError, /smaller than 5MB/)
           end
 
           it 'accepts file size option to avoid HEAD request' do
-            expect(client).not_to receive(:head_object)
-            object.copy_from('source-bucket/source%20key',
-                             multipart_copy: true,
-                             content_length: 10 * 1024 * 1024)
+            object.copy_from('source-bucket/source%20key', multipart_copy: true, content_length: 10 * 1024 * 1024)
+
+            expect(get_requests(client, :head_object).size).to be_zero
           end
 
           context 'when target and source objects are in different regions' do
             let(:content_length) { 10 * 1024 * 1024 }
-
-            let(:source_region) { 'ap-southeast-1' }
-
-            let(:source_bucket) { 'source-bucket' }
-            let(:target_bucket) { 'target-bucket' }
-
-            let(:key) { 'my/source-key' }
-
-            let(:source_client) { S3::Client.new(stub_responses: true) }
-            let(:target_client) { S3::Client.new(stub_responses: true) }
-
-            let(:source_object) do
-              S3::Object.new(
-                bucket_name: source_bucket,
-                key: key,
-                client: source_client
-              )
-            end
-
-            let(:target_object) do
-              S3::Object.new(
-                bucket_name: target_bucket,
-                key: key,
-                client: target_client
-              )
-            end
-
-            let(:head_response) do
-              Types::HeadObjectOutput.new(content_length: content_length)
-            end
+            let(:source_region)  { 'ap-southeast-1' }
+            let(:source_bucket)  { 'source-bucket' }
+            let(:target_bucket)  { 'target-bucket' }
+            let(:key)            { 'my/source-key' }
+            let(:source_client)  { S3::Client.new(stub_responses: true) }
+            let(:target_client)  { S3::Client.new(stub_responses: true) }
+            let(:source_object)  { S3::Object.new(bucket_name: source_bucket, key: key, client: source_client) }
+            let(:target_object)  { S3::Object.new(bucket_name: target_bucket, key: key, client: target_client) }
+            let(:head_response)  { Types::HeadObjectOutput.new(content_length: content_length) }
 
             before do
-              allow(source_client).to receive(:head_object)
-                .and_return(head_response)
+              source_client.stub_responses(
+                :head_object,
+                client.stub_data(:head_object, content_length: 10 * 1024 * 1024) # 10MB
+              )
             end
 
             context 'when the source is an S3::Object' do
               it 'uses the content-length of the source object and region' do
-                expect(source_client).to receive(:head_object)
-                  .with({bucket: source_bucket, key: key})
-                expect(target_client).not_to receive(:head_object)
-
                 target_object.copy_from(source_object, multipart_copy: true)
+
+                expect(get_requests(target_client, :head_object).size).to be_zero
+                expect(get_requests(source_client, :head_object).size).to eq(1)
+                expect(get_request_params(source_client, :head_object)).to(eq({ bucket: source_bucket, key: key }))
               end
             end
 
@@ -461,31 +360,25 @@ module Aws
               let(:source_hash) { { bucket: source_bucket, key: key } }
 
               it 'uses :copy_source_client to query content_length' do
-                expect(source_client).to receive(:head_object)
-                  .with({bucket: source_bucket, key: key})
-                expect(target_client).not_to receive(:head_object)
+                target_object.copy_from(source_hash,
+                                        multipart_copy: true, copy_source_client: source_client)
 
-                target_object.copy_from(
-                  source_hash,
-                  multipart_copy: true, copy_source_client: source_client
-                )
+                expect(get_requests(target_client, :head_object).size).to be_zero
+                expect(get_requests(source_client, :head_object).size).to eq(1)
+                expect(get_request_params(source_client, :head_object)).to(eq({ bucket: source_bucket, key: key }))
               end
 
               it 'uses :copy_source_region to construct a client' do
                 allow(S3::Client).to receive(:new).and_call_original
-
-                expect(S3::Client).to receive(:new).with(
-                  hash_including(region: source_region)
-                ).and_return(source_client)
-                expect(source_client).to receive(:head_object)
-                  .with({bucket: source_bucket, key: key})
-                expect(target_client).not_to receive(:head_object)
-
-                target_object.copy_from(
-                  source_hash,
-                  multipart_copy: true,
-                  copy_source_region: source_region
+                expect(S3::Client).to(
+                  receive(:new).with(hash_including(region: source_region)).and_return(source_client)
                 )
+
+                target_object.copy_from(source_hash, multipart_copy: true, copy_source_region: source_region)
+
+                expect(get_requests(target_client, :head_object).size).to be_zero
+                expect(get_requests(source_client, :head_object).size).to eq(1)
+                expect(get_request_params(source_client, :head_object)).to(eq({ bucket: source_bucket, key: key }))
               end
             end
 
@@ -493,32 +386,24 @@ module Aws
               let(:source_string) { "#{source_bucket}/#{key}" }
 
               it 'uses :copy_source_client to query content_length' do
-                expect(source_client).to receive(:head_object)
-                  .with({bucket: source_bucket, key: key})
-                expect(target_client).not_to receive(:head_object)
+                target_object.copy_from(source_string, multipart_copy: true, copy_source_client: source_client)
 
-                target_object.copy_from(
-                  source_string,
-                  multipart_copy: true,
-                  copy_source_client: source_client
-                )
+                expect(get_requests(target_client, :head_object).size).to be_zero
+                expect(get_requests(source_client, :head_object).size).to eq(1)
+                expect(get_request_params(source_client, :head_object)).to(eq({ bucket: source_bucket, key: key }))
               end
 
               it 'uses :copy_source_region to construct a client' do
                 allow(S3::Client).to receive(:new).and_call_original
-
-                expect(S3::Client).to receive(:new).with(
-                  hash_including(region: source_region)
-                ).and_return(source_client)
-                expect(source_client).to receive(:head_object)
-                  .with({bucket: source_bucket, key: key})
-                expect(target_client).not_to receive(:head_object)
-
-                target_object.copy_from(
-                  source_string,
-                  multipart_copy: true,
-                  copy_source_region: source_region
+                expect(S3::Client).to(
+                  receive(:new).with(hash_including(region: source_region)).and_return(source_client)
                 )
+
+                target_object.copy_from(source_string, multipart_copy: true, copy_source_region: source_region)
+
+                expect(get_requests(target_client, :head_object).size).to be_zero
+                expect(get_requests(source_client, :head_object).size).to eq(1)
+                expect(get_request_params(source_client, :head_object)).to(eq({ bucket: source_bucket, key: key }))
               end
             end
           end
@@ -532,114 +417,84 @@ module Aws
 
         context 'with multipart_copy: true and checksum_algorithm specified' do
           before(:each) do
-            size = 300 * 1024 * 1024 # 300MB
-            allow(client).to receive(:head_object).with({
-              bucket: 'source-bucket',
-              key: 'source key'
-            }).and_return(Types::HeadObjectOutput.new(content_length: size))
+            client.stub_responses(
+              :head_object,
+              client.stub_data(:head_object, content_length: 300 * 1024 * 1024) # 300MB
+            )
           end
 
           it 'includes the checksum algorithm when one is specified' do
-            expect(client).to receive(:create_multipart_upload)
-              .with({
-                      bucket: 'bucket',
-                      key: 'unescaped/key path',
-                      checksum_algorithm: 'SHA256'
-              })
-              .and_return(
-                client.stub_data(:create_multipart_upload, upload_id: 'id')
-              )
+            object.copy_from('source-bucket/source%20key', multipart_copy: true, checksum_algorithm: 'SHA256')
 
-            (1..6).each do |n|
+            expect(get_requests(client, :create_multipart_upload).size).to eq(1)
+            expect(get_request_params(client, :create_multipart_upload)).to(
+              include({ bucket: 'bucket', key: 'unescaped/key path', checksum_algorithm: 'SHA256' })
+            )
+
+            expect((requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(6)
+            requests.sort_by { |req| req[:part_number] }.each.with_index do |part, i|
+              n = i + 1
               range = "bytes=#{(n - 1) * 52_428_800}-#{n * 52_428_800 - 1}"
 
-              expect(client).to receive(:upload_part_copy).with({
-                bucket: 'bucket',
-                key: 'unescaped/key path',
-                part_number: n,
-                copy_source: 'source-bucket/source%20key',
-                copy_source_range: range,
-                upload_id: 'id'
-              }).and_return(
-                client.stub_data(
-                  :upload_part_copy,
-                  copy_part_result: { etag: "etag#{n}", checksum_sha256: "sha256value#{n}" }
-                )
-              )
+              expect(part).to eq({ bucket: 'bucket',
+                                   key: 'unescaped/key path',
+                                   part_number: n,
+                                   copy_source: 'source-bucket/source%20key',
+                                   copy_source_range: range,
+                                   upload_id: 'MultipartUploadId' })
             end
 
-            expect(client).to receive(:complete_multipart_upload).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              upload_id: 'id',
-              multipart_upload: {
-                parts: (1..6).map { |n| { etag: "etag#{n}", checksum_sha256: "sha256value#{n}", part_number: n } }
-              }
-            })
-            object.copy_from('source-bucket/source%20key', multipart_copy: true, checksum_algorithm: 'SHA256')
+            expect(get_requests(client, :complete_multipart_upload).size).to eq(1)
+            expect(get_request_params(client, :complete_multipart_upload)).to(
+              include({ bucket: 'bucket',
+                        key: 'unescaped/key path',
+                        upload_id: 'MultipartUploadId',
+                        multipart_upload: { parts: (1..6).map { |n| a_hash_including({ part_number: n }) } } })
+            )
           end
         end
 
         context 'with multipart_copy: true and use_source_parts: true' do
           before(:each) do
-            size = 300 * 1024 * 1024 # 300MB
-            part_size = size / 3 # 3 100MB parts
-            allow(client).to receive(:head_object).with({
-              bucket: 'source-bucket',
-              key: 'source key'
-            }).and_return(Types::HeadObjectOutput.new(content_length: size))
-            allow(client).to receive(:head_object).with({
-              bucket: 'source-bucket',
-              key: 'source key',
-              part_number: 1
-            }).and_return(Types::HeadObjectOutput.new(content_length: part_size, parts_count: 3))
+            size      = 300 * 1024 * 1024 # 300MB
+            part_size = size / 3          # 3 100MB parts
 
-            (1..3).each do |n|
-              allow(client).to receive(:head_object).with({
-                bucket: 'source-bucket',
-                key: 'source key',
-                part_number: n
-              }).and_return(Types::HeadObjectOutput.new(content_length: part_size, parts_count: 3))
-            end
+            client.stub_responses(:head_object,
+                                  [client.stub_data(:head_object, content_length: size),
+                                   client.stub_data(:head_object, content_length: part_size, parts_count: 3),
+                                   client.stub_data(:head_object, content_length: part_size, parts_count: 3),
+                                   client.stub_data(:head_object, content_length: part_size, parts_count: 3),
+                                   client.stub_data(:head_object, content_length: part_size, parts_count: 3)])
           end
 
           it 'uses part sizes specified on the source' do
-            expect(client).to receive(:create_multipart_upload)
-              .with({
-                      bucket: 'bucket',
-                      key: 'unescaped/key path'
-              })
-              .and_return(
-                client.stub_data(:create_multipart_upload, upload_id: 'id')
-              )
+            object.copy_from('source-bucket/source%20key', multipart_copy: true, use_source_parts: true)
 
-            (1..3).each do |n|
+            expect(get_requests(client, :create_multipart_upload).size).to eq(1)
+            expect(get_request_params(client, :create_multipart_upload)).to(
+              include({ bucket: 'bucket', key: 'unescaped/key path' })
+            )
+
+            expect((requests = get_requests(client, :upload_part_copy).map { |req| req[:params] }).size).to eq(3)
+            requests.sort_by { |req| req[:part_number] }.each.with_index do |part, i|
+              n = i + 1
               range = "bytes=#{(n - 1) * 104_857_600}-#{n * 104_857_600 - 1}"
 
-              allow(client).to receive(:upload_part_copy).with({
-                bucket: 'bucket',
-                key: 'unescaped/key path',
-                part_number: n,
-                copy_source: 'source-bucket/source%20key',
-                copy_source_range: range,
-                upload_id: 'id'
-              }).and_return(
-                client.stub_data(
-                  :upload_part_copy,
-                  copy_part_result: { etag: "etag#{n}" }
-                )
-              )
+              expect(part).to eq({ bucket: 'bucket',
+                                   key: 'unescaped/key path',
+                                   part_number: n,
+                                   copy_source: 'source-bucket/source%20key',
+                                   copy_source_range: range,
+                                   upload_id: 'MultipartUploadId' })
             end
 
-            expect(client).to receive(:complete_multipart_upload).with({
-              bucket: 'bucket',
-              key: 'unescaped/key path',
-              upload_id: 'id',
-              multipart_upload: {
-                parts: (1..3).map { |n| { etag: "etag#{n}", part_number: n } }
-              }
-            })
-            object.copy_from('source-bucket/source%20key', multipart_copy: true, use_source_parts: true)
+            expect(get_requests(client, :complete_multipart_upload).size).to eq(1)
+            expect(get_request_params(client, :complete_multipart_upload)).to(
+              include({ bucket: 'bucket',
+                        key: 'unescaped/key path',
+                        upload_id: 'MultipartUploadId',
+                        multipart_upload: { parts: (1..3).map { |n| a_hash_including({ part_number: n }) } } })
+            )
           end
         end
       end
