@@ -475,7 +475,8 @@ module Aws
                                     no_regional_blackout_flag: ("FOLLOW" | "IGNORE")?,
                                     web_delivery_allowed_flag: ("FOLLOW" | "IGNORE")?
                                   }?
-                                }?
+                                }?,
+                                scte_35_segmentation_scope: ("ALL_OUTPUT_GROUPS" | "SCTE35_ENABLED_OUTPUT_GROUPS")?
                               }?,
                               blackout_slate: {
                                 blackout_slate_image: {
@@ -2328,7 +2329,8 @@ module Aws
                                     no_regional_blackout_flag: ("FOLLOW" | "IGNORE")?,
                                     web_delivery_allowed_flag: ("FOLLOW" | "IGNORE")?
                                   }?
-                                }?
+                                }?,
+                                scte_35_segmentation_scope: ("ALL_OUTPUT_GROUPS" | "SCTE35_ENABLED_OUTPUT_GROUPS")?
                               }?,
                               blackout_slate: {
                                 blackout_slate_image: {

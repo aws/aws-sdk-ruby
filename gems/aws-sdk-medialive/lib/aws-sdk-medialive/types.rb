@@ -814,10 +814,25 @@ module Aws::MediaLive
     #   server for possible update.
     #   @return [Types::AvailSettings]
     #
+    # @!attribute [rw] scte_35_segmentation_scope
+    #   Configures whether SCTE 35 passthrough triggers segment breaks in
+    #   all output groups that use segmented outputs. Insertion of a SCTE 35
+    #   message typically results in a segment break, in addition to the
+    #   regular cadence of breaks. The segment breaks appear in video
+    #   outputs, audio outputs, and captions outputs (if any).
+    #   ALL\_OUTPUT\_GROUPS: Default. Insert the segment break in in all
+    #   output groups that have segmented outputs. This is the legacy
+    #   behavior. SCTE35\_ENABLED\_OUTPUT\_GROUPS: Insert the segment break
+    #   only in output groups that have SCTE 35 passthrough enabled. This is
+    #   the recommended value, because it reduces unnecessary segment
+    #   breaks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailConfiguration AWS API Documentation
     #
     class AvailConfiguration < Struct.new(
-      :avail_settings)
+      :avail_settings,
+      :scte_35_segmentation_scope)
       SENSITIVE = []
       include Aws::Structure
     end

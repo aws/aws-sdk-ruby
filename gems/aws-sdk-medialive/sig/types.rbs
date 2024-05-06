@@ -215,6 +215,7 @@ module Aws::MediaLive
 
     class AvailConfiguration
       attr_accessor avail_settings: Types::AvailSettings
+      attr_accessor scte_35_segmentation_scope: ("ALL_OUTPUT_GROUPS" | "SCTE35_ENABLED_OUTPUT_GROUPS")
       SENSITIVE: []
     end
 

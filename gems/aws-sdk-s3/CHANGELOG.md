@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.149.1 (2024-05-06)
+------------------
+
 * Issue - Fix bug where destination bucket default encryption was inadvertently overridden by source object encryption.
 
 1.149.0 (2024-04-30)

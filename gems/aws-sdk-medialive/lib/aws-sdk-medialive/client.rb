@@ -1102,6 +1102,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.ad_avail_offset #=> Integer
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
+    #   resp.channel.encoder_settings.avail_configuration.scte_35_segmentation_scope #=> String, one of "ALL_OUTPUT_GROUPS", "SCTE35_ENABLED_OUTPUT_GROUPS"
     #   resp.channel.encoder_settings.blackout_slate.blackout_slate_image.password_param #=> String
     #   resp.channel.encoder_settings.blackout_slate.blackout_slate_image.uri #=> String
     #   resp.channel.encoder_settings.blackout_slate.blackout_slate_image.username #=> String
@@ -2225,6 +2226,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.ad_avail_offset #=> Integer
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
+    #   resp.encoder_settings.avail_configuration.scte_35_segmentation_scope #=> String, one of "ALL_OUTPUT_GROUPS", "SCTE35_ENABLED_OUTPUT_GROUPS"
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.password_param #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.uri #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.username #=> String
@@ -3240,6 +3242,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.ad_avail_offset #=> Integer
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
+    #   resp.encoder_settings.avail_configuration.scte_35_segmentation_scope #=> String, one of "ALL_OUTPUT_GROUPS", "SCTE35_ENABLED_OUTPUT_GROUPS"
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.password_param #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.uri #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.username #=> String
@@ -5392,6 +5395,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.ad_avail_offset #=> Integer
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
+    #   resp.encoder_settings.avail_configuration.scte_35_segmentation_scope #=> String, one of "ALL_OUTPUT_GROUPS", "SCTE35_ENABLED_OUTPUT_GROUPS"
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.password_param #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.uri #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.username #=> String
@@ -6219,6 +6223,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.ad_avail_offset #=> Integer
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
+    #   resp.encoder_settings.avail_configuration.scte_35_segmentation_scope #=> String, one of "ALL_OUTPUT_GROUPS", "SCTE35_ENABLED_OUTPUT_GROUPS"
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.password_param #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.uri #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.username #=> String
@@ -7074,6 +7079,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.ad_avail_offset #=> Integer
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
+    #   resp.channel.encoder_settings.avail_configuration.scte_35_segmentation_scope #=> String, one of "ALL_OUTPUT_GROUPS", "SCTE35_ENABLED_OUTPUT_GROUPS"
     #   resp.channel.encoder_settings.blackout_slate.blackout_slate_image.password_param #=> String
     #   resp.channel.encoder_settings.blackout_slate.blackout_slate_image.uri #=> String
     #   resp.channel.encoder_settings.blackout_slate.blackout_slate_image.username #=> String
@@ -7809,6 +7815,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.ad_avail_offset #=> Integer
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.channel.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
+    #   resp.channel.encoder_settings.avail_configuration.scte_35_segmentation_scope #=> String, one of "ALL_OUTPUT_GROUPS", "SCTE35_ENABLED_OUTPUT_GROUPS"
     #   resp.channel.encoder_settings.blackout_slate.blackout_slate_image.password_param #=> String
     #   resp.channel.encoder_settings.blackout_slate.blackout_slate_image.uri #=> String
     #   resp.channel.encoder_settings.blackout_slate.blackout_slate_image.username #=> String
@@ -9012,6 +9019,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.ad_avail_offset #=> Integer
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.no_regional_blackout_flag #=> String, one of "FOLLOW", "IGNORE"
     #   resp.encoder_settings.avail_configuration.avail_settings.scte_35_time_signal_apos.web_delivery_allowed_flag #=> String, one of "FOLLOW", "IGNORE"
+    #   resp.encoder_settings.avail_configuration.scte_35_segmentation_scope #=> String, one of "ALL_OUTPUT_GROUPS", "SCTE35_ENABLED_OUTPUT_GROUPS"
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.password_param #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.uri #=> String
     #   resp.encoder_settings.blackout_slate.blackout_slate_image.username #=> String
@@ -11151,7 +11159,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
