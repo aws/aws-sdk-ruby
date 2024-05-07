@@ -187,8 +187,8 @@ module Aws::ResilienceHub
       attr_accessor actual_value: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::DisruptionCompliance]
       attr_accessor app_id: ::String
       attr_accessor app_version: ::String
-      attr_accessor diff_type: ("NotEqual")
-      attr_accessor drift_type: ("ApplicationCompliance")
+      attr_accessor diff_type: ("NotEqual" | "Added" | "Removed")
+      attr_accessor drift_type: ("ApplicationCompliance" | "AppComponentResiliencyComplianceStatus")
       attr_accessor entity_id: ::String
       attr_accessor entity_type: ::String
       attr_accessor expected_reference_id: ::String
@@ -620,6 +620,19 @@ module Aws::ResilienceHub
       SENSITIVE: []
     end
 
+    class ListAppAssessmentResourceDriftsRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppAssessmentResourceDriftsResponse
+      attr_accessor next_token: ::String
+      attr_accessor resource_drifts: ::Array[Types::ResourceDrift]
+      SENSITIVE: []
+    end
+
     class ListAppAssessmentsRequest
       attr_accessor app_arn: ::String
       attr_accessor assessment_name: ::String
@@ -1001,6 +1014,15 @@ module Aws::ResilienceHub
       SENSITIVE: []
     end
 
+    class ResourceDrift
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor diff_type: ("NotEqual" | "Added" | "Removed")
+      attr_accessor reference_id: ::String
+      attr_accessor resource_identifier: Types::ResourceIdentifier
+      SENSITIVE: []
+    end
+
     class ResourceError
       attr_accessor logical_resource_id: ::String
       attr_accessor physical_resource_id: ::String
@@ -1011,6 +1033,12 @@ module Aws::ResilienceHub
     class ResourceErrorsDetails
       attr_accessor has_more_errors: bool
       attr_accessor resource_errors: ::Array[Types::ResourceError]
+      SENSITIVE: []
+    end
+
+    class ResourceIdentifier
+      attr_accessor logical_resource_id: Types::LogicalResourceId
+      attr_accessor resource_type: ::String
       SENSITIVE: []
     end
 

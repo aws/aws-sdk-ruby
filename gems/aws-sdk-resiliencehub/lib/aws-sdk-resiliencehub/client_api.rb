@@ -152,6 +152,8 @@ module Aws::ResilienceHub
     ListAlarmRecommendationsResponse = Shapes::StructureShape.new(name: 'ListAlarmRecommendationsResponse')
     ListAppAssessmentComplianceDriftsRequest = Shapes::StructureShape.new(name: 'ListAppAssessmentComplianceDriftsRequest')
     ListAppAssessmentComplianceDriftsResponse = Shapes::StructureShape.new(name: 'ListAppAssessmentComplianceDriftsResponse')
+    ListAppAssessmentResourceDriftsRequest = Shapes::StructureShape.new(name: 'ListAppAssessmentResourceDriftsRequest')
+    ListAppAssessmentResourceDriftsResponse = Shapes::StructureShape.new(name: 'ListAppAssessmentResourceDriftsResponse')
     ListAppAssessmentsRequest = Shapes::StructureShape.new(name: 'ListAppAssessmentsRequest')
     ListAppAssessmentsResponse = Shapes::StructureShape.new(name: 'ListAppAssessmentsResponse')
     ListAppComponentCompliancesRequest = Shapes::StructureShape.new(name: 'ListAppComponentCompliancesRequest')
@@ -221,10 +223,13 @@ module Aws::ResilienceHub
     ResiliencyScoreType = Shapes::StringShape.new(name: 'ResiliencyScoreType')
     ResolveAppVersionResourcesRequest = Shapes::StructureShape.new(name: 'ResolveAppVersionResourcesRequest')
     ResolveAppVersionResourcesResponse = Shapes::StructureShape.new(name: 'ResolveAppVersionResourcesResponse')
+    ResourceDrift = Shapes::StructureShape.new(name: 'ResourceDrift')
+    ResourceDriftList = Shapes::ListShape.new(name: 'ResourceDriftList')
     ResourceError = Shapes::StructureShape.new(name: 'ResourceError')
     ResourceErrorList = Shapes::ListShape.new(name: 'ResourceErrorList')
     ResourceErrorsDetails = Shapes::StructureShape.new(name: 'ResourceErrorsDetails')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+    ResourceIdentifier = Shapes::StructureShape.new(name: 'ResourceIdentifier')
     ResourceImportStatusType = Shapes::StringShape.new(name: 'ResourceImportStatusType')
     ResourceImportStrategyType = Shapes::StringShape.new(name: 'ResourceImportStrategyType')
     ResourceMapping = Shapes::StructureShape.new(name: 'ResourceMapping')
@@ -807,6 +812,15 @@ module Aws::ResilienceHub
     ListAppAssessmentComplianceDriftsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAppAssessmentComplianceDriftsResponse.struct_class = Types::ListAppAssessmentComplianceDriftsResponse
 
+    ListAppAssessmentResourceDriftsRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentArn"))
+    ListAppAssessmentResourceDriftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAppAssessmentResourceDriftsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAppAssessmentResourceDriftsRequest.struct_class = Types::ListAppAssessmentResourceDriftsRequest
+
+    ListAppAssessmentResourceDriftsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAppAssessmentResourceDriftsResponse.add_member(:resource_drifts, Shapes::ShapeRef.new(shape: ResourceDriftList, required: true, location_name: "resourceDrifts"))
+    ListAppAssessmentResourceDriftsResponse.struct_class = Types::ListAppAssessmentResourceDriftsResponse
+
     ListAppAssessmentsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "appArn"))
     ListAppAssessmentsRequest.add_member(:assessment_name, Shapes::ShapeRef.new(shape: EntityName, location: "querystring", location_name: "assessmentName"))
     ListAppAssessmentsRequest.add_member(:assessment_status, Shapes::ShapeRef.new(shape: AssessmentStatusList, location: "querystring", location_name: "assessmentStatus"))
@@ -907,7 +921,7 @@ module Aws::ResilienceHub
     ListAppsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAppsResponse.struct_class = Types::ListAppsResponse
 
-    ListRecommendationTemplatesRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "assessmentArn"))
+    ListRecommendationTemplatesRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "assessmentArn"))
     ListRecommendationTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListRecommendationTemplatesRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location: "querystring", location_name: "name"))
     ListRecommendationTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1107,6 +1121,15 @@ module Aws::ResilienceHub
     ResolveAppVersionResourcesResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourceResolutionStatusType, required: true, location_name: "status"))
     ResolveAppVersionResourcesResponse.struct_class = Types::ResolveAppVersionResourcesResponse
 
+    ResourceDrift.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "appArn"))
+    ResourceDrift.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, location_name: "appVersion"))
+    ResourceDrift.add_member(:diff_type, Shapes::ShapeRef.new(shape: DifferenceType, location_name: "diffType"))
+    ResourceDrift.add_member(:reference_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "referenceId"))
+    ResourceDrift.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
+    ResourceDrift.struct_class = Types::ResourceDrift
+
+    ResourceDriftList.member = Shapes::ShapeRef.new(shape: ResourceDrift)
+
     ResourceError.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: String255, location_name: "logicalResourceId"))
     ResourceError.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: String255, location_name: "physicalResourceId"))
     ResourceError.add_member(:reason, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "reason"))
@@ -1117,6 +1140,10 @@ module Aws::ResilienceHub
     ResourceErrorsDetails.add_member(:has_more_errors, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "hasMoreErrors"))
     ResourceErrorsDetails.add_member(:resource_errors, Shapes::ShapeRef.new(shape: ResourceErrorList, location_name: "resourceErrors"))
     ResourceErrorsDetails.struct_class = Types::ResourceErrorsDetails
+
+    ResourceIdentifier.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "logicalResourceId"))
+    ResourceIdentifier.add_member(:resource_type, Shapes::ShapeRef.new(shape: String255, location_name: "resourceType"))
+    ResourceIdentifier.struct_class = Types::ResourceIdentifier
 
     ResourceMapping.add_member(:app_registry_app_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "appRegistryAppName"))
     ResourceMapping.add_member(:eks_source_name, Shapes::ShapeRef.new(shape: String255, location_name: "eksSourceName"))
@@ -1317,6 +1344,7 @@ module Aws::ResilienceHub
         "endpointPrefix" => "resiliencehub",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Resilience Hub",
         "serviceId" => "resiliencehub",
         "signatureVersion" => "v4",
@@ -1680,6 +1708,24 @@ module Aws::ResilienceHub
         o.http_request_uri = "/list-app-assessment-compliance-drifts"
         o.input = Shapes::ShapeRef.new(shape: ListAppAssessmentComplianceDriftsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAppAssessmentComplianceDriftsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_app_assessment_resource_drifts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAppAssessmentResourceDrifts"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-app-assessment-resource-drifts"
+        o.input = Shapes::ShapeRef.new(shape: ListAppAssessmentResourceDriftsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAppAssessmentResourceDriftsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

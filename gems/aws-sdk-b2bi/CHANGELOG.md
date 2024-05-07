@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2024-05-07)
+------------------
+
+* Feature - Documentation update to clarify the MappingTemplate definition.
+
 1.7.0 (2024-04-25)
 ------------------
 

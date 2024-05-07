@@ -96,6 +96,12 @@ module Aws::Budgets
             Aws::Budgets::Endpoints::DescribeSubscribersForNotification.build(context)
           when :execute_budget_action
             Aws::Budgets::Endpoints::ExecuteBudgetAction.build(context)
+          when :list_tags_for_resource
+            Aws::Budgets::Endpoints::ListTagsForResource.build(context)
+          when :tag_resource
+            Aws::Budgets::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::Budgets::Endpoints::UntagResource.build(context)
           when :update_budget
             Aws::Budgets::Endpoints::UpdateBudget.build(context)
           when :update_budget_action

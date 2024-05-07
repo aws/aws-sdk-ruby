@@ -110,6 +110,8 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::ListAlarmRecommendations.build(context)
           when :list_app_assessment_compliance_drifts
             Aws::ResilienceHub::Endpoints::ListAppAssessmentComplianceDrifts.build(context)
+          when :list_app_assessment_resource_drifts
+            Aws::ResilienceHub::Endpoints::ListAppAssessmentResourceDrifts.build(context)
           when :list_app_assessments
             Aws::ResilienceHub::Endpoints::ListAppAssessments.build(context)
           when :list_app_component_compliances

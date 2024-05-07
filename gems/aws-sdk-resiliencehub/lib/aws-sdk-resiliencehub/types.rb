@@ -3046,6 +3046,58 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] assessment_arn
+    #   Amazon Resource Name (ARN) of the assessment. The format for this
+    #   ARN is:
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
+    #   For more information about ARNs, see [ Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Indicates the maximum number of drift results to include in the
+    #   response. If more results exist than the specified `MaxResults`
+    #   value, a token is included in the response so that the remaining
+    #   results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Null, or the token from a previous call to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListAppAssessmentResourceDriftsRequest AWS API Documentation
+    #
+    class ListAppAssessmentResourceDriftsRequest < Struct.new(
+      :assessment_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Null, or the token from a previous call to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_drifts
+    #   Indicates all the resource drifts detected for an assessed entity.
+    #   @return [Array<Types::ResourceDrift>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListAppAssessmentResourceDriftsResponse AWS API Documentation
+    #
+    class ListAppAssessmentResourceDriftsResponse < Struct.new(
+      :next_token,
+      :resource_drifts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] app_arn
     #   Amazon Resource Name (ARN) of the Resilience Hub application. The
     #   format for this ARN is:
@@ -4129,7 +4181,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource.
+    #   Type of resource.
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -5036,6 +5088,49 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
+    # Indicates the resources that have drifted in the current application
+    # version.
+    #
+    # @!attribute [rw] app_arn
+    #   Amazon Resource Name (ARN) of the application whose resources have
+    #   drifted. The format for this ARN is:
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
+    #   For more information about ARNs, see [ Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] app_version
+    #   Version of the application whose resources have drifted.
+    #   @return [String]
+    #
+    # @!attribute [rw] diff_type
+    #   Indicates if the resource was added or removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_id
+    #   Reference identifier of the resource drift.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Identifier of the drifted resource.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ResourceDrift AWS API Documentation
+    #
+    class ResourceDrift < Struct.new(
+      :app_arn,
+      :app_version,
+      :diff_type,
+      :reference_id,
+      :resource_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines application resource errors.
     #
     # @!attribute [rw] logical_resource_id
@@ -5080,15 +5175,35 @@ module Aws::ResilienceHub
       include Aws::Structure
     end
 
+    # Defines a resource identifier for the drifted resource.
+    #
+    # @!attribute [rw] logical_resource_id
+    #   Logical identifier of the drifted resource.
+    #   @return [Types::LogicalResourceId]
+    #
+    # @!attribute [rw] resource_type
+    #   Type of the drifted resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ResourceIdentifier AWS API Documentation
+    #
+    class ResourceIdentifier < Struct.new(
+      :logical_resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a resource mapping.
     #
     # @!attribute [rw] app_registry_app_name
-    #   The name of the application this resource is mapped to.
+    #   Name of the application this resource is mapped to when the
+    #   `mappingType` is `AppRegistryApp`.
     #   @return [String]
     #
     # @!attribute [rw] eks_source_name
     #   Name of the Amazon Elastic Kubernetes Service cluster and namespace
-    #   this resource belongs to.
+    #   that this resource is mapped to when the `mappingType` is `EKS`.
     #
     #   <note markdown="1"> This parameter accepts values in "eks-cluster/namespace" format.
     #
@@ -5096,32 +5211,12 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] logical_stack_name
-    #   The name of the CloudFormation stack this resource is mapped to.
+    #   Name of the CloudFormation stack this resource is mapped to when the
+    #   `mappingType` is `CfnStack`.
     #   @return [String]
     #
     # @!attribute [rw] mapping_type
     #   Specifies the type of resource mapping.
-    #
-    #   AppRegistryApp
-    #
-    #   : The resource is mapped to another application. The name of the
-    #     application is contained in the `appRegistryAppName` property.
-    #
-    #   CfnStack
-    #
-    #   : The resource is mapped to a CloudFormation stack. The name of the
-    #     CloudFormation stack is contained in the `logicalStackName`
-    #     property.
-    #
-    #   Resource
-    #
-    #   : The resource is mapped to another resource. The name of the
-    #     resource is contained in the `resourceName` property.
-    #
-    #   ResourceGroup
-    #
-    #   : The resource is mapped to Resource Groups. The name of the
-    #     resource group is contained in the `resourceGroupName` property.
     #   @return [String]
     #
     # @!attribute [rw] physical_resource_id
@@ -5129,15 +5224,18 @@ module Aws::ResilienceHub
     #   @return [Types::PhysicalResourceId]
     #
     # @!attribute [rw] resource_group_name
-    #   Name of the resource group that the resource is mapped to.
+    #   Name of the Resource Groups that this resource is mapped to when the
+    #   `mappingType` is `ResourceGroup`.
     #   @return [String]
     #
     # @!attribute [rw] resource_name
-    #   Name of the resource that the resource is mapped to.
+    #   Name of the resource that this resource is mapped to when the
+    #   `mappingType` is `Resource`.
     #   @return [String]
     #
     # @!attribute [rw] terraform_source_name
-    #   The short name of the Terraform source.
+    #   Name of the Terraform source that this resource is mapped to when
+    #   the `mappingType` is `Terraform`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ResourceMapping AWS API Documentation
@@ -5207,34 +5305,36 @@ module Aws::ResilienceHub
     # @!attribute [rw] excluded_count
     #   Number of recommendations that were excluded from the assessment.
     #
-    #   For example, if the `Excluded count` for Resilience Hub recommended
-    #   Amazon CloudWatch alarms is 7, it indicates that 7 Amazon CloudWatch
-    #   alarms are excluded from the assessment.
+    #   For example, if the `excludedCount` for Alarms coverage scoring
+    #   component is 7, it indicates that 7 Amazon CloudWatch alarms are
+    #   excluded from the assessment.
     #   @return [Integer]
     #
     # @!attribute [rw] outstanding_count
-    #   Number of issues that must be resolved to obtain the maximum
-    #   possible score for the scoring component. For SOPs, alarms, and FIS
-    #   experiments, these are the number of recommendations that must be
-    #   implemented. For compliance, it is the number of Application
-    #   Components that has breached the resiliency policy.
+    #   Number of recommendations that must be implemented to obtain the
+    #   maximum possible score for the scoring component. For SOPs, alarms,
+    #   and tests, these are the number of recommendations that must be
+    #   implemented. For compliance, these are the number of Application
+    #   Components that have breached the resiliency policy.
     #
-    #   For example, if the `Outstanding count` for Resilience Hub
-    #   recommended Amazon CloudWatch alarms is 5, it indicates that 5
-    #   Amazon CloudWatch alarms must be fixed to achieve the maximum
-    #   possible score.
+    #   For example, if the `outstandingCount` for Alarms coverage scoring
+    #   component is 5, it indicates that 5 Amazon CloudWatch alarms need to
+    #   be implemented to achieve the maximum possible score.
     #   @return [Integer]
     #
     # @!attribute [rw] possible_score
     #   Maximum possible score that can be obtained for the scoring
-    #   component. If the `Possible score` is 20 points, it indicates the
-    #   maximum possible score you can achieve for your application when you
-    #   run a new assessment after implementing all the Resilience Hub
-    #   recommendations.
+    #   component.
+    #
+    #   For example, if the `possibleScore` is 20 points, it indicates the
+    #   maximum possible score you can achieve for the scoring component
+    #   when you run a new assessment after implementing all the Resilience
+    #   Hub recommendations.
     #   @return [Float]
     #
     # @!attribute [rw] score
-    #   Resiliency score of your application.
+    #   Resiliency score points given for the scoring component. The score
+    #   is always less than or equal to the `possibleScore`.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ScoringComponentResiliencyScore AWS API Documentation

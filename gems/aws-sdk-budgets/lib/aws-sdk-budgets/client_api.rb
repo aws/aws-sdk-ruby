@@ -26,6 +26,7 @@ module Aws::Budgets
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     Actions = Shapes::ListShape.new(name: 'Actions')
     AdjustmentPeriod = Shapes::IntegerShape.new(name: 'AdjustmentPeriod')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ApprovalModel = Shapes::StringShape.new(name: 'ApprovalModel')
     AutoAdjustData = Shapes::StructureShape.new(name: 'AutoAdjustData')
     AutoAdjustType = Shapes::StringShape.new(name: 'AutoAdjustType')
@@ -99,6 +100,8 @@ module Aws::Budgets
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxResultsBudgetNotifications = Shapes::IntegerShape.new(name: 'MaxResultsBudgetNotifications')
     MaxResultsDescribeBudgets = Shapes::IntegerShape.new(name: 'MaxResultsDescribeBudgets')
@@ -117,16 +120,24 @@ module Aws::Budgets
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     Region = Shapes::StringShape.new(name: 'Region')
     ResourceLockedException = Shapes::StructureShape.new(name: 'ResourceLockedException')
+    ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
+    ResourceTagKey = Shapes::StringShape.new(name: 'ResourceTagKey')
+    ResourceTagKeyList = Shapes::ListShape.new(name: 'ResourceTagKeyList')
+    ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
+    ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
     Role = Shapes::StringShape.new(name: 'Role')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Roles = Shapes::ListShape.new(name: 'Roles')
     ScpActionDefinition = Shapes::StructureShape.new(name: 'ScpActionDefinition')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Spend = Shapes::StructureShape.new(name: 'Spend')
     SsmActionDefinition = Shapes::StructureShape.new(name: 'SsmActionDefinition')
     Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
     SubscriberAddress = Shapes::StringShape.new(name: 'SubscriberAddress')
     Subscribers = Shapes::ListShape.new(name: 'Subscribers')
     SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
     TargetIds = Shapes::ListShape.new(name: 'TargetIds')
     ThresholdType = Shapes::StringShape.new(name: 'ThresholdType')
@@ -134,6 +145,8 @@ module Aws::Budgets
     TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     UnitValue = Shapes::StringShape.new(name: 'UnitValue')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateBudgetActionRequest = Shapes::StructureShape.new(name: 'UpdateBudgetActionRequest')
     UpdateBudgetActionResponse = Shapes::StructureShape.new(name: 'UpdateBudgetActionResponse')
     UpdateBudgetRequest = Shapes::StructureShape.new(name: 'UpdateBudgetRequest')
@@ -249,6 +262,7 @@ module Aws::Budgets
     CreateBudgetActionRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateBudgetActionRequest.add_member(:approval_model, Shapes::ShapeRef.new(shape: ApprovalModel, required: true, location_name: "ApprovalModel"))
     CreateBudgetActionRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, required: true, location_name: "Subscribers"))
+    CreateBudgetActionRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
     CreateBudgetActionRequest.struct_class = Types::CreateBudgetActionRequest
 
     CreateBudgetActionResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
@@ -259,6 +273,7 @@ module Aws::Budgets
     CreateBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     CreateBudgetRequest.add_member(:budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "Budget"))
     CreateBudgetRequest.add_member(:notifications_with_subscribers, Shapes::ShapeRef.new(shape: NotificationWithSubscribersList, location_name: "NotificationsWithSubscribers"))
+    CreateBudgetRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
     CreateBudgetRequest.struct_class = Types::CreateBudgetRequest
 
     CreateBudgetResponse.struct_class = Types::CreateBudgetResponse
@@ -459,6 +474,12 @@ module Aws::Budgets
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -483,11 +504,22 @@ module Aws::Budgets
     ResourceLockedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     ResourceLockedException.struct_class = Types::ResourceLockedException
 
+    ResourceTag.add_member(:key, Shapes::ShapeRef.new(shape: ResourceTagKey, required: true, location_name: "Key"))
+    ResourceTag.add_member(:value, Shapes::ShapeRef.new(shape: ResourceTagValue, required: true, location_name: "Value"))
+    ResourceTag.struct_class = Types::ResourceTag
+
+    ResourceTagKeyList.member = Shapes::ShapeRef.new(shape: ResourceTagKey)
+
+    ResourceTagList.member = Shapes::ShapeRef.new(shape: ResourceTag)
+
     Roles.member = Shapes::ShapeRef.new(shape: Role)
 
     ScpActionDefinition.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
     ScpActionDefinition.add_member(:target_ids, Shapes::ShapeRef.new(shape: TargetIds, required: true, location_name: "TargetIds"))
     ScpActionDefinition.struct_class = Types::ScpActionDefinition
+
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     Spend.add_member(:amount, Shapes::ShapeRef.new(shape: NumericValue, required: true, location_name: "Amount"))
     Spend.add_member(:unit, Shapes::ShapeRef.new(shape: UnitValue, required: true, location_name: "Unit"))
@@ -504,6 +536,12 @@ module Aws::Budgets
 
     Subscribers.member = Shapes::ShapeRef.new(shape: Subscriber)
 
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, required: true, location_name: "ResourceTags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TargetIds.member = Shapes::ShapeRef.new(shape: TargetId)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
@@ -512,6 +550,12 @@ module Aws::Budgets
     TimePeriod.add_member(:start, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "Start"))
     TimePeriod.add_member(:end, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "End"))
     TimePeriod.struct_class = Types::TimePeriod
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:resource_tag_keys, Shapes::ShapeRef.new(shape: ResourceTagKeyList, required: true, location_name: "ResourceTagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateBudgetActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     UpdateBudgetActionRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
@@ -566,6 +610,7 @@ module Aws::Budgets
         "endpointPrefix" => "budgets",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "AWSBudgets",
         "serviceFullName" => "AWS Budgets",
         "serviceId" => "Budgets",
@@ -586,6 +631,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRecordException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_budget_action, Seahorse::Model::Operation.new.tap do |o|
@@ -601,6 +647,7 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_notification, Seahorse::Model::Operation.new.tap do |o|
@@ -888,6 +935,46 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLockedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:update_budget, Seahorse::Model::Operation.new.tap do |o|

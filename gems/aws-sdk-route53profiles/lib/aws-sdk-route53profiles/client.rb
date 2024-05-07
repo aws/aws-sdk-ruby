@@ -414,7 +414,13 @@ module Aws::Route53Profiles
 
     # Associates a Route 53 Profiles profile with a VPC. A VPC can have only
     # one Profile associated with it, but a Profile can be associated with
-    # up to 5000 VPCs.
+    # 1000 of VPCs (and you can request a higher quota). For more
+    # information, see
+    # [https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities
     #
     # @option params [required, String] :name
     #   A name for the association.
@@ -480,10 +486,11 @@ module Aws::Route53Profiles
     #   Amazon resource number, ARN, of the DNS resource.
     #
     # @option params [String] :resource_properties
-    #   If you are adding a DNS Firewall rule group, include also a priority
-    #   in this format:
+    #   If you are adding a DNS Firewall rule group, include also a priority.
+    #   The priority indicates the processing order for the rule groups,
+    #   starting with the priority assinged the lowest value.
     #
-    #   `Key=FirewallRuleGroupPriority,Value=100`
+    #   The allowed values for priority are between 100 and 9900.
     #
     # @return [Types::AssociateResourceToProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1098,10 +1105,11 @@ module Aws::Route53Profiles
     #   ID of the resource association.
     #
     # @option params [String] :resource_properties
-    #   If you are adding a DNS Firewall rule group, include also a priority
-    #   in this format:
+    #   If you are adding a DNS Firewall rule group, include also a priority.
+    #   The priority indicates the processing order for the rule groups,
+    #   starting with the priority assinged the lowest value.
     #
-    #   `Key=FirewallRuleGroupPriority,Value=100`.
+    #   The allowed values for priority are between 100 and 9900.
     #
     # @return [Types::UpdateProfileResourceAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1151,7 +1159,7 @@ module Aws::Route53Profiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53profiles'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

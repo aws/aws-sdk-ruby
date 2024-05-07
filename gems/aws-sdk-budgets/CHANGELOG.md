@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2024-05-07)
+------------------
+
+* Feature - This release adds tag support for budgets and budget actions.
+
 1.64.0 (2024-04-25)
 ------------------
 

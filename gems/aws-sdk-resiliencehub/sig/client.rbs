@@ -516,6 +516,19 @@ module Aws
                                                  ) -> _ListAppAssessmentComplianceDriftsResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppAssessmentComplianceDriftsResponseSuccess
 
+      interface _ListAppAssessmentResourceDriftsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppAssessmentResourceDriftsResponse]
+        def next_token: () -> ::String
+        def resource_drifts: () -> ::Array[Types::ResourceDrift]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_assessment_resource_drifts-instance_method
+      def list_app_assessment_resource_drifts: (
+                                                 assessment_arn: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _ListAppAssessmentResourceDriftsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppAssessmentResourceDriftsResponseSuccess
+
       interface _ListAppAssessmentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAppAssessmentsResponse]
         def assessment_summaries: () -> ::Array[Types::AppAssessmentSummary]
@@ -659,7 +672,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_recommendation_templates-instance_method
       def list_recommendation_templates: (
-                                           assessment_arn: ::String,
+                                           ?assessment_arn: ::String,
                                            ?max_results: ::Integer,
                                            ?name: ::String,
                                            ?next_token: ::String,
@@ -667,7 +680,7 @@ module Aws
                                            ?reverse_order: bool,
                                            ?status: Array[("Pending" | "InProgress" | "Failed" | "Success")]
                                          ) -> _ListRecommendationTemplatesResponseSuccess
-                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationTemplatesResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationTemplatesResponseSuccess
 
       interface _ListResiliencyPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResiliencyPoliciesResponse]

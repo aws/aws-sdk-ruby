@@ -123,6 +123,7 @@ module Aws::Budgets
       attr_accessor execution_role_arn: ::String
       attr_accessor approval_model: ("AUTOMATIC" | "MANUAL")
       attr_accessor subscribers: ::Array[Types::Subscriber]
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
       SENSITIVE: []
     end
 
@@ -137,6 +138,7 @@ module Aws::Budgets
       attr_accessor account_id: ::String
       attr_accessor budget: Types::Budget
       attr_accessor notifications_with_subscribers: ::Array[Types::NotificationWithSubscribers]
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
       SENSITIVE: []
     end
 
@@ -414,6 +416,16 @@ module Aws::Budgets
       SENSITIVE: []
     end
 
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
     class NotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -439,9 +451,20 @@ module Aws::Budgets
       SENSITIVE: []
     end
 
+    class ResourceTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class ScpActionDefinition
       attr_accessor policy_id: ::String
       attr_accessor target_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -464,6 +487,15 @@ module Aws::Budgets
       SENSITIVE: [:address]
     end
 
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
     class ThrottlingException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -473,6 +505,15 @@ module Aws::Budgets
       attr_accessor start: ::Time
       attr_accessor end: ::Time
       SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
     end
 
     class UpdateBudgetActionRequest

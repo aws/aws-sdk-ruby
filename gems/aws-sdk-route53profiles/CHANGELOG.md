@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2024-05-07)
+------------------
+
+* Feature - Doc only update for Route 53 profiles that fixes some link  issues
+
 1.1.0 (2024-04-25)
 ------------------
 

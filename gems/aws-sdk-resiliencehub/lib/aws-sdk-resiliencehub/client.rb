@@ -2313,8 +2313,8 @@ module Aws::ResilienceHub
     #   resp.compliance_drifts[0].actual_value["DisruptionType"].rto_reference_id #=> String
     #   resp.compliance_drifts[0].app_id #=> String
     #   resp.compliance_drifts[0].app_version #=> String
-    #   resp.compliance_drifts[0].diff_type #=> String, one of "NotEqual"
-    #   resp.compliance_drifts[0].drift_type #=> String, one of "ApplicationCompliance"
+    #   resp.compliance_drifts[0].diff_type #=> String, one of "NotEqual", "Added", "Removed"
+    #   resp.compliance_drifts[0].drift_type #=> String, one of "ApplicationCompliance", "AppComponentResiliencyComplianceStatus"
     #   resp.compliance_drifts[0].entity_id #=> String
     #   resp.compliance_drifts[0].entity_type #=> String
     #   resp.compliance_drifts[0].expected_reference_id #=> String
@@ -2337,6 +2337,69 @@ module Aws::ResilienceHub
     # @param [Hash] params ({})
     def list_app_assessment_compliance_drifts(params = {}, options = {})
       req = build_request(:list_app_assessment_compliance_drifts, params)
+      req.send_request(options)
+    end
+
+    # Indicates the list of resource drifts that were detected while running
+    # an assessment.
+    #
+    # @option params [required, String] :assessment_arn
+    #   Amazon Resource Name (ARN) of the assessment. The format for this ARN
+    #   is:
+    #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
+    #   For more information about ARNs, see [ Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Integer] :max_results
+    #   Indicates the maximum number of drift results to include in the
+    #   response. If more results exist than the specified `MaxResults` value,
+    #   a token is included in the response so that the remaining results can
+    #   be retrieved.
+    #
+    # @option params [String] :next_token
+    #   Null, or the token from a previous call to get the next set of
+    #   results.
+    #
+    # @return [Types::ListAppAssessmentResourceDriftsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppAssessmentResourceDriftsResponse#next_token #next_token} => String
+    #   * {Types::ListAppAssessmentResourceDriftsResponse#resource_drifts #resource_drifts} => Array&lt;Types::ResourceDrift&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_app_assessment_resource_drifts({
+    #     assessment_arn: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.resource_drifts #=> Array
+    #   resp.resource_drifts[0].app_arn #=> String
+    #   resp.resource_drifts[0].app_version #=> String
+    #   resp.resource_drifts[0].diff_type #=> String, one of "NotEqual", "Added", "Removed"
+    #   resp.resource_drifts[0].reference_id #=> String
+    #   resp.resource_drifts[0].resource_identifier.logical_resource_id.eks_source_name #=> String
+    #   resp.resource_drifts[0].resource_identifier.logical_resource_id.identifier #=> String
+    #   resp.resource_drifts[0].resource_identifier.logical_resource_id.logical_stack_name #=> String
+    #   resp.resource_drifts[0].resource_identifier.logical_resource_id.resource_group_name #=> String
+    #   resp.resource_drifts[0].resource_identifier.logical_resource_id.terraform_source_name #=> String
+    #   resp.resource_drifts[0].resource_identifier.resource_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListAppAssessmentResourceDrifts AWS API Documentation
+    #
+    # @overload list_app_assessment_resource_drifts(params = {})
+    # @param [Hash] params ({})
+    def list_app_assessment_resource_drifts(params = {}, options = {})
+      req = build_request(:list_app_assessment_resource_drifts, params)
       req.send_request(options)
     end
 
@@ -3033,7 +3096,7 @@ module Aws::ResilienceHub
     # Lists the recommendation templates for the Resilience Hub
     # applications.
     #
-    # @option params [required, String] :assessment_arn
+    # @option params [String] :assessment_arn
     #   Amazon Resource Name (ARN) of the assessment. The format for this ARN
     #   is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app-assessment/`app-id`.
@@ -3076,7 +3139,7 @@ module Aws::ResilienceHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_recommendation_templates({
-    #     assessment_arn: "Arn", # required
+    #     assessment_arn: "Arn",
     #     max_results: 1,
     #     name: "EntityName",
     #     next_token: "NextToken",
@@ -4553,7 +4616,7 @@ module Aws::ResilienceHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

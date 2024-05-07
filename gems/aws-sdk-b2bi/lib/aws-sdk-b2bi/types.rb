@@ -413,9 +413,8 @@ module Aws::B2bi
     #   @return [String]
     #
     # @!attribute [rw] mapping_template
-    #   Specifies the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set
-    #   of objects.
+    #   Specifies the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #   @return [String]
     #
     # @!attribute [rw] edi_type
@@ -478,9 +477,8 @@ module Aws::B2bi
     #   @return [String]
     #
     # @!attribute [rw] mapping_template
-    #   Returns the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set
-    #   of objects.
+    #   Returns the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -916,9 +914,8 @@ module Aws::B2bi
     #   @return [String]
     #
     # @!attribute [rw] mapping_template
-    #   Returns the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set
-    #   of objects.
+    #   Returns the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1451,9 +1448,8 @@ module Aws::B2bi
     #   @return [String]
     #
     # @!attribute [rw] mapping_template
-    #   Specifies the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set
-    #   of objects.
+    #   Specifies the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #   @return [String]
     #
     # @!attribute [rw] file_format
@@ -1561,9 +1557,8 @@ module Aws::B2bi
     #   @return [String]
     #
     # @!attribute [rw] mapping_template
-    #   Returns the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set
-    #   of objects.
+    #   Returns the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1904,9 +1899,8 @@ module Aws::B2bi
     #   @return [String]
     #
     # @!attribute [rw] mapping_template
-    #   Specifies the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set
-    #   of objects.
+    #   Specifies the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1960,9 +1954,8 @@ module Aws::B2bi
     #   @return [String]
     #
     # @!attribute [rw] mapping_template
-    #   Returns the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set
-    #   of objects.
+    #   Returns the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #   @return [String]
     #
     # @!attribute [rw] status
