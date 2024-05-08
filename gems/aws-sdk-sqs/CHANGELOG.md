@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2024-05-08)
+------------------
+
+* Feature - This release adds MessageSystemAttributeNames to ReceiveMessageRequest to replace AttributeNames.
+
 1.72.0 (2024-04-30)
 ------------------
 

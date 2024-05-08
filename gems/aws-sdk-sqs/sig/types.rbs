@@ -281,7 +281,7 @@ module Aws::SQS
       attr_accessor receipt_handle: ::String
       attr_accessor md5_of_body: ::String
       attr_accessor body: ::String
-      attr_accessor attributes: ::Hash[("SenderId" | "SentTimestamp" | "ApproximateReceiveCount" | "ApproximateFirstReceiveTimestamp" | "SequenceNumber" | "MessageDeduplicationId" | "MessageGroupId" | "AWSTraceHeader" | "DeadLetterQueueSourceArn"), ::String]
+      attr_accessor attributes: ::Hash[("All" | "SenderId" | "SentTimestamp" | "ApproximateReceiveCount" | "ApproximateFirstReceiveTimestamp" | "SequenceNumber" | "MessageDeduplicationId" | "MessageGroupId" | "AWSTraceHeader" | "DeadLetterQueueSourceArn"), ::String]
       attr_accessor md5_of_message_attributes: ::String
       attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
       SENSITIVE: []
@@ -346,6 +346,7 @@ module Aws::SQS
     class ReceiveMessageRequest
       attr_accessor queue_url: ::String
       attr_accessor attribute_names: ::Array[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled")]
+      attr_accessor message_system_attribute_names: ::Array[("All" | "SenderId" | "SentTimestamp" | "ApproximateReceiveCount" | "ApproximateFirstReceiveTimestamp" | "SequenceNumber" | "MessageDeduplicationId" | "MessageGroupId" | "AWSTraceHeader" | "DeadLetterQueueSourceArn")]
       attr_accessor message_attribute_names: ::Array[::String]
       attr_accessor max_number_of_messages: ::Integer
       attr_accessor visibility_timeout: ::Integer

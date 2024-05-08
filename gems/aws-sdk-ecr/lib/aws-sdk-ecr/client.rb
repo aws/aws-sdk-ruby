@@ -801,6 +801,9 @@ module Aws::ECR
     #   * Microsoft Azure Container Registry (`azure-container-registry`) -
     #     `<custom>.azurecr.io`
     #
+    #   * GitLab Container Registry (`gitlab-container-registry`) -
+    #     `registry.gitlab.com`
+    #
     # @option params [String] :registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   create the pull through cache rule for. If you do not specify a
@@ -829,7 +832,7 @@ module Aws::ECR
     #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
     #     upstream_registry_url: "Url", # required
     #     registry_id: "RegistryId",
-    #     upstream_registry: "ecr-public", # accepts ecr-public, quay, k8s, docker-hub, github-container-registry, azure-container-registry
+    #     upstream_registry: "ecr-public", # accepts ecr-public, quay, k8s, docker-hub, github-container-registry, azure-container-registry, gitlab-container-registry
     #     credential_arn: "CredentialArn",
     #   })
     #
@@ -839,7 +842,7 @@ module Aws::ECR
     #   resp.upstream_registry_url #=> String
     #   resp.created_at #=> Time
     #   resp.registry_id #=> String
-    #   resp.upstream_registry #=> String, one of "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry"
+    #   resp.upstream_registry #=> String, one of "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry", "gitlab-container-registry"
     #   resp.credential_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreatePullThroughCacheRule AWS API Documentation
@@ -1549,7 +1552,7 @@ module Aws::ECR
     #   resp.pull_through_cache_rules[0].created_at #=> Time
     #   resp.pull_through_cache_rules[0].registry_id #=> String
     #   resp.pull_through_cache_rules[0].credential_arn #=> String
-    #   resp.pull_through_cache_rules[0].upstream_registry #=> String, one of "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry"
+    #   resp.pull_through_cache_rules[0].upstream_registry #=> String, one of "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry", "gitlab-container-registry"
     #   resp.pull_through_cache_rules[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -3035,7 +3038,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

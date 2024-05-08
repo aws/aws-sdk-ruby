@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-05-08)
+------------------
+
+* Feature - The policy scope resource tag is always a string value, either a non-empty string or an empty string.
+
 1.69.0 (2024-04-30)
 ------------------
 

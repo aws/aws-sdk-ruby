@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2024-05-08)
+------------------
+
+* Feature - Add new engine - generative - that builds the most expressive conversational voices.
+
 1.83.0 (2024-04-25)
 ------------------
 

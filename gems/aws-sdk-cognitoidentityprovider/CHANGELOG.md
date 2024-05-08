@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2024-05-08)
+------------------
+
+* Feature - Add EXTERNAL_PROVIDER enum value to UserStatusType.
+
 1.90.0 (2024-04-26)
 ------------------
 

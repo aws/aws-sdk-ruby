@@ -361,6 +361,9 @@ module Aws::ECR
     #
     #   * Microsoft Azure Container Registry (`azure-container-registry`) -
     #     `<custom>.azurecr.io`
+    #
+    #   * GitLab Container Registry (`gitlab-container-registry`) -
+    #     `registry.gitlab.com`
     #   @return [String]
     #
     # @!attribute [rw] registry_id

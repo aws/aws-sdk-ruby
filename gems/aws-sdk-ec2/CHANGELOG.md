@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.456.0 (2024-05-08)
+------------------
+
+* Feature - Adding Precision Hardware Clock (PHC) to public API DescribeInstanceTypes
+
 1.455.0 (2024-05-02)
 ------------------
 

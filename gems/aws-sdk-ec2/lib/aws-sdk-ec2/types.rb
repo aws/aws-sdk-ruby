@@ -41838,6 +41838,11 @@ module Aws::EC2
     #   Describes the Neuron accelerator settings for the instance type.
     #   @return [Types::NeuronInfo]
     #
+    # @!attribute [rw] phc_support
+    #   Indicates whether a local Precision Time Protocol (PTP) hardware
+    #   clock (PHC) is supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeInfo AWS API Documentation
     #
     class InstanceTypeInfo < Struct.new(
@@ -41869,7 +41874,8 @@ module Aws::EC2
       :nitro_tpm_support,
       :nitro_tpm_info,
       :media_accelerator_info,
-      :neuron_info)
+      :neuron_info,
+      :phc_support)
       SENSITIVE = []
       include Aws::Structure
     end

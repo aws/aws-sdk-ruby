@@ -30,7 +30,7 @@ module Aws
       def body: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#attributes-instance_method
-      def attributes: () -> ::Hash[("SenderId" | "SentTimestamp" | "ApproximateReceiveCount" | "ApproximateFirstReceiveTimestamp" | "SequenceNumber" | "MessageDeduplicationId" | "MessageGroupId" | "AWSTraceHeader" | "DeadLetterQueueSourceArn"), ::String]
+      def attributes: () -> ::Hash[("All" | "SenderId" | "SentTimestamp" | "ApproximateReceiveCount" | "ApproximateFirstReceiveTimestamp" | "SequenceNumber" | "MessageDeduplicationId" | "MessageGroupId" | "AWSTraceHeader" | "DeadLetterQueueSourceArn"), ::String]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#md5_of_message_attributes-instance_method
       def md5_of_message_attributes: () -> ::String

@@ -17,7 +17,7 @@ module Aws::Polly
     end
 
     class DescribeVoicesInput
-      attr_accessor engine: ("standard" | "neural" | "long-form")
+      attr_accessor engine: ("standard" | "neural" | "long-form" | "generative")
       attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")
       attr_accessor include_additional_language_codes: bool
       attr_accessor next_token: ::String
@@ -192,7 +192,7 @@ module Aws::Polly
     end
 
     class StartSpeechSynthesisTaskInput
-      attr_accessor engine: ("standard" | "neural" | "long-form")
+      attr_accessor engine: ("standard" | "neural" | "long-form" | "generative")
       attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")
       attr_accessor lexicon_names: ::Array[::String]
       attr_accessor output_format: ("json" | "mp3" | "ogg_vorbis" | "pcm")
@@ -213,7 +213,7 @@ module Aws::Polly
     end
 
     class SynthesisTask
-      attr_accessor engine: ("standard" | "neural" | "long-form")
+      attr_accessor engine: ("standard" | "neural" | "long-form" | "generative")
       attr_accessor task_id: ::String
       attr_accessor task_status: ("scheduled" | "inProgress" | "completed" | "failed")
       attr_accessor task_status_reason: ::String
@@ -237,7 +237,7 @@ module Aws::Polly
     end
 
     class SynthesizeSpeechInput
-      attr_accessor engine: ("standard" | "neural" | "long-form")
+      attr_accessor engine: ("standard" | "neural" | "long-form" | "generative")
       attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")
       attr_accessor lexicon_names: ::Array[::String]
       attr_accessor output_format: ("json" | "mp3" | "ogg_vorbis" | "pcm")
@@ -278,7 +278,7 @@ module Aws::Polly
       attr_accessor language_name: ::String
       attr_accessor name: ::String
       attr_accessor additional_language_codes: ::Array[("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE")]
-      attr_accessor supported_engines: ::Array[("standard" | "neural" | "long-form")]
+      attr_accessor supported_engines: ::Array[("standard" | "neural" | "long-form" | "generative")]
       SENSITIVE: []
     end
   end

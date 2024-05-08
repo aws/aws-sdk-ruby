@@ -2554,7 +2554,7 @@ module Aws::FMS
     #
     #
     #
-    # [1]: https://aws.amazon.com/marketplace
+    # [1]: http://aws.amazon.com/marketplace
     #
     # @option params [required, Types::Policy] :policy
     #   The details of the Firewall Manager policy to be created.
@@ -2910,7 +2910,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

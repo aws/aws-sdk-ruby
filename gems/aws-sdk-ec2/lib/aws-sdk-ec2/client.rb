@@ -25257,6 +25257,7 @@ module Aws::EC2
     #   resp.instance_types[0].neuron_info.neuron_devices[0].core_info.version #=> Integer
     #   resp.instance_types[0].neuron_info.neuron_devices[0].memory_info.size_in_mi_b #=> Integer
     #   resp.instance_types[0].neuron_info.total_neuron_device_memory_in_mi_b #=> Integer
+    #   resp.instance_types[0].phc_support #=> String, one of "unsupported", "supported"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypes AWS API Documentation
@@ -59355,7 +59356,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.455.0'
+      context[:gem_version] = '1.456.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

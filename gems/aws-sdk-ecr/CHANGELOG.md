@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2024-05-08)
+------------------
+
+* Feature - This release adds pull through cache rules support for GitLab container registry in Amazon ECR.
+
 1.70.0 (2024-04-25)
 ------------------
 

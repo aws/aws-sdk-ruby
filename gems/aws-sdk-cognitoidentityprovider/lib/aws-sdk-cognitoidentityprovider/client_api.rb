@@ -2064,6 +2064,7 @@ module Aws::CognitoIdentityProvider
         "endpointPrefix" => "cognito-idp",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Cognito Identity Provider",
         "serviceId" => "Cognito Identity Provider",
         "signatureVersion" => "v4",

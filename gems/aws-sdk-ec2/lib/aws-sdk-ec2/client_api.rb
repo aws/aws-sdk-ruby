@@ -2369,6 +2369,7 @@ module Aws::EC2
     Phase2IntegrityAlgorithmsListValue = Shapes::StructureShape.new(name: 'Phase2IntegrityAlgorithmsListValue')
     Phase2IntegrityAlgorithmsRequestList = Shapes::ListShape.new(name: 'Phase2IntegrityAlgorithmsRequestList')
     Phase2IntegrityAlgorithmsRequestListValue = Shapes::StructureShape.new(name: 'Phase2IntegrityAlgorithmsRequestListValue')
+    PhcSupport = Shapes::StringShape.new(name: 'PhcSupport')
     Placement = Shapes::StructureShape.new(name: 'Placement')
     PlacementGroup = Shapes::StructureShape.new(name: 'PlacementGroup')
     PlacementGroupArn = Shapes::StringShape.new(name: 'PlacementGroupArn')
@@ -10368,6 +10369,7 @@ module Aws::EC2
     InstanceTypeInfo.add_member(:nitro_tpm_info, Shapes::ShapeRef.new(shape: NitroTpmInfo, location_name: "nitroTpmInfo"))
     InstanceTypeInfo.add_member(:media_accelerator_info, Shapes::ShapeRef.new(shape: MediaAcceleratorInfo, location_name: "mediaAcceleratorInfo"))
     InstanceTypeInfo.add_member(:neuron_info, Shapes::ShapeRef.new(shape: NeuronInfo, location_name: "neuronInfo"))
+    InstanceTypeInfo.add_member(:phc_support, Shapes::ShapeRef.new(shape: PhcSupport, location_name: "phcSupport"))
     InstanceTypeInfo.struct_class = Types::InstanceTypeInfo
 
     InstanceTypeInfoFromInstanceRequirements.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))

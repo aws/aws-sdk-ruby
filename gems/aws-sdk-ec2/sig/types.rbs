@@ -9213,6 +9213,7 @@ module Aws::EC2
       attr_accessor nitro_tpm_info: Types::NitroTpmInfo
       attr_accessor media_accelerator_info: Types::MediaAcceleratorInfo
       attr_accessor neuron_info: Types::NeuronInfo
+      attr_accessor phc_support: ("unsupported" | "supported")
       SENSITIVE: []
     end
 

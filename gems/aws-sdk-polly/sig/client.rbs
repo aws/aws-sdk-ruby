@@ -88,7 +88,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#describe_voices-instance_method
       def describe_voices: (
-                             ?engine: ("standard" | "neural" | "long-form"),
+                             ?engine: ("standard" | "neural" | "long-form" | "generative"),
                              ?language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE"),
                              ?include_additional_language_codes: bool,
                              ?next_token: ::String
@@ -156,7 +156,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#start_speech_synthesis_task-instance_method
       def start_speech_synthesis_task: (
-                                         ?engine: ("standard" | "neural" | "long-form"),
+                                         ?engine: ("standard" | "neural" | "long-form" | "generative"),
                                          ?language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE"),
                                          ?lexicon_names: Array[::String],
                                          output_format: ("json" | "mp3" | "ogg_vorbis" | "pcm"),
@@ -179,7 +179,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#synthesize_speech-instance_method
       def synthesize_speech: (
-                               ?engine: ("standard" | "neural" | "long-form"),
+                               ?engine: ("standard" | "neural" | "long-form" | "generative"),
                                ?language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE"),
                                ?lexicon_names: Array[::String],
                                output_format: ("json" | "mp3" | "ogg_vorbis" | "pcm"),
