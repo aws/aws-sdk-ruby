@@ -16,6 +16,7 @@ module Aws::VerifiedPermissions
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ActionId = Shapes::StringShape.new(name: 'ActionId')
     ActionIdentifier = Shapes::StructureShape.new(name: 'ActionIdentifier')
+    ActionIdentifierList = Shapes::ListShape.new(name: 'ActionIdentifierList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     AttributeValue = Shapes::UnionShape.new(name: 'AttributeValue')
     BatchIsAuthorizedInput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInput')
@@ -120,6 +121,7 @@ module Aws::VerifiedPermissions
     PolicyDefinition = Shapes::UnionShape.new(name: 'PolicyDefinition')
     PolicyDefinitionDetail = Shapes::UnionShape.new(name: 'PolicyDefinitionDetail')
     PolicyDefinitionItem = Shapes::UnionShape.new(name: 'PolicyDefinitionItem')
+    PolicyEffect = Shapes::StringShape.new(name: 'PolicyEffect')
     PolicyFilter = Shapes::StructureShape.new(name: 'PolicyFilter')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     PolicyItem = Shapes::StructureShape.new(name: 'PolicyItem')
@@ -185,6 +187,8 @@ module Aws::VerifiedPermissions
     ActionIdentifier.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "actionType"))
     ActionIdentifier.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "actionId"))
     ActionIdentifier.struct_class = Types::ActionIdentifier
+
+    ActionIdentifierList.member = Shapes::ShapeRef.new(shape: ActionIdentifier)
 
     AttributeValue.add_member(:boolean, Shapes::ShapeRef.new(shape: BooleanAttribute, location_name: "boolean"))
     AttributeValue.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "entityIdentifier"))
@@ -333,8 +337,10 @@ module Aws::VerifiedPermissions
     CreatePolicyOutput.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     CreatePolicyOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     CreatePolicyOutput.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    CreatePolicyOutput.add_member(:actions, Shapes::ShapeRef.new(shape: ActionIdentifierList, location_name: "actions"))
     CreatePolicyOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     CreatePolicyOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    CreatePolicyOutput.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     CreatePolicyOutput.struct_class = Types::CreatePolicyOutput
 
     CreatePolicyStoreInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
@@ -443,9 +449,11 @@ module Aws::VerifiedPermissions
     GetPolicyOutput.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     GetPolicyOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     GetPolicyOutput.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    GetPolicyOutput.add_member(:actions, Shapes::ShapeRef.new(shape: ActionIdentifierList, location_name: "actions"))
     GetPolicyOutput.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinitionDetail, required: true, location_name: "definition"))
     GetPolicyOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetPolicyOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    GetPolicyOutput.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     GetPolicyOutput.struct_class = Types::GetPolicyOutput
 
     GetPolicyStoreInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -616,9 +624,11 @@ module Aws::VerifiedPermissions
     PolicyItem.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     PolicyItem.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     PolicyItem.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    PolicyItem.add_member(:actions, Shapes::ShapeRef.new(shape: ActionIdentifierList, location_name: "actions"))
     PolicyItem.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinitionItem, required: true, location_name: "definition"))
     PolicyItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     PolicyItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    PolicyItem.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     PolicyItem.struct_class = Types::PolicyItem
 
     PolicyList.member = Shapes::ShapeRef.new(shape: PolicyItem)
@@ -753,8 +763,10 @@ module Aws::VerifiedPermissions
     UpdatePolicyOutput.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     UpdatePolicyOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     UpdatePolicyOutput.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    UpdatePolicyOutput.add_member(:actions, Shapes::ShapeRef.new(shape: ActionIdentifierList, location_name: "actions"))
     UpdatePolicyOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     UpdatePolicyOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    UpdatePolicyOutput.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     UpdatePolicyOutput.struct_class = Types::UpdatePolicyOutput
 
     UpdatePolicyStoreInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -808,6 +820,7 @@ module Aws::VerifiedPermissions
         "endpointPrefix" => "verifiedpermissions",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Verified Permissions",
         "serviceId" => "VerifiedPermissions",
         "signatureVersion" => "v4",

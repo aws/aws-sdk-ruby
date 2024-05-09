@@ -423,12 +423,12 @@ module Aws::BedrockAgentRuntime
 
     # @!group API Operations
 
-    # Sends a prompt for the agent to process and respond to. Use return
-    # control event type for function calling.
-    #
     # <note markdown="1"> The CLI doesn't support `InvokeAgent`.
     #
     #  </note>
+    #
+    # Sends a prompt for the agent to process and respond to. Note the
+    # following fields for the request:
     #
     # * To continue the same conversation with an agent, use the same
     #   `sessionId` value in the request.
@@ -442,9 +442,8 @@ module Aws::BedrockAgentRuntime
     # * End a conversation by setting `endSession` to `true`.
     #
     # * In the `sessionState` object, you can include attributes for the
-    #   session or prompt or parameters returned from the action group.
-    #
-    # * Use return control event type for function calling.
+    #   session or prompt or, if you configured an action group to return
+    #   control, results from invocation of the action group.
     #
     # The response is returned in the `bytes` field of the `chunk` object.
     #
@@ -453,6 +452,10 @@ module Aws::BedrockAgentRuntime
     #
     # * If you set `enableTrace` to `true` in the request, you can trace the
     #   agent's steps and reasoning process that led it to the response.
+    #
+    # * If the action predicted was configured to return control, the
+    #   response returns parameters for the action, elicited from the user,
+    #   in the `returnControl` field.
     #
     # * Errors are also surfaced in the response.
     #
@@ -480,6 +483,11 @@ module Aws::BedrockAgentRuntime
     # @option params [String] :input_text
     #   The prompt text to send the agent.
     #
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the `sessionState`
+    #   field, the `inputText` field will be ignored.
+    #
+    #    </note>
+    #
     # @option params [required, String] :session_id
     #   The unique identifier of the session. Use the same value across
     #   requests to continue the same conversation.
@@ -487,6 +495,11 @@ module Aws::BedrockAgentRuntime
     # @option params [Types::SessionState] :session_state
     #   Contains parameters that specify various attributes of the session.
     #   For more information, see [Control session context][1].
+    #
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the `sessionState`
+    #   field, the `inputText` field will be ignored.
+    #
+    #    </note>
     #
     #
     #
@@ -1049,6 +1062,7 @@ module Aws::BedrockAgentRuntime
     # @return [Types::RetrieveAndGenerateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RetrieveAndGenerateResponse#citations #citations} => Array&lt;Types::Citation&gt;
+    #   * {Types::RetrieveAndGenerateResponse#guardrail_action #guardrail_action} => String
     #   * {Types::RetrieveAndGenerateResponse#output #output} => Types::RetrieveAndGenerateOutput
     #   * {Types::RetrieveAndGenerateResponse#session_id #session_id} => String
     #
@@ -1061,6 +1075,22 @@ module Aws::BedrockAgentRuntime
     #     retrieve_and_generate_configuration: {
     #       external_sources_configuration: {
     #         generation_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           guardrail_configuration: {
+    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
+    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
     #           prompt_template: {
     #             text_prompt_template: "TextPromptTemplate",
     #           },
@@ -1082,6 +1112,22 @@ module Aws::BedrockAgentRuntime
     #       },
     #       knowledge_base_configuration: {
     #         generation_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           guardrail_configuration: {
+    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
+    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
     #           prompt_template: {
     #             text_prompt_template: "TextPromptTemplate",
     #           },
@@ -1171,6 +1217,7 @@ module Aws::BedrockAgentRuntime
     #   resp.citations[0].retrieved_references[0].location.s3_location.uri #=> String
     #   resp.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
     #   resp.citations[0].retrieved_references[0].metadata #=> Hash
+    #   resp.guardrail_action #=> String, one of "INTERVENED", "NONE"
     #   resp.output.text #=> String
     #   resp.session_id #=> String
     #
@@ -1196,7 +1243,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

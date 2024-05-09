@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2024-05-09)
+------------------
+
+* Feature - Update the DNS Firewall settings to correct a spelling issue.
+
 1.56.0 (2024-04-30)
 ------------------
 

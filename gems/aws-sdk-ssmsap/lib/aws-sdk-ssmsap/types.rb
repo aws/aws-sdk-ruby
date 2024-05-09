@@ -942,6 +942,62 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # @!attribute [rw] operation_id
+    #   The ID of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #
+    #   If you do not specify a value for `MaxResults`, the request returns
+    #   50 items per page by default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Optionally specify filters to narrow the returned operation event
+    #   items.
+    #
+    #   Valid filter names include `status`, `resourceID`, and
+    #   `resourceType`. The valid operator for all three filters is
+    #   `Equals`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListOperationEventsInput AWS API Documentation
+    #
+    class ListOperationEventsInput < Struct.new(
+      :operation_id,
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_events
+    #   A returned list of operation events that meet the filter criteria.
+    #   @return [Array<Types::OperationEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListOperationEventsOutput AWS API Documentation
+    #
+    class ListOperationEventsOutput < Struct.new(
+      :operation_events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The ID of the application.
     #   @return [String]
@@ -1077,6 +1133,60 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # An operation event returns details for an operation, including key
+    # milestones which can be used to monitor and track operations in
+    # progress.
+    #
+    # Operation events contain:
+    #
+    # * Description string
+    #
+    # * Resource, including its ARN and type
+    #
+    # * Status
+    #
+    # * StatusMessage string
+    #
+    # * TimeStamp
+    #
+    # Operation event examples include StartApplication or StopApplication.
+    #
+    # @!attribute [rw] description
+    #   A description of the operation event. For example, "Stop the EC2
+    #   instance i-abcdefgh987654321".
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource involved in the operations event.
+    #
+    #   Contains `ResourceArn` ARN and `ResourceType`.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] status
+    #   The status of the operation event. The possible statuses are:
+    #   `IN_PROGRESS`, `COMPLETED`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message relating to a specific operation event.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the specified operation event.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/OperationEvent AWS API Documentation
+    #
+    class OperationEvent < Struct.new(
+      :description,
+      :resource,
+      :status,
+      :status_message,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] action_type
     #   @return [String]
     #
@@ -1206,6 +1316,31 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # The resource contains a `ResourceArn` and the `ResourceType`.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the source resource.
+    #
+    #   Example of `ResourceArn`:
+    #   "`arn:aws:ec2:us-east-1:111111111111:instance/i-abcdefgh987654321`"
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #
+    #   Example of `ResourceType`: "`AWS::SystemsManagerSAP::Component`"
+    #   or "`AWS::EC2::Instance`".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Resource AWS API Documentation
+    #
+    class Resource < Struct.new(
+      :resource_arn,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource is not available.
     #
     # @!attribute [rw] message
@@ -1215,6 +1350,30 @@ module Aws::SsmSap
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The ID of the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartApplicationInput AWS API Documentation
+    #
+    class StartApplicationInput < Struct.new(
+      :application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The ID of the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartApplicationOutput AWS API Documentation
+    #
+    class StartApplicationOutput < Struct.new(
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1238,6 +1397,45 @@ module Aws::SsmSap
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartApplicationRefreshOutput AWS API Documentation
     #
     class StartApplicationRefreshOutput < Struct.new(
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The ID of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] stop_connected_entity
+    #   Specify the `ConnectedEntityType`. Accepted type is `DBMS`.
+    #
+    #   If this parameter is included, the connected DBMS (Database
+    #   Management System) will be stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_ec2_instance_shutdown
+    #   Boolean. If included and if set to `True`, the StopApplication
+    #   operation will shut down the associated Amazon EC2 instance in
+    #   addition to the application.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StopApplicationInput AWS API Documentation
+    #
+    class StopApplicationInput < Struct.new(
+      :application_id,
+      :stop_connected_entity,
+      :include_ec2_instance_shutdown)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The ID of the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StopApplicationOutput AWS API Documentation
+    #
+    class StopApplicationOutput < Struct.new(
       :operation_id)
       SENSITIVE = []
       include Aws::Structure

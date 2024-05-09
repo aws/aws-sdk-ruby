@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-05-09)
+------------------
+
+* Feature - Added support for application-aware start/stop of SAP applications running on EC2 instances, with SSM for SAP
+
 1.17.0 (2024-04-25)
 ------------------
 

@@ -196,6 +196,7 @@ module Aws
       interface _RetrieveAndGenerateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveAndGenerateResponse]
         def citations: () -> ::Array[Types::Citation]
+        def guardrail_action: () -> ("INTERVENED" | "NONE")
         def output: () -> Types::RetrieveAndGenerateOutput
         def session_id: () -> ::String
       end
@@ -207,6 +208,20 @@ module Aws
                                    ?retrieve_and_generate_configuration: {
                                      external_sources_configuration: {
                                        generation_configuration: {
+                                         additional_model_request_fields: Hash[::String, {
+                                           }]?,
+                                         guardrail_configuration: {
+                                           guardrail_id: ::String,
+                                           guardrail_version: ::String
+                                         }?,
+                                         inference_config: {
+                                           text_inference_config: {
+                                             max_tokens: ::Integer?,
+                                             stop_sequences: Array[::String]?,
+                                             temperature: ::Float?,
+                                             top_p: ::Float?
+                                           }?
+                                         }?,
                                          prompt_template: {
                                            text_prompt_template: ::String?
                                          }?
@@ -228,6 +243,20 @@ module Aws
                                      }?,
                                      knowledge_base_configuration: {
                                        generation_configuration: {
+                                         additional_model_request_fields: Hash[::String, {
+                                           }]?,
+                                         guardrail_configuration: {
+                                           guardrail_id: ::String,
+                                           guardrail_version: ::String
+                                         }?,
+                                         inference_config: {
+                                           text_inference_config: {
+                                             max_tokens: ::Integer?,
+                                             stop_sequences: Array[::String]?,
+                                             temperature: ::Float?,
+                                             top_p: ::Float?
+                                           }?
+                                         }?,
                                          prompt_template: {
                                            text_prompt_template: ::String?
                                          }?

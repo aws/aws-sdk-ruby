@@ -199,6 +199,26 @@ module Aws
                           ) -> _ListDatabasesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatabasesResponseSuccess
 
+      interface _ListOperationEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOperationEventsOutput]
+        def operation_events: () -> ::Array[Types::OperationEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_operation_events-instance_method
+      def list_operation_events: (
+                                   operation_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?filters: Array[
+                                     {
+                                       name: ::String,
+                                       value: ::String,
+                                       operator: ("Equals" | "GreaterThanOrEquals" | "LessThanOrEquals")
+                                     },
+                                   ]
+                                 ) -> _ListOperationEventsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOperationEventsResponseSuccess
+
       interface _ListOperationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListOperationsOutput]
         def operations: () -> ::Array[Types::Operation]
@@ -265,6 +285,16 @@ module Aws
                                 ) -> _RegisterApplicationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterApplicationResponseSuccess
 
+      interface _StartApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartApplicationOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#start_application-instance_method
+      def start_application: (
+                               application_id: ::String
+                             ) -> _StartApplicationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartApplicationResponseSuccess
+
       interface _StartApplicationRefreshResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartApplicationRefreshOutput]
         def operation_id: () -> ::String
@@ -274,6 +304,18 @@ module Aws
                                        application_id: ::String
                                      ) -> _StartApplicationRefreshResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartApplicationRefreshResponseSuccess
+
+      interface _StopApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopApplicationOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#stop_application-instance_method
+      def stop_application: (
+                              application_id: ::String,
+                              ?stop_connected_entity: ("DBMS"),
+                              ?include_ec2_instance_shutdown: bool
+                            ) -> _StopApplicationResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopApplicationResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

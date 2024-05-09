@@ -270,6 +270,20 @@ module Aws::SsmSap
       SENSITIVE: []
     end
 
+    class ListOperationEventsInput
+      attr_accessor operation_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListOperationEventsOutput
+      attr_accessor operation_events: ::Array[Types::OperationEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListOperationsInput
       attr_accessor application_id: ::String
       attr_accessor max_results: ::Integer
@@ -306,6 +320,15 @@ module Aws::SsmSap
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class OperationEvent
+      attr_accessor description: ::String
+      attr_accessor resource: Types::Resource
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -348,8 +371,24 @@ module Aws::SsmSap
       SENSITIVE: []
     end
 
+    class Resource
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartApplicationInput
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartApplicationOutput
+      attr_accessor operation_id: ::String
       SENSITIVE: []
     end
 
@@ -359,6 +398,18 @@ module Aws::SsmSap
     end
 
     class StartApplicationRefreshOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopApplicationInput
+      attr_accessor application_id: ::String
+      attr_accessor stop_connected_entity: ("DBMS")
+      attr_accessor include_ec2_instance_shutdown: bool
+      SENSITIVE: []
+    end
+
+    class StopApplicationOutput
       attr_accessor operation_id: ::String
       SENSITIVE: []
     end

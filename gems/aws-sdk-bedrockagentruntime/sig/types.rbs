@@ -111,6 +111,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class ExternalSourcesGenerationConfiguration
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
+      attr_accessor inference_config: Types::InferenceConfig
       attr_accessor prompt_template: Types::PromptTemplate
       SENSITIVE: []
     end
@@ -167,7 +170,21 @@ module Aws::BedrockAgentRuntime
     end
 
     class GenerationConfiguration
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
+      attr_accessor inference_config: Types::InferenceConfig
       attr_accessor prompt_template: Types::PromptTemplate
+      SENSITIVE: []
+    end
+
+    class GuardrailConfiguration
+      attr_accessor guardrail_id: ::String
+      attr_accessor guardrail_version: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceConfig
+      attr_accessor text_inference_config: Types::TextInferenceConfig
       SENSITIVE: []
     end
 
@@ -507,6 +524,7 @@ module Aws::BedrockAgentRuntime
 
     class RetrieveAndGenerateResponse
       attr_accessor citations: ::Array[Types::Citation]
+      attr_accessor guardrail_action: ("INTERVENED" | "NONE")
       attr_accessor output: Types::RetrieveAndGenerateOutput
       attr_accessor session_id: ::String
       SENSITIVE: [:output]
@@ -567,6 +585,14 @@ module Aws::BedrockAgentRuntime
     class Span
       attr_accessor end: ::Integer
       attr_accessor start: ::Integer
+      SENSITIVE: []
+    end
+
+    class TextInferenceConfig
+      attr_accessor max_tokens: ::Integer
+      attr_accessor stop_sequences: ::Array[::String]
+      attr_accessor temperature: ::Float
+      attr_accessor top_p: ::Float
       SENSITIVE: []
     end
 

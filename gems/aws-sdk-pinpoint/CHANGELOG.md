@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2024-05-09)
+------------------
+
+* Feature - This release adds support for specifying email message headers for Email Templates, Campaigns, Journeys and Send Messages.
+
 1.88.0 (2024-04-25)
 ------------------
 

@@ -18,6 +18,9 @@ module Aws::BedrockAgentRuntime
     ActionGroupInvocationOutput = Shapes::StructureShape.new(name: 'ActionGroupInvocationOutput')
     ActionGroupName = Shapes::StringShape.new(name: 'ActionGroupName')
     ActionGroupOutputString = Shapes::StringShape.new(name: 'ActionGroupOutputString')
+    AdditionalModelRequestFields = Shapes::MapShape.new(name: 'AdditionalModelRequestFields')
+    AdditionalModelRequestFieldsKey = Shapes::StringShape.new(name: 'AdditionalModelRequestFieldsKey')
+    AdditionalModelRequestFieldsValue = Shapes::DocumentShape.new(name: 'AdditionalModelRequestFieldsValue', document: true)
     AgentAliasId = Shapes::StringShape.new(name: 'AgentAliasId')
     AgentId = Shapes::StringShape.new(name: 'AgentId')
     AgentVersion = Shapes::StringShape.new(name: 'AgentVersion')
@@ -62,7 +65,12 @@ module Aws::BedrockAgentRuntime
     FunctionResult = Shapes::StructureShape.new(name: 'FunctionResult')
     GeneratedResponsePart = Shapes::StructureShape.new(name: 'GeneratedResponsePart')
     GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
+    GuadrailAction = Shapes::StringShape.new(name: 'GuadrailAction')
+    GuardrailConfiguration = Shapes::StructureShape.new(name: 'GuardrailConfiguration')
+    GuardrailConfigurationGuardrailIdString = Shapes::StringShape.new(name: 'GuardrailConfigurationGuardrailIdString')
+    GuardrailConfigurationGuardrailVersionString = Shapes::StringShape.new(name: 'GuardrailConfigurationGuardrailVersionString')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
+    InferenceConfig = Shapes::StructureShape.new(name: 'InferenceConfig')
     InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
     InputText = Shapes::StringShape.new(name: 'InputText')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -88,6 +96,7 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseVectorSearchConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseVectorSearchConfiguration')
     KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
+    MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     ModelInvocationInput = Shapes::StructureShape.new(name: 'ModelInvocationInput')
@@ -112,6 +121,8 @@ module Aws::BedrockAgentRuntime
     PromptText = Shapes::StringShape.new(name: 'PromptText')
     PromptType = Shapes::StringShape.new(name: 'PromptType')
     PropertyParameters = Shapes::StructureShape.new(name: 'PropertyParameters')
+    RAGStopSequences = Shapes::ListShape.new(name: 'RAGStopSequences')
+    RAGStopSequencesMemberString = Shapes::StringShape.new(name: 'RAGStopSequencesMemberString')
     Rationale = Shapes::StructureShape.new(name: 'Rationale')
     RationaleString = Shapes::StringShape.new(name: 'RationaleString')
     RepromptResponse = Shapes::StructureShape.new(name: 'RepromptResponse')
@@ -157,6 +168,7 @@ module Aws::BedrockAgentRuntime
     StopSequences = Shapes::ListShape.new(name: 'StopSequences')
     String = Shapes::StringShape.new(name: 'String')
     Temperature = Shapes::FloatShape.new(name: 'Temperature')
+    TextInferenceConfig = Shapes::StructureShape.new(name: 'TextInferenceConfig')
     TextPromptTemplate = Shapes::StringShape.new(name: 'TextPromptTemplate')
     TextResponsePart = Shapes::StructureShape.new(name: 'TextResponsePart')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -183,6 +195,9 @@ module Aws::BedrockAgentRuntime
 
     ActionGroupInvocationOutput.add_member(:text, Shapes::ShapeRef.new(shape: ActionGroupOutputString, location_name: "text"))
     ActionGroupInvocationOutput.struct_class = Types::ActionGroupInvocationOutput
+
+    AdditionalModelRequestFields.key = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsKey)
+    AdditionalModelRequestFields.value = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsValue)
 
     ApiContentMap.key = Shapes::ShapeRef.new(shape: String)
     ApiContentMap.value = Shapes::ShapeRef.new(shape: PropertyParameters)
@@ -250,6 +265,9 @@ module Aws::BedrockAgentRuntime
 
     ExternalSources.member = Shapes::ShapeRef.new(shape: ExternalSource)
 
+    ExternalSourcesGenerationConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
+    ExternalSourcesGenerationConfiguration.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
+    ExternalSourcesGenerationConfiguration.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfig, location_name: "inferenceConfig"))
     ExternalSourcesGenerationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: PromptTemplate, location_name: "promptTemplate"))
     ExternalSourcesGenerationConfiguration.struct_class = Types::ExternalSourcesGenerationConfiguration
 
@@ -290,8 +308,18 @@ module Aws::BedrockAgentRuntime
     GeneratedResponsePart.add_member(:text_response_part, Shapes::ShapeRef.new(shape: TextResponsePart, location_name: "textResponsePart"))
     GeneratedResponsePart.struct_class = Types::GeneratedResponsePart
 
+    GenerationConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
+    GenerationConfiguration.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
+    GenerationConfiguration.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfig, location_name: "inferenceConfig"))
     GenerationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: PromptTemplate, location_name: "promptTemplate"))
     GenerationConfiguration.struct_class = Types::GenerationConfiguration
+
+    GuardrailConfiguration.add_member(:guardrail_id, Shapes::ShapeRef.new(shape: GuardrailConfigurationGuardrailIdString, required: true, location_name: "guardrailId"))
+    GuardrailConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailConfigurationGuardrailVersionString, required: true, location_name: "guardrailVersion"))
+    GuardrailConfiguration.struct_class = Types::GuardrailConfiguration
+
+    InferenceConfig.add_member(:text_inference_config, Shapes::ShapeRef.new(shape: TextInferenceConfig, location_name: "textInferenceConfig"))
+    InferenceConfig.struct_class = Types::InferenceConfig
 
     InferenceConfiguration.add_member(:maximum_length, Shapes::ShapeRef.new(shape: MaximumLength, location_name: "maximumLength"))
     InferenceConfiguration.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: StopSequences, location_name: "stopSequences"))
@@ -457,6 +485,8 @@ module Aws::BedrockAgentRuntime
     PropertyParameters.add_member(:properties, Shapes::ShapeRef.new(shape: ParameterList, location_name: "properties"))
     PropertyParameters.struct_class = Types::PropertyParameters
 
+    RAGStopSequences.member = Shapes::ShapeRef.new(shape: RAGStopSequencesMemberString)
+
     Rationale.add_member(:text, Shapes::ShapeRef.new(shape: RationaleString, location_name: "text"))
     Rationale.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     Rationale.struct_class = Types::Rationale
@@ -547,6 +577,7 @@ module Aws::BedrockAgentRuntime
     RetrieveAndGenerateRequest.struct_class = Types::RetrieveAndGenerateRequest
 
     RetrieveAndGenerateResponse.add_member(:citations, Shapes::ShapeRef.new(shape: Citations, location_name: "citations"))
+    RetrieveAndGenerateResponse.add_member(:guardrail_action, Shapes::ShapeRef.new(shape: GuadrailAction, location_name: "guardrailAction"))
     RetrieveAndGenerateResponse.add_member(:output, Shapes::ShapeRef.new(shape: RetrieveAndGenerateOutput, required: true, location_name: "output"))
     RetrieveAndGenerateResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "sessionId"))
     RetrieveAndGenerateResponse.struct_class = Types::RetrieveAndGenerateResponse
@@ -597,6 +628,12 @@ module Aws::BedrockAgentRuntime
     Span.struct_class = Types::Span
 
     StopSequences.member = Shapes::ShapeRef.new(shape: String)
+
+    TextInferenceConfig.add_member(:max_tokens, Shapes::ShapeRef.new(shape: MaxTokens, location_name: "maxTokens"))
+    TextInferenceConfig.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: RAGStopSequences, location_name: "stopSequences"))
+    TextInferenceConfig.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
+    TextInferenceConfig.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
+    TextInferenceConfig.struct_class = Types::TextInferenceConfig
 
     TextResponsePart.add_member(:span, Shapes::ShapeRef.new(shape: Span, location_name: "span"))
     TextResponsePart.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))

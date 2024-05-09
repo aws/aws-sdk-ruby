@@ -537,6 +537,12 @@ module Aws::Pinpoint
     #             email_message: {
     #               body: "__string",
     #               from_address: "__string",
+    #               headers: [
+    #                 {
+    #                   name: "__string",
+    #                   value: "__string",
+    #                 },
+    #               ],
     #               html_body: "__string",
     #               title: "__string",
     #             },
@@ -771,6 +777,12 @@ module Aws::Pinpoint
     #         email_message: {
     #           body: "__string",
     #           from_address: "__string",
+    #           headers: [
+    #             {
+    #               name: "__string",
+    #               value: "__string",
+    #             },
+    #           ],
     #           html_body: "__string",
     #           title: "__string",
     #         },
@@ -988,6 +1000,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1148,6 +1163,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
     #   resp.campaign_response.message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.message_configuration.email_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1274,6 +1292,12 @@ module Aws::Pinpoint
     #       html_part: "__string",
     #       recommender_id: "__string",
     #       subject: "__string",
+    #       headers: [
+    #         {
+    #           name: "__string",
+    #           value: "__string",
+    #         },
+    #       ],
     #       tags: {
     #         "__string" => "__string",
     #       },
@@ -3043,6 +3067,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -3203,6 +3230,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
     #   resp.campaign_response.message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.message_configuration.email_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -4684,6 +4714,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -4844,6 +4877,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
     #   resp.campaign_response.message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.message_configuration.email_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -5140,6 +5176,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -5300,6 +5339,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
     #   resp.campaign_response.message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.message_configuration.email_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -5488,6 +5530,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.from_address #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.headers #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.headers[0].value #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.html_body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -5648,6 +5693,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.default_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.from_address #=> String
+    #   resp.campaigns_response.item[0].message_configuration.email_message.headers #=> Array
+    #   resp.campaigns_response.item[0].message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaigns_response.item[0].message_configuration.email_message.headers[0].value #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.html_body #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -5835,6 +5883,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.from_address #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.headers #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.headers[0].value #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.html_body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.email_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -5995,6 +6046,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.default_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.from_address #=> String
+    #   resp.campaigns_response.item[0].message_configuration.email_message.headers #=> Array
+    #   resp.campaigns_response.item[0].message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaigns_response.item[0].message_configuration.email_message.headers[0].value #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.html_body #=> String
     #   resp.campaigns_response.item[0].message_configuration.email_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -6208,6 +6262,9 @@ module Aws::Pinpoint
     #   resp.email_template_response.last_modified_date #=> String
     #   resp.email_template_response.recommender_id #=> String
     #   resp.email_template_response.subject #=> String
+    #   resp.email_template_response.headers #=> Array
+    #   resp.email_template_response.headers[0].name #=> String
+    #   resp.email_template_response.headers[0].value #=> String
     #   resp.email_template_response.tags #=> Hash
     #   resp.email_template_response.tags["__string"] #=> String
     #   resp.email_template_response.template_description #=> String
@@ -9163,6 +9220,12 @@ module Aws::Pinpoint
     #               charset: "__string",
     #               data: "__string",
     #             },
+    #             headers: [
+    #               {
+    #                 name: "__string",
+    #                 value: "__string",
+    #               },
+    #             ],
     #           },
     #           substitutions: {
     #             "__string" => ["__string"],
@@ -9452,6 +9515,12 @@ module Aws::Pinpoint
     #               charset: "__string",
     #               data: "__string",
     #             },
+    #             headers: [
+    #               {
+    #                 name: "__string",
+    #                 value: "__string",
+    #               },
+    #             ],
     #           },
     #           substitutions: {
     #             "__string" => ["__string"],
@@ -10087,6 +10156,12 @@ module Aws::Pinpoint
     #             email_message: {
     #               body: "__string",
     #               from_address: "__string",
+    #               headers: [
+    #                 {
+    #                   name: "__string",
+    #                   value: "__string",
+    #                 },
+    #               ],
     #               html_body: "__string",
     #               title: "__string",
     #             },
@@ -10321,6 +10396,12 @@ module Aws::Pinpoint
     #         email_message: {
     #           body: "__string",
     #           from_address: "__string",
+    #           headers: [
+    #             {
+    #               name: "__string",
+    #               value: "__string",
+    #             },
+    #           ],
     #           html_body: "__string",
     #           title: "__string",
     #         },
@@ -10538,6 +10619,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.email_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -10698,6 +10782,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.default_message.url #=> String
     #   resp.campaign_response.message_configuration.email_message.body #=> String
     #   resp.campaign_response.message_configuration.email_message.from_address #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers #=> Array
+    #   resp.campaign_response.message_configuration.email_message.headers[0].name #=> String
+    #   resp.campaign_response.message_configuration.email_message.headers[0].value #=> String
     #   resp.campaign_response.message_configuration.email_message.html_body #=> String
     #   resp.campaign_response.message_configuration.email_message.title #=> String
     #   resp.campaign_response.message_configuration.gcm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -10884,6 +10971,12 @@ module Aws::Pinpoint
     #       html_part: "__string",
     #       recommender_id: "__string",
     #       subject: "__string",
+    #       headers: [
+    #         {
+    #           name: "__string",
+    #           value: "__string",
+    #         },
+    #       ],
     #       tags: {
     #         "__string" => "__string",
     #       },
@@ -12882,7 +12975,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

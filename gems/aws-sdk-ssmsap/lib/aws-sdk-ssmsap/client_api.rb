@@ -38,6 +38,7 @@ module Aws::SsmSap
     ComponentSummaryList = Shapes::ListShape.new(name: 'ComponentSummaryList')
     ComponentType = Shapes::StringShape.new(name: 'ComponentType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectedEntityType = Shapes::StringShape.new(name: 'ConnectedEntityType')
     CredentialType = Shapes::StringShape.new(name: 'CredentialType')
     Database = Shapes::StructureShape.new(name: 'Database')
     DatabaseConnection = Shapes::StructureShape.new(name: 'DatabaseConnection')
@@ -83,6 +84,8 @@ module Aws::SsmSap
     ListComponentsOutput = Shapes::StructureShape.new(name: 'ListComponentsOutput')
     ListDatabasesInput = Shapes::StructureShape.new(name: 'ListDatabasesInput')
     ListDatabasesOutput = Shapes::StructureShape.new(name: 'ListDatabasesOutput')
+    ListOperationEventsInput = Shapes::StructureShape.new(name: 'ListOperationEventsInput')
+    ListOperationEventsOutput = Shapes::StructureShape.new(name: 'ListOperationEventsOutput')
     ListOperationsInput = Shapes::StructureShape.new(name: 'ListOperationsInput')
     ListOperationsOutput = Shapes::StructureShape.new(name: 'ListOperationsOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -90,6 +93,10 @@ module Aws::SsmSap
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Operation = Shapes::StructureShape.new(name: 'Operation')
+    OperationEvent = Shapes::StructureShape.new(name: 'OperationEvent')
+    OperationEventList = Shapes::ListShape.new(name: 'OperationEventList')
+    OperationEventResourceType = Shapes::StringShape.new(name: 'OperationEventResourceType')
+    OperationEventStatus = Shapes::StringShape.new(name: 'OperationEventStatus')
     OperationId = Shapes::StringShape.new(name: 'OperationId')
     OperationIdList = Shapes::ListShape.new(name: 'OperationIdList')
     OperationList = Shapes::ListShape.new(name: 'OperationList')
@@ -104,6 +111,7 @@ module Aws::SsmSap
     RegisterApplicationOutput = Shapes::StructureShape.new(name: 'RegisterApplicationOutput')
     ReplicationMode = Shapes::StringShape.new(name: 'ReplicationMode')
     Resilience = Shapes::StructureShape.new(name: 'Resilience')
+    Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -111,8 +119,12 @@ module Aws::SsmSap
     SID = Shapes::StringShape.new(name: 'SID')
     SecretId = Shapes::StringShape.new(name: 'SecretId')
     SsmSapArn = Shapes::StringShape.new(name: 'SsmSapArn')
+    StartApplicationInput = Shapes::StructureShape.new(name: 'StartApplicationInput')
+    StartApplicationOutput = Shapes::StructureShape.new(name: 'StartApplicationOutput')
     StartApplicationRefreshInput = Shapes::StructureShape.new(name: 'StartApplicationRefreshInput')
     StartApplicationRefreshOutput = Shapes::StructureShape.new(name: 'StartApplicationRefreshOutput')
+    StopApplicationInput = Shapes::StructureShape.new(name: 'StopApplicationInput')
+    StopApplicationOutput = Shapes::StructureShape.new(name: 'StopApplicationOutput')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -341,6 +353,16 @@ module Aws::SsmSap
     ListDatabasesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDatabasesOutput.struct_class = Types::ListDatabasesOutput
 
+    ListOperationEventsInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, required: true, location_name: "OperationId"))
+    ListOperationEventsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListOperationEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOperationEventsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    ListOperationEventsInput.struct_class = Types::ListOperationEventsInput
+
+    ListOperationEventsOutput.add_member(:operation_events, Shapes::ShapeRef.new(shape: OperationEventList, location_name: "OperationEvents"))
+    ListOperationEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOperationEventsOutput.struct_class = Types::ListOperationEventsOutput
+
     ListOperationsInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
     ListOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListOperationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -369,6 +391,15 @@ module Aws::SsmSap
     Operation.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     Operation.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     Operation.struct_class = Types::Operation
+
+    OperationEvent.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    OperationEvent.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "Resource"))
+    OperationEvent.add_member(:status, Shapes::ShapeRef.new(shape: OperationEventStatus, location_name: "Status"))
+    OperationEvent.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    OperationEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    OperationEvent.struct_class = Types::OperationEvent
+
+    OperationEventList.member = Shapes::ShapeRef.new(shape: OperationEvent)
 
     OperationIdList.member = Shapes::ShapeRef.new(shape: OperationId)
 
@@ -406,14 +437,32 @@ module Aws::SsmSap
     Resilience.add_member(:enqueue_replication, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnqueueReplication"))
     Resilience.struct_class = Types::Resilience
 
+    Resource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn"))
+    Resource.add_member(:resource_type, Shapes::ShapeRef.new(shape: OperationEventResourceType, location_name: "ResourceType"))
+    Resource.struct_class = Types::Resource
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    StartApplicationInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
+    StartApplicationInput.struct_class = Types::StartApplicationInput
+
+    StartApplicationOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    StartApplicationOutput.struct_class = Types::StartApplicationOutput
 
     StartApplicationRefreshInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
     StartApplicationRefreshInput.struct_class = Types::StartApplicationRefreshInput
 
     StartApplicationRefreshOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     StartApplicationRefreshOutput.struct_class = Types::StartApplicationRefreshOutput
+
+    StopApplicationInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
+    StopApplicationInput.add_member(:stop_connected_entity, Shapes::ShapeRef.new(shape: ConnectedEntityType, location_name: "StopConnectedEntity"))
+    StopApplicationInput.add_member(:include_ec2_instance_shutdown, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeEc2InstanceShutdown"))
+    StopApplicationInput.struct_class = Types::StopApplicationInput
+
+    StopApplicationOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    StopApplicationOutput.struct_class = Types::StopApplicationOutput
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -594,6 +643,22 @@ module Aws::SsmSap
         )
       end)
 
+      api.add_operation(:list_operation_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOperationEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-operation-events"
+        o.input = Shapes::ShapeRef.new(shape: ListOperationEventsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListOperationEventsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_operations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListOperations"
         o.http_method = "POST"
@@ -644,6 +709,18 @@ module Aws::SsmSap
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/start-application"
+        o.input = Shapes::ShapeRef.new(shape: StartApplicationInput)
+        o.output = Shapes::ShapeRef.new(shape: StartApplicationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:start_application_refresh, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartApplicationRefresh"
         o.http_method = "POST"
@@ -651,6 +728,18 @@ module Aws::SsmSap
         o.input = Shapes::ShapeRef.new(shape: StartApplicationRefreshInput)
         o.output = Shapes::ShapeRef.new(shape: StartApplicationRefreshOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/stop-application"
+        o.input = Shapes::ShapeRef.new(shape: StopApplicationInput)
+        o.output = Shapes::ShapeRef.new(shape: StopApplicationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

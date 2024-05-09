@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2024-05-09)
+------------------
+
+* Feature - This release adds support to provide guardrail configuration and modify inference parameters that are then used in RetrieveAndGenerate API in Agents for Amazon Bedrock.
+
 1.7.0 (2024-04-25)
 ------------------
 

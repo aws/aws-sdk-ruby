@@ -91,13 +91,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControl` field of the [Retrieve response][1]
+    # * In the `returnControl` field of the [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] action_group
     #   The action group that the API operation belongs to.
@@ -137,13 +137,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1]
+    # * [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] name
     #   The name of the parameter.
@@ -172,13 +172,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1]
+    # * [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] content
     #   The content of the request body. The key of the object in this field
@@ -198,13 +198,14 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControlInvocationResults` of the [Retrieve request][1]
+    # * In the `returnControlInvocationResults` of the [InvokeAgent
+    #   request][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
     #
     # @!attribute [rw] action_group
     #   The action group that the API operation belongs to.
@@ -225,8 +226,8 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] response_body
     #   The response body from the API operation. The key of the object is
-    #   the content type. The response may be returned directly or from the
-    #   Lambda function.
+    #   the content type (currently, only `TEXT` is supported). The response
+    #   may be returned directly or from the Lambda function.
     #   @return [Hash<String,Types::ContentBody>]
     #
     # @!attribute [rw] response_state
@@ -317,13 +318,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1] – in the `citations` field
+    # * [InvokeAgent response][1] – in the `citations` field
     #
     # * [RetrieveAndGenerate response][2] – in the `citations` field
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
     #
     # @!attribute [rw] generated_response_part
@@ -363,14 +364,14 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControlInvocationResults` field of the [Retrieve
+    # * In the `returnControlInvocationResults` field of the [InvokeAgent
     #   request][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
     #
     # @!attribute [rw] body
     #   The body of the API response.
@@ -434,6 +435,22 @@ module Aws::BedrockAgentRuntime
     # Contains the generation configuration of the external source wrapper
     # object.
     #
+    # @!attribute [rw] additional_model_request_fields
+    #   Additional model parameters and their corresponding values not
+    #   included in the textInferenceConfig structure for an external
+    #   source. Takes in custom model parameters specific to the language
+    #   model being used.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] guardrail_configuration
+    #   The configuration details for the guardrail.
+    #   @return [Types::GuardrailConfiguration]
+    #
+    # @!attribute [rw] inference_config
+    #   Configuration settings for inference when using RetrieveAndGenerate
+    #   to generate responses while using an external source.
+    #   @return [Types::InferenceConfig]
+    #
     # @!attribute [rw] prompt_template
     #   Contain the textPromptTemplate string for the external source
     #   wrapper object.
@@ -442,6 +459,9 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ExternalSourcesGenerationConfiguration AWS API Documentation
     #
     class ExternalSourcesGenerationConfiguration < Struct.new(
+      :additional_model_request_fields,
+      :guardrail_configuration,
+      :inference_config,
       :prompt_template)
       SENSITIVE = []
       include Aws::Structure
@@ -545,13 +565,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControl` field of the [Retrieve response][1]
+    # * In the `returnControl` field of the [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] action_group
     #   The action group that the function belongs to.
@@ -579,13 +599,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControl` field of the [Retrieve response][1]
+    # * In the `returnControl` field of the [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] name
     #   The name of the parameter.
@@ -614,13 +634,14 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControlInvocationResults` of the [Retrieve request][1]
+    # * In the `returnControlInvocationResults` of the [InvokeAgent
+    #   request][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
     #
     # @!attribute [rw] action_group
     #   The action group that the function belongs to.
@@ -631,8 +652,10 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] response_body
-    #   The response from the function call using the parameters. The
-    #   response may be returned directly or from the Lambda function.
+    #   The response from the function call using the parameters. The key of
+    #   the object is the content type (currently, only `TEXT` is
+    #   supported). The response may be returned directly or from the Lambda
+    #   function.
     #   @return [Hash<String,Types::ContentBody>]
     #
     # @!attribute [rw] response_state
@@ -659,14 +682,14 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1] – in the `generatedResponsePart` field
+    # * [InvokeAgent response][1] – in the `generatedResponsePart` field
     #
     # * [RetrieveAndGenerate response][2] – in the `generatedResponsePart`
     #   field
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
     #
     # @!attribute [rw] text_response_part
@@ -695,6 +718,22 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
     #
+    # @!attribute [rw] additional_model_request_fields
+    #   Additional model parameters and corresponding values not included in
+    #   the textInferenceConfig structure for a knowledge base. This allows
+    #   users to provide custom model parameters specific to the language
+    #   model being used.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] guardrail_configuration
+    #   The configuration details for the guardrail.
+    #   @return [Types::GuardrailConfiguration]
+    #
+    # @!attribute [rw] inference_config
+    #   Configuration settings for inference when using RetrieveAndGenerate
+    #   to generate responses while using a knowledge base as a source.
+    #   @return [Types::InferenceConfig]
+    #
     # @!attribute [rw] prompt_template
     #   Contains the template for the prompt that's sent to the model for
     #   response generation.
@@ -703,7 +742,45 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GenerationConfiguration AWS API Documentation
     #
     class GenerationConfiguration < Struct.new(
+      :additional_model_request_fields,
+      :guardrail_configuration,
+      :inference_config,
       :prompt_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details for the guardrail.
+    #
+    # @!attribute [rw] guardrail_id
+    #   The unique identifier for the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_version
+    #   The version of the guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailConfiguration AWS API Documentation
+    #
+    class GuardrailConfiguration < Struct.new(
+      :guardrail_id,
+      :guardrail_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for inference settings when generating responses
+    # using RetrieveAndGenerate.
+    #
+    # @!attribute [rw] text_inference_config
+    #   Configuration settings specific to text generation while generating
+    #   responses using RetrieveAndGenerate.
+    #   @return [Types::TextInferenceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InferenceConfig AWS API Documentation
+    #
+    class InferenceConfig < Struct.new(
+      :text_inference_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -816,13 +893,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControl` field of the [Retrieve response][1]
+    # * In the `returnControl` field of the [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @note InvocationInputMember is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InvocationInputMember corresponding to the set member.
     #
@@ -851,17 +928,21 @@ module Aws::BedrockAgentRuntime
       class Unknown < InvocationInputMember; end
     end
 
-    # A result from the action group invocation.
+    # A result from the invocation of an action. For more information, see
+    # [Return control to the agent developer][1] and [Control session
+    # context][2].
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve request][1]
+    # * [InvokeAgent request][3]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
     #
     # @note InvocationResultMember is a union - when making an API calls you must set exactly one of the members.
     #
@@ -911,6 +992,11 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] input_text
     #   The prompt text to send the agent.
+    #
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the
+    #   `sessionState` field, the `inputText` field will be ignored.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -921,6 +1007,11 @@ module Aws::BedrockAgentRuntime
     # @!attribute [rw] session_state
     #   Contains parameters that specify various attributes of the session.
     #   For more information, see [Control session context][1].
+    #
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the
+    #   `sessionState` field, the `inputText` field will be ignored.
+    #
+    #    </note>
     #
     #
     #
@@ -1838,12 +1929,13 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][2] – in the `content` field
     #
-    # * [Retrieve response][1] – in the `content` field
+    # * [InvokeAgent response][3] – in the `content` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] text
     #   The cited text from the data source.
@@ -1865,12 +1957,13 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][2] – in the `location` field
     #
-    # * [Retrieve response][1] – in the `locatino` field
+    # * [InvokeAgent response][3] – in the `locatino` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] s3_location
     #   Contains the S3 location of the data source.
@@ -1897,12 +1990,13 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][2] – in the `s3Location` field
     #
-    # * [Retrieve response][1] – in the `s3Location` field
+    # * [InvokeAgent response][3] – in the `s3Location` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] uri
     #   The S3 URI of the data source.
@@ -2039,6 +2133,10 @@ module Aws::BedrockAgentRuntime
     #   sources.
     #   @return [Array<Types::Citation>]
     #
+    # @!attribute [rw] guardrail_action
+    #   Specifies if there is a guardrail intervention in the response.
+    #   @return [String]
+    #
     # @!attribute [rw] output
     #   Contains the response generated from querying the knowledge base.
     #   @return [Types::RetrieveAndGenerateOutput]
@@ -2052,6 +2150,7 @@ module Aws::BedrockAgentRuntime
     #
     class RetrieveAndGenerateResponse < Struct.new(
       :citations,
+      :guardrail_action,
       :output,
       :session_id)
       SENSITIVE = [:output]
@@ -2143,12 +2242,12 @@ module Aws::BedrockAgentRuntime
     # * [RetrieveAndGenerate response][1] – in the `retrievedReferences`
     #   field
     #
-    # * [Retrieve response][2] – in the `retrievedReferences` field
+    # * [InvokeAgent response][2] – in the `retrievedReferences` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] content
     #   Contains the cited text from the data source.
@@ -2182,13 +2281,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1]
+    # * [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] invocation_id
     #   The identifier of the action group invocation.
@@ -2254,7 +2353,17 @@ module Aws::BedrockAgentRuntime
     # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #
     # @!attribute [rw] invocation_id
-    #   The identifier of the invocation.
+    #   The identifier of the invocation of an action. This value must match
+    #   the `invocationId` returned in the `InvokeAgent` response for the
+    #   action whose results are provided in the
+    #   `returnControlInvocationResults` field. For more information, see
+    #   [Return control to the agent developer][1] and [Control session
+    #   context][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #   @return [String]
     #
     # @!attribute [rw] prompt_session_attributes
@@ -2271,7 +2380,17 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] return_control_invocation_results
     #   Contains information about the results from the action group
-    #   invocation.
+    #   invocation. For more information, see [Return control to the agent
+    #   developer][1] and [Control session context][2].
+    #
+    #   <note markdown="1"> If you include this field, the `inputText` field will be ignored.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #   @return [Array<Types::InvocationResultMember>]
     #
     # @!attribute [rw] session_attributes
@@ -2297,12 +2416,12 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][1] – in the `span` field
     #
-    # * [Retrieve response][2] – in the `span` field
+    # * [InvokeAgent response][2] – in the `span` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] end
     #   Where the text with a citation ends in the generated output.
@@ -2321,6 +2440,62 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Configuration settings for text generation using a language model via
+    # the RetrieveAndGenerate operation. Includes parameters like
+    # temperature, top-p, maximum token count, and stop sequences.
+    #
+    # <note markdown="1"> The valid range of `maxTokens` depends on the accepted values for your
+    # chosen model's inference parameters. To see the inference parameters
+    # for your model, see [Inference parameters for foundation models.][1]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+    #
+    # @!attribute [rw] max_tokens
+    #   The maximum number of tokens to generate in the output text. Do not
+    #   use the minimum of 0 or the maximum of 65536. The limit values
+    #   described here are arbitary values, for actual values consult the
+    #   limits defined by your specific model.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stop_sequences
+    #   A list of sequences of characters that, if generated, will cause the
+    #   model to stop generating further tokens. Do not use a minimum length
+    #   of 1 or a maximum length of 1000. The limit values described here
+    #   are arbitary values, for actual values consult the limits defined by
+    #   your specific model.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] temperature
+    #   Controls the random-ness of text generated by the language model,
+    #   influencing how much the model sticks to the most predictable next
+    #   words versus exploring more surprising options. A lower temperature
+    #   value (e.g. 0.2 or 0.3) makes model outputs more deterministic or
+    #   predictable, while a higher temperature (e.g. 0.8 or 0.9) makes the
+    #   outputs more creative or unpredictable.
+    #   @return [Float]
+    #
+    # @!attribute [rw] top_p
+    #   A probability distribution threshold which controls what the model
+    #   considers for the set of possible next tokens. The model will only
+    #   consider the top p% of the probability distribution when generating
+    #   the next token.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/TextInferenceConfig AWS API Documentation
+    #
+    class TextInferenceConfig < Struct.new(
+      :max_tokens,
+      :stop_sequences,
+      :temperature,
+      :top_p)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the part of the generated text that contains a citation,
     # alongside where it begins and ends.
     #
@@ -2328,12 +2503,12 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][1] – in the `textResponsePart` field
     #
-    # * [Retrieve response][2] – in the `textResponsePart` field
+    # * [InvokeAgent response][2] – in the `textResponsePart` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] span
     #   Contains information about where the text with a citation begins and

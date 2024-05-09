@@ -892,8 +892,10 @@ module Aws::VerifiedPermissions
     #   * {Types::CreatePolicyOutput#policy_type #policy_type} => String
     #   * {Types::CreatePolicyOutput#principal #principal} => Types::EntityIdentifier
     #   * {Types::CreatePolicyOutput#resource #resource} => Types::EntityIdentifier
+    #   * {Types::CreatePolicyOutput#actions #actions} => Array&lt;Types::ActionIdentifier&gt;
     #   * {Types::CreatePolicyOutput#created_date #created_date} => Time
     #   * {Types::CreatePolicyOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::CreatePolicyOutput#effect #effect} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -928,8 +930,12 @@ module Aws::VerifiedPermissions
     #   resp.principal.entity_id #=> String
     #   resp.resource.entity_type #=> String
     #   resp.resource.entity_id #=> String
+    #   resp.actions #=> Array
+    #   resp.actions[0].action_type #=> String
+    #   resp.actions[0].action_id #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.effect #=> String, one of "Permit", "Forbid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CreatePolicy AWS API Documentation
     #
@@ -1317,9 +1323,11 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyOutput#policy_type #policy_type} => String
     #   * {Types::GetPolicyOutput#principal #principal} => Types::EntityIdentifier
     #   * {Types::GetPolicyOutput#resource #resource} => Types::EntityIdentifier
+    #   * {Types::GetPolicyOutput#actions #actions} => Array&lt;Types::ActionIdentifier&gt;
     #   * {Types::GetPolicyOutput#definition #definition} => Types::PolicyDefinitionDetail
     #   * {Types::GetPolicyOutput#created_date #created_date} => Time
     #   * {Types::GetPolicyOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::GetPolicyOutput#effect #effect} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1337,6 +1345,9 @@ module Aws::VerifiedPermissions
     #   resp.principal.entity_id #=> String
     #   resp.resource.entity_type #=> String
     #   resp.resource.entity_id #=> String
+    #   resp.actions #=> Array
+    #   resp.actions[0].action_type #=> String
+    #   resp.actions[0].action_id #=> String
     #   resp.definition.static.description #=> String
     #   resp.definition.static.statement #=> String
     #   resp.definition.template_linked.policy_template_id #=> String
@@ -1346,6 +1357,7 @@ module Aws::VerifiedPermissions
     #   resp.definition.template_linked.resource.entity_id #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.effect #=> String, one of "Permit", "Forbid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicy AWS API Documentation
     #
@@ -1747,7 +1759,7 @@ module Aws::VerifiedPermissions
     #   every operation to ensure that you receive all of the results.
     #
     #   If you do not specify this parameter, the operation defaults to 10
-    #   identity sources per response. You can specify a maximum of 200
+    #   identity sources per response. You can specify a maximum of 50
     #   identity sources per response.
     #
     # @option params [Array<Types::IdentitySourceFilter>] :filters
@@ -1879,6 +1891,9 @@ module Aws::VerifiedPermissions
     #   resp.policies[0].principal.entity_id #=> String
     #   resp.policies[0].resource.entity_type #=> String
     #   resp.policies[0].resource.entity_id #=> String
+    #   resp.policies[0].actions #=> Array
+    #   resp.policies[0].actions[0].action_type #=> String
+    #   resp.policies[0].actions[0].action_id #=> String
     #   resp.policies[0].definition.static.description #=> String
     #   resp.policies[0].definition.template_linked.policy_template_id #=> String
     #   resp.policies[0].definition.template_linked.principal.entity_type #=> String
@@ -1887,6 +1902,7 @@ module Aws::VerifiedPermissions
     #   resp.policies[0].definition.template_linked.resource.entity_id #=> String
     #   resp.policies[0].created_date #=> Time
     #   resp.policies[0].last_updated_date #=> Time
+    #   resp.policies[0].effect #=> String, one of "Permit", "Forbid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListPolicies AWS API Documentation
     #
@@ -2234,8 +2250,10 @@ module Aws::VerifiedPermissions
     #   * {Types::UpdatePolicyOutput#policy_type #policy_type} => String
     #   * {Types::UpdatePolicyOutput#principal #principal} => Types::EntityIdentifier
     #   * {Types::UpdatePolicyOutput#resource #resource} => Types::EntityIdentifier
+    #   * {Types::UpdatePolicyOutput#actions #actions} => Array&lt;Types::ActionIdentifier&gt;
     #   * {Types::UpdatePolicyOutput#created_date #created_date} => Time
     #   * {Types::UpdatePolicyOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::UpdatePolicyOutput#effect #effect} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2259,8 +2277,12 @@ module Aws::VerifiedPermissions
     #   resp.principal.entity_id #=> String
     #   resp.resource.entity_type #=> String
     #   resp.resource.entity_id #=> String
+    #   resp.actions #=> Array
+    #   resp.actions[0].action_type #=> String
+    #   resp.actions[0].action_id #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.effect #=> String, one of "Permit", "Forbid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdatePolicy AWS API Documentation
     #
@@ -2418,7 +2440,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

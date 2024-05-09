@@ -220,8 +220,10 @@ module Aws::VerifiedPermissions
       attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
       attr_accessor principal: Types::EntityIdentifier
       attr_accessor resource: Types::EntityIdentifier
+      attr_accessor actions: ::Array[Types::ActionIdentifier]
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
+      attr_accessor effect: ("Permit" | "Forbid")
       SENSITIVE: []
     end
 
@@ -368,9 +370,11 @@ module Aws::VerifiedPermissions
       attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
       attr_accessor principal: Types::EntityIdentifier
       attr_accessor resource: Types::EntityIdentifier
+      attr_accessor actions: ::Array[Types::ActionIdentifier]
       attr_accessor definition: Types::PolicyDefinitionDetail
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
+      attr_accessor effect: ("Permit" | "Forbid")
       SENSITIVE: []
     end
 
@@ -601,9 +605,11 @@ module Aws::VerifiedPermissions
       attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
       attr_accessor principal: Types::EntityIdentifier
       attr_accessor resource: Types::EntityIdentifier
+      attr_accessor actions: ::Array[Types::ActionIdentifier]
       attr_accessor definition: Types::PolicyDefinitionItem
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
+      attr_accessor effect: ("Permit" | "Forbid")
       SENSITIVE: []
     end
 
@@ -780,8 +786,10 @@ module Aws::VerifiedPermissions
       attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
       attr_accessor principal: Types::EntityIdentifier
       attr_accessor resource: Types::EntityIdentifier
+      attr_accessor actions: ::Array[Types::ActionIdentifier]
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
+      attr_accessor effect: ("Permit" | "Forbid")
       SENSITIVE: []
     end
 
