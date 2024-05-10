@@ -611,26 +611,9 @@ module Aws::GreengrassV2
     #   migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass
     #   V2.
     #
-    #   This function only accepts Lambda functions that use the following
-    #   runtimes:
-    #
-    #   * Python 2.7 – `python2.7`
-    #
-    #   * Python 3.7 – `python3.7`
-    #
-    #   * Python 3.8 – `python3.8`
-    #
-    #   * Python 3.9 – `python3.9`
-    #
-    #   * Java 8 – `java8`
-    #
-    #   * Java 11 – `java11`
-    #
-    #   * Node.js 10 – `nodejs10.x`
-    #
-    #   * Node.js 12 – `nodejs12.x`
-    #
-    #   * Node.js 14 – `nodejs14.x`
+    #   This function accepts Lambda functions in all supported versions of
+    #   Python, Node.js, and Java runtimes. IoT Greengrass doesn't apply
+    #   any additional restrictions on deprecated Lambda runtime versions.
     #
     #   To create a component from a Lambda function, specify
     #   `lambdaFunction` when you call this operation.
@@ -866,7 +849,7 @@ module Aws::GreengrassV2
     #     deployment_name: "DeploymentNameString",
     #     components: {
     #       "NonEmptyString" => {
-    #         component_version: "ComponentVersionString",
+    #         component_version: "ComponentVersionString", # required
     #         configuration_update: {
     #           merge: "ComponentConfigurationString",
     #           reset: ["ComponentConfigurationPath"],
@@ -1186,6 +1169,20 @@ module Aws::GreengrassV2
     #
     #   [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html
     #
+    # @option params [String] :s3_endpoint_type
+    #   Specifies the endpoint to use when getting Amazon S3 pre-signed URLs.
+    #
+    #   All Amazon Web Services Regions except US East (N. Virginia) use
+    #   `REGIONAL` in all cases. In the US East (N. Virginia) Region the
+    #   default is `GLOBAL`, but you can change it to `REGIONAL` with this
+    #   parameter.
+    #
+    # @option params [String] :iot_endpoint_type
+    #   Determines if the Amazon S3 URL returned is a FIPS pre-signed URL
+    #   endpoint. Specify `fips` if you want the returned Amazon S3 pre-signed
+    #   URL to point to an Amazon S3 FIPS endpoint. If you don't specify a
+    #   value, the default is `standard`.
+    #
     # @return [Types::GetComponentVersionArtifactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetComponentVersionArtifactResponse#pre_signed_url #pre_signed_url} => String
@@ -1195,6 +1192,8 @@ module Aws::GreengrassV2
     #   resp = client.get_component_version_artifact({
     #     arn: "ComponentVersionARN", # required
     #     artifact_name: "NonEmptyString", # required
+    #     s3_endpoint_type: "REGIONAL", # accepts REGIONAL, GLOBAL
+    #     iot_endpoint_type: "fips", # accepts fips, standard
     #   })
     #
     # @example Response structure
@@ -1699,6 +1698,8 @@ module Aws::GreengrassV2
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
     #
+    #   Default: `50`
+    #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
     #
@@ -2136,7 +2137,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

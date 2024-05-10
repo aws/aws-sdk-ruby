@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.195.0 (2024-05-10)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated request parameters for PKCE support.
+
 3.194.2 (2024-05-07)
 ------------------
 

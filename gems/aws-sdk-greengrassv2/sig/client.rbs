@@ -203,7 +203,7 @@ module Aws
                                target_arn: ::String,
                                ?deployment_name: ::String,
                                ?components: Hash[::String, {
-                                   component_version: ::String?,
+                                   component_version: ::String,
                                    configuration_update: {
                                      merge: ::String?,
                                      reset: Array[::String]?
@@ -324,7 +324,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#get_component_version_artifact-instance_method
       def get_component_version_artifact: (
                                             arn: ::String,
-                                            artifact_name: ::String
+                                            artifact_name: ::String,
+                                            ?s3_endpoint_type: ("REGIONAL" | "GLOBAL"),
+                                            ?iot_endpoint_type: ("fips" | "standard")
                                           ) -> _GetComponentVersionArtifactResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentVersionArtifactResponseSuccess
 

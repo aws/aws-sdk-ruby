@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2024-05-10)
+------------------
+
+* Feature - Mark ComponentVersion in ComponentDeploymentSpecification as required.
+
 1.36.0 (2024-04-25)
 ------------------
 
