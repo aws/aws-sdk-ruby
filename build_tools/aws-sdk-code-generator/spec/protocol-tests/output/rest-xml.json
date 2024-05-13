@@ -597,7 +597,7 @@
                     }
                 },
                 "response": {
-                    "status_code": 400,
+                    "status_code": 403,
                     "headers": {
                         "Content-Type": "application/xml",
                         "X-Header": "Header"

@@ -537,14 +537,14 @@
                     },
                     "documentation": "<p>This test serializes simple and complex lists.</p>"
                 },
-                "description": "Serializes empty query lists",
+                "description": "Does not serialize empty query lists.",
                 "params": {
                     "ListArg": []
                 },
                 "serialized": {
                     "method": "POST",
                     "uri": "/",
-                    "body": "Action=QueryLists&Version=2020-01-08&ListArg=",
+                    "body": "Action=QueryLists&Version=2020-01-08",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
                     }

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-resiliencehub/customizations'
 # @!group service
 module Aws::ResilienceHub
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end

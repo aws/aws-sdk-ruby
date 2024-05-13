@@ -52,6 +52,6 @@ require_relative 'aws-sdk-inspector2/customizations'
 # @!group service
 module Aws::Inspector2
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end

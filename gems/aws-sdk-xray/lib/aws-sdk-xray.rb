@@ -52,6 +52,6 @@ require_relative 'aws-sdk-xray/customizations'
 # @!group service
 module Aws::XRay
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end

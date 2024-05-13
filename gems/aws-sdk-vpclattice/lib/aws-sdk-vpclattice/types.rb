@@ -214,11 +214,7 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] default_action
     #   The action for the default rule. Each listener has a default rule.
-    #   Each rule consists of a priority, one or more actions, and one or
-    #   more conditions. The default rule is the rule that's used if no
-    #   other rules match. Each rule must include exactly one of the
-    #   following types of actions: `forward `or `fixed-response`, and it
-    #   must be the last action to be performed.
+    #   The default rule is used if no other rules match.
     #   @return [Types::RuleAction]
     #
     # @!attribute [rw] name
@@ -229,12 +225,12 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The listener port. You can specify a value from `1` to `65535`. For
-    #   HTTP, the default is `80`. For HTTPS, the default is `443`.
+    #   The listener port. You can specify a value from 1 to 65535. For
+    #   HTTP, the default is 80. For HTTPS, the default is 443.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The listener protocol HTTP or HTTPS.
+    #   The listener protocol.
     #   @return [String]
     #
     # @!attribute [rw] service_identifier
@@ -366,9 +362,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] action
-    #   The rule action. Each rule must include exactly one of the following
-    #   types of actions: `forward `or `fixed-response`, and it must be the
-    #   last action to be performed.
+    #   The rule action.
     #   @return [Types::RuleAction]
     #
     # @!attribute [rw] arn
@@ -534,7 +528,7 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The operation's status.
+    #   The association status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkServiceAssociationResponse AWS API Documentation
@@ -617,7 +611,7 @@ module Aws::VPCLattice
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
-    #   The operation's status.
+    #   The association status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkVpcAssociationResponse AWS API Documentation
@@ -714,8 +708,8 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status. If the status is `CREATE_FAILED`, you will have to
-    #   delete and recreate the service.
+    #   The status. If the status is `CREATE_FAILED`, you must delete and
+    #   recreate the service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceResponse AWS API Documentation
@@ -745,8 +739,7 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] config
-    #   The target group configuration. If `type` is set to `LAMBDA`, this
-    #   parameter doesn't apply.
+    #   The target group configuration.
     #   @return [Types::TargetGroupConfig]
     #
     # @!attribute [rw] name
@@ -781,8 +774,7 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] config
-    #   The target group configuration. If `type` is set to `LAMBDA`, this
-    #   parameter doesn't apply.
+    #   The target group configuration.
     #   @return [Types::TargetGroupConfig]
     #
     # @!attribute [rw] id
@@ -794,8 +786,8 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The operation's status. You can retry the operation if the status
-    #   is `CREATE_FAILED`. However, if you retry it while the status is
+    #   The status. You can retry the operation if the status is
+    #   `CREATE_FAILED`. However, if you retry it while the status is
     #   `CREATE_IN_PROGRESS`, there is no change in the status.
     #   @return [String]
     #
@@ -948,8 +940,8 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The operation's status. You can retry the operation if the status
-    #   is `DELETE_FAILED`. However, if you retry it when the status is
+    #   The status. You can retry the operation if the status is
+    #   `DELETE_FAILED`. However, if you retry it when the status is
     #   `DELETE_IN_PROGRESS`, there is no change in the status.
     #   @return [String]
     #
@@ -985,7 +977,7 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] status
     #   The status. You can retry the operation if the status is
-    #   `DELETE_FAILED`. However, if you retry it when the status is
+    #   `DELETE_FAILED`. However, if you retry it while the status is
     #   `DELETE_IN_PROGRESS`, there is no change in the status.
     #   @return [String]
     #
@@ -1129,7 +1121,7 @@ module Aws::VPCLattice
       include Aws::Structure
     end
 
-    # Information about an action that returns a custom HTTP response.
+    # Describes an action that returns a custom HTTP response.
     #
     # @!attribute [rw] status_code
     #   The HTTP response code.
@@ -1156,8 +1148,8 @@ module Aws::VPCLattice
     #   traffic.
     #
     #   The default value is 1. This means that if only one target group is
-    #   provided, there is no need to set the weight; 100% of traffic will
-    #   go to that target group.
+    #   provided, there is no need to set the weight; 100% of the traffic
+    #   goes to that target group.
     #   @return [Array<Types::WeightedTargetGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ForwardAction AWS API Documentation
@@ -1253,12 +1245,12 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] state
     #   The state of the auth policy. The auth policy is only active when
-    #   the auth type is set to `Amazon Web Services_IAM`. If you provide a
-    #   policy, then authentication and authorization decisions are made
-    #   based on this policy and the client's IAM policy. If the auth type
-    #   is `NONE`, then any auth policy you provide will remain inactive.
-    #   For more information, see [Create a service network][1] in the
-    #   *Amazon VPC Lattice User Guide*.
+    #   the auth type is set to `AWS_IAM`. If you provide a policy, then
+    #   authentication and authorization decisions are made based on this
+    #   policy and the client's IAM policy. If the auth type is `NONE`,
+    #   then any auth policy that you provide remains inactive. For more
+    #   information, see [Create a service network][1] in the *Amazon VPC
+    #   Lattice User Guide*.
     #
     #
     #
@@ -1353,7 +1345,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] resource_arn
-    #   An IAM policy.
+    #   The Amazon Resource Name (ARN) of the service network or service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourcePolicyRequest AWS API Documentation
@@ -1365,7 +1357,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   The Amazon Resource Name (ARN) of the service network or service.
+    #   An IAM policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourcePolicyResponse AWS API Documentation
@@ -1856,7 +1848,7 @@ module Aws::VPCLattice
     # action.
     #
     # @!attribute [rw] case_sensitive
-    #   Indicates whether the match is case sensitive. Defaults to false.
+    #   Indicates whether the match is case sensitive.
     #   @return [Boolean]
     #
     # @!attribute [rw] match
@@ -1877,22 +1869,22 @@ module Aws::VPCLattice
       include Aws::Structure
     end
 
-    # Describes a header match type. Only one can be provided.
+    # Describes a header match type.
     #
     # @note HeaderMatchType is a union - when making an API calls you must set exactly one of the members.
     #
     # @note HeaderMatchType is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HeaderMatchType corresponding to the set member.
     #
     # @!attribute [rw] contains
-    #   Specifies a contains type match.
+    #   A contains type match.
     #   @return [String]
     #
     # @!attribute [rw] exact
-    #   Specifies an exact type match.
+    #   An exact type match.
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   Specifies a prefix type match. Matches the value with the prefix.
+    #   A prefix type match. Matches the value with the prefix.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/HeaderMatchType AWS API Documentation
@@ -1912,8 +1904,9 @@ module Aws::VPCLattice
       class Unknown < HeaderMatchType; end
     end
 
-    # The health check configuration of a target group. Health check
-    # configurations aren't used for `LAMBDA` and `ALB` target groups.
+    # Describes the health check configuration of a target group. Health
+    # check configurations aren't used for target groups of type `LAMBDA`
+    # or `ALB`.
     #
     # @!attribute [rw] enabled
     #   Indicates whether health checking is enabled.
@@ -1938,7 +1931,7 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] matcher
     #   The codes to use when checking for a successful response from a
-    #   target. These are called *Success codes* in the console.
+    #   target.
     #   @return [Types::Matcher]
     #
     # @!attribute [rw] path
@@ -2053,7 +2046,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] items
-    #   The access log subscriptions.
+    #   Information about the access log subscriptions.
     #   @return [Array<Types::AccessLogSubscriptionSummary>]
     #
     # @!attribute [rw] next_token
@@ -2297,7 +2290,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] items
-    #   The services.
+    #   Information about the services.
     #   @return [Array<Types::ServiceSummary>]
     #
     # @!attribute [rw] next_token
@@ -2327,7 +2320,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] tags
-    #   The tags.
+    #   Information about the tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListTagsForResourceResponse AWS API Documentation
@@ -2351,7 +2344,7 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] vpc_identifier
-    #   The ID or Amazon Resource Name (ARN) of the service.
+    #   The ID or Amazon Resource Name (ARN) of the VPC.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListTargetGroupsRequest AWS API Documentation
@@ -2396,7 +2389,7 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets to list.
+    #   The targets.
     #   @return [Array<Types::Target>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListTargetsRequest AWS API Documentation
@@ -2474,8 +2467,8 @@ module Aws::VPCLattice
       include Aws::Structure
     end
 
-    # The codes to use when checking for a successful response from a target
-    # for health checks.
+    # Describes the codes to use when checking for a successful response
+    # from a target for health checks.
     #
     # @note Matcher is a union - when making an API calls you must set exactly one of the members.
     #
@@ -2503,7 +2496,7 @@ module Aws::VPCLattice
     # incoming requests.
     #
     # @!attribute [rw] case_sensitive
-    #   Indicates whether the match is case sensitive. Defaults to false.
+    #   Indicates whether the match is case sensitive.
     #   @return [Boolean]
     #
     # @!attribute [rw] match
@@ -2550,7 +2543,8 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   The auth policy.
+    #   The auth policy. The policy string in JSON must not contain newlines
+    #   or blank lines.
     #   @return [String]
     #
     # @!attribute [rw] resource_identifier
@@ -2568,17 +2562,18 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   The auth policy.
+    #   The auth policy. The policy string in JSON must not contain newlines
+    #   or blank lines.
     #   @return [String]
     #
     # @!attribute [rw] state
     #   The state of the auth policy. The auth policy is only active when
-    #   the auth type is set to `Amazon Web Services_IAM`. If you provide a
-    #   policy, then authentication and authorization decisions are made
-    #   based on this policy and the client's IAM policy. If the Auth type
-    #   is `NONE`, then, any auth policy you provide will remain inactive.
-    #   For more information, see [Create a service network][1] in the
-    #   *Amazon VPC Lattice User Guide*.
+    #   the auth type is set to `AWS_IAM`. If you provide a policy, then
+    #   authentication and authorization decisions are made based on this
+    #   policy and the client's IAM policy. If the Auth type is `NONE`,
+    #   then, any auth policy that you provide remains inactive. For more
+    #   information, see [Create a service network][1] in the *Amazon VPC
+    #   Lattice User Guide*.
     #
     #
     #
@@ -2595,7 +2590,8 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   An IAM policy.
+    #   An IAM policy. The policy string in JSON must not contain newlines
+    #   or blank lines.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -2673,16 +2669,14 @@ module Aws::VPCLattice
       include Aws::Structure
     end
 
-    # Describes the action for a rule. Each rule must include exactly one of
-    # the following types of actions: `forward `or `fixed-response`, and it
-    # must be the last action to be performed.
+    # Describes the action for a rule.
     #
     # @note RuleAction is a union - when making an API calls you must set exactly one of the members.
     #
     # @note RuleAction is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RuleAction corresponding to the set member.
     #
     # @!attribute [rw] fixed_response
-    #   Describes the rule action that returns a custom HTTP response.
+    #   The fixed response action. The rule returns a custom HTTP response.
     #   @return [Types::FixedResponseAction]
     #
     # @!attribute [rw] forward
@@ -2744,9 +2738,7 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] is_default
-    #   Indicates whether this is the default rule. Listener rules are
-    #   created when you create a listener. Each listener has a default rule
-    #   for checking connection requests.
+    #   Indicates whether this is the default listener rule.
     #   @return [Boolean]
     #
     # @!attribute [rw] last_updated_at
@@ -2776,7 +2768,7 @@ module Aws::VPCLattice
       include Aws::Structure
     end
 
-    # Represents an object when updating a rule.
+    # Describes a rule update.
     #
     # @!attribute [rw] action
     #   The rule action.
@@ -2833,7 +2825,7 @@ module Aws::VPCLattice
     # Describes a successful rule update.
     #
     # @!attribute [rw] action
-    #   The action for the default rule.
+    #   The action for the rule.
     #   @return [Types::RuleAction]
     #
     # @!attribute [rw] arn
@@ -2895,7 +2887,7 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] dns_entry
-    #   DNS information about the service.
+    #   The DNS information.
     #   @return [Types::DnsEntry]
     #
     # @!attribute [rw] id
@@ -3107,7 +3099,7 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] dns_entry
-    #   DNS information about the service.
+    #   The DNS information.
     #   @return [Types::DnsEntry]
     #
     # @!attribute [rw] id
@@ -3166,16 +3158,16 @@ module Aws::VPCLattice
     # Describes a target.
     #
     # @!attribute [rw] id
-    #   The ID of the target. If the target type of the target group is
-    #   `INSTANCE`, this is an instance ID. If the target type is `IP` ,
-    #   this is an IP address. If the target type is `LAMBDA`, this is the
-    #   ARN of the Lambda function. If the target type is `ALB`, this is the
-    #   ARN of the Application Load Balancer.
+    #   The ID of the target. If the target group type is `INSTANCE`, this
+    #   is an instance ID. If the target group type is `IP`, this is an IP
+    #   address. If the target group type is `LAMBDA`, this is the ARN of a
+    #   Lambda function. If the target group type is `ALB`, this is the ARN
+    #   of an Application Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] port
     #   The port on which the target is listening. For HTTP, the default is
-    #   `80`. For HTTPS, the default is `443`.
+    #   80. For HTTPS, the default is 443.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/Target AWS API Documentation
@@ -3198,11 +3190,11 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID of the target. If the target type of the target group is
-    #   `INSTANCE`, this is an instance ID. If the target type is `IP` ,
-    #   this is an IP address. If the target type is `LAMBDA`, this is the
-    #   ARN of the Lambda function. If the target type is `ALB`, this is the
-    #   ARN of the Application Load Balancer.
+    #   The ID of the target. If the target group type is `INSTANCE`, this
+    #   is an instance ID. If the target group type is `IP`, this is an IP
+    #   address. If the target group type is `LAMBDA`, this is the ARN of a
+    #   Lambda function. If the target group type is `ALB`, this is the ARN
+    #   of an Application Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -3221,39 +3213,51 @@ module Aws::VPCLattice
       include Aws::Structure
     end
 
-    # Describes the configuration of a target group. Lambda functions don't
-    # support target group configuration.
+    # Describes the configuration of a target group.
+    #
+    # For more information, see [Target groups][1] in the *Amazon VPC
+    # Lattice User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html
     #
     # @!attribute [rw] health_check
-    #   The health check configuration.
+    #   The health check configuration. Not supported if the target group
+    #   type is `LAMBDA` or `ALB`.
     #   @return [Types::HealthCheckConfig]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP address used for the target group. The possible
-    #   values are `ipv4` and `ipv6`. This is an optional parameter. If not
-    #   specified, the IP address type defaults to `ipv4`.
+    #   The type of IP address used for the target group. Supported only if
+    #   the target group type is `IP`. The default is `IPV4`.
     #   @return [String]
     #
     # @!attribute [rw] lambda_event_structure_version
-    #   Lambda event structure version
+    #   The version of the event structure that your Lambda function
+    #   receives. Supported only if the target group type is `LAMBDA`. The
+    #   default is `V1`.
     #   @return [String]
     #
     # @!attribute [rw] port
     #   The port on which the targets are listening. For HTTP, the default
-    #   is `80`. For HTTPS, the default is `443`
+    #   is 80. For HTTPS, the default is 443. Not supported if the target
+    #   group type is `LAMBDA`.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol to use for routing traffic to the targets. Default is
-    #   the protocol of a target group.
+    #   The protocol to use for routing traffic to the targets. The default
+    #   is the protocol of the target group. Not supported if the target
+    #   group type is `LAMBDA`.
     #   @return [String]
     #
     # @!attribute [rw] protocol_version
-    #   The protocol version. Default value is `HTTP1`.
+    #   The protocol version. The default is `HTTP1`. Not supported if the
+    #   target group type is `LAMBDA`.
     #   @return [String]
     #
     # @!attribute [rw] vpc_identifier
-    #   The ID of the VPC.
+    #   The ID of the VPC. Not supported if the target group type is
+    #   `LAMBDA`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/TargetGroupConfig AWS API Documentation
@@ -3272,6 +3276,13 @@ module Aws::VPCLattice
 
     # Summary information about a target group.
     #
+    # For more information, see [Target groups][1] in the *Amazon VPC
+    # Lattice User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html
+    #
     # @!attribute [rw] arn
     #   The ARN (Amazon Resource Name) of the target group.
     #   @return [String]
@@ -3287,12 +3298,13 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] ip_address_type
     #   The type of IP address used for the target group. The possible
-    #   values are `ipv4` and `ipv6`. This is an optional parameter. If not
-    #   specified, the IP address type defaults to `ipv4`.
+    #   values are `IPV4` and `IPV6`. This is an optional parameter. If not
+    #   specified, the default is `IPV4`.
     #   @return [String]
     #
     # @!attribute [rw] lambda_event_structure_version
-    #   Lambda event structure version
+    #   The version of the event structure that your Lambda function
+    #   receives. Supported only if the target group type is `LAMBDA`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -3313,7 +3325,7 @@ module Aws::VPCLattice
     #   @return [String]
     #
     # @!attribute [rw] service_arns
-    #   The list of Amazon Resource Names (ARNs) of the service.
+    #   The Amazon Resource Names (ARNs) of the service.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
@@ -3351,11 +3363,11 @@ module Aws::VPCLattice
     # Summary information about a target.
     #
     # @!attribute [rw] id
-    #   The ID of the target. If the target type of the target group is
-    #   `INSTANCE`, this is an instance ID. If the target type is `IP` ,
-    #   this is an IP address. If the target type is `LAMBDA`, this is the
-    #   ARN of the Lambda function. If the target type is `ALB`, this is the
-    #   ARN of the Application Load Balancer.
+    #   The ID of the target. If the target group type is `INSTANCE`, this
+    #   is an instance ID. If the target group type is `IP`, this is an IP
+    #   address. If the target group type is `LAMBDA`, this is the ARN of a
+    #   Lambda function. If the target type is `ALB`, this is the ARN of an
+    #   Application Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -3369,20 +3381,20 @@ module Aws::VPCLattice
     # @!attribute [rw] status
     #   The status of the target.
     #
-    #   * `Draining`: The target is being deregistered. No new connections
-    #     will be sent to this target while current connections are being
-    #     drained. Default draining time is 5 minutes.
+    #   * `DRAINING`: The target is being deregistered. No new connections
+    #     are sent to this target while current connections are being
+    #     drained. The default draining time is 5 minutes.
     #
-    #   * `Unavailable`: Health checks are unavailable for the target group.
+    #   * `UNAVAILABLE`: Health checks are unavailable for the target group.
     #
-    #   * `Healthy`: The target is healthy.
+    #   * `HEALTHY`: The target is healthy.
     #
-    #   * `Unhealthy`: The target is unhealthy.
+    #   * `UNHEALTHY`: The target is unhealthy.
     #
-    #   * `Initial`: Initial health checks on the target are being
+    #   * `INITIAL`: Initial health checks on the target are being
     #     performed.
     #
-    #   * `Unused`: Target group is not used in a service.
+    #   * `UNUSED`: Target group is not used in a service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/TargetSummary AWS API Documentation
@@ -3694,8 +3706,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] security_group_ids
-    #   The IDs of the security groups. Once you add a security group, it
-    #   cannot be removed.
+    #   The IDs of the security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_network_vpc_association_identifier
@@ -3891,7 +3902,7 @@ module Aws::VPCLattice
     # Describes a validation failure.
     #
     # @!attribute [rw] message
-    #   Additional details about why the validation failed.
+    #   Additional information about why the validation failed.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3915,12 +3926,12 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] weight
     #   Only required if you specify multiple target groups for a forward
-    #   action. The "weight" determines how requests are distributed to
-    #   the target group. For example, if you specify two target groups,
-    #   each with a weight of 10, each target group receives half the
-    #   requests. If you specify two target groups, one with a weight of 10
-    #   and the other with a weight of 20, the target group with a weight of
-    #   20 receives twice as many requests as the other target group. If
+    #   action. The weight determines how requests are distributed to the
+    #   target group. For example, if you specify two target groups, each
+    #   with a weight of 10, each target group receives half the requests.
+    #   If you specify two target groups, one with a weight of 10 and the
+    #   other with a weight of 20, the target group with a weight of 20
+    #   receives twice as many requests as the other target group. If
     #   there's only one target group specified, then the default value is
     #   100.
     #   @return [Integer]

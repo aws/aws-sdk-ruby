@@ -1053,6 +1053,58 @@ module Aws::EventBridge
     #   event source that the new event bus will be matched with.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   The event bus description.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to
+    #   use, if you choose to use a customer managed key to encrypt events
+    #   on this event bus. The identifier can be the key Amazon Resource
+    #   Name (ARN), KeyId, key alias, or key alias ARN.
+    #
+    #   If you do not specify a customer managed key identifier, EventBridge
+    #   uses an Amazon Web Services owned key to encrypt events on the event
+    #   bus.
+    #
+    #   For more information, see [Managing keys][1] in the *Key Management
+    #   Service Developer Guide*.
+    #
+    #   <note markdown="1"> Archives and schema discovery are not supported for event buses
+    #   encrypted using a customer managed key. EventBridge returns an error
+    #   if:
+    #
+    #    * You call ` CreateArchive ` on an event bus set to use a customer
+    #     managed key for encryption.
+    #
+    #   * You call ` CreateDiscoverer ` on an event bus set to use a
+    #     customer managed key for encryption.
+    #
+    #   * You call ` UpdatedEventBus ` to set a customer managed key on an
+    #     event bus with an archives or schema discovery enabled.
+    #
+    #    To enable archives or schema discovery on an event bus, choose to
+    #   use an Amazon Web Services owned key. For more information, see
+    #   [Data encryption in EventBridge][2] in the *Amazon EventBridge User
+    #   Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html
+    #   [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dead_letter_config
+    #   Configuration details of the Amazon SQS queue for EventBridge to use
+    #   as a dead-letter queue (DLQ).
+    #
+    #   For more information, see [Event retry policy and using dead-letter
+    #   queues](eventbridge/latest/userguide/eb-rule-dlq.html) in the
+    #   *EventBridge User Guide*.
+    #   @return [Types::DeadLetterConfig]
+    #
     # @!attribute [rw] tags
     #   Tags to associate with the event bus.
     #   @return [Array<Types::Tag>]
@@ -1062,6 +1114,9 @@ module Aws::EventBridge
     class CreateEventBusRequest < Struct.new(
       :name,
       :event_source_name,
+      :description,
+      :kms_key_identifier,
+      :dead_letter_config,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1071,10 +1126,38 @@ module Aws::EventBridge
     #   The ARN of the new event bus.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   The event bus description.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to
+    #   use to encrypt events on this event bus, if one has been specified.
+    #
+    #   For more information, see [Data encryption in EventBridge][1] in the
+    #   *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dead_letter_config
+    #   Configuration details of the Amazon SQS queue for EventBridge to use
+    #   as a dead-letter queue (DLQ).
+    #
+    #   For more information, see [Event retry policy and using dead-letter
+    #   queues](eventbridge/latest/userguide/eb-rule-dlq.html) in the
+    #   *EventBridge User Guide*.
+    #   @return [Types::DeadLetterConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEventBusResponse AWS API Documentation
     #
     class CreateEventBusResponse < Struct.new(
-      :event_bus_arn)
+      :event_bus_arn,
+      :description,
+      :kms_key_identifier,
+      :dead_letter_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1125,8 +1208,12 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # A `DeadLetterConfig` object that contains information about a
-    # dead-letter queue configuration.
+    # Configuration details of the Amazon SQS queue for EventBridge to use
+    # as a dead-letter queue (DLQ).
+    #
+    # For more information, see [Event retry policy and using dead-letter
+    # queues](eventbridge/latest/userguide/eb-rule-dlq.html) in the
+    # *EventBridge User Guide*.
     #
     # @!attribute [rw] arn
     #   The ARN of the SQS queue specified as the target for the dead-letter
@@ -1684,17 +1771,55 @@ module Aws::EventBridge
     #   events to the current account.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   The event bus description.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to
+    #   use to encrypt events on this event bus, if one has been specified.
+    #
+    #   For more information, see [Data encryption in EventBridge][1] in the
+    #   *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dead_letter_config
+    #   Configuration details of the Amazon SQS queue for EventBridge to use
+    #   as a dead-letter queue (DLQ).
+    #
+    #   For more information, see [Event retry policy and using dead-letter
+    #   queues](eventbridge/latest/userguide/eb-rule-dlq.html) in the
+    #   *EventBridge User Guide*.
+    #   @return [Types::DeadLetterConfig]
+    #
     # @!attribute [rw] policy
     #   The policy that enables the external account to send events to your
     #   account.
     #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the event bus was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time the event bus was last modified.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventBusResponse AWS API Documentation
     #
     class DescribeEventBusResponse < Struct.new(
       :name,
       :arn,
-      :policy)
+      :description,
+      :kms_key_identifier,
+      :dead_letter_config,
+      :policy,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1892,7 +2017,7 @@ module Aws::EventBridge
     #
     # @!attribute [rw] event_pattern
     #   The event pattern. For more information, see [Events and Event
-    #   Patterns][1] in the *Amazon EventBridge User Guide*.
+    #   Patterns][1] in the <i> <i>Amazon EventBridge User Guide</i> </i>.
     #
     #
     #
@@ -2127,8 +2252,8 @@ module Aws::EventBridge
     # A global endpoint used to improve your application's availability by
     # making it regional-fault tolerant. For more information about global
     # endpoints, see [Making applications Regional-fault tolerant with
-    # global endpoints and event replication][1] in the *Amazon EventBridge
-    # User Guide*.
+    # global endpoints and event replication][1] in the <i> <i>Amazon
+    # EventBridge User Guide</i> </i>.
     #
     #
     #
@@ -2241,17 +2366,32 @@ module Aws::EventBridge
     #   The ARN of the event bus.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   The event bus description.
+    #   @return [String]
+    #
     # @!attribute [rw] policy
     #   The permissions policy of the event bus, describing which other
     #   Amazon Web Services accounts can write events to this event bus.
     #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the event bus was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time the event bus was last modified.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EventBus AWS API Documentation
     #
     class EventBus < Struct.new(
       :name,
       :arn,
-      :policy)
+      :description,
+      :policy,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3721,7 +3861,8 @@ module Aws::EventBridge
     #
     # @!attribute [rw] event_pattern
     #   The event pattern. For more information, see [Amazon EventBridge
-    #   event patterns][1] in the *Amazon EventBridge User Guide*.
+    #   event patterns][1] in the <i> <i>Amazon EventBridge User Guide</i>
+    #   </i>.
     #
     #
     #
@@ -3729,7 +3870,40 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   Indicates whether the rule is enabled or disabled.
+    #   The state of the rule.
+    #
+    #   Valid values include:
+    #
+    #   * `DISABLED`: The rule is disabled. EventBridge does not match any
+    #     events against the rule.
+    #
+    #   * `ENABLED`: The rule is enabled. EventBridge matches events against
+    #     the rule, *except* for Amazon Web Services management events
+    #     delivered through CloudTrail.
+    #
+    #   * `ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS`: The rule is
+    #     enabled for all events, including Amazon Web Services management
+    #     events delivered through CloudTrail.
+    #
+    #     Management events provide visibility into management operations
+    #     that are performed on resources in your Amazon Web Services
+    #     account. These are also known as control plane operations. For
+    #     more information, see [Logging management events][1] in the
+    #     *CloudTrail User Guide*, and [Filtering management events from
+    #     Amazon Web Services services][2] in the <i> <i>Amazon EventBridge
+    #     User Guide</i> </i>.
+    #
+    #     This value is only valid for rules on the [default][3] event bus
+    #     or [custom event buses][4]. It does not apply to [partner event
+    #     buses][5].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events
+    #   [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail
+    #   [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses
+    #   [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html
+    #   [5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4162,7 +4336,8 @@ module Aws::EventBridge
     #
     # @!attribute [rw] event_pattern
     #   The event pattern of the rule. For more information, see [Events and
-    #   Event Patterns][1] in the *Amazon EventBridge User Guide*.
+    #   Event Patterns][1] in the <i> <i>Amazon EventBridge User Guide</i>
+    #   </i>.
     #
     #
     #
@@ -4171,6 +4346,39 @@ module Aws::EventBridge
     #
     # @!attribute [rw] state
     #   The state of the rule.
+    #
+    #   Valid values include:
+    #
+    #   * `DISABLED`: The rule is disabled. EventBridge does not match any
+    #     events against the rule.
+    #
+    #   * `ENABLED`: The rule is enabled. EventBridge matches events against
+    #     the rule, *except* for Amazon Web Services management events
+    #     delivered through CloudTrail.
+    #
+    #   * `ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS`: The rule is
+    #     enabled for all events, including Amazon Web Services management
+    #     events delivered through CloudTrail.
+    #
+    #     Management events provide visibility into management operations
+    #     that are performed on resources in your Amazon Web Services
+    #     account. These are also known as control plane operations. For
+    #     more information, see [Logging management events][1] in the
+    #     *CloudTrail User Guide*, and [Filtering management events from
+    #     Amazon Web Services services][2] in the <i> <i>Amazon EventBridge
+    #     User Guide</i> </i>.
+    #
+    #     This value is only valid for rules on the [default][3] event bus
+    #     or [custom event buses][4]. It does not apply to [partner event
+    #     buses][5].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events
+    #   [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-cloudtrail
+    #   [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses
+    #   [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html
+    #   [5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4615,7 +4823,7 @@ module Aws::EventBridge
 
     # @!attribute [rw] event_pattern
     #   The event pattern. For more information, see [Events and Event
-    #   Patterns][1] in the *Amazon EventBridge User Guide*.
+    #   Patterns][1] in the <i> <i>Amazon EventBridge User Guide</i> </i>.
     #
     #
     #
@@ -5083,6 +5291,118 @@ module Aws::EventBridge
       :endpoint_id,
       :endpoint_url,
       :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the event bus.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to
+    #   use, if you choose to use a customer managed key to encrypt events
+    #   on this event bus. The identifier can be the key Amazon Resource
+    #   Name (ARN), KeyId, key alias, or key alias ARN.
+    #
+    #   If you do not specify a customer managed key identifier, EventBridge
+    #   uses an Amazon Web Services owned key to encrypt events on the event
+    #   bus.
+    #
+    #   For more information, see [Managing keys][1] in the *Key Management
+    #   Service Developer Guide*.
+    #
+    #   <note markdown="1"> Archives and schema discovery are not supported for event buses
+    #   encrypted using a customer managed key. EventBridge returns an error
+    #   if:
+    #
+    #    * You call ` CreateArchive ` on an event bus set to use a customer
+    #     managed key for encryption.
+    #
+    #   * You call ` CreateDiscoverer ` on an event bus set to use a
+    #     customer managed key for encryption.
+    #
+    #   * You call ` UpdatedEventBus ` to set a customer managed key on an
+    #     event bus with an archives or schema discovery enabled.
+    #
+    #    To enable archives or schema discovery on an event bus, choose to
+    #   use an Amazon Web Services owned key. For more information, see
+    #   [Data encryption in EventBridge][2] in the *Amazon EventBridge User
+    #   Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html
+    #   [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The event bus description.
+    #   @return [String]
+    #
+    # @!attribute [rw] dead_letter_config
+    #   Configuration details of the Amazon SQS queue for EventBridge to use
+    #   as a dead-letter queue (DLQ).
+    #
+    #   For more information, see [Event retry policy and using dead-letter
+    #   queues](eventbridge/latest/userguide/eb-rule-dlq.html) in the
+    #   *EventBridge User Guide*.
+    #   @return [Types::DeadLetterConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEventBusRequest AWS API Documentation
+    #
+    class UpdateEventBusRequest < Struct.new(
+      :name,
+      :kms_key_identifier,
+      :description,
+      :dead_letter_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The event bus Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The event bus name.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to
+    #   use to encrypt events on this event bus, if one has been specified.
+    #
+    #   For more information, see [Data encryption in EventBridge][1] in the
+    #   *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The event bus description.
+    #   @return [String]
+    #
+    # @!attribute [rw] dead_letter_config
+    #   Configuration details of the Amazon SQS queue for EventBridge to use
+    #   as a dead-letter queue (DLQ).
+    #
+    #   For more information, see [Event retry policy and using dead-letter
+    #   queues](eventbridge/latest/userguide/eb-rule-dlq.html) in the
+    #   *EventBridge User Guide*.
+    #   @return [Types::DeadLetterConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEventBusResponse AWS API Documentation
+    #
+    class UpdateEventBusResponse < Struct.new(
+      :arn,
+      :name,
+      :kms_key_identifier,
+      :description,
+      :dead_letter_config)
       SENSITIVE = []
       include Aws::Structure
     end

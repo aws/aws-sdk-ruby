@@ -170,6 +170,8 @@ module Aws::EventBridge
             Aws::EventBridge::Endpoints::UpdateConnection.build(context)
           when :update_endpoint
             Aws::EventBridge::Endpoints::UpdateEndpoint.build(context)
+          when :update_event_bus
+            Aws::EventBridge::Endpoints::UpdateEventBus.build(context)
           end
         end
       end
