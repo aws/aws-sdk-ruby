@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.457.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.456.0 (2024-05-08)
 ------------------
 

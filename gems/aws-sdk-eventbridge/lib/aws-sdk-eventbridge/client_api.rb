@@ -141,6 +141,7 @@ module Aws::EventBridge
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventBus = Shapes::StructureShape.new(name: 'EventBus')
+    EventBusDescription = Shapes::StringShape.new(name: 'EventBusDescription')
     EventBusList = Shapes::ListShape.new(name: 'EventBusList')
     EventBusName = Shapes::StringShape.new(name: 'EventBusName')
     EventBusNameOrArn = Shapes::StringShape.new(name: 'EventBusNameOrArn')
@@ -173,6 +174,7 @@ module Aws::EventBridge
     InvalidEventPatternException = Shapes::StructureShape.new(name: 'InvalidEventPatternException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     KinesisParameters = Shapes::StructureShape.new(name: 'KinesisParameters')
+    KmsKeyIdentifier = Shapes::StringShape.new(name: 'KmsKeyIdentifier')
     LaunchType = Shapes::StringShape.new(name: 'LaunchType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitMax100 = Shapes::IntegerShape.new(name: 'LimitMax100')
@@ -351,6 +353,8 @@ module Aws::EventBridge
     UpdateConnectionResponse = Shapes::StructureShape.new(name: 'UpdateConnectionResponse')
     UpdateEndpointRequest = Shapes::StructureShape.new(name: 'UpdateEndpointRequest')
     UpdateEndpointResponse = Shapes::StructureShape.new(name: 'UpdateEndpointResponse')
+    UpdateEventBusRequest = Shapes::StructureShape.new(name: 'UpdateEventBusRequest')
+    UpdateEventBusResponse = Shapes::StructureShape.new(name: 'UpdateEventBusResponse')
 
     ActivateEventSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "Name"))
     ActivateEventSourceRequest.struct_class = Types::ActivateEventSourceRequest
@@ -563,10 +567,16 @@ module Aws::EventBridge
 
     CreateEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, required: true, location_name: "Name"))
     CreateEventBusRequest.add_member(:event_source_name, Shapes::ShapeRef.new(shape: EventSourceName, location_name: "EventSourceName"))
+    CreateEventBusRequest.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
+    CreateEventBusRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
+    CreateEventBusRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     CreateEventBusRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateEventBusRequest.struct_class = Types::CreateEventBusRequest
 
     CreateEventBusResponse.add_member(:event_bus_arn, Shapes::ShapeRef.new(shape: String, location_name: "EventBusArn"))
+    CreateEventBusResponse.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
+    CreateEventBusResponse.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
+    CreateEventBusResponse.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     CreateEventBusResponse.struct_class = Types::CreateEventBusResponse
 
     CreatePartnerEventSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "Name"))
@@ -700,7 +710,12 @@ module Aws::EventBridge
 
     DescribeEventBusResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     DescribeEventBusResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    DescribeEventBusResponse.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
+    DescribeEventBusResponse.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
+    DescribeEventBusResponse.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     DescribeEventBusResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    DescribeEventBusResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeEventBusResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeEventBusResponse.struct_class = Types::DescribeEventBusResponse
 
     DescribeEventSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "Name"))
@@ -802,7 +817,10 @@ module Aws::EventBridge
 
     EventBus.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     EventBus.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    EventBus.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
     EventBus.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    EventBus.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    EventBus.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     EventBus.struct_class = Types::EventBus
 
     EventBusList.member = Shapes::ShapeRef.new(shape: EventBus)
@@ -1359,6 +1377,19 @@ module Aws::EventBridge
     UpdateEndpointResponse.add_member(:state, Shapes::ShapeRef.new(shape: EndpointState, location_name: "State"))
     UpdateEndpointResponse.struct_class = Types::UpdateEndpointResponse
 
+    UpdateEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "Name"))
+    UpdateEventBusRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
+    UpdateEventBusRequest.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
+    UpdateEventBusRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    UpdateEventBusRequest.struct_class = Types::UpdateEventBusRequest
+
+    UpdateEventBusResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    UpdateEventBusResponse.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, location_name: "Name"))
+    UpdateEventBusResponse.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
+    UpdateEventBusResponse.add_member(:description, Shapes::ShapeRef.new(shape: EventBusDescription, location_name: "Description"))
+    UpdateEventBusResponse.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    UpdateEventBusResponse.struct_class = Types::UpdateEventBusResponse
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -1370,6 +1401,7 @@ module Aws::EventBridge
         "endpointPrefix" => "events",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon EventBridge",
         "serviceId" => "EventBridge",
         "signatureVersion" => "v4",
@@ -1998,6 +2030,18 @@ module Aws::EventBridge
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:update_event_bus, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEventBus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEventBusRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEventBusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationDisabledException)
       end)
     end
 

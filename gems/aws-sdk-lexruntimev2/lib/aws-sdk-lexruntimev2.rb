@@ -54,6 +54,6 @@ require_relative 'aws-sdk-lexruntimev2/event_streams'
 # @!group service
 module Aws::LexRuntimeV2
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end

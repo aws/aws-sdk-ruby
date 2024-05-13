@@ -3,6 +3,15 @@ Unreleased Changes
 
 * Issue - Fix `ConnectionPool` for `.empty!` and `.clear!` since it prevented adding a new key from being added to the pool (#3020).
 
+3.196.0 (2024-05-13)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.195.0 (2024-05-10)
 ------------------
 

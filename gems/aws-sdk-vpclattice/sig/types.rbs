@@ -66,7 +66,7 @@ module Aws::VPCLattice
       attr_accessor default_action: Types::RuleAction
       attr_accessor name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH")
       attr_accessor service_identifier: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -78,7 +78,7 @@ module Aws::VPCLattice
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH")
       attr_accessor service_arn: ::String
       attr_accessor service_id: ::String
       SENSITIVE: []
@@ -370,7 +370,7 @@ module Aws::VPCLattice
       attr_accessor last_updated_at: ::Time
       attr_accessor name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH")
       attr_accessor service_arn: ::String
       attr_accessor service_id: ::String
       SENSITIVE: []
@@ -542,7 +542,7 @@ module Aws::VPCLattice
       attr_accessor matcher: Types::Matcher
       attr_accessor path: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP")
       attr_accessor protocol_version: ("HTTP1" | "HTTP2")
       attr_accessor unhealthy_threshold_count: ::Integer
       SENSITIVE: []
@@ -698,7 +698,7 @@ module Aws::VPCLattice
       attr_accessor last_updated_at: ::Time
       attr_accessor name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH")
       SENSITIVE: []
     end
 
@@ -926,7 +926,7 @@ module Aws::VPCLattice
       attr_accessor ip_address_type: ("IPV4" | "IPV6")
       attr_accessor lambda_event_structure_version: ("V1" | "V2")
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP")
       attr_accessor protocol_version: ("HTTP1" | "HTTP2" | "GRPC")
       attr_accessor vpc_identifier: ::String
       SENSITIVE: []
@@ -941,7 +941,7 @@ module Aws::VPCLattice
       attr_accessor last_updated_at: ::Time
       attr_accessor name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP")
       attr_accessor service_arns: ::Array[::String]
       attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor type: ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
@@ -1002,7 +1002,7 @@ module Aws::VPCLattice
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH")
       attr_accessor service_arn: ::String
       attr_accessor service_id: ::String
       SENSITIVE: []
