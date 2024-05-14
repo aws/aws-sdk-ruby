@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Honeycode is deprecated.
+
 1.31.0 (2024-05-13)
 ------------------
 

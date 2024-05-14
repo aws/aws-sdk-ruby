@@ -531,7 +531,8 @@
     "models": "healthlake/2017-07-01"
   },
   "Honeycode": {
-    "models": "honeycode/2020-03-01"
+    "models": "honeycode/2020-03-01",
+    "deprecated": true
   },
   "IAM": {
     "models": "iam/2010-05-08"
