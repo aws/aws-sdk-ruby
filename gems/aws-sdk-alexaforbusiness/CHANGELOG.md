@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2024-05-14)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Alexa For Business is deprecated.
 
 1.70.0 (2024-05-13)

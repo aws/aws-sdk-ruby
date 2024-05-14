@@ -403,6 +403,7 @@ module Aws
                                  type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER"),
                                  ?description: ::String,
                                  content: ::String,
+                                 ?status: ("PUBLISHED" | "SAVED"),
                                  ?tags: Hash[::String, ::String]
                                ) -> _CreateContactFlowResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactFlowResponseSuccess
@@ -2565,6 +2566,107 @@ module Aws
                                             ?next_token: ::String
                                           ) -> _SearchAvailablePhoneNumbersResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAvailablePhoneNumbersResponseSuccess
+
+      interface _SearchContactFlowModulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchContactFlowModulesResponse]
+        def contact_flow_modules: () -> ::Array[Types::ContactFlowModule]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_contact_flow_modules-instance_method
+      def search_contact_flow_modules: (
+                                         instance_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer,
+                                         ?search_filter: {
+                                           tag_filter: {
+                                             or_conditions: Array[
+                                               Array[
+                                                 {
+                                                   tag_key: ::String?,
+                                                   tag_value: ::String?
+                                                 },
+                                               ],
+                                             ]?,
+                                             and_conditions: Array[
+                                               {
+                                                 tag_key: ::String?,
+                                                 tag_value: ::String?
+                                               },
+                                             ]?,
+                                             tag_condition: {
+                                               tag_key: ::String?,
+                                               tag_value: ::String?
+                                             }?
+                                           }?
+                                         },
+                                         ?search_criteria: {
+                                           or_conditions: Array[
+                                             untyped,
+                                           ]?,
+                                           and_conditions: Array[
+                                             untyped,
+                                           ]?,
+                                           string_condition: {
+                                             field_name: ::String?,
+                                             value: ::String?,
+                                             comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                           }?
+                                         }
+                                       ) -> _SearchContactFlowModulesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContactFlowModulesResponseSuccess
+
+      interface _SearchContactFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchContactFlowsResponse]
+        def contact_flows: () -> ::Array[Types::ContactFlow]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_contact_flows-instance_method
+      def search_contact_flows: (
+                                  instance_id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?search_filter: {
+                                    tag_filter: {
+                                      or_conditions: Array[
+                                        Array[
+                                          {
+                                            tag_key: ::String?,
+                                            tag_value: ::String?
+                                          },
+                                        ],
+                                      ]?,
+                                      and_conditions: Array[
+                                        {
+                                          tag_key: ::String?,
+                                          tag_value: ::String?
+                                        },
+                                      ]?,
+                                      tag_condition: {
+                                        tag_key: ::String?,
+                                        tag_value: ::String?
+                                      }?
+                                    }?
+                                  },
+                                  ?search_criteria: {
+                                    or_conditions: Array[
+                                      untyped,
+                                    ]?,
+                                    and_conditions: Array[
+                                      untyped,
+                                    ]?,
+                                    string_condition: {
+                                      field_name: ::String?,
+                                      value: ::String?,
+                                      comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                    }?,
+                                    type_condition: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")?,
+                                    state_condition: ("ACTIVE" | "ARCHIVED")?,
+                                    status_condition: ("PUBLISHED" | "SAVED")?
+                                  }
+                                ) -> _SearchContactFlowsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContactFlowsResponseSuccess
 
       interface _SearchContactsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchContactsResponse]

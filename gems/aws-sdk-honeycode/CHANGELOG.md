@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2024-05-14)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Honeycode is deprecated.
 
 1.31.0 (2024-05-13)

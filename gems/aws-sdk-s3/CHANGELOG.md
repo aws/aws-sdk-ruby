@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2024-05-14)
+------------------
+
+* Feature - Updated a few x-id in the http uri traits
+
 1.150.0 (2024-05-13)
 ------------------
 

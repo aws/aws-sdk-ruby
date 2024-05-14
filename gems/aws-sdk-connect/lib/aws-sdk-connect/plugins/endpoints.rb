@@ -402,6 +402,10 @@ module Aws::Connect
             Aws::Connect::Endpoints::ResumeContactRecording.build(context)
           when :search_available_phone_numbers
             Aws::Connect::Endpoints::SearchAvailablePhoneNumbers.build(context)
+          when :search_contact_flow_modules
+            Aws::Connect::Endpoints::SearchContactFlowModules.build(context)
+          when :search_contact_flows
+            Aws::Connect::Endpoints::SearchContactFlows.build(context)
           when :search_contacts
             Aws::Connect::Endpoints::SearchContacts.build(context)
           when :search_hours_of_operations

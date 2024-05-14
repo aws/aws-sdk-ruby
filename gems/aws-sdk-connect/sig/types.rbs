@@ -501,6 +501,7 @@ module Aws::Connect
       attr_accessor name: ::String
       attr_accessor type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")
       attr_accessor state: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status: ("PUBLISHED" | "SAVED")
       attr_accessor description: ::String
       attr_accessor content: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -519,6 +520,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ContactFlowModuleSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::ContactFlowModuleSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::ContactFlowModuleSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class ContactFlowModuleSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
     class ContactFlowModuleSummary
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -532,12 +545,28 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ContactFlowSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::ContactFlowSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::ContactFlowSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      attr_accessor type_condition: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")
+      attr_accessor state_condition: ("ACTIVE" | "ARCHIVED")
+      attr_accessor status_condition: ("PUBLISHED" | "SAVED")
+      SENSITIVE: []
+    end
+
+    class ContactFlowSearchFilter
+      attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
     class ContactFlowSummary
       attr_accessor id: ::String
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")
       attr_accessor contact_flow_state: ("ACTIVE" | "ARCHIVED")
+      attr_accessor contact_flow_status: ("PUBLISHED" | "SAVED")
       SENSITIVE: []
     end
 
@@ -632,6 +661,7 @@ module Aws::Connect
       attr_accessor type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")
       attr_accessor description: ::String
       attr_accessor content: ::String
+      attr_accessor status: ("PUBLISHED" | "SAVED")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -3832,6 +3862,38 @@ module Aws::Connect
     class SearchAvailablePhoneNumbersResponse
       attr_accessor next_token: ::String
       attr_accessor available_numbers_list: ::Array[Types::AvailableNumberSummary]
+      SENSITIVE: []
+    end
+
+    class SearchContactFlowModulesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::ContactFlowModuleSearchFilter
+      attr_accessor search_criteria: Types::ContactFlowModuleSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchContactFlowModulesResponse
+      attr_accessor contact_flow_modules: ::Array[Types::ContactFlowModule]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchContactFlowsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::ContactFlowSearchFilter
+      attr_accessor search_criteria: Types::ContactFlowSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchContactFlowsResponse
+      attr_accessor contact_flows: ::Array[Types::ContactFlow]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
       SENSITIVE: []
     end
 

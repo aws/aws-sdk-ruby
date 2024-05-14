@@ -2036,6 +2036,10 @@ module Aws::Connect
     #   The type of flow.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the contact flow.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the flow.
     #   @return [String]
@@ -2065,6 +2069,7 @@ module Aws::Connect
       :name,
       :type,
       :state,
+      :status,
       :description,
       :content,
       :tags)
@@ -2128,6 +2133,60 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The search criteria to be used to return flow modules.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Types::ContactFlowModuleSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an `AND`
+    #   condition.
+    #   @return [Array<Types::ContactFlowModuleSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
+    #   `description`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowModuleSearchCriteria AWS API Documentation
+    #
+    class ContactFlowModuleSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria to be used to return flow modules.
+    #
+    # @!attribute [rw] tag_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * Top level list specifies conditions that need to be applied with
+    #     `OR` operator
+    #
+    #   * Inner list specifies conditions that need to be applied with `AND`
+    #     operator.
+    #   @return [Types::ControlPlaneTagFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowModuleSearchFilter AWS API Documentation
+    #
+    class ContactFlowModuleSearchFilter < Struct.new(
+      :tag_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a flow.
     #
     # @!attribute [rw] id
@@ -2170,6 +2229,75 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The search criteria to be used to return contact flows.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Types::ContactFlowSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an `AND`
+    #   condition.
+    #   @return [Array<Types::ContactFlowSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
+    #   `description`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @!attribute [rw] type_condition
+    #   The type of flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_condition
+    #   The state of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_condition
+    #   The status of the flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowSearchCriteria AWS API Documentation
+    #
+    class ContactFlowSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition,
+      :type_condition,
+      :state_condition,
+      :status_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @!attribute [rw] tag_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * Top level list specifies conditions that need to be applied with
+    #     `OR` operator
+    #
+    #   * Inner list specifies conditions that need to be applied with `AND`
+    #     operator.
+    #   @return [Types::ControlPlaneTagFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowSearchFilter AWS API Documentation
+    #
+    class ContactFlowSearchFilter < Struct.new(
+      :tag_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a flow.
     #
     # You can also create and update flows using the [Amazon Connect Flow
@@ -2199,6 +2327,10 @@ module Aws::Connect
     #   The type of flow.
     #   @return [String]
     #
+    # @!attribute [rw] contact_flow_status
+    #   The status of the contact flow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowSummary AWS API Documentation
     #
     class ContactFlowSummary < Struct.new(
@@ -2206,7 +2338,8 @@ module Aws::Connect
       :arn,
       :name,
       :contact_flow_type,
-      :contact_flow_state)
+      :contact_flow_state,
+      :contact_flow_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2610,6 +2743,13 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Indicates the flow status as either `SAVED` or `PUBLISHED`. The
+    #   `PUBLISHED` status will initiate validation on the content. the
+    #   `SAVED` status does not initiate validation of the content. `SAVED`
+    #   \| `PUBLISHED`.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
@@ -2624,6 +2764,7 @@ module Aws::Connect
       :type,
       :description,
       :content,
+      :status,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -7421,7 +7562,7 @@ module Aws::Connect
     #
     # @!attribute [rw] url_expiry_in_seconds
     #   Optional override for the expiry of the pre-signed S3 URL in
-    #   seconds.
+    #   seconds. The default value is 300.
     #   @return [Integer]
     #
     # @!attribute [rw] associated_resource_arn
@@ -7479,10 +7620,6 @@ module Aws::Connect
     # @!attribute [rw] associated_resource_arn
     #   The resource to which the attached file is (being) uploaded to.
     #   [Cases][1] are the only current supported resource.
-    #
-    #   <note markdown="1"> This value must be a valid ARN.
-    #
-    #    </note>
     #
     #
     #
@@ -8342,7 +8479,7 @@ module Aws::Connect
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
     #     `FEATURE` \| `CASE_TEMPLATE_ARN` \| `CASE_STATUS` \|
     #     `contact/segmentAttributes/connect:Subtype` \|
-    #     `ROUTING_STEP_EXPRESSION`
+    #     `ROUTING_STEP_EXPRESSION` \| `Q_CONNECT_ENABLED`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in
     #     a single request. VOICE, CHAT, and TASK are valid `filterValue`
@@ -8364,6 +8501,17 @@ module Aws::Connect
     #     JSON string fields must be sorted in ascending order and JSON
     #     array order should be kept as is.
     #
+    #     `Q_CONNECT_ENABLED`. TRUE and FALSE are the only valid
+    #     filterValues for the `Q_CONNECT_ENABLED` filter key.
+    #
+    #     * TRUE includes all contacts that had Amazon Q in Connect enabled
+    #       as part of the flow.
+    #
+    #     * FALSE includes all contacts that did not have Amazon Q in
+    #       Connect enabled as part of the flow
+    #
+    #     This filter is available only for contact record-driven metrics.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html
@@ -8383,7 +8531,7 @@ module Aws::Connect
     #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
     #   `CASE_TEMPLATE_ARN` \| `CASE_STATUS` \|
     #   `contact/segmentAttributes/connect:Subtype` \|
-    #   `ROUTING_STEP_EXPRESSION`
+    #   `ROUTING_STEP_EXPRESSION` \| `Q_CONNECT_ENABLED`
     #   @return [Array<String>]
     #
     # @!attribute [rw] metrics
@@ -8398,7 +8546,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Abandonment rate][2]
     #
@@ -8492,7 +8640,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Average queue abandon time][12]
     #
@@ -8501,7 +8649,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Average active time][13]
     #
@@ -8513,7 +8661,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Average after contact work time][14]
     #
@@ -8544,7 +8692,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Average agent pause time][16]
     #
@@ -8574,7 +8722,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Average contact duration][19]
     #
@@ -8588,7 +8736,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Average conversation duration][20]
     #
@@ -8600,7 +8748,8 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Average agent greeting time][21]
     #
@@ -8624,7 +8773,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Average customer hold time][23]
     #
@@ -8637,7 +8786,8 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Average customer hold time all contacts][24]
     #
@@ -8647,7 +8797,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Average holds][25]
     #
@@ -8660,7 +8810,8 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Average agent interaction and customer hold time][26]
     #
@@ -8671,7 +8822,7 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Feature, contact/segmentAttributes/connect:Subtype
+    #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Average agent interaction time][27]
     #
@@ -8687,7 +8838,8 @@ module Aws::Connect
     #     Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Average agent interruptions][28]
     #
@@ -8699,7 +8851,8 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Average agent interruption time][29]
     #
@@ -8711,7 +8864,8 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Average non-talk time][30]
     #
@@ -8720,7 +8874,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Feature, contact/segmentAttributes/connect:Subtype
+    #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Average queue answer time][31]
     #
@@ -8733,7 +8887,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Average resolution time][32]
     #
@@ -8745,7 +8899,8 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Average talk time][33]
     #
@@ -8757,7 +8912,8 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Average agent talk time][34]
     #
@@ -8769,7 +8925,8 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Average customer talk time][35]
     #
@@ -8789,7 +8946,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
-    #     RoutingStepExpression
+    #     RoutingStepExpression, Q in Connect
     #
     #     UI name: [Contact abandoned][37]
     #
@@ -8800,7 +8957,7 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Feature, contact/segmentAttributes/connect:Subtype
+    #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Contacts created][38]
     #
@@ -8816,7 +8973,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype, RoutingStepExpression
+    #     contact/segmentAttributes/connect:Subtype, RoutingStepExpression,
+    #     Q in Connect
     #
     #     UI name: [API contacts handled][39]
     #
@@ -8831,7 +8989,7 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`
     #
     #     Valid groupings and filters: Queue, Channel, Agent, Agent
-    #     Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Contacts handled (connected to agent timestamp)][40]
     #
@@ -8840,7 +8998,8 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Contacts hold disconnect][40]
     #
@@ -8849,7 +9008,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Contacts hold agent disconnect][41]
     #
@@ -8858,7 +9017,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Contacts hold customer disconnect][42]
     #
@@ -8867,7 +9026,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Contacts put on hold][42]
     #
@@ -8876,7 +9035,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Contacts transferred out external][43]
     #
@@ -8885,7 +9044,7 @@ module Aws::Connect
     #   : Unit: Percent
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Contacts transferred out internal][44]
     #
@@ -8894,7 +9053,8 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Contacts queued][45]
     #
@@ -8912,7 +9072,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     Threshold: For `ThresholdValue` enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
@@ -8926,7 +9086,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Feature,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Contacts transferred out][48]
     #
@@ -8939,7 +9099,8 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Contacts transferred out by agent][49]
     #
@@ -8948,7 +9109,8 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Contacts transferred out queue][49]
     #
@@ -8967,7 +9129,8 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Maximum queued time][51]
     #
@@ -9005,7 +9168,8 @@ module Aws::Connect
     #     Unit: Percentage
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Non-talk time percent][53]
     #
@@ -9017,7 +9181,8 @@ module Aws::Connect
     #     Unit: Percentage
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Talk time percent][54]
     #
@@ -9029,7 +9194,8 @@ module Aws::Connect
     #     Unit: Percentage
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Agent talk time percent][55]
     #
@@ -9041,7 +9207,8 @@ module Aws::Connect
     #     Unit: Percentage
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Customer talk time percent][56]
     #
@@ -9071,7 +9238,8 @@ module Aws::Connect
     #
     #     Unit: Percent
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Q in
+    #     Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
@@ -9092,7 +9260,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [After contact work time][60]
     #
@@ -9119,7 +9287,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Contact flow time][62]
     #
@@ -9137,7 +9305,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
@@ -9150,7 +9318,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
@@ -9165,7 +9333,8 @@ module Aws::Connect
     #     Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     Q in Connect
     #
     #     UI name: [Contact disconnected][66]
     #
@@ -9183,7 +9352,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Contact handle time][68]
     #
@@ -9192,7 +9361,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Customer hold time][69]
     #
@@ -9210,7 +9379,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Q in Connect
     #
     #     UI name: [Agent interaction and hold time][71]
     #
@@ -9246,7 +9415,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     contact/segmentAttributes/connect:Subtype
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     UI name: [Callback attempts][75]
     #
@@ -16125,6 +16294,136 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::ContactFlowModuleSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return contact flow modules.
+    #
+    #   <note markdown="1"> The `name` and `description` fields support "contains" queries
+    #   with a minimum of 2 characters and a maximum of 25 characters. Any
+    #   queries with character lengths outside of this range will result in
+    #   invalid results.
+    #
+    #    </note>
+    #   @return [Types::ContactFlowModuleSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactFlowModulesRequest AWS API Documentation
+    #
+    class SearchContactFlowModulesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow_modules
+    #   The search criteria to be used to return contact flow modules.
+    #   @return [Array<Types::ContactFlowModule>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of contact flows which matched your search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactFlowModulesResponse AWS API Documentation
+    #
+    class SearchContactFlowModulesResponse < Struct.new(
+      :contact_flow_modules,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::ContactFlowSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return flows.
+    #
+    #   <note markdown="1"> The `name` and `description` fields support "contains" queries
+    #   with a minimum of 2 characters and a maximum of 25 characters. Any
+    #   queries with character lengths outside of this range will result in
+    #   invalid results.
+    #
+    #    </note>
+    #   @return [Types::ContactFlowSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactFlowsRequest AWS API Documentation
+    #
+    class SearchContactFlowsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flows
+    #   Information about the contact flows.
+    #   @return [Array<Types::ContactFlow>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of contact flows which matched your search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContactFlowsResponse AWS API Documentation
+    #
+    class SearchContactFlowsResponse < Struct.new(
+      :contact_flows,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of Amazon Connect instance. You can find the instance
     #   ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
@@ -17451,7 +17750,7 @@ module Aws::Connect
     #
     # @!attribute [rw] url_expiry_in_seconds
     #   Optional override for the expiry of the pre-signed S3 URL in
-    #   seconds.
+    #   seconds. The default value is 300.
     #   @return [Integer]
     #
     # @!attribute [rw] file_use_case_type

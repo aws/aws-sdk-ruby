@@ -157,13 +157,22 @@ module Aws::Connect
     ContactFlowModuleDescription = Shapes::StringShape.new(name: 'ContactFlowModuleDescription')
     ContactFlowModuleId = Shapes::StringShape.new(name: 'ContactFlowModuleId')
     ContactFlowModuleName = Shapes::StringShape.new(name: 'ContactFlowModuleName')
+    ContactFlowModuleSearchConditionList = Shapes::ListShape.new(name: 'ContactFlowModuleSearchConditionList')
+    ContactFlowModuleSearchCriteria = Shapes::StructureShape.new(name: 'ContactFlowModuleSearchCriteria')
+    ContactFlowModuleSearchFilter = Shapes::StructureShape.new(name: 'ContactFlowModuleSearchFilter')
+    ContactFlowModuleSearchSummaryList = Shapes::ListShape.new(name: 'ContactFlowModuleSearchSummaryList')
     ContactFlowModuleState = Shapes::StringShape.new(name: 'ContactFlowModuleState')
     ContactFlowModuleStatus = Shapes::StringShape.new(name: 'ContactFlowModuleStatus')
     ContactFlowModuleSummary = Shapes::StructureShape.new(name: 'ContactFlowModuleSummary')
     ContactFlowModulesSummaryList = Shapes::ListShape.new(name: 'ContactFlowModulesSummaryList')
     ContactFlowName = Shapes::StringShape.new(name: 'ContactFlowName')
     ContactFlowNotPublishedException = Shapes::StructureShape.new(name: 'ContactFlowNotPublishedException')
+    ContactFlowSearchConditionList = Shapes::ListShape.new(name: 'ContactFlowSearchConditionList')
+    ContactFlowSearchCriteria = Shapes::StructureShape.new(name: 'ContactFlowSearchCriteria')
+    ContactFlowSearchFilter = Shapes::StructureShape.new(name: 'ContactFlowSearchFilter')
+    ContactFlowSearchSummaryList = Shapes::ListShape.new(name: 'ContactFlowSearchSummaryList')
     ContactFlowState = Shapes::StringShape.new(name: 'ContactFlowState')
+    ContactFlowStatus = Shapes::StringShape.new(name: 'ContactFlowStatus')
     ContactFlowSummary = Shapes::StructureShape.new(name: 'ContactFlowSummary')
     ContactFlowSummaryList = Shapes::ListShape.new(name: 'ContactFlowSummaryList')
     ContactFlowType = Shapes::StringShape.new(name: 'ContactFlowType')
@@ -935,6 +944,10 @@ module Aws::Connect
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
+    SearchContactFlowModulesRequest = Shapes::StructureShape.new(name: 'SearchContactFlowModulesRequest')
+    SearchContactFlowModulesResponse = Shapes::StructureShape.new(name: 'SearchContactFlowModulesResponse')
+    SearchContactFlowsRequest = Shapes::StructureShape.new(name: 'SearchContactFlowsRequest')
+    SearchContactFlowsResponse = Shapes::StructureShape.new(name: 'SearchContactFlowsResponse')
     SearchContactsMatchType = Shapes::StringShape.new(name: 'SearchContactsMatchType')
     SearchContactsRequest = Shapes::StructureShape.new(name: 'SearchContactsRequest')
     SearchContactsResponse = Shapes::StructureShape.new(name: 'SearchContactsResponse')
@@ -1671,6 +1684,7 @@ module Aws::Connect
     ContactFlow.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
     ContactFlow.add_member(:type, Shapes::ShapeRef.new(shape: ContactFlowType, location_name: "Type"))
     ContactFlow.add_member(:state, Shapes::ShapeRef.new(shape: ContactFlowState, location_name: "State"))
+    ContactFlow.add_member(:status, Shapes::ShapeRef.new(shape: ContactFlowStatus, location_name: "Status"))
     ContactFlow.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
     ContactFlow.add_member(:content, Shapes::ShapeRef.new(shape: ContactFlowContent, location_name: "Content"))
     ContactFlow.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -1686,6 +1700,18 @@ module Aws::Connect
     ContactFlowModule.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ContactFlowModule.struct_class = Types::ContactFlowModule
 
+    ContactFlowModuleSearchConditionList.member = Shapes::ShapeRef.new(shape: ContactFlowModuleSearchCriteria)
+
+    ContactFlowModuleSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchConditionList, location_name: "OrConditions"))
+    ContactFlowModuleSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchConditionList, location_name: "AndConditions"))
+    ContactFlowModuleSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    ContactFlowModuleSearchCriteria.struct_class = Types::ContactFlowModuleSearchCriteria
+
+    ContactFlowModuleSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    ContactFlowModuleSearchFilter.struct_class = Types::ContactFlowModuleSearchFilter
+
+    ContactFlowModuleSearchSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowModule)
+
     ContactFlowModuleSummary.add_member(:id, Shapes::ShapeRef.new(shape: ContactFlowModuleId, location_name: "Id"))
     ContactFlowModuleSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     ContactFlowModuleSummary.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowModuleName, location_name: "Name"))
@@ -1697,11 +1723,27 @@ module Aws::Connect
     ContactFlowNotPublishedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ContactFlowNotPublishedException.struct_class = Types::ContactFlowNotPublishedException
 
+    ContactFlowSearchConditionList.member = Shapes::ShapeRef.new(shape: ContactFlowSearchCriteria)
+
+    ContactFlowSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: ContactFlowSearchConditionList, location_name: "OrConditions"))
+    ContactFlowSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: ContactFlowSearchConditionList, location_name: "AndConditions"))
+    ContactFlowSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    ContactFlowSearchCriteria.add_member(:type_condition, Shapes::ShapeRef.new(shape: ContactFlowType, location_name: "TypeCondition"))
+    ContactFlowSearchCriteria.add_member(:state_condition, Shapes::ShapeRef.new(shape: ContactFlowState, location_name: "StateCondition"))
+    ContactFlowSearchCriteria.add_member(:status_condition, Shapes::ShapeRef.new(shape: ContactFlowStatus, location_name: "StatusCondition"))
+    ContactFlowSearchCriteria.struct_class = Types::ContactFlowSearchCriteria
+
+    ContactFlowSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    ContactFlowSearchFilter.struct_class = Types::ContactFlowSearchFilter
+
+    ContactFlowSearchSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlow)
+
     ContactFlowSummary.add_member(:id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "Id"))
     ContactFlowSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     ContactFlowSummary.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
     ContactFlowSummary.add_member(:contact_flow_type, Shapes::ShapeRef.new(shape: ContactFlowType, location_name: "ContactFlowType"))
     ContactFlowSummary.add_member(:contact_flow_state, Shapes::ShapeRef.new(shape: ContactFlowState, location_name: "ContactFlowState"))
+    ContactFlowSummary.add_member(:contact_flow_status, Shapes::ShapeRef.new(shape: ContactFlowStatus, location_name: "ContactFlowStatus"))
     ContactFlowSummary.struct_class = Types::ContactFlowSummary
 
     ContactFlowSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowSummary)
@@ -1788,6 +1830,7 @@ module Aws::Connect
     CreateContactFlowRequest.add_member(:type, Shapes::ShapeRef.new(shape: ContactFlowType, required: true, location_name: "Type"))
     CreateContactFlowRequest.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
     CreateContactFlowRequest.add_member(:content, Shapes::ShapeRef.new(shape: ContactFlowContent, required: true, location_name: "Content"))
+    CreateContactFlowRequest.add_member(:status, Shapes::ShapeRef.new(shape: ContactFlowStatus, location_name: "Status"))
     CreateContactFlowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateContactFlowRequest.struct_class = Types::CreateContactFlowRequest
 
@@ -4272,6 +4315,30 @@ module Aws::Connect
     SearchAvailablePhoneNumbersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     SearchAvailablePhoneNumbersResponse.add_member(:available_numbers_list, Shapes::ShapeRef.new(shape: AvailableNumbersList, location_name: "AvailableNumbersList"))
     SearchAvailablePhoneNumbersResponse.struct_class = Types::SearchAvailablePhoneNumbersResponse
+
+    SearchContactFlowModulesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchContactFlowModulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchContactFlowModulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchContactFlowModulesRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchFilter, location_name: "SearchFilter"))
+    SearchContactFlowModulesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchCriteria, location_name: "SearchCriteria"))
+    SearchContactFlowModulesRequest.struct_class = Types::SearchContactFlowModulesRequest
+
+    SearchContactFlowModulesResponse.add_member(:contact_flow_modules, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchSummaryList, location_name: "ContactFlowModules"))
+    SearchContactFlowModulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchContactFlowModulesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchContactFlowModulesResponse.struct_class = Types::SearchContactFlowModulesResponse
+
+    SearchContactFlowsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchContactFlowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchContactFlowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchContactFlowsRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: ContactFlowSearchFilter, location_name: "SearchFilter"))
+    SearchContactFlowsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: ContactFlowSearchCriteria, location_name: "SearchCriteria"))
+    SearchContactFlowsRequest.struct_class = Types::SearchContactFlowsRequest
+
+    SearchContactFlowsResponse.add_member(:contact_flows, Shapes::ShapeRef.new(shape: ContactFlowSearchSummaryList, location_name: "ContactFlows"))
+    SearchContactFlowsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchContactFlowsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchContactFlowsResponse.struct_class = Types::SearchContactFlowsResponse
 
     SearchContactsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchContactsRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: SearchContactsTimeRange, required: true, location_name: "TimeRange"))
@@ -8025,6 +8092,44 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_contact_flow_modules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchContactFlowModules"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-contact-flow-modules"
+        o.input = Shapes::ShapeRef.new(shape: SearchContactFlowModulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchContactFlowModulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_contact_flows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchContactFlows"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-contact-flows"
+        o.input = Shapes::ShapeRef.new(shape: SearchContactFlowsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchContactFlowsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
