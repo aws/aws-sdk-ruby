@@ -20,10 +20,6 @@
   "Account": {
     "models": "account/2021-02-01"
   },
-  "AlexaForBusiness": {
-    "models": "alexaforbusiness/2017-11-09",
-    "deprecated": true
-  },
   "Amplify": {
     "models": "amplify/2017-07-25"
   },
