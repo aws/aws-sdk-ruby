@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2024-05-15)
+------------------
+
+* Feature - Documentation-only update for AWS Security Hub
+
 1.106.0 (2024-05-13)
 ------------------
 

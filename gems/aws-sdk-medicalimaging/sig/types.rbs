@@ -433,6 +433,7 @@ module Aws::MedicalImaging
       attr_accessor datastore_id: ::String
       attr_accessor input_s3_uri: ::String
       attr_accessor output_s3_uri: ::String
+      attr_accessor input_owner_account_id: ::String
       SENSITIVE: []
     end
 

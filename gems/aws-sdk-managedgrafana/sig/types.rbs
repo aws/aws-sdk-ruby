@@ -101,6 +101,36 @@ module Aws::ManagedGrafana
       SENSITIVE: []
     end
 
+    class CreateWorkspaceServiceAccountRequest
+      attr_accessor grafana_role: ("ADMIN" | "EDITOR" | "VIEWER")
+      attr_accessor name: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceServiceAccountResponse
+      attr_accessor grafana_role: ("ADMIN" | "EDITOR" | "VIEWER")
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceServiceAccountTokenRequest
+      attr_accessor name: ::String
+      attr_accessor seconds_to_live: ::Integer
+      attr_accessor service_account_id: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceServiceAccountTokenResponse
+      attr_accessor service_account_id: ::String
+      attr_accessor service_account_token: Types::ServiceAccountTokenSummaryWithKey
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
     class DeleteWorkspaceApiKeyRequest
       attr_accessor key_name: ::String
       attr_accessor workspace_id: ::String
@@ -120,6 +150,32 @@ module Aws::ManagedGrafana
 
     class DeleteWorkspaceResponse
       attr_accessor workspace: Types::WorkspaceDescription
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceServiceAccountRequest
+      attr_accessor service_account_id: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceServiceAccountResponse
+      attr_accessor service_account_id: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceServiceAccountTokenRequest
+      attr_accessor service_account_id: ::String
+      attr_accessor token_id: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceServiceAccountTokenResponse
+      attr_accessor service_account_id: ::String
+      attr_accessor token_id: ::String
+      attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
 
@@ -224,6 +280,36 @@ module Aws::ManagedGrafana
       SENSITIVE: []
     end
 
+    class ListWorkspaceServiceAccountTokensRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor service_account_id: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkspaceServiceAccountTokensResponse
+      attr_accessor next_token: ::String
+      attr_accessor service_account_id: ::String
+      attr_accessor service_account_tokens: ::Array[Types::ServiceAccountTokenSummary]
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkspaceServiceAccountsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkspaceServiceAccountsResponse
+      attr_accessor next_token: ::String
+      attr_accessor service_accounts: ::Array[Types::ServiceAccountSummary]
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
     class ListWorkspacesRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -274,6 +360,30 @@ module Aws::ManagedGrafana
       attr_accessor login_validity_duration: ::Integer
       attr_accessor role_values: Types::RoleValues
       SENSITIVE: []
+    end
+
+    class ServiceAccountSummary
+      attr_accessor grafana_role: ("ADMIN" | "EDITOR" | "VIEWER")
+      attr_accessor id: ::String
+      attr_accessor is_disabled: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceAccountTokenSummary
+      attr_accessor created_at: ::Time
+      attr_accessor expires_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor last_used_at: ::Time
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceAccountTokenSummaryWithKey
+      attr_accessor id: ::String
+      attr_accessor key: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:key]
     end
 
     class ServiceQuotaExceededException

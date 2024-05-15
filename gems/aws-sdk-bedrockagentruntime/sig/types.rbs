@@ -448,10 +448,12 @@ module Aws::BedrockAgentRuntime
       attr_accessor in: Types::FilterAttribute
       attr_accessor less_than: Types::FilterAttribute
       attr_accessor less_than_or_equals: Types::FilterAttribute
+      attr_accessor list_contains: Types::FilterAttribute
       attr_accessor not_equals: Types::FilterAttribute
       attr_accessor not_in: Types::FilterAttribute
       attr_accessor or_all: ::Array[Types::RetrievalFilter]
       attr_accessor starts_with: Types::FilterAttribute
+      attr_accessor string_contains: Types::FilterAttribute
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -469,6 +471,8 @@ module Aws::BedrockAgentRuntime
       end
       class LessThanOrEquals < RetrievalFilter
       end
+      class ListContains < RetrievalFilter
+      end
       class NotEquals < RetrievalFilter
       end
       class NotIn < RetrievalFilter
@@ -476,6 +480,8 @@ module Aws::BedrockAgentRuntime
       class OrAll < RetrievalFilter
       end
       class StartsWith < RetrievalFilter
+      end
+      class StringContains < RetrievalFilter
       end
       class Unknown < RetrievalFilter
       end

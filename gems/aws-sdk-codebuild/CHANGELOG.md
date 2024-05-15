@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2024-05-15)
+------------------
+
+* Feature - CodeBuild Reserved Capacity VPC Support
+
 1.112.0 (2024-05-13)
 ------------------
 

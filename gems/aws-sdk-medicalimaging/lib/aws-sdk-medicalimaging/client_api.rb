@@ -15,6 +15,7 @@ module Aws::MedicalImaging
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CopyDestinationImageSet = Shapes::StructureShape.new(name: 'CopyDestinationImageSet')
@@ -461,6 +462,7 @@ module Aws::MedicalImaging
     StartDICOMImportJobRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location: "uri", location_name: "datastoreId"))
     StartDICOMImportJobRequest.add_member(:input_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "inputS3Uri"))
     StartDICOMImportJobRequest.add_member(:output_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "outputS3Uri"))
+    StartDICOMImportJobRequest.add_member(:input_owner_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "inputOwnerAccountId"))
     StartDICOMImportJobRequest.struct_class = Types::StartDICOMImportJobRequest
 
     StartDICOMImportJobResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "datastoreId"))
@@ -519,8 +521,8 @@ module Aws::MedicalImaging
       api.metadata = {
         "apiVersion" => "2023-07-19",
         "endpointPrefix" => "medical-imaging",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Health Imaging",
         "serviceId" => "Medical Imaging",
         "signatureVersion" => "v4",

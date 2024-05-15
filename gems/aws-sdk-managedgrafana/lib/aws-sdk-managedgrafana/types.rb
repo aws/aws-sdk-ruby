@@ -72,8 +72,8 @@ module Aws::ManagedGrafana
 
     # @!attribute [rw] grafana_token
     #   A token from Grafana Labs that ties your Amazon Web Services account
-    #   with a Grafana Labs account. For more information, see [Register
-    #   with Grafana Labs][1].
+    #   with a Grafana Labs account. For more information, see [Link your
+    #   account with Grafana Labs][1].
     #
     #
     #
@@ -217,7 +217,7 @@ module Aws::ManagedGrafana
     # @!attribute [rw] key_role
     #   Specifies the permission level of the key.
     #
-    #   Valid values: `VIEWER`\|`EDITOR`\|`ADMIN`
+    #   Valid values: `ADMIN`\|`EDITOR`\|`VIEWER`
     #   @return [String]
     #
     # @!attribute [rw] seconds_to_live
@@ -303,7 +303,7 @@ module Aws::ManagedGrafana
     #
     # @!attribute [rw] grafana_version
     #   Specifies the version of Grafana to support in the new workspace. If
-    #   not specified, defaults to the latest version (for example, 9.4).
+    #   not specified, defaults to the latest version (for example, 10.4).
     #
     #   To get a list of supported versions, use the `ListVersions`
     #   operation.
@@ -446,6 +446,117 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @!attribute [rw] grafana_role
+    #   The permission level to use for this service account.
+    #
+    #   <note markdown="1"> For more information about the roles and the permissions each has,
+    #   see [User roles][1] in the *Amazon Managed Grafana User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/Grafana-user-roles.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the service account. The name must be unique within the
+    #   workspace, as it determines the ID associated with the service
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace within which to create the service account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccountRequest AWS API Documentation
+    #
+    class CreateWorkspaceServiceAccountRequest < Struct.new(
+      :grafana_role,
+      :name,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] grafana_role
+    #   The permission level given to the service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The workspace with which the service account is associated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccountResponse AWS API Documentation
+    #
+    class CreateWorkspaceServiceAccountResponse < Struct.new(
+      :grafana_role,
+      :id,
+      :name,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   A name for the token to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] seconds_to_live
+    #   Sets how long the token will be valid, in seconds. You can set the
+    #   time up to 30 days in the future.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account for which to create a token.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace the service account resides within.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccountTokenRequest AWS API Documentation
+    #
+    class CreateWorkspaceServiceAccountTokenRequest < Struct.new(
+      :name,
+      :seconds_to_live,
+      :service_account_id,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account where the token was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_token
+    #   Information about the created token, including the key. Be sure to
+    #   store the key securely.
+    #   @return [Types::ServiceAccountTokenSummaryWithKey]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace where the token was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccountTokenResponse AWS API Documentation
+    #
+    class CreateWorkspaceServiceAccountTokenResponse < Struct.new(
+      :service_account_id,
+      :service_account_token,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] key_name
     #   The name of the API key to delete.
     #   @return [String]
@@ -501,6 +612,84 @@ module Aws::ManagedGrafana
     #
     class DeleteWorkspaceResponse < Struct.new(
       :workspace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace where the service account resides.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceServiceAccountRequest AWS API Documentation
+    #
+    class DeleteWorkspaceServiceAccountRequest < Struct.new(
+      :service_account_id,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace where the service account was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceServiceAccountResponse AWS API Documentation
+    #
+    class DeleteWorkspaceServiceAccountResponse < Struct.new(
+      :service_account_id,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account from which to delete the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_id
+    #   The ID of the token to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace from which to delete the token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceServiceAccountTokenRequest AWS API Documentation
+    #
+    class DeleteWorkspaceServiceAccountTokenRequest < Struct.new(
+      :service_account_id,
+      :token_id,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account where the token was deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_id
+    #   The ID of the token that was deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace where the token was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceServiceAccountTokenResponse AWS API Documentation
+    #
+    class DeleteWorkspaceServiceAccountTokenResponse < Struct.new(
+      :service_account_id,
+      :token_id,
+      :workspace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -801,6 +990,109 @@ module Aws::ManagedGrafana
     end
 
     # @!attribute [rw] max_results
+    #   The maximum number of tokens to include in the results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of service accounts to return. (You
+    #   receive this token from a previous
+    #   `ListWorkspaceServiceAccountTokens` operation.)
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account for which to return tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace for which to return tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaceServiceAccountTokensRequest AWS API Documentation
+    #
+    class ListWorkspaceServiceAccountTokensRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :service_account_id,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of service accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account where the tokens reside.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_tokens
+    #   An array of structures containing information about the tokens.
+    #   @return [Array<Types::ServiceAccountTokenSummary>]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace where the tokens reside.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaceServiceAccountTokensResponse AWS API Documentation
+    #
+    class ListWorkspaceServiceAccountTokensResponse < Struct.new(
+      :next_token,
+      :service_account_id,
+      :service_account_tokens,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of service accounts to include in the results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of service accounts to return. (You
+    #   receive this token from a previous `ListWorkspaceServiceAccounts`
+    #   operation.)
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The workspace for which to list service accounts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaceServiceAccountsRequest AWS API Documentation
+    #
+    class ListWorkspaceServiceAccountsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of service accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_accounts
+    #   An array of structures containing information about the service
+    #   accounts.
+    #   @return [Array<Types::ServiceAccountSummary>]
+    #
+    # @!attribute [rw] workspace_id
+    #   The workspace to which the service accounts are associated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaceServiceAccountsResponse AWS API Documentation
+    #
+    class ListWorkspaceServiceAccountsResponse < Struct.new(
+      :next_token,
+      :service_accounts,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
     #   The maximum number of workspaces to include in the results.
     #   @return [Integer]
     #
@@ -1043,6 +1335,105 @@ module Aws::ManagedGrafana
       :login_validity_duration,
       :role_values)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the information about one service account.
+    #
+    # @!attribute [rw] grafana_role
+    #   The role of the service account, which sets the permission level
+    #   used when calling Grafana APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_disabled
+    #   Returns true if the service account is disabled. Service accounts
+    #   can be disabled and enabled in the Amazon Managed Grafana console.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the service account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ServiceAccountSummary AWS API Documentation
+    #
+    class ServiceAccountSummary < Struct.new(
+      :grafana_role,
+      :id,
+      :is_disabled,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the information about a service account
+    # token.
+    #
+    # @!attribute [rw] created_at
+    #   When the service account token was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_at
+    #   When the service account token will expire.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the service account token.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_used_at
+    #   The last time the token was used to authorize a Grafana HTTP API.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the service account token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ServiceAccountTokenSummary AWS API Documentation
+    #
+    class ServiceAccountTokenSummary < Struct.new(
+      :created_at,
+      :expires_at,
+      :id,
+      :last_used_at,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the information about a service account
+    # token.
+    #
+    # This structure is returned when creating the token. It is important to
+    # store the `key` that is returned, as it is not retrievable at a later
+    # time.
+    #
+    # If you lose the key, you can delete and recreate the token, which will
+    # create a new key.
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the service account token.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The key for the service account token. Used when making calls to the
+    #   Grafana HTTP APIs to authenticate and authorize the requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the service account token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ServiceAccountTokenSummaryWithKey AWS API Documentation
+    #
+    class ServiceAccountTokenSummaryWithKey < Struct.new(
+      :id,
+      :key,
+      :name)
+      SENSITIVE = [:key]
       include Aws::Structure
     end
 
@@ -1652,7 +2043,7 @@ module Aws::ManagedGrafana
     #
     # @!attribute [rw] grafana_token
     #   The token that ties this workspace to a Grafana Labs account. For
-    #   more information, see [Register with Grafana Labs][1].
+    #   more information, see [Link your account with Grafana Labs][1].
     #
     #
     #
@@ -1822,7 +2213,7 @@ module Aws::ManagedGrafana
     #
     # @!attribute [rw] grafana_token
     #   The token that ties this workspace to a Grafana Labs account. For
-    #   more information, see [Register with Grafana Labs][1].
+    #   more information, see [Link your account with Grafana Labs][1].
     #
     #
     #

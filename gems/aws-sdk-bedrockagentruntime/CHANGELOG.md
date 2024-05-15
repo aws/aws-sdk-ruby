@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2024-05-15)
+------------------
+
+* Feature - Updating Bedrock Knowledge Base Metadata & Filters feature with two new filters listContains and stringContains
+
 1.9.0 (2024-05-13)
 ------------------
 

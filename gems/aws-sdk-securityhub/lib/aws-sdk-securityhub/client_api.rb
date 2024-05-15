@@ -6919,6 +6919,7 @@ module Aws::SecurityHub
         "endpointPrefix" => "securityhub",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS SecurityHub",
         "serviceId" => "SecurityHub",
         "signatureVersion" => "v4",

@@ -164,6 +164,11 @@ module Aws
                               value: {
                               }
                             }?,
+                            list_contains: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
                             not_equals: {
                               key: ::String,
                               value: {
@@ -178,6 +183,11 @@ module Aws
                               untyped,
                             ]?,
                             starts_with: {
+                              key: ::String,
+                              value: {
+                              }
+                            }?,
+                            string_contains: {
                               key: ::String,
                               value: {
                               }
@@ -299,6 +309,11 @@ module Aws
                                                value: {
                                                }
                                              }?,
+                                             list_contains: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
                                              not_equals: {
                                                key: ::String,
                                                value: {
@@ -313,6 +328,11 @@ module Aws
                                                untyped,
                                              ]?,
                                              starts_with: {
+                                               key: ::String,
+                                               value: {
+                                               }
+                                             }?,
+                                             string_contains: {
                                                key: ::String,
                                                value: {
                                                }

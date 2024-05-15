@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2024-05-15)
+------------------
+
+* Feature - Added support for importing medical imaging data from Amazon S3 buckets across accounts and regions.
+
 1.9.0 (2024-05-13)
 ------------------
 

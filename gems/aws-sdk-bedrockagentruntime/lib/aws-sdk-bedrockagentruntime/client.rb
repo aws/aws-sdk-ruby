@@ -989,6 +989,11 @@ module Aws::BedrockAgentRuntime
     #             value: { # required
     #             },
     #           },
+    #           list_contains: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
     #           not_equals: {
     #             key: "FilterKey", # required
     #             value: { # required
@@ -1005,6 +1010,11 @@ module Aws::BedrockAgentRuntime
     #             },
     #           ],
     #           starts_with: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           string_contains: {
     #             key: "FilterKey", # required
     #             value: { # required
     #             },
@@ -1173,6 +1183,11 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
+    #               list_contains: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
     #               not_equals: {
     #                 key: "FilterKey", # required
     #                 value: { # required
@@ -1189,6 +1204,11 @@ module Aws::BedrockAgentRuntime
     #                 },
     #               ],
     #               starts_with: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               string_contains: {
     #                 key: "FilterKey", # required
     #                 value: { # required
     #                 },
@@ -1244,7 +1264,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3044,7 +3044,7 @@ module Aws::DataSync
     # @example Response structure
     #
     #   resp.task_execution_arn #=> String
-    #   resp.status #=> String, one of "QUEUED", "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
+    #   resp.status #=> String, one of "QUEUED", "CANCELLING", "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
     #   resp.options.verify_mode #=> String, one of "POINT_IN_TIME_CONSISTENT", "ONLY_FILES_TRANSFERRED", "NONE"
     #   resp.options.overwrite_mode #=> String, one of "ALWAYS", "NEVER"
     #   resp.options.atime #=> String, one of "NONE", "BEST_EFFORT"
@@ -3442,7 +3442,7 @@ module Aws::DataSync
     #
     #   resp.task_executions #=> Array
     #   resp.task_executions[0].task_execution_arn #=> String
-    #   resp.task_executions[0].status #=> String, one of "QUEUED", "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
+    #   resp.task_executions[0].status #=> String, one of "QUEUED", "CANCELLING", "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTaskExecutions AWS API Documentation
@@ -4653,7 +4653,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

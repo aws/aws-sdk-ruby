@@ -496,7 +496,6 @@ RubyGems.org page under "LINKS" section.
 | Access Analyzer                                       | Aws::AccessAnalyzer                      | aws-sdk-accessanalyzer                      | 2019-11-01  |
 | Agents for Amazon Bedrock                             | Aws::BedrockAgent                        | aws-sdk-bedrockagent                        | 2023-06-05  |
 | Agents for Amazon Bedrock Runtime                     | Aws::BedrockAgentRuntime                 | aws-sdk-bedrockagentruntime                 | 2023-07-26  |
-| Alexa For Business                                    | Aws::AlexaForBusiness                    | aws-sdk-alexaforbusiness                    | 2017-11-09  |
 | Amazon API Gateway                                    | Aws::APIGateway                          | aws-sdk-apigateway                          | 2015-07-09  |
 | Amazon AppConfig                                      | Aws::AppConfig                           | aws-sdk-appconfig                           | 2019-10-09  |
 | Amazon AppIntegrations Service                        | Aws::AppIntegrationsService              | aws-sdk-appintegrationsservice              | 2020-07-29  |
@@ -573,7 +572,6 @@ RubyGems.org page under "LINKS" section.
 | Amazon Glacier                                        | Aws::Glacier                             | aws-sdk-glacier                             | 2012-06-01  |
 | Amazon GuardDuty                                      | Aws::GuardDuty                           | aws-sdk-guardduty                           | 2017-11-28  |
 | Amazon HealthLake                                     | Aws::HealthLake                          | aws-sdk-healthlake                          | 2017-07-01  |
-| Amazon Honeycode                                      | Aws::Honeycode                           | aws-sdk-honeycode                           | 2020-03-01  |
 | Amazon Import/Export Snowball                         | Aws::Snowball                            | aws-sdk-snowball                            | 2016-06-30  |
 | Amazon Inspector                                      | Aws::Inspector                           | aws-sdk-inspector                           | 2016-02-16  |
 | Amazon Interactive Video Service                      | Aws::IVS                                 | aws-sdk-ivs                                 | 2020-07-14  |

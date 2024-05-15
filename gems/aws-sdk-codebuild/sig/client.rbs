@@ -171,6 +171,12 @@ module Aws
                             max_capacity: ::Integer?
                           },
                           ?overflow_behavior: ("QUEUE" | "ON_DEMAND"),
+                          ?vpc_config: {
+                            vpc_id: ::String?,
+                            subnets: Array[::String]?,
+                            security_group_ids: Array[::String]?
+                          },
+                          ?fleet_service_role: ::String,
                           ?tags: Array[
                             {
                               key: ::String?,
@@ -1056,6 +1062,12 @@ module Aws
                             max_capacity: ::Integer?
                           },
                           ?overflow_behavior: ("QUEUE" | "ON_DEMAND"),
+                          ?vpc_config: {
+                            vpc_id: ::String?,
+                            subnets: Array[::String]?,
+                            security_group_ids: Array[::String]?
+                          },
+                          ?fleet_service_role: ::String,
                           ?tags: Array[
                             {
                               key: ::String?,

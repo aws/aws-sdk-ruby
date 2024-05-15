@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2024-05-15)
+------------------
+
+* Feature - Task executions now display a CANCELLING status when an execution is in the process of being cancelled.
+
 1.77.0 (2024-05-13)
 ------------------
 

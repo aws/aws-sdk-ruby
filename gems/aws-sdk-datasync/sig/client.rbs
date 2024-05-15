@@ -816,7 +816,7 @@ module Aws
       interface _DescribeTaskExecutionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTaskExecutionResponse]
         def task_execution_arn: () -> ::String
-        def status: () -> ("QUEUED" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
+        def status: () -> ("QUEUED" | "CANCELLING" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
         def options: () -> Types::Options
         def excludes: () -> ::Array[Types::FilterRule]
         def includes: () -> ::Array[Types::FilterRule]

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2024-05-15)
+------------------
+
+* Feature - This release adds new ServiceAccount and ServiceAccountToken APIs.
+
 1.28.0 (2024-05-13)
 ------------------
 

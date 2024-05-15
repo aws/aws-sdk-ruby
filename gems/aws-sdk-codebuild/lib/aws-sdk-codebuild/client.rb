@@ -799,7 +799,7 @@ module Aws::CodeBuild
     #   resp.fleets[0].created #=> Time
     #   resp.fleets[0].last_modified #=> Time
     #   resp.fleets[0].status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "PENDING_DELETION", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
-    #   resp.fleets[0].status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.fleets[0].status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED", "ACTION_REQUIRED"
     #   resp.fleets[0].status.message #=> String
     #   resp.fleets[0].base_capacity #=> Integer
     #   resp.fleets[0].environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
@@ -811,6 +811,12 @@ module Aws::CodeBuild
     #   resp.fleets[0].scaling_configuration.max_capacity #=> Integer
     #   resp.fleets[0].scaling_configuration.desired_capacity #=> Integer
     #   resp.fleets[0].overflow_behavior #=> String, one of "QUEUE", "ON_DEMAND"
+    #   resp.fleets[0].vpc_config.vpc_id #=> String
+    #   resp.fleets[0].vpc_config.subnets #=> Array
+    #   resp.fleets[0].vpc_config.subnets[0] #=> String
+    #   resp.fleets[0].vpc_config.security_group_ids #=> Array
+    #   resp.fleets[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.fleets[0].fleet_service_role #=> String
     #   resp.fleets[0].tags #=> Array
     #   resp.fleets[0].tags[0].key #=> String
     #   resp.fleets[0].tags[0].value #=> String
@@ -1193,6 +1199,25 @@ module Aws::CodeBuild
     #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
     #     CodeBuild on-demand.
     #
+    #     <note markdown="1"> If you choose to set your overflow behavior to on-demand while
+    #     creating a VPC-connected fleet, make sure that you add the required
+    #     VPC permissions to your project service role. For more information,
+    #     see [Example policy statement to allow CodeBuild access to Amazon
+    #     Web Services services required to create a VPC network
+    #     interface][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Information about the VPC configuration that CodeBuild accesses.
+    #
+    # @option params [String] :fleet_service_role
+    #   The service role associated with the compute fleet.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this compute fleet.
     #
@@ -1221,6 +1246,12 @@ module Aws::CodeBuild
     #       max_capacity: 1,
     #     },
     #     overflow_behavior: "QUEUE", # accepts QUEUE, ON_DEMAND
+    #     vpc_config: {
+    #       vpc_id: "NonEmptyString",
+    #       subnets: ["NonEmptyString"],
+    #       security_group_ids: ["NonEmptyString"],
+    #     },
+    #     fleet_service_role: "NonEmptyString",
     #     tags: [
     #       {
     #         key: "KeyInput",
@@ -1237,7 +1268,7 @@ module Aws::CodeBuild
     #   resp.fleet.created #=> Time
     #   resp.fleet.last_modified #=> Time
     #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "PENDING_DELETION", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
-    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED", "ACTION_REQUIRED"
     #   resp.fleet.status.message #=> String
     #   resp.fleet.base_capacity #=> Integer
     #   resp.fleet.environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
@@ -1249,6 +1280,12 @@ module Aws::CodeBuild
     #   resp.fleet.scaling_configuration.max_capacity #=> Integer
     #   resp.fleet.scaling_configuration.desired_capacity #=> Integer
     #   resp.fleet.overflow_behavior #=> String, one of "QUEUE", "ON_DEMAND"
+    #   resp.fleet.vpc_config.vpc_id #=> String
+    #   resp.fleet.vpc_config.subnets #=> Array
+    #   resp.fleet.vpc_config.subnets[0] #=> String
+    #   resp.fleet.vpc_config.security_group_ids #=> Array
+    #   resp.fleet.vpc_config.security_group_ids[0] #=> String
+    #   resp.fleet.fleet_service_role #=> String
     #   resp.fleet.tags #=> Array
     #   resp.fleet.tags[0].key #=> String
     #   resp.fleet.tags[0].value #=> String
@@ -1289,6 +1326,8 @@ module Aws::CodeBuild
     #     `pr/pull-request-ID` (for example `pr/25`). If a branch name is
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
+    #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
     #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build. If
@@ -1362,6 +1401,11 @@ module Aws::CodeBuild
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   VpcConfig enables CodeBuild to access resources in an Amazon VPC.
+    #
+    #   <note markdown="1"> If you're using compute fleets during project creation, do not
+    #   provide vpcConfig.
+    #
+    #    </note>
     #
     # @option params [Boolean] :badge_enabled
     #   Set this to true to generate a publicly accessible URL for your
@@ -2339,14 +2383,17 @@ module Aws::CodeBuild
     # @option params [required, String] :token
     #   For GitHub or GitHub Enterprise, this is the personal access token.
     #   For Bitbucket, this is either the access token or the app password.
+    #   For the `authType` CODECONNECTIONS, this is the `connectionArn`.
     #
     # @option params [required, String] :server_type
     #   The source provider used for this project.
     #
     # @option params [required, String] :auth_type
     #   The type of authentication used to connect to a GitHub, GitHub
-    #   Enterprise, or Bitbucket repository. An OAUTH connection is not
-    #   supported by the API and must be created using the CodeBuild console.
+    #   Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An
+    #   OAUTH connection is not supported by the API and must be created using
+    #   the CodeBuild console. Note that CODECONNECTIONS is only valid for
+    #   GitLab and GitLab Self Managed.
     #
     # @option params [Boolean] :should_overwrite
     #   Set to `false` to prevent overwriting the repository source
@@ -3538,6 +3585,10 @@ module Aws::CodeBuild
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
     #
+    #   GitLab
+    #
+    #   : The commit ID, branch, or Git tag to use.
+    #
     #   Bitbucket
     #
     #   : The commit ID, branch name, or tag name that corresponds to the
@@ -3582,7 +3633,7 @@ module Aws::CodeBuild
     # @option params [Types::SourceAuth] :source_auth_override
     #   An authorization type for this build that overrides the one defined in
     #   the build project. This override applies only if the build project's
-    #   source is BitBucket or GitHub.
+    #   source is BitBucket, GitHub, GitLab, or GitLab Self Managed.
     #
     # @option params [Integer] :git_clone_depth_override
     #   The user-defined depth of history, with a minimum value of 0, that
@@ -4918,6 +4969,25 @@ module Aws::CodeBuild
     #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
     #     CodeBuild on-demand.
     #
+    #     <note markdown="1"> If you choose to set your overflow behavior to on-demand while
+    #     creating a VPC-connected fleet, make sure that you add the required
+    #     VPC permissions to your project service role. For more information,
+    #     see [Example policy statement to allow CodeBuild access to Amazon
+    #     Web Services services required to create a VPC network
+    #     interface][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Information about the VPC configuration that CodeBuild accesses.
+    #
+    # @option params [String] :fleet_service_role
+    #   The service role associated with the compute fleet.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this compute fleet.
     #
@@ -4946,6 +5016,12 @@ module Aws::CodeBuild
     #       max_capacity: 1,
     #     },
     #     overflow_behavior: "QUEUE", # accepts QUEUE, ON_DEMAND
+    #     vpc_config: {
+    #       vpc_id: "NonEmptyString",
+    #       subnets: ["NonEmptyString"],
+    #       security_group_ids: ["NonEmptyString"],
+    #     },
+    #     fleet_service_role: "NonEmptyString",
     #     tags: [
     #       {
     #         key: "KeyInput",
@@ -4962,7 +5038,7 @@ module Aws::CodeBuild
     #   resp.fleet.created #=> Time
     #   resp.fleet.last_modified #=> Time
     #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "PENDING_DELETION", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
-    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED", "ACTION_REQUIRED"
     #   resp.fleet.status.message #=> String
     #   resp.fleet.base_capacity #=> Integer
     #   resp.fleet.environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
@@ -4974,6 +5050,12 @@ module Aws::CodeBuild
     #   resp.fleet.scaling_configuration.max_capacity #=> Integer
     #   resp.fleet.scaling_configuration.desired_capacity #=> Integer
     #   resp.fleet.overflow_behavior #=> String, one of "QUEUE", "ON_DEMAND"
+    #   resp.fleet.vpc_config.vpc_id #=> String
+    #   resp.fleet.vpc_config.subnets #=> Array
+    #   resp.fleet.vpc_config.subnets[0] #=> String
+    #   resp.fleet.vpc_config.security_group_ids #=> Array
+    #   resp.fleet.vpc_config.security_group_ids[0] #=> String
+    #   resp.fleet.fleet_service_role #=> String
     #   resp.fleet.tags #=> Array
     #   resp.fleet.tags[0].key #=> String
     #   resp.fleet.tags[0].value #=> String
@@ -5019,6 +5101,8 @@ module Aws::CodeBuild
     #     `pr/pull-request-ID` (for example `pr/25`). If a branch name is
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
+    #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
     #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build. If
@@ -5667,7 +5751,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
