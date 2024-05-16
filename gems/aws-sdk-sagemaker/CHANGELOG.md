@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.242.0 (2024-05-16)
+------------------
+
+* Feature - Introduced WorkerAccessConfiguration to SageMaker Workteam. This allows customers to configure resource access for workers in a workteam.
+
 1.241.0 (2024-05-13)
 ------------------
 

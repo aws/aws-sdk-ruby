@@ -554,6 +554,7 @@ module Aws::ACMPCA
         "endpointPrefix" => "acm-pca",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "ACM-PCA",
         "serviceFullName" => "AWS Certificate Manager Private Certificate Authority",
         "serviceId" => "ACM PCA",

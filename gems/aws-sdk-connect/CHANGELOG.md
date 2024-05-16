@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.159.0 (2024-05-16)
+------------------
+
+* Feature - Adding Contact Flow metrics to the GetMetricDataV2 API
+
 1.158.0 (2024-05-14)
 ------------------
 

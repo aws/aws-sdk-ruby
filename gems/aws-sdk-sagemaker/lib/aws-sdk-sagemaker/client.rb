@@ -7613,7 +7613,8 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a space used for real time collaboration in a domain.
+    # Creates a private space or a space used for real time collaboration in
+    # a domain.
     #
     # @option params [required, String] :domain_id
     #   The ID of the associated domain.
@@ -9108,6 +9109,12 @@ module Aws::SageMaker
     #   Configures notification of workers regarding available or expiring
     #   work items.
     #
+    # @option params [Types::WorkerAccessConfiguration] :worker_access_configuration
+    #   Use this optional parameter to constrain access to an Amazon S3
+    #   resource based on the IP address using supported IAM global condition
+    #   keys. The Amazon S3 resource is accessed in the worker portal using a
+    #   Amazon S3 presigned URL.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs.
     #
@@ -9144,6 +9151,14 @@ module Aws::SageMaker
     #     description: "String200", # required
     #     notification_configuration: {
     #       notification_topic_arn: "NotificationTopicArn",
+    #     },
+    #     worker_access_configuration: {
+    #       s3_presign: {
+    #         iam_policy_constraints: {
+    #           source_ip: "Enabled", # accepts Enabled, Disabled
+    #           vpc_source_ip: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #       },
     #     },
     #     tags: [
     #       {
@@ -15958,6 +15973,8 @@ module Aws::SageMaker
     #   resp.workteam.create_date #=> Time
     #   resp.workteam.last_updated_date #=> Time
     #   resp.workteam.notification_configuration.notification_topic_arn #=> String
+    #   resp.workteam.worker_access_configuration.s3_presign.iam_policy_constraints.source_ip #=> String, one of "Enabled", "Disabled"
+    #   resp.workteam.worker_access_configuration.s3_presign.iam_policy_constraints.vpc_source_ip #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkteam AWS API Documentation
     #
@@ -16694,11 +16711,13 @@ module Aws::SageMaker
     #   Use it in your next request to receive the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The total number of items to return in the response. If the total
-    #   number of items available is more than the value specified, a
-    #   `NextToken` is provided in the response. To resume pagination, provide
-    #   the `NextToken` value in the as part of a subsequent call. The default
-    #   value is 10.
+    #   This parameter defines the maximum number of results that can be
+    #   returned in a single response. The `MaxResults` parameter is an upper
+    #   bound, not a target. If there are more results available than the
+    #   value specified, a `NextToken` is provided in the response. The
+    #   `NextToken` indicates that the user should get the next set of results
+    #   by providing this token as a part of a subsequent call. The default
+    #   value for `MaxResults` is 10.
     #
     # @option params [String] :sort_order
     #   The sort order for the results. The default is Ascending.
@@ -17762,11 +17781,13 @@ module Aws::SageMaker
     #   Use it in your next request to receive the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The total number of items to return in the response. If the total
-    #   number of items available is more than the value specified, a
-    #   `NextToken` is provided in the response. To resume pagination, provide
-    #   the `NextToken` value in the as part of a subsequent call. The default
-    #   value is 10.
+    #   This parameter defines the maximum number of results that can be
+    #   returned in a single response. The `MaxResults` parameter is an upper
+    #   bound, not a target. If there are more results available than the
+    #   value specified, a `NextToken` is provided in the response. The
+    #   `NextToken` indicates that the user should get the next set of results
+    #   by providing this token as a part of a subsequent call. The default
+    #   value for `MaxResults` is 10.
     #
     # @return [Types::ListDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21229,11 +21250,13 @@ module Aws::SageMaker
     #   Use it in your next request to receive the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The total number of items to return in the response. If the total
-    #   number of items available is more than the value specified, a
-    #   `NextToken` is provided in the response. To resume pagination, provide
-    #   the `NextToken` value in the as part of a subsequent call. The default
-    #   value is 10.
+    #   This parameter defines the maximum number of results that can be
+    #   returned in a single response. The `MaxResults` parameter is an upper
+    #   bound, not a target. If there are more results available than the
+    #   value specified, a `NextToken` is provided in the response. The
+    #   `NextToken` indicates that the user should get the next set of results
+    #   by providing this token as a part of a subsequent call. The default
+    #   value for `MaxResults` is 10.
     #
     # @option params [String] :sort_order
     #   The sort order for the results. The default is `Ascending`.
@@ -21999,11 +22022,13 @@ module Aws::SageMaker
     #   Use it in your next request to receive the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The total number of items to return in the response. If the total
-    #   number of items available is more than the value specified, a
-    #   `NextToken` is provided in the response. To resume pagination, provide
-    #   the `NextToken` value in the as part of a subsequent call. The default
-    #   value is 10.
+    #   This parameter defines the maximum number of results that can be
+    #   returned in a single response. The `MaxResults` parameter is an upper
+    #   bound, not a target. If there are more results available than the
+    #   value specified, a `NextToken` is provided in the response. The
+    #   `NextToken` indicates that the user should get the next set of results
+    #   by providing this token as a part of a subsequent call. The default
+    #   value for `MaxResults` is 10.
     #
     # @option params [String] :sort_order
     #   The sort order for the results. The default is Ascending.
@@ -22189,6 +22214,8 @@ module Aws::SageMaker
     #   resp.workteams[0].create_date #=> Time
     #   resp.workteams[0].last_updated_date #=> Time
     #   resp.workteams[0].notification_configuration.notification_topic_arn #=> String
+    #   resp.workteams[0].worker_access_configuration.s3_presign.iam_policy_constraints.source_ip #=> String, one of "Enabled", "Disabled"
+    #   resp.workteams[0].worker_access_configuration.s3_presign.iam_policy_constraints.vpc_source_ip #=> String, one of "Enabled", "Disabled"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkteams AWS API Documentation
@@ -26261,6 +26288,12 @@ module Aws::SageMaker
     #   Configures SNS topic notifications for available or expiring work
     #   items
     #
+    # @option params [Types::WorkerAccessConfiguration] :worker_access_configuration
+    #   Use this optional parameter to constrain access to an Amazon S3
+    #   resource based on the IP address using supported IAM global condition
+    #   keys. The Amazon S3 resource is accessed in the worker portal using a
+    #   Amazon S3 presigned URL.
+    #
     # @return [Types::UpdateWorkteamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkteamResponse#workteam #workteam} => Types::Workteam
@@ -26285,6 +26318,14 @@ module Aws::SageMaker
     #     notification_configuration: {
     #       notification_topic_arn: "NotificationTopicArn",
     #     },
+    #     worker_access_configuration: {
+    #       s3_presign: {
+    #         iam_policy_constraints: {
+    #           source_ip: "Enabled", # accepts Enabled, Disabled
+    #           vpc_source_ip: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -26305,6 +26346,8 @@ module Aws::SageMaker
     #   resp.workteam.create_date #=> Time
     #   resp.workteam.last_updated_date #=> Time
     #   resp.workteam.notification_configuration.notification_topic_arn #=> String
+    #   resp.workteam.worker_access_configuration.s3_presign.iam_policy_constraints.source_ip #=> String, one of "Enabled", "Disabled"
+    #   resp.workteam.worker_access_configuration.s3_presign.iam_policy_constraints.vpc_source_ip #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkteam AWS API Documentation
     #
@@ -26328,7 +26371,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.241.0'
+      context[:gem_version] = '1.242.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1782,6 +1782,7 @@ module Aws::SageMaker
       attr_accessor member_definitions: ::Array[Types::MemberDefinition]
       attr_accessor description: ::String
       attr_accessor notification_configuration: Types::NotificationConfiguration
+      attr_accessor worker_access_configuration: Types::WorkerAccessConfiguration
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -4548,6 +4549,12 @@ module Aws::SageMaker
       attr_accessor arn: ::String
       attr_accessor principal_id: ::String
       attr_accessor source_identity: ::String
+      SENSITIVE: []
+    end
+
+    class IamPolicyConstraints
+      attr_accessor source_ip: ("Enabled" | "Disabled")
+      attr_accessor vpc_source_ip: ("Enabled" | "Disabled")
       SENSITIVE: []
     end
 
@@ -7942,6 +7949,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class S3Presign
+      attr_accessor iam_policy_constraints: Types::IamPolicyConstraints
+      SENSITIVE: []
+    end
+
     class S3StorageConfig
       attr_accessor s3_uri: ::String
       attr_accessor kms_key_id: ::String
@@ -9327,6 +9339,7 @@ module Aws::SageMaker
       attr_accessor member_definitions: ::Array[Types::MemberDefinition]
       attr_accessor description: ::String
       attr_accessor notification_configuration: Types::NotificationConfiguration
+      attr_accessor worker_access_configuration: Types::WorkerAccessConfiguration
       SENSITIVE: []
     end
 
@@ -9408,6 +9421,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class WorkerAccessConfiguration
+      attr_accessor s3_presign: Types::S3Presign
+      SENSITIVE: []
+    end
+
     class Workforce
       attr_accessor workforce_name: ::String
       attr_accessor workforce_arn: ::String
@@ -9455,6 +9473,7 @@ module Aws::SageMaker
       attr_accessor create_date: ::Time
       attr_accessor last_updated_date: ::Time
       attr_accessor notification_configuration: Types::NotificationConfiguration
+      attr_accessor worker_access_configuration: Types::WorkerAccessConfiguration
       SENSITIVE: []
     end
   end

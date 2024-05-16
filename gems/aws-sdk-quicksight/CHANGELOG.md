@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2024-05-16)
+------------------
+
+* Feature - This release adds DescribeKeyRegistration and UpdateKeyRegistration APIs to manage QuickSight Customer Managed Keys (CMK).
+
 1.111.0 (2024-05-13)
 ------------------
 

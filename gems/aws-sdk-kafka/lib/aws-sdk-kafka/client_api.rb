@@ -20,6 +20,7 @@ module Aws::Kafka
     BatchDisassociateScramSecretRequest = Shapes::StructureShape.new(name: 'BatchDisassociateScramSecretRequest')
     BatchDisassociateScramSecretResponse = Shapes::StructureShape.new(name: 'BatchDisassociateScramSecretResponse')
     BrokerAZDistribution = Shapes::StringShape.new(name: 'BrokerAZDistribution')
+    BrokerCountUpdateInfo = Shapes::StructureShape.new(name: 'BrokerCountUpdateInfo')
     BrokerEBSVolumeInfo = Shapes::StructureShape.new(name: 'BrokerEBSVolumeInfo')
     BrokerLogs = Shapes::StructureShape.new(name: 'BrokerLogs')
     BrokerNodeGroupInfo = Shapes::StructureShape.new(name: 'BrokerNodeGroupInfo')
@@ -252,6 +253,7 @@ module Aws::Kafka
     __listOfUnprocessedScramSecret = Shapes::ListShape.new(name: '__listOfUnprocessedScramSecret')
     __listOfVpcConfig = Shapes::ListShape.new(name: '__listOfVpcConfig')
     __listOfVpcConnection = Shapes::ListShape.new(name: '__listOfVpcConnection')
+    __listOf__double = Shapes::ListShape.new(name: '__listOf__double')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __listOf__stringMax249 = Shapes::ListShape.new(name: '__listOf__stringMax249')
     __listOf__stringMax256 = Shapes::ListShape.new(name: '__listOf__stringMax256')
@@ -290,6 +292,10 @@ module Aws::Kafka
     BatchDisassociateScramSecretResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
     BatchDisassociateScramSecretResponse.add_member(:unprocessed_scram_secrets, Shapes::ShapeRef.new(shape: __listOfUnprocessedScramSecret, location_name: "unprocessedScramSecrets"))
     BatchDisassociateScramSecretResponse.struct_class = Types::BatchDisassociateScramSecretResponse
+
+    BrokerCountUpdateInfo.add_member(:created_broker_ids, Shapes::ShapeRef.new(shape: __listOf__double, location_name: "createdBrokerIds"))
+    BrokerCountUpdateInfo.add_member(:deleted_broker_ids, Shapes::ShapeRef.new(shape: __listOf__double, location_name: "deletedBrokerIds"))
+    BrokerCountUpdateInfo.struct_class = Types::BrokerCountUpdateInfo
 
     BrokerEBSVolumeInfo.add_member(:kafka_broker_node_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "kafkaBrokerNodeId"))
     BrokerEBSVolumeInfo.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "provisionedThroughput"))
@@ -875,6 +881,7 @@ module Aws::Kafka
     MutableClusterInfo.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
     MutableClusterInfo.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: ConnectivityInfo, location_name: "connectivityInfo"))
     MutableClusterInfo.add_member(:storage_mode, Shapes::ShapeRef.new(shape: StorageMode, location_name: "storageMode"))
+    MutableClusterInfo.add_member(:broker_count_update_info, Shapes::ShapeRef.new(shape: BrokerCountUpdateInfo, location_name: "brokerCountUpdateInfo"))
     MutableClusterInfo.struct_class = Types::MutableClusterInfo
 
     NodeExporter.add_member(:enabled_in_broker, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabledInBroker"))
@@ -1286,6 +1293,8 @@ module Aws::Kafka
     __listOfVpcConfig.member = Shapes::ShapeRef.new(shape: VpcConfig)
 
     __listOfVpcConnection.member = Shapes::ShapeRef.new(shape: VpcConnection)
+
+    __listOf__double.member = Shapes::ShapeRef.new(shape: __double)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 

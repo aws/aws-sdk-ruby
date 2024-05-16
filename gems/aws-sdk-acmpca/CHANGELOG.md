@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2024-05-16)
+------------------
+
+* Feature - This release adds support for waiters to fail on AccessDeniedException when having insufficient permissions
+
 1.67.0 (2024-05-13)
 ------------------
 

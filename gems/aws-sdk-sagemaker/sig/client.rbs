@@ -4011,6 +4011,14 @@ module Aws
                              ?notification_configuration: {
                                notification_topic_arn: ::String?
                              },
+                             ?worker_access_configuration: {
+                               s3_presign: {
+                                 iam_policy_constraints: {
+                                   source_ip: ("Enabled" | "Disabled")?,
+                                   vpc_source_ip: ("Enabled" | "Disabled")?
+                                 }?
+                               }?
+                             },
                              ?tags: Array[
                                {
                                  key: ::String,
@@ -8966,6 +8974,14 @@ module Aws
                              ?description: ::String,
                              ?notification_configuration: {
                                notification_topic_arn: ::String?
+                             },
+                             ?worker_access_configuration: {
+                               s3_presign: {
+                                 iam_policy_constraints: {
+                                   source_ip: ("Enabled" | "Disabled")?,
+                                   vpc_source_ip: ("Enabled" | "Disabled")?
+                                 }?
+                               }?
                              }
                            ) -> _UpdateWorkteamResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkteamResponseSuccess

@@ -208,6 +208,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeIngestion.build(context)
           when :describe_ip_restriction
             Aws::QuickSight::Endpoints::DescribeIpRestriction.build(context)
+          when :describe_key_registration
+            Aws::QuickSight::Endpoints::DescribeKeyRegistration.build(context)
           when :describe_namespace
             Aws::QuickSight::Endpoints::DescribeNamespace.build(context)
           when :describe_refresh_schedule
@@ -372,6 +374,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::UpdateIdentityPropagationConfig.build(context)
           when :update_ip_restriction
             Aws::QuickSight::Endpoints::UpdateIpRestriction.build(context)
+          when :update_key_registration
+            Aws::QuickSight::Endpoints::UpdateKeyRegistration.build(context)
           when :update_public_sharing_settings
             Aws::QuickSight::Endpoints::UpdatePublicSharingSettings.build(context)
           when :update_refresh_schedule

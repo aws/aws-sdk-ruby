@@ -527,6 +527,8 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] rotation_enabled
     #   Specifies whether automatic rotation is turned on for this secret.
+    #   If the secret has never been configured for rotation, Secrets
+    #   Manager returns null.
     #
     #   To turn on rotation, use RotateSecret. To turn off rotation, use
     #   CancelRotateSecret.
@@ -861,7 +863,8 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] secret_id
-    #   The ARN or name of the secret to retrieve.
+    #   The ARN or name of the secret to retrieve. To retrieve a secret from
+    #   another account, you must use an ARN.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
     #   a partial ARN. See [Finding a secret from a partial ARN][1].
@@ -1705,7 +1708,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda-functions.html#rotate-secrets_lambda-functions-code
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RotateSecretRequest AWS API Documentation
@@ -2365,7 +2368,8 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] secret_id
-    #   This field is reserved for internal use.
+    #   The ARN or name of the secret with the resource-based policy you
+    #   want to validate.
     #   @return [String]
     #
     # @!attribute [rw] resource_policy

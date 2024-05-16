@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2024-05-16)
+------------------
+
+* Feature - Documentation updates for AWS Secrets Manager
+
 1.93.0 (2024-05-13)
 ------------------
 

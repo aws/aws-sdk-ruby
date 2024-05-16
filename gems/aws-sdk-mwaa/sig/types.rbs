@@ -25,29 +25,31 @@ module Aws::MWAA
     end
 
     class CreateEnvironmentInput
-      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
-      attr_accessor airflow_version: ::String
-      attr_accessor dag_s3_path: ::String
-      attr_accessor endpoint_management: ("CUSTOMER" | "SERVICE")
-      attr_accessor environment_class: ::String
-      attr_accessor execution_role_arn: ::String
-      attr_accessor kms_key: ::String
-      attr_accessor logging_configuration: Types::LoggingConfigurationInput
-      attr_accessor max_workers: ::Integer
-      attr_accessor min_workers: ::Integer
       attr_accessor name: ::String
-      attr_accessor network_configuration: Types::NetworkConfiguration
-      attr_accessor plugins_s3_object_version: ::String
-      attr_accessor plugins_s3_path: ::String
-      attr_accessor requirements_s3_object_version: ::String
-      attr_accessor requirements_s3_path: ::String
-      attr_accessor schedulers: ::Integer
+      attr_accessor execution_role_arn: ::String
       attr_accessor source_bucket_arn: ::String
-      attr_accessor startup_script_s3_object_version: ::String
+      attr_accessor dag_s3_path: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor plugins_s3_path: ::String
+      attr_accessor plugins_s3_object_version: ::String
+      attr_accessor requirements_s3_path: ::String
+      attr_accessor requirements_s3_object_version: ::String
       attr_accessor startup_script_s3_path: ::String
+      attr_accessor startup_script_s3_object_version: ::String
+      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
+      attr_accessor environment_class: ::String
+      attr_accessor max_workers: ::Integer
+      attr_accessor kms_key: ::String
+      attr_accessor airflow_version: ::String
+      attr_accessor logging_configuration: Types::LoggingConfigurationInput
+      attr_accessor weekly_maintenance_window_start: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
-      attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor min_workers: ::Integer
+      attr_accessor schedulers: ::Integer
+      attr_accessor endpoint_management: ("CUSTOMER" | "SERVICE")
+      attr_accessor min_webservers: ::Integer
+      attr_accessor max_webservers: ::Integer
       SENSITIVE: [:airflow_configuration_options]
     end
 
@@ -62,10 +64,10 @@ module Aws::MWAA
     end
 
     class CreateWebLoginTokenResponse
-      attr_accessor airflow_identity: ::String
-      attr_accessor iam_identity: ::String
-      attr_accessor web_server_hostname: ::String
       attr_accessor web_token: ::String
+      attr_accessor web_server_hostname: ::String
+      attr_accessor iam_identity: ::String
+      attr_accessor airflow_identity: ::String
       SENSITIVE: [:web_token]
     end
 
@@ -84,38 +86,40 @@ module Aws::MWAA
     end
 
     class Environment
-      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
-      attr_accessor airflow_version: ::String
-      attr_accessor arn: ::String
-      attr_accessor celery_executor_queue: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor dag_s3_path: ::String
-      attr_accessor database_vpc_endpoint_service: ::String
-      attr_accessor endpoint_management: ("CUSTOMER" | "SERVICE")
-      attr_accessor environment_class: ::String
-      attr_accessor execution_role_arn: ::String
-      attr_accessor kms_key: ::String
-      attr_accessor last_update: Types::LastUpdate
-      attr_accessor logging_configuration: Types::LoggingConfiguration
-      attr_accessor max_workers: ::Integer
-      attr_accessor min_workers: ::Integer
       attr_accessor name: ::String
-      attr_accessor network_configuration: Types::NetworkConfiguration
-      attr_accessor plugins_s3_object_version: ::String
-      attr_accessor plugins_s3_path: ::String
-      attr_accessor requirements_s3_object_version: ::String
-      attr_accessor requirements_s3_path: ::String
-      attr_accessor schedulers: ::Integer
-      attr_accessor service_role_arn: ::String
-      attr_accessor source_bucket_arn: ::String
-      attr_accessor startup_script_s3_object_version: ::String
-      attr_accessor startup_script_s3_path: ::String
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "AVAILABLE" | "UPDATING" | "DELETING" | "DELETED" | "UNAVAILABLE" | "UPDATE_FAILED" | "ROLLING_BACK" | "CREATING_SNAPSHOT" | "PENDING" | "MAINTENANCE")
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor webserver_url: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor service_role_arn: ::String
+      attr_accessor kms_key: ::String
+      attr_accessor airflow_version: ::String
+      attr_accessor source_bucket_arn: ::String
+      attr_accessor dag_s3_path: ::String
+      attr_accessor plugins_s3_path: ::String
+      attr_accessor plugins_s3_object_version: ::String
+      attr_accessor requirements_s3_path: ::String
+      attr_accessor requirements_s3_object_version: ::String
+      attr_accessor startup_script_s3_path: ::String
+      attr_accessor startup_script_s3_object_version: ::String
+      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
+      attr_accessor environment_class: ::String
+      attr_accessor max_workers: ::Integer
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor last_update: Types::LastUpdate
+      attr_accessor weekly_maintenance_window_start: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
-      attr_accessor webserver_url: ::String
+      attr_accessor min_workers: ::Integer
+      attr_accessor schedulers: ::Integer
       attr_accessor webserver_vpc_endpoint_service: ::String
-      attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor database_vpc_endpoint_service: ::String
+      attr_accessor celery_executor_queue: ::String
+      attr_accessor endpoint_management: ("CUSTOMER" | "SERVICE")
+      attr_accessor min_webservers: ::Integer
+      attr_accessor max_webservers: ::Integer
       SENSITIVE: [:airflow_configuration_options]
     end
 
@@ -135,16 +139,16 @@ module Aws::MWAA
     end
 
     class LastUpdate
+      attr_accessor status: ("SUCCESS" | "PENDING" | "FAILED")
       attr_accessor created_at: ::Time
       attr_accessor error: Types::UpdateError
       attr_accessor source: ::String
-      attr_accessor status: ("SUCCESS" | "PENDING" | "FAILED")
       SENSITIVE: []
     end
 
     class ListEnvironmentsInput
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -167,35 +171,35 @@ module Aws::MWAA
     class LoggingConfiguration
       attr_accessor dag_processing_logs: Types::ModuleLoggingConfiguration
       attr_accessor scheduler_logs: Types::ModuleLoggingConfiguration
-      attr_accessor task_logs: Types::ModuleLoggingConfiguration
       attr_accessor webserver_logs: Types::ModuleLoggingConfiguration
       attr_accessor worker_logs: Types::ModuleLoggingConfiguration
+      attr_accessor task_logs: Types::ModuleLoggingConfiguration
       SENSITIVE: []
     end
 
     class LoggingConfigurationInput
       attr_accessor dag_processing_logs: Types::ModuleLoggingConfigurationInput
       attr_accessor scheduler_logs: Types::ModuleLoggingConfigurationInput
-      attr_accessor task_logs: Types::ModuleLoggingConfigurationInput
       attr_accessor webserver_logs: Types::ModuleLoggingConfigurationInput
       attr_accessor worker_logs: Types::ModuleLoggingConfigurationInput
+      attr_accessor task_logs: Types::ModuleLoggingConfigurationInput
       SENSITIVE: []
     end
 
     class MetricDatum
-      attr_accessor dimensions: ::Array[Types::Dimension]
       attr_accessor metric_name: ::String
-      attr_accessor statistic_values: Types::StatisticSet
       attr_accessor timestamp: ::Time
-      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor dimensions: ::Array[Types::Dimension]
       attr_accessor value: ::Float
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor statistic_values: Types::StatisticSet
       SENSITIVE: []
     end
 
     class ModuleLoggingConfiguration
-      attr_accessor cloud_watch_log_group_arn: ::String
       attr_accessor enabled: bool
       attr_accessor log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+      attr_accessor cloud_watch_log_group_arn: ::String
       SENSITIVE: []
     end
 
@@ -206,8 +210,8 @@ module Aws::MWAA
     end
 
     class NetworkConfiguration
-      attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -226,10 +230,10 @@ module Aws::MWAA
     end
 
     class StatisticSet
-      attr_accessor maximum: ::Float
-      attr_accessor minimum: ::Float
       attr_accessor sample_count: ::Integer
       attr_accessor sum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor maximum: ::Float
       SENSITIVE: []
     end
 
@@ -252,26 +256,28 @@ module Aws::MWAA
     end
 
     class UpdateEnvironmentInput
-      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
-      attr_accessor airflow_version: ::String
-      attr_accessor dag_s3_path: ::String
-      attr_accessor environment_class: ::String
-      attr_accessor execution_role_arn: ::String
-      attr_accessor logging_configuration: Types::LoggingConfigurationInput
-      attr_accessor max_workers: ::Integer
-      attr_accessor min_workers: ::Integer
       attr_accessor name: ::String
-      attr_accessor network_configuration: Types::UpdateNetworkConfigurationInput
-      attr_accessor plugins_s3_object_version: ::String
-      attr_accessor plugins_s3_path: ::String
-      attr_accessor requirements_s3_object_version: ::String
-      attr_accessor requirements_s3_path: ::String
-      attr_accessor schedulers: ::Integer
+      attr_accessor execution_role_arn: ::String
+      attr_accessor airflow_version: ::String
       attr_accessor source_bucket_arn: ::String
-      attr_accessor startup_script_s3_object_version: ::String
+      attr_accessor dag_s3_path: ::String
+      attr_accessor plugins_s3_path: ::String
+      attr_accessor plugins_s3_object_version: ::String
+      attr_accessor requirements_s3_path: ::String
+      attr_accessor requirements_s3_object_version: ::String
       attr_accessor startup_script_s3_path: ::String
-      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
+      attr_accessor startup_script_s3_object_version: ::String
+      attr_accessor airflow_configuration_options: ::Hash[::String, ::String]
+      attr_accessor environment_class: ::String
+      attr_accessor max_workers: ::Integer
+      attr_accessor network_configuration: Types::UpdateNetworkConfigurationInput
+      attr_accessor logging_configuration: Types::LoggingConfigurationInput
       attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
+      attr_accessor min_workers: ::Integer
+      attr_accessor schedulers: ::Integer
+      attr_accessor min_webservers: ::Integer
+      attr_accessor max_webservers: ::Integer
       SENSITIVE: [:airflow_configuration_options]
     end
 

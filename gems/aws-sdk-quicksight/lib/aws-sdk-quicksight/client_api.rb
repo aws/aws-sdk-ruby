@@ -631,6 +631,8 @@ module Aws::QuickSight
     DescribeIngestionResponse = Shapes::StructureShape.new(name: 'DescribeIngestionResponse')
     DescribeIpRestrictionRequest = Shapes::StructureShape.new(name: 'DescribeIpRestrictionRequest')
     DescribeIpRestrictionResponse = Shapes::StructureShape.new(name: 'DescribeIpRestrictionResponse')
+    DescribeKeyRegistrationRequest = Shapes::StructureShape.new(name: 'DescribeKeyRegistrationRequest')
+    DescribeKeyRegistrationResponse = Shapes::StructureShape.new(name: 'DescribeKeyRegistrationResponse')
     DescribeNamespaceRequest = Shapes::StructureShape.new(name: 'DescribeNamespaceRequest')
     DescribeNamespaceResponse = Shapes::StructureShape.new(name: 'DescribeNamespaceResponse')
     DescribeRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleRequest')
@@ -696,6 +698,8 @@ module Aws::QuickSight
     ExportToCSVOption = Shapes::StructureShape.new(name: 'ExportToCSVOption')
     ExportWithHiddenFieldsOption = Shapes::StructureShape.new(name: 'ExportWithHiddenFieldsOption')
     Expression = Shapes::StringShape.new(name: 'Expression')
+    FailedKeyRegistrationEntries = Shapes::ListShape.new(name: 'FailedKeyRegistrationEntries')
+    FailedKeyRegistrationEntry = Shapes::StructureShape.new(name: 'FailedKeyRegistrationEntry')
     FieldBasedTooltip = Shapes::StructureShape.new(name: 'FieldBasedTooltip')
     FieldFolder = Shapes::StructureShape.new(name: 'FieldFolder')
     FieldFolderDescription = Shapes::StringShape.new(name: 'FieldFolderDescription')
@@ -942,6 +946,7 @@ module Aws::QuickSight
     KPIVisualLayoutOptions = Shapes::StructureShape.new(name: 'KPIVisualLayoutOptions')
     KPIVisualStandardLayout = Shapes::StructureShape.new(name: 'KPIVisualStandardLayout')
     KPIVisualStandardLayoutType = Shapes::StringShape.new(name: 'KPIVisualStandardLayoutType')
+    KeyRegistration = Shapes::ListShape.new(name: 'KeyRegistration')
     LabelOptions = Shapes::StructureShape.new(name: 'LabelOptions')
     Latitude = Shapes::FloatShape.new(name: 'Latitude')
     Layout = Shapes::StructureShape.new(name: 'Layout')
@@ -1261,6 +1266,7 @@ module Aws::QuickSight
     RefreshSchedules = Shapes::ListShape.new(name: 'RefreshSchedules')
     RegisterUserRequest = Shapes::StructureShape.new(name: 'RegisterUserRequest')
     RegisterUserResponse = Shapes::StructureShape.new(name: 'RegisterUserResponse')
+    RegisteredCustomerManagedKey = Shapes::StructureShape.new(name: 'RegisteredCustomerManagedKey')
     RegisteredUserConsoleFeatureConfigurations = Shapes::StructureShape.new(name: 'RegisteredUserConsoleFeatureConfigurations')
     RegisteredUserDashboardEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserDashboardEmbeddingConfiguration')
     RegisteredUserDashboardFeatureConfigurations = Shapes::StructureShape.new(name: 'RegisteredUserDashboardFeatureConfigurations')
@@ -1498,6 +1504,8 @@ module Aws::QuickSight
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     SubtotalOptions = Shapes::StructureShape.new(name: 'SubtotalOptions')
+    SuccessfulKeyRegistrationEntries = Shapes::ListShape.new(name: 'SuccessfulKeyRegistrationEntries')
+    SuccessfulKeyRegistrationEntry = Shapes::StructureShape.new(name: 'SuccessfulKeyRegistrationEntry')
     Suffix = Shapes::StringShape.new(name: 'Suffix')
     Synonyms = Shapes::ListShape.new(name: 'Synonyms')
     TableAggregatedFieldWells = Shapes::StructureShape.new(name: 'TableAggregatedFieldWells')
@@ -1711,6 +1719,8 @@ module Aws::QuickSight
     UpdateIdentityPropagationConfigResponse = Shapes::StructureShape.new(name: 'UpdateIdentityPropagationConfigResponse')
     UpdateIpRestrictionRequest = Shapes::StructureShape.new(name: 'UpdateIpRestrictionRequest')
     UpdateIpRestrictionResponse = Shapes::StructureShape.new(name: 'UpdateIpRestrictionResponse')
+    UpdateKeyRegistrationRequest = Shapes::StructureShape.new(name: 'UpdateKeyRegistrationRequest')
+    UpdateKeyRegistrationResponse = Shapes::StructureShape.new(name: 'UpdateKeyRegistrationResponse')
     UpdateLinkPermissionList = Shapes::ListShape.new(name: 'UpdateLinkPermissionList')
     UpdatePublicSharingSettingsRequest = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsRequest')
     UpdatePublicSharingSettingsResponse = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsResponse')
@@ -4312,6 +4322,16 @@ module Aws::QuickSight
     DescribeIpRestrictionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeIpRestrictionResponse.struct_class = Types::DescribeIpRestrictionResponse
 
+    DescribeKeyRegistrationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeKeyRegistrationRequest.add_member(:default_key_only, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "default-key-only"))
+    DescribeKeyRegistrationRequest.struct_class = Types::DescribeKeyRegistrationRequest
+
+    DescribeKeyRegistrationResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    DescribeKeyRegistrationResponse.add_member(:key_registration, Shapes::ShapeRef.new(shape: KeyRegistration, location_name: "KeyRegistration"))
+    DescribeKeyRegistrationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    DescribeKeyRegistrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
+    DescribeKeyRegistrationResponse.struct_class = Types::DescribeKeyRegistrationResponse
+
     DescribeNamespaceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     DescribeNamespaceRequest.struct_class = Types::DescribeNamespaceRequest
@@ -4582,6 +4602,14 @@ module Aws::QuickSight
 
     ExportWithHiddenFieldsOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
     ExportWithHiddenFieldsOption.struct_class = Types::ExportWithHiddenFieldsOption
+
+    FailedKeyRegistrationEntries.member = Shapes::ShapeRef.new(shape: FailedKeyRegistrationEntry)
+
+    FailedKeyRegistrationEntry.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, location_name: "KeyArn"))
+    FailedKeyRegistrationEntry.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Message"))
+    FailedKeyRegistrationEntry.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, required: true, location_name: "StatusCode"))
+    FailedKeyRegistrationEntry.add_member(:sender_fault, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "SenderFault"))
+    FailedKeyRegistrationEntry.struct_class = Types::FailedKeyRegistrationEntry
 
     FieldBasedTooltip.add_member(:aggregation_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "AggregationVisibility"))
     FieldBasedTooltip.add_member(:tooltip_title_type, Shapes::ShapeRef.new(shape: TooltipTitleType, location_name: "TooltipTitleType"))
@@ -5459,6 +5487,8 @@ module Aws::QuickSight
 
     KPIVisualStandardLayout.add_member(:type, Shapes::ShapeRef.new(shape: KPIVisualStandardLayoutType, required: true, location_name: "Type"))
     KPIVisualStandardLayout.struct_class = Types::KPIVisualStandardLayout
+
+    KeyRegistration.member = Shapes::ShapeRef.new(shape: RegisteredCustomerManagedKey)
 
     LabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     LabelOptions.add_member(:font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "FontConfiguration"))
@@ -6567,7 +6597,7 @@ module Aws::QuickSight
     RdsParameters.struct_class = Types::RdsParameters
 
     RedshiftIAMParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
-    RedshiftIAMParameters.add_member(:database_user, Shapes::ShapeRef.new(shape: DatabaseUser, required: true, location_name: "DatabaseUser"))
+    RedshiftIAMParameters.add_member(:database_user, Shapes::ShapeRef.new(shape: DatabaseUser, location_name: "DatabaseUser"))
     RedshiftIAMParameters.add_member(:database_groups, Shapes::ShapeRef.new(shape: DatabaseGroupList, location_name: "DatabaseGroups"))
     RedshiftIAMParameters.add_member(:auto_create_database_user, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoCreateDatabaseUser"))
     RedshiftIAMParameters.struct_class = Types::RedshiftIAMParameters
@@ -6659,6 +6689,10 @@ module Aws::QuickSight
     RegisterUserResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     RegisterUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     RegisterUserResponse.struct_class = Types::RegisterUserResponse
+
+    RegisteredCustomerManagedKey.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, location_name: "KeyArn"))
+    RegisteredCustomerManagedKey.add_member(:default_key, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultKey"))
+    RegisteredCustomerManagedKey.struct_class = Types::RegisteredCustomerManagedKey
 
     RegisteredUserConsoleFeatureConfigurations.add_member(:state_persistence, Shapes::ShapeRef.new(shape: StatePersistenceConfigurations, location_name: "StatePersistence"))
     RegisteredUserConsoleFeatureConfigurations.struct_class = Types::RegisteredUserConsoleFeatureConfigurations
@@ -7351,6 +7385,12 @@ module Aws::QuickSight
     SubtotalOptions.add_member(:metric_header_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "MetricHeaderCellStyle"))
     SubtotalOptions.add_member(:style_targets, Shapes::ShapeRef.new(shape: TableStyleTargetList, location_name: "StyleTargets"))
     SubtotalOptions.struct_class = Types::SubtotalOptions
+
+    SuccessfulKeyRegistrationEntries.member = Shapes::ShapeRef.new(shape: SuccessfulKeyRegistrationEntry)
+
+    SuccessfulKeyRegistrationEntry.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "KeyArn"))
+    SuccessfulKeyRegistrationEntry.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, required: true, location_name: "StatusCode"))
+    SuccessfulKeyRegistrationEntry.struct_class = Types::SuccessfulKeyRegistrationEntry
 
     Synonyms.member = Shapes::ShapeRef.new(shape: LimitedString)
 
@@ -8281,6 +8321,15 @@ module Aws::QuickSight
     UpdateIpRestrictionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateIpRestrictionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateIpRestrictionResponse.struct_class = Types::UpdateIpRestrictionResponse
+
+    UpdateKeyRegistrationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateKeyRegistrationRequest.add_member(:key_registration, Shapes::ShapeRef.new(shape: KeyRegistration, required: true, location_name: "KeyRegistration"))
+    UpdateKeyRegistrationRequest.struct_class = Types::UpdateKeyRegistrationRequest
+
+    UpdateKeyRegistrationResponse.add_member(:failed_key_registration, Shapes::ShapeRef.new(shape: FailedKeyRegistrationEntries, location_name: "FailedKeyRegistration"))
+    UpdateKeyRegistrationResponse.add_member(:successful_key_registration, Shapes::ShapeRef.new(shape: SuccessfulKeyRegistrationEntries, location_name: "SuccessfulKeyRegistration"))
+    UpdateKeyRegistrationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    UpdateKeyRegistrationResponse.struct_class = Types::UpdateKeyRegistrationResponse
 
     UpdateLinkPermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
@@ -9843,6 +9892,18 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:describe_key_registration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeKeyRegistration"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/key-registration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeKeyRegistrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeKeyRegistrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:describe_namespace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeNamespace"
         o.http_method = "GET"
@@ -11226,6 +11287,18 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_key_registration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKeyRegistration"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/key-registration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateKeyRegistrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateKeyRegistrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
