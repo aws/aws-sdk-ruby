@@ -1545,6 +1545,25 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Returns the identity of the invoking principal.
+    #
+    # @return [Types::GetDataLakePrincipalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataLakePrincipalResponse#identity #identity} => String
+    #
+    # @example Response structure
+    #
+    #   resp.identity #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakePrincipal AWS API Documentation
+    #
+    # @overload get_data_lake_principal(params = {})
+    # @param [Hash] params ({})
+    def get_data_lake_principal(params = {}, options = {})
+      req = build_request(:get_data_lake_principal, params)
+      req.send_request(options)
+    end
+
     # Retrieves the list of the data lake administrators of a Lake
     # Formation-managed data lake.
     #
@@ -3776,7 +3795,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2024-05-17)
+------------------
+
+* Feature - Introduces a new API, GetDataLakePrincipal, that returns the identity of the invoking principal
+
 1.50.0 (2024-05-13)
 ------------------
 

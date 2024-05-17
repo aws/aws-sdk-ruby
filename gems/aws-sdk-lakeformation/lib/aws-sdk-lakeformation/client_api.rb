@@ -110,6 +110,8 @@ module Aws::LakeFormation
     FilterConditionList = Shapes::ListShape.new(name: 'FilterConditionList')
     GetDataCellsFilterRequest = Shapes::StructureShape.new(name: 'GetDataCellsFilterRequest')
     GetDataCellsFilterResponse = Shapes::StructureShape.new(name: 'GetDataCellsFilterResponse')
+    GetDataLakePrincipalRequest = Shapes::StructureShape.new(name: 'GetDataLakePrincipalRequest')
+    GetDataLakePrincipalResponse = Shapes::StructureShape.new(name: 'GetDataLakePrincipalResponse')
     GetDataLakeSettingsRequest = Shapes::StructureShape.new(name: 'GetDataLakeSettingsRequest')
     GetDataLakeSettingsResponse = Shapes::StructureShape.new(name: 'GetDataLakeSettingsResponse')
     GetEffectivePermissionsForPathRequest = Shapes::StructureShape.new(name: 'GetEffectivePermissionsForPathRequest')
@@ -145,6 +147,7 @@ module Aws::LakeFormation
     IAMSAMLProviderArn = Shapes::StringShape.new(name: 'IAMSAMLProviderArn')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IdentityCenterInstanceArn = Shapes::StringShape.new(name: 'IdentityCenterInstanceArn')
+    IdentityString = Shapes::StringShape.new(name: 'IdentityString')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
@@ -590,6 +593,11 @@ module Aws::LakeFormation
 
     GetDataCellsFilterResponse.add_member(:data_cells_filter, Shapes::ShapeRef.new(shape: DataCellsFilter, location_name: "DataCellsFilter"))
     GetDataCellsFilterResponse.struct_class = Types::GetDataCellsFilterResponse
+
+    GetDataLakePrincipalRequest.struct_class = Types::GetDataLakePrincipalRequest
+
+    GetDataLakePrincipalResponse.add_member(:identity, Shapes::ShapeRef.new(shape: IdentityString, location_name: "Identity"))
+    GetDataLakePrincipalResponse.struct_class = Types::GetDataLakePrincipalResponse
 
     GetDataLakeSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetDataLakeSettingsRequest.struct_class = Types::GetDataLakeSettingsRequest
@@ -1155,6 +1163,7 @@ module Aws::LakeFormation
         "endpointPrefix" => "lakeformation",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Lake Formation",
         "serviceId" => "LakeFormation",
         "signatureVersion" => "v4",
@@ -1439,6 +1448,17 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_data_lake_principal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataLakePrincipal"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetDataLakePrincipal"
+        o.input = Shapes::ShapeRef.new(shape: GetDataLakePrincipalRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataLakePrincipalResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 

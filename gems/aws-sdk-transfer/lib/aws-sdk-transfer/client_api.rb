@@ -1306,6 +1306,7 @@ module Aws::Transfer
         "endpointPrefix" => "transfer",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "AWS Transfer",
         "serviceFullName" => "AWS Transfer Family",
         "serviceId" => "Transfer",

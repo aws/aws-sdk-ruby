@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2024-05-17)
+------------------
+
+* Feature - Enable use of CloudFormation traits in Smithy model to improve generated CloudFormation schema from the Smithy API model.
+
 1.93.0 (2024-05-13)
 ------------------
 

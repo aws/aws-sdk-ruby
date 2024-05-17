@@ -100,6 +100,8 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::ExtendTransaction.build(context)
           when :get_data_cells_filter
             Aws::LakeFormation::Endpoints::GetDataCellsFilter.build(context)
+          when :get_data_lake_principal
+            Aws::LakeFormation::Endpoints::GetDataLakePrincipal.build(context)
           when :get_data_lake_settings
             Aws::LakeFormation::Endpoints::GetDataLakeSettings.build(context)
           when :get_effective_permissions_for_path

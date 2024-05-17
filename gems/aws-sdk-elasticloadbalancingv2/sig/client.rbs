@@ -233,7 +233,7 @@ module Aws
                                     },
                                   ],
                                   ?type: ("application" | "network" | "gateway"),
-                                  ?ip_address_type: ("ipv4" | "dualstack"),
+                                  ?ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4"),
                                   ?customer_owned_ipv_4_pool: ::String
                                 ) -> _CreateLoadBalancerResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoadBalancerResponseSuccess
@@ -958,12 +958,12 @@ module Aws
 
       interface _SetIpAddressTypeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetIpAddressTypeOutput]
-        def ip_address_type: () -> ("ipv4" | "dualstack")
+        def ip_address_type: () -> ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#set_ip_address_type-instance_method
       def set_ip_address_type: (
                                  load_balancer_arn: ::String,
-                                 ip_address_type: ("ipv4" | "dualstack")
+                                 ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
                                ) -> _SetIpAddressTypeResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIpAddressTypeResponseSuccess
 
@@ -998,7 +998,7 @@ module Aws
       interface _SetSubnetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetSubnetsOutput]
         def availability_zones: () -> ::Array[Types::AvailabilityZone]
-        def ip_address_type: () -> ("ipv4" | "dualstack")
+        def ip_address_type: () -> ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#set_subnets-instance_method
       def set_subnets: (
@@ -1012,7 +1012,7 @@ module Aws
                              i_pv_6_address: ::String?
                            },
                          ],
-                         ?ip_address_type: ("ipv4" | "dualstack")
+                         ?ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
                        ) -> _SetSubnetsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetSubnetsResponseSuccess
 

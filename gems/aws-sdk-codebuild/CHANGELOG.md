@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2024-05-17)
+------------------
+
+* Feature - Aws CodeBuild now supports 36 hours build timeout
+
 1.113.0 (2024-05-15)
 ------------------
 

@@ -388,8 +388,9 @@ module Aws::CodeBuild
     #   @return [Types::LogsLocation]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
-    #   before timing out this build if it does not get marked as completed.
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to
+    #   wait before timing out this build if it does not get marked as
+    #   completed.
     #   @return [Integer]
     #
     # @!attribute [rw] queued_timeout_in_minutes
@@ -1649,9 +1650,9 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
-    #   before it times out any build that has not been marked as completed.
-    #   The default is 60 minutes.
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to
+    #   wait before it times out any build that has not been marked as
+    #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] queued_timeout_in_minutes
@@ -3749,8 +3750,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
-    #   before timing out any related build that did not get marked as
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to
+    #   wait before timing out any related build that did not get marked as
     #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
@@ -5984,7 +5985,7 @@ module Aws::CodeBuild
     #   @return [Boolean]
     #
     # @!attribute [rw] timeout_in_minutes_override
-    #   The number of build timeout minutes, from 5 to 480 (8 hours), that
+    #   The number of build timeout minutes, from 5 to 2160 (36 hours), that
     #   overrides, for this build only, the latest setting already defined
     #   in the build project.
     #   @return [Integer]
@@ -6575,7 +6576,7 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   The replacement value in minutes, from 5 to 480 (8 hours), for
+    #   The replacement value in minutes, from 5 to 2160 (36 hours), for
     #   CodeBuild to wait before timing out any related build that did not
     #   get marked as completed.
     #   @return [Integer]

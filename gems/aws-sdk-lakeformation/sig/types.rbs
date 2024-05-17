@@ -388,6 +388,14 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class GetDataLakePrincipalRequest < Aws::EmptyStructure
+    end
+
+    class GetDataLakePrincipalResponse
+      attr_accessor identity: ::String
+      SENSITIVE: []
+    end
+
     class GetDataLakeSettingsRequest
       attr_accessor catalog_id: ::String
       SENSITIVE: []

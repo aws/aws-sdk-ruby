@@ -2071,8 +2071,14 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] usage
-    #   Specifies whether this certificate is used for signing or
-    #   encryption.
+    #   Specifies how this certificate is used. It can be used in the
+    #   following ways:
+    #
+    #   * `SIGNING`: For signing AS2 messages
+    #
+    #   * `ENCRYPTION`: For encrypting AS2 messages
+    #
+    #   * `TLS`: For securing AS2 communications sent over HTTPS
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2535,7 +2541,9 @@ module Aws::Transfer
     #
     # @!attribute [rw] domain
     #   Specifies the domain of the storage system that is used for file
-    #   transfers.
+    #   transfers. There are two domains available: Amazon Simple Storage
+    #   Service (Amazon S3) and Amazon Elastic File System (Amazon EFS). The
+    #   default value is S3.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_details
@@ -3294,8 +3302,14 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] usage
-    #   Specifies whether this certificate is used for signing or
-    #   encryption.
+    #   Specifies how this certificate is used. It can be used in the
+    #   following ways:
+    #
+    #   * `SIGNING`: For signing AS2 messages
+    #
+    #   * `ENCRYPTION`: For encrypting AS2 messages
+    #
+    #   * `TLS`: For securing AS2 communications sent over HTTPS
     #   @return [String]
     #
     # @!attribute [rw] certificate
@@ -4225,8 +4239,14 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] usage
-    #   Specifies whether this certificate is used for signing or
-    #   encryption.
+    #   Specifies how this certificate is used. It can be used in the
+    #   following ways:
+    #
+    #   * `SIGNING`: For signing AS2 messages
+    #
+    #   * `ENCRYPTION`: For encrypting AS2 messages
+    #
+    #   * `TLS`: For securing AS2 communications sent over HTTPS
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4430,7 +4450,9 @@ module Aws::Transfer
     #
     # @!attribute [rw] domain
     #   Specifies the domain of the storage system that is used for file
-    #   transfers.
+    #   transfers. There are two domains available: Amazon Simple Storage
+    #   Service (Amazon S3) and Amazon Elastic File System (Amazon EFS). The
+    #   default value is S3.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_type

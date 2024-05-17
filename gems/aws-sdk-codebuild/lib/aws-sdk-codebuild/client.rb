@@ -1372,7 +1372,7 @@ module Aws::CodeBuild
     #   Services account.
     #
     # @option params [Integer] :timeout_in_minutes
-    #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait
     #   before it times out any build that has not been marked as completed.
     #   The default is 60 minutes.
     #
@@ -3733,7 +3733,7 @@ module Aws::CodeBuild
     #   Enable this flag to override privileged mode in the build project.
     #
     # @option params [Integer] :timeout_in_minutes_override
-    #   The number of build timeout minutes, from 5 to 480 (8 hours), that
+    #   The number of build timeout minutes, from 5 to 2160 (36 hours), that
     #   overrides, for this build only, the latest setting already defined in
     #   the build project.
     #
@@ -5148,7 +5148,7 @@ module Aws::CodeBuild
     #   Web Services account.
     #
     # @option params [Integer] :timeout_in_minutes
-    #   The replacement value in minutes, from 5 to 480 (8 hours), for
+    #   The replacement value in minutes, from 5 to 2160 (36 hours), for
     #   CodeBuild to wait before timing out any related build that did not get
     #   marked as completed.
     #
@@ -5751,7 +5751,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

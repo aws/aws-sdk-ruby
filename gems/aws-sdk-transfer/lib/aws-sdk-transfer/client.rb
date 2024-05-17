@@ -2548,7 +2548,14 @@ module Aws::Transfer
     # create local (AS2) profiles and partner profiles.
     #
     # @option params [required, String] :usage
-    #   Specifies whether this certificate is used for signing or encryption.
+    #   Specifies how this certificate is used. It can be used in the
+    #   following ways:
+    #
+    #   * `SIGNING`: For signing AS2 messages
+    #
+    #   * `ENCRYPTION`: For encrypting AS2 messages
+    #
+    #   * `TLS`: For securing AS2 communications sent over HTTPS
     #
     # @option params [required, String] :certificate
     #   * For the CLI, provide a file path for a certificate in URI format.
@@ -4809,7 +4816,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

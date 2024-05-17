@@ -999,9 +999,21 @@ module Aws::ElasticLoadBalancingV2
     #   The type of load balancer. The default is `application`.
     #
     # @option params [String] :ip_address_type
-    #   The type of IP addresses used by the subnets for your load balancer.
-    #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
-    #   (for IPv4 and IPv6 addresses).
+    #   Note: Internal load balancers must use the `ipv4` IP address type.
+    #
+    #   \[Application Load Balancers\] The IP address type. The possible
+    #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4 and
+    #   IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6 only
+    #   public addresses, with private IPv4 and IPv6 addresses).
+    #
+    #   \[Network Load Balancers\] The IP address type. The possible values
+    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
+    #   IPv6 addresses). You can’t specify `dualstack` for a load balancer
+    #   with a UDP or TCP\_UDP listener.
+    #
+    #   \[Gateway Load Balancers\] The IP address type. The possible values
+    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
+    #   IPv6 addresses).
     #
     # @option params [String] :customer_owned_ipv_4_pool
     #   \[Application Load Balancers on Outposts\] The ID of the
@@ -1125,7 +1137,7 @@ module Aws::ElasticLoadBalancingV2
     #       },
     #     ],
     #     type: "application", # accepts application, network, gateway
-    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack, dualstack-without-public-ipv4
     #     customer_owned_ipv_4_pool: "CustomerOwnedIpv4Pool",
     #   })
     #
@@ -1153,7 +1165,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].i_pv_6_address #=> String
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
-    #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
+    #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack", "dualstack-without-public-ipv4"
     #   resp.load_balancers[0].customer_owned_ipv_4_pool #=> String
     #   resp.load_balancers[0].enforce_security_group_inbound_rules_on_private_link_traffic #=> String
     #
@@ -2395,7 +2407,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].i_pv_6_address #=> String
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
-    #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
+    #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack", "dualstack-without-public-ipv4"
     #   resp.load_balancers[0].customer_owned_ipv_4_pool #=> String
     #   resp.load_balancers[0].enforce_security_group_inbound_rules_on_private_link_traffic #=> String
     #   resp.next_marker #=> String
@@ -4472,10 +4484,21 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the load balancer.
     #
     # @option params [required, String] :ip_address_type
-    #   The IP address type. The possible values are `ipv4` (for IPv4
-    #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). You can’t
-    #   specify `dualstack` for a load balancer with a UDP or TCP\_UDP
-    #   listener.
+    #   Note: Internal load balancers must use the `ipv4` IP address type.
+    #
+    #   \[Application Load Balancers\] The IP address type. The possible
+    #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4 and
+    #   IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6 only
+    #   public addresses, with private IPv4 and IPv6 addresses).
+    #
+    #   \[Network Load Balancers\] The IP address type. The possible values
+    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
+    #   IPv6 addresses). You can’t specify `dualstack` for a load balancer
+    #   with a UDP or TCP\_UDP listener.
+    #
+    #   \[Gateway Load Balancers\] The IP address type. The possible values
+    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
+    #   IPv6 addresses).
     #
     # @return [Types::SetIpAddressTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4485,12 +4508,12 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.set_ip_address_type({
     #     load_balancer_arn: "LoadBalancerArn", # required
-    #     ip_address_type: "ipv4", # required, accepts ipv4, dualstack
+    #     ip_address_type: "ipv4", # required, accepts ipv4, dualstack, dualstack-without-public-ipv4
     #   })
     #
     # @example Response structure
     #
-    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack"
+    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack", "dualstack-without-public-ipv4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressType AWS API Documentation
     #
@@ -4763,6 +4786,11 @@ module Aws::ElasticLoadBalancingV2
     #   Availability Zones.
     #
     # @option params [String] :ip_address_type
+    #   \[Application Load Balancers\] The IP address type. The possible
+    #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4 and
+    #   IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6 only
+    #   public addresses, with private IPv4 and IPv6 addresses).
+    #
     #   \[Network Load Balancers\] The type of IP addresses used by the
     #   subnets for your load balancer. The possible values are `ipv4` (for
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
@@ -4818,7 +4846,7 @@ module Aws::ElasticLoadBalancingV2
     #         i_pv_6_address: "IPv6Address",
     #       },
     #     ],
-    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack, dualstack-without-public-ipv4
     #   })
     #
     # @example Response structure
@@ -4832,7 +4860,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
     #   resp.availability_zones[0].load_balancer_addresses[0].private_i_pv_4_address #=> String
     #   resp.availability_zones[0].load_balancer_addresses[0].i_pv_6_address #=> String
-    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack"
+    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack", "dualstack-without-public-ipv4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnets AWS API Documentation
     #
@@ -4856,7 +4884,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
