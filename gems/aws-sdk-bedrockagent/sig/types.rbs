@@ -63,6 +63,7 @@ module Aws::BedrockAgent
       attr_accessor description: ::String
       attr_accessor failure_reasons: ::Array[::String]
       attr_accessor foundation_model: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
       attr_accessor prepared_at: ::Time
@@ -153,6 +154,7 @@ module Aws::BedrockAgent
       attr_accessor agent_name: ::String
       attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       attr_accessor description: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor latest_agent_version: ::String
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -169,6 +171,7 @@ module Aws::BedrockAgent
       attr_accessor description: ::String
       attr_accessor failure_reasons: ::Array[::String]
       attr_accessor foundation_model: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
@@ -184,6 +187,7 @@ module Aws::BedrockAgent
       attr_accessor agent_version: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -254,6 +258,7 @@ module Aws::BedrockAgent
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor description: ::String
       attr_accessor foundation_model: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
@@ -525,6 +530,12 @@ module Aws::BedrockAgent
 
     class GetKnowledgeBaseResponse
       attr_accessor knowledge_base: Types::KnowledgeBase
+      SENSITIVE: []
+    end
+
+    class GuardrailConfiguration
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
       SENSITIVE: []
     end
 
@@ -980,6 +991,7 @@ module Aws::BedrockAgent
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor description: ::String
       attr_accessor foundation_model: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration

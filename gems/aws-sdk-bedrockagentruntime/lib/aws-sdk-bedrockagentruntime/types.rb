@@ -750,6 +750,35 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Assessment details of the content analyzed by Guardrails.
+    #
+    # @!attribute [rw] content_policy
+    #   Content policy details of the Guardrail.
+    #   @return [Types::GuardrailContentPolicyAssessment]
+    #
+    # @!attribute [rw] sensitive_information_policy
+    #   Sensitive Information policy details of Guardrail.
+    #   @return [Types::GuardrailSensitiveInformationPolicyAssessment]
+    #
+    # @!attribute [rw] topic_policy
+    #   Topic policy details of the Guardrail.
+    #   @return [Types::GuardrailTopicPolicyAssessment]
+    #
+    # @!attribute [rw] word_policy
+    #   Word policy details of the Guardrail.
+    #   @return [Types::GuardrailWordPolicyAssessment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailAssessment AWS API Documentation
+    #
+    class GuardrailAssessment < Struct.new(
+      :content_policy,
+      :sensitive_information_policy,
+      :topic_policy,
+      :word_policy)
+      SENSITIVE = [:content_policy, :sensitive_information_policy, :topic_policy, :word_policy]
+      include Aws::Structure
+    end
+
     # The configuration details for the guardrail.
     #
     # @!attribute [rw] guardrail_id
@@ -766,6 +795,251 @@ module Aws::BedrockAgentRuntime
       :guardrail_id,
       :guardrail_version)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the content filter used in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action placed on the content by the Guardrail filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence level regarding the content detected in the filter by
+    #   the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of content detected in the filter by the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailContentFilter AWS API Documentation
+    #
+    class GuardrailContentFilter < Struct.new(
+      :action,
+      :confidence,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the policy assessment in the Guardrails filter.
+    #
+    # @!attribute [rw] filters
+    #   The filter details of the policy assessment used in the Guardrails
+    #   filter.
+    #   @return [Array<Types::GuardrailContentFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailContentPolicyAssessment AWS API Documentation
+    #
+    class GuardrailContentPolicyAssessment < Struct.new(
+      :filters)
+      SENSITIVE = [:filters]
+      include Aws::Structure
+    end
+
+    # The custom word details for the filter in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action details for the custom word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] match
+    #   The match details for the custom word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailCustomWord AWS API Documentation
+    #
+    class GuardrailCustomWord < Struct.new(
+      :action,
+      :match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The managed word details for the filter in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action details for the managed word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] match
+    #   The match details for the managed word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type details for the managed word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailManagedWord AWS API Documentation
+    #
+    class GuardrailManagedWord < Struct.new(
+      :action,
+      :match,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Guardrail filter to identify and remove personally identifiable
+    # information (PII).
+    #
+    # @!attribute [rw] action
+    #   The action of the Guardrail filter to identify and remove PII.
+    #   @return [String]
+    #
+    # @!attribute [rw] match
+    #   The match to settings in the Guardrail filter to identify and remove
+    #   PII.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of PII the Guardrail filter has identified and removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailPiiEntityFilter AWS API Documentation
+    #
+    class GuardrailPiiEntityFilter < Struct.new(
+      :action,
+      :match,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details for the regex filter used in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action details for the regex filter used in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] match
+    #   The match details for the regex filter used in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name details for the regex filter used in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex
+    #   The regex details for the regex filter used in the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailRegexFilter AWS API Documentation
+    #
+    class GuardrailRegexFilter < Struct.new(
+      :action,
+      :match,
+      :name,
+      :regex)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the sensitive policy assessment used in the Guardrail.
+    #
+    # @!attribute [rw] pii_entities
+    #   The details of the PII entities used in the sensitive policy
+    #   assessment for the Guardrail.
+    #   @return [Array<Types::GuardrailPiiEntityFilter>]
+    #
+    # @!attribute [rw] regexes
+    #   The details of the regexes used in the sensitive policy assessment
+    #   for the Guardrail.
+    #   @return [Array<Types::GuardrailRegexFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailSensitiveInformationPolicyAssessment AWS API Documentation
+    #
+    class GuardrailSensitiveInformationPolicyAssessment < Struct.new(
+      :pii_entities,
+      :regexes)
+      SENSITIVE = [:pii_entities, :regexes]
+      include Aws::Structure
+    end
+
+    # The details for a specific topic defined in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action details on a specific topic in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name details on a specific topic in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type details on a specific topic in the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailTopic AWS API Documentation
+    #
+    class GuardrailTopic < Struct.new(
+      :action,
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the policy assessment used in the Guardrail.
+    #
+    # @!attribute [rw] topics
+    #   The topic details of the policy assessment used in the Guardrail.
+    #   @return [Array<Types::GuardrailTopic>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailTopicPolicyAssessment AWS API Documentation
+    #
+    class GuardrailTopicPolicyAssessment < Struct.new(
+      :topics)
+      SENSITIVE = [:topics]
+      include Aws::Structure
+    end
+
+    # The trace details used in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The trace action details used with the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_assessments
+    #   The details of the input assessments used in the Guardrail Trace.
+    #   @return [Array<Types::GuardrailAssessment>]
+    #
+    # @!attribute [rw] output_assessments
+    #   The details of the output assessments used in the Guardrail Trace.
+    #   @return [Array<Types::GuardrailAssessment>]
+    #
+    # @!attribute [rw] trace_id
+    #   The details of the trace Id used in the Guardrail Trace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailTrace AWS API Documentation
+    #
+    class GuardrailTrace < Struct.new(
+      :action,
+      :input_assessments,
+      :output_assessments,
+      :trace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The assessment details for words defined in the Guardrail filter.
+    #
+    # @!attribute [rw] custom_words
+    #   The custom word details for words defined in the Guardrail filter.
+    #   @return [Array<Types::GuardrailCustomWord>]
+    #
+    # @!attribute [rw] managed_word_lists
+    #   The managed word lists for words defined in the Guardrail filter.
+    #   @return [Array<Types::GuardrailManagedWord>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailWordPolicyAssessment AWS API Documentation
+    #
+    class GuardrailWordPolicyAssessment < Struct.new(
+      :custom_words,
+      :managed_word_lists)
+      SENSITIVE = [:custom_words, :managed_word_lists]
       include Aws::Structure
     end
 
@@ -2639,6 +2913,10 @@ module Aws::BedrockAgentRuntime
     #   Contains information about the failure of the interaction.
     #   @return [Types::FailureTrace]
     #
+    # @!attribute [rw] guardrail_trace
+    #   The trace details for a trace defined in the Guardrail filter.
+    #   @return [Types::GuardrailTrace]
+    #
     # @!attribute [rw] orchestration_trace
     #   Details about the orchestration step, in which the agent determines
     #   the order in which actions are executed and which knowledge bases
@@ -2659,15 +2937,17 @@ module Aws::BedrockAgentRuntime
     #
     class Trace < Struct.new(
       :failure_trace,
+      :guardrail_trace,
       :orchestration_trace,
       :post_processing_trace,
       :pre_processing_trace,
       :unknown)
-      SENSITIVE = [:failure_trace, :orchestration_trace, :post_processing_trace, :pre_processing_trace]
+      SENSITIVE = [:failure_trace, :guardrail_trace, :orchestration_trace, :post_processing_trace, :pre_processing_trace]
       include Aws::Structure
       include Aws::Structure::Union
 
       class FailureTrace < Trace; end
+      class GuardrailTrace < Trace; end
       class OrchestrationTrace < Trace; end
       class PostProcessingTrace < Trace; end
       class PreProcessingTrace < Trace; end

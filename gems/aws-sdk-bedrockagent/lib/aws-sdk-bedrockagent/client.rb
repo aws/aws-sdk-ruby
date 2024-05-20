@@ -534,6 +534,10 @@ module Aws::BedrockAgent
     #   The foundation model to be used for orchestration by the agent you
     #   create.
     #
+    # @option params [Types::GuardrailConfiguration] :guardrail_configuration
+    #   The unique Guardrail configuration assigned to the agent when it is
+    #   created.
+    #
     # @option params [Integer] :idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information about
     #   a user's conversation with the agent.
@@ -570,6 +574,10 @@ module Aws::BedrockAgent
     #     customer_encryption_key_arn: "KmsKeyArn",
     #     description: "Description",
     #     foundation_model: "ModelIdentifier",
+    #     guardrail_configuration: {
+    #       guardrail_identifier: "GuardrailIdentifier",
+    #       guardrail_version: "GuardrailVersion",
+    #     },
     #     idle_session_ttl_in_seconds: 1,
     #     instruction: "Instruction",
     #     prompt_override_configuration: {
@@ -611,6 +619,8 @@ module Aws::BedrockAgent
     #   resp.agent.failure_reasons #=> Array
     #   resp.agent.failure_reasons[0] #=> String
     #   resp.agent.foundation_model #=> String
+    #   resp.agent.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.agent.guardrail_configuration.guardrail_version #=> String
     #   resp.agent.idle_session_ttl_in_seconds #=> Integer
     #   resp.agent.instruction #=> String
     #   resp.agent.prepared_at #=> Time
@@ -1495,6 +1505,8 @@ module Aws::BedrockAgent
     #   resp.agent.failure_reasons #=> Array
     #   resp.agent.failure_reasons[0] #=> String
     #   resp.agent.foundation_model #=> String
+    #   resp.agent.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.agent.guardrail_configuration.guardrail_version #=> String
     #   resp.agent.idle_session_ttl_in_seconds #=> Integer
     #   resp.agent.instruction #=> String
     #   resp.agent.prepared_at #=> Time
@@ -1709,6 +1721,8 @@ module Aws::BedrockAgent
     #   resp.agent_version.failure_reasons #=> Array
     #   resp.agent_version.failure_reasons[0] #=> String
     #   resp.agent_version.foundation_model #=> String
+    #   resp.agent_version.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.agent_version.guardrail_configuration.guardrail_version #=> String
     #   resp.agent_version.idle_session_ttl_in_seconds #=> Integer
     #   resp.agent_version.instruction #=> String
     #   resp.agent_version.prompt_override_configuration.override_lambda #=> String
@@ -2123,6 +2137,8 @@ module Aws::BedrockAgent
     #   resp.agent_version_summaries[0].agent_version #=> String
     #   resp.agent_version_summaries[0].created_at #=> Time
     #   resp.agent_version_summaries[0].description #=> String
+    #   resp.agent_version_summaries[0].guardrail_configuration.guardrail_identifier #=> String
+    #   resp.agent_version_summaries[0].guardrail_configuration.guardrail_version #=> String
     #   resp.agent_version_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2171,6 +2187,8 @@ module Aws::BedrockAgent
     #   resp.agent_summaries[0].agent_name #=> String
     #   resp.agent_summaries[0].agent_status #=> String, one of "CREATING", "PREPARING", "PREPARED", "NOT_PREPARED", "DELETING", "FAILED", "VERSIONING", "UPDATING"
     #   resp.agent_summaries[0].description #=> String
+    #   resp.agent_summaries[0].guardrail_configuration.guardrail_identifier #=> String
+    #   resp.agent_summaries[0].guardrail_configuration.guardrail_version #=> String
     #   resp.agent_summaries[0].latest_agent_version #=> String
     #   resp.agent_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -2586,6 +2604,10 @@ module Aws::BedrockAgent
     #   Specifies a new foundation model to be used for orchestration by the
     #   agent.
     #
+    # @option params [Types::GuardrailConfiguration] :guardrail_configuration
+    #   The unique Guardrail configuration assigned to the agent when it is
+    #   updated.
+    #
     # @option params [Integer] :idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information about
     #   a user's conversation with the agent.
@@ -2619,6 +2641,10 @@ module Aws::BedrockAgent
     #     customer_encryption_key_arn: "KmsKeyArn",
     #     description: "Description",
     #     foundation_model: "ModelIdentifier", # required
+    #     guardrail_configuration: {
+    #       guardrail_identifier: "GuardrailIdentifier",
+    #       guardrail_version: "GuardrailVersion",
+    #     },
     #     idle_session_ttl_in_seconds: 1,
     #     instruction: "Instruction",
     #     prompt_override_configuration: {
@@ -2657,6 +2683,8 @@ module Aws::BedrockAgent
     #   resp.agent.failure_reasons #=> Array
     #   resp.agent.failure_reasons[0] #=> String
     #   resp.agent.foundation_model #=> String
+    #   resp.agent.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.agent.guardrail_configuration.guardrail_version #=> String
     #   resp.agent.idle_session_ttl_in_seconds #=> Integer
     #   resp.agent.instruction #=> String
     #   resp.agent.prepared_at #=> Time
@@ -3235,7 +3263,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -252,6 +252,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#certificate_details-instance_method
       def certificate_details: () -> Types::CertificateDetails
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#engine_lifecycle_support-instance_method
+      def engine_lifecycle_support: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#load-instance_method
@@ -338,6 +341,7 @@ module Aws
                     ?master_user_secret_kms_key_id: ::String,
                     ?enable_local_write_forwarding: bool,
                     ?ca_certificate_identifier: ::String,
+                    ?engine_lifecycle_support: ::String,
                     ?source_region: ::String
                   ) -> DBCluster
                 | (?Hash[Symbol, untyped]) -> DBCluster
@@ -478,7 +482,8 @@ module Aws
                        interconnect_subnet_id: ::String?,
                        transit_gateway_multicast_domain_id: ::String?,
                        replica_mode: ("open-read-only" | "mounted")?
-                     }
+                     },
+                     ?engine_lifecycle_support: ::String
                    ) -> DBCluster
                  | (?Hash[Symbol, untyped]) -> DBCluster
 

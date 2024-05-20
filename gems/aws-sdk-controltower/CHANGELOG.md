@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-05-20)
+------------------
+
+* Feature - Added ListControlOperations API and filtering support for ListEnabledControls API. Updates also includes added metadata for enabled controls and control operations.
+
 1.20.0 (2024-05-13)
 ------------------
 

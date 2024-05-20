@@ -320,9 +320,9 @@ module Aws::RDS
     #   parameter to `db-instance`. For RDS Proxy events, specify `db-proxy`.
     #   If this value isn't specified, all events are returned.
     #
-    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
-    #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
-    #   `db-proxy`
+    #   Valid Values:` db-instance | db-cluster | db-parameter-group |
+    #   db-security-group | db-snapshot | db-cluster-snapshot | db-proxy |
+    #   zero-etl | custom-engine-version | blue-green-deployment `
     # @option options [Array<String>] :event_categories
     #   A list of event categories for a particular source type (`SourceType`)
     #   that you want to subscribe to. You can see a list of the categories
@@ -426,9 +426,9 @@ module Aws::RDS
     #   set this parameter to db-instance. For RDS Proxy events, specify
     #   `db-proxy`. If this value isn't specified, all events are returned.
     #
-    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
-    #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
-    #   `db-proxy`
+    #   Valid Values:` db-instance | db-cluster | db-parameter-group |
+    #   db-security-group | db-snapshot | db-cluster-snapshot | db-proxy |
+    #   zero-etl | custom-engine-version | blue-green-deployment `
     # @option options [Array<String>] :event_categories
     #   A list of event categories for a source type (`SourceType`) that you
     #   want to subscribe to. You can see a list of the categories for a given

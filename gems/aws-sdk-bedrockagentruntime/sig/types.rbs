@@ -177,10 +177,90 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class GuardrailAssessment
+      attr_accessor content_policy: Types::GuardrailContentPolicyAssessment
+      attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicyAssessment
+      attr_accessor topic_policy: Types::GuardrailTopicPolicyAssessment
+      attr_accessor word_policy: Types::GuardrailWordPolicyAssessment
+      SENSITIVE: [:content_policy, :sensitive_information_policy, :topic_policy, :word_policy]
+    end
+
     class GuardrailConfiguration
       attr_accessor guardrail_id: ::String
       attr_accessor guardrail_version: ::String
       SENSITIVE: []
+    end
+
+    class GuardrailContentFilter
+      attr_accessor action: ("BLOCKED")
+      attr_accessor confidence: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+      attr_accessor type: ("INSULTS" | "HATE" | "SEXUAL" | "VIOLENCE" | "MISCONDUCT" | "PROMPT_ATTACK")
+      SENSITIVE: []
+    end
+
+    class GuardrailContentPolicyAssessment
+      attr_accessor filters: ::Array[Types::GuardrailContentFilter]
+      SENSITIVE: [:filters]
+    end
+
+    class GuardrailCustomWord
+      attr_accessor action: ("BLOCKED")
+      attr_accessor match: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailManagedWord
+      attr_accessor action: ("BLOCKED")
+      attr_accessor match: ::String
+      attr_accessor type: ("PROFANITY")
+      SENSITIVE: []
+    end
+
+    class GuardrailPiiEntityFilter
+      attr_accessor action: ("BLOCKED" | "ANONYMIZED")
+      attr_accessor match: ::String
+      attr_accessor type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER")
+      SENSITIVE: []
+    end
+
+    class GuardrailRegexFilter
+      attr_accessor action: ("BLOCKED" | "ANONYMIZED")
+      attr_accessor match: ::String
+      attr_accessor name: ::String
+      attr_accessor regex: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailSensitiveInformationPolicyAssessment
+      attr_accessor pii_entities: ::Array[Types::GuardrailPiiEntityFilter]
+      attr_accessor regexes: ::Array[Types::GuardrailRegexFilter]
+      SENSITIVE: [:pii_entities, :regexes]
+    end
+
+    class GuardrailTopic
+      attr_accessor action: ("BLOCKED")
+      attr_accessor name: ::String
+      attr_accessor type: ("DENY")
+      SENSITIVE: []
+    end
+
+    class GuardrailTopicPolicyAssessment
+      attr_accessor topics: ::Array[Types::GuardrailTopic]
+      SENSITIVE: [:topics]
+    end
+
+    class GuardrailTrace
+      attr_accessor action: ("INTERVENED" | "NONE")
+      attr_accessor input_assessments: ::Array[Types::GuardrailAssessment]
+      attr_accessor output_assessments: ::Array[Types::GuardrailAssessment]
+      attr_accessor trace_id: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailWordPolicyAssessment
+      attr_accessor custom_words: ::Array[Types::GuardrailCustomWord]
+      attr_accessor managed_word_lists: ::Array[Types::GuardrailManagedWord]
+      SENSITIVE: [:custom_words, :managed_word_lists]
     end
 
     class InferenceConfig
@@ -616,13 +696,16 @@ module Aws::BedrockAgentRuntime
 
     class Trace
       attr_accessor failure_trace: Types::FailureTrace
+      attr_accessor guardrail_trace: Types::GuardrailTrace
       attr_accessor orchestration_trace: Types::OrchestrationTrace
       attr_accessor post_processing_trace: Types::PostProcessingTrace
       attr_accessor pre_processing_trace: Types::PreProcessingTrace
       attr_accessor unknown: untyped
-      SENSITIVE: [:failure_trace, :orchestration_trace, :post_processing_trace, :pre_processing_trace]
+      SENSITIVE: [:failure_trace, :guardrail_trace, :orchestration_trace, :post_processing_trace, :pre_processing_trace]
 
       class FailureTrace < Trace
+      end
+      class GuardrailTrace < Trace
       end
       class OrchestrationTrace < Trace
       end

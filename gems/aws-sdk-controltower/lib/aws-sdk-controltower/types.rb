@@ -106,9 +106,21 @@ module Aws::ControlTower
 
     # An operation performed by the control.
     #
+    # @!attribute [rw] control_identifier
+    #   The `controlIdentifier` of the control for the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_control_identifier
+    #   The `controlIdentifier` of the enabled control.
+    #   @return [String]
+    #
     # @!attribute [rw] end_time
     #   The time that the operation finished.
     #   @return [Time]
+    #
+    # @!attribute [rw] operation_identifier
+    #   The identifier of the specified operation.
+    #   @return [String]
     #
     # @!attribute [rw] operation_type
     #   One of `ENABLE_CONTROL` or `DISABLE_CONTROL`.
@@ -127,25 +139,124 @@ module Aws::ControlTower
     #   explaining why the operation failed.
     #   @return [String]
     #
+    # @!attribute [rw] target_identifier
+    #   The target upon which the control operation is working.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ControlOperation AWS API Documentation
     #
     class ControlOperation < Struct.new(
+      :control_identifier,
+      :enabled_control_identifier,
       :end_time,
+      :operation_identifier,
       :operation_type,
       :start_time,
       :status,
-      :status_message)
+      :status_message,
+      :target_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter object that lets you call `ListCOntrolOperations` with a
+    # specific filter.
+    #
+    # @!attribute [rw] control_identifiers
+    #   The set of `controlIdentifier` returned by the filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] control_operation_types
+    #   The set of `ControlOperation` objects returned by the filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enabled_control_identifiers
+    #   The set `controlIdentifier` of enabled controls selected by the
+    #   filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statuses
+    #   Lists the status of control operations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_identifiers
+    #   The set of `targetIdentifier` objects returned by the filter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ControlOperationFilter AWS API Documentation
+    #
+    class ControlOperationFilter < Struct.new(
+      :control_identifiers,
+      :control_operation_types,
+      :enabled_control_identifiers,
+      :statuses,
+      :target_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of information about the specified control operation.
+    #
+    # @!attribute [rw] control_identifier
+    #   The `controlIdentifier` of a control.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_control_identifier
+    #   The `controlIdentifier` of an enabled control.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the control operation was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_identifier
+    #   The unique identifier of a control operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   The type of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time at which a control operation began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the specified control operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A speficic message displayed as part of the control status.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_identifier
+    #   The unique identifier of the target of a control operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ControlOperationSummary AWS API Documentation
+    #
+    class ControlOperationSummary < Struct.new(
+      :control_identifier,
+      :enabled_control_identifier,
+      :end_time,
+      :operation_identifier,
+      :operation_type,
+      :start_time,
+      :status,
+      :status_message,
+      :target_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] manifest
-    #   The manifest.yaml file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [The manifest file][1].
+    #   The manifest JSON file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [Launch your landing
+    #   zone][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] tags
@@ -619,6 +730,32 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # A structure that returns a set of control identifiers, the control
+    # status for each control in the set, and the drift status for each
+    # control in the set.
+    #
+    # @!attribute [rw] control_identifiers
+    #   The set of `controlIdentifier` returned by the filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] drift_statuses
+    #   A list of `DriftStatus` items.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statuses
+    #   A list of `EnablementStatus` items.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlFilter AWS API Documentation
+    #
+    class EnabledControlFilter < Struct.new(
+      :control_identifiers,
+      :drift_statuses,
+      :statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A key/value pair, where `Key` is of type `String` and `Value` is of
     # type `Document`.
     #
@@ -931,8 +1068,8 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] manifest
-    #   The landing zone `manifest.yaml` text file that specifies the
-    #   landing zone configurations.
+    #   The landing zone manifest JSON text file that specifies the landing
+    #   zone configurations.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] status
@@ -1084,6 +1221,46 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] filter
+    #   An input filter for the `ListControlOperations` API that lets you
+    #   select the types of control operations to view.
+    #   @return [Types::ControlOperationFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be shown.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListControlOperationsInput AWS API Documentation
+    #
+    class ListControlOperationsInput < Struct.new(
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] control_operations
+    #   Returns a list of output from control operations. PLACEHOLDER
+    #   @return [Array<Types::ControlOperationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListControlOperationsOutput AWS API Documentation
+    #
+    class ListControlOperationsOutput < Struct.new(
+      :control_operations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
     #   A filter applied on the `ListEnabledBaseline` operation. Allowed
     #   filters are `baselineIdentifiers` and `targetIdentifiers`. The
     #   filter can be applied for either, or both.
@@ -1124,6 +1301,11 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] filter
+    #   An input filter for the `ListCEnabledControls` API that lets you
+    #   select the types of control operations to view.
+    #   @return [Types::EnabledControlFilter]
+    #
     # @!attribute [rw] max_results
     #   How many results to return per API call.
     #   @return [Integer]
@@ -1145,6 +1327,7 @@ module Aws::ControlTower
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledControlsInput AWS API Documentation
     #
     class ListEnabledControlsInput < Struct.new(
+      :filter,
       :max_results,
       :next_token,
       :target_identifier)
@@ -1477,12 +1660,13 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] manifest
-    #   The `manifest.yaml` file is a text file that describes your Amazon
-    #   Web Services resources. For examples, review [The manifest file][1].
+    #   The manifest JSON file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [Launch your landing
+    #   zone][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] version

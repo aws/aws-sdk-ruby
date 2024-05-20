@@ -218,6 +218,10 @@ module Aws::BedrockAgent
     #   The foundation model used for orchestration by the agent.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The guardrails configuration assigned to the agent.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information
     #   about a user's conversation with the agent.
@@ -270,6 +274,7 @@ module Aws::BedrockAgent
       :description,
       :failure_reasons,
       :foundation_model,
+      :guardrail_configuration,
       :idle_session_ttl_in_seconds,
       :instruction,
       :prepared_at,
@@ -683,6 +688,10 @@ module Aws::BedrockAgent
     #   The description of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The details of the guardrails configuration in the agent summary.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] latest_agent_version
     #   The latest version of the agent.
     #   @return [String]
@@ -698,6 +707,7 @@ module Aws::BedrockAgent
       :agent_name,
       :agent_status,
       :description,
+      :guardrail_configuration,
       :latest_agent_version,
       :updated_at)
       SENSITIVE = []
@@ -749,6 +759,10 @@ module Aws::BedrockAgent
     #   The foundation model that the version invokes.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The guardrails configuration assigned to the agent version.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information
     #   about a user's conversation with the agent.
@@ -798,6 +812,7 @@ module Aws::BedrockAgent
       :description,
       :failure_reasons,
       :foundation_model,
+      :guardrail_configuration,
       :idle_session_ttl_in_seconds,
       :instruction,
       :prompt_override_configuration,
@@ -830,6 +845,11 @@ module Aws::BedrockAgent
     #   The description of the version of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The details of the guardrails configuration in the agent version
+    #   summary.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] updated_at
     #   The time at which the version was last updated.
     #   @return [Time]
@@ -842,6 +862,7 @@ module Aws::BedrockAgent
       :agent_version,
       :created_at,
       :description,
+      :guardrail_configuration,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
@@ -1153,6 +1174,11 @@ module Aws::BedrockAgent
     #   create.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The unique Guardrail configuration assigned to the agent when it is
+    #   created.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information
     #   about a user's conversation with the agent.
@@ -1189,6 +1215,7 @@ module Aws::BedrockAgent
       :customer_encryption_key_arn,
       :description,
       :foundation_model,
+      :guardrail_configuration,
       :idle_session_ttl_in_seconds,
       :instruction,
       :prompt_override_configuration,
@@ -2091,6 +2118,25 @@ module Aws::BedrockAgent
     #
     class GetKnowledgeBaseResponse < Struct.new(
       :knowledge_base)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the guardrails configuration.
+    #
+    # @!attribute [rw] guardrail_identifier
+    #   The guardrails identifier assigned to the guardrails configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_version
+    #   The guardrails version assigned to the guardrails configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GuardrailConfiguration AWS API Documentation
+    #
+    class GuardrailConfiguration < Struct.new(
+      :guardrail_identifier,
+      :guardrail_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3246,11 +3292,13 @@ module Aws::BedrockAgent
     #   Defines the prompt template with which to replace the default prompt
     #   template. You can use placeholder variables in the base prompt
     #   template to customize the prompt. For more information, see [Prompt
-    #   template placeholder variables][1].
+    #   template placeholder variables][1]. For more information, see
+    #   [Configure the prompt templates][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts-configure.html
     #   @return [String]
     #
     # @!attribute [rw] inference_configuration
@@ -3328,7 +3376,13 @@ module Aws::BedrockAgent
     #   The ARN of the Lambda function to use when parsing the raw
     #   foundation model output in parts of the agent sequence. If you
     #   specify this field, at least one of the `promptConfigurations` must
-    #   contain a `parserMode` value that is set to `OVERRIDDEN`.
+    #   contain a `parserMode` value that is set to `OVERRIDDEN`. For more
+    #   information, see [Parser Lambda function in Agents for Amazon
+    #   Bedrock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html
     #   @return [String]
     #
     # @!attribute [rw] prompt_configurations
@@ -3965,6 +4019,11 @@ module Aws::BedrockAgent
     #   agent.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The unique Guardrail configuration assigned to the agent when it is
+    #   updated.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information
     #   about a user's conversation with the agent.
@@ -3997,6 +4056,7 @@ module Aws::BedrockAgent
       :customer_encryption_key_arn,
       :description,
       :foundation_model,
+      :guardrail_configuration,
       :idle_session_ttl_in_seconds,
       :instruction,
       :prompt_override_configuration)

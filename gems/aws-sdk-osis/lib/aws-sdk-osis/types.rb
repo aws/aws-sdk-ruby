@@ -18,7 +18,12 @@ module Aws::OSIS
 
     # Options that specify the configuration of a persistent buffer. To
     # configure how OpenSearch Ingestion encrypts this data, set the
-    # EncryptionAtRestOptions.
+    # `EncryptionAtRestOptions`. For more information, see [Persistent
+    # buffering][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/osis-features-overview.html#persistent-buffering
     #
     # @!attribute [rw] persistent_buffer_enabled
     #   Whether persistent buffering should be enabled.
@@ -99,7 +104,7 @@ module Aws::OSIS
     # @!attribute [rw] log_group
     #   The name of the CloudWatch Logs group to send pipeline logs to. You
     #   can specify an existing log group or create a new one. For example,
-    #   `/aws/OpenSearchService/IngestionService/my-pipeline`.
+    #   `/aws/vendedlogs/OpenSearchService/pipelines`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/CloudWatchLogDestination AWS API Documentation
@@ -204,11 +209,17 @@ module Aws::OSIS
     #
     class DeletePipelineResponse < Aws::EmptyStructure; end
 
-    # Options to control how OpenSearch encrypts all data-at-rest.
+    # Exception is thrown when an operation has been disabled.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/DisabledOperationException AWS API Documentation
+    #
+    class DisabledOperationException < Aws::EmptyStructure; end
+
+    # Options to control how OpenSearch encrypts buffer data.
     #
     # @!attribute [rw] kms_key_arn
-    #   The ARN of the KMS key used to encrypt data-at-rest in OpenSearch
-    #   Ingestion. By default, data is encrypted using an AWS owned key.
+    #   The ARN of the KMS key used to encrypt buffer data. By default, data
+    #   is encrypted using an Amazon Web Services owned key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/EncryptionAtRestOptions AWS API Documentation
@@ -223,10 +234,15 @@ module Aws::OSIS
     #   The name of the blueprint to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] format
+    #   The format format of the blueprint to retrieve.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetPipelineBlueprintRequest AWS API Documentation
     #
     class GetPipelineBlueprintRequest < Struct.new(
-      :blueprint_name)
+      :blueprint_name,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -235,10 +251,15 @@ module Aws::OSIS
     #   The requested blueprint in YAML format.
     #   @return [Types::PipelineBlueprint]
     #
+    # @!attribute [rw] format
+    #   The format of the blueprint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetPipelineBlueprintResponse AWS API Documentation
     #
     class GetPipelineBlueprintResponse < Struct.new(
-      :blueprint)
+      :blueprint,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -268,7 +289,7 @@ module Aws::OSIS
     end
 
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline to get information about.
+    #   The name of the pipeline.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetPipelineRequest AWS API Documentation
@@ -469,17 +490,26 @@ module Aws::OSIS
     # @!attribute [rw] buffer_options
     #   Options that specify the configuration of a persistent buffer. To
     #   configure how OpenSearch Ingestion encrypts this data, set the
-    #   EncryptionAtRestOptions.
+    #   `EncryptionAtRestOptions`. For more information, see [Persistent
+    #   buffering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/osis-features-overview.html#persistent-buffering
     #   @return [Types::BufferOptions]
     #
     # @!attribute [rw] encryption_at_rest_options
-    #   Options to control how OpenSearch encrypts all data-at-rest.
+    #   Options to control how OpenSearch encrypts buffer data.
     #   @return [Types::EncryptionAtRestOptions]
     #
     # @!attribute [rw] service_vpc_endpoints
     #   A list of VPC endpoints that OpenSearch Ingestion has created to
-    #   other AWS services.
+    #   other Amazon Web Services services.
     #   @return [Array<Types::ServiceVpcEndpoint>]
+    #
+    # @!attribute [rw] destinations
+    #   Destinations to which the pipeline writes data.
+    #   @return [Array<Types::PipelineDestination>]
     #
     # @!attribute [rw] tags
     #   A list of tags associated with the given pipeline.
@@ -503,6 +533,7 @@ module Aws::OSIS
       :buffer_options,
       :encryption_at_rest_options,
       :service_vpc_endpoints,
+      :destinations,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -518,11 +549,31 @@ module Aws::OSIS
     #   The YAML configuration of the blueprint.
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   The display name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_description
+    #   A description of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The name of the service that the blueprint is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case
+    #   The use case that the blueprint relates to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PipelineBlueprint AWS API Documentation
     #
     class PipelineBlueprint < Struct.new(
       :blueprint_name,
-      :pipeline_configuration_body)
+      :pipeline_configuration_body,
+      :display_name,
+      :display_description,
+      :service,
+      :use_case)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -533,10 +584,49 @@ module Aws::OSIS
     #   The name of the blueprint.
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   The display name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_description
+    #   A description of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The name of the service that the blueprint is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case
+    #   The use case that the blueprint relates to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PipelineBlueprintSummary AWS API Documentation
     #
     class PipelineBlueprintSummary < Struct.new(
-      :blueprint_name)
+      :blueprint_name,
+      :display_name,
+      :display_description,
+      :service,
+      :use_case)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the destination of a pipeline.
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service receiving data from the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint receiving data from the pipeline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/PipelineDestination AWS API Documentation
+    #
+    class PipelineDestination < Struct.new(
+      :service_name,
+      :endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -589,6 +679,10 @@ module Aws::OSIS
     #   The date and time when the pipeline was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] destinations
+    #   A list of destinations to which the pipeline writes data.
+    #   @return [Array<Types::PipelineDestination>]
+    #
     # @!attribute [rw] tags
     #   A list of tags associated with the given pipeline.
     #   @return [Array<Types::Tag>]
@@ -604,6 +698,7 @@ module Aws::OSIS
       :max_units,
       :created_at,
       :last_updated_at,
+      :destinations,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -629,7 +724,7 @@ module Aws::OSIS
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_id
-    #   The ID of the VPC endpoint that was created.
+    #   The unique identifier of the VPC endpoint that was created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ServiceVpcEndpoint AWS API Documentation
@@ -866,6 +961,26 @@ module Aws::OSIS
       include Aws::Structure
     end
 
+    # Options for attaching a VPC to pipeline.
+    #
+    # @!attribute [rw] attach_to_vpc
+    #   Whether a VPC is attached to the pipeline.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cidr_block
+    #   The CIDR block to be reserved for OpenSearch Ingestion to create
+    #   elastic network interfaces (ENIs).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/VpcAttachmentOptions AWS API Documentation
+    #
+    class VpcAttachmentOptions < Struct.new(
+      :attach_to_vpc,
+      :cidr_block)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An OpenSearch Ingestion-managed VPC endpoint that will access one or
     # more pipelines.
     #
@@ -904,11 +1019,16 @@ module Aws::OSIS
     #   A list of security groups associated with the VPC endpoint.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] vpc_attachment_options
+    #   Options for attaching a VPC to a pipeline.
+    #   @return [Types::VpcAttachmentOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/VpcOptions AWS API Documentation
     #
     class VpcOptions < Struct.new(
       :subnet_ids,
-      :security_group_ids)
+      :security_group_ids,
+      :vpc_attachment_options)
       SENSITIVE = []
       include Aws::Structure
     end

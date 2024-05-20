@@ -15,6 +15,8 @@ module Aws
       end
       class ConflictException < ::Aws::Errors::ServiceError
       end
+      class DisabledOperationException < ::Aws::Errors::ServiceError
+      end
       class InternalException < ::Aws::Errors::ServiceError
       end
       class InvalidPaginationTokenException < ::Aws::Errors::ServiceError

@@ -2539,18 +2539,23 @@ module Aws::RDS
     # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
     #
     # @option params [Array<String>] :availability_zones
-    #   A list of Availability Zones (AZs) where DB instances in the DB
-    #   cluster can be created.
+    #   A list of Availability Zones (AZs) where you specifically want to
+    #   create DB instances in the DB cluster.
     #
-    #   For information on Amazon Web Services Regions and Availability Zones,
-    #   see [Choosing the Regions and Availability Zones][1] in the *Amazon
+    #   For information on AZs, see [Availability Zones][1] in the *Amazon
     #   Aurora User Guide*.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
+    #   Constraints:
+    #
+    #   * Can't specify more than three AZs.
+    #
+    #   ^
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.AvailabilityZones
     #
     # @option params [Integer] :backup_retention_period
     #   The number of days for which automated backups are retained.
@@ -2634,7 +2639,22 @@ module Aws::RDS
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
-    #   Valid Values: `aurora-mysql | aurora-postgresql | mysql | postgres`
+    #   Valid Values:
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
+    #
+    #   * `mysql`
+    #
+    #   * `postgres`
+    #
+    #   * `neptune` - For information about using Amazon Neptune, see the [
+    #     *Amazon Neptune User Guide* ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/intro.html
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
@@ -3369,6 +3389,42 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [String] :engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
+    #   end of standard support, you can avoid charges for Extended Support by
+    #   setting the value to `open-source-rds-extended-support-disabled`. In
+    #   this case, creating the DB cluster will fail if the DB major version
+    #   is past its end of standard support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB cluster past the end of standard
+    #   support for that engine version. For more information, see the
+    #   following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3580,6 +3636,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     enable_local_write_forwarding: false,
     #     ca_certificate_identifier: "String",
+    #     engine_lifecycle_support: "String",
     #     source_region: "String",
     #   })
     #
@@ -3721,6 +3778,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -5422,6 +5480,38 @@ module Aws::RDS
     #     DB instance, you can't later modify this DB instance to use the
     #     single-tenant configuration.
     #
+    # @option params [String] :engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, creating
+    #   the DB instance will fail if the DB major version is past its end of
+    #   standard support date.
+    #
+    #    </note>
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
+    #   Amazon Aurora DB instances, the life cycle type is managed by the DB
+    #   cluster.
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB instance past the end of standard
+    #   support for that engine version. For more information, see [Using
+    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -5611,6 +5701,7 @@ module Aws::RDS
     #     db_system_id: "String",
     #     dedicated_log_volume: false,
     #     multi_tenant: false,
+    #     engine_lifecycle_support: "String",
     #   })
     #
     # @example Response structure
@@ -5775,6 +5866,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -6714,6 +6806,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7616,9 +7709,9 @@ module Aws::RDS
     #   parameter to `db-instance`. For RDS Proxy events, specify `db-proxy`.
     #   If this value isn't specified, all events are returned.
     #
-    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
-    #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
-    #   `db-proxy`
+    #   Valid Values:` db-instance | db-cluster | db-parameter-group |
+    #   db-security-group | db-snapshot | db-cluster-snapshot | db-proxy |
+    #   zero-etl | custom-engine-version | blue-green-deployment `
     #
     # @option params [Array<String>] :event_categories
     #   A list of event categories for a particular source type (`SourceType`)
@@ -7816,6 +7909,36 @@ module Aws::RDS
     #
     #   ^
     #
+    # @option params [String] :engine_lifecycle_support
+    #   The life cycle type for this global database cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your global cluster into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, creating
+    #   the global cluster will fail if the DB major version is past its end
+    #   of standard support date.
+    #
+    #    </note>
+    #
+    #   This setting only applies to Aurora PostgreSQL-based global databases.
+    #
+    #   You can use this setting to enroll your global cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your global cluster past the end of standard
+    #   support for that engine version. For more information, see [Using
+    #   Amazon RDS Extended Support][1] in the *Amazon Aurora User Guide*.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #
     # @option params [Boolean] :deletion_protection
     #   Specifies whether to enable deletion protection for the new global
     #   database cluster. The global database can't be deleted when deletion
@@ -7883,6 +8006,7 @@ module Aws::RDS
     #     source_db_cluster_identifier: "String",
     #     engine: "String",
     #     engine_version: "String",
+    #     engine_lifecycle_support: "String",
     #     deletion_protection: false,
     #     database_name: "String",
     #     storage_encrypted: false,
@@ -7896,6 +8020,7 @@ module Aws::RDS
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
@@ -8928,6 +9053,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -9530,6 +9656,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -10170,6 +10297,7 @@ module Aws::RDS
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
@@ -12357,6 +12485,7 @@ module Aws::RDS
     #   resp.db_clusters[0].storage_throughput #=> Integer
     #   resp.db_clusters[0].certificate_details.ca_identifier #=> String
     #   resp.db_clusters[0].certificate_details.valid_till #=> Time
+    #   resp.db_clusters[0].engine_lifecycle_support #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13100,6 +13229,7 @@ module Aws::RDS
     #   resp.db_instances[0].dedicated_log_volume #=> Boolean
     #   resp.db_instances[0].is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instances[0].multi_tenant #=> Boolean
+    #   resp.db_instances[0].engine_lifecycle_support #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -15747,6 +15877,7 @@ module Aws::RDS
     #   resp.global_clusters[0].status #=> String
     #   resp.global_clusters[0].engine #=> String
     #   resp.global_clusters[0].engine_version #=> String
+    #   resp.global_clusters[0].engine_lifecycle_support #=> String
     #   resp.global_clusters[0].database_name #=> String
     #   resp.global_clusters[0].storage_encrypted #=> Boolean
     #   resp.global_clusters[0].deletion_protection #=> Boolean
@@ -17656,6 +17787,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -17781,6 +17913,7 @@ module Aws::RDS
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
@@ -19338,6 +19471,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -21071,6 +21205,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -22042,9 +22177,9 @@ module Aws::RDS
     #   set this parameter to db-instance. For RDS Proxy events, specify
     #   `db-proxy`. If this value isn't specified, all events are returned.
     #
-    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
-    #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
-    #   `db-proxy`
+    #   Valid Values:` db-instance | db-cluster | db-parameter-group |
+    #   db-security-group | db-snapshot | db-cluster-snapshot | db-proxy |
+    #   zero-etl | custom-engine-version | blue-green-deployment `
     #
     # @option params [Array<String>] :event_categories
     #   A list of event categories for a source type (`SourceType`) that you
@@ -22246,6 +22381,7 @@ module Aws::RDS
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
@@ -22855,6 +22991,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -23027,6 +23164,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -23322,6 +23460,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -23567,6 +23706,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -23753,6 +23893,7 @@ module Aws::RDS
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
@@ -24590,6 +24731,43 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters only
     #
+    # @option params [String] :engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
+    #   end of standard support, you can avoid charges for Extended Support by
+    #   setting the value to `open-source-rds-extended-support-disabled`. In
+    #   this case, RDS automatically upgrades your restored DB cluster to a
+    #   higher engine version, if the major engine version is past its end of
+    #   standard support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB cluster past the end of standard
+    #   support for that engine version. For more information, see the
+    #   following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -24710,6 +24888,7 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     storage_type: "String",
+    #     engine_lifecycle_support: "String",
     #   })
     #
     # @example Response structure
@@ -24850,6 +25029,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -25308,6 +25488,43 @@ module Aws::RDS
     # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
     #   Reserved for future use.
     #
+    # @option params [String] :engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
+    #   end of standard support, you can avoid charges for Extended Support by
+    #   setting the value to `open-source-rds-extended-support-disabled`. In
+    #   this case, RDS automatically upgrades your restored DB cluster to a
+    #   higher engine version, if the major engine version is past its end of
+    #   standard support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB cluster past the end of standard
+    #   support for that engine version. For more information, see the
+    #   following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -25429,6 +25646,7 @@ module Aws::RDS
     #       transit_gateway_multicast_domain_id: "String",
     #       replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     },
+    #     engine_lifecycle_support: "String",
     #   })
     #
     # @example Response structure
@@ -25569,6 +25787,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -26003,6 +26222,43 @@ module Aws::RDS
     # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
     #   Reserved for future use.
     #
+    # @option params [String] :engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
+    #   end of standard support, you can avoid charges for Extended Support by
+    #   setting the value to `open-source-rds-extended-support-disabled`. In
+    #   this case, RDS automatically upgrades your restored DB cluster to a
+    #   higher engine version, if the major engine version is past its end of
+    #   standard support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB cluster past the end of standard
+    #   support for that engine version. For more information, see the
+    #   following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -26123,6 +26379,7 @@ module Aws::RDS
     #       transit_gateway_multicast_domain_id: "String",
     #       replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     },
+    #     engine_lifecycle_support: "String",
     #   })
     #
     # @example Response structure
@@ -26263,6 +26520,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -26816,6 +27074,39 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [String] :engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB instance to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB instance past the end of standard
+    #   support for that engine version. For more information, see [Using
+    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
+    #   Amazon Aurora DB instances, the life cycle type is managed by the DB
+    #   cluster.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -26912,6 +27203,7 @@ module Aws::RDS
     #     allocated_storage: 1,
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
+    #     engine_lifecycle_support: "String",
     #   })
     #
     # @example Response structure
@@ -27076,6 +27368,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -27602,6 +27895,39 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [String] :engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB instance to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB instance past the end of standard
+    #   support for that engine version. For more information, see [Using
+    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
+    #   Amazon Aurora DB instances, the life cycle type is managed by the DB
+    #   cluster.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -27669,6 +27995,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
+    #     engine_lifecycle_support: "String",
     #   })
     #
     # @example Response structure
@@ -27833,6 +28160,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -28402,6 +28730,39 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [String] :engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB instance to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB instance past the end of standard
+    #   support for that engine version. For more information, see [Using
+    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
+    #   Amazon Aurora DB instances, the life cycle type is managed by the DB
+    #   cluster.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -28561,6 +28922,7 @@ module Aws::RDS
     #     allocated_storage: 1,
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
+    #     engine_lifecycle_support: "String",
     #   })
     #
     # @example Response structure
@@ -28725,6 +29087,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -29125,6 +29488,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -29342,6 +29706,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -29966,6 +30331,7 @@ module Aws::RDS
     #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -30190,6 +30556,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -30579,6 +30946,7 @@ module Aws::RDS
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
@@ -30790,6 +31158,7 @@ module Aws::RDS
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
     #   resp.db_instance.multi_tenant #=> Boolean
+    #   resp.db_instance.engine_lifecycle_support #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -30813,7 +31182,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.230.0'
+      context[:gem_version] = '1.231.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

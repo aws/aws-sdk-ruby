@@ -24,9 +24,15 @@ module Aws::ControlTower
     Baselines = Shapes::ListShape.new(name: 'Baselines')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ControlIdentifier = Shapes::StringShape.new(name: 'ControlIdentifier')
+    ControlIdentifiers = Shapes::ListShape.new(name: 'ControlIdentifiers')
     ControlOperation = Shapes::StructureShape.new(name: 'ControlOperation')
+    ControlOperationFilter = Shapes::StructureShape.new(name: 'ControlOperationFilter')
     ControlOperationStatus = Shapes::StringShape.new(name: 'ControlOperationStatus')
+    ControlOperationStatuses = Shapes::ListShape.new(name: 'ControlOperationStatuses')
+    ControlOperationSummary = Shapes::StructureShape.new(name: 'ControlOperationSummary')
     ControlOperationType = Shapes::StringShape.new(name: 'ControlOperationType')
+    ControlOperationTypes = Shapes::ListShape.new(name: 'ControlOperationTypes')
+    ControlOperations = Shapes::ListShape.new(name: 'ControlOperations')
     CreateLandingZoneInput = Shapes::StructureShape.new(name: 'CreateLandingZoneInput')
     CreateLandingZoneOutput = Shapes::StructureShape.new(name: 'CreateLandingZoneOutput')
     DeleteLandingZoneInput = Shapes::StructureShape.new(name: 'DeleteLandingZoneInput')
@@ -38,6 +44,7 @@ module Aws::ControlTower
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DriftStatus = Shapes::StringShape.new(name: 'DriftStatus')
     DriftStatusSummary = Shapes::StructureShape.new(name: 'DriftStatusSummary')
+    DriftStatuses = Shapes::ListShape.new(name: 'DriftStatuses')
     EnableBaselineInput = Shapes::StructureShape.new(name: 'EnableBaselineInput')
     EnableBaselineOutput = Shapes::StructureShape.new(name: 'EnableBaselineOutput')
     EnableControlInput = Shapes::StructureShape.new(name: 'EnableControlInput')
@@ -54,6 +61,8 @@ module Aws::ControlTower
     EnabledBaselineTargetIdentifiers = Shapes::ListShape.new(name: 'EnabledBaselineTargetIdentifiers')
     EnabledBaselines = Shapes::ListShape.new(name: 'EnabledBaselines')
     EnabledControlDetails = Shapes::StructureShape.new(name: 'EnabledControlDetails')
+    EnabledControlFilter = Shapes::StructureShape.new(name: 'EnabledControlFilter')
+    EnabledControlIdentifiers = Shapes::ListShape.new(name: 'EnabledControlIdentifiers')
     EnabledControlParameter = Shapes::StructureShape.new(name: 'EnabledControlParameter')
     EnabledControlParameterSummaries = Shapes::ListShape.new(name: 'EnabledControlParameterSummaries')
     EnabledControlParameterSummary = Shapes::StructureShape.new(name: 'EnabledControlParameterSummary')
@@ -62,6 +71,7 @@ module Aws::ControlTower
     EnabledControls = Shapes::ListShape.new(name: 'EnabledControls')
     EnablementStatus = Shapes::StringShape.new(name: 'EnablementStatus')
     EnablementStatusSummary = Shapes::StructureShape.new(name: 'EnablementStatusSummary')
+    EnablementStatuses = Shapes::ListShape.new(name: 'EnablementStatuses')
     GetBaselineInput = Shapes::StructureShape.new(name: 'GetBaselineInput')
     GetBaselineOperationInput = Shapes::StructureShape.new(name: 'GetBaselineOperationInput')
     GetBaselineOperationOutput = Shapes::StructureShape.new(name: 'GetBaselineOperationOutput')
@@ -90,6 +100,10 @@ module Aws::ControlTower
     ListBaselinesInput = Shapes::StructureShape.new(name: 'ListBaselinesInput')
     ListBaselinesMaxResults = Shapes::IntegerShape.new(name: 'ListBaselinesMaxResults')
     ListBaselinesOutput = Shapes::StructureShape.new(name: 'ListBaselinesOutput')
+    ListControlOperationsInput = Shapes::StructureShape.new(name: 'ListControlOperationsInput')
+    ListControlOperationsMaxResults = Shapes::IntegerShape.new(name: 'ListControlOperationsMaxResults')
+    ListControlOperationsNextToken = Shapes::StringShape.new(name: 'ListControlOperationsNextToken')
+    ListControlOperationsOutput = Shapes::StructureShape.new(name: 'ListControlOperationsOutput')
     ListEnabledBaselinesInput = Shapes::StructureShape.new(name: 'ListEnabledBaselinesInput')
     ListEnabledBaselinesMaxResults = Shapes::IntegerShape.new(name: 'ListEnabledBaselinesMaxResults')
     ListEnabledBaselinesNextToken = Shapes::StringShape.new(name: 'ListEnabledBaselinesNextToken')
@@ -122,6 +136,7 @@ module Aws::ControlTower
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetIdentifier = Shapes::StringShape.new(name: 'TargetIdentifier')
+    TargetIdentifiers = Shapes::ListShape.new(name: 'TargetIdentifiers')
     TargetRegions = Shapes::ListShape.new(name: 'TargetRegions')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
@@ -156,12 +171,42 @@ module Aws::ControlTower
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    ControlIdentifiers.member = Shapes::ShapeRef.new(shape: ControlIdentifier)
+
+    ControlOperation.add_member(:control_identifier, Shapes::ShapeRef.new(shape: ControlIdentifier, location_name: "controlIdentifier"))
+    ControlOperation.add_member(:enabled_control_identifier, Shapes::ShapeRef.new(shape: Arn, location_name: "enabledControlIdentifier"))
     ControlOperation.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    ControlOperation.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, location_name: "operationIdentifier"))
     ControlOperation.add_member(:operation_type, Shapes::ShapeRef.new(shape: ControlOperationType, location_name: "operationType"))
     ControlOperation.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startTime"))
     ControlOperation.add_member(:status, Shapes::ShapeRef.new(shape: ControlOperationStatus, location_name: "status"))
     ControlOperation.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ControlOperation.add_member(:target_identifier, Shapes::ShapeRef.new(shape: TargetIdentifier, location_name: "targetIdentifier"))
     ControlOperation.struct_class = Types::ControlOperation
+
+    ControlOperationFilter.add_member(:control_identifiers, Shapes::ShapeRef.new(shape: ControlIdentifiers, location_name: "controlIdentifiers"))
+    ControlOperationFilter.add_member(:control_operation_types, Shapes::ShapeRef.new(shape: ControlOperationTypes, location_name: "controlOperationTypes"))
+    ControlOperationFilter.add_member(:enabled_control_identifiers, Shapes::ShapeRef.new(shape: EnabledControlIdentifiers, location_name: "enabledControlIdentifiers"))
+    ControlOperationFilter.add_member(:statuses, Shapes::ShapeRef.new(shape: ControlOperationStatuses, location_name: "statuses"))
+    ControlOperationFilter.add_member(:target_identifiers, Shapes::ShapeRef.new(shape: TargetIdentifiers, location_name: "targetIdentifiers"))
+    ControlOperationFilter.struct_class = Types::ControlOperationFilter
+
+    ControlOperationStatuses.member = Shapes::ShapeRef.new(shape: ControlOperationStatus)
+
+    ControlOperationSummary.add_member(:control_identifier, Shapes::ShapeRef.new(shape: ControlIdentifier, location_name: "controlIdentifier"))
+    ControlOperationSummary.add_member(:enabled_control_identifier, Shapes::ShapeRef.new(shape: Arn, location_name: "enabledControlIdentifier"))
+    ControlOperationSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    ControlOperationSummary.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, location_name: "operationIdentifier"))
+    ControlOperationSummary.add_member(:operation_type, Shapes::ShapeRef.new(shape: ControlOperationType, location_name: "operationType"))
+    ControlOperationSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startTime"))
+    ControlOperationSummary.add_member(:status, Shapes::ShapeRef.new(shape: ControlOperationStatus, location_name: "status"))
+    ControlOperationSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ControlOperationSummary.add_member(:target_identifier, Shapes::ShapeRef.new(shape: TargetIdentifier, location_name: "targetIdentifier"))
+    ControlOperationSummary.struct_class = Types::ControlOperationSummary
+
+    ControlOperationTypes.member = Shapes::ShapeRef.new(shape: ControlOperationType)
+
+    ControlOperations.member = Shapes::ShapeRef.new(shape: ControlOperationSummary)
 
     CreateLandingZoneInput.add_member(:manifest, Shapes::ShapeRef.new(shape: Manifest, required: true, location_name: "manifest"))
     CreateLandingZoneInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -193,6 +238,8 @@ module Aws::ControlTower
 
     DriftStatusSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: DriftStatus, location_name: "driftStatus"))
     DriftStatusSummary.struct_class = Types::DriftStatusSummary
+
+    DriftStatuses.member = Shapes::ShapeRef.new(shape: DriftStatus)
 
     EnableBaselineInput.add_member(:baseline_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "baselineIdentifier"))
     EnableBaselineInput.add_member(:baseline_version, Shapes::ShapeRef.new(shape: BaselineVersion, required: true, location_name: "baselineVersion"))
@@ -261,6 +308,13 @@ module Aws::ControlTower
     EnabledControlDetails.add_member(:target_regions, Shapes::ShapeRef.new(shape: TargetRegions, location_name: "targetRegions"))
     EnabledControlDetails.struct_class = Types::EnabledControlDetails
 
+    EnabledControlFilter.add_member(:control_identifiers, Shapes::ShapeRef.new(shape: ControlIdentifiers, location_name: "controlIdentifiers"))
+    EnabledControlFilter.add_member(:drift_statuses, Shapes::ShapeRef.new(shape: DriftStatuses, location_name: "driftStatuses"))
+    EnabledControlFilter.add_member(:statuses, Shapes::ShapeRef.new(shape: EnablementStatuses, location_name: "statuses"))
+    EnabledControlFilter.struct_class = Types::EnabledControlFilter
+
+    EnabledControlIdentifiers.member = Shapes::ShapeRef.new(shape: Arn)
+
     EnabledControlParameter.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "key"))
     EnabledControlParameter.add_member(:value, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "value"))
     EnabledControlParameter.struct_class = Types::EnabledControlParameter
@@ -285,6 +339,8 @@ module Aws::ControlTower
     EnablementStatusSummary.add_member(:last_operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, location_name: "lastOperationIdentifier"))
     EnablementStatusSummary.add_member(:status, Shapes::ShapeRef.new(shape: EnablementStatus, location_name: "status"))
     EnablementStatusSummary.struct_class = Types::EnablementStatusSummary
+
+    EnablementStatuses.member = Shapes::ShapeRef.new(shape: EnablementStatus)
 
     GetBaselineInput.add_member(:baseline_identifier, Shapes::ShapeRef.new(shape: BaselineArn, required: true, location_name: "baselineIdentifier"))
     GetBaselineInput.struct_class = Types::GetBaselineInput
@@ -362,6 +418,15 @@ module Aws::ControlTower
     ListBaselinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListBaselinesOutput.struct_class = Types::ListBaselinesOutput
 
+    ListControlOperationsInput.add_member(:filter, Shapes::ShapeRef.new(shape: ControlOperationFilter, location_name: "filter"))
+    ListControlOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListControlOperationsMaxResults, location_name: "maxResults"))
+    ListControlOperationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListControlOperationsNextToken, location_name: "nextToken"))
+    ListControlOperationsInput.struct_class = Types::ListControlOperationsInput
+
+    ListControlOperationsOutput.add_member(:control_operations, Shapes::ShapeRef.new(shape: ControlOperations, required: true, location_name: "controlOperations"))
+    ListControlOperationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListControlOperationsNextToken, location_name: "nextToken"))
+    ListControlOperationsOutput.struct_class = Types::ListControlOperationsOutput
+
     ListEnabledBaselinesInput.add_member(:filter, Shapes::ShapeRef.new(shape: EnabledBaselineFilter, location_name: "filter"))
     ListEnabledBaselinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEnabledBaselinesMaxResults, location_name: "maxResults"))
     ListEnabledBaselinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListEnabledBaselinesNextToken, location_name: "nextToken"))
@@ -371,9 +436,10 @@ module Aws::ControlTower
     ListEnabledBaselinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListEnabledBaselinesNextToken, location_name: "nextToken"))
     ListEnabledBaselinesOutput.struct_class = Types::ListEnabledBaselinesOutput
 
+    ListEnabledControlsInput.add_member(:filter, Shapes::ShapeRef.new(shape: EnabledControlFilter, location_name: "filter"))
     ListEnabledControlsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListEnabledControlsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListEnabledControlsInput.add_member(:target_identifier, Shapes::ShapeRef.new(shape: TargetIdentifier, required: true, location_name: "targetIdentifier"))
+    ListEnabledControlsInput.add_member(:target_identifier, Shapes::ShapeRef.new(shape: TargetIdentifier, location_name: "targetIdentifier"))
     ListEnabledControlsInput.struct_class = Types::ListEnabledControlsInput
 
     ListEnabledControlsOutput.add_member(:enabled_controls, Shapes::ShapeRef.new(shape: EnabledControls, required: true, location_name: "enabledControls"))
@@ -428,6 +494,8 @@ module Aws::ControlTower
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
 
+    TargetIdentifiers.member = Shapes::ShapeRef.new(shape: TargetIdentifier)
+
     TargetRegions.member = Shapes::ShapeRef.new(shape: Region)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -479,6 +547,7 @@ module Aws::ControlTower
         "endpointPrefix" => "controltower",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Control Tower",
         "serviceId" => "ControlTower",
         "signatureVersion" => "v4",
@@ -670,6 +739,24 @@ module Aws::ControlTower
         o.http_request_uri = "/list-baselines"
         o.input = Shapes::ShapeRef.new(shape: ListBaselinesInput)
         o.output = Shapes::ShapeRef.new(shape: ListBaselinesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_control_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListControlOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-control-operations"
+        o.input = Shapes::ShapeRef.new(shape: ListControlOperationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListControlOperationsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-05-20)
+------------------
+
+* Feature - This release adds support for using Guardrails with Bedrock Agents.
+
 1.10.0 (2024-05-15)
 ------------------
 

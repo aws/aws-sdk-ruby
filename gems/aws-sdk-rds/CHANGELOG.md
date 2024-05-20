@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.231.0 (2024-05-20)
+------------------
+
+* Feature - This release adds support for EngineLifecycleSupport on DBInstances, DBClusters, and GlobalClusters.
+
 1.230.0 (2024-05-13)
 ------------------
 

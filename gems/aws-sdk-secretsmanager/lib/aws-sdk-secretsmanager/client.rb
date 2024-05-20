@@ -1501,8 +1501,7 @@ module Aws::SecretsManager
     # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
-    #   The ARN or name of the secret to retrieve. To retrieve a secret from
-    #   another account, you must use an ARN.
+    #   The ARN or name of the secret to retrieve.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
     #   partial ARN. See [Finding a secret from a partial ARN][1].
@@ -2498,7 +2497,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda-functions.html#rotate-secrets_lambda-functions-code
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
     #
     # @return [Types::RotateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3218,8 +3217,7 @@ module Aws::SecretsManager
     # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [String] :secret_id
-    #   The ARN or name of the secret with the resource-based policy you want
-    #   to validate.
+    #   This field is reserved for internal use.
     #
     # @option params [required, String] :resource_policy
     #   A JSON-formatted string that contains an Amazon Web Services
@@ -3289,7 +3287,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

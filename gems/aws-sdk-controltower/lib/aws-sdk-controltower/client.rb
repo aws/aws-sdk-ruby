@@ -418,8 +418,9 @@ module Aws::ControlTower
     # parameters specified in the manifest JSON file.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
-    #   The manifest.yaml file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [The manifest file][1].
+    #   The manifest JSON file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [Launch your landing
+    #   zone][1].
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -428,7 +429,7 @@ module Aws::ControlTower
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to be applied to the landing zone.
@@ -499,7 +500,12 @@ module Aws::ControlTower
     # Disable an `EnabledBaseline` resource on the specified Target. This
     # API starts an asynchronous operation to remove all resources deployed
     # as part of the baseline enablement. The resource will vary depending
-    # on the enabled baseline.
+    # on the enabled baseline. For usage examples, see [ *the Amazon Web
+    # Services Control Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
     #
     # @option params [required, String] :enabled_baseline_identifier
     #   Identifier of the `EnabledBaseline` resource to be deactivated, in ARN
@@ -582,7 +588,12 @@ module Aws::ControlTower
 
     # Enable (apply) a `Baseline` to a Target. This API starts an
     # asynchronous operation to deploy resources specified by the `Baseline`
-    # to the specified Target.
+    # to the specified Target. For usage examples, see [ *the Amazon Web
+    # Services Control Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
     #
     # @option params [required, String] :baseline_identifier
     #   The ARN of the baseline to be enabled.
@@ -711,7 +722,12 @@ module Aws::ControlTower
     end
 
     # Retrieve details about an existing `Baseline` resource by specifying
-    # its identifier.
+    # its identifier. For usage examples, see [ *the Amazon Web Services
+    # Control Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
     #
     # @option params [required, String] :baseline_identifier
     #   The ARN of the `Baseline` resource to be retrieved.
@@ -746,7 +762,12 @@ module Aws::ControlTower
     # Returns the details of an asynchronous baseline operation, as
     # initiated by any of these APIs: `EnableBaseline`, `DisableBaseline`,
     # `UpdateEnabledBaseline`, `ResetEnabledBaseline`. A status message is
-    # displayed in case of operation failure.
+    # displayed in case of operation failure. For usage examples, see [ *the
+    # Amazon Web Services Control Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
     #
     # @option params [required, String] :operation_identifier
     #   The operation ID returned from mutating asynchronous APIs (Enable,
@@ -805,11 +826,15 @@ module Aws::ControlTower
     #
     # @example Response structure
     #
+    #   resp.control_operation.control_identifier #=> String
+    #   resp.control_operation.enabled_control_identifier #=> String
     #   resp.control_operation.end_time #=> Time
+    #   resp.control_operation.operation_identifier #=> String
     #   resp.control_operation.operation_type #=> String, one of "ENABLE_CONTROL", "DISABLE_CONTROL", "UPDATE_ENABLED_CONTROL"
     #   resp.control_operation.start_time #=> Time
     #   resp.control_operation.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
     #   resp.control_operation.status_message #=> String
+    #   resp.control_operation.target_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetControlOperation AWS API Documentation
     #
@@ -933,7 +958,7 @@ module Aws::ControlTower
     end
 
     # Returns the status of the specified landing zone operation. Details
-    # for an operation are available for 60 days.
+    # for an operation are available for 90 days.
     #
     # @option params [required, String] :operation_identifier
     #   A unique identifier assigned to a landing zone operation.
@@ -965,7 +990,12 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # Returns a summary list of all available baselines.
+    # Returns a summary list of all available baselines. For usage examples,
+    # see [ *the Amazon Web Services Control Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be shown.
@@ -1004,9 +1034,70 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Provides a list of operations in progress or queued.
+    #
+    # @option params [Types::ControlOperationFilter] :filter
+    #   An input filter for the `ListControlOperations` API that lets you
+    #   select the types of control operations to view.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be shown.
+    #
+    # @option params [String] :next_token
+    #   A pagination token.
+    #
+    # @return [Types::ListControlOperationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListControlOperationsOutput#control_operations #control_operations} => Array&lt;Types::ControlOperationSummary&gt;
+    #   * {Types::ListControlOperationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_control_operations({
+    #     filter: {
+    #       control_identifiers: ["ControlIdentifier"],
+    #       control_operation_types: ["ENABLE_CONTROL"], # accepts ENABLE_CONTROL, DISABLE_CONTROL, UPDATE_ENABLED_CONTROL
+    #       enabled_control_identifiers: ["Arn"],
+    #       statuses: ["SUCCEEDED"], # accepts SUCCEEDED, FAILED, IN_PROGRESS
+    #       target_identifiers: ["TargetIdentifier"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "ListControlOperationsNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.control_operations #=> Array
+    #   resp.control_operations[0].control_identifier #=> String
+    #   resp.control_operations[0].enabled_control_identifier #=> String
+    #   resp.control_operations[0].end_time #=> Time
+    #   resp.control_operations[0].operation_identifier #=> String
+    #   resp.control_operations[0].operation_type #=> String, one of "ENABLE_CONTROL", "DISABLE_CONTROL", "UPDATE_ENABLED_CONTROL"
+    #   resp.control_operations[0].start_time #=> Time
+    #   resp.control_operations[0].status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
+    #   resp.control_operations[0].status_message #=> String
+    #   resp.control_operations[0].target_identifier #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListControlOperations AWS API Documentation
+    #
+    # @overload list_control_operations(params = {})
+    # @param [Hash] params ({})
+    def list_control_operations(params = {}, options = {})
+      req = build_request(:list_control_operations, params)
+      req.send_request(options)
+    end
+
     # Returns a list of summaries describing `EnabledBaseline` resources.
     # You can filter the list by the corresponding `Baseline` or `Target` of
-    # the `EnabledBaseline` resources.
+    # the `EnabledBaseline` resources. For usage examples, see [ *the Amazon
+    # Web Services Control Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
     #
     # @option params [Types::EnabledBaselineFilter] :filter
     #   A filter applied on the `ListEnabledBaseline` operation. Allowed
@@ -1066,6 +1157,10 @@ module Aws::ControlTower
     #
     # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
     #
+    # @option params [Types::EnabledControlFilter] :filter
+    #   An input filter for the `ListCEnabledControls` API that lets you
+    #   select the types of control operations to view.
+    #
     # @option params [Integer] :max_results
     #   How many results to return per API call.
     #
@@ -1073,7 +1168,7 @@ module Aws::ControlTower
     #   The token to continue the list from a previous API call with the same
     #   parameters.
     #
-    # @option params [required, String] :target_identifier
+    # @option params [String] :target_identifier
     #   The ARN of the organizational unit. For information on how to find the
     #   `targetIdentifier`, see [the overview page][1].
     #
@@ -1091,9 +1186,14 @@ module Aws::ControlTower
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_enabled_controls({
+    #     filter: {
+    #       control_identifiers: ["ControlIdentifier"],
+    #       drift_statuses: ["DRIFTED"], # accepts DRIFTED, IN_SYNC, NOT_CHECKING, UNKNOWN
+    #       statuses: ["SUCCEEDED"], # accepts SUCCEEDED, FAILED, UNDER_CHANGE
+    #     },
     #     max_results: 1,
     #     next_token: "String",
-    #     target_identifier: "TargetIdentifier", # required
+    #     target_identifier: "TargetIdentifier",
     #   })
     #
     # @example Response structure
@@ -1195,7 +1295,12 @@ module Aws::ControlTower
 
     # Re-enables an `EnabledBaseline` resource. For example, this API can
     # re-apply the existing `Baseline` after a new member account is moved
-    # to the target OU.
+    # to the target OU. For usage examples, see [ *the Amazon Web Services
+    # Control Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
     #
     # @option params [required, String] :enabled_baseline_identifier
     #   Specifies the ID of the `EnabledBaseline` resource to be re-enabled,
@@ -1319,7 +1424,12 @@ module Aws::ControlTower
     end
 
     # Updates an `EnabledBaseline` resource's applied parameters or
-    # version.
+    # version. For usage examples, see [ *the Amazon Web Services Control
+    # Tower User Guide* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
     #
     # @option params [required, String] :baseline_version
     #   Specifies the new `Baseline` version, to which the `EnabledBaseline`
@@ -1429,8 +1539,9 @@ module Aws::ControlTower
     #   The unique identifier of the landing zone.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
-    #   The `manifest.yaml` file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [The manifest file][1].
+    #   The manifest JSON file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [Launch your landing
+    #   zone][1].
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -1439,7 +1550,7 @@ module Aws::ControlTower
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #
     # @option params [required, String] :version
     #   The landing zone version, for example, 3.2.
@@ -1483,7 +1594,7 @@ module Aws::ControlTower
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
