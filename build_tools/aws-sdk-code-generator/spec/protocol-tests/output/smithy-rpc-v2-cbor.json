@@ -1375,5 +1375,158 @@
                 }
             }
         ]
+    },
+
+    {
+        "description": "Test cases for Float16 operation",
+        "metadata": {
+            "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
+            "apiVersion": "2020-07-14",
+            "targetPrefix": "RpcV2Protocol"
+        },
+        "shapes": {
+            "Float16Output": {
+                "type": "structure",
+                "members": {
+                    "value": {
+                        "shape": "Double"
+                    }
+                }
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            }
+        },
+        "cases": [
+            {
+                "id": "RpcV2CborFloat16Inf",
+                "given": {
+                    "name": "Float16",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "Float16Output"
+                    }
+                },
+                "description": "Ensures that clients can correctly parse float16 +Inf.",
+                "result": {
+                    "value": "Infinity"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/cbor",
+                        "smithy-protocol": "rpc-v2-cbor"
+                    },
+                    "body": "oWV2YWx1Zfl8AA=="
+                }
+            },
+            {
+                "id": "RpcV2CborFloat16NegInf",
+                "given": {
+                    "name": "Float16",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "Float16Output"
+                    }
+                },
+                "description": "Ensures that clients can correctly parse float16 -Inf.",
+                "result": {
+                    "value": "-Infinity"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/cbor",
+                        "smithy-protocol": "rpc-v2-cbor"
+                    },
+                    "body": "oWV2YWx1Zfn8AA=="
+                }
+            },
+            {
+                "id": "RpcV2CborFloat16LSBNaN",
+                "given": {
+                    "name": "Float16",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "Float16Output"
+                    }
+                },
+                "description": "Ensures that clients can correctly parse float16 NaN with high LSB.",
+                "result": {
+                    "value": "NaN"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/cbor",
+                        "smithy-protocol": "rpc-v2-cbor"
+                    },
+                    "body": "oWV2YWx1Zfl8AQ=="
+                }
+            },
+            {
+                "id": "RpcV2CborFloat16MSBNaN",
+                "given": {
+                    "name": "Float16",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "Float16Output"
+                    }
+                },
+                "description": "Ensures that clients can correctly parse float16 NaN with high MSB.",
+                "result": {
+                    "value": "NaN"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/cbor",
+                        "smithy-protocol": "rpc-v2-cbor"
+                    },
+                    "body": "oWV2YWx1Zfl+AA=="
+                }
+            },
+            {
+                "id": "RpcV2CborFloat16Subnormal",
+                "given": {
+                    "name": "Float16",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "Float16Output"
+                    }
+                },
+                "description": "ensures that clients can correctly parse a subnormal float16.",
+                "result": {
+                    "value": 0.00000476837158203125
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/cbor",
+                        "smithy-protocol": "rpc-v2-cbor"
+                    },
+                    "body": "oWV2YWx1ZfkAUA=="
+                }
+            }
+        ]
     }
 ]
