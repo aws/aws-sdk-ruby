@@ -716,7 +716,7 @@ module Aws
         def domain_name: () -> ::String
         def active_directory_status: () -> ("ACCESS_DENIED" | "DETACHED" | "JOINED" | "JOINING" | "NETWORK_ERROR" | "TIMEOUT" | "UNKNOWN_ERROR")
         def smb_guest_password_set: () -> bool
-        def smb_security_strategy: () -> ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption")
+        def smb_security_strategy: () -> ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption" | "MandatoryEncryptionNoAes128")
         def file_shares_visible: () -> bool
         def smb_local_groups: () -> Types::SMBLocalGroups
       end
@@ -1350,7 +1350,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_smb_security_strategy-instance_method
       def update_smb_security_strategy: (
                                           gateway_arn: ::String,
-                                          smb_security_strategy: ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption")
+                                          smb_security_strategy: ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption" | "MandatoryEncryptionNoAes128")
                                         ) -> _UpdateSMBSecurityStrategyResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSMBSecurityStrategyResponseSuccess
 

@@ -4899,6 +4899,18 @@ module Aws::Glue
     #   synchronization of job artifacts to or from a remote repository.
     #   @return [Types::SourceControlDetails]
     #
+    # @!attribute [rw] maintenance_window
+    #   This field specifies a day of the week and hour for a maintenance
+    #   window for streaming jobs. Glue periodically performs maintenance
+    #   activities. During these maintenance windows, Glue will need to
+    #   restart your streaming jobs.
+    #
+    #   Glue will restart the job within 3 hours of the specified
+    #   maintenance window. For instance, if you set up the maintenance
+    #   window for Monday at 10:00AM GMT, your jobs will be restarted
+    #   between 10:00AM GMT to 1:00PM GMT.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -4923,7 +4935,8 @@ module Aws::Glue
       :worker_type,
       :code_gen_configuration_nodes,
       :execution_class,
-      :source_control_details)
+      :source_control_details,
+      :maintenance_window)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -13429,6 +13442,18 @@ module Aws::Glue
     #   synchronization of job artifacts to or from a remote repository.
     #   @return [Types::SourceControlDetails]
     #
+    # @!attribute [rw] maintenance_window
+    #   This field specifies a day of the week and hour for a maintenance
+    #   window for streaming jobs. Glue periodically performs maintenance
+    #   activities. During these maintenance windows, Glue will need to
+    #   restart your streaming jobs.
+    #
+    #   Glue will restart the job within 3 hours of the specified
+    #   maintenance window. For instance, if you set up the maintenance
+    #   window for Monday at 10:00AM GMT, your jobs will be restarted
+    #   between 10:00AM GMT to 1:00PM GMT.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -13454,7 +13479,8 @@ module Aws::Glue
       :glue_version,
       :code_gen_configuration_nodes,
       :execution_class,
-      :source_control_details)
+      :source_control_details,
+      :maintenance_window)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -13687,8 +13713,18 @@ module Aws::Glue
     #   `TIMEOUT` status. This value overrides the timeout value set in the
     #   parent job.
     #
-    #   Streaming jobs do not have a timeout. The default for non-streaming
-    #   jobs is 2,880 minutes (48 hours).
+    #   The maximum value for timeout for batch jobs is 7 days or 10080
+    #   minutes. The default is 2880 minutes (48 hours) for batch jobs.
+    #
+    #   Any existing Glue jobs that have a greater timeout value are
+    #   defaulted to 7 days. For instance you have specified a timeout of 20
+    #   days for a batch job, it will be stopped on the 7th day.
+    #
+    #   Streaming jobs must have timeout values less than 7 days or 10080
+    #   minutes. When the value is left blank, the job will be restarted
+    #   after 7 days based if you have not setup a maintenance window. If
+    #   you have setup maintenance window, it will be restarted during the
+    #   maintenance window after 7 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
@@ -13819,10 +13855,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] dpu_seconds
-    #   This field populates only for Auto Scaling job runs, and represents
-    #   the total time each executor ran during the lifecycle of a job run
-    #   in seconds, multiplied by a DPU factor (1 for `G.1X`, 2 for `G.2X`,
-    #   or 0.25 for `G.025X` workers). This value may be different than the
+    #   This field can be set for either job runs with execution class
+    #   `FLEX` or when Auto Scaling is enabled, and represents the total
+    #   time each executor ran during the lifecycle of a job run in seconds,
+    #   multiplied by a DPU factor (1 for `G.1X`, 2 for `G.2X`, or 0.25 for
+    #   `G.025X` workers). This value may be different than the
     #   `executionEngineRuntime` * `MaxCapacity` as in the case of Auto
     #   Scaling jobs, as the number of executors running at a given time may
     #   be less than the `MaxCapacity`. Therefore, it is possible that the
@@ -13842,6 +13879,18 @@ module Aws::Glue
     #   Only jobs with Glue version 3.0 and above and command type `glueetl`
     #   will be allowed to set `ExecutionClass` to `FLEX`. The flexible
     #   execution class is available for Spark jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_window
+    #   This field specifies a day of the week and hour for a maintenance
+    #   window for streaming jobs. Glue periodically performs maintenance
+    #   activities. During these maintenance windows, Glue will need to
+    #   restart your streaming jobs.
+    #
+    #   Glue will restart the job within 3 hours of the specified
+    #   maintenance window. For instance, if you set up the maintenance
+    #   window for Monday at 10:00AM GMT, your jobs will be restarted
+    #   between 10:00AM GMT to 1:00PM GMT.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
@@ -13870,7 +13919,8 @@ module Aws::Glue
       :notification_property,
       :glue_version,
       :dpu_seconds,
-      :execution_class)
+      :execution_class,
+      :maintenance_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14106,6 +14156,18 @@ module Aws::Glue
     #   synchronization of job artifacts to or from a remote repository.
     #   @return [Types::SourceControlDetails]
     #
+    # @!attribute [rw] maintenance_window
+    #   This field specifies a day of the week and hour for a maintenance
+    #   window for streaming jobs. Glue periodically performs maintenance
+    #   activities. During these maintenance windows, Glue will need to
+    #   restart your streaming jobs.
+    #
+    #   Glue will restart the job within 3 hours of the specified
+    #   maintenance window. For instance, if you set up the maintenance
+    #   window for Monday at 10:00AM GMT, your jobs will be restarted
+    #   between 10:00AM GMT to 1:00PM GMT.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
     class JobUpdate < Struct.new(
@@ -14128,7 +14190,8 @@ module Aws::Glue
       :glue_version,
       :code_gen_configuration_nodes,
       :execution_class,
-      :source_control_details)
+      :source_control_details,
+      :maintenance_window)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end

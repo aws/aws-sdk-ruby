@@ -1211,6 +1211,17 @@ module Aws::PI
     #   the token, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @!attribute [rw] authorized_actions
+    #   The actions to discover the dimensions you are authorized to access.
+    #   If you specify multiple actions, then the response will contain the
+    #   dimensions common for all the actions.
+    #
+    #   When you don't specify this request parameter or provide an empty
+    #   list, the response contains all the available dimensions for the
+    #   target database engine whether or not you are authorized to access
+    #   them.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListAvailableResourceDimensionsRequest AWS API Documentation
     #
     class ListAvailableResourceDimensionsRequest < Struct.new(
@@ -1218,7 +1229,8 @@ module Aws::PI
       :identifier,
       :metrics,
       :max_results,
-      :next_token)
+      :next_token,
+      :authorized_actions)
       SENSITIVE = []
       include Aws::Structure
     end

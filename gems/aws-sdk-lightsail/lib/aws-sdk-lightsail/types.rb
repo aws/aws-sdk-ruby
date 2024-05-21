@@ -961,8 +961,8 @@ module Aws::Lightsail
     # Describes a blueprint (a virtual private server image).
     #
     # @!attribute [rw] blueprint_id
-    #   The ID for the virtual private server image (`app_wordpress_4_4` or
-    #   `app_lamp_7_0`).
+    #   The ID for the virtual private server image (`app_wordpress_x_x` or
+    #   `app_lamp_x_x`).
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1322,11 +1322,11 @@ module Aws::Lightsail
     #   @return [Integer]
     #
     # @!attribute [rw] bundle_id
-    #   The bundle ID (`micro_1_0`).
+    #   The bundle ID (`micro_x_x`).
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The Amazon EC2 instance type (`t2.micro`).
+    #   The instance type (`micro`).
     #   @return [String]
     #
     # @!attribute [rw] is_active
@@ -3843,7 +3843,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] bundle_id
     #   The bundle of specification information for your virtual private
-    #   server (or *instance*), including the pricing plan (`micro_1_0`).
+    #   server (or *instance*), including the pricing plan (`micro_x_x`).
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -3881,8 +3881,8 @@ module Aws::Lightsail
     # @!attribute [rw] ip_address_type
     #   The IP address type for the instance.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
-    #   IPv4 and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
     #
     #   The default value is `dualstack`.
     #   @return [String]
@@ -4010,8 +4010,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] blueprint_id
-    #   The ID for a virtual private server image (`app_wordpress_4_4` or
-    #   `app_lamp_7_0`). Use the `get blueprints` operation to return a list
+    #   The ID for a virtual private server image (`app_wordpress_x_x` or
+    #   `app_lamp_x_x`). Use the `get blueprints` operation to return a list
     #   of available images (or *blueprints*).
     #
     #   <note markdown="1"> Use active blueprints when creating new instances. Inactive
@@ -4025,7 +4025,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] bundle_id
     #   The bundle of specification information for your virtual private
-    #   server (or *instance*), including the pricing plan (`micro_1_0`).
+    #   server (or *instance*), including the pricing plan (`medium_x_x`).
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -4064,8 +4064,8 @@ module Aws::Lightsail
     # @!attribute [rw] ip_address_type
     #   The IP address type for the instance.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
-    #   IPv4 and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
     #
     #   The default value is `dualstack`.
     #   @return [String]
@@ -4200,8 +4200,8 @@ module Aws::Lightsail
     # @!attribute [rw] ip_address_type
     #   The IP address type for the load balancer.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
-    #   IPv4 and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
     #
     #   The default value is `dualstack`.
     #   @return [String]
@@ -9838,7 +9838,7 @@ module Aws::Lightsail
     # Describes an instance (a virtual private server).
     #
     # @!attribute [rw] name
-    #   The name the user gave the instance (`Amazon_Linux-1GB-Ohio-1`).
+    #   The name the user gave the instance (`Amazon_Linux_2023-1`).
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -9877,15 +9877,15 @@ module Aws::Lightsail
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] blueprint_id
-    #   The blueprint ID (`os_amlinux_2016_03`).
+    #   The blueprint ID (`amazon_linux_2023`).
     #   @return [String]
     #
     # @!attribute [rw] blueprint_name
-    #   The friendly name of the blueprint (`Amazon Linux`).
+    #   The friendly name of the blueprint (`Amazon Linux 2023`).
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
-    #   The bundle for the instance (`micro_1_0`).
+    #   The bundle for the instance (`micro_x_x`).
     #   @return [String]
     #
     # @!attribute [rw] add_ons
@@ -9913,8 +9913,8 @@ module Aws::Lightsail
     # @!attribute [rw] ip_address_type
     #   The IP address type of the instance.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
-    #   IPv4 and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
     #   @return [String]
     #
     # @!attribute [rw] hardware
@@ -10421,6 +10421,11 @@ module Aws::Lightsail
     #     using the `fromPort` parameter, and ICMP code using the `toPort`
     #     parameter.
     #
+    #   * `icmp6` - Internet Control Message Protocol (ICMP) for IPv6. When
+    #     you specify `icmp6` as the `protocol`, you must specify the ICMP
+    #     type using the `fromPort` parameter, and ICMP code using the
+    #     `toPort` parameter.
+    #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Transport_layer
@@ -10591,6 +10596,11 @@ module Aws::Lightsail
     #     using the `fromPort` parameter, and ICMP code using the `toPort`
     #     parameter.
     #
+    #   * `icmp6` - Internet Control Message Protocol (ICMP) for IPv6. When
+    #     you specify `icmp6` as the `protocol`, you must specify the ICMP
+    #     type using the `fromPort` parameter, and ICMP code using the
+    #     `toPort` parameter.
+    #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Transport_layer
@@ -10735,12 +10745,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] from_blueprint_id
     #   The blueprint ID from which you created the snapshot
-    #   (`os_debian_8_3`). A blueprint is a virtual private server (or
+    #   (`amazon_linux_2023`). A blueprint is a virtual private server (or
     #   *instance*) image used to create instances quickly.
     #   @return [String]
     #
     # @!attribute [rw] from_bundle_id
-    #   The bundle ID from which you created the snapshot (`micro_1_0`).
+    #   The bundle ID from which you created the snapshot (`micro_x_x`).
     #   @return [String]
     #
     # @!attribute [rw] is_from_auto_snapshot
@@ -10779,11 +10789,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] from_bundle_id
     #   The bundle ID from which the source instance was created
-    #   (`micro_1_0`).
+    #   (`micro_x_x`).
     #   @return [String]
     #
     # @!attribute [rw] from_blueprint_id
-    #   The blueprint ID from which the source instance (`os_debian_8_3`).
+    #   The blueprint ID from which the source instance
+    #   (`amazon_linux_2023`).
     #   @return [String]
     #
     # @!attribute [rw] from_disk_info
@@ -11171,8 +11182,8 @@ module Aws::Lightsail
     # @!attribute [rw] ip_address_type
     #   The IP address type of the load balancer.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
-    #   IPv4 and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
     #   @return [String]
     #
     # @!attribute [rw] https_redirection_enabled
@@ -12211,6 +12222,11 @@ module Aws::Lightsail
     #     specify `icmp` as the `protocol`, you must specify the ICMP type
     #     using the `fromPort` parameter, and ICMP code using the `toPort`
     #     parameter.
+    #
+    #   * `icmp6` - Internet Control Message Protocol (ICMP) for IPv6. When
+    #     you specify `icmp6` as the `protocol`, you must specify the ICMP
+    #     type using the `fromPort` parameter, and ICMP code using the
+    #     `toPort` parameter.
     #
     #
     #
@@ -13633,16 +13649,33 @@ module Aws::Lightsail
     # @!attribute [rw] ip_address_type
     #   The IP address type to set for the specified resource.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
-    #   IPv4 and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
     #   @return [String]
+    #
+    # @!attribute [rw] accept_bundle_update
+    #   Required parameter to accept the instance bundle update when
+    #   changing to, and from, IPv6-only.
+    #
+    #   <note markdown="1"> An instance bundle will change when switching from `dual-stack` or
+    #   `ipv4`, to `ipv6`. It also changes when switching from `ipv6`, to
+    #   `dual-stack` or `ipv4`.
+    #
+    #    You must include this parameter in the command to update the bundle.
+    #   For example, if you switch from `dual-stack` to `ipv6`, the bundle
+    #   will be updated, and billing for the IPv6-only instance bundle
+    #   begins immediately.
+    #
+    #    </note>
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetIpAddressTypeRequest AWS API Documentation
     #
     class SetIpAddressTypeRequest < Struct.new(
       :resource_type,
       :resource_name,
-      :ip_address_type)
+      :ip_address_type,
+      :accept_bundle_update)
       SENSITIVE = []
       include Aws::Structure
     end

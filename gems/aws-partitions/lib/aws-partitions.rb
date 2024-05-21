@@ -466,6 +466,7 @@ module Aws
             'MWAA' => 'airflow',
             'MachineLearning' => 'machinelearning',
             'Macie2' => 'macie2',
+            'MailManager' => 'mail-manager',
             'MainframeModernization' => 'm2',
             'ManagedBlockchain' => 'managedblockchain',
             'ManagedBlockchainQuery' => 'managedblockchain-query',

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.932.0 (2024-05-21)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::MailManager`.
+
 1.931.0 (2024-05-17)
 ------------------
 

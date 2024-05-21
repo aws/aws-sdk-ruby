@@ -689,6 +689,7 @@ RubyGems.org page under "LINKS" section.
 | IAM Roles Anywhere                                    | Aws::RolesAnywhere                       | aws-sdk-rolesanywhere                       | 2018-05-10  |
 | Inspector Scan                                        | Aws::InspectorScan                       | aws-sdk-inspectorscan                       | 2023-08-08  |
 | Inspector2                                            | Aws::Inspector2                          | aws-sdk-inspector2                          | 2020-06-08  |
+| MailManager                                           | Aws::MailManager                         | aws-sdk-mailmanager                         | 2023-10-17  |
 | Managed Streaming for Kafka                           | Aws::Kafka                               | aws-sdk-kafka                               | 2018-11-14  |
 | Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                        | aws-sdk-kafkaconnect                        | 2021-09-14  |
 | Migration Hub Strategy Recommendations                | Aws::MigrationHubStrategyRecommendations | aws-sdk-migrationhubstrategyrecommendations | 2020-02-19  |

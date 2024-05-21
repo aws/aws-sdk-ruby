@@ -239,6 +239,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-mwaa', '~> 1')
   spec.add_dependency('aws-sdk-machinelearning', '~> 1')
   spec.add_dependency('aws-sdk-macie2', '~> 1')
+  spec.add_dependency('aws-sdk-mailmanager', '~> 1')
   spec.add_dependency('aws-sdk-mainframemodernization', '~> 1')
   spec.add_dependency('aws-sdk-managedblockchain', '~> 1')
   spec.add_dependency('aws-sdk-managedblockchainquery', '~> 1')

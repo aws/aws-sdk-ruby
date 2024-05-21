@@ -1,0 +1,1168 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MailManager
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddHeaderAction
+      attr_accessor header_name: ::String
+      attr_accessor header_value: ::String
+      SENSITIVE: []
+    end
+
+    class AddonInstance
+      attr_accessor addon_instance_arn: ::String
+      attr_accessor addon_instance_id: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor addon_subscription_id: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class AddonSubscription
+      attr_accessor addon_name: ::String
+      attr_accessor addon_subscription_arn: ::String
+      attr_accessor addon_subscription_id: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class Analysis
+      attr_accessor analyzer: ::String
+      attr_accessor result_field: ::String
+      SENSITIVE: []
+    end
+
+    class Archive
+      attr_accessor archive_id: ::String
+      attr_accessor archive_name: ::String
+      attr_accessor archive_state: ("ACTIVE" | "PENDING_DELETION")
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ArchiveAction
+      attr_accessor action_failure_policy: ("CONTINUE" | "DROP")
+      attr_accessor target_archive: ::String
+      SENSITIVE: []
+    end
+
+    class ArchiveBooleanExpression
+      attr_accessor evaluate: Types::ArchiveBooleanToEvaluate
+      attr_accessor operator: ("IS_TRUE" | "IS_FALSE")
+      SENSITIVE: []
+    end
+
+    class ArchiveBooleanToEvaluate
+      attr_accessor attribute: ("HAS_ATTACHMENTS")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Attribute < ArchiveBooleanToEvaluate
+      end
+      class Unknown < ArchiveBooleanToEvaluate
+      end
+    end
+
+    class ArchiveFilterCondition
+      attr_accessor boolean_expression: Types::ArchiveBooleanExpression
+      attr_accessor string_expression: Types::ArchiveStringExpression
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BooleanExpression < ArchiveFilterCondition
+      end
+      class StringExpression < ArchiveFilterCondition
+      end
+      class Unknown < ArchiveFilterCondition
+      end
+    end
+
+    class ArchiveFilters
+      attr_accessor include: ::Array[Types::ArchiveFilterCondition]
+      attr_accessor unless: ::Array[Types::ArchiveFilterCondition]
+      SENSITIVE: []
+    end
+
+    class ArchiveRetention
+      attr_accessor retention_period: ("THREE_MONTHS" | "SIX_MONTHS" | "NINE_MONTHS" | "ONE_YEAR" | "EIGHTEEN_MONTHS" | "TWO_YEARS" | "THIRTY_MONTHS" | "THREE_YEARS" | "FOUR_YEARS" | "FIVE_YEARS" | "SIX_YEARS" | "SEVEN_YEARS" | "EIGHT_YEARS" | "NINE_YEARS" | "TEN_YEARS" | "PERMANENT")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RetentionPeriod < ArchiveRetention
+      end
+      class Unknown < ArchiveRetention
+      end
+    end
+
+    class ArchiveStringExpression
+      attr_accessor evaluate: Types::ArchiveStringToEvaluate
+      attr_accessor operator: ("CONTAINS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ArchiveStringToEvaluate
+      attr_accessor attribute: ("TO" | "FROM" | "CC" | "SUBJECT")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Attribute < ArchiveStringToEvaluate
+      end
+      class Unknown < ArchiveStringToEvaluate
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAddonInstanceRequest
+      attr_accessor addon_subscription_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAddonInstanceResponse
+      attr_accessor addon_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAddonSubscriptionRequest
+      attr_accessor addon_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAddonSubscriptionResponse
+      attr_accessor addon_subscription_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateArchiveRequest
+      attr_accessor archive_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor retention: Types::ArchiveRetention
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateArchiveResponse
+      attr_accessor archive_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIngressPointRequest
+      attr_accessor client_token: ::String
+      attr_accessor ingress_point_configuration: Types::IngressPointConfiguration
+      attr_accessor ingress_point_name: ::String
+      attr_accessor rule_set_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor traffic_policy_id: ::String
+      attr_accessor type: ("OPEN" | "AUTH")
+      SENSITIVE: []
+    end
+
+    class CreateIngressPointResponse
+      attr_accessor ingress_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRelayRequest
+      attr_accessor authentication: Types::RelayAuthentication
+      attr_accessor client_token: ::String
+      attr_accessor relay_name: ::String
+      attr_accessor server_name: ::String
+      attr_accessor server_port: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRelayResponse
+      attr_accessor relay_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRuleSetRequest
+      attr_accessor client_token: ::String
+      attr_accessor rule_set_name: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRuleSetResponse
+      attr_accessor rule_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrafficPolicyRequest
+      attr_accessor client_token: ::String
+      attr_accessor default_action: ("ALLOW" | "DENY")
+      attr_accessor max_message_size_bytes: ::Integer
+      attr_accessor policy_statements: ::Array[Types::PolicyStatement]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor traffic_policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrafficPolicyResponse
+      attr_accessor traffic_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAddonInstanceRequest
+      attr_accessor addon_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAddonInstanceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAddonSubscriptionRequest
+      attr_accessor addon_subscription_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAddonSubscriptionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteArchiveRequest
+      attr_accessor archive_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteArchiveResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIngressPointRequest
+      attr_accessor ingress_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIngressPointResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRelayRequest
+      attr_accessor relay_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRelayResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRuleSetRequest
+      attr_accessor rule_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTrafficPolicyRequest
+      attr_accessor traffic_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrafficPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeliverToMailboxAction
+      attr_accessor action_failure_policy: ("CONTINUE" | "DROP")
+      attr_accessor mailbox_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DropAction < Aws::EmptyStructure
+    end
+
+    class ExportDestinationConfiguration
+      attr_accessor s3: Types::S3ExportDestinationConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < ExportDestinationConfiguration
+      end
+      class Unknown < ExportDestinationConfiguration
+      end
+    end
+
+    class ExportStatus
+      attr_accessor completion_timestamp: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor state: ("QUEUED" | "PREPROCESSING" | "PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLED")
+      attr_accessor submission_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ExportSummary
+      attr_accessor export_id: ::String
+      attr_accessor status: Types::ExportStatus
+      SENSITIVE: []
+    end
+
+    class GetAddonInstanceRequest
+      attr_accessor addon_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAddonInstanceResponse
+      attr_accessor addon_instance_arn: ::String
+      attr_accessor addon_name: ::String
+      attr_accessor addon_subscription_id: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAddonSubscriptionRequest
+      attr_accessor addon_subscription_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAddonSubscriptionResponse
+      attr_accessor addon_name: ::String
+      attr_accessor addon_subscription_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetArchiveExportRequest
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchiveExportResponse
+      attr_accessor archive_id: ::String
+      attr_accessor export_destination_configuration: Types::ExportDestinationConfiguration
+      attr_accessor filters: Types::ArchiveFilters
+      attr_accessor from_timestamp: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor status: Types::ExportStatus
+      attr_accessor to_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetArchiveMessageContentRequest
+      attr_accessor archived_message_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchiveMessageContentResponse
+      attr_accessor body: Types::MessageBody
+      SENSITIVE: []
+    end
+
+    class GetArchiveMessageRequest
+      attr_accessor archived_message_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchiveMessageResponse
+      attr_accessor message_download_link: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchiveRequest
+      attr_accessor archive_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchiveResponse
+      attr_accessor archive_arn: ::String
+      attr_accessor archive_id: ::String
+      attr_accessor archive_name: ::String
+      attr_accessor archive_state: ("ACTIVE" | "PENDING_DELETION")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor kms_key_arn: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor retention: Types::ArchiveRetention
+      SENSITIVE: []
+    end
+
+    class GetArchiveSearchRequest
+      attr_accessor search_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchiveSearchResponse
+      attr_accessor archive_id: ::String
+      attr_accessor filters: Types::ArchiveFilters
+      attr_accessor from_timestamp: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor status: Types::SearchStatus
+      attr_accessor to_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetArchiveSearchResultsRequest
+      attr_accessor search_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchiveSearchResultsResponse
+      attr_accessor rows: ::Array[Types::Row]
+      SENSITIVE: []
+    end
+
+    class GetIngressPointRequest
+      attr_accessor ingress_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIngressPointResponse
+      attr_accessor a_record: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor ingress_point_arn: ::String
+      attr_accessor ingress_point_auth_configuration: Types::IngressPointAuthConfiguration
+      attr_accessor ingress_point_id: ::String
+      attr_accessor ingress_point_name: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor rule_set_id: ::String
+      attr_accessor status: ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED")
+      attr_accessor traffic_policy_id: ::String
+      attr_accessor type: ("OPEN" | "AUTH")
+      SENSITIVE: []
+    end
+
+    class GetRelayRequest
+      attr_accessor relay_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelayResponse
+      attr_accessor authentication: Types::RelayAuthentication
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor relay_arn: ::String
+      attr_accessor relay_id: ::String
+      attr_accessor relay_name: ::String
+      attr_accessor server_name: ::String
+      attr_accessor server_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRuleSetRequest
+      attr_accessor rule_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuleSetResponse
+      attr_accessor created_date: ::Time
+      attr_accessor last_modification_date: ::Time
+      attr_accessor rule_set_arn: ::String
+      attr_accessor rule_set_id: ::String
+      attr_accessor rule_set_name: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
+    class GetTrafficPolicyRequest
+      attr_accessor traffic_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrafficPolicyResponse
+      attr_accessor created_timestamp: ::Time
+      attr_accessor default_action: ("ALLOW" | "DENY")
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor max_message_size_bytes: ::Integer
+      attr_accessor policy_statements: ::Array[Types::PolicyStatement]
+      attr_accessor traffic_policy_arn: ::String
+      attr_accessor traffic_policy_id: ::String
+      attr_accessor traffic_policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class IngressAnalysis
+      attr_accessor analyzer: ::String
+      attr_accessor result_field: ::String
+      SENSITIVE: []
+    end
+
+    class IngressBooleanExpression
+      attr_accessor evaluate: Types::IngressBooleanToEvaluate
+      attr_accessor operator: ("IS_TRUE" | "IS_FALSE")
+      SENSITIVE: []
+    end
+
+    class IngressBooleanToEvaluate
+      attr_accessor analysis: Types::IngressAnalysis
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Analysis < IngressBooleanToEvaluate
+      end
+      class Unknown < IngressBooleanToEvaluate
+      end
+    end
+
+    class IngressIpToEvaluate
+      attr_accessor attribute: ("SENDER_IP")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Attribute < IngressIpToEvaluate
+      end
+      class Unknown < IngressIpToEvaluate
+      end
+    end
+
+    class IngressIpv4Expression
+      attr_accessor evaluate: Types::IngressIpToEvaluate
+      attr_accessor operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IngressPoint
+      attr_accessor a_record: ::String
+      attr_accessor ingress_point_id: ::String
+      attr_accessor ingress_point_name: ::String
+      attr_accessor status: ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED")
+      attr_accessor type: ("OPEN" | "AUTH")
+      SENSITIVE: []
+    end
+
+    class IngressPointAuthConfiguration
+      attr_accessor ingress_point_password_configuration: Types::IngressPointPasswordConfiguration
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IngressPointConfiguration
+      attr_accessor secret_arn: ::String
+      attr_accessor smtp_password: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:smtp_password]
+
+      class SecretArn < IngressPointConfiguration
+      end
+      class SmtpPassword < IngressPointConfiguration
+      end
+      class Unknown < IngressPointConfiguration
+      end
+    end
+
+    class IngressPointPasswordConfiguration
+      attr_accessor previous_smtp_password_expiry_timestamp: ::Time
+      attr_accessor previous_smtp_password_version: ::String
+      attr_accessor smtp_password_version: ::String
+      SENSITIVE: []
+    end
+
+    class IngressStringExpression
+      attr_accessor evaluate: Types::IngressStringToEvaluate
+      attr_accessor operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IngressStringToEvaluate
+      attr_accessor attribute: ("RECIPIENT")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Attribute < IngressStringToEvaluate
+      end
+      class Unknown < IngressStringToEvaluate
+      end
+    end
+
+    class IngressTlsProtocolExpression
+      attr_accessor evaluate: Types::IngressTlsProtocolToEvaluate
+      attr_accessor operator: ("MINIMUM_TLS_VERSION" | "IS")
+      attr_accessor value: ("TLS1_2" | "TLS1_3")
+      SENSITIVE: []
+    end
+
+    class IngressTlsProtocolToEvaluate
+      attr_accessor attribute: ("TLS_PROTOCOL")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Attribute < IngressTlsProtocolToEvaluate
+      end
+      class Unknown < IngressTlsProtocolToEvaluate
+      end
+    end
+
+    class ListAddonInstancesRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAddonInstancesResponse
+      attr_accessor addon_instances: ::Array[Types::AddonInstance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAddonSubscriptionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAddonSubscriptionsResponse
+      attr_accessor addon_subscriptions: ::Array[Types::AddonSubscription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListArchiveExportsRequest
+      attr_accessor archive_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListArchiveExportsResponse
+      attr_accessor exports: ::Array[Types::ExportSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListArchiveSearchesRequest
+      attr_accessor archive_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListArchiveSearchesResponse
+      attr_accessor next_token: ::String
+      attr_accessor searches: ::Array[Types::SearchSummary]
+      SENSITIVE: []
+    end
+
+    class ListArchivesRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListArchivesResponse
+      attr_accessor archives: ::Array[Types::Archive]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIngressPointsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIngressPointsResponse
+      attr_accessor ingress_points: ::Array[Types::IngressPoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRelaysRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRelaysResponse
+      attr_accessor next_token: ::String
+      attr_accessor relays: ::Array[Types::Relay]
+      SENSITIVE: []
+    end
+
+    class ListRuleSetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRuleSetsResponse
+      attr_accessor next_token: ::String
+      attr_accessor rule_sets: ::Array[Types::RuleSet]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTrafficPoliciesRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPoliciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor traffic_policies: ::Array[Types::TrafficPolicy]
+      SENSITIVE: []
+    end
+
+    class MessageBody
+      attr_accessor html: ::String
+      attr_accessor message_malformed: bool
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class NoAuthentication < Aws::EmptyStructure
+    end
+
+    class PolicyCondition
+      attr_accessor boolean_expression: Types::IngressBooleanExpression
+      attr_accessor ip_expression: Types::IngressIpv4Expression
+      attr_accessor string_expression: Types::IngressStringExpression
+      attr_accessor tls_expression: Types::IngressTlsProtocolExpression
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BooleanExpression < PolicyCondition
+      end
+      class IpExpression < PolicyCondition
+      end
+      class StringExpression < PolicyCondition
+      end
+      class TlsExpression < PolicyCondition
+      end
+      class Unknown < PolicyCondition
+      end
+    end
+
+    class PolicyStatement
+      attr_accessor action: ("ALLOW" | "DENY")
+      attr_accessor conditions: ::Array[Types::PolicyCondition]
+      SENSITIVE: []
+    end
+
+    class Relay
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor relay_id: ::String
+      attr_accessor relay_name: ::String
+      SENSITIVE: []
+    end
+
+    class RelayAction
+      attr_accessor action_failure_policy: ("CONTINUE" | "DROP")
+      attr_accessor mail_from: ("REPLACE" | "PRESERVE")
+      attr_accessor relay: ::String
+      SENSITIVE: []
+    end
+
+    class RelayAuthentication
+      attr_accessor no_authentication: Types::NoAuthentication
+      attr_accessor secret_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class NoAuthentication < RelayAuthentication
+      end
+      class SecretArn < RelayAuthentication
+      end
+      class Unknown < RelayAuthentication
+      end
+    end
+
+    class ReplaceRecipientAction
+      attr_accessor replace_with: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Row
+      attr_accessor archived_message_id: ::String
+      attr_accessor cc: ::String
+      attr_accessor date: ::String
+      attr_accessor from: ::String
+      attr_accessor has_attachments: bool
+      attr_accessor in_reply_to: ::String
+      attr_accessor message_id: ::String
+      attr_accessor received_headers: ::Array[::String]
+      attr_accessor received_timestamp: ::Time
+      attr_accessor subject: ::String
+      attr_accessor to: ::String
+      attr_accessor x_mailer: ::String
+      attr_accessor x_original_mailer: ::String
+      attr_accessor x_priority: ::String
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor actions: ::Array[Types::RuleAction]
+      attr_accessor conditions: ::Array[Types::RuleCondition]
+      attr_accessor name: ::String
+      attr_accessor unless: ::Array[Types::RuleCondition]
+      SENSITIVE: []
+    end
+
+    class RuleAction
+      attr_accessor add_header: Types::AddHeaderAction
+      attr_accessor archive: Types::ArchiveAction
+      attr_accessor deliver_to_mailbox: Types::DeliverToMailboxAction
+      attr_accessor drop: Types::DropAction
+      attr_accessor relay: Types::RelayAction
+      attr_accessor replace_recipient: Types::ReplaceRecipientAction
+      attr_accessor send: Types::SendAction
+      attr_accessor write_to_s3: Types::S3Action
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AddHeader < RuleAction
+      end
+      class Archive < RuleAction
+      end
+      class DeliverToMailbox < RuleAction
+      end
+      class Drop < RuleAction
+      end
+      class Relay < RuleAction
+      end
+      class ReplaceRecipient < RuleAction
+      end
+      class Send < RuleAction
+      end
+      class WriteToS3 < RuleAction
+      end
+      class Unknown < RuleAction
+      end
+    end
+
+    class RuleBooleanExpression
+      attr_accessor evaluate: Types::RuleBooleanToEvaluate
+      attr_accessor operator: ("IS_TRUE" | "IS_FALSE")
+      SENSITIVE: []
+    end
+
+    class RuleBooleanToEvaluate
+      attr_accessor attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Attribute < RuleBooleanToEvaluate
+      end
+      class Unknown < RuleBooleanToEvaluate
+      end
+    end
+
+    class RuleCondition
+      attr_accessor boolean_expression: Types::RuleBooleanExpression
+      attr_accessor dmarc_expression: Types::RuleDmarcExpression
+      attr_accessor ip_expression: Types::RuleIpExpression
+      attr_accessor number_expression: Types::RuleNumberExpression
+      attr_accessor string_expression: Types::RuleStringExpression
+      attr_accessor verdict_expression: Types::RuleVerdictExpression
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BooleanExpression < RuleCondition
+      end
+      class DmarcExpression < RuleCondition
+      end
+      class IpExpression < RuleCondition
+      end
+      class NumberExpression < RuleCondition
+      end
+      class StringExpression < RuleCondition
+      end
+      class VerdictExpression < RuleCondition
+      end
+      class Unknown < RuleCondition
+      end
+    end
+
+    class RuleDmarcExpression
+      attr_accessor operator: ("EQUALS" | "NOT_EQUALS")
+      attr_accessor values: ::Array[("NONE" | "QUARANTINE" | "REJECT")]
+      SENSITIVE: []
+    end
+
+    class RuleIpExpression
+      attr_accessor evaluate: Types::RuleIpToEvaluate
+      attr_accessor operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RuleIpToEvaluate
+      attr_accessor attribute: ("SOURCE_IP")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Attribute < RuleIpToEvaluate
+      end
+      class Unknown < RuleIpToEvaluate
+      end
+    end
+
+    class RuleNumberExpression
+      attr_accessor evaluate: Types::RuleNumberToEvaluate
+      attr_accessor operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class RuleNumberToEvaluate
+      attr_accessor attribute: ("MESSAGE_SIZE")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Attribute < RuleNumberToEvaluate
+      end
+      class Unknown < RuleNumberToEvaluate
+      end
+    end
+
+    class RuleSet
+      attr_accessor last_modification_date: ::Time
+      attr_accessor rule_set_id: ::String
+      attr_accessor rule_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class RuleStringExpression
+      attr_accessor evaluate: Types::RuleStringToEvaluate
+      attr_accessor operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RuleStringToEvaluate
+      attr_accessor attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Attribute < RuleStringToEvaluate
+      end
+      class Unknown < RuleStringToEvaluate
+      end
+    end
+
+    class RuleVerdictExpression
+      attr_accessor evaluate: Types::RuleVerdictToEvaluate
+      attr_accessor operator: ("EQUALS" | "NOT_EQUALS")
+      attr_accessor values: ::Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+      SENSITIVE: []
+    end
+
+    class RuleVerdictToEvaluate
+      attr_accessor analysis: Types::Analysis
+      attr_accessor attribute: ("SPF" | "DKIM")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Analysis < RuleVerdictToEvaluate
+      end
+      class Attribute < RuleVerdictToEvaluate
+      end
+      class Unknown < RuleVerdictToEvaluate
+      end
+    end
+
+    class S3Action
+      attr_accessor action_failure_policy: ("CONTINUE" | "DROP")
+      attr_accessor role_arn: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_prefix: ::String
+      attr_accessor s3_sse_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class S3ExportDestinationConfiguration
+      attr_accessor s3_location: ::String
+      SENSITIVE: []
+    end
+
+    class SearchStatus
+      attr_accessor completion_timestamp: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor state: ("QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLED")
+      attr_accessor submission_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class SearchSummary
+      attr_accessor search_id: ::String
+      attr_accessor status: Types::SearchStatus
+      SENSITIVE: []
+    end
+
+    class SendAction
+      attr_accessor action_failure_policy: ("CONTINUE" | "DROP")
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartArchiveExportRequest
+      attr_accessor archive_id: ::String
+      attr_accessor export_destination_configuration: Types::ExportDestinationConfiguration
+      attr_accessor filters: Types::ArchiveFilters
+      attr_accessor from_timestamp: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor to_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class StartArchiveExportResponse
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartArchiveSearchRequest
+      attr_accessor archive_id: ::String
+      attr_accessor filters: Types::ArchiveFilters
+      attr_accessor from_timestamp: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor to_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class StartArchiveSearchResponse
+      attr_accessor search_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopArchiveExportRequest
+      attr_accessor export_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopArchiveExportResponse < Aws::EmptyStructure
+    end
+
+    class StopArchiveSearchRequest
+      attr_accessor search_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopArchiveSearchResponse < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrafficPolicy
+      attr_accessor default_action: ("ALLOW" | "DENY")
+      attr_accessor traffic_policy_id: ::String
+      attr_accessor traffic_policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateArchiveRequest
+      attr_accessor archive_id: ::String
+      attr_accessor archive_name: ::String
+      attr_accessor retention: Types::ArchiveRetention
+      SENSITIVE: []
+    end
+
+    class UpdateArchiveResponse < Aws::EmptyStructure
+    end
+
+    class UpdateIngressPointRequest
+      attr_accessor ingress_point_configuration: Types::IngressPointConfiguration
+      attr_accessor ingress_point_id: ::String
+      attr_accessor ingress_point_name: ::String
+      attr_accessor rule_set_id: ::String
+      attr_accessor status_to_update: ("ACTIVE" | "CLOSED")
+      attr_accessor traffic_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIngressPointResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRelayRequest
+      attr_accessor authentication: Types::RelayAuthentication
+      attr_accessor relay_id: ::String
+      attr_accessor relay_name: ::String
+      attr_accessor server_name: ::String
+      attr_accessor server_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRelayResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRuleSetRequest
+      attr_accessor rule_set_id: ::String
+      attr_accessor rule_set_name: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
+    class UpdateRuleSetResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTrafficPolicyRequest
+      attr_accessor default_action: ("ALLOW" | "DENY")
+      attr_accessor max_message_size_bytes: ::Integer
+      attr_accessor policy_statements: ::Array[Types::PolicyStatement]
+      attr_accessor traffic_policy_id: ::String
+      attr_accessor traffic_policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTrafficPolicyResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

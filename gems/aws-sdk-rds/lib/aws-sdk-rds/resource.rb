@@ -1744,12 +1744,22 @@ module Aws::RDS
     # @option options [String] :license_model
     #   The license model information for this DB instance.
     #
+    #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
+    #   Bring Your Own License (BYOL) model requires a custom parameter group.
+    #   The Db2 license through Amazon Web Services Marketplace model requires
+    #   an Amazon Web Services Marketplace subscription. For more information,
+    #   see [RDS for Db2 licensing options][1] in the *Amazon RDS User Guide*.
+    #
+    #    The default for RDS for Db2 is `bring-your-own-license`.
+    #
+    #    </note>
+    #
     #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
     #   instances.
     #
     #   Valid Values:
     #
-    #   * RDS for Db2 - `bring-your-own-license`
+    #   * RDS for Db2 - `bring-your-own-license | marketplace-license`
     #
     #   * RDS for MariaDB - `general-public-license`
     #
@@ -1760,6 +1770,10 @@ module Aws::RDS
     #   * RDS for Oracle - `bring-your-own-license | license-included`
     #
     #   * RDS for PostgreSQL - `postgresql-license`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   initially allocate for the DB instance. For information about valid

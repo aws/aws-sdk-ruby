@@ -229,6 +229,7 @@ module Aws
   autoload :MWAA, 'aws-sdk-mwaa'
   autoload :MachineLearning, 'aws-sdk-machinelearning'
   autoload :Macie2, 'aws-sdk-macie2'
+  autoload :MailManager, 'aws-sdk-mailmanager'
   autoload :MainframeModernization, 'aws-sdk-mainframemodernization'
   autoload :ManagedBlockchain, 'aws-sdk-managedblockchain'
   autoload :ManagedBlockchainQuery, 'aws-sdk-managedblockchainquery'

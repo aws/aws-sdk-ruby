@@ -219,7 +219,8 @@ module Aws
                                                 identifier: ::String,
                                                 metrics: Array[::String],
                                                 ?max_results: ::Integer,
-                                                ?next_token: ::String
+                                                ?next_token: ::String,
+                                                ?authorized_actions: Array[("DescribeDimensionKeys" | "GetDimensionKeyDetails" | "GetResourceMetrics")]
                                               ) -> _ListAvailableResourceDimensionsResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAvailableResourceDimensionsResponseSuccess
 

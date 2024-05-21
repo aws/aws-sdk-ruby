@@ -655,7 +655,7 @@ module Aws::Lightsail
       attr_accessor cache_behavior_settings: Types::CacheSettings
       attr_accessor cache_behaviors: ::Array[Types::CacheBehaviorPerPath]
       attr_accessor bundle_id: ::String
-      attr_accessor ip_address_type: ("dualstack" | "ipv4")
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor certificate_name: ::String
       attr_accessor viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
@@ -726,7 +726,7 @@ module Aws::Lightsail
       attr_accessor key_pair_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor add_ons: ::Array[Types::AddOnRequest]
-      attr_accessor ip_address_type: ("dualstack" | "ipv4")
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
       attr_accessor source_instance_name: ::String
       attr_accessor restore_date: ::String
       attr_accessor use_latest_restorable_auto_snapshot: bool
@@ -748,7 +748,7 @@ module Aws::Lightsail
       attr_accessor key_pair_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor add_ons: ::Array[Types::AddOnRequest]
-      attr_accessor ip_address_type: ("dualstack" | "ipv4")
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
       SENSITIVE: []
     end
 
@@ -779,7 +779,7 @@ module Aws::Lightsail
       attr_accessor certificate_domain_name: ::String
       attr_accessor certificate_alternative_names: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor ip_address_type: ("dualstack" | "ipv4")
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
       attr_accessor tls_policy_name: ::String
       SENSITIVE: []
     end
@@ -2108,7 +2108,7 @@ module Aws::Lightsail
       attr_accessor private_ip_address: ::String
       attr_accessor public_ip_address: ::String
       attr_accessor ipv6_addresses: ::Array[::String]
-      attr_accessor ip_address_type: ("dualstack" | "ipv4")
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
       attr_accessor hardware: Types::InstanceHardware
       attr_accessor networking: Types::InstanceNetworking
       attr_accessor state: Types::InstanceState
@@ -2174,7 +2174,7 @@ module Aws::Lightsail
     class InstancePortInfo
       attr_accessor from_port: ::Integer
       attr_accessor to_port: ::Integer
-      attr_accessor protocol: ("tcp" | "all" | "udp" | "icmp")
+      attr_accessor protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")
       attr_accessor access_from: ::String
       attr_accessor access_type: ("Public" | "Private")
       attr_accessor common_name: ::String
@@ -2188,7 +2188,7 @@ module Aws::Lightsail
     class InstancePortState
       attr_accessor from_port: ::Integer
       attr_accessor to_port: ::Integer
-      attr_accessor protocol: ("tcp" | "all" | "udp" | "icmp")
+      attr_accessor protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")
       attr_accessor state: ("open" | "closed")
       attr_accessor cidrs: ::Array[::String]
       attr_accessor ipv6_cidrs: ::Array[::String]
@@ -2276,7 +2276,7 @@ module Aws::Lightsail
       attr_accessor cache_behavior_settings: Types::CacheSettings
       attr_accessor cache_behaviors: ::Array[Types::CacheBehaviorPerPath]
       attr_accessor able_to_update_bundle: bool
-      attr_accessor ip_address_type: ("dualstack" | "ipv4")
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor viewer_minimum_tls_protocol_version: ::String
       SENSITIVE: []
@@ -2299,7 +2299,7 @@ module Aws::Lightsail
       attr_accessor instance_health_summary: ::Array[Types::InstanceHealthSummary]
       attr_accessor tls_certificate_summaries: ::Array[Types::LoadBalancerTlsCertificateSummary]
       attr_accessor configuration_options: ::Hash[("HealthCheckPath" | "SessionStickinessEnabled" | "SessionStickiness_LB_CookieDurationSeconds" | "HttpsRedirectionEnabled" | "TlsPolicyName"), ::String]
-      attr_accessor ip_address_type: ("dualstack" | "ipv4")
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
       attr_accessor https_redirection_enabled: bool
       attr_accessor tls_policy_name: ::String
       SENSITIVE: []
@@ -2495,7 +2495,7 @@ module Aws::Lightsail
     class PortInfo
       attr_accessor from_port: ::Integer
       attr_accessor to_port: ::Integer
-      attr_accessor protocol: ("tcp" | "all" | "udp" | "icmp")
+      attr_accessor protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")
       attr_accessor cidrs: ::Array[::String]
       attr_accessor ipv6_cidrs: ::Array[::String]
       attr_accessor cidr_list_aliases: ::Array[::String]
@@ -2794,7 +2794,8 @@ module Aws::Lightsail
     class SetIpAddressTypeRequest
       attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
       attr_accessor resource_name: ::String
-      attr_accessor ip_address_type: ("dualstack" | "ipv4")
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
+      attr_accessor accept_bundle_update: bool
       SENSITIVE: []
     end
 

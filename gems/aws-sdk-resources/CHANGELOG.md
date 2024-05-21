@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.193.0 (2024-05-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mailmanager` gem.
+
 3.192.0 (2024-04-22)
 ------------------
 

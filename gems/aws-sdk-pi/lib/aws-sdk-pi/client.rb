@@ -655,18 +655,18 @@ module Aws::PI
     #     metric: "RequestString", # required
     #     period_in_seconds: 1,
     #     group_by: { # required
-    #       group: "RequestString", # required
-    #       dimensions: ["RequestString"],
+    #       group: "SanitizedString", # required
+    #       dimensions: ["SanitizedString"],
     #       limit: 1,
     #     },
-    #     additional_metrics: ["RequestString"],
+    #     additional_metrics: ["SanitizedString"],
     #     partition_by: {
-    #       group: "RequestString", # required
-    #       dimensions: ["RequestString"],
+    #       group: "SanitizedString", # required
+    #       dimensions: ["SanitizedString"],
     #       limit: 1,
     #     },
     #     filter: {
-    #       "RequestString" => "RequestString",
+    #       "SanitizedString" => "RequestString",
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -757,7 +757,7 @@ module Aws::PI
     #     identifier: "IdentifierString", # required
     #     group: "RequestString", # required
     #     group_identifier: "RequestString", # required
-    #     requested_dimensions: ["RequestString"],
+    #     requested_dimensions: ["SanitizedString"],
     #   })
     #
     # @example Response structure
@@ -1012,14 +1012,14 @@ module Aws::PI
     #     identifier: "IdentifierString", # required
     #     metric_queries: [ # required
     #       {
-    #         metric: "RequestString", # required
+    #         metric: "SanitizedString", # required
     #         group_by: {
-    #           group: "RequestString", # required
-    #           dimensions: ["RequestString"],
+    #           group: "SanitizedString", # required
+    #           dimensions: ["SanitizedString"],
     #           limit: 1,
     #         },
     #         filter: {
-    #           "RequestString" => "RequestString",
+    #           "SanitizedString" => "RequestString",
     #         },
     #       },
     #     ],
@@ -1083,6 +1083,16 @@ module Aws::PI
     #   parameter is specified, the response includes only records beyond the
     #   token, up to the value specified by `MaxRecords`.
     #
+    # @option params [Array<String>] :authorized_actions
+    #   The actions to discover the dimensions you are authorized to access.
+    #   If you specify multiple actions, then the response will contain the
+    #   dimensions common for all the actions.
+    #
+    #   When you don't specify this request parameter or provide an empty
+    #   list, the response contains all the available dimensions for the
+    #   target database engine whether or not you are authorized to access
+    #   them.
+    #
     # @return [Types::ListAvailableResourceDimensionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAvailableResourceDimensionsResponse#metric_dimensions #metric_dimensions} => Array&lt;Types::MetricDimensionGroups&gt;
@@ -1095,9 +1105,10 @@ module Aws::PI
     #   resp = client.list_available_resource_dimensions({
     #     service_type: "RDS", # required, accepts RDS, DOCDB
     #     identifier: "IdentifierString", # required
-    #     metrics: ["RequestString"], # required
+    #     metrics: ["SanitizedString"], # required
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     authorized_actions: ["DescribeDimensionKeys"], # accepts DescribeDimensionKeys, GetDimensionKeyDetails, GetResourceMetrics
     #   })
     #
     # @example Response structure
@@ -1169,7 +1180,7 @@ module Aws::PI
     #   resp = client.list_available_resource_metrics({
     #     service_type: "RDS", # required, accepts RDS, DOCDB
     #     identifier: "IdentifierString", # required
-    #     metric_types: ["RequestString"], # required
+    #     metric_types: ["SanitizedString"], # required
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -1401,7 +1412,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

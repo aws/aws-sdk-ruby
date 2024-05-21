@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.232.0 (2024-05-21)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Db2 license through AWS Marketplace.
+
 1.231.0 (2024-05-20)
 ------------------
 

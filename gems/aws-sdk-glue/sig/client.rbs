@@ -1956,7 +1956,8 @@ module Aws
                           last_commit_id: ::String?,
                           auth_strategy: ("PERSONAL_ACCESS_TOKEN" | "AWS_SECRETS_MANAGER")?,
                           auth_token: ::String?
-                        }
+                        },
+                        ?maintenance_window: ::String
                       ) -> _CreateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
 
@@ -2340,7 +2341,7 @@ module Aws
                                 {
                                   logical_operator: ("EQUALS")?,
                                   job_name: ::String?,
-                                  state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING")?,
+                                  state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING" | "EXPIRED")?,
                                   crawler_name: ::String?,
                                   crawl_state: ("RUNNING" | "CANCELLING" | "CANCELLED" | "SUCCEEDED" | "FAILED" | "ERROR")?
                                 },
@@ -6274,7 +6275,8 @@ module Aws
                             last_commit_id: ::String?,
                             auth_strategy: ("PERSONAL_ACCESS_TOKEN" | "AWS_SECRETS_MANAGER")?,
                             auth_token: ::String?
-                          }?
+                          }?,
+                          maintenance_window: ::String?
                         }
                       ) -> _UpdateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobResponseSuccess
@@ -6570,7 +6572,7 @@ module Aws
                                   {
                                     logical_operator: ("EQUALS")?,
                                     job_name: ::String?,
-                                    state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING")?,
+                                    state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING" | "EXPIRED")?,
                                     crawler_name: ::String?,
                                     crawl_state: ("RUNNING" | "CANCELLING" | "CANCELLED" | "SUCCEEDED" | "FAILED" | "ERROR")?
                                   },

@@ -777,6 +777,7 @@ module Aws::Glue
     MLTransformNotReadyException = Shapes::StructureShape.new(name: 'MLTransformNotReadyException')
     MLUserDataEncryption = Shapes::StructureShape.new(name: 'MLUserDataEncryption')
     MLUserDataEncryptionModeString = Shapes::StringShape.new(name: 'MLUserDataEncryptionModeString')
+    MaintenanceWindow = Shapes::StringShape.new(name: 'MaintenanceWindow')
     ManyInputs = Shapes::ListShape.new(name: 'ManyInputs')
     MapValue = Shapes::MapShape.new(name: 'MapValue')
     Mapping = Shapes::StructureShape.new(name: 'Mapping')
@@ -2208,6 +2209,7 @@ module Aws::Glue
     CreateJobRequest.add_member(:code_gen_configuration_nodes, Shapes::ShapeRef.new(shape: CodeGenConfigurationNodes, location_name: "CodeGenConfigurationNodes"))
     CreateJobRequest.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
     CreateJobRequest.add_member(:source_control_details, Shapes::ShapeRef.new(shape: SourceControlDetails, location_name: "SourceControlDetails"))
+    CreateJobRequest.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "MaintenanceWindow"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -3918,6 +3920,7 @@ module Aws::Glue
     Job.add_member(:code_gen_configuration_nodes, Shapes::ShapeRef.new(shape: CodeGenConfigurationNodes, location_name: "CodeGenConfigurationNodes"))
     Job.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
     Job.add_member(:source_control_details, Shapes::ShapeRef.new(shape: SourceControlDetails, location_name: "SourceControlDetails"))
+    Job.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "MaintenanceWindow"))
     Job.struct_class = Types::Job
 
     JobBookmarkEntry.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
@@ -3970,6 +3973,7 @@ module Aws::Glue
     JobRun.add_member(:glue_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "GlueVersion"))
     JobRun.add_member(:dpu_seconds, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "DPUSeconds"))
     JobRun.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
+    JobRun.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "MaintenanceWindow"))
     JobRun.struct_class = Types::JobRun
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
@@ -3994,6 +3998,7 @@ module Aws::Glue
     JobUpdate.add_member(:code_gen_configuration_nodes, Shapes::ShapeRef.new(shape: CodeGenConfigurationNodes, location_name: "CodeGenConfigurationNodes"))
     JobUpdate.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
     JobUpdate.add_member(:source_control_details, Shapes::ShapeRef.new(shape: SourceControlDetails, location_name: "SourceControlDetails"))
+    JobUpdate.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "MaintenanceWindow"))
     JobUpdate.struct_class = Types::JobUpdate
 
     Join.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -5953,6 +5958,7 @@ module Aws::Glue
         "endpointPrefix" => "glue",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Glue",
         "serviceId" => "Glue",
         "signatureVersion" => "v4",

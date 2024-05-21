@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.457.1 (2024-05-21)
+------------------
+
 * Issue - Fix Aws::EC2::Resource not to set max_results automatically when the options contains the parameter that cannot be used with the parameter max_results.
 
 1.457.0 (2024-05-13)

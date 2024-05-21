@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2024-05-21)
+------------------
+
+* Feature - Model update; no change to SDK functionality.
+
 1.90.0 (2024-05-13)
 ------------------
 

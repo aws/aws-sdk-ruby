@@ -716,6 +716,9 @@
   "Macie2": {
     "models": "macie2/2020-01-01"
   },
+  "MailManager": {
+    "models": "mailmanager/2023-10-17"
+  },
   "MainframeModernization": {
     "models": "m2/2021-04-28"
   },

@@ -3157,6 +3157,7 @@ module Aws::CloudFront
         "endpointPrefix" => "cloudfront",
         "globalEndpoint" => "cloudfront.amazonaws.com",
         "protocol" => "rest-xml",
+        "protocols" => ["rest-xml"],
         "serviceAbbreviation" => "CloudFront",
         "serviceFullName" => "Amazon CloudFront",
         "serviceId" => "CloudFront",

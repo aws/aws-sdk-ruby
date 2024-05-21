@@ -638,7 +638,7 @@ module Aws::StorageGateway
       attr_accessor domain_name: ::String
       attr_accessor active_directory_status: ("ACCESS_DENIED" | "DETACHED" | "JOINED" | "JOINING" | "NETWORK_ERROR" | "TIMEOUT" | "UNKNOWN_ERROR")
       attr_accessor smb_guest_password_set: bool
-      attr_accessor smb_security_strategy: ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption")
+      attr_accessor smb_security_strategy: ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption" | "MandatoryEncryptionNoAes128")
       attr_accessor file_shares_visible: bool
       attr_accessor smb_local_groups: Types::SMBLocalGroups
       SENSITIVE: []
@@ -1501,7 +1501,7 @@ module Aws::StorageGateway
 
     class UpdateSMBSecurityStrategyInput
       attr_accessor gateway_arn: ::String
-      attr_accessor smb_security_strategy: ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption")
+      attr_accessor smb_security_strategy: ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption" | "MandatoryEncryptionNoAes128")
       SENSITIVE: []
     end
 

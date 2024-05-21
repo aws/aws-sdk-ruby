@@ -221,6 +221,7 @@ module Aws::PI
       attr_accessor metrics: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor authorized_actions: ::Array[("DescribeDimensionKeys" | "GetDimensionKeyDetails" | "GetResourceMetrics")]
       SENSITIVE: []
     end
 
