@@ -9,22 +9,38 @@ module Aws
     # to ensure results are paginated.
     module ResourcePaginationFix
       def images(options = {})
-        options[:max_results] ||= 1000
+        # Prevent the error:
+        # The parameter imageIdsSet cannot be used with the parameter maxResults
+        if options[:image_ids].nil? || options[:image_ids].empty?
+          options[:max_results] ||= 1000
+        end
         super(options)
       end
 
       def instances(options = {})
-        options[:max_results] ||= 1000
+        # Prevent the error:
+        # The parameter instancesSet cannot be used with the parameter maxResults
+        if options[:instance_ids].nil? || options[:instance_ids].empty?
+          options[:max_results] ||= 1000
+        end
         super(options)
       end
 
       def snapshots(options = {})
-        options[:max_results] ||= 1000
+        # Prevent the error:
+        # The parameter snapshotSet cannot be used with the parameter maxResults
+        if options[:snapshot_ids].nil? || options[:snapshot_ids].empty?
+          options[:max_results] ||= 1000
+        end
         super(options)
       end
 
       def volumes(options = {})
-        options[:max_results] ||= 1000
+        # Prevent the error:
+        # The parameter volumeIdsSet cannot be used with the parameter maxResults
+        if options[:volume_ids].nil? || options[:volume_ids].empty?
+          options[:max_results] ||= 1000
+        end
         super(options)
       end
     end
