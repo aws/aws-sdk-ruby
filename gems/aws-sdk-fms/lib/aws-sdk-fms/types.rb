@@ -2681,13 +2681,12 @@ module Aws::FMS
     #
     #   If forced remediation is disabled, Firewall Manager marks the
     #   network ACL as noncompliant and does not try to remediate. For more
-    #   information about the remediation behavior, see [Network access
-    #   control list (ACL) policies][1] in the *Firewall Manager Developer
-    #   Guide*.
+    #   information about the remediation behavior, see [Remediation for
+    #   managed network ACLs][1] in the *Firewall Manager Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html#network-acls-remediation
     #   @return [Boolean]
     #
     # @!attribute [rw] last_entries
@@ -2712,13 +2711,12 @@ module Aws::FMS
     #
     #   If forced remediation is disabled, Firewall Manager marks the
     #   network ACL as noncompliant and does not try to remediate. For more
-    #   information about the remediation behavior, see [Network access
-    #   control list (ACL) policies][1] in the *Firewall Manager Developer
-    #   Guide*.
+    #   information about the remediation behavior, see [Remediation for
+    #   managed network ACLs][1] in the *Firewall Manager Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html#network-acls-remediation
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkAclEntrySet AWS API Documentation
@@ -3537,7 +3535,7 @@ module Aws::FMS
     #   @return [Array<String>]
     #
     # @!attribute [rw] policy_description
-    #   The definition of the Network Firewall firewall policy.
+    #   Your description of the Firewall Manager policy.
     #   @return [String]
     #
     # @!attribute [rw] policy_status
@@ -4435,6 +4433,13 @@ module Aws::FMS
     # specified tags to be included or excluded. For more information, see
     # [Working with Tag Editor][1].
     #
+    # Every resource tag must have a string value, either a non-empty string
+    # or an empty string. If you don't provide a value for a resource tag,
+    # Firewall Manager saves the value as an empty string: "". When
+    # Firewall Manager compares tags, it only matches two tags if they have
+    # the same key and the same value. A tag with an empty string value only
+    # matches with tags that also have an empty string value.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html
@@ -4444,7 +4449,8 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The resource tag value.
+    #   The resource tag value. To specify an empty string value, either
+    #   don't provide this or specify it as "".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceTag AWS API Documentation

@@ -36,11 +36,37 @@ module Aws::ControlTower
     end
 
     class ControlOperation
+      attr_accessor control_identifier: ::String
+      attr_accessor enabled_control_identifier: ::String
       attr_accessor end_time: ::Time
+      attr_accessor operation_identifier: ::String
       attr_accessor operation_type: ("ENABLE_CONTROL" | "DISABLE_CONTROL" | "UPDATE_ENABLED_CONTROL")
       attr_accessor start_time: ::Time
       attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
       attr_accessor status_message: ::String
+      attr_accessor target_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ControlOperationFilter
+      attr_accessor control_identifiers: ::Array[::String]
+      attr_accessor control_operation_types: ::Array[("ENABLE_CONTROL" | "DISABLE_CONTROL" | "UPDATE_ENABLED_CONTROL")]
+      attr_accessor enabled_control_identifiers: ::Array[::String]
+      attr_accessor statuses: ::Array[("SUCCEEDED" | "FAILED" | "IN_PROGRESS")]
+      attr_accessor target_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ControlOperationSummary
+      attr_accessor control_identifier: ::String
+      attr_accessor enabled_control_identifier: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor operation_identifier: ::String
+      attr_accessor operation_type: ("ENABLE_CONTROL" | "DISABLE_CONTROL" | "UPDATE_ENABLED_CONTROL")
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
+      attr_accessor status_message: ::String
+      attr_accessor target_identifier: ::String
       SENSITIVE: []
     end
 
@@ -167,6 +193,13 @@ module Aws::ControlTower
       attr_accessor status_summary: Types::EnablementStatusSummary
       attr_accessor target_identifier: ::String
       attr_accessor target_regions: ::Array[Types::Region]
+      SENSITIVE: []
+    end
+
+    class EnabledControlFilter
+      attr_accessor control_identifiers: ::Array[::String]
+      attr_accessor drift_statuses: ::Array[("DRIFTED" | "IN_SYNC" | "NOT_CHECKING" | "UNKNOWN")]
+      attr_accessor statuses: ::Array[("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")]
       SENSITIVE: []
     end
 
@@ -315,6 +348,19 @@ module Aws::ControlTower
       SENSITIVE: []
     end
 
+    class ListControlOperationsInput
+      attr_accessor filter: Types::ControlOperationFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListControlOperationsOutput
+      attr_accessor control_operations: ::Array[Types::ControlOperationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListEnabledBaselinesInput
       attr_accessor filter: Types::EnabledBaselineFilter
       attr_accessor max_results: ::Integer
@@ -329,6 +375,7 @@ module Aws::ControlTower
     end
 
     class ListEnabledControlsInput
+      attr_accessor filter: Types::EnabledControlFilter
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor target_identifier: ::String

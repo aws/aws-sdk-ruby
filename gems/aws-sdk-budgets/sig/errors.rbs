@@ -38,6 +38,9 @@ module Aws
       class ResourceLockedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ThrottlingException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

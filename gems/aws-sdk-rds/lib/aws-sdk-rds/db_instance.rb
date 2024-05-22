@@ -237,7 +237,7 @@ module Aws::RDS
     end
 
     # The license model information for this DB instance. This setting
-    # doesn't apply to RDS Custom DB instances.
+    # doesn't apply to Amazon Aurora or RDS Custom DB instances.
     # @return [String]
     def license_model
       data[:license_model]
@@ -786,6 +786,14 @@ module Aws::RDS
       data[:multi_tenant]
     end
 
+    # The life cycle type for the DB instance.
+    #
+    # For more information, see CreateDBInstance.
+    # @return [String]
+    def engine_lifecycle_support
+      data[:engine_lifecycle_support]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -998,6 +1006,7 @@ module Aws::RDS
     #     db_system_id: "String",
     #     dedicated_log_volume: false,
     #     multi_tenant: false,
+    #     engine_lifecycle_support: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1600,12 +1609,22 @@ module Aws::RDS
     # @option options [String] :license_model
     #   The license model information for this DB instance.
     #
+    #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
+    #   Bring Your Own License (BYOL) model requires a custom parameter group.
+    #   The Db2 license through Amazon Web Services Marketplace model requires
+    #   an Amazon Web Services Marketplace subscription. For more information,
+    #   see [RDS for Db2 licensing options][1] in the *Amazon RDS User Guide*.
+    #
+    #    The default for RDS for Db2 is `bring-your-own-license`.
+    #
+    #    </note>
+    #
     #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
     #   instances.
     #
     #   Valid Values:
     #
-    #   * RDS for Db2 - `bring-your-own-license`
+    #   * RDS for Db2 - `bring-your-own-license | marketplace-license`
     #
     #   * RDS for MariaDB - `general-public-license`
     #
@@ -1616,6 +1635,10 @@ module Aws::RDS
     #   * RDS for Oracle - `bring-your-own-license | license-included`
     #
     #   * RDS for PostgreSQL - `postgresql-license`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   initially allocate for the DB instance. For information about valid
@@ -2170,6 +2193,37 @@ module Aws::RDS
     #   * If you specify the multi-tenant configuration when you create your
     #     DB instance, you can't later modify this DB instance to use the
     #     single-tenant configuration.
+    # @option options [String] :engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, creating
+    #   the DB instance will fail if the DB major version is past its end of
+    #   standard support date.
+    #
+    #    </note>
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
+    #   Amazon Aurora DB instances, the life cycle type is managed by the DB
+    #   cluster.
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB instance past the end of standard
+    #   support for that engine version. For more information, see [Using
+    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -4174,6 +4228,7 @@ module Aws::RDS
     #     allocated_storage: 1,
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
+    #     engine_lifecycle_support: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -4288,12 +4343,36 @@ module Aws::RDS
     # @option options [String] :license_model
     #   The license model information for the restored DB instance.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
+    #   Bring Your Own License (BYOL) model requires a custom parameter group.
+    #   The Db2 license through Amazon Web Services Marketplace model requires
+    #   an Amazon Web Services Marketplace subscription. For more information,
+    #   see [RDS for Db2 licensing options][1] in the *Amazon RDS User Guide*.
     #
-    #   Valid Values: `license-included` \| `bring-your-own-license` \|
-    #   `general-public-license`
+    #    </note>
+    #
+    #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
+    #   instances.
+    #
+    #   Valid Values:
+    #
+    #   * RDS for Db2 - `bring-your-own-license | marketplace-license`
+    #
+    #   * RDS for MariaDB - `general-public-license`
+    #
+    #   * RDS for Microsoft SQL Server - `license-included`
+    #
+    #   * RDS for MySQL - `general-public-license`
+    #
+    #   * RDS for Oracle - `bring-your-own-license | license-included`
+    #
+    #   * RDS for PostgreSQL - `postgresql-license`
     #
     #   Default: Same as the source.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
     # @option options [String] :db_name
     #   The database name for the restored DB instance.
     #
@@ -4663,6 +4742,38 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    # @option options [String] :engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB instance to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB instance past the end of standard
+    #   support for that engine version. For more information, see [Using
+    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
+    #   Amazon Aurora DB instances, the life cycle type is managed by the DB
+    #   cluster.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

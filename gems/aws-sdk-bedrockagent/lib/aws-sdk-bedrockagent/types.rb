@@ -73,7 +73,8 @@ module Aws::BedrockAgent
     end
 
     # Contains details about the Lambda function containing the business
-    # logic that is carried out upon invoking the action.
+    # logic that is carried out upon invoking the action or the custom
+    # control method for handling the information elicited from the user.
     #
     # @note ActionGroupExecutor is a union - when making an API calls you must set exactly one of the members.
     #
@@ -217,6 +218,10 @@ module Aws::BedrockAgent
     #   The foundation model used for orchestration by the agent.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The guardrails configuration assigned to the agent.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information
     #   about a user's conversation with the agent.
@@ -269,6 +274,7 @@ module Aws::BedrockAgent
       :description,
       :failure_reasons,
       :foundation_model,
+      :guardrail_configuration,
       :idle_session_ttl_in_seconds,
       :instruction,
       :prepared_at,
@@ -283,7 +289,9 @@ module Aws::BedrockAgent
     #
     # @!attribute [rw] action_group_executor
     #   The Amazon Resource Name (ARN) of the Lambda function containing the
-    #   business logic that is carried out upon invoking the action.
+    #   business logic that is carried out upon invoking the action or the
+    #   custom control method for handling the information elicited from the
+    #   user.
     #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_id
@@ -446,6 +454,11 @@ module Aws::BedrockAgent
     #   The description of the alias of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Information on the failure of Provisioned Throughput assigned to an
+    #   agent alias.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] routing_configuration
     #   Contains details about the routing configuration of the alias.
     #   @return [Array<Types::AgentAliasRoutingConfigurationListItem>]
@@ -466,6 +479,7 @@ module Aws::BedrockAgent
       :client_token,
       :created_at,
       :description,
+      :failure_reasons,
       :routing_configuration,
       :updated_at)
       SENSITIVE = []
@@ -505,10 +519,16 @@ module Aws::BedrockAgent
     #   The version of the agent with which the alias is associated.
     #   @return [String]
     #
+    # @!attribute [rw] provisioned_throughput
+    #   Information on the Provisioned Throughput assigned to an agent
+    #   alias.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AgentAliasRoutingConfigurationListItem AWS API Documentation
     #
     class AgentAliasRoutingConfigurationListItem < Struct.new(
-      :agent_version)
+      :agent_version,
+      :provisioned_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -668,6 +688,10 @@ module Aws::BedrockAgent
     #   The description of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The details of the guardrails configuration in the agent summary.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] latest_agent_version
     #   The latest version of the agent.
     #   @return [String]
@@ -683,6 +707,7 @@ module Aws::BedrockAgent
       :agent_name,
       :agent_status,
       :description,
+      :guardrail_configuration,
       :latest_agent_version,
       :updated_at)
       SENSITIVE = []
@@ -734,6 +759,10 @@ module Aws::BedrockAgent
     #   The foundation model that the version invokes.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The guardrails configuration assigned to the agent version.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information
     #   about a user's conversation with the agent.
@@ -783,6 +812,7 @@ module Aws::BedrockAgent
       :description,
       :failure_reasons,
       :foundation_model,
+      :guardrail_configuration,
       :idle_session_ttl_in_seconds,
       :instruction,
       :prompt_override_configuration,
@@ -815,6 +845,11 @@ module Aws::BedrockAgent
     #   The description of the version of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The details of the guardrails configuration in the agent version
+    #   summary.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] updated_at
     #   The time at which the version was last updated.
     #   @return [Time]
@@ -827,6 +862,7 @@ module Aws::BedrockAgent
       :agent_version,
       :created_at,
       :description,
+      :guardrail_configuration,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
@@ -935,7 +971,9 @@ module Aws::BedrockAgent
 
     # @!attribute [rw] action_group_executor
     #   The Amazon Resource Name (ARN) of the Lambda function containing the
-    #   business logic that is carried out upon invoking the action.
+    #   business logic that is carried out upon invoking the action or the
+    #   custom control method for handling the information elicited from the
+    #   user.
     #   @return [Types::ActionGroupExecutor]
     #
     # @!attribute [rw] action_group_name
@@ -1136,6 +1174,11 @@ module Aws::BedrockAgent
     #   create.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The unique Guardrail configuration assigned to the agent when it is
+    #   created.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information
     #   about a user's conversation with the agent.
@@ -1172,6 +1215,7 @@ module Aws::BedrockAgent
       :customer_encryption_key_arn,
       :description,
       :foundation_model,
+      :guardrail_configuration,
       :idle_session_ttl_in_seconds,
       :instruction,
       :prompt_override_configuration,
@@ -1207,7 +1251,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] data_deletion_policy
-    #   The deletion policy for the requested data source
+    #   The data deletion policy assigned to the data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
@@ -1339,7 +1383,7 @@ module Aws::BedrockAgent
     #   @return [Time]
     #
     # @!attribute [rw] data_deletion_policy
-    #   The deletion policy for the data source.
+    #   The data deletion policy for a data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
@@ -1355,7 +1399,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] failure_reasons
-    #   The details of the failure reasons related to the data source.
+    #   The detailed reasons on the failure to delete a data source.
     #   @return [Array<String>]
     #
     # @!attribute [rw] knowledge_base_id
@@ -2074,6 +2118,25 @@ module Aws::BedrockAgent
     #
     class GetKnowledgeBaseResponse < Struct.new(
       :knowledge_base)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the guardrails configuration.
+    #
+    # @!attribute [rw] guardrail_identifier
+    #   The guardrails identifier assigned to the guardrails configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_version
+    #   The guardrails version assigned to the guardrails configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GuardrailConfiguration AWS API Documentation
+    #
+    class GuardrailConfiguration < Struct.new(
+      :guardrail_identifier,
+      :guardrail_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2930,6 +2993,86 @@ module Aws::BedrockAgent
     end
 
     # Contains details about the storage configuration of the knowledge base
+    # in MongoDB Atlas.
+    #
+    # @!attribute [rw] collection_name
+    #   The collection name of the knowledge base in MongoDB Atlas.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials_secret_arn
+    #   The Amazon Resource Name (ARN) of the secret that you created in
+    #   Secrets Manager that contains user credentials for your MongoDB
+    #   Atlas cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database name in your MongoDB Atlas cluster for your knowledge
+    #   base.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint URL of your MongoDB Atlas cluster for your knowledge
+    #   base.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_service_name
+    #   The name of the VPC endpoint service in your account that is
+    #   connected to your MongoDB Atlas cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_mapping
+    #   Contains the names of the fields to which to map information about
+    #   the vector store.
+    #   @return [Types::MongoDbAtlasFieldMapping]
+    #
+    # @!attribute [rw] vector_index_name
+    #   The name of the MongoDB Atlas vector search index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MongoDbAtlasConfiguration AWS API Documentation
+    #
+    class MongoDbAtlasConfiguration < Struct.new(
+      :collection_name,
+      :credentials_secret_arn,
+      :database_name,
+      :endpoint,
+      :endpoint_service_name,
+      :field_mapping,
+      :vector_index_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the names of the fields to which to map information about the
+    # vector store.
+    #
+    # @!attribute [rw] metadata_field
+    #   The name of the field in which Amazon Bedrock stores metadata about
+    #   the vector store.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_field
+    #   The name of the field in which Amazon Bedrock stores the raw text
+    #   from your data. The text is split according to the chunking strategy
+    #   you choose.
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_field
+    #   The name of the field in which Amazon Bedrock stores the vector
+    #   embeddings for your data sources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MongoDbAtlasFieldMapping AWS API Documentation
+    #
+    class MongoDbAtlasFieldMapping < Struct.new(
+      :metadata_field,
+      :text_field,
+      :vector_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the storage configuration of the knowledge base
     # in Amazon OpenSearch Service. For more information, see [Create a
     # vector index in Amazon OpenSearch Service][1].
     #
@@ -3149,11 +3292,13 @@ module Aws::BedrockAgent
     #   Defines the prompt template with which to replace the default prompt
     #   template. You can use placeholder variables in the base prompt
     #   template to customize the prompt. For more information, see [Prompt
-    #   template placeholder variables][1].
+    #   template placeholder variables][1]. For more information, see
+    #   [Configure the prompt templates][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts-configure.html
     #   @return [String]
     #
     # @!attribute [rw] inference_configuration
@@ -3231,7 +3376,13 @@ module Aws::BedrockAgent
     #   The ARN of the Lambda function to use when parsing the raw
     #   foundation model output in parts of the agent sequence. If you
     #   specify this field, at least one of the `promptConfigurations` must
-    #   contain a `parserMode` value that is set to `OVERRIDDEN`.
+    #   contain a `parserMode` value that is set to `OVERRIDDEN`. For more
+    #   information, see [Parser Lambda function in Agents for Amazon
+    #   Bedrock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html
     #   @return [String]
     #
     # @!attribute [rw] prompt_configurations
@@ -3418,7 +3569,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] bucket_owner_account_id
-    #   The account ID for the owner of the S3 bucket.
+    #   The bucket account owner ID for the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] inclusion_prefixes
@@ -3541,6 +3692,11 @@ module Aws::BedrockAgent
 
     # Contains the storage configuration of the knowledge base.
     #
+    # @!attribute [rw] mongo_db_atlas_configuration
+    #   Contains the storage configuration of the knowledge base in MongoDB
+    #   Atlas.
+    #   @return [Types::MongoDbAtlasConfiguration]
+    #
     # @!attribute [rw] opensearch_serverless_configuration
     #   Contains the storage configuration of the knowledge base in Amazon
     #   OpenSearch Service.
@@ -3573,6 +3729,7 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StorageConfiguration AWS API Documentation
     #
     class StorageConfiguration < Struct.new(
+      :mongo_db_atlas_configuration,
       :opensearch_serverless_configuration,
       :pinecone_configuration,
       :rds_configuration,
@@ -3862,6 +4019,11 @@ module Aws::BedrockAgent
     #   agent.
     #   @return [String]
     #
+    # @!attribute [rw] guardrail_configuration
+    #   The unique Guardrail configuration assigned to the agent when it is
+    #   updated.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] idle_session_ttl_in_seconds
     #   The number of seconds for which Amazon Bedrock keeps information
     #   about a user's conversation with the agent.
@@ -3894,6 +4056,7 @@ module Aws::BedrockAgent
       :customer_encryption_key_arn,
       :description,
       :foundation_model,
+      :guardrail_configuration,
       :idle_session_ttl_in_seconds,
       :instruction,
       :prompt_override_configuration)

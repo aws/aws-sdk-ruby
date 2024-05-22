@@ -22,6 +22,7 @@ module Aws::PI
     AnalysisReportSummary = Shapes::StructureShape.new(name: 'AnalysisReportSummary')
     AnalysisReportSummaryList = Shapes::ListShape.new(name: 'AnalysisReportSummaryList')
     AnalysisStatus = Shapes::StringShape.new(name: 'AnalysisStatus')
+    AuthorizedActionsList = Shapes::ListShape.new(name: 'AuthorizedActionsList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ContextType = Shapes::StringShape.new(name: 'ContextType')
     CreatePerformanceAnalysisReportRequest = Shapes::StructureShape.new(name: 'CreatePerformanceAnalysisReportRequest')
@@ -54,6 +55,7 @@ module Aws::PI
     FeatureMetadata = Shapes::StructureShape.new(name: 'FeatureMetadata')
     FeatureMetadataMap = Shapes::MapShape.new(name: 'FeatureMetadataMap')
     FeatureStatus = Shapes::StringShape.new(name: 'FeatureStatus')
+    FineGrainedAction = Shapes::StringShape.new(name: 'FineGrainedAction')
     GetDimensionKeyDetailsRequest = Shapes::StructureShape.new(name: 'GetDimensionKeyDetailsRequest')
     GetDimensionKeyDetailsResponse = Shapes::StructureShape.new(name: 'GetDimensionKeyDetailsResponse')
     GetPerformanceAnalysisReportRequest = Shapes::StructureShape.new(name: 'GetPerformanceAnalysisReportRequest')
@@ -96,13 +98,14 @@ module Aws::PI
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     RecommendationList = Shapes::ListShape.new(name: 'RecommendationList')
     RequestString = Shapes::StringShape.new(name: 'RequestString')
-    RequestStringList = Shapes::ListShape.new(name: 'RequestStringList')
     RequestedDimensionList = Shapes::ListShape.new(name: 'RequestedDimensionList')
     ResponsePartitionKey = Shapes::StructureShape.new(name: 'ResponsePartitionKey')
     ResponsePartitionKeyList = Shapes::ListShape.new(name: 'ResponsePartitionKeyList')
     ResponseResourceMetric = Shapes::StructureShape.new(name: 'ResponseResourceMetric')
     ResponseResourceMetricKey = Shapes::StructureShape.new(name: 'ResponseResourceMetricKey')
     ResponseResourceMetricList = Shapes::ListShape.new(name: 'ResponseResourceMetricList')
+    SanitizedString = Shapes::StringShape.new(name: 'SanitizedString')
+    SanitizedStringList = Shapes::ListShape.new(name: 'SanitizedStringList')
     ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     Severity = Shapes::StringShape.new(name: 'Severity')
     String = Shapes::StringShape.new(name: 'String')
@@ -117,7 +120,7 @@ module Aws::PI
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
 
-    AdditionalMetricsList.member = Shapes::ShapeRef.new(shape: RequestString)
+    AdditionalMetricsList.member = Shapes::ShapeRef.new(shape: SanitizedString)
 
     AdditionalMetricsMap.key = Shapes::ShapeRef.new(shape: RequestString)
     AdditionalMetricsMap.value = Shapes::ShapeRef.new(shape: Double)
@@ -141,6 +144,8 @@ module Aws::PI
     AnalysisReportSummary.struct_class = Types::AnalysisReportSummary
 
     AnalysisReportSummaryList.member = Shapes::ShapeRef.new(shape: AnalysisReportSummary)
+
+    AuthorizedActionsList.member = Shapes::ShapeRef.new(shape: FineGrainedAction)
 
     CreatePerformanceAnalysisReportRequest.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, required: true, location_name: "ServiceType"))
     CreatePerformanceAnalysisReportRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "Identifier"))
@@ -199,8 +204,8 @@ module Aws::PI
 
     DimensionDetailList.member = Shapes::ShapeRef.new(shape: DimensionDetail)
 
-    DimensionGroup.add_member(:group, Shapes::ShapeRef.new(shape: RequestString, required: true, location_name: "Group"))
-    DimensionGroup.add_member(:dimensions, Shapes::ShapeRef.new(shape: RequestStringList, location_name: "Dimensions"))
+    DimensionGroup.add_member(:group, Shapes::ShapeRef.new(shape: SanitizedString, required: true, location_name: "Group"))
+    DimensionGroup.add_member(:dimensions, Shapes::ShapeRef.new(shape: SanitizedStringList, location_name: "Dimensions"))
     DimensionGroup.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
     DimensionGroup.struct_class = Types::DimensionGroup
 
@@ -228,7 +233,7 @@ module Aws::PI
     DimensionMap.key = Shapes::ShapeRef.new(shape: RequestString)
     DimensionMap.value = Shapes::ShapeRef.new(shape: RequestString)
 
-    DimensionsMetricList.member = Shapes::ShapeRef.new(shape: RequestString)
+    DimensionsMetricList.member = Shapes::ShapeRef.new(shape: SanitizedString)
 
     FeatureMetadata.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
     FeatureMetadata.struct_class = Types::FeatureMetadata
@@ -308,6 +313,7 @@ module Aws::PI
     ListAvailableResourceDimensionsRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: DimensionsMetricList, required: true, location_name: "Metrics"))
     ListAvailableResourceDimensionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListAvailableResourceDimensionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAvailableResourceDimensionsRequest.add_member(:authorized_actions, Shapes::ShapeRef.new(shape: AuthorizedActionsList, location_name: "AuthorizedActions"))
     ListAvailableResourceDimensionsRequest.struct_class = Types::ListAvailableResourceDimensionsRequest
 
     ListAvailableResourceDimensionsResponse.add_member(:metric_dimensions, Shapes::ShapeRef.new(shape: MetricDimensionsList, location_name: "MetricDimensions"))
@@ -355,17 +361,17 @@ module Aws::PI
 
     MetricKeyDataPointsList.member = Shapes::ShapeRef.new(shape: MetricKeyDataPoints)
 
-    MetricQuery.add_member(:metric, Shapes::ShapeRef.new(shape: RequestString, required: true, location_name: "Metric"))
+    MetricQuery.add_member(:metric, Shapes::ShapeRef.new(shape: SanitizedString, required: true, location_name: "Metric"))
     MetricQuery.add_member(:group_by, Shapes::ShapeRef.new(shape: DimensionGroup, location_name: "GroupBy"))
     MetricQuery.add_member(:filter, Shapes::ShapeRef.new(shape: MetricQueryFilterMap, location_name: "Filter"))
     MetricQuery.struct_class = Types::MetricQuery
 
-    MetricQueryFilterMap.key = Shapes::ShapeRef.new(shape: RequestString)
+    MetricQueryFilterMap.key = Shapes::ShapeRef.new(shape: SanitizedString)
     MetricQueryFilterMap.value = Shapes::ShapeRef.new(shape: RequestString)
 
     MetricQueryList.member = Shapes::ShapeRef.new(shape: MetricQuery)
 
-    MetricTypeList.member = Shapes::ShapeRef.new(shape: RequestString)
+    MetricTypeList.member = Shapes::ShapeRef.new(shape: SanitizedString)
 
     MetricValuesList.member = Shapes::ShapeRef.new(shape: Double)
 
@@ -384,9 +390,7 @@ module Aws::PI
 
     RecommendationList.member = Shapes::ShapeRef.new(shape: Recommendation)
 
-    RequestStringList.member = Shapes::ShapeRef.new(shape: RequestString)
-
-    RequestedDimensionList.member = Shapes::ShapeRef.new(shape: RequestString)
+    RequestedDimensionList.member = Shapes::ShapeRef.new(shape: SanitizedString)
 
     ResponsePartitionKey.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionMap, required: true, location_name: "Dimensions"))
     ResponsePartitionKey.struct_class = Types::ResponsePartitionKey
@@ -403,6 +407,8 @@ module Aws::PI
     ResponseResourceMetricKey.struct_class = Types::ResponseResourceMetricKey
 
     ResponseResourceMetricList.member = Shapes::ShapeRef.new(shape: ResponseResourceMetric)
+
+    SanitizedStringList.member = Shapes::ShapeRef.new(shape: SanitizedString)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -437,6 +443,7 @@ module Aws::PI
         "endpointPrefix" => "pi",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "AWS PI",
         "serviceFullName" => "AWS Performance Insights",
         "serviceId" => "PI",

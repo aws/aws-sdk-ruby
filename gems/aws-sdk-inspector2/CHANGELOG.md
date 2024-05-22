@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2024-05-03)
+------------------
+
+* Feature - This release adds CSV format to GetCisScanReport for Inspector v2
+
 1.28.0 (2024-04-29)
 ------------------
 

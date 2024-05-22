@@ -1272,7 +1272,13 @@ module Aws
                                    replacement_template: {
                                      replacement_template_data: ::String?
                                    }?
-                                 }?
+                                 }?,
+                                 replacement_headers: Array[
+                                   {
+                                     name: ::String,
+                                     value: ::String
+                                   },
+                                 ]?
                                },
                              ],
                              ?configuration_set_name: ::String

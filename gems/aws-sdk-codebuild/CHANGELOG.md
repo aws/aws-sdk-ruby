@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2024-05-17)
+------------------
+
+* Feature - Aws CodeBuild now supports 36 hours build timeout
+
+1.113.0 (2024-05-15)
+------------------
+
+* Feature - CodeBuild Reserved Capacity VPC Support
+
+1.112.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.111.0 (2024-04-25)
 ------------------
 

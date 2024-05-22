@@ -301,8 +301,9 @@ module Aws::Inspector2
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -1897,6 +1898,10 @@ module Aws::Inspector2
 
     # Retrieves a CIS scan report.
     #
+    # @option params [String] :report_format
+    #   The format of the report. Valid values are `PDF` and `CSV`. If no
+    #   value is specified, the report format defaults to `PDF`.
+    #
     # @option params [required, String] :scan_arn
     #   The scan ARN.
     #
@@ -1911,6 +1916,7 @@ module Aws::Inspector2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_cis_scan_report({
+    #     report_format: "PDF", # accepts PDF, CSV
     #     scan_arn: "CisScanArn", # required
     #     target_accounts: ["AccountId"],
     #   })
@@ -5302,7 +5308,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2024-05-17)
+------------------
+
+* Feature - Enable use of CloudFormation traits in Smithy model to improve generated CloudFormation schema from the Smithy API model.
+
+1.93.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.92.0 (2024-04-25)
 ------------------
 

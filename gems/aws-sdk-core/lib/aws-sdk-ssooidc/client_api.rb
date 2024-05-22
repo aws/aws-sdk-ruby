@@ -15,6 +15,7 @@ module Aws::SSOOIDC
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessToken = Shapes::StringShape.new(name: 'AccessToken')
+    ArnType = Shapes::StringShape.new(name: 'ArnType')
     Assertion = Shapes::StringShape.new(name: 'Assertion')
     AuthCode = Shapes::StringShape.new(name: 'AuthCode')
     AuthorizationPendingException = Shapes::StructureShape.new(name: 'AuthorizationPendingException')
@@ -22,6 +23,7 @@ module Aws::SSOOIDC
     ClientName = Shapes::StringShape.new(name: 'ClientName')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ClientType = Shapes::StringShape.new(name: 'ClientType')
+    CodeVerifier = Shapes::StringShape.new(name: 'CodeVerifier')
     CreateTokenRequest = Shapes::StructureShape.new(name: 'CreateTokenRequest')
     CreateTokenResponse = Shapes::StructureShape.new(name: 'CreateTokenResponse')
     CreateTokenWithIAMRequest = Shapes::StructureShape.new(name: 'CreateTokenWithIAMRequest')
@@ -32,17 +34,20 @@ module Aws::SSOOIDC
     ExpirationInSeconds = Shapes::IntegerShape.new(name: 'ExpirationInSeconds')
     ExpiredTokenException = Shapes::StructureShape.new(name: 'ExpiredTokenException')
     GrantType = Shapes::StringShape.new(name: 'GrantType')
+    GrantTypes = Shapes::ListShape.new(name: 'GrantTypes')
     IdToken = Shapes::StringShape.new(name: 'IdToken')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidClientException = Shapes::StructureShape.new(name: 'InvalidClientException')
     InvalidClientMetadataException = Shapes::StructureShape.new(name: 'InvalidClientMetadataException')
     InvalidGrantException = Shapes::StructureShape.new(name: 'InvalidGrantException')
+    InvalidRedirectUriException = Shapes::StructureShape.new(name: 'InvalidRedirectUriException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidRequestRegionException = Shapes::StructureShape.new(name: 'InvalidRequestRegionException')
     InvalidScopeException = Shapes::StructureShape.new(name: 'InvalidScopeException')
     Location = Shapes::StringShape.new(name: 'Location')
     LongTimeStampType = Shapes::IntegerShape.new(name: 'LongTimeStampType')
+    RedirectUris = Shapes::ListShape.new(name: 'RedirectUris')
     RefreshToken = Shapes::StringShape.new(name: 'RefreshToken')
     Region = Shapes::StringShape.new(name: 'Region')
     RegisterClientRequest = Shapes::StructureShape.new(name: 'RegisterClientRequest')
@@ -76,6 +81,7 @@ module Aws::SSOOIDC
     CreateTokenRequest.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
     CreateTokenRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scopes, location_name: "scope"))
     CreateTokenRequest.add_member(:redirect_uri, Shapes::ShapeRef.new(shape: URI, location_name: "redirectUri"))
+    CreateTokenRequest.add_member(:code_verifier, Shapes::ShapeRef.new(shape: CodeVerifier, location_name: "codeVerifier"))
     CreateTokenRequest.struct_class = Types::CreateTokenRequest
 
     CreateTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
@@ -95,6 +101,7 @@ module Aws::SSOOIDC
     CreateTokenWithIAMRequest.add_member(:subject_token, Shapes::ShapeRef.new(shape: SubjectToken, location_name: "subjectToken"))
     CreateTokenWithIAMRequest.add_member(:subject_token_type, Shapes::ShapeRef.new(shape: TokenTypeURI, location_name: "subjectTokenType"))
     CreateTokenWithIAMRequest.add_member(:requested_token_type, Shapes::ShapeRef.new(shape: TokenTypeURI, location_name: "requestedTokenType"))
+    CreateTokenWithIAMRequest.add_member(:code_verifier, Shapes::ShapeRef.new(shape: CodeVerifier, location_name: "codeVerifier"))
     CreateTokenWithIAMRequest.struct_class = Types::CreateTokenWithIAMRequest
 
     CreateTokenWithIAMResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
@@ -109,6 +116,8 @@ module Aws::SSOOIDC
     ExpiredTokenException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
     ExpiredTokenException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
     ExpiredTokenException.struct_class = Types::ExpiredTokenException
+
+    GrantTypes.member = Shapes::ShapeRef.new(shape: GrantType)
 
     InternalServerException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
     InternalServerException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
@@ -126,6 +135,10 @@ module Aws::SSOOIDC
     InvalidGrantException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
     InvalidGrantException.struct_class = Types::InvalidGrantException
 
+    InvalidRedirectUriException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
+    InvalidRedirectUriException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
+    InvalidRedirectUriException.struct_class = Types::InvalidRedirectUriException
+
     InvalidRequestException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
     InvalidRequestException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
@@ -140,9 +153,15 @@ module Aws::SSOOIDC
     InvalidScopeException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
     InvalidScopeException.struct_class = Types::InvalidScopeException
 
+    RedirectUris.member = Shapes::ShapeRef.new(shape: URI)
+
     RegisterClientRequest.add_member(:client_name, Shapes::ShapeRef.new(shape: ClientName, required: true, location_name: "clientName"))
     RegisterClientRequest.add_member(:client_type, Shapes::ShapeRef.new(shape: ClientType, required: true, location_name: "clientType"))
     RegisterClientRequest.add_member(:scopes, Shapes::ShapeRef.new(shape: Scopes, location_name: "scopes"))
+    RegisterClientRequest.add_member(:redirect_uris, Shapes::ShapeRef.new(shape: RedirectUris, location_name: "redirectUris"))
+    RegisterClientRequest.add_member(:grant_types, Shapes::ShapeRef.new(shape: GrantTypes, location_name: "grantTypes"))
+    RegisterClientRequest.add_member(:issuer_url, Shapes::ShapeRef.new(shape: URI, location_name: "issuerUrl"))
+    RegisterClientRequest.add_member(:entitled_application_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "entitledApplicationArn"))
     RegisterClientRequest.struct_class = Types::RegisterClientRequest
 
     RegisterClientResponse.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId"))
@@ -191,6 +210,7 @@ module Aws::SSOOIDC
         "endpointPrefix" => "oidc",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "SSO OIDC",
         "serviceFullName" => "AWS SSO OIDC",
         "serviceId" => "SSO OIDC",
@@ -250,6 +270,8 @@ module Aws::SSOOIDC
         o.errors << Shapes::ShapeRef.new(shape: InvalidScopeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClientMetadataException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRedirectUriException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedGrantTypeException)
       end)
 
       api.add_operation(:start_device_authorization, Seahorse::Model::Operation.new.tap do |o|

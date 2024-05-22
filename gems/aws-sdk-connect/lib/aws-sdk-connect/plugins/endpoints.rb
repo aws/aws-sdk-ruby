@@ -92,12 +92,16 @@ module Aws::Connect
             Aws::Connect::Endpoints::BatchAssociateAnalyticsDataSet.build(context)
           when :batch_disassociate_analytics_data_set
             Aws::Connect::Endpoints::BatchDisassociateAnalyticsDataSet.build(context)
+          when :batch_get_attached_file_metadata
+            Aws::Connect::Endpoints::BatchGetAttachedFileMetadata.build(context)
           when :batch_get_flow_association
             Aws::Connect::Endpoints::BatchGetFlowAssociation.build(context)
           when :batch_put_contact
             Aws::Connect::Endpoints::BatchPutContact.build(context)
           when :claim_phone_number
             Aws::Connect::Endpoints::ClaimPhoneNumber.build(context)
+          when :complete_attached_file_upload
+            Aws::Connect::Endpoints::CompleteAttachedFileUpload.build(context)
           when :create_agent_status
             Aws::Connect::Endpoints::CreateAgentStatus.build(context)
           when :create_contact_flow
@@ -148,6 +152,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateVocabulary.build(context)
           when :deactivate_evaluation_form
             Aws::Connect::Endpoints::DeactivateEvaluationForm.build(context)
+          when :delete_attached_file
+            Aws::Connect::Endpoints::DeleteAttachedFile.build(context)
           when :delete_contact_evaluation
             Aws::Connect::Endpoints::DeleteContactEvaluation.build(context)
           when :delete_contact_flow
@@ -268,6 +274,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DisassociateUserProficiencies.build(context)
           when :dismiss_user_contact
             Aws::Connect::Endpoints::DismissUserContact.build(context)
+          when :get_attached_file
+            Aws::Connect::Endpoints::GetAttachedFile.build(context)
           when :get_contact_attributes
             Aws::Connect::Endpoints::GetContactAttributes.build(context)
           when :get_current_metric_data
@@ -394,6 +402,10 @@ module Aws::Connect
             Aws::Connect::Endpoints::ResumeContactRecording.build(context)
           when :search_available_phone_numbers
             Aws::Connect::Endpoints::SearchAvailablePhoneNumbers.build(context)
+          when :search_contact_flow_modules
+            Aws::Connect::Endpoints::SearchContactFlowModules.build(context)
+          when :search_contact_flows
+            Aws::Connect::Endpoints::SearchContactFlows.build(context)
           when :search_contacts
             Aws::Connect::Endpoints::SearchContacts.build(context)
           when :search_hours_of_operations
@@ -418,6 +430,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::SearchVocabularies.build(context)
           when :send_chat_integration_event
             Aws::Connect::Endpoints::SendChatIntegrationEvent.build(context)
+          when :start_attached_file_upload
+            Aws::Connect::Endpoints::StartAttachedFileUpload.build(context)
           when :start_chat_contact
             Aws::Connect::Endpoints::StartChatContact.build(context)
           when :start_contact_evaluation

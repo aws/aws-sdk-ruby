@@ -91,13 +91,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControl` field of the [Retrieve response][1]
+    # * In the `returnControl` field of the [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] action_group
     #   The action group that the API operation belongs to.
@@ -137,13 +137,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1]
+    # * [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] name
     #   The name of the parameter.
@@ -172,13 +172,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1]
+    # * [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] content
     #   The content of the request body. The key of the object in this field
@@ -198,13 +198,14 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControlInvocationResults` of the [Retrieve request][1]
+    # * In the `returnControlInvocationResults` of the [InvokeAgent
+    #   request][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
     #
     # @!attribute [rw] action_group
     #   The action group that the API operation belongs to.
@@ -225,8 +226,8 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] response_body
     #   The response body from the API operation. The key of the object is
-    #   the content type. The response may be returned directly or from the
-    #   Lambda function.
+    #   the content type (currently, only `TEXT` is supported). The response
+    #   may be returned directly or from the Lambda function.
     #   @return [Hash<String,Types::ContentBody>]
     #
     # @!attribute [rw] response_state
@@ -317,13 +318,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1] – in the `citations` field
+    # * [InvokeAgent response][1] – in the `citations` field
     #
     # * [RetrieveAndGenerate response][2] – in the `citations` field
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
     #
     # @!attribute [rw] generated_response_part
@@ -363,14 +364,14 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControlInvocationResults` field of the [Retrieve
+    # * In the `returnControlInvocationResults` field of the [InvokeAgent
     #   request][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
     #
     # @!attribute [rw] body
     #   The body of the API response.
@@ -434,6 +435,22 @@ module Aws::BedrockAgentRuntime
     # Contains the generation configuration of the external source wrapper
     # object.
     #
+    # @!attribute [rw] additional_model_request_fields
+    #   Additional model parameters and their corresponding values not
+    #   included in the textInferenceConfig structure for an external
+    #   source. Takes in custom model parameters specific to the language
+    #   model being used.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] guardrail_configuration
+    #   The configuration details for the guardrail.
+    #   @return [Types::GuardrailConfiguration]
+    #
+    # @!attribute [rw] inference_config
+    #   Configuration settings for inference when using RetrieveAndGenerate
+    #   to generate responses while using an external source.
+    #   @return [Types::InferenceConfig]
+    #
     # @!attribute [rw] prompt_template
     #   Contain the textPromptTemplate string for the external source
     #   wrapper object.
@@ -442,6 +459,9 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ExternalSourcesGenerationConfiguration AWS API Documentation
     #
     class ExternalSourcesGenerationConfiguration < Struct.new(
+      :additional_model_request_fields,
+      :guardrail_configuration,
+      :inference_config,
       :prompt_template)
       SENSITIVE = []
       include Aws::Structure
@@ -545,13 +565,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControl` field of the [Retrieve response][1]
+    # * In the `returnControl` field of the [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] action_group
     #   The action group that the function belongs to.
@@ -579,13 +599,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControl` field of the [Retrieve response][1]
+    # * In the `returnControl` field of the [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] name
     #   The name of the parameter.
@@ -614,13 +634,14 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControlInvocationResults` of the [Retrieve request][1]
+    # * In the `returnControlInvocationResults` of the [InvokeAgent
+    #   request][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
     #
     # @!attribute [rw] action_group
     #   The action group that the function belongs to.
@@ -631,8 +652,10 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] response_body
-    #   The response from the function call using the parameters. The
-    #   response may be returned directly or from the Lambda function.
+    #   The response from the function call using the parameters. The key of
+    #   the object is the content type (currently, only `TEXT` is
+    #   supported). The response may be returned directly or from the Lambda
+    #   function.
     #   @return [Hash<String,Types::ContentBody>]
     #
     # @!attribute [rw] response_state
@@ -659,14 +682,14 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1] – in the `generatedResponsePart` field
+    # * [InvokeAgent response][1] – in the `generatedResponsePart` field
     #
     # * [RetrieveAndGenerate response][2] – in the `generatedResponsePart`
     #   field
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
     #
     # @!attribute [rw] text_response_part
@@ -695,6 +718,22 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
     #
+    # @!attribute [rw] additional_model_request_fields
+    #   Additional model parameters and corresponding values not included in
+    #   the textInferenceConfig structure for a knowledge base. This allows
+    #   users to provide custom model parameters specific to the language
+    #   model being used.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] guardrail_configuration
+    #   The configuration details for the guardrail.
+    #   @return [Types::GuardrailConfiguration]
+    #
+    # @!attribute [rw] inference_config
+    #   Configuration settings for inference when using RetrieveAndGenerate
+    #   to generate responses while using a knowledge base as a source.
+    #   @return [Types::InferenceConfig]
+    #
     # @!attribute [rw] prompt_template
     #   Contains the template for the prompt that's sent to the model for
     #   response generation.
@@ -703,7 +742,319 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GenerationConfiguration AWS API Documentation
     #
     class GenerationConfiguration < Struct.new(
+      :additional_model_request_fields,
+      :guardrail_configuration,
+      :inference_config,
       :prompt_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Assessment details of the content analyzed by Guardrails.
+    #
+    # @!attribute [rw] content_policy
+    #   Content policy details of the Guardrail.
+    #   @return [Types::GuardrailContentPolicyAssessment]
+    #
+    # @!attribute [rw] sensitive_information_policy
+    #   Sensitive Information policy details of Guardrail.
+    #   @return [Types::GuardrailSensitiveInformationPolicyAssessment]
+    #
+    # @!attribute [rw] topic_policy
+    #   Topic policy details of the Guardrail.
+    #   @return [Types::GuardrailTopicPolicyAssessment]
+    #
+    # @!attribute [rw] word_policy
+    #   Word policy details of the Guardrail.
+    #   @return [Types::GuardrailWordPolicyAssessment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailAssessment AWS API Documentation
+    #
+    class GuardrailAssessment < Struct.new(
+      :content_policy,
+      :sensitive_information_policy,
+      :topic_policy,
+      :word_policy)
+      SENSITIVE = [:content_policy, :sensitive_information_policy, :topic_policy, :word_policy]
+      include Aws::Structure
+    end
+
+    # The configuration details for the guardrail.
+    #
+    # @!attribute [rw] guardrail_id
+    #   The unique identifier for the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_version
+    #   The version of the guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailConfiguration AWS API Documentation
+    #
+    class GuardrailConfiguration < Struct.new(
+      :guardrail_id,
+      :guardrail_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the content filter used in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action placed on the content by the Guardrail filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence level regarding the content detected in the filter by
+    #   the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of content detected in the filter by the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailContentFilter AWS API Documentation
+    #
+    class GuardrailContentFilter < Struct.new(
+      :action,
+      :confidence,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the policy assessment in the Guardrails filter.
+    #
+    # @!attribute [rw] filters
+    #   The filter details of the policy assessment used in the Guardrails
+    #   filter.
+    #   @return [Array<Types::GuardrailContentFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailContentPolicyAssessment AWS API Documentation
+    #
+    class GuardrailContentPolicyAssessment < Struct.new(
+      :filters)
+      SENSITIVE = [:filters]
+      include Aws::Structure
+    end
+
+    # The custom word details for the filter in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action details for the custom word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] match
+    #   The match details for the custom word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailCustomWord AWS API Documentation
+    #
+    class GuardrailCustomWord < Struct.new(
+      :action,
+      :match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The managed word details for the filter in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action details for the managed word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] match
+    #   The match details for the managed word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type details for the managed word filter in the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailManagedWord AWS API Documentation
+    #
+    class GuardrailManagedWord < Struct.new(
+      :action,
+      :match,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Guardrail filter to identify and remove personally identifiable
+    # information (PII).
+    #
+    # @!attribute [rw] action
+    #   The action of the Guardrail filter to identify and remove PII.
+    #   @return [String]
+    #
+    # @!attribute [rw] match
+    #   The match to settings in the Guardrail filter to identify and remove
+    #   PII.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of PII the Guardrail filter has identified and removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailPiiEntityFilter AWS API Documentation
+    #
+    class GuardrailPiiEntityFilter < Struct.new(
+      :action,
+      :match,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details for the regex filter used in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action details for the regex filter used in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] match
+    #   The match details for the regex filter used in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name details for the regex filter used in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex
+    #   The regex details for the regex filter used in the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailRegexFilter AWS API Documentation
+    #
+    class GuardrailRegexFilter < Struct.new(
+      :action,
+      :match,
+      :name,
+      :regex)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the sensitive policy assessment used in the Guardrail.
+    #
+    # @!attribute [rw] pii_entities
+    #   The details of the PII entities used in the sensitive policy
+    #   assessment for the Guardrail.
+    #   @return [Array<Types::GuardrailPiiEntityFilter>]
+    #
+    # @!attribute [rw] regexes
+    #   The details of the regexes used in the sensitive policy assessment
+    #   for the Guardrail.
+    #   @return [Array<Types::GuardrailRegexFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailSensitiveInformationPolicyAssessment AWS API Documentation
+    #
+    class GuardrailSensitiveInformationPolicyAssessment < Struct.new(
+      :pii_entities,
+      :regexes)
+      SENSITIVE = [:pii_entities, :regexes]
+      include Aws::Structure
+    end
+
+    # The details for a specific topic defined in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The action details on a specific topic in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name details on a specific topic in the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type details on a specific topic in the Guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailTopic AWS API Documentation
+    #
+    class GuardrailTopic < Struct.new(
+      :action,
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the policy assessment used in the Guardrail.
+    #
+    # @!attribute [rw] topics
+    #   The topic details of the policy assessment used in the Guardrail.
+    #   @return [Array<Types::GuardrailTopic>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailTopicPolicyAssessment AWS API Documentation
+    #
+    class GuardrailTopicPolicyAssessment < Struct.new(
+      :topics)
+      SENSITIVE = [:topics]
+      include Aws::Structure
+    end
+
+    # The trace details used in the Guardrail.
+    #
+    # @!attribute [rw] action
+    #   The trace action details used with the Guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_assessments
+    #   The details of the input assessments used in the Guardrail Trace.
+    #   @return [Array<Types::GuardrailAssessment>]
+    #
+    # @!attribute [rw] output_assessments
+    #   The details of the output assessments used in the Guardrail Trace.
+    #   @return [Array<Types::GuardrailAssessment>]
+    #
+    # @!attribute [rw] trace_id
+    #   The details of the trace Id used in the Guardrail Trace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailTrace AWS API Documentation
+    #
+    class GuardrailTrace < Struct.new(
+      :action,
+      :input_assessments,
+      :output_assessments,
+      :trace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The assessment details for words defined in the Guardrail filter.
+    #
+    # @!attribute [rw] custom_words
+    #   The custom word details for words defined in the Guardrail filter.
+    #   @return [Array<Types::GuardrailCustomWord>]
+    #
+    # @!attribute [rw] managed_word_lists
+    #   The managed word lists for words defined in the Guardrail filter.
+    #   @return [Array<Types::GuardrailManagedWord>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GuardrailWordPolicyAssessment AWS API Documentation
+    #
+    class GuardrailWordPolicyAssessment < Struct.new(
+      :custom_words,
+      :managed_word_lists)
+      SENSITIVE = [:custom_words, :managed_word_lists]
+      include Aws::Structure
+    end
+
+    # The configuration for inference settings when generating responses
+    # using RetrieveAndGenerate.
+    #
+    # @!attribute [rw] text_inference_config
+    #   Configuration settings specific to text generation while generating
+    #   responses using RetrieveAndGenerate.
+    #   @return [Types::TextInferenceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InferenceConfig AWS API Documentation
+    #
+    class InferenceConfig < Struct.new(
+      :text_inference_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -816,13 +1167,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * In the `returnControl` field of the [Retrieve response][1]
+    # * In the `returnControl` field of the [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @note InvocationInputMember is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InvocationInputMember corresponding to the set member.
     #
@@ -851,17 +1202,21 @@ module Aws::BedrockAgentRuntime
       class Unknown < InvocationInputMember; end
     end
 
-    # A result from the action group invocation.
+    # A result from the invocation of an action. For more information, see
+    # [Return control to the agent developer][1] and [Control session
+    # context][2].
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve request][1]
+    # * [InvokeAgent request][3]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
     #
     # @note InvocationResultMember is a union - when making an API calls you must set exactly one of the members.
     #
@@ -911,6 +1266,11 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] input_text
     #   The prompt text to send the agent.
+    #
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the
+    #   `sessionState` field, the `inputText` field will be ignored.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -921,6 +1281,11 @@ module Aws::BedrockAgentRuntime
     # @!attribute [rw] session_state
     #   Contains parameters that specify various attributes of the session.
     #   For more information, see [Control session context][1].
+    #
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the
+    #   `sessionState` field, the `inputText` field will be ignored.
+    #
+    #    </note>
     #
     #
     #
@@ -1716,7 +2081,8 @@ module Aws::BedrockAgentRuntime
 
     # Specifies the filters to use on the metadata attributes in the
     # knowledge base data sources before returning results. For more
-    # information, see [Query configurations][1].
+    # information, see [Query configurations][1]. See the examples below to
+    # see how to use these filters.
     #
     # This data type is used in the following API operations:
     #
@@ -1733,68 +2099,145 @@ module Aws::BedrockAgentRuntime
     # @note RetrievalFilter is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] and_all
-    #   Knowledge base data sources whose metadata attributes fulfill all
-    #   the filter conditions inside this list are returned.
+    #   Knowledge base data sources are returned if their metadata
+    #   attributes fulfill all the filter conditions inside this list.
     #   @return [Array<Types::RetrievalFilter>]
     #
     # @!attribute [rw] equals
-    #   Knowledge base data sources that contain a metadata attribute whose
-    #   name matches the `key` and whose value matches the `value` in this
-    #   object are returned.
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value matches the
+    #   `value` in this object.
+    #
+    #   The following example would return data sources with an `animal`
+    #   attribute whose value is `cat`:
+    #
+    #   `"equals": \{ "key": "animal", "value": "cat" \}`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] greater_than
-    #   Knowledge base data sources that contain a metadata attribute whose
-    #   name matches the `key` and whose value is greater than the `value`
-    #   in this object are returned.
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value is greater
+    #   than the `value` in this object.
+    #
+    #   The following example would return data sources with an `year`
+    #   attribute whose value is greater than `1989`:
+    #
+    #   `"greaterThan": \{ "key": "year", "value": 1989 \}`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] greater_than_or_equals
-    #   Knowledge base data sources that contain a metadata attribute whose
-    #   name matches the `key` and whose value is greater than or equal to
-    #   the `value` in this object are returned.
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value is greater
+    #   than or equal to the `value` in this object.
+    #
+    #   The following example would return data sources with an `year`
+    #   attribute whose value is greater than or equal to `1989`:
+    #
+    #   `"greaterThanOrEquals": \{ "key": "year", "value": 1989 \}`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] in
-    #   Knowledge base data sources that contain a metadata attribute whose
-    #   name matches the `key` and whose value is in the list specified in
-    #   the `value` in this object are returned.
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value is in the
+    #   list specified in the `value` in this object.
+    #
+    #   The following example would return data sources with an `animal`
+    #   attribute that is either `cat` or `dog`:
+    #
+    #   `"in": \{ "key": "animal", "value": ["cat", "dog"] \}`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] less_than
-    #   Knowledge base data sources that contain a metadata attribute whose
-    #   name matches the `key` and whose value is less than the `value` in
-    #   this object are returned.
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value is less than
+    #   the `value` in this object.
+    #
+    #   The following example would return data sources with an `year`
+    #   attribute whose value is less than to `1989`.
+    #
+    #   `"lessThan": \{ "key": "year", "value": 1989 \}`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] less_than_or_equals
-    #   Knowledge base data sources that contain a metadata attribute whose
-    #   name matches the `key` and whose value is less than or equal to the
-    #   `value` in this object are returned.
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value is less than
+    #   or equal to the `value` in this object.
+    #
+    #   The following example would return data sources with an `year`
+    #   attribute whose value is less than or equal to `1989`.
+    #
+    #   `"lessThanOrEquals": \{ "key": "year", "value": 1989 \}`
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] list_contains
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value is a list
+    #   that contains the `value` as one of its members.
+    #
+    #   The following example would return data sources with an `animals`
+    #   attribute that is a list containing a `cat` member (for example
+    #   `["dog", "cat"]`).
+    #
+    #   `"listContains": \{ "key": "animals", "value": "cat" \}`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] not_equals
     #   Knowledge base data sources that contain a metadata attribute whose
     #   name matches the `key` and whose value doesn't match the `value` in
     #   this object are returned.
+    #
+    #   The following example would return data sources that don't contain
+    #   an `animal` attribute whose value is `cat`.
+    #
+    #   `"notEquals": \{ "key": "animal", "value": "cat" \}`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] not_in
-    #   Knowledge base data sources that contain a metadata attribute whose
-    #   name matches the `key` and whose value isn't in the list specified
-    #   in the `value` in this object are returned.
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value isn't in the
+    #   list specified in the `value` in this object.
+    #
+    #   The following example would return data sources whose `animal`
+    #   attribute is neither `cat` nor `dog`.
+    #
+    #   `"notIn": \{ "key": "animal", "value": ["cat", "dog"] \}`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] or_all
-    #   Knowledge base data sources whose metadata attributes fulfill at
-    #   least one of the filter conditions inside this list are returned.
+    #   Knowledge base data sources are returned if their metadata
+    #   attributes fulfill at least one of the filter conditions inside this
+    #   list.
     #   @return [Array<Types::RetrievalFilter>]
     #
     # @!attribute [rw] starts_with
-    #   Knowledge base data sources that contain a metadata attribute whose
-    #   name matches the `key` and whose value starts with the `value` in
-    #   this object are returned. This filter is currently only supported
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value starts with
+    #   the `value` in this object. This filter is currently only supported
     #   for Amazon OpenSearch Serverless vector stores.
+    #
+    #   The following example would return data sources with an `animal`
+    #   attribute starts with `ca` (for example, `cat` or `camel`).
+    #
+    #   `"startsWith": \{ "key": "animal", "value": "ca" \}`
+    #   @return [Types::FilterAttribute]
+    #
+    # @!attribute [rw] string_contains
+    #   Knowledge base data sources are returned if they contain a metadata
+    #   attribute whose name matches the `key` and whose value is one of the
+    #   following:
+    #
+    #   * A string that contains the `value` as a substring. The following
+    #     example would return data sources with an `animal` attribute that
+    #     contains the substring `at` (for example `cat`).
+    #
+    #     `"stringContains": \{ "key": "animal", "value": "at" \}`
+    #
+    #   * A list with a member that contains the `value` as a substring. The
+    #     following example would return data sources with an `animals`
+    #     attribute that is a list containing a member that contains the
+    #     substring `at` (for example `["dog", "cat"]`).
+    #
+    #     `"stringContains": \{ "key": "animals", "value": "at" \}`
     #   @return [Types::FilterAttribute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrievalFilter AWS API Documentation
@@ -1807,10 +2250,12 @@ module Aws::BedrockAgentRuntime
       :in,
       :less_than,
       :less_than_or_equals,
+      :list_contains,
       :not_equals,
       :not_in,
       :or_all,
       :starts_with,
+      :string_contains,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1823,10 +2268,12 @@ module Aws::BedrockAgentRuntime
       class In < RetrievalFilter; end
       class LessThan < RetrievalFilter; end
       class LessThanOrEquals < RetrievalFilter; end
+      class ListContains < RetrievalFilter; end
       class NotEquals < RetrievalFilter; end
       class NotIn < RetrievalFilter; end
       class OrAll < RetrievalFilter; end
       class StartsWith < RetrievalFilter; end
+      class StringContains < RetrievalFilter; end
       class Unknown < RetrievalFilter; end
     end
 
@@ -1838,12 +2285,13 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][2] – in the `content` field
     #
-    # * [Retrieve response][1] – in the `content` field
+    # * [InvokeAgent response][3] – in the `content` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] text
     #   The cited text from the data source.
@@ -1865,12 +2313,13 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][2] – in the `location` field
     #
-    # * [Retrieve response][1] – in the `locatino` field
+    # * [InvokeAgent response][3] – in the `locatino` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] s3_location
     #   Contains the S3 location of the data source.
@@ -1897,12 +2346,13 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][2] – in the `s3Location` field
     #
-    # * [Retrieve response][1] – in the `s3Location` field
+    # * [InvokeAgent response][3] – in the `s3Location` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] uri
     #   The S3 URI of the data source.
@@ -2039,6 +2489,10 @@ module Aws::BedrockAgentRuntime
     #   sources.
     #   @return [Array<Types::Citation>]
     #
+    # @!attribute [rw] guardrail_action
+    #   Specifies if there is a guardrail intervention in the response.
+    #   @return [String]
+    #
     # @!attribute [rw] output
     #   Contains the response generated from querying the knowledge base.
     #   @return [Types::RetrieveAndGenerateOutput]
@@ -2052,6 +2506,7 @@ module Aws::BedrockAgentRuntime
     #
     class RetrieveAndGenerateResponse < Struct.new(
       :citations,
+      :guardrail_action,
       :output,
       :session_id)
       SENSITIVE = [:output]
@@ -2143,12 +2598,12 @@ module Aws::BedrockAgentRuntime
     # * [RetrieveAndGenerate response][1] – in the `retrievedReferences`
     #   field
     #
-    # * [Retrieve response][2] – in the `retrievedReferences` field
+    # * [InvokeAgent response][2] – in the `retrievedReferences` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] content
     #   Contains the cited text from the data source.
@@ -2182,13 +2637,13 @@ module Aws::BedrockAgentRuntime
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve response][1]
+    # * [InvokeAgent response][1]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] invocation_id
     #   The identifier of the action group invocation.
@@ -2254,7 +2709,17 @@ module Aws::BedrockAgentRuntime
     # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #
     # @!attribute [rw] invocation_id
-    #   The identifier of the invocation.
+    #   The identifier of the invocation of an action. This value must match
+    #   the `invocationId` returned in the `InvokeAgent` response for the
+    #   action whose results are provided in the
+    #   `returnControlInvocationResults` field. For more information, see
+    #   [Return control to the agent developer][1] and [Control session
+    #   context][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #   @return [String]
     #
     # @!attribute [rw] prompt_session_attributes
@@ -2271,7 +2736,17 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] return_control_invocation_results
     #   Contains information about the results from the action group
-    #   invocation.
+    #   invocation. For more information, see [Return control to the agent
+    #   developer][1] and [Control session context][2].
+    #
+    #   <note markdown="1"> If you include this field, the `inputText` field will be ignored.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #   @return [Array<Types::InvocationResultMember>]
     #
     # @!attribute [rw] session_attributes
@@ -2297,12 +2772,12 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][1] – in the `span` field
     #
-    # * [Retrieve response][2] – in the `span` field
+    # * [InvokeAgent response][2] – in the `span` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] end
     #   Where the text with a citation ends in the generated output.
@@ -2321,6 +2796,62 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Configuration settings for text generation using a language model via
+    # the RetrieveAndGenerate operation. Includes parameters like
+    # temperature, top-p, maximum token count, and stop sequences.
+    #
+    # <note markdown="1"> The valid range of `maxTokens` depends on the accepted values for your
+    # chosen model's inference parameters. To see the inference parameters
+    # for your model, see [Inference parameters for foundation models.][1]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+    #
+    # @!attribute [rw] max_tokens
+    #   The maximum number of tokens to generate in the output text. Do not
+    #   use the minimum of 0 or the maximum of 65536. The limit values
+    #   described here are arbitary values, for actual values consult the
+    #   limits defined by your specific model.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stop_sequences
+    #   A list of sequences of characters that, if generated, will cause the
+    #   model to stop generating further tokens. Do not use a minimum length
+    #   of 1 or a maximum length of 1000. The limit values described here
+    #   are arbitary values, for actual values consult the limits defined by
+    #   your specific model.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] temperature
+    #   Controls the random-ness of text generated by the language model,
+    #   influencing how much the model sticks to the most predictable next
+    #   words versus exploring more surprising options. A lower temperature
+    #   value (e.g. 0.2 or 0.3) makes model outputs more deterministic or
+    #   predictable, while a higher temperature (e.g. 0.8 or 0.9) makes the
+    #   outputs more creative or unpredictable.
+    #   @return [Float]
+    #
+    # @!attribute [rw] top_p
+    #   A probability distribution threshold which controls what the model
+    #   considers for the set of possible next tokens. The model will only
+    #   consider the top p% of the probability distribution when generating
+    #   the next token.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/TextInferenceConfig AWS API Documentation
+    #
+    class TextInferenceConfig < Struct.new(
+      :max_tokens,
+      :stop_sequences,
+      :temperature,
+      :top_p)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the part of the generated text that contains a citation,
     # alongside where it begins and ends.
     #
@@ -2328,12 +2859,12 @@ module Aws::BedrockAgentRuntime
     #
     # * [RetrieveAndGenerate response][1] – in the `textResponsePart` field
     #
-    # * [Retrieve response][2] – in the `textResponsePart` field
+    # * [InvokeAgent response][2] – in the `textResponsePart` field
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
     #
     # @!attribute [rw] span
     #   Contains information about where the text with a citation begins and
@@ -2382,6 +2913,10 @@ module Aws::BedrockAgentRuntime
     #   Contains information about the failure of the interaction.
     #   @return [Types::FailureTrace]
     #
+    # @!attribute [rw] guardrail_trace
+    #   The trace details for a trace defined in the Guardrail filter.
+    #   @return [Types::GuardrailTrace]
+    #
     # @!attribute [rw] orchestration_trace
     #   Details about the orchestration step, in which the agent determines
     #   the order in which actions are executed and which knowledge bases
@@ -2402,15 +2937,17 @@ module Aws::BedrockAgentRuntime
     #
     class Trace < Struct.new(
       :failure_trace,
+      :guardrail_trace,
       :orchestration_trace,
       :post_processing_trace,
       :pre_processing_trace,
       :unknown)
-      SENSITIVE = [:failure_trace, :orchestration_trace, :post_processing_trace, :pre_processing_trace]
+      SENSITIVE = [:failure_trace, :guardrail_trace, :orchestration_trace, :post_processing_trace, :pre_processing_trace]
       include Aws::Structure
       include Aws::Structure::Union
 
       class FailureTrace < Trace; end
+      class GuardrailTrace < Trace; end
       class OrchestrationTrace < Trace; end
       class PostProcessingTrace < Trace; end
       class PreProcessingTrace < Trace; end

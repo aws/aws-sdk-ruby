@@ -1,0 +1,1135 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MailManager
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAddonInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAddonInstanceResponse]
+        def addon_instance_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_addon_instance-instance_method
+      def create_addon_instance: (
+                                   addon_subscription_id: ::String,
+                                   ?client_token: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _CreateAddonInstanceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddonInstanceResponseSuccess
+
+      interface _CreateAddonSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAddonSubscriptionResponse]
+        def addon_subscription_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_addon_subscription-instance_method
+      def create_addon_subscription: (
+                                       addon_name: ::String,
+                                       ?client_token: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> _CreateAddonSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddonSubscriptionResponseSuccess
+
+      interface _CreateArchiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateArchiveResponse]
+        def archive_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_archive-instance_method
+      def create_archive: (
+                            archive_name: ::String,
+                            ?client_token: ::String,
+                            ?kms_key_arn: ::String,
+                            ?retention: {
+                              retention_period: ("THREE_MONTHS" | "SIX_MONTHS" | "NINE_MONTHS" | "ONE_YEAR" | "EIGHTEEN_MONTHS" | "TWO_YEARS" | "THIRTY_MONTHS" | "THREE_YEARS" | "FOUR_YEARS" | "FIVE_YEARS" | "SIX_YEARS" | "SEVEN_YEARS" | "EIGHT_YEARS" | "NINE_YEARS" | "TEN_YEARS" | "PERMANENT")?
+                            },
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateArchiveResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateArchiveResponseSuccess
+
+      interface _CreateIngressPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIngressPointResponse]
+        def ingress_point_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_ingress_point-instance_method
+      def create_ingress_point: (
+                                  ?client_token: ::String,
+                                  ?ingress_point_configuration: {
+                                    secret_arn: ::String?,
+                                    smtp_password: ::String?
+                                  },
+                                  ingress_point_name: ::String,
+                                  rule_set_id: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ],
+                                  traffic_policy_id: ::String,
+                                  type: ("OPEN" | "AUTH")
+                                ) -> _CreateIngressPointResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngressPointResponseSuccess
+
+      interface _CreateRelayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRelayResponse]
+        def relay_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_relay-instance_method
+      def create_relay: (
+                          authentication: {
+                            no_authentication: {
+                            }?,
+                            secret_arn: ::String?
+                          },
+                          ?client_token: ::String,
+                          relay_name: ::String,
+                          server_name: ::String,
+                          server_port: ::Integer,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateRelayResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelayResponseSuccess
+
+      interface _CreateRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleSetResponse]
+        def rule_set_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_rule_set-instance_method
+      def create_rule_set: (
+                             ?client_token: ::String,
+                             rule_set_name: ::String,
+                             rules: Array[
+                               {
+                                 actions: Array[
+                                   {
+                                     add_header: {
+                                       header_name: ::String,
+                                       header_value: ::String
+                                     }?,
+                                     archive: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       target_archive: ::String
+                                     }?,
+                                     deliver_to_mailbox: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       mailbox_arn: ::String,
+                                       role_arn: ::String
+                                     }?,
+                                     drop: {
+                                     }?,
+                                     relay: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       mail_from: ("REPLACE" | "PRESERVE")?,
+                                       relay: ::String
+                                     }?,
+                                     replace_recipient: {
+                                       replace_with: Array[::String]?
+                                     }?,
+                                     send: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String
+                                     }?,
+                                     write_to_s3: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String,
+                                       s3_bucket: ::String,
+                                       s3_prefix: ::String?,
+                                       s3_sse_kms_key_id: ::String?
+                                     }?
+                                   },
+                                 ],
+                                 conditions: Array[
+                                   {
+                                     boolean_expression: {
+                                       evaluate: {
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?
+                                       },
+                                       operator: ("IS_TRUE" | "IS_FALSE")
+                                     }?,
+                                     dmarc_expression: {
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
+                                     }?,
+                                     ip_expression: {
+                                       evaluate: {
+                                         attribute: ("SOURCE_IP")?
+                                       },
+                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                       values: Array[::String]
+                                     }?,
+                                     number_expression: {
+                                       evaluate: {
+                                         attribute: ("MESSAGE_SIZE")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
+                                       value: ::Float
+                                     }?,
+                                     string_expression: {
+                                       evaluate: {
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                       values: Array[::String]
+                                     }?,
+                                     verdict_expression: {
+                                       evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
+                                         attribute: ("SPF" | "DKIM")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+                                     }?
+                                   },
+                                 ]?,
+                                 name: ::String?,
+                                 unless: Array[
+                                   {
+                                     boolean_expression: {
+                                       evaluate: {
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?
+                                       },
+                                       operator: ("IS_TRUE" | "IS_FALSE")
+                                     }?,
+                                     dmarc_expression: {
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
+                                     }?,
+                                     ip_expression: {
+                                       evaluate: {
+                                         attribute: ("SOURCE_IP")?
+                                       },
+                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                       values: Array[::String]
+                                     }?,
+                                     number_expression: {
+                                       evaluate: {
+                                         attribute: ("MESSAGE_SIZE")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
+                                       value: ::Float
+                                     }?,
+                                     string_expression: {
+                                       evaluate: {
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                       values: Array[::String]
+                                     }?,
+                                     verdict_expression: {
+                                       evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
+                                         attribute: ("SPF" | "DKIM")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+                                     }?
+                                   },
+                                 ]?
+                               },
+                             ],
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreateRuleSetResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleSetResponseSuccess
+
+      interface _CreateTrafficPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrafficPolicyResponse]
+        def traffic_policy_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_traffic_policy-instance_method
+      def create_traffic_policy: (
+                                   ?client_token: ::String,
+                                   default_action: ("ALLOW" | "DENY"),
+                                   ?max_message_size_bytes: ::Integer,
+                                   policy_statements: Array[
+                                     {
+                                       action: ("ALLOW" | "DENY"),
+                                       conditions: Array[
+                                         {
+                                           boolean_expression: {
+                                             evaluate: {
+                                               analysis: {
+                                                 analyzer: ::String,
+                                                 result_field: ::String
+                                               }?
+                                             },
+                                             operator: ("IS_TRUE" | "IS_FALSE")
+                                           }?,
+                                           ip_expression: {
+                                             evaluate: {
+                                               attribute: ("SENDER_IP")?
+                                             },
+                                             operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                             values: Array[::String]
+                                           }?,
+                                           string_expression: {
+                                             evaluate: {
+                                               attribute: ("RECIPIENT")?
+                                             },
+                                             operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                             values: Array[::String]
+                                           }?,
+                                           tls_expression: {
+                                             evaluate: {
+                                               attribute: ("TLS_PROTOCOL")?
+                                             },
+                                             operator: ("MINIMUM_TLS_VERSION" | "IS"),
+                                             value: ("TLS1_2" | "TLS1_3")
+                                           }?
+                                         },
+                                       ]
+                                     },
+                                   ],
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   traffic_policy_name: ::String
+                                 ) -> _CreateTrafficPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrafficPolicyResponseSuccess
+
+      interface _DeleteAddonInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAddonInstanceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#delete_addon_instance-instance_method
+      def delete_addon_instance: (
+                                   addon_instance_id: ::String
+                                 ) -> _DeleteAddonInstanceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAddonInstanceResponseSuccess
+
+      interface _DeleteAddonSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAddonSubscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#delete_addon_subscription-instance_method
+      def delete_addon_subscription: (
+                                       addon_subscription_id: ::String
+                                     ) -> _DeleteAddonSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAddonSubscriptionResponseSuccess
+
+      interface _DeleteArchiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteArchiveResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#delete_archive-instance_method
+      def delete_archive: (
+                            archive_id: ::String
+                          ) -> _DeleteArchiveResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteArchiveResponseSuccess
+
+      interface _DeleteIngressPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIngressPointResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#delete_ingress_point-instance_method
+      def delete_ingress_point: (
+                                  ingress_point_id: ::String
+                                ) -> _DeleteIngressPointResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIngressPointResponseSuccess
+
+      interface _DeleteRelayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRelayResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#delete_relay-instance_method
+      def delete_relay: (
+                          relay_id: ::String
+                        ) -> _DeleteRelayResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRelayResponseSuccess
+
+      interface _DeleteRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuleSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#delete_rule_set-instance_method
+      def delete_rule_set: (
+                             rule_set_id: ::String
+                           ) -> _DeleteRuleSetResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuleSetResponseSuccess
+
+      interface _DeleteTrafficPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrafficPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#delete_traffic_policy-instance_method
+      def delete_traffic_policy: (
+                                   traffic_policy_id: ::String
+                                 ) -> _DeleteTrafficPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrafficPolicyResponseSuccess
+
+      interface _GetAddonInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAddonInstanceResponse]
+        def addon_instance_arn: () -> ::String
+        def addon_name: () -> ::String
+        def addon_subscription_id: () -> ::String
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_addon_instance-instance_method
+      def get_addon_instance: (
+                                addon_instance_id: ::String
+                              ) -> _GetAddonInstanceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAddonInstanceResponseSuccess
+
+      interface _GetAddonSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAddonSubscriptionResponse]
+        def addon_name: () -> ::String
+        def addon_subscription_arn: () -> ::String
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_addon_subscription-instance_method
+      def get_addon_subscription: (
+                                    addon_subscription_id: ::String
+                                  ) -> _GetAddonSubscriptionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAddonSubscriptionResponseSuccess
+
+      interface _GetArchiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveResponse]
+        def archive_arn: () -> ::String
+        def archive_id: () -> ::String
+        def archive_name: () -> ::String
+        def archive_state: () -> ("ACTIVE" | "PENDING_DELETION")
+        def created_timestamp: () -> ::Time
+        def kms_key_arn: () -> ::String
+        def last_updated_timestamp: () -> ::Time
+        def retention: () -> Types::ArchiveRetention
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive-instance_method
+      def get_archive: (
+                         archive_id: ::String
+                       ) -> _GetArchiveResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetArchiveResponseSuccess
+
+      interface _GetArchiveExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveExportResponse]
+        def archive_id: () -> ::String
+        def export_destination_configuration: () -> Types::ExportDestinationConfiguration
+        def filters: () -> Types::ArchiveFilters
+        def from_timestamp: () -> ::Time
+        def max_results: () -> ::Integer
+        def status: () -> Types::ExportStatus
+        def to_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive_export-instance_method
+      def get_archive_export: (
+                                export_id: ::String
+                              ) -> _GetArchiveExportResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetArchiveExportResponseSuccess
+
+      interface _GetArchiveMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveMessageResponse]
+        def message_download_link: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive_message-instance_method
+      def get_archive_message: (
+                                 archived_message_id: ::String
+                               ) -> _GetArchiveMessageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetArchiveMessageResponseSuccess
+
+      interface _GetArchiveMessageContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveMessageContentResponse]
+        def body: () -> Types::MessageBody
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive_message_content-instance_method
+      def get_archive_message_content: (
+                                         archived_message_id: ::String
+                                       ) -> _GetArchiveMessageContentResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetArchiveMessageContentResponseSuccess
+
+      interface _GetArchiveSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveSearchResponse]
+        def archive_id: () -> ::String
+        def filters: () -> Types::ArchiveFilters
+        def from_timestamp: () -> ::Time
+        def max_results: () -> ::Integer
+        def status: () -> Types::SearchStatus
+        def to_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive_search-instance_method
+      def get_archive_search: (
+                                search_id: ::String
+                              ) -> _GetArchiveSearchResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetArchiveSearchResponseSuccess
+
+      interface _GetArchiveSearchResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveSearchResultsResponse]
+        def rows: () -> ::Array[Types::Row]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive_search_results-instance_method
+      def get_archive_search_results: (
+                                        search_id: ::String
+                                      ) -> _GetArchiveSearchResultsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetArchiveSearchResultsResponseSuccess
+
+      interface _GetIngressPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIngressPointResponse]
+        def a_record: () -> ::String
+        def created_timestamp: () -> ::Time
+        def ingress_point_arn: () -> ::String
+        def ingress_point_auth_configuration: () -> Types::IngressPointAuthConfiguration
+        def ingress_point_id: () -> ::String
+        def ingress_point_name: () -> ::String
+        def last_updated_timestamp: () -> ::Time
+        def rule_set_id: () -> ::String
+        def status: () -> ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED")
+        def traffic_policy_id: () -> ::String
+        def type: () -> ("OPEN" | "AUTH")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_ingress_point-instance_method
+      def get_ingress_point: (
+                               ingress_point_id: ::String
+                             ) -> _GetIngressPointResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngressPointResponseSuccess
+
+      interface _GetRelayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelayResponse]
+        def authentication: () -> Types::RelayAuthentication
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+        def relay_arn: () -> ::String
+        def relay_id: () -> ::String
+        def relay_name: () -> ::String
+        def server_name: () -> ::String
+        def server_port: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_relay-instance_method
+      def get_relay: (
+                       relay_id: ::String
+                     ) -> _GetRelayResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelayResponseSuccess
+
+      interface _GetRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuleSetResponse]
+        def created_date: () -> ::Time
+        def last_modification_date: () -> ::Time
+        def rule_set_arn: () -> ::String
+        def rule_set_id: () -> ::String
+        def rule_set_name: () -> ::String
+        def rules: () -> ::Array[Types::Rule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_rule_set-instance_method
+      def get_rule_set: (
+                          rule_set_id: ::String
+                        ) -> _GetRuleSetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuleSetResponseSuccess
+
+      interface _GetTrafficPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrafficPolicyResponse]
+        def created_timestamp: () -> ::Time
+        def default_action: () -> ("ALLOW" | "DENY")
+        def last_updated_timestamp: () -> ::Time
+        def max_message_size_bytes: () -> ::Integer
+        def policy_statements: () -> ::Array[Types::PolicyStatement]
+        def traffic_policy_arn: () -> ::String
+        def traffic_policy_id: () -> ::String
+        def traffic_policy_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_traffic_policy-instance_method
+      def get_traffic_policy: (
+                                traffic_policy_id: ::String
+                              ) -> _GetTrafficPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrafficPolicyResponseSuccess
+
+      interface _ListAddonInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAddonInstancesResponse]
+        def addon_instances: () -> ::Array[Types::AddonInstance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_addon_instances-instance_method
+      def list_addon_instances: (
+                                  ?next_token: ::String,
+                                  ?page_size: ::Integer
+                                ) -> _ListAddonInstancesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAddonInstancesResponseSuccess
+
+      interface _ListAddonSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAddonSubscriptionsResponse]
+        def addon_subscriptions: () -> ::Array[Types::AddonSubscription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_addon_subscriptions-instance_method
+      def list_addon_subscriptions: (
+                                      ?next_token: ::String,
+                                      ?page_size: ::Integer
+                                    ) -> _ListAddonSubscriptionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAddonSubscriptionsResponseSuccess
+
+      interface _ListArchiveExportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListArchiveExportsResponse]
+        def exports: () -> ::Array[Types::ExportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_archive_exports-instance_method
+      def list_archive_exports: (
+                                  archive_id: ::String,
+                                  ?next_token: ::String,
+                                  ?page_size: ::Integer
+                                ) -> _ListArchiveExportsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListArchiveExportsResponseSuccess
+
+      interface _ListArchiveSearchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListArchiveSearchesResponse]
+        def next_token: () -> ::String
+        def searches: () -> ::Array[Types::SearchSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_archive_searches-instance_method
+      def list_archive_searches: (
+                                   archive_id: ::String,
+                                   ?next_token: ::String,
+                                   ?page_size: ::Integer
+                                 ) -> _ListArchiveSearchesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListArchiveSearchesResponseSuccess
+
+      interface _ListArchivesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListArchivesResponse]
+        def archives: () -> ::Array[Types::Archive]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_archives-instance_method
+      def list_archives: (
+                           ?next_token: ::String,
+                           ?page_size: ::Integer
+                         ) -> _ListArchivesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListArchivesResponseSuccess
+
+      interface _ListIngressPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIngressPointsResponse]
+        def ingress_points: () -> ::Array[Types::IngressPoint]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_ingress_points-instance_method
+      def list_ingress_points: (
+                                 ?next_token: ::String,
+                                 ?page_size: ::Integer
+                               ) -> _ListIngressPointsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngressPointsResponseSuccess
+
+      interface _ListRelaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRelaysResponse]
+        def next_token: () -> ::String
+        def relays: () -> ::Array[Types::Relay]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_relays-instance_method
+      def list_relays: (
+                         ?next_token: ::String,
+                         ?page_size: ::Integer
+                       ) -> _ListRelaysResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRelaysResponseSuccess
+
+      interface _ListRuleSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleSetsResponse]
+        def next_token: () -> ::String
+        def rule_sets: () -> ::Array[Types::RuleSet]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_rule_sets-instance_method
+      def list_rule_sets: (
+                            ?next_token: ::String,
+                            ?page_size: ::Integer
+                          ) -> _ListRuleSetsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleSetsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTrafficPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrafficPoliciesResponse]
+        def next_token: () -> ::String
+        def traffic_policies: () -> ::Array[Types::TrafficPolicy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_traffic_policies-instance_method
+      def list_traffic_policies: (
+                                   ?next_token: ::String,
+                                   ?page_size: ::Integer
+                                 ) -> _ListTrafficPoliciesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPoliciesResponseSuccess
+
+      interface _StartArchiveExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartArchiveExportResponse]
+        def export_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#start_archive_export-instance_method
+      def start_archive_export: (
+                                  archive_id: ::String,
+                                  export_destination_configuration: {
+                                    s3: {
+                                      s3_location: ::String?
+                                    }?
+                                  },
+                                  ?filters: {
+                                    include: Array[
+                                      {
+                                        boolean_expression: {
+                                          evaluate: {
+                                            attribute: ("HAS_ATTACHMENTS")?
+                                          },
+                                          operator: ("IS_TRUE" | "IS_FALSE")
+                                        }?,
+                                        string_expression: {
+                                          evaluate: {
+                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT")?
+                                          },
+                                          operator: ("CONTAINS"),
+                                          values: Array[::String]
+                                        }?
+                                      },
+                                    ]?,
+                                    unless: Array[
+                                      {
+                                        boolean_expression: {
+                                          evaluate: {
+                                            attribute: ("HAS_ATTACHMENTS")?
+                                          },
+                                          operator: ("IS_TRUE" | "IS_FALSE")
+                                        }?,
+                                        string_expression: {
+                                          evaluate: {
+                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT")?
+                                          },
+                                          operator: ("CONTAINS"),
+                                          values: Array[::String]
+                                        }?
+                                      },
+                                    ]?
+                                  },
+                                  from_timestamp: ::Time,
+                                  ?max_results: ::Integer,
+                                  to_timestamp: ::Time
+                                ) -> _StartArchiveExportResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartArchiveExportResponseSuccess
+
+      interface _StartArchiveSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartArchiveSearchResponse]
+        def search_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#start_archive_search-instance_method
+      def start_archive_search: (
+                                  archive_id: ::String,
+                                  ?filters: {
+                                    include: Array[
+                                      {
+                                        boolean_expression: {
+                                          evaluate: {
+                                            attribute: ("HAS_ATTACHMENTS")?
+                                          },
+                                          operator: ("IS_TRUE" | "IS_FALSE")
+                                        }?,
+                                        string_expression: {
+                                          evaluate: {
+                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT")?
+                                          },
+                                          operator: ("CONTAINS"),
+                                          values: Array[::String]
+                                        }?
+                                      },
+                                    ]?,
+                                    unless: Array[
+                                      {
+                                        boolean_expression: {
+                                          evaluate: {
+                                            attribute: ("HAS_ATTACHMENTS")?
+                                          },
+                                          operator: ("IS_TRUE" | "IS_FALSE")
+                                        }?,
+                                        string_expression: {
+                                          evaluate: {
+                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT")?
+                                          },
+                                          operator: ("CONTAINS"),
+                                          values: Array[::String]
+                                        }?
+                                      },
+                                    ]?
+                                  },
+                                  from_timestamp: ::Time,
+                                  max_results: ::Integer,
+                                  to_timestamp: ::Time
+                                ) -> _StartArchiveSearchResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartArchiveSearchResponseSuccess
+
+      interface _StopArchiveExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopArchiveExportResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#stop_archive_export-instance_method
+      def stop_archive_export: (
+                                 export_id: ::String
+                               ) -> _StopArchiveExportResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopArchiveExportResponseSuccess
+
+      interface _StopArchiveSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopArchiveSearchResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#stop_archive_search-instance_method
+      def stop_archive_search: (
+                                 search_id: ::String
+                               ) -> _StopArchiveSearchResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopArchiveSearchResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateArchiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateArchiveResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#update_archive-instance_method
+      def update_archive: (
+                            archive_id: ::String,
+                            ?archive_name: ::String,
+                            ?retention: {
+                              retention_period: ("THREE_MONTHS" | "SIX_MONTHS" | "NINE_MONTHS" | "ONE_YEAR" | "EIGHTEEN_MONTHS" | "TWO_YEARS" | "THIRTY_MONTHS" | "THREE_YEARS" | "FOUR_YEARS" | "FIVE_YEARS" | "SIX_YEARS" | "SEVEN_YEARS" | "EIGHT_YEARS" | "NINE_YEARS" | "TEN_YEARS" | "PERMANENT")?
+                            }
+                          ) -> _UpdateArchiveResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateArchiveResponseSuccess
+
+      interface _UpdateIngressPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIngressPointResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#update_ingress_point-instance_method
+      def update_ingress_point: (
+                                  ?ingress_point_configuration: {
+                                    secret_arn: ::String?,
+                                    smtp_password: ::String?
+                                  },
+                                  ingress_point_id: ::String,
+                                  ?ingress_point_name: ::String,
+                                  ?rule_set_id: ::String,
+                                  ?status_to_update: ("ACTIVE" | "CLOSED"),
+                                  ?traffic_policy_id: ::String
+                                ) -> _UpdateIngressPointResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIngressPointResponseSuccess
+
+      interface _UpdateRelayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRelayResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#update_relay-instance_method
+      def update_relay: (
+                          ?authentication: {
+                            no_authentication: {
+                            }?,
+                            secret_arn: ::String?
+                          },
+                          relay_id: ::String,
+                          ?relay_name: ::String,
+                          ?server_name: ::String,
+                          ?server_port: ::Integer
+                        ) -> _UpdateRelayResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelayResponseSuccess
+
+      interface _UpdateRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#update_rule_set-instance_method
+      def update_rule_set: (
+                             rule_set_id: ::String,
+                             ?rule_set_name: ::String,
+                             ?rules: Array[
+                               {
+                                 actions: Array[
+                                   {
+                                     add_header: {
+                                       header_name: ::String,
+                                       header_value: ::String
+                                     }?,
+                                     archive: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       target_archive: ::String
+                                     }?,
+                                     deliver_to_mailbox: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       mailbox_arn: ::String,
+                                       role_arn: ::String
+                                     }?,
+                                     drop: {
+                                     }?,
+                                     relay: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       mail_from: ("REPLACE" | "PRESERVE")?,
+                                       relay: ::String
+                                     }?,
+                                     replace_recipient: {
+                                       replace_with: Array[::String]?
+                                     }?,
+                                     send: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String
+                                     }?,
+                                     write_to_s3: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String,
+                                       s3_bucket: ::String,
+                                       s3_prefix: ::String?,
+                                       s3_sse_kms_key_id: ::String?
+                                     }?
+                                   },
+                                 ],
+                                 conditions: Array[
+                                   {
+                                     boolean_expression: {
+                                       evaluate: {
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?
+                                       },
+                                       operator: ("IS_TRUE" | "IS_FALSE")
+                                     }?,
+                                     dmarc_expression: {
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
+                                     }?,
+                                     ip_expression: {
+                                       evaluate: {
+                                         attribute: ("SOURCE_IP")?
+                                       },
+                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                       values: Array[::String]
+                                     }?,
+                                     number_expression: {
+                                       evaluate: {
+                                         attribute: ("MESSAGE_SIZE")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
+                                       value: ::Float
+                                     }?,
+                                     string_expression: {
+                                       evaluate: {
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                       values: Array[::String]
+                                     }?,
+                                     verdict_expression: {
+                                       evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
+                                         attribute: ("SPF" | "DKIM")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+                                     }?
+                                   },
+                                 ]?,
+                                 name: ::String?,
+                                 unless: Array[
+                                   {
+                                     boolean_expression: {
+                                       evaluate: {
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?
+                                       },
+                                       operator: ("IS_TRUE" | "IS_FALSE")
+                                     }?,
+                                     dmarc_expression: {
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
+                                     }?,
+                                     ip_expression: {
+                                       evaluate: {
+                                         attribute: ("SOURCE_IP")?
+                                       },
+                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                       values: Array[::String]
+                                     }?,
+                                     number_expression: {
+                                       evaluate: {
+                                         attribute: ("MESSAGE_SIZE")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
+                                       value: ::Float
+                                     }?,
+                                     string_expression: {
+                                       evaluate: {
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                       values: Array[::String]
+                                     }?,
+                                     verdict_expression: {
+                                       evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
+                                         attribute: ("SPF" | "DKIM")?
+                                       },
+                                       operator: ("EQUALS" | "NOT_EQUALS"),
+                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+                                     }?
+                                   },
+                                 ]?
+                               },
+                             ]
+                           ) -> _UpdateRuleSetResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleSetResponseSuccess
+
+      interface _UpdateTrafficPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrafficPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#update_traffic_policy-instance_method
+      def update_traffic_policy: (
+                                   ?default_action: ("ALLOW" | "DENY"),
+                                   ?max_message_size_bytes: ::Integer,
+                                   ?policy_statements: Array[
+                                     {
+                                       action: ("ALLOW" | "DENY"),
+                                       conditions: Array[
+                                         {
+                                           boolean_expression: {
+                                             evaluate: {
+                                               analysis: {
+                                                 analyzer: ::String,
+                                                 result_field: ::String
+                                               }?
+                                             },
+                                             operator: ("IS_TRUE" | "IS_FALSE")
+                                           }?,
+                                           ip_expression: {
+                                             evaluate: {
+                                               attribute: ("SENDER_IP")?
+                                             },
+                                             operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+                                             values: Array[::String]
+                                           }?,
+                                           string_expression: {
+                                             evaluate: {
+                                               attribute: ("RECIPIENT")?
+                                             },
+                                             operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+                                             values: Array[::String]
+                                           }?,
+                                           tls_expression: {
+                                             evaluate: {
+                                               attribute: ("TLS_PROTOCOL")?
+                                             },
+                                             operator: ("MINIMUM_TLS_VERSION" | "IS"),
+                                             value: ("TLS1_2" | "TLS1_3")
+                                           }?
+                                         },
+                                       ]
+                                     },
+                                   ],
+                                   traffic_policy_id: ::String,
+                                   ?traffic_policy_name: ::String
+                                 ) -> _UpdateTrafficPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrafficPolicyResponseSuccess
+    end
+  end
+end
+

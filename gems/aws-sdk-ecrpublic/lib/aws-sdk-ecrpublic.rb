@@ -52,6 +52,6 @@ require_relative 'aws-sdk-ecrpublic/customizations'
 # @!group service
 module Aws::ECRPublic
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end

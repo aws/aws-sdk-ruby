@@ -145,6 +145,7 @@ module Aws::GreengrassV2
     IoTJobRolloutIncrementFactor = Shapes::FloatShape.new(name: 'IoTJobRolloutIncrementFactor')
     IoTJobTimeoutConfig = Shapes::StructureShape.new(name: 'IoTJobTimeoutConfig')
     IoTThingName = Shapes::StringShape.new(name: 'IoTThingName')
+    IotEndpointType = Shapes::StringShape.new(name: 'IotEndpointType')
     IsLatestForTarget = Shapes::BooleanShape.new(name: 'IsLatestForTarget')
     IsRoot = Shapes::BooleanShape.new(name: 'IsRoot')
     LambdaContainerParams = Shapes::StructureShape.new(name: 'LambdaContainerParams')
@@ -200,6 +201,7 @@ module Aws::GreengrassV2
     ResolvedComponentVersionsList = Shapes::ListShape.new(name: 'ResolvedComponentVersionsList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
+    S3EndpointType = Shapes::StringShape.new(name: 'S3EndpointType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
@@ -305,7 +307,7 @@ module Aws::GreengrassV2
     ComponentDependencyRequirement.add_member(:dependency_type, Shapes::ShapeRef.new(shape: ComponentDependencyType, location_name: "dependencyType"))
     ComponentDependencyRequirement.struct_class = Types::ComponentDependencyRequirement
 
-    ComponentDeploymentSpecification.add_member(:component_version, Shapes::ShapeRef.new(shape: ComponentVersionString, location_name: "componentVersion"))
+    ComponentDeploymentSpecification.add_member(:component_version, Shapes::ShapeRef.new(shape: ComponentVersionString, required: true, location_name: "componentVersion"))
     ComponentDeploymentSpecification.add_member(:configuration_update, Shapes::ShapeRef.new(shape: ComponentConfigurationUpdate, location_name: "configurationUpdate"))
     ComponentDeploymentSpecification.add_member(:run_with, Shapes::ShapeRef.new(shape: ComponentRunWith, location_name: "runWith"))
     ComponentDeploymentSpecification.struct_class = Types::ComponentDeploymentSpecification
@@ -493,6 +495,8 @@ module Aws::GreengrassV2
 
     GetComponentVersionArtifactRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ComponentVersionARN, required: true, location: "uri", location_name: "arn"))
     GetComponentVersionArtifactRequest.add_member(:artifact_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "artifactName"))
+    GetComponentVersionArtifactRequest.add_member(:s3_endpoint_type, Shapes::ShapeRef.new(shape: S3EndpointType, location: "querystring", location_name: "s3EndpointType"))
+    GetComponentVersionArtifactRequest.add_member(:iot_endpoint_type, Shapes::ShapeRef.new(shape: IotEndpointType, location: "header", location_name: "x-amz-iot-endpoint-type"))
     GetComponentVersionArtifactRequest.struct_class = Types::GetComponentVersionArtifactRequest
 
     GetComponentVersionArtifactResponse.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "preSignedUrl"))
@@ -814,6 +818,7 @@ module Aws::GreengrassV2
         "apiVersion" => "2020-11-30",
         "endpointPrefix" => "greengrass",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AWS GreengrassV2",
         "serviceFullName" => "AWS IoT Greengrass V2",
         "serviceId" => "GreengrassV2",

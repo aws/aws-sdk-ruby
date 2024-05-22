@@ -301,8 +301,9 @@ module Aws::StorageGateway
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -456,11 +457,12 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_timezone
     #   A value that indicates the time zone you want to set for the gateway.
-    #   The time zone is of the format "GMT-hr:mm" or "GMT+hr:mm". For
-    #   example, GMT-4:00 indicates the time is 4 hours behind GMT. GMT+2:00
-    #   indicates the time is 2 hours ahead of GMT. The time zone is used, for
-    #   example, for scheduling snapshots and your gateway's maintenance
-    #   schedule.
+    #   The time zone is of the format "GMT", "GMT-hr:mm", or
+    #   "GMT+hr:mm". For example, GMT indicates Greenwich Mean Time without
+    #   any offset. GMT-4:00 indicates the time is 4 hours behind GMT.
+    #   GMT+2:00 indicates the time is 2 hours ahead of GMT. The time zone is
+    #   used, for example, for scheduling snapshots and your gateway's
+    #   maintenance schedule.
     #
     # @option params [required, String] :gateway_region
     #   A value that indicates the Amazon Web Services Region where you want
@@ -483,8 +485,8 @@ module Aws::StorageGateway
     #   specified is critical to all later functions of the gateway and cannot
     #   be changed after activation. The default value is `CACHED`.
     #
-    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `VTL_SNOW` \| `FILE_S3`
-    #   \| `FILE_FSX_SMB`
+    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3` \|
+    #   `FILE_FSX_SMB`
     #
     # @option params [String] :tape_drive_type
     #   The value that indicates the type of tape drive to use for tape
@@ -3797,7 +3799,7 @@ module Aws::StorageGateway
     #   resp.domain_name #=> String
     #   resp.active_directory_status #=> String, one of "ACCESS_DENIED", "DETACHED", "JOINED", "JOINING", "NETWORK_ERROR", "TIMEOUT", "UNKNOWN_ERROR"
     #   resp.smb_guest_password_set #=> Boolean
-    #   resp.smb_security_strategy #=> String, one of "ClientSpecified", "MandatorySigning", "MandatoryEncryption"
+    #   resp.smb_security_strategy #=> String, one of "ClientSpecified", "MandatorySigning", "MandatoryEncryption", "MandatoryEncryptionNoAes128"
     #   resp.file_shares_visible #=> Boolean
     #   resp.smb_local_groups.gateway_admins #=> Array
     #   resp.smb_local_groups.gateway_admins[0] #=> String
@@ -5573,6 +5575,9 @@ module Aws::StorageGateway
     #   `true`, the entire S3 bucket that the file share has access to is
     #   refreshed.
     #
+    #   Do not include `/` when specifying folder names. For example, you
+    #   would specify `samplefolder` rather than `samplefolder/`.
+    #
     # @option params [Boolean] :recursive
     #   A value that specifies whether to recursively refresh folders in the
     #   cache. The refresh includes folders that were in the cache the last
@@ -7139,7 +7144,7 @@ module Aws::StorageGateway
     #
     #   resp = client.update_smb_security_strategy({
     #     gateway_arn: "GatewayARN", # required
-    #     smb_security_strategy: "ClientSpecified", # required, accepts ClientSpecified, MandatorySigning, MandatoryEncryption
+    #     smb_security_strategy: "ClientSpecified", # required, accepts ClientSpecified, MandatorySigning, MandatoryEncryption, MandatoryEncryptionNoAes128
     #   })
     #
     # @example Response structure
@@ -7311,7 +7316,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

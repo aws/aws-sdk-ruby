@@ -225,7 +225,7 @@ module Aws
         def user_create_date: () -> ::Time
         def user_last_modified_date: () -> ::Time
         def enabled: () -> bool
-        def user_status: () -> ("UNCONFIRMED" | "CONFIRMED" | "ARCHIVED" | "COMPROMISED" | "UNKNOWN" | "RESET_REQUIRED" | "FORCE_CHANGE_PASSWORD")
+        def user_status: () -> ("UNCONFIRMED" | "CONFIRMED" | "ARCHIVED" | "COMPROMISED" | "UNKNOWN" | "RESET_REQUIRED" | "FORCE_CHANGE_PASSWORD" | "EXTERNAL_PROVIDER")
         def mfa_options: () -> ::Array[Types::MFAOptionType]
         def preferred_mfa_setting: () -> ::String
         def user_mfa_setting_list: () -> ::Array[::String]

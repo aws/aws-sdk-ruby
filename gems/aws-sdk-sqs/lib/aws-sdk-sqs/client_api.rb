@@ -83,6 +83,7 @@ module Aws::SQS
     MessageBodySystemAttributeMap = Shapes::MapShape.new(name: 'MessageBodySystemAttributeMap', flattened: true)
     MessageList = Shapes::ListShape.new(name: 'MessageList', flattened: true)
     MessageNotInflight = Shapes::StructureShape.new(name: 'MessageNotInflight')
+    MessageSystemAttributeList = Shapes::ListShape.new(name: 'MessageSystemAttributeList', flattened: true)
     MessageSystemAttributeMap = Shapes::MapShape.new(name: 'MessageSystemAttributeMap', flattened: true)
     MessageSystemAttributeName = Shapes::StringShape.new(name: 'MessageSystemAttributeName')
     MessageSystemAttributeNameForSends = Shapes::StringShape.new(name: 'MessageSystemAttributeNameForSends')
@@ -350,6 +351,8 @@ module Aws::SQS
 
     MessageNotInflight.struct_class = Types::MessageNotInflight
 
+    MessageSystemAttributeList.member = Shapes::ShapeRef.new(shape: MessageSystemAttributeName)
+
     MessageSystemAttributeMap.key = Shapes::ShapeRef.new(shape: MessageSystemAttributeName)
     MessageSystemAttributeMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -387,7 +390,8 @@ module Aws::SQS
     ReceiptHandleIsInvalid.struct_class = Types::ReceiptHandleIsInvalid
 
     ReceiveMessageRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
-    ReceiveMessageRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
+    ReceiveMessageRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, deprecated: true, location_name: "AttributeNames", metadata: {"deprecatedMessage"=>"AttributeNames has been replaced by MessageSystemAttributeNames"}))
+    ReceiveMessageRequest.add_member(:message_system_attribute_names, Shapes::ShapeRef.new(shape: MessageSystemAttributeList, location_name: "MessageSystemAttributeNames"))
     ReceiveMessageRequest.add_member(:message_attribute_names, Shapes::ShapeRef.new(shape: MessageAttributeNameList, location_name: "MessageAttributeNames"))
     ReceiveMessageRequest.add_member(:max_number_of_messages, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxNumberOfMessages"))
     ReceiveMessageRequest.add_member(:visibility_timeout, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "VisibilityTimeout"))

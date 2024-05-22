@@ -301,8 +301,9 @@ module Aws::Polly
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -479,8 +480,9 @@ module Aws::Polly
     # `polly:DescribeVoices` action.
     #
     # @option params [String] :engine
-    #   Specifies the engine (`standard`, `neural` or `long-form`) used by
-    #   Amazon Polly when processing input text for speech synthesis.
+    #   Specifies the engine (`standard`, `neural`, `long-form` or
+    #   `generative`) used by Amazon Polly when processing input text for
+    #   speech synthesis.
     #
     # @option params [String] :language_code
     #   The language identification tag (ISO 639 code for the language
@@ -545,7 +547,7 @@ module Aws::Polly
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_voices({
-    #     engine: "standard", # accepts standard, neural, long-form
+    #     engine: "standard", # accepts standard, neural, long-form, generative
     #     language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR, en-NZ, en-ZA, ca-ES, de-AT, yue-CN, ar-AE, fi-FI, en-IE, nl-BE, fr-BE
     #     include_additional_language_codes: false,
     #     next_token: "NextToken",
@@ -562,7 +564,7 @@ module Aws::Polly
     #   resp.voices[0].additional_language_codes #=> Array
     #   resp.voices[0].additional_language_codes[0] #=> String, one of "arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE"
     #   resp.voices[0].supported_engines #=> Array
-    #   resp.voices[0].supported_engines[0] #=> String, one of "standard", "neural", "long-form"
+    #   resp.voices[0].supported_engines[0] #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoices AWS API Documentation
@@ -661,7 +663,7 @@ module Aws::Polly
     #
     # @example Response structure
     #
-    #   resp.synthesis_task.engine #=> String, one of "standard", "neural", "long-form"
+    #   resp.synthesis_task.engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.synthesis_task.task_id #=> String
     #   resp.synthesis_task.task_status #=> String, one of "scheduled", "inProgress", "completed", "failed"
     #   resp.synthesis_task.task_status_reason #=> String
@@ -790,7 +792,7 @@ module Aws::Polly
     #
     #   resp.next_token #=> String
     #   resp.synthesis_tasks #=> Array
-    #   resp.synthesis_tasks[0].engine #=> String, one of "standard", "neural", "long-form"
+    #   resp.synthesis_tasks[0].engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.synthesis_tasks[0].task_id #=> String
     #   resp.synthesis_tasks[0].task_status #=> String, one of "scheduled", "inProgress", "completed", "failed"
     #   resp.synthesis_tasks[0].task_status_reason #=> String
@@ -881,10 +883,10 @@ module Aws::Polly
     # task.
     #
     # @option params [String] :engine
-    #   Specifies the engine (`standard`, `neural` or `long-form`) for Amazon
-    #   Polly to use when processing input text for speech synthesis. Using a
-    #   voice that is not supported for the engine selected will result in an
-    #   error.
+    #   Specifies the engine (`standard`, `neural`, `long-form` or
+    #   `generative`) for Amazon Polly to use when processing input text for
+    #   speech synthesis. Using a voice that is not supported for the engine
+    #   selected will result in an error.
     #
     # @option params [String] :language_code
     #   Optional language code for the Speech Synthesis request. This is only
@@ -924,7 +926,8 @@ module Aws::Polly
     #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
     #   "22050", and "24000". The default value for standard voices is
     #   "22050". The default value for neural voices is "24000". The
-    #   default value for long-form voices is "24000".
+    #   default value for long-form voices is "24000". The default value for
+    #   generative voices is "24000".
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
@@ -954,7 +957,7 @@ module Aws::Polly
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_speech_synthesis_task({
-    #     engine: "standard", # accepts standard, neural, long-form
+    #     engine: "standard", # accepts standard, neural, long-form, generative
     #     language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR, en-NZ, en-ZA, ca-ES, de-AT, yue-CN, ar-AE, fi-FI, en-IE, nl-BE, fr-BE
     #     lexicon_names: ["LexiconName"],
     #     output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
@@ -970,7 +973,7 @@ module Aws::Polly
     #
     # @example Response structure
     #
-    #   resp.synthesis_task.engine #=> String, one of "standard", "neural", "long-form"
+    #   resp.synthesis_task.engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.synthesis_task.task_id #=> String
     #   resp.synthesis_task.task_status #=> String, one of "scheduled", "inProgress", "completed", "failed"
     #   resp.synthesis_task.task_status_reason #=> String
@@ -1008,36 +1011,20 @@ module Aws::Polly
     # [1]: https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html
     #
     # @option params [String] :engine
-    #   Specifies the engine (`standard`, `neural` or `long-form`) for Amazon
-    #   Polly to use when processing input text for speech synthesis. For
-    #   information on Amazon Polly voices and which voices are available for
-    #   each engine, see [Available Voices][1].
-    #
-    #   **NTTS-only voices**
-    #
-    #   When using NTTS-only voices such as Kevin (en-US), this parameter is
-    #   required and must be set to `neural`. If the engine is not specified,
-    #   or is set to `standard`, this will result in an error.
-    #
-    #   **long-form-only voices**
-    #
-    #   When using long-form-only voices such as Danielle (en-US), this
-    #   parameter is required and must be set to `long-form`. If the engine is
-    #   not specified, or is set to `standard` or `neural`, this will result
-    #   in an error.
+    #   Specifies the engine (`standard`, `neural`, `long-form`, or
+    #   `generative`) for Amazon Polly to use when processing input text for
+    #   speech synthesis. Provide an engine that is supported by the voice you
+    #   select. If you don't provide an engine, the standard engine is
+    #   selected by default. If a chosen voice isn't supported by the
+    #   standard engine, this will result in an error. For information on
+    #   Amazon Polly voices and which voices are available for each engine,
+    #   see [Available Voices][1].
     #
     #   Type: String
     #
-    #   Valid Values: `standard` \| `neural` \| `long-form`
+    #   Valid Values: `standard` \| `neural` \| `long-form` \| `generative`
     #
     #   Required: Yes
-    #
-    #   **Standard voices**
-    #
-    #   For standard voices, this is not required; the engine parameter
-    #   defaults to `standard`. If the engine is not specified, or is set to
-    #   `standard` and an NTTS-only voice is selected, this will result in an
-    #   error.
     #
     #
     #
@@ -1083,7 +1070,8 @@ module Aws::Polly
     #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
     #   "22050", and "24000". The default value for standard voices is
     #   "22050". The default value for neural voices is "24000". The
-    #   default value for long-form voices is "24000".
+    #   default value for long-form voices is "24000". The default value for
+    #   generative voices is "24000".
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
@@ -1143,7 +1131,7 @@ module Aws::Polly
     # @example Request syntax with placeholder values
     #
     #   resp = client.synthesize_speech({
-    #     engine: "standard", # accepts standard, neural, long-form
+    #     engine: "standard", # accepts standard, neural, long-form, generative
     #     language_code: "arb", # accepts arb, cmn-CN, cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-MX, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, hi-IN, ko-KR, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR, en-NZ, en-ZA, ca-ES, de-AT, yue-CN, ar-AE, fi-FI, en-IE, nl-BE, fr-BE
     #     lexicon_names: ["LexiconName"],
     #     output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
@@ -1182,7 +1170,7 @@ module Aws::Polly
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

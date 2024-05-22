@@ -301,8 +301,9 @@ module Aws::MedicalImaging
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -999,11 +1000,11 @@ module Aws::MedicalImaging
     #
     # <note markdown="1"> `SearchImageSets` accepts a single search query parameter and returns
     # a paginated response of all image sets that have the matching
-    # criteria. All range queries must be input as `(lowerBound,
+    # criteria. All date range queries must be input as `(lowerBound,
     # upperBound)`.
     #
-    #  `SearchImageSets` uses the `updatedAt` field for sorting in decreasing
-    # order from latest to oldest.
+    #  By default, `SearchImageSets` uses the `updatedAt` field for sorting
+    # in descending order from newest to oldest.
     #
     #  </note>
     #
@@ -1129,6 +1130,9 @@ module Aws::MedicalImaging
     #   The output prefix of the S3 bucket to upload the results of the DICOM
     #   import job.
     #
+    # @option params [String] :input_owner_account_id
+    #   The account ID of the source S3 bucket owner.
+    #
     # @return [Types::StartDICOMImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDICOMImportJobResponse#datastore_id #datastore_id} => String
@@ -1145,6 +1149,7 @@ module Aws::MedicalImaging
     #     datastore_id: "DatastoreId", # required
     #     input_s3_uri: "S3Uri", # required
     #     output_s3_uri: "S3Uri", # required
+    #     input_owner_account_id: "AwsAccountId",
     #   })
     #
     # @example Response structure
@@ -1292,7 +1297,7 @@ module Aws::MedicalImaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

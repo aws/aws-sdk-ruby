@@ -244,11 +244,19 @@ module Aws
       interface _CreateEventBusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventBusResponse]
         def event_bus_arn: () -> ::String
+        def description: () -> ::String
+        def kms_key_identifier: () -> ::String
+        def dead_letter_config: () -> Types::DeadLetterConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridge/Client.html#create_event_bus-instance_method
       def create_event_bus: (
                               name: ::String,
                               ?event_source_name: ::String,
+                              ?description: ::String,
+                              ?kms_key_identifier: ::String,
+                              ?dead_letter_config: {
+                                arn: ::String?
+                              },
                               ?tags: Array[
                                 {
                                   key: ::String,
@@ -437,7 +445,12 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventBusResponse]
         def name: () -> ::String
         def arn: () -> ::String
+        def description: () -> ::String
+        def kms_key_identifier: () -> ::String
+        def dead_letter_config: () -> Types::DeadLetterConfig
         def policy: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridge/Client.html#describe_event_bus-instance_method
       def describe_event_bus: (
@@ -1134,6 +1147,25 @@ module Aws
                              ?role_arn: ::String
                            ) -> _UpdateEndpointResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEndpointResponseSuccess
+
+      interface _UpdateEventBusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventBusResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def kms_key_identifier: () -> ::String
+        def description: () -> ::String
+        def dead_letter_config: () -> Types::DeadLetterConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridge/Client.html#update_event_bus-instance_method
+      def update_event_bus: (
+                              ?name: ::String,
+                              ?kms_key_identifier: ::String,
+                              ?description: ::String,
+                              ?dead_letter_config: {
+                                arn: ::String?
+                              }
+                            ) -> _UpdateEventBusResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventBusResponseSuccess
     end
   end
 end

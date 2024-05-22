@@ -223,7 +223,8 @@ module Aws
                      ?db_cluster_snapshot_identifier: ::String,
                      ?allocated_storage: ::Integer,
                      ?dedicated_log_volume: bool,
-                     ?ca_certificate_identifier: ::String
+                     ?ca_certificate_identifier: ::String,
+                     ?engine_lifecycle_support: ::String
                    ) -> DBInstance
                  | (?Hash[Symbol, untyped]) -> DBInstance
 

@@ -301,8 +301,9 @@ module Aws::Route53Resolver
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -839,15 +840,15 @@ module Aws::Route53Resolver
     #
     # @option params [String] :firewall_domain_redirection_action
     #   How you want the the rule to evaluate DNS redirection in the DNS
-    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #   redirection chain, such as CNAME or DNAME.
     #
     #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
     #   redirection chain. The individual domains in the redirection chain
-    #   must be added to the allow domain list.
+    #   must be added to the domain list.
     #
     #   `Trust_Redirection_Domain ` inspects only the first domain in the
     #   redirection chain. You don't need to add the subsequent domains in
-    #   the redirection list to the domain alloww list.
+    #   the domain in the redirection list to the domain list.
     #
     # @option params [String] :qtype
     #   The DNS query type you want the rule to evaluate. Allowed values are;
@@ -4264,15 +4265,15 @@ module Aws::Route53Resolver
     #
     # @option params [String] :firewall_domain_redirection_action
     #   How you want the the rule to evaluate DNS redirection in the DNS
-    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #   redirection chain, such as CNAME or DNAME.
     #
     #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
     #   redirection chain. The individual domains in the redirection chain
-    #   must be added to the allow domain list.
+    #   must be added to the domain list.
     #
     #   `Trust_Redirection_Domain ` inspects only the first domain in the
     #   redirection chain. You don't need to add the subsequent domains in
-    #   the domain in the redirection list to the domain alloww list.
+    #   the domain in the redirection list to the domain list.
     #
     # @option params [String] :qtype
     #   The DNS query type you want the rule to evaluate. Allowed values are;
@@ -4752,7 +4753,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

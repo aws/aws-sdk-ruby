@@ -18,6 +18,9 @@ module Aws::BedrockAgentRuntime
     ActionGroupInvocationOutput = Shapes::StructureShape.new(name: 'ActionGroupInvocationOutput')
     ActionGroupName = Shapes::StringShape.new(name: 'ActionGroupName')
     ActionGroupOutputString = Shapes::StringShape.new(name: 'ActionGroupOutputString')
+    AdditionalModelRequestFields = Shapes::MapShape.new(name: 'AdditionalModelRequestFields')
+    AdditionalModelRequestFieldsKey = Shapes::StringShape.new(name: 'AdditionalModelRequestFieldsKey')
+    AdditionalModelRequestFieldsValue = Shapes::DocumentShape.new(name: 'AdditionalModelRequestFieldsValue', document: true)
     AgentAliasId = Shapes::StringShape.new(name: 'AgentAliasId')
     AgentId = Shapes::StringShape.new(name: 'AgentId')
     AgentVersion = Shapes::StringShape.new(name: 'AgentVersion')
@@ -62,7 +65,41 @@ module Aws::BedrockAgentRuntime
     FunctionResult = Shapes::StructureShape.new(name: 'FunctionResult')
     GeneratedResponsePart = Shapes::StructureShape.new(name: 'GeneratedResponsePart')
     GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
+    GuadrailAction = Shapes::StringShape.new(name: 'GuadrailAction')
+    GuardrailAction = Shapes::StringShape.new(name: 'GuardrailAction')
+    GuardrailAssessment = Shapes::StructureShape.new(name: 'GuardrailAssessment')
+    GuardrailAssessmentList = Shapes::ListShape.new(name: 'GuardrailAssessmentList')
+    GuardrailConfiguration = Shapes::StructureShape.new(name: 'GuardrailConfiguration')
+    GuardrailConfigurationGuardrailIdString = Shapes::StringShape.new(name: 'GuardrailConfigurationGuardrailIdString')
+    GuardrailConfigurationGuardrailVersionString = Shapes::StringShape.new(name: 'GuardrailConfigurationGuardrailVersionString')
+    GuardrailContentFilter = Shapes::StructureShape.new(name: 'GuardrailContentFilter')
+    GuardrailContentFilterConfidence = Shapes::StringShape.new(name: 'GuardrailContentFilterConfidence')
+    GuardrailContentFilterList = Shapes::ListShape.new(name: 'GuardrailContentFilterList')
+    GuardrailContentFilterType = Shapes::StringShape.new(name: 'GuardrailContentFilterType')
+    GuardrailContentPolicyAction = Shapes::StringShape.new(name: 'GuardrailContentPolicyAction')
+    GuardrailContentPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailContentPolicyAssessment')
+    GuardrailCustomWord = Shapes::StructureShape.new(name: 'GuardrailCustomWord')
+    GuardrailCustomWordList = Shapes::ListShape.new(name: 'GuardrailCustomWordList')
+    GuardrailManagedWord = Shapes::StructureShape.new(name: 'GuardrailManagedWord')
+    GuardrailManagedWordList = Shapes::ListShape.new(name: 'GuardrailManagedWordList')
+    GuardrailManagedWordType = Shapes::StringShape.new(name: 'GuardrailManagedWordType')
+    GuardrailPiiEntityFilter = Shapes::StructureShape.new(name: 'GuardrailPiiEntityFilter')
+    GuardrailPiiEntityFilterList = Shapes::ListShape.new(name: 'GuardrailPiiEntityFilterList')
+    GuardrailPiiEntityType = Shapes::StringShape.new(name: 'GuardrailPiiEntityType')
+    GuardrailRegexFilter = Shapes::StructureShape.new(name: 'GuardrailRegexFilter')
+    GuardrailRegexFilterList = Shapes::ListShape.new(name: 'GuardrailRegexFilterList')
+    GuardrailSensitiveInformationPolicyAction = Shapes::StringShape.new(name: 'GuardrailSensitiveInformationPolicyAction')
+    GuardrailSensitiveInformationPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailSensitiveInformationPolicyAssessment')
+    GuardrailTopic = Shapes::StructureShape.new(name: 'GuardrailTopic')
+    GuardrailTopicList = Shapes::ListShape.new(name: 'GuardrailTopicList')
+    GuardrailTopicPolicyAction = Shapes::StringShape.new(name: 'GuardrailTopicPolicyAction')
+    GuardrailTopicPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailTopicPolicyAssessment')
+    GuardrailTopicType = Shapes::StringShape.new(name: 'GuardrailTopicType')
+    GuardrailTrace = Shapes::StructureShape.new(name: 'GuardrailTrace')
+    GuardrailWordPolicyAction = Shapes::StringShape.new(name: 'GuardrailWordPolicyAction')
+    GuardrailWordPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailWordPolicyAssessment')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
+    InferenceConfig = Shapes::StructureShape.new(name: 'InferenceConfig')
     InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
     InputText = Shapes::StringShape.new(name: 'InputText')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -88,6 +125,7 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseVectorSearchConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseVectorSearchConfiguration')
     KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
+    MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     ModelInvocationInput = Shapes::StructureShape.new(name: 'ModelInvocationInput')
@@ -112,6 +150,8 @@ module Aws::BedrockAgentRuntime
     PromptText = Shapes::StringShape.new(name: 'PromptText')
     PromptType = Shapes::StringShape.new(name: 'PromptType')
     PropertyParameters = Shapes::StructureShape.new(name: 'PropertyParameters')
+    RAGStopSequences = Shapes::ListShape.new(name: 'RAGStopSequences')
+    RAGStopSequencesMemberString = Shapes::StringShape.new(name: 'RAGStopSequencesMemberString')
     Rationale = Shapes::StructureShape.new(name: 'Rationale')
     RationaleString = Shapes::StringShape.new(name: 'RationaleString')
     RepromptResponse = Shapes::StructureShape.new(name: 'RepromptResponse')
@@ -157,6 +197,7 @@ module Aws::BedrockAgentRuntime
     StopSequences = Shapes::ListShape.new(name: 'StopSequences')
     String = Shapes::StringShape.new(name: 'String')
     Temperature = Shapes::FloatShape.new(name: 'Temperature')
+    TextInferenceConfig = Shapes::StructureShape.new(name: 'TextInferenceConfig')
     TextPromptTemplate = Shapes::StringShape.new(name: 'TextPromptTemplate')
     TextResponsePart = Shapes::StructureShape.new(name: 'TextResponsePart')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -183,6 +224,9 @@ module Aws::BedrockAgentRuntime
 
     ActionGroupInvocationOutput.add_member(:text, Shapes::ShapeRef.new(shape: ActionGroupOutputString, location_name: "text"))
     ActionGroupInvocationOutput.struct_class = Types::ActionGroupInvocationOutput
+
+    AdditionalModelRequestFields.key = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsKey)
+    AdditionalModelRequestFields.value = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsValue)
 
     ApiContentMap.key = Shapes::ShapeRef.new(shape: String)
     ApiContentMap.value = Shapes::ShapeRef.new(shape: PropertyParameters)
@@ -250,6 +294,9 @@ module Aws::BedrockAgentRuntime
 
     ExternalSources.member = Shapes::ShapeRef.new(shape: ExternalSource)
 
+    ExternalSourcesGenerationConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
+    ExternalSourcesGenerationConfiguration.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
+    ExternalSourcesGenerationConfiguration.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfig, location_name: "inferenceConfig"))
     ExternalSourcesGenerationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: PromptTemplate, location_name: "promptTemplate"))
     ExternalSourcesGenerationConfiguration.struct_class = Types::ExternalSourcesGenerationConfiguration
 
@@ -290,8 +337,88 @@ module Aws::BedrockAgentRuntime
     GeneratedResponsePart.add_member(:text_response_part, Shapes::ShapeRef.new(shape: TextResponsePart, location_name: "textResponsePart"))
     GeneratedResponsePart.struct_class = Types::GeneratedResponsePart
 
+    GenerationConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
+    GenerationConfiguration.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
+    GenerationConfiguration.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfig, location_name: "inferenceConfig"))
     GenerationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: PromptTemplate, location_name: "promptTemplate"))
     GenerationConfiguration.struct_class = Types::GenerationConfiguration
+
+    GuardrailAssessment.add_member(:content_policy, Shapes::ShapeRef.new(shape: GuardrailContentPolicyAssessment, location_name: "contentPolicy"))
+    GuardrailAssessment.add_member(:sensitive_information_policy, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyAssessment, location_name: "sensitiveInformationPolicy"))
+    GuardrailAssessment.add_member(:topic_policy, Shapes::ShapeRef.new(shape: GuardrailTopicPolicyAssessment, location_name: "topicPolicy"))
+    GuardrailAssessment.add_member(:word_policy, Shapes::ShapeRef.new(shape: GuardrailWordPolicyAssessment, location_name: "wordPolicy"))
+    GuardrailAssessment.struct_class = Types::GuardrailAssessment
+
+    GuardrailAssessmentList.member = Shapes::ShapeRef.new(shape: GuardrailAssessment)
+
+    GuardrailConfiguration.add_member(:guardrail_id, Shapes::ShapeRef.new(shape: GuardrailConfigurationGuardrailIdString, required: true, location_name: "guardrailId"))
+    GuardrailConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailConfigurationGuardrailVersionString, required: true, location_name: "guardrailVersion"))
+    GuardrailConfiguration.struct_class = Types::GuardrailConfiguration
+
+    GuardrailContentFilter.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailContentPolicyAction, location_name: "action"))
+    GuardrailContentFilter.add_member(:confidence, Shapes::ShapeRef.new(shape: GuardrailContentFilterConfidence, location_name: "confidence"))
+    GuardrailContentFilter.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailContentFilterType, location_name: "type"))
+    GuardrailContentFilter.struct_class = Types::GuardrailContentFilter
+
+    GuardrailContentFilterList.member = Shapes::ShapeRef.new(shape: GuardrailContentFilter)
+
+    GuardrailContentPolicyAssessment.add_member(:filters, Shapes::ShapeRef.new(shape: GuardrailContentFilterList, location_name: "filters"))
+    GuardrailContentPolicyAssessment.struct_class = Types::GuardrailContentPolicyAssessment
+
+    GuardrailCustomWord.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailWordPolicyAction, location_name: "action"))
+    GuardrailCustomWord.add_member(:match, Shapes::ShapeRef.new(shape: String, location_name: "match"))
+    GuardrailCustomWord.struct_class = Types::GuardrailCustomWord
+
+    GuardrailCustomWordList.member = Shapes::ShapeRef.new(shape: GuardrailCustomWord)
+
+    GuardrailManagedWord.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailWordPolicyAction, location_name: "action"))
+    GuardrailManagedWord.add_member(:match, Shapes::ShapeRef.new(shape: String, location_name: "match"))
+    GuardrailManagedWord.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailManagedWordType, location_name: "type"))
+    GuardrailManagedWord.struct_class = Types::GuardrailManagedWord
+
+    GuardrailManagedWordList.member = Shapes::ShapeRef.new(shape: GuardrailManagedWord)
+
+    GuardrailPiiEntityFilter.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyAction, location_name: "action"))
+    GuardrailPiiEntityFilter.add_member(:match, Shapes::ShapeRef.new(shape: String, location_name: "match"))
+    GuardrailPiiEntityFilter.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailPiiEntityType, location_name: "type"))
+    GuardrailPiiEntityFilter.struct_class = Types::GuardrailPiiEntityFilter
+
+    GuardrailPiiEntityFilterList.member = Shapes::ShapeRef.new(shape: GuardrailPiiEntityFilter)
+
+    GuardrailRegexFilter.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyAction, location_name: "action"))
+    GuardrailRegexFilter.add_member(:match, Shapes::ShapeRef.new(shape: String, location_name: "match"))
+    GuardrailRegexFilter.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    GuardrailRegexFilter.add_member(:regex, Shapes::ShapeRef.new(shape: String, location_name: "regex"))
+    GuardrailRegexFilter.struct_class = Types::GuardrailRegexFilter
+
+    GuardrailRegexFilterList.member = Shapes::ShapeRef.new(shape: GuardrailRegexFilter)
+
+    GuardrailSensitiveInformationPolicyAssessment.add_member(:pii_entities, Shapes::ShapeRef.new(shape: GuardrailPiiEntityFilterList, location_name: "piiEntities"))
+    GuardrailSensitiveInformationPolicyAssessment.add_member(:regexes, Shapes::ShapeRef.new(shape: GuardrailRegexFilterList, location_name: "regexes"))
+    GuardrailSensitiveInformationPolicyAssessment.struct_class = Types::GuardrailSensitiveInformationPolicyAssessment
+
+    GuardrailTopic.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailTopicPolicyAction, location_name: "action"))
+    GuardrailTopic.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    GuardrailTopic.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailTopicType, location_name: "type"))
+    GuardrailTopic.struct_class = Types::GuardrailTopic
+
+    GuardrailTopicList.member = Shapes::ShapeRef.new(shape: GuardrailTopic)
+
+    GuardrailTopicPolicyAssessment.add_member(:topics, Shapes::ShapeRef.new(shape: GuardrailTopicList, location_name: "topics"))
+    GuardrailTopicPolicyAssessment.struct_class = Types::GuardrailTopicPolicyAssessment
+
+    GuardrailTrace.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailAction, location_name: "action"))
+    GuardrailTrace.add_member(:input_assessments, Shapes::ShapeRef.new(shape: GuardrailAssessmentList, location_name: "inputAssessments"))
+    GuardrailTrace.add_member(:output_assessments, Shapes::ShapeRef.new(shape: GuardrailAssessmentList, location_name: "outputAssessments"))
+    GuardrailTrace.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
+    GuardrailTrace.struct_class = Types::GuardrailTrace
+
+    GuardrailWordPolicyAssessment.add_member(:custom_words, Shapes::ShapeRef.new(shape: GuardrailCustomWordList, location_name: "customWords"))
+    GuardrailWordPolicyAssessment.add_member(:managed_word_lists, Shapes::ShapeRef.new(shape: GuardrailManagedWordList, location_name: "managedWordLists"))
+    GuardrailWordPolicyAssessment.struct_class = Types::GuardrailWordPolicyAssessment
+
+    InferenceConfig.add_member(:text_inference_config, Shapes::ShapeRef.new(shape: TextInferenceConfig, location_name: "textInferenceConfig"))
+    InferenceConfig.struct_class = Types::InferenceConfig
 
     InferenceConfiguration.add_member(:maximum_length, Shapes::ShapeRef.new(shape: MaximumLength, location_name: "maximumLength"))
     InferenceConfiguration.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: StopSequences, location_name: "stopSequences"))
@@ -457,6 +584,8 @@ module Aws::BedrockAgentRuntime
     PropertyParameters.add_member(:properties, Shapes::ShapeRef.new(shape: ParameterList, location_name: "properties"))
     PropertyParameters.struct_class = Types::PropertyParameters
 
+    RAGStopSequences.member = Shapes::ShapeRef.new(shape: RAGStopSequencesMemberString)
+
     Rationale.add_member(:text, Shapes::ShapeRef.new(shape: RationaleString, location_name: "text"))
     Rationale.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     Rationale.struct_class = Types::Rationale
@@ -495,10 +624,12 @@ module Aws::BedrockAgentRuntime
     RetrievalFilter.add_member(:in, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "in"))
     RetrievalFilter.add_member(:less_than, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "lessThan"))
     RetrievalFilter.add_member(:less_than_or_equals, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "lessThanOrEquals"))
+    RetrievalFilter.add_member(:list_contains, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "listContains"))
     RetrievalFilter.add_member(:not_equals, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "notEquals"))
     RetrievalFilter.add_member(:not_in, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "notIn"))
     RetrievalFilter.add_member(:or_all, Shapes::ShapeRef.new(shape: RetrievalFilterList, location_name: "orAll"))
     RetrievalFilter.add_member(:starts_with, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "startsWith"))
+    RetrievalFilter.add_member(:string_contains, Shapes::ShapeRef.new(shape: FilterAttribute, location_name: "stringContains"))
     RetrievalFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RetrievalFilter.add_member_subclass(:and_all, Types::RetrievalFilter::AndAll)
     RetrievalFilter.add_member_subclass(:equals, Types::RetrievalFilter::Equals)
@@ -507,10 +638,12 @@ module Aws::BedrockAgentRuntime
     RetrievalFilter.add_member_subclass(:in, Types::RetrievalFilter::In)
     RetrievalFilter.add_member_subclass(:less_than, Types::RetrievalFilter::LessThan)
     RetrievalFilter.add_member_subclass(:less_than_or_equals, Types::RetrievalFilter::LessThanOrEquals)
+    RetrievalFilter.add_member_subclass(:list_contains, Types::RetrievalFilter::ListContains)
     RetrievalFilter.add_member_subclass(:not_equals, Types::RetrievalFilter::NotEquals)
     RetrievalFilter.add_member_subclass(:not_in, Types::RetrievalFilter::NotIn)
     RetrievalFilter.add_member_subclass(:or_all, Types::RetrievalFilter::OrAll)
     RetrievalFilter.add_member_subclass(:starts_with, Types::RetrievalFilter::StartsWith)
+    RetrievalFilter.add_member_subclass(:string_contains, Types::RetrievalFilter::StringContains)
     RetrievalFilter.add_member_subclass(:unknown, Types::RetrievalFilter::Unknown)
     RetrievalFilter.struct_class = Types::RetrievalFilter
 
@@ -547,6 +680,7 @@ module Aws::BedrockAgentRuntime
     RetrieveAndGenerateRequest.struct_class = Types::RetrieveAndGenerateRequest
 
     RetrieveAndGenerateResponse.add_member(:citations, Shapes::ShapeRef.new(shape: Citations, location_name: "citations"))
+    RetrieveAndGenerateResponse.add_member(:guardrail_action, Shapes::ShapeRef.new(shape: GuadrailAction, location_name: "guardrailAction"))
     RetrieveAndGenerateResponse.add_member(:output, Shapes::ShapeRef.new(shape: RetrieveAndGenerateOutput, required: true, location_name: "output"))
     RetrieveAndGenerateResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "sessionId"))
     RetrieveAndGenerateResponse.struct_class = Types::RetrieveAndGenerateResponse
@@ -598,6 +732,12 @@ module Aws::BedrockAgentRuntime
 
     StopSequences.member = Shapes::ShapeRef.new(shape: String)
 
+    TextInferenceConfig.add_member(:max_tokens, Shapes::ShapeRef.new(shape: MaxTokens, location_name: "maxTokens"))
+    TextInferenceConfig.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: RAGStopSequences, location_name: "stopSequences"))
+    TextInferenceConfig.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
+    TextInferenceConfig.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
+    TextInferenceConfig.struct_class = Types::TextInferenceConfig
+
     TextResponsePart.add_member(:span, Shapes::ShapeRef.new(shape: Span, location_name: "span"))
     TextResponsePart.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
     TextResponsePart.struct_class = Types::TextResponsePart
@@ -606,11 +746,13 @@ module Aws::BedrockAgentRuntime
     ThrottlingException.struct_class = Types::ThrottlingException
 
     Trace.add_member(:failure_trace, Shapes::ShapeRef.new(shape: FailureTrace, location_name: "failureTrace"))
+    Trace.add_member(:guardrail_trace, Shapes::ShapeRef.new(shape: GuardrailTrace, location_name: "guardrailTrace"))
     Trace.add_member(:orchestration_trace, Shapes::ShapeRef.new(shape: OrchestrationTrace, location_name: "orchestrationTrace"))
     Trace.add_member(:post_processing_trace, Shapes::ShapeRef.new(shape: PostProcessingTrace, location_name: "postProcessingTrace"))
     Trace.add_member(:pre_processing_trace, Shapes::ShapeRef.new(shape: PreProcessingTrace, location_name: "preProcessingTrace"))
     Trace.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Trace.add_member_subclass(:failure_trace, Types::Trace::FailureTrace)
+    Trace.add_member_subclass(:guardrail_trace, Types::Trace::GuardrailTrace)
     Trace.add_member_subclass(:orchestration_trace, Types::Trace::OrchestrationTrace)
     Trace.add_member_subclass(:post_processing_trace, Types::Trace::PostProcessingTrace)
     Trace.add_member_subclass(:pre_processing_trace, Types::Trace::PreProcessingTrace)

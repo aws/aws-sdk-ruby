@@ -312,8 +312,9 @@ module Aws::BedrockAgentRuntime
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -423,12 +424,12 @@ module Aws::BedrockAgentRuntime
 
     # @!group API Operations
 
-    # Sends a prompt for the agent to process and respond to. Use return
-    # control event type for function calling.
-    #
     # <note markdown="1"> The CLI doesn't support `InvokeAgent`.
     #
     #  </note>
+    #
+    # Sends a prompt for the agent to process and respond to. Note the
+    # following fields for the request:
     #
     # * To continue the same conversation with an agent, use the same
     #   `sessionId` value in the request.
@@ -442,9 +443,8 @@ module Aws::BedrockAgentRuntime
     # * End a conversation by setting `endSession` to `true`.
     #
     # * In the `sessionState` object, you can include attributes for the
-    #   session or prompt or parameters returned from the action group.
-    #
-    # * Use return control event type for function calling.
+    #   session or prompt or, if you configured an action group to return
+    #   control, results from invocation of the action group.
     #
     # The response is returned in the `bytes` field of the `chunk` object.
     #
@@ -453,6 +453,10 @@ module Aws::BedrockAgentRuntime
     #
     # * If you set `enableTrace` to `true` in the request, you can trace the
     #   agent's steps and reasoning process that led it to the response.
+    #
+    # * If the action predicted was configured to return control, the
+    #   response returns parameters for the action, elicited from the user,
+    #   in the `returnControl` field.
     #
     # * Errors are also surfaced in the response.
     #
@@ -480,6 +484,11 @@ module Aws::BedrockAgentRuntime
     # @option params [String] :input_text
     #   The prompt text to send the agent.
     #
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the `sessionState`
+    #   field, the `inputText` field will be ignored.
+    #
+    #    </note>
+    #
     # @option params [required, String] :session_id
     #   The unique identifier of the session. Use the same value across
     #   requests to continue the same conversation.
@@ -487,6 +496,11 @@ module Aws::BedrockAgentRuntime
     # @option params [Types::SessionState] :session_state
     #   Contains parameters that specify various attributes of the session.
     #   For more information, see [Control session context][1].
+    #
+    #   <note markdown="1"> If you include `returnControlInvocationResults` in the `sessionState`
+    #   field, the `inputText` field will be ignored.
+    #
+    #    </note>
     #
     #
     #
@@ -799,6 +813,58 @@ module Aws::BedrockAgentRuntime
     #   event.session_id #=> String
     #   event.trace.failure_trace.failure_reason #=> String
     #   event.trace.failure_trace.trace_id #=> String
+    #   event.trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
+    #   event.trace.guardrail_trace.input_assessments #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail_trace.input_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].name #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].name #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.custom_words[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists #=> Array
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.output_assessments #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "BLOCKED", "ANONYMIZED"
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].name #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].sensitive_information_policy.regexes[0].regex #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].name #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.custom_words[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists #=> Array
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.guardrail_trace.output_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.trace_id #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
@@ -975,6 +1041,11 @@ module Aws::BedrockAgentRuntime
     #             value: { # required
     #             },
     #           },
+    #           list_contains: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
     #           not_equals: {
     #             key: "FilterKey", # required
     #             value: { # required
@@ -991,6 +1062,11 @@ module Aws::BedrockAgentRuntime
     #             },
     #           ],
     #           starts_with: {
+    #             key: "FilterKey", # required
+    #             value: { # required
+    #             },
+    #           },
+    #           string_contains: {
     #             key: "FilterKey", # required
     #             value: { # required
     #             },
@@ -1049,6 +1125,7 @@ module Aws::BedrockAgentRuntime
     # @return [Types::RetrieveAndGenerateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RetrieveAndGenerateResponse#citations #citations} => Array&lt;Types::Citation&gt;
+    #   * {Types::RetrieveAndGenerateResponse#guardrail_action #guardrail_action} => String
     #   * {Types::RetrieveAndGenerateResponse#output #output} => Types::RetrieveAndGenerateOutput
     #   * {Types::RetrieveAndGenerateResponse#session_id #session_id} => String
     #
@@ -1061,6 +1138,22 @@ module Aws::BedrockAgentRuntime
     #     retrieve_and_generate_configuration: {
     #       external_sources_configuration: {
     #         generation_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           guardrail_configuration: {
+    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
+    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
     #           prompt_template: {
     #             text_prompt_template: "TextPromptTemplate",
     #           },
@@ -1082,6 +1175,22 @@ module Aws::BedrockAgentRuntime
     #       },
     #       knowledge_base_configuration: {
     #         generation_configuration: {
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           guardrail_configuration: {
+    #             guardrail_id: "GuardrailConfigurationGuardrailIdString", # required
+    #             guardrail_version: "GuardrailConfigurationGuardrailVersionString", # required
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
     #           prompt_template: {
     #             text_prompt_template: "TextPromptTemplate",
     #           },
@@ -1126,6 +1235,11 @@ module Aws::BedrockAgentRuntime
     #                 value: { # required
     #                 },
     #               },
+    #               list_contains: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
     #               not_equals: {
     #                 key: "FilterKey", # required
     #                 value: { # required
@@ -1142,6 +1256,11 @@ module Aws::BedrockAgentRuntime
     #                 },
     #               ],
     #               starts_with: {
+    #                 key: "FilterKey", # required
+    #                 value: { # required
+    #                 },
+    #               },
+    #               string_contains: {
     #                 key: "FilterKey", # required
     #                 value: { # required
     #                 },
@@ -1171,6 +1290,7 @@ module Aws::BedrockAgentRuntime
     #   resp.citations[0].retrieved_references[0].location.s3_location.uri #=> String
     #   resp.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
     #   resp.citations[0].retrieved_references[0].metadata #=> Hash
+    #   resp.guardrail_action #=> String, one of "INTERVENED", "NONE"
     #   resp.output.text #=> String
     #   resp.session_id #=> String
     #
@@ -1196,7 +1316,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

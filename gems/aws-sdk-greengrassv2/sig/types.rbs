@@ -330,6 +330,8 @@ module Aws::GreengrassV2
     class GetComponentVersionArtifactRequest
       attr_accessor arn: ::String
       attr_accessor artifact_name: ::String
+      attr_accessor s3_endpoint_type: ("REGIONAL" | "GLOBAL")
+      attr_accessor iot_endpoint_type: ("fips" | "standard")
       SENSITIVE: []
     end
 

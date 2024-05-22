@@ -406,15 +406,15 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] firewall_domain_redirection_action
     #   How you want the the rule to evaluate DNS redirection in the DNS
-    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #   redirection chain, such as CNAME or DNAME.
     #
     #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
     #   redirection chain. The individual domains in the redirection chain
-    #   must be added to the allow domain list.
+    #   must be added to the domain list.
     #
     #   `Trust_Redirection_Domain ` inspects only the first domain in the
     #   redirection chain. You don't need to add the subsequent domains in
-    #   the redirection list to the domain alloww list.
+    #   the domain in the redirection list to the domain list.
     #   @return [String]
     #
     # @!attribute [rw] qtype
@@ -1644,15 +1644,15 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] firewall_domain_redirection_action
     #   How you want the the rule to evaluate DNS redirection in the DNS
-    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #   redirection chain, such as CNAME or DNAME.
     #
     #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
     #   redirection chain. The individual domains in the redirection chain
-    #   must be added to the allow domain list.
+    #   must be added to the domain list.
     #
     #   `Trust_Redirection_Domain ` inspects only the first domain in the
     #   redirection chain. You don't need to add the subsequent domains in
-    #   the domain in the redirection list to the domain alloww list.
+    #   the domain in the redirection list to the domain list.
     #   @return [String]
     #
     # @!attribute [rw] qtype
@@ -5146,15 +5146,15 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] firewall_domain_redirection_action
     #   How you want the the rule to evaluate DNS redirection in the DNS
-    #   redirection chain, such as CNAME, DNAME, ot ALIAS.
+    #   redirection chain, such as CNAME or DNAME.
     #
     #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
     #   redirection chain. The individual domains in the redirection chain
-    #   must be added to the allow domain list.
+    #   must be added to the domain list.
     #
     #   `Trust_Redirection_Domain ` inspects only the first domain in the
     #   redirection chain. You don't need to add the subsequent domains in
-    #   the domain in the redirection list to the domain alloww list.
+    #   the domain in the redirection list to the domain list.
     #   @return [String]
     #
     # @!attribute [rw] qtype

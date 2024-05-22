@@ -1255,6 +1255,9 @@ module Aws::EC2
     EgressOnlyInternetGatewayList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayList')
     EipAllocationPublicIp = Shapes::StringShape.new(name: 'EipAllocationPublicIp')
     EipAssociationIdList = Shapes::ListShape.new(name: 'EipAssociationIdList')
+    EkPubKeyFormat = Shapes::StringShape.new(name: 'EkPubKeyFormat')
+    EkPubKeyType = Shapes::StringShape.new(name: 'EkPubKeyType')
+    EkPubKeyValue = Shapes::StringShape.new(name: 'EkPubKeyValue')
     ElasticGpuAssociation = Shapes::StructureShape.new(name: 'ElasticGpuAssociation')
     ElasticGpuAssociationList = Shapes::ListShape.new(name: 'ElasticGpuAssociationList')
     ElasticGpuHealth = Shapes::StructureShape.new(name: 'ElasticGpuHealth')
@@ -1470,6 +1473,8 @@ module Aws::EC2
     GetImageBlockPublicAccessStateResult = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateResult')
     GetInstanceMetadataDefaultsRequest = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsRequest')
     GetInstanceMetadataDefaultsResult = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsResult')
+    GetInstanceTpmEkPubRequest = Shapes::StructureShape.new(name: 'GetInstanceTpmEkPubRequest')
+    GetInstanceTpmEkPubResult = Shapes::StructureShape.new(name: 'GetInstanceTpmEkPubResult')
     GetInstanceTypesFromInstanceRequirementsRequest = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsRequest')
     GetInstanceTypesFromInstanceRequirementsResult = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsResult')
     GetInstanceUefiDataRequest = Shapes::StructureShape.new(name: 'GetInstanceUefiDataRequest')
@@ -2364,6 +2369,7 @@ module Aws::EC2
     Phase2IntegrityAlgorithmsListValue = Shapes::StructureShape.new(name: 'Phase2IntegrityAlgorithmsListValue')
     Phase2IntegrityAlgorithmsRequestList = Shapes::ListShape.new(name: 'Phase2IntegrityAlgorithmsRequestList')
     Phase2IntegrityAlgorithmsRequestListValue = Shapes::StructureShape.new(name: 'Phase2IntegrityAlgorithmsRequestListValue')
+    PhcSupport = Shapes::StringShape.new(name: 'PhcSupport')
     Placement = Shapes::StructureShape.new(name: 'Placement')
     PlacementGroup = Shapes::StructureShape.new(name: 'PlacementGroup')
     PlacementGroupArn = Shapes::StringShape.new(name: 'PlacementGroupArn')
@@ -9095,6 +9101,18 @@ module Aws::EC2
     GetInstanceMetadataDefaultsResult.add_member(:account_level, Shapes::ShapeRef.new(shape: InstanceMetadataDefaultsResponse, location_name: "accountLevel"))
     GetInstanceMetadataDefaultsResult.struct_class = Types::GetInstanceMetadataDefaultsResult
 
+    GetInstanceTpmEkPubRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    GetInstanceTpmEkPubRequest.add_member(:key_type, Shapes::ShapeRef.new(shape: EkPubKeyType, required: true, location_name: "KeyType"))
+    GetInstanceTpmEkPubRequest.add_member(:key_format, Shapes::ShapeRef.new(shape: EkPubKeyFormat, required: true, location_name: "KeyFormat"))
+    GetInstanceTpmEkPubRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetInstanceTpmEkPubRequest.struct_class = Types::GetInstanceTpmEkPubRequest
+
+    GetInstanceTpmEkPubResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "instanceId"))
+    GetInstanceTpmEkPubResult.add_member(:key_type, Shapes::ShapeRef.new(shape: EkPubKeyType, location_name: "keyType"))
+    GetInstanceTpmEkPubResult.add_member(:key_format, Shapes::ShapeRef.new(shape: EkPubKeyFormat, location_name: "keyFormat"))
+    GetInstanceTpmEkPubResult.add_member(:key_value, Shapes::ShapeRef.new(shape: EkPubKeyValue, location_name: "keyValue"))
+    GetInstanceTpmEkPubResult.struct_class = Types::GetInstanceTpmEkPubResult
+
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:architecture_types, Shapes::ShapeRef.new(shape: ArchitectureTypeSet, required: true, location_name: "ArchitectureType"))
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:virtualization_types, Shapes::ShapeRef.new(shape: VirtualizationTypeSet, required: true, location_name: "VirtualizationType"))
@@ -10351,6 +10369,7 @@ module Aws::EC2
     InstanceTypeInfo.add_member(:nitro_tpm_info, Shapes::ShapeRef.new(shape: NitroTpmInfo, location_name: "nitroTpmInfo"))
     InstanceTypeInfo.add_member(:media_accelerator_info, Shapes::ShapeRef.new(shape: MediaAcceleratorInfo, location_name: "mediaAcceleratorInfo"))
     InstanceTypeInfo.add_member(:neuron_info, Shapes::ShapeRef.new(shape: NeuronInfo, location_name: "neuronInfo"))
+    InstanceTypeInfo.add_member(:phc_support, Shapes::ShapeRef.new(shape: PhcSupport, location_name: "phcSupport"))
     InstanceTypeInfo.struct_class = Types::InstanceTypeInfo
 
     InstanceTypeInfoFromInstanceRequirements.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
@@ -19946,6 +19965,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetInstanceMetadataDefaultsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetInstanceMetadataDefaultsResult)
+      end)
+
+      api.add_operation(:get_instance_tpm_ek_pub, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInstanceTpmEkPub"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetInstanceTpmEkPubRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInstanceTpmEkPubResult)
       end)
 
       api.add_operation(:get_instance_types_from_instance_requirements, Seahorse::Model::Operation.new.tap do |o|

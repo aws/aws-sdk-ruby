@@ -301,8 +301,9 @@ module Aws::PersonalizeRuntime
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -602,6 +603,8 @@ module Aws::PersonalizeRuntime
     #   resp.personalized_ranking[0].promotion_name #=> String
     #   resp.personalized_ranking[0].metadata #=> Hash
     #   resp.personalized_ranking[0].metadata["ColumnName"] #=> String
+    #   resp.personalized_ranking[0].reason #=> Array
+    #   resp.personalized_ranking[0].reason[0] #=> String
     #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRanking AWS API Documentation
@@ -761,6 +764,8 @@ module Aws::PersonalizeRuntime
     #   resp.item_list[0].promotion_name #=> String
     #   resp.item_list[0].metadata #=> Hash
     #   resp.item_list[0].metadata["ColumnName"] #=> String
+    #   resp.item_list[0].reason #=> Array
+    #   resp.item_list[0].reason[0] #=> String
     #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendations AWS API Documentation
@@ -785,7 +790,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

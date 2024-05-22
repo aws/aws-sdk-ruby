@@ -442,6 +442,7 @@ module Aws::ApplicationAutoScaling
         "endpointPrefix" => "application-autoscaling",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Application Auto Scaling",
         "serviceId" => "Application Auto Scaling",
         "signatureVersion" => "v4",

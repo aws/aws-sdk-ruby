@@ -116,6 +116,9 @@ module Aws::BedrockAgent
     GetIngestionJobResponse = Shapes::StructureShape.new(name: 'GetIngestionJobResponse')
     GetKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'GetKnowledgeBaseRequest')
     GetKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'GetKnowledgeBaseResponse')
+    GuardrailConfiguration = Shapes::StructureShape.new(name: 'GuardrailConfiguration')
+    GuardrailIdentifier = Shapes::StringShape.new(name: 'GuardrailIdentifier')
+    GuardrailVersion = Shapes::StringShape.new(name: 'GuardrailVersion')
     Id = Shapes::StringShape.new(name: 'Id')
     InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
     IngestionJob = Shapes::StructureShape.new(name: 'IngestionJob')
@@ -166,6 +169,13 @@ module Aws::BedrockAgent
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
     ModelIdentifier = Shapes::StringShape.new(name: 'ModelIdentifier')
+    MongoDbAtlasCollectionName = Shapes::StringShape.new(name: 'MongoDbAtlasCollectionName')
+    MongoDbAtlasConfiguration = Shapes::StructureShape.new(name: 'MongoDbAtlasConfiguration')
+    MongoDbAtlasDatabaseName = Shapes::StringShape.new(name: 'MongoDbAtlasDatabaseName')
+    MongoDbAtlasEndpoint = Shapes::StringShape.new(name: 'MongoDbAtlasEndpoint')
+    MongoDbAtlasEndpointServiceName = Shapes::StringShape.new(name: 'MongoDbAtlasEndpointServiceName')
+    MongoDbAtlasFieldMapping = Shapes::StructureShape.new(name: 'MongoDbAtlasFieldMapping')
+    MongoDbAtlasIndexName = Shapes::StringShape.new(name: 'MongoDbAtlasIndexName')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
@@ -190,6 +200,7 @@ module Aws::BedrockAgent
     PromptOverrideConfiguration = Shapes::StructureShape.new(name: 'PromptOverrideConfiguration')
     PromptState = Shapes::StringShape.new(name: 'PromptState')
     PromptType = Shapes::StringShape.new(name: 'PromptType')
+    ProvisionedModelIdentifier = Shapes::StringShape.new(name: 'ProvisionedModelIdentifier')
     RdsArn = Shapes::StringShape.new(name: 'RdsArn')
     RdsConfiguration = Shapes::StructureShape.new(name: 'RdsConfiguration')
     RdsDatabaseName = Shapes::StringShape.new(name: 'RdsDatabaseName')
@@ -292,6 +303,7 @@ module Aws::BedrockAgent
     Agent.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     Agent.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     Agent.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
+    Agent.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
     Agent.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, required: true, location_name: "idleSessionTTLInSeconds"))
     Agent.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
     Agent.add_member(:prepared_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "preparedAt"))
@@ -324,6 +336,7 @@ module Aws::BedrockAgent
     AgentAlias.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     AgentAlias.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     AgentAlias.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AgentAlias.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     AgentAlias.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, required: true, location_name: "routingConfiguration"))
     AgentAlias.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentAlias.struct_class = Types::AgentAlias
@@ -337,7 +350,8 @@ module Aws::BedrockAgent
 
     AgentAliasRoutingConfiguration.member = Shapes::ShapeRef.new(shape: AgentAliasRoutingConfigurationListItem)
 
-    AgentAliasRoutingConfigurationListItem.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "agentVersion"))
+    AgentAliasRoutingConfigurationListItem.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, location_name: "agentVersion"))
+    AgentAliasRoutingConfigurationListItem.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedModelIdentifier, location_name: "provisionedThroughput"))
     AgentAliasRoutingConfigurationListItem.struct_class = Types::AgentAliasRoutingConfigurationListItem
 
     AgentAliasSummaries.member = Shapes::ShapeRef.new(shape: AgentAliasSummary)
@@ -374,6 +388,7 @@ module Aws::BedrockAgent
     AgentSummary.add_member(:agent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentName"))
     AgentSummary.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "agentStatus"))
     AgentSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AgentSummary.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
     AgentSummary.add_member(:latest_agent_version, Shapes::ShapeRef.new(shape: Version, location_name: "latestAgentVersion"))
     AgentSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentSummary.struct_class = Types::AgentSummary
@@ -388,6 +403,7 @@ module Aws::BedrockAgent
     AgentVersion.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     AgentVersion.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     AgentVersion.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
+    AgentVersion.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
     AgentVersion.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, required: true, location_name: "idleSessionTTLInSeconds"))
     AgentVersion.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
     AgentVersion.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
@@ -403,6 +419,7 @@ module Aws::BedrockAgent
     AgentVersionSummary.add_member(:agent_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "agentVersion"))
     AgentVersionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     AgentVersionSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AgentVersionSummary.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
     AgentVersionSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentVersionSummary.struct_class = Types::AgentVersionSummary
 
@@ -455,6 +472,7 @@ module Aws::BedrockAgent
     CreateAgentRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
     CreateAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAgentRequest.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
+    CreateAgentRequest.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
     CreateAgentRequest.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
     CreateAgentRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
     CreateAgentRequest.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
@@ -651,6 +669,10 @@ module Aws::BedrockAgent
     GetKnowledgeBaseResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBase, required: true, location_name: "knowledgeBase"))
     GetKnowledgeBaseResponse.struct_class = Types::GetKnowledgeBaseResponse
 
+    GuardrailConfiguration.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location_name: "guardrailIdentifier"))
+    GuardrailConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location_name: "guardrailVersion"))
+    GuardrailConfiguration.struct_class = Types::GuardrailConfiguration
+
     InferenceConfiguration.add_member(:maximum_length, Shapes::ShapeRef.new(shape: MaximumLength, location_name: "maximumLength"))
     InferenceConfiguration.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: StopSequences, location_name: "stopSequences"))
     InferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
@@ -813,6 +835,20 @@ module Aws::BedrockAgent
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MongoDbAtlasConfiguration.add_member(:collection_name, Shapes::ShapeRef.new(shape: MongoDbAtlasCollectionName, required: true, location_name: "collectionName"))
+    MongoDbAtlasConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
+    MongoDbAtlasConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: MongoDbAtlasDatabaseName, required: true, location_name: "databaseName"))
+    MongoDbAtlasConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: MongoDbAtlasEndpoint, required: true, location_name: "endpoint"))
+    MongoDbAtlasConfiguration.add_member(:endpoint_service_name, Shapes::ShapeRef.new(shape: MongoDbAtlasEndpointServiceName, location_name: "endpointServiceName"))
+    MongoDbAtlasConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: MongoDbAtlasFieldMapping, required: true, location_name: "fieldMapping"))
+    MongoDbAtlasConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: MongoDbAtlasIndexName, required: true, location_name: "vectorIndexName"))
+    MongoDbAtlasConfiguration.struct_class = Types::MongoDbAtlasConfiguration
+
+    MongoDbAtlasFieldMapping.add_member(:metadata_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "metadataField"))
+    MongoDbAtlasFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
+    MongoDbAtlasFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
+    MongoDbAtlasFieldMapping.struct_class = Types::MongoDbAtlasFieldMapping
+
     OpenSearchServerlessConfiguration.add_member(:collection_arn, Shapes::ShapeRef.new(shape: OpenSearchServerlessCollectionArn, required: true, location_name: "collectionArn"))
     OpenSearchServerlessConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: OpenSearchServerlessFieldMapping, required: true, location_name: "fieldMapping"))
     OpenSearchServerlessConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: OpenSearchServerlessIndexName, required: true, location_name: "vectorIndexName"))
@@ -921,6 +957,7 @@ module Aws::BedrockAgent
 
     StopSequences.member = Shapes::ShapeRef.new(shape: String)
 
+    StorageConfiguration.add_member(:mongo_db_atlas_configuration, Shapes::ShapeRef.new(shape: MongoDbAtlasConfiguration, location_name: "mongoDbAtlasConfiguration"))
     StorageConfiguration.add_member(:opensearch_serverless_configuration, Shapes::ShapeRef.new(shape: OpenSearchServerlessConfiguration, location_name: "opensearchServerlessConfiguration"))
     StorageConfiguration.add_member(:pinecone_configuration, Shapes::ShapeRef.new(shape: PineconeConfiguration, location_name: "pineconeConfiguration"))
     StorageConfiguration.add_member(:rds_configuration, Shapes::ShapeRef.new(shape: RdsConfiguration, location_name: "rdsConfiguration"))
@@ -989,6 +1026,7 @@ module Aws::BedrockAgent
     UpdateAgentRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
     UpdateAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateAgentRequest.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location_name: "foundationModel"))
+    UpdateAgentRequest.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
     UpdateAgentRequest.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
     UpdateAgentRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, location_name: "instruction"))
     UpdateAgentRequest.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))

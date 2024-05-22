@@ -146,7 +146,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor scheme: ("internet-facing" | "internal")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor type: ("application" | "network" | "gateway")
-      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       attr_accessor customer_owned_ipv_4_pool: ::String
       SENSITIVE: []
     end
@@ -575,7 +575,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor type: ("application" | "network" | "gateway")
       attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
       attr_accessor security_groups: ::Array[::String]
-      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       attr_accessor customer_owned_ipv_4_pool: ::String
       attr_accessor enforce_security_group_inbound_rules_on_private_link_traffic: ::String
       SENSITIVE: []
@@ -820,12 +820,12 @@ module Aws::ElasticLoadBalancingV2
 
     class SetIpAddressTypeInput
       attr_accessor load_balancer_arn: ::String
-      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       SENSITIVE: []
     end
 
     class SetIpAddressTypeOutput
-      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       SENSITIVE: []
     end
 
@@ -856,13 +856,13 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor load_balancer_arn: ::String
       attr_accessor subnets: ::Array[::String]
       attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
-      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       SENSITIVE: []
     end
 
     class SetSubnetsOutput
       attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
-      attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       SENSITIVE: []
     end
 

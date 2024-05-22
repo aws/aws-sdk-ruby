@@ -57,6 +57,7 @@ module Aws::CodeBuild
     BuildStatusConfig = Shapes::StructureShape.new(name: 'BuildStatusConfig')
     BuildSummaries = Shapes::ListShape.new(name: 'BuildSummaries')
     BuildSummary = Shapes::StructureShape.new(name: 'BuildSummary')
+    BuildTimeOut = Shapes::IntegerShape.new(name: 'BuildTimeOut')
     Builds = Shapes::ListShape.new(name: 'Builds')
     BuildsNotDeleted = Shapes::ListShape.new(name: 'BuildsNotDeleted')
     CacheMode = Shapes::StringShape.new(name: 'CacheMode')
@@ -519,6 +520,8 @@ module Aws::CodeBuild
     CreateFleetInput.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, required: true, location_name: "computeType"))
     CreateFleetInput.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationInput, location_name: "scalingConfiguration"))
     CreateFleetInput.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
+    CreateFleetInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    CreateFleetInput.add_member(:fleet_service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fleetServiceRole"))
     CreateFleetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateFleetInput.struct_class = Types::CreateFleetInput
 
@@ -536,7 +539,7 @@ module Aws::CodeBuild
     CreateProjectInput.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
     CreateProjectInput.add_member(:environment, Shapes::ShapeRef.new(shape: ProjectEnvironment, required: true, location_name: "environment"))
     CreateProjectInput.add_member(:service_role, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "serviceRole"))
-    CreateProjectInput.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeOut, location_name: "timeoutInMinutes"))
+    CreateProjectInput.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: BuildTimeOut, location_name: "timeoutInMinutes"))
     CreateProjectInput.add_member(:queued_timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeOut, location_name: "queuedTimeoutInMinutes"))
     CreateProjectInput.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
     CreateProjectInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -688,6 +691,8 @@ module Aws::CodeBuild
     Fleet.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeType"))
     Fleet.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationOutput, location_name: "scalingConfiguration"))
     Fleet.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
+    Fleet.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    Fleet.add_member(:fleet_service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fleetServiceRole"))
     Fleet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Fleet.struct_class = Types::Fleet
 
@@ -897,7 +902,7 @@ module Aws::CodeBuild
     Project.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
     Project.add_member(:environment, Shapes::ShapeRef.new(shape: ProjectEnvironment, location_name: "environment"))
     Project.add_member(:service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "serviceRole"))
-    Project.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeOut, location_name: "timeoutInMinutes"))
+    Project.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: BuildTimeOut, location_name: "timeoutInMinutes"))
     Project.add_member(:queued_timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeOut, location_name: "queuedTimeoutInMinutes"))
     Project.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
     Project.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -1147,7 +1152,7 @@ module Aws::CodeBuild
     StartBuildBatchInput.add_member(:cache_override, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cacheOverride"))
     StartBuildBatchInput.add_member(:service_role_override, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "serviceRoleOverride"))
     StartBuildBatchInput.add_member(:privileged_mode_override, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "privilegedModeOverride"))
-    StartBuildBatchInput.add_member(:build_timeout_in_minutes_override, Shapes::ShapeRef.new(shape: TimeOut, location_name: "buildTimeoutInMinutesOverride"))
+    StartBuildBatchInput.add_member(:build_timeout_in_minutes_override, Shapes::ShapeRef.new(shape: BuildTimeOut, location_name: "buildTimeoutInMinutesOverride"))
     StartBuildBatchInput.add_member(:queued_timeout_in_minutes_override, Shapes::ShapeRef.new(shape: TimeOut, location_name: "queuedTimeoutInMinutesOverride"))
     StartBuildBatchInput.add_member(:encryption_key_override, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKeyOverride"))
     StartBuildBatchInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: String, location_name: "idempotencyToken"))
@@ -1184,7 +1189,7 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:cache_override, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cacheOverride"))
     StartBuildInput.add_member(:service_role_override, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "serviceRoleOverride"))
     StartBuildInput.add_member(:privileged_mode_override, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "privilegedModeOverride"))
-    StartBuildInput.add_member(:timeout_in_minutes_override, Shapes::ShapeRef.new(shape: TimeOut, location_name: "timeoutInMinutesOverride"))
+    StartBuildInput.add_member(:timeout_in_minutes_override, Shapes::ShapeRef.new(shape: BuildTimeOut, location_name: "timeoutInMinutesOverride"))
     StartBuildInput.add_member(:queued_timeout_in_minutes_override, Shapes::ShapeRef.new(shape: TimeOut, location_name: "queuedTimeoutInMinutesOverride"))
     StartBuildInput.add_member(:encryption_key_override, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKeyOverride"))
     StartBuildInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: String, location_name: "idempotencyToken"))
@@ -1251,6 +1256,8 @@ module Aws::CodeBuild
     UpdateFleetInput.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeType"))
     UpdateFleetInput.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationInput, location_name: "scalingConfiguration"))
     UpdateFleetInput.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
+    UpdateFleetInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    UpdateFleetInput.add_member(:fleet_service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fleetServiceRole"))
     UpdateFleetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     UpdateFleetInput.struct_class = Types::UpdateFleetInput
 
@@ -1268,7 +1275,7 @@ module Aws::CodeBuild
     UpdateProjectInput.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
     UpdateProjectInput.add_member(:environment, Shapes::ShapeRef.new(shape: ProjectEnvironment, location_name: "environment"))
     UpdateProjectInput.add_member(:service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "serviceRole"))
-    UpdateProjectInput.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeOut, location_name: "timeoutInMinutes"))
+    UpdateProjectInput.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: BuildTimeOut, location_name: "timeoutInMinutes"))
     UpdateProjectInput.add_member(:queued_timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeOut, location_name: "queuedTimeoutInMinutes"))
     UpdateProjectInput.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
     UpdateProjectInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -1341,6 +1348,7 @@ module Aws::CodeBuild
         "endpointPrefix" => "codebuild",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS CodeBuild",
         "serviceId" => "CodeBuild",
         "signatureVersion" => "v4",

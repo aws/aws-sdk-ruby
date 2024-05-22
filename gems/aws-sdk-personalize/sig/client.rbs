@@ -169,6 +169,27 @@ module Aws
                            ) -> _CreateCampaignResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCampaignResponseSuccess
 
+      interface _CreateDataDeletionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataDeletionJobResponse]
+        def data_deletion_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_data_deletion_job-instance_method
+      def create_data_deletion_job: (
+                                      job_name: ::String,
+                                      dataset_group_arn: ::String,
+                                      data_source: {
+                                        data_location: ::String?
+                                      },
+                                      role_arn: ::String,
+                                      ?tags: Array[
+                                        {
+                                          tag_key: ::String,
+                                          tag_value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateDataDeletionJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataDeletionJobResponseSuccess
+
       interface _CreateDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
         def dataset_arn: () -> ::String
@@ -541,6 +562,16 @@ module Aws
                              ) -> _DescribeCampaignResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCampaignResponseSuccess
 
+      interface _DescribeDataDeletionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataDeletionJobResponse]
+        def data_deletion_job: () -> Types::DataDeletionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_data_deletion_job-instance_method
+      def describe_data_deletion_job: (
+                                        data_deletion_job_arn: ::String
+                                      ) -> _DescribeDataDeletionJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataDeletionJobResponseSuccess
+
       interface _DescribeDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
         def dataset: () -> Types::Dataset
@@ -720,6 +751,19 @@ module Aws
                             ?max_results: ::Integer
                           ) -> _ListCampaignsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCampaignsResponseSuccess
+
+      interface _ListDataDeletionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataDeletionJobsResponse]
+        def data_deletion_jobs: () -> ::Array[Types::DataDeletionJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_data_deletion_jobs-instance_method
+      def list_data_deletion_jobs: (
+                                     ?dataset_group_arn: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListDataDeletionJobsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataDeletionJobsResponseSuccess
 
       interface _ListDatasetExportJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetExportJobsResponse]

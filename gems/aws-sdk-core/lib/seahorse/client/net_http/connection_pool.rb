@@ -119,11 +119,7 @@ module Seahorse
         #   pool, not counting those currently in use.
         def size
           @pool_mutex.synchronize do
-            size = 0
-            @pool.each_pair do |endpoint,sessions|
-              size += sessions.size
-            end
-            size
+            @pool.values.flatten.size
           end
         end
 
@@ -142,9 +138,7 @@ module Seahorse
         # @return [nil]
         def empty!
           @pool_mutex.synchronize do
-            @pool.each_pair do |endpoint,sessions|
-              sessions.each(&:finish)
-            end
+            @pool.values.flatten.map(&:finish)
             @pool.clear
           end
           nil
@@ -312,7 +306,7 @@ module Seahorse
         # @note **Must** be called behind a `@pool_mutex` synchronize block.
         def _clean
           now = Aws::Util.monotonic_milliseconds
-          @pool.each_pair do |endpoint,sessions|
+          @pool.values.each do |sessions|
             sessions.delete_if do |session|
               if session.last_used.nil? or now - session.last_used > http_idle_timeout * 1000
                 session.finish

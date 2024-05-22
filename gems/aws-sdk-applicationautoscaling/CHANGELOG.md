@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2024-05-17)
+------------------
+
+* Feature - add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+1.82.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.81.0 (2024-04-25)
 ------------------
 

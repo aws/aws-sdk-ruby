@@ -1411,6 +1411,10 @@ module Aws::MedicalImaging
     #   DICOM import job.
     #   @return [String]
     #
+    # @!attribute [rw] input_owner_account_id
+    #   The account ID of the source S3 bucket owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/StartDICOMImportJobRequest AWS API Documentation
     #
     class StartDICOMImportJobRequest < Struct.new(
@@ -1419,7 +1423,8 @@ module Aws::MedicalImaging
       :client_token,
       :datastore_id,
       :input_s3_uri,
-      :output_s3_uri)
+      :output_s3_uri,
+      :input_owner_account_id)
       SENSITIVE = []
       include Aws::Structure
     end

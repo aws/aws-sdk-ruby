@@ -309,7 +309,8 @@ module Aws
                                     client_token: ::String,
                                     datastore_id: ::String,
                                     input_s3_uri: ::String,
-                                    output_s3_uri: ::String
+                                    output_s3_uri: ::String,
+                                    ?input_owner_account_id: ::String
                                   ) -> _StartDICOMImportJobResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDICOMImportJobResponseSuccess
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2024-05-07)
+------------------
+
+* Feature - AWS Resilience Hub has expanded its drift detection capabilities by introducing a new type of drift detection - application resource drift. This new enhancement detects changes, such as the addition or deletion of resources within the application's input sources.
+
 1.26.0 (2024-04-25)
 ------------------
 

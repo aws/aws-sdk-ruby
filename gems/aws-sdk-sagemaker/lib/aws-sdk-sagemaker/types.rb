@@ -9574,6 +9574,13 @@ module Aws::SageMaker
     #   work items.
     #   @return [Types::NotificationConfiguration]
     #
+    # @!attribute [rw] worker_access_configuration
+    #   Use this optional parameter to constrain access to an Amazon S3
+    #   resource based on the IP address using supported IAM global
+    #   condition keys. The Amazon S3 resource is accessed in the worker
+    #   portal using a Amazon S3 presigned URL.
+    #   @return [Types::WorkerAccessConfiguration]
+    #
     # @!attribute [rw] tags
     #   An array of key-value pairs.
     #
@@ -9595,6 +9602,7 @@ module Aws::SageMaker
       :member_definitions,
       :description,
       :notification_configuration,
+      :worker_access_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -22581,6 +22589,41 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Use this parameter to specify a supported global condition key that is
+    # added to the IAM policy.
+    #
+    # @!attribute [rw] source_ip
+    #   When `SourceIp` is `Enabled` the worker's IP address when a task is
+    #   rendered in the worker portal is added to the IAM policy as a
+    #   `Condition` used to generate the Amazon S3 presigned URL. This IP
+    #   address is checked by Amazon S3 and must match in order for the
+    #   Amazon S3 resource to be rendered in the worker portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_source_ip
+    #   When `VpcSourceIp` is `Enabled` the worker's IP address when a task
+    #   is rendered in private worker portal inside the VPC is added to the
+    #   IAM policy as a `Condition` used to generate the Amazon S3 presigned
+    #   URL. To render the task successfully Amazon S3 checks that the
+    #   presigned URL is being accessed over an Amazon S3 VPC Endpoint, and
+    #   that the worker's IP address matches the IP address in the IAM
+    #   policy. To learn more about configuring private worker portal, see
+    #   [Use Amazon VPC mode from a private worker portal][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/samurai-vpc-worker-portal.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IamPolicyConstraints AWS API Documentation
+    #
+    class IamPolicyConstraints < Struct.new(
+      :source_ip,
+      :vpc_source_ip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon SageMaker Canvas application setting where you configure
     # OAuth for connecting to an external data source, such as Snowflake.
     #
@@ -24895,11 +24938,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of items to return in the response. If the total
-    #   number of items available is more than the value specified, a
-    #   `NextToken` is provided in the response. To resume pagination,
-    #   provide the `NextToken` value in the as part of a subsequent call.
-    #   The default value is 10.
+    #   This parameter defines the maximum number of results that can be
+    #   returned in a single response. The `MaxResults` parameter is an
+    #   upper bound, not a target. If there are more results available than
+    #   the value specified, a `NextToken` is provided in the response. The
+    #   `NextToken` indicates that the user should get the next set of
+    #   results by providing this token as a part of a subsequent call. The
+    #   default value for `MaxResults` is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_order
@@ -25911,11 +25956,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of items to return in the response. If the total
-    #   number of items available is more than the value specified, a
-    #   `NextToken` is provided in the response. To resume pagination,
-    #   provide the `NextToken` value in the as part of a subsequent call.
-    #   The default value is 10.
+    #   This parameter defines the maximum number of results that can be
+    #   returned in a single response. The `MaxResults` parameter is an
+    #   upper bound, not a target. If there are more results available than
+    #   the value specified, a `NextToken` is provided in the response. The
+    #   `NextToken` indicates that the user should get the next set of
+    #   results by providing this token as a part of a subsequent call. The
+    #   default value for `MaxResults` is 10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListDomainsRequest AWS API Documentation
@@ -29235,11 +29282,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of items to return in the response. If the total
-    #   number of items available is more than the value specified, a
-    #   `NextToken` is provided in the response. To resume pagination,
-    #   provide the `NextToken` value in the as part of a subsequent call.
-    #   The default value is 10.
+    #   This parameter defines the maximum number of results that can be
+    #   returned in a single response. The `MaxResults` parameter is an
+    #   upper bound, not a target. If there are more results available than
+    #   the value specified, a `NextToken` is provided in the response. The
+    #   `NextToken` indicates that the user should get the next set of
+    #   results by providing this token as a part of a subsequent call. The
+    #   default value for `MaxResults` is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_order
@@ -29919,11 +29968,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of items to return in the response. If the total
-    #   number of items available is more than the value specified, a
-    #   `NextToken` is provided in the response. To resume pagination,
-    #   provide the `NextToken` value in the as part of a subsequent call.
-    #   The default value is 10.
+    #   This parameter defines the maximum number of results that can be
+    #   returned in a single response. The `MaxResults` parameter is an
+    #   upper bound, not a target. If there are more results available than
+    #   the value specified, a `NextToken` is provided in the response. The
+    #   `NextToken` indicates that the user should get the next set of
+    #   results by providing this token as a part of a subsequent call. The
+    #   default value for `MaxResults` is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_order
@@ -38109,6 +38160,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # This object defines the access restrictions to Amazon S3 resources
+    # that are included in custom worker task templates using the Liquid
+    # filter, `grant_read_access`.
+    #
+    # To learn more about how custom templates are created, see [Create
+    # custom worker task templates][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-custom-templates.html
+    #
+    # @!attribute [rw] iam_policy_constraints
+    #   Use this parameter to specify the allowed request source. Possible
+    #   sources are either `SourceIp` or `VpcSourceIp`.
+    #   @return [Types::IamPolicyConstraints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3Presign AWS API Documentation
+    #
+    class S3Presign < Struct.new(
+      :iam_policy_constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon Simple Storage (Amazon S3) location and security
     # configuration for `OfflineStore`.
     #
@@ -38924,7 +38999,14 @@ module Aws::SageMaker
     end
 
     # Contains information about attribute-based access control (ABAC) for a
-    # training job.
+    # training job. The session chaining configuration uses Amazon Security
+    # Token Service (STS) for your training job to request temporary,
+    # limited-privilege credentials to tenants. For more information, see
+    # [Attribute-based access control (ABAC) for multi-tenancy training][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-access-training-data.html#model-access-training-data-abac
     #
     # @!attribute [rw] enable_session_tag_chaining
     #   Set to `True` to allow SageMaker to extract session tags from a
@@ -44641,13 +44723,21 @@ module Aws::SageMaker
     #   items
     #   @return [Types::NotificationConfiguration]
     #
+    # @!attribute [rw] worker_access_configuration
+    #   Use this optional parameter to constrain access to an Amazon S3
+    #   resource based on the IP address using supported IAM global
+    #   condition keys. The Amazon S3 resource is accessed in the worker
+    #   portal using a Amazon S3 presigned URL.
+    #   @return [Types::WorkerAccessConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkteamRequest AWS API Documentation
     #
     class UpdateWorkteamRequest < Struct.new(
       :workteam_name,
       :member_definitions,
       :description,
-      :notification_configuration)
+      :notification_configuration,
+      :worker_access_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45036,6 +45126,23 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Use this optional parameter to constrain access to an Amazon S3
+    # resource based on the IP address using supported IAM global condition
+    # keys. The Amazon S3 resource is accessed in the worker portal using a
+    # Amazon S3 presigned URL.
+    #
+    # @!attribute [rw] s3_presign
+    #   Defines any Amazon S3 resource constraints.
+    #   @return [Types::S3Presign]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/WorkerAccessConfiguration AWS API Documentation
+    #
+    class WorkerAccessConfiguration < Struct.new(
+      :s3_presign)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A single private workforce, which is automatically created when you
     # create your first private work team. You can create one private work
     # force in each Amazon Web Services Region. By default, any
@@ -45260,6 +45367,11 @@ module Aws::SageMaker
     #   work teams.
     #   @return [Types::NotificationConfiguration]
     #
+    # @!attribute [rw] worker_access_configuration
+    #   Describes any access constraints that have been defined for Amazon
+    #   S3 resources.
+    #   @return [Types::WorkerAccessConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workteam AWS API Documentation
     #
     class Workteam < Struct.new(
@@ -45272,7 +45384,8 @@ module Aws::SageMaker
       :sub_domain,
       :create_date,
       :last_updated_date,
-      :notification_configuration)
+      :notification_configuration,
+      :worker_access_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

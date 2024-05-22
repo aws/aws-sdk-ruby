@@ -424,8 +424,8 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # A list of user groups and entities from an Amazon Cognito user pool
-    # identity source.
+    # The type of entity that a policy store maps to groups from an Amazon
+    # Cognito user pool identity source.
     #
     # This data type is part of a [CognitoUserPoolConfiguration][1]
     # structure and is a request parameter in [CreateIdentitySource][2].
@@ -448,8 +448,8 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # A list of user groups and entities from an Amazon Cognito user pool
-    # identity source.
+    # The type of entity that a policy store maps to groups from an Amazon
+    # Cognito user pool identity source.
     #
     # This data type is part of an [CognitoUserPoolConfigurationDetail][1]
     # structure and is a response parameter to [GetIdentitySource][2].
@@ -472,8 +472,8 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # A list of user groups and entities from an Amazon Cognito user pool
-    # identity source.
+    # The type of entity that a policy store maps to groups from an Amazon
+    # Cognito user pool identity source.
     #
     # This data type is part of an [CognitoUserPoolConfigurationItem][1]
     # structure and is a response parameter to [ListIdentitySources][2].
@@ -505,7 +505,8 @@ module Aws::VerifiedPermissions
     # [CreateIdentitySource][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
+    # \{"groupEntityType": "MyCorp::Group"\}\}`
     #
     #
     #
@@ -532,8 +533,8 @@ module Aws::VerifiedPermissions
     #   @return [Array<String>]
     #
     # @!attribute [rw] group_configuration
-    #   The configuration of the user groups from an Amazon Cognito user
-    #   pool identity source.
+    #   The type of entity that a policy store maps to groups from an Amazon
+    #   Cognito user pool identity source.
     #   @return [Types::CognitoGroupConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfiguration AWS API Documentation
@@ -555,7 +556,8 @@ module Aws::VerifiedPermissions
     # [GetIdentitySource][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
+    # \{"groupEntityType": "MyCorp::Group"\}\}`
     #
     #
     #
@@ -590,8 +592,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] group_configuration
-    #   The configuration of the user groups from an Amazon Cognito user
-    #   pool identity source.
+    #   The type of entity that a policy store maps to groups from an Amazon
+    #   Cognito user pool identity source.
     #   @return [Types::CognitoGroupConfigurationDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfigurationDetail AWS API Documentation
@@ -614,7 +616,8 @@ module Aws::VerifiedPermissions
     # [ListIdentitySources][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
+    # \{"groupEntityType": "MyCorp::Group"\}\}`
     #
     #
     #
@@ -649,8 +652,8 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] group_configuration
-    #   The configuration of the user groups from an Amazon Cognito user
-    #   pool identity source.
+    #   The type of entity that a policy store maps to groups from an Amazon
+    #   Cognito user pool identity source.
     #   @return [Types::CognitoGroupConfigurationItem]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfigurationItem AWS API Documentation
@@ -670,7 +673,7 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> At this time, the only valid member of this structure is a Amazon
     # Cognito user pool configuration.
     #
-    #  You must specify a `userPoolArn`, and optionally, a `ClientId`.
+    #  Specifies a `userPoolArn`, a `groupConfiguration`, and a `ClientId`.
     #
     #  </note>
     #
@@ -727,7 +730,8 @@ module Aws::VerifiedPermissions
     #   Contains configuration details of a Amazon Cognito user pool that
     #   Verified Permissions can use as a source of authenticated identities
     #   as entities. It specifies the [Amazon Resource Name (ARN)][1] of a
-    #   Amazon Cognito user pool and one or more application client IDs.
+    #   Amazon Cognito user pool, the policy store entity that you want to
+    #   assign to user groups, and one or more application client IDs.
     #
     #   Example:
     #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
@@ -767,7 +771,8 @@ module Aws::VerifiedPermissions
     #   Contains configuration details of a Amazon Cognito user pool that
     #   Verified Permissions can use as a source of authenticated identities
     #   as entities. It specifies the [Amazon Resource Name (ARN)][1] of a
-    #   Amazon Cognito user pool and one or more application client IDs.
+    #   Amazon Cognito user pool, the policy store entity that you want to
+    #   assign to user groups, and one or more application client IDs.
     #
     #   Example:
     #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
@@ -1018,6 +1023,13 @@ module Aws::VerifiedPermissions
     #   policy content.
     #   @return [Types::EntityIdentifier]
     #
+    # @!attribute [rw] actions
+    #   The action that a policy permits or forbids. For example,
+    #   `\{"actions": [\{"actionId": "ViewPhoto", "actionType":
+    #   "PhotoFlash::Action"\}, \{"entityID": "SharePhoto", "entityType":
+    #   "PhotoFlash::Action"\}]\}`.
+    #   @return [Array<Types::ActionIdentifier>]
+    #
     # @!attribute [rw] created_date
     #   The date and time the policy was originally created.
     #   @return [Time]
@@ -1025,6 +1037,11 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] last_updated_date
     #   The date and time the policy was last updated.
     #   @return [Time]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the decision that a policy returns to an authorization
+    #   request. For example, `"effect": "Permit"`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CreatePolicyOutput AWS API Documentation
     #
@@ -1034,8 +1051,10 @@ module Aws::VerifiedPermissions
       :policy_type,
       :principal,
       :resource,
+      :actions,
       :created_date,
-      :last_updated_date)
+      :last_updated_date,
+      :effect)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1591,6 +1610,13 @@ module Aws::VerifiedPermissions
     #   policy content.
     #   @return [Types::EntityIdentifier]
     #
+    # @!attribute [rw] actions
+    #   The action that a policy permits or forbids. For example,
+    #   `\{"actions": [\{"actionId": "ViewPhoto", "actionType":
+    #   "PhotoFlash::Action"\}, \{"entityID": "SharePhoto", "entityType":
+    #   "PhotoFlash::Action"\}]\}`.
+    #   @return [Array<Types::ActionIdentifier>]
+    #
     # @!attribute [rw] definition
     #   The definition of the requested policy.
     #   @return [Types::PolicyDefinitionDetail]
@@ -1603,6 +1629,11 @@ module Aws::VerifiedPermissions
     #   The date and time that the policy was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] effect
+    #   The effect of the decision that a policy returns to an authorization
+    #   request. For example, `"effect": "Permit"`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyOutput AWS API Documentation
     #
     class GetPolicyOutput < Struct.new(
@@ -1611,9 +1642,11 @@ module Aws::VerifiedPermissions
       :policy_type,
       :principal,
       :resource,
+      :actions,
       :definition,
       :created_date,
-      :last_updated_date)
+      :last_updated_date,
+      :effect)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2179,7 +2212,7 @@ module Aws::VerifiedPermissions
     #   the results.
     #
     #   If you do not specify this parameter, the operation defaults to 10
-    #   identity sources per response. You can specify a maximum of 200
+    #   identity sources per response. You can specify a maximum of 50
     #   identity sources per response.
     #   @return [Integer]
     #
@@ -2600,6 +2633,13 @@ module Aws::VerifiedPermissions
     #   The resource associated with the policy.
     #   @return [Types::EntityIdentifier]
     #
+    # @!attribute [rw] actions
+    #   The action that a policy permits or forbids. For example,
+    #   `\{"actions": [\{"actionId": "ViewPhoto", "actionType":
+    #   "PhotoFlash::Action"\}, \{"entityID": "SharePhoto", "entityType":
+    #   "PhotoFlash::Action"\}]\}`.
+    #   @return [Array<Types::ActionIdentifier>]
+    #
     # @!attribute [rw] definition
     #   The policy definition of an item in the list of policies returned.
     #   @return [Types::PolicyDefinitionItem]
@@ -2612,6 +2652,11 @@ module Aws::VerifiedPermissions
     #   The date and time the policy was most recently updated.
     #   @return [Time]
     #
+    # @!attribute [rw] effect
+    #   The effect of the decision that a policy returns to an authorization
+    #   request. For example, `"effect": "Permit"`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/PolicyItem AWS API Documentation
     #
     class PolicyItem < Struct.new(
@@ -2620,9 +2665,11 @@ module Aws::VerifiedPermissions
       :policy_type,
       :principal,
       :resource,
+      :actions,
       :definition,
       :created_date,
-      :last_updated_date)
+      :last_updated_date,
+      :effect)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3067,8 +3114,8 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # A list of user groups and entities from an Amazon Cognito user pool
-    # identity source.
+    # The user group entities from an Amazon Cognito user pool identity
+    # source.
     #
     # @!attribute [rw] group_entity_type
     #   The name of the schema entity type that's mapped to the user pool
@@ -3311,6 +3358,13 @@ module Aws::VerifiedPermissions
     #   policy content.
     #   @return [Types::EntityIdentifier]
     #
+    # @!attribute [rw] actions
+    #   The action that a policy permits or forbids. For example,
+    #   `\{"actions": [\{"actionId": "ViewPhoto", "actionType":
+    #   "PhotoFlash::Action"\}, \{"entityID": "SharePhoto", "entityType":
+    #   "PhotoFlash::Action"\}]\}`.
+    #   @return [Array<Types::ActionIdentifier>]
+    #
     # @!attribute [rw] created_date
     #   The date and time that the policy was originally created.
     #   @return [Time]
@@ -3318,6 +3372,11 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] last_updated_date
     #   The date and time that the policy was most recently updated.
     #   @return [Time]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the decision that a policy returns to an authorization
+    #   request. For example, `"effect": "Permit"`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdatePolicyOutput AWS API Documentation
     #
@@ -3327,8 +3386,10 @@ module Aws::VerifiedPermissions
       :policy_type,
       :principal,
       :resource,
+      :actions,
       :created_date,
-      :last_updated_date)
+      :last_updated_date,
+      :effect)
       SENSITIVE = []
       include Aws::Structure
     end

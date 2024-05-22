@@ -131,6 +131,36 @@ module Aws
                                     ) -> _CreateWorkspaceApiKeyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceApiKeyResponseSuccess
 
+      interface _CreateWorkspaceServiceAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceServiceAccountResponse]
+        def grafana_role: () -> ("ADMIN" | "EDITOR" | "VIEWER")
+        def id: () -> ::String
+        def name: () -> ::String
+        def workspace_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#create_workspace_service_account-instance_method
+      def create_workspace_service_account: (
+                                              grafana_role: ("ADMIN" | "EDITOR" | "VIEWER"),
+                                              name: ::String,
+                                              workspace_id: ::String
+                                            ) -> _CreateWorkspaceServiceAccountResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceServiceAccountResponseSuccess
+
+      interface _CreateWorkspaceServiceAccountTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceServiceAccountTokenResponse]
+        def service_account_id: () -> ::String
+        def service_account_token: () -> Types::ServiceAccountTokenSummaryWithKey
+        def workspace_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#create_workspace_service_account_token-instance_method
+      def create_workspace_service_account_token: (
+                                                    name: ::String,
+                                                    seconds_to_live: ::Integer,
+                                                    service_account_id: ::String,
+                                                    workspace_id: ::String
+                                                  ) -> _CreateWorkspaceServiceAccountTokenResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceServiceAccountTokenResponseSuccess
+
       interface _DeleteWorkspaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceResponse]
         def workspace: () -> Types::WorkspaceDescription
@@ -152,6 +182,32 @@ module Aws
                                       workspace_id: ::String
                                     ) -> _DeleteWorkspaceApiKeyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceApiKeyResponseSuccess
+
+      interface _DeleteWorkspaceServiceAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceServiceAccountResponse]
+        def service_account_id: () -> ::String
+        def workspace_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#delete_workspace_service_account-instance_method
+      def delete_workspace_service_account: (
+                                              service_account_id: ::String,
+                                              workspace_id: ::String
+                                            ) -> _DeleteWorkspaceServiceAccountResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceServiceAccountResponseSuccess
+
+      interface _DeleteWorkspaceServiceAccountTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceServiceAccountTokenResponse]
+        def service_account_id: () -> ::String
+        def token_id: () -> ::String
+        def workspace_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#delete_workspace_service_account_token-instance_method
+      def delete_workspace_service_account_token: (
+                                                    service_account_id: ::String,
+                                                    token_id: ::String,
+                                                    workspace_id: ::String
+                                                  ) -> _DeleteWorkspaceServiceAccountTokenResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceServiceAccountTokenResponseSuccess
 
       interface _DescribeWorkspaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspaceResponse]
@@ -233,6 +289,36 @@ module Aws
                            ?workspace_id: ::String
                          ) -> _ListVersionsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVersionsResponseSuccess
+
+      interface _ListWorkspaceServiceAccountTokensResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspaceServiceAccountTokensResponse]
+        def next_token: () -> ::String
+        def service_account_id: () -> ::String
+        def service_account_tokens: () -> ::Array[Types::ServiceAccountTokenSummary]
+        def workspace_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#list_workspace_service_account_tokens-instance_method
+      def list_workspace_service_account_tokens: (
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String,
+                                                   service_account_id: ::String,
+                                                   workspace_id: ::String
+                                                 ) -> _ListWorkspaceServiceAccountTokensResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkspaceServiceAccountTokensResponseSuccess
+
+      interface _ListWorkspaceServiceAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspaceServiceAccountsResponse]
+        def next_token: () -> ::String
+        def service_accounts: () -> ::Array[Types::ServiceAccountSummary]
+        def workspace_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#list_workspace_service_accounts-instance_method
+      def list_workspace_service_accounts: (
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String,
+                                             workspace_id: ::String
+                                           ) -> _ListWorkspaceServiceAccountsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkspaceServiceAccountsResponseSuccess
 
       interface _ListWorkspacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspacesResponse]

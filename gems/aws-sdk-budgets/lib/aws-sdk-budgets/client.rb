@@ -301,8 +301,9 @@ module Aws::Budgets
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -446,6 +447,11 @@ module Aws::Budgets
     #   notifications and subscribers in your `CreateBudget` call, Amazon Web
     #   Services creates the notifications and subscribers for you.
     #
+    # @option params [Array<Types::ResourceTag>] :resource_tags
+    #   An optional list of tags to associate with the specified budget. Each
+    #   tag consists of a key and a value, and each key must be unique for the
+    #   resource.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -523,6 +529,12 @@ module Aws::Budgets
     #         ],
     #       },
     #     ],
+    #     resource_tags: [
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @overload create_budget(params = {})
@@ -565,6 +577,11 @@ module Aws::Budgets
     # @option params [required, Array<Types::Subscriber>] :subscribers
     #   A list of subscribers.
     #
+    # @option params [Array<Types::ResourceTag>] :resource_tags
+    #   An optional list of tags to associate with the specified budget
+    #   action. Each tag consists of a key and a value, and each key must be
+    #   unique for the resource.
+    #
     # @return [Types::CreateBudgetActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBudgetActionResponse#account_id #account_id} => String
@@ -605,6 +622,12 @@ module Aws::Budgets
     #       {
     #         subscription_type: "SNS", # required, accepts SNS, EMAIL
     #         address: "SubscriberAddress", # required
+    #       },
+    #     ],
+    #     resource_tags: [
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
     #       },
     #     ],
     #   })
@@ -1605,6 +1628,87 @@ module Aws::Budgets
       req.send_request(options)
     end
 
+    # Lists tags associated with a budget or budget action resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The unique identifier for the resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_tags #=> Array
+    #   resp.resource_tags[0].key #=> String
+    #   resp.resource_tags[0].value #=> String
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates tags for a budget or budget action resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The unique identifier for the resource.
+    #
+    # @option params [required, Array<Types::ResourceTag>] :resource_tags
+    #   The tags associated with the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     resource_tags: [ # required
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes tags associated with a budget or budget action resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The unique identifier for the resource.
+    #
+    # @option params [required, Array<String>] :resource_tag_keys
+    #   The key that's associated with the tag.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     resource_tag_keys: ["ResourceTagKey"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates a budget. You can change every part of a budget except for the
     # `budgetName` and the `calculatedSpend`. When you modify a budget, the
     # `calculatedSpend` drops to zero until Amazon Web Services has new
@@ -1943,7 +2047,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

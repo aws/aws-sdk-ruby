@@ -531,6 +531,7 @@ module Aws::SecretsManager
         "endpointPrefix" => "secretsmanager",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Secrets Manager",
         "serviceId" => "Secrets Manager",
         "signatureVersion" => "v4",

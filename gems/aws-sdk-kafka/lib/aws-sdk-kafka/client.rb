@@ -301,8 +301,9 @@ module Aws::Kafka
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -1336,6 +1337,10 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info.source_cluster_info.broker_count_update_info.created_broker_ids #=> Array
+    #   resp.cluster_operation_info.source_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
+    #   resp.cluster_operation_info.source_cluster_info.broker_count_update_info.deleted_broker_ids #=> Array
+    #   resp.cluster_operation_info.source_cluster_info.broker_count_update_info.deleted_broker_ids[0] #=> Float
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].provisioned_throughput.enabled #=> Boolean
@@ -1370,6 +1375,10 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info.target_cluster_info.broker_count_update_info.created_broker_ids #=> Array
+    #   resp.cluster_operation_info.target_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
+    #   resp.cluster_operation_info.target_cluster_info.broker_count_update_info.deleted_broker_ids #=> Array
+    #   resp.cluster_operation_info.target_cluster_info.broker_count_update_info.deleted_broker_ids[0] #=> Float
     #   resp.cluster_operation_info.vpc_connection_info.vpc_connection_arn #=> String
     #   resp.cluster_operation_info.vpc_connection_info.owner #=> String
     #   resp.cluster_operation_info.vpc_connection_info.user_identity.type #=> String, one of "AWSACCOUNT", "AWSSERVICE"
@@ -1445,6 +1454,10 @@ module Aws::Kafka
     #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info.provisioned.source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_count_update_info.created_broker_ids #=> Array
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_count_update_info.deleted_broker_ids #=> Array
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_count_update_info.deleted_broker_ids[0] #=> Float
     #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_ebs_volume_info[0].provisioned_throughput.enabled #=> Boolean
@@ -1479,6 +1492,10 @@ module Aws::Kafka
     #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info.provisioned.target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_count_update_info.created_broker_ids #=> Array
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_count_update_info.deleted_broker_ids #=> Array
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_count_update_info.deleted_broker_ids[0] #=> Float
     #   resp.cluster_operation_info.provisioned.vpc_connection_info.vpc_connection_arn #=> String
     #   resp.cluster_operation_info.provisioned.vpc_connection_info.owner #=> String
     #   resp.cluster_operation_info.provisioned.vpc_connection_info.user_identity.type #=> String, one of "AWSACCOUNT", "AWSSERVICE"
@@ -1887,6 +1904,10 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info_list[0].source_cluster_info.broker_count_update_info.created_broker_ids #=> Array
+    #   resp.cluster_operation_info_list[0].source_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
+    #   resp.cluster_operation_info_list[0].source_cluster_info.broker_count_update_info.deleted_broker_ids #=> Array
+    #   resp.cluster_operation_info_list[0].source_cluster_info.broker_count_update_info.deleted_broker_ids[0] #=> Float
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].provisioned_throughput.enabled #=> Boolean
@@ -1921,6 +1942,10 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info_list[0].target_cluster_info.broker_count_update_info.created_broker_ids #=> Array
+    #   resp.cluster_operation_info_list[0].target_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
+    #   resp.cluster_operation_info_list[0].target_cluster_info.broker_count_update_info.deleted_broker_ids #=> Array
+    #   resp.cluster_operation_info_list[0].target_cluster_info.broker_count_update_info.deleted_broker_ids[0] #=> Float
     #   resp.cluster_operation_info_list[0].vpc_connection_info.vpc_connection_arn #=> String
     #   resp.cluster_operation_info_list[0].vpc_connection_info.owner #=> String
     #   resp.cluster_operation_info_list[0].vpc_connection_info.user_identity.type #=> String, one of "AWSACCOUNT", "AWSSERVICE"
@@ -3324,7 +3349,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

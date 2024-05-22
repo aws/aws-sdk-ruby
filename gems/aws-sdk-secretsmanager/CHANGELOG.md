@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2024-05-20)
+------------------
+
+* Feature - add v2 smoke tests and smithy smokeTests trait for SDK testing
+
+1.94.0 (2024-05-16)
+------------------
+
+* Feature - Documentation updates for AWS Secrets Manager
+
+1.93.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.92.0 (2024-04-25)
 ------------------
 

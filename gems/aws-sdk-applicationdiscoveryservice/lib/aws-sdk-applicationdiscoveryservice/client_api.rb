@@ -721,6 +721,7 @@ module Aws::ApplicationDiscoveryService
         "endpointPrefix" => "discovery",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Application Discovery Service",
         "serviceId" => "Application Discovery Service",
         "signatureVersion" => "v4",

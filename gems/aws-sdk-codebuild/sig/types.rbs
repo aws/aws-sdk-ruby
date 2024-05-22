@@ -268,6 +268,8 @@ module Aws::CodeBuild
       attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
       attr_accessor scaling_configuration: Types::ScalingConfigurationInput
       attr_accessor overflow_behavior: ("QUEUE" | "ON_DEMAND")
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor fleet_service_role: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -485,13 +487,15 @@ module Aws::CodeBuild
       attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
       attr_accessor scaling_configuration: Types::ScalingConfigurationOutput
       attr_accessor overflow_behavior: ("QUEUE" | "ON_DEMAND")
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor fleet_service_role: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class FleetStatus
       attr_accessor status_code: ("CREATING" | "UPDATING" | "ROTATING" | "PENDING_DELETION" | "DELETING" | "CREATE_FAILED" | "UPDATE_ROLLBACK_FAILED" | "ACTIVE")
-      attr_accessor context: ("CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor context: ("CREATE_FAILED" | "UPDATE_FAILED" | "ACTION_REQUIRED")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -1162,6 +1166,8 @@ module Aws::CodeBuild
       attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
       attr_accessor scaling_configuration: Types::ScalingConfigurationInput
       attr_accessor overflow_behavior: ("QUEUE" | "ON_DEMAND")
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor fleet_service_role: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end

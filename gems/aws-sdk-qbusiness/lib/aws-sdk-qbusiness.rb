@@ -55,6 +55,6 @@ require_relative 'aws-sdk-qbusiness/event_streams'
 # @!group service
 module Aws::QBusiness
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end

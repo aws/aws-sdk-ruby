@@ -12319,6 +12319,53 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the customer
+    #   managed key registration that you want to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_key_only
+    #   Determines whether the request returns the default key only.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeKeyRegistrationRequest AWS API Documentation
+    #
+    class DescribeKeyRegistrationRequest < Struct.new(
+      :aws_account_id,
+      :default_key_only)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the customer
+    #   managed key registration specified in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_registration
+    #   A list of `RegisteredCustomerManagedKey` objects in a Amazon
+    #   QuickSight account.
+    #   @return [Array<Types::RegisteredCustomerManagedKey>]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeKeyRegistrationResponse AWS API Documentation
+    #
+    class DescribeKeyRegistrationResponse < Struct.new(
+      :aws_account_id,
+      :key_registration,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account that contains the Amazon
     #   QuickSight namespace that you want to describe.
     #   @return [String]
@@ -13620,6 +13667,42 @@ module Aws::QuickSight
     #
     class ExportWithHiddenFieldsOption < Struct.new(
       :availability_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An entry that appears when a `KeyRegistration` update to Amazon
+    # QuickSight fails.
+    #
+    # @!attribute [rw] key_arn
+    #   The ARN of the KMS key that failed to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about why a
+    #   `FailedKeyRegistrationEntry` error occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The HTTP status of a `FailedKeyRegistrationEntry` error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sender_fault
+    #   A boolean that indicates whether a `FailedKeyRegistrationEntry`
+    #   resulted from user error. If the value of this property is `True`,
+    #   the error was caused by user error. If the value of this property is
+    #   `False`, the error occurred on the backend. If your job continues
+    #   fail and with a `False` `SenderFault` value, contact Amazon Web
+    #   Services Support.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FailedKeyRegistrationEntry AWS API Documentation
+    #
+    class FailedKeyRegistrationEntry < Struct.new(
+      :key_arn,
+      :message,
+      :status_code,
+      :sender_fault)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23701,6 +23784,20 @@ module Aws::QuickSight
     #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
+    #   * `READER_PRO`: Reader Pro adds Generative BI capabilities to the
+    #     Reader role. Reader Pros have access to Amazon Q in Amazon
+    #     QuickSight, can build stories with Amazon Q, and can generate
+    #     executive summaries from dashboards.
+    #
+    #   * `AUTHOR_PRO`: Author Pro adds Generative BI capabilities to the
+    #     Author role. Author Pros can author dashboards with natural
+    #     language with Amazon Q, build stories with Amazon Q, create Topics
+    #     for Q&amp;A, and generate executive summaries from dashboards.
+    #
+    #   * `ADMIN_PRO`: Admin Pros are Author Pros who can also manage Amazon
+    #     QuickSight administrative settings. Admin Pro users are billed at
+    #     Author Pro pricing.
+    #
     #   * `RESTRICTED_READER`: This role isn't currently available for use.
     #
     #   * `RESTRICTED_AUTHOR`: This role isn't currently available for use.
@@ -23851,6 +23948,34 @@ module Aws::QuickSight
       :user_invitation_url,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A customer managed key structure that contains the information listed
+    # below:
+    #
+    # * `KeyArn` - The ARN of a KMS key that is registered to a Amazon
+    #   QuickSight account for encryption and decryption use.
+    #
+    # * `DefaultKey` - Indicates whether the current key is set as the
+    #   default key for encryption and decryption use.
+    #
+    # @!attribute [rw] key_arn
+    #   The ARN of the KMS key that is registered to a Amazon QuickSight
+    #   account for encryption and decryption use.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_key
+    #   Indicates whether a `RegisteredCustomerManagedKey` is set as the
+    #   default key for encryption and decryption use.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredCustomerManagedKey AWS API Documentation
+    #
+    class RegisteredCustomerManagedKey < Struct.new(
+      :key_arn,
+      :default_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27291,6 +27416,27 @@ module Aws::QuickSight
       :value_cell_style,
       :metric_header_cell_style,
       :style_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A success entry that occurs when a `KeyRegistration` job is
+    # successfully applied to the Amazon QuickSight account.
+    #
+    # @!attribute [rw] key_arn
+    #   The ARN of the KMS key that is associated with the
+    #   `SuccessfulKeyRegistrationEntry` entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The HTTP status of a `SuccessfulKeyRegistrationEntry` entry.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SuccessfulKeyRegistrationEntry AWS API Documentation
+    #
+    class SuccessfulKeyRegistrationEntry < Struct.new(
+      :key_arn,
+      :status_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31846,6 +31992,49 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the customer
+    #   managed key registration that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_registration
+    #   A list of `RegisteredCustomerManagedKey` objects to be updated to
+    #   the Amazon QuickSight account.
+    #   @return [Array<Types::RegisteredCustomerManagedKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateKeyRegistrationRequest AWS API Documentation
+    #
+    class UpdateKeyRegistrationRequest < Struct.new(
+      :aws_account_id,
+      :key_registration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_key_registration
+    #   A list of all customer managed key registrations that failed to
+    #   update.
+    #   @return [Array<Types::FailedKeyRegistrationEntry>]
+    #
+    # @!attribute [rw] successful_key_registration
+    #   A list of all customer managed key registrations that were
+    #   successfully updated.
+    #   @return [Array<Types::SuccessfulKeyRegistrationEntry>]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateKeyRegistrationResponse AWS API Documentation
+    #
+    class UpdateKeyRegistrationResponse < Struct.new(
+      :failed_key_registration,
+      :successful_key_registration,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The Amazon Web Services account ID associated with your Amazon
     #   QuickSight subscription.
     #   @return [String]
@@ -32637,9 +32826,9 @@ module Aws::QuickSight
     #     QuickSight settings.
     #
     #   * `READER_PRO`: Reader Pro adds Generative BI capabilities to the
-    #     Reader role. Reader Pros have access to Amazon Q Business, can
-    #     build stories with Amazon Q, and can generate executive summaries
-    #     from dashboards.
+    #     Reader role. Reader Pros have access to Amazon Q in Amazon
+    #     QuickSight, can build stories with Amazon Q, and can generate
+    #     executive summaries from dashboards.
     #
     #   * `AUTHOR_PRO`: Author Pro adds Generative BI capabilities to the
     #     Author role. Author Pros can author dashboards with natural
@@ -32913,9 +33102,9 @@ module Aws::QuickSight
     #     Amazon QuickSight settings.
     #
     #   * `READER_PRO`: Reader Pro adds Generative BI capabilities to the
-    #     Reader role. Reader Pros have access to Amazon Q Business, can
-    #     build stories with Amazon Q, and can generate executive summaries
-    #     from dashboards.
+    #     Reader role. Reader Pros have access to Amazon Q in Amazon
+    #     QuickSight, can build stories with Amazon Q, and can generate
+    #     executive summaries from dashboards.
     #
     #   * `AUTHOR_PRO`: Author Pro adds Generative BI capabilities to the
     #     Author role. Author Pros can author dashboards with natural

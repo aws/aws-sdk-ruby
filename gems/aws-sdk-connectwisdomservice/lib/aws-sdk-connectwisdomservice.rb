@@ -52,6 +52,6 @@ require_relative 'aws-sdk-connectwisdomservice/customizations'
 # @!group service
 module Aws::ConnectWisdomService
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end

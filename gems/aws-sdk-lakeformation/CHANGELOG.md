@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2024-05-17)
+------------------
+
+* Feature - Introduces a new API, GetDataLakePrincipal, that returns the identity of the invoking principal
+
+1.50.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.49.0 (2024-04-25)
 ------------------
 

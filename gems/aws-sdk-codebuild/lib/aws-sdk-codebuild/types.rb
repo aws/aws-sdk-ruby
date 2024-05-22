@@ -388,8 +388,9 @@ module Aws::CodeBuild
     #   @return [Types::LogsLocation]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long, in minutes, for CodeBuild to wait before timing out this
-    #   build if it does not get marked as completed.
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to
+    #   wait before timing out this build if it does not get marked as
+    #   completed.
     #   @return [Integer]
     #
     # @!attribute [rw] queued_timeout_in_minutes
@@ -1506,6 +1507,27 @@ module Aws::CodeBuild
     #
     #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
     #     CodeBuild on-demand.
+    #
+    #     <note markdown="1"> If you choose to set your overflow behavior to on-demand while
+    #     creating a VPC-connected fleet, make sure that you add the
+    #     required VPC permissions to your project service role. For more
+    #     information, see [Example policy statement to allow CodeBuild
+    #     access to Amazon Web Services services required to create a VPC
+    #     network interface][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Information about the VPC configuration that CodeBuild accesses.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] fleet_service_role
+    #   The service role associated with the compute fleet.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1525,6 +1547,8 @@ module Aws::CodeBuild
       :compute_type,
       :scaling_configuration,
       :overflow_behavior,
+      :vpc_config,
+      :fleet_service_role,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1571,6 +1595,8 @@ module Aws::CodeBuild
     #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
     #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build.
@@ -1624,9 +1650,9 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
-    #   before it times out any build that has not been marked as completed.
-    #   The default is 60 minutes.
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to
+    #   wait before it times out any build that has not been marked as
+    #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] queued_timeout_in_minutes
@@ -1658,6 +1684,11 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] vpc_config
     #   VpcConfig enables CodeBuild to access resources in an Amazon VPC.
+    #
+    #   <note markdown="1"> If you're using compute fleets during project creation, do not
+    #   provide vpcConfig.
+    #
+    #    </note>
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] badge_enabled
@@ -2447,6 +2478,27 @@ module Aws::CodeBuild
     #
     #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
     #     CodeBuild on-demand.
+    #
+    #     <note markdown="1"> If you choose to set your overflow behavior to on-demand while
+    #     creating a VPC-connected fleet, make sure that you add the
+    #     required VPC permissions to your project service role. For more
+    #     information, see [Example policy statement to allow CodeBuild
+    #     access to Amazon Web Services services required to create a VPC
+    #     network interface][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Information about the VPC configuration that CodeBuild accesses.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] fleet_service_role
+    #   The service role associated with the compute fleet.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2471,6 +2523,8 @@ module Aws::CodeBuild
       :compute_type,
       :scaling_configuration,
       :overflow_behavior,
+      :vpc_config,
+      :fleet_service_role,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2662,6 +2716,7 @@ module Aws::CodeBuild
     # @!attribute [rw] token
     #   For GitHub or GitHub Enterprise, this is the personal access token.
     #   For Bitbucket, this is either the access token or the app password.
+    #   For the `authType` CODECONNECTIONS, this is the `connectionArn`.
     #   @return [String]
     #
     # @!attribute [rw] server_type
@@ -2670,9 +2725,10 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] auth_type
     #   The type of authentication used to connect to a GitHub, GitHub
-    #   Enterprise, or Bitbucket repository. An OAUTH connection is not
-    #   supported by the API and must be created using the CodeBuild
-    #   console.
+    #   Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An
+    #   OAUTH connection is not supported by the API and must be created
+    #   using the CodeBuild console. Note that CODECONNECTIONS is only valid
+    #   for GitLab and GitLab Self Managed.
     #   @return [String]
     #
     # @!attribute [rw] should_overwrite
@@ -3642,6 +3698,8 @@ module Aws::CodeBuild
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
     #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
+    #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build.
     #     If a branch name is specified, the branch's HEAD commit ID is
@@ -3692,8 +3750,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
-    #   before timing out any related build that did not get marked as
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to
+    #   wait before timing out any related build that did not get marked as
     #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
@@ -4714,12 +4772,14 @@ module Aws::CodeBuild
     #
     #   * For CodeCommit: the commit ID, branch, or Git tag to use.
     #
-    #   * For GitHub or GitLab: the commit ID, pull request ID, branch name,
-    #     or tag name that corresponds to the version of the source code you
-    #     want to build. If a pull request ID is specified, it must use the
+    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
+    #     name that corresponds to the version of the source code you want
+    #     to build. If a pull request ID is specified, it must use the
     #     format `pr/pull-request-ID` (for example, `pr/25`). If a branch
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
     #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build.
@@ -5754,6 +5814,10 @@ module Aws::CodeBuild
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
     #
+    #   GitLab
+    #
+    #   : The commit ID, branch, or Git tag to use.
+    #
     #   Bitbucket
     #
     #   : The commit ID, branch name, or tag name that corresponds to the
@@ -5804,7 +5868,8 @@ module Aws::CodeBuild
     # @!attribute [rw] source_auth_override
     #   An authorization type for this build that overrides the one defined
     #   in the build project. This override applies only if the build
-    #   project's source is BitBucket or GitHub.
+    #   project's source is BitBucket, GitHub, GitLab, or GitLab Self
+    #   Managed.
     #   @return [Types::SourceAuth]
     #
     # @!attribute [rw] git_clone_depth_override
@@ -5920,7 +5985,7 @@ module Aws::CodeBuild
     #   @return [Boolean]
     #
     # @!attribute [rw] timeout_in_minutes_override
-    #   The number of build timeout minutes, from 5 to 480 (8 hours), that
+    #   The number of build timeout minutes, from 5 to 2160 (36 hours), that
     #   overrides, for this build only, the latest setting already defined
     #   in the build project.
     #   @return [Integer]
@@ -6362,6 +6427,27 @@ module Aws::CodeBuild
     #
     #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
     #     CodeBuild on-demand.
+    #
+    #     <note markdown="1"> If you choose to set your overflow behavior to on-demand while
+    #     creating a VPC-connected fleet, make sure that you add the
+    #     required VPC permissions to your project service role. For more
+    #     information, see [Example policy statement to allow CodeBuild
+    #     access to Amazon Web Services services required to create a VPC
+    #     network interface][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Information about the VPC configuration that CodeBuild accesses.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] fleet_service_role
+    #   The service role associated with the compute fleet.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6381,6 +6467,8 @@ module Aws::CodeBuild
       :compute_type,
       :scaling_configuration,
       :overflow_behavior,
+      :vpc_config,
+      :fleet_service_role,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -6432,6 +6520,8 @@ module Aws::CodeBuild
     #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
     #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build.
@@ -6486,7 +6576,7 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   The replacement value in minutes, from 5 to 480 (8 hours), for
+    #   The replacement value in minutes, from 5 to 2160 (36 hours), for
     #   CodeBuild to wait before timing out any related build that did not
     #   get marked as completed.
     #   @return [Integer]

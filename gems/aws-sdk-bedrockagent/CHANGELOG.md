@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2024-05-20)
+------------------
+
+* Feature - This release adds support for using Guardrails with Bedrock Agents.
+
+1.11.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2024-05-03)
+------------------
+
+* Feature - This release adds support for using Provisioned Throughput with Bedrock Agents.
+
+1.9.0 (2024-05-01)
+------------------
+
+* Feature - This release adds support for using MongoDB Atlas as a vector store when creating a knowledge base.
+
 1.8.0 (2024-04-25)
 ------------------
 

@@ -301,8 +301,9 @@ module Aws::SecurityHub
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -8103,8 +8104,9 @@ module Aws::SecurityHub
     # Region.
     #
     # @option params [required, String] :configuration_policy_identifier
-    #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
-    #   of the configuration policy.
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed configuration.
     #
     # @option params [required, Types::Target] :target
     #   The identifier of the target account, organizational unit, or the root
@@ -8188,8 +8190,9 @@ module Aws::SecurityHub
     #   to disassociate from the specified configuration.
     #
     # @option params [required, String] :configuration_policy_identifier
-    #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
-    #   of the configuration policy.
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8656,12 +8659,16 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # `UpdateFindings` is deprecated. Instead of `UpdateFindings`, use
-    # `BatchUpdateFindings`.
+    # `UpdateFindings` is a deprecated operation. Instead of
+    # `UpdateFindings`, use the `BatchUpdateFindings` operation.
     #
     # Updates the `Note` and `RecordState` of the Security Hub-aggregated
     # findings that the filter attributes specify. Any member account that
     # can view the finding also sees the update to the finding.
+    #
+    # Finding updates made with `UpdateFindings` might not be persisted if
+    # the same finding is later updated by the finding provider through the
+    # `BatchImportFindings` operation.
     #
     # @option params [required, Types::AwsSecurityFindingFilters] :filters
     #   A collection of attributes that specify which findings you want to
@@ -10400,7 +10407,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2024-05-15)
+------------------
+
+* Feature - Documentation-only update for AWS Security Hub
+
+1.106.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.105.0 (2024-05-01)
+------------------
+
+* Feature - Updated CreateMembers API request with limits.
+
 1.104.0 (2024-04-25)
 ------------------
 

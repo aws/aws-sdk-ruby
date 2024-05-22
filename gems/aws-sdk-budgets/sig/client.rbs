@@ -145,6 +145,12 @@ module Aws
                                  },
                                ]
                              },
+                           ],
+                           ?resource_tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
                            ]
                          ) -> _CreateBudgetResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBudgetResponseSuccess
@@ -188,6 +194,12 @@ module Aws
                                     {
                                       subscription_type: ("SNS" | "EMAIL"),
                                       address: ::String
+                                    },
+                                  ],
+                                  ?resource_tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
                                     },
                                   ]
                                 ) -> _CreateBudgetActionResponseSuccess
@@ -464,6 +476,41 @@ module Aws
                                    execution_type: ("APPROVE_BUDGET_ACTION" | "RETRY_BUDGET_ACTION" | "REVERSE_BUDGET_ACTION" | "RESET_BUDGET_ACTION")
                                  ) -> _ExecuteBudgetActionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteBudgetActionResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def resource_tags: () -> ::Array[Types::ResourceTag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          resource_tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            resource_tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
       interface _UpdateBudgetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBudgetResponse]

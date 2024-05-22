@@ -304,6 +304,7 @@ module Aws::Route53Profiles
         "endpointPrefix" => "route53profiles",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Route 53 Profiles",
         "serviceId" => "Route53Profiles",
         "signatureVersion" => "v4",

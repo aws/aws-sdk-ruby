@@ -301,8 +301,9 @@ module Aws::OSIS
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -474,6 +475,10 @@ module Aws::OSIS
     #     vpc_options: {
     #       subnet_ids: ["SubnetId"], # required
     #       security_group_ids: ["SecurityGroupId"],
+    #       vpc_attachment_options: {
+    #         attach_to_vpc: false, # required
+    #         cidr_block: "CidrBlock",
+    #       },
     #     },
     #     buffer_options: {
     #       persistent_buffer_enabled: false, # required
@@ -511,11 +516,16 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
@@ -559,7 +569,7 @@ module Aws::OSIS
     # Retrieves information about an OpenSearch Ingestion pipeline.
     #
     # @option params [required, String] :pipeline_name
-    #   The name of the pipeline to get information about.
+    #   The name of the pipeline.
     #
     # @return [Types::GetPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -593,11 +603,16 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
@@ -623,20 +638,30 @@ module Aws::OSIS
     # @option params [required, String] :blueprint_name
     #   The name of the blueprint to retrieve.
     #
+    # @option params [String] :format
+    #   The format format of the blueprint to retrieve.
+    #
     # @return [Types::GetPipelineBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPipelineBlueprintResponse#blueprint #blueprint} => Types::PipelineBlueprint
+    #   * {Types::GetPipelineBlueprintResponse#format #format} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_pipeline_blueprint({
     #     blueprint_name: "String", # required
+    #     format: "BlueprintFormat",
     #   })
     #
     # @example Response structure
     #
     #   resp.blueprint.blueprint_name #=> String
     #   resp.blueprint.pipeline_configuration_body #=> String
+    #   resp.blueprint.display_name #=> String
+    #   resp.blueprint.display_description #=> String
+    #   resp.blueprint.service #=> String
+    #   resp.blueprint.use_case #=> String
+    #   resp.format #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetPipelineBlueprint AWS API Documentation
     #
@@ -707,6 +732,10 @@ module Aws::OSIS
     #
     #   resp.blueprints #=> Array
     #   resp.blueprints[0].blueprint_name #=> String
+    #   resp.blueprints[0].display_name #=> String
+    #   resp.blueprints[0].display_description #=> String
+    #   resp.blueprints[0].service #=> String
+    #   resp.blueprints[0].use_case #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelineBlueprints AWS API Documentation
     #
@@ -760,6 +789,9 @@ module Aws::OSIS
     #   resp.pipelines[0].max_units #=> Integer
     #   resp.pipelines[0].created_at #=> Time
     #   resp.pipelines[0].last_updated_at #=> Time
+    #   resp.pipelines[0].destinations #=> Array
+    #   resp.pipelines[0].destinations[0].service_name #=> String
+    #   resp.pipelines[0].destinations[0].endpoint #=> String
     #   resp.pipelines[0].tags #=> Array
     #   resp.pipelines[0].tags[0].key #=> String
     #   resp.pipelines[0].tags[0].value #=> String
@@ -851,11 +883,16 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
@@ -911,11 +948,16 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
@@ -1076,11 +1118,16 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
     #   resp.pipeline.tags #=> Array
     #   resp.pipeline.tags[0].key #=> String
     #   resp.pipeline.tags[0].value #=> String
@@ -1147,7 +1194,7 @@ module Aws::OSIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-osis'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

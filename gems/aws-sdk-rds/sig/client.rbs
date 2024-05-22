@@ -437,6 +437,7 @@ module Aws
                                ?master_user_secret_kms_key_id: ::String,
                                ?enable_local_write_forwarding: bool,
                                ?ca_certificate_identifier: ::String,
+                               ?engine_lifecycle_support: ::String,
                                ?source_region: ::String
                              ) -> _CreateDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterResponseSuccess
@@ -582,7 +583,8 @@ module Aws
                                 ?ca_certificate_identifier: ::String,
                                 ?db_system_id: ::String,
                                 ?dedicated_log_volume: bool,
-                                ?multi_tenant: bool
+                                ?multi_tenant: bool,
+                                ?engine_lifecycle_support: ::String
                               ) -> _CreateDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBInstanceResponseSuccess
 
@@ -826,6 +828,7 @@ module Aws
                                    ?source_db_cluster_identifier: ::String,
                                    ?engine: ::String,
                                    ?engine_version: ::String,
+                                   ?engine_lifecycle_support: ::String,
                                    ?deletion_protection: bool,
                                    ?database_name: ::String,
                                    ?storage_encrypted: bool
@@ -2918,7 +2921,8 @@ module Aws
                                         ?network_type: ::String,
                                         ?manage_master_user_password: bool,
                                         ?master_user_secret_kms_key_id: ::String,
-                                        ?storage_type: ::String
+                                        ?storage_type: ::String,
+                                        ?engine_lifecycle_support: ::String
                                       ) -> _RestoreDBClusterFromS3ResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromS3ResponseSuccess
 
@@ -2975,7 +2979,8 @@ module Aws
                                                 interconnect_subnet_id: ::String?,
                                                 transit_gateway_multicast_domain_id: ::String?,
                                                 replica_mode: ("open-read-only" | "mounted")?
-                                              }
+                                              },
+                                              ?engine_lifecycle_support: ::String
                                             ) -> _RestoreDBClusterFromSnapshotResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromSnapshotResponseSuccess
 
@@ -3032,7 +3037,8 @@ module Aws
                                                    interconnect_subnet_id: ::String?,
                                                    transit_gateway_multicast_domain_id: ::String?,
                                                    replica_mode: ("open-read-only" | "mounted")?
-                                                 }
+                                                 },
+                                                 ?engine_lifecycle_support: ::String
                                                ) -> _RestoreDBClusterToPointInTimeResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterToPointInTimeResponseSuccess
 
@@ -3092,7 +3098,8 @@ module Aws
                                                   ?db_cluster_snapshot_identifier: ::String,
                                                   ?allocated_storage: ::Integer,
                                                   ?dedicated_log_volume: bool,
-                                                  ?ca_certificate_identifier: ::String
+                                                  ?ca_certificate_identifier: ::String,
+                                                  ?engine_lifecycle_support: ::String
                                                 ) -> _RestoreDBInstanceFromDBSnapshotResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceFromDBSnapshotResponseSuccess
 
@@ -3161,7 +3168,8 @@ module Aws
                                          ?manage_master_user_password: bool,
                                          ?master_user_secret_kms_key_id: ::String,
                                          ?dedicated_log_volume: bool,
-                                         ?ca_certificate_identifier: ::String
+                                         ?ca_certificate_identifier: ::String,
+                                         ?engine_lifecycle_support: ::String
                                        ) -> _RestoreDBInstanceFromS3ResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceFromS3ResponseSuccess
 
@@ -3225,7 +3233,8 @@ module Aws
                                                   ?storage_throughput: ::Integer,
                                                   ?allocated_storage: ::Integer,
                                                   ?dedicated_log_volume: bool,
-                                                  ?ca_certificate_identifier: ::String
+                                                  ?ca_certificate_identifier: ::String,
+                                                  ?engine_lifecycle_support: ::String
                                                 ) -> _RestoreDBInstanceToPointInTimeResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceToPointInTimeResponseSuccess
 

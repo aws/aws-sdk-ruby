@@ -1199,6 +1199,7 @@ module Aws::ElasticLoadBalancingV2
         "apiVersion" => "2015-12-01",
         "endpointPrefix" => "elasticloadbalancing",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "Elastic Load Balancing v2",
         "serviceFullName" => "Elastic Load Balancing",
         "serviceId" => "Elastic Load Balancing v2",

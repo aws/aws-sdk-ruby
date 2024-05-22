@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-05-13)
+------------------
+
+* Feature - This release adds TLS Passthrough support. It also increases max number of target group per rule to 10.
+
 1.12.0 (2024-04-25)
 ------------------
 

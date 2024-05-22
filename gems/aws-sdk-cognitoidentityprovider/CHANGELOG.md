@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2024-05-08)
+------------------
+
+* Feature - Add EXTERNAL_PROVIDER enum value to UserStatusType.
+
 1.90.0 (2024-04-26)
 ------------------
 

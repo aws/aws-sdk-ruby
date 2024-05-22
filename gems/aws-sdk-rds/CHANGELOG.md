@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.232.0 (2024-05-21)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Db2 license through AWS Marketplace.
+
+1.231.0 (2024-05-20)
+------------------
+
+* Feature - This release adds support for EngineLifecycleSupport on DBInstances, DBClusters, and GlobalClusters.
+
+1.230.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.229.0 (2024-04-26)
 ------------------
 

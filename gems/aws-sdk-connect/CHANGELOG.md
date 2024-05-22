@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.159.0 (2024-05-16)
+------------------
+
+* Feature - Adding Contact Flow metrics to the GetMetricDataV2 API
+
+1.158.0 (2024-05-14)
+------------------
+
+* Feature - Amazon Connect provides enhanced search capabilities for flows & flow modules on the Connect admin website and programmatically using APIs. You can search for flows and flow modules by name, description, type, status, and tags, to filter and identify a specific flow in your Connect instances.
+
+1.157.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.156.0 (2024-05-03)
+------------------
+
+* Feature - This release adds 5 new APIs for managing attachments: StartAttachedFileUpload, CompleteAttachedFileUpload, GetAttachedFile, BatchGetAttachedFileMetadata, DeleteAttachedFile. These APIs can be used to programmatically upload and download attachments to Connect resources, like cases.
+
 1.155.0 (2024-04-25)
 ------------------
 

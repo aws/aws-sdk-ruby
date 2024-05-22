@@ -157,7 +157,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_create_date: ::Time
       attr_accessor user_last_modified_date: ::Time
       attr_accessor enabled: bool
-      attr_accessor user_status: ("UNCONFIRMED" | "CONFIRMED" | "ARCHIVED" | "COMPROMISED" | "UNKNOWN" | "RESET_REQUIRED" | "FORCE_CHANGE_PASSWORD")
+      attr_accessor user_status: ("UNCONFIRMED" | "CONFIRMED" | "ARCHIVED" | "COMPROMISED" | "UNKNOWN" | "RESET_REQUIRED" | "FORCE_CHANGE_PASSWORD" | "EXTERNAL_PROVIDER")
       attr_accessor mfa_options: ::Array[Types::MFAOptionType]
       attr_accessor preferred_mfa_setting: ::String
       attr_accessor user_mfa_setting_list: ::Array[::String]
@@ -1999,7 +1999,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_create_date: ::Time
       attr_accessor user_last_modified_date: ::Time
       attr_accessor enabled: bool
-      attr_accessor user_status: ("UNCONFIRMED" | "CONFIRMED" | "ARCHIVED" | "COMPROMISED" | "UNKNOWN" | "RESET_REQUIRED" | "FORCE_CHANGE_PASSWORD")
+      attr_accessor user_status: ("UNCONFIRMED" | "CONFIRMED" | "ARCHIVED" | "COMPROMISED" | "UNKNOWN" | "RESET_REQUIRED" | "FORCE_CHANGE_PASSWORD" | "EXTERNAL_PROVIDER")
       attr_accessor mfa_options: ::Array[Types::MFAOptionType]
       SENSITIVE: [:username]
     end

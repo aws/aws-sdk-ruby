@@ -173,6 +173,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] port_name
     #   The port name of the local connection.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionLocalPortDetails AWS API Documentation
@@ -230,6 +232,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] port_name
     #   The port name of the remote connection.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionRemotePortDetails AWS API Documentation
@@ -1515,11 +1519,15 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] api
     #   The name of the API method that was issued.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @!attribute [rw] service_name
     #   The name of the Amazon Web Services service that the API method
     #   belongs to.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @!attribute [rw] caller_type
@@ -1610,6 +1618,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] domain
     #   The name of the DNS domain that issued the API call.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiCallActionDomainDetails AWS API Documentation
@@ -19560,11 +19570,14 @@ module Aws::SecurityHub
     #  </note>
     #
     # @!attribute [rw] schema_version
-    #   The schema version that a finding is formatted for.
+    #   The schema version that a finding is formatted for. The value is
+    #   `2018-10-08`.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The security findings provider-specific identifier for a finding.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 512.
     #   @return [String]
     #
     # @!attribute [rw] product_arn
@@ -19572,6 +19585,8 @@ module Aws::SecurityHub
     #   that generates findings. This can be the ARN for a third-party
     #   product that is integrated with Security Hub, or the ARN for a
     #   custom integration.
+    #
+    #   Length Constraints: Minimum length of 12. Maximum length of 2048.
     #   @return [String]
     #
     # @!attribute [rw] product_name
@@ -19584,6 +19599,8 @@ module Aws::SecurityHub
     #
     #   When you use the Security Hub console or API to filter findings by
     #   product name, you use this attribute.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 128.
     #   @return [String]
     #
     # @!attribute [rw] company_name
@@ -19596,6 +19613,8 @@ module Aws::SecurityHub
     #
     #   When you use the Security Hub console or API to filter findings by
     #   company name, you use this attribute.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 128.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -19604,17 +19623,23 @@ module Aws::SecurityHub
     #   Security Hub populates this attribute automatically for each
     #   finding. You cannot update it using `BatchImportFindings` or
     #   `BatchUpdateFindings`.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 16.
     #   @return [String]
     #
     # @!attribute [rw] generator_id
     #   The identifier for the solution-specific component (a discrete unit
     #   of logic) that generated a finding. In various security findings
     #   providers' solutions, this generator can be called a rule, a check,
-    #   a detector, a plugin, etc.
+    #   a detector, a plugin, or something else.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 512.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
     #   The Amazon Web Services account ID that a finding is generated in.
+    #
+    #   Length Constraints: 12.
     #   @return [String]
     #
     # @!attribute [rw] types
@@ -19624,6 +19649,8 @@ module Aws::SecurityHub
     #   Valid namespace values are: Software and Configuration Checks \|
     #   TTPs \| Effects \| Unusual Behaviors \| Sensitive Data
     #   Identifications
+    #
+    #   Array Members: Maximum number of 50 items.
     #   @return [Array<String>]
     #
     # @!attribute [rw] first_observed_at
@@ -19749,19 +19776,15 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] title
-    #   A finding's title.
+    #   A finding's title. `Title` is a required property.
     #
-    #   <note markdown="1"> In this release, `Title` is a required property.
-    #
-    #    </note>
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A finding's description.
+    #   A finding's description. `Description` is a required property.
     #
-    #   <note markdown="1"> In this release, `Description` is a required property.
-    #
-    #    </note>
+    #   Length Constraints: Minimum length of 1. Maximum length of 1024.
     #   @return [String]
     #
     # @!attribute [rw] remediation
@@ -19786,10 +19809,16 @@ module Aws::SecurityHub
     # @!attribute [rw] user_defined_fields
     #   A list of name/value string pairs associated with the finding. These
     #   are custom, user-defined fields added to a finding.
+    #
+    #   Can contain up to 50 key-value pairs. For each key-value pair, the
+    #   key can contain up to 128 characters, and the value can contain up
+    #   to 1024 characters.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] malware
     #   A list of malware related to a finding.
+    #
+    #   Array Members: Maximum number of 5 items.
     #   @return [Array<Types::Malware>]
     #
     # @!attribute [rw] network
@@ -19809,15 +19838,21 @@ module Aws::SecurityHub
     # @!attribute [rw] threats
     #   Details about the threat detected in a security finding and the file
     #   paths that were affected by the threat.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 32 items.
     #   @return [Array<Types::Threat>]
     #
     # @!attribute [rw] threat_intel_indicators
     #   Threat intelligence details related to a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 5 items.
     #   @return [Array<Types::ThreatIntelIndicator>]
     #
     # @!attribute [rw] resources
     #   A set of resource data types that describe the resources that the
     #   finding refers to.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 32 items.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] compliance
@@ -19846,6 +19881,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] related_findings
     #   A list of related findings.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 10 items.
     #   @return [Array<Types::RelatedFinding>]
     #
     # @!attribute [rw] note
@@ -19886,7 +19923,7 @@ module Aws::SecurityHub
     #   @return [Types::GeneratorDetails]
     #
     # @!attribute [rw] processed_at
-    #   A imestamp that indicates when Security Hub received a finding and
+    #   A timestamp that indicates when Security Hub received a finding and
     #   begins to process it.
     #
     #   This field accepts only the specified formats. Timestamps can end
@@ -19913,6 +19950,8 @@ module Aws::SecurityHub
     # @!attribute [rw] aws_account_name
     #   The name of the Amazon Web Services account from which a finding was
     #   generated.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 50.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
@@ -23098,14 +23137,16 @@ module Aws::SecurityHub
     #     * `NOT_AVAILABLE` - Check could not be performed due to a service
     #       outage, API error, or because the result of the Config
     #       evaluation was `NOT_APPLICABLE`. If the Config evaluation result
-    #       was `NOT_APPLICABLE`, then after 3 days, Security Hub
-    #       automatically archives the finding.
+    #       was `NOT_APPLICABLE` for a Security Hub control, Security Hub
+    #       automatically archives the finding after 3 days.
     #   @return [String]
     #
     # @!attribute [rw] related_requirements
     #   For a control, the industry or regulatory framework requirements
     #   that are related to the control. The check for that control is
     #   aligned with these requirements.
+    #
+    #   Array Members: Maximum number of 32 items.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status_reasons
@@ -24512,10 +24553,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] domain
     #   The DNS domain that is associated with the DNS request.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @!attribute [rw] protocol
     #   The protocol that was used for the DNS request.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 64.
     #   @return [String]
     #
     # @!attribute [rw] blocked
@@ -24697,20 +24742,28 @@ module Aws::SecurityHub
     # @!attribute [rw] file_path
     #   Path to the infected or suspicious file on the resource it was
     #   detected on.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] file_name
     #   The name of the infected or suspicious file corresponding to the
     #   hash.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The Amazon Resource Name (ARN) of the resource on which the threat
     #   was detected.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] hash
     #   The hash value for the infected or suspicious file.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FilePaths AWS API Documentation
@@ -24944,6 +24997,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] original
     #   The finding provider's original value for the severity.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 64.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingProviderSeverity AWS API Documentation
@@ -25071,6 +25126,9 @@ module Aws::SecurityHub
     # @!attribute [rw] labels
     #   An array of tags used to identify the detector associated with the
     #   finding.
+    #
+    #   Array Members: Minimum number of 0 items. Maximum number of 10
+    #   items.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GeneratorDetails AWS API Documentation
@@ -26623,6 +26681,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] name
     #   The name of the malware that was observed.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 64.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -26631,6 +26691,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] path
     #   The file system path of the malware that was observed.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 512.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -26823,6 +26885,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] protocol
     #   The protocol of network-related information about a finding.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 16.
     #   @return [String]
     #
     # @!attribute [rw] open_port_range
@@ -26845,6 +26909,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] source_domain
     #   The source domain of network-related information about a finding.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 128.
     #   @return [String]
     #
     # @!attribute [rw] source_mac
@@ -26869,6 +26935,8 @@ module Aws::SecurityHub
     # @!attribute [rw] destination_domain
     #   The destination domain of network-related information about a
     #   finding.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 128.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Network AWS API Documentation
@@ -26912,6 +26980,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] protocol
     #   The protocol used to make the network connection request.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 64.
     #   @return [String]
     #
     # @!attribute [rw] blocked
@@ -26936,6 +27006,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] protocol
     #   The protocol used for the component.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 16.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -26960,10 +27032,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] component_id
     #   The identifier of a component in the network path.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 32.
     #   @return [String]
     #
     # @!attribute [rw] component_type
     #   The type of component.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 32.
     #   @return [String]
     #
     # @!attribute [rw] egress
@@ -27011,6 +27087,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] text
     #   The text of a note.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 512.
     #   @return [String]
     #
     # @!attribute [rw] updated_by
@@ -27346,37 +27424,51 @@ module Aws::SecurityHub
     # @!attribute [rw] id
     #   The identifier of the compliance standard that was used to determine
     #   the patch compliance status.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @!attribute [rw] installed_count
     #   The number of patches from the compliance standard that were
     #   installed successfully.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] missing_count
     #   The number of patches that are part of the compliance standard but
     #   are not installed. The count includes patches that failed to
     #   install.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_count
     #   The number of patches from the compliance standard that failed to
     #   install.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] installed_other_count
     #   The number of installed patches that are not part of the compliance
     #   standard.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] installed_rejected_count
     #   The number of patches that are installed but are also on a list of
     #   patches that the customer rejected.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] installed_pending_reboot
     #   The number of patches that were applied, but that require the
     #   instance to be rebooted in order to be marked as installed.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] operation_start_time
@@ -27429,11 +27521,15 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] reboot_option
     #   The reboot option specified for the instance.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @!attribute [rw] operation
     #   The type of patch operation performed. For Patch Manager, the values
     #   are `SCAN` and `INSTALL`.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PatchSummary AWS API Documentation
@@ -27576,10 +27672,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] name
     #   The name of the process.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 64.
     #   @return [String]
     #
     # @!attribute [rw] path
     #   The path to the process executable.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 512.
     #   @return [String]
     #
     # @!attribute [rw] pid
@@ -27772,6 +27872,8 @@ module Aws::SecurityHub
     # @!attribute [rw] text
     #   Describes the recommended steps to take to remediate an issue
     #   identified in a finding.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 512 length.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -27856,6 +27958,8 @@ module Aws::SecurityHub
     #
     #   If the resource does not match any of the provided types, then set
     #   `Type` to `Other`.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -27870,6 +27974,8 @@ module Aws::SecurityHub
     # @!attribute [rw] region
     #   The canonical Amazon Web Services external Region name where this
     #   resource is located.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 16.
     #   @return [String]
     #
     # @!attribute [rw] resource_role
@@ -27879,7 +27985,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] tags
     #   A list of Amazon Web Services tags associated with a resource at the
-    #   time the finding was processed.
+    #   time the finding was processed. Tags must follow [Amazon Web
+    #   Services tag naming limits and requirements][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html#tag-conventions
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] data_classification
@@ -29473,6 +29584,8 @@ module Aws::SecurityHub
     #   Deprecated. The normalized severity of a finding. Instead of
     #   providing `Normalized`, provide `Label`.
     #
+    #   The value of `Normalized` can be an integer between `0` and `100`.
+    #
     #   If you provide `Label` and do not provide `Normalized`, then
     #   `Normalized` is set automatically as follows.
     #
@@ -29490,6 +29603,8 @@ module Aws::SecurityHub
     # @!attribute [rw] original
     #   The native severity from the finding product that generated the
     #   finding.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 64.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Severity AWS API Documentation
@@ -30058,8 +30173,10 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] configuration_policy_identifier
-    #   The Amazon Resource Name (ARN) or universally unique identifier
-    #   (UUID) of the configuration policy.
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed
+    #   configuration.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -30130,8 +30247,10 @@ module Aws::SecurityHub
     #   @return [Types::Target]
     #
     # @!attribute [rw] configuration_policy_identifier
-    #   The Amazon Resource Name (ARN) or universally unique identifier
-    #   (UUID) of the configuration policy.
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed
+    #   configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyDisassociationRequest AWS API Documentation
@@ -30447,10 +30566,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] name
     #   The name of the threat.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] severity
     #   The severity of the threat.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] item_count
@@ -30460,6 +30583,8 @@ module Aws::SecurityHub
     # @!attribute [rw] file_paths
     #   Provides information about the file paths that were affected by the
     #   threat.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 5 items.
     #   @return [Array<Types::FilePaths>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Threat AWS API Documentation
@@ -30481,6 +30606,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] value
     #   The value of a threat intelligence indicator.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 512 length.
     #   @return [String]
     #
     # @!attribute [rw] category
@@ -30514,6 +30641,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] source
     #   The source of the threat intelligence indicator.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 64 length.
     #   @return [String]
     #
     # @!attribute [rw] source_url

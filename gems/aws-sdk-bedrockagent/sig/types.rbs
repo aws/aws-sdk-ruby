@@ -63,6 +63,7 @@ module Aws::BedrockAgent
       attr_accessor description: ::String
       attr_accessor failure_reasons: ::Array[::String]
       attr_accessor foundation_model: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
       attr_accessor prepared_at: ::Time
@@ -99,6 +100,7 @@ module Aws::BedrockAgent
       attr_accessor client_token: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
+      attr_accessor failure_reasons: ::Array[::String]
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -113,6 +115,7 @@ module Aws::BedrockAgent
 
     class AgentAliasRoutingConfigurationListItem
       attr_accessor agent_version: ::String
+      attr_accessor provisioned_throughput: ::String
       SENSITIVE: []
     end
 
@@ -151,6 +154,7 @@ module Aws::BedrockAgent
       attr_accessor agent_name: ::String
       attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       attr_accessor description: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor latest_agent_version: ::String
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -167,6 +171,7 @@ module Aws::BedrockAgent
       attr_accessor description: ::String
       attr_accessor failure_reasons: ::Array[::String]
       attr_accessor foundation_model: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
@@ -182,6 +187,7 @@ module Aws::BedrockAgent
       attr_accessor agent_version: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -252,6 +258,7 @@ module Aws::BedrockAgent
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor description: ::String
       attr_accessor foundation_model: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
@@ -526,6 +533,12 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class GuardrailConfiguration
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      SENSITIVE: []
+    end
+
     class InferenceConfiguration
       attr_accessor maximum_length: ::Integer
       attr_accessor stop_sequences: ::Array[::String]
@@ -736,6 +749,24 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class MongoDbAtlasConfiguration
+      attr_accessor collection_name: ::String
+      attr_accessor credentials_secret_arn: ::String
+      attr_accessor database_name: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor endpoint_service_name: ::String
+      attr_accessor field_mapping: Types::MongoDbAtlasFieldMapping
+      attr_accessor vector_index_name: ::String
+      SENSITIVE: []
+    end
+
+    class MongoDbAtlasFieldMapping
+      attr_accessor metadata_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor vector_field: ::String
+      SENSITIVE: []
+    end
+
     class OpenSearchServerlessConfiguration
       attr_accessor collection_arn: ::String
       attr_accessor field_mapping: Types::OpenSearchServerlessFieldMapping
@@ -874,11 +905,12 @@ module Aws::BedrockAgent
     end
 
     class StorageConfiguration
+      attr_accessor mongo_db_atlas_configuration: Types::MongoDbAtlasConfiguration
       attr_accessor opensearch_serverless_configuration: Types::OpenSearchServerlessConfiguration
       attr_accessor pinecone_configuration: Types::PineconeConfiguration
       attr_accessor rds_configuration: Types::RdsConfiguration
       attr_accessor redis_enterprise_cloud_configuration: Types::RedisEnterpriseCloudConfiguration
-      attr_accessor type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS")
+      attr_accessor type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS")
       SENSITIVE: []
     end
 
@@ -959,6 +991,7 @@ module Aws::BedrockAgent
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor description: ::String
       attr_accessor foundation_model: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration

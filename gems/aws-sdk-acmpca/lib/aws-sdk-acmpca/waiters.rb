@@ -103,6 +103,11 @@ module Aws::ACMPCA
                 "matcher" => "path",
                 "argument" => "audit_report_status",
                 "expected" => "FAILED"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "error",
+                "expected" => "AccessDeniedException"
               }
             ]
           )
@@ -146,6 +151,11 @@ module Aws::ACMPCA
                 "state" => "retry",
                 "matcher" => "error",
                 "expected" => "RequestInProgressException"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "error",
+                "expected" => "AccessDeniedException"
               }
             ]
           )
@@ -189,6 +199,11 @@ module Aws::ACMPCA
                 "state" => "retry",
                 "matcher" => "error",
                 "expected" => "RequestInProgressException"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "error",
+                "expected" => "AccessDeniedException"
               }
             ]
           )

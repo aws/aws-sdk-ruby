@@ -86,6 +86,8 @@ module Aws::ControlTower
             Aws::ControlTower::Endpoints::GetLandingZoneOperation.build(context)
           when :list_baselines
             Aws::ControlTower::Endpoints::ListBaselines.build(context)
+          when :list_control_operations
+            Aws::ControlTower::Endpoints::ListControlOperations.build(context)
           when :list_enabled_baselines
             Aws::ControlTower::Endpoints::ListEnabledBaselines.build(context)
           when :list_enabled_controls

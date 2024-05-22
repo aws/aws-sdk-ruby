@@ -772,7 +772,7 @@ module Aws::Glue
     class Condition
       attr_accessor logical_operator: ("EQUALS")
       attr_accessor job_name: ::String
-      attr_accessor state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING")
+      attr_accessor state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING" | "EXPIRED")
       attr_accessor crawler_name: ::String
       attr_accessor crawl_state: ("RUNNING" | "CANCELLING" | "CANCELLED" | "SUCCEEDED" | "FAILED" | "ERROR")
       SENSITIVE: []
@@ -1126,6 +1126,7 @@ module Aws::Glue
       attr_accessor code_gen_configuration_nodes: ::Hash[::String, Types::CodeGenConfigurationNode]
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor source_control_details: Types::SourceControlDetails
+      attr_accessor maintenance_window: ::String
       SENSITIVE: [:code_gen_configuration_nodes]
     end
 
@@ -3336,6 +3337,7 @@ module Aws::Glue
       attr_accessor code_gen_configuration_nodes: ::Hash[::String, Types::CodeGenConfigurationNode]
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor source_control_details: Types::SourceControlDetails
+      attr_accessor maintenance_window: ::String
       SENSITIVE: [:code_gen_configuration_nodes]
     end
 
@@ -3378,7 +3380,7 @@ module Aws::Glue
       attr_accessor started_on: ::Time
       attr_accessor last_modified_on: ::Time
       attr_accessor completed_on: ::Time
-      attr_accessor job_run_state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING")
+      attr_accessor job_run_state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING" | "EXPIRED")
       attr_accessor arguments: ::Hash[::String, ::String]
       attr_accessor error_message: ::String
       attr_accessor predecessor_runs: ::Array[Types::Predecessor]
@@ -3394,6 +3396,7 @@ module Aws::Glue
       attr_accessor glue_version: ::String
       attr_accessor dpu_seconds: ::Float
       attr_accessor execution_class: ("FLEX" | "STANDARD")
+      attr_accessor maintenance_window: ::String
       SENSITIVE: []
     end
 
@@ -3418,6 +3421,7 @@ module Aws::Glue
       attr_accessor code_gen_configuration_nodes: ::Hash[::String, Types::CodeGenConfigurationNode]
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor source_control_details: Types::SourceControlDetails
+      attr_accessor maintenance_window: ::String
       SENSITIVE: [:code_gen_configuration_nodes]
     end
 

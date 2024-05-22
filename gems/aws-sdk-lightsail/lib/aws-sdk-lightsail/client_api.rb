@@ -2866,6 +2866,7 @@ module Aws::Lightsail
     SetIpAddressTypeRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     SetIpAddressTypeRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
     SetIpAddressTypeRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, required: true, location_name: "ipAddressType"))
+    SetIpAddressTypeRequest.add_member(:accept_bundle_update, Shapes::ShapeRef.new(shape: boolean, location_name: "acceptBundleUpdate"))
     SetIpAddressTypeRequest.struct_class = Types::SetIpAddressTypeRequest
 
     SetIpAddressTypeResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -3136,6 +3137,7 @@ module Aws::Lightsail
         "endpointPrefix" => "lightsail",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Lightsail",
         "serviceId" => "Lightsail",
         "signatureVersion" => "v4",

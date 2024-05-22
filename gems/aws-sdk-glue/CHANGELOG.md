@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.174.0 (2024-05-21)
+------------------
+
+* Feature - Add Maintenance window to CreateJob and UpdateJob APIs and JobRun response. Add a new Job Run State for EXPIRED.
+
+1.173.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.172.0 (2024-04-25)
 ------------------
 

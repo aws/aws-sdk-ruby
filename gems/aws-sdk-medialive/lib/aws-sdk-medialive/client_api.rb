@@ -712,6 +712,7 @@ module Aws::MediaLive
     Scte35ReturnToNetworkScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35ReturnToNetworkScheduleActionSettings')
     Scte35SegmentationCancelIndicator = Shapes::StringShape.new(name: 'Scte35SegmentationCancelIndicator')
     Scte35SegmentationDescriptor = Shapes::StructureShape.new(name: 'Scte35SegmentationDescriptor')
+    Scte35SegmentationScope = Shapes::StringShape.new(name: 'Scte35SegmentationScope')
     Scte35SpliceInsert = Shapes::StructureShape.new(name: 'Scte35SpliceInsert')
     Scte35SpliceInsertNoRegionalBlackoutBehavior = Shapes::StringShape.new(name: 'Scte35SpliceInsertNoRegionalBlackoutBehavior')
     Scte35SpliceInsertScheduleActionSettings = Shapes::StructureShape.new(name: 'Scte35SpliceInsertScheduleActionSettings')
@@ -1188,6 +1189,7 @@ module Aws::MediaLive
     AvailBlanking.struct_class = Types::AvailBlanking
 
     AvailConfiguration.add_member(:avail_settings, Shapes::ShapeRef.new(shape: AvailSettings, location_name: "availSettings"))
+    AvailConfiguration.add_member(:scte_35_segmentation_scope, Shapes::ShapeRef.new(shape: Scte35SegmentationScope, location_name: "scte35SegmentationScope"))
     AvailConfiguration.struct_class = Types::AvailConfiguration
 
     AvailSettings.add_member(:esam, Shapes::ShapeRef.new(shape: Esam, location_name: "esam"))

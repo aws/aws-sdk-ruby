@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2024-05-07)
+------------------
+
+* Feature - Documentation update to clarify the MappingTemplate definition.
+
 1.7.0 (2024-04-25)
 ------------------
 

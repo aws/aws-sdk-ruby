@@ -148,6 +148,7 @@ module Aws
                                ?master_user_secret_kms_key_id: ::String,
                                ?enable_local_write_forwarding: bool,
                                ?ca_certificate_identifier: ::String,
+                               ?engine_lifecycle_support: ::String,
                                ?source_region: ::String
                              ) -> DBCluster
                            | (?Hash[Symbol, untyped]) -> DBCluster
@@ -239,7 +240,8 @@ module Aws
                                 ?ca_certificate_identifier: ::String,
                                 ?db_system_id: ::String,
                                 ?dedicated_log_volume: bool,
-                                ?multi_tenant: bool
+                                ?multi_tenant: bool,
+                                ?engine_lifecycle_support: ::String
                               ) -> DBInstance
                             | (?Hash[Symbol, untyped]) -> DBInstance
 

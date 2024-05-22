@@ -636,9 +636,21 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP addresses used by the subnets for your load balancer.
-    #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
-    #   (for IPv4 and IPv6 addresses).
+    #   Note: Internal load balancers must use the `ipv4` IP address type.
+    #
+    #   \[Application Load Balancers\] The IP address type. The possible
+    #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4
+    #   and IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6
+    #   only public addresses, with private IPv4 and IPv6 addresses).
+    #
+    #   \[Network Load Balancers\] The IP address type. The possible values
+    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
+    #   IPv6 addresses). You can’t specify `dualstack` for a load balancer
+    #   with a UDP or TCP\_UDP listener.
+    #
+    #   \[Gateway Load Balancers\] The IP address type. The possible values
+    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
+    #   IPv6 addresses).
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
@@ -2107,9 +2119,17 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP addresses used by the subnets for your load balancer.
-    #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
-    #   (for IPv4 and IPv6 addresses).
+    #   \[Application Load Balancers\] The type of IP addresses used for
+    #   public or private connections by the subnets attached to your load
+    #   balancer. The possible values are `ipv4` (for only IPv4 addresses),
+    #   `dualstack` (for IPv4 and IPv6 addresses), and
+    #   `dualstack-without-public-ipv4` (for IPv6 only public addresses,
+    #   with private IPv4 and IPv6 addresses).
+    #
+    #   \[Network Load Balancers and Gateway Load Balancers\] The type of IP
+    #   addresses used for public or private connections by the subnets
+    #   attached to your load balancer. The possible values are `ipv4` (for
+    #   only IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
@@ -3207,10 +3227,21 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The IP address type. The possible values are `ipv4` (for IPv4
-    #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). You can’t
-    #   specify `dualstack` for a load balancer with a UDP or TCP\_UDP
-    #   listener.
+    #   Note: Internal load balancers must use the `ipv4` IP address type.
+    #
+    #   \[Application Load Balancers\] The IP address type. The possible
+    #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4
+    #   and IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6
+    #   only public addresses, with private IPv4 and IPv6 addresses).
+    #
+    #   \[Network Load Balancers\] The IP address type. The possible values
+    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
+    #   IPv6 addresses). You can’t specify `dualstack` for a load balancer
+    #   with a UDP or TCP\_UDP listener.
+    #
+    #   \[Gateway Load Balancers\] The IP address type. The possible values
+    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
+    #   IPv6 addresses).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressTypeInput AWS API Documentation
@@ -3354,6 +3385,11 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] ip_address_type
+    #   \[Application Load Balancers\] The IP address type. The possible
+    #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4
+    #   and IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6
+    #   only public addresses, with private IPv4 and IPv6 addresses).
+    #
     #   \[Network Load Balancers\] The type of IP addresses used by the
     #   subnets for your load balancer. The possible values are `ipv4` (for
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
@@ -3381,6 +3417,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @!attribute [rw] ip_address_type
+    #   \[Application Load Balancers\] The IP address type.
+    #
     #   \[Network Load Balancers\] The IP address type.
     #
     #   \[Gateway Load Balancers\] The IP address type.

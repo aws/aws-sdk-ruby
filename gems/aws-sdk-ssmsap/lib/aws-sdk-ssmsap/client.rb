@@ -301,8 +301,9 @@ module Aws::SsmSap
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -884,6 +885,75 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Returns a list of operations events.
+    #
+    # Available parameters include `OperationID`, as well as optional
+    # parameters `MaxResults`, `NextToken`, and `Filters`.
+    #
+    # @option params [required, String] :operation_id
+    #   The ID of the operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #
+    #   If you do not specify a value for `MaxResults`, the request returns 50
+    #   items per page by default.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Optionally specify filters to narrow the returned operation event
+    #   items.
+    #
+    #   Valid filter names include `status`, `resourceID`, and `resourceType`.
+    #   The valid operator for all three filters is `Equals`.
+    #
+    # @return [Types::ListOperationEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOperationEventsOutput#operation_events #operation_events} => Array&lt;Types::OperationEvent&gt;
+    #   * {Types::ListOperationEventsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_operation_events({
+    #     operation_id: "OperationId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         value: "FilterValue", # required
+    #         operator: "Equals", # required, accepts Equals, GreaterThanOrEquals, LessThanOrEquals
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_events #=> Array
+    #   resp.operation_events[0].description #=> String
+    #   resp.operation_events[0].resource.resource_arn #=> String
+    #   resp.operation_events[0].resource.resource_type #=> String
+    #   resp.operation_events[0].status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.operation_events[0].status_message #=> String
+    #   resp.operation_events[0].timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListOperationEvents AWS API Documentation
+    #
+    # @overload list_operation_events(params = {})
+    # @param [Hash] params ({})
+    def list_operation_events(params = {}, options = {})
+      req = build_request(:list_operation_events, params)
+      req.send_request(options)
+    end
+
     # Lists the operations performed by AWS Systems Manager for SAP.
     #
     # @option params [required, String] :application_id
@@ -1097,6 +1167,36 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Request is an operation which starts an application.
+    #
+    # Parameter `ApplicationId` is required.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the application.
+    #
+    # @return [Types::StartApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartApplicationOutput#operation_id #operation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_application({
+    #     application_id: "ApplicationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartApplication AWS API Documentation
+    #
+    # @overload start_application(params = {})
+    # @param [Hash] params ({})
+    def start_application(params = {}, options = {})
+      req = build_request(:start_application, params)
+      req.send_request(options)
+    end
+
     # Refreshes a registered application.
     #
     # @option params [required, String] :application_id
@@ -1122,6 +1222,50 @@ module Aws::SsmSap
     # @param [Hash] params ({})
     def start_application_refresh(params = {}, options = {})
       req = build_request(:start_application_refresh, params)
+      req.send_request(options)
+    end
+
+    # Request is an operation to stop an application.
+    #
+    # Parameter `ApplicationId` is required. Parameters
+    # `StopConnectedEntity` and `IncludeEc2InstanceShutdown` are optional.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the application.
+    #
+    # @option params [String] :stop_connected_entity
+    #   Specify the `ConnectedEntityType`. Accepted type is `DBMS`.
+    #
+    #   If this parameter is included, the connected DBMS (Database Management
+    #   System) will be stopped.
+    #
+    # @option params [Boolean] :include_ec2_instance_shutdown
+    #   Boolean. If included and if set to `True`, the StopApplication
+    #   operation will shut down the associated Amazon EC2 instance in
+    #   addition to the application.
+    #
+    # @return [Types::StopApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopApplicationOutput#operation_id #operation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_application({
+    #     application_id: "ApplicationId", # required
+    #     stop_connected_entity: "DBMS", # accepts DBMS
+    #     include_ec2_instance_shutdown: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StopApplication AWS API Documentation
+    #
+    # @overload stop_application(params = {})
+    # @param [Hash] params ({})
+    def stop_application(params = {}, options = {})
+      req = build_request(:stop_application, params)
       req.send_request(options)
     end
 
@@ -1257,7 +1401,7 @@ module Aws::SsmSap
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmsap'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

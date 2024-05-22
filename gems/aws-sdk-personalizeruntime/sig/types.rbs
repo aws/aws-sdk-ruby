@@ -76,7 +76,8 @@ module Aws::PersonalizeRuntime
       attr_accessor score: ::Float
       attr_accessor promotion_name: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
-      SENSITIVE: []
+      attr_accessor reason: ::Array[::String]
+      SENSITIVE: [:metadata]
     end
 
     class Promotion

@@ -187,7 +187,8 @@ module Aws
                        interconnect_subnet_id: ::String?,
                        transit_gateway_multicast_domain_id: ::String?,
                        replica_mode: ("open-read-only" | "mounted")?
-                     }
+                     },
+                     ?engine_lifecycle_support: ::String
                    ) -> DBCluster
                  | (?Hash[Symbol, untyped]) -> DBCluster
 

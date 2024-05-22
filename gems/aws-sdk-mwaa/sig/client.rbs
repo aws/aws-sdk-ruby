@@ -89,23 +89,31 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#create_environment-instance_method
       def create_environment: (
-                                ?airflow_configuration_options: Hash[::String, ::String],
-                                ?airflow_version: ::String,
-                                dag_s3_path: ::String,
-                                ?endpoint_management: ("CUSTOMER" | "SERVICE"),
-                                ?environment_class: ::String,
+                                name: ::String,
                                 execution_role_arn: ::String,
+                                source_bucket_arn: ::String,
+                                dag_s3_path: ::String,
+                                network_configuration: {
+                                  subnet_ids: Array[::String]?,
+                                  security_group_ids: Array[::String]?
+                                },
+                                ?plugins_s3_path: ::String,
+                                ?plugins_s3_object_version: ::String,
+                                ?requirements_s3_path: ::String,
+                                ?requirements_s3_object_version: ::String,
+                                ?startup_script_s3_path: ::String,
+                                ?startup_script_s3_object_version: ::String,
+                                ?airflow_configuration_options: Hash[::String, ::String],
+                                ?environment_class: ::String,
+                                ?max_workers: ::Integer,
                                 ?kms_key: ::String,
+                                ?airflow_version: ::String,
                                 ?logging_configuration: {
                                   dag_processing_logs: {
                                     enabled: bool,
                                     log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
                                   }?,
                                   scheduler_logs: {
-                                    enabled: bool,
-                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
-                                  }?,
-                                  task_logs: {
                                     enabled: bool,
                                     log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
                                   }?,
@@ -116,35 +124,29 @@ module Aws
                                   worker_logs: {
                                     enabled: bool,
                                     log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  task_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
                                   }?
                                 },
-                                ?max_workers: ::Integer,
-                                ?min_workers: ::Integer,
-                                name: ::String,
-                                network_configuration: {
-                                  security_group_ids: Array[::String]?,
-                                  subnet_ids: Array[::String]?
-                                },
-                                ?plugins_s3_object_version: ::String,
-                                ?plugins_s3_path: ::String,
-                                ?requirements_s3_object_version: ::String,
-                                ?requirements_s3_path: ::String,
-                                ?schedulers: ::Integer,
-                                source_bucket_arn: ::String,
-                                ?startup_script_s3_object_version: ::String,
-                                ?startup_script_s3_path: ::String,
+                                ?weekly_maintenance_window_start: ::String,
                                 ?tags: Hash[::String, ::String],
                                 ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY"),
-                                ?weekly_maintenance_window_start: ::String
+                                ?min_workers: ::Integer,
+                                ?schedulers: ::Integer,
+                                ?endpoint_management: ("CUSTOMER" | "SERVICE"),
+                                ?min_webservers: ::Integer,
+                                ?max_webservers: ::Integer
                               ) -> _CreateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
 
       interface _CreateWebLoginTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebLoginTokenResponse]
-        def airflow_identity: () -> ::String
-        def iam_identity: () -> ::String
-        def web_server_hostname: () -> ::String
         def web_token: () -> ::String
+        def web_server_hostname: () -> ::String
+        def iam_identity: () -> ::String
+        def airflow_identity: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#create_web_login_token-instance_method
       def create_web_login_token: (
@@ -178,8 +180,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#list_environments-instance_method
       def list_environments: (
-                               ?max_results: ::Integer,
-                               ?next_token: ::String
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
                              ) -> _ListEnvironmentsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
 
@@ -201,22 +203,22 @@ module Aws
                              environment_name: ::String,
                              metric_data: Array[
                                {
+                                 metric_name: ::String,
+                                 timestamp: ::Time,
                                  dimensions: Array[
                                    {
                                      name: ::String,
                                      value: ::String
                                    },
                                  ]?,
-                                 metric_name: ::String,
-                                 statistic_values: {
-                                   maximum: ::Float?,
-                                   minimum: ::Float?,
-                                   sample_count: ::Integer?,
-                                   sum: ::Float?
-                                 }?,
-                                 timestamp: ::Time,
+                                 value: ::Float?,
                                  unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?,
-                                 value: ::Float?
+                                 statistic_values: {
+                                   sample_count: ::Integer?,
+                                   sum: ::Float?,
+                                   minimum: ::Float?,
+                                   maximum: ::Float?
+                                 }?
                                },
                              ]
                            ) -> _PublishMetricsResponseSuccess
@@ -248,21 +250,29 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#update_environment-instance_method
       def update_environment: (
-                                ?airflow_configuration_options: Hash[::String, ::String],
-                                ?airflow_version: ::String,
-                                ?dag_s3_path: ::String,
-                                ?environment_class: ::String,
+                                name: ::String,
                                 ?execution_role_arn: ::String,
+                                ?airflow_version: ::String,
+                                ?source_bucket_arn: ::String,
+                                ?dag_s3_path: ::String,
+                                ?plugins_s3_path: ::String,
+                                ?plugins_s3_object_version: ::String,
+                                ?requirements_s3_path: ::String,
+                                ?requirements_s3_object_version: ::String,
+                                ?startup_script_s3_path: ::String,
+                                ?startup_script_s3_object_version: ::String,
+                                ?airflow_configuration_options: Hash[::String, ::String],
+                                ?environment_class: ::String,
+                                ?max_workers: ::Integer,
+                                ?network_configuration: {
+                                  security_group_ids: Array[::String]
+                                },
                                 ?logging_configuration: {
                                   dag_processing_logs: {
                                     enabled: bool,
                                     log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
                                   }?,
                                   scheduler_logs: {
-                                    enabled: bool,
-                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
-                                  }?,
-                                  task_logs: {
                                     enabled: bool,
                                     log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
                                   }?,
@@ -273,24 +283,18 @@ module Aws
                                   worker_logs: {
                                     enabled: bool,
                                     log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  task_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
                                   }?
                                 },
-                                ?max_workers: ::Integer,
-                                ?min_workers: ::Integer,
-                                name: ::String,
-                                ?network_configuration: {
-                                  security_group_ids: Array[::String]
-                                },
-                                ?plugins_s3_object_version: ::String,
-                                ?plugins_s3_path: ::String,
-                                ?requirements_s3_object_version: ::String,
-                                ?requirements_s3_path: ::String,
-                                ?schedulers: ::Integer,
-                                ?source_bucket_arn: ::String,
-                                ?startup_script_s3_object_version: ::String,
-                                ?startup_script_s3_path: ::String,
+                                ?weekly_maintenance_window_start: ::String,
                                 ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY"),
-                                ?weekly_maintenance_window_start: ::String
+                                ?min_workers: ::Integer,
+                                ?schedulers: ::Integer,
+                                ?min_webservers: ::Integer,
+                                ?max_webservers: ::Integer
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
     end

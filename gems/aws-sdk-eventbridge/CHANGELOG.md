@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2024-05-13)
+------------------
+
+* Feature - Amazon EventBridge introduces KMS customer-managed key (CMK) encryption support for custom and partner events published on EventBridge Event Bus (including default bus) and UpdateEventBus API.
+
 1.58.0 (2024-04-25)
 ------------------
 

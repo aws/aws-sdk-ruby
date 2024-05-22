@@ -7,6 +7,37 @@ Unreleased Changes
 
 * Issue - Enhance, refactor, and rebase protocols to be consistent. Ensure protocol tests are run for each engine.
 
+3.196.1 (2024-05-14)
+------------------
+
+* Issue - Fix `ConnectionPool` for `.empty!` and `.clear!` since it prevented adding a new key from being added to the pool (#3020).
+
+3.196.0 (2024-05-13)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.195.0 (2024-05-10)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated request parameters for PKCE support.
+
+3.194.2 (2024-05-07)
+------------------
+
+* Issue - Fix issue where `ConnectionPool` size iteration would prevent a new key from being added to the pool.
+
+3.194.1 (2024-05-03)
+------------------
+
+* Issue - Update EC2 protocol to not serialize empty lists.
+
 3.194.0 (2024-04-30)
 ------------------
 

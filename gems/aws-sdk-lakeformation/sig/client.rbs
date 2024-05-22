@@ -601,6 +601,15 @@ module Aws
                                  ) -> _GetDataCellsFilterResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataCellsFilterResponseSuccess
 
+      interface _GetDataLakePrincipalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataLakePrincipalResponse]
+        def identity: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_data_lake_principal-instance_method
+      def get_data_lake_principal: (
+                                   ) -> _GetDataLakePrincipalResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataLakePrincipalResponseSuccess
+
       interface _GetDataLakeSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataLakeSettingsResponse]
         def data_lake_settings: () -> Types::DataLakeSettings

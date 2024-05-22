@@ -162,6 +162,12 @@ module Aws
                                      email_message: {
                                        body: ::String?,
                                        from_address: ::String?,
+                                       headers: Array[
+                                         {
+                                           name: ::String?,
+                                           value: ::String?
+                                         },
+                                       ]?,
                                        html_body: ::String?,
                                        title: ::String?
                                      }?,
@@ -390,6 +396,12 @@ module Aws
                                  email_message: {
                                    body: ::String?,
                                    from_address: ::String?,
+                                   headers: Array[
+                                     {
+                                       name: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]?,
                                    html_body: ::String?,
                                    title: ::String?
                                  }?,
@@ -553,6 +565,12 @@ module Aws
                                      html_part: ::String?,
                                      recommender_id: ::String?,
                                      subject: ::String?,
+                                     headers: Array[
+                                       {
+                                         name: ::String?,
+                                         value: ::String?
+                                       },
+                                     ]?,
                                      tags: Hash[::String, ::String]?,
                                      template_description: ::String?,
                                      text_part: ::String?
@@ -2406,7 +2424,13 @@ module Aws
                                    text_part: {
                                      charset: ::String?,
                                      data: ::String?
-                                   }?
+                                   }?,
+                                   headers: Array[
+                                     {
+                                       name: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]?
                                  }?,
                                  substitutions: Hash[::String, Array[::String]]?
                                }?,
@@ -2596,7 +2620,13 @@ module Aws
                                          text_part: {
                                            charset: ::String?,
                                            data: ::String?
-                                         }?
+                                         }?,
+                                         headers: Array[
+                                           {
+                                             name: ::String?,
+                                             value: ::String?
+                                           },
+                                         ]?
                                        }?,
                                        substitutions: Hash[::String, Array[::String]]?
                                      }?,
@@ -2914,6 +2944,12 @@ module Aws
                                      email_message: {
                                        body: ::String?,
                                        from_address: ::String?,
+                                       headers: Array[
+                                         {
+                                           name: ::String?,
+                                           value: ::String?
+                                         },
+                                       ]?,
                                        html_body: ::String?,
                                        title: ::String?
                                      }?,
@@ -3142,6 +3178,12 @@ module Aws
                                  email_message: {
                                    body: ::String?,
                                    from_address: ::String?,
+                                   headers: Array[
+                                     {
+                                       name: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]?,
                                    html_body: ::String?,
                                    title: ::String?
                                  }?,
@@ -3324,6 +3366,12 @@ module Aws
                                      html_part: ::String?,
                                      recommender_id: ::String?,
                                      subject: ::String?,
+                                     headers: Array[
+                                       {
+                                         name: ::String?,
+                                         value: ::String?
+                                       },
+                                     ]?,
                                      tags: Hash[::String, ::String]?,
                                      template_description: ::String?,
                                      text_part: ::String?

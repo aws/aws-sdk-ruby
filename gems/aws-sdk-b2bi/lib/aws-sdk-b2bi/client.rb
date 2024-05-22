@@ -301,8 +301,9 @@ module Aws::B2bi
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -843,9 +844,8 @@ module Aws::B2bi
     #   transformations are `JSON` and `XML`.
     #
     # @option params [required, String] :mapping_template
-    #   Specifies the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set of
-    #   objects.
+    #   Specifies the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #
     # @option params [required, Types::EdiType] :edi_type
     #   Specifies the details for the EDI standard that is being used for the
@@ -1954,9 +1954,8 @@ module Aws::B2bi
     #   JSON file that is used as input for the transform.
     #
     # @option params [required, String] :mapping_template
-    #   Specifies the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set of
-    #   objects.
+    #   Specifies the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #
     # @option params [required, String] :file_format
     #   Specifies that the currently supported file formats for EDI
@@ -2460,9 +2459,8 @@ module Aws::B2bi
     #   transformations are `JSON` and `XML`.
     #
     # @option params [String] :mapping_template
-    #   Specifies the name of the mapping template for the transformer. This
-    #   template is used to convert the input document into the correct set of
-    #   objects.
+    #   Specifies the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
     #
     # @option params [String] :status
     #   Specifies the transformer's status. You can update the state of the
@@ -2581,7 +2579,7 @@ module Aws::B2bi
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-b2bi'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

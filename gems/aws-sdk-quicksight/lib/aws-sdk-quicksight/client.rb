@@ -301,8 +301,9 @@ module Aws::QuickSight
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -1479,7 +1480,7 @@ module Aws::QuickSight
     #         cluster_id: "ClusterId",
     #         iam_parameters: {
     #           role_arn: "RoleArn", # required
-    #           database_user: "DatabaseUser", # required
+    #           database_user: "DatabaseUser",
     #           database_groups: ["DatabaseGroup"],
     #           auto_create_database_user: false,
     #         },
@@ -1613,7 +1614,7 @@ module Aws::QuickSight
     #               cluster_id: "ClusterId",
     #               iam_parameters: {
     #                 role_arn: "RoleArn", # required
-    #                 database_user: "DatabaseUser", # required
+    #                 database_user: "DatabaseUser",
     #                 database_groups: ["DatabaseGroup"],
     #                 auto_create_database_user: false,
     #               },
@@ -6079,6 +6080,48 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes all customer managed key registrations in a Amazon
+    # QuickSight account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the customer
+    #   managed key registration that you want to describe.
+    #
+    # @option params [Boolean] :default_key_only
+    #   Determines whether the request returns the default key only.
+    #
+    # @return [Types::DescribeKeyRegistrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeKeyRegistrationResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::DescribeKeyRegistrationResponse#key_registration #key_registration} => Array&lt;Types::RegisteredCustomerManagedKey&gt;
+    #   * {Types::DescribeKeyRegistrationResponse#request_id #request_id} => String
+    #   * {Types::DescribeKeyRegistrationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_key_registration({
+    #     aws_account_id: "AwsAccountId", # required
+    #     default_key_only: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aws_account_id #=> String
+    #   resp.key_registration #=> Array
+    #   resp.key_registration[0].key_arn #=> String
+    #   resp.key_registration[0].default_key #=> Boolean
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeKeyRegistration AWS API Documentation
+    #
+    # @overload describe_key_registration(params = {})
+    # @param [Hash] params ({})
+    def describe_key_registration(params = {}, options = {})
+      req = build_request(:describe_key_registration, params)
+      req.send_request(options)
+    end
+
     # Describes the current namespace.
     #
     # @option params [required, String] :aws_account_id
@@ -9450,6 +9493,20 @@ module Aws::QuickSight
     #   * `ADMIN`: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
+    #   * `READER_PRO`: Reader Pro adds Generative BI capabilities to the
+    #     Reader role. Reader Pros have access to Amazon Q in Amazon
+    #     QuickSight, can build stories with Amazon Q, and can generate
+    #     executive summaries from dashboards.
+    #
+    #   * `AUTHOR_PRO`: Author Pro adds Generative BI capabilities to the
+    #     Author role. Author Pros can author dashboards with natural language
+    #     with Amazon Q, build stories with Amazon Q, create Topics for
+    #     Q&amp;A, and generate executive summaries from dashboards.
+    #
+    #   * `ADMIN_PRO`: Admin Pros are Author Pros who can also manage Amazon
+    #     QuickSight administrative settings. Admin Pro users are billed at
+    #     Author Pro pricing.
+    #
     #   * `RESTRICTED_READER`: This role isn't currently available for use.
     #
     #   * `RESTRICTED_AUTHOR`: This role isn't currently available for use.
@@ -10354,7 +10411,7 @@ module Aws::QuickSight
     #               cluster_id: "ClusterId",
     #               iam_parameters: {
     #                 role_arn: "RoleArn", # required
-    #                 database_user: "DatabaseUser", # required
+    #                 database_user: "DatabaseUser",
     #                 database_groups: ["DatabaseGroup"],
     #                 auto_create_database_user: false,
     #               },
@@ -11895,7 +11952,7 @@ module Aws::QuickSight
     #         cluster_id: "ClusterId",
     #         iam_parameters: {
     #           role_arn: "RoleArn", # required
-    #           database_user: "DatabaseUser", # required
+    #           database_user: "DatabaseUser",
     #           database_groups: ["DatabaseGroup"],
     #           auto_create_database_user: false,
     #         },
@@ -12029,7 +12086,7 @@ module Aws::QuickSight
     #               cluster_id: "ClusterId",
     #               iam_parameters: {
     #                 role_arn: "RoleArn", # required
-    #                 database_user: "DatabaseUser", # required
+    #                 database_user: "DatabaseUser",
     #                 database_groups: ["DatabaseGroup"],
     #                 auto_create_database_user: false,
     #               },
@@ -12526,6 +12583,55 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def update_ip_restriction(params = {}, options = {})
       req = build_request(:update_ip_restriction, params)
+      req.send_request(options)
+    end
+
+    # Updates a customer managed key in a Amazon QuickSight account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the customer
+    #   managed key registration that you want to update.
+    #
+    # @option params [required, Array<Types::RegisteredCustomerManagedKey>] :key_registration
+    #   A list of `RegisteredCustomerManagedKey` objects to be updated to the
+    #   Amazon QuickSight account.
+    #
+    # @return [Types::UpdateKeyRegistrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKeyRegistrationResponse#failed_key_registration #failed_key_registration} => Array&lt;Types::FailedKeyRegistrationEntry&gt;
+    #   * {Types::UpdateKeyRegistrationResponse#successful_key_registration #successful_key_registration} => Array&lt;Types::SuccessfulKeyRegistrationEntry&gt;
+    #   * {Types::UpdateKeyRegistrationResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_key_registration({
+    #     aws_account_id: "AwsAccountId", # required
+    #     key_registration: [ # required
+    #       {
+    #         key_arn: "String",
+    #         default_key: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_key_registration #=> Array
+    #   resp.failed_key_registration[0].key_arn #=> String
+    #   resp.failed_key_registration[0].message #=> String
+    #   resp.failed_key_registration[0].status_code #=> Integer
+    #   resp.failed_key_registration[0].sender_fault #=> Boolean
+    #   resp.successful_key_registration #=> Array
+    #   resp.successful_key_registration[0].key_arn #=> String
+    #   resp.successful_key_registration[0].status_code #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateKeyRegistration AWS API Documentation
+    #
+    # @overload update_key_registration(params = {})
+    # @param [Hash] params ({})
+    def update_key_registration(params = {}, options = {})
+      req = build_request(:update_key_registration, params)
       req.send_request(options)
     end
 
@@ -13582,9 +13688,9 @@ module Aws::QuickSight
     #     QuickSight settings.
     #
     #   * `READER_PRO`: Reader Pro adds Generative BI capabilities to the
-    #     Reader role. Reader Pros have access to Amazon Q Business, can build
-    #     stories with Amazon Q, and can generate executive summaries from
-    #     dashboards.
+    #     Reader role. Reader Pros have access to Amazon Q in Amazon
+    #     QuickSight, can build stories with Amazon Q, and can generate
+    #     executive summaries from dashboards.
     #
     #   * `AUTHOR_PRO`: Author Pro adds Generative BI capabilities to the
     #     Author role. Author Pros can author dashboards with natural language
@@ -13787,7 +13893,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

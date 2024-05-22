@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2024-05-15)
+------------------
+
+* Feature - Task executions now display a CANCELLING status when an execution is in the process of being cancelled.
+
+1.77.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2024-05-03)
+------------------
+
+* Feature - Updated guidance on using private or self-signed certificate authorities (CAs) with AWS DataSync object storage locations.
+
 1.75.0 (2024-04-25)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-05-20)
+------------------
+
+* Feature - This release adds support for using Guardrails with Bedrock Agents.
+
+1.10.0 (2024-05-15)
+------------------
+
+* Feature - Updating Bedrock Knowledge Base Metadata & Filters feature with two new filters listContains and stringContains
+
+1.9.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2024-05-09)
+------------------
+
+* Feature - This release adds support to provide guardrail configuration and modify inference parameters that are then used in RetrieveAndGenerate API in Agents for Amazon Bedrock.
+
 1.7.0 (2024-04-25)
 ------------------
 

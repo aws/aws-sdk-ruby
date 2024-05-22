@@ -64,10 +64,18 @@ module Aws::ManagedGrafana
             Aws::ManagedGrafana::Endpoints::CreateWorkspace.build(context)
           when :create_workspace_api_key
             Aws::ManagedGrafana::Endpoints::CreateWorkspaceApiKey.build(context)
+          when :create_workspace_service_account
+            Aws::ManagedGrafana::Endpoints::CreateWorkspaceServiceAccount.build(context)
+          when :create_workspace_service_account_token
+            Aws::ManagedGrafana::Endpoints::CreateWorkspaceServiceAccountToken.build(context)
           when :delete_workspace
             Aws::ManagedGrafana::Endpoints::DeleteWorkspace.build(context)
           when :delete_workspace_api_key
             Aws::ManagedGrafana::Endpoints::DeleteWorkspaceApiKey.build(context)
+          when :delete_workspace_service_account
+            Aws::ManagedGrafana::Endpoints::DeleteWorkspaceServiceAccount.build(context)
+          when :delete_workspace_service_account_token
+            Aws::ManagedGrafana::Endpoints::DeleteWorkspaceServiceAccountToken.build(context)
           when :describe_workspace
             Aws::ManagedGrafana::Endpoints::DescribeWorkspace.build(context)
           when :describe_workspace_authentication
@@ -82,6 +90,10 @@ module Aws::ManagedGrafana
             Aws::ManagedGrafana::Endpoints::ListTagsForResource.build(context)
           when :list_versions
             Aws::ManagedGrafana::Endpoints::ListVersions.build(context)
+          when :list_workspace_service_account_tokens
+            Aws::ManagedGrafana::Endpoints::ListWorkspaceServiceAccountTokens.build(context)
+          when :list_workspace_service_accounts
+            Aws::ManagedGrafana::Endpoints::ListWorkspaceServiceAccounts.build(context)
           when :list_workspaces
             Aws::ManagedGrafana::Endpoints::ListWorkspaces.build(context)
           when :tag_resource

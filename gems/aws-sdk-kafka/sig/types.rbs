@@ -241,6 +241,12 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class BrokerCountUpdateInfo
+      attr_accessor created_broker_ids: ::Array[::Float]
+      attr_accessor deleted_broker_ids: ::Array[::Float]
+      SENSITIVE: []
+    end
+
     class ConsumerGroupReplication
       attr_accessor consumer_groups_to_exclude: ::Array[::String]
       attr_accessor consumer_groups_to_replicate: ::Array[::String]
@@ -929,6 +935,7 @@ module Aws::Kafka
       attr_accessor encryption_info: Types::EncryptionInfo
       attr_accessor connectivity_info: Types::ConnectivityInfo
       attr_accessor storage_mode: ("LOCAL" | "TIERED")
+      attr_accessor broker_count_update_info: Types::BrokerCountUpdateInfo
       SENSITIVE: []
     end
 

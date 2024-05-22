@@ -560,7 +560,7 @@ module Aws::DataSync
 
     class DescribeTaskExecutionResponse
       attr_accessor task_execution_arn: ::String
-      attr_accessor status: ("QUEUED" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
+      attr_accessor status: ("QUEUED" | "CANCELLING" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
       attr_accessor options: Types::Options
       attr_accessor excludes: ::Array[Types::FilterRule]
       attr_accessor includes: ::Array[Types::FilterRule]
@@ -1075,7 +1075,7 @@ module Aws::DataSync
 
     class TaskExecutionListEntry
       attr_accessor task_execution_arn: ::String
-      attr_accessor status: ("QUEUED" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
+      attr_accessor status: ("QUEUED" | "CANCELLING" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
       SENSITIVE: []
     end
 

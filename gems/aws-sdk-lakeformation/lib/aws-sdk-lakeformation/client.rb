@@ -301,8 +301,9 @@ module Aws::LakeFormation
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -1541,6 +1542,25 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def get_data_cells_filter(params = {}, options = {})
       req = build_request(:get_data_cells_filter, params)
+      req.send_request(options)
+    end
+
+    # Returns the identity of the invoking principal.
+    #
+    # @return [Types::GetDataLakePrincipalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataLakePrincipalResponse#identity #identity} => String
+    #
+    # @example Response structure
+    #
+    #   resp.identity #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakePrincipal AWS API Documentation
+    #
+    # @overload get_data_lake_principal(params = {})
+    # @param [Hash] params ({})
+    def get_data_lake_principal(params = {}, options = {})
+      req = build_request(:get_data_lake_principal, params)
       req.send_request(options)
     end
 
@@ -3775,7 +3795,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

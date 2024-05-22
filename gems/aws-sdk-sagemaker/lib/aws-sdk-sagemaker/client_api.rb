@@ -783,6 +783,7 @@ module Aws::SageMaker
     EnableSagemakerServicecatalogPortfolioInput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioInput')
     EnableSagemakerServicecatalogPortfolioOutput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioOutput')
     EnableSessionTagChaining = Shapes::BooleanShape.new(name: 'EnableSessionTagChaining')
+    EnabledOrDisabled = Shapes::StringShape.new(name: 'EnabledOrDisabled')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointArn = Shapes::StringShape.new(name: 'EndpointArn')
     EndpointConfigArn = Shapes::StringShape.new(name: 'EndpointConfigArn')
@@ -1002,6 +1003,7 @@ module Aws::SageMaker
     HyperbandStrategyMaxResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMaxResource')
     HyperbandStrategyMinResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMinResource')
     IamIdentity = Shapes::StructureShape.new(name: 'IamIdentity')
+    IamPolicyConstraints = Shapes::StructureShape.new(name: 'IamPolicyConstraints')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdentityProviderOAuthSetting = Shapes::StructureShape.new(name: 'IdentityProviderOAuthSetting')
     IdentityProviderOAuthSettings = Shapes::ListShape.new(name: 'IdentityProviderOAuthSettings')
@@ -1837,6 +1839,7 @@ module Aws::SageMaker
     S3ModelDataType = Shapes::StringShape.new(name: 'S3ModelDataType')
     S3ModelUri = Shapes::StringShape.new(name: 'S3ModelUri')
     S3OutputPath = Shapes::StringShape.new(name: 'S3OutputPath')
+    S3Presign = Shapes::StructureShape.new(name: 'S3Presign')
     S3StorageConfig = Shapes::StructureShape.new(name: 'S3StorageConfig')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SageMakerImageVersionAlias = Shapes::StringShape.new(name: 'SageMakerImageVersionAlias')
@@ -2237,6 +2240,7 @@ module Aws::SageMaker
     WaitIntervalInSeconds = Shapes::IntegerShape.new(name: 'WaitIntervalInSeconds')
     WarmPoolResourceStatus = Shapes::StringShape.new(name: 'WarmPoolResourceStatus')
     WarmPoolStatus = Shapes::StructureShape.new(name: 'WarmPoolStatus')
+    WorkerAccessConfiguration = Shapes::StructureShape.new(name: 'WorkerAccessConfiguration')
     Workforce = Shapes::StructureShape.new(name: 'Workforce')
     WorkforceArn = Shapes::StringShape.new(name: 'WorkforceArn')
     WorkforceFailureReason = Shapes::StringShape.new(name: 'WorkforceFailureReason')
@@ -3695,6 +3699,7 @@ module Aws::SageMaker
     CreateWorkteamRequest.add_member(:member_definitions, Shapes::ShapeRef.new(shape: MemberDefinitions, required: true, location_name: "MemberDefinitions"))
     CreateWorkteamRequest.add_member(:description, Shapes::ShapeRef.new(shape: String200, required: true, location_name: "Description"))
     CreateWorkteamRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration"))
+    CreateWorkteamRequest.add_member(:worker_access_configuration, Shapes::ShapeRef.new(shape: WorkerAccessConfiguration, location_name: "WorkerAccessConfiguration"))
     CreateWorkteamRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWorkteamRequest.struct_class = Types::CreateWorkteamRequest
 
@@ -5955,6 +5960,10 @@ module Aws::SageMaker
     IamIdentity.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "PrincipalId"))
     IamIdentity.add_member(:source_identity, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentity"))
     IamIdentity.struct_class = Types::IamIdentity
+
+    IamPolicyConstraints.add_member(:source_ip, Shapes::ShapeRef.new(shape: EnabledOrDisabled, location_name: "SourceIp"))
+    IamPolicyConstraints.add_member(:vpc_source_ip, Shapes::ShapeRef.new(shape: EnabledOrDisabled, location_name: "VpcSourceIp"))
+    IamPolicyConstraints.struct_class = Types::IamPolicyConstraints
 
     IdentityProviderOAuthSetting.add_member(:data_source_name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "DataSourceName"))
     IdentityProviderOAuthSetting.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
@@ -8736,6 +8745,9 @@ module Aws::SageMaker
     S3ModelDataSource.add_member(:model_access_config, Shapes::ShapeRef.new(shape: ModelAccessConfig, location_name: "ModelAccessConfig"))
     S3ModelDataSource.struct_class = Types::S3ModelDataSource
 
+    S3Presign.add_member(:iam_policy_constraints, Shapes::ShapeRef.new(shape: IamPolicyConstraints, location_name: "IamPolicyConstraints"))
+    S3Presign.struct_class = Types::S3Presign
+
     S3StorageConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     S3StorageConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     S3StorageConfig.add_member(:resolved_output_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "ResolvedOutputS3Uri"))
@@ -9812,6 +9824,7 @@ module Aws::SageMaker
     UpdateWorkteamRequest.add_member(:member_definitions, Shapes::ShapeRef.new(shape: MemberDefinitions, location_name: "MemberDefinitions"))
     UpdateWorkteamRequest.add_member(:description, Shapes::ShapeRef.new(shape: String200, location_name: "Description"))
     UpdateWorkteamRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration"))
+    UpdateWorkteamRequest.add_member(:worker_access_configuration, Shapes::ShapeRef.new(shape: WorkerAccessConfiguration, location_name: "WorkerAccessConfiguration"))
     UpdateWorkteamRequest.struct_class = Types::UpdateWorkteamRequest
 
     UpdateWorkteamResponse.add_member(:workteam, Shapes::ShapeRef.new(shape: Workteam, required: true, location_name: "Workteam"))
@@ -9884,6 +9897,9 @@ module Aws::SageMaker
     WarmPoolStatus.add_member(:reused_by_job, Shapes::ShapeRef.new(shape: TrainingJobName, location_name: "ReusedByJob"))
     WarmPoolStatus.struct_class = Types::WarmPoolStatus
 
+    WorkerAccessConfiguration.add_member(:s3_presign, Shapes::ShapeRef.new(shape: S3Presign, location_name: "S3Presign"))
+    WorkerAccessConfiguration.struct_class = Types::WorkerAccessConfiguration
+
     Workforce.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
     Workforce.add_member(:workforce_arn, Shapes::ShapeRef.new(shape: WorkforceArn, required: true, location_name: "WorkforceArn"))
     Workforce.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedDate"))
@@ -9928,6 +9944,7 @@ module Aws::SageMaker
     Workteam.add_member(:create_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
     Workteam.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedDate"))
     Workteam.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration"))
+    Workteam.add_member(:worker_access_configuration, Shapes::ShapeRef.new(shape: WorkerAccessConfiguration, location_name: "WorkerAccessConfiguration"))
     Workteam.struct_class = Types::Workteam
 
     Workteams.member = Shapes::ShapeRef.new(shape: Workteam)

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2024-05-16)
+------------------
+
+* Feature - This release adds support for waiters to fail on AccessDeniedException when having insufficient permissions
+
+1.67.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.66.0 (2024-04-25)
 ------------------
 

@@ -301,8 +301,9 @@ module Aws::CognitoIdentityProvider
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -945,7 +946,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user.user_create_date #=> Time
     #   resp.user.user_last_modified_date #=> Time
     #   resp.user.enabled #=> Boolean
-    #   resp.user.user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD"
+    #   resp.user.user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD", "EXTERNAL_PROVIDER"
     #   resp.user.mfa_options #=> Array
     #   resp.user.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.user.mfa_options[0].attribute_name #=> String
@@ -1419,7 +1420,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_create_date #=> Time
     #   resp.user_last_modified_date #=> Time
     #   resp.enabled #=> Boolean
-    #   resp.user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD"
+    #   resp.user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD", "EXTERNAL_PROVIDER"
     #   resp.mfa_options #=> Array
     #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.mfa_options[0].attribute_name #=> String
@@ -7922,7 +7923,7 @@ module Aws::CognitoIdentityProvider
     #   resp.users[0].user_create_date #=> Time
     #   resp.users[0].user_last_modified_date #=> Time
     #   resp.users[0].enabled #=> Boolean
-    #   resp.users[0].user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD"
+    #   resp.users[0].user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD", "EXTERNAL_PROVIDER"
     #   resp.users[0].mfa_options #=> Array
     #   resp.users[0].mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.users[0].mfa_options[0].attribute_name #=> String
@@ -7998,7 +7999,7 @@ module Aws::CognitoIdentityProvider
     #   resp.users[0].user_create_date #=> Time
     #   resp.users[0].user_last_modified_date #=> Time
     #   resp.users[0].enabled #=> Boolean
-    #   resp.users[0].user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD"
+    #   resp.users[0].user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD", "EXTERNAL_PROVIDER"
     #   resp.users[0].mfa_options #=> Array
     #   resp.users[0].mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.users[0].mfa_options[0].attribute_name #=> String
@@ -10798,7 +10799,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -66,6 +66,9 @@ module Aws::OSIS
     class DeletePipelineResponse < Aws::EmptyStructure
     end
 
+    class DisabledOperationException < Aws::EmptyStructure
+    end
+
     class EncryptionAtRestOptions
       attr_accessor kms_key_arn: ::String
       SENSITIVE: []
@@ -73,11 +76,13 @@ module Aws::OSIS
 
     class GetPipelineBlueprintRequest
       attr_accessor blueprint_name: ::String
+      attr_accessor format: ::String
       SENSITIVE: []
     end
 
     class GetPipelineBlueprintResponse
       attr_accessor blueprint: Types::PipelineBlueprint
+      attr_accessor format: ::String
       SENSITIVE: []
     end
 
@@ -162,6 +167,7 @@ module Aws::OSIS
       attr_accessor buffer_options: Types::BufferOptions
       attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
       attr_accessor service_vpc_endpoints: ::Array[Types::ServiceVpcEndpoint]
+      attr_accessor destinations: ::Array[Types::PipelineDestination]
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -169,11 +175,25 @@ module Aws::OSIS
     class PipelineBlueprint
       attr_accessor blueprint_name: ::String
       attr_accessor pipeline_configuration_body: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_description: ::String
+      attr_accessor service: ::String
+      attr_accessor use_case: ::String
       SENSITIVE: []
     end
 
     class PipelineBlueprintSummary
       attr_accessor blueprint_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_description: ::String
+      attr_accessor service: ::String
+      attr_accessor use_case: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineDestination
+      attr_accessor service_name: ::String
+      attr_accessor endpoint: ::String
       SENSITIVE: []
     end
 
@@ -191,6 +211,7 @@ module Aws::OSIS
       attr_accessor max_units: ::Integer
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      attr_accessor destinations: ::Array[Types::PipelineDestination]
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -286,6 +307,12 @@ module Aws::OSIS
       SENSITIVE: []
     end
 
+    class VpcAttachmentOptions
+      attr_accessor attach_to_vpc: bool
+      attr_accessor cidr_block: ::String
+      SENSITIVE: []
+    end
+
     class VpcEndpoint
       attr_accessor vpc_endpoint_id: ::String
       attr_accessor vpc_id: ::String
@@ -296,6 +323,7 @@ module Aws::OSIS
     class VpcOptions
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor vpc_attachment_options: Types::VpcAttachmentOptions
       SENSITIVE: []
     end
   end

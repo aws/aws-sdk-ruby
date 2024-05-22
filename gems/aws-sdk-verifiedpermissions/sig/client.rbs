@@ -195,8 +195,10 @@ module Aws
         def policy_type: () -> ("STATIC" | "TEMPLATE_LINKED")
         def principal: () -> Types::EntityIdentifier
         def resource: () -> Types::EntityIdentifier
+        def actions: () -> ::Array[Types::ActionIdentifier]
         def created_date: () -> ::Time
         def last_updated_date: () -> ::Time
+        def effect: () -> ("Permit" | "Forbid")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#create_policy-instance_method
       def create_policy: (
@@ -318,9 +320,11 @@ module Aws
         def policy_type: () -> ("STATIC" | "TEMPLATE_LINKED")
         def principal: () -> Types::EntityIdentifier
         def resource: () -> Types::EntityIdentifier
+        def actions: () -> ::Array[Types::ActionIdentifier]
         def definition: () -> Types::PolicyDefinitionDetail
         def created_date: () -> ::Time
         def last_updated_date: () -> ::Time
+        def effect: () -> ("Permit" | "Forbid")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_policy-instance_method
       def get_policy: (
@@ -582,8 +586,10 @@ module Aws
         def policy_type: () -> ("STATIC" | "TEMPLATE_LINKED")
         def principal: () -> Types::EntityIdentifier
         def resource: () -> Types::EntityIdentifier
+        def actions: () -> ::Array[Types::ActionIdentifier]
         def created_date: () -> ::Time
         def last_updated_date: () -> ::Time
+        def effect: () -> ("Permit" | "Forbid")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#update_policy-instance_method
       def update_policy: (

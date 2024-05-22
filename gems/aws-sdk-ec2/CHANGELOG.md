@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.457.1 (2024-05-21)
+------------------
+
+* Issue - Fix Aws::EC2::Resource not to set max_results automatically when the options contains the parameter that cannot be used with the parameter max_results.
+
+1.457.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.456.0 (2024-05-08)
+------------------
+
+* Feature - Adding Precision Hardware Clock (PHC) to public API DescribeInstanceTypes
+
+1.455.0 (2024-05-02)
+------------------
+
+* Feature - This release includes a new API for retrieving the public endorsement key of the EC2 instance's Nitro Trusted Platform Module (NitroTPM).
+
+1.454.0 (2024-05-01)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
 1.453.0 (2024-04-25)
 ------------------
 

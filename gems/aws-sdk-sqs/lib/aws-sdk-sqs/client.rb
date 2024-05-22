@@ -305,8 +305,9 @@ module Aws::SQS
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -541,8 +542,6 @@ module Aws::SQS
     #   queue is the dead-letter queue (DLQ), while the destination queue
     #   can be the original source queue (from which the messages were
     #   driven to the dead-letter-queue), or a custom destination queue.
-    #
-    # * Currently, only standard queues are supported.
     #
     # * Only one active message movement task is supported per queue at any
     #   given time.
@@ -1570,8 +1569,6 @@ module Aws::SQS
     #   can be the original source queue (from which the messages were
     #   driven to the dead-letter-queue), or a custom destination queue.
     #
-    # * Currently, only standard queues are supported.
-    #
     # * Only one active message movement task is supported per queue at any
     #   given time.
     #
@@ -1833,6 +1830,54 @@ module Aws::SQS
     #   Queue URLs and names are case-sensitive.
     #
     # @option params [Array<String>] :attribute_names
+    #   This parameter has been deprecated but will be supported for backward
+    #   compatibility. To provide attribute names, you are encouraged to use
+    #   `MessageSystemAttributeNames`.
+    #
+    #   A list of attributes that need to be returned along with each message.
+    #   These attributes include:
+    #
+    #   * `All` – Returns all values.
+    #
+    #   * `ApproximateFirstReceiveTimestamp` – Returns the time the message
+    #     was first received from the queue ([epoch time][1] in milliseconds).
+    #
+    #   * `ApproximateReceiveCount` – Returns the number of times a message
+    #     has been received across all queues but not deleted.
+    #
+    #   * `AWSTraceHeader` – Returns the X-Ray trace header string.
+    #
+    #   * `SenderId`
+    #
+    #     * For a user, returns the user ID, for example
+    #       `ABCDEFGHI1JKLMNOPQ23R`.
+    #
+    #     * For an IAM role, returns the IAM role ID, for example
+    #       `ABCDE1F2GH3I4JK5LMNOP:i-a123b456`.
+    #
+    #   * `SentTimestamp` – Returns the time the message was sent to the queue
+    #     ([epoch time][1] in milliseconds).
+    #
+    #   * `SqsManagedSseEnabled` – Enables server-side queue encryption using
+    #     SQS owned encryption keys. Only one server-side encryption option is
+    #     supported per queue (for example, [SSE-KMS][2] or [SSE-SQS][3]).
+    #
+    #   * `MessageDeduplicationId` – Returns the value provided by the
+    #     producer that calls the ` SendMessage ` action.
+    #
+    #   * `MessageGroupId` – Returns the value provided by the producer that
+    #     calls the ` SendMessage ` action. Messages with the same
+    #     `MessageGroupId` are returned in sequence.
+    #
+    #   * `SequenceNumber` – Returns the value provided by Amazon SQS.
+    #
+    #
+    #
+    #   [1]: http://en.wikipedia.org/wiki/Unix_time
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html
+    #
+    # @option params [Array<String>] :message_system_attribute_names
     #   A list of attributes that need to be returned along with each message.
     #   These attributes include:
     #
@@ -1912,8 +1957,8 @@ module Aws::SQS
     #   The duration (in seconds) for which the call waits for a message to
     #   arrive in the queue before returning. If a message is available, the
     #   call returns sooner than `WaitTimeSeconds`. If no messages are
-    #   available and the wait time expires, the call returns successfully
-    #   with an empty list of messages.
+    #   available and the wait time expires, the call does not return a
+    #   message list.
     #
     #   To avoid HTTP errors, ensure that the HTTP response timeout for
     #   `ReceiveMessage` requests is longer than the `WaitTimeSeconds`
@@ -1941,10 +1986,6 @@ module Aws::SQS
     #
     #   * When you set `FifoQueue`, a caller of the `ReceiveMessage` action
     #     can provide a `ReceiveRequestAttemptId` explicitly.
-    #
-    #   * If a caller of the `ReceiveMessage` action doesn't provide a
-    #     `ReceiveRequestAttemptId`, Amazon SQS generates a
-    #     `ReceiveRequestAttemptId`.
     #
     #   * It is possible to retry the `ReceiveMessage` action with the same
     #     `ReceiveRequestAttemptId` if none of the messages have been modified
@@ -2000,6 +2041,7 @@ module Aws::SQS
     #   resp = client.receive_message({
     #     queue_url: "String", # required
     #     attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication, KmsMasterKeyId, KmsDataKeyReusePeriodSeconds, DeduplicationScope, FifoThroughputLimit, RedriveAllowPolicy, SqsManagedSseEnabled
+    #     message_system_attribute_names: ["All"], # accepts All, SenderId, SentTimestamp, ApproximateReceiveCount, ApproximateFirstReceiveTimestamp, SequenceNumber, MessageDeduplicationId, MessageGroupId, AWSTraceHeader, DeadLetterQueueSourceArn
     #     message_attribute_names: ["MessageAttributeName"],
     #     max_number_of_messages: 1,
     #     visibility_timeout: 1,
@@ -2231,8 +2273,8 @@ module Aws::SQS
     #     `MessageGroupId` values. For each `MessageGroupId`, the messages are
     #     sorted by time sent. The caller can't specify a `MessageGroupId`.
     #
-    #   The length of `MessageGroupId` is 128 characters. Valid values:
-    #   alphanumeric characters and punctuation ``
+    #   The maximum length of `MessageGroupId` is 128 characters. Valid
+    #   values: alphanumeric characters and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   For best practices of using `MessageGroupId`, see [Using the
@@ -2399,13 +2441,14 @@ module Aws::SQS
       req.send_request(options)
     end
 
-    # Sets the value of one or more queue attributes. When you change a
-    # queue's attributes, the change can take up to 60 seconds for most of
-    # the attributes to propagate throughout the Amazon SQS system. Changes
-    # made to the `MessageRetentionPeriod` attribute can take up to 15
-    # minutes and will impact existing messages in the queue potentially
-    # causing them to be expired and deleted if the `MessageRetentionPeriod`
-    # is reduced below the age of existing messages.
+    # Sets the value of one or more queue attributes, like a policy. When
+    # you change a queue's attributes, the change can take up to 60 seconds
+    # for most of the attributes to propagate throughout the Amazon SQS
+    # system. Changes made to the `MessageRetentionPeriod` attribute can
+    # take up to 15 minutes and will impact existing messages in the queue
+    # potentially causing them to be expired and deleted if the
+    # `MessageRetentionPeriod` is reduced below the age of existing
+    # messages.
     #
     # <note markdown="1"> * In the future, new attributes might be added. If you write code that
     #   calls this action, we recommend that you structure your code so that
@@ -2653,9 +2696,6 @@ module Aws::SQS
     #   original source queue (from which the messages were driven to the
     #   dead-letter-queue), or a custom destination queue.
     #
-    # * Currently, only standard queues support redrive. FIFO queues don't
-    #   support redrive.
-    #
     # * Only one active message movement task is supported per queue at any
     #   given time.
     #
@@ -2820,7 +2860,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1300,6 +1300,24 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakePrincipalRequest AWS API Documentation
+    #
+    class GetDataLakePrincipalRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] identity
+    #   A unique identifier of the invoking principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakePrincipalResponse AWS API Documentation
+    #
+    class GetDataLakePrincipalResponse < Struct.new(
+      :identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database

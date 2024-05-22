@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2024-05-15)
+------------------
+
+* Feature - Added support for importing medical imaging data from Amazon S3 buckets across accounts and regions.
+
+1.9.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.8.0 (2024-04-25)
 ------------------
 

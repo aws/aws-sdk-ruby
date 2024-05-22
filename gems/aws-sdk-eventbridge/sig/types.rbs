@@ -277,12 +277,18 @@ module Aws::EventBridge
     class CreateEventBusRequest
       attr_accessor name: ::String
       attr_accessor event_source_name: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class CreateEventBusResponse
       attr_accessor event_bus_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
       SENSITIVE: []
     end
 
@@ -467,7 +473,12 @@ module Aws::EventBridge
     class DescribeEventBusResponse
       attr_accessor name: ::String
       attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
       attr_accessor policy: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -593,7 +604,10 @@ module Aws::EventBridge
     class EventBus
       attr_accessor name: ::String
       attr_accessor arn: ::String
+      attr_accessor description: ::String
       attr_accessor policy: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -1275,6 +1289,23 @@ module Aws::EventBridge
       attr_accessor endpoint_id: ::String
       attr_accessor endpoint_url: ::String
       attr_accessor state: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdateEventBusRequest
+      attr_accessor name: ::String
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
+      SENSITIVE: []
+    end
+
+    class UpdateEventBusResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
       SENSITIVE: []
     end
   end

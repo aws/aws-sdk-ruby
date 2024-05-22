@@ -888,6 +888,25 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Describes brokers being changed during a broker count update.
+    #
+    # @!attribute [rw] created_broker_ids
+    #   List of Broker Ids when creating new Brokers in a cluster.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] deleted_broker_ids
+    #   List of Broker Ids when deleting existing Brokers in a cluster.
+    #   @return [Array<Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerCountUpdateInfo AWS API Documentation
+    #
+    class BrokerCountUpdateInfo < Struct.new(
+      :created_broker_ids,
+      :deleted_broker_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about consumer group replication.
     #
     # @!attribute [rw] consumer_groups_to_exclude
@@ -3271,6 +3290,10 @@ module Aws::Kafka
     #   This controls storage mode for supported storage tiers.
     #   @return [String]
     #
+    # @!attribute [rw] broker_count_update_info
+    #   Describes brokers being changed during a broker count update.
+    #   @return [Types::BrokerCountUpdateInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo AWS API Documentation
     #
     class MutableClusterInfo < Struct.new(
@@ -3285,7 +3308,8 @@ module Aws::Kafka
       :client_authentication,
       :encryption_info,
       :connectivity_info,
-      :storage_mode)
+      :storage_mode,
+      :broker_count_update_info)
       SENSITIVE = []
       include Aws::Structure
     end

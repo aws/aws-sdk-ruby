@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2024-05-14)
+------------------
+
+* Feature - Updated a few x-id in the http uri traits
+
+1.150.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.149.1 (2024-05-06)
+------------------
+
+* Issue - Fix bug where destination bucket default encryption was inadvertently overridden by source object encryption.
+
 1.149.0 (2024-04-30)
 ------------------
 
@@ -167,7 +182,7 @@ Unreleased Changes
 1.123.2 (2023-06-12)
 ------------------
 
-* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866). 
+* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866).
 
 1.123.1 (2023-06-02)
 ------------------

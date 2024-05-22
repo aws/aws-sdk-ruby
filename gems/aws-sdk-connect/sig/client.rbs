@@ -293,6 +293,19 @@ module Aws
                                                  ) -> _BatchDisassociateAnalyticsDataSetResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateAnalyticsDataSetResponseSuccess
 
+      interface _BatchGetAttachedFileMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetAttachedFileMetadataResponse]
+        def files: () -> ::Array[Types::AttachedFile]
+        def errors: () -> ::Array[Types::AttachedFileError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#batch_get_attached_file_metadata-instance_method
+      def batch_get_attached_file_metadata: (
+                                              file_ids: Array[::String],
+                                              instance_id: ::String,
+                                              associated_resource_arn: ::String
+                                            ) -> _BatchGetAttachedFileMetadataResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetAttachedFileMetadataResponseSuccess
+
       interface _BatchGetFlowAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFlowAssociationResponse]
         def flow_association_summary_list: () -> ::Array[Types::FlowAssociationSummary]
@@ -351,6 +364,17 @@ module Aws
                               ) -> _ClaimPhoneNumberResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ClaimPhoneNumberResponseSuccess
 
+      interface _CompleteAttachedFileUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompleteAttachedFileUploadResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#complete_attached_file_upload-instance_method
+      def complete_attached_file_upload: (
+                                           instance_id: ::String,
+                                           file_id: ::String,
+                                           associated_resource_arn: ::String
+                                         ) -> _CompleteAttachedFileUploadResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteAttachedFileUploadResponseSuccess
+
       interface _CreateAgentStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentStatusResponse]
         def agent_status_arn: () -> ::String
@@ -379,6 +403,7 @@ module Aws
                                  type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER"),
                                  ?description: ::String,
                                  content: ::String,
+                                 ?status: ("PUBLISHED" | "SAVED"),
                                  ?tags: Hash[::String, ::String]
                                ) -> _CreateContactFlowResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactFlowResponseSuccess
@@ -984,6 +1009,17 @@ module Aws
                                       ) -> _DeactivateEvaluationFormResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateEvaluationFormResponseSuccess
 
+      interface _DeleteAttachedFileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAttachedFileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_attached_file-instance_method
+      def delete_attached_file: (
+                                  instance_id: ::String,
+                                  file_id: ::String,
+                                  associated_resource_arn: ::String
+                                ) -> _DeleteAttachedFileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAttachedFileResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_contact_evaluation-instance_method
       def delete_contact_evaluation: (
                                        instance_id: ::String,
@@ -1557,6 +1593,29 @@ module Aws
                                   contact_id: ::String
                                 ) -> _DismissUserContactResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DismissUserContactResponseSuccess
+
+      interface _GetAttachedFileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAttachedFileResponse]
+        def file_arn: () -> ::String
+        def file_id: () -> ::String
+        def creation_time: () -> ::String
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_name: () -> ::String
+        def file_size_in_bytes: () -> ::Integer
+        def associated_resource_arn: () -> ::String
+        def file_use_case_type: () -> ("ATTACHMENT")
+        def created_by: () -> Types::CreatedByInfo
+        def download_url_metadata: () -> Types::DownloadUrlMetadata
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#get_attached_file-instance_method
+      def get_attached_file: (
+                               instance_id: ::String,
+                               file_id: ::String,
+                               ?url_expiry_in_seconds: ::Integer,
+                               associated_resource_arn: ::String
+                             ) -> _GetAttachedFileResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttachedFileResponseSuccess
 
       interface _GetContactAttributesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetContactAttributesResponse]
@@ -2508,6 +2567,107 @@ module Aws
                                           ) -> _SearchAvailablePhoneNumbersResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAvailablePhoneNumbersResponseSuccess
 
+      interface _SearchContactFlowModulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchContactFlowModulesResponse]
+        def contact_flow_modules: () -> ::Array[Types::ContactFlowModule]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_contact_flow_modules-instance_method
+      def search_contact_flow_modules: (
+                                         instance_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer,
+                                         ?search_filter: {
+                                           tag_filter: {
+                                             or_conditions: Array[
+                                               Array[
+                                                 {
+                                                   tag_key: ::String?,
+                                                   tag_value: ::String?
+                                                 },
+                                               ],
+                                             ]?,
+                                             and_conditions: Array[
+                                               {
+                                                 tag_key: ::String?,
+                                                 tag_value: ::String?
+                                               },
+                                             ]?,
+                                             tag_condition: {
+                                               tag_key: ::String?,
+                                               tag_value: ::String?
+                                             }?
+                                           }?
+                                         },
+                                         ?search_criteria: {
+                                           or_conditions: Array[
+                                             untyped,
+                                           ]?,
+                                           and_conditions: Array[
+                                             untyped,
+                                           ]?,
+                                           string_condition: {
+                                             field_name: ::String?,
+                                             value: ::String?,
+                                             comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                           }?
+                                         }
+                                       ) -> _SearchContactFlowModulesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContactFlowModulesResponseSuccess
+
+      interface _SearchContactFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchContactFlowsResponse]
+        def contact_flows: () -> ::Array[Types::ContactFlow]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_contact_flows-instance_method
+      def search_contact_flows: (
+                                  instance_id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?search_filter: {
+                                    tag_filter: {
+                                      or_conditions: Array[
+                                        Array[
+                                          {
+                                            tag_key: ::String?,
+                                            tag_value: ::String?
+                                          },
+                                        ],
+                                      ]?,
+                                      and_conditions: Array[
+                                        {
+                                          tag_key: ::String?,
+                                          tag_value: ::String?
+                                        },
+                                      ]?,
+                                      tag_condition: {
+                                        tag_key: ::String?,
+                                        tag_value: ::String?
+                                      }?
+                                    }?
+                                  },
+                                  ?search_criteria: {
+                                    or_conditions: Array[
+                                      untyped,
+                                    ]?,
+                                    and_conditions: Array[
+                                      untyped,
+                                    ]?,
+                                    string_condition: {
+                                      field_name: ::String?,
+                                      value: ::String?,
+                                      comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                    }?,
+                                    type_condition: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")?,
+                                    state_condition: ("ACTIVE" | "ARCHIVED")?,
+                                    status_condition: ("PUBLISHED" | "SAVED")?
+                                  }
+                                ) -> _SearchContactFlowsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContactFlowsResponseSuccess
+
       interface _SearchContactsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchContactsResponse]
         def contacts: () -> ::Array[Types::ContactSearchSummary]
@@ -3041,6 +3201,32 @@ module Aws
                                          }
                                        ) -> _SendChatIntegrationEventResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendChatIntegrationEventResponseSuccess
+
+      interface _StartAttachedFileUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAttachedFileUploadResponse]
+        def file_arn: () -> ::String
+        def file_id: () -> ::String
+        def creation_time: () -> ::String
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def created_by: () -> Types::CreatedByInfo
+        def upload_url_metadata: () -> Types::UploadUrlMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#start_attached_file_upload-instance_method
+      def start_attached_file_upload: (
+                                        ?client_token: ::String,
+                                        instance_id: ::String,
+                                        file_name: ::String,
+                                        file_size_in_bytes: ::Integer,
+                                        ?url_expiry_in_seconds: ::Integer,
+                                        file_use_case_type: ("ATTACHMENT"),
+                                        associated_resource_arn: ::String,
+                                        ?created_by: {
+                                          connect_user_arn: ::String?,
+                                          aws_identity_arn: ::String?
+                                        },
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _StartAttachedFileUploadResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAttachedFileUploadResponseSuccess
 
       interface _StartChatContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartChatContactResponse]

@@ -381,6 +381,7 @@ module Aws::Pinpoint
     class CampaignEmailMessage
       attr_accessor body: ::String
       attr_accessor from_address: ::String
+      attr_accessor headers: ::Array[Types::MessageHeader]
       attr_accessor html_body: ::String
       attr_accessor title: ::String
       SENSITIVE: []
@@ -1024,6 +1025,7 @@ module Aws::Pinpoint
       attr_accessor html_part: ::String
       attr_accessor recommender_id: ::String
       attr_accessor subject: ::String
+      attr_accessor headers: ::Array[Types::MessageHeader]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor template_description: ::String
       attr_accessor text_part: ::String
@@ -1038,6 +1040,7 @@ module Aws::Pinpoint
       attr_accessor last_modified_date: ::String
       attr_accessor recommender_id: ::String
       attr_accessor subject: ::String
+      attr_accessor headers: ::Array[Types::MessageHeader]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor template_description: ::String
       attr_accessor template_name: ::String
@@ -2805,6 +2808,13 @@ module Aws::Pinpoint
       attr_accessor html_part: Types::SimpleEmailPart
       attr_accessor subject: Types::SimpleEmailPart
       attr_accessor text_part: Types::SimpleEmailPart
+      attr_accessor headers: ::Array[Types::MessageHeader]
+      SENSITIVE: []
+    end
+
+    class MessageHeader
+      attr_accessor name: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2024-05-03)
+------------------
+
+* Feature - Adds support for specifying replacement headers per BulkEmailEntry in SendBulkEmail in SESv2.
+
+1.47.0 (2024-05-01)
+------------------
+
+* Feature - Fixes ListContacts and ListImportJobs APIs to use POST instead of GET.
+
 1.46.0 (2024-04-25)
 ------------------
 

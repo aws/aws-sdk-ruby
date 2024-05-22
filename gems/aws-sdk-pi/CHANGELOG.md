@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2024-05-21)
+------------------
+
+* Feature - Performance Insights added a new input parameter called AuthorizedActions to support the fine-grained access feature. Performance Insights also restricted the acceptable input characters.
+
+1.56.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.55.0 (2024-04-25)
 ------------------
 

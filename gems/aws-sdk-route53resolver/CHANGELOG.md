@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2024-05-09)
+------------------
+
+* Feature - Update the DNS Firewall settings to correct a spelling issue.
+
 1.56.0 (2024-04-30)
 ------------------
 

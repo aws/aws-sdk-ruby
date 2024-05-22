@@ -29,6 +29,7 @@ module Aws::OSIS
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {DisabledOperationException}
   # * {InternalException}
   # * {InvalidPaginationTokenException}
   # * {LimitExceededException}
@@ -57,6 +58,16 @@ module Aws::OSIS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::OSIS::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DisabledOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::OSIS::Types::DisabledOperationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -3105,6 +3105,20 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DescribeKeyRegistrationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor default_key_only: bool
+      SENSITIVE: []
+    end
+
+    class DescribeKeyRegistrationResponse
+      attr_accessor aws_account_id: ::String
+      attr_accessor key_registration: ::Array[Types::RegisteredCustomerManagedKey]
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class DescribeNamespaceRequest
       attr_accessor aws_account_id: ::String
       attr_accessor namespace: ::String
@@ -3463,6 +3477,14 @@ module Aws::QuickSight
 
     class ExportWithHiddenFieldsOption
       attr_accessor availability_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class FailedKeyRegistrationEntry
+      attr_accessor key_arn: ::String
+      attr_accessor message: ::String
+      attr_accessor status_code: ::Integer
+      attr_accessor sender_fault: bool
       SENSITIVE: []
     end
 
@@ -6086,6 +6108,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class RegisteredCustomerManagedKey
+      attr_accessor key_arn: ::String
+      attr_accessor default_key: bool
+      SENSITIVE: []
+    end
+
     class RegisteredUserConsoleFeatureConfigurations
       attr_accessor state_persistence: Types::StatePersistenceConfigurations
       SENSITIVE: []
@@ -6949,6 +6977,12 @@ module Aws::QuickSight
       attr_accessor value_cell_style: Types::TableCellStyle
       attr_accessor metric_header_cell_style: Types::TableCellStyle
       attr_accessor style_targets: ::Array[Types::TableStyleTarget]
+      SENSITIVE: []
+    end
+
+    class SuccessfulKeyRegistrationEntry
+      attr_accessor key_arn: ::String
+      attr_accessor status_code: ::Integer
       SENSITIVE: []
     end
 
@@ -8102,6 +8136,19 @@ module Aws::QuickSight
       attr_accessor aws_account_id: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateKeyRegistrationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor key_registration: ::Array[Types::RegisteredCustomerManagedKey]
+      SENSITIVE: []
+    end
+
+    class UpdateKeyRegistrationResponse
+      attr_accessor failed_key_registration: ::Array[Types::FailedKeyRegistrationEntry]
+      attr_accessor successful_key_registration: ::Array[Types::SuccessfulKeyRegistrationEntry]
+      attr_accessor request_id: ::String
       SENSITIVE: []
     end
 

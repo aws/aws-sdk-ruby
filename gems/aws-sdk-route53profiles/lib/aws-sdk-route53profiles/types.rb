@@ -79,10 +79,11 @@ module Aws::Route53Profiles
     #   @return [String]
     #
     # @!attribute [rw] resource_properties
-    #   If you are adding a DNS Firewall rule group, include also a priority
-    #   in this format:
+    #   If you are adding a DNS Firewall rule group, include also a
+    #   priority. The priority indicates the processing order for the rule
+    #   groups, starting with the priority assinged the lowest value.
     #
-    #   `Key=FirewallRuleGroupPriority,Value=100`
+    #   The allowed values for priority are between 100 and 9900.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/AssociateResourceToProfileRequest AWS API Documentation
@@ -918,10 +919,11 @@ module Aws::Route53Profiles
     #   @return [String]
     #
     # @!attribute [rw] resource_properties
-    #   If you are adding a DNS Firewall rule group, include also a priority
-    #   in this format:
+    #   If you are adding a DNS Firewall rule group, include also a
+    #   priority. The priority indicates the processing order for the rule
+    #   groups, starting with the priority assinged the lowest value.
     #
-    #   `Key=FirewallRuleGroupPriority,Value=100`.
+    #   The allowed values for priority are between 100 and 9900.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/UpdateProfileResourceAssociationRequest AWS API Documentation

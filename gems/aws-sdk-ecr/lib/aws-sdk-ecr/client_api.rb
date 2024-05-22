@@ -1200,6 +1200,7 @@ module Aws::ECR
         "endpointPrefix" => "api.ecr",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon ECR",
         "serviceFullName" => "Amazon EC2 Container Registry",
         "serviceId" => "ECR",

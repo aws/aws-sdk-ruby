@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2024-05-09)
+------------------
+
+* Feature - Adds policy effect and actions fields to Policy API's.
+
 1.20.0 (2024-04-25)
 ------------------
 

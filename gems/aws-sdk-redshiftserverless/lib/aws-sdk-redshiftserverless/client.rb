@@ -301,8 +301,9 @@ module Aws::RedshiftServerless
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -1044,10 +1045,10 @@ module Aws::RedshiftServerless
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, `require_ssl`, and query monitoring
-    #   metrics that let you define performance boundaries. For more
-    #   information about query monitoring rules and available metrics, see [
-    #   Query monitoring metrics for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and query
+    #   monitoring metrics that let you define performance boundaries. For
+    #   more information about query monitoring rules and available metrics,
+    #   see [ Query monitoring metrics for Amazon Redshift Serverless][1].
     #
     #
     #
@@ -2299,7 +2300,7 @@ module Aws::RedshiftServerless
     # @return [Types::ListScheduledActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListScheduledActionsResponse#next_token #next_token} => String
-    #   * {Types::ListScheduledActionsResponse#scheduled_actions #scheduled_actions} => Array&lt;String&gt;
+    #   * {Types::ListScheduledActionsResponse#scheduled_actions #scheduled_actions} => Array&lt;Types::ScheduledActionAssociation&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2315,7 +2316,8 @@ module Aws::RedshiftServerless
     #
     #   resp.next_token #=> String
     #   resp.scheduled_actions #=> Array
-    #   resp.scheduled_actions[0] #=> String
+    #   resp.scheduled_actions[0].namespace_name #=> String
+    #   resp.scheduled_actions[0].scheduled_action_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListScheduledActions AWS API Documentation
     #
@@ -3555,10 +3557,10 @@ module Aws::RedshiftServerless
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, `require_ssl`, and query monitoring
-    #   metrics that let you define performance boundaries. For more
-    #   information about query monitoring rules and available metrics, see [
-    #   Query monitoring metrics for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and query
+    #   monitoring metrics that let you define performance boundaries. For
+    #   more information about query monitoring rules and available metrics,
+    #   see [ Query monitoring metrics for Amazon Redshift Serverless][1].
     #
     #
     #
@@ -3674,7 +3676,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -78,6 +78,8 @@ module Aws::SsmSap
             Aws::SsmSap::Endpoints::ListComponents.build(context)
           when :list_databases
             Aws::SsmSap::Endpoints::ListDatabases.build(context)
+          when :list_operation_events
+            Aws::SsmSap::Endpoints::ListOperationEvents.build(context)
           when :list_operations
             Aws::SsmSap::Endpoints::ListOperations.build(context)
           when :list_tags_for_resource
@@ -86,8 +88,12 @@ module Aws::SsmSap
             Aws::SsmSap::Endpoints::PutResourcePermission.build(context)
           when :register_application
             Aws::SsmSap::Endpoints::RegisterApplication.build(context)
+          when :start_application
+            Aws::SsmSap::Endpoints::StartApplication.build(context)
           when :start_application_refresh
             Aws::SsmSap::Endpoints::StartApplicationRefresh.build(context)
+          when :stop_application
+            Aws::SsmSap::Endpoints::StopApplication.build(context)
           when :tag_resource
             Aws::SsmSap::Endpoints::TagResource.build(context)
           when :untag_resource

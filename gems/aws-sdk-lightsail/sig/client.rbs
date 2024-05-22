@@ -149,7 +149,7 @@ module Aws
                                          port_info: {
                                            from_port: ::Integer?,
                                            to_port: ::Integer?,
-                                           protocol: ("tcp" | "all" | "udp" | "icmp")?,
+                                           protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")?,
                                            cidrs: Array[::String]?,
                                            ipv6_cidrs: Array[::String]?,
                                            cidr_list_aliases: Array[::String]?
@@ -457,7 +457,7 @@ module Aws
                                    },
                                  ],
                                  bundle_id: ::String,
-                                 ?ip_address_type: ("dualstack" | "ipv4"),
+                                 ?ip_address_type: ("dualstack" | "ipv4" | "ipv6"),
                                  ?tags: Array[
                                    {
                                      key: ::String?,
@@ -565,7 +565,7 @@ module Aws
                                   }?
                                 },
                               ],
-                              ?ip_address_type: ("dualstack" | "ipv4")
+                              ?ip_address_type: ("dualstack" | "ipv4" | "ipv6")
                             ) -> _CreateInstancesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstancesResponseSuccess
 
@@ -605,7 +605,7 @@ module Aws
                                                 }?
                                               },
                                             ],
-                                            ?ip_address_type: ("dualstack" | "ipv4"),
+                                            ?ip_address_type: ("dualstack" | "ipv4" | "ipv6"),
                                             ?source_instance_name: ::String,
                                             ?restore_date: ::String,
                                             ?use_latest_restorable_auto_snapshot: bool
@@ -649,7 +649,7 @@ module Aws
                                       value: ::String?
                                     },
                                   ],
-                                  ?ip_address_type: ("dualstack" | "ipv4"),
+                                  ?ip_address_type: ("dualstack" | "ipv4" | "ipv6"),
                                   ?tls_policy_name: ::String
                                 ) -> _CreateLoadBalancerResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoadBalancerResponseSuccess
@@ -1845,7 +1845,7 @@ module Aws
                                         port_info: {
                                           from_port: ::Integer?,
                                           to_port: ::Integer?,
-                                          protocol: ("tcp" | "all" | "udp" | "icmp")?,
+                                          protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")?,
                                           cidrs: Array[::String]?,
                                           ipv6_cidrs: Array[::String]?,
                                           cidr_list_aliases: Array[::String]?
@@ -1893,7 +1893,7 @@ module Aws
                                          {
                                            from_port: ::Integer?,
                                            to_port: ::Integer?,
-                                           protocol: ("tcp" | "all" | "udp" | "icmp")?,
+                                           protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")?,
                                            cidrs: Array[::String]?,
                                            ipv6_cidrs: Array[::String]?,
                                            cidr_list_aliases: Array[::String]?
@@ -1975,7 +1975,8 @@ module Aws
       def set_ip_address_type: (
                                  resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket"),
                                  resource_name: ::String,
-                                 ip_address_type: ("dualstack" | "ipv4")
+                                 ip_address_type: ("dualstack" | "ipv4" | "ipv6"),
+                                 ?accept_bundle_update: bool
                                ) -> _SetIpAddressTypeResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIpAddressTypeResponseSuccess
 

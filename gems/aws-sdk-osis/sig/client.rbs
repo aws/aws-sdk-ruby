@@ -90,7 +90,11 @@ module Aws
                              },
                              ?vpc_options: {
                                subnet_ids: Array[::String],
-                               security_group_ids: Array[::String]?
+                               security_group_ids: Array[::String]?,
+                               vpc_attachment_options: {
+                                 attach_to_vpc: bool,
+                                 cidr_block: ::String?
+                               }?
                              },
                              ?buffer_options: {
                                persistent_buffer_enabled: bool
@@ -129,10 +133,12 @@ module Aws
       interface _GetPipelineBlueprintResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPipelineBlueprintResponse]
         def blueprint: () -> Types::PipelineBlueprint
+        def format: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#get_pipeline_blueprint-instance_method
       def get_pipeline_blueprint: (
-                                    blueprint_name: ::String
+                                    blueprint_name: ::String,
+                                    ?format: ::String
                                   ) -> _GetPipelineBlueprintResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPipelineBlueprintResponseSuccess
 

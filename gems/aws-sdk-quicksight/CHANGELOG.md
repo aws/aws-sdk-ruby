@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2024-05-16)
+------------------
+
+* Feature - This release adds DescribeKeyRegistration and UpdateKeyRegistration APIs to manage QuickSight Customer Managed Keys (CMK).
+
+1.111.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.110.0 (2024-04-30)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.242.0 (2024-05-16)
+------------------
+
+* Feature - Introduced WorkerAccessConfiguration to SageMaker Workteam. This allows customers to configure resource access for workers in a workteam.
+
+1.241.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.240.0 (2024-05-10)
+------------------
+
+* Feature - Introduced support for G6 instance types on Sagemaker Notebook Instances and on SageMaker Studio for JupyterLab and CodeEditor applications.
+
+1.239.0 (2024-05-03)
+------------------
+
+* Feature - Amazon SageMaker Inference now supports m6i, c6i, r6i, m7i, c7i, r7i and g5 instance types for Batch Transform Jobs
+
 1.238.0 (2024-04-30)
 ------------------
 

@@ -2764,6 +2764,7 @@ module Aws::S3
         "endpointPrefix" => "s3",
         "globalEndpoint" => "s3.amazonaws.com",
         "protocol" => "rest-xml",
+        "protocols" => ["rest-xml"],
         "serviceAbbreviation" => "Amazon S3",
         "serviceFullName" => "Amazon Simple Storage Service",
         "serviceId" => "S3",

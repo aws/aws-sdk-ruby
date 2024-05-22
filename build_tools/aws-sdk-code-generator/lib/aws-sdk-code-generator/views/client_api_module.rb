@@ -72,6 +72,7 @@ module AwsSdkCodeGenerator
         # keep
         'endpointPrefix' => true,
         'signatureVersion' => true,
+        'auth' => true,
         'signingName' => true,
         'serviceFullName' => true,
         'protocol' => true,

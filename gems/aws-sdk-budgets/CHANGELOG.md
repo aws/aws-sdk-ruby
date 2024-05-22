@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2024-05-07)
+------------------
+
+* Feature - This release adds tag support for budgets and budget actions.
+
 1.64.0 (2024-04-25)
 ------------------
 

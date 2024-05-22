@@ -301,8 +301,9 @@ module Aws::Lightsail
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -805,7 +806,7 @@ module Aws::Lightsail
     #     port_info: { # required
     #       from_port: 1,
     #       to_port: 1,
-    #       protocol: "tcp", # accepts tcp, all, udp, icmp
+    #       protocol: "tcp", # accepts tcp, all, udp, icmp, icmpv6
     #       cidrs: ["string"],
     #       ipv6_cidrs: ["string"],
     #       cidr_list_aliases: ["string"],
@@ -2360,7 +2361,7 @@ module Aws::Lightsail
     #       },
     #     ],
     #     bundle_id: "string", # required
-    #     ip_address_type: "dualstack", # accepts dualstack, ipv4
+    #     ip_address_type: "dualstack", # accepts dualstack, ipv4, ipv6
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -2412,7 +2413,7 @@ module Aws::Lightsail
     #   resp.distribution.cache_behaviors[0].path #=> String
     #   resp.distribution.cache_behaviors[0].behavior #=> String, one of "dont-cache", "cache"
     #   resp.distribution.able_to_update_bundle #=> Boolean
-    #   resp.distribution.ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.distribution.ip_address_type #=> String, one of "dualstack", "ipv4", "ipv6"
     #   resp.distribution.tags #=> Array
     #   resp.distribution.tags[0].key #=> String
     #   resp.distribution.tags[0].value #=> String
@@ -2710,8 +2711,8 @@ module Aws::Lightsail
     #    </note>
     #
     # @option params [required, String] :blueprint_id
-    #   The ID for a virtual private server image (`app_wordpress_4_4` or
-    #   `app_lamp_7_0`). Use the `get blueprints` operation to return a list
+    #   The ID for a virtual private server image (`app_wordpress_x_x` or
+    #   `app_lamp_x_x`). Use the `get blueprints` operation to return a list
     #   of available images (or *blueprints*).
     #
     #   <note markdown="1"> Use active blueprints when creating new instances. Inactive blueprints
@@ -2724,7 +2725,7 @@ module Aws::Lightsail
     #
     # @option params [required, String] :bundle_id
     #   The bundle of specification information for your virtual private
-    #   server (or *instance*), including the pricing plan (`micro_1_0`).
+    #   server (or *instance*), including the pricing plan (`medium_x_x`).
     #
     # @option params [String] :user_data
     #   A launch script you can create that configures a server with
@@ -2757,8 +2758,8 @@ module Aws::Lightsail
     # @option params [String] :ip_address_type
     #   The IP address type for the instance.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for IPv4
-    #   and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
     #
     #   The default value is `dualstack`.
     #
@@ -2794,7 +2795,7 @@ module Aws::Lightsail
     #         },
     #       },
     #     ],
-    #     ip_address_type: "dualstack", # accepts dualstack, ipv4
+    #     ip_address_type: "dualstack", # accepts dualstack, ipv4, ipv6
     #   })
     #
     # @example Response structure
@@ -2867,7 +2868,7 @@ module Aws::Lightsail
     #
     # @option params [required, String] :bundle_id
     #   The bundle of specification information for your virtual private
-    #   server (or *instance*), including the pricing plan (`micro_1_0`).
+    #   server (or *instance*), including the pricing plan (`micro_x_x`).
     #
     # @option params [String] :user_data
     #   You can create a launch script that configures a server with
@@ -2899,8 +2900,8 @@ module Aws::Lightsail
     # @option params [String] :ip_address_type
     #   The IP address type for the instance.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for IPv4
-    #   and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
     #
     #   The default value is `dualstack`.
     #
@@ -3000,7 +3001,7 @@ module Aws::Lightsail
     #         },
     #       },
     #     ],
-    #     ip_address_type: "dualstack", # accepts dualstack, ipv4
+    #     ip_address_type: "dualstack", # accepts dualstack, ipv4, ipv6
     #     source_instance_name: "string",
     #     restore_date: "string",
     #     use_latest_restorable_auto_snapshot: false,
@@ -3174,8 +3175,8 @@ module Aws::Lightsail
     # @option params [String] :ip_address_type
     #   The IP address type for the load balancer.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for IPv4
-    #   and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
     #
     #   The default value is `dualstack`.
     #
@@ -3213,7 +3214,7 @@ module Aws::Lightsail
     #         value: "TagValue",
     #       },
     #     ],
-    #     ip_address_type: "dualstack", # accepts dualstack, ipv4
+    #     ip_address_type: "dualstack", # accepts dualstack, ipv4, ipv6
     #     tls_policy_name: "string",
     #   })
     #
@@ -7295,7 +7296,7 @@ module Aws::Lightsail
     #   resp.distributions[0].cache_behaviors[0].path #=> String
     #   resp.distributions[0].cache_behaviors[0].behavior #=> String, one of "dont-cache", "cache"
     #   resp.distributions[0].able_to_update_bundle #=> Boolean
-    #   resp.distributions[0].ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.distributions[0].ip_address_type #=> String, one of "dualstack", "ipv4", "ipv6"
     #   resp.distributions[0].tags #=> Array
     #   resp.distributions[0].tags[0].key #=> String
     #   resp.distributions[0].tags[0].value #=> String
@@ -7526,7 +7527,7 @@ module Aws::Lightsail
     #   resp.instance.public_ip_address #=> String
     #   resp.instance.ipv6_addresses #=> Array
     #   resp.instance.ipv6_addresses[0] #=> String
-    #   resp.instance.ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.instance.ip_address_type #=> String, one of "dualstack", "ipv4", "ipv6"
     #   resp.instance.hardware.cpu_count #=> Integer
     #   resp.instance.hardware.disks #=> Array
     #   resp.instance.hardware.disks[0].name #=> String
@@ -7561,7 +7562,7 @@ module Aws::Lightsail
     #   resp.instance.networking.ports #=> Array
     #   resp.instance.networking.ports[0].from_port #=> Integer
     #   resp.instance.networking.ports[0].to_port #=> Integer
-    #   resp.instance.networking.ports[0].protocol #=> String, one of "tcp", "all", "udp", "icmp"
+    #   resp.instance.networking.ports[0].protocol #=> String, one of "tcp", "all", "udp", "icmp", "icmpv6"
     #   resp.instance.networking.ports[0].access_from #=> String
     #   resp.instance.networking.ports[0].access_type #=> String, one of "Public", "Private"
     #   resp.instance.networking.ports[0].common_name #=> String
@@ -7886,7 +7887,7 @@ module Aws::Lightsail
     #   resp.port_states #=> Array
     #   resp.port_states[0].from_port #=> Integer
     #   resp.port_states[0].to_port #=> Integer
-    #   resp.port_states[0].protocol #=> String, one of "tcp", "all", "udp", "icmp"
+    #   resp.port_states[0].protocol #=> String, one of "tcp", "all", "udp", "icmp", "icmpv6"
     #   resp.port_states[0].state #=> String, one of "open", "closed"
     #   resp.port_states[0].cidrs #=> Array
     #   resp.port_states[0].cidrs[0] #=> String
@@ -8137,7 +8138,7 @@ module Aws::Lightsail
     #   resp.instances[0].public_ip_address #=> String
     #   resp.instances[0].ipv6_addresses #=> Array
     #   resp.instances[0].ipv6_addresses[0] #=> String
-    #   resp.instances[0].ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.instances[0].ip_address_type #=> String, one of "dualstack", "ipv4", "ipv6"
     #   resp.instances[0].hardware.cpu_count #=> Integer
     #   resp.instances[0].hardware.disks #=> Array
     #   resp.instances[0].hardware.disks[0].name #=> String
@@ -8172,7 +8173,7 @@ module Aws::Lightsail
     #   resp.instances[0].networking.ports #=> Array
     #   resp.instances[0].networking.ports[0].from_port #=> Integer
     #   resp.instances[0].networking.ports[0].to_port #=> Integer
-    #   resp.instances[0].networking.ports[0].protocol #=> String, one of "tcp", "all", "udp", "icmp"
+    #   resp.instances[0].networking.ports[0].protocol #=> String, one of "tcp", "all", "udp", "icmp", "icmpv6"
     #   resp.instances[0].networking.ports[0].access_from #=> String
     #   resp.instances[0].networking.ports[0].access_type #=> String, one of "Public", "Private"
     #   resp.instances[0].networking.ports[0].common_name #=> String
@@ -8334,7 +8335,7 @@ module Aws::Lightsail
     #   resp.load_balancer.tls_certificate_summaries[0].is_attached #=> Boolean
     #   resp.load_balancer.configuration_options #=> Hash
     #   resp.load_balancer.configuration_options["LoadBalancerAttributeName"] #=> String
-    #   resp.load_balancer.ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.load_balancer.ip_address_type #=> String, one of "dualstack", "ipv4", "ipv6"
     #   resp.load_balancer.https_redirection_enabled #=> Boolean
     #   resp.load_balancer.tls_policy_name #=> String
     #
@@ -8729,7 +8730,7 @@ module Aws::Lightsail
     #   resp.load_balancers[0].tls_certificate_summaries[0].is_attached #=> Boolean
     #   resp.load_balancers[0].configuration_options #=> Hash
     #   resp.load_balancers[0].configuration_options["LoadBalancerAttributeName"] #=> String
-    #   resp.load_balancers[0].ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.load_balancers[0].ip_address_type #=> String, one of "dualstack", "ipv4", "ipv6"
     #   resp.load_balancers[0].https_redirection_enabled #=> Boolean
     #   resp.load_balancers[0].tls_policy_name #=> String
     #   resp.next_page_token #=> String
@@ -9945,7 +9946,7 @@ module Aws::Lightsail
     #     port_info: { # required
     #       from_port: 1,
     #       to_port: 1,
-    #       protocol: "tcp", # accepts tcp, all, udp, icmp
+    #       protocol: "tcp", # accepts tcp, all, udp, icmp, icmpv6
     #       cidrs: ["string"],
     #       ipv6_cidrs: ["string"],
     #       cidr_list_aliases: ["string"],
@@ -10251,7 +10252,7 @@ module Aws::Lightsail
     #       {
     #         from_port: 1,
     #         to_port: 1,
-    #         protocol: "tcp", # accepts tcp, all, udp, icmp
+    #         protocol: "tcp", # accepts tcp, all, udp, icmp, icmpv6
     #         cidrs: ["string"],
     #         ipv6_cidrs: ["string"],
     #         cidr_list_aliases: ["string"],
@@ -10640,8 +10641,23 @@ module Aws::Lightsail
     # @option params [required, String] :ip_address_type
     #   The IP address type to set for the specified resource.
     #
-    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for IPv4
-    #   and IPv6.
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
+    #
+    # @option params [Boolean] :accept_bundle_update
+    #   Required parameter to accept the instance bundle update when changing
+    #   to, and from, IPv6-only.
+    #
+    #   <note markdown="1"> An instance bundle will change when switching from `dual-stack` or
+    #   `ipv4`, to `ipv6`. It also changes when switching from `ipv6`, to
+    #   `dual-stack` or `ipv4`.
+    #
+    #    You must include this parameter in the command to update the bundle.
+    #   For example, if you switch from `dual-stack` to `ipv6`, the bundle
+    #   will be updated, and billing for the IPv6-only instance bundle begins
+    #   immediately.
+    #
+    #    </note>
     #
     # @return [Types::SetIpAddressTypeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10652,7 +10668,8 @@ module Aws::Lightsail
     #   resp = client.set_ip_address_type({
     #     resource_type: "ContainerService", # required, accepts ContainerService, Instance, StaticIp, KeyPair, InstanceSnapshot, Domain, PeeredVpc, LoadBalancer, LoadBalancerTlsCertificate, Disk, DiskSnapshot, RelationalDatabase, RelationalDatabaseSnapshot, ExportSnapshotRecord, CloudFormationStackRecord, Alarm, ContactMethod, Distribution, Certificate, Bucket
     #     resource_name: "ResourceName", # required
-    #     ip_address_type: "dualstack", # required, accepts dualstack, ipv4
+    #     ip_address_type: "dualstack", # required, accepts dualstack, ipv4, ipv6
+    #     accept_bundle_update: false,
     #   })
     #
     # @example Response structure
@@ -12395,7 +12412,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

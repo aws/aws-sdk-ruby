@@ -150,7 +150,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def port: () -> ::Integer
-        def protocol: () -> ("HTTP" | "HTTPS")
+        def protocol: () -> ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH")
         def service_arn: () -> ::String
         def service_id: () -> ::String
       end
@@ -172,7 +172,7 @@ module Aws
                              },
                              name: ::String,
                              ?port: ::Integer,
-                             protocol: ("HTTP" | "HTTPS"),
+                             protocol: ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH"),
                              service_identifier: ::String,
                              ?tags: Hash[::String, ::String]
                            ) -> _CreateListenerResponseSuccess
@@ -331,14 +331,14 @@ module Aws
                                      }?,
                                      path: ::String?,
                                      port: ::Integer?,
-                                     protocol: ("HTTP" | "HTTPS")?,
+                                     protocol: ("HTTP" | "HTTPS" | "TCP")?,
                                      protocol_version: ("HTTP1" | "HTTP2")?,
                                      unhealthy_threshold_count: ::Integer?
                                    }?,
                                    ip_address_type: ("IPV4" | "IPV6")?,
                                    lambda_event_structure_version: ("V1" | "V2")?,
                                    port: ::Integer?,
-                                   protocol: ("HTTP" | "HTTPS")?,
+                                   protocol: ("HTTP" | "HTTPS" | "TCP")?,
                                    protocol_version: ("HTTP1" | "HTTP2" | "GRPC")?,
                                    vpc_identifier: ::String?
                                  },
@@ -509,7 +509,7 @@ module Aws
         def last_updated_at: () -> ::Time
         def name: () -> ::String
         def port: () -> ::Integer
-        def protocol: () -> ("HTTP" | "HTTPS")
+        def protocol: () -> ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH")
         def service_arn: () -> ::String
         def service_id: () -> ::String
       end
@@ -870,7 +870,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def port: () -> ::Integer
-        def protocol: () -> ("HTTP" | "HTTPS")
+        def protocol: () -> ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH")
         def service_arn: () -> ::String
         def service_id: () -> ::String
       end
@@ -1016,7 +1016,7 @@ module Aws
                                    }?,
                                    path: ::String?,
                                    port: ::Integer?,
-                                   protocol: ("HTTP" | "HTTPS")?,
+                                   protocol: ("HTTP" | "HTTPS" | "TCP")?,
                                    protocol_version: ("HTTP1" | "HTTP2")?,
                                    unhealthy_threshold_count: ::Integer?
                                  },

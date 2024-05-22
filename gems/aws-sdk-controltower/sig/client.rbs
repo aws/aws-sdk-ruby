@@ -242,6 +242,25 @@ module Aws
                           ) -> _ListBaselinesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBaselinesResponseSuccess
 
+      interface _ListControlOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListControlOperationsOutput]
+        def control_operations: () -> ::Array[Types::ControlOperationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_control_operations-instance_method
+      def list_control_operations: (
+                                     ?filter: {
+                                       control_identifiers: Array[::String]?,
+                                       control_operation_types: Array[("ENABLE_CONTROL" | "DISABLE_CONTROL" | "UPDATE_ENABLED_CONTROL")]?,
+                                       enabled_control_identifiers: Array[::String]?,
+                                       statuses: Array[("SUCCEEDED" | "FAILED" | "IN_PROGRESS")]?,
+                                       target_identifiers: Array[::String]?
+                                     },
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListControlOperationsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlOperationsResponseSuccess
+
       interface _ListEnabledBaselinesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnabledBaselinesOutput]
         def enabled_baselines: () -> ::Array[Types::EnabledBaselineSummary]
@@ -265,11 +284,16 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_enabled_controls-instance_method
       def list_enabled_controls: (
+                                   ?filter: {
+                                     control_identifiers: Array[::String]?,
+                                     drift_statuses: Array[("DRIFTED" | "IN_SYNC" | "NOT_CHECKING" | "UNKNOWN")]?,
+                                     statuses: Array[("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")]?
+                                   },
                                    ?max_results: ::Integer,
                                    ?next_token: ::String,
-                                   target_identifier: ::String
+                                   ?target_identifier: ::String
                                  ) -> _ListEnabledControlsResponseSuccess
-                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnabledControlsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnabledControlsResponseSuccess
 
       interface _ListLandingZonesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLandingZonesOutput]
