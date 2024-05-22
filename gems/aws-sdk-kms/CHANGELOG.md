@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2024-05-22)
+------------------
+
+* Feature - This release includes feature to import customer's asymmetric (RSA, ECC and SM2) and HMAC keys into KMS in China.
+
 1.81.0 (2024-05-13)
 ------------------
 

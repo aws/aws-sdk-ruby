@@ -223,6 +223,8 @@ module Aws::WAFV2
     ListWebACLsResponse = Shapes::StructureShape.new(name: 'ListWebACLsResponse')
     LockToken = Shapes::StringShape.new(name: 'LockToken')
     LogDestinationConfigs = Shapes::ListShape.new(name: 'LogDestinationConfigs')
+    LogScope = Shapes::StringShape.new(name: 'LogScope')
+    LogType = Shapes::StringShape.new(name: 'LogType')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     LoggingConfigurations = Shapes::ListShape.new(name: 'LoggingConfigurations')
     LoggingFilter = Shapes::StructureShape.new(name: 'LoggingFilter')
@@ -644,6 +646,8 @@ module Aws::WAFV2
     DeleteIPSetResponse.struct_class = Types::DeleteIPSetResponse
 
     DeleteLoggingConfigurationRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DeleteLoggingConfigurationRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "LogType"))
+    DeleteLoggingConfigurationRequest.add_member(:log_scope, Shapes::ShapeRef.new(shape: LogScope, location_name: "LogScope"))
     DeleteLoggingConfigurationRequest.struct_class = Types::DeleteLoggingConfigurationRequest
 
     DeleteLoggingConfigurationResponse.struct_class = Types::DeleteLoggingConfigurationResponse
@@ -785,6 +789,8 @@ module Aws::WAFV2
     GetIPSetResponse.struct_class = Types::GetIPSetResponse
 
     GetLoggingConfigurationRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    GetLoggingConfigurationRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "LogType"))
+    GetLoggingConfigurationRequest.add_member(:log_scope, Shapes::ShapeRef.new(shape: LogScope, location_name: "LogScope"))
     GetLoggingConfigurationRequest.struct_class = Types::GetLoggingConfigurationRequest
 
     GetLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
@@ -1005,6 +1011,7 @@ module Aws::WAFV2
     ListLoggingConfigurationsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     ListLoggingConfigurationsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListLoggingConfigurationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListLoggingConfigurationsRequest.add_member(:log_scope, Shapes::ShapeRef.new(shape: LogScope, location_name: "LogScope"))
     ListLoggingConfigurationsRequest.struct_class = Types::ListLoggingConfigurationsRequest
 
     ListLoggingConfigurationsResponse.add_member(:logging_configurations, Shapes::ShapeRef.new(shape: LoggingConfigurations, location_name: "LoggingConfigurations"))
@@ -1079,6 +1086,8 @@ module Aws::WAFV2
     LoggingConfiguration.add_member(:redacted_fields, Shapes::ShapeRef.new(shape: RedactedFields, location_name: "RedactedFields"))
     LoggingConfiguration.add_member(:managed_by_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedByFirewallManager"))
     LoggingConfiguration.add_member(:logging_filter, Shapes::ShapeRef.new(shape: LoggingFilter, location_name: "LoggingFilter"))
+    LoggingConfiguration.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "LogType"))
+    LoggingConfiguration.add_member(:log_scope, Shapes::ShapeRef.new(shape: LogScope, location_name: "LogScope"))
     LoggingConfiguration.struct_class = Types::LoggingConfiguration
 
     LoggingConfigurations.member = Shapes::ShapeRef.new(shape: LoggingConfiguration)
@@ -1702,6 +1711,7 @@ module Aws::WAFV2
         "endpointPrefix" => "wafv2",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "WAFV2",
         "serviceFullName" => "AWS WAFV2",
         "serviceId" => "WAFV2",

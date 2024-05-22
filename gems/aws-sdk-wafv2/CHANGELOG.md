@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2024-05-22)
+------------------
+
+* Feature - You can now use Security Lake to collect web ACL traffic data.
+
 1.81.0 (2024-05-13)
 ------------------
 

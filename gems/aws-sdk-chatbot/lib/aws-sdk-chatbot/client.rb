@@ -437,6 +437,9 @@ module Aws::Chatbot
     # @option params [String] :logging_level
     #   Logging levels include ERROR, INFO, or NONE.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to apply to the configuration.
+    #
     # @return [Types::CreateChimeWebhookConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChimeWebhookConfigurationResult#webhook_configuration #webhook_configuration} => Types::ChimeWebhookConfiguration
@@ -450,6 +453,12 @@ module Aws::Chatbot
     #     iam_role_arn: "Arn", # required
     #     configuration_name: "ConfigurationName", # required
     #     logging_level: "CustomerCwLogLevel",
+    #     tags: [
+    #       {
+    #         tag_key: "TagKey", # required
+    #         tag_value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -461,6 +470,9 @@ module Aws::Chatbot
     #   resp.webhook_configuration.sns_topic_arns[0] #=> String
     #   resp.webhook_configuration.configuration_name #=> String
     #   resp.webhook_configuration.logging_level #=> String
+    #   resp.webhook_configuration.tags #=> Array
+    #   resp.webhook_configuration.tags[0].tag_key #=> String
+    #   resp.webhook_configuration.tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateChimeWebhookConfiguration AWS API Documentation
     #
@@ -516,6 +528,9 @@ module Aws::Chatbot
     # @option params [Boolean] :user_authorization_required
     #   Enables use of a user role requirement in your chat configuration.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to apply to the configuration.
+    #
     # @return [Types::CreateTeamsChannelConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTeamsChannelConfigurationResult#channel_configuration #channel_configuration} => Types::TeamsChannelConfiguration
@@ -534,6 +549,12 @@ module Aws::Chatbot
     #     logging_level: "CustomerCwLogLevel",
     #     guardrail_policy_arns: ["GuardrailPolicyArn"],
     #     user_authorization_required: false,
+    #     tags: [
+    #       {
+    #         tag_key: "TagKey", # required
+    #         tag_value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -552,6 +573,9 @@ module Aws::Chatbot
     #   resp.channel_configuration.guardrail_policy_arns #=> Array
     #   resp.channel_configuration.guardrail_policy_arns[0] #=> String
     #   resp.channel_configuration.user_authorization_required #=> Boolean
+    #   resp.channel_configuration.tags #=> Array
+    #   resp.channel_configuration.tags[0].tag_key #=> String
+    #   resp.channel_configuration.tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateMicrosoftTeamsChannelConfiguration AWS API Documentation
     #
@@ -599,6 +623,9 @@ module Aws::Chatbot
     # @option params [Boolean] :user_authorization_required
     #   Enables use of a user role requirement in your chat configuration.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to apply to the configuration.
+    #
     # @return [Types::CreateSlackChannelConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSlackChannelConfigurationResult#channel_configuration #channel_configuration} => Types::SlackChannelConfiguration
@@ -615,6 +642,12 @@ module Aws::Chatbot
     #     logging_level: "CustomerCwLogLevel",
     #     guardrail_policy_arns: ["GuardrailPolicyArn"],
     #     user_authorization_required: false,
+    #     tags: [
+    #       {
+    #         tag_key: "TagKey", # required
+    #         tag_value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -632,6 +665,9 @@ module Aws::Chatbot
     #   resp.channel_configuration.guardrail_policy_arns #=> Array
     #   resp.channel_configuration.guardrail_policy_arns[0] #=> String
     #   resp.channel_configuration.user_authorization_required #=> Boolean
+    #   resp.channel_configuration.tags #=> Array
+    #   resp.channel_configuration.tags[0].tag_key #=> String
+    #   resp.channel_configuration.tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateSlackChannelConfiguration AWS API Documentation
     #
@@ -862,6 +898,9 @@ module Aws::Chatbot
     #   resp.webhook_configurations[0].sns_topic_arns[0] #=> String
     #   resp.webhook_configurations[0].configuration_name #=> String
     #   resp.webhook_configurations[0].logging_level #=> String
+    #   resp.webhook_configurations[0].tags #=> Array
+    #   resp.webhook_configurations[0].tags[0].tag_key #=> String
+    #   resp.webhook_configurations[0].tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeChimeWebhookConfigurations AWS API Documentation
     #
@@ -921,6 +960,9 @@ module Aws::Chatbot
     #   resp.slack_channel_configurations[0].guardrail_policy_arns #=> Array
     #   resp.slack_channel_configurations[0].guardrail_policy_arns[0] #=> String
     #   resp.slack_channel_configurations[0].user_authorization_required #=> Boolean
+    #   resp.slack_channel_configurations[0].tags #=> Array
+    #   resp.slack_channel_configurations[0].tags[0].tag_key #=> String
+    #   resp.slack_channel_configurations[0].tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeSlackChannelConfigurations AWS API Documentation
     #
@@ -1076,6 +1118,9 @@ module Aws::Chatbot
     #   resp.channel_configuration.guardrail_policy_arns #=> Array
     #   resp.channel_configuration.guardrail_policy_arns[0] #=> String
     #   resp.channel_configuration.user_authorization_required #=> Boolean
+    #   resp.channel_configuration.tags #=> Array
+    #   resp.channel_configuration.tags[0].tag_key #=> String
+    #   resp.channel_configuration.tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/GetMicrosoftTeamsChannelConfiguration AWS API Documentation
     #
@@ -1140,6 +1185,9 @@ module Aws::Chatbot
     #   resp.team_channel_configurations[0].guardrail_policy_arns #=> Array
     #   resp.team_channel_configurations[0].guardrail_policy_arns[0] #=> String
     #   resp.team_channel_configurations[0].user_authorization_required #=> Boolean
+    #   resp.team_channel_configurations[0].tags #=> Array
+    #   resp.team_channel_configurations[0].tags[0].tag_key #=> String
+    #   resp.team_channel_configurations[0].tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListMicrosoftTeamsChannelConfigurations AWS API Documentation
     #
@@ -1247,6 +1295,93 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
+    # Retrieves the list of tags applied to a configuration.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the configuration.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].tag_key #=> String
+    #   resp.tags[0].tag_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Applies the supplied tags to a configuration.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the configuration.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of tags to apply to the configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         tag_key: "TagKey", # required
+    #         tag_value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the supplied tags from a configuration
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the configuration.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys to remove from the configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Update Chatbot account level preferences
     #
     # @option params [Boolean] :user_authorization_required
@@ -1338,6 +1473,9 @@ module Aws::Chatbot
     #   resp.webhook_configuration.sns_topic_arns[0] #=> String
     #   resp.webhook_configuration.configuration_name #=> String
     #   resp.webhook_configuration.logging_level #=> String
+    #   resp.webhook_configuration.tags #=> Array
+    #   resp.webhook_configuration.tags[0].tag_key #=> String
+    #   resp.webhook_configuration.tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateChimeWebhookConfiguration AWS API Documentation
     #
@@ -1412,6 +1550,9 @@ module Aws::Chatbot
     #   resp.channel_configuration.guardrail_policy_arns #=> Array
     #   resp.channel_configuration.guardrail_policy_arns[0] #=> String
     #   resp.channel_configuration.user_authorization_required #=> Boolean
+    #   resp.channel_configuration.tags #=> Array
+    #   resp.channel_configuration.tags[0].tag_key #=> String
+    #   resp.channel_configuration.tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateMicrosoftTeamsChannelConfiguration AWS API Documentation
     #
@@ -1488,6 +1629,9 @@ module Aws::Chatbot
     #   resp.channel_configuration.guardrail_policy_arns #=> Array
     #   resp.channel_configuration.guardrail_policy_arns[0] #=> String
     #   resp.channel_configuration.user_authorization_required #=> Boolean
+    #   resp.channel_configuration.tags #=> Array
+    #   resp.channel_configuration.tags[0].tag_key #=> String
+    #   resp.channel_configuration.tags[0].tag_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateSlackChannelConfiguration AWS API Documentation
     #
@@ -1511,7 +1655,7 @@ module Aws::Chatbot
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chatbot'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

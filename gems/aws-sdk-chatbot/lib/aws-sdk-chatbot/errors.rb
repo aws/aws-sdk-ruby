@@ -44,6 +44,7 @@ module Aws::Chatbot
   # * {DescribeSlackWorkspacesException}
   # * {GetAccountPreferencesException}
   # * {GetTeamsChannelConfigurationException}
+  # * {InternalServiceError}
   # * {InvalidParameterException}
   # * {InvalidRequestException}
   # * {LimitExceededException}
@@ -51,6 +52,8 @@ module Aws::Chatbot
   # * {ListMicrosoftTeamsUserIdentitiesException}
   # * {ListTeamsChannelConfigurationsException}
   # * {ResourceNotFoundException}
+  # * {ServiceUnavailableException}
+  # * {TooManyTagsException}
   # * {UpdateAccountPreferencesException}
   # * {UpdateChimeWebhookConfigurationException}
   # * {UpdateSlackChannelConfigurationException}
@@ -232,6 +235,16 @@ module Aws::Chatbot
       end
     end
 
+    class InternalServiceError < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Chatbot::Types::InternalServiceError] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidParameterException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -297,6 +310,26 @@ module Aws::Chatbot
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Chatbot::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServiceUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Chatbot::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Chatbot::Types::TooManyTagsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

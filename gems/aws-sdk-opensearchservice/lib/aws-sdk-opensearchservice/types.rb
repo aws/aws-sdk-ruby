@@ -1614,12 +1614,17 @@ module Aws::OpenSearchService
     #   A description of the data source.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the data source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DataSourceDetails AWS API Documentation
     #
     class DataSourceDetails < Struct.new(
       :data_source_type,
       :name,
-      :description)
+      :description,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3043,7 +3048,7 @@ module Aws::OpenSearchService
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] domain_endpoint_v2_hosted_zone_id
-    #   The DualStack Hosted Zone Id for the domain.
+    #   The dual stack hosted zone ID for the domain.
     #   @return [String]
     #
     # @!attribute [rw] processing
@@ -3502,12 +3507,17 @@ module Aws::OpenSearchService
     #   A description of the data source.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the data source response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSourceResponse AWS API Documentation
     #
     class GetDataSourceResponse < Struct.new(
       :data_source_type,
       :name,
-      :description)
+      :description,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5873,13 +5883,18 @@ module Aws::OpenSearchService
     #   A new description of the data source.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the data source update request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSourceRequest AWS API Documentation
     #
     class UpdateDataSourceRequest < Struct.new(
       :domain_name,
       :name,
       :data_source_type,
-      :description)
+      :description,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

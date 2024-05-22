@@ -104,6 +104,7 @@ module Aws::CloudFormation
     DeleteStackInstancesOutput = Shapes::StructureShape.new(name: 'DeleteStackInstancesOutput')
     DeleteStackSetInput = Shapes::StructureShape.new(name: 'DeleteStackSetInput')
     DeleteStackSetOutput = Shapes::StructureShape.new(name: 'DeleteStackSetOutput')
+    DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     DeletionTime = Shapes::TimestampShape.new(name: 'DeletionTime')
     DeploymentTargets = Shapes::StructureShape.new(name: 'DeploymentTargets')
     DeprecatedStatus = Shapes::StringShape.new(name: 'DeprecatedStatus')
@@ -821,6 +822,7 @@ module Aws::CloudFormation
     DeleteStackInput.add_member(:retain_resources, Shapes::ShapeRef.new(shape: RetainResources, location_name: "RetainResources"))
     DeleteStackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     DeleteStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    DeleteStackInput.add_member(:deletion_mode, Shapes::ShapeRef.new(shape: DeletionMode, location_name: "DeletionMode"))
     DeleteStackInput.struct_class = Types::DeleteStackInput
 
     DeleteStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
@@ -1684,6 +1686,7 @@ module Aws::CloudFormation
     Stack.add_member(:root_id, Shapes::ShapeRef.new(shape: StackId, location_name: "RootId"))
     Stack.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackDriftInformation, location_name: "DriftInformation"))
     Stack.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
+    Stack.add_member(:deletion_mode, Shapes::ShapeRef.new(shape: DeletionMode, location_name: "DeletionMode"))
     Stack.add_member(:detailed_status, Shapes::ShapeRef.new(shape: DetailedStatus, location_name: "DetailedStatus"))
     Stack.struct_class = Types::Stack
 
@@ -2205,6 +2208,7 @@ module Aws::CloudFormation
         "apiVersion" => "2010-05-15",
         "endpointPrefix" => "cloudformation",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceFullName" => "AWS CloudFormation",
         "serviceId" => "CloudFormation",
         "signatureVersion" => "v4",

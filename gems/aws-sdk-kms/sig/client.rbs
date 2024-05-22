@@ -433,8 +433,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#get_parameters_for_import-instance_method
       def get_parameters_for_import: (
                                        key_id: ::String,
-                                       wrapping_algorithm: ("RSAES_PKCS1_V1_5" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "RSA_AES_KEY_WRAP_SHA_1" | "RSA_AES_KEY_WRAP_SHA_256"),
-                                       wrapping_key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096")
+                                       wrapping_algorithm: ("RSAES_PKCS1_V1_5" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "RSA_AES_KEY_WRAP_SHA_1" | "RSA_AES_KEY_WRAP_SHA_256" | "SM2PKE"),
+                                       wrapping_key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "SM2")
                                      ) -> _GetParametersForImportResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParametersForImportResponseSuccess
 

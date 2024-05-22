@@ -5872,8 +5872,8 @@ module Aws::KMS
     # `GetParametersForImport` returns the items that you need to import
     # your key material.
     #
-    # * The public key (or "wrapping key") of an RSA key pair that KMS
-    #   generates.
+    # * The public key (or "wrapping key") of an asymmetric key pair that
+    #   KMS generates.
     #
     #   You will use this public key to encrypt ("wrap") your key material
     #   while it's in transit to KMS.
@@ -5951,20 +5951,28 @@ module Aws::KMS
     #   DescribeKey.
     #
     # @option params [required, String] :wrapping_algorithm
-    #   The algorithm you will use with the RSA public key (`PublicKey`) in
-    #   the response to protect your key material during import. For more
-    #   information, see [Select a wrapping
+    #   The algorithm you will use with the asymmetric public key
+    #   (`PublicKey`) in the response to protect your key material during
+    #   import. For more information, see [Select a wrapping
     #   algorithm](kms/latest/developerguide/importing-keys-get-public-key-and-token.html#select-wrapping-algorithm)
     #   in the *Key Management Service Developer Guide*.
     #
     #   For RSA\_AES wrapping algorithms, you encrypt your key material with
     #   an AES key that you generate, then encrypt your AES key with the RSA
     #   public key from KMS. For RSAES wrapping algorithms, you encrypt your
-    #   key material directly with the RSA public key from KMS.
+    #   key material directly with the RSA public key from KMS. For SM2PKE
+    #   wrapping algorithms, you encrypt your key material directly with the
+    #   SM2 public key from KMS.
     #
     #   The wrapping algorithms that you can use depend on the type of key
     #   material that you are importing. To import an RSA private key, you
-    #   must use an RSA\_AES wrapping algorithm.
+    #   must use an RSA\_AES wrapping algorithm, except in China Regions,
+    #   where you must use the SM2PKE wrapping algorithm to import an RSA
+    #   private key.
+    #
+    #   The SM2PKE wrapping algorithm is available only in China Regions. The
+    #   `RSA_AES_KEY_WRAP_SHA_256` and `RSA_AES_KEY_WRAP_SHA_1` wrapping
+    #   algorithms are not supported in China Regions.
     #
     #   * **RSA\_AES\_KEY\_WRAP\_SHA\_256** — Supported for wrapping RSA and
     #     ECC key material.
@@ -5987,16 +5995,21 @@ module Aws::KMS
     #   * **RSAES\_PKCS1\_V1\_5** (Deprecated) — As of October 10, 2023, KMS
     #     does not support the RSAES\_PKCS1\_V1\_5 wrapping algorithm.
     #
-    # @option params [required, String] :wrapping_key_spec
-    #   The type of RSA public key to return in the response. You will use
-    #   this wrapping key with the specified wrapping algorithm to protect
-    #   your key material during import.
+    #   * **SM2PKE** (China Regions only) — supported for wrapping RSA, ECC,
+    #     and SM2 key material.
     #
-    #   Use the longest RSA wrapping key that is practical.
+    # @option params [required, String] :wrapping_key_spec
+    #   The type of public key to return in the response. You will use this
+    #   wrapping key with the specified wrapping algorithm to protect your key
+    #   material during import.
+    #
+    #   Use the longest wrapping key that is practical.
     #
     #   You cannot use an RSA\_2048 public key to directly wrap an
     #   ECC\_NIST\_P521 private key. Instead, use an RSA\_AES wrapping
     #   algorithm or choose a longer RSA public key.
+    #
+    #   The SM2 wrapping key spec is available only in China Regions.
     #
     # @return [Types::GetParametersForImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6088,8 +6101,8 @@ module Aws::KMS
     #
     #   resp = client.get_parameters_for_import({
     #     key_id: "KeyIdType", # required
-    #     wrapping_algorithm: "RSAES_PKCS1_V1_5", # required, accepts RSAES_PKCS1_V1_5, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, RSA_AES_KEY_WRAP_SHA_1, RSA_AES_KEY_WRAP_SHA_256
-    #     wrapping_key_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096
+    #     wrapping_algorithm: "RSAES_PKCS1_V1_5", # required, accepts RSAES_PKCS1_V1_5, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, RSA_AES_KEY_WRAP_SHA_1, RSA_AES_KEY_WRAP_SHA_256, SM2PKE
+    #     wrapping_key_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, SM2
     #   })
     #
     # @example Response structure
@@ -10458,7 +10471,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

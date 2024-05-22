@@ -73,6 +73,10 @@ module Aws::Chatbot
     #   levels include ERROR, INFO, or NONE.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags applied to the configuration.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ChimeWebhookConfiguration AWS API Documentation
     #
     class ChimeWebhookConfiguration < Struct.new(
@@ -81,7 +85,8 @@ module Aws::Chatbot
       :iam_role_arn,
       :sns_topic_arns,
       :configuration_name,
-      :logging_level)
+      :logging_level,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -157,6 +162,10 @@ module Aws::Chatbot
     #   Logging levels include ERROR, INFO, or NONE.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to apply to the configuration.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateChimeWebhookConfigurationRequest AWS API Documentation
     #
     class CreateChimeWebhookConfigurationRequest < Struct.new(
@@ -165,7 +174,8 @@ module Aws::Chatbot
       :sns_topic_arns,
       :iam_role_arn,
       :configuration_name,
-      :logging_level)
+      :logging_level,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -234,6 +244,10 @@ module Aws::Chatbot
     #   Enables use of a user role requirement in your chat configuration.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to apply to the configuration.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateSlackChannelConfigurationRequest AWS API Documentation
     #
     class CreateSlackChannelConfigurationRequest < Struct.new(
@@ -245,7 +259,8 @@ module Aws::Chatbot
       :configuration_name,
       :logging_level,
       :guardrail_policy_arns,
-      :user_authorization_required)
+      :user_authorization_required,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -324,6 +339,10 @@ module Aws::Chatbot
     #   Enables use of a user role requirement in your chat configuration.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to apply to the configuration.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateTeamsChannelConfigurationRequest AWS API Documentation
     #
     class CreateTeamsChannelConfigurationRequest < Struct.new(
@@ -337,7 +356,8 @@ module Aws::Chatbot
       :configuration_name,
       :logging_level,
       :guardrail_policy_arns,
-      :user_authorization_required)
+      :user_authorization_required,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -811,6 +831,13 @@ module Aws::Chatbot
       include Aws::Structure
     end
 
+    # Customer/consumer-facing internal service exception.
+    # https://w.amazon.com/index.php/AWS/API\_Standards/Exceptions#InternalServiceError
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/InternalServiceError AWS API Documentation
+    #
+    class InternalServiceError < Aws::EmptyStructure; end
+
     # Your request input doesn't meet the constraints that AWS Chatbot
     # requires.
     #
@@ -938,6 +965,30 @@ module Aws::Chatbot
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The ARN of the configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tags applied to the configuration.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
@@ -1004,6 +1055,13 @@ module Aws::Chatbot
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
+    # We can’t process your request right now because of a server issue. Try
+    # again later.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Aws::EmptyStructure; end
+
     # An AWS Chatbot configuration for Slack.
     #
     # @!attribute [rw] slack_team_name
@@ -1059,6 +1117,10 @@ module Aws::Chatbot
     #   Enables use of a user role requirement in your chat configuration.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of tags applied to the configuration.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/SlackChannelConfiguration AWS API Documentation
     #
     class SlackChannelConfiguration < Struct.new(
@@ -1072,7 +1134,8 @@ module Aws::Chatbot
       :configuration_name,
       :logging_level,
       :guardrail_policy_arns,
-      :user_authorization_required)
+      :user_authorization_required,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1135,6 +1198,46 @@ module Aws::Chatbot
       include Aws::Structure
     end
 
+    # A tag applied to the configuration.
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The tag value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :tag_key,
+      :tag_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to apply to the configuration.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # An AWS Chatbot configuration for Microsoft Teams.
     #
     # @!attribute [rw] channel_id
@@ -1196,6 +1299,10 @@ module Aws::Chatbot
     #   Enables use of a user role requirement in your chat configuration.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of tags applied to the configuration.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/TeamsChannelConfiguration AWS API Documentation
     #
     class TeamsChannelConfiguration < Struct.new(
@@ -1210,7 +1317,8 @@ module Aws::Chatbot
       :configuration_name,
       :logging_level,
       :guardrail_policy_arns,
-      :user_authorization_required)
+      :user_authorization_required,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1268,6 +1376,33 @@ module Aws::Chatbot
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The supplied list of tags contains too many tags.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys to remove from the configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # We can’t process your request right now because of a server issue. Try
     # again later.

@@ -383,7 +383,8 @@ module Aws
                           stack_name: ::String,
                           ?retain_resources: Array[::String],
                           ?role_arn: ::String,
-                          ?client_request_token: ::String
+                          ?client_request_token: ::String,
+                          ?deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

@@ -84,6 +84,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#retain_except_on_create-instance_method
       def retain_except_on_create: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#deletion_mode-instance_method
+      def deletion_mode: () -> ("STANDARD" | "FORCE_DELETE_STACK")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#detailed_status-instance_method
       def detailed_status: () -> ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
 
@@ -159,7 +162,8 @@ module Aws
       def delete: (
                     ?retain_resources: Array[::String],
                     ?role_arn: ::String,
-                    ?client_request_token: ::String
+                    ?client_request_token: ::String,
+                    ?deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
                   ) -> ::Aws::EmptyStructure
                 | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
 

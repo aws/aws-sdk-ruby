@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2024-05-22)
+------------------
+
+* Feature - This change adds support for tagging Chatbot configurations.
+
 1.3.0 (2024-05-13)
 ------------------
 

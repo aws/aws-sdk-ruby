@@ -2937,6 +2937,7 @@ module Aws::OpenSearchService
     #   * {Types::GetDataSourceResponse#data_source_type #data_source_type} => Types::DataSourceType
     #   * {Types::GetDataSourceResponse#name #name} => String
     #   * {Types::GetDataSourceResponse#description #description} => String
+    #   * {Types::GetDataSourceResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2950,6 +2951,7 @@ module Aws::OpenSearchService
     #   resp.data_source_type.s3_glue_data_catalog.role_arn #=> String
     #   resp.name #=> String
     #   resp.description #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSource AWS API Documentation
     #
@@ -3177,6 +3179,7 @@ module Aws::OpenSearchService
     #   resp.data_sources[0].data_source_type.s3_glue_data_catalog.role_arn #=> String
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].description #=> String
+    #   resp.data_sources[0].status #=> String, one of "ACTIVE", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDataSources AWS API Documentation
     #
@@ -3988,6 +3991,9 @@ module Aws::OpenSearchService
     # @option params [String] :description
     #   A new description of the data source.
     #
+    # @option params [String] :status
+    #   The status of the data source update request.
+    #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataSourceResponse#message #message} => String
@@ -4003,6 +4009,7 @@ module Aws::OpenSearchService
     #       },
     #     },
     #     description: "DataSourceDescription",
+    #     status: "ACTIVE", # accepts ACTIVE, DISABLED
     #   })
     #
     # @example Response structure
@@ -4715,7 +4722,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
