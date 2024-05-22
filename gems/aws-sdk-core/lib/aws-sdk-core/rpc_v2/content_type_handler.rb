@@ -15,9 +15,9 @@ module Aws
             'application/vnd.amazon.eventstream'
           end
 
-        context.http_request.headers['Content-Type'] ||= content_type
-        context.http_request.headers['Accept'] ||= accept if accept
-
+        headers = context.http_request.headers
+        headers['Content-Type'] ||= content_type if content_type
+        headers['Accept'] ||= accept if accept
         @handler.call(context)
       end
 
