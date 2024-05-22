@@ -43,9 +43,10 @@ module Aws
 
       def serializer_class(protocol)
         case protocol
-        when 'rest-xml' then Xml::Builder
-        when 'rest-json' then Json::Builder
-        when 'json' then Json::Builder
+        when 'rest-xml' then Aws::Xml::Builder
+        when 'rest-json' then Aws::Json::Builder
+        when 'json' then Aws::Json::Builder
+        when 'smithy-rpc-v2-cbor' then Aws::RpcV2::Builder
         else raise "unsupported protocol #{protocol} for event stream"
         end
       end

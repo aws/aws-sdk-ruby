@@ -7,8 +7,8 @@
         "engines": ["ox"]
       },
       "SimpleScalarPropertiesWithXMLPreamble": {
-          "description": "Nokogiri doesn't support XML preamble?",
-          "engines": ["nokogiri"]
+        "description": "Nokogiri doesn't support XML preamble?",
+        "engines": ["nokogiri"]
       }
     }
   }

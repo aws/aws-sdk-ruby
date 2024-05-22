@@ -11,7 +11,8 @@ module AwsSdkCodeGenerator
       json_1.1
       rest-json
       rest-xml
-      query ec2
+      query
+      ec2
     ]
 
     # @param [Hash] options

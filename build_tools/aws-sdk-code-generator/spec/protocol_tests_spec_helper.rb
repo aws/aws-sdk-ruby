@@ -21,9 +21,11 @@ module ProtocolTestsHelper
     #     }
     #   },
     def skip_test_if_ignored(protocol, test_type, test_id, engine, it)
-      if (test_id, description = check_ignore_list(protocol, test_type, test_id, engine))
-        it.skip("ID: #{test_id} - #{description}")
-      end
+      ignored = check_ignore_list(protocol, test_type, test_id, engine)
+      return unless ignored
+
+      test_id, description = ignored
+      it.skip("Engine: #{engine} ID: #{test_id} - #{description}")
     end
 
     # sets up paths for each protocol and its file paths
@@ -194,12 +196,16 @@ module ProtocolTestsHelper
     def check_ignore_list(protocol, test_type, test_id, engine)
       return nil if protocol.include?('extras')
 
-      ignore_list
+      test = ignore_list
         .fetch(protocol, {})
         .fetch(test_type, {})
-        .fetch(test_id, {})
-        .fetch("engines", [])
-        .find { |e| engine.to_s == e }
+      return unless test.key?(test_id)
+
+      test = test[test_id]
+      if (test.key?('engines') && test['engines'].include?(engine.to_s)) ||
+         !test.key?('engines')
+        [test_id, test['description']]
+      end
     end
 
   end

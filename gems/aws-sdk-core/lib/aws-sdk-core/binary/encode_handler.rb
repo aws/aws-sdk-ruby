@@ -10,7 +10,7 @@ module Aws
         if eventstream_member = eventstream_input?(context)
           input_es_handler = context[:input_event_stream_handler]
           input_es_handler.event_emitter.encoder = EventStreamEncoder.new(
-            context.config.api.metadata['protocol'],
+            context.config.protocol,
             eventstream_member,
             context.operation.input,
             signer_for(context)
