@@ -2,11 +2,13 @@
   "rest-xml" : {
     "input" : {},
     "output" : {
-      "ox": {
-        "SimpleScalarPropertiesComplexEscapes": "OxEngine does not handle all escape cases but other engines supports it"
+      "SimpleScalarPropertiesComplexEscapes": {
+        "description": "OxEngine does not handle all escape cases but other engines supports it",
+        "engines": ["ox"]
       },
-      "nokogiri": {
-        "SimpleScalarPropertiesWithXMLPreamble": "Nokogiri doesn't support XML preamble?"
+      "SimpleScalarPropertiesWithXMLPreamble": {
+          "description": "Nokogiri doesn't support XML preamble?",
+          "engines": ["nokogiri"]
       }
     }
   }

@@ -13,7 +13,7 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
         describe 'input tests' do
           ProtocolTestsHelper.each_test_case(self, files['input']) do |group, suite, test_case, test_id, description|
             group.it("ID: #{test_id} - #{description}") do
-              ProtocolTestsHelper.skip_test_if_ignored(protocol, 'input', engine, test_id, self)
+              ProtocolTestsHelper.skip_test_if_ignored(protocol, 'input', test_id, engine, self)
               ProtocolTestsHelper::Matcher.setup_matchers(test_id, self)
 
               client = ProtocolTestsHelper.client_for(suite, test_case, "Input_#{test_id}")
@@ -42,7 +42,7 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
         describe 'output tests' do
           ProtocolTestsHelper.each_test_case(self, files['output']) do |group, suite, test_case, test_id, description|
             group.it("ID: #{test_id} - #{description}") do
-              ProtocolTestsHelper.skip_test_if_ignored(protocol, 'output', engine, test_id, self)
+              ProtocolTestsHelper.skip_test_if_ignored(protocol, 'output', test_id, engine, self)
 
               client = ProtocolTestsHelper.client_for(suite, test_case, "Output_#{test_id}")
               client.handle(step: :send) do |context|

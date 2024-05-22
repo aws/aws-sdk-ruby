@@ -14,11 +14,14 @@ module ProtocolTestsHelper
     #   "protocol" : {
     #     "input" : {},
     #     "output" : {
-    #       "some_engine": { "SomeTestId": "Description" }
+    #       "SomeTestId": {
+    #         "description": "Description",
+    #         "engines": ["engine"]
+    #       }
     #     }
     #   },
-    def skip_test_if_ignored(protocol, test_type, engine, test_id, it)
-      if (test_id, description = check_ignore_list(protocol, test_type, engine, test_id))
+    def skip_test_if_ignored(protocol, test_type, test_id, engine, it)
+      if (test_id, description = check_ignore_list(protocol, test_type, test_id, engine))
         it.skip("ID: #{test_id} - #{description}")
       end
     end
@@ -188,14 +191,15 @@ module ProtocolTestsHelper
 
     private
 
-    def check_ignore_list(protocol, test_type, engine, test_id)
+    def check_ignore_list(protocol, test_type, test_id, engine)
       return nil if protocol.include?('extras')
 
       ignore_list
         .fetch(protocol, {})
         .fetch(test_type, {})
-        .fetch(engine.to_s, {})
-        .find { |k, _v| k == test_id }
+        .fetch(test_id, {})
+        .fetch("engines", [])
+        .find { |e| engine.to_s == e }
     end
 
   end
