@@ -38,7 +38,7 @@ describe 'Protocols Resolution:' do
       Object.send(:remove_const, :ProtocolsJsonQuery)
     end
 
-    it 'selects query if is the only choice' do
+    it 'selects query if it is the only choice' do
       SpecHelper.generate_service(['ProtocolsQuery'], multiple_files: false)
       client = ProtocolsQuery::Client.new(stub_responses: true)
       expect(client.handlers).to include(Aws::Query::Handler)

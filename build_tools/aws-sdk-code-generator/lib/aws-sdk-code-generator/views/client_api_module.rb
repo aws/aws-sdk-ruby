@@ -31,7 +31,7 @@ module AwsSdkCodeGenerator
         'xmlNamespace' => true,
         'streaming' => true,
         'requiresLength' => true,
-        'union' => false, # not ignored - should remain false
+        'union' => false, # handled separately - should remain false
         'document' => true,
         'jsonvalue' => true,
         'error' => true,

@@ -198,7 +198,7 @@ module Aws
       end
 
       def end_indefinite_collection
-        # write the stop sequenece
+        # write the stop sequence
         head(MAJOR_TYPE_SIMPLE + 31, 0)
       end
 
