@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2024-05-22)
+------------------
+
+* Feature - This release adds support for enabling or disabling a data source configured as part of Zero-ETL integration with Amazon S3, by setting its status.
+
 1.41.0 (2024-05-13)
 ------------------
 

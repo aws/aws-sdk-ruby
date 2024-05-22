@@ -96,6 +96,12 @@ module Aws::Chatbot
             Aws::Chatbot::Endpoints::ListMicrosoftTeamsConfiguredTeams.build(context)
           when :list_microsoft_teams_user_identities
             Aws::Chatbot::Endpoints::ListMicrosoftTeamsUserIdentities.build(context)
+          when :list_tags_for_resource
+            Aws::Chatbot::Endpoints::ListTagsForResource.build(context)
+          when :tag_resource
+            Aws::Chatbot::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::Chatbot::Endpoints::UntagResource.build(context)
           when :update_account_preferences
             Aws::Chatbot::Endpoints::UpdateAccountPreferences.build(context)
           when :update_chime_webhook_configuration

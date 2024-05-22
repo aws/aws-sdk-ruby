@@ -296,6 +296,7 @@ module Aws::CloudFormation
       attr_accessor retain_resources: ::Array[::String]
       attr_accessor role_arn: ::String
       attr_accessor client_request_token: ::String
+      attr_accessor deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
       SENSITIVE: []
     end
 
@@ -1382,6 +1383,7 @@ module Aws::CloudFormation
       attr_accessor root_id: ::String
       attr_accessor drift_information: Types::StackDriftInformation
       attr_accessor retain_except_on_create: bool
+      attr_accessor deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
       attr_accessor detailed_status: ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
       SENSITIVE: []
     end

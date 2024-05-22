@@ -14,6 +14,7 @@ module Aws::Chatbot
     include Seahorse::Model
 
     AccountPreferences = Shapes::StructureShape.new(name: 'AccountPreferences')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AwsUserIdentity = Shapes::StringShape.new(name: 'AwsUserIdentity')
     BooleanAccountPreference = Shapes::BooleanShape.new(name: 'BooleanAccountPreference')
@@ -77,6 +78,7 @@ module Aws::Chatbot
     GetTeamsChannelConfigurationResult = Shapes::StructureShape.new(name: 'GetTeamsChannelConfigurationResult')
     GuardrailPolicyArn = Shapes::StringShape.new(name: 'GuardrailPolicyArn')
     GuardrailPolicyArnList = Shapes::ListShape.new(name: 'GuardrailPolicyArnList')
+    InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -86,12 +88,15 @@ module Aws::Chatbot
     ListMicrosoftTeamsUserIdentitiesException = Shapes::StructureShape.new(name: 'ListMicrosoftTeamsUserIdentitiesException')
     ListMicrosoftTeamsUserIdentitiesRequest = Shapes::StructureShape.new(name: 'ListMicrosoftTeamsUserIdentitiesRequest')
     ListMicrosoftTeamsUserIdentitiesResult = Shapes::StructureShape.new(name: 'ListMicrosoftTeamsUserIdentitiesResult')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTeamsChannelConfigurationsException = Shapes::StructureShape.new(name: 'ListTeamsChannelConfigurationsException')
     ListTeamsChannelConfigurationsRequest = Shapes::StructureShape.new(name: 'ListTeamsChannelConfigurationsRequest')
     ListTeamsChannelConfigurationsResult = Shapes::StructureShape.new(name: 'ListTeamsChannelConfigurationsResult')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SlackChannelConfiguration = Shapes::StructureShape.new(name: 'SlackChannelConfiguration')
     SlackChannelConfigurationList = Shapes::ListShape.new(name: 'SlackChannelConfigurationList')
     SlackChannelDisplayName = Shapes::StringShape.new(name: 'SlackChannelDisplayName')
@@ -105,6 +110,14 @@ module Aws::Chatbot
     SlackWorkspacesList = Shapes::ListShape.new(name: 'SlackWorkspacesList')
     SnsTopicArnList = Shapes::ListShape.new(name: 'SnsTopicArnList')
     String = Shapes::StringShape.new(name: 'String')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::ListShape.new(name: 'Tags')
     TeamChannelConfigurationsList = Shapes::ListShape.new(name: 'TeamChannelConfigurationsList')
     TeamName = Shapes::StringShape.new(name: 'TeamName')
     TeamsChannelConfiguration = Shapes::StructureShape.new(name: 'TeamsChannelConfiguration')
@@ -112,7 +125,10 @@ module Aws::Chatbot
     TeamsChannelName = Shapes::StringShape.new(name: 'TeamsChannelName')
     TeamsUserIdentitiesList = Shapes::ListShape.new(name: 'TeamsUserIdentitiesList')
     TeamsUserIdentity = Shapes::StructureShape.new(name: 'TeamsUserIdentity')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UUID = Shapes::StringShape.new(name: 'UUID')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAccountPreferencesException = Shapes::StructureShape.new(name: 'UpdateAccountPreferencesException')
     UpdateAccountPreferencesRequest = Shapes::StructureShape.new(name: 'UpdateAccountPreferencesRequest')
     UpdateAccountPreferencesResult = Shapes::StructureShape.new(name: 'UpdateAccountPreferencesResult')
@@ -136,6 +152,7 @@ module Aws::Chatbot
     ChimeWebhookConfiguration.add_member(:sns_topic_arns, Shapes::ShapeRef.new(shape: SnsTopicArnList, required: true, location_name: "SnsTopicArns"))
     ChimeWebhookConfiguration.add_member(:configuration_name, Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName"))
     ChimeWebhookConfiguration.add_member(:logging_level, Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    ChimeWebhookConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ChimeWebhookConfiguration.struct_class = Types::ChimeWebhookConfiguration
 
     ChimeWebhookConfigurationList.member = Shapes::ShapeRef.new(shape: ChimeWebhookConfiguration)
@@ -157,6 +174,7 @@ module Aws::Chatbot
     CreateChimeWebhookConfigurationRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "IamRoleArn"))
     CreateChimeWebhookConfigurationRequest.add_member(:configuration_name, Shapes::ShapeRef.new(shape: ConfigurationName, required: true, location_name: "ConfigurationName"))
     CreateChimeWebhookConfigurationRequest.add_member(:logging_level, Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
+    CreateChimeWebhookConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateChimeWebhookConfigurationRequest.struct_class = Types::CreateChimeWebhookConfigurationRequest
 
     CreateChimeWebhookConfigurationResult.add_member(:webhook_configuration, Shapes::ShapeRef.new(shape: ChimeWebhookConfiguration, location_name: "WebhookConfiguration"))
@@ -173,6 +191,7 @@ module Aws::Chatbot
     CreateSlackChannelConfigurationRequest.add_member(:logging_level, Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
     CreateSlackChannelConfigurationRequest.add_member(:guardrail_policy_arns, Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
     CreateSlackChannelConfigurationRequest.add_member(:user_authorization_required, Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    CreateSlackChannelConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSlackChannelConfigurationRequest.struct_class = Types::CreateSlackChannelConfigurationRequest
 
     CreateSlackChannelConfigurationResult.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: SlackChannelConfiguration, location_name: "ChannelConfiguration"))
@@ -191,6 +210,7 @@ module Aws::Chatbot
     CreateTeamsChannelConfigurationRequest.add_member(:logging_level, Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
     CreateTeamsChannelConfigurationRequest.add_member(:guardrail_policy_arns, Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
     CreateTeamsChannelConfigurationRequest.add_member(:user_authorization_required, Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    CreateTeamsChannelConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateTeamsChannelConfigurationRequest.struct_class = Types::CreateTeamsChannelConfigurationRequest
 
     CreateTeamsChannelConfigurationResult.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: TeamsChannelConfiguration, location_name: "ChannelConfiguration"))
@@ -308,6 +328,8 @@ module Aws::Chatbot
 
     GuardrailPolicyArnList.member = Shapes::ShapeRef.new(shape: GuardrailPolicyArn)
 
+    InternalServiceError.struct_class = Types::InternalServiceError
+
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     InvalidRequestException.struct_class = Types::InvalidRequestException
@@ -335,6 +357,12 @@ module Aws::Chatbot
     ListMicrosoftTeamsUserIdentitiesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListMicrosoftTeamsUserIdentitiesResult.struct_class = Types::ListMicrosoftTeamsUserIdentitiesResult
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListTeamsChannelConfigurationsException.struct_class = Types::ListTeamsChannelConfigurationsException
 
     ListTeamsChannelConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -348,6 +376,8 @@ module Aws::Chatbot
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     SlackChannelConfiguration.add_member(:slack_team_name, Shapes::ShapeRef.new(shape: SlackTeamName, required: true, location_name: "SlackTeamName"))
     SlackChannelConfiguration.add_member(:slack_team_id, Shapes::ShapeRef.new(shape: SlackTeamId, required: true, location_name: "SlackTeamId"))
     SlackChannelConfiguration.add_member(:slack_channel_id, Shapes::ShapeRef.new(shape: SlackChannelId, required: true, location_name: "SlackChannelId"))
@@ -359,6 +389,7 @@ module Aws::Chatbot
     SlackChannelConfiguration.add_member(:logging_level, Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
     SlackChannelConfiguration.add_member(:guardrail_policy_arns, Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
     SlackChannelConfiguration.add_member(:user_authorization_required, Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    SlackChannelConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     SlackChannelConfiguration.struct_class = Types::SlackChannelConfiguration
 
     SlackChannelConfigurationList.member = Shapes::ShapeRef.new(shape: SlackChannelConfiguration)
@@ -380,6 +411,22 @@ module Aws::Chatbot
 
     SnsTopicArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
+    Tag.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "TagKey"))
+    Tag.add_member(:tag_value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "TagValue"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
     TeamChannelConfigurationsList.member = Shapes::ShapeRef.new(shape: TeamsChannelConfiguration)
 
     TeamsChannelConfiguration.add_member(:channel_id, Shapes::ShapeRef.new(shape: TeamsChannelId, required: true, location_name: "ChannelId"))
@@ -394,6 +441,7 @@ module Aws::Chatbot
     TeamsChannelConfiguration.add_member(:logging_level, Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
     TeamsChannelConfiguration.add_member(:guardrail_policy_arns, Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
     TeamsChannelConfiguration.add_member(:user_authorization_required, Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
+    TeamsChannelConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     TeamsChannelConfiguration.struct_class = Types::TeamsChannelConfiguration
 
     TeamsUserIdentitiesList.member = Shapes::ShapeRef.new(shape: TeamsUserIdentity)
@@ -406,6 +454,14 @@ module Aws::Chatbot
     TeamsUserIdentity.add_member(:teams_channel_id, Shapes::ShapeRef.new(shape: TeamsChannelId, location_name: "TeamsChannelId"))
     TeamsUserIdentity.add_member(:teams_tenant_id, Shapes::ShapeRef.new(shape: UUID, location_name: "TeamsTenantId"))
     TeamsUserIdentity.struct_class = Types::TeamsUserIdentity
+
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAccountPreferencesException.struct_class = Types::UpdateAccountPreferencesException
 
@@ -470,6 +526,7 @@ module Aws::Chatbot
         "endpointPrefix" => "chatbot",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Chatbot",
         "serviceId" => "chatbot",
         "signatureVersion" => "v4",
@@ -731,6 +788,40 @@ module Aws::Chatbot
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-tags-for-resource"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tag-resource"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/untag-resource"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_account_preferences, Seahorse::Model::Operation.new.tap do |o|

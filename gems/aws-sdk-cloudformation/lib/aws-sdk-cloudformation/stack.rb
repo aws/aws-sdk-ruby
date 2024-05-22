@@ -218,6 +218,18 @@ module Aws::CloudFormation
       data[:retain_except_on_create]
     end
 
+    # Specifies the deletion mode for the stack. Possible values are:
+    #
+    # * `STANDARD` - Use the standard behavior. Specifying this value is the
+    #   same as not specifying this parameter.
+    #
+    # * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
+    #   `DELETE_FAILED` state due to resource deletion failure.
+    # @return [String]
+    def deletion_mode
+      data[:deletion_mode]
+    end
+
     # The detailed status of the resource or stack. If
     # `CONFIGURATION_COMPLETE` is present, the resource or resource
     # configuration phase has completed and the stabilization of the
@@ -730,6 +742,7 @@ module Aws::CloudFormation
     #     retain_resources: ["LogicalResourceId"],
     #     role_arn: "RoleARN",
     #     client_request_token: "ClientRequestToken",
+    #     deletion_mode: "STANDARD", # accepts STANDARD, FORCE_DELETE_STACK
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :retain_resources
@@ -770,6 +783,14 @@ module Aws::CloudFormation
     #   stack using the console, each stack event would be assigned the same
     #   token in the following format:
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
+    # @option options [String] :deletion_mode
+    #   Specifies the deletion mode for the stack. Possible values are:
+    #
+    #   * `STANDARD` - Use the standard behavior. Specifying this value is the
+    #     same as not specifying this parameter.
+    #
+    #   * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
+    #     `DELETE_FAILED` state due to resource deletion failure.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(stack_name: @name)

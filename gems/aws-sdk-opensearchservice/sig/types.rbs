@@ -388,6 +388,7 @@ module Aws::OpenSearchService
       attr_accessor data_source_type: Types::DataSourceType
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -881,6 +882,7 @@ module Aws::OpenSearchService
       attr_accessor data_source_type: Types::DataSourceType
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1487,6 +1489,7 @@ module Aws::OpenSearchService
       attr_accessor name: ::String
       attr_accessor data_source_type: Types::DataSourceType
       attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "DISABLED")
       SENSITIVE: []
     end
 

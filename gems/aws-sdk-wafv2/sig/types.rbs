@@ -308,6 +308,8 @@ module Aws::WAFV2
 
     class DeleteLoggingConfigurationRequest
       attr_accessor resource_arn: ::String
+      attr_accessor log_type: ("WAF_LOGS")
+      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE")
       SENSITIVE: []
     end
 
@@ -501,6 +503,8 @@ module Aws::WAFV2
 
     class GetLoggingConfigurationRequest
       attr_accessor resource_arn: ::String
+      attr_accessor log_type: ("WAF_LOGS")
+      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE")
       SENSITIVE: []
     end
 
@@ -797,6 +801,7 @@ module Aws::WAFV2
       attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
       attr_accessor next_marker: ::String
       attr_accessor limit: ::Integer
+      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE")
       SENSITIVE: []
     end
 
@@ -901,6 +906,8 @@ module Aws::WAFV2
       attr_accessor redacted_fields: ::Array[Types::FieldToMatch]
       attr_accessor managed_by_firewall_manager: bool
       attr_accessor logging_filter: Types::LoggingFilter
+      attr_accessor log_type: ("WAF_LOGS")
+      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE")
       SENSITIVE: []
     end
 

@@ -559,12 +559,14 @@ module Aws::WAFV2
     #   * `UriPath`: The value that you want WAF to search for in the URI
     #     path, for example, `/images/daily-ad.jpg`.
     #
-    #   * `JA3Fingerprint`: Match against the request's JA3 fingerprint.
-    #     The JA3 fingerprint is a 32-character hash derived from the TLS
-    #     Client Hello of an incoming request. This fingerprint serves as a
-    #     unique identifier for the client's TLS configuration. You can use
-    #     this choice only with a string match `ByteMatchStatement` with the
-    #     `PositionalConstraint` set to `EXACTLY`.
+    #   * `JA3Fingerprint`: Available for use with Amazon CloudFront
+    #     distributions and Application Load Balancers. Match against the
+    #     request's JA3 fingerprint. The JA3 fingerprint is a 32-character
+    #     hash derived from the TLS Client Hello of an incoming request.
+    #     This fingerprint serves as a unique identifier for the client's
+    #     TLS configuration. You can use this choice only with a string
+    #     match `ByteMatchStatement` with the `PositionalConstraint` set to
+    #     `EXACTLY`.
     #
     #     You can obtain the JA3 fingerprint for client requests from the
     #     web ACL logs. If WAF is able to calculate the fingerprint, it
@@ -1849,10 +1851,37 @@ module Aws::WAFV2
     #   delete the LoggingConfiguration.
     #   @return [String]
     #
+    # @!attribute [rw] log_type
+    #   Used to distinguish between various logging options. Currently,
+    #   there is one option.
+    #
+    #   Default: `WAF_LOGS`
+    #   @return [String]
+    #
+    # @!attribute [rw] log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteLoggingConfigurationRequest AWS API Documentation
     #
     class DeleteLoggingConfigurationRequest < Struct.new(
-      :resource_arn)
+      :resource_arn,
+      :log_type,
+      :log_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2379,6 +2408,11 @@ module Aws::WAFV2
     #     for field redaction, you are specifying the component type to
     #     redact from the logs.
     #
+    #   * If you have request sampling enabled, the redacted fields
+    #     configuration for logging has no impact on sampling. The only way
+    #     to exclude fields from request sampling is by disabling sampling
+    #     in the web ACL visibility configuration.
+    #
     # @!attribute [rw] single_header
     #   Inspect a single header. Provide the name of the header to inspect,
     #   for example, `User-Agent` or `Referer`. This setting isn't case
@@ -2501,13 +2535,14 @@ module Aws::WAFV2
     #   @return [Types::HeaderOrder]
     #
     # @!attribute [rw] ja3_fingerprint
-    #   Match against the request's JA3 fingerprint. The JA3 fingerprint is
-    #   a 32-character hash derived from the TLS Client Hello of an incoming
-    #   request. This fingerprint serves as a unique identifier for the
-    #   client's TLS configuration. WAF calculates and logs this
-    #   fingerprint for each request that has enough TLS Client Hello
-    #   information for the calculation. Almost all web requests include
-    #   this information.
+    #   Available for use with Amazon CloudFront distributions and
+    #   Application Load Balancers. Match against the request's JA3
+    #   fingerprint. The JA3 fingerprint is a 32-character hash derived from
+    #   the TLS Client Hello of an incoming request. This fingerprint serves
+    #   as a unique identifier for the client's TLS configuration. WAF
+    #   calculates and logs this fingerprint for each request that has
+    #   enough TLS Client Hello information for the calculation. Almost all
+    #   web requests include this information.
     #
     #   <note markdown="1"> You can use this choice only with a string match
     #   `ByteMatchStatement` with the `PositionalConstraint` set to
@@ -2925,10 +2960,37 @@ module Aws::WAFV2
     #   get the LoggingConfiguration.
     #   @return [String]
     #
+    # @!attribute [rw] log_type
+    #   Used to distinguish between various logging options. Currently,
+    #   there is one option.
+    #
+    #   Default: `WAF_LOGS`
+    #   @return [String]
+    #
+    # @!attribute [rw] log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetLoggingConfigurationRequest AWS API Documentation
     #
     class GetLoggingConfigurationRequest < Struct.new(
-      :resource_arn)
+      :resource_arn,
+      :log_type,
+      :log_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3960,12 +4022,14 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Match against the request's JA3 fingerprint. The JA3 fingerprint is a
-    # 32-character hash derived from the TLS Client Hello of an incoming
-    # request. This fingerprint serves as a unique identifier for the
-    # client's TLS configuration. WAF calculates and logs this fingerprint
-    # for each request that has enough TLS Client Hello information for the
-    # calculation. Almost all web requests include this information.
+    # Available for use with Amazon CloudFront distributions and Application
+    # Load Balancers. Match against the request's JA3 fingerprint. The JA3
+    # fingerprint is a 32-character hash derived from the TLS Client Hello
+    # of an incoming request. This fingerprint serves as a unique identifier
+    # for the client's TLS configuration. WAF calculates and logs this
+    # fingerprint for each request that has enough TLS Client Hello
+    # information for the calculation. Almost all web requests include this
+    # information.
     #
     # <note markdown="1"> You can use this choice only with a string match `ByteMatchStatement`
     # with the `PositionalConstraint` set to `EXACTLY`.
@@ -4564,12 +4628,31 @@ module Aws::WAFV2
     #   to get the next batch of objects.
     #   @return [Integer]
     #
+    # @!attribute [rw] log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListLoggingConfigurationsRequest AWS API Documentation
     #
     class ListLoggingConfigurationsRequest < Struct.new(
       :scope,
       :next_marker,
-      :limit)
+      :limit,
+      :log_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5064,6 +5147,12 @@ module Aws::WAFV2
     #   `QueryString`, `SingleHeader`, and `Method`.
     #
     #    </note>
+    #
+    #   <note markdown="1"> This setting has no impact on request sampling. With request
+    #   sampling, the only way to exclude fields is by disabling sampling in
+    #   the web ACL visibility configuration.
+    #
+    #    </note>
     #   @return [Array<Types::FieldToMatch>]
     #
     # @!attribute [rw] managed_by_firewall_manager
@@ -5079,6 +5168,31 @@ module Aws::WAFV2
     #   evaluation.
     #   @return [Types::LoggingFilter]
     #
+    # @!attribute [rw] log_type
+    #   Used to distinguish between various logging options. Currently,
+    #   there is one option.
+    #
+    #   Default: `WAF_LOGS`
+    #   @return [String]
+    #
+    # @!attribute [rw] log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/LoggingConfiguration AWS API Documentation
     #
     class LoggingConfiguration < Struct.new(
@@ -5086,7 +5200,9 @@ module Aws::WAFV2
       :log_destination_configs,
       :redacted_fields,
       :managed_by_firewall_manager,
-      :logging_filter)
+      :logging_filter,
+      :log_type,
+      :log_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9235,6 +9351,14 @@ module Aws::WAFV2
     #   Indicates whether WAF should store a sampling of the web requests
     #   that match the rules. You can view the sampled requests through the
     #   WAF console.
+    #
+    #   <note markdown="1"> Request sampling doesn't provide a field redaction option, and any
+    #   field redaction that you specify in your logging configuration
+    #   doesn't affect sampling. The only way to exclude fields from
+    #   request sampling is by disabling sampling in the web ACL visibility
+    #   configuration.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] cloud_watch_metrics_enabled

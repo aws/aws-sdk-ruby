@@ -993,6 +993,7 @@ module Aws::KMS
         "endpointPrefix" => "kms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "KMS",
         "serviceFullName" => "AWS Key Management Service",
         "serviceId" => "KMS",

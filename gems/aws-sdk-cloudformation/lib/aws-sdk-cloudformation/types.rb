@@ -1990,13 +1990,24 @@ module Aws::CloudFormation
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #   @return [String]
     #
+    # @!attribute [rw] deletion_mode
+    #   Specifies the deletion mode for the stack. Possible values are:
+    #
+    #   * `STANDARD` - Use the standard behavior. Specifying this value is
+    #     the same as not specifying this parameter.
+    #
+    #   * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
+    #     `DELETE_FAILED` state due to resource deletion failure.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInput AWS API Documentation
     #
     class DeleteStackInput < Struct.new(
       :stack_name,
       :retain_resources,
       :role_arn,
-      :client_request_token)
+      :client_request_token,
+      :deletion_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5029,7 +5040,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] summaries
-    #   A list of `StackInstanceResourceDriftSummary` structures that
+    #   A list of `StackInstanceResourceDriftsSummary` structures that
     #   contain information about the specified stack instances.
     #   @return [Array<Types::StackInstanceResourceDriftsSummary>]
     #
@@ -7682,6 +7693,16 @@ module Aws::CloudFormation
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_mode
+    #   Specifies the deletion mode for the stack. Possible values are:
+    #
+    #   * `STANDARD` - Use the standard behavior. Specifying this value is
+    #     the same as not specifying this parameter.
+    #
+    #   * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
+    #     `DELETE_FAILED` state due to resource deletion failure.
+    #   @return [String]
+    #
     # @!attribute [rw] detailed_status
     #   The detailed status of the resource or stack. If
     #   `CONFIGURATION_COMPLETE` is present, the resource or resource
@@ -7722,6 +7743,7 @@ module Aws::CloudFormation
       :root_id,
       :drift_information,
       :retain_except_on_create,
+      :deletion_mode,
       :detailed_status)
       SENSITIVE = []
       include Aws::Structure
@@ -9341,9 +9363,9 @@ module Aws::CloudFormation
     #     concurrency level to ensure the number of failed accounts never
     #     exceeds the value of `FailureToleranceCount` +1. The initial
     #     actual concurrency is set to the lower of either the value of the
-    #     `MaxConcurrentCount`, or the value of `MaxConcurrentCount` +1. The
-    #     actual concurrency is then reduced proportionally by the number of
-    #     failures. This is the default behavior.
+    #     `MaxConcurrentCount`, or the value of `FailureToleranceCount` +1.
+    #     The actual concurrency is then reduced proportionally by the
+    #     number of failures. This is the default behavior.
     #
     #     If failure tolerance or Maximum concurrent accounts are set to
     #     percentages, the behavior is similar.

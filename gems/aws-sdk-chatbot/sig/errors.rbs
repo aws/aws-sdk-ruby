@@ -45,6 +45,8 @@ module Aws
       end
       class GetTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
       end
+      class InternalServiceError < ::Aws::Errors::ServiceError
+      end
       class InvalidParameterException < ::Aws::Errors::ServiceError
       end
       class InvalidRequestException < ::Aws::Errors::ServiceError
@@ -58,6 +60,10 @@ module Aws
       class ListTeamsChannelConfigurationsException < ::Aws::Errors::ServiceError
       end
       class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
       end
       class UpdateAccountPreferencesException < ::Aws::Errors::ServiceError
       end

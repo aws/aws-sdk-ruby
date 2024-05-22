@@ -103,6 +103,7 @@ module Aws::OpenSearchService
     DataSourceDetails = Shapes::StructureShape.new(name: 'DataSourceDetails')
     DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
     DataSourceName = Shapes::StringShape.new(name: 'DataSourceName')
+    DataSourceStatus = Shapes::StringShape.new(name: 'DataSourceStatus')
     DataSourceType = Shapes::UnionShape.new(name: 'DataSourceType')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteDataSourceResponse = Shapes::StructureShape.new(name: 'DeleteDataSourceResponse')
@@ -750,6 +751,7 @@ module Aws::OpenSearchService
     DataSourceDetails.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "DataSourceType"))
     DataSourceDetails.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
     DataSourceDetails.add_member(:description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "Description"))
+    DataSourceDetails.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, location_name: "Status"))
     DataSourceDetails.struct_class = Types::DataSourceDetails
 
     DataSourceList.member = Shapes::ShapeRef.new(shape: DataSourceDetails)
@@ -1127,6 +1129,7 @@ module Aws::OpenSearchService
     GetDataSourceResponse.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "DataSourceType"))
     GetDataSourceResponse.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
     GetDataSourceResponse.add_member(:description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "Description"))
+    GetDataSourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, location_name: "Status"))
     GetDataSourceResponse.struct_class = Types::GetDataSourceResponse
 
     GetDomainMaintenanceStatusRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
@@ -1600,6 +1603,7 @@ module Aws::OpenSearchService
     UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location: "uri", location_name: "DataSourceName"))
     UpdateDataSourceRequest.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "DataSourceType"))
     UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "Description"))
+    UpdateDataSourceRequest.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, location_name: "Status"))
     UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest
 
     UpdateDataSourceResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1761,6 +1765,7 @@ module Aws::OpenSearchService
         "apiVersion" => "2021-01-01",
         "endpointPrefix" => "es",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon OpenSearch Service",
         "serviceId" => "OpenSearch",
         "signatureVersion" => "v4",

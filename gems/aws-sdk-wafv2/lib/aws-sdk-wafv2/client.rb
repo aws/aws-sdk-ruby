@@ -3780,12 +3780,37 @@ module Aws::WAFV2
     #   The Amazon Resource Name (ARN) of the web ACL from which you want to
     #   delete the LoggingConfiguration.
     #
+    # @option params [String] :log_type
+    #   Used to distinguish between various logging options. Currently, there
+    #   is one option.
+    #
+    #   Default: `WAF_LOGS`
+    #
+    # @option params [String] :log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_logging_configuration({
     #     resource_arn: "ResourceArn", # required
+    #     log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteLoggingConfiguration AWS API Documentation
@@ -4454,6 +4479,29 @@ module Aws::WAFV2
     #   The Amazon Resource Name (ARN) of the web ACL for which you want to
     #   get the LoggingConfiguration.
     #
+    # @option params [String] :log_type
+    #   Used to distinguish between various logging options. Currently, there
+    #   is one option.
+    #
+    #   Default: `WAF_LOGS`
+    #
+    # @option params [String] :log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #
     # @return [Types::GetLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
@@ -4462,6 +4510,8 @@ module Aws::WAFV2
     #
     #   resp = client.get_logging_configuration({
     #     resource_arn: "ResourceArn", # required
+    #     log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
     #   })
     #
     # @example Response structure
@@ -4500,6 +4550,8 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
+    #   resp.logging_configuration.log_type #=> String, one of "WAF_LOGS"
+    #   resp.logging_configuration.log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetLoggingConfiguration AWS API Documentation
     #
@@ -5758,6 +5810,23 @@ module Aws::WAFV2
     #   a `NextMarker` value that you can use in a subsequent call to get the
     #   next batch of objects.
     #
+    # @option params [String] :log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #
     # @return [Types::ListLoggingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLoggingConfigurationsResponse#logging_configurations #logging_configurations} => Array&lt;Types::LoggingConfiguration&gt;
@@ -5769,6 +5838,7 @@ module Aws::WAFV2
     #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
     #     next_marker: "NextMarker",
     #     limit: 1,
+    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
     #   })
     #
     # @example Response structure
@@ -5808,6 +5878,8 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
     #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configurations[0].logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
+    #   resp.logging_configurations[0].log_type #=> String, one of "WAF_LOGS"
+    #   resp.logging_configurations[0].log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE"
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListLoggingConfigurations AWS API Documentation
@@ -6401,6 +6473,8 @@ module Aws::WAFV2
     #         ],
     #         default_behavior: "KEEP", # required, accepts KEEP, DROP
     #       },
+    #       log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #       log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
     #     },
     #   })
     #
@@ -6440,6 +6514,8 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
+    #   resp.logging_configuration.log_type #=> String, one of "WAF_LOGS"
+    #   resp.logging_configuration.log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutLoggingConfiguration AWS API Documentation
     #
@@ -9108,7 +9184,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

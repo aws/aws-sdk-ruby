@@ -83,7 +83,13 @@ module Aws
                                                 sns_topic_arns: Array[::String],
                                                 iam_role_arn: ::String,
                                                 configuration_name: ::String,
-                                                ?logging_level: ::String
+                                                ?logging_level: ::String,
+                                                ?tags: Array[
+                                                  {
+                                                    tag_key: ::String,
+                                                    tag_value: ::String
+                                                  },
+                                                ]
                                               ) -> _CreateChimeWebhookConfigurationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChimeWebhookConfigurationResponseSuccess
 
@@ -103,7 +109,13 @@ module Aws
                                                           configuration_name: ::String,
                                                           ?logging_level: ::String,
                                                           ?guardrail_policy_arns: Array[::String],
-                                                          ?user_authorization_required: bool
+                                                          ?user_authorization_required: bool,
+                                                          ?tags: Array[
+                                                            {
+                                                              tag_key: ::String,
+                                                              tag_value: ::String
+                                                            },
+                                                          ]
                                                         ) -> _CreateMicrosoftTeamsChannelConfigurationResponseSuccess
                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMicrosoftTeamsChannelConfigurationResponseSuccess
 
@@ -121,7 +133,13 @@ module Aws
                                                 configuration_name: ::String,
                                                 ?logging_level: ::String,
                                                 ?guardrail_policy_arns: Array[::String],
-                                                ?user_authorization_required: bool
+                                                ?user_authorization_required: bool,
+                                                ?tags: Array[
+                                                  {
+                                                    tag_key: ::String,
+                                                    tag_value: ::String
+                                                  },
+                                                ]
                                               ) -> _CreateSlackChannelConfigurationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSlackChannelConfigurationResponseSuccess
 
@@ -298,6 +316,41 @@ module Aws
                                                   ?max_results: ::Integer
                                                 ) -> _ListMicrosoftTeamsUserIdentitiesResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMicrosoftTeamsUserIdentitiesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              tag_key: ::String,
+                              tag_value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
       interface _UpdateAccountPreferencesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountPreferencesResult]
