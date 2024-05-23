@@ -108,6 +108,11 @@ module Aws::EMRServerless
     #   The configuration setting for monitoring.
     #   @return [Types::MonitoringConfiguration]
     #
+    # @!attribute [rw] interactive_configuration
+    #   The interactive configuration object that enables the interactive
+    #   use cases for an application.
+    #   @return [Types::InteractiveConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -130,7 +135,8 @@ module Aws::EMRServerless
       :image_configuration,
       :worker_type_specifications,
       :runtime_configuration,
-      :monitoring_configuration)
+      :monitoring_configuration,
+      :interactive_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -465,6 +471,11 @@ module Aws::EMRServerless
     #   The configuration setting for monitoring.
     #   @return [Types::MonitoringConfiguration]
     #
+    # @!attribute [rw] interactive_configuration
+    #   The interactive configuration object that enables the interactive
+    #   use cases to use when running an application.
+    #   @return [Types::InteractiveConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -482,7 +493,8 @@ module Aws::EMRServerless
       :image_configuration,
       :worker_type_specifications,
       :runtime_configuration,
-      :monitoring_configuration)
+      :monitoring_configuration,
+      :interactive_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -683,6 +695,28 @@ module Aws::EMRServerless
     class InitialCapacityConfig < Struct.new(
       :worker_count,
       :worker_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration to use to enable the different types of interactive
+    # use cases in an application.
+    #
+    # @!attribute [rw] studio_enabled
+    #   Enables you to connect an application to Amazon EMR Studio to run
+    #   interactive workloads in a notebook.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] livy_endpoint_enabled
+    #   Enables an Apache Livy endpoint that you can connect to and run
+    #   interactive jobs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/InteractiveConfiguration AWS API Documentation
+    #
+    class InteractiveConfiguration < Struct.new(
+      :studio_enabled,
+      :livy_endpoint_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1495,6 +1529,11 @@ module Aws::EMRServerless
     #   `imageConfiguration` for all worker types.
     #   @return [Hash<String,Types::WorkerTypeSpecificationInput>]
     #
+    # @!attribute [rw] interactive_configuration
+    #   The interactive configuration object that contains new interactive
+    #   use cases when the application is updated.
+    #   @return [Types::InteractiveConfiguration]
+    #
     # @!attribute [rw] release_label
     #   The Amazon EMR release label for the application. You can change the
     #   release label to use a different release of Amazon EMR.
@@ -1528,6 +1567,7 @@ module Aws::EMRServerless
       :architecture,
       :image_configuration,
       :worker_type_specifications,
+      :interactive_configuration,
       :release_label,
       :runtime_configuration,
       :monitoring_configuration)

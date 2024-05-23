@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2024-05-23)
+------------------
+
+* Feature - Documentation-only update for OpsWorks Stacks.
+
 1.55.0 (2024-05-13)
 ------------------
 

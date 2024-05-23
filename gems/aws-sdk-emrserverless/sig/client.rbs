@@ -157,6 +157,10 @@ module Aws
                                   prometheus_monitoring_configuration: {
                                     remote_write_url: ::String?
                                   }?
+                                },
+                                ?interactive_configuration: {
+                                  studio_enabled: bool?,
+                                  livy_endpoint_enabled: bool?
                                 }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -379,6 +383,10 @@ module Aws
                                       image_uri: ::String?
                                     }?
                                   }],
+                                ?interactive_configuration: {
+                                  studio_enabled: bool?,
+                                  livy_endpoint_enabled: bool?
+                                },
                                 ?release_label: ::String,
                                 ?runtime_configuration: Array[
                                   {

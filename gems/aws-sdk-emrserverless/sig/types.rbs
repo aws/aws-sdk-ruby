@@ -29,6 +29,7 @@ module Aws::EMRServerless
       attr_accessor worker_type_specifications: ::Hash[::String, Types::WorkerTypeSpecification]
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor interactive_configuration: Types::InteractiveConfiguration
       SENSITIVE: []
     end
 
@@ -112,6 +113,7 @@ module Aws::EMRServerless
       attr_accessor worker_type_specifications: ::Hash[::String, Types::WorkerTypeSpecificationInput]
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor interactive_configuration: Types::InteractiveConfiguration
       SENSITIVE: []
     end
 
@@ -183,6 +185,12 @@ module Aws::EMRServerless
     class InitialCapacityConfig
       attr_accessor worker_count: ::Integer
       attr_accessor worker_configuration: Types::WorkerResourceConfig
+      SENSITIVE: []
+    end
+
+    class InteractiveConfiguration
+      attr_accessor studio_enabled: bool
+      attr_accessor livy_endpoint_enabled: bool
       SENSITIVE: []
     end
 
@@ -416,6 +424,7 @@ module Aws::EMRServerless
       attr_accessor architecture: ("ARM64" | "X86_64")
       attr_accessor image_configuration: Types::ImageConfigurationInput
       attr_accessor worker_type_specifications: ::Hash[::String, Types::WorkerTypeSpecificationInput]
+      attr_accessor interactive_configuration: Types::InteractiveConfiguration
       attr_accessor release_label: ::String
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration

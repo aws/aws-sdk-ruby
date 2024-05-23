@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-05-23)
+------------------
+
+* Feature - This release adds the capability to run interactive workloads using Apache Livy Endpoint.
+
 1.23.0 (2024-05-13)
 ------------------
 

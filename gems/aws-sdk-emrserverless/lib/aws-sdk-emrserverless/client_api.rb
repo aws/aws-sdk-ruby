@@ -68,6 +68,7 @@ module Aws::EMRServerless
     InitialCapacityConfig = Shapes::StructureShape.new(name: 'InitialCapacityConfig')
     InitialCapacityConfigMap = Shapes::MapShape.new(name: 'InitialCapacityConfigMap')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InteractiveConfiguration = Shapes::StructureShape.new(name: 'InteractiveConfiguration')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobArn = Shapes::StringShape.new(name: 'JobArn')
     JobDriver = Shapes::UnionShape.new(name: 'JobDriver')
@@ -164,6 +165,7 @@ module Aws::EMRServerless
     Application.add_member(:worker_type_specifications, Shapes::ShapeRef.new(shape: WorkerTypeSpecificationMap, location_name: "workerTypeSpecifications"))
     Application.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     Application.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    Application.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
     Application.struct_class = Types::Application
 
     ApplicationList.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
@@ -233,6 +235,7 @@ module Aws::EMRServerless
     CreateApplicationRequest.add_member(:worker_type_specifications, Shapes::ShapeRef.new(shape: WorkerTypeSpecificationInputMap, location_name: "workerTypeSpecifications"))
     CreateApplicationRequest.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     CreateApplicationRequest.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    CreateApplicationRequest.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -285,6 +288,10 @@ module Aws::EMRServerless
 
     InitialCapacityConfigMap.key = Shapes::ShapeRef.new(shape: WorkerTypeString)
     InitialCapacityConfigMap.value = Shapes::ShapeRef.new(shape: InitialCapacityConfig)
+
+    InteractiveConfiguration.add_member(:studio_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "studioEnabled"))
+    InteractiveConfiguration.add_member(:livy_endpoint_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "livyEndpointEnabled"))
+    InteractiveConfiguration.struct_class = Types::InteractiveConfiguration
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -474,6 +481,7 @@ module Aws::EMRServerless
     UpdateApplicationRequest.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
     UpdateApplicationRequest.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfigurationInput, location_name: "imageConfiguration"))
     UpdateApplicationRequest.add_member(:worker_type_specifications, Shapes::ShapeRef.new(shape: WorkerTypeSpecificationInputMap, location_name: "workerTypeSpecifications"))
+    UpdateApplicationRequest.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
     UpdateApplicationRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
     UpdateApplicationRequest.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     UpdateApplicationRequest.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
@@ -512,8 +520,8 @@ module Aws::EMRServerless
       api.metadata = {
         "apiVersion" => "2021-07-13",
         "endpointPrefix" => "emr-serverless",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "EMR Serverless",
         "serviceId" => "EMR Serverless",
         "signatureVersion" => "v4",

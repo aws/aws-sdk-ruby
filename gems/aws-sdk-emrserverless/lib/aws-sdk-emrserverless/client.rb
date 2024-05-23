@@ -518,6 +518,10 @@ module Aws::EMRServerless
     # @option params [Types::MonitoringConfiguration] :monitoring_configuration
     #   The configuration setting for monitoring.
     #
+    # @option params [Types::InteractiveConfiguration] :interactive_configuration
+    #   The interactive configuration object that enables the interactive use
+    #   cases to use when running an application.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -604,6 +608,10 @@ module Aws::EMRServerless
     #       prometheus_monitoring_configuration: {
     #         remote_write_url: "PrometheusUrlString",
     #       },
+    #     },
+    #     interactive_configuration: {
+    #       studio_enabled: false,
+    #       livy_endpoint_enabled: false,
     #     },
     #   })
     #
@@ -712,6 +720,8 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
+    #   resp.application.interactive_configuration.studio_enabled #=> Boolean
+    #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -1268,6 +1278,10 @@ module Aws::EMRServerless
     #   image details in this parameter for each worker type, or in
     #   `imageConfiguration` for all worker types.
     #
+    # @option params [Types::InteractiveConfiguration] :interactive_configuration
+    #   The interactive configuration object that contains new interactive use
+    #   cases when the application is updated.
+    #
     # @option params [String] :release_label
     #   The Amazon EMR release label for the application. You can change the
     #   release label to use a different release of Amazon EMR.
@@ -1331,6 +1345,10 @@ module Aws::EMRServerless
     #           image_uri: "ImageUri",
     #         },
     #       },
+    #     },
+    #     interactive_configuration: {
+    #       studio_enabled: false,
+    #       livy_endpoint_enabled: false,
     #     },
     #     release_label: "ReleaseLabel",
     #     runtime_configuration: [
@@ -1420,6 +1438,8 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
+    #   resp.application.interactive_configuration.studio_enabled #=> Boolean
+    #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1443,7 +1463,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -196,8 +196,8 @@ module Aws::OpsWorks
     end
 
     # Describes a load-based auto scaling upscaling or downscaling threshold
-    # configuration, which specifies when AWS OpsWorks Stacks starts or
-    # stops load-based instances.
+    # configuration, which specifies when OpsWorks Stacks starts or stops
+    # load-based instances.
     #
     # @!attribute [rw] instance_count
     #   The number of instances to add or remove when the load exceeds a
@@ -211,14 +211,14 @@ module Aws::OpsWorks
     #
     # @!attribute [rw] ignore_metrics_time
     #   The amount of time (in minutes) after a scaling event occurs that
-    #   AWS OpsWorks Stacks should ignore metrics and suppress additional
-    #   scaling events. For example, AWS OpsWorks Stacks adds new instances
+    #   OpsWorks Stacks should ignore metrics and suppress additional
+    #   scaling events. For example, OpsWorks Stacks adds new instances
     #   following an upscaling event but the instances won't start reducing
     #   the load until they have been booted and configured. There is no
     #   point in raising additional scaling events during that operation,
     #   which typically takes several minutes. `IgnoreMetricsTime` allows
-    #   you to direct AWS OpsWorks Stacks to suppress scaling events long
-    #   enough to get the new instances online.
+    #   you to direct OpsWorks Stacks to suppress scaling events long enough
+    #   to get the new instances online.
     #   @return [Integer]
     #
     # @!attribute [rw] cpu_threshold
@@ -241,15 +241,15 @@ module Aws::OpsWorks
     #   @return [Float]
     #
     # @!attribute [rw] alarms
-    #   Custom Cloudwatch auto scaling alarms, to be used as thresholds.
+    #   Custom CloudWatch auto scaling alarms, to be used as thresholds.
     #   This parameter takes a list of up to five alarm names, which are
     #   case sensitive and must be in the same region as the stack.
     #
     #   <note markdown="1"> To use custom alarms, you must update your service role to allow
-    #   `cloudwatch:DescribeAlarms`. You can either have AWS OpsWorks Stacks
+    #   `cloudwatch:DescribeAlarms`. You can either have OpsWorks Stacks
     #   update the role for you when you first use this feature or you can
-    #   edit the role manually. For more information, see [Allowing AWS
-    #   OpsWorks Stacks to Act on Your Behalf][1].
+    #   edit the role manually. For more information, see [Allowing OpsWorks
+    #   Stacks to Act on Your Behalf][1].
     #
     #    </note>
     #
@@ -282,8 +282,8 @@ module Aws::OpsWorks
     # @!attribute [rw] device_name
     #   The device name that is exposed to the instance, such as `/dev/sdh`.
     #   For the root device, you can use the explicit device name or you can
-    #   set this parameter to `ROOT_DEVICE` and AWS OpsWorks Stacks will
-    #   provide the correct device name.
+    #   set this parameter to `ROOT_DEVICE` and OpsWorks Stacks will provide
+    #   the correct device name.
     #   @return [String]
     #
     # @!attribute [rw] no_device
@@ -340,12 +340,14 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The cloned stack name.
+    #   The cloned stack name. Stack names can be a maximum of 64
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The cloned stack AWS region, such as "ap-northeast-2". For more
-    #   information about AWS regions, see [Regions and Endpoints][1].
+    #   The cloned stack Amazon Web Services Region, such as
+    #   `ap-northeast-2`. For more information about Amazon Web Services
+    #   Regions, see [Regions and Endpoints][1].
     #
     #
     #
@@ -364,9 +366,9 @@ module Aws::OpsWorks
     #
     #   If the VPC ID corresponds to a default VPC and you have specified
     #   either the `DefaultAvailabilityZone` or the `DefaultSubnetId`
-    #   parameter only, AWS OpsWorks Stacks infers the value of the other
-    #   parameter. If you specify neither parameter, AWS OpsWorks Stacks
-    #   sets these parameters to the first valid Availability Zone for the
+    #   parameter only, OpsWorks Stacks infers the value of the other
+    #   parameter. If you specify neither parameter, OpsWorks Stacks sets
+    #   these parameters to the first valid Availability Zone for the
     #   specified region and the corresponding default VPC subnet ID,
     #   respectively.
     #
@@ -377,8 +379,8 @@ module Aws::OpsWorks
     #
     #   * You must specify a value for `DefaultSubnetId`.
     #
-    #   For more information about how to use AWS OpsWorks Stacks with a
-    #   VPC, see [Running a Stack in a VPC][1]. For more information about
+    #   For more information about how to use OpsWorks Stacks with a VPC,
+    #   see [Running a Stack in a VPC][1]. For more information about
     #   default VPC and EC2 Classic, see [Supported Platforms][2].
     #
     #
@@ -393,11 +395,11 @@ module Aws::OpsWorks
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] service_role_arn
-    #   The stack AWS Identity and Access Management (IAM) role, which
-    #   allows AWS OpsWorks Stacks to work with AWS resources on your
+    #   The stack Identity and Access Management (IAM) role, which allows
+    #   OpsWorks Stacks to work with Amazon Web Services resources on your
     #   behalf. You must set this parameter to the Amazon Resource Name
     #   (ARN) for an existing IAM role. If you create a stack by using the
-    #   AWS OpsWorks Stacks console, it creates the role for you. You can
+    #   OpsWorkss Stacks console, it creates the role for you. You can
     #   obtain an existing stack's IAM ARN programmatically by calling
     #   DescribePermissions. For more information about IAM ARNs, see [Using
     #   Identifiers][1].
@@ -429,12 +431,12 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
-    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
-    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2`, `Amazon Linux 2018.03`, `Amazon Linux
+    #     2017.09`, `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon
+    #     Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
-    #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
-    #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+    #   * A supported Ubuntu operating system, such as `Ubuntu 18.04 LTS`,
+    #     `Ubuntu 16.04 LTS`, `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
     #
     #   * `CentOS Linux 7`
     #
@@ -449,9 +451,10 @@ module Aws::OpsWorks
     #     when you create instances. For more information about how to use
     #     custom AMIs with OpsWorks, see [Using Custom AMIs][1].
     #
-    #   The default option is the parent stack's operating system. For more
-    #   information about supported operating systems, see [AWS OpsWorks
-    #   Stacks Operating Systems][2].
+    #   The default option is the parent stack's operating system. Not all
+    #   operating systems are supported with all versions of Chef. For more
+    #   information about supported operating systems, see [OpsWorks Stacks
+    #   Operating Systems][2].
     #
     #   <note markdown="1"> You can specify a different Linux operating system for the cloned
     #   stack, but you cannot change from Linux to Windows or Windows to
@@ -557,28 +560,27 @@ module Aws::OpsWorks
     #   @return [Boolean]
     #
     # @!attribute [rw] use_opsworks_security_groups
-    #   Whether to associate the AWS OpsWorks Stacks built-in security
-    #   groups with the stack's layers.
+    #   Whether to associate the OpsWorks Stacks built-in security groups
+    #   with the stack's layers.
     #
-    #   AWS OpsWorks Stacks provides a standard set of built-in security
-    #   groups, one for each layer, which are associated with layers by
-    #   default. With `UseOpsworksSecurityGroups` you can instead provide
-    #   your own custom security groups. `UseOpsworksSecurityGroups` has the
-    #   following settings:
+    #   OpsWorks Stacks provides a standard set of security groups, one for
+    #   each layer, which are associated with layers by default. With
+    #   `UseOpsworksSecurityGroups` you can instead provide your own custom
+    #   security groups. `UseOpsworksSecurityGroups` has the following
+    #   settings:
     #
-    #   * True - AWS OpsWorks Stacks automatically associates the
-    #     appropriate built-in security group with each layer (default
-    #     setting). You can associate additional security groups with a
-    #     layer after you create it but you cannot delete the built-in
-    #     security group.
+    #   * True - OpsWorks Stacks automatically associates the appropriate
+    #     built-in security group with each layer (default setting). You can
+    #     associate additional security groups with a layer after you create
+    #     it but you cannot delete the built-in security group.
     #
-    #   * False - AWS OpsWorks Stacks does not associate built-in security
-    #     groups with layers. You must create appropriate Amazon Elastic
-    #     Compute Cloud (Amazon EC2) security groups and associate a
-    #     security group with each layer that you create. However, you can
-    #     still manually associate a built-in security group with a layer on
-    #     creation; custom security groups are required only for those
-    #     layers that need custom settings.
+    #   * False - OpsWorks Stacks does not associate built-in security
+    #     groups with layers. You must create appropriate Amazon EC2
+    #     security groups and associate a security group with each layer
+    #     that you create. However, you can still manually associate a
+    #     built-in security group with a layer on creation; custom security
+    #     groups are required only for those layers that need custom
+    #     settings.
     #
     #   For more information, see [Create a New Stack][1].
     #
@@ -600,9 +602,9 @@ module Aws::OpsWorks
     #
     # @!attribute [rw] default_ssh_key_name
     #   A default Amazon EC2 key pair name. The default value is none. If
-    #   you specify a key pair name, AWS OpsWorks installs the public key on
-    #   the instance and you can use the private key with an SSH client to
-    #   log in to the instance. For more information, see [ Using SSH to
+    #   you specify a key pair name, OpsWorks installs the public key on the
+    #   instance and you can use the private key with an SSH client to log
+    #   in to the instance. For more information, see [ Using SSH to
     #   Communicate with an Instance][1] and [ Managing SSH Access][2]. You
     #   can override this setting by specifying a different key pair, or no
     #   key pair, when you [ create an instance][3].
@@ -634,16 +636,16 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   The default AWS OpsWorks Stacks agent version. You have the
-    #   following options:
+    #   The default OpsWorks Stacks agent version. You have the following
+    #   options:
     #
-    #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks Stacks
+    #   * Auto-update - Set this parameter to `LATEST`. OpsWorks Stacks
     #     automatically installs new agent versions on the stack's
     #     instances as soon as they are available.
     #
     #   * Fixed version - Set this parameter to your preferred agent
     #     version. To update the agent version, you must edit the stack
-    #     configuration and specify a new version. AWS OpsWorks Stacks then
+    #     configuration and specify a new version. OpsWorks Stacks
     #     automatically installs that version on the stack's instances.
     #
     #   The default setting is `LATEST`. To specify an agent version, you
@@ -700,7 +702,7 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # Describes the Amazon CloudWatch logs configuration for a layer.
+    # Describes the Amazon CloudWatch Logs configuration for a layer.
     #
     # @!attribute [rw] enabled
     #   Whether CloudWatch Logs is enabled for a layer.
@@ -719,9 +721,9 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # Describes the Amazon CloudWatch logs configuration for a layer. For
-    # detailed information about members of this data type, see the
-    # [CloudWatch Logs Agent Reference][1].
+    # Describes the CloudWatch Logs configuration for a layer. For detailed
+    # information about members of this data type, see the [CloudWatch Logs
+    # Agent Reference][1].
     #
     #
     #
@@ -939,7 +941,7 @@ module Aws::OpsWorks
     # @!attribute [rw] type
     #   The app type. Each supported type is associated with a particular
     #   layer. For example, PHP applications are associated with a PHP
-    #   layer. AWS OpsWorks Stacks deploys an application to those instances
+    #   layer. OpsWorks Stacks deploys an application to those instances
     #   that are members of the corresponding layer. If your app isn't one
     #   of the standard types, or you prefer to implement your own Deploy
     #   recipes, specify `other`.
@@ -1123,7 +1125,12 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] hostname
-    #   The instance host name.
+    #   The instance host name. The following are character limits for
+    #   instance host names.
+    #
+    #   * Linux-based instances: 63 characters
+    #
+    #   * Windows-based instances: 15 characters
     #   @return [String]
     #
     # @!attribute [rw] os
@@ -1131,12 +1138,12 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
-    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
-    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2`, `Amazon Linux 2018.03`, `Amazon Linux
+    #     2017.09`, `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon
+    #     Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
-    #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
-    #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+    #   * A supported Ubuntu operating system, such as `Ubuntu 18.04 LTS`,
+    #     `Ubuntu 16.04 LTS`, `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
     #
     #   * `CentOS Linux 7`
     #
@@ -1150,16 +1157,16 @@ module Aws::OpsWorks
     #
     #   * A custom AMI: `Custom`.
     #
-    #   For more information about the supported operating systems, see [AWS
-    #   OpsWorks Stacks Operating Systems][1].
+    #   Not all operating systems are supported with all versions of Chef.
+    #   For more information about the supported operating systems, see
+    #   [OpsWorks Stacks Operating Systems][1].
     #
     #   The default option is the current Amazon Linux version. If you set
     #   this parameter to `Custom`, you must use the CreateInstance
     #   action's AmiId parameter to specify the custom AMI that you want to
     #   use. Block device mappings are not supported if the value is
-    #   `Custom`. For more information about supported operating systems,
-    #   see [Operating Systems][1]For more information about how to use
-    #   custom AMIs with AWS OpsWorks Stacks, see [Using Custom AMIs][2].
+    #   `Custom`. For more information about how to use custom AMIs with
+    #   OpsWorks Stacks, see [Using Custom AMIs][2].
     #
     #
     #
@@ -1201,7 +1208,7 @@ module Aws::OpsWorks
     # @!attribute [rw] subnet_id
     #   The ID of the instance's subnet. If the stack is running in a VPC,
     #   you can use this parameter to override the stack's default subnet
-    #   ID value and direct AWS OpsWorks Stacks to launch the instance in a
+    #   ID value and direct OpsWorks Stacks to launch the instance in a
     #   different subnet.
     #   @return [String]
     #
@@ -1255,16 +1262,15 @@ module Aws::OpsWorks
     #   @return [Boolean]
     #
     # @!attribute [rw] agent_version
-    #   The default AWS OpsWorks Stacks agent version. You have the
-    #   following options:
+    #   The default OpsWorks Stacks agent version. You have the following
+    #   options:
     #
     #   * `INHERIT` - Use the stack's default agent version setting.
     #
     #   * *version\_number* - Use the specified agent version. This value
     #     overrides the stack's default setting. To update the agent
     #     version, edit the instance configuration and specify a new
-    #     version. AWS OpsWorks Stacks then automatically installs that
-    #     version on the instance.
+    #     version. OpsWorks Stacks installs that version on the instance.
     #
     #   The default setting is `INHERIT`. To specify an agent version, you
     #   must use the complete version number, not the abbreviated number
@@ -1341,19 +1347,20 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The layer name, which is used by the console.
+    #   The layer name, which is used by the console. Layer names can be a
+    #   maximum of 32 characters.
     #   @return [String]
     #
     # @!attribute [rw] shortname
     #   For custom layers only, use this parameter to specify the layer's
-    #   short name, which is used internally by AWS OpsWorks Stacks and by
-    #   Chef recipes. The short name is also used as the name for the
-    #   directory where your app files are installed. It can have a maximum
-    #   of 200 characters, which are limited to the alphanumeric characters,
-    #   '-', '\_', and '.'.
+    #   short name, which is used internally by OpsWorks Stacks and by Chef
+    #   recipes. The short name is also used as the name for the directory
+    #   where your app files are installed. It can have a maximum of 32
+    #   characters, which are limited to the alphanumeric characters, '-',
+    #   '\_', and '.'.
     #
-    #   The built-in layers' short names are defined by AWS OpsWorks
-    #   Stacks. For more information, see the [Layer Reference][1].
+    #   Built-in layer short names are defined by OpsWorks Stacks. For more
+    #   information, see the [Layer Reference][1].
     #
     #
     #
@@ -1386,7 +1393,7 @@ module Aws::OpsWorks
     #   A JSON-formatted string containing custom stack configuration and
     #   deployment attributes to be installed on the layer's instances. For
     #   more information, see [ Using Custom JSON][1]. This feature is
-    #   supported as of version 1.7.42 of the AWS CLI.
+    #   supported as of version 1.7.42 of the CLI.
     #
     #
     #
@@ -1500,19 +1507,20 @@ module Aws::OpsWorks
     end
 
     # @!attribute [rw] name
-    #   The stack name.
+    #   The stack name. Stack names can be a maximum of 64 characters.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The stack's AWS region, such as `ap-south-1`. For more information
-    #   about Amazon regions, see [Regions and Endpoints][1].
+    #   The stack's Amazon Web Services Region, such as `ap-south-1`. For
+    #   more information about Amazon Web Services Regions, see [Regions and
+    #   Endpoints][1].
     #
-    #   <note markdown="1"> In the AWS CLI, this API maps to the `--stack-region` parameter. If
-    #   the `--stack-region` parameter and the AWS CLI common parameter
-    #   `--region` are set to the same value, the stack uses a *regional*
-    #   endpoint. If the `--stack-region` parameter is not set, but the AWS
-    #   CLI `--region` parameter is, this also results in a stack with a
-    #   *regional* endpoint. However, if the `--region` parameter is set to
+    #   <note markdown="1"> In the CLI, this API maps to the `--stack-region` parameter. If the
+    #   `--stack-region` parameter and the CLI common parameter `--region`
+    #   are set to the same value, the stack uses a *regional* endpoint. If
+    #   the `--stack-region` parameter is not set, but the CLI `--region`
+    #   parameter is, this also results in a stack with a *regional*
+    #   endpoint. However, if the `--region` parameter is set to
     #   `us-east-1`, and the `--stack-region` parameter is set to one of the
     #   following, then the stack uses a legacy or *classic* region:
     #   `us-west-1, us-west-2, sa-east-1, eu-central-1, eu-west-1,
@@ -1520,11 +1528,11 @@ module Aws::OpsWorks
     #   actual API endpoint of the stack is in `us-east-1`. Only the
     #   preceding regions are supported as classic regions in the
     #   `us-east-1` API endpoint. Because it is a best practice to choose
-    #   the regional endpoint that is closest to where you manage AWS, we
-    #   recommend that you use regional endpoints for new stacks. The AWS
-    #   CLI common `--region` parameter always specifies a regional API
-    #   endpoint; it cannot be used to specify a classic AWS OpsWorks Stacks
-    #   region.
+    #   the regional endpoint that is closest to where you manage Amazon Web
+    #   Services, we recommend that you use regional endpoints for new
+    #   stacks. The CLI common `--region` parameter always specifies a
+    #   regional API endpoint; it cannot be used to specify a classic
+    #   OpsWorks Stacks region.
     #
     #    </note>
     #
@@ -1546,9 +1554,9 @@ module Aws::OpsWorks
     #
     #   If the VPC ID corresponds to a default VPC and you have specified
     #   either the `DefaultAvailabilityZone` or the `DefaultSubnetId`
-    #   parameter only, AWS OpsWorks Stacks infers the value of the other
-    #   parameter. If you specify neither parameter, AWS OpsWorks Stacks
-    #   sets these parameters to the first valid Availability Zone for the
+    #   parameter only, OpsWorks Stacks infers the value of the other
+    #   parameter. If you specify neither parameter, OpsWorks Stacks sets
+    #   these parameters to the first valid Availability Zone for the
     #   specified region and the corresponding default VPC subnet ID,
     #   respectively.
     #
@@ -1559,8 +1567,8 @@ module Aws::OpsWorks
     #
     #   * You must specify a value for `DefaultSubnetId`.
     #
-    #   For more information about how to use AWS OpsWorks Stacks with a
-    #   VPC, see [Running a Stack in a VPC][1]. For more information about
+    #   For more information about how to use OpsWorks Stacks with a VPC,
+    #   see [Running a Stack in a VPC][1]. For more information about
     #   default VPC and EC2-Classic, see [Supported Platforms][2].
     #
     #
@@ -1575,11 +1583,11 @@ module Aws::OpsWorks
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] service_role_arn
-    #   The stack's AWS Identity and Access Management (IAM) role, which
-    #   allows AWS OpsWorks Stacks to work with AWS resources on your
-    #   behalf. You must set this parameter to the Amazon Resource Name
-    #   (ARN) for an existing IAM role. For more information about IAM ARNs,
-    #   see [Using Identifiers][1].
+    #   The stack's IAM role, which allows OpsWorks Stacks to work with
+    #   Amazon Web Services resources on your behalf. You must set this
+    #   parameter to the Amazon Resource Name (ARN) for an existing IAM
+    #   role. For more information about IAM ARNs, see [Using
+    #   Identifiers][1].
     #
     #
     #
@@ -1602,12 +1610,12 @@ module Aws::OpsWorks
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
-    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
-    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2`, `Amazon Linux 2018.03`, `Amazon Linux
+    #     2017.09`, `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon
+    #     Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
-    #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
-    #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+    #   * A supported Ubuntu operating system, such as `Ubuntu 18.04 LTS`,
+    #     `Ubuntu 16.04 LTS`, `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
     #
     #   * `CentOS Linux 7`
     #
@@ -1623,9 +1631,10 @@ module Aws::OpsWorks
     #     when you create instances. For more information, see [ Using
     #     Custom AMIs][1].
     #
-    #   The default option is the current Amazon Linux version. For more
-    #   information about supported operating systems, see [AWS OpsWorks
-    #   Stacks Operating Systems][2].
+    #   The default option is the current Amazon Linux version. Not all
+    #   operating systems are supported with all versions of Chef. For more
+    #   information about supported operating systems, see [OpsWorks Stacks
+    #   Operating Systems][2].
     #
     #
     #
@@ -1726,22 +1735,21 @@ module Aws::OpsWorks
     #   @return [Boolean]
     #
     # @!attribute [rw] use_opsworks_security_groups
-    #   Whether to associate the AWS OpsWorks Stacks built-in security
-    #   groups with the stack's layers.
+    #   Whether to associate the OpsWorks Stacks built-in security groups
+    #   with the stack's layers.
     #
-    #   AWS OpsWorks Stacks provides a standard set of built-in security
-    #   groups, one for each layer, which are associated with layers by
-    #   default. With `UseOpsworksSecurityGroups` you can instead provide
-    #   your own custom security groups. `UseOpsworksSecurityGroups` has the
+    #   OpsWorks Stacks provides a standard set of built-in security groups,
+    #   one for each layer, which are associated with layers by default.
+    #   With `UseOpsworksSecurityGroups` you can instead provide your own
+    #   custom security groups. `UseOpsworksSecurityGroups` has the
     #   following settings:
     #
-    #   * True - AWS OpsWorks Stacks automatically associates the
-    #     appropriate built-in security group with each layer (default
-    #     setting). You can associate additional security groups with a
-    #     layer after you create it, but you cannot delete the built-in
-    #     security group.
+    #   * True - OpsWorks Stacks automatically associates the appropriate
+    #     built-in security group with each layer (default setting). You can
+    #     associate additional security groups with a layer after you create
+    #     it, but you cannot delete the built-in security group.
     #
-    #   * False - AWS OpsWorks Stacks does not associate built-in security
+    #   * False - OpsWorks Stacks does not associate built-in security
     #     groups with layers. You must create appropriate EC2 security
     #     groups and associate a security group with each layer that you
     #     create. However, you can still manually associate a built-in
@@ -1768,9 +1776,9 @@ module Aws::OpsWorks
     #
     # @!attribute [rw] default_ssh_key_name
     #   A default Amazon EC2 key pair name. The default value is none. If
-    #   you specify a key pair name, AWS OpsWorks installs the public key on
-    #   the instance and you can use the private key with an SSH client to
-    #   log in to the instance. For more information, see [ Using SSH to
+    #   you specify a key pair name, OpsWorks installs the public key on the
+    #   instance and you can use the private key with an SSH client to log
+    #   in to the instance. For more information, see [ Using SSH to
     #   Communicate with an Instance][1] and [ Managing SSH Access][2]. You
     #   can override this setting by specifying a different key pair, or no
     #   key pair, when you [ create an instance][3].
@@ -1794,17 +1802,17 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] agent_version
-    #   The default AWS OpsWorks Stacks agent version. You have the
-    #   following options:
+    #   The default OpsWorks Stacks agent version. You have the following
+    #   options:
     #
-    #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks Stacks
+    #   * Auto-update - Set this parameter to `LATEST`. OpsWorks Stacks
     #     automatically installs new agent versions on the stack's
     #     instances as soon as they are available.
     #
     #   * Fixed version - Set this parameter to your preferred agent
     #     version. To update the agent version, you must edit the stack
-    #     configuration and specify a new version. AWS OpsWorks Stacks then
-    #     automatically installs that version on the stack's instances.
+    #     configuration and specify a new version. OpsWorks Stacks installs
+    #     that version on the stack's instances.
     #
     #   The default setting is the most recent release of the agent. To
     #   specify an agent version, you must use the complete version number,
@@ -1866,10 +1874,9 @@ module Aws::OpsWorks
     # @!attribute [rw] ssh_username
     #   The user's SSH user name. The allowable characters are \[a-z\],
     #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes
-    #   other punctuation marks, AWS OpsWorks Stacks removes them. For
-    #   example, `my.name` will be changed to `myname`. If you do not
-    #   specify an SSH user name, AWS OpsWorks Stacks generates one from the
-    #   IAM user name.
+    #   other punctuation marks, OpsWorks Stacks removes them. For example,
+    #   `my.name` is changed to `myname`. If you do not specify an SSH user
+    #   name, OpsWorks Stacks generates one from the IAM user name.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key
@@ -2126,8 +2133,8 @@ module Aws::OpsWorks
     #     default setting is \\\{"migrate":\["false"\]\\}.
     #
     #   * `rollback` Roll the app back to the previous version. When you
-    #     update an app, AWS OpsWorks Stacks stores the previous version, up
-    #     to a maximum of five versions. You can use this command to roll an
+    #     update an app, OpsWorks Stacks stores the previous version, up to
+    #     a maximum of five versions. You can use this command to roll an
     #     app back as many as four versions.
     #
     #   * `start`: Start the app's web or application server.
@@ -2148,19 +2155,19 @@ module Aws::OpsWorks
     #
     #   The `update_dependencies` command takes two arguments:
     #
-    #   * `upgrade_os_to` - Specifies the desired Amazon Linux version for
-    #     instances whose OS you want to upgrade, such as `Amazon Linux
-    #     2016.09`. You must also set the `allow_reboot` argument to true.
+    #   * `upgrade_os_to` - Specifies the Amazon Linux version that you want
+    #     instances to run, such as `Amazon Linux 2`. You must also set the
+    #     `allow_reboot` argument to true.
     #
-    #   * `allow_reboot` - Specifies whether to allow AWS OpsWorks Stacks to
+    #   * `allow_reboot` - Specifies whether to allow OpsWorks Stacks to
     #     reboot the instances if necessary, after installing the updates.
     #     This argument can be set to either `true` or `false`. The default
     #     value is `false`.
     #
-    #   For example, to upgrade an instance to Amazon Linux 2016.09, set
+    #   For example, to upgrade an instance to Amazon Linux 2018.03, set
     #   `Args` to the following.
     #
-    #   ` \{ "upgrade_os_to":["Amazon Linux 2016.09"],
+    #   ` \{ "upgrade_os_to":["Amazon Linux 2018.03"],
     #   "allow_reboot":["true"] \} `
     #   @return [Hash<String,Array<String>>]
     #
@@ -2222,9 +2229,9 @@ module Aws::OpsWorks
     end
 
     # @!attribute [rw] volume_id
-    #   The AWS OpsWorks Stacks volume ID, which is the GUID that AWS
-    #   OpsWorks Stacks assigned to the instance when you registered the
-    #   volume with the stack, not the Amazon EC2 volume ID.
+    #   The OpsWorks Stacks volume ID, which is the GUID that OpsWorks
+    #   Stacks assigned to the instance when you registered the volume with
+    #   the stack, not the Amazon EC2 volume ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterVolumeRequest AWS API Documentation
@@ -2835,7 +2842,7 @@ module Aws::OpsWorks
     # request.
     #
     # @!attribute [rw] agent_installer_url
-    #   The AWS OpsWorks Stacks agent installer's URL.
+    #   The OpsWorks Stacks agent installer's URL.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -2879,8 +2886,13 @@ module Aws::OpsWorks
 
     # @!attribute [rw] stack_ids
     #   An array of stack IDs that specify the stacks to be described. If
-    #   you omit this parameter, `DescribeStacks` returns a description of
-    #   every stack.
+    #   you omit this parameter, and have permissions to get information
+    #   about all stacks, `DescribeStacks` returns a description of every
+    #   stack. If the IAM policy that is attached to an IAM user limits the
+    #   `DescribeStacks` action to specific stack ARNs, this parameter is
+    #   required, and the user must specify a stack ARN that is allowed by
+    #   the policy. Otherwise, `DescribeStacks` returns an `AccessDenied`
+    #   error.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStacksRequest AWS API Documentation
@@ -3074,9 +3086,9 @@ module Aws::OpsWorks
     #
     #   If you specify the `io1` volume type, you must also specify a value
     #   for the `Iops` attribute. The maximum ratio of provisioned IOPS to
-    #   requested volume size (in GiB) is 50:1. AWS uses the default volume
-    #   size (in GiB) specified in the AMI attributes to set IOPS to 50 x
-    #   (volume size).
+    #   requested volume size (in GiB) is 50:1. Amazon Web Services uses the
+    #   default volume size (in GiB) specified in the AMI attributes to set
+    #   IOPS to 50 x (volume size).
     #   @return [String]
     #
     # @!attribute [rw] delete_on_termination
@@ -3131,7 +3143,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name.
+    #   The name, which can be a maximum of 32 characters.
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -3139,8 +3151,8 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS region. For more information, see [Regions and
-    #   Endpoints][1].
+    #   The Amazon Web Services Region. For more information, see [Regions
+    #   and Endpoints][1].
     #
     #
     #
@@ -3166,11 +3178,11 @@ module Aws::OpsWorks
     # Describes an Elastic Load Balancing instance.
     #
     # @!attribute [rw] elastic_load_balancer_name
-    #   The Elastic Load Balancing instance's name.
+    #   The Elastic Load Balancing instance name.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The instance's AWS region.
+    #   The instance's Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -3178,11 +3190,11 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] stack_id
-    #   The ID of the stack that the instance is associated with.
+    #   The ID of the stack with which the instance is associated.
     #   @return [String]
     #
     # @!attribute [rw] layer_id
-    #   The ID of the layer that the instance is attached to.
+    #   The ID of the layer to which the instance is attached.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -3198,8 +3210,8 @@ module Aws::OpsWorks
     #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_instance_ids
-    #   A list of the EC2 instances that the Elastic Load Balancing instance
-    #   is managing traffic for.
+    #   A list of the EC2 instances for which the Elastic Load Balancing
+    #   instance is managing traffic.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ElasticLoadBalancer AWS API Documentation
@@ -3234,11 +3246,11 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] secure
-    #   (Optional) Whether the variable's value will be returned by the
-    #   DescribeApps action. To conceal an environment variable's value,
-    #   set `Secure` to `true`. `DescribeApps` then returns
-    #   `*****FILTERED*****` instead of the actual value. The default value
-    #   for `Secure` is `false`.
+    #   (Optional) Whether the variable's value is returned by the
+    #   DescribeApps action. To hide an environment variable's value, set
+    #   `Secure` to `true`. `DescribeApps` returns `*****FILTERED*****`
+    #   instead of the actual value. The default value for `Secure` is
+    #   `false`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/EnvironmentVariable AWS API Documentation
@@ -3283,14 +3295,14 @@ module Aws::OpsWorks
     end
 
     # @!attribute [rw] instance_id
-    #   The instance's AWS OpsWorks Stacks ID.
+    #   The instance's OpsWorks Stacks ID.
     #   @return [String]
     #
     # @!attribute [rw] valid_for_in_minutes
     #   The length of time (in minutes) that the grant is valid. When the
     #   grant expires at the end of this period, the user will no longer be
     #   able to use the credentials to log in. If the user is logged in at
-    #   the time, he or she automatically will be logged out.
+    #   the time, they are logged out.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GrantAccessRequest AWS API Documentation
@@ -3382,7 +3394,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] elastic_ip
-    #   The instance [Elastic IP address ][1].
+    #   The instance [Elastic IP address][1].
     #
     #
     #
@@ -3390,7 +3402,12 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] hostname
-    #   The instance host name.
+    #   The instance host name. The following are character limits for
+    #   instance host names.
+    #
+    #   * Linux-based instances: 63 characters
+    #
+    #   * Windows-based instances: 15 characters
     #   @return [String]
     #
     # @!attribute [rw] infrastructure_class
@@ -3401,12 +3418,12 @@ module Aws::OpsWorks
     # @!attribute [rw] install_updates_on_boot
     #   Whether to install operating system and package updates when the
     #   instance boots. The default value is `true`. If this value is set to
-    #   `false`, you must then update your instances manually by using
+    #   `false`, you must update instances manually by using
     #   CreateDeployment to run the `update_dependencies` stack command or
     #   by manually running `yum` (Amazon Linux) or `apt-get` (Ubuntu) on
     #   the instances.
     #
-    #   <note markdown="1"> We strongly recommend using the default value of `true`, to ensure
+    #   <note markdown="1"> We strongly recommend using the default value of `true` to ensure
     #   that your instances have the latest security updates.
     #
     #    </note>
@@ -3467,7 +3484,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] reported_agent_version
-    #   The instance's reported AWS OpsWorks Stacks agent version.
+    #   The instance's reported OpsWorks Stacks agent version.
     #   @return [String]
     #
     # @!attribute [rw] reported_os
@@ -3756,7 +3773,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The layer name.
+    #   The layer name. Layer names can be a maximum of 32 characters.
     #   @return [String]
     #
     # @!attribute [rw] shortname
@@ -3767,10 +3784,10 @@ module Aws::OpsWorks
     #   The layer attributes.
     #
     #   For the `HaproxyStatsPassword`, `MysqlRootPassword`, and
-    #   `GangliaPassword` attributes, AWS OpsWorks Stacks returns
+    #   `GangliaPassword` attributes, OpsWorks Stacks returns
     #   `*****FILTERED*****` instead of the actual value
     #
-    #   For an ECS Cluster layer, AWS OpsWorks Stacks the `EcsClusterArn`
+    #   For an ECS Cluster layer, OpsWorks Stacks the `EcsClusterArn`
     #   attribute is set to the cluster's ARN.
     #   @return [Hash<String,String>]
     #
@@ -3836,14 +3853,13 @@ module Aws::OpsWorks
     #   @return [Boolean]
     #
     # @!attribute [rw] default_recipes
-    #   AWS OpsWorks Stacks supports five lifecycle events: **setup**,
+    #   OpsWorks Stacks supports five lifecycle events: **setup**,
     #   **configuration**, **deploy**, **undeploy**, and **shutdown**. For
-    #   each layer, AWS OpsWorks Stacks runs a set of standard recipes for
-    #   each event. You can also provide custom recipes for any or all
-    #   layers and events. AWS OpsWorks Stacks runs custom event recipes
-    #   after the standard recipes. `LayerCustomRecipes` specifies the
-    #   custom recipes for a particular layer to be run in response to each
-    #   of the five events.
+    #   each layer, OpsWorks Stacks runs a set of standard recipes for each
+    #   event. You can also provide custom recipes for any or all layers and
+    #   events. OpsWorks Stacks runs custom event recipes after the standard
+    #   recipes. `LayerCustomRecipes` specifies the custom recipes for a
+    #   particular layer to be run in response to each of the five events.
     #
     #   To specify a recipe, use the cookbook's directory name in the
     #   repository followed by two colons and the recipe name, which is the
@@ -3989,14 +4005,14 @@ module Aws::OpsWorks
     #
     # @!attribute [rw] up_scaling
     #   An `AutoScalingThresholds` object that describes the upscaling
-    #   configuration, which defines how and when AWS OpsWorks Stacks
-    #   increases the number of instances.
+    #   configuration, which defines how and when OpsWorks Stacks increases
+    #   the number of instances.
     #   @return [Types::AutoScalingThresholds]
     #
     # @!attribute [rw] down_scaling
     #   An `AutoScalingThresholds` object that describes the downscaling
-    #   configuration, which defines how and when AWS OpsWorks Stacks
-    #   reduces the number of instances.
+    #   configuration, which defines how and when OpsWorks Stacks reduces
+    #   the number of instances.
     #   @return [Types::AutoScalingThresholds]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/LoadBasedAutoScalingConfiguration AWS API Documentation
@@ -4010,15 +4026,14 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # Describes supported operating systems in AWS OpsWorks Stacks.
+    # Describes supported operating systems in OpsWorks Stacks.
     #
     # @!attribute [rw] name
-    #   The name of the operating system, such as `Amazon Linux 2018.03`.
+    #   The name of the operating system, such as `Amazon Linux 2`.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID of a supported operating system, such as `Amazon Linux
-    #   2018.03`.
+    #   The ID of a supported operating system, such as `Amazon Linux 2`.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4027,8 +4042,8 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] configuration_managers
-    #   Supported configuration manager name and versions for an AWS
-    #   OpsWorks Stacks operating system.
+    #   Supported configuration manager name and versions for an OpsWorks
+    #   Stacks operating system.
     #   @return [Array<Types::OperatingSystemConfigurationManager>]
     #
     # @!attribute [rw] reported_name
@@ -4088,9 +4103,9 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] iam_user_arn
-    #   The Amazon Resource Name (ARN) for an AWS Identity and Access
-    #   Management (IAM) role. For more information about IAM ARNs, see
-    #   [Using Identifiers][1].
+    #   The Amazon Resource Name (ARN) for an Identity and Access Management
+    #   (IAM) role. For more information about IAM ARNs, see [Using
+    #   Identifiers][1].
     #
     #
     #
@@ -4228,7 +4243,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] db_instance_identifier
-    #   The DB instance identifier.
+    #   The database instance identifier.
     #   @return [String]
     #
     # @!attribute [rw] db_user
@@ -4236,12 +4251,12 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] db_password
-    #   AWS OpsWorks Stacks returns `*****FILTERED*****` instead of the
-    #   actual value.
+    #   OpsWorks Stacks returns `*****FILTERED*****` instead of the actual
+    #   value.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The instance's AWS region.
+    #   The instance's Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] address
@@ -4257,10 +4272,10 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] missing_on_rds
-    #   Set to `true` if AWS OpsWorks Stacks is unable to discover the
-    #   Amazon RDS instance. AWS OpsWorks Stacks attempts to discover the
-    #   instance only once. If this value is set to `true`, you must
-    #   deregister the instance, and then register it again.
+    #   Set to `true` if OpsWorks Stacks is unable to discover the Amazon
+    #   RDS instance. OpsWorks Stacks attempts to discover the instance only
+    #   once. If this value is set to `true`, you must deregister the
+    #   instance, and then register it again.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RdsDbInstance AWS API Documentation
@@ -4291,14 +4306,14 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # AWS OpsWorks Stacks supports five lifecycle events: **setup**,
+    # OpsWorks Stacks supports five lifecycle events: **setup**,
     # **configuration**, **deploy**, **undeploy**, and **shutdown**. For
-    # each layer, AWS OpsWorks Stacks runs a set of standard recipes for
-    # each event. In addition, you can provide custom recipes for any or all
-    # layers and events. AWS OpsWorks Stacks runs custom event recipes after
-    # the standard recipes. `LayerCustomRecipes` specifies the custom
-    # recipes for a particular layer to be run in response to each of the
-    # five events.
+    # each layer, OpsWorks Stacks runs a set of standard recipes for each
+    # event. In addition, you can provide custom recipes for any or all
+    # layers and events. OpsWorks Stacks runs custom event recipes after the
+    # standard recipes. `LayerCustomRecipes` specifies the custom recipes
+    # for a particular layer to be run in response to each of the five
+    # events.
     #
     # To specify a recipe, use the cookbook's directory name in the
     # repository followed by two colons and the recipe name, which is the
@@ -4409,7 +4424,12 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] hostname
-    #   The instance's hostname.
+    #   The instance's host name. The following are character limits for
+    #   instance host names.
+    #
+    #   * Linux-based instances: 63 characters
+    #
+    #   * Windows-based instances: 15 characters
     #   @return [String]
     #
     # @!attribute [rw] public_ip
@@ -4450,7 +4470,7 @@ module Aws::OpsWorks
     # Contains the response to a `RegisterInstanceResult` request.
     #
     # @!attribute [rw] instance_id
-    #   The registered instance's AWS OpsWorks Stacks ID.
+    #   The registered instance's OpsWorks Stacks ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstanceResult AWS API Documentation
@@ -4586,7 +4606,7 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
-    # Describes an AWS OpsWorks Stacks service error.
+    # Describes an OpsWorks Stacks service error.
     #
     # @!attribute [rw] service_error_id
     #   The error ID.
@@ -4636,15 +4656,15 @@ module Aws::OpsWorks
     # @!attribute [rw] up_scaling
     #   An `AutoScalingThresholds` object with the upscaling threshold
     #   configuration. If the load exceeds these thresholds for a specified
-    #   amount of time, AWS OpsWorks Stacks starts a specified number of
+    #   amount of time, OpsWorks Stacks starts a specified number of
     #   instances.
     #   @return [Types::AutoScalingThresholds]
     #
     # @!attribute [rw] down_scaling
     #   An `AutoScalingThresholds` object with the downscaling threshold
     #   configuration. If the load falls below these thresholds for a
-    #   specified amount of time, AWS OpsWorks Stacks stops a specified
-    #   number of instances.
+    #   specified amount of time, OpsWorks Stacks stops a specified number
+    #   of instances.
     #   @return [Types::AutoScalingThresholds]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScalingRequest AWS API Documentation
@@ -4728,8 +4748,8 @@ module Aws::OpsWorks
     # The Shutdown event configuration.
     #
     # @!attribute [rw] execution_timeout
-    #   The time, in seconds, that AWS OpsWorks Stacks will wait after
-    #   triggering a Shutdown event before shutting down an instance.
+    #   The time, in seconds, that OpsWorks Stacks waits after triggering a
+    #   Shutdown event before shutting down an instance.
     #   @return [Integer]
     #
     # @!attribute [rw] delay_until_elb_connections_drained
@@ -4792,8 +4812,8 @@ module Aws::OpsWorks
     #   For more information on how to safely handle IAM credentials, see
     #   [https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html][1].
     #
-    #   In responses, AWS OpsWorks Stacks returns `*****FILTERED*****`
-    #   instead of the actual value.
+    #   In responses, OpsWorks Stacks returns `*****FILTERED*****` instead
+    #   of the actual value.
     #
     #
     #
@@ -4803,13 +4823,13 @@ module Aws::OpsWorks
     # @!attribute [rw] ssh_key
     #   In requests, the repository's SSH key.
     #
-    #   In responses, AWS OpsWorks Stacks returns `*****FILTERED*****`
-    #   instead of the actual value.
+    #   In responses, OpsWorks Stacks returns `*****FILTERED*****` instead
+    #   of the actual value.
     #   @return [String]
     #
     # @!attribute [rw] revision
-    #   The application's version. AWS OpsWorks Stacks enables you to
-    #   easily deploy new versions of an application. One of the simplest
+    #   The application's version. OpsWorks Stacks enables you to easily
+    #   deploy new versions of an application. One of the simplest
     #   approaches is to have branches or revisions in your repository that
     #   represent different versions that can potentially be deployed.
     #   @return [String]
@@ -4859,7 +4879,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The stack name.
+    #   The stack name. Stack names can be a maximum of 64 characters.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4867,8 +4887,9 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The stack AWS region, such as "ap-northeast-2". For more
-    #   information about AWS regions, see [Regions and Endpoints][1].
+    #   The stack Amazon Web Services Region, such as `ap-northeast-2`. For
+    #   more information about Amazon Web Services Regions, see [Regions and
+    #   Endpoints][1].
     #
     #
     #
@@ -4884,7 +4905,7 @@ module Aws::OpsWorks
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] service_role_arn
-    #   The stack AWS Identity and Access Management (IAM) role.
+    #   The stack Identity and Access Management (IAM) role.
     #   @return [String]
     #
     # @!attribute [rw] default_instance_profile_arn
@@ -4955,7 +4976,7 @@ module Aws::OpsWorks
     #   @return [Boolean]
     #
     # @!attribute [rw] use_opsworks_security_groups
-    #   Whether the stack automatically associates the AWS OpsWorks Stacks
+    #   Whether the stack automatically associates the OpsWorks Stacks
     #   built-in security groups with the stack's layers.
     #   @return [Boolean]
     #
@@ -5027,13 +5048,13 @@ module Aws::OpsWorks
     # Describes the configuration manager.
     #
     # @!attribute [rw] name
-    #   The name. This parameter must be set to "Chef".
+    #   The name. This parameter must be set to `Chef`.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The Chef version. This parameter must be set to 12, 11.10, or 11.4
     #   for Linux stacks, and to 12.2 for Windows stacks. The default value
-    #   for Linux stacks is 11.4.
+    #   for Linux stacks is 12.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StackConfigurationManager AWS API Documentation
@@ -5116,11 +5137,11 @@ module Aws::OpsWorks
     # @!attribute [rw] force
     #   Specifies whether to force an instance to stop. If the instance's
     #   root device type is `ebs`, or EBS-backed, adding the `Force`
-    #   parameter to the `StopInstances` API call disassociates the AWS
-    #   OpsWorks Stacks instance from EC2, and forces deletion of *only* the
-    #   OpsWorks Stacks instance. You must also delete the
-    #   formerly-associated instance in EC2 after troubleshooting and
-    #   replacing the AWS OpsWorks Stacks instance with a new one.
+    #   parameter to the `StopInstances` API call disassociates the OpsWorks
+    #   Stacks instance from EC2, and forces deletion of *only* the OpsWorks
+    #   Stacks instance. You must also delete the formerly-associated
+    #   instance in EC2 after troubleshooting and replacing the OpsWorks
+    #   Stacks instance with a new one.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstanceRequest AWS API Documentation
@@ -5192,11 +5213,11 @@ module Aws::OpsWorks
     #   The length of time (in minutes) that the grant is valid. When the
     #   grant expires, at the end of this period, the user will no longer be
     #   able to use the credentials to log in. If they are logged in at the
-    #   time, they will be automatically logged out.
+    #   time, they are automatically logged out.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_id
-    #   The instance's AWS OpsWorks Stacks ID.
+    #   The instance's OpsWorks Stacks ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TemporaryCredential AWS API Documentation
@@ -5358,7 +5379,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The new name.
+    #   The new name, which can be a maximum of 32 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateElasticIpRequest AWS API Documentation
@@ -5398,7 +5419,12 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] hostname
-    #   The instance host name.
+    #   The instance host name. The following are character limits for
+    #   instance host names.
+    #
+    #   * Linux-based instances: 63 characters
+    #
+    #   * Windows-based instances: 15 characters
     #   @return [String]
     #
     # @!attribute [rw] os
@@ -5406,12 +5432,12 @@ module Aws::OpsWorks
     #   following. You cannot update an instance that is using a custom AMI.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
-    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
-    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2`, `Amazon Linux 2018.03`, `Amazon Linux
+    #     2017.09`, `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon
+    #     Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
-    #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
-    #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+    #   * A supported Ubuntu operating system, such as `Ubuntu 18.04 LTS`,
+    #     `Ubuntu 16.04 LTS`, `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
     #
     #   * `CentOS Linux 7`
     #
@@ -5423,15 +5449,15 @@ module Aws::OpsWorks
     #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
     #     Web`.
     #
-    #   For more information about supported operating systems, see [AWS
-    #   OpsWorks Stacks Operating Systems][1].
+    #   Not all operating systems are supported with all versions of Chef.
+    #   For more information about supported operating systems, see
+    #   [OpsWorks Stacks Operating Systems][1].
     #
     #   The default option is the current Amazon Linux version. If you set
     #   this parameter to `Custom`, you must use the AmiId parameter to
     #   specify the custom AMI that you want to use. For more information
-    #   about supported operating systems, see [Operating Systems][1]. For
-    #   more information about how to use custom AMIs with OpsWorks, see
-    #   [Using Custom AMIs][2].
+    #   about how to use custom AMIs with OpsWorks, see [Using Custom
+    #   AMIs][2].
     #
     #   <note markdown="1"> You can specify a different Linux operating system for the updated
     #   stack, but you cannot change from Linux to Windows or Windows to
@@ -5487,16 +5513,16 @@ module Aws::OpsWorks
     #   @return [Boolean]
     #
     # @!attribute [rw] agent_version
-    #   The default AWS OpsWorks Stacks agent version. You have the
-    #   following options:
+    #   The default OpsWorks Stacks agent version. You have the following
+    #   options:
     #
     #   * `INHERIT` - Use the stack's default agent version setting.
     #
     #   * *version\_number* - Use the specified agent version. This value
     #     overrides the stack's default setting. To update the agent
     #     version, you must edit the instance configuration and specify a
-    #     new version. AWS OpsWorks Stacks then automatically installs that
-    #     version on the instance.
+    #     new version. OpsWorks Stacks installs that version on the
+    #     instance.
     #
     #   The default setting is `INHERIT`. To specify an agent version, you
     #   must use the complete version number, not the abbreviated number
@@ -5530,19 +5556,20 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The layer name, which is used by the console.
+    #   The layer name, which is used by the console. Layer names can be a
+    #   maximum of 32 characters.
     #   @return [String]
     #
     # @!attribute [rw] shortname
     #   For custom layers only, use this parameter to specify the layer's
-    #   short name, which is used internally by AWS OpsWorks Stacks and by
-    #   Chef. The short name is also used as the name for the directory
-    #   where your app files are installed. It can have a maximum of 200
-    #   characters and must be in the following format:
-    #   /\\A\[a-z0-9\\-\\\_\\.\]+\\Z/.
+    #   short name, which is used internally by OpsWorks Stacks and by Chef.
+    #   The short name is also used as the name for the directory where your
+    #   app files are installed. It can have a maximum of 32 characters and
+    #   must be in the following format: /\\A\[a-z0-9\\-\\\_\\.\]+\\Z/.
     #
-    #   The built-in layers' short names are defined by AWS OpsWorks
-    #   Stacks. For more information, see the [Layer Reference][1]
+    #   Built-in layer short names are defined by OpsWorks Stacks. For more
+    #   information, see the [Layer reference][1] in the OpsWorks User
+    #   Guide.
     #
     #
     #
@@ -5706,7 +5733,8 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The stack's new name.
+    #   The stack's new name. Stack names can be a maximum of 64
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -5734,12 +5762,12 @@ module Aws::OpsWorks
     #   following:
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
-    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
-    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2`, `Amazon Linux 2018.03`, `Amazon Linux
+    #     2017.09`, `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon
+    #     Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
-    #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
-    #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+    #   * A supported Ubuntu operating system, such as `Ubuntu 18.04 LTS`,
+    #     `Ubuntu 16.04 LTS`, `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
     #
     #   * `CentOS Linux 7`
     #
@@ -5755,9 +5783,10 @@ module Aws::OpsWorks
     #     when you create instances. For more information about how to use
     #     custom AMIs with OpsWorks, see [Using Custom AMIs][1].
     #
-    #   The default option is the stack's current operating system. For
-    #   more information about supported operating systems, see [AWS
-    #   OpsWorks Stacks Operating Systems][2].
+    #   The default option is the stack's current operating system. Not all
+    #   operating systems are supported with all versions of Chef. For more
+    #   information about supported operating systems, see [OpsWorks Stacks
+    #   Operating Systems][2].
     #
     #
     #
@@ -5870,12 +5899,12 @@ module Aws::OpsWorks
     #
     # @!attribute [rw] default_ssh_key_name
     #   A default Amazon EC2 key-pair name. The default value is `none`. If
-    #   you specify a key-pair name, AWS OpsWorks Stacks installs the public
-    #   key on the instance and you can use the private key with an SSH
-    #   client to log in to the instance. For more information, see [ Using
-    #   SSH to Communicate with an Instance][1] and [ Managing SSH
-    #   Access][2]. You can override this setting by specifying a different
-    #   key pair, or no key pair, when you [ create an instance][3].
+    #   you specify a key-pair name, OpsWorks Stacks installs the public key
+    #   on the instance and you can use the private key with an SSH client
+    #   to log in to the instance. For more information, see [ Using SSH to
+    #   Communicate with an Instance][1] and [ Managing SSH Access][2]. You
+    #   can override this setting by specifying a different key pair, or no
+    #   key pair, when you [ create an instance][3].
     #
     #
     #
@@ -5896,22 +5925,21 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] use_opsworks_security_groups
-    #   Whether to associate the AWS OpsWorks Stacks built-in security
-    #   groups with the stack's layers.
+    #   Whether to associate the OpsWorks Stacks built-in security groups
+    #   with the stack's layers.
     #
-    #   AWS OpsWorks Stacks provides a standard set of built-in security
-    #   groups, one for each layer, which are associated with layers by
-    #   default. `UseOpsworksSecurityGroups` allows you to provide your own
-    #   custom security groups instead of using the built-in groups.
+    #   OpsWorks Stacks provides a standard set of built-in security groups,
+    #   one for each layer, which are associated with layers by default.
+    #   `UseOpsworksSecurityGroups` allows you to provide your own custom
+    #   security groups instead of using the built-in groups.
     #   `UseOpsworksSecurityGroups` has the following settings:
     #
-    #   * True - AWS OpsWorks Stacks automatically associates the
-    #     appropriate built-in security group with each layer (default
-    #     setting). You can associate additional security groups with a
-    #     layer after you create it, but you cannot delete the built-in
-    #     security group.
+    #   * True - OpsWorks Stacks automatically associates the appropriate
+    #     built-in security group with each layer (default setting). You can
+    #     associate additional security groups with a layer after you create
+    #     it, but you cannot delete the built-in security group.
     #
-    #   * False - AWS OpsWorks Stacks does not associate built-in security
+    #   * False - OpsWorks Stacks does not associate built-in security
     #     groups with layers. You must create appropriate EC2 security
     #     groups and associate a security group with each layer that you
     #     create. However, you can still manually associate a built-in
@@ -5926,17 +5954,17 @@ module Aws::OpsWorks
     #   @return [Boolean]
     #
     # @!attribute [rw] agent_version
-    #   The default AWS OpsWorks Stacks agent version. You have the
-    #   following options:
+    #   The default OpsWorks Stacks agent version. You have the following
+    #   options:
     #
-    #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks Stacks
+    #   * Auto-update - Set this parameter to `LATEST`. OpsWorks Stacks
     #     automatically installs new agent versions on the stack's
     #     instances as soon as they are available.
     #
     #   * Fixed version - Set this parameter to your preferred agent
     #     version. To update the agent version, you must edit the stack
-    #     configuration and specify a new version. AWS OpsWorks Stacks then
-    #     automatically installs that version on the stack's instances.
+    #     configuration and specify a new version. OpsWorks Stacks installs
+    #     that version on the stack's instances.
     #
     #   The default setting is `LATEST`. To specify an agent version, you
     #   must use the complete version number, not the abbreviated number
@@ -5981,10 +6009,9 @@ module Aws::OpsWorks
     # @!attribute [rw] ssh_username
     #   The user's SSH user name. The allowable characters are \[a-z\],
     #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes
-    #   other punctuation marks, AWS OpsWorks Stacks removes them. For
-    #   example, `my.name` will be changed to `myname`. If you do not
-    #   specify an SSH user name, AWS OpsWorks Stacks generates one from the
-    #   IAM user name.
+    #   other punctuation marks, OpsWorks Stacks removes them. For example,
+    #   `my.name` will be changed to `myname`. If you do not specify an SSH
+    #   user name, OpsWorks Stacks generates one from the IAM user name.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key
@@ -6017,7 +6044,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The new name.
+    #   The new name. Volume names can be a maximum of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] mount_point
@@ -6099,7 +6126,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The volume name.
+    #   The volume name. Volume names are a maximum of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] raid_array_id
@@ -6131,8 +6158,8 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS region. For more information about AWS regions, see [Regions
-    #   and Endpoints][1].
+    #   The Amazon Web Services Region. For more information about Amazon
+    #   Web Services Regions, see [Regions and Endpoints][1].
     #
     #
     #
@@ -6162,10 +6189,10 @@ module Aws::OpsWorks
     #     minimum size of 1 GiB and a maximum size of 16384 GiB.
     #
     #   * `st1` - Throughput Optimized hard disk drive (HDD). Throughput
-    #     optimized HDD volumes must have a minimum size of 500 GiB and a
+    #     optimized HDD volumes must have a minimum size of 125 GiB and a
     #     maximum size of 16384 GiB.
     #
-    #   * `sc1` - Cold HDD. Cold HDD volumes must have a minimum size of 500
+    #   * `sc1` - Cold HDD. Cold HDD volumes must have a minimum size of 125
     #     GiB and a maximum size of 16384 GiB.
     #
     #
@@ -6243,10 +6270,10 @@ module Aws::OpsWorks
     #     minimum size of 1 GiB and a maximum size of 16384 GiB.
     #
     #   * `st1` - Throughput Optimized hard disk drive (HDD). Throughput
-    #     optimized HDD volumes must have a minimum size of 500 GiB and a
+    #     optimized HDD volumes must have a minimum size of 125 GiB and a
     #     maximum size of 16384 GiB.
     #
-    #   * `sc1` - Cold HDD. Cold HDD volumes must have a minimum size of 500
+    #   * `sc1` - Cold HDD. Cold HDD volumes must have a minimum size of 125
     #     GiB and a maximum size of 16384 GiB.
     #
     #

@@ -40,7 +40,7 @@ module Aws::OpsWorks
       data[:stack_id]
     end
 
-    # The stack name.
+    # The stack name. Stack names can be a maximum of 64 characters.
     # @return [String]
     def name
       data[:name]
@@ -52,8 +52,9 @@ module Aws::OpsWorks
       data[:arn]
     end
 
-    # The stack AWS region, such as "ap-northeast-2". For more information
-    # about AWS regions, see [Regions and Endpoints][1].
+    # The stack Amazon Web Services Region, such as `ap-northeast-2`. For
+    # more information about Amazon Web Services Regions, see [Regions and
+    # Endpoints][1].
     #
     #
     #
@@ -75,7 +76,7 @@ module Aws::OpsWorks
       data[:attributes]
     end
 
-    # The stack AWS Identity and Access Management (IAM) role.
+    # The stack Identity and Access Management (IAM) role.
     # @return [String]
     def service_role_arn
       data[:service_role_arn]
@@ -166,7 +167,7 @@ module Aws::OpsWorks
       data[:use_custom_cookbooks]
     end
 
-    # Whether the stack automatically associates the AWS OpsWorks Stacks
+    # Whether the stack automatically associates the OpsWorks Stacks
     # built-in security groups with the stack's layers.
     # @return [Boolean]
     def use_opsworks_security_groups
@@ -423,17 +424,18 @@ module Aws::OpsWorks
     #   the same type. It can have any number of custom layers. Built-in
     #   layers are not available in Chef 12 stacks.
     # @option options [required, String] :name
-    #   The layer name, which is used by the console.
+    #   The layer name, which is used by the console. Layer names can be a
+    #   maximum of 32 characters.
     # @option options [required, String] :shortname
     #   For custom layers only, use this parameter to specify the layer's
-    #   short name, which is used internally by AWS OpsWorks Stacks and by
-    #   Chef recipes. The short name is also used as the name for the
-    #   directory where your app files are installed. It can have a maximum of
-    #   200 characters, which are limited to the alphanumeric characters,
-    #   '-', '\_', and '.'.
+    #   short name, which is used internally by OpsWorks Stacks and by Chef
+    #   recipes. The short name is also used as the name for the directory
+    #   where your app files are installed. It can have a maximum of 32
+    #   characters, which are limited to the alphanumeric characters, '-',
+    #   '\_', and '.'.
     #
-    #   The built-in layers' short names are defined by AWS OpsWorks Stacks.
-    #   For more information, see the [Layer Reference][1].
+    #   Built-in layer short names are defined by OpsWorks Stacks. For more
+    #   information, see the [Layer Reference][1].
     #
     #
     #
@@ -458,7 +460,7 @@ module Aws::OpsWorks
     #   A JSON-formatted string containing custom stack configuration and
     #   deployment attributes to be installed on the layer's instances. For
     #   more information, see [ Using Custom JSON][1]. This feature is
-    #   supported as of version 1.7.42 of the AWS CLI.
+    #   supported as of version 1.7.42 of the CLI.
     #
     #
     #

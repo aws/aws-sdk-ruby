@@ -1268,6 +1268,7 @@ module Aws::OpsWorks
         "endpointPrefix" => "opsworks",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS OpsWorks",
         "serviceId" => "OpsWorks",
         "signatureVersion" => "v4",
