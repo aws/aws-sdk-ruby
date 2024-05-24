@@ -588,8 +588,8 @@ module Aws::IoTFleetWise
     #   An optional description of the campaign to help identify its purpose.
     #
     # @option params [required, String] :signal_catalog_arn
-    #   (Optional) The Amazon Resource Name (ARN) of the signal catalog to
-    #   associate with the campaign.
+    #   The Amazon Resource Name (ARN) of the signal catalog to associate with
+    #   the campaign.
     #
     # @option params [required, String] :target_arn
     #   The ARN of the vehicle or fleet to deploy a campaign to.
@@ -2656,6 +2656,16 @@ module Aws::IoTFleetWise
     #   You can use this optional parameter to list only the vehicles created
     #   from a certain vehicle model.
     #
+    # @option params [Array<String>] :attribute_names
+    #   The fully qualified names of the attributes. For example, the fully
+    #   qualified name of an attribute might be `Vehicle.Body.Engine.Type`.
+    #
+    # @option params [Array<String>] :attribute_values
+    #   Static information about a vehicle attribute value in string format.
+    #   For example:
+    #
+    #   `"1.3 L R2"`
+    #
     # @option params [String] :next_token
     #   A pagination token for the next set of results.
     #
@@ -2679,6 +2689,8 @@ module Aws::IoTFleetWise
     #
     #   resp = client.list_vehicles({
     #     model_manifest_arn: "arn",
+    #     attribute_names: ["attributeName"],
+    #     attribute_values: ["attributeValue"],
     #     next_token: "nextToken",
     #     max_results: 1,
     #   })
@@ -3568,7 +3580,7 @@ module Aws::IoTFleetWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

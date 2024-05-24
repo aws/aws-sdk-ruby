@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2024-05-24)
+------------------
+
+* Feature - This is a minor documentation update to address the impact of the shut down of the Goerli and Polygon networks.
+
 1.51.0 (2024-05-13)
 ------------------
 

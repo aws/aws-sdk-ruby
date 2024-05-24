@@ -820,6 +820,8 @@ module Aws::IoTFleetWise
 
     class ListVehiclesRequest
       attr_accessor model_manifest_arn: ::String
+      attr_accessor attribute_names: ::Array[::String]
+      attr_accessor attribute_values: ::Array[::String]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []

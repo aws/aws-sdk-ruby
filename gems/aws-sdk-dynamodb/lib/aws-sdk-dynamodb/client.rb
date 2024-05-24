@@ -907,6 +907,10 @@ module Aws::DynamoDB
     #
     # * The total request size exceeds 16 MB.
     #
+    # * Any individual items with keys exceeding the key length limits. For
+    #   a partition key, the limit is 2048 bytes and for a sort key, the
+    #   limit is 1024 bytes.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html
@@ -1153,14 +1157,13 @@ module Aws::DynamoDB
     # a replication relationship between two or more DynamoDB tables with
     # the same table name in the provided Regions.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version), as it provides greater
+    # flexibility, higher efficiency and consumes less write capacity than
+    # 2017.11.29 (Legacy). To determine which version you are using, see
+    # [Determining the version][1]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [
+    # Updating global tables][2].
     #
     # If you want to add a new replica table to a global table, each of the
     # following conditions must be true:
@@ -1203,10 +1206,8 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -1419,16 +1420,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     #
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   Represents the provisioned throughput settings for a specified table
@@ -2199,8 +2200,8 @@ module Aws::DynamoDB
     # DynamoDB returns a `ResourceNotFoundException`. If table is already in
     # the `DELETING` state, no error is returned.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # <note markdown="1"> DynamoDB might continue to accept data read and write operations, such
     # as `GetItem` and `PutItem`, on a table in the `DELETING` state until
@@ -2215,10 +2216,6 @@ module Aws::DynamoDB
     # the stream is automatically deleted after 24 hours.
     #
     # Use the `DescribeTable` action to check the status of the table.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
     # @option params [required, String] :table_name
     #   The name of the table to delete. You can also provide the Amazon
@@ -2609,21 +2606,18 @@ module Aws::DynamoDB
 
     # Returns information about the specified global table.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version), as it provides greater
+    # flexibility, higher efficiency and consumes less write capacity than
+    # 2017.11.29 (Legacy). To determine which version you are using, see
+    # [Determining the version][1]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [
+    # Updating global tables][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table.
@@ -2671,21 +2665,18 @@ module Aws::DynamoDB
 
     # Describes Region-specific settings for a global table.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version), as it provides greater
+    # flexibility, higher efficiency and consumes less write capacity than
+    # 2017.11.29 (Legacy). To determine which version you are using, see
+    # [Determining the version][1]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [
+    # Updating global tables][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table to describe.
@@ -2994,8 +2985,8 @@ module Aws::DynamoDB
     # the table, when it was created, the primary key schema, and any
     # indexes on the table.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # <note markdown="1"> If you issue a `DescribeTable` request immediately after a
     # `CreateTable` request, DynamoDB might return a
@@ -3005,10 +2996,6 @@ module Aws::DynamoDB
     # `DescribeTable` request again.
     #
     #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
     # @option params [required, String] :table_name
     #   The name of the table to describe. You can also provide the Amazon
@@ -3177,12 +3164,8 @@ module Aws::DynamoDB
     # Describes auto scaling settings across replicas of the global table at
     # once.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # @option params [required, String] :table_name
     #   The name of the table. You can also provide the Amazon Resource Name
@@ -4345,21 +4328,18 @@ module Aws::DynamoDB
 
     # Lists all global tables that have a replica in the specified Region.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version), as it provides greater
+    # flexibility, higher efficiency and consumes less write capacity than
+    # 2017.11.29 (Legacy). To determine which version you are using, see
+    # [Determining the version][1]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [
+    # Updating global tables][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [String] :exclusive_start_global_table_name
     #   The first global table name that this operation will evaluate.
@@ -6955,18 +6935,17 @@ module Aws::DynamoDB
     # have the same key schema, have DynamoDB Streams enabled, and have the
     # same provisioned and maximum write capacity units.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version), as it provides greater
+    # flexibility, higher efficiency and consumes less write capacity than
+    # 2017.11.29 (Legacy). To determine which version you are using, see
+    # [Determining the version][1]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [
+    # Updating global tables][2].
     #
-    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
-    # tables. If you are using global tables [Version 2019.11.21][2] you can
-    # use [UpdateTable][5] instead.
+    # <note markdown="1"> For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version). If you are using global tables
+    # [Version 2019.11.21][3] you can use [UpdateTable][4] instead.
     #
     #  Although you can use `UpdateGlobalTable` to add replicas and remove
     # replicas in a single request, for simplicity we recommend that you
@@ -6987,11 +6966,10 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
-    # [5]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
+    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -7053,21 +7031,18 @@ module Aws::DynamoDB
 
     # Updates settings for a global table.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version), as it provides greater
+    # flexibility, higher efficiency and consumes less write capacity than
+    # 2017.11.29 (Legacy). To determine which version you are using, see
+    # [Determining the version][1]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [
+    # Updating global tables][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table
@@ -7079,16 +7054,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     #
     # @option params [Integer] :global_table_provisioned_write_capacity_units
     #   The maximum number of writes consumed per second before DynamoDB
@@ -7716,8 +7691,8 @@ module Aws::DynamoDB
     # Modifies the provisioned throughput settings, global secondary
     # indexes, or DynamoDB Streams settings for a given table.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # You can only perform one of the following operations at once:
     #
@@ -7734,10 +7709,6 @@ module Aws::DynamoDB
     # `UPDATING`, you can't issue another `UpdateTable` request. When the
     # table returns to the `ACTIVE` state, the `UpdateTable` operation is
     # complete.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
     # @option params [Array<Types::AttributeDefinition>] :attribute_definitions
     #   An array of attributes that describe the key schema for the table and
@@ -7759,16 +7730,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     #
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   The new provisioned throughput settings for the specified table or
@@ -7811,14 +7782,10 @@ module Aws::DynamoDB
     #   A list of replica update actions (create, delete, or update) for the
     #   table.
     #
-    #   <note markdown="1"> This property only applies to [Version 2019.11.21 (Current)][1] of
-    #   global tables.
+    #   <note markdown="1"> For global tables, this property only applies to global tables using
+    #   Version 2019.11.21 (Current version).
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
     # @option params [String] :table_class
     #   The table class of the table to be updated. Valid values are
@@ -8110,12 +8077,8 @@ module Aws::DynamoDB
 
     # Updates auto scaling settings on your global tables at once.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # @option params [Array<Types::GlobalSecondaryIndexAutoScalingUpdate>] :global_secondary_index_updates
     #   Represents the auto scaling settings of the global secondary indexes
@@ -8364,7 +8327,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

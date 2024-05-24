@@ -846,6 +846,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_vehicles-instance_method
       def list_vehicles: (
                            ?model_manifest_arn: ::String,
+                           ?attribute_names: Array[::String],
+                           ?attribute_values: Array[::String],
                            ?next_token: ::String,
                            ?max_results: ::Integer
                          ) -> _ListVehiclesResponseSuccess

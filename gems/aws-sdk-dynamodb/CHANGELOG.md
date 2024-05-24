@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2024-05-24)
+------------------
+
+* Feature - Documentation only updates for DynamoDB.
+
 1.109.0 (2024-05-13)
 ------------------
 
