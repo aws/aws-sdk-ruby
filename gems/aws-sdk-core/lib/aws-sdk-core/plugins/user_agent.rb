@@ -29,15 +29,18 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
 
       def self.feature(feature, &block)
         Thread.current[:aws_sdk_core_user_agent_feature] ||= []
-        Thread.current[:aws_sdk_core_user_agent_feature] << "ft/#{feature}"
+        Thread.current[:aws_sdk_core_user_agent_feature] << feature
         block.call
       ensure
         Thread.current[:aws_sdk_core_user_agent_feature].pop
       end
 
-      def self.metric(metric)
+      def self.metric(metric, &block)
         Thread.current[:aws_sdk_core_user_agent_metric] ||= []
         Thread.current[:aws_sdk_core_user_agent_metric] << METRICS[metric]
+        block.call
+      ensure
+        Thread.current[:aws_sdk_core_user_agent_metric].pop
       end
 
       # @api private
@@ -138,7 +141,8 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
           def feature_metadata
             return unless Thread.current[:aws_sdk_core_user_agent_feature]
 
-            Thread.current[:aws_sdk_core_user_agent_feature].join(' ')
+            features = Thread.current[:aws_sdk_core_user_agent_feature]
+            features.map { |f| "ft/#{f}" }.join(' ')
           end
 
           def framework_metadata
@@ -161,8 +165,8 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
           def metric_metadata
             return unless Thread.current[:aws_sdk_core_user_agent_metric]
 
-            metrics = Thread.current[:aws_sdk_core_user_agent_metric].join(',')
-            Thread.current[:aws_sdk_core_user_agent_metric] = nil
+            metrics = Thread.current[:aws_sdk_core_user_agent_metric]
+            metrics = metrics.compact.join(',')
             # Metric metadata is limited to 1024 bytes
             return "m/#{metrics}" if metrics.bytesize <= 1024
 

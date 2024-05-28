@@ -91,10 +91,19 @@ and 10485780 bytes inclusive.
               end
             end
           end
-          @handler.call(context)
+          with_metric(selected_encoding) { @handler.call(context) }
         end
 
         private
+
+        def with_metric(encoding, &block)
+          case encoding
+          when 'gzip'
+            Aws::Plugins::UserAgent.metric('GZIP_REQUEST_COMPRESSION', &block)
+          else
+            block.call
+          end
+        end
 
         def request_encoding_selection(context)
           encoding_list = context.operation.request_compression['encodings']
@@ -127,7 +136,6 @@ and 10485780 bytes inclusive.
           case encoding
           when 'gzip'
             gzip_compress(context)
-            Aws::Plugins::UserAgent.metric('GZIP_REQUEST_COMPRESSION')
           else
             raise StandardError, "We currently do not support #{encoding} encoding"
           end
@@ -161,7 +169,6 @@ and 10485780 bytes inclusive.
           case encoding
           when 'gzip'
             context.http_request.body = GzipIO.new(context.http_request.body)
-            Aws::Plugins::UserAgent.metric('GZIP_REQUEST_COMPRESSION')
           else
             raise StandardError, "We currently do not support #{encoding} encoding"
           end
