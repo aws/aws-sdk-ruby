@@ -120,7 +120,14 @@ module Aws
         end
       end
 
-      context 'requestcompression operation' do
+      context 'request compression operation' do
+        it 'sets user-agent metric for the operation' do
+          resp = client.some_operation(body: uncompressed_body)
+          metric = Aws::Plugins::UserAgent::METRICS['GZIP_REQUEST_COMPRESSION']
+          expect(resp.context.http_request.headers['User-Agent'])
+            .to include("m/#{metric}")
+        end
+
         it 'compresses the body and sets the content-encoding header' do
           resp = client.some_operation(body: uncompressed_body)
           expect(resp.context.http_request.headers['Content-Encoding']).to eq('gzip')
@@ -156,6 +163,13 @@ module Aws
           client.config.request_min_compression_size_bytes = 256
           resp = client.some_operation(body: small_body)
           expect_uncompressed_body(resp, small_body)
+        end
+
+        it 'sets user-agent metric for a streaming operation' do
+          resp = client.operation_streaming(body: 'body')
+          metric = Aws::Plugins::UserAgent::METRICS['GZIP_REQUEST_COMPRESSION']
+          expect(resp.context.http_request.headers['User-Agent'])
+            .to include("m/#{metric}")
         end
 
         it 'compresses a large streaming body' do

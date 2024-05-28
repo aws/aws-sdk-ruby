@@ -10,7 +10,7 @@ module Aws
         if config.client_side_monitoring && config.client_side_monitoring_port
           # AttemptHandler comes just before we would retry an error.
           # Or before we would follow redirects.
-          handlers.add(AttemptHandler, step: :sign, priority: 39)
+          handlers.add(AttemptHandler, step: :sign, priority: 95)
           # LatencyHandler is as close to sending as possible.
           handlers.add(LatencyHandler, step: :sign, priority: 0)
         end

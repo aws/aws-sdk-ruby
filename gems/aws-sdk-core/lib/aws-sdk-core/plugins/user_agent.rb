@@ -114,7 +114,6 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             local_version = Gem::Platform.local.version
             metadata += "##{local_version}" if local_version
             metadata += " md/#{RbConfig::CONFIG['host_cpu']}"
-            metadata
           end
 
           # Used to be RUBY_ENGINE/RUBY_VERSION
@@ -173,7 +172,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         end
       end
 
-      handler(Handler, step: :sign, priority: 51)
+      handler(Handler, step: :sign, priority: 97)
     end
   end
 end

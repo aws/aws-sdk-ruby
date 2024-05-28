@@ -12,7 +12,7 @@ module Aws
         StubPublisher.new
       end
 
-      let(:client) {
+      let(:client) do
         client = ClientMetricsSvc::Client.new(
           stub_responses: true,
           client_side_monitoring_publisher: stub_publisher
@@ -32,12 +32,6 @@ module Aws
           priority: 95
         )
         client
-      }
-
-      let(:env) {{}}
-
-      before do
-        stub_const('ENV', env)
       end
 
       before(:each) do
@@ -107,8 +101,8 @@ module Aws
           )
         end
 
-        it 'accepts client_side_monitoring as an env variable' do
-          env['AWS_CSM_ENABLED'] = 'fAlSe'
+        it 'accepts client_side_monitoring as an ENV variable' do
+          ENV['AWS_CSM_ENABLED'] = 'fAlSe'
           client = ClientMetricsSvc::Client.new(stub_responses: true)
           expect(client.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsPlugin
@@ -116,7 +110,7 @@ module Aws
           expect(client.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsSendPlugin
           )
-          env['AWS_CSM_ENABLED'] = 'F'
+          ENV['AWS_CSM_ENABLED'] = 'F'
           client2 = ClientMetricsSvc::Client.new(stub_responses: true)
           expect(client2.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsPlugin
@@ -127,7 +121,7 @@ module Aws
         end
 
         it 'accepts a custom client id' do
-          env['AWS_CSM_CLIENT_ID'] = 'env-client'
+          ENV['AWS_CSM_CLIENT_ID'] = 'env-client'
           client = ClientMetricsSvc::Client.new(
             stub_responses: true,
             client_side_monitoring_client_id: 'foo-client'
@@ -138,7 +132,7 @@ module Aws
         end
 
         it 'fetches client id from env variables' do
-          env['AWS_CSM_CLIENT_ID'] = 'env-client'
+          ENV['AWS_CSM_CLIENT_ID'] = 'env-client'
           client = ClientMetricsSvc::Client.new(stub_responses: true)
           expect(client.config.client_side_monitoring_client_id).to eq(
             'env-client'
@@ -193,75 +187,99 @@ module Aws
           expect(attempt.client_id).to eq('')
         end
 
-        it 'collects exception information when an error occurs' do
-          client.stub_responses(:get_object,
-            {
-              status_code: 404,
-              body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
-                    "<Error>\n"\
-                    "<Code>NoSuchKey</Code>\n"\
-                    "<Message>The resource you requested does not exist</Message>\n"\
-                    "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
-                    "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
-                    '</Error>',
-              headers: {}
-            },
-            {}
-          )
-          expect {
-            client.get_object(bucket: 'mybucket', key: 'myfoto.jpg')
-          }.to raise_error('The resource you requested does not exist')
-          expect(stub_publisher.metrics.size).to eq(1)
-          request_metrics = stub_publisher.metrics[0]
-          api_call_attempts = request_metrics.api_call_attempts
-          expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
-          expect(request_metrics.api_call.final_aws_exception).to eq(
-            'NoSuchKey'
-          )
-          expect(request_metrics.api_call.final_aws_exception_message).to eq(
-            'The resource you requested does not exist'
-          )
-          expect(api_call_attempts.size).to eq(1)
-          attempt = api_call_attempts[0]
-          expect(attempt.aws_exception).to eq('NoSuchKey')
-          expect(attempt.aws_exception_msg).to eq(
-            'The resource you requested does not exist'
-          )
-        end
+        describe 'failures with network requests' do
+          let(:client) do
+            client = ClientMetricsSvc::Client.new(
+              stub_responses: true,
+              client_side_monitoring_publisher: stub_publisher
+            )
+            client.handlers.add(
+              ClientMetricsPlugin::Handler,
+              step: :initialize
+            )
+            client.handlers.add(
+              ClientMetricsSendPlugin::LatencyHandler,
+              step: :sign,
+              priority: 0
+            )
+            client.handlers.add(
+              ClientMetricsSendPlugin::AttemptHandler,
+              step: :sign,
+              priority: 95
+            )
+            client
+          end
 
-        it 'collects request ID headers when available' do
-          client.stub_responses(:get_object,
-            {
-              status_code: 404,
-              body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
-                    "<Error>\n"\
-                    "<Code>NoSuchKey</Code>\n"\
-                    "<Message>The resource you requested does not exist</Message>\n"\
-                    "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
-                    "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
-                    '</Error>',
-              headers: {
-                'x-amz-id-2' => 'fWhd+V0u5IWKNLhbIZi2ZR/DoWpAt2Km8T9ZZ75UnvkZFl0MU3jlf2B2zRJYHmxqkEc6iAtctOc=',
-                'x-amz-request-id' => '226FC0DC6464C2AE'
-              }
-            },
-            {}
-          )
-          expect {
-            client.get_object(bucket: 'mybucket', key: 'myfoto.jpg')
-          }.to raise_error('The resource you requested does not exist')
-          expect(stub_publisher.metrics.size).to eq(1)
-          request_metrics = stub_publisher.metrics[0]
-          api_call_attempts = request_metrics.api_call_attempts
-          expect(api_call_attempts.size).to eq(1)
-          expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
-          attempt = api_call_attempts[0]
-          expect(attempt.x_amz_id_2).to eq('fWhd+V0u5IWKNLhbIZi2ZR/DoWpAt2Km8T9ZZ75UnvkZFl0MU3jlf2B2zRJYHmxqkEc6iAtctOc=')
-          expect(attempt.x_amz_request_id).to eq('226FC0DC6464C2AE')
+          it 'collects exception information when an error occurs' do
+            client.stub_responses(:get_object,
+              {
+                status_code: 404,
+                body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
+                      "<Error>\n"\
+                      "<Code>NoSuchKey</Code>\n"\
+                      "<Message>The resource you requested does not exist</Message>\n"\
+                      "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
+                      "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
+                      '</Error>',
+                headers: {}
+              },
+              {}
+            )
+            expect {
+              client.get_object(bucket: 'mybucket', key: 'myfoto.jpg')
+            }.to raise_error('The resource you requested does not exist')
+            expect(stub_publisher.metrics.size).to eq(1)
+            request_metrics = stub_publisher.metrics[0]
+            api_call_attempts = request_metrics.api_call_attempts
+            expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
+            expect(request_metrics.api_call.final_aws_exception).to eq(
+              'NoSuchKey'
+            )
+            expect(request_metrics.api_call.final_aws_exception_message).to eq(
+              'The resource you requested does not exist'
+            )
+            expect(api_call_attempts.size).to eq(1)
+            attempt = api_call_attempts[0]
+            expect(attempt.aws_exception).to eq('NoSuchKey')
+            expect(attempt.aws_exception_msg).to eq(
+              'The resource you requested does not exist'
+            )
+          end
+
+          it 'collects request ID headers when available' do
+            client.stub_responses(:get_object,
+              {
+                status_code: 404,
+                body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
+                      "<Error>\n"\
+                      "<Code>NoSuchKey</Code>\n"\
+                      "<Message>The resource you requested does not exist</Message>\n"\
+                      "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
+                      "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
+                      '</Error>',
+                headers: {
+                  'x-amz-id-2' => 'fWhd+V0u5IWKNLhbIZi2ZR/DoWpAt2Km8T9ZZ75UnvkZFl0MU3jlf2B2zRJYHmxqkEc6iAtctOc=',
+                  'x-amz-request-id' => '226FC0DC6464C2AE'
+                }
+              },
+              {}
+            )
+            expect {
+              client.get_object(bucket: 'mybucket', key: 'myfoto.jpg')
+            }.to raise_error('The resource you requested does not exist')
+            expect(stub_publisher.metrics.size).to eq(1)
+            request_metrics = stub_publisher.metrics[0]
+            api_call_attempts = request_metrics.api_call_attempts
+            expect(api_call_attempts.size).to eq(1)
+            expect(request_metrics.api_call.max_retries_exceeded).to eq(0)
+            attempt = api_call_attempts[0]
+            expect(attempt.x_amz_id_2).to eq('fWhd+V0u5IWKNLhbIZi2ZR/DoWpAt2Km8T9ZZ75UnvkZFl0MU3jlf2B2zRJYHmxqkEc6iAtctOc=')
+            expect(attempt.x_amz_request_id).to eq('226FC0DC6464C2AE')
+          end
         end
 
         describe 'failures without network requests' do
-          let(:failure_client) {
+          let(:failure_client) do
             client = ClientMetricsSvc::Client.new(
               stub_responses: true,
               client_side_monitoring_publisher: stub_publisher
@@ -286,7 +304,7 @@ module Aws
               priority: 50
             )
             client
-          }
+          end
 
           it 'correctly publishes metrics for a validation error' do
             expect {
@@ -311,7 +329,7 @@ module Aws
         end
 
         describe 'failures without network requests' do
-          let(:failure_client) {
+          let(:failure_client) do
             client = ClientMetricsSvc::Client.new(
               stub_responses: true,
               client_side_monitoring_publisher: stub_publisher
@@ -336,7 +354,7 @@ module Aws
               priority: 50
             )
             client
-          }
+          end
 
           it 'accounts for failures during response handling' do
             expect {

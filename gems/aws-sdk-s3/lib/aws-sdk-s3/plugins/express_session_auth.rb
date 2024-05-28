@@ -36,7 +36,6 @@ for different buckets.
                   context[:default_request_checksum_algorithm] = 'CRC32'
                 end
                 context[:s3_express_endpoint] = true
-                Aws::Plugins::UserAgent.metric('S3_EXPRESS_BUCKET')
               end
 
               # if s3 express auth, use new credentials and sign additional header
@@ -46,6 +45,7 @@ for different buckets.
                 credentials_provider = context.config.express_credentials_provider
                 credentials = credentials_provider.express_credentials_for(bucket)
                 context[:sigv4_credentials] = credentials # Sign will use this
+                Aws::Plugins::UserAgent.metric('S3_EXPRESS_BUCKET')
               end
             end
             @handler.call(context)
