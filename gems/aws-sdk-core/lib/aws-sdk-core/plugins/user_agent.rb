@@ -4,6 +4,10 @@ module Aws
   module Plugins
     # @api private
     class UserAgent < Seahorse::Client::Plugin
+      METRICS = Aws::Json.load(
+        File.read(File.expand_path('business-metrics.json', __dir__))
+      )["BUSINESS_METRICS_IDENTIFIERS"]
+
       # @api private
       option(:user_agent_suffix)
       # @api private
@@ -31,6 +35,11 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         Thread.current[:aws_sdk_core_user_agent_feature].pop
       end
 
+      def self.metric(metric)
+        Thread.current[:aws_sdk_core_user_agent_metric] ||= []
+        Thread.current[:aws_sdk_core_user_agent_metric] << METRICS[metric]
+      end
+
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
@@ -49,7 +58,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
 
           def to_s
             ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
-            ua += ' ua/2.0'
+            ua += ' ua/2.1'
             ua += " #{api_metadata}" if api_metadata
             ua += " #{os_metadata}"
             ua += " #{language_metadata}"
@@ -58,6 +67,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             ua += " #{app_id}" if app_id
             ua += " #{feature_metadata}" if feature_metadata
             ua += " #{framework_metadata}" if framework_metadata
+            ua += " #{metrics_metadata}" if metrics_metadata
             if @context.config.user_agent_suffix
               ua += " #{@context.config.user_agent_suffix}"
             end
@@ -140,6 +150,18 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
               frameworks[match[:name]] = match[:version]
             end
             frameworks.map { |n, v| "lib/#{n}##{v}" }.join(' ')
+          end
+
+          def metric_metadata
+            return unless Thread.current[:aws_sdk_core_user_agent_metric]
+
+            metrics = Thread.current[:aws_sdk_core_user_agent_metric].join(',')
+            Thread.current[:aws_sdk_core_user_agent_metric] = nil
+            # Metric metadata is limited to 1024 bytes.
+            return metrics if metrics.bytesize <= 1024
+
+            # Removes the last unfinished metric.
+            "m/#{metrics[0...metrics[0..1024].rindex(',')]}"
           end
         end
       end

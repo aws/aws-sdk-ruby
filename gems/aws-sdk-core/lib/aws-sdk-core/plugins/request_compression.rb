@@ -89,6 +89,7 @@ and 10485780 bytes inclusive.
               elsif context.http_request.body.size >= context.config.request_min_compression_size_bytes
                 process_compression(selected_encoding, context)
               end
+              Aws::Plugins::UserAgent.metric('GZIP_REQUEST_COMPRESSION')
             end
           end
           @handler.call(context)

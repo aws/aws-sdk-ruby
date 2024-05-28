@@ -235,6 +235,7 @@ a clock skew correction and retry requests with skewed client clocks.
 
           get_send_token(config)
           add_retry_headers(context)
+          Aws::Plugins::UserAgent.metric("RETRY_MODE_#{config.retry_mode.upcase}")
           response = @handler.call(context)
           error_inspector = Retries::ErrorInspector.new(
             response.error, response.context.http_response.status_code
@@ -359,6 +360,7 @@ a clock skew correction and retry requests with skewed client clocks.
       class LegacyHandler < Seahorse::Client::Handler
 
         def call(context)
+          Aws::Plugins::UserAgent.metric('RETRY_MODE_LEGACY')
           response = @handler.call(context)
           if response.error
             error_inspector = Retries::ErrorInspector.new(
