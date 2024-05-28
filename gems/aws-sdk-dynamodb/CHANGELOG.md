@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2024-05-28)
+------------------
+
+* Feature - Doc-only update for DynamoDB. Specified the IAM actions needed to authorize a user to create a table with a resource-based policy.
+
 1.110.0 (2024-05-24)
 ------------------
 

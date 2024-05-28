@@ -35,6 +35,9 @@ module Aws
       class TypeDeprecatedFault < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class TypeNotDeprecatedFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class UnknownResourceFault < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

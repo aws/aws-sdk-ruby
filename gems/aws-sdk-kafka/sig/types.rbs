@@ -942,6 +942,7 @@ module Aws::Kafka
     class NodeInfo
       attr_accessor added_to_cluster_time: ::String
       attr_accessor broker_node_info: Types::BrokerNodeInfo
+      attr_accessor controller_node_info: Types::ControllerNodeInfo
       attr_accessor instance_type: ::String
       attr_accessor node_arn: ::String
       attr_accessor node_type: ("BROKER")
@@ -1282,6 +1283,11 @@ module Aws::Kafka
       attr_accessor endpoints: ::Array[::String]
       attr_accessor zookeeper_id: ::Float
       attr_accessor zookeeper_version: ::String
+      SENSITIVE: []
+    end
+
+    class ControllerNodeInfo
+      attr_accessor endpoints: ::Array[::String]
       SENSITIVE: []
     end
 

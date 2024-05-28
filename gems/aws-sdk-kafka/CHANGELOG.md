@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2024-05-28)
+------------------
+
+* Feature - Adds ControllerNodeInfo in ListNodes response to support Raft mode for MSK
+
 1.72.0 (2024-05-16)
 ------------------
 

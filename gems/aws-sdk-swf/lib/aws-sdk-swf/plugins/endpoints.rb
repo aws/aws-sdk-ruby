@@ -66,6 +66,10 @@ module Aws::SWF
             Aws::SWF::Endpoints::CountPendingActivityTasks.build(context)
           when :count_pending_decision_tasks
             Aws::SWF::Endpoints::CountPendingDecisionTasks.build(context)
+          when :delete_activity_type
+            Aws::SWF::Endpoints::DeleteActivityType.build(context)
+          when :delete_workflow_type
+            Aws::SWF::Endpoints::DeleteWorkflowType.build(context)
           when :deprecate_activity_type
             Aws::SWF::Endpoints::DeprecateActivityType.build(context)
           when :deprecate_domain

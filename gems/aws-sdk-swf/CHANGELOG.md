@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-05-28)
+------------------
+
+* Feature - This release adds new APIs for deleting activity type and workflow type resources.
+
 1.52.0 (2024-05-13)
 ------------------
 

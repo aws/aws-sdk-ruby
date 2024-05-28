@@ -5791,9 +5791,14 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/cgw-options.html
     #
     # @option params [Integer] :bgp_asn
-    #   For devices that support BGP, the customer gateway's BGP ASN.
+    #   For customer gateway devices that support BGP, specify the device's
+    #   ASN. You must specify either `BgpAsn` or `BgpAsnExtended` when
+    #   creating the customer gateway. If the ASN is larger than
+    #   `2,147,483,647`, you must use `BgpAsnExtended`.
     #
     #   Default: 65000
+    #
+    #   Valid values: `1` to `2,147,483,647`
     #
     # @option params [String] :public_ip
     #   *This member has been deprecated.* The Internet-routable IP address
@@ -5817,13 +5822,24 @@ module Aws::EC2
     #
     # @option params [String] :ip_address
     #   IPv4 address for the customer gateway device's outside interface. The
-    #   address must be static.
+    #   address must be static. If `OutsideIpAddressType` in your VPN
+    #   connection options is set to `PrivateIpv4`, you can use an RFC6598 or
+    #   RFC1918 private IPv4 address. If `OutsideIpAddressType` is set to
+    #   `PublicIpv4`, you can use a public IPv4 address.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Integer] :bgp_asn_extended
+    #   For customer gateway devices that support BGP, specify the device's
+    #   ASN. You must specify either `BgpAsn` or `BgpAsnExtended` when
+    #   creating the customer gateway. If the ASN is larger than
+    #   `2,147,483,647`, you must use `BgpAsnExtended`.
+    #
+    #   Valid values: `2,147,483,648` to `4,294,967,295`
     #
     # @return [Types::CreateCustomerGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5872,6 +5888,7 @@ module Aws::EC2
     #     device_name: "String",
     #     ip_address: "String",
     #     dry_run: false,
+    #     bgp_asn_extended: 1,
     #   })
     #
     # @example Response structure
@@ -5886,6 +5903,7 @@ module Aws::EC2
     #   resp.customer_gateway.tags #=> Array
     #   resp.customer_gateway.tags[0].key #=> String
     #   resp.customer_gateway.tags[0].value #=> String
+    #   resp.customer_gateway.bgp_asn_extended #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGateway AWS API Documentation
     #
@@ -21461,6 +21479,7 @@ module Aws::EC2
     #   resp.customer_gateways[0].tags #=> Array
     #   resp.customer_gateways[0].tags[0].key #=> String
     #   resp.customer_gateways[0].tags[0].value #=> String
+    #   resp.customer_gateways[0].bgp_asn_extended #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -59357,7 +59376,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.457.1'
+      context[:gem_version] = '1.458.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

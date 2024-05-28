@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.458.0 (2024-05-28)
+------------------
+
+* Feature - Providing support to accept BgpAsnExtended attribute
+
 1.457.1 (2024-05-21)
 ------------------
 

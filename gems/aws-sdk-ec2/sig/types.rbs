@@ -1728,6 +1728,7 @@ module Aws::EC2
       attr_accessor device_name: ::String
       attr_accessor ip_address: ::String
       attr_accessor dry_run: bool
+      attr_accessor bgp_asn_extended: ::Integer
       SENSITIVE: []
     end
 
@@ -2995,6 +2996,7 @@ module Aws::EC2
       attr_accessor type: ::String
       attr_accessor device_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor bgp_asn_extended: ::String
       SENSITIVE: []
     end
 

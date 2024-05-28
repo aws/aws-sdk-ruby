@@ -1253,7 +1253,8 @@ module Aws
                                      ],
                                      ?device_name: ::String,
                                      ?ip_address: ::String,
-                                     ?dry_run: bool
+                                     ?dry_run: bool,
+                                     ?bgp_asn_extended: ::Integer
                                    ) -> _CreateCustomerGatewayResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomerGatewayResponseSuccess
 

@@ -70,6 +70,8 @@ module Aws::SWF
     DecisionTaskTimeoutType = Shapes::StringShape.new(name: 'DecisionTaskTimeoutType')
     DecisionType = Shapes::StringShape.new(name: 'DecisionType')
     DefaultUndefinedFault = Shapes::StructureShape.new(name: 'DefaultUndefinedFault')
+    DeleteActivityTypeInput = Shapes::StructureShape.new(name: 'DeleteActivityTypeInput')
+    DeleteWorkflowTypeInput = Shapes::StructureShape.new(name: 'DeleteWorkflowTypeInput')
     DeprecateActivityTypeInput = Shapes::StructureShape.new(name: 'DeprecateActivityTypeInput')
     DeprecateDomainInput = Shapes::StructureShape.new(name: 'DeprecateDomainInput')
     DeprecateWorkflowTypeInput = Shapes::StructureShape.new(name: 'DeprecateWorkflowTypeInput')
@@ -201,6 +203,7 @@ module Aws::SWF
     Truncated = Shapes::BooleanShape.new(name: 'Truncated')
     TypeAlreadyExistsFault = Shapes::StructureShape.new(name: 'TypeAlreadyExistsFault')
     TypeDeprecatedFault = Shapes::StructureShape.new(name: 'TypeDeprecatedFault')
+    TypeNotDeprecatedFault = Shapes::StructureShape.new(name: 'TypeNotDeprecatedFault')
     UndeprecateActivityTypeInput = Shapes::StructureShape.new(name: 'UndeprecateActivityTypeInput')
     UndeprecateDomainInput = Shapes::StructureShape.new(name: 'UndeprecateDomainInput')
     UndeprecateWorkflowTypeInput = Shapes::StructureShape.new(name: 'UndeprecateWorkflowTypeInput')
@@ -480,6 +483,14 @@ module Aws::SWF
 
     DefaultUndefinedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     DefaultUndefinedFault.struct_class = Types::DefaultUndefinedFault
+
+    DeleteActivityTypeInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
+    DeleteActivityTypeInput.add_member(:activity_type, Shapes::ShapeRef.new(shape: ActivityType, required: true, location_name: "activityType"))
+    DeleteActivityTypeInput.struct_class = Types::DeleteActivityTypeInput
+
+    DeleteWorkflowTypeInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
+    DeleteWorkflowTypeInput.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "workflowType"))
+    DeleteWorkflowTypeInput.struct_class = Types::DeleteWorkflowTypeInput
 
     DeprecateActivityTypeInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     DeprecateActivityTypeInput.add_member(:activity_type, Shapes::ShapeRef.new(shape: ActivityType, required: true, location_name: "activityType"))
@@ -1004,6 +1015,9 @@ module Aws::SWF
     TypeDeprecatedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TypeDeprecatedFault.struct_class = Types::TypeDeprecatedFault
 
+    TypeNotDeprecatedFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TypeNotDeprecatedFault.struct_class = Types::TypeNotDeprecatedFault
+
     UndeprecateActivityTypeInput.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domain"))
     UndeprecateActivityTypeInput.add_member(:activity_type, Shapes::ShapeRef.new(shape: ActivityType, required: true, location_name: "activityType"))
     UndeprecateActivityTypeInput.struct_class = Types::UndeprecateActivityTypeInput
@@ -1180,6 +1194,7 @@ module Aws::SWF
         "endpointPrefix" => "swf",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon SWF",
         "serviceFullName" => "Amazon Simple Workflow Service",
         "serviceId" => "SWF",
@@ -1225,6 +1240,28 @@ module Aws::SWF
         o.input = Shapes::ShapeRef.new(shape: CountPendingDecisionTasksInput)
         o.output = Shapes::ShapeRef.new(shape: PendingTaskCount)
         o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
+      end)
+
+      api.add_operation(:delete_activity_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteActivityType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteActivityTypeInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: TypeNotDeprecatedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
+      end)
+
+      api.add_operation(:delete_workflow_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWorkflowType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWorkflowTypeInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceFault)
+        o.errors << Shapes::ShapeRef.new(shape: TypeNotDeprecatedFault)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedFault)
       end)
 
