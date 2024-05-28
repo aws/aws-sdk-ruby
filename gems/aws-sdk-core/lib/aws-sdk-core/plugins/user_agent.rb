@@ -67,9 +67,6 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             if (env_m = env_metadata)
               ua += " #{env_m}"
             end
-            if (config_m = config_metadata)
-              ua += " #{config_m}"
-            end
             if (app_id_m = app_id_metadata)
               ua += " #{app_id_m}"
             end
@@ -129,10 +126,6 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             return unless (execution_env = ENV['AWS_EXECUTION_ENV'])
 
             "exec-env/#{execution_env}"
-          end
-
-          def config_metadata
-            "cfg/retry-mode##{@context.config.retry_mode}"
           end
 
           def app_id_metadata
