@@ -59,15 +59,29 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
           def to_s
             ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
             ua += ' ua/2.1'
-            ua += " #{api_metadata}" if api_metadata
+            if (api_m = api_metadata)
+              ua += " #{api_m}"
+            end
             ua += " #{os_metadata}"
             ua += " #{language_metadata}"
-            ua += " #{env_metadata}" if env_metadata
-            ua += " #{config_metadata}" if config_metadata
-            ua += " #{app_id}" if app_id
-            ua += " #{feature_metadata}" if feature_metadata
-            ua += " #{framework_metadata}" if framework_metadata
-            ua += " #{metrics_metadata}" if metrics_metadata
+            if (env_m = env_metadata)
+              ua += " #{env_m}"
+            end
+            if (config_m = config_metadata)
+              ua += " #{config_m}"
+            end
+            if (app_id_m = app_id_metadata)
+              ua += " #{app_id_m}"
+            end
+            if (feature_m = feature_metadata)
+              ua += " #{feature_m}"
+            end
+            if (framework_m = framework_metadata)
+              ua += " #{framework_m}"
+            end
+            if (metric_m = metric_metadata)
+              ua += " #{metric_m}"
+            end
             if @context.config.user_agent_suffix
               ua += " #{@context.config.user_agent_suffix}"
             end
@@ -121,7 +135,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             "cfg/retry-mode##{@context.config.retry_mode}"
           end
 
-          def app_id
+          def app_id_metadata
             return unless (app_id = @context.config.sdk_ua_app_id)
 
             # Sanitize and only allow these characters
@@ -157,16 +171,16 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
 
             metrics = Thread.current[:aws_sdk_core_user_agent_metric].join(',')
             Thread.current[:aws_sdk_core_user_agent_metric] = nil
-            # Metric metadata is limited to 1024 bytes.
-            return metrics if metrics.bytesize <= 1024
+            # Metric metadata is limited to 1024 bytes
+            return "m/#{metrics}" if metrics.bytesize <= 1024
 
-            # Removes the last unfinished metric.
+            # Removes the last unfinished metric
             "m/#{metrics[0...metrics[0..1024].rindex(',')]}"
           end
         end
       end
 
-      handler(Handler, priority: 1)
+      handler(Handler, step: :sign, priority: 51)
     end
   end
 end
