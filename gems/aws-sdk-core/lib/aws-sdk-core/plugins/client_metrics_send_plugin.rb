@@ -10,7 +10,9 @@ module Aws
         if config.client_side_monitoring && config.client_side_monitoring_port
           # AttemptHandler comes just before we would retry an error.
           # Or before we would follow redirects.
-          handlers.add(AttemptHandler, step: :sign, priority: 95)
+          handlers.add(AttemptHandler, step: :sign, priority: 39)
+          # ErrorHandler comes after we have parsed an error.
+          handlers.add(ErrorHandler, step: :sign, priority: 95)
           # LatencyHandler is as close to sending as possible.
           handlers.add(LatencyHandler, step: :sign, priority: 0)
         end
@@ -62,17 +64,27 @@ module Aws
             call_attempt.x_amzn_request_id = headers["x-amzn-request-id"]
           end
           call_attempt.http_status_code = context.http_response.status_code
-          if e = resp.error
+          context.metadata[:current_call_attempt] = call_attempt
+          request_metrics.add_call_attempt(call_attempt)
+          resp
+        end
+      end
+
+      class ErrorHandler < Seahorse::Client::Handler
+        def call(context)
+          resp = @handler.call(context)
+          call_attempt = context.metadata[:current_call_attempt]
+          if (e = resp.error)
             e_name = _extract_error_name(e)
             e_msg = e.message
             call_attempt.aws_exception = "#{e_name}"
             call_attempt.aws_exception_msg = "#{e_msg}"
           end
-          request_metrics.add_call_attempt(call_attempt)
           resp
         end
 
         private
+
         def _extract_error_name(error)
           if error.is_a?(Aws::Errors::ServiceError)
             error.class.code

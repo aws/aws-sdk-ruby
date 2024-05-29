@@ -4,9 +4,17 @@ module Aws
   module Plugins
     # @api private
     class UserAgent < Seahorse::Client::Plugin
-      METRICS = Aws::Json.load(
-        File.read(File.expand_path('business-metrics.json', __dir__))
-      )["BUSINESS_METRICS_IDENTIFIERS"]
+      METRICS = Aws::Json.load(<<-METRICS)["BUSINESS_METRICS_IDENTIFIERS"]
+        {
+          "BUSINESS_METRICS_IDENTIFIERS": {
+            "S3_EXPRESS_BUCKET": "A",
+            "GZIP_REQUEST_COMPRESSION": "B",
+            "RETRY_MODE_LEGACY": "C",
+            "RETRY_MODE_STANDARD": "D",
+            "RETRY_MODE_ADAPTIVE": "E"
+          }
+        }
+      METRICS
 
       # @api private
       option(:user_agent_suffix)
@@ -33,6 +41,9 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         block.call
       ensure
         Thread.current[:aws_sdk_core_user_agent_feature].pop
+        if Thread.current[:aws_sdk_core_user_agent_feature].empty?
+          Thread.current[:aws_sdk_core_user_agent_feature] = nil
+        end
       end
 
       def self.metric(metric, &block)
@@ -41,6 +52,9 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         block.call
       ensure
         Thread.current[:aws_sdk_core_user_agent_metric].pop
+        if Thread.current[:aws_sdk_core_user_agent_metric].empty?
+          Thread.current[:aws_sdk_core_user_agent_metric] = nil
+        end
       end
 
       # @api private
@@ -165,8 +179,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
           def metric_metadata
             return unless Thread.current[:aws_sdk_core_user_agent_metric]
 
-            metrics = Thread.current[:aws_sdk_core_user_agent_metric]
-            metrics = metrics.compact.join(',')
+            metrics = Thread.current[:aws_sdk_core_user_agent_metric].join(',')
             # Metric metadata is limited to 1024 bytes
             return "m/#{metrics}" if metrics.bytesize <= 1024
 

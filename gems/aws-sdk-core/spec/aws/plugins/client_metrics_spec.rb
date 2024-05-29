@@ -29,6 +29,11 @@ module Aws
         client.handlers.add(
           ClientMetricsSendPlugin::AttemptHandler,
           step: :sign,
+          priority: 39
+        )
+        client.handlers.add(
+          ClientMetricsSendPlugin::ErrorHandler,
+          step: :sign,
           priority: 95
         )
         client
@@ -60,6 +65,9 @@ module Aws
             Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
           )
           expect(client.handlers.to_a).not_to include(
+            Aws::Plugins::ClientMetricsSendPlugin::ErrorHandler
+          )
+          expect(client.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsSendPlugin::LatencyHandler
           )
         end
@@ -76,6 +84,9 @@ module Aws
           )
           expect(client.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
+          )
+          expect(client.handlers.to_a).not_to include(
+            Aws::Plugins::ClientMetricsSendPlugin::ErrorHandler
           )
           expect(client.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsSendPlugin::LatencyHandler
@@ -95,6 +106,9 @@ module Aws
           )
           expect(client.handlers.to_a).to include(
             Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
+          )
+          expect(client.handlers.to_a).to include(
+            Aws::Plugins::ClientMetricsSendPlugin::ErrorHandler
           )
           expect(client.handlers.to_a).to include(
             Aws::Plugins::ClientMetricsSendPlugin::LatencyHandler
@@ -205,6 +219,11 @@ module Aws
             client.handlers.add(
               ClientMetricsSendPlugin::AttemptHandler,
               step: :sign,
+              priority: 39
+            )
+            client.handlers.add(
+              ClientMetricsSendPlugin::ErrorHandler,
+              step: :sign,
               priority: 95
             )
             client
@@ -296,6 +315,11 @@ module Aws
             client.handlers.add(
               ClientMetricsSendPlugin::AttemptHandler,
               step: :sign,
+              priority: 39
+            )
+            client.handlers.add(
+              ClientMetricsSendPlugin::ErrorHandler,
+              step: :sign,
               priority: 95
             )
             client.handlers.add(
@@ -345,6 +369,11 @@ module Aws
             )
             client.handlers.add(
               ClientMetricsSendPlugin::AttemptHandler,
+              step: :sign,
+              priority: 39
+            )
+            client.handlers.add(
+              ClientMetricsSendPlugin::ErrorHandler,
               step: :sign,
               priority: 95
             )
