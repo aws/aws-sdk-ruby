@@ -3517,15 +3517,9 @@ module Aws::Athena
     #   either for individual queries using either this setting
     #   (client-side), or in the workgroup, using WorkGroupConfiguration. If
     #   none of them is set, Athena issues an error that no output location
-    #   is provided. For more information, see [Working with query results,
-    #   recent queries, and output files][1]. If workgroup settings override
-    #   client-side settings, then the query uses the settings specified for
-    #   the workgroup. See
+    #   is provided. If workgroup settings override client-side settings,
+    #   then the query uses the settings specified for the workgroup. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
     #   @return [String]
     #
     # @!attribute [rw] encryption_configuration
@@ -3597,19 +3591,13 @@ module Aws::Athena
     #
     # @!attribute [rw] output_location
     #   The location in Amazon S3 where your query and calculation results
-    #   are stored, such as `s3://path/to/query/bucket/`. For more
-    #   information, see [Working with query results, recent queries, and
-    #   output files][1]. If workgroup settings override client-side
-    #   settings, then the query uses the location for the query results and
-    #   the encryption configuration that are specified for the workgroup.
-    #   The "workgroup settings override" is specified in
-    #   `EnforceWorkGroupConfiguration` (true/false) in the
+    #   are stored, such as `s3://path/to/query/bucket/`. If workgroup
+    #   settings override client-side settings, then the query uses the
+    #   location for the query results and the encryption configuration that
+    #   are specified for the workgroup. The "workgroup settings override"
+    #   is specified in `EnforceWorkGroupConfiguration` (true/false) in the
     #   `WorkGroupConfiguration`. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
     #   @return [String]
     #
     # @!attribute [rw] remove_output_location
@@ -4891,13 +4879,7 @@ module Aws::Athena
     #   one of the ways: either in the workgroup using this setting, or for
     #   individual queries (client-side), using
     #   ResultConfiguration$OutputLocation. If none of them is set, Athena
-    #   issues an error that no output location is provided. For more
-    #   information, see [Working with query results, recent queries, and
-    #   output files][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
+    #   issues an error that no output location is provided.
     #   @return [Types::ResultConfiguration]
     #
     # @!attribute [rw] enforce_work_group_configuration

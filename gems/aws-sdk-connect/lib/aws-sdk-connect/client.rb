@@ -1420,20 +1420,20 @@ module Aws::Connect
     # API to verify the status of a previous [ClaimPhoneNumber][5]
     # operation.
     #
-    # If you plan to claim and release numbers frequently during a 30 day
-    # period, contact us for a service quota exception. Otherwise, it is
-    # possible you will be blocked from claiming and releasing any more
-    # numbers until 30 days past the oldest number released has expired.
+    # If you plan to claim and release numbers frequently, contact us for a
+    # service quota exception. Otherwise, it is possible you will be blocked
+    # from claiming and releasing any more numbers until up to 180 days past
+    # the oldest number released has expired.
     #
     # By default you can claim and release up to 200% of your maximum number
-    # of active phone numbers during any 30 day period. If you claim and
-    # release phone numbers using the UI or API during a rolling 30 day
-    # cycle that exceeds 200% of your phone number service level quota, you
-    # will be blocked from claiming any more numbers until 30 days past the
-    # oldest number released has expired.
+    # of active phone numbers. If you claim and release phone numbers using
+    # the UI or API during a rolling 180 day cycle that exceeds 200% of your
+    # phone number service level quota, you will be blocked from claiming
+    # any more numbers until 180 days past the oldest number released has
+    # expired.
     #
     # For example, if you already have 99 claimed numbers and a service
-    # level quota of 99 phone numbers, and in any 30 day period you release
+    # level quota of 99 phone numbers, and in any 180 day period you release
     # 99, claim 99, and then release 99, you will have exceeded the 200%
     # limit. At that point you are blocked from claiming any more numbers
     # until you open an Amazon Web Services support ticket.
@@ -4552,6 +4552,15 @@ module Aws::Connect
     #   resp.contact.agent_info.id #=> String
     #   resp.contact.agent_info.connected_to_agent_timestamp #=> Time
     #   resp.contact.agent_info.agent_pause_duration_in_seconds #=> Integer
+    #   resp.contact.agent_info.hierarchy_groups.level_1.arn #=> String
+    #   resp.contact.agent_info.hierarchy_groups.level_2.arn #=> String
+    #   resp.contact.agent_info.hierarchy_groups.level_3.arn #=> String
+    #   resp.contact.agent_info.hierarchy_groups.level_4.arn #=> String
+    #   resp.contact.agent_info.hierarchy_groups.level_5.arn #=> String
+    #   resp.contact.agent_info.device_info.platform_name #=> String
+    #   resp.contact.agent_info.device_info.platform_version #=> String
+    #   resp.contact.agent_info.device_info.operating_system #=> String
+    #   resp.contact.agent_info.capabilities.video #=> String, one of "SEND"
     #   resp.contact.initiation_timestamp #=> Time
     #   resp.contact.disconnect_timestamp #=> Time
     #   resp.contact.last_update_timestamp #=> Time
@@ -4566,6 +4575,38 @@ module Aws::Connect
     #   resp.contact.queue_priority #=> Integer
     #   resp.contact.tags #=> Hash
     #   resp.contact.tags["ContactTagKey"] #=> String
+    #   resp.contact.connected_to_system_timestamp #=> Time
+    #   resp.contact.routing_criteria.steps #=> Array
+    #   resp.contact.routing_criteria.steps[0].expiry.duration_in_seconds #=> Integer
+    #   resp.contact.routing_criteria.steps[0].expiry.expiry_timestamp #=> Time
+    #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.name #=> String
+    #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.value #=> String
+    #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.proficiency_level #=> Float
+    #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.comparison_operator #=> String
+    #   resp.contact.routing_criteria.steps[0].expression.and_expression #=> Array
+    #   resp.contact.routing_criteria.steps[0].expression.and_expression[0] #=> Types::Expression
+    #   resp.contact.routing_criteria.steps[0].expression.or_expression #=> Array
+    #   resp.contact.routing_criteria.steps[0].expression.or_expression[0] #=> Types::Expression
+    #   resp.contact.routing_criteria.steps[0].status #=> String, one of "ACTIVE", "INACTIVE", "JOINED", "EXPIRED"
+    #   resp.contact.routing_criteria.activation_timestamp #=> Time
+    #   resp.contact.routing_criteria.index #=> Integer
+    #   resp.contact.customer.device_info.platform_name #=> String
+    #   resp.contact.customer.device_info.platform_version #=> String
+    #   resp.contact.customer.device_info.operating_system #=> String
+    #   resp.contact.customer.capabilities.video #=> String, one of "SEND"
+    #   resp.contact.campaign.campaign_id #=> String
+    #   resp.contact.answering_machine_detection_status #=> String, one of "ANSWERED", "UNDETECTED", "ERROR", "HUMAN_ANSWERED", "SIT_TONE_DETECTED", "SIT_TONE_BUSY", "SIT_TONE_INVALID_NUMBER", "FAX_MACHINE_DETECTED", "VOICEMAIL_BEEP", "VOICEMAIL_NO_BEEP", "AMD_UNRESOLVED", "AMD_UNANSWERED", "AMD_ERROR", "AMD_NOT_APPLICABLE"
+    #   resp.contact.customer_voice_activity.greeting_start_timestamp #=> Time
+    #   resp.contact.customer_voice_activity.greeting_end_timestamp #=> Time
+    #   resp.contact.quality_metrics.agent.audio.quality_score #=> Float
+    #   resp.contact.quality_metrics.agent.audio.potential_quality_issues #=> Array
+    #   resp.contact.quality_metrics.agent.audio.potential_quality_issues[0] #=> String
+    #   resp.contact.quality_metrics.customer.audio.quality_score #=> Float
+    #   resp.contact.quality_metrics.customer.audio.potential_quality_issues #=> Array
+    #   resp.contact.quality_metrics.customer.audio.potential_quality_issues[0] #=> String
+    #   resp.contact.disconnect_details.potential_disconnect_issue #=> String
+    #   resp.contact.segment_attributes #=> Hash
+    #   resp.contact.segment_attributes["SegmentAttributeName"].value_string #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContact AWS API Documentation
     #
@@ -11660,24 +11701,24 @@ module Aws::Connect
     # `ReleasePhoneNumber` API, not the Amazon Connect admin website.
     #
     #  After releasing a phone number, the phone number enters into a
-    # cooldown period of 30 days. It cannot be searched for or claimed again
-    # until the period has ended. If you accidentally release a phone
-    # number, contact Amazon Web Services Support.
+    # cooldown period for up to 180 days. It cannot be searched for or
+    # claimed again until the period has ended. If you accidentally release
+    # a phone number, contact Amazon Web Services Support.
     #
-    # If you plan to claim and release numbers frequently during a 30 day
-    # period, contact us for a service quota exception. Otherwise, it is
-    # possible you will be blocked from claiming and releasing any more
-    # numbers until 30 days past the oldest number released has expired.
+    # If you plan to claim and release numbers frequently, contact us for a
+    # service quota exception. Otherwise, it is possible you will be blocked
+    # from claiming and releasing any more numbers until up to 180 days past
+    # the oldest number released has expired.
     #
     # By default you can claim and release up to 200% of your maximum number
-    # of active phone numbers during any 30 day period. If you claim and
-    # release phone numbers using the UI or API during a rolling 30 day
-    # cycle that exceeds 200% of your phone number service level quota, you
-    # will be blocked from claiming any more numbers until 30 days past the
-    # oldest number released has expired.
+    # of active phone numbers. If you claim and release phone numbers using
+    # the UI or API during a rolling 180 day cycle that exceeds 200% of your
+    # phone number service level quota, you will be blocked from claiming
+    # any more numbers until 180 days past the oldest number released has
+    # expired.
     #
     # For example, if you already have 99 claimed numbers and a service
-    # level quota of 99 phone numbers, and in any 30 day period you release
+    # level quota of 99 phone numbers, and in any 180 day period you release
     # 99, claim 99, and then release 99, you will have exceeded the 200%
     # limit. At that point you are blocked from claiming any more numbers
     # until you open an Amazon Web Services support ticket.
@@ -14385,6 +14426,10 @@ module Aws::Connect
     #
     # * QUEUE\_TRANSFER
     #
+    # * EXTERNAL\_OUTBOUND
+    #
+    # * MONITOR
+    #
     # Chat and task contacts can be terminated in any state, regardless of
     # initiation method.
     #
@@ -15343,9 +15388,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Updates routing priority and age on the contact (**QueuePriority** and
     # **QueueTimeAdjustmentInSeconds**). These properties can be used to
     # change a customer's position in the queue. For example, you can move
@@ -15357,6 +15399,11 @@ module Aws::Connect
     # of a contact affects only its position in queue, and not its actual
     # queue wait time as reported through metrics. These properties can also
     # be updated by using [the Set routing priority / age flow block][1].
+    #
+    # <note markdown="1"> Either **QueuePriority** or **QueueTimeAdjustmentInSeconds** should be
+    # provided within the request body, but not both.
+    #
+    #  </note>
     #
     #
     #
@@ -17439,7 +17486,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

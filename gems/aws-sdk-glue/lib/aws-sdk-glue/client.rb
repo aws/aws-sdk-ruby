@@ -1089,6 +1089,7 @@ module Aws::Glue
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].name #=> String
+    #   resp.jobs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.jobs[0].description #=> String
     #   resp.jobs[0].log_uri #=> String
     #   resp.jobs[0].role #=> String
@@ -2282,6 +2283,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -2351,6 +2353,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -3416,6 +3419,19 @@ module Aws::Glue
     # @option params [required, String] :name
     #   The name you assign to this job definition. It must be unique in your
     #   account.
+    #
+    # @option params [String] :job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
     #
     # @option params [String] :description
     #   Description of the job being defined.
@@ -7334,6 +7350,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.job.name #=> String
+    #   resp.job.job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.job.description #=> String
     #   resp.job.log_uri #=> String
     #   resp.job.role #=> String
@@ -8307,6 +8324,7 @@ module Aws::Glue
     #   resp.job_run.previous_run_id #=> String
     #   resp.job_run.trigger_name #=> String
     #   resp.job_run.job_name #=> String
+    #   resp.job_run.job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.job_run.started_on #=> Time
     #   resp.job_run.last_modified_on #=> Time
     #   resp.job_run.completed_on #=> Time
@@ -8374,6 +8392,7 @@ module Aws::Glue
     #   resp.job_runs[0].previous_run_id #=> String
     #   resp.job_runs[0].trigger_name #=> String
     #   resp.job_runs[0].job_name #=> String
+    #   resp.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.job_runs[0].started_on #=> Time
     #   resp.job_runs[0].last_modified_on #=> Time
     #   resp.job_runs[0].completed_on #=> Time
@@ -8434,6 +8453,7 @@ module Aws::Glue
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].name #=> String
+    #   resp.jobs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.jobs[0].description #=> String
     #   resp.jobs[0].log_uri #=> String
     #   resp.jobs[0].role #=> String
@@ -12259,6 +12279,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -12328,6 +12349,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -12450,6 +12472,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -12612,6 +12635,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -17168,7 +17192,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.174.0'
+      context[:gem_version] = '1.175.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

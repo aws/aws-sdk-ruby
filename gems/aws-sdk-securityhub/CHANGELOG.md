@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2024-05-29)
+------------------
+
+* Feature - Add ROOT type for TargetType model
+
 1.107.0 (2024-05-15)
 ------------------
 

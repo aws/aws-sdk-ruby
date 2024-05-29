@@ -393,7 +393,8 @@ module Aws
                                 },
                               ],
                             ],
-                            ?build_type: ("BUILD" | "BUILD_BATCH")
+                            ?build_type: ("BUILD" | "BUILD_BATCH"),
+                            ?manual_creation: bool
                           ) -> _CreateWebhookResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebhookResponseSuccess
 

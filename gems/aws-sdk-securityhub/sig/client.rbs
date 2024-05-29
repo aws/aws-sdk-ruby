@@ -6093,7 +6093,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationPolicyAssociationResponse]
         def configuration_policy_id: () -> ::String
         def target_id: () -> ::String
-        def target_type: () -> ("ACCOUNT" | "ORGANIZATIONAL_UNIT")
+        def target_type: () -> ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
         def association_type: () -> ("INHERITED" | "APPLIED")
         def updated_at: () -> ::Time
         def association_status: () -> ("PENDING" | "SUCCESS" | "FAILED")
@@ -7081,7 +7081,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::StartConfigurationPolicyAssociationResponse]
         def configuration_policy_id: () -> ::String
         def target_id: () -> ::String
-        def target_type: () -> ("ACCOUNT" | "ORGANIZATIONAL_UNIT")
+        def target_type: () -> ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
         def association_type: () -> ("INHERITED" | "APPLIED")
         def updated_at: () -> ::Time
         def association_status: () -> ("PENDING" | "SUCCESS" | "FAILED")

@@ -689,6 +689,7 @@ module Aws::Glue
     JobBookmarksEncryptionMode = Shapes::StringShape.new(name: 'JobBookmarksEncryptionMode')
     JobCommand = Shapes::StructureShape.new(name: 'JobCommand')
     JobList = Shapes::ListShape.new(name: 'JobList')
+    JobMode = Shapes::StringShape.new(name: 'JobMode')
     JobName = Shapes::StringShape.new(name: 'JobName')
     JobNameList = Shapes::ListShape.new(name: 'JobNameList')
     JobNodeDetails = Shapes::StructureShape.new(name: 'JobNodeDetails')
@@ -2188,6 +2189,7 @@ module Aws::Glue
     CreateGrokClassifierRequest.struct_class = Types::CreateGrokClassifierRequest
 
     CreateJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateJobRequest.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
     CreateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateJobRequest.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "LogUri"))
     CreateJobRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, required: true, location_name: "Role"))
@@ -3898,6 +3900,7 @@ module Aws::Glue
     JdbcTargetList.member = Shapes::ShapeRef.new(shape: JdbcTarget)
 
     Job.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    Job.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
     Job.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     Job.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "LogUri"))
     Job.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
@@ -3954,6 +3957,7 @@ module Aws::Glue
     JobRun.add_member(:previous_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "PreviousRunId"))
     JobRun.add_member(:trigger_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TriggerName"))
     JobRun.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    JobRun.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
     JobRun.add_member(:started_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "StartedOn"))
     JobRun.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "LastModifiedOn"))
     JobRun.add_member(:completed_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CompletedOn"))
@@ -3978,6 +3982,7 @@ module Aws::Glue
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
 
+    JobUpdate.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
     JobUpdate.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     JobUpdate.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "LogUri"))
     JobUpdate.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))

@@ -327,6 +327,7 @@ module Aws::CodeBuild
       attr_accessor branch_filter: ::String
       attr_accessor filter_groups: ::Array[::Array[Types::WebhookFilter]]
       attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
+      attr_accessor manual_creation: bool
       SENSITIVE: []
     end
 
@@ -1261,6 +1262,7 @@ module Aws::CodeBuild
       attr_accessor branch_filter: ::String
       attr_accessor filter_groups: ::Array[::Array[Types::WebhookFilter]]
       attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
+      attr_accessor manual_creation: bool
       attr_accessor last_modified_secret: ::Time
       SENSITIVE: []
     end

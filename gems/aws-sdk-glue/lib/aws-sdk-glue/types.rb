@@ -4661,6 +4661,22 @@ module Aws::Glue
     #   your account.
     #   @return [String]
     #
+    # @!attribute [rw] job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script
+    #     editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual
+    #     editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Description of the job being defined.
     #   @return [String]
@@ -4915,6 +4931,7 @@ module Aws::Glue
     #
     class CreateJobRequest < Struct.new(
       :name,
+      :job_mode,
       :description,
       :log_uri,
       :role,
@@ -13204,6 +13221,22 @@ module Aws::Glue
     #   The name you assign to this job definition.
     #   @return [String]
     #
+    # @!attribute [rw] job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script
+    #     editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual
+    #     editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the job.
     #   @return [String]
@@ -13458,6 +13491,7 @@ module Aws::Glue
     #
     class Job < Struct.new(
       :name,
+      :job_mode,
       :description,
       :log_uri,
       :role,
@@ -13626,6 +13660,22 @@ module Aws::Glue
     #
     # @!attribute [rw] job_name
     #   The name of the job definition being used in this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script
+    #     editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual
+    #     editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
     #   @return [String]
     #
     # @!attribute [rw] started_on
@@ -13901,6 +13951,7 @@ module Aws::Glue
       :previous_run_id,
       :trigger_name,
       :job_name,
+      :job_mode,
       :started_on,
       :last_modified_on,
       :completed_on,
@@ -13927,6 +13978,22 @@ module Aws::Glue
 
     # Specifies information used to update an existing job definition. The
     # previous job definition is completely overwritten by this information.
+    #
+    # @!attribute [rw] job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script
+    #     editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual
+    #     editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
+    #   @return [String]
     #
     # @!attribute [rw] description
     #   Description of the job being defined.
@@ -14171,6 +14238,7 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
     class JobUpdate < Struct.new(
+      :job_mode,
       :description,
       :log_uri,
       :role,

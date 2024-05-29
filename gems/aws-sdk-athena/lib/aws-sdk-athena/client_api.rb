@@ -1359,6 +1359,7 @@ module Aws::Athena
         "endpointPrefix" => "athena",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Athena",
         "serviceId" => "Athena",
         "signatureVersion" => "v4",

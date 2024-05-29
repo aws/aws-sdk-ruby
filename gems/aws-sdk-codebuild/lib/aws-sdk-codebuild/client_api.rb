@@ -567,6 +567,7 @@ module Aws::CodeBuild
     CreateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
     CreateWebhookInput.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     CreateWebhookInput.add_member(:build_type, Shapes::ShapeRef.new(shape: WebhookBuildType, location_name: "buildType"))
+    CreateWebhookInput.add_member(:manual_creation, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "manualCreation"))
     CreateWebhookInput.struct_class = Types::CreateWebhookInput
 
     CreateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
@@ -1329,6 +1330,7 @@ module Aws::CodeBuild
     Webhook.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
     Webhook.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     Webhook.add_member(:build_type, Shapes::ShapeRef.new(shape: WebhookBuildType, location_name: "buildType"))
+    Webhook.add_member(:manual_creation, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "manualCreation"))
     Webhook.add_member(:last_modified_secret, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedSecret"))
     Webhook.struct_class = Types::Webhook
 

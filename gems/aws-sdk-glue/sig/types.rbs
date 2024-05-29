@@ -1105,6 +1105,7 @@ module Aws::Glue
 
     class CreateJobRequest
       attr_accessor name: ::String
+      attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
       attr_accessor description: ::String
       attr_accessor log_uri: ::String
       attr_accessor role: ::String
@@ -3315,6 +3316,7 @@ module Aws::Glue
 
     class Job
       attr_accessor name: ::String
+      attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
       attr_accessor description: ::String
       attr_accessor log_uri: ::String
       attr_accessor role: ::String
@@ -3377,6 +3379,7 @@ module Aws::Glue
       attr_accessor previous_run_id: ::String
       attr_accessor trigger_name: ::String
       attr_accessor job_name: ::String
+      attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
       attr_accessor started_on: ::Time
       attr_accessor last_modified_on: ::Time
       attr_accessor completed_on: ::Time
@@ -3401,6 +3404,7 @@ module Aws::Glue
     end
 
     class JobUpdate
+      attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
       attr_accessor description: ::String
       attr_accessor log_uri: ::String
       attr_accessor role: ::String

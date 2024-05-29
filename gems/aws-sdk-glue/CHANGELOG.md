@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.175.0 (2024-05-29)
+------------------
+
+* Feature - Add optional field JobMode to CreateJob and UpdateJob APIs.
+
 1.174.0 (2024-05-21)
 ------------------
 

@@ -734,6 +734,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#create_job-instance_method
       def create_job: (
                         name: ::String,
+                        ?job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK"),
                         ?description: ::String,
                         ?log_uri: ::String,
                         role: ::String,
@@ -5054,6 +5055,7 @@ module Aws
       def update_job: (
                         job_name: ::String,
                         job_update: {
+                          job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")?,
                           description: ::String?,
                           log_uri: ::String?,
                           role: ::String?,
