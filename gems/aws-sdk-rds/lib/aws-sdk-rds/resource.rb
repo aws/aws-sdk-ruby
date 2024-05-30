@@ -952,7 +952,7 @@ module Aws::RDS
     #   shapshot is encrypted and in a different region.
     # @return [DBCluster]
     def create_db_cluster(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_db_cluster(options)
       end
       DBCluster.new(
@@ -1043,7 +1043,7 @@ module Aws::RDS
     #   Tags to assign to the DB cluster parameter group.
     # @return [DBClusterParameterGroup]
     def create_db_cluster_parameter_group(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_db_cluster_parameter_group(options)
       end
       DBClusterParameterGroup.new(
@@ -2361,7 +2361,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     # @return [DBInstance]
     def create_db_instance(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_db_instance(options)
       end
       DBInstance.new(
@@ -2456,7 +2456,7 @@ module Aws::RDS
     #   Tags to assign to the DB parameter group.
     # @return [DBParameterGroup]
     def create_db_parameter_group(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_db_parameter_group(options)
       end
       DBParameterGroup.new(
@@ -2500,7 +2500,7 @@ module Aws::RDS
     #   Tags to assign to the DB security group.
     # @return [DBSecurityGroup]
     def create_db_security_group(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_db_security_group(options)
       end
       DBSecurityGroup.new(
@@ -2546,7 +2546,7 @@ module Aws::RDS
     #   Tags to assign to the DB subnet group.
     # @return [DBSubnetGroup]
     def create_db_subnet_group(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_db_subnet_group(options)
       end
       DBSubnetGroup.new(
@@ -2656,7 +2656,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @return [EventSubscription]
     def create_event_subscription(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_event_subscription(options)
       end
       EventSubscription.new(
@@ -2732,7 +2732,7 @@ module Aws::RDS
     #   Tags to assign to the option group.
     # @return [OptionGroup]
     def create_option_group(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_option_group(options)
       end
       OptionGroup.new(
@@ -2752,7 +2752,7 @@ module Aws::RDS
     def account_quotas(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_account_attributes(options)
         end
         resp.data.account_quotas.each do |a|
@@ -2803,7 +2803,7 @@ module Aws::RDS
     # @return [Certificate::Collection]
     def certificates(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_certificates(options)
         end
         resp.each_page do |page|
@@ -2866,7 +2866,7 @@ module Aws::RDS
     # @return [DBClusterParameterGroup::Collection]
     def db_cluster_parameter_groups(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_db_cluster_parameter_groups(options)
         end
         resp.each_page do |page|
@@ -2937,7 +2937,7 @@ module Aws::RDS
     # @return [DBCluster::Collection]
     def db_clusters(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_db_clusters(options)
         end
         resp.each_page do |page|
@@ -3114,7 +3114,7 @@ module Aws::RDS
     # @return [DBEngineVersion::Collection]
     def db_engine_versions(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_db_engine_versions(options)
         end
         resp.each_page do |page|
@@ -3192,7 +3192,7 @@ module Aws::RDS
     # @return [DBInstance::Collection]
     def db_instances(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_db_instances(options)
         end
         resp.each_page do |page|
@@ -3254,7 +3254,7 @@ module Aws::RDS
     # @return [DBParameterGroup::Collection]
     def db_parameter_groups(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_db_parameter_groups(options)
         end
         resp.each_page do |page|
@@ -3300,7 +3300,7 @@ module Aws::RDS
     # @return [DBSecurityGroup::Collection]
     def db_security_groups(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_db_security_groups(options)
         end
         resp.each_page do |page|
@@ -3433,7 +3433,7 @@ module Aws::RDS
     # @return [DBSnapshot::Collection]
     def db_snapshots(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_db_snapshots(options)
         end
         resp.each_page do |page|
@@ -3480,7 +3480,7 @@ module Aws::RDS
     # @return [DBSubnetGroup::Collection]
     def db_subnet_groups(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_db_subnet_groups(options)
         end
         resp.each_page do |page|
@@ -3532,7 +3532,7 @@ module Aws::RDS
     def event_category_maps(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_event_categories(options)
         end
         resp.data.event_categories_map_list.each do |e|
@@ -3576,7 +3576,7 @@ module Aws::RDS
     # @return [EventSubscription::Collection]
     def event_subscriptions(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_event_subscriptions(options)
         end
         resp.each_page do |page|
@@ -3677,7 +3677,7 @@ module Aws::RDS
     # @return [Event::Collection]
     def events(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_events(options)
         end
         resp.each_page do |page|
@@ -3762,7 +3762,7 @@ module Aws::RDS
     # @return [OptionGroup::Collection]
     def option_groups(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_option_groups(options)
         end
         resp.each_page do |page|
@@ -3859,7 +3859,7 @@ module Aws::RDS
     # @return [ReservedDBInstance::Collection]
     def reserved_db_instances(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_reserved_db_instances(options)
         end
         resp.each_page do |page|
@@ -3938,7 +3938,7 @@ module Aws::RDS
     # @return [ReservedDBInstancesOffering::Collection]
     def reserved_db_instances_offerings(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_reserved_db_instances_offerings(options)
         end
         resp.each_page do |page|
@@ -3995,7 +3995,7 @@ module Aws::RDS
     # @return [ResourcePendingMaintenanceActionList::Collection]
     def resources_with_pending_maintenance_actions(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_pending_maintenance_actions(options)
         end
         resp.each_page do |page|

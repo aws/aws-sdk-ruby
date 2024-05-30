@@ -163,7 +163,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_nat_gateways(nat_gateway_ids: [@id])
       end
       @data = resp.nat_gateways[0]
@@ -280,7 +280,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -312,7 +312,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -359,7 +359,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -387,7 +387,7 @@ module Aws::EC2
     # @return [Types::DeleteNatGatewayResult]
     def delete(options = {})
       options = options.merge(nat_gateway_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_nat_gateway(options)
       end
       resp.data

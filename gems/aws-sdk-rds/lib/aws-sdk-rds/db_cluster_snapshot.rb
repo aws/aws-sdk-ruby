@@ -233,7 +233,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_db_cluster_snapshots(db_cluster_snapshot_identifier: @snapshot_id)
       end
       @data = resp.db_cluster_snapshots[0]
@@ -350,7 +350,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -376,7 +376,7 @@ module Aws::RDS
         db_cluster_identifier: @cluster_id,
         db_cluster_snapshot_identifier: @snapshot_id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_db_cluster_snapshot(options)
       end
       DBClusterSnapshot.new(
@@ -512,7 +512,7 @@ module Aws::RDS
     # @return [DBClusterSnapshot]
     def copy(options = {})
       options = options.merge(source_db_cluster_snapshot_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.copy_db_cluster_snapshot(options)
       end
       DBClusterSnapshot.new(
@@ -530,7 +530,7 @@ module Aws::RDS
     # @return [DBClusterSnapshot]
     def delete(options = {})
       options = options.merge(db_cluster_snapshot_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_db_cluster_snapshot(options)
       end
       DBClusterSnapshot.new(
@@ -1011,7 +1011,7 @@ module Aws::RDS
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.restore_db_cluster_from_snapshot(options)
       end
       DBCluster.new(
@@ -1082,7 +1082,7 @@ module Aws::RDS
           source_type: "db-cluster-snapshot",
           source_identifier: @snapshot_id
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_events(options)
         end
         resp.each_page do |page|

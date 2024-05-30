@@ -198,7 +198,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -212,7 +212,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(serial_number: @serial_number)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_virtual_mfa_device(options)
       end
       resp.data

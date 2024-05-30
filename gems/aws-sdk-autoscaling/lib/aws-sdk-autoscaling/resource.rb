@@ -468,7 +468,7 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
     # @return [AutoScalingGroup]
     def create_group(options = {})
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         @client.create_auto_scaling_group(options)
       end
       AutoScalingGroup.new(
@@ -734,7 +734,7 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds
     # @return [LaunchConfiguration]
     def create_launch_configuration(options = {})
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         @client.create_launch_configuration(options)
       end
       LaunchConfiguration.new(
@@ -769,7 +769,7 @@ module Aws::AutoScaling
     # @return [Activity::Collection]
     def activities(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_scaling_activities(options)
         end
         resp.each_page do |page|
@@ -828,7 +828,7 @@ module Aws::AutoScaling
     # @return [AutoScalingGroup::Collection]
     def groups(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_auto_scaling_groups(options)
         end
         resp.each_page do |page|
@@ -861,7 +861,7 @@ module Aws::AutoScaling
     # @return [Instance::Collection]
     def instances(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_auto_scaling_instances(options)
         end
         resp.each_page do |page|
@@ -903,7 +903,7 @@ module Aws::AutoScaling
     # @return [LaunchConfiguration::Collection]
     def launch_configurations(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_launch_configurations(options)
         end
         resp.each_page do |page|
@@ -944,7 +944,7 @@ module Aws::AutoScaling
     # @return [ScalingPolicy::Collection]
     def policies(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_policies(options)
         end
         resp.each_page do |page|
@@ -1006,7 +1006,7 @@ module Aws::AutoScaling
     # @return [ScheduledAction::Collection]
     def scheduled_actions(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_scheduled_actions(options)
         end
         resp.each_page do |page|
@@ -1041,7 +1041,7 @@ module Aws::AutoScaling
     # @return [Tag::Collection]
     def tags(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_tags(options)
         end
         resp.each_page do |page|

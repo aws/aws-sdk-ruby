@@ -116,7 +116,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_event_subscriptions(subscription_name: @name)
       end
       @data = resp.event_subscriptions_list[0]
@@ -233,7 +233,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -274,7 +274,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def add_subscriber(options = {})
       options = options.merge(subscription_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.add_source_identifier_to_subscription(options)
       end
       EventSubscription.new(
@@ -380,7 +380,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def create(options = {})
       options = options.merge(subscription_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_event_subscription(options)
       end
       EventSubscription.new(
@@ -397,7 +397,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def delete(options = {})
       options = options.merge(subscription_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_event_subscription(options)
       end
       EventSubscription.new(
@@ -443,7 +443,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def modify(options = {})
       options = options.merge(subscription_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.modify_event_subscription(options)
       end
       EventSubscription.new(
@@ -466,7 +466,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def remove_subscriber(options = {})
       options = options.merge(subscription_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.remove_source_identifier_from_subscription(options)
       end
       EventSubscription.new(

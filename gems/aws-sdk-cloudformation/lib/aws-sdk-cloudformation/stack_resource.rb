@@ -139,7 +139,7 @@ module Aws::CloudFormation
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_stack_resource(
         logical_resource_id: @logical_id,
         stack_name: @stack_name
@@ -259,7 +259,7 @@ module Aws::CloudFormation
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end

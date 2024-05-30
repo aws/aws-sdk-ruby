@@ -336,7 +336,7 @@ module Aws::CloudFormation
     #   Default: `false`
     # @return [Stack]
     def create_stack(options = {})
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         @client.create_stack(options)
       end
       Stack.new(
@@ -403,7 +403,7 @@ module Aws::CloudFormation
     # @return [Stack::Collection]
     def stacks(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_stacks(options)
         end
         resp.each_page do |page|

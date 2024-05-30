@@ -76,7 +76,7 @@ module Aws::S3
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.get_bucket_website(bucket: @bucket_name)
       end
       @data = resp.data
@@ -193,7 +193,7 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -213,7 +213,7 @@ module Aws::S3
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(bucket: @bucket_name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_bucket_website(options)
       end
       resp.data
@@ -290,7 +290,7 @@ module Aws::S3
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.put_bucket_website(options)
       end
       resp.data

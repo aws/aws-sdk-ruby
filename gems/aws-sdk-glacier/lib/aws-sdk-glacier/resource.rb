@@ -46,7 +46,7 @@ module Aws::Glacier
     # @return [Vault]
     def create_vault(options = {})
       options = options.merge(account_id: "-")
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         @client.create_vault(options)
       end
       Vault.new(
@@ -75,7 +75,7 @@ module Aws::Glacier
     def vaults(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(account_id: "-")
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_vaults(options)
         end
         resp.each_page do |page|

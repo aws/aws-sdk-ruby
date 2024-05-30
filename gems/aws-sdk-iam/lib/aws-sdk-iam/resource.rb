@@ -63,7 +63,7 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     # @return [EmptyStructure]
     def change_password(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.change_password(options)
       end
       resp.data
@@ -88,7 +88,7 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     # @return [EmptyStructure]
     def create_account_alias(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_account_alias(options)
       end
       resp.data
@@ -193,7 +193,7 @@ module Aws::IAM
     #    </note>
     # @return [AccountPasswordPolicy]
     def create_account_password_policy(options = {})
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         @client.update_account_password_policy(options)
       end
       AccountPasswordPolicy.new(client: @client)
@@ -233,7 +233,7 @@ module Aws::IAM
     #   create resources named both "MyResource" and "myresource".
     # @return [Group]
     def create_group(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_group(options)
       end
       Group.new(
@@ -302,7 +302,7 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [InstanceProfile]
     def create_instance_profile(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_instance_profile(options)
       end
       InstanceProfile.new(
@@ -417,7 +417,7 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Policy]
     def create_policy(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_policy(options)
       end
       Policy.new(
@@ -559,7 +559,7 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Role]
     def create_role(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_role(options)
       end
       Role.new(
@@ -624,7 +624,7 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [SamlProvider]
     def create_saml_provider(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_saml_provider(options)
       end
       SamlProvider.new(
@@ -756,7 +756,7 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [ServerCertificate]
     def create_server_certificate(options = {})
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         @client.upload_server_certificate(options)
       end
       ServerCertificate.new(
@@ -803,7 +803,7 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     # @return [SigningCertificate]
     def create_signing_certificate(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.upload_signing_certificate(options)
       end
       SigningCertificate.new(
@@ -885,7 +885,7 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [User]
     def create_user(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_user(options)
       end
       User.new(
@@ -955,7 +955,7 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [VirtualMfaDevice]
     def create_virtual_mfa_device(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_virtual_mfa_device(options)
       end
       VirtualMfaDevice.new(
@@ -1016,7 +1016,7 @@ module Aws::IAM
     # @return [Group::Collection]
     def groups(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_groups(options)
         end
         resp.each_page do |page|
@@ -1069,7 +1069,7 @@ module Aws::IAM
     # @return [InstanceProfile::Collection]
     def instance_profiles(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_instance_profiles(options)
         end
         resp.each_page do |page|
@@ -1138,7 +1138,7 @@ module Aws::IAM
     # @return [Policy::Collection]
     def policies(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_policies(options)
         end
         resp.each_page do |page|
@@ -1199,7 +1199,7 @@ module Aws::IAM
     # @return [Role::Collection]
     def roles(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_roles(options)
         end
         resp.each_page do |page|
@@ -1234,7 +1234,7 @@ module Aws::IAM
     def saml_providers(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_saml_providers(options)
         end
         resp.data.saml_provider_list.each do |s|
@@ -1283,7 +1283,7 @@ module Aws::IAM
     # @return [ServerCertificate::Collection]
     def server_certificates(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_server_certificates(options)
         end
         resp.each_page do |page|
@@ -1334,7 +1334,7 @@ module Aws::IAM
     # @return [User::Collection]
     def users(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_users(options)
         end
         resp.each_page do |page|
@@ -1374,7 +1374,7 @@ module Aws::IAM
     # @return [VirtualMfaDevice::Collection]
     def virtual_mfa_devices(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_virtual_mfa_devices(options)
         end
         resp.each_page do |page|

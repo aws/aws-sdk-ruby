@@ -238,7 +238,7 @@ module Aws::OpsWorks
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_layers(layer_ids: [@id])
       end
       @data = resp.layers[0]
@@ -355,7 +355,7 @@ module Aws::OpsWorks
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -369,7 +369,7 @@ module Aws::OpsWorks
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(layer_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_layer(options)
       end
       resp.data

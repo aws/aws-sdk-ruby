@@ -62,7 +62,7 @@ module Aws::SNS
     #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
     # @return [PlatformApplication]
     def create_platform_application(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_platform_application(options)
       end
       PlatformApplication.new(
@@ -185,7 +185,7 @@ module Aws::SNS
     #   Length Constraints: Maximum length of 30,720.
     # @return [Topic]
     def create_topic(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_topic(options)
       end
       Topic.new(
@@ -212,7 +212,7 @@ module Aws::SNS
     # @return [PlatformApplication::Collection]
     def platform_applications(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_platform_applications(options)
         end
         resp.each_page do |page|
@@ -254,7 +254,7 @@ module Aws::SNS
     # @return [Subscription::Collection]
     def subscriptions(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_subscriptions(options)
         end
         resp.each_page do |page|
@@ -287,7 +287,7 @@ module Aws::SNS
     # @return [Topic::Collection]
     def topics(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_topics(options)
         end
         resp.each_page do |page|

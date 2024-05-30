@@ -157,7 +157,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.get_role(role_name: @name)
       end
       @data = resp.role
@@ -274,7 +274,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -299,7 +299,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(role_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.attach_role_policy(options)
       end
       resp.data
@@ -312,7 +312,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(role_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_role(options)
       end
       resp.data
@@ -336,7 +336,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(role_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.detach_role_policy(options)
       end
       resp.data
@@ -377,7 +377,7 @@ module Aws::IAM
     def attached_policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(role_name: @name)
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_attached_role_policies(options)
         end
         resp.each_page do |page|
@@ -402,7 +402,7 @@ module Aws::IAM
     def instance_profiles(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(role_name: @name)
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_instance_profiles_for_role(options)
         end
         resp.each_page do |page|
@@ -428,7 +428,7 @@ module Aws::IAM
     def policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(role_name: @name)
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_role_policies(options)
         end
         resp.each_page do |page|

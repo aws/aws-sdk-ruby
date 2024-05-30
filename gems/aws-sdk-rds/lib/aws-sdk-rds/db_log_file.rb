@@ -179,7 +179,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -228,7 +228,7 @@ module Aws::RDS
         db_instance_identifier: @instance_id,
         log_file_name: @name
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.download_db_log_file_portion(options)
       end
       resp.data

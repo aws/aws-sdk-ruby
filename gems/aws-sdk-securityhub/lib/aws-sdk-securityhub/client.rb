@@ -5158,7 +5158,7 @@ module Aws::SecurityHub
     #   resp.to_h outputs the following:
     #   {
     #     association_status: "FAILED", 
-    #     association_status_message: "Configuration Policy a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 couldn\u2019t be applied to account 111122223333 in us-east-1 Region. Retry your request.", 
+    #     association_status_message: "Configuration Policy a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 couldn’t be applied to account 111122223333 in us-east-1 Region. Retry your request.", 
     #     association_type: "INHERITED", 
     #     configuration_policy_id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
     #     target_id: "111122223333", 

@@ -79,7 +79,7 @@ module Aws::OpsWorks
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_stack_summary(stack_id: @stack_id)
       end
       @data = resp.stack_summary
@@ -196,7 +196,7 @@ module Aws::OpsWorks
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end

@@ -86,7 +86,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_db_security_groups(db_security_group_name: @name)
       end
       @data = resp.db_security_groups[0]
@@ -203,7 +203,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -241,7 +241,7 @@ module Aws::RDS
     # @return [DBSecurityGroup]
     def authorize_ingress(options = {})
       options = options.merge(db_security_group_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.authorize_db_security_group_ingress(options)
       end
       DBSecurityGroup.new(
@@ -270,7 +270,7 @@ module Aws::RDS
     # @return [DBSecurityGroup]
     def create(options = {})
       options = options.merge(db_security_group_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_db_security_group(options)
       end
       DBSecurityGroup.new(
@@ -287,7 +287,7 @@ module Aws::RDS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(db_security_group_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_db_security_group(options)
       end
       resp.data
@@ -326,7 +326,7 @@ module Aws::RDS
     # @return [DBSecurityGroup]
     def revoke_ingress(options = {})
       options = options.merge(db_security_group_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.revoke_db_security_group_ingress(options)
       end
       DBSecurityGroup.new(
@@ -348,7 +348,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def subscribe_to(options = {})
       options = options.merge(source_identifier: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.add_source_identifier_to_subscription(options)
       end
       EventSubscription.new(
@@ -370,7 +370,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def unsubscribe_from(options = {})
       options = options.merge(source_identifier: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.remove_source_identifier_from_subscription(options)
       end
       EventSubscription.new(
@@ -433,7 +433,7 @@ module Aws::RDS
           source_type: "db-security-group",
           source_identifier: @name
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_events(options)
         end
         resp.each_page do |page|

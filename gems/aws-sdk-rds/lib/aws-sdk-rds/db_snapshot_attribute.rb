@@ -179,7 +179,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -220,7 +220,7 @@ module Aws::RDS
         attribute_name: @name,
         db_snapshot_identifier: @snapshot_id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.modify_db_snapshot_attribute(options)
       end
       resp.data

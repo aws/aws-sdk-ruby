@@ -172,7 +172,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -222,7 +222,7 @@ module Aws::IAM
         user_name: @user_name,
         serial_number: @serial_number
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.enable_mfa_device(options)
       end
       resp.data
@@ -238,7 +238,7 @@ module Aws::IAM
         user_name: @user_name,
         serial_number: @serial_number
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.deactivate_mfa_device(options)
       end
       resp.data
@@ -265,7 +265,7 @@ module Aws::IAM
         user_name: @user_name,
         serial_number: @serial_number
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.resync_mfa_device(options)
       end
       resp.data

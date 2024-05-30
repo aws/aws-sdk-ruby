@@ -178,7 +178,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_snapshots(snapshot_ids: [@id])
       end
       @data = resp.snapshots[0]
@@ -211,7 +211,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::SnapshotCompleted.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         waiter.wait(params.merge(snapshot_ids: [@id]))
       end
       Snapshot.new({
@@ -315,7 +315,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -437,7 +437,7 @@ module Aws::EC2
     # @return [Types::CopySnapshotResult]
     def copy(options = {})
       options = options.merge(source_snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.copy_snapshot(options)
       end
       resp.data
@@ -468,7 +468,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -515,7 +515,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -543,7 +543,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_snapshot(options)
       end
       resp.data
@@ -566,7 +566,7 @@ module Aws::EC2
     # @return [Types::DescribeSnapshotAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_snapshot_attribute(options)
       end
       resp.data
@@ -615,7 +615,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.modify_snapshot_attribute(options)
       end
       resp.data
@@ -639,7 +639,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def reset_attribute(options = {})
       options = options.merge(snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.reset_snapshot_attribute(options)
       end
       resp.data

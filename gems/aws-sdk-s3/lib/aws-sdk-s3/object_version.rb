@@ -243,7 +243,7 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -303,7 +303,7 @@ module Aws::S3
         key: @object_key,
         version_id: @id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_object(options)
       end
       resp.data
@@ -530,7 +530,7 @@ module Aws::S3
         key: @object_key,
         version_id: @id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.get_object(options, &block)
       end
       resp.data
@@ -694,7 +694,7 @@ module Aws::S3
         key: @object_key,
         version_id: @id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.head_object(options)
       end
       resp.data
@@ -868,7 +868,7 @@ module Aws::S3
               version_id: item.id
             }
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.delete_objects(params)
           end
         end

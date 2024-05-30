@@ -115,7 +115,7 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_lifecycle_hooks(
         auto_scaling_group_name: @group_name,
         lifecycle_hook_names: [@name]
@@ -235,7 +235,7 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -266,7 +266,7 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         lifecycle_hook_name: @name
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.complete_lifecycle_action(options)
       end
       resp.data
@@ -282,7 +282,7 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         lifecycle_hook_name: @name
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_lifecycle_hook(options)
       end
       resp.data
@@ -352,7 +352,7 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         lifecycle_hook_name: @name
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.put_lifecycle_hook(options)
       end
       resp.data
@@ -378,7 +378,7 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         lifecycle_hook_name: @name
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.record_lifecycle_action_heartbeat(options)
       end
       resp.data

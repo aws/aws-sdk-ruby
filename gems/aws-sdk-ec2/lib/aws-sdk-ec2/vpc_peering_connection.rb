@@ -81,7 +81,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_vpc_peering_connections(vpc_peering_connection_ids: [@id])
       end
       @data = resp.vpc_peering_connections[0]
@@ -128,7 +128,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcPeeringConnectionExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         waiter.wait(params.merge(vpc_peering_connection_ids: [@id]))
       end
       VpcPeeringConnection.new({
@@ -232,7 +232,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -253,7 +253,7 @@ module Aws::EC2
     # @return [Types::AcceptVpcPeeringConnectionResult]
     def accept(options = {})
       options = options.merge(vpc_peering_connection_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.accept_vpc_peering_connection(options)
       end
       resp.data
@@ -273,7 +273,7 @@ module Aws::EC2
     # @return [Types::DeleteVpcPeeringConnectionResult]
     def delete(options = {})
       options = options.merge(vpc_peering_connection_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_vpc_peering_connection(options)
       end
       resp.data
@@ -293,7 +293,7 @@ module Aws::EC2
     # @return [Types::RejectVpcPeeringConnectionResult]
     def reject(options = {})
       options = options.merge(vpc_peering_connection_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.reject_vpc_peering_connection(options)
       end
       resp.data

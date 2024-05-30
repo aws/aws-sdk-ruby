@@ -176,7 +176,7 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -193,7 +193,7 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         topic_arn: @topic_arn
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_notification_configuration(options)
       end
       resp.data
@@ -210,7 +210,7 @@ module Aws::AutoScaling
         topic_arn: @topic_arn,
         notification_types: [@notification_type]
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.put_notification_configuration(options)
       end
       resp.data
@@ -287,7 +287,7 @@ module Aws::AutoScaling
           batch.each do |item|
             params[:notification_types] << item.notification_type
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.put_notification_configuration(params)
           end
         end

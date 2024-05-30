@@ -116,7 +116,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.get_account_password_policy
       end
       @data = resp.password_policy
@@ -233,7 +233,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -246,7 +246,7 @@ module Aws::IAM
     # @param [Hash] options ({})
     # @return [EmptyStructure]
     def delete(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_account_password_policy(options)
       end
       resp.data
@@ -351,7 +351,7 @@ module Aws::IAM
     #    </note>
     # @return [EmptyStructure]
     def update(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.update_account_password_policy(options)
       end
       resp.data

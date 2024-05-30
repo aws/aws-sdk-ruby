@@ -163,7 +163,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.get_policy(policy_arn: @arn)
       end
       @data = resp.policy
@@ -280,7 +280,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -308,7 +308,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def attach_group(options = {})
       options = options.merge(policy_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.attach_group_policy(options)
       end
       resp.data
@@ -334,7 +334,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def attach_role(options = {})
       options = options.merge(policy_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.attach_role_policy(options)
       end
       resp.data
@@ -361,7 +361,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def attach_user(options = {})
       options = options.merge(policy_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.attach_user_policy(options)
       end
       resp.data
@@ -421,7 +421,7 @@ module Aws::IAM
     # @return [PolicyVersion]
     def create_version(options = {})
       options = options.merge(policy_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_policy_version(options)
       end
       PolicyVersion.new(
@@ -438,7 +438,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(policy_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_policy(options)
       end
       resp.data
@@ -465,7 +465,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def detach_group(options = {})
       options = options.merge(policy_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.detach_group_policy(options)
       end
       resp.data
@@ -492,7 +492,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def detach_role(options = {})
       options = options.merge(policy_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.detach_role_policy(options)
       end
       resp.data
@@ -519,7 +519,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def detach_user(options = {})
       options = options.merge(policy_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.detach_user_policy(options)
       end
       resp.data
@@ -566,7 +566,7 @@ module Aws::IAM
           policy_arn: @arn,
           entity_filter: "Group"
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_entities_for_policy(options)
         end
         resp.each_page do |page|
@@ -623,7 +623,7 @@ module Aws::IAM
           policy_arn: @arn,
           entity_filter: "Role"
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_entities_for_policy(options)
         end
         resp.each_page do |page|
@@ -680,7 +680,7 @@ module Aws::IAM
           policy_arn: @arn,
           entity_filter: "User"
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_entities_for_policy(options)
         end
         resp.each_page do |page|
@@ -719,7 +719,7 @@ module Aws::IAM
     def versions(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(policy_arn: @arn)
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_policy_versions(options)
         end
         resp.each_page do |page|

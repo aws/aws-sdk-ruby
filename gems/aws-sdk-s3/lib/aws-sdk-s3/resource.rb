@@ -166,7 +166,7 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
     # @return [Bucket]
     def create_bucket(options = {})
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         @client.create_bucket(options)
       end
       Bucket.new(
@@ -194,7 +194,7 @@ module Aws::S3
     def buckets(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_buckets(options)
         end
         resp.data.buckets.each do |b|

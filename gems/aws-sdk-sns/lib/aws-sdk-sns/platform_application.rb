@@ -84,7 +84,7 @@ module Aws::SNS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.get_platform_application_attributes(platform_application_arn: @arn)
       end
       @data = resp.data
@@ -138,7 +138,7 @@ module Aws::SNS
     # @return [PlatformEndpoint]
     def create_platform_endpoint(options = {})
       options = options.merge(platform_application_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_platform_endpoint(options)
       end
       PlatformEndpoint.new(
@@ -154,7 +154,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(platform_application_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_platform_application(options)
       end
       resp.data
@@ -243,7 +243,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(platform_application_arn: @arn)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.set_platform_application_attributes(options)
       end
       resp.data
@@ -259,7 +259,7 @@ module Aws::SNS
     def endpoints(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(platform_application_arn: @arn)
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_endpoints_by_platform_application(options)
         end
         resp.each_page do |page|

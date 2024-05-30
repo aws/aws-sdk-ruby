@@ -69,7 +69,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [DhcpOptions]
     def create_dhcp_options(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_dhcp_options(options)
       end
       DhcpOptions.new(
@@ -621,7 +621,7 @@ module Aws::EC2
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.run_instances(options)
       end
       resp.data.instances.each do |i|
@@ -660,7 +660,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [InternetGateway]
     def create_internet_gateway(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_internet_gateway(options)
       end
       InternetGateway.new(
@@ -712,7 +712,7 @@ module Aws::EC2
     #   Default: `pem`
     # @return [KeyPair]
     def create_key_pair(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_key_pair(options)
       end
       KeyPair.new(
@@ -805,7 +805,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     # @return [NatGateway]
     def create_nat_gateway(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_nat_gateway(options)
       end
       NatGateway.new(
@@ -853,7 +853,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [NetworkAcl]
     def create_network_acl(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_network_acl(options)
       end
       NetworkAcl.new(
@@ -1028,7 +1028,7 @@ module Aws::EC2
     #   A connection tracking specification for the network interface.
     # @return [NetworkInterface]
     def create_network_interface(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_network_interface(options)
       end
       NetworkInterface.new(
@@ -1084,7 +1084,7 @@ module Aws::EC2
     #   * Rack – No usage restrictions.
     # @return [PlacementGroup]
     def create_placement_group(options = {})
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         @client.create_placement_group(options)
       end
       PlacementGroup.new(
@@ -1131,7 +1131,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [RouteTable]
     def create_route_table(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_route_table(options)
       end
       RouteTable.new(
@@ -1186,7 +1186,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [SecurityGroup]
     def create_security_group(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_security_group(options)
       end
       SecurityGroup.new(
@@ -1249,7 +1249,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Snapshot]
     def create_snapshot(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_snapshot(options)
       end
       Snapshot.new(
@@ -1341,7 +1341,7 @@ module Aws::EC2
     #   An IPv6 netmask length for the subnet.
     # @return [Subnet]
     def create_subnet(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_subnet(options)
       end
       Subnet.new(
@@ -1380,7 +1380,7 @@ module Aws::EC2
     #   set the value to an empty string.
     # @return [EmptyStructure]
     def create_tags(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_tags(options)
       end
       resp.data
@@ -1423,7 +1423,7 @@ module Aws::EC2
     #   Constraints: Up to 1000 tags.
     # @return [EmptyStructure]
     def delete_tags(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_tags(options)
       end
       resp.data
@@ -1603,7 +1603,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     # @return [Volume]
     def create_volume(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_volume(options)
       end
       Volume.new(
@@ -1722,7 +1722,7 @@ module Aws::EC2
     #   The tags to assign to the VPC.
     # @return [Vpc]
     def create_vpc(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_vpc(options)
       end
       Vpc.new(
@@ -1777,7 +1777,7 @@ module Aws::EC2
     #   The tags to assign to the peering connection.
     # @return [VpcPeeringConnection]
     def create_vpc_peering_connection(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_vpc_peering_connection(options)
       end
       VpcPeeringConnection.new(
@@ -1804,7 +1804,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [EmptyStructure]
     def disassociate_route_table(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.disassociate_route_table(options)
       end
       resp.data
@@ -1843,7 +1843,7 @@ module Aws::EC2
     #   The tags to apply to the imported key pair.
     # @return [KeyPairInfo]
     def import_key_pair(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.import_key_pair(options)
       end
       KeyPairInfo.new(
@@ -2047,7 +2047,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     # @return [Image]
     def register_image(options = {})
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.register_image(options)
       end
       Image.new(
@@ -2125,7 +2125,7 @@ module Aws::EC2
           name: "domain",
           values: ["standard"]
         }])
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_addresses(options)
         end
         resp.data.addresses.each do |a|
@@ -2195,7 +2195,7 @@ module Aws::EC2
     # @return [DhcpOptions::Collection]
     def dhcp_options_sets(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_dhcp_options(options)
         end
         resp.each_page do |page|
@@ -2391,7 +2391,7 @@ module Aws::EC2
     # @return [Image::Collection]
     def images(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_images(options)
         end
         resp.each_page do |page|
@@ -2868,7 +2868,7 @@ module Aws::EC2
     # @return [Instance::Collection]
     def instances(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_instances(options)
         end
         resp.each_page do |page|
@@ -2945,7 +2945,7 @@ module Aws::EC2
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_internet_gateways(options)
         end
         resp.each_page do |page|
@@ -3024,7 +3024,7 @@ module Aws::EC2
     def key_pairs(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_key_pairs(options)
         end
         resp.data.key_pairs.each do |k|
@@ -3092,7 +3092,7 @@ module Aws::EC2
     # @return [NatGateway::Collection]
     def nat_gateways(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_nat_gateways(options)
         end
         resp.each_page do |page|
@@ -3201,7 +3201,7 @@ module Aws::EC2
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_network_acls(options)
         end
         resp.each_page do |page|
@@ -3368,7 +3368,7 @@ module Aws::EC2
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_network_interfaces(options)
         end
         resp.each_page do |page|
@@ -3450,7 +3450,7 @@ module Aws::EC2
     def placement_groups(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_placement_groups(options)
         end
         resp.data.placement_groups.each do |p|
@@ -3581,7 +3581,7 @@ module Aws::EC2
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_route_tables(options)
         end
         resp.each_page do |page|
@@ -3722,7 +3722,7 @@ module Aws::EC2
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_security_groups(options)
         end
         resp.each_page do |page|
@@ -3826,7 +3826,7 @@ module Aws::EC2
     # @return [Snapshot::Collection]
     def snapshots(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_snapshots(options)
         end
         resp.each_page do |page|
@@ -3967,7 +3967,7 @@ module Aws::EC2
     # @return [Subnet::Collection]
     def subnets(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_subnets(options)
         end
         resp.each_page do |page|
@@ -4071,7 +4071,7 @@ module Aws::EC2
     # @return [Volume::Collection]
     def volumes(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_volumes(options)
         end
         resp.each_page do |page|
@@ -4165,7 +4165,7 @@ module Aws::EC2
           name: "domain",
           values: ["vpc"]
         }])
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_addresses(options)
         end
         resp.data.addresses.each do |a|
@@ -4254,7 +4254,7 @@ module Aws::EC2
     # @return [VpcPeeringConnection::Collection]
     def vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_vpc_peering_connections(options)
         end
         resp.each_page do |page|
@@ -4346,7 +4346,7 @@ module Aws::EC2
     # @return [Vpc::Collection]
     def vpcs(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_vpcs(options)
         end
         resp.each_page do |page|

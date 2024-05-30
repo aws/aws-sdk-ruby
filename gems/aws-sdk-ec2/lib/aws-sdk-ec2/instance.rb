@@ -450,7 +450,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_instances(instance_ids: [@id])
       end
       @data = resp.reservations[0].instances[0]
@@ -497,7 +497,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         waiter.wait(params.merge(instance_ids: [@id]))
       end
       Instance.new({
@@ -517,7 +517,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceRunning.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         waiter.wait(params.merge(instance_ids: [@id]))
       end
       Instance.new({
@@ -537,7 +537,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceStopped.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         waiter.wait(params.merge(instance_ids: [@id]))
       end
       Instance.new({
@@ -557,7 +557,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceTerminated.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         waiter.wait(params.merge(instance_ids: [@id]))
       end
       Instance.new({
@@ -661,7 +661,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -689,7 +689,7 @@ module Aws::EC2
     # @return [Types::AttachClassicLinkVpcResult]
     def attach_classic_link_vpc(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.attach_classic_link_vpc(options)
       end
       resp.data
@@ -716,7 +716,7 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def attach_volume(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.attach_volume(options)
       end
       resp.data
@@ -741,7 +741,7 @@ module Aws::EC2
     # @return [Types::GetConsoleOutputResult]
     def console_output(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.get_console_output(options)
       end
       resp.data
@@ -852,7 +852,7 @@ module Aws::EC2
     # @return [Image]
     def create_image(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_image(options)
       end
       Image.new(
@@ -886,7 +886,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -933,7 +933,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -966,7 +966,7 @@ module Aws::EC2
     # @return [Types::InstanceAttribute]
     def describe_attribute(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_instance_attribute(options)
       end
       resp.data
@@ -989,7 +989,7 @@ module Aws::EC2
     # @return [Types::DetachClassicLinkVpcResult]
     def detach_classic_link_vpc(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.detach_classic_link_vpc(options)
       end
       resp.data
@@ -1025,7 +1025,7 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def detach_volume(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.detach_volume(options)
       end
       resp.data
@@ -1189,7 +1189,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.modify_instance_attribute(options)
       end
       resp.data
@@ -1209,7 +1209,7 @@ module Aws::EC2
     # @return [Types::MonitorInstancesResult]
     def monitor(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.monitor_instances(options)
       end
       resp.data
@@ -1229,7 +1229,7 @@ module Aws::EC2
     # @return [Types::GetPasswordDataResult]
     def password_data(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.get_password_data(options)
       end
       resp.data
@@ -1249,7 +1249,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def reboot(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.reboot_instances(options)
       end
       resp.data
@@ -1309,7 +1309,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def report_status(options = {})
       options = Aws::Util.deep_merge(options, instances: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.report_instance_status(options)
       end
       resp.data
@@ -1335,7 +1335,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def reset_attribute(options = {})
       options = options.merge(instance_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.reset_instance_attribute(options)
       end
       resp.data
@@ -1358,7 +1358,7 @@ module Aws::EC2
         instance_id: @id,
         attribute: "kernel"
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.reset_instance_attribute(options)
       end
       resp.data
@@ -1381,7 +1381,7 @@ module Aws::EC2
         instance_id: @id,
         attribute: "ramdisk"
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.reset_instance_attribute(options)
       end
       resp.data
@@ -1404,7 +1404,7 @@ module Aws::EC2
         instance_id: @id,
         attribute: "sourceDestCheck"
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.reset_instance_attribute(options)
       end
       resp.data
@@ -1427,7 +1427,7 @@ module Aws::EC2
     # @return [Types::StartInstancesResult]
     def start(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.start_instances(options)
       end
       resp.data
@@ -1467,7 +1467,7 @@ module Aws::EC2
     # @return [Types::StopInstancesResult]
     def stop(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.stop_instances(options)
       end
       resp.data
@@ -1487,7 +1487,7 @@ module Aws::EC2
     # @return [Types::TerminateInstancesResult]
     def terminate(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.terminate_instances(options)
       end
       resp.data
@@ -1507,7 +1507,7 @@ module Aws::EC2
     # @return [Types::UnmonitorInstancesResult]
     def unmonitor(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.unmonitor_instances(options)
       end
       resp.data
@@ -1669,7 +1669,7 @@ module Aws::EC2
           name: "attachment.instance-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_volumes(options)
         end
         resp.each_page do |page|
@@ -1766,7 +1766,7 @@ module Aws::EC2
           name: "instance-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_addresses(options)
         end
         resp.data.addresses.each do |a|
@@ -1861,7 +1861,7 @@ module Aws::EC2
           batch.each do |item|
             params[:resources] << item.id
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.create_tags(params)
           end
         end
@@ -1905,7 +1905,7 @@ module Aws::EC2
           batch.each do |item|
             params[:resources] << item.id
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.delete_tags(params)
           end
         end
@@ -1931,7 +1931,7 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.monitor_instances(params)
           end
         end
@@ -1957,7 +1957,7 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.reboot_instances(params)
           end
         end
@@ -1986,7 +1986,7 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.start_instances(params)
           end
         end
@@ -2032,7 +2032,7 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.stop_instances(params)
           end
         end
@@ -2058,7 +2058,7 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.terminate_instances(params)
           end
         end
@@ -2084,7 +2084,7 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+          Aws::Plugins::UserAgent.feature('resource') do
             batch[0].client.unmonitor_instances(params)
           end
         end

@@ -191,7 +191,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_subnets(subnet_ids: [@id])
       end
       @data = resp.subnets[0]
@@ -308,7 +308,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -852,7 +852,7 @@ module Aws::EC2
     def create_instances(options = {})
       batch = []
       options = options.merge(subnet_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.run_instances(options)
       end
       resp.data.instances.each do |i|
@@ -1028,7 +1028,7 @@ module Aws::EC2
     # @return [NetworkInterface]
     def create_network_interface(options = {})
       options = options.merge(subnet_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_network_interface(options)
       end
       NetworkInterface.new(
@@ -1063,7 +1063,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -1110,7 +1110,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -1138,7 +1138,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(subnet_id: @id)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_subnet(options)
       end
       resp.data
@@ -1600,7 +1600,7 @@ module Aws::EC2
           name: "subnet-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_instances(options)
         end
         resp.each_page do |page|
@@ -1668,7 +1668,7 @@ module Aws::EC2
           name: "subnet-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_nat_gateways(options)
         end
         resp.each_page do |page|
@@ -1830,7 +1830,7 @@ module Aws::EC2
           name: "subnet-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_network_interfaces(options)
         end
         resp.each_page do |page|

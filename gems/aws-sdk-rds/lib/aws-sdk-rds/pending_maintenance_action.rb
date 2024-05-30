@@ -210,7 +210,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -228,7 +228,7 @@ module Aws::RDS
         resource_identifier: @target_arn,
         opt_in_type: "immediate"
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.apply_pending_maintenance_action(options)
       end
       ResourcePendingMaintenanceActionList.new(
@@ -249,7 +249,7 @@ module Aws::RDS
         resource_identifier: @target_arn,
         opt_in_type: "undo-opt-in"
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.apply_pending_maintenance_action(options)
       end
       ResourcePendingMaintenanceActionList.new(
@@ -270,7 +270,7 @@ module Aws::RDS
         resource_identifier: @target_arn,
         opt_in_type: "next-maintenance"
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.apply_pending_maintenance_action(options)
       end
       ResourcePendingMaintenanceActionList.new(

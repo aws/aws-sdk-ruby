@@ -69,7 +69,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_db_parameter_groups(db_parameter_group_name: @name)
       end
       @data = resp.db_parameter_groups[0]
@@ -186,7 +186,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -264,7 +264,7 @@ module Aws::RDS
     # @return [DBParameterGroup]
     def create(options = {})
       options = options.merge(db_parameter_group_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_db_parameter_group(options)
       end
       DBParameterGroup.new(
@@ -313,7 +313,7 @@ module Aws::RDS
     # @return [DBParameterGroup]
     def copy(options = {})
       options = options.merge(source_db_parameter_group_identifier: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.copy_db_parameter_group(options)
       end
       DBParameterGroup.new(
@@ -330,7 +330,7 @@ module Aws::RDS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(db_parameter_group_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_db_parameter_group(options)
       end
       resp.data
@@ -391,7 +391,7 @@ module Aws::RDS
     # @return [DBParameterGroup]
     def modify(options = {})
       options = options.merge(db_parameter_group_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.modify_db_parameter_group(options)
       end
       DBParameterGroup.new(
@@ -454,7 +454,7 @@ module Aws::RDS
     # @return [DBParameterGroup]
     def reset(options = {})
       options = options.merge(db_parameter_group_name: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.reset_db_parameter_group(options)
       end
       DBParameterGroup.new(
@@ -475,7 +475,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def subscribe_to(options = {})
       options = options.merge(source_identifier: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.add_source_identifier_to_subscription(options)
       end
       EventSubscription.new(
@@ -497,7 +497,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def unsubscribe_from(options = {})
       options = options.merge(source_identifier: @name)
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.remove_source_identifier_from_subscription(options)
       end
       EventSubscription.new(
@@ -560,7 +560,7 @@ module Aws::RDS
           source_type: "db-parameter-group",
           source_identifier: @name
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_events(options)
         end
         resp.each_page do |page|
@@ -603,7 +603,7 @@ module Aws::RDS
     def parameters(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(db_parameter_group_name: @name)
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.describe_db_parameters(options)
         end
         resp.each_page do |page|

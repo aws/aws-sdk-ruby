@@ -96,7 +96,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.get_policy_version(
         policy_arn: @arn,
         version_id: @version_id
@@ -216,7 +216,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -233,7 +233,7 @@ module Aws::IAM
         policy_arn: @arn,
         version_id: @version_id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_policy_version(options)
       end
       resp.data
@@ -249,7 +249,7 @@ module Aws::IAM
         policy_arn: @arn,
         version_id: @version_id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.set_default_policy_version(options)
       end
       resp.data

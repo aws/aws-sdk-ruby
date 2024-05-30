@@ -95,7 +95,7 @@ module Aws::Glacier
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.describe_vault(
         vault_name: @name,
         account_id: @account_id
@@ -215,7 +215,7 @@ module Aws::Glacier
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -232,7 +232,7 @@ module Aws::Glacier
         vault_name: @name,
         account_id: @account_id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.create_vault(options)
       end
       resp.data
@@ -248,7 +248,7 @@ module Aws::Glacier
         vault_name: @name,
         account_id: @account_id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.delete_vault(options)
       end
       resp.data
@@ -267,7 +267,7 @@ module Aws::Glacier
           type: "inventory-retrieval"
         }
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.initiate_job(options)
       end
       Job.new(
@@ -301,7 +301,7 @@ module Aws::Glacier
         vault_name: @name,
         account_id: @account_id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.initiate_multipart_upload(options)
       end
       MultipartUpload.new(
@@ -332,7 +332,7 @@ module Aws::Glacier
         vault_name: @name,
         account_id: @account_id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.upload_archive(options)
       end
       Archive.new(
@@ -381,7 +381,7 @@ module Aws::Glacier
           vault_name: @name,
           completed: "true"
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_jobs(options)
         end
         resp.each_page do |page|
@@ -417,7 +417,7 @@ module Aws::Glacier
           vault_name: @name,
           statuscode: "Failed"
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_jobs(options)
         end
         resp.each_page do |page|
@@ -467,7 +467,7 @@ module Aws::Glacier
           account_id: @account_id,
           vault_name: @name
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_jobs(options)
         end
         resp.each_page do |page|
@@ -503,7 +503,7 @@ module Aws::Glacier
           vault_name: @name,
           statuscode: "InProgress"
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_jobs(options)
         end
         resp.each_page do |page|
@@ -534,7 +534,7 @@ module Aws::Glacier
           vault_name: @name,
           account_id: @account_id
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_multipart_uploads(options)
         end
         resp.each_page do |page|
@@ -590,7 +590,7 @@ module Aws::Glacier
           vault_name: @name,
           statuscode: "Succeeded"
         )
-        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+        resp = Aws::Plugins::UserAgent.feature('resource') do
           @client.list_jobs(options)
         end
         resp.each_page do |page|

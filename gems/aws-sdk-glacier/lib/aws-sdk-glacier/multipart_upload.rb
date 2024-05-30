@@ -202,7 +202,7 @@ module Aws::Glacier
           :retry
         end
       end
-      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      Aws::Plugins::UserAgent.feature('resource') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -220,7 +220,7 @@ module Aws::Glacier
         vault_name: @vault_name,
         upload_id: @id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.abort_multipart_upload(options)
       end
       resp.data
@@ -249,7 +249,7 @@ module Aws::Glacier
         vault_name: @vault_name,
         upload_id: @id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.complete_multipart_upload(options)
       end
       resp.data
@@ -279,7 +279,7 @@ module Aws::Glacier
         vault_name: @vault_name,
         upload_id: @id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.list_parts(options)
       end
       resp.data
@@ -310,7 +310,7 @@ module Aws::Glacier
         vault_name: @vault_name,
         upload_id: @id
       )
-      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+      resp = Aws::Plugins::UserAgent.feature('resource') do
         @client.upload_multipart_part(options)
       end
       resp.data
