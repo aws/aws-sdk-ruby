@@ -225,6 +225,10 @@ module Aws::CloudTrail
     OrganizationNotInAllFeaturesModeException = Shapes::StructureShape.new(name: 'OrganizationNotInAllFeaturesModeException')
     OrganizationsNotInUseException = Shapes::StructureShape.new(name: 'OrganizationsNotInUseException')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PartitionKey = Shapes::StructureShape.new(name: 'PartitionKey')
+    PartitionKeyList = Shapes::ListShape.new(name: 'PartitionKeyList')
+    PartitionKeyName = Shapes::StringShape.new(name: 'PartitionKeyName')
+    PartitionKeyType = Shapes::StringShape.new(name: 'PartitionKeyType')
     PublicKey = Shapes::StructureShape.new(name: 'PublicKey')
     PublicKeyList = Shapes::ListShape.new(name: 'PublicKeyList')
     PutEventSelectorsRequest = Shapes::StructureShape.new(name: 'PutEventSelectorsRequest')
@@ -611,6 +615,7 @@ module Aws::CloudTrail
     GetEventDataStoreResponse.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     GetEventDataStoreResponse.add_member(:federation_status, Shapes::ShapeRef.new(shape: FederationStatus, location_name: "FederationStatus"))
     GetEventDataStoreResponse.add_member(:federation_role_arn, Shapes::ShapeRef.new(shape: FederationRoleArn, location_name: "FederationRoleArn"))
+    GetEventDataStoreResponse.add_member(:partition_keys, Shapes::ShapeRef.new(shape: PartitionKeyList, location_name: "PartitionKeys"))
     GetEventDataStoreResponse.struct_class = Types::GetEventDataStoreResponse
 
     GetEventSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
@@ -939,6 +944,12 @@ module Aws::CloudTrail
 
     OrganizationsNotInUseException.struct_class = Types::OrganizationsNotInUseException
 
+    PartitionKey.add_member(:name, Shapes::ShapeRef.new(shape: PartitionKeyName, required: true, location_name: "Name"))
+    PartitionKey.add_member(:type, Shapes::ShapeRef.new(shape: PartitionKeyType, required: true, location_name: "Type"))
+    PartitionKey.struct_class = Types::PartitionKey
+
+    PartitionKeyList.member = Shapes::ShapeRef.new(shape: PartitionKey)
+
     PublicKey.add_member(:value, Shapes::ShapeRef.new(shape: ByteBuffer, location_name: "Value"))
     PublicKey.add_member(:validity_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "ValidityStartTime"))
     PublicKey.add_member(:validity_end_time, Shapes::ShapeRef.new(shape: Date, location_name: "ValidityEndTime"))
@@ -1256,6 +1267,7 @@ module Aws::CloudTrail
         "endpointPrefix" => "cloudtrail",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "CloudTrail",
         "serviceFullName" => "AWS CloudTrail",
         "serviceId" => "CloudTrail",

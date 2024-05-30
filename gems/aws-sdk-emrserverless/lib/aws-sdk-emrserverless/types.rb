@@ -569,11 +569,18 @@ module Aws::EMRServerless
     #   The ID of the job run.
     #   @return [String]
     #
+    # @!attribute [rw] attempt
+    #   An optimal parameter that indicates the amount of attempts for the
+    #   job. If not specified, this value defaults to the attempt of the
+    #   latest job.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetDashboardForJobRunRequest AWS API Documentation
     #
     class GetDashboardForJobRunRequest < Struct.new(
       :application_id,
-      :job_run_id)
+      :job_run_id,
+      :attempt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -598,11 +605,18 @@ module Aws::EMRServerless
     #   The ID of the job run.
     #   @return [String]
     #
+    # @!attribute [rw] attempt
+    #   An optimal parameter that indicates the amount of attempts for the
+    #   job. If not specified, this value defaults to the attempt of the
+    #   latest job.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetJobRunRequest AWS API Documentation
     #
     class GetJobRunRequest < Struct.new(
       :application_id,
-      :job_run_id)
+      :job_run_id,
+      :attempt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -856,6 +870,26 @@ module Aws::EMRServerless
     #   pre-initialized workers.
     #   @return [Types::ResourceUtilization]
     #
+    # @!attribute [rw] mode
+    #   The mode of the job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_policy
+    #   The retry policy of the job run.
+    #   @return [Types::RetryPolicy]
+    #
+    # @!attribute [rw] attempt
+    #   The attempt of the job run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attempt_created_at
+    #   The date and time of when the job run attempt was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attempt_updated_at
+    #   The date and time of when the job run attempt was last updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -877,7 +911,97 @@ module Aws::EMRServerless
       :network_configuration,
       :total_execution_duration_seconds,
       :execution_timeout_minutes,
-      :billed_resource_utilization)
+      :billed_resource_utilization,
+      :mode,
+      :retry_policy,
+      :attempt,
+      :attempt_created_at,
+      :attempt_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of attributes associated with a job run attempt.
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the application the job is running on.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the job run attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the job run attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the job run attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_created_at
+    #   The date and time of when the job run was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the job run attempt was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time of when the job run attempt was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_role
+    #   The Amazon Resource Name (ARN) of the execution role of the job
+    #   run..
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the job run attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_details
+    #   The state details of the job run attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_label
+    #   The Amazon EMR release label of the job run attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the job run, such as Spark or Hive.
+    #   @return [String]
+    #
+    # @!attribute [rw] attempt
+    #   The attempt number of the job run execution.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRunAttemptSummary AWS API Documentation
+    #
+    class JobRunAttemptSummary < Struct.new(
+      :application_id,
+      :id,
+      :name,
+      :mode,
+      :arn,
+      :created_by,
+      :job_created_at,
+      :created_at,
+      :updated_at,
+      :execution_role,
+      :state,
+      :state_details,
+      :release_label,
+      :type,
+      :attempt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -894,6 +1018,10 @@ module Aws::EMRServerless
     #
     # @!attribute [rw] name
     #   The optional job run name. This doesn't have to be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the job run.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -933,12 +1061,25 @@ module Aws::EMRServerless
     #   The type of job run, such as Spark or Hive.
     #   @return [String]
     #
+    # @!attribute [rw] attempt
+    #   The attempt number of the job run execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attempt_created_at
+    #   The date and time of when the job run attempt was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attempt_updated_at
+    #   The date and time of when the job run attempt was last updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRunSummary AWS API Documentation
     #
     class JobRunSummary < Struct.new(
       :application_id,
       :id,
       :name,
+      :mode,
       :arn,
       :created_by,
       :created_at,
@@ -947,7 +1088,10 @@ module Aws::EMRServerless
       :state,
       :state_details,
       :release_label,
-      :type)
+      :type,
+      :attempt,
+      :attempt_created_at,
+      :attempt_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -996,6 +1140,52 @@ module Aws::EMRServerless
     end
 
     # @!attribute [rw] application_id
+    #   The ID of the application for which to list job runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The ID of the job run to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of job run attempt results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of job run attempts to list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListJobRunAttemptsRequest AWS API Documentation
+    #
+    class ListJobRunAttemptsRequest < Struct.new(
+      :application_id,
+      :job_run_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_run_attempts
+    #   The array of the listed job run attempt objects.
+    #   @return [Array<Types::JobRunAttemptSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The output displays the token for the next set of application
+    #   results. This is required for pagination and is available as a
+    #   response of the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListJobRunAttemptsResponse AWS API Documentation
+    #
+    class ListJobRunAttemptsResponse < Struct.new(
+      :job_run_attempts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
     #   The ID of the application for which to list the job run.
     #   @return [String]
     #
@@ -1021,6 +1211,10 @@ module Aws::EMRServerless
     #   state.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] mode
+    #   The mode of the job runs to list.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListJobRunsRequest AWS API Documentation
     #
     class ListJobRunsRequest < Struct.new(
@@ -1029,7 +1223,8 @@ module Aws::EMRServerless
       :max_results,
       :created_at_after,
       :created_at_before,
-      :states)
+      :states,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1231,6 +1426,27 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
+    # The retry policy to use for a job run.
+    #
+    # @!attribute [rw] max_attempts
+    #   Maximum number of attempts for the job run. This parameter is only
+    #   applicable for `BATCH` mode.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_failed_attempts_per_hour
+    #   Maximum number of failed attempts per hour. This \[arameter is only
+    #   applicable for `STREAMING` mode.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/RetryPolicy AWS API Documentation
+    #
+    class RetryPolicy < Struct.new(
+      :max_attempts,
+      :max_failed_attempts_per_hour)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon S3 configuration for monitoring log publishing. You can
     # configure your jobs to send log information to Amazon S3.
     #
@@ -1342,6 +1558,14 @@ module Aws::EMRServerless
     #   The optional job run name. This doesn't have to be unique.
     #   @return [String]
     #
+    # @!attribute [rw] mode
+    #   The mode of the job run when it starts.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_policy
+    #   The retry policy when job run starts.
+    #   @return [Types::RetryPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/StartJobRunRequest AWS API Documentation
     #
     class StartJobRunRequest < Struct.new(
@@ -1352,7 +1576,9 @@ module Aws::EMRServerless
       :configuration_overrides,
       :tags,
       :execution_timeout_minutes,
-      :name)
+      :name,
+      :mode,
+      :retry_policy)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-bedrockagent/customizations'
 # @!group service
 module Aws::BedrockAgent
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end

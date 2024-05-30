@@ -58,6 +58,10 @@ module Aws::BedrockRuntime
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :converse
+            Aws::BedrockRuntime::Endpoints::Converse.build(context)
+          when :converse_stream
+            Aws::BedrockRuntime::Endpoints::ConverseStream.build(context)
           when :invoke_model
             Aws::BedrockRuntime::Endpoints::InvokeModel.build(context)
           when :invoke_model_with_response_stream

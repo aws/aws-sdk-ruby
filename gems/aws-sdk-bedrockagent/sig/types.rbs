@@ -206,6 +206,11 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class BedrockEmbeddingModelConfiguration
+      attr_accessor dimensions: ::Integer
+      SENSITIVE: []
+    end
+
     class ChunkingConfiguration
       attr_accessor chunking_strategy: ("FIXED_SIZE" | "NONE")
       attr_accessor fixed_size_chunking_configuration: Types::FixedSizeChunkingConfiguration
@@ -418,6 +423,11 @@ module Aws::BedrockAgent
     end
 
     class DisassociateAgentKnowledgeBaseResponse < Aws::EmptyStructure
+    end
+
+    class EmbeddingModelConfiguration
+      attr_accessor bedrock_embedding_model_configuration: Types::BedrockEmbeddingModelConfiguration
+      SENSITIVE: []
     end
 
     class FixedSizeChunkingConfiguration
@@ -1054,6 +1064,7 @@ module Aws::BedrockAgent
 
     class VectorKnowledgeBaseConfiguration
       attr_accessor embedding_model_arn: ::String
+      attr_accessor embedding_model_configuration: Types::EmbeddingModelConfiguration
       SENSITIVE: []
     end
   end

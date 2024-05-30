@@ -83,6 +83,7 @@ module Aws::Connect
     AssociateTrafficDistributionGroupUserRequest = Shapes::StructureShape.new(name: 'AssociateTrafficDistributionGroupUserRequest')
     AssociateTrafficDistributionGroupUserResponse = Shapes::StructureShape.new(name: 'AssociateTrafficDistributionGroupUserResponse')
     AssociateUserProficienciesRequest = Shapes::StructureShape.new(name: 'AssociateUserProficienciesRequest')
+    AssociatedQueueIdList = Shapes::ListShape.new(name: 'AssociatedQueueIdList')
     AssociationId = Shapes::StringShape.new(name: 'AssociationId')
     AttachedFile = Shapes::StructureShape.new(name: 'AttachedFile')
     AttachedFileError = Shapes::StructureShape.new(name: 'AttachedFileError')
@@ -1513,6 +1514,8 @@ module Aws::Connect
     AssociateUserProficienciesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     AssociateUserProficienciesRequest.add_member(:user_proficiencies, Shapes::ShapeRef.new(shape: UserProficiencyList, required: true, location_name: "UserProficiencies"))
     AssociateUserProficienciesRequest.struct_class = Types::AssociateUserProficienciesRequest
+
+    AssociatedQueueIdList.member = Shapes::ShapeRef.new(shape: QueueId)
 
     AttachedFile.add_member(:creation_time, Shapes::ShapeRef.new(shape: ISO8601Datetime, required: true, location_name: "CreationTime"))
     AttachedFile.add_member(:file_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "FileArn"))
@@ -4310,6 +4313,7 @@ module Aws::Connect
     RoutingProfile.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     RoutingProfile.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     RoutingProfile.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
+    RoutingProfile.add_member(:associated_queue_ids, Shapes::ShapeRef.new(shape: AssociatedQueueIdList, location_name: "AssociatedQueueIds"))
     RoutingProfile.struct_class = Types::RoutingProfile
 
     RoutingProfileList.member = Shapes::ShapeRef.new(shape: RoutingProfile)

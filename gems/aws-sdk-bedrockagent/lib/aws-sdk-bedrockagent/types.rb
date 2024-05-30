@@ -921,6 +921,21 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # The vector configuration details for the Bedrock embeddings model.
+    #
+    # @!attribute [rw] dimensions
+    #   The dimensions details for the vector configuration used on the
+    #   Bedrock embeddings model.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/BedrockEmbeddingModelConfiguration AWS API Documentation
+    #
+    class BedrockEmbeddingModelConfiguration < Struct.new(
+      :dimensions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about how to chunk the documents in the data source. A *chunk*
     # refers to an excerpt from a data source that is returned when the
     # knowledge base that it belongs to is queried.
@@ -1765,6 +1780,20 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DisassociateAgentKnowledgeBaseResponse AWS API Documentation
     #
     class DisassociateAgentKnowledgeBaseResponse < Aws::EmptyStructure; end
+
+    # The configuration details for the embeddings model.
+    #
+    # @!attribute [rw] bedrock_embedding_model_configuration
+    #   The vector configuration details on the Bedrock embeddings model.
+    #   @return [Types::BedrockEmbeddingModelConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/EmbeddingModelConfiguration AWS API Documentation
+    #
+    class EmbeddingModelConfiguration < Struct.new(
+      :bedrock_embedding_model_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Configurations for when you choose fixed-size chunking. If you set the
     # `chunkingStrategy` as `NONE`, exclude this field.
@@ -4255,10 +4284,16 @@ module Aws::BedrockAgent
     #   embeddings for the knowledge base.
     #   @return [String]
     #
+    # @!attribute [rw] embedding_model_configuration
+    #   The embeddings model configuration details for the vector model used
+    #   in Knowledge Base.
+    #   @return [Types::EmbeddingModelConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VectorKnowledgeBaseConfiguration AWS API Documentation
     #
     class VectorKnowledgeBaseConfiguration < Struct.new(
-      :embedding_model_arn)
+      :embedding_model_arn,
+      :embedding_model_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

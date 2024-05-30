@@ -3842,6 +3842,7 @@ module Aws::Connect
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
       attr_accessor is_default: bool
+      attr_accessor associated_queue_ids: ::Array[::String]
       SENSITIVE: []
     end
 

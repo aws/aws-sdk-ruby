@@ -232,7 +232,12 @@ module Aws
                                    knowledge_base_configuration: {
                                      type: ("VECTOR"),
                                      vector_knowledge_base_configuration: {
-                                       embedding_model_arn: ::String
+                                       embedding_model_arn: ::String,
+                                       embedding_model_configuration: {
+                                         bedrock_embedding_model_configuration: {
+                                           dimensions: ::Integer?
+                                         }?
+                                       }?
                                      }?
                                    },
                                    name: ::String,
@@ -801,7 +806,12 @@ module Aws
                                    knowledge_base_configuration: {
                                      type: ("VECTOR"),
                                      vector_knowledge_base_configuration: {
-                                       embedding_model_arn: ::String
+                                       embedding_model_arn: ::String,
+                                       embedding_model_configuration: {
+                                         bedrock_embedding_model_configuration: {
+                                           dimensions: ::Integer?
+                                         }?
+                                       }?
                                      }?
                                    },
                                    knowledge_base_id: ::String,

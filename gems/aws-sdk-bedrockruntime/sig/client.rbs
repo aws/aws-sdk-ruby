@@ -75,6 +75,182 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _ConverseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConverseResponse]
+        def output: () -> Types::ConverseOutput
+        def stop_reason: () -> ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "content_filtered")
+        def usage: () -> Types::TokenUsage
+        def metrics: () -> Types::ConverseMetrics
+        def additional_model_response_fields: () -> untyped
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#converse-instance_method
+      def converse: (
+                      model_id: ::String,
+                      messages: Array[
+                        {
+                          role: ("user" | "assistant"),
+                          content: Array[
+                            {
+                              text: ::String?,
+                              image: {
+                                format: ("png" | "jpeg" | "gif" | "webp"),
+                                source: {
+                                  bytes: ::String?
+                                }
+                              }?,
+                              tool_use: {
+                                tool_use_id: ::String,
+                                name: ::String,
+                                input: {
+                                }
+                              }?,
+                              tool_result: {
+                                tool_use_id: ::String,
+                                content: Array[
+                                  {
+                                    json: {
+                                    }?,
+                                    text: ::String?,
+                                    image: {
+                                      format: ("png" | "jpeg" | "gif" | "webp"),
+                                      source: {
+                                        bytes: ::String?
+                                      }
+                                    }?
+                                  },
+                                ],
+                                status: ("success" | "error")?
+                              }?
+                            },
+                          ]
+                        },
+                      ],
+                      ?system: Array[
+                        {
+                          text: ::String?
+                        },
+                      ],
+                      ?inference_config: {
+                        max_tokens: ::Integer?,
+                        temperature: ::Float?,
+                        top_p: ::Float?,
+                        stop_sequences: Array[::String]?
+                      },
+                      ?tool_config: {
+                        tools: Array[
+                          {
+                            tool_spec: {
+                              name: ::String,
+                              description: ::String?,
+                              input_schema: {
+                                json: {
+                                }?
+                              }
+                            }?
+                          },
+                        ],
+                        tool_choice: {
+                          auto: {
+                          }?,
+                          any: {
+                          }?,
+                          tool: {
+                            name: ::String
+                          }?
+                        }?
+                      },
+                      ?additional_model_request_fields: {
+                      },
+                      ?additional_model_response_field_paths: Array[::String]
+                    ) -> _ConverseResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConverseResponseSuccess
+
+      interface _ConverseStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConverseStreamResponse]
+        def stream: () -> Types::ConverseStreamOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#converse_stream-instance_method
+      def converse_stream: (
+                             model_id: ::String,
+                             messages: Array[
+                               {
+                                 role: ("user" | "assistant"),
+                                 content: Array[
+                                   {
+                                     text: ::String?,
+                                     image: {
+                                       format: ("png" | "jpeg" | "gif" | "webp"),
+                                       source: {
+                                         bytes: ::String?
+                                       }
+                                     }?,
+                                     tool_use: {
+                                       tool_use_id: ::String,
+                                       name: ::String,
+                                       input: {
+                                       }
+                                     }?,
+                                     tool_result: {
+                                       tool_use_id: ::String,
+                                       content: Array[
+                                         {
+                                           json: {
+                                           }?,
+                                           text: ::String?,
+                                           image: {
+                                             format: ("png" | "jpeg" | "gif" | "webp"),
+                                             source: {
+                                               bytes: ::String?
+                                             }
+                                           }?
+                                         },
+                                       ],
+                                       status: ("success" | "error")?
+                                     }?
+                                   },
+                                 ]
+                               },
+                             ],
+                             ?system: Array[
+                               {
+                                 text: ::String?
+                               },
+                             ],
+                             ?inference_config: {
+                               max_tokens: ::Integer?,
+                               temperature: ::Float?,
+                               top_p: ::Float?,
+                               stop_sequences: Array[::String]?
+                             },
+                             ?tool_config: {
+                               tools: Array[
+                                 {
+                                   tool_spec: {
+                                     name: ::String,
+                                     description: ::String?,
+                                     input_schema: {
+                                       json: {
+                                       }?
+                                     }
+                                   }?
+                                 },
+                               ],
+                               tool_choice: {
+                                 auto: {
+                                 }?,
+                                 any: {
+                                 }?,
+                                 tool: {
+                                   name: ::String
+                                 }?
+                               }?
+                             },
+                             ?additional_model_request_fields: {
+                             },
+                             ?additional_model_response_field_paths: Array[::String]
+                           ) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
+
       interface _InvokeModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeModelResponse]
         def body: () -> ::String

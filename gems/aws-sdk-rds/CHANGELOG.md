@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.233.0 (2024-05-30)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Aurora Postgres DBname.
+
 1.232.0 (2024-05-21)
 ------------------
 

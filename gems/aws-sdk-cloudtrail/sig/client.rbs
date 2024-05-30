@@ -345,6 +345,7 @@ module Aws
         def billing_mode: () -> ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
         def federation_status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
         def federation_role_arn: () -> ::String
+        def partition_keys: () -> ::Array[Types::PartitionKey]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_event_data_store-instance_method
       def get_event_data_store: (

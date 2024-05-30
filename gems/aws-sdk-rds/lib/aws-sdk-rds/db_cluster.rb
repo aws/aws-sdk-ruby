@@ -972,9 +972,9 @@ module Aws::RDS
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     # @option options [String] :database_name
-    #   The name for your database of up to 64 alphanumeric characters. If you
-    #   don't provide a name, Amazon RDS doesn't create a database in the DB
-    #   cluster you are creating.
+    #   The name for your database of up to 64 alphanumeric characters. A
+    #   database named `postgres` is always created. If this parameter is
+    #   specified, an additional database with this name is created.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :db_cluster_parameter_group_name

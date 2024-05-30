@@ -145,6 +145,7 @@ module Aws::EMRServerless
     class GetDashboardForJobRunRequest
       attr_accessor application_id: ::String
       attr_accessor job_run_id: ::String
+      attr_accessor attempt: ::Integer
       SENSITIVE: []
     end
 
@@ -156,6 +157,7 @@ module Aws::EMRServerless
     class GetJobRunRequest
       attr_accessor application_id: ::String
       attr_accessor job_run_id: ::String
+      attr_accessor attempt: ::Integer
       SENSITIVE: []
     end
 
@@ -233,6 +235,30 @@ module Aws::EMRServerless
       attr_accessor total_execution_duration_seconds: ::Integer
       attr_accessor execution_timeout_minutes: ::Integer
       attr_accessor billed_resource_utilization: Types::ResourceUtilization
+      attr_accessor mode: ("BATCH" | "STREAMING")
+      attr_accessor retry_policy: Types::RetryPolicy
+      attr_accessor attempt: ::Integer
+      attr_accessor attempt_created_at: ::Time
+      attr_accessor attempt_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class JobRunAttemptSummary
+      attr_accessor application_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor mode: ("BATCH" | "STREAMING")
+      attr_accessor arn: ::String
+      attr_accessor created_by: ::String
+      attr_accessor job_created_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor execution_role: ::String
+      attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor state_details: ::String
+      attr_accessor release_label: ::String
+      attr_accessor type: ::String
+      attr_accessor attempt: ::Integer
       SENSITIVE: []
     end
 
@@ -240,6 +266,7 @@ module Aws::EMRServerless
       attr_accessor application_id: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
+      attr_accessor mode: ("BATCH" | "STREAMING")
       attr_accessor arn: ::String
       attr_accessor created_by: ::String
       attr_accessor created_at: ::Time
@@ -249,6 +276,9 @@ module Aws::EMRServerless
       attr_accessor state_details: ::String
       attr_accessor release_label: ::String
       attr_accessor type: ::String
+      attr_accessor attempt: ::Integer
+      attr_accessor attempt_created_at: ::Time
+      attr_accessor attempt_updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -265,6 +295,20 @@ module Aws::EMRServerless
       SENSITIVE: []
     end
 
+    class ListJobRunAttemptsRequest
+      attr_accessor application_id: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListJobRunAttemptsResponse
+      attr_accessor job_run_attempts: ::Array[Types::JobRunAttemptSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListJobRunsRequest
       attr_accessor application_id: ::String
       attr_accessor next_token: ::String
@@ -272,6 +316,7 @@ module Aws::EMRServerless
       attr_accessor created_at_after: ::Time
       attr_accessor created_at_before: ::Time
       attr_accessor states: ::Array[("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")]
+      attr_accessor mode: ("BATCH" | "STREAMING")
       SENSITIVE: []
     end
 
@@ -335,6 +380,12 @@ module Aws::EMRServerless
       SENSITIVE: []
     end
 
+    class RetryPolicy
+      attr_accessor max_attempts: ::Integer
+      attr_accessor max_failed_attempts_per_hour: ::Integer
+      SENSITIVE: []
+    end
+
     class S3MonitoringConfiguration
       attr_accessor log_uri: ::String
       attr_accessor encryption_key_arn: ::String
@@ -370,6 +421,8 @@ module Aws::EMRServerless
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor execution_timeout_minutes: ::Integer
       attr_accessor name: ::String
+      attr_accessor mode: ("BATCH" | "STREAMING")
+      attr_accessor retry_policy: Types::RetryPolicy
       SENSITIVE: []
     end
 

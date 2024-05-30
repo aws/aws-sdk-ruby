@@ -383,6 +383,7 @@ module Aws::CloudTrail
       attr_accessor billing_mode: ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
       attr_accessor federation_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
       attr_accessor federation_role_arn: ::String
+      attr_accessor partition_keys: ::Array[Types::PartitionKey]
       SENSITIVE: []
     end
 
@@ -823,6 +824,12 @@ module Aws::CloudTrail
     end
 
     class OrganizationsNotInUseException < Aws::EmptyStructure
+    end
+
+    class PartitionKey
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
     end
 
     class PublicKey

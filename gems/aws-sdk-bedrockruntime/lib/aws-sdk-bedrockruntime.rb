@@ -34,7 +34,7 @@ require_relative 'aws-sdk-bedrockruntime/event_streams'
 # structure.
 #
 #     bedrock_runtime = Aws::BedrockRuntime::Client.new
-#     resp = bedrock_runtime.invoke_model(params)
+#     resp = bedrock_runtime.converse(params)
 #
 # See {Client} for more information.
 #
@@ -54,6 +54,6 @@ require_relative 'aws-sdk-bedrockruntime/event_streams'
 # @!group service
 module Aws::BedrockRuntime
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end

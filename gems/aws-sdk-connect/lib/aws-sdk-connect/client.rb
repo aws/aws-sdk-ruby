@@ -5402,6 +5402,8 @@ module Aws::Connect
     #   resp.routing_profile.last_modified_time #=> Time
     #   resp.routing_profile.last_modified_region #=> String
     #   resp.routing_profile.is_default #=> Boolean
+    #   resp.routing_profile.associated_queue_ids #=> Array
+    #   resp.routing_profile.associated_queue_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfile AWS API Documentation
     #
@@ -12983,6 +12985,8 @@ module Aws::Connect
     #   resp.routing_profiles[0].last_modified_time #=> Time
     #   resp.routing_profiles[0].last_modified_region #=> String
     #   resp.routing_profiles[0].is_default #=> Boolean
+    #   resp.routing_profiles[0].associated_queue_ids #=> Array
+    #   resp.routing_profiles[0].associated_queue_ids[0] #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -17486,7 +17490,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.160.0'
+      context[:gem_version] = '1.161.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

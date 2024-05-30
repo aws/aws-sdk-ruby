@@ -16202,6 +16202,10 @@ module Aws::Connect
     #   Whether this a default routing profile.
     #   @return [Boolean]
     #
+    # @!attribute [rw] associated_queue_ids
+    #   The IDs of the associated queue.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
     #
     class RoutingProfile < Struct.new(
@@ -16218,7 +16222,8 @@ module Aws::Connect
       :agent_availability_timer,
       :last_modified_time,
       :last_modified_region,
-      :is_default)
+      :is_default,
+      :associated_queue_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16372,8 +16377,8 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a string
     #   condition.
     #
-    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
-    #   `description`, and `resourceID`.
+    #   <note markdown="1"> The currently supported values for `FieldName` are
+    #   `associatedQueueIds`, `name`, `description`, and `resourceID`.
     #
     #    </note>
     #   @return [Types::StringCondition]

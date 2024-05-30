@@ -247,7 +247,7 @@ module Aws::SageMaker
     end
 
     class AutoMLAlgorithmConfig
-      attr_accessor auto_ml_algorithms: ::Array[("xgboost" | "linear-learner" | "mlp" | "lightgbm" | "catboost" | "randomforest" | "extra-trees" | "nn-torch" | "fastai")]
+      attr_accessor auto_ml_algorithms: ::Array[("xgboost" | "linear-learner" | "mlp" | "lightgbm" | "catboost" | "randomforest" | "extra-trees" | "nn-torch" | "fastai" | "cnn-qr" | "deepar" | "prophet" | "npts" | "arima" | "ets")]
       SENSITIVE: []
     end
 
@@ -1473,6 +1473,8 @@ module Aws::SageMaker
       attr_accessor additional_inference_specifications: ::Array[Types::AdditionalInferenceSpecificationDefinition]
       attr_accessor skip_model_validation: ("All" | "None")
       attr_accessor source_uri: ::String
+      attr_accessor security_config: Types::ModelPackageSecurityConfig
+      attr_accessor model_card: Types::ModelPackageModelCard
       SENSITIVE: []
     end
 
@@ -3245,6 +3247,8 @@ module Aws::SageMaker
       attr_accessor additional_inference_specifications: ::Array[Types::AdditionalInferenceSpecificationDefinition]
       attr_accessor skip_model_validation: ("All" | "None")
       attr_accessor source_uri: ::String
+      attr_accessor security_config: Types::ModelPackageSecurityConfig
+      attr_accessor model_card: Types::ModelPackageModelCard
       SENSITIVE: []
     end
 
@@ -6667,6 +6671,8 @@ module Aws::SageMaker
       attr_accessor sample_payload_url: ::String
       attr_accessor additional_inference_specifications: ::Array[Types::AdditionalInferenceSpecificationDefinition]
       attr_accessor source_uri: ::String
+      attr_accessor security_config: Types::ModelPackageSecurityConfig
+      attr_accessor model_card: Types::ModelPackageModelCard
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor customer_metadata_properties: ::Hash[::String, ::String]
       attr_accessor drift_check_baselines: Types::DriftCheckBaselines
@@ -6707,6 +6713,17 @@ module Aws::SageMaker
       attr_accessor model_package_group_description: ::String
       attr_accessor creation_time: ::Time
       attr_accessor model_package_group_status: ("Pending" | "InProgress" | "Completed" | "Failed" | "Deleting" | "DeleteFailed")
+      SENSITIVE: []
+    end
+
+    class ModelPackageModelCard
+      attr_accessor model_card_content: ::String
+      attr_accessor model_card_status: ("Draft" | "PendingReview" | "Approved" | "Archived")
+      SENSITIVE: [:model_card_content]
+    end
+
+    class ModelPackageSecurityConfig
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -8476,6 +8493,7 @@ module Aws::SageMaker
       attr_accessor transformations: Types::TimeSeriesTransformations
       attr_accessor time_series_config: Types::TimeSeriesConfig
       attr_accessor holiday_config: ::Array[Types::HolidayConfigAttributes]
+      attr_accessor candidate_generation_config: Types::CandidateGenerationConfig
       SENSITIVE: []
     end
 
@@ -9145,6 +9163,7 @@ module Aws::SageMaker
       attr_accessor additional_inference_specifications_to_add: ::Array[Types::AdditionalInferenceSpecificationDefinition]
       attr_accessor inference_specification: Types::InferenceSpecification
       attr_accessor source_uri: ::String
+      attr_accessor model_card: Types::ModelPackageModelCard
       SENSITIVE: []
     end
 

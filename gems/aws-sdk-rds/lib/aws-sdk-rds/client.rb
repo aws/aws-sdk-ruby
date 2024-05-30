@@ -617,12 +617,14 @@ module Aws::RDS
     # Amazon RDS resources, or used in a Condition statement in an IAM
     # policy for Amazon RDS.
     #
-    # For an overview on tagging Amazon RDS resources, see [Tagging Amazon
-    # RDS Resources][1].
+    # For an overview on tagging your relational database resources, see
+    # [Tagging Amazon RDS Resources][1] or [Tagging Amazon Aurora and Amazon
+    # RDS Resources][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon RDS resource that the tags are added to. This value is an
@@ -2577,9 +2579,9 @@ module Aws::RDS
     #   Valid for Cluster Type: Aurora DB clusters only
     #
     # @option params [String] :database_name
-    #   The name for your database of up to 64 alphanumeric characters. If you
-    #   don't provide a name, Amazon RDS doesn't create a database in the DB
-    #   cluster you are creating.
+    #   The name for your database of up to 64 alphanumeric characters. A
+    #   database named `postgres` is always created. If this parameter is
+    #   specified, an additional database with this name is created.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -4255,9 +4257,9 @@ module Aws::RDS
     #   Amazon Aurora PostgreSQL
     #
     #   : The name of the database to create when the primary DB instance of
-    #     the Aurora PostgreSQL DB cluster is created. If this parameter
-    #     isn't specified for an Aurora PostgreSQL DB cluster, a database
-    #     named `postgres` is created in the DB cluster.
+    #     the Aurora PostgreSQL DB cluster is created. A database named
+    #     `postgres` is always created. If this parameter is specified, an
+    #     additional database with this name is created.
     #
     #     Constraints:
     #
@@ -4352,8 +4354,8 @@ module Aws::RDS
     #   RDS for PostgreSQL
     #
     #   : The name of the database to create when the DB instance is created.
-    #     If this parameter isn't specified, a database named `postgres` is
-    #     created in the DB instance.
+    #     A database named `postgres` is always created. If this parameter is
+    #     specified, an additional database with this name is created.
     #
     #     Constraints:
     #
@@ -27759,8 +27761,14 @@ module Aws::RDS
     #   The prefix of your Amazon S3 bucket.
     #
     # @option params [required, String] :s3_ingestion_role_arn
-    #   An Amazon Web Services Identity and Access Management (IAM) role to
-    #   allow Amazon RDS to access your Amazon S3 bucket.
+    #   An Amazon Web Services Identity and Access Management (IAM) role with
+    #   a trust policy and a permissions policy that allows Amazon RDS to
+    #   access your Amazon S3 bucket. For information about this role, see [
+    #   Creating an IAM role manually][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html#MySQL.Procedural.Importing.Enabling.IAM
     #
     # @option params [Boolean] :enable_performance_insights
     #   Specifies whether to enable Performance Insights for the DB instance.
@@ -31244,7 +31252,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.232.0'
+      context[:gem_version] = '1.233.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

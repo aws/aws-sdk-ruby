@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2024-05-30)
+------------------
+
+* Feature - The release adds support for spark structured streaming.
+
 1.24.0 (2024-05-23)
 ------------------
 

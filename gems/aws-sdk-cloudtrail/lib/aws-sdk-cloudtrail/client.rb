@@ -608,15 +608,15 @@ module Aws::CloudTrail
     #   CloudTrail User Guide.
     #
     #   For more information about how to use advanced event selectors to
-    #   include non-Amazon Web Services events in your event data store, see
-    #   [Create an integration to log events from outside Amazon Web
-    #   Services][3] in the CloudTrail User Guide.
+    #   include events outside of Amazon Web Services events in your event
+    #   data store, see [Create an integration to log events from outside
+    #   Amazon Web Services][3] in the CloudTrail User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
-    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config
-    #   [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-eds-cli.html#lake-cli-create-eds-config
+    #   [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-integrations-cli.html#lake-cli-create-integration
     #
     # @option params [Boolean] :multi_region_enabled
     #   Specifies whether the event data store includes events from all
@@ -833,11 +833,12 @@ module Aws::CloudTrail
     #
     # @option params [required, String] :s3_bucket_name
     #   Specifies the name of the Amazon S3 bucket designated for publishing
-    #   log files. See [Amazon S3 Bucket Naming Requirements][1].
+    #   log files. For information about bucket naming rules, see [Bucket
+    #   naming rules][1] in the *Amazon Simple Storage Service User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #
     # @option params [String] :s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
@@ -847,7 +848,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
     #
     # @option params [String] :sns_topic_name
     #   Specifies the name of the Amazon SNS topic defined for notification of
@@ -1446,6 +1447,7 @@ module Aws::CloudTrail
     #   * {Types::GetEventDataStoreResponse#billing_mode #billing_mode} => String
     #   * {Types::GetEventDataStoreResponse#federation_status #federation_status} => String
     #   * {Types::GetEventDataStoreResponse#federation_role_arn #federation_role_arn} => String
+    #   * {Types::GetEventDataStoreResponse#partition_keys #partition_keys} => Array&lt;Types::PartitionKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1484,6 +1486,9 @@ module Aws::CloudTrail
     #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
     #   resp.federation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #   resp.federation_role_arn #=> String
+    #   resp.partition_keys #=> Array
+    #   resp.partition_keys[0].name #=> String
+    #   resp.partition_keys[0].type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStore AWS API Documentation
     #
@@ -2598,10 +2603,10 @@ module Aws::CloudTrail
     # trail to log Insights events, be sure the event selector enables
     # logging of the Insights event types you want configured for your
     # trail. For more information about logging Insights events, see
-    # [Logging Insights events for trails][1] in the *CloudTrail User
-    # Guide*. By default, trails created without specific event selectors
-    # are configured to log all read and write management events, and no
-    # data events.
+    # [Logging Insights events][1] in the *CloudTrail User Guide*. By
+    # default, trails created without specific event selectors are
+    # configured to log all read and write management events, and no data
+    # events.
     #
     # When an event occurs in your account, CloudTrail evaluates the event
     # selectors or advanced event selectors in all trails. For each trail,
@@ -3105,7 +3110,8 @@ module Aws::CloudTrail
     # for other Amazon Web Services services. If you want to import
     # CloudTrail events contained in another prefix, you must include the
     # prefix in the `S3LocationUri`. For more considerations about importing
-    # trail events, see [Considerations][1].
+    # trail events, see [Considerations for copying trail events][1] in the
+    # *CloudTrail User Guide*.
     #
     # When you start a new import, the `Destinations` and `ImportSource`
     # parameters are required. Before starting a new import, disable any
@@ -3701,11 +3707,11 @@ module Aws::CloudTrail
     #
     # @option params [String] :s3_bucket_name
     #   Specifies the name of the Amazon S3 bucket designated for publishing
-    #   log files. See [Amazon S3 Bucket Naming Requirements][1].
+    #   log files. See [Amazon S3 Bucket naming rules][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #
     # @option params [String] :s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
@@ -3715,7 +3721,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
     #
     # @option params [String] :sns_topic_name
     #   Specifies the name of the Amazon SNS topic defined for notification of
@@ -3876,7 +3882,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

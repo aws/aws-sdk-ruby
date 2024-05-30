@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.161.0 (2024-05-30)
+------------------
+
+* Feature - Adding associatedQueueIds as a SearchCriteria and response field to the SearchRoutingProfiles API
+
 1.160.0 (2024-05-29)
 ------------------
 
