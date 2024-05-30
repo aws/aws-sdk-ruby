@@ -33,10 +33,33 @@ module Aws
       end
 
       def parse_body(context)
-        Parser.new(
-          context.operation.output,
-          query_compatible: query_compatible?(context)
-        ).parse(context.http_response.body_contents)
+        cbor = context.http_response.body_contents
+        if (rules = context.operation.output)
+          if cbor.is_a?(Array)
+            # an array of emitted events
+            if cbor[0].respond_to?(:response)
+              # initial response exists
+              # it must be the first event arrived
+              resp_struct = cbor.shift.response
+            else
+              resp_struct = context.operation.output.shape.struct_class.new
+            end
+
+            rules.shape.members.each do |name, ref|
+              if ref.eventstream
+                resp_struct.send("#{name}=", cbor.to_enum)
+              end
+            end
+            resp_struct
+          else
+            Parser.new(
+              rules,
+              query_compatible: query_compatible?(context)
+            ).parse(cbor)
+          end
+        else
+          EmptyStructure.new
+        end
       end
 
       def apply_request_id(context)
