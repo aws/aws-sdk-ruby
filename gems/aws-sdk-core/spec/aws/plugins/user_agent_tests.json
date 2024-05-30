@@ -17,10 +17,7 @@
       "sharedConfigFile":{
         "retry_mode":"standard"
       },
-      "feature":{
-        "name":"s3-transfer",
-        "version":""
-      },
+      "metric": "A",
       "framework":{
         "name":"foobar",
         "version":""
@@ -37,7 +34,7 @@
         ],
         "containsInAnyOrder":[
           "app/123456",
-          "ft/s3-transfer",
+          "m/A",
           "lib/foobar"
         ]
       }
