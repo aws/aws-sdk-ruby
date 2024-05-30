@@ -70,7 +70,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_tags(filters: [
         {
           name: "key",
@@ -196,7 +196,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -241,7 +241,7 @@ module Aws::EC2
           value: @value
         }]
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       resp.data
@@ -321,7 +321,7 @@ module Aws::EC2
               value: item.value
             }
           end
-          Aws::Plugins::UserAgent.feature('resource') do
+          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
             batch[0].client.delete_tags(params)
           end
         end

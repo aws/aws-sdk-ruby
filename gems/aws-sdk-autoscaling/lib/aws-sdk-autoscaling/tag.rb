@@ -77,7 +77,7 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_tags(filters: [
         {
           name: "key",
@@ -203,7 +203,7 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -233,7 +233,7 @@ module Aws::AutoScaling
         resource_id: @resource_id,
         key: @key
       }])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_or_update_tags(options)
       end
       resp.data
@@ -262,7 +262,7 @@ module Aws::AutoScaling
         resource_id: @resource_id,
         key: @key
       }])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       resp.data
@@ -331,7 +331,7 @@ module Aws::AutoScaling
               key: item.key
             }
           end
-          Aws::Plugins::UserAgent.feature('resource') do
+          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
             batch[0].client.create_or_update_tags(params)
           end
         end
@@ -351,7 +351,7 @@ module Aws::AutoScaling
               key: item.key
             }
           end
-          Aws::Plugins::UserAgent.feature('resource') do
+          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
             batch[0].client.delete_tags(params)
           end
         end

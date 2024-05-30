@@ -160,7 +160,7 @@ module Aws::DynamoDB
     #   * `NONE` - No `ConsumedCapacity` details are included in the response.
     # @return [Types::BatchGetItemOutput]
     def batch_get_item(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.batch_get_item(options)
       end
       resp.data
@@ -243,7 +243,7 @@ module Aws::DynamoDB
     #   response. If set to `NONE` (the default), no statistics are returned.
     # @return [Types::BatchWriteItemOutput]
     def batch_write_item(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.batch_write_item(options)
       end
       resp.data
@@ -552,7 +552,7 @@ module Aws::DynamoDB
     #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     # @return [Table]
     def create_table(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_table(options)
       end
       Table.new(
@@ -580,7 +580,7 @@ module Aws::DynamoDB
     # @return [Table::Collection]
     def tables(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_tables(options)
         end
         resp.each_page do |page|

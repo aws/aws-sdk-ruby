@@ -188,7 +188,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -212,7 +212,7 @@ module Aws::EC2
     # @return [Types::DeleteKeyPairResult]
     def delete(options = {})
       options = options.merge(key_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_key_pair(options)
       end
       resp.data

@@ -4,15 +4,19 @@ module Aws
   module Plugins
     # @api private
     class UserAgent < Seahorse::Client::Plugin
-      METRICS = Aws::Json.load(<<-METRICS)["BUSINESS_METRICS_IDENTIFIERS"]
+      METRICS = Aws::Json.load(<<-METRICS)
         {
-          "BUSINESS_METRICS_IDENTIFIERS": {
-            "S3_EXPRESS_BUCKET": "A",
-            "GZIP_REQUEST_COMPRESSION": "B",
-            "RETRY_MODE_LEGACY": "C",
-            "RETRY_MODE_STANDARD": "D",
-            "RETRY_MODE_ADAPTIVE": "E"
-          }
+          "RESOURCE_MODEL": "A",
+          "WAITER": "B",
+          "PAGINATOR": "C",
+          "RETRY_MODE_LEGACY": "D",
+          "RETRY_MODE_STANDARD": "E",
+          "RETRY_MODE_ADAPTIVE": "F",
+          "S3_TRANSFER": "G",
+          "S3_CRYPTO_V1N": "H",
+          "S3_CRYPTO_V2": "I",
+          "S3_EXPRESS_BUCKET": "J",
+          "S3_ACCESS_GRANTS": "K"
         }
       METRICS
 
@@ -33,17 +37,6 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         app_id = ENV['AWS_SDK_UA_APP_ID']
         app_id ||= Aws.shared_config.sdk_ua_app_id(profile: cfg.profile)
         app_id
-      end
-
-      def self.feature(feature, &block)
-        Thread.current[:aws_sdk_core_user_agent_feature] ||= []
-        Thread.current[:aws_sdk_core_user_agent_feature] << feature
-        block.call
-      ensure
-        Thread.current[:aws_sdk_core_user_agent_feature].pop
-        if Thread.current[:aws_sdk_core_user_agent_feature].empty?
-          Thread.current[:aws_sdk_core_user_agent_feature] = nil
-        end
       end
 
       def self.metric(metric, &block)
@@ -86,9 +79,6 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             end
             if (app_id_m = app_id_metadata)
               ua += " #{app_id_m}"
-            end
-            if (feature_m = feature_metadata)
-              ua += " #{feature_m}"
             end
             if (framework_m = framework_metadata)
               ua += " #{framework_m}"
@@ -150,13 +140,6 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             # Sanitize and only allow these characters
             app_id = app_id.gsub(/[^!#$%&'*+\-.^_`|~0-9A-Za-z]/, '-')
             "app/#{app_id}"
-          end
-
-          def feature_metadata
-            return unless Thread.current[:aws_sdk_core_user_agent_feature]
-
-            features = Thread.current[:aws_sdk_core_user_agent_feature]
-            features.map { |f| "ft/#{f}" }.join(' ')
           end
 
           def framework_metadata

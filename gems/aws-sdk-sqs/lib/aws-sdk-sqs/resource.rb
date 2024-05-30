@@ -294,7 +294,7 @@ module Aws::SQS
     #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name
     # @return [Queue]
     def create_queue(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_queue(options)
       end
       Queue.new(
@@ -321,7 +321,7 @@ module Aws::SQS
     #   queue.
     # @return [Queue]
     def get_queue_by_name(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_queue_url(options)
       end
       Queue.new(
@@ -355,7 +355,7 @@ module Aws::SQS
     # @return [Queue::Collection]
     def queues(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_queues(options)
         end
         resp.each_page do |page|

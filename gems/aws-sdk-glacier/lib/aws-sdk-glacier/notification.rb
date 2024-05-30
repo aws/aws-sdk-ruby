@@ -70,7 +70,7 @@ module Aws::Glacier
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_vault_notifications(
         account_id: @account_id,
         vault_name: @vault_name
@@ -190,7 +190,7 @@ module Aws::Glacier
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -207,7 +207,7 @@ module Aws::Glacier
         account_id: @account_id,
         vault_name: @vault_name
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_vault_notifications(options)
       end
       resp.data
@@ -230,7 +230,7 @@ module Aws::Glacier
         account_id: @account_id,
         vault_name: @vault_name
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.set_vault_notifications(options)
       end
       resp.data

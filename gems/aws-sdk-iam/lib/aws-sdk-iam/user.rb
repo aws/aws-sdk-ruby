@@ -150,7 +150,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_user(user_name: @name)
       end
       @data = resp.user
@@ -197,7 +197,7 @@ module Aws::IAM
       options, params = separate_params_and_options(options)
       waiter = Waiters::UserExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(user_name: @name))
       end
       User.new({
@@ -300,7 +300,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -327,7 +327,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def add_group(options = {})
       options = options.merge(user_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.add_user_to_group(options)
       end
       resp.data
@@ -351,7 +351,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(user_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_user_policy(options)
       end
       resp.data
@@ -423,7 +423,7 @@ module Aws::IAM
     # @return [User]
     def create(options = {})
       options = options.merge(user_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_user(options)
       end
       User.new(
@@ -440,7 +440,7 @@ module Aws::IAM
     # @return [AccessKeyPair]
     def create_access_key_pair(options = {})
       options = options.merge(user_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_access_key(options)
       end
       AccessKeyPair.new(
@@ -481,7 +481,7 @@ module Aws::IAM
     # @return [LoginProfile]
     def create_login_profile(options = {})
       options = options.merge(user_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_login_profile(options)
       end
       LoginProfile.new(
@@ -535,7 +535,7 @@ module Aws::IAM
     # @return [UserPolicy]
     def create_policy(options = {})
       options = options.merge(user_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_user_policy(options)
       end
       UserPolicy.new(
@@ -552,7 +552,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(user_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_user(options)
       end
       resp.data
@@ -576,7 +576,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(user_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_user_policy(options)
       end
       resp.data
@@ -635,7 +635,7 @@ module Aws::IAM
     # @return [MfaDevice]
     def enable_mfa(options = {})
       options = options.merge(user_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.enable_mfa_device(options)
       end
       MfaDevice.new(
@@ -665,7 +665,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def remove_group(options = {})
       options = options.merge(user_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.remove_user_from_group(options)
       end
       resp.data
@@ -702,7 +702,7 @@ module Aws::IAM
     # @return [User]
     def update(options = {})
       options = options.merge(user_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_user(options)
       end
       User.new(
@@ -731,7 +731,7 @@ module Aws::IAM
     def access_keys(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(user_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_access_keys(options)
         end
         resp.each_page do |page|
@@ -775,7 +775,7 @@ module Aws::IAM
     def attached_policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(user_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_attached_user_policies(options)
         end
         resp.each_page do |page|
@@ -800,7 +800,7 @@ module Aws::IAM
     def groups(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(user_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_groups_for_user(options)
         end
         resp.each_page do |page|
@@ -844,7 +844,7 @@ module Aws::IAM
     def mfa_devices(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(user_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_mfa_devices(options)
         end
         resp.each_page do |page|
@@ -871,7 +871,7 @@ module Aws::IAM
     def policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(user_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_user_policies(options)
         end
         resp.each_page do |page|
@@ -917,7 +917,7 @@ module Aws::IAM
     def signing_certificates(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(user_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_signing_certificates(options)
         end
         resp.each_page do |page|

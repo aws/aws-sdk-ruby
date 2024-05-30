@@ -54,7 +54,7 @@ module Aws::SQS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_queue_attributes(
         queue_url: @url,
         attribute_names: ["All"]
@@ -125,7 +125,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def add_permission(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.add_permission(options)
       end
       resp.data
@@ -149,7 +149,7 @@ module Aws::SQS
     # @return [Types::ChangeMessageVisibilityBatchResult]
     def change_message_visibility_batch(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.change_message_visibility_batch(options)
       end
       resp.data
@@ -162,7 +162,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_queue(options)
       end
       resp.data
@@ -184,7 +184,7 @@ module Aws::SQS
     # @return [Types::DeleteMessageBatchResult]
     def delete_messages(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_message_batch(options)
       end
       resp.data
@@ -197,7 +197,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def purge(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.purge_queue(options)
       end
       resp.data
@@ -415,7 +415,7 @@ module Aws::SQS
     def receive_messages(options = {})
       batch = []
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.receive_message(options)
       end
       resp.data.messages.each do |m|
@@ -441,7 +441,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def remove_permission(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.remove_permission(options)
       end
       resp.data
@@ -615,7 +615,7 @@ module Aws::SQS
     # @return [Types::SendMessageResult]
     def send_message(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.send_message(options)
       end
       resp.data
@@ -658,7 +658,7 @@ module Aws::SQS
     # @return [Types::SendMessageBatchResult]
     def send_messages(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.send_message_batch(options)
       end
       resp.data
@@ -863,7 +863,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.set_queue_attributes(options)
       end
       resp.data
@@ -879,7 +879,7 @@ module Aws::SQS
     def dead_letter_source_queues(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(queue_url: @url)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_dead_letter_source_queues(options)
         end
         resp.each_page do |page|

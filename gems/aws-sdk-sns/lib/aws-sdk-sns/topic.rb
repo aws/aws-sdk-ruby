@@ -141,7 +141,7 @@ module Aws::SNS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_topic_attributes(topic_arn: @arn)
       end
       @data = resp.data
@@ -188,7 +188,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def add_permission(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.add_permission(options)
       end
       resp.data
@@ -212,7 +212,7 @@ module Aws::SNS
     # @return [Subscription]
     def confirm_subscription(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.confirm_subscription(options)
       end
       Subscription.new(
@@ -228,7 +228,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_topic(options)
       end
       resp.data
@@ -371,7 +371,7 @@ module Aws::SNS
     # @return [Types::PublishResponse]
     def publish(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.publish(options)
       end
       resp.data
@@ -388,7 +388,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def remove_permission(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.remove_permission(options)
       end
       resp.data
@@ -563,7 +563,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.set_topic_attributes(options)
       end
       resp.data
@@ -720,7 +720,7 @@ module Aws::SNS
     # @return [Subscription]
     def subscribe(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.subscribe(options)
       end
       Subscription.new(
@@ -739,7 +739,7 @@ module Aws::SNS
     def subscriptions(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(topic_arn: @arn)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_subscriptions_by_topic(options)
         end
         resp.each_page do |page|

@@ -119,7 +119,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_option_groups(option_group_name: @name)
       end
       @data = resp.option_groups_list[0]
@@ -236,7 +236,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -297,7 +297,7 @@ module Aws::RDS
     # @return [OptionGroup]
     def create(options = {})
       options = options.merge(option_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_option_group(options)
       end
       OptionGroup.new(
@@ -346,7 +346,7 @@ module Aws::RDS
     # @return [OptionGroup]
     def copy(options = {})
       options = options.merge(source_option_group_identifier: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.copy_option_group(options)
       end
       OptionGroup.new(
@@ -363,7 +363,7 @@ module Aws::RDS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(option_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_option_group(options)
       end
       resp.data
@@ -410,7 +410,7 @@ module Aws::RDS
     # @return [OptionGroup]
     def modify(options = {})
       options = options.merge(option_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_option_group(options)
       end
       OptionGroup.new(
