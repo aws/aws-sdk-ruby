@@ -10,7 +10,7 @@ module Aws
 
       # @return the encoded bytes in CBOR format for all added data
       def bytes
-        @buffer
+        @buffer.force_encoding(Encoding::BINARY)
       end
 
       # generic method for adding generic Ruby data based on its type
@@ -174,7 +174,7 @@ module Aws
       end
 
       def add_string(value)
-        value = value.encode(Encoding::UTF_8).force_encoding(Encoding::BINARY)
+        value = value.encode(Encoding::UTF_8)
         head(MAJOR_TYPE_STR, value.bytesize)
         @buffer << value
       end

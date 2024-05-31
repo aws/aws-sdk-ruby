@@ -125,7 +125,7 @@ module Aws
 
       def read_binary_string
         _major_type, add_info = read_info
-        take(read_count(add_info)).force_encoding(Encoding::BINARY)
+        take(read_count(add_info))
       end
 
       def read_string
