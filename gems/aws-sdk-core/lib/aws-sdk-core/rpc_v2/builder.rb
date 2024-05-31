@@ -45,7 +45,7 @@ module Aws
       end
 
       def blob(value)
-        String === value ? value : value.read
+        (String === value ? value : value.read).force_encoding(Encoding::BINARY)
       end
 
       def format(ref, value)
