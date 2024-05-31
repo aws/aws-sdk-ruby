@@ -185,6 +185,7 @@ module Aws::CodeGuruSecurity
     class GetScanResponse
       attr_accessor analysis_type: ("Security" | "All")
       attr_accessor created_at: ::Time
+      attr_accessor error_message: ::String
       attr_accessor number_of_revisions: ::Integer
       attr_accessor run_id: ::String
       attr_accessor scan_name: ::String

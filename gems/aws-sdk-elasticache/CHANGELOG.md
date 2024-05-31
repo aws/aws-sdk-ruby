@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2024-05-31)
+------------------
+
+* Feature - Update to attributes of TestFailover and minor revisions.
+
 1.101.0 (2024-05-13)
 ------------------
 

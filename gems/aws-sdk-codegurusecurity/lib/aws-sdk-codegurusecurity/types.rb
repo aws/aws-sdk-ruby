@@ -39,30 +39,29 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # A summary of findings metrics in an account.
+    # A summary of findings metrics for an account on a specified date.
     #
     # @!attribute [rw] closed_findings
-    #   The number of closed findings of each severity in an account on the
-    #   specified date.
+    #   The number of closed findings of each severity on the specified
+    #   date.
     #   @return [Types::FindingMetricsValuePerSeverity]
     #
     # @!attribute [rw] date
-    #   The date from which the finding metrics were retrieved.
+    #   The date from which the findings metrics were retrieved.
     #   @return [Time]
     #
     # @!attribute [rw] mean_time_to_close
-    #   The average time it takes to close findings of each severity in
-    #   days.
+    #   The average time in days it takes to close findings of each severity
+    #   as of a specified date.
     #   @return [Types::FindingMetricsValuePerSeverity]
     #
     # @!attribute [rw] new_findings
-    #   The number of new findings of each severity in account on the
-    #   specified date.
+    #   The number of new findings of each severity on the specified date.
     #   @return [Types::FindingMetricsValuePerSeverity]
     #
     # @!attribute [rw] open_findings
-    #   The number of open findings of each severity in an account as of the
-    #   specified date.
+    #   The number of open findings of each severity as of the specified
+    #   date.
     #   @return [Types::FindingMetricsValuePerSeverity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/AccountFindingsMetric AWS API Documentation
@@ -128,7 +127,7 @@ module Aws::CodeGuruSecurity
     #   @return [Array<Types::BatchGetFindingsError>]
     #
     # @!attribute [rw] findings
-    #   A list of all requested findings.
+    #   A list of all findings which were successfully fetched.
     #   @return [Array<Types::Finding>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/BatchGetFindingsResponse AWS API Documentation
@@ -228,13 +227,13 @@ module Aws::CodeGuruSecurity
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The identifier for an input resource used to create a scan.
+    #   The identifier for the resource object to be scanned.
     #   @return [Types::ResourceId]
     #
     # @!attribute [rw] scan_name
     #   The unique name that CodeGuru Security uses to track revisions
     #   across multiple scans of the same resource. Only allowed for a
-    #   `STANDARD` scan type. If not specified, it will be auto generated.
+    #   `STANDARD` scan type.
     #   @return [String]
     #
     # @!attribute [rw] scan_type
@@ -322,7 +321,8 @@ module Aws::CodeGuruSecurity
     end
 
     # @!attribute [rw] code_artifact_id
-    #   The identifier for the uploaded code resource.
+    #   The identifier for the uploaded code resource. Pass this to
+    #   `CreateScan` to use the uploaded resources.
     #   @return [String]
     #
     # @!attribute [rw] request_headers
@@ -332,7 +332,7 @@ module Aws::CodeGuruSecurity
     #
     # @!attribute [rw] s3_url
     #   A pre-signed S3 URL. You can upload the code file you want to scan
-    #   and add the required `requestHeaders` using any HTTP client.
+    #   with the required `requestHeaders` using any HTTP client.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/CreateUploadUrlResponse AWS API Documentation
@@ -345,11 +345,12 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # Information about account-level configuration.
+    # Information about the encryption configuration for an account.
+    # Required to call `UpdateAccountConfiguration`.
     #
     # @!attribute [rw] kms_key_arn
-    #   The KMS key ARN to use for encryption. This must be provided as a
-    #   header when uploading your code resource.
+    #   The KMS key ARN that is used for encryption. If an AWS-managed key
+    #   is used for encryption, returns empty.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/EncryptionConfig AWS API Documentation
@@ -427,7 +428,7 @@ module Aws::CodeGuruSecurity
     #
     # @!attribute [rw] generator_id
     #   The identifier for the component that generated a finding such as
-    #   AWSCodeGuruSecurity or AWSInspector.
+    #   AmazonCodeGuruSecurity.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -448,7 +449,13 @@ module Aws::CodeGuruSecurity
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of the finding.
+    #   The severity of the finding. Severity can be critical, high, medium,
+    #   low, or informational. For information on severity levels, see
+    #   [Finding severity][1] in the *Amazon CodeGuru Security User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/latest/security-ug/findings-overview.html#severity-distribution
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -515,31 +522,28 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # The severity of the issue in the code that generated a finding.
+    # A numeric value corresponding to the severity of a finding, such as
+    # the number of open findings or the average time it takes to close
+    # findings of a given severity.
     #
     # @!attribute [rw] critical
-    #   The severity of the finding is critical and should be addressed
-    #   immediately.
+    #   A numeric value corresponding to a critical finding.
     #   @return [Float]
     #
     # @!attribute [rw] high
-    #   The severity of the finding is high and should be addressed as a
-    #   near-term priority.
+    #   A numeric value corresponding to a high severity finding.
     #   @return [Float]
     #
     # @!attribute [rw] info
-    #   The finding is related to quality or readability improvements and
-    #   not considered actionable.
+    #   A numeric value corresponding to an informational finding.
     #   @return [Float]
     #
     # @!attribute [rw] low
-    #   The severity of the finding is low and does require action on its
-    #   own.
+    #   A numeric value corresponding to a low severity finding.
     #   @return [Float]
     #
     # @!attribute [rw] medium
-    #   The severity of the finding is medium and should be addressed as a
-    #   mid-term priority.
+    #   A numeric value corresponding to a medium severity finding.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/FindingMetricsValuePerSeverity AWS API Documentation
@@ -561,10 +565,11 @@ module Aws::CodeGuruSecurity
     class GetAccountConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] encryption_config
-    #   An `EncryptionConfig` object that contains the KMS key ARN to use
-    #   for encryption. By default, CodeGuru Security uses an AWS-managed
-    #   key for encryption. To specify your own key, call
-    #   `UpdateAccountConfiguration`.
+    #   An `EncryptionConfig` object that contains the KMS key ARN that is
+    #   used for encryption. By default, CodeGuru Security uses an
+    #   AWS-managed key for encryption. To specify your own key, call
+    #   `UpdateAccountConfiguration`. If you do not specify a
+    #   customer-managed key, returns empty.
     #   @return [Types::EncryptionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/GetAccountConfigurationResponse AWS API Documentation
@@ -580,7 +585,7 @@ module Aws::CodeGuruSecurity
     #   parameter when paginating results. If additional results exist
     #   beyond the number you specify, the `nextToken` element is returned
     #   in the response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results.
+    #   additional results. If not specified, returns 1000 results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -631,9 +636,7 @@ module Aws::CodeGuruSecurity
 
     # @!attribute [rw] date
     #   The date you want to retrieve summary metrics from, rounded to the
-    #   nearest day. The date must be within the past two years since
-    #   metrics data is only stored for two years. If a date outside of this
-    #   range is passed, the response will be empty.
+    #   nearest day. The date must be within the past two years.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/GetMetricsSummaryRequest AWS API Documentation
@@ -686,6 +689,10 @@ module Aws::CodeGuruSecurity
     #   The time the scan was created.
     #   @return [Time]
     #
+    # @!attribute [rw] error_message
+    #   Details about the error that causes a scan to fail to be retrieved.
+    #   @return [String]
+    #
     # @!attribute [rw] number_of_revisions
     #   The number of times a scan has been re-run on a revised resource.
     #   @return [Integer]
@@ -703,7 +710,7 @@ module Aws::CodeGuruSecurity
     #   @return [String]
     #
     # @!attribute [rw] scan_state
-    #   The current state of the scan. Pass either `InProgress`,
+    #   The current state of the scan. Returns either `InProgress`,
     #   `Successful`, or `Failed`.
     #   @return [String]
     #
@@ -717,6 +724,7 @@ module Aws::CodeGuruSecurity
     class GetScanResponse < Struct.new(
       :analysis_type,
       :created_at,
+      :error_message,
       :number_of_revisions,
       :run_id,
       :scan_name,
@@ -749,7 +757,7 @@ module Aws::CodeGuruSecurity
 
     # @!attribute [rw] end_date
     #   The end date of the interval which you want to retrieve metrics
-    #   from.
+    #   from. Round to the nearest day.
     #   @return [Time]
     #
     # @!attribute [rw] max_results
@@ -757,7 +765,7 @@ module Aws::CodeGuruSecurity
     #   parameter when paginating results. If additional results exist
     #   beyond the number you specify, the `nextToken` element is returned
     #   in the response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results.
+    #   additional results. If not specified, returns 1000 results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -770,7 +778,7 @@ module Aws::CodeGuruSecurity
     #
     # @!attribute [rw] start_date
     #   The start date of the interval which you want to retrieve metrics
-    #   from.
+    #   from. Rounds to the nearest day.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ListFindingsMetricsRequest AWS API Documentation
@@ -809,7 +817,7 @@ module Aws::CodeGuruSecurity
     #   parameter when paginating results. If additional results exist
     #   beyond the number you specify, the `nextToken` element is returned
     #   in the response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results.
+    #   additional results. If not specified, returns 100 results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -850,7 +858,7 @@ module Aws::CodeGuruSecurity
 
     # @!attribute [rw] resource_arn
     #   The ARN of the `ScanName` object. You can retrieve this ARN by
-    #   calling `ListScans` or `GetScan`.
+    #   calling `CreateScan`, `ListScans`, or `GetScan`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ListTagsForResourceRequest AWS API Documentation
@@ -881,11 +889,11 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # Information about summary metrics in an account.
+    # A summary of metrics for an account as of a specified date.
     #
     # @!attribute [rw] categories_with_most_findings
     #   A list of `CategoryWithFindingNum` objects for the top 5 finding
-    #   categories with the most open findings in an account.
+    #   categories with the most findings.
     #   @return [Array<Types::CategoryWithFindingNum>]
     #
     # @!attribute [rw] date
@@ -893,17 +901,17 @@ module Aws::CodeGuruSecurity
     #   @return [Time]
     #
     # @!attribute [rw] open_findings
-    #   The number of open findings of each severity in an account.
+    #   The number of open findings of each severity.
     #   @return [Types::FindingMetricsValuePerSeverity]
     #
     # @!attribute [rw] scans_with_most_open_critical_findings
     #   A list of `ScanNameWithFindingNum` objects for the top 3 scans with
-    #   the most number of open findings in an account.
+    #   the most number of open critical findings.
     #   @return [Array<Types::ScanNameWithFindingNum>]
     #
     # @!attribute [rw] scans_with_most_open_findings
     #   A list of `ScanNameWithFindingNum` objects for the top 3 scans with
-    #   the most number of open critical findings in an account.
+    #   the most number of open findings.
     #   @return [Array<Types::ScanNameWithFindingNum>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/MetricsSummary AWS API Documentation
@@ -959,16 +967,14 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # Information about a resource, such as an Amazon S3 bucket or AWS
-    # Lambda function, that contains a finding.
+    # Information about a resource that contains a finding.
     #
     # @!attribute [rw] id
-    #   The identifier for the resource.
+    #   The `scanName` of the scan that was run on the resource.
     #   @return [String]
     #
     # @!attribute [rw] sub_resource_id
-    #   The identifier for a section of the resource, such as an AWS Lambda
-    #   layer.
+    #   The identifier for a section of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/Resource AWS API Documentation
@@ -980,16 +986,17 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # The identifier for a resource object that contains resources where a
-    # finding was detected.
+    # The identifier for a resource object that contains resources to scan.
+    # Specifying a codeArtifactId is required to create a scan.
     #
     # @note ResourceId is a union - when making an API calls you must set exactly one of the members.
     #
     # @note ResourceId is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ResourceId corresponding to the set member.
     #
     # @!attribute [rw] code_artifact_id
-    #   The identifier for the code file uploaded to the resource where a
-    #   finding was detected.
+    #   The identifier for the code file uploaded to the resource object.
+    #   Returned by `CreateUploadUrl` when you upload resources to be
+    #   scanned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ResourceId AWS API Documentation
@@ -1034,10 +1041,10 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # Information about a scan with open findings.
+    # Information about the number of findings generated by a scan.
     #
     # @!attribute [rw] finding_number
-    #   The number of open findings generated by a scan.
+    #   The number of findings generated by a scan.
     #   @return [Integer]
     #
     # @!attribute [rw] scan_name
@@ -1097,7 +1104,8 @@ module Aws::CodeGuruSecurity
     # Information about the suggested code fix to remediate a finding.
     #
     # @!attribute [rw] code
-    #   The suggested code to add to your file.
+    #   The suggested code fix. If applicable, includes code patch to
+    #   replace your source code.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1116,7 +1124,7 @@ module Aws::CodeGuruSecurity
 
     # @!attribute [rw] resource_arn
     #   The ARN of the `ScanName` object. You can retrieve this ARN by
-    #   calling `ListScans` or `GetScan`.
+    #   calling `CreateScan`, `ListScans`, or `GetScan`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1175,7 +1183,7 @@ module Aws::CodeGuruSecurity
 
     # @!attribute [rw] resource_arn
     #   The ARN of the `ScanName` object. You can retrieve this ARN by
-    #   calling `ListScans` or `GetScan`.
+    #   calling `CreateScan`, `ListScans`, or `GetScan`.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -1196,8 +1204,11 @@ module Aws::CodeGuruSecurity
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] encryption_config
-    #   The KMS key ARN you want to use for encryption. Defaults to
-    #   service-side encryption if missing.
+    #   The customer-managed KMS key ARN you want to use for encryption. If
+    #   not specified, CodeGuru Security will use an AWS-managed key for
+    #   encryption. If you previously specified a customer-managed KMS key
+    #   and want CodeGuru Security to use an AWS-managed key for encryption
+    #   instead, pass nothing.
     #   @return [Types::EncryptionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/UpdateAccountConfigurationRequest AWS API Documentation
@@ -1209,8 +1220,9 @@ module Aws::CodeGuruSecurity
     end
 
     # @!attribute [rw] encryption_config
-    #   An `EncryptionConfig` object that contains the KMS key ARN to use
-    #   for encryption.
+    #   An `EncryptionConfig` object that contains the KMS key ARN that is
+    #   used for encryption. If you did not specify a customer-managed KMS
+    #   key in the request, returns empty.
     #   @return [Types::EncryptionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/UpdateAccountConfigurationResponse AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2024-05-31)
+------------------
+
+* Feature - AWS CodeBuild now supports Self-hosted GitHub Actions runners for Github Enterprise
+
 1.115.0 (2024-05-29)
 ------------------
 

@@ -436,22 +436,29 @@ module Aws::LaunchWizard
     #   The name of the deployment.
     #
     # @option params [required, Hash<String,String>] :specifications
-    #   The settings specified for the deployment. For more information on the
-    #   specifications required for creating a deployment, see [Workload
-    #   specifications][1].
+    #   The settings specified for the deployment. These settings define how
+    #   to deploy and configure your resources created by the deployment. For
+    #   more information about the specifications required for creating a
+    #   deployment for a SAP workload, see [SAP deployment specifications][1].
+    #   To retrieve the specifications required to create a deployment for
+    #   other workloads, use the [ `GetWorkloadDeploymentPattern` ][2]
+    #   operation.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html
+    #   [2]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the deployment.
     #
     # @option params [required, String] :workload_name
-    #   The name of the workload. You can use the [
-    #   `ListWorkloadDeploymentPatterns` ][1] operation to discover supported
-    #   values for this parameter.
+    #   The name of the workload. You can use the [ `ListWorkloads` ][1]
+    #   operation to discover supported values for this parameter.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
     #
     # @return [Types::CreateDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -465,6 +472,9 @@ module Aws::LaunchWizard
     #     name: "DeploymentName", # required
     #     specifications: { # required
     #       "KeyString" => "ValueString",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #     workload_name: "WorkloadName", # required
     #   })
@@ -531,6 +541,7 @@ module Aws::LaunchWizard
     #
     #   resp.deployment.created_at #=> Time
     #   resp.deployment.deleted_at #=> Time
+    #   resp.deployment.deployment_arn #=> String
     #   resp.deployment.id #=> String
     #   resp.deployment.name #=> String
     #   resp.deployment.pattern_name #=> String
@@ -538,6 +549,8 @@ module Aws::LaunchWizard
     #   resp.deployment.specifications #=> Hash
     #   resp.deployment.specifications["KeyString"] #=> String
     #   resp.deployment.status #=> String, one of "COMPLETED", "CREATING", "DELETE_IN_PROGRESS", "DELETE_INITIATING", "DELETE_FAILED", "DELETED", "FAILED", "IN_PROGRESS", "VALIDATING"
+    #   resp.deployment.tags #=> Hash
+    #   resp.deployment.tags["TagKey"] #=> String
     #   resp.deployment.workload_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/GetDeployment AWS API Documentation
@@ -580,6 +593,63 @@ module Aws::LaunchWizard
     # @param [Hash] params ({})
     def get_workload(params = {}, options = {})
       req = build_request(:get_workload, params)
+      req.send_request(options)
+    end
+
+    # Returns details for a given workload and deployment pattern, including
+    # the available specifications. You can use the [ListWorkloads][1]
+    # operation to discover the available workload names and the
+    # [ListWorkloadDeploymentPatterns][2] operation to discover the
+    # available deployment pattern names of a given workload.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
+    # [2]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
+    #
+    # @option params [required, String] :deployment_pattern_name
+    #   The name of the deployment pattern.
+    #
+    # @option params [required, String] :workload_name
+    #   The name of the workload.
+    #
+    # @return [Types::GetWorkloadDeploymentPatternOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkloadDeploymentPatternOutput#workload_deployment_pattern #workload_deployment_pattern} => Types::WorkloadDeploymentPatternData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workload_deployment_pattern({
+    #     deployment_pattern_name: "DeploymentPatternName", # required
+    #     workload_name: "WorkloadName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workload_deployment_pattern.deployment_pattern_name #=> String
+    #   resp.workload_deployment_pattern.description #=> String
+    #   resp.workload_deployment_pattern.display_name #=> String
+    #   resp.workload_deployment_pattern.specifications #=> Array
+    #   resp.workload_deployment_pattern.specifications[0].allowed_values #=> Array
+    #   resp.workload_deployment_pattern.specifications[0].allowed_values[0] #=> String
+    #   resp.workload_deployment_pattern.specifications[0].conditionals #=> Array
+    #   resp.workload_deployment_pattern.specifications[0].conditionals[0].comparator #=> String
+    #   resp.workload_deployment_pattern.specifications[0].conditionals[0].name #=> String
+    #   resp.workload_deployment_pattern.specifications[0].conditionals[0].value #=> String
+    #   resp.workload_deployment_pattern.specifications[0].description #=> String
+    #   resp.workload_deployment_pattern.specifications[0].name #=> String
+    #   resp.workload_deployment_pattern.specifications[0].required #=> String
+    #   resp.workload_deployment_pattern.status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
+    #   resp.workload_deployment_pattern.status_message #=> String
+    #   resp.workload_deployment_pattern.workload_name #=> String
+    #   resp.workload_deployment_pattern.workload_version_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/GetWorkloadDeploymentPattern AWS API Documentation
+    #
+    # @overload get_workload_deployment_pattern(params = {})
+    # @param [Hash] params ({})
+    def get_workload_deployment_pattern(params = {}, options = {})
+      req = build_request(:get_workload_deployment_pattern, params)
       req.send_request(options)
     end
 
@@ -636,9 +706,11 @@ module Aws::LaunchWizard
     # @option params [Array<Types::DeploymentFilter>] :filters
     #   Filters to scope the results. The following filters are supported:
     #
-    #   * `WORKLOAD_NAME`
+    #   * `WORKLOAD_NAME` - The name used in deployments.
     #
-    #   * `DEPLOYMENT_STATUS`
+    #   * `DEPLOYMENT_STATUS` - `COMPLETED` \| `CREATING` \|
+    #     `DELETE_IN_PROGRESS` \| `DELETE_INITIATING` \| `DELETE_FAILED` \|
+    #     `DELETED` \| `FAILED` \| `IN_PROGRESS` \| `VALIDATING`
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -689,7 +761,42 @@ module Aws::LaunchWizard
       req.send_request(options)
     end
 
-    # Lists the workload deployment patterns.
+    # Lists the tags associated with a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Lists the workload deployment patterns for a given workload name. You
+    # can use the [ListWorkloads][1] operation to discover the available
+    # workload names.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -739,7 +846,13 @@ module Aws::LaunchWizard
       req.send_request(options)
     end
 
-    # Lists the workloads.
+    # Lists the available workload names. You can use the
+    # [ListWorkloadDeploymentPatterns][1] operation to discover the
+    # available deployment patterns for a given workload.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -780,6 +893,60 @@ module Aws::LaunchWizard
       req.send_request(options)
     end
 
+    # Adds the specified tags to the given resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   One or more tags to attach to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the given resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   Keys identifying the tags to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -793,7 +960,7 @@ module Aws::LaunchWizard
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-launchwizard'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

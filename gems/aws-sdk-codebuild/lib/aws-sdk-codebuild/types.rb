@@ -1847,7 +1847,7 @@ module Aws::CodeBuild
     #   webhook. The `payloadUrl` and `secret` values in the output can be
     #   used to manually create a webhook within GitHub.
     #
-    #   <note markdown="1"> manualCreation is only available for GitHub webhooks.
+    #   <note markdown="1"> `manualCreation` is only available for GitHub webhooks.
     #
     #    </note>
     #   @return [Boolean]
@@ -6994,9 +6994,9 @@ module Aws::CodeBuild
     #       PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all push,
     #       pull request created, and pull request updated events.
     #
-    #       <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
-    #       Enterprise only. The `RELEASED`, `PRERELEASED`, and
-    #       `WORKFLOW_JOB_QUEUED` work with GitHub only.
+    #       <note markdown="1"> Types `PULL_REQUEST_REOPENED` and `WORKFLOW_JOB_QUEUED` work
+    #       with GitHub and GitHub Enterprise only. Types `RELEASED` and
+    #       `PRERELEASED` work with GitHub only.
     #
     #        </note>
     #

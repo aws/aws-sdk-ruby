@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-05-31)
+------------------
+
+* Feature - This release includes minor model updates and documentation updates.
+
 1.12.0 (2024-05-13)
 ------------------
 

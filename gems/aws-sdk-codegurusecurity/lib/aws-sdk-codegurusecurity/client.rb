@@ -413,7 +413,7 @@ module Aws::CodeGuruSecurity
 
     # @!group API Operations
 
-    # Returns a list of all requested findings.
+    # Returns a list of requested findings from standard scans.
     #
     # @option params [required, Array<Types::FindingIdentifier>] :finding_identifiers
     #   A list of finding identifiers. Each identifier consists of a
@@ -488,7 +488,7 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Use to create a scan using code uploaded to an S3 bucket.
+    # Use to create a scan using code uploaded to an Amazon S3 bucket.
     #
     # @option params [String] :analysis_type
     #   The type of analysis you want CodeGuru Security to perform in the
@@ -505,12 +505,12 @@ module Aws::CodeGuruSecurity
     #   not need to pass this option.**
     #
     # @option params [required, Types::ResourceId] :resource_id
-    #   The identifier for an input resource used to create a scan.
+    #   The identifier for the resource object to be scanned.
     #
     # @option params [required, String] :scan_name
     #   The unique name that CodeGuru Security uses to track revisions across
     #   multiple scans of the same resource. Only allowed for a `STANDARD`
-    #   scan type. If not specified, it will be auto generated.
+    #   scan type.
     #
     # @option params [String] :scan_type
     #   The type of scan, either `Standard` or `Express`. Defaults to
@@ -572,11 +572,11 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Generates a pre-signed URL and request headers used to upload a code
-    # resource.
+    # Generates a pre-signed URL, request headers used to upload a code
+    # resource, and code artifact identifier for the uploaded resource.
     #
-    # You can upload your code resource to the URL and add the request
-    # headers using any HTTP client.
+    # You can upload your code resource to the URL with the request headers
+    # using any HTTP client.
     #
     # @option params [required, String] :scan_name
     #   The name of the scan that will use the uploaded resource. CodeGuru
@@ -612,7 +612,7 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Use to get account level configuration.
+    # Use to get the encryption configuration for an account.
     #
     # @return [Types::GetAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -638,7 +638,7 @@ module Aws::CodeGuruSecurity
     #   parameter when paginating results. If additional results exist beyond
     #   the number you specify, the `nextToken` element is returned in the
     #   response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results.
+    #   additional results. If not specified, returns 1000 results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
@@ -717,16 +717,14 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Returns top level metrics about an account from a specified date,
+    # Returns a summary of metrics for an account from a specified date,
     # including number of open findings, the categories with most findings,
     # the scans with most open findings, and scans with most open critical
     # findings.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :date
     #   The date you want to retrieve summary metrics from, rounded to the
-    #   nearest day. The date must be within the past two years since metrics
-    #   data is only stored for two years. If a date outside of this range is
-    #   passed, the response will be empty.
+    #   nearest day. The date must be within the past two years.
     #
     # @return [Types::GetMetricsSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -780,6 +778,7 @@ module Aws::CodeGuruSecurity
     #
     #   * {Types::GetScanResponse#analysis_type #analysis_type} => String
     #   * {Types::GetScanResponse#created_at #created_at} => Time
+    #   * {Types::GetScanResponse#error_message #error_message} => String
     #   * {Types::GetScanResponse#number_of_revisions #number_of_revisions} => Integer
     #   * {Types::GetScanResponse#run_id #run_id} => String
     #   * {Types::GetScanResponse#scan_name #scan_name} => String
@@ -798,6 +797,7 @@ module Aws::CodeGuruSecurity
     #
     #   resp.analysis_type #=> String, one of "Security", "All"
     #   resp.created_at #=> Time
+    #   resp.error_message #=> String
     #   resp.number_of_revisions #=> Integer
     #   resp.run_id #=> String
     #   resp.scan_name #=> String
@@ -819,13 +819,14 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_date
     #   The end date of the interval which you want to retrieve metrics from.
+    #   Round to the nearest day.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. Use this
     #   parameter when paginating results. If additional results exist beyond
     #   the number you specify, the `nextToken` element is returned in the
     #   response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results.
+    #   additional results. If not specified, returns 1000 results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
@@ -835,7 +836,7 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_date
     #   The start date of the interval which you want to retrieve metrics
-    #   from.
+    #   from. Rounds to the nearest day.
     #
     # @return [Types::ListFindingsMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -888,15 +889,15 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Returns a list of all the standard scans in an account. Does not
-    # return express scans.
+    # Returns a list of all scans in an account. Does not return `EXPRESS`
+    # scans.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. Use this
     #   parameter when paginating results. If additional results exist beyond
     #   the number you specify, the `nextToken` element is returned in the
     #   response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results.
+    #   additional results. If not specified, returns 100 results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
@@ -942,7 +943,7 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the `ScanName` object. You can retrieve this ARN by calling
-    #   `ListScans` or `GetScan`.
+    #   `CreateScan`, `ListScans`, or `GetScan`.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -972,7 +973,7 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the `ScanName` object. You can retrieve this ARN by calling
-    #   `ListScans` or `GetScan`.
+    #   `CreateScan`, `ListScans`, or `GetScan`.
     #
     # @option params [required, Hash<String,String>] :tags
     #   An array of key-value pairs used to tag an existing scan. A tag is a
@@ -1009,7 +1010,7 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the `ScanName` object. You can retrieve this ARN by calling
-    #   `ListScans` or `GetScan`.
+    #   `CreateScan`, `ListScans`, or `GetScan`.
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of keys for each tag you want to remove from a scan.
@@ -1032,11 +1033,14 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Use to update account-level configuration with an encryption key.
+    # Use to update the encryption configuration for an account.
     #
     # @option params [required, Types::EncryptionConfig] :encryption_config
-    #   The KMS key ARN you want to use for encryption. Defaults to
-    #   service-side encryption if missing.
+    #   The customer-managed KMS key ARN you want to use for encryption. If
+    #   not specified, CodeGuru Security will use an AWS-managed key for
+    #   encryption. If you previously specified a customer-managed KMS key and
+    #   want CodeGuru Security to use an AWS-managed key for encryption
+    #   instead, pass nothing.
     #
     # @return [Types::UpdateAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1076,7 +1080,7 @@ module Aws::CodeGuruSecurity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurusecurity'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

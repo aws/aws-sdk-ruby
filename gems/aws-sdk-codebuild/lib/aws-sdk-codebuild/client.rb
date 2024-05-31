@@ -1861,7 +1861,7 @@ module Aws::CodeBuild
     #   webhook. The `payloadUrl` and `secret` values in the output can be
     #   used to manually create a webhook within GitHub.
     #
-    #   <note markdown="1"> manualCreation is only available for GitHub webhooks.
+    #   <note markdown="1"> `manualCreation` is only available for GitHub webhooks.
     #
     #    </note>
     #
@@ -5779,7 +5779,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

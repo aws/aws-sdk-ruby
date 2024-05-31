@@ -2036,6 +2036,7 @@ module Aws::ElastiCache
         "apiVersion" => "2015-02-02",
         "endpointPrefix" => "elasticache",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceFullName" => "Amazon ElastiCache",
         "serviceId" => "ElastiCache",
         "signatureVersion" => "v4",

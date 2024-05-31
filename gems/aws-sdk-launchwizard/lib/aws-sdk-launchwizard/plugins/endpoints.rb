@@ -66,14 +66,22 @@ module Aws::LaunchWizard
             Aws::LaunchWizard::Endpoints::GetDeployment.build(context)
           when :get_workload
             Aws::LaunchWizard::Endpoints::GetWorkload.build(context)
+          when :get_workload_deployment_pattern
+            Aws::LaunchWizard::Endpoints::GetWorkloadDeploymentPattern.build(context)
           when :list_deployment_events
             Aws::LaunchWizard::Endpoints::ListDeploymentEvents.build(context)
           when :list_deployments
             Aws::LaunchWizard::Endpoints::ListDeployments.build(context)
+          when :list_tags_for_resource
+            Aws::LaunchWizard::Endpoints::ListTagsForResource.build(context)
           when :list_workload_deployment_patterns
             Aws::LaunchWizard::Endpoints::ListWorkloadDeploymentPatterns.build(context)
           when :list_workloads
             Aws::LaunchWizard::Endpoints::ListWorkloads.build(context)
+          when :tag_resource
+            Aws::LaunchWizard::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::LaunchWizard::Endpoints::UntagResource.build(context)
           end
         end
       end

@@ -9104,9 +9104,11 @@ module Aws::ElastiCache
     #   Specifies the strategy to use to update the AUTH token. This parameter
     #   must be specified with the `auth-token` parameter. Possible values:
     #
-    #   * Rotate
+    #   * ROTATE - default, if no update strategy is provided
     #
-    #   * Set
+    #   * SET - allowed only after ROTATE
+    #
+    #   * DELETE - allowed only when transitioning to RBAC
     #
     #   For more information, see [Authenticating Users with Redis AUTH][1]
     #
@@ -9738,9 +9740,11 @@ module Aws::ElastiCache
     #   Specifies the strategy to use to update the AUTH token. This parameter
     #   must be specified with the `auth-token` parameter. Possible values:
     #
-    #   * Rotate
+    #   * ROTATE - default, if no update strategy is provided
     #
-    #   * Set
+    #   * SET - allowed only after ROTATE
+    #
+    #   * DELETE - allowed only when transitioning to RBAC
     #
     #   For more information, see [Authenticating Users with Redis AUTH][1]
     #
@@ -11041,7 +11045,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Represents the input of a `TestFailover` operation which test
+    # Represents the input of a `TestFailover` operation which tests
     # automatic failover on a specified node group (called shard in the
     # console) in a replication group (called cluster in the console).
     #
@@ -11054,7 +11058,7 @@ module Aws::ElastiCache
     # **Note the following**
     #
     # * A customer can use this operation to test automatic failover on up
-    #   to 5 shards (called node groups in the ElastiCache API and Amazon
+    #   to 15 shards (called node groups in the ElastiCache API and Amazon
     #   CLI) in any rolling 24-hour period.
     #
     # * If calling this operation on shards in different clusters (called
@@ -11107,7 +11111,7 @@ module Aws::ElastiCache
     # @option params [required, String] :node_group_id
     #   The name of the node group (called shard in the console) in this
     #   replication group on which automatic failover is to be tested. You may
-    #   test automatic failover on up to 5 node groups in any rolling 24-hour
+    #   test automatic failover on up to 15 node groups in any rolling 24-hour
     #   period.
     #
     # @return [Types::TestFailoverResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -11332,7 +11336,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
