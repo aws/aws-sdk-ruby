@@ -16,7 +16,8 @@ module Aws
           "S3_CRYPTO_V1N": "H",
           "S3_CRYPTO_V2": "I",
           "S3_EXPRESS_BUCKET": "J",
-          "S3_ACCESS_GRANTS": "K"
+          "S3_ACCESS_GRANTS": "K",
+          "GZIP_REQUEST_COMPRESSION": "L"
         }
       METRICS
 
@@ -37,6 +38,11 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         app_id = ENV['AWS_SDK_UA_APP_ID']
         app_id ||= Aws.shared_config.sdk_ua_app_id(profile: cfg.profile)
         app_id
+      end
+
+      # Deprecated - must exist for old service gems
+      def self.feature(_feature, &block)
+        block.call
       end
 
       def self.metric(metric, &block)
