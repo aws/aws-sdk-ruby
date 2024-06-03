@@ -59,6 +59,7 @@ module Aws::EKS
       attr_accessor owner: ::String
       attr_accessor marketplace_information: Types::MarketplaceInformation
       attr_accessor configuration_values: ::String
+      attr_accessor pod_identity_associations: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -78,9 +79,21 @@ module Aws::EKS
     end
 
     class AddonIssue
-      attr_accessor code: ("AccessDenied" | "InternalFailure" | "ClusterUnreachable" | "InsufficientNumberOfReplicas" | "ConfigurationConflict" | "AdmissionRequestDenied" | "UnsupportedAddonModification" | "K8sResourceNotFound")
+      attr_accessor code: ("AccessDenied" | "InternalFailure" | "ClusterUnreachable" | "InsufficientNumberOfReplicas" | "ConfigurationConflict" | "AdmissionRequestDenied" | "UnsupportedAddonModification" | "K8sResourceNotFound" | "AddonSubscriptionNeeded" | "AddonPermissionFailure")
       attr_accessor message: ::String
       attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AddonPodIdentityAssociations
+      attr_accessor service_account: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddonPodIdentityConfiguration
+      attr_accessor service_account: ::String
+      attr_accessor recommended_managed_policies: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -89,6 +102,7 @@ module Aws::EKS
       attr_accessor architecture: ::Array[::String]
       attr_accessor compatibilities: ::Array[Types::Compatibility]
       attr_accessor requires_configuration: bool
+      attr_accessor requires_iam_permissions: bool
       SENSITIVE: []
     end
 
@@ -272,6 +286,7 @@ module Aws::EKS
       attr_accessor client_request_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor configuration_values: ::String
+      attr_accessor pod_identity_associations: ::Array[Types::AddonPodIdentityAssociations]
       SENSITIVE: []
     end
 
@@ -488,6 +503,7 @@ module Aws::EKS
       attr_accessor addon_name: ::String
       attr_accessor addon_version: ::String
       attr_accessor configuration_schema: ::String
+      attr_accessor pod_identity_configuration: ::Array[Types::AddonPodIdentityConfiguration]
       SENSITIVE: []
     end
 
@@ -1102,6 +1118,7 @@ module Aws::EKS
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
+      attr_accessor owner_arn: ::String
       SENSITIVE: []
     end
 
@@ -1111,6 +1128,7 @@ module Aws::EKS
       attr_accessor service_account: ::String
       attr_accessor association_arn: ::String
       attr_accessor association_id: ::String
+      attr_accessor owner_arn: ::String
       SENSITIVE: []
     end
 
@@ -1253,6 +1271,7 @@ module Aws::EKS
       attr_accessor resolve_conflicts: ("OVERWRITE" | "NONE" | "PRESERVE")
       attr_accessor client_request_token: ::String
       attr_accessor configuration_values: ::String
+      attr_accessor pod_identity_associations: ::Array[Types::AddonPodIdentityAssociations]
       SENSITIVE: []
     end
 
@@ -1338,7 +1357,7 @@ module Aws::EKS
     end
 
     class UpdateParam
-      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode")
+      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations")
       attr_accessor value: ::String
       SENSITIVE: []
     end

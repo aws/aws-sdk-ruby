@@ -279,6 +279,16 @@ module Aws
                                         ) -> _DescribeSchedulingPoliciesResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSchedulingPoliciesResponseSuccess
 
+      interface _GetJobQueueSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobQueueSnapshotResponse]
+        def front_of_queue: () -> Types::FrontOfQueueDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#get_job_queue_snapshot-instance_method
+      def get_job_queue_snapshot: (
+                                    job_queue: ::String
+                                  ) -> _GetJobQueueSnapshotResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobQueueSnapshotResponseSuccess
+
       interface _ListJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResponse]
         def job_summary_list: () -> ::Array[Types::JobSummary]

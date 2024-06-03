@@ -982,7 +982,7 @@ module Aws::IoTTwinMaker
     class PropertyRequest
       attr_accessor definition: Types::PropertyDefinitionRequest
       attr_accessor value: Types::DataValue
-      attr_accessor update_type: ("UPDATE" | "DELETE" | "CREATE")
+      attr_accessor update_type: ("UPDATE" | "DELETE" | "CREATE" | "RESET_VALUE")
       SENSITIVE: []
     end
 

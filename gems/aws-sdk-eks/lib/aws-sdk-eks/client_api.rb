@@ -28,6 +28,10 @@ module Aws::EKS
     AddonIssue = Shapes::StructureShape.new(name: 'AddonIssue')
     AddonIssueCode = Shapes::StringShape.new(name: 'AddonIssueCode')
     AddonIssueList = Shapes::ListShape.new(name: 'AddonIssueList')
+    AddonPodIdentityAssociations = Shapes::StructureShape.new(name: 'AddonPodIdentityAssociations')
+    AddonPodIdentityAssociationsList = Shapes::ListShape.new(name: 'AddonPodIdentityAssociationsList')
+    AddonPodIdentityConfiguration = Shapes::StructureShape.new(name: 'AddonPodIdentityConfiguration')
+    AddonPodIdentityConfigurationList = Shapes::ListShape.new(name: 'AddonPodIdentityConfigurationList')
     AddonStatus = Shapes::StringShape.new(name: 'AddonStatus')
     AddonVersionInfo = Shapes::StructureShape.new(name: 'AddonVersionInfo')
     AddonVersionInfoList = Shapes::ListShape.new(name: 'AddonVersionInfoList')
@@ -346,6 +350,7 @@ module Aws::EKS
     Addon.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
     Addon.add_member(:marketplace_information, Shapes::ShapeRef.new(shape: MarketplaceInformation, location_name: "marketplaceInformation"))
     Addon.add_member(:configuration_values, Shapes::ShapeRef.new(shape: String, location_name: "configurationValues"))
+    Addon.add_member(:pod_identity_associations, Shapes::ShapeRef.new(shape: StringList, location_name: "podIdentityAssociations"))
     Addon.struct_class = Types::Addon
 
     AddonHealth.add_member(:issues, Shapes::ShapeRef.new(shape: AddonIssueList, location_name: "issues"))
@@ -366,10 +371,23 @@ module Aws::EKS
 
     AddonIssueList.member = Shapes::ShapeRef.new(shape: AddonIssue)
 
+    AddonPodIdentityAssociations.add_member(:service_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceAccount"))
+    AddonPodIdentityAssociations.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "roleArn"))
+    AddonPodIdentityAssociations.struct_class = Types::AddonPodIdentityAssociations
+
+    AddonPodIdentityAssociationsList.member = Shapes::ShapeRef.new(shape: AddonPodIdentityAssociations)
+
+    AddonPodIdentityConfiguration.add_member(:service_account, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccount"))
+    AddonPodIdentityConfiguration.add_member(:recommended_managed_policies, Shapes::ShapeRef.new(shape: StringList, location_name: "recommendedManagedPolicies"))
+    AddonPodIdentityConfiguration.struct_class = Types::AddonPodIdentityConfiguration
+
+    AddonPodIdentityConfigurationList.member = Shapes::ShapeRef.new(shape: AddonPodIdentityConfiguration)
+
     AddonVersionInfo.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
     AddonVersionInfo.add_member(:architecture, Shapes::ShapeRef.new(shape: StringList, location_name: "architecture"))
     AddonVersionInfo.add_member(:compatibilities, Shapes::ShapeRef.new(shape: Compatibilities, location_name: "compatibilities"))
     AddonVersionInfo.add_member(:requires_configuration, Shapes::ShapeRef.new(shape: Boolean, location_name: "requiresConfiguration"))
+    AddonVersionInfo.add_member(:requires_iam_permissions, Shapes::ShapeRef.new(shape: Boolean, location_name: "requiresIamPermissions"))
     AddonVersionInfo.struct_class = Types::AddonVersionInfo
 
     AddonVersionInfoList.member = Shapes::ShapeRef.new(shape: AddonVersionInfo)
@@ -521,6 +539,7 @@ module Aws::EKS
     CreateAddonRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateAddonRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateAddonRequest.add_member(:configuration_values, Shapes::ShapeRef.new(shape: String, location_name: "configurationValues"))
+    CreateAddonRequest.add_member(:pod_identity_associations, Shapes::ShapeRef.new(shape: AddonPodIdentityAssociationsList, location_name: "podIdentityAssociations"))
     CreateAddonRequest.struct_class = Types::CreateAddonRequest
 
     CreateAddonResponse.add_member(:addon, Shapes::ShapeRef.new(shape: Addon, location_name: "addon"))
@@ -676,6 +695,7 @@ module Aws::EKS
     DescribeAddonConfigurationResponse.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
     DescribeAddonConfigurationResponse.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
     DescribeAddonConfigurationResponse.add_member(:configuration_schema, Shapes::ShapeRef.new(shape: String, location_name: "configurationSchema"))
+    DescribeAddonConfigurationResponse.add_member(:pod_identity_configuration, Shapes::ShapeRef.new(shape: AddonPodIdentityConfigurationList, location_name: "podIdentityConfiguration"))
     DescribeAddonConfigurationResponse.struct_class = Types::DescribeAddonConfigurationResponse
 
     DescribeAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
@@ -1148,6 +1168,7 @@ module Aws::EKS
     PodIdentityAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     PodIdentityAssociation.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     PodIdentityAssociation.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
+    PodIdentityAssociation.add_member(:owner_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownerArn"))
     PodIdentityAssociation.struct_class = Types::PodIdentityAssociation
 
     PodIdentityAssociationSummaries.member = Shapes::ShapeRef.new(shape: PodIdentityAssociationSummary)
@@ -1157,6 +1178,7 @@ module Aws::EKS
     PodIdentityAssociationSummary.add_member(:service_account, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccount"))
     PodIdentityAssociationSummary.add_member(:association_arn, Shapes::ShapeRef.new(shape: String, location_name: "associationArn"))
     PodIdentityAssociationSummary.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    PodIdentityAssociationSummary.add_member(:owner_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownerArn"))
     PodIdentityAssociationSummary.struct_class = Types::PodIdentityAssociationSummary
 
     Provider.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, location_name: "keyArn"))
@@ -1266,6 +1288,7 @@ module Aws::EKS
     UpdateAddonRequest.add_member(:resolve_conflicts, Shapes::ShapeRef.new(shape: ResolveConflicts, location_name: "resolveConflicts"))
     UpdateAddonRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpdateAddonRequest.add_member(:configuration_values, Shapes::ShapeRef.new(shape: String, location_name: "configurationValues"))
+    UpdateAddonRequest.add_member(:pod_identity_associations, Shapes::ShapeRef.new(shape: AddonPodIdentityAssociationsList, location_name: "podIdentityAssociations"))
     UpdateAddonRequest.struct_class = Types::UpdateAddonRequest
 
     UpdateAddonResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1381,6 +1404,7 @@ module Aws::EKS
         "endpointPrefix" => "eks",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon EKS",
         "serviceFullName" => "Amazon Elastic Kubernetes Service",
         "serviceId" => "EKS",

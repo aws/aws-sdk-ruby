@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2024-06-03)
+------------------
+
+* Feature - This release adds support for the AWS Batch GetJobQueueSnapshot API operation.
+
 1.87.0 (2024-05-13)
 ------------------
 

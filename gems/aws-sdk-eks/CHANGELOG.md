@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2024-06-03)
+------------------
+
+* Feature - Adds support for EKS add-ons pod identity associations integration
+
 1.102.0 (2024-05-13)
 ------------------
 
