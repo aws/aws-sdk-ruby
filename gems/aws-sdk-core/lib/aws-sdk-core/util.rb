@@ -90,7 +90,7 @@ module Aws
         end
       end
 
-      # @param [String, Integer] value
+      # @param [String] value
       # @return [Time]
       def deserialize_time(value)
         case value
